@@ -38,7 +38,6 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagElement;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagHandlerElement;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDValidatorTagElement;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
-import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
 
 /**
  * Utility class supporting methods to derive information from JSP tag
@@ -134,7 +133,7 @@ public final class TagAnalyzer
         final String className = tldDecl.getTagclass();
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
-        { new ServletBeanProxyContributor(getProjectVersion(project)) };
+        { new ServletBeanProxyContributor(project) };
         final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
                 contributor, project);
 
@@ -154,7 +153,10 @@ public final class TagAnalyzer
             }
             catch (final ProxyException tp)
             {
-                // fall through
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                {
+                    JSFCoreTraceOptions.log("TagAnalyzer.findComponentType", tp);
+                }
             }
         }
 
@@ -184,7 +186,7 @@ public final class TagAnalyzer
         final String className = tldDecl.getTagclass();
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
-        { new ServletBeanProxyContributor(getProjectVersion(project)) };
+        { new ServletBeanProxyContributor(project) };
         final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
                 contributor, project);
 
@@ -348,7 +350,7 @@ public final class TagAnalyzer
         final String className = tldDecl.getTagclass();
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
-        { new ServletBeanProxyContributor(getProjectVersion(project)) };
+        { new ServletBeanProxyContributor(project) };
         final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
                 contributor, project);
 
@@ -531,6 +533,15 @@ public final class TagAnalyzer
             }
 
             final IType type = javaProject.findType(typeName);
+            
+            if (type == null)
+            {
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                {
+                    JSFCoreTraceOptions.log("Type not found for: "+typeName);
+                }
+                return null;
+            }
             final TagType tagType = getJSFComponentTagType(type, project);
 
             if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
@@ -582,7 +593,9 @@ public final class TagAnalyzer
             if (componentClass != null && !"".equals(componentClass.trim()))
             {
                 final ComponentTypeInfo typeInfo = DTComponentIntrospector
-                        .getComponent(componentType, componentClass, project);
+                        .getComponent(componentType, componentClass, project,
+                                new IConfigurationContributor[]
+                                {new ServletBeanProxyContributor(project)});
 
                 if (typeInfo != null)
                 {
@@ -710,7 +723,7 @@ public final class TagAnalyzer
         Set<String> converterTags = null;
         Set<String> validatorTags = null;
 
-        final JSFVersion jsfVersion = getProjectVersion(project);
+        final JSFVersion jsfVersion = ServletBeanProxyContributor.getProjectVersion(project);
 
         // v1.1(9.2.2): JSF component tags must sub-class one of these
         if (jsfVersion == JSFVersion.V1_0 || jsfVersion == JSFVersion.V1_1)
@@ -761,33 +774,5 @@ public final class TagAnalyzer
         return tagType;
     }
 
-    private static JSFVersion getProjectVersion(final IProject project)
-    {
-        try
-        {
-            if (FacetedProjectFramework.hasProjectFacet(project, "jst.jsf",
-                    "1.0"))
-            {
-                return JSFVersion.V1_0;
-            }
-            else if (FacetedProjectFramework.hasProjectFacet(project,
-                    "jst.jsf", "1.1"))
-            {
-                return JSFVersion.V1_1;
-            }
-            else if (FacetedProjectFramework.hasProjectFacet(project,
-                    "jst.jsf", "1.2"))
-            {
-                return JSFVersion.V1_2;
-            }
-        }
-        catch (final CoreException e)
-        {
-            JSFCorePlugin.log("checking project version", e);
-            // fall-through
-        }
-
-        return null;
-    }
 
 }

@@ -16,6 +16,9 @@ public class IdentifierOrderedIteratorPolicy<ITERATORTYPE> implements
         IIteratorPolicy<ITERATORTYPE>
 {
     private final Iterable<ITERATORTYPE>   _policyOrder;
+    // controls whether the policy iterator will return items that are
+    // not explicitly listed in policyOrder.
+    private boolean                        _excludeNonExplicitValues = false;
     
     /**
      * @param policyOrder
@@ -25,24 +28,47 @@ public class IdentifierOrderedIteratorPolicy<ITERATORTYPE> implements
         _policyOrder = policyOrder;
     }
     
+    /**
+     * Default value is <b>false</b>.
+     * 
+     * @return if true, the iterator will not return values in the forCollection
+     * passed to getIterator whose identifier are not explicitly listed in
+     * the policyOrder,  If false, these values will be return after all
+     * the policyOrder values have been returned.
+     */
+    public boolean isExcludeNonExplicitValues()
+    {
+        return _excludeNonExplicitValues;
+    }
+
+    /**
+     * @param excludeNonExplicitValues
+     */
+    public void setExcludeNonExplicitValues(boolean excludeNonExplicitValues)
+    {
+        _excludeNonExplicitValues = excludeNonExplicitValues;
+    }
+
     public Iterator<ITERATORTYPE> getIterator(
             final Collection<ITERATORTYPE> forCollection)
     {
-        return new MyIterator(forCollection);
+        return new MyIterator<ITERATORTYPE>(forCollection, _excludeNonExplicitValues, _policyOrder);
     }
 
-    private class MyIterator implements Iterator
+    private static class MyIterator<ITERATORTYPE> implements Iterator<ITERATORTYPE>
     {
         private final List<ITERATORTYPE>         _items;
         private final Iterator<ITERATORTYPE>    _policyIterator;
         private ITERATORTYPE                    _next;
         
-        MyIterator(final Collection<ITERATORTYPE> collection)
+        MyIterator(final Collection<ITERATORTYPE> collection,
+                final boolean excludeNonExplicitValues,
+                final Iterable<ITERATORTYPE> policyOrder)
         {
             _items = new ArrayList();
             _items.addAll(collection);
 
-            _policyIterator = _policyOrder.iterator();
+            _policyIterator = policyOrder.iterator();
             _next = findNext();
         }
         
@@ -51,11 +77,11 @@ public class IdentifierOrderedIteratorPolicy<ITERATORTYPE> implements
             return _next != null;
         }
 
-        public Object next()
+        public ITERATORTYPE next()
         {
             if (_next != null)
             {
-                Object next = _next;
+                ITERATORTYPE next = _next;
                 //calculate next one before returning
                 _next = findNext();
                 return next;

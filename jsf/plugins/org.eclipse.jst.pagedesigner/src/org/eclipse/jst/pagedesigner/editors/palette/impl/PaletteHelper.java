@@ -29,6 +29,8 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
@@ -60,9 +62,9 @@ public class PaletteHelper {
     // pattern to find all new lines for removal
     final private static Pattern removeNewLines = Pattern.compile("[\n]");
     
-	private final static ImageDescriptor DEFAULT_SMALL_ICON = PDPlugin
+	private final static ImageDescriptor DEFAULT_SMALL_ICON = JSFUICommonPlugin
 		.getDefault().getImageDescriptor(
-			"palette/GENERIC/small/PD_Palette_Default.gif");
+			JSFSharedImages.DEFAULT_PALETTE_TAG_IMG);
 
 	private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		.getDefault().getImageDescriptor(

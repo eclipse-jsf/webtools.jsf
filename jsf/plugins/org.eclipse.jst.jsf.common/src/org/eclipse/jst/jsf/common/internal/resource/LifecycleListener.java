@@ -1,8 +1,8 @@
 package org.eclipse.jst.jsf.common.internal.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -28,9 +28,9 @@ public class LifecycleListener implements IResourceChangeListener
                                                                 = false;
     private static long                                     _seqId;
     
-    private final List<IResource>                           _resources;
+    private final CopyOnWriteArrayList<IResource>                   _resources;
     private final CopyOnWriteArrayList<IResourceLifecycleListener>  _listeners;
-    private boolean                                         _isDisposed = false;
+    private AtomicBoolean                                   _isDisposed = new AtomicBoolean(false);
     private ITestTracker                                    _testTracker; // == null; initialized by setter injection
 
     /**
@@ -41,7 +41,7 @@ public class LifecycleListener implements IResourceChangeListener
      */
     public LifecycleListener()
     {
-        _resources = new ArrayList<IResource>();
+        _resources = new CopyOnWriteArrayList<IResource>();
         _listeners = new CopyOnWriteArrayList<IResourceLifecycleListener>();
     }
 
@@ -82,6 +82,9 @@ public class LifecycleListener implements IResourceChangeListener
     {
         synchronized(_resources)
         {
+            // don't add any resources if we've disposed before acquiring the lock
+            if (isDisposed()) return;
+
             final int preSize = _resources.size();
             if (!_resources.contains(res))
             {
@@ -99,12 +102,17 @@ public class LifecycleListener implements IResourceChangeListener
     }
 
     /**
+     * If there are no longer resources being targeted, the resource change
+     * listener will be removed.
+     * 
      * @param res
      */
     public void removeResource(final IResource res)
     {
         synchronized(_resources)
         {
+            // don't bother with this stuff if we're disposed.
+            if (isDisposed())   return;
             _resources.remove(res);
             
             // if there are no longer target resources,
@@ -121,16 +129,17 @@ public class LifecycleListener implements IResourceChangeListener
      */
     public void dispose()
     {
-        if (!_isDisposed)
+        if (_isDisposed.compareAndSet(false, true))
         {
-            // remove first to minimize the chance that the listener will
-            // be triggered during the remainder of dispose
-            ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
-
-            // don't clear the listener list currently because of 
-            // concurrent change problems.
-
-            _isDisposed = true;
+            // ensure that add/removeResource don't cause races to add or
+            // remove the resource listener
+            synchronized(_resources)
+            {
+                // remove first to minimize the chance that the listener will
+                // be triggered during the remainder of dispose
+                ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+                _resources.clear();
+            }
         }
     }
 
@@ -138,7 +147,7 @@ public class LifecycleListener implements IResourceChangeListener
      * @return true if the listener has been disposed
      */
     public boolean isDisposed() {
-        return _isDisposed;
+        return _isDisposed.get();
     }
 
     /**
@@ -196,16 +205,13 @@ public class LifecycleListener implements IResourceChangeListener
             {
                 final IProject proj = (IProject) event.getResource();
 
-                synchronized(_resources)
+                // must use iterator to ensure copy on write behaviour
+                for (final IResource res : _resources)
                 {
-                    final List<IResource> resources = copyResourceList();
-                    for (final IResource res : resources)
+                    if (proj == res || proj == res.getProject())
                     {
-                        if (proj == res || proj == res.getProject())
-                        {
-                            fireLifecycleEvent(
-                                    new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_CLOSED));
-                        }
+                        fireLifecycleEvent(
+                                new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_CLOSED));
                     }
                 }
             }
@@ -215,24 +221,21 @@ public class LifecycleListener implements IResourceChangeListener
             {
                 final IProject proj = (IProject) event.getResource();
 
-                synchronized(_resources)
+                // must use iterator to ensure copy on write behaviour
+                for (final IResource res : _resources)
                 {
-                    final List<IResource> resources = copyResourceList();
-                    for (final IResource res : resources)
+                    // if the resource being tracked is the resource being deleted,
+                    // then fire a resource delete event
+                    if (proj == res)
                     {
-                        // if the resource being tracked is the resource being deleted,
-                        // then fire a resource delete event
-                        if (proj == res)
-                        {
-                            fireLifecycleEvent(new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_DELETED));
-                        }
-                        // if the resource being tracked is a resource in the project being
-                        // deleted, then fire a project deleted event
-                        else if (proj == res.getProject())
-                        {
-                            fireLifecycleEvent(
-                                new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_DELETED));
-                        }
+                        fireLifecycleEvent(new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_DELETED));
+                    }
+                    // if the resource being tracked is a resource in the project being
+                    // deleted, then fire a project deleted event
+                    else if (proj == res.getProject())
+                    {
+                        fireLifecycleEvent(
+                            new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_DELETED));
                     }
                 }
             }
@@ -240,38 +243,28 @@ public class LifecycleListener implements IResourceChangeListener
 
             case IResourceChangeEvent.POST_CHANGE:
             {
-                synchronized(_resources)
+                for (final IResource res : _resources)
                 {
-                    final List<IResource> resources = copyResourceList();
-                    for (final IResource res : resources)
-                    {
-                        // only bother continuing if the resource we are tracking
-                        // is not a project since post-change events on projects 
-                        // that we care about won't occur
-                        if (res.getType() != IResource.PROJECT)
-                        {
-                            IResourceDelta delta = event.getDelta();
-                            
+                    IResourceDelta delta = event.getDelta();
+                    
 //                            long seqId2 = _seqId++;
 //                            if (ENABLE_TEST_TRACKING && _testTracker != null)
 //                            {
 //                                _testTracker.fireEvent(Event.START_TRACKING, seqId2, "testFindMember");
 //                            }
-                            // only care about post change events to resources
-                            // that we are tracking
-                            delta = delta.findMember(res.getFullPath());
+                    // only care about post change events to resources
+                    // that we are tracking
+                    delta = delta.findMember(res.getFullPath());
 
-                            if (delta != null)
-                            {
-                                visit(delta);
-                            }
+                    if (delta != null)
+                    {
+                        visit(delta);
+                    }
 
 //                            if (ENABLE_TEST_TRACKING && _testTracker != null)
 //                            {
 //                                _testTracker.fireEvent(Event.STOP_TRACKING, seqId2, "testFindMember");
 //                            }
-                        }
-                    }
                 }
             }
             break;
@@ -284,16 +277,6 @@ public class LifecycleListener implements IResourceChangeListener
         if (ENABLE_TEST_TRACKING && _testTracker != null)
         {
             _testTracker.fireEvent(Event.STOP_TRACKING, seqId, "trackMethod_resourceChanged");
-        }
-    }
-
-    private List<IResource> copyResourceList()
-    {
-        synchronized(_resources)
-        {
-            final List<IResource>  resList = new ArrayList<IResource>(_resources.size());
-            resList.addAll(_resources);
-            return resList;
         }
     }
 
@@ -317,9 +300,17 @@ public class LifecycleListener implements IResourceChangeListener
 
     private void visit(final IResourceDelta delta) 
     {
-        assert(!isDisposed());
+        assert (!isDisposed());
 
         final IResource res = delta.getResource();
+
+        // the wkspace root is a special case since even though
+        // it is registered as the target resource, we are interested
+        // in new projects created in the root
+        if (res.getType() == IResource.ROOT)
+        {
+            handleWorkspaceRoot(delta);
+        }
 
         switch (delta.getKind())
         {
@@ -343,6 +334,22 @@ public class LifecycleListener implements IResourceChangeListener
                                     , ReasonType.RESOURCE_DELETED));
             }
             break;
+        }
+    }
+
+    private void handleWorkspaceRoot(final IResourceDelta delta)
+    {
+        for (final IResourceDelta childDelta : delta
+                .getAffectedChildren(IResourceDelta.ADDED))
+        {
+            final IResource res = childDelta.getResource();
+            if ((childDelta.getFlags() & IResourceDelta.OPEN) != 0 &&
+            // project was just opened
+                    res.getType() == IResource.PROJECT)
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_ADDED, ReasonType.PROJECT_OPENED));
+            }
         }
     }
 }

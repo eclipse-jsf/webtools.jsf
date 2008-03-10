@@ -23,6 +23,8 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
 import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
@@ -39,9 +41,9 @@ import org.eclipse.swt.graphics.Image;
 public class TagImageManager {
 	private static TagImageManager INSTANCE = null;
 	
-	private final static ImageDescriptor DEFAULT_SMALL_ICON = PDPlugin
+	private final static ImageDescriptor DEFAULT_SMALL_ICON = JSFUICommonPlugin
 	.getDefault().getImageDescriptor(
-		"palette/GENERIC/small/PD_Palette_Default.gif");
+		JSFSharedImages.DEFAULT_PALETTE_TAG_IMG);
 
 	private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		.getDefault().getImageDescriptor(

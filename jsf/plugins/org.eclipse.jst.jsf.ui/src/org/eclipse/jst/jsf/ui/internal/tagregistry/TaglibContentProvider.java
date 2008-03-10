@@ -1,10 +1,11 @@
 package org.eclipse.jst.jsf.ui.internal.tagregistry;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.eclipse.core.resources.IProject;
@@ -17,12 +18,15 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IJSFTagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
+import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory;
+import org.eclipse.jst.jsf.core.internal.TagRegistryFactoryInfo;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry.TagRegistryChangeEvent;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry.TagRegistryChangeEvent.EventType;
-import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDTagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
+import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -36,18 +40,21 @@ import org.eclipse.ui.PlatformUI;
 public class TaglibContentProvider implements IStructuredContentProvider,
         ITreeContentProvider, ITagRegistry.ITagRegistryListener
 {
-    private final static Object[] NO_CHILDREN  = new Object[0];
-    private IProject              _curInput;
-    private ITagRegistry          _curTagRegistry;
-    private Viewer                _curViewer;
-    private final AtomicLong      _changeStamp = new AtomicLong(0);
-    private Map<String, Object>          _rootNamespaces;
+    private final static Object[]                                     NO_CHILDREN       = new Object[0];
+    private IProject                                                  _curInput;
+    private Map<ITagRegistry, TagRegistryInstance>                    _curTagRegistries = 
+        new HashMap<ITagRegistry, TagRegistryInstance>();
+    private Viewer                                                    _curViewer;
+    private final AtomicLong                                          _changeStamp      = new AtomicLong(
+                                                                                                0);
 
     public Object[] getElements(final Object inputElement)
     {
+
         if (inputElement instanceof IProject)
         {
-            return _rootNamespaces.values().toArray();
+            return _curTagRegistries.values().toArray();
+            // return _rootNamespaces.values().toArray();
         }
 
         return NO_CHILDREN;
@@ -67,29 +74,51 @@ public class TaglibContentProvider implements IStructuredContentProvider,
 
         if (oldInput instanceof IProject)
         {
-            if (_curTagRegistry != null)
+            for (final TagRegistryInstance tagRegistry : _curTagRegistries.values())
             {
-                _curTagRegistry.removeListener(this);
+                tagRegistry.getRegistry().removeListener(this);
             }
         }
 
         if (newInput instanceof IProject)
         {
-            _curTagRegistry = TLDTagRegistry.getRegistry((IProject) newInput);
-            _curTagRegistry.addListener(this);
             _curInput = (IProject) newInput;
 
-            _rootNamespaces = Collections
-                    .synchronizedMap(new HashMap<String, Object>());
-            _rootNamespaces.put("not a uri", new TreePlaceholder("Calculating...", null));
+            final Set<TagRegistryFactoryInfo> factories = CompositeTagRegistryFactory
+                    .getInstance().getAllTagRegistryFactories();
 
-            new UpdateNamespacesListJob(_curInput, _changeStamp.get())
-                    .schedule();
+            _curTagRegistries.clear();
+
+            for (TagRegistryFactoryInfo factoryInfo : factories)
+            {
+                TagRegistryFactory factory = factoryInfo
+                        .getTagRegistryFactory();
+                ITagRegistry registry;
+                try
+                {
+                    registry = factory.createTagRegistry(_curInput);
+                    if (registry != null)
+                    {
+                        final TagRegistryInstance registryInstance =
+                            new TagRegistryInstance(factoryInfo, registry);
+                        _curTagRegistries.put(registry, registryInstance);
+                        registry.addListener(this);
+                        
+                        new UpdateNamespacesListJob(_curInput, _changeStamp.get(), 
+                                registryInstance).schedule();
+                    }
+                }
+                catch (TagRegistryFactoryException e)
+                {
+                    JSFUiPlugin.log(IStatus.ERROR,
+                            "Problem getting tag registry", e);
+                }
+            }
         }
         else
         {
             _curInput = null;
-            _rootNamespaces = Collections.EMPTY_MAP;
+            _curTagRegistries.clear();
         }
     }
 
@@ -97,7 +126,17 @@ public class TaglibContentProvider implements IStructuredContentProvider,
     {
         if (parentElement instanceof IProject)
         {
-            return _rootNamespaces.values().toArray();
+            return _curTagRegistries.values().toArray();
+        }
+        else if (parentElement instanceof TagRegistryInstance)
+        {
+            final TagRegistryInstance regInstance = (TagRegistryInstance) parentElement;
+            
+            if (!regInstance.isUpToDate())
+            {
+                return new Object[] {new TreePlaceholder("Calculating...", null)};
+            }
+            return regInstance.getNamespaces().values().toArray();
         }
         else if (parentElement instanceof Namespace)
         {
@@ -149,11 +188,11 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             return new Object[]
             { new TreePlaceholder("Calculating tags, please wait...", null) };
         }
-        else if (parentElement instanceof IJSFTagElement)
-        {
-            return new Object[]
-            { ((IJSFTagElement) parentElement).toString() };
-        }
+//        else if (parentElement instanceof IJSFTagElement)
+//        {
+//            return new Object[]
+//            { ((IJSFTagElement) parentElement).toString() };
+//        }
 
         return NO_CHILDREN;
     }
@@ -166,8 +205,13 @@ public class TaglibContentProvider implements IStructuredContentProvider,
 
     public boolean hasChildren(final Object element)
     {
+        // avoid an infinite refresh loop on the namespaces in the tag registry
+        if (element instanceof TagRegistryInstance)
+        {
+            return true;
+        }
         // finding all children of a namespace can be expensive
-        if (element instanceof Namespace)
+        else if (element instanceof Namespace)
         {
             return ((Namespace) element).hasViewElements();
         }
@@ -178,9 +222,15 @@ public class TaglibContentProvider implements IStructuredContentProvider,
     {
         if (_curViewer != null)
         {
-            _curViewer.getControl().getDisplay().asyncExec(
-                    new RegistryChangeTask(changeEvent.getType(), changeEvent
-                            .getAffectedObjects(), _changeStamp.get()));
+            TagRegistryInstance registryInstance =
+                _curTagRegistries.get(changeEvent.getSource());
+            
+            if (registryInstance != null)
+            {
+                _curViewer.getControl().getDisplay().asyncExec(
+                        new RegistryChangeTask(changeEvent.getType(), changeEvent
+                                .getAffectedObjects(), _changeStamp.get(),registryInstance));
+            }
         }
     }
 
@@ -189,14 +239,16 @@ public class TaglibContentProvider implements IStructuredContentProvider,
         private final EventType                 _eventType;
         private final long                      _timestamp;
         private final List<? extends Namespace> _affectedObjects;
+        private final TagRegistryInstance       _registryInstance;
 
         RegistryChangeTask(final TagRegistryChangeEvent.EventType eventType,
                 final List<? extends Namespace> affectedObjects,
-                final long timestamp)
+                final long timestamp, final TagRegistryInstance registryInstance)
         {
             _eventType = eventType;
             _timestamp = timestamp;
             _affectedObjects = affectedObjects;
+            _registryInstance = registryInstance;
         }
 
         public void run()
@@ -215,7 +267,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
                 {
                     for (final Namespace ns : _affectedObjects)
                     {
-                        _rootNamespaces.put(ns.getNSUri(), ns);
+                        _registryInstance.getNamespaces().put(ns.getNSUri(), ns);
                     }
 
                     viewerRefresh(_curInput);
@@ -226,7 +278,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
                 {
                     for (final Namespace ns : _affectedObjects)
                     {
-                        _rootNamespaces.remove(ns.getNSUri());
+                        _registryInstance.getNamespaces().remove(ns.getNSUri());
                     }
                     viewerRefresh(_curInput);
                 }
@@ -234,10 +286,9 @@ public class TaglibContentProvider implements IStructuredContentProvider,
 
                 case REGISTRY_DISPOSED:
                 {
-                    _curTagRegistry.removeListener(TaglibContentProvider.this);
-                    // nullify the input since the current project is no longer
-                    // valid
-                    _curViewer.setInput(null);
+                    _registryInstance.getRegistry().removeListener(TaglibContentProvider.this);
+                    _curTagRegistries.remove(_registryInstance);
+                    viewerRefresh(_curInput);
                 }
             }
         }
@@ -259,35 +310,43 @@ public class TaglibContentProvider implements IStructuredContentProvider,
     private class UpdateNamespacesListJob extends Job
     {
 
-        private final long     _timestamp;
-        private final IProject _project;
+        private final long                _timestamp;
+        private final IProject            _project;
+        private final TagRegistryInstance _registry;
 
         public UpdateNamespacesListJob(final IProject project,
-                final long timestamp)
+                final long timestamp, final TagRegistryInstance registry)
         {
             super("Updating available namespaces for project "
                     + project.getName());
             _project = project;
             _timestamp = timestamp;
+            _registry = registry;
         }
 
         @Override
         protected IStatus run(final IProgressMonitor monitor)
         {
-            if (!_project.isAccessible())
+            if (!_project.isAccessible()
+                    || _registry.isUpToDate())
             {
-                return new Status(IStatus.CANCEL, "", "");
+                return new Status(IStatus.CANCEL, JSFUiPlugin.PLUGIN_ID, "");
             }
 
-            final Collection<? extends Namespace> libs = TLDTagRegistry
-                    .getRegistry(_project).getAllTagLibraries();
-            _rootNamespaces.clear();
-            
+            final Collection<? extends Namespace> libs = _registry.getRegistry()
+                    .getAllTagLibraries();
+            _registry.getNamespaces().clear();
+
             for (Namespace ns : libs)
             {
-                _rootNamespaces.put(ns.getNSUri(), ns);
+                if (ns.getNSUri() != null)
+                {
+                    _registry.getNamespaces().put(ns.getNSUri(), ns);
+
+                }
             }
-            
+
+            _registry.setUpToDate(true);
             PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
             {
                 public void run()
@@ -302,6 +361,47 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             });
 
             return Status.OK_STATUS;
+        }
+    }
+
+    static class TagRegistryInstance
+    {
+        private final TagRegistryFactoryInfo        _info;
+        private final ITagRegistry                  _registry;
+        private final Map<String, Namespace>        _namespaces;
+        private boolean                             _isUpToDate;
+
+        public TagRegistryInstance(final TagRegistryFactoryInfo info,
+                ITagRegistry registry)
+        {
+            _info = info;
+            _registry = registry;
+            _namespaces = new ConcurrentHashMap<String, Namespace>();
+        }
+
+        public TagRegistryFactoryInfo getInfo()
+        {
+            return _info;
+        }
+
+        public ITagRegistry getRegistry()
+        {
+            return _registry;
+        }
+
+        public Map<String, Namespace> getNamespaces()
+        {
+            return _namespaces;
+        }
+
+        public synchronized boolean isUpToDate()
+        {
+            return _isUpToDate;
+        }
+
+        public synchronized void setUpToDate(boolean isUpToDate)
+        {
+            _isUpToDate = isUpToDate;
         }
     }
 

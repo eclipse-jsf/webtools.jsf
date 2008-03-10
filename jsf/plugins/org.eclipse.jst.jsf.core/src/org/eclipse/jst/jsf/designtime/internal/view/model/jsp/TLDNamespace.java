@@ -44,7 +44,12 @@ public class TLDNamespace extends Namespace
     @Override
     public final String getDisplayName()
     {
-        return _tldDoc.getDisplayName();
+        String displayName = _tldDoc.getDisplayName();
+        if (displayName == null || "".equals(displayName.trim()))
+        {
+            displayName = getNSUri();
+        }
+        return displayName;
     }
 
     @Override

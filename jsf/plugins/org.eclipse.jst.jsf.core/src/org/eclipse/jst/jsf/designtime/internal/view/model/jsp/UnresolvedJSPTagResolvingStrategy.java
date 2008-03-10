@@ -17,11 +17,20 @@ public class UnresolvedJSPTagResolvingStrategy extends JSPTagResolvingStrategy
      * the identifier of this strategy
      */
     public final static String ID = "org.eclipse.jst.jsf.designtime.UnresolvedJSPTagResolvingStrategy";
+    /**
+     * the displayable name
+     */
+    public final static String DISPLAY_NAME = "Unresolved Tag Resolver";
 
     @Override
     public String getId()
     {
         return ID;
+    }
+
+    public String getDisplayName()
+    {
+        return DISPLAY_NAME;
     }
 
     @Override

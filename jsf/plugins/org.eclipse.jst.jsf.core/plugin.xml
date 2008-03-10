@@ -9,6 +9,8 @@
    <extension-point id="externalcontext" name="External Context Ext Point" schema="schema/externalcontext.exsd"/>
    <extension-point id="AttributeValueRuntimeTypes" name="AttributeValueRuntimeTypes" schema="schema/AttributeValueRuntimeTypes.exsd"/>
    <extension-point id="MetaDataEnabledFeatures" name="MetaDataEnabledFeatures" schema="schema/MetaDataEnabledFeatures.exsd"/>
+   <extension-point id="tagregistry" name="JSF Tag Library Registry" schema="schema/tagregistry.exsd"/>
+   <extension-point id="viewhandler" name="JSF View Handler Extension" schema="schema/viewhandler.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
     	<package 
@@ -304,6 +306,24 @@
     <classpathContainerInitializer
       class="org.eclipse.jst.jsf.core.internal.JSFLibrariesContainerInitializer"
       id="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"/>
+  </extension>
+  <extension
+        point="org.eclipse.jst.jsf.core.tagregistry">
+     <tagRegistry
+           class="org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryManager$MyRegistryFactory"
+           description="JSP tag registry"
+           id="default.jsp">
+        <content-type
+              contentTypeId="org.eclipse.jst.jsp.core.jspsource">
+        </content-type>
+     </tagRegistry>
+  </extension>
+  <extension
+        point="org.eclipse.jst.jsf.core.viewhandler">
+     <viewhandler
+           class="org.eclipse.jst.jsf.designtime.internal.view.DefaultDTViewHandler"
+           id="org.eclipse.jst.jsf.designtime.view.jspviewhandler">
+     </viewhandler>
   </extension>
   
 </plugin>

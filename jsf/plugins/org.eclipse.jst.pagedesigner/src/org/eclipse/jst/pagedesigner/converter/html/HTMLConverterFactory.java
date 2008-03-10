@@ -11,9 +11,10 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.converter.html;
 
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.AbstractTagConverter;
 import org.eclipse.jst.pagedesigner.converter.DumDescriptionTagConverter;
 import org.eclipse.jst.pagedesigner.converter.DumTagConverter;
@@ -74,8 +75,8 @@ public class HTMLConverterFactory implements IConverterFactory {
 	}
 
 	private static Image getUnknownImage() {
-		return PDPlugin.getDefault().getImage(
-				"palette/GENERIC/small/PD_Palette_Default.gif");
+		return JSFUICommonPlugin.getDefault().getImage(
+				JSFSharedImages.DEFAULT_PALETTE_TAG_IMG);
 	}
 
 	/*

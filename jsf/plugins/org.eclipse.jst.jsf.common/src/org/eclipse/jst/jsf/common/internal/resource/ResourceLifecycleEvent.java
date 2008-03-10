@@ -24,7 +24,13 @@ public class ResourceLifecycleEvent
          * Indicates that the resource being tracked has changed in some
          * way, use ReasonType to determine specifics
          */
-        RESOURCE_CHANGED;
+        RESOURCE_CHANGED,
+        
+        /**
+         * Indicates that the resource being tracked hass been added.  Use
+         * ReasonType to determine specifics.
+         */
+        RESOURCE_ADDED;
     }
     
     /**
@@ -53,7 +59,16 @@ public class ResourceLifecycleEvent
         /**
          * Occurs when the contents of a non-project resource has changed 
          */
-        RESOURCE_CHANGED_CONTENTS
+        RESOURCE_CHANGED_CONTENTS,
+        
+        /**
+         * Occurs when a project resource is added
+         */
+        PROJECT_OPENED,
+        /**
+         * Occurs when a non-project resource is added.
+         */
+        RESOURCE_ADDED
     }
 
     private final IResource   _affectedResource;

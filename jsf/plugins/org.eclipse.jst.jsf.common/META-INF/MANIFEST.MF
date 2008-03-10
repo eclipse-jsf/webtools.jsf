@@ -8,8 +8,10 @@ Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsf.common;x-internal:=true,
  org.eclipse.jst.jsf.common.dom,
  org.eclipse.jst.jsf.common.internal;x-friends:="org.eclipse.jst.jsf.core",
+ org.eclipse.jst.jsf.common.internal.managedobject,
  org.eclipse.jst.jsf.common.internal.policy,
  org.eclipse.jst.jsf.common.internal.resource;x-friends:="org.eclipse.jst.jsf.core.tests",
+ org.eclipse.jst.jsf.common.internal.strategy,
  org.eclipse.jst.jsf.common.internal.types;
   x-friends:="org.eclipse.jst.jsf.core,
    org.eclipse.jst.jsf.core.tests,

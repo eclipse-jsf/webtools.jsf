@@ -12,13 +12,16 @@ import org.eclipse.jst.jsf.common.internal.policy.IIdentifiable;
 public abstract class AbstractXMLViewValidationStrategy implements IIdentifiable<String>
 {
     private final String            _id;
-
+    private final String            _displayName;
+    
     /**
      * @param id
+     * @param displayName 
      */
-    public AbstractXMLViewValidationStrategy(final String id)
+    public AbstractXMLViewValidationStrategy(final String id, final String displayName)
     {
         _id = id;
+        _displayName = displayName;
     }
 
     /**
@@ -35,5 +38,10 @@ public abstract class AbstractXMLViewValidationStrategy implements IIdentifiable
     public final String getId()
     {
         return _id;
+    }
+
+    public String getDisplayName()
+    {
+        return _displayName;
     }
 }

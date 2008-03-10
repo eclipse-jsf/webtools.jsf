@@ -119,7 +119,8 @@ public class XMLViewDefnValidator implements IJSFViewValidator
                 model.getStructuredDocument();
             final IStructuredDocumentRegion[] regions =
                 structuredDoc.getStructuredDocumentRegions();
-            validateRegions(regions, jsfValidationContext, new ContainmentValidatingStrategy(jsfValidationContext));
+            validateRegions(regions, jsfValidationContext, 
+                    new ContainmentValidatingStrategy(jsfValidationContext));
         }
         catch (final CoreException e)
         {
@@ -149,7 +150,8 @@ public class XMLViewDefnValidator implements IJSFViewValidator
             return;
         }
 
-        validateRegions(regions, jsfValidationContext, new ContainmentValidatingStrategy(jsfValidationContext));
+        validateRegions(regions, jsfValidationContext, 
+                new ContainmentValidatingStrategy(jsfValidationContext));
     }
     
     private void validateRegions(final IStructuredDocumentRegion[] regions, 

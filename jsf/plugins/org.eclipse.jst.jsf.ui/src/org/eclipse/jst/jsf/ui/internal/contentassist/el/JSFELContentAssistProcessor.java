@@ -71,7 +71,7 @@ public class JSFELContentAssistProcessor implements IContentAssistProcessor
                                 ContentAssistParser.getPrefix(documentPosition
                                         - elExpression.getDocumentContext()
                                                 .getDocumentPosition() + 1,
-                                        elExpression.getText());
+                                        elExpression.getText().trim());
 
                         if (strategy != null)
                         {

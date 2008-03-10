@@ -1,40 +1,11 @@
 package org.eclipse.jst.jsf.ui.internal.tagregistry;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.ActionContributionItem;
-import org.eclipse.jface.action.IContributionItem;
-import org.eclipse.jface.action.IMenuCreator;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
-import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
-import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDTagRegistry;
-import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TreePlaceholder;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.DrillDownAdapter;
+import org.eclipse.ui.forms.widgets.Form;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -54,50 +25,12 @@ import org.eclipse.ui.part.ViewPart;
 
 public class TagRegistryView extends ViewPart
 {
-    private TreeViewer       _viewer;
-    private DrillDownAdapter drillDownAdapter;
-    private Action           _selectProjectAction;
-    private Action           action2;
-    private Action           doubleClickAction;
+    private FormToolkit _toolkit;
+    private Form _form;
+    private TagRegistryMasterDetailBlock _masterDetailBlock;
 
-    class ViewLabelProvider extends LabelProvider
-    {
-
-        @Override
-        public String getText(final Object obj)
-        {
-            if (obj instanceof Namespace)
-            {
-                if (((Namespace) obj).getDisplayName() != null)
-                {
-                    return ((Namespace) obj).getDisplayName();
-                }
-                return ((Namespace) obj).getNSUri();
-            }
-            else if (obj instanceof ITagElement)
-            {
-                return ((ITagElement) obj).getName();
-            }
-            else if (obj instanceof TreePlaceholder)
-            {
-                return ((TreePlaceholder)obj).getText();
-            }
-            return obj.toString();
-        }
-
-        @Override
-        public Image getImage(final Object obj)
-        {
-            final String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
-            return PlatformUI.getWorkbench().getSharedImages().getImage(
-                    imageKey);
-        }
-    }
-
-    class NameSorter extends ViewerSorter
-    {
-        // do nothing
-    }
+    //private DrillDownAdapter _drillDownAdapter;
+    //    private Action           doubleClickAction;
 
     /**
      * The constructor.
@@ -114,201 +47,112 @@ public class TagRegistryView extends ViewPart
     @Override
     public void createPartControl(final Composite parent)
     {
-        _viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
-                | SWT.V_SCROLL);
-        drillDownAdapter = new DrillDownAdapter(_viewer);
-        _viewer.setContentProvider(new TaglibContentProvider());
-        _viewer.setLabelProvider(new ViewLabelProvider());
-        _viewer.setSorter(new NameSorter());
+        final GridLayout  gridLayout= new GridLayout(1,true);
+        parent.setLayout(gridLayout);
+        _toolkit = new FormToolkit(parent.getDisplay());
 
-        final IProject[] projects = ResourcesPlugin.getWorkspace().getRoot()
-                .getProjects();
-
-        for (final IProject project : projects)
-        {
-            if (project.isAccessible())
-            {
-                new SetInputRunnable(project, _viewer).run();
-                break;
-            }
-        }
+        //_form = createScrolledForm(parent);//_toolkit.createScrolledForm(parent);
+        _form = _toolkit.createForm(parent);
+        _form.setLayoutData(new  GridData(SWT.FILL, SWT.FILL, true,true));
+        //_form.getBody().setLayout(new GridLayout(2,true));
+        //final ManagedForm managedForm = new ManagedForm(_toolkit, _form);
+        _masterDetailBlock =
+            new TagRegistryMasterDetailBlock();
+        _masterDetailBlock.createContent(_toolkit,_form);
 
         // Create the help context id for the viewer's control
-        PlatformUI.getWorkbench().getHelpSystem().setHelp(_viewer.getControl(),
-                "ViewHandlerPrototype.viewer");
-        makeActions();
-        hookContextMenu();
-        hookDoubleClickAction();
-        contributeToActionBars();
+
+        //        makeActions();
+        //hookContextMenu();
+        //hookDoubleClickAction();
+        //        contributeToActionBars();
     }
 
-    private void hookContextMenu()
+    
+//    private ScrolledForm  createScrolledForm(final Composite parent)
+//    {
+//        final int orientation = Window.getDefaultOrientation();
+//        final ScrolledForm form = new ScrolledForm(parent, SWT.H_SCROLL | SWT.V_SCROLL|orientation);
+//        form.setExpandHorizontal(true);
+//        form.setExpandVertical(true);
+//        form.setBackground(_toolkit.getColors().getBackground());
+//        form.setForeground(_toolkit.getColors().getColor(IFormColors.TITLE));
+//        form.setFont(JFaceResources.getHeaderFont());
+//        return form;
+//    }
+
+    //    private void contributeToActionBars()
+    //    {
+    //        final IActionBars bars = getViewSite().getActionBars();
+    //        fillLocalPullDown(bars.getMenuManager());
+    //        fillLocalToolBar(bars.getToolBarManager());
+    //    }
+
+    //    private void fillLocalPullDown(final IMenuManager manager)
+    //    {
+    //        manager.add(_selectProjectAction);
+    //        manager.add(new Separator());
+    //        manager.add(action2);
+    //    }
+    //    private void hookContextMenu()
+    //    {
+    //        final MenuManager menuMgr = new MenuManager("#PopupMenu");
+    //        menuMgr.setRemoveAllWhenShown(true);
+    //        menuMgr.addMenuListener(new IMenuListener()
+    //        {
+    //            public void menuAboutToShow(final IMenuManager manager)
+    //            {
+    //                TagRegistryView.this.fillContextMenu(manager);
+    //            }
+    //        });
+    //    }
+
+    //    private void fillContextMenu(final IMenuManager manager)
+    //    {
+    //        manager.add(_selectProjectAction);
+    //        manager.add(action2);
+    //        manager.add(new Separator());
+    //        //_drillDownAdapter.addNavigationActions(manager);
+    //        // Other plug-ins can contribute there actions here
+    //        manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+    //    }
+
+    //    private void fillLocalToolBar(final IToolBarManager manager)
+    //    {
+    //        manager.add(_selectProjectAction);
+    //        manager.add(action2);
+    //        manager.add(new Separator());
+    //        //_drillDownAdapter.addNavigationActions(manager);
+    //    }
+
+
+
+    //    private void hookDoubleClickAction()
+    //    {
+    //        _viewer.addDoubleClickListener(new IDoubleClickListener()
+    //        {
+    //            public void doubleClick(final DoubleClickEvent event)
+    //            {
+    //                doubleClickAction.run();
+    //            }
+    //        });
+    //    }
+
+    //    private void showMessage(final String message)
+    //    {
+    //        MessageDialog.openInformation(_viewer.getControl().getShell(),
+    //                "Sample View", message);
+    //    }
+
+    @Override
+    public void dispose()
     {
-        final MenuManager menuMgr = new MenuManager("#PopupMenu");
-        menuMgr.setRemoveAllWhenShown(true);
-        menuMgr.addMenuListener(new IMenuListener()
+        if (_masterDetailBlock != null)
         {
-            public void menuAboutToShow(final IMenuManager manager)
-            {
-                TagRegistryView.this.fillContextMenu(manager);
-            }
-        });
-        final Menu menu = menuMgr.createContextMenu(_viewer.getControl());
-        _viewer.getControl().setMenu(menu);
-        getSite().registerContextMenu(menuMgr, _viewer);
-    }
-
-    private void contributeToActionBars()
-    {
-        final IActionBars bars = getViewSite().getActionBars();
-        fillLocalPullDown(bars.getMenuManager());
-        fillLocalToolBar(bars.getToolBarManager());
-    }
-
-    private void fillLocalPullDown(final IMenuManager manager)
-    {
-        manager.add(_selectProjectAction);
-        manager.add(new Separator());
-        manager.add(action2);
-    }
-
-    private void fillContextMenu(final IMenuManager manager)
-    {
-        manager.add(_selectProjectAction);
-        manager.add(action2);
-        manager.add(new Separator());
-        drillDownAdapter.addNavigationActions(manager);
-        // Other plug-ins can contribute there actions here
-        manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-    }
-
-    private void fillLocalToolBar(final IToolBarManager manager)
-    {
-        manager.add(_selectProjectAction);
-        manager.add(action2);
-        manager.add(new Separator());
-        drillDownAdapter.addNavigationActions(manager);
-    }
-
-    private void makeActions()
-    {
-        final IMenuCreator selectProjectCreator = new IMenuCreator()
-        {
-            private MenuManager createMenuMgr()
-            {
-                // TODO: this is inefficient but means we don't
-                // have to do the laborious process of filtering
-                // workspace changes.
-                final MenuManager dropDownMenuMgr = new MenuManager();
-
-                final IProject projects[] = ResourcesPlugin.getWorkspace()
-                        .getRoot().getProjects();
-
-                for (final IProject project : projects)
-                {
-                    if (JSFAppConfigUtils.isValidJSFProject(project))
-                    {
-                        dropDownMenuMgr.add(new Action(project.getName())
-                        {
-                            @Override
-                            public void run()
-                            {
-                                _viewer.setInput(project);
-                            }
-                        });
-                    }
-                }
-
-                return dropDownMenuMgr;
-            }
-
-            public void dispose()
-            {
-                // do nothing
-            }
-
-            public Menu getMenu(Control parent)
-            {
-                MenuManager manager = createMenuMgr();
-                return manager.createContextMenu(parent);
-            }
-
-            public Menu getMenu(Menu parent)
-            {
-                final MenuManager manager = createMenuMgr();
-                final Menu menu = new Menu(parent);
-                final IContributionItem[] items = manager.getItems();
-                for (final IContributionItem item : items)
-                {
-                    IContributionItem newItem = item;
-                    if (item instanceof ActionContributionItem)
-                    {
-                        newItem = new ActionContributionItem(
-                                ((ActionContributionItem) item).getAction());
-                    }
-                    newItem.fill(menu, -1);
-                }
-                return menu;
-            }
-
-        };
-
-        _selectProjectAction = new Action("Set project")
-        {/* do nothing */};
-        _selectProjectAction.setToolTipText("Action 1 tooltip");
-        _selectProjectAction.setImageDescriptor(PlatformUI.getWorkbench()
-                .getSharedImages().getImageDescriptor(
-                        ISharedImages.IMG_OBJS_INFO_TSK));
-        _selectProjectAction.setMenuCreator(selectProjectCreator);
-
-        action2 = new Action()
-        {
-            @Override
-            public void run()
-            {
-                final Object input = _viewer.getInput();
-
-                if (input instanceof IProject)
-                {
-                    // FaceletTagRegistry.getRegistry((IProject)
-                    // input).refresh();
-                    TLDTagRegistry.getRegistry((IProject) input).refresh(
-                            new RefreshRunnable(_viewer));
-                }
-            }
-        };
-        action2.setText("Refresh Registry");
-        action2.setToolTipText("Refresh Registry");
-        action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages()
-                .getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
-        doubleClickAction = new Action()
-        {
-            @Override
-            public void run()
-            {
-                final ISelection selection = _viewer.getSelection();
-                final Object obj = ((IStructuredSelection) selection)
-                        .getFirstElement();
-                showMessage("Double-click detected on " + obj.toString());
-            }
-        };
-    }
-
-    private void hookDoubleClickAction()
-    {
-        _viewer.addDoubleClickListener(new IDoubleClickListener()
-        {
-            public void doubleClick(final DoubleClickEvent event)
-            {
-                doubleClickAction.run();
-            }
-        });
-    }
-
-    private void showMessage(final String message)
-    {
-        MessageDialog.openInformation(_viewer.getControl().getShell(),
-                "Sample View", message);
+            _masterDetailBlock.dispose();
+            _masterDetailBlock = null;
+        }
+        super.dispose();
     }
 
     /**
@@ -317,53 +161,6 @@ public class TagRegistryView extends ViewPart
     @Override
     public void setFocus()
     {
-        _viewer.getControl().setFocus();
-    }
-
-    private static class RefreshRunnable implements Runnable
-    {
-        private final Viewer   _viewer;
-
-        public RefreshRunnable(Viewer viewer)
-        {
-            super();
-            _viewer = viewer;
-        }
-
-        public void run()
-        {
-            PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
-            {
-                public void run()
-                {
-                    _viewer.refresh();
-                }
-            });
-        }
-
-    }
-
-    private static class SetInputRunnable implements Runnable
-    {
-        private final Viewer   _viewer;
-        private final IProject _project;
-
-        public SetInputRunnable(IProject project, Viewer viewer)
-        {
-            super();
-            _project = project;
-            _viewer = viewer;
-        }
-
-        public void run()
-        {
-            PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
-            {
-                public void run()
-                {
-                    _viewer.setInput(_project);
-                }
-            });
-        }
+        _form.setFocus();
     }
 }

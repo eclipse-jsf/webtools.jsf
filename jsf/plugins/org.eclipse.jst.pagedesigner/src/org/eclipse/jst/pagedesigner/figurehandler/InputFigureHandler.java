@@ -11,7 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.figurehandler;
 
-import org.eclipse.jst.pagedesigner.PDPlugin;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.css2.provider.ICSSWidgetProvider;
 import org.eclipse.jst.pagedesigner.css2.widget.ButtonWidgetProvider;
@@ -79,8 +80,8 @@ import org.w3c.dom.Element;
 	 * @return the image
 	 */
 	protected Image getHiddenImage() {
-		return PDPlugin.getDefault().getImage(
-				"palette/GENERIC/small/PD_Palette_Default.gif");
+		return JSFUICommonPlugin.getDefault().getImage(
+				JSFSharedImages.DEFAULT_PALETTE_TAG_IMG);
 	}
 
 	ICSSWidgetProvider getHiddenProvider(Element node) {

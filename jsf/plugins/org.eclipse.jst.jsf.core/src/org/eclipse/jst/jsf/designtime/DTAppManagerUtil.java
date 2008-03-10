@@ -77,15 +77,19 @@ public class DTAppManagerUtil
         try
         {
             final DTFacesContext facesContext = manager.getFacesContext(file);
-            final IViewDefnAdapterFactory factory =
-                    viewHandler.getViewMetadataAdapterFactory(facesContext);
-            final IViewDefnAdapter adapter =
-                    factory.createAdapter(facesContext, viewHandler.getViewId(
-                            facesContext, file));
-
-            if (adapter instanceof XMLViewDefnAdapter)
+            
+            if (facesContext != null)
             {
-                return (XMLViewDefnAdapter) adapter;
+                final IViewDefnAdapterFactory factory =
+                        viewHandler.getViewMetadataAdapterFactory(facesContext);
+                final IViewDefnAdapter adapter =
+                        factory.createAdapter(facesContext, viewHandler.getViewId(
+                                facesContext, file));
+    
+                if (adapter instanceof XMLViewDefnAdapter)
+                {
+                    return (XMLViewDefnAdapter) adapter;
+                }
             }
         }
         catch (final ViewHandlerException e)

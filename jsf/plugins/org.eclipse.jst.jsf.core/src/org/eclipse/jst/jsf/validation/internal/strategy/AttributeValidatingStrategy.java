@@ -16,6 +16,10 @@ import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.region.Region2AttrAdapter;
+import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
+import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter.DTELExpression;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
@@ -39,9 +43,7 @@ import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 public class AttributeValidatingStrategy extends
         AbstractXMLViewValidationStrategy
 {
-    // TODO: should the source validator be a separate class in jsp.ui?
-    // problem with simple split off is that preference must also be split off
-    static final boolean         DEBUG;
+    static final boolean               DEBUG;
     static
     {
         final String value = Platform
@@ -52,9 +54,10 @@ public class AttributeValidatingStrategy extends
     /**
      * identifier
      */
-    public final static String   ID = "org.eclipse.jst.jsf.validation.strategy.AttributeValidatingStrategy";
+    public final static String         ID           = "org.eclipse.jst.jsf.validation.strategy.AttributeValidatingStrategy";
+    private final static String        DISPLAY_NAME = "Attribute Validator";
 
-    private JSFValidationContext _validationContext;
+    private final JSFValidationContext _validationContext;
 
     /**
      * Default constructor
@@ -64,7 +67,7 @@ public class AttributeValidatingStrategy extends
     public AttributeValidatingStrategy(
             final JSFValidationContext validationContext)
     {
-        super(ID);
+        super(ID, DISPLAY_NAME);
 
         _validationContext = validationContext;
     }
@@ -81,8 +84,7 @@ public class AttributeValidatingStrategy extends
         if (domAdapter instanceof AttrDOMAdapter)
         {
             final Region2AttrAdapter attrAdapter = (Region2AttrAdapter) domAdapter;
-            final IStructuredDocumentContext context = 
-                IStructuredDocumentContextFactory.INSTANCE
+            final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
                     .getContext(attrAdapter.getDocumentContext()
                             .getStructuredDocument(), attrAdapter
                             .getOwningElement().getDocumentContext()
@@ -112,13 +114,110 @@ public class AttributeValidatingStrategy extends
         }
     }
 
+    private boolean checkIfELAndValidate(final Region2AttrAdapter attrAdapter,
+            final IStructuredDocumentContext context)
+    {
+        int offsetOfFirstEL = -1;
+        final String attrValue = attrAdapter.getValue();
+
+        // TODO: should find and validate all
+        offsetOfFirstEL = attrValue.indexOf('#');
+
+        if (offsetOfFirstEL != -1 && offsetOfFirstEL < attrValue.length() - 1
+                && attrValue.charAt(offsetOfFirstEL + 1) == '{')
+        {
+            offsetOfFirstEL += 2;
+        }
+        else
+        {
+            offsetOfFirstEL = -1;
+        }
+
+        final XMLViewDefnAdapter adapter = DTAppManagerUtil
+                .getXMLViewDefnAdapter(context);
+
+        boolean isEL = false;
+        if (adapter != null && offsetOfFirstEL != -1)
+        {
+            try
+            {
+                // use the attribute's context plus the offset into the
+                // whole attribute value to find where we think the el
+                // expression starts. Add one since the attribute value
+                // string returned by attrAdapter will have the value quotes
+                // removed, but the region offsets include the quotes.
+                IStructuredDocumentContext elContext = IStructuredDocumentContextFactory.INSTANCE
+                        .getContext(context.getStructuredDocument(), context
+                                .getDocumentPosition()
+                                + offsetOfFirstEL + 1);
+                final DTELExpression elExpression = adapter
+                        .getELExpression(elContext);
+                if (elExpression != null)
+                {
+                    final String elText = elExpression.getText();
+
+                    if (DEBUG)
+                    {
+                        System.out.println(addDebugSpacer(3) + "EL attrVal= "
+                                + elText);
+                    }
+
+                    elContext = elExpression.getDocumentContext();
+                    // EL validation is user configurable because
+                    // it can be computationally costly.
+                    if (_validationContext.shouldValidateEL())
+                    {
+                        // also, skip the validation if the expression is empty
+                        // or only whitespace, since the parser doesn't handle it
+                        // anyway.
+                        if ("".equals(elText.trim()))
+                        {
+                            final int offset = elContext.getDocumentPosition()-1;
+                            final int length = elText.length()+2;
+                            final Diagnostic diagnostic = _validationContext
+                                    .getDiagnosticFactory()
+                                    .create_EMPTY_EL_EXPRESSION();
+                            // detected empty EL expression
+                            if (_validationContext.shouldValidateEL())
+                            {
+                                _validationContext.getReporter().report(
+                                        diagnostic, offset, length);
+                            }
+                        }
+                        else
+                        {
+                            final List elVals = MetaDataEnabledProcessingFactory
+                                    .getInstance()
+                                    .getAttributeValueRuntimeTypeFeatureProcessors(
+                                            IValidELValues.class, elContext,
+                                            attrAdapter.getAttributeIdentifier());
+                            validateELExpression(context, elContext, elVals,
+                                    attrAdapter.getValue(), elText);
+                            isEL = true;
+                        }
+                    }
+                }
+            }
+            catch (final ViewHandlerException e)
+            {
+                // fall through to return false
+            }
+        }
+
+        // is el if we've already detected it or if the step 2 method
+        // finds it. Run the method first to avoid short-circuiting
+        final boolean isEL2 = checkIfELAndValidate2(attrAdapter, context);
+
+        return isEL || isEL2;
+    }
+
     /**
      * Checks the region to see if it contains an EL attribute value. If it
      * does, validates it
      * 
      * @return true if validated EL, false otherwise
      */
-    private boolean checkIfELAndValidate(final Region2AttrAdapter attrAdapter,
+    private boolean checkIfELAndValidate2(final Region2AttrAdapter attrAdapter,
             final IStructuredDocumentContext sDocContext)
     {
         final ITextRegion attrValueRegion = attrAdapter
@@ -128,67 +227,17 @@ public class AttributeValidatingStrategy extends
             final ITextRegionCollection parentRegion = ((ITextRegionCollection) attrValueRegion);
             if (parentRegion.getType() == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE)
             {
-                // look for attribute pattern "#{}"
-                // TODO: need to generalize this for RValue concatenation
-                final ITextRegionList regionList = parentRegion.getRegions();
+                ITextRegionList regionList = parentRegion.getRegions();
+
                 if (regionList.size() >= 3)
                 {
                     final ITextRegion openQuote = regionList.get(0);
-                    final ITextRegion openVBLQuote = regionList.get(1);
+                    final ITextRegion vblOpen = regionList.get(1);
 
                     if ((openQuote.getType() == DOMJSPRegionContexts.XML_TAG_ATTRIBUTE_VALUE_DQUOTE || openQuote
-                            .getType() == DOMJSPRegionContexts.XML_TAG_ATTRIBUTE_VALUE_SQUOTE)
-                            && (openVBLQuote.getType() == DOMJSPRegionContexts.JSP_VBL_OPEN))
+                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE)
+                            && vblOpen.getType() == DOMJSPRegionContexts.JSP_VBL_OPEN)
                     {
-                        // we appear to be inside "#{", so next should be a
-                        // VBL_CONTENT if there's anything
-                        // here to validate
-                        final ITextRegion content = regionList.get(2);
-                        if (content.getType() == DOMJSPRegionContexts.JSP_VBL_CONTENT)
-                        {
-                            final int contentStart = parentRegion
-                                    .getStartOffset(content);
-                            final IStructuredDocumentContext elContext = IStructuredDocumentContextFactory.INSTANCE
-                                    .getContext(sDocContext
-                                            .getStructuredDocument(),
-                                            contentStart);
-
-                            final String elText = parentRegion.getText(content);
-
-                            if (DEBUG)
-                            {
-                                System.out.println(addDebugSpacer(3)
-                                        + "EL attrVal= " + elText);
-                            }
-
-                            // EL validation is user configurable because
-                            // it can be computationally costly.
-                            if (_validationContext.shouldValidateEL())
-                            {
-                                final List elVals = MetaDataEnabledProcessingFactory
-                                        .getInstance()
-                                        .getAttributeValueRuntimeTypeFeatureProcessors(
-                                                IValidELValues.class,
-                                                elContext,
-                                                attrAdapter
-                                                        .getAttributeIdentifier());
-                                validateELExpression(sDocContext, elContext,
-                                        elVals, attrAdapter.getValue(), elText);
-                            }
-                        }
-                        else if (content.getType() == DOMJSPRegionContexts.JSP_VBL_CLOSE)
-                        {
-                            final int offset = parentRegion
-                                    .getStartOffset(openVBLQuote) + 1;
-                            final int length = 2;
-                            final Diagnostic diagnostic =
-                                _validationContext
-                                .getDiagnosticFactory()
-                                .create_EMPTY_EL_EXPRESSION();
-                            // detected empty EL expression
-                            _validationContext.getReporter().report(diagnostic, offset, length);
-                        }
-
                         boolean foundClosingQuote = false;
                         for (int i = 2; !foundClosingQuote
                                 && i < regionList.size(); i++)
@@ -200,18 +249,18 @@ public class AttributeValidatingStrategy extends
                             }
                         }
 
-                        if (!foundClosingQuote)
+                        if (!foundClosingQuote
+                                && _validationContext.shouldValidateEL())
                         {
                             final int offset = sDocContext
                                     .getDocumentPosition() + 1;
                             final int length = parentRegion.getText().length();
-                            final Diagnostic diagnostic =
-                                _validationContext
-                                .getDiagnosticFactory()
-                                .create_MISSING_CLOSING_EXPR_BRACKET();
-                            _validationContext.getReporter().report(diagnostic, offset, length);
+                            final Diagnostic diagnostic = _validationContext
+                                    .getDiagnosticFactory()
+                                    .create_MISSING_CLOSING_EXPR_BRACKET();
+                            _validationContext.getReporter().report(diagnostic,
+                                    offset, length);
                         }
-
                         return true;
                     }
                 }
@@ -228,7 +277,8 @@ public class AttributeValidatingStrategy extends
         // validation
         final ELExpressionValidator elValidator = new ELExpressionValidator(
                 elContext, elText, _validationContext
-                        .getSymbolResolverFactory(), _validationContext.getReporter());
+                        .getSymbolResolverFactory(), _validationContext
+                        .getReporter());
         elValidator.validateXMLNode();
 
         final CompositeType exprType = elValidator.getExpressionType();
@@ -245,9 +295,8 @@ public class AttributeValidatingStrategy extends
 
                     if (expectedType != null)
                     {
-                        status = TypeComparator
-                                .calculateTypeCompatibility(expectedType,
-                                        exprType);
+                        status = TypeComparator.calculateTypeCompatibility(
+                                expectedType, exprType);
                         if (status.getSeverity() != Diagnostic.OK)
                         {
                             reportValidationMessage(status, context,
@@ -257,10 +306,9 @@ public class AttributeValidatingStrategy extends
                 }
                 catch (final ELIsNotValidException e)
                 {
-                    reportValidationMessage(
-                            createValidationMessage(context, attributeVal,
-                                    IStatus.WARNING, e.getMessage(),
-                                    _validationContext.getFile()), context,
+                    reportValidationMessage(createValidationMessage(context,
+                            attributeVal, IStatus.WARNING, e.getMessage(),
+                            _validationContext.getFile()), context,
                             attributeVal);
                 }
             }
@@ -323,8 +371,8 @@ public class AttributeValidatingStrategy extends
                     {
                         final IValidationMessage msg = (IValidationMessage) msgs
                                 .next();
-                        reportValidationMessage(createValidationMessage
-                                (context, attributeValue, msg.getSeverity(), msg
+                        reportValidationMessage(createValidationMessage(
+                                context, attributeValue, msg.getSeverity(), msg
                                         .getMessage(), _validationContext
                                         .getFile()), context, attributeValue);
                     }
@@ -341,8 +389,7 @@ public class AttributeValidatingStrategy extends
         }
     }
 
-    private void reportValidationMessage(
-            final  Diagnostic  problem,
+    private void reportValidationMessage(final Diagnostic problem,
             final IStructuredDocumentContext context,
             final String attributeValue)
     {
@@ -357,8 +404,8 @@ public class AttributeValidatingStrategy extends
             final IFile file)
     {
         // TODO: need factory
-        final Diagnostic diagnostic =
-            new BasicDiagnostic(severity, "", -1, msg, null);
+        final Diagnostic diagnostic = new BasicDiagnostic(severity, "", -1,
+                msg, null);
         return diagnostic;
     }
 

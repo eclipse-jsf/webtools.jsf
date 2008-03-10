@@ -20,6 +20,18 @@
            id="org.eclipse.jst.jsf.ui.JSFRootPage"
            name="%preferencepage.jsf.name">
      </page>
+     <page
+           category="org.eclipse.jst.jsf.ui.viewRoot"
+           class="org.eclipse.jst.jsf.ui.internal.preferences.JSPTagRegistryPreferencePage"
+           id="org.eclipse.jst.jsf.ui.jspTagRegistry"
+           name="%JSP_Tag_Registry_Preferences">
+     </page>
+     <page
+           category="org.eclipse.jst.jsf.ui.JSFRootPage"
+           class="org.eclipse.jst.jsf.ui.internal.preferences.EmptyRootPreferencePage"
+           id="org.eclipse.jst.jsf.ui.viewRoot"
+           name="%View_Preference_Root">
+     </page>
   </extension>
 
   <extension 
@@ -40,7 +52,7 @@
                         type="contentassistprocessor" 
                         class="org.eclipse.jst.jsf.ui.internal.contentassist.el.JSFELContentAssistProcessor" 
                         target="org.eclipse.jst.jsp.SCRIPT.JSP_EL2" /> 
-				<provisionalConfiguration 
+                <provisionalConfiguration 
                         type="contentassistprocessor" 
                         class="org.eclipse.jst.jsf.ui.internal.contentassist.JSFContentAssistProcessor" 
                         target="org.eclipse.jst.jsp.JSP_DEFAULT,org.eclipse.jst.jsp.JSP_DIRECTIVE" />

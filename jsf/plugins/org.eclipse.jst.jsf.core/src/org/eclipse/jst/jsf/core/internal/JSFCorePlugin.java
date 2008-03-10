@@ -26,11 +26,13 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.context.IDelegatingFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.designtime.internal.resolver.ViewBasedTaglibResolverFactory;
+import org.eclipse.jst.jsf.designtime.internal.view.AbstractDTViewHandler;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
 import org.osgi.framework.Bundle;
@@ -74,19 +76,18 @@ public class JSFCorePlugin extends WTPPlugin
     public void start(final BundleContext context) throws Exception
     {
         super.start(context);
-//        IStructuredDocumentContextResolverFactory factory = 
-//            IStructuredDocumentContextResolverFactory.INSTANCE;
-
-//        if (factory instanceof IDelegatingFactory)
-//        {
-//            _tagLibResolverFactory = new ViewBasedTaglibResolverFactory();
-//            ((IDelegatingFactory) factory)
-//                    .addFactoryDelegate(_tagLibResolverFactory);
-//        }
-//        else
-//        {
-//            log("Error adding tag resolver delegate", new Throwable());
-//        }
+        IStructuredDocumentContextResolverFactory2 factory = 
+            IStructuredDocumentContextResolverFactory2.INSTANCE;
+        if (factory instanceof IDelegatingFactory)
+        {
+            _tagLibResolverFactory = new ViewBasedTaglibResolverFactory();
+            ((IDelegatingFactory) factory)
+                    .addFactoryDelegate(_tagLibResolverFactory);
+        }
+        else
+        {
+            log("Error adding tag resolver delegate", new Throwable());
+        }
     }
 
     /**
@@ -287,6 +288,34 @@ public class JSFCorePlugin extends WTPPlugin
                 EXTERNAL_CONTEXT_EXT_POINT_NAME);
     }
 
+    
+    /**
+     * @return a map of all registered external context providers by id
+     */
+    public synchronized static Map<String, AbstractDTViewHandler> getViewHandlers()
+    {
+        if (_registeredViewHandlers == null)
+        {
+            registerViewHandlers();
+            if (_registeredViewHandlers == null)
+            {
+                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
+            }
+        }
+        return Collections.unmodifiableMap(_registeredViewHandlers);
+    }
+
+    private static Map<String, AbstractDTViewHandler>           _registeredViewHandlers;
+    private final static String                                  VIEWHANDLER_EXT_POINT_NAME = "viewhandler"; //$NON-NLS-1$
+
+    private static void registerViewHandlers()
+    {
+        _registeredViewHandlers = new HashMap();
+        loadRegisteredExtensions(VIEWHANDLER_EXT_POINT_NAME,
+                _registeredViewHandlers,
+                VIEWHANDLER_EXT_POINT_NAME);
+    }
+
     private static <ResolverProvider> void loadRegisteredExtensions(
             final String extName, final Map<String, ResolverProvider> registry,
             final String elementName)
@@ -357,5 +386,16 @@ public class JSFCorePlugin extends WTPPlugin
 
         }
         return this.preferenceStore;
+    }
+    
+    /**
+     * @param name
+     * @return the extension point called name for this bundle
+     */
+    public IExtensionPoint getExtension(final String name)
+    {
+        return Platform.getExtensionRegistry()
+        .getExtensionPoint(plugin.getBundle().getSymbolicName(),
+                name);
     }
 }

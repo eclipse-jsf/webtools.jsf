@@ -15,6 +15,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jem.internal.proxy.core.IBeanTypeProxy;
+import org.eclipse.jem.internal.proxy.core.IConfigurationContributor;
 import org.eclipse.jem.internal.proxy.core.IStandardBeanTypeProxyFactory;
 import org.eclipse.jem.internal.proxy.core.ProxyFactoryRegistry;
 import org.eclipse.jem.internal.proxy.ide.IDERegistration;
@@ -25,6 +26,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorType
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
 import org.eclipse.jst.jsf.core.internal.jem.BeanProxyUtil.BeanProxyWrapper;
 import org.eclipse.jst.jsf.core.internal.jem.BeanProxyUtil.ProxyException;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
@@ -66,12 +68,16 @@ public final class DTComponentIntrospector
      * @param classType
      * @param className
      * @param project
-     * @return the component type info for the class type or null if none.
+     * @param contributors  may be null
+     * @return the component type info for the class type or null if none.  Adds
+     * contributors to the class path
      */
     public static ComponentTypeInfo getComponent(final String classType,
-            final String className, final IProject project)
+            final String className, final IProject project,
+            final IConfigurationContributor[] contributors)
     {
-        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(project);
+        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(project,
+                contributors);
 
         if (registry != null)
         {
@@ -82,58 +88,73 @@ public final class DTComponentIntrospector
             final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
                     classTypeProxy);
 
+            String family = null;
+            String renderer = null;
             try
             {
                 classTypeWrapper.init();
-                final String family = classTypeWrapper
-                        .callStringMethod("getFamily");
-                final String renderer = classTypeWrapper
-                        .callStringMethod("getRendererType");
-
-                IType type = null;
-
-                try
-                {
-                    type = JavaCore.create(project).findType(className);
-                }
-                catch (JavaModelException e)
-                {
-                    // fall through;
-                }
-
-                List<String> interfaces = new ArrayList<String>();
-                List<String> superClasses = new ArrayList<String>();
-
-                if (type != null)
-                {
-                    TypeInfoCache typeCache = getSharedTypeCache();
-
-                    IType[] interfaceTypes = typeCache
-                            .cacheInterfaceTypesFor(type);
-                    for (IType interfaze : interfaceTypes)
-                    {
-                        interfaces.add(interfaze.getFullyQualifiedName());
-                    }
-
-                    IType[] superClassTypes = typeCache
-                            .cacheSupertypesFor(type);
-
-                    for (IType superClass : superClassTypes)
-                    {
-                        superClasses.add(superClass.getFullyQualifiedName());
-                    }
-                }
-
-                return new ComponentTypeInfo(classType, className, superClasses
-                        .toArray(new String[0]), interfaces
-                        .toArray(new String[0]), family, renderer);
+                family = classTypeWrapper.callStringMethod("getFamily");
+                renderer = classTypeWrapper.callStringMethod("getRendererType");
             }
-            catch (final ProxyException tp)
+            catch (ProxyException e1)
             {
                 // fall through
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                {
+                    JSFCoreTraceOptions.log("DTComponentIntrospector.getComponent:", e1);
+                }
             }
+
+            IType type = null;
+
+            try
+            {
+                type = JavaCore.create(project).findType(className);
+            }
+            catch (JavaModelException e)
+            {
+                // fall through;
+            }
+
+            List<String> interfaces = new ArrayList<String>();
+            List<String> superClasses = new ArrayList<String>();
+
+            if (type != null)
+            {
+                TypeInfoCache typeCache = getSharedTypeCache();
+
+                IType[] interfaceTypes = typeCache.cacheInterfaceTypesFor(type);
+                for (IType interfaze : interfaceTypes)
+                {
+                    interfaces.add(interfaze.getFullyQualifiedName());
+                }
+
+                IType[] superClassTypes = typeCache.cacheSupertypesFor(type);
+
+                for (IType superClass : superClassTypes)
+                {
+                    superClasses.add(superClass.getFullyQualifiedName());
+                }
+            }
+
+            return new ComponentTypeInfo(classType, className, superClasses
+                    .toArray(new String[0]), interfaces.toArray(new String[0]),
+                    family, renderer);
         }
         return null;
+    }
+
+    /**
+     * @param classType
+     * @param className
+     * @param project
+     * @return the component type info with no additional classpath
+     *         contributions. May return null;
+     */
+    public static ComponentTypeInfo getComponent(final String classType,
+            final String className, final IProject project)
+    {
+        return getComponent(classType, className, project, null);
     }
 
     /**
@@ -335,11 +356,11 @@ public final class DTComponentIntrospector
      * TODO: caching?
      */
     private static ProxyFactoryRegistry getProxyFactoryRegistry(
-            final IProject project)
+            final IProject project, final IConfigurationContributor[] contributors)
     {
         try
         {
-            return IDERegistration.startAnImplementation(null, false, project,
+            return IDERegistration.startAnImplementation(contributors, false, project,
                     project.getName(), JSFCorePlugin.PLUGIN_ID,
                     new NullProgressMonitor());
         }

@@ -1,14 +1,13 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
-import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDTagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.w3c.dom.Node;
 
 /**
@@ -88,10 +87,8 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
 
                 if (res instanceof IFile)
                 {
-                    final IProject proj = res.getProject();
-                    final TLDTagRegistry registry =
-                            TLDTagRegistry.getRegistry(proj);
                     final IFile srcFile = (IFile) res;
+                    final ITagRegistry registry = findTagRegistry(srcFile);
                     if (JSPUtil.isJSPContentType(srcFile) && registry != null)
                     {
                         // if we have a jsp file, then return the default
@@ -114,7 +111,27 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     protected DTUIViewRoot internalCreateView(
             final DTFacesContext facesContext, final String viewId)
     {
-        return new DefaultDTUIViewRoot(facesContext, this);
+        IViewDefnAdapterFactory factory;
+        try
+        {
+            factory = getViewMetadataAdapterFactory(facesContext);
+            if (factory != null)
+            {
+                IViewDefnAdapter<?, ?> adapter = 
+                    factory.createAdapter(facesContext, viewId);
+                if (adapter instanceof XMLViewDefnAdapter)
+                {
+                    return new DefaultDTUIViewRoot(facesContext, this, (XMLViewDefnAdapter) adapter);
+                }
+            }
+        }
+        catch (ViewHandlerException e)
+        {
+            JSFCorePlugin.log(e, "While acquiring view defn adapter factory");
+            // fall-through
+        }
+        
+        return null;
     }
 
     @Override

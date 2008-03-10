@@ -28,6 +28,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -88,8 +89,8 @@ public class JSFContentAssistProcessor implements IContentAssistProcessor {
 				if (regionType != null
 						&& regionType.equals(DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE)) {
 					
-					tlResolver = IStructuredDocumentContextResolverFactory.INSTANCE
-							.getTaglibContextResolver(context);
+					tlResolver = IStructuredDocumentContextResolverFactory2.INSTANCE
+							.getTaglibContextResolverFromDelegates(context);
 
 					if (tlResolver != null) {
 						

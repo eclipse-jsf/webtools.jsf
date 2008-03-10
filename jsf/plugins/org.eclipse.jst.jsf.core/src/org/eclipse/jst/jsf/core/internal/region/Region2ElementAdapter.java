@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.jst.jsf.common.dom.ElementDOMAdapter;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
@@ -15,6 +16,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentReg
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 /**
@@ -158,8 +160,8 @@ public class Region2ElementAdapter extends ElementDOMAdapter
         public String getNamespace()
         {
             final ITaglibContextResolver tagLibResolver =
-                              IStructuredDocumentContextResolverFactory.INSTANCE
-                                      .getTaglibContextResolver(_context);
+                              IStructuredDocumentContextResolverFactory2.INSTANCE
+                                      .getTaglibContextResolverFromDelegates(_context);
 
             if (tagLibResolver != null)
             {
@@ -185,12 +187,22 @@ public class Region2ElementAdapter extends ElementDOMAdapter
             if (_attributes != null)
                 return;
 
-            _attributes = new HashMap<String, Region2AttrAdapter>();
-            for (int i = 0; i < _node.getAttributes().getLength(); i++)
+            _attributes = Collections.EMPTY_MAP;
+
+            final NamedNodeMap attributes = _node.getAttributes();
+
+            if (attributes != null)
             {
-                final Node nodeAttr = _node.getAttributes().item(i);
-                Region2AttrAdapter  attr = new Region2AttrAdapter(Region2ElementAdapter.this, nodeAttr);
-                _attributes.put(attr.getLocalName(), attr);
+                final int numAttrs = attributes.getLength();
+                _attributes = new HashMap<String, Region2AttrAdapter>(
+                        (int) (numAttrs / 0.75f) + 1, 0.75f);
+                for (int i = 0; i < numAttrs; i++)
+                {
+                    final Node nodeAttr = attributes.item(i);
+                    Region2AttrAdapter attr = new Region2AttrAdapter(
+                            Region2ElementAdapter.this, nodeAttr);
+                    _attributes.put(attr.getLocalName(), attr);
+                }
             }
         }
     }

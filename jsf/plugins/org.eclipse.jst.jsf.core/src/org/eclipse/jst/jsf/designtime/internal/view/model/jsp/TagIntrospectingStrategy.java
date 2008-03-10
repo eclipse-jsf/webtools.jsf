@@ -17,6 +17,10 @@ public final class TagIntrospectingStrategy extends JSPTagResolvingStrategy
      * the identifier of this strategy
      */
     public final static String ID = "org.eclipse.jst.jsf.designtime.TagIntrospectingStrategy";
+    /**
+     * the display name
+     */
+    public final static String DISPLAY_NAME = "Introspecting Tag Resolver";
 
     private final IProject _project;
 
@@ -33,6 +37,11 @@ public final class TagIntrospectingStrategy extends JSPTagResolvingStrategy
     public String getId()
     {
         return ID;
+    }
+
+    public String getDisplayName()
+    {
+        return DISPLAY_NAME;
     }
 
     @Override

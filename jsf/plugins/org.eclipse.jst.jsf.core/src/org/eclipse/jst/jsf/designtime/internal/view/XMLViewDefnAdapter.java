@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,10 +10,14 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.datatypes.ELExpression;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.context.IModelContext;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -32,13 +37,34 @@ public abstract class XMLViewDefnAdapter extends
     public abstract IDocument getContainer(DTFacesContext context, String viewId);
 
     @Override
-    public abstract String getId(Node viewDefnObject)
-            throws IllegalArgumentException;
-
+    public String getId(final Node viewDefnObject)
+            throws IllegalArgumentException
+    {
+        if (viewDefnObject instanceof Element)
+        {
+            return ((Element) viewDefnObject).getAttribute("id");
+        }
+        throw new IllegalArgumentException(
+                "Only Elements can define view object ids");
+    }
+    
     @Override
-    public abstract ViewObject mapToViewObject(Node viewDefnObject,
-            ViewObjectConstructionStrategy<? extends Node> constructionData,
-            IDocument viewContainer);
+    public ViewObject mapToViewObject(
+            final Node viewDefnObject,
+            final ViewObjectConstructionStrategy<? extends Node> constructionData,
+            final IDocument document)
+    {
+        switch (viewDefnObject.getNodeType())
+        {
+            case Node.ELEMENT_NODE:
+                return createFromElement(
+                        (Element) viewDefnObject,
+                        (ViewObjectConstructionStrategy<Element>) constructionData,
+                        document);
+        }
+
+        return null;
+    }
 
     /**
      * @param viewDefnObject
@@ -58,8 +84,33 @@ public abstract class XMLViewDefnAdapter extends
     }
 
     @Override
-    public abstract List<Node> getViewDefnRoots(IDocument container);
+    public List<Node> getViewDefnRoots(final IDocument container)
+    {
+        final List<Node> roots = new ArrayList<Node>();
 
+        final IStructuredDocumentContext context =
+            IStructuredDocumentContextFactory.INSTANCE.getContext(
+                    container, -1);
+
+        if (context != null)
+        {
+            final IDOMContextResolver resolver =
+                IStructuredDocumentContextResolverFactory.INSTANCE
+                .getDOMContextResolver(context);
+
+            if (resolver != null)
+            {
+                final Document doc = resolver.getDOMDocument();
+
+                if (doc != null)
+                {
+                    roots.add(doc);
+                }
+            }
+        }
+
+        return roots;
+    }
     @Override
     public abstract DTELExpression getELExpression(IModelContext context)
             throws ViewHandlerException;
@@ -84,7 +135,7 @@ public abstract class XMLViewDefnAdapter extends
      * @param doc
      * @return the namespace uri for element in doc
      */
-    protected abstract String getNamespace(Element element, IDocument doc);
+    public abstract String getNamespace(Element element, IDocument doc);
 
     /**
      * @param node

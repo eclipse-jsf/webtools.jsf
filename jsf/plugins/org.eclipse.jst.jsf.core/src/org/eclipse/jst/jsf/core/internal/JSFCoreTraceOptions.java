@@ -27,12 +27,17 @@ public final class JSFCoreTraceOptions
      * True if the JSP tag registry tracing is enabled
      */
     public static final boolean TRACE_JSPTAGREGISTRY;
-
+    
     /**
      * True if handling of JSP TagIndex changes are being traced
      */
     public static final boolean TRACE_JSPTAGREGISTRY_CHANGES;
-    
+
+    /**
+     * True if the TLD registry manager tracing is enabled
+     */
+    public static final boolean TRACE_TLDREGISTRYMANAGER;
+
     private static final String KEY_DEBUG_ENABLED = "/debug";
     private static final String KEY_DESIGNTIME = "/designtime";
     private static final String KEY_DESIGNTIME_VIEW = KEY_DESIGNTIME + "/view";
@@ -42,6 +47,8 @@ public final class JSFCoreTraceOptions
             + "/jsptagregistry";
     private static final String KEY_VIEW_JSPTAGREGISTRY_CHANGES =
         KEY_VIEW_JSPTAGREGISTRY + "/changes";
+    private static final String KEY_VIEW_TLDREGISTRYMANAGER =
+        KEY_DESIGNTIME_VIEW + "/tldregistrymanager";
     
     static
     {
@@ -59,12 +66,15 @@ public final class JSFCoreTraceOptions
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY, false);
             TRACE_JSPTAGREGISTRY_CHANGES = debugOptions.getBooleanOption(
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_CHANGES, false);
+            TRACE_TLDREGISTRYMANAGER = debugOptions.getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_TLDREGISTRYMANAGER, false);
         }
         else
         {
             TRACE_JSPTAGINTROSPECTOR = false;
             TRACE_JSPTAGREGISTRY = false;
             TRACE_JSPTAGREGISTRY_CHANGES = false;
+            TRACE_TLDREGISTRYMANAGER = false;
         }
     }
 
@@ -74,6 +84,17 @@ public final class JSFCoreTraceOptions
     public static void log(final String message)
     {
         System.out.println(message);
+    }
+    
+    /**
+     * @param msg A short label placed before the trace of t to show the source
+     * @param t
+     */
+    public static void log(final String msg, final Throwable t)
+    {
+        System.out.printf("%s: Exception Trace:\n\n",msg);
+        t.printStackTrace(System.out);
+        System.out.print("\n\n\n");
     }
 
     private JSFCoreTraceOptions()

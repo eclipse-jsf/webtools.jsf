@@ -1,6 +1,6 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
-import org.eclipse.jst.jsf.common.internal.policy.IIdentifiable;
+import org.eclipse.jst.jsf.common.internal.strategy.IIdentifiableStrategy;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 
 /**
@@ -11,7 +11,8 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement
  * @param <IDTYPE> 
  * 
  */
-public interface ITagResolvingStrategy<TLDELEMENT, IDTYPE> extends IIdentifiable<IDTYPE>
+public interface ITagResolvingStrategy<TLDELEMENT, IDTYPE> extends 
+    IIdentifiableStrategy<TLDELEMENT, ITagElement, IDTYPE>
 {
     /**
      * @param element
@@ -21,7 +22,8 @@ public interface ITagResolvingStrategy<TLDELEMENT, IDTYPE> extends IIdentifiable
 
     /**
      * @return the ITagElement (may be null) that indicates that
-     *         resolve(TLDELEMENT) could not resolve a tag.
+     *         resolve(TLDELEMENT) could not resolve a tag.  The return
+     *         must be testable with standard "==" operator and not equals().
      */
     ITagElement getNotFoundIndicator();
 }

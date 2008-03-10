@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -28,7 +29,7 @@ import org.w3c.dom.NodeList;
  * 
  */
 public class ViewBasedTaglibResolverFactory implements
-        IStructuredDocumentContextResolverFactory, IAdaptable
+IStructuredDocumentContextResolverFactory, IAdaptable
 {
     public IDOMContextResolver getDOMContextResolver(
             final IStructuredDocumentContext context)
@@ -50,7 +51,7 @@ public class ViewBasedTaglibResolverFactory implements
         if (context.getStructuredDocument() instanceof IStructuredDocument)
         {
             final IWorkspaceContextResolver resolver = INSTANCE
-                    .getWorkspaceContextResolver(context);
+            .getWorkspaceContextResolver(context);
             if (resolver != null)
             {
                 final IProject project = resolver.getProject();
@@ -65,7 +66,7 @@ public class ViewBasedTaglibResolverFactory implements
                         return new ViewBasedTaglibResolver(context, file,
                                 project);
                     }
-                    catch (IllegalArgumentException e)
+                    catch (final IllegalArgumentException e)
                     {
                         // the constructor will throw this if the view
                         // definition
@@ -86,7 +87,7 @@ public class ViewBasedTaglibResolverFactory implements
      * 
      */
     private static class ViewBasedTaglibResolver implements
-            ITaglibContextResolver
+    ITaglibContextResolver
     {
         private final IProject                   _project;
         private final IFile                      _file;
@@ -109,7 +110,7 @@ public class ViewBasedTaglibResolverFactory implements
             if (DTAppManagerUtil.getXMLViewDefnAdapter(project, file) == null)
             {
                 throw new IllegalArgumentException(
-                        "View definition adapter not found");
+                "View definition adapter not found");
             }
         }
 
@@ -121,11 +122,12 @@ public class ViewBasedTaglibResolverFactory implements
 
         public String getTagURIForNodeName(final Node node)
         {
-            final ITagElement tagElement = getTagElement(node);
-            
-            if  (tagElement != null)
+            final XMLViewDefnAdapter adapter = DTAppManagerUtil
+            .getXMLViewDefnAdapter(_file);
+            final Element element = getElement(node);
+            if (element != null && adapter != null)
             {
-                return tagElement.getUri();
+                return adapter.getNamespace(element, _context.getStructuredDocument());
             }
             return null;
         }
@@ -147,8 +149,8 @@ public class ViewBasedTaglibResolverFactory implements
         public boolean canResolveContext(final IModelContext modelContext)
         {
             // must be a JSP page
-            Object adapter = modelContext.getAdapter(IStructuredDocumentContext.class);
-            
+            final Object adapter = modelContext.getAdapter(IStructuredDocumentContext.class);
+
             if (adapter instanceof IStructuredDocumentContext)
             {
                 return ((IStructuredDocumentContext)adapter).getStructuredDocument() instanceof IStructuredDocument;
@@ -156,21 +158,31 @@ public class ViewBasedTaglibResolverFactory implements
             return false;
         }
 
-        private ITagElement getTagElement(Node node)
+        private Element getElement(final Node node)
         {
-            Node checkNode = node;
+            Element checkNode = null;
 
-            if (node instanceof Attr)
+            if (node instanceof Element)
+            {
+                checkNode = (Element) node;
+            }
+            else if (node instanceof Attr)
             {
                 checkNode = ((Attr) node).getOwnerElement();
             }
+            return checkNode;
+        }
 
-            XMLViewDefnAdapter adapter = 
+        private ITagElement getTagElement(final Node node)
+        {
+            final Element element = getElement(node);
+
+            final XMLViewDefnAdapter adapter =
                 DTAppManagerUtil.getXMLViewDefnAdapter(_project, _file);
 
-            if (adapter != null)
+            if (element != null && adapter != null)
             {
-                return adapter.mapToTagElement(checkNode, _context
+                return adapter.mapToTagElement(element, _context
                         .getStructuredDocument());
             }
             // shouldn't happen since the constuctor throws an exceptino
@@ -196,7 +208,7 @@ public class ViewBasedTaglibResolverFactory implements
         return null;
     }
 
-    public Object getAdapter(Class adapter)
+    public Object getAdapter(final Class adapter)
     {
         if (adapter.isInstance(this))
         {

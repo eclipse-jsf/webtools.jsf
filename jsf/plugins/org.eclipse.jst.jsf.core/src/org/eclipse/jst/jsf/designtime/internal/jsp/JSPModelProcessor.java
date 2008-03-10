@@ -48,11 +48,12 @@ import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
-import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
+import org.eclipse.wst.html.core.internal.document.DOMStyleModelImpl;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -214,7 +215,7 @@ public class JSPModelProcessor
         _lastModificationStamp = -1;
     }
 
-    private DOMModelForJSP getModelForFile(final IFile file)
+    private DOMStyleModelImpl getModelForFile(final IFile file)
             throws CoreException, IOException
     {
         final IModelManager modelManager = 
@@ -222,9 +223,9 @@ public class JSPModelProcessor
 
         IStructuredModel model = modelManager.getModelForRead(file);
 
-        if (model instanceof DOMModelForJSP)
+        if (model instanceof DOMStyleModelImpl)
         {
-            return (DOMModelForJSP) model;
+            return (DOMStyleModelImpl) model;
         }
         else if (model != null)
         {
@@ -324,7 +325,7 @@ public class JSPModelProcessor
                 return;
             }
 
-            DOMModelForJSP  model = null;
+            DOMStyleModelImpl  model = null;
             try
             {
                 _lastModificationStampMonitor.setSignalled(true);
@@ -358,7 +359,7 @@ public class JSPModelProcessor
         }
     }
     
-    private void refreshInternal(DOMModelForJSP model)
+    private void refreshInternal(DOMStyleModelImpl model)
     {
         final IStructuredDocumentContext context = 
             IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), -1);
@@ -374,7 +375,7 @@ public class JSPModelProcessor
         //System.out.println("Net time to recurse document: "+netTime);
     }
 
-    private void recurseChildNodes(final DOMModelForJSP model,
+    private void recurseChildNodes(final IDOMModel model,
                                    final NodeList nodes, 
                                     final ITaglibContextResolver taglibResolver)
     {
@@ -388,7 +389,7 @@ public class JSPModelProcessor
         }
     }
 
-    private void processAttributes(final DOMModelForJSP model, final Node node, 
+    private void processAttributes(final IDOMModel model, final Node node, 
                                     final ITaglibContextResolver taglibResolver)
     {
         if (taglibResolver.hasTag(node))
@@ -407,7 +408,7 @@ public class JSPModelProcessor
         }
     }
 
-    private void processSymbolContrib(final DOMModelForJSP model, final String uri, final String elementName, Node attribute)
+    private void processSymbolContrib(final IDOMModel model, final String uri, final String elementName, Node attribute)
     {
         final SymbolContribAggregator  aggregator =
             SymbolContribAggregator.

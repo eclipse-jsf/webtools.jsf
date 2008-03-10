@@ -45,7 +45,8 @@ public class ContainmentValidatingStrategy extends
      */
     public final static String                         ID = 
         "org.eclipse.jst.jsf.validation.strategy.ElementValidatingStrategy";
-
+    private final static String                        DISPLAY_NAME =
+        "Tag Containment Validator";
     private final static ElementToTagIdentifierMapping elem2TagIdMapper = 
         new ElementToTagIdentifierMapping();
     private int                                        _containmentValidationCount;  // = 0;
@@ -57,7 +58,7 @@ public class ContainmentValidatingStrategy extends
     public ContainmentValidatingStrategy(
             final JSFValidationContext jsfValidationContext)
     {
-        super(ID);
+        super(ID, DISPLAY_NAME);
         _jsfValidationContext = jsfValidationContext;
     }
 

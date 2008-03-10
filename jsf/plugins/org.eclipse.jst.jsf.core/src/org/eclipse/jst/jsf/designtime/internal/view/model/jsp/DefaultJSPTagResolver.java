@@ -34,6 +34,10 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
      * strategy id
      */
     public final static String ID = "org.eclipse.jst.jsf.THISISTEMPORARY";
+    /**
+     * displayable nameb
+     */
+    public final static String DISPLAY_NAME = "Meta-data Driven Resolver";
     private final static Set<String> URI_IS_A_JSF_LIB;
 
     static
@@ -117,6 +121,11 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
         return ID;
     }
 
+    public String getDisplayName()
+    {
+        return DISPLAY_NAME;
+    }
+
     private static final ComponentTypeInfo COMPINFO_PARAM = new ComponentTypeInfo(
             "javax.faces.Parameter", "javax.faces.component.UIParameter",
             new String[]
@@ -194,6 +203,13 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
     private static final ComponentTypeInfo COMPINFO_COMMANDLINK = new ComponentTypeInfo(
             "javax.faces.HtmlCommandLink",
             "javax.faces.component.html.HtmlCommandLink",
+            new String[]
+                    { "javax.faces.component.UICommand",
+                    "javax.faces.component.UIComponentBase",
+                    "javax.faces.component.UIComponent", "java.lang.Object" },
+            new String[]
+            { "javax.faces.component.ActionSource",
+                    "javax.faces.component.StateHolder" },
             "javax.faces.Command", "javax.faces.Link");
     private static final ComponentTypeInfo COMPINFO_DATATABLE = new ComponentTypeInfo(
             "javax.faces.HtmlDataTable",
@@ -204,7 +220,6 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
             new String[]
             { "javax.faces.component.NamingContainer",
                     "javax.faces.component.StateHolder"},
-
             "javax.faces.Data", "javax.faces.Table");
     private static final ComponentTypeInfo COMPINFO_FORM = new ComponentTypeInfo(
             "javax.faces.HtmlForm", "javax.faces.component.html.HtmlForm",

@@ -6,7 +6,7 @@ package org.eclipse.jst.jsf.common.internal.resource;
  * @author cbateman
  *
  */
-public interface IResourceLifecycleListener 
+public interface IResourceLifecycleListener
 {
     /**
      * Listener accepts the resource lifecycle event
@@ -27,11 +27,18 @@ public interface IResourceLifecycleListener
         /**
          * @return an event result with defaults initialized
          */
-        public static EventResult getDefaultEventResult()
+        public synchronized static EventResult getDefaultEventResult()
         {
             if (DEFAULT == null)
             {
-                DEFAULT = new EventResult();
+                DEFAULT = new EventResult()
+                {
+                    @Override
+                    protected void setDisposeAfterEvent(final boolean disposeAfterEvent)
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+                };
             }
             return DEFAULT;
         }
@@ -42,12 +49,30 @@ public interface IResourceLifecycleListener
          * @return an event result with default except dispose after
          * is set
          */
-        public static EventResult getDisposeAfterEventResult()
+        public synchronized static EventResult getDisposeAfterEventResult()
         {
             if (DISPOSE_AFTER_EVENT == null)
             {
-                DISPOSE_AFTER_EVENT = new EventResult();
-                DISPOSE_AFTER_EVENT.setDisposeAfterEvent(true);
+                DISPOSE_AFTER_EVENT = new EventResult()
+                {
+                    /**
+                     * @return the remove listener flag
+                     */
+                    @Override
+                    public boolean getDisposeAfterEvent()
+                    {
+                        return true;
+                    }
+
+                    /**
+                     * @param disposeAfterEvent
+                     */
+                    @Override
+                    protected void setDisposeAfterEvent(final boolean disposeAfterEvent) {
+                        _disposeAfterEvent = disposeAfterEvent;
+                    }
+
+                };
             }
             return DISPOSE_AFTER_EVENT;
         }
@@ -69,7 +94,7 @@ public interface IResourceLifecycleListener
         /**
          * @param disposeAfterEvent
          */
-        protected void setDisposeAfterEvent(boolean disposeAfterEvent) {
+        protected void setDisposeAfterEvent(final boolean disposeAfterEvent) {
             _disposeAfterEvent = disposeAfterEvent;
         }
     }

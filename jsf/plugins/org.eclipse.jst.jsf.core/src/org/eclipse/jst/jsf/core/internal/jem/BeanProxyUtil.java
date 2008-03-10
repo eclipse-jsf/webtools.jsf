@@ -76,6 +76,16 @@ public final class BeanProxyUtil
             _instance = null;
             init();
         }
+        
+        
+
+        /**
+         * @return the instance proxy
+         */
+        public IBeanProxy getInstance()
+        {
+            return _instance;
+        }
 
         /**
          * <p>

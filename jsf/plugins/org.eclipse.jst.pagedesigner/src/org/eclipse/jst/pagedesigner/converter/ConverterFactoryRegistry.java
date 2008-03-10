@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.converter.html.HTMLConverterFactory;
 import org.eclipse.jst.pagedesigner.converter.jsp.JSPConverterFactory;
 import org.eclipse.swt.graphics.Image;
@@ -128,8 +129,8 @@ public class ConverterFactoryRegistry {
 	}
 
 	Image getUnknownImage() {
-		return PDPlugin.getDefault().getImage(
-				"palette/GENERIC/small/PD_Palette_Default.gif");
+		return JSFUICommonPlugin.getDefault().getImage(
+				JSFSharedImages.DEFAULT_PALETTE_TAG_IMG);
 	}
 
 	/**

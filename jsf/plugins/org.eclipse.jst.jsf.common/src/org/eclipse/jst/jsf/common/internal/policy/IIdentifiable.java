@@ -12,4 +12,9 @@ public interface IIdentifiable<IDTYPE>
      * @return the unique identifier
      */
     IDTYPE getId();
+    
+    /**
+     * @return a human-readable name for this identifier.
+     */
+    String getDisplayName();
 }

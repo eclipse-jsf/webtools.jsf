@@ -18,6 +18,7 @@ import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
@@ -33,7 +34,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
  */
 public class StructuredDocumentContextResolverFactory extends
 AbstractDelegatingFactory implements
-IStructuredDocumentContextResolverFactory
+IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFactory2
 {
     /* static attributes */
     private static StructuredDocumentContextResolverFactory INSTANCE;
@@ -214,6 +215,20 @@ IStructuredDocumentContextResolverFactory
             final IStructuredDocumentContext context)
     {
         // check the delegats first
+        ITaglibContextResolver resolver = internalGetTaglibContextResolver(context);
+
+        if (resolver == null)
+        {
+            resolver = delegateGetTaglibContextResolver(context);
+        }
+
+        return resolver;
+    }
+
+    public ITaglibContextResolver getTaglibContextResolverFromDelegates(
+            final IStructuredDocumentContext context)
+    {
+        // check the delegats first
         ITaglibContextResolver resolver = delegateGetTaglibContextResolver(context);
 
         if (resolver == null)
@@ -249,13 +264,12 @@ IStructuredDocumentContextResolverFactory
                 if (delegateFactory != null)
                 {
                     final ITaglibContextResolver contextResolver = delegateFactory
-                    .getTaglibContextResolver(context);
+                            .getTaglibContextResolver(context);
 
                     if (contextResolver != null)
                     {
                         return contextResolver;
                     }
-
                 }
             }
 

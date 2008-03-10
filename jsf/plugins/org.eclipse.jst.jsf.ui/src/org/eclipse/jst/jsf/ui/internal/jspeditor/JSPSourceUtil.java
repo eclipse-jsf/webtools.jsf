@@ -1,7 +1,5 @@
 package org.eclipse.jst.jsf.ui.internal.jspeditor;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
@@ -12,7 +10,6 @@ import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter.DTELExpression;
-import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 
 /**
@@ -38,35 +35,27 @@ public final class JSPSourceUtil
     {
         if (context != null)
         {
-            final XMLViewDefnAdapter adapter =
-                    DTAppManagerUtil.getXMLViewDefnAdapter(context);
-            if (adapter != null)
+            final DTELExpression expression = getELExpression(context);
+            if (expression != null)
             {
-                DTELExpression expression;
-                try
-                {
-                    expression = adapter.getELExpression(context);
-                }
-                catch (ViewHandlerException e)
-                {
-                    JSFUiPlugin.log(IStatus.ERROR, "", e);
-                    expression = null;
-                }
+                final ITextRegionContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+                        .getTextRegionResolver(expression.getDocumentContext());
 
-                if (expression != null)
+                if (resolver != null)
                 {
-                    final ITextRegionContextResolver resolver =
-                            IStructuredDocumentContextResolverFactory.INSTANCE
-                                    .getTextRegionResolver(expression
-                                            .getDocumentContext());
+                    final String regionType = resolver.getRegionType();
 
-                    if (resolver != null)
+                    if (regionType != null)
                     {
-                        final String regionType = resolver.getRegionType();
 
-                        if (regionType != null
-                                && resolver.matchesRelative(new String[]
-                                { DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE }))
+                        if (regionType == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE)
+                        {
+                            return new Region(expression.getDocumentContext()
+                                    .getDocumentPosition(), expression
+                                    .getText().length());
+                        }
+                        else if (resolver.matchesRelative(new String[]
+                        { DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE }))
                         {
                             return new Region(resolver.getStartOffset(),
                                     resolver.getLength());
@@ -95,25 +84,37 @@ public final class JSPSourceUtil
     {
         if (context != null && elRegion != null)
         {
-            try
-            {
-                String elText;
-                elText =
-                        context.getStructuredDocument().get(
-                                elRegion.getOffset(), elRegion.getLength());
-                final SymbolInfo symbolInfo =
-                        ContentAssistParser.getSymbolInfo(context,
-                                documentPosition - elRegion.getOffset() + 1,
-                                elText);
-                return symbolInfo;
-            }
-            catch (final BadLocationException e)
-            {
-                // well, so we simply have no symbol, no reason to worry (or
-                // log...)
-                return null;
-            }
+            final DTELExpression elExpression = getELExpression(context);
+            
+            final String elText = elExpression.getText().trim();
+//                        context.getStructuredDocument().get(
+//                                elRegion.getOffset(), elRegion.getLength());
+            final SymbolInfo symbolInfo =
+                    ContentAssistParser.getSymbolInfo(context,
+                            documentPosition - elRegion.getOffset() + 1,
+                            elText);
+            return symbolInfo;
         }
         return null;
+    }
+    
+    private static DTELExpression getELExpression(
+            final IStructuredDocumentContext context)
+    {
+        final XMLViewDefnAdapter adapter = DTAppManagerUtil
+                .getXMLViewDefnAdapter(context);
+        DTELExpression expression = null;
+        if (adapter != null)
+        {
+            try
+            {
+                expression = adapter.getELExpression(context);
+            }
+            catch (ViewHandlerException e)
+            {
+                expression = null;
+            }
+        }
+        return expression;
     }
 }

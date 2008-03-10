@@ -4,14 +4,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.internal.RunOnCompletionPattern;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
-import org.eclipse.jst.jsf.designtime.internal.view.DefaultDTViewHandler.DefaultViewDefnAdapterFactory;
-import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
-import org.w3c.dom.Node;
 
 /**
  * The default view root implementation
@@ -19,43 +14,35 @@ import org.w3c.dom.Node;
  * @author cbateman
  * 
  */
-class DefaultDTUIViewRoot extends DTUIViewRoot
+public class DefaultDTUIViewRoot extends DTUIViewRoot
 {
     /**
      * serializable
      */
     private static final long serialVersionUID = -6948413077931237435L;
-    private final DefaultDTViewHandler _viewHandler;
+    //private final DefaultDTViewHandler _viewHandler;
     private final DTFacesContext _context;
-    private DefaultViewDefnAdapterFactory _viewDefnAdapterFactory;
+    private XMLViewDefnAdapter _viewAdapter;
     private String _viewId;
     private XMLComponentTreeConstructionStrategy _constructionStrategy;
 
     /**
+     * @param context 
      * @param viewHandler
      *            TODO: should we decouple from the viewHandler by creating and
      *            update proxy?
+     * @param adapter 
      */
-    DefaultDTUIViewRoot(final DTFacesContext context,
-            final DefaultDTViewHandler viewHandler)
+    public DefaultDTUIViewRoot(final DTFacesContext context,
+            final IDTViewHandler viewHandler, final XMLViewDefnAdapter adapter)
     {
         // TODO: refactor constants
         super(null, null, new ComponentTypeInfo("javax.faces.ViewRoot",
                 "javax.faces.component.UIViewRoot", "javax.faces.ViewRoot",
                 null));
         _context = context;
-        _viewHandler = viewHandler;
-        try
-        {
-            _viewDefnAdapterFactory =
-            // TODO: not extensible
-            (DefaultViewDefnAdapterFactory) _viewHandler
-                    .getViewMetadataAdapterFactory(context);
-        }
-        catch (final ViewHandlerException e)
-        {
-            JSFCorePlugin.log(e, "Trying to get view adapter factory");
-        }
+        //_viewHandler = viewHandler;
+        _viewAdapter = adapter;
     }
 
     @Override
@@ -75,10 +62,8 @@ class DefaultDTUIViewRoot extends DTUIViewRoot
     {
         if (_constructionStrategy == null)
         {
-            final IViewDefnAdapter<Node, IDocument> adapter = _viewDefnAdapterFactory
-                    .createAdapter(_context, _viewId);
             _constructionStrategy = new XMLComponentTreeConstructionStrategy(
-                    (XMLViewDefnAdapter) adapter, _context.adaptContextObject()
+                    _viewAdapter, _context.adaptContextObject()
                             .getProject());
         }
 

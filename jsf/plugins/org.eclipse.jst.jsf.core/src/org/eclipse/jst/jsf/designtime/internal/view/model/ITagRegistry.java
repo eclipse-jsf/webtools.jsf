@@ -38,6 +38,9 @@ public interface ITagRegistry
     public abstract void refresh(final Runnable runAfter);
 
     /**
+     * Callers should assume the collection is not modifiable.  Implementers
+     * may return a collection whose mutator operations throw exceptions.
+     * 
      * @return all tag libraries for a project tag registry
      */
     public abstract Collection<? extends Namespace> getAllTagLibraries();

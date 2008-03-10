@@ -14,11 +14,12 @@ package org.eclipse.jst.pagedesigner.figurehandler;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
+import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory2;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSFigure;
 import org.eclipse.jst.pagedesigner.css2.layout.CSSTextFigure;
 import org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider;
@@ -205,8 +206,8 @@ public final class FigureFactory
         		image = TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"HTML", element.getLocalName());
         	}
         }
-		return image != null ? image : PDPlugin.getDefault().getImage(
-			"palette/GENERIC/small/PD_Palette_Default.gif");	
+		return image != null ? image : JSFUICommonPlugin.getDefault().getImage(
+			JSFSharedImages.DEFAULT_PALETTE_TAG_IMG);	
 	}
 	
 	private FigureFactory()

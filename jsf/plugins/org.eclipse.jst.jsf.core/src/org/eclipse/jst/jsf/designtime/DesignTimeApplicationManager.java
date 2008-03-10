@@ -12,12 +12,18 @@
 
 package org.eclipse.jst.jsf.designtime;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
@@ -29,7 +35,6 @@ import org.eclipse.jst.jsf.designtime.context.IExternalContextFactoryLocator;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
-import org.eclipse.jst.jsf.designtime.internal.view.DefaultDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 
 
@@ -73,6 +78,9 @@ public final class DesignTimeApplicationManager
     private static final QualifiedName PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER =
         new QualifiedName(PROPERTY_QUALIFIER, PERSIST_PROPERTY_NAME_METHOD_RESOLVER_PROVIDER);
 
+    private static final String    PERSIST_PROPERTY_NAME_VIEW_HANDLER =
+        "ViewHandler";  //$NON-NLS-1$
+    
     private static final String   DEFAULT_EXTERNAL_CONTEXT_ID = 
         "org.eclipse.jst.jsf.core.externalcontext.default"; //$NON-NLS-1$
     
@@ -85,6 +93,9 @@ public final class DesignTimeApplicationManager
     private static final String   DEFAULT_METHOD_RESOLVER_ID =
         "org.eclipse.jst.jsf.core.methodresolver.default"; //$NON-NLS-1$
 
+    private static final String   DEFAULT_VIEW_HANDLER_ID =
+        "org.eclipse.jst.jsf.designtime.view.jspviewhandler"; //$NON-NLS-1$
+    
     /**
      * @param project
      * @return the app manager associated with project
@@ -157,12 +168,14 @@ public final class DesignTimeApplicationManager
     // after a rename/move etc.
     private IProject                                    _project;
     private final IExternalContextFactoryLocator        _locator;
-    private IDTViewHandler                              _viewHandler;
+    //private IDTViewHandler                              _viewHandler;
+    private Properties                                  _properties;
     
     private DesignTimeApplicationManager(IProject project)
     {
         _project = project;
         _locator = new MyExternalContextFactoryLocator();
+        _properties = loadProperties(_project);
     }
     
     /**
@@ -236,15 +249,29 @@ public final class DesignTimeApplicationManager
      */
     public synchronized IDTViewHandler getViewHandler()
     {
-        // TODO: lifecycle issues; extensibility.
-        if (_viewHandler == null)
-        {
-            _viewHandler = new DefaultDTViewHandler();
-        }
+        final String viewHandlerId = 
+            getFromProjectSettings(PERSIST_PROPERTY_NAME_VIEW_HANDLER
+                                 , DEFAULT_VIEW_HANDLER_ID);
         
-        return _viewHandler;
+        if (viewHandlerId != null)
+        {
+            return JSFCorePlugin.getViewHandlers().get(viewHandlerId);
+        }
+
+        return null;
     }
     
+    /**
+     * Sets the persistent id on this project that will be used to load the
+     * view handler.
+     * 
+     * @param viewHandlerId
+     */
+    public synchronized void setViewHandlerId(final String viewHandlerId)
+    {
+        setProjectSetting(PERSIST_PROPERTY_NAME_VIEW_HANDLER, viewHandlerId);
+    }
+
     /**
      * @param resolverPluginId
      * @throws CoreException
@@ -438,5 +465,84 @@ public final class DesignTimeApplicationManager
                     JSFCorePlugin.getExternalContextProviders(),
                         DEFAULT_EXTERNAL_CONTEXT_ID);
         }
+    }
+    
+    private String getFromProjectSettings(final String key, final String defaultValue)
+    {
+        return _properties.getProperty(key, defaultValue);
+    }
+    
+    private void setProjectSetting(final String key, final String value)
+    {
+        _properties.setProperty(key, value);
+        storeProperties(_properties);
+    }
+    
+    private void storeProperties(final Properties properties)
+    {
+        IFile propFile;
+        try
+        {
+            propFile = getPropsFile(_project);
+            if (propFile != null)
+            {
+                final ByteArrayOutputStream  outstream =
+                    new ByteArrayOutputStream();
+                properties.store(outstream, null);
+                propFile.setContents(new ByteArrayInputStream(outstream.toByteArray())
+                    , true, true, null);
+            }
+        }
+        catch (CoreException e)
+        {
+            JSFCorePlugin.log(e, "Problem storing properties");
+        }
+        catch (IOException e)
+        {
+            JSFCorePlugin.log(e, "Problem storing properties");
+        }
+    }
+    
+    private Properties loadProperties(final IProject project)
+    {
+        Properties props = new Properties();
+        try
+        {
+            final IFile propFile = getPropsFile(project);
+            
+            if (propFile != null)
+            {
+                props.load(propFile.getContents());
+            }
+        }
+        catch (CoreException ce)
+        {
+            JSFCorePlugin.log(ce, "Problem loading properties");
+        }
+        catch (IOException ce)
+        {
+            JSFCorePlugin.log(ce, "Problem loading properties");
+        }
+        
+        return props;
+    }
+    
+    private IFile getPropsFile(final IProject project) throws CoreException
+    {
+        IFolder  folder = project.getFolder(new Path(".settings"));
+        if (!folder.exists())
+        {
+            folder.create(false, true, null);
+        }
+        
+        final IFile file = folder.getFile(
+                new Path("org.eclipse.jst.jsf.designtime.appmgr.prefs"));
+        
+        if (!file.exists())
+        {
+            file.create(new ByteArrayInputStream(new byte[0]), false, null);
+        }
+        
+        return file;
     }
 }
