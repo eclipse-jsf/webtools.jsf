@@ -144,10 +144,10 @@ public class ViewHandlerTypeItemProvider extends ItemProviderAdapter implements
      * @generated
      */
 	public String getText(Object object) {
-        String label = ((ViewHandlerType)object).getId();
-        return label == null || label.length() == 0 ?
+        String label = ((ViewHandlerType)object).getTextContent();
+        return (label == null || label.trim().length() == 0) ?
             getString("_UI_ViewHandlerType_type") :
-            getString("_UI_ViewHandlerType_type") + " " + label;
+            label;
     }
 
     /**
