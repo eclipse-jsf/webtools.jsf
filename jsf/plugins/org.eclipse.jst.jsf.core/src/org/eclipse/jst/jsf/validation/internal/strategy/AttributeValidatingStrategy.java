@@ -84,14 +84,17 @@ public class AttributeValidatingStrategy extends
         if (domAdapter instanceof AttrDOMAdapter)
         {
             final Region2AttrAdapter attrAdapter = (Region2AttrAdapter) domAdapter;
-            final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-                    .getContext(attrAdapter.getDocumentContext()
-                            .getStructuredDocument(), attrAdapter
-                            .getOwningElement().getDocumentContext()
-                            .getDocumentPosition()
-                            + attrAdapter.getAttributeValueRegion().getStart());
-
-            validateAttributeValue(context, attrAdapter);
+            //check that this is attribute value region - 221722
+            if (attrAdapter.getAttributeValueRegion() != null) { 
+	            final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+	                    .getContext(attrAdapter.getDocumentContext()
+	                            .getStructuredDocument(), attrAdapter
+	                            .getOwningElement().getDocumentContext()
+	                            .getDocumentPosition()
+	                            + attrAdapter.getAttributeValueRegion().getStart());
+            
+	            validateAttributeValue(context, attrAdapter);
+            }
         }
     }
 
