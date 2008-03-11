@@ -138,6 +138,12 @@ public abstract class XMLViewDefnAdapter extends
     public abstract String getNamespace(Element element, IDocument doc);
 
     /**
+     * @param namespace
+     * @param doc
+     * @return the prefix in doc for namespace or null if none.
+     */
+    public abstract String getPrefix(final String namespace, IDocument doc);
+    /**
      * @param node
      * @param document
      * @return the tag element for node in document or null if none

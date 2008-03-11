@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -20,10 +21,12 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsp.core.internal.contentmodel.TaglibController;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TaglibTracker;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.jst.jsp.core.internal.regions.DOMJSPRegionContexts;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 import org.w3c.dom.Element;
 
@@ -189,5 +192,28 @@ public class JSPViewDefnAdapter extends TaglibBasedViewDefnAdapter
     public String getGeneratedIdPrefix()
     {
         return "_idJsp";
+    }
+
+    @Override
+    public String getPrefix(String namespace, IDocument doc)
+    {
+        TLDCMDocumentManager m = TaglibController.getTLDCMDocumentManager(doc);
+        if (m == null)
+            return null;
+        List trackers = m.getTaglibTrackers();
+        for (Iterator iter = trackers.iterator(); iter.hasNext();) {
+            TaglibTracker tracker = (TaglibTracker) iter.next();
+            if (namespace.equals(tracker.getURI())) {
+                return tracker.getPrefix();
+            }
+            
+            CMDocument cmdoc = tracker.getDocument();
+            if (cmdoc instanceof TLDDocument
+                    && namespace.equals(((TLDDocument) cmdoc).getUri())) {
+                return tracker.getPrefix();
+            }
+        }
+        return null;
+
     }
 }

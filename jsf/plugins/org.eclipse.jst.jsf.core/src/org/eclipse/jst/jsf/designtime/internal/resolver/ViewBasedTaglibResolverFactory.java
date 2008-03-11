@@ -116,7 +116,13 @@ IStructuredDocumentContextResolverFactory, IAdaptable
 
         public String getTagPrefixForURI(final String uri)
         {
-            // TODO:
+            final XMLViewDefnAdapter adapter = DTAppManagerUtil
+                    .getXMLViewDefnAdapter(_file);
+
+            if (adapter != null)
+            {
+                return adapter.getPrefix(uri, _context.getStructuredDocument());
+            }
             return null;
         }
 
