@@ -24,6 +24,8 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.editpolicies.DragMoveEditPolicy;
 import org.eclipse.jst.pagedesigner.editpolicies.ElementResizableEditPolicy;
+import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationEditPolicy;
+import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.parts.NodeEditPart;
 import org.eclipse.jst.pagedesigner.tools.ObjectModeDragTracker;
@@ -50,12 +52,20 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 	 */
 	@Override
 	public void createEditPolicies(ElementEditPart part) {
-		part.installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new PanelTabbedElementResizableEditPolicy());
-		part.installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PanelTabbedDragMoveEditPolicy());
+		part.installEditPolicy(
+				EditPolicy.SELECTION_FEEDBACK_ROLE,
+				new PanelTabbedElementResizableEditPolicy());
+		part.installEditPolicy(
+				EditPolicy.PRIMARY_DRAG_ROLE,
+				new PanelTabbedDragMoveEditPolicy());
+		part.installEditPolicy(
+				ItemCreationRequest.REQ_ITEM_CREATION,
+				new PanelTabbedItemCreationEditPolicy());
 	}
 
 	/**
-	 * Extends ElementResizableEditPolicy.
+	 * Extends ElementResizableEditPolicy to determine if tab is clicked and
+	 * respond accordingly.
 	 * 
 	 * @author Ian Trimble - Oracle
 	 */
@@ -139,7 +149,7 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 	}
 
 	/**
-	 * Extends DragMoveEditPolicy.
+	 * Extends DragMoveEditPolicy to add OnlyShowDetailItemsRule as a rule.
 	 * 
 	 * @author Ian Trimble - Oracle
 	 */
@@ -162,44 +172,77 @@ public class PanelTabbedElementEdit extends DefaultTrinidadCoreElementEdit {
 			return null;
 		}
 
-		private static class OnlyShowDetailItemsRule extends DefaultPositionRule {
+	}
 
-			/**
-			 * Instantiates an instance.
-			 * 
-			 * @param actionData ActionData instance.
-			 */
-			public OnlyShowDetailItemsRule(ActionData actionData) {
-				super(actionData);
-			}
+	/**
+	 * Extends ItemCreationEditPolicy to add OnlyShowDetailItemsRule as a rule.
+	 * 
+	 * @author Ian Trimble - Oracle
+	 */
+	public static class PanelTabbedItemCreationEditPolicy extends ItemCreationEditPolicy {
 
-			/*
-			 * (non-Javadoc)
-			 * @see org.eclipse.jst.pagedesigner.validation.caret.DefaultPositionRule#isEditable(org.eclipse.jst.pagedesigner.validation.caret.Target)
-			 */
-			@Override
-			public boolean isEditable(Target target) {
-				if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(
-						target.getTagWrapper())) {
-					return isDataDroppable();
-				}
-				return true;
+		/* (non-Javadoc)
+		 * @see org.eclipse.jst.pagedesigner.editpolicies.DropEditPolicy#createDropChildValidator(org.eclipse.gef.requests.DropRequest)
+		 */
+		@Override
+		protected IPositionMediator createDropChildValidator(DropRequest r) {
+			DropData dropData = createDropData(r);
+			if (dropData != null) {
+				DnDPositionValidator validator = 
+					new DnDPositionValidator(new DropActionData(
+							ActionData.PALETTE_DND, dropData));
+				validator.addRule(new OnlyShowDetailItemsRule(validator.getActionData()));
+				return validator;
 			}
-
-			private boolean isDataDroppable() {
-				ActionData actionData = getActionData();
-				if (actionData instanceof DropActionData) {
-					DropActionData dropActionData = (DropActionData)actionData;
-					TagIdentifier tagIdentifier = 
-						(TagIdentifier)dropActionData.getDropData().getTagIdentifiers().get(0);
-					if (ITrinidadConstants.TAG_IDENTIFIER_SHOWDETAILITEM.isSameTagType(
-							tagIdentifier)) {
-						return true;
-					}
-				}
-				return false;
-			}
+			return null;
 		}
+
+	}
+
+	/**
+	 * Extends DefaultPositionRule to only allow showDetailItem tags to be
+	 * dropped on panelTabbed tag.
+	 * 
+	 * @author Ian Trimble - Oracle
+	 */
+	private static class OnlyShowDetailItemsRule extends DefaultPositionRule {
+
+		/**
+		 * Instantiates an instance.
+		 * 
+		 * @param actionData ActionData instance.
+		 */
+		public OnlyShowDetailItemsRule(ActionData actionData) {
+			super(actionData);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * @see org.eclipse.jst.pagedesigner.validation.caret.DefaultPositionRule#isEditable(org.eclipse.jst.pagedesigner.validation.caret.Target)
+		 */
+		@Override
+		public boolean isEditable(Target target) {
+			if (ITrinidadConstants.TAG_IDENTIFIER_PANELTABBED.isSameTagType(
+					target.getTagWrapper())) {
+				return isDataDroppable();
+			}
+			return true;
+		}
+
+		private boolean isDataDroppable() {
+			ActionData actionData = getActionData();
+			if (actionData instanceof DropActionData) {
+				DropActionData dropActionData = (DropActionData)actionData;
+				TagIdentifier tagIdentifier = 
+					(TagIdentifier)dropActionData.getDropData().getTagIdentifiers().get(0);
+				if (ITrinidadConstants.TAG_IDENTIFIER_SHOWDETAILITEM.isSameTagType(
+						tagIdentifier)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 	}
 
 }
