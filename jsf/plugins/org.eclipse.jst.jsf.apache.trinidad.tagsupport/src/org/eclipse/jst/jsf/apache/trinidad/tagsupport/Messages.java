@@ -31,4 +31,9 @@ public class Messages extends NLS {
 	 */
 	public static String PanelTabbedOperation_EmptyPanelTabbedTag;
 
+	/**
+	 * See messages.properties.
+	 */
+	public static String ShowDetailItemOperation_EmptyShowDetailItemTag;
+
 }

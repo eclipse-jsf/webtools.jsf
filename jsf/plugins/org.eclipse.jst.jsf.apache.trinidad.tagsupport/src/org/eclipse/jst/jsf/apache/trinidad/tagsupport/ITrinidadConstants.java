@@ -2548,4 +2548,10 @@ public interface ITrinidadConstants {
 	*/
 	public static final String ATTR_FIRSTCLICKPASSED = "firstClickPassed"; //$NON-NLS-1$
 
+	/**
+	 * Value for "style" attribute on elements used to indicate an empty source
+	 * element.
+	 */
+	public static final String STYLE_EMPTYELEMENT = "color:silver;font-family:Arial,Helvetica,Geneva,sans-serif;font-size:8pt;"; //$NON-NLS-1$
+
 }

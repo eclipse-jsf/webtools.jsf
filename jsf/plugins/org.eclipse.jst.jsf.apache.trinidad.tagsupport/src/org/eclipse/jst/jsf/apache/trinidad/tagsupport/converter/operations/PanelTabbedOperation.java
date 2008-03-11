@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.Messages;
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.TrinidadUtils;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
@@ -109,7 +110,7 @@ public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 			appendAttribute(
 					spanElement,
 					"style", //$NON-NLS-1$
-					"color:silver;font-family:Arial,Helvetica,Geneva,sans-serif;font-size:8pt;"); //$NON-NLS-1$
+					ITrinidadConstants.STYLE_EMPTYELEMENT);
 			appendChildText(
 					Messages.PanelTabbedOperation_EmptyPanelTabbedTag,
 					spanElement);

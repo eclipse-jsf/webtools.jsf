@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations;
 
 import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.Messages;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -58,8 +59,18 @@ public class ShowDetailItemOperation extends AbstractTrinidadTransformOperation 
 			topElement = createElement("div"); //$NON-NLS-1$
 		}
 
-		//copy all children
-		tagConverterContext.copyChildren(srcElement, topElement);
+		if (getCopyChildrenNodes(srcElement).size() > 0) {
+			//copy all children
+			tagConverterContext.copyChildren(srcElement, topElement);
+		} else {
+			appendAttribute(
+					topElement,
+					"style", //$NON-NLS-1$
+					ITrinidadConstants.STYLE_EMPTYELEMENT);
+			appendChildText(
+					Messages.ShowDetailItemOperation_EmptyShowDetailItemTag,
+					topElement);
+		}
 		return topElement;
 	}
 
