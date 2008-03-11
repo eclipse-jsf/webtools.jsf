@@ -95,8 +95,8 @@ public abstract class FacesConfigEditorTest extends TestCase {
 		super.tearDown();
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.closeEditor(editor, false);
+		JSFTestUtil.safeDelete(project, 10, 200);
 		project.delete(IProject.FORCE | IProject.ALWAYS_DELETE_PROJECT_CONTENT,
 				null);
 	}
-
 }

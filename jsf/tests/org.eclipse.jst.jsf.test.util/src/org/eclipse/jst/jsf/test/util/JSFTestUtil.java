@@ -25,6 +25,8 @@ import java.util.zip.ZipFile;
 
 import junit.framework.Assert;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -319,6 +321,49 @@ public final class JSFTestUtil
         }
 
         return null;
+    }
+    
+    /**
+     * Attempts to delete resource.  If the delete operation throws a 
+     * CoreException, the call will sleep the thread for backOffInMs
+     * before trying again.  Will try a maximum of 'maxTries' times.  If at that
+     * point the resource still exists, an error will be logged and the method
+     * will return.
+     * 
+     * @param resource
+     * @param maxTries
+     * @param backInMs
+     * @return true if the delete was successful.
+     */
+    public static  boolean safeDelete(final IResource resource, final int maxTries, final int backOffInMs)
+    {
+        boolean success = false;
+
+        DELETE_LOOP: for (int attempt = 0; attempt < maxTries; attempt++)
+        {
+            try
+            {
+                resource.delete(true, null);
+                success = true;
+                break DELETE_LOOP;
+            }
+            catch (CoreException e)
+            {
+                try
+                {
+                    Thread.sleep(backOffInMs);
+                }
+                catch (InterruptedException e1)
+                {
+                    // do nothing, just continue
+                }
+            }
+        }
+        if (!success)
+        {
+            System.err.println("Could not delete resource: "+resource.getLocation().toOSString());
+        }
+        return success;
     }
 
     private JSFTestUtil()
