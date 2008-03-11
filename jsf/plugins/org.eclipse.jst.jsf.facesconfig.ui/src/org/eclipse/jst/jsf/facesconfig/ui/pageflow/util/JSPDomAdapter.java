@@ -19,10 +19,15 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory2;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -40,165 +45,172 @@ import org.w3c.dom.NodeList;
  * @author Xiao-guang Zhang
  */
 public class JSPDomAdapter {
-	/** log instance */
-	private static final Logger log = EditorPlugin
-			.getLogger(JSPDomAdapter.class);
+    /** log instance */
+    private static final Logger log = EditorPlugin
+    .getLogger(JSPDomAdapter.class);
 
-	/** JSP Taglib's tag name */
-	public static String JSP_TAGLIB_TAG = "jsp:directive.taglib";
+    /** JSP Taglib's tag name */
+    public static String JSP_TAGLIB_TAG = "jsp:directive.taglib";
 
-	/** JSF HTML TagLib name */
-	public static String JSF_HTML_TAGLIB = "http://java.sun.com/jsf/html";
+    /** JSF HTML TagLib name */
+    public static String JSF_HTML_TAGLIB = "http://java.sun.com/jsf/html";
 
-	/** singleton model manager */
-	private static IModelManager modelManager;
+    /** singleton model manager */
+    private static IModelManager modelManager;
 
-	/** source jsp file */
-	private IFile jspFile;
+    /** source jsp file */
+    private IFile jspFile;
 
-	/** Structured Model of JSP File */
-	private IStructuredModel model;
+    /** Structured Model of JSP File */
+    private IStructuredModel model;
 
-	/** Root Document (Node) of JSP file */
-	private Document document;
+    /** Root Document (Node) of JSP file */
+    private Document document;
 
-	/**
-	 * 
-	 */
-	public JSPDomAdapter() {
-		super();
+    /**
+     * 
+     */
+    public JSPDomAdapter() {
+        super();
 
-	}
+    }
 
-	/**
-	 * initialize this adapter to get the StructuredModel for the input file.
-	 * At last user should call releaseModel() method to release the Structured Model.
-	 * 
-	 * @param file -
-	 *            JSP file
-	 * @return - True means sucessfully load jsp file.
-	 */
-	public boolean initialize(IFile file) {
-		jspFile = file;
+    /**
+     * initialize this adapter to get the StructuredModel for the input file.
+     * At last user should call releaseModel() method to release the Structured Model.
+     * 
+     * @param file -
+     *            JSP file
+     * @return - True means sucessfully load jsp file.
+     */
+    public boolean initialize(final IFile file) {
+        jspFile = file;
 
-		if (jspFile != null && jspFile.exists()) {
-			try {
-				model = getModel(jspFile);
-			} catch (IOException e) {
-				// PageFlow.JSPDomAdapter.FailToGetStructuredModel = Failed to
-				// get the structured model
-				log.error("PageFlow.JSPDomAdapter.FailToGetStructuredModel", e); //$NON-NLS-1$
-			} catch (CoreException e) {
-				// PageFlow.JSPDomAdapter.FailToGetStructuredModel = Failed to
-				// get the structured model
-				log.error("PageFlow.JSPDomAdapter.FailToGetStructuredModel", e);//$NON-NLS-1$
-			}
+        if (jspFile != null && jspFile.exists()) {
+            try {
+                model = getModel(jspFile);
+            } catch (final IOException e) {
+                // PageFlow.JSPDomAdapter.FailToGetStructuredModel = Failed to
+                // get the structured model
+                log.error("PageFlow.JSPDomAdapter.FailToGetStructuredModel", e); //$NON-NLS-1$
+            } catch (final CoreException e) {
+                // PageFlow.JSPDomAdapter.FailToGetStructuredModel = Failed to
+                // get the structured model
+                log.error("PageFlow.JSPDomAdapter.FailToGetStructuredModel", e);//$NON-NLS-1$
+            }
 
-			if (model != null && model instanceof IDOMModel) {
-				return true;
-			}
-		}
+            if (model != null && model instanceof IDOMModel) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * get the prefix for the input taglib URI, e.g.,
-	 * http://java.sun.com/jsf/html -> "h"
-	 * 
-	 * @param taglibURI
-	 * @return the prefix
-	 */
-	public String getTagLibPrefix(String taglibURI) {
-		String prefix = null;
+    /**
+     * get the prefix for the input taglib URI, e.g.,
+     * http://java.sun.com/jsf/html -> "h"
+     * 
+     * @param taglibURI
+     * @return the prefix
+     */
+    public String getTagLibPrefix(final String taglibURI) {
+        String prefix = null;
 
-		if (getDocument() != null) {
-			prefix = JSPUtil.getPrefix((IDOMModel) model, taglibURI);
-		}
+        final IStructuredDocument sdocument = model.getStructuredDocument();
 
-		return prefix;
-	}
+        if (sdocument != null)
+        {
+            IStructuredDocumentContext context =
+                IStructuredDocumentContextFactory.INSTANCE.getContext(sdocument, -1);
+            ITaglibContextResolver resolver =
+            IStructuredDocumentContextResolverFactory2.INSTANCE.getTaglibContextResolverFromDelegates(context);
+            prefix = resolver.getTagPrefixForURI(taglibURI);
+        }
 
-	/**
-	 * get the elements by the namespace and its tag name, e.g., h and
-	 * commandButton.
-	 * 
-	 * @param namespace -
-	 *            namespace for the taglib, e.g., h for
-	 *            http://java.sun.com/jsf/html
-	 * @param elementName -
-	 *            element Tag Name, e.g., h
-	 * @return - Element Node list.
-	 */
-	public List getElementsByTagNameNS(String namespace, String elementName) {
-		List nodes = null;
+        return prefix;
+    }
 
-		if (getDocument() != null) {
-			NodeList listNodes = null;
-			if (namespace != null) {
-				listNodes = getDocument().getElementsByTagName(
-						namespace + ":" + elementName); //$NON-NLS-1$
-			} else {
-				listNodes = getDocument().getElementsByTagName(elementName); //$NON-NLS-1$
-			}
+    /**
+     * get the elements by the namespace and its tag name, e.g., h and
+     * commandButton.
+     * 
+     * @param namespace -
+     *            namespace for the taglib, e.g., h for
+     *            http://java.sun.com/jsf/html
+     * @param elementName -
+     *            element Tag Name, e.g., h
+     * @return - Element Node list.
+     */
+    public List getElementsByTagNameNS(final String namespace, final String elementName) {
+        List nodes = null;
 
-			if (listNodes != null && listNodes.getLength() > 0) {
-				nodes = new ArrayList();
-				for (int i = 0; i < listNodes.getLength(); i++) {
-					nodes.add(listNodes.item(i));
-				}
-			}
-		}
-		return nodes;
-	}
+        if (getDocument() != null) {
+            NodeList listNodes = null;
+            if (namespace != null) {
+                listNodes = getDocument().getElementsByTagName(
+                        namespace + ":" + elementName); //$NON-NLS-1$
+            } else {
+                listNodes = getDocument().getElementsByTagName(elementName);
+            }
 
-	/**
-	 * get the singleton model manager.
-	 * 
-	 * @return
-	 */
-	private IModelManager getModelManager() {
-		if (modelManager == null) {
-			modelManager = StructuredModelManager.getModelManager();
-		}
-		return modelManager;
-	}
+            if (listNodes != null && listNodes.getLength() > 0) {
+                nodes = new ArrayList();
+                for (int i = 0; i < listNodes.getLength(); i++) {
+                    nodes.add(listNodes.item(i));
+                }
+            }
+        }
+        return nodes;
+    }
 
-	/**
-	 * get the structured model for the JSP file
-	 * 
-	 * @param file -
-	 *            JSP File
-	 * @return - IStructuredModel
-	 * @throws IOException
-	 * @throws CoreException
-	 */
-	private IStructuredModel getModel(IFile file) throws IOException,
-			CoreException {
-		return getModelManager().getModelForRead(file);
-	}
+    /**
+     * get the singleton model manager.
+     * 
+     * @return
+     */
+    private IModelManager getModelManager() {
+        if (modelManager == null) {
+            modelManager = StructuredModelManager.getModelManager();
+        }
+        return modelManager;
+    }
 
-	/**
-	 * get the root docuement for the StructuredModel
-	 * 
-	 * @return
-	 */
-	private Document getDocument() {
-		if (document == null) {
-			if (model != null && model instanceof IDOMModel) {
-				document = ((IDOMModel) model).getDocument();
-			}
-		}
-		return document;
-	}
-	
-    
+    /**
+     * get the structured model for the JSP file
+     * 
+     * @param file -
+     *            JSP File
+     * @return - IStructuredModel
+     * @throws IOException
+     * @throws CoreException
+     */
+    private IStructuredModel getModel(final IFile file) throws IOException,
+    CoreException {
+        return getModelManager().getModelForRead(file);
+    }
+
+    /**
+     * get the root docuement for the StructuredModel
+     * 
+     * @return
+     */
+    private Document getDocument() {
+        if (document == null) {
+            if (model != null && model instanceof IDOMModel) {
+                document = ((IDOMModel) model).getDocument();
+            }
+        }
+        return document;
+    }
+
+
     /**
      * signal we are done with the model
      */
     public void releaseModel() {
-		if (model != null) {
-			model.releaseFromRead();
-		}
-	}
+        if (model != null) {
+            model.releaseFromRead();
+        }
+    }
 }
