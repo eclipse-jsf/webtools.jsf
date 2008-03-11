@@ -215,7 +215,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     TLDNamespace initialize(final ITaglibRecord tagRecord,
             final boolean fireEvent)
     {
-        if (tagRecord.getRecordType() == ITLDRecord.TLD)
+        if (tagRecord.getRecordType() == ITLDRecord.URL)
         {
             if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
             {
