@@ -55,81 +55,6 @@
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="span/img/src"/>
 				</tag-decorate-info>
-
-			<!--
-				PROBLEM: Preview pane works correctly, Design pane ignores
-				div Element's background style (so no icon in Design mode).
-
-				<tag-convert-info>
-					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
-						<parameter value="div"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeFromXPathOperation">
-						<parameter value="style"/>
-						<parameter value="concat('background:url($metadata-plugin-location$/icons/small/chart.gif) no-repeat 1px 1px; border:1px solid black; width:20px; height:20px; ',@inlineStyle)"/>
-					</operation>
-				</tag-convert-info>
-				<tag-decorate-info id="vpd-decorate-design"
-					needBorderDecorator="true"
-					multiLevel="true"
-					widget="true"
-				>
-					<resolve-attribute-value attributeName="style"/>
-				</tag-decorate-info>
-				<tag-decorate-info id="vpd-decorate-preview">
-					<resolve-attribute-value attributeName="style"/>
-				</tag-decorate-info>
-				-->
-
-				<!--
-					PROBLEM: image is resized, which is not desirable.
-
-				<tag-convert-info>
-					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
-						<parameter value="img"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="inlineStyle"/>
-						<parameter value="style"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-						<parameter value="src"/>
-						<parameter value="$metadata-plugin-location$/icons/small/chart.gif"/>
-					</operation>
-				</tag-convert-info>
-				<tag-decorate-info id="vpd-decorate-design"
-					needBorderDecorator="true"
-					multiLevel="true"
-					widget="true"
-				>
-					<resolve-attribute-value attributeName="src"/>
-				</tag-decorate-info>
-				<tag-decorate-info id="vpd-decorate-preview">
-					<resolve-attribute-value attributeName="src"/>
-				</tag-decorate-info>
-				-->
-
-				<!--
-					PROBLEM: does nothing to represent chart size nor does it
-					display anything at all in Preview pane.
-
-				<tag-decorate-info id="vpd-decorate-design"
-					nonVisual="true"
-					nonVisualImagePath="icons/small/chart.gif"
-					widget="true"
-				/>
-				<tag-decorate-info id="vpd-decorate-preview"
-					nonVisual="true"
-				/>
-				-->
 			</value>
 		</trait>
 	</entity>
@@ -259,6 +184,22 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					needBorderDecorator="true"					
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="inputText" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.InputTextOperation">
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
 				/>
 			</value>
 		</trait>

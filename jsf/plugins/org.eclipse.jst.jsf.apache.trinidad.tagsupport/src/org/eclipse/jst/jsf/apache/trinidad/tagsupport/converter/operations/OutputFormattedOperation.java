@@ -36,7 +36,7 @@ import org.w3c.dom.Text;
  * 
  * @author Ian Trimble - Oracle
  */
-public class OutputFormattedTransformOperation extends AbstractTrinidadTransformOperation {
+public class OutputFormattedOperation extends AbstractTrinidadTransformOperation {
 
 	/*
 	 * NOTICE (especially if looking for missing whitespace):
