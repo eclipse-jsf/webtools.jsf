@@ -23,15 +23,16 @@ public class ComponentDetailSubForm extends AbstractDetailsForm
             final ComponentTypeInfo typeInfo = _curTagElement.getComponent();
             if (typeInfo != null)
             {
-                final String formatText = "<form><p><b>Component Type:</b> %s</p> <p><b>Component Family:</b> %s</p> <p><b>Render Type:</b> %s</p></form>";
+                final String formatText = "<form><p><b>Component Type:</b> %s</p> <p><b>Component Family:</b> %s</p> <p><b>Render Type:</b> %s</p><p><b>Component Class:</b> %s</p></form>";
                 final String componentType = typeInfo.getComponentType();
                 final String componentFamily = typeInfo.getComponentFamily();
                 final String renderType = typeInfo.getRenderFamily();
-
+                final String componentClass = typeInfo.getClassName();
                 getTextSection().setText(String.format(formatText,
                         componentType == null ? "" : componentType,
                         componentFamily == null ? "" : componentFamily,
-                        renderType == null ? "" : renderType), true, false);
+                        renderType == null ? "" : renderType, 
+                        componentClass == null ? "" : componentClass), true, false);
                 getTextSection().refresh();
             }
         }
