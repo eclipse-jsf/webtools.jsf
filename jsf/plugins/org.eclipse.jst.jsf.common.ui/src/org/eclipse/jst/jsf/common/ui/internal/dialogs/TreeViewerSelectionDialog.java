@@ -28,6 +28,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
@@ -97,7 +98,7 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	private int _style;
 
 	private ViewerSorter _viewerSorter = null;
-
+	private ViewerComparator _viewerComparator = null;
 	/**
 	 * @param parentShell
 	 * @param statusMessage 
@@ -150,6 +151,12 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 			_viewerSorter = new ViewerSorter();
 		}
 		_treeViewer.setSorter(_viewerSorter);
+		
+		// override if not null.. setSorter is discouraged.
+		if (_viewerComparator != null)
+		{
+		    _treeViewer.setComparator(_viewerComparator);
+		}
 		_treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 					public void selectionChanged(SelectionChangedEvent event) {
 						_selection = getSelectedElements((IStructuredSelection) event
@@ -287,6 +294,17 @@ public abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	}
 
 	/**
+	 * Set the viewer comparator.  If not null, it's set after after the
+	 * viewer sorter and thus overrides it.
+	 * 
+	 * @param viewerComparator
+	 */
+	public void setViewerComparator(ViewerComparator viewerComparator)
+    {
+        _viewerComparator = viewerComparator;
+    }
+
+    /**
 	 * @param message
 	 */
 	public void setStatusMessage(String message) {

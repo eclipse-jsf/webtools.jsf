@@ -135,7 +135,8 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 
 		dialog
 				.setTitle(PageflowMessages.Pageflow_Commands_CreateNodeCommand_SelectJSPDialog_Title);
-		dialog.setSuffixs(WebrootUtil.getJSPFileExtensions());
+		// no suffix filter
+		dialog.setSuffixs(null);
 		dialog
 				.setResourceDescription(PageflowMessages.Pageflow_Commands_CreateNodeCommand_SelectJSPDialog_Description);
 

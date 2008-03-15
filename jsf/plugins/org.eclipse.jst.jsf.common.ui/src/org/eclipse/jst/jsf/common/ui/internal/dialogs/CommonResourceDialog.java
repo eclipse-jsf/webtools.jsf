@@ -30,6 +30,7 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipse.ui.views.navigator.ResourceComparator;
 
 /**
  * This dialog shows IFile type resources within a IProject domain for
@@ -221,6 +222,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 				.getDecoratingWorkbenchLabelProvider());
 		_filter = new CommonResourceFilter();
 		setFilter(_filter);
+		setViewerComparator(new ResourceComparator(ResourceComparator.TYPE));
 		_project = project;
 		setStatusMessage(getStatusMessage());
 	}
