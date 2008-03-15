@@ -7,7 +7,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator;
 import org.eclipse.jst.jsf.validation.internal.JSFValidatorFactory;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
@@ -114,15 +116,23 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
     @Override
     protected void validateFile(final IFile file, final IReporter reporter)
     {
-        final IJSFViewValidator validator = JSFValidatorFactory
-                .createDefaultXMLValidator();
-        final ValidationPreferences prefs = new ValidationPreferences(
-                JSFCorePlugin.getDefault().getPreferenceStore());
-        prefs.load();
-
-        final ValidationReporter jsfReporter = new ValidationReporter(this,
-                reporter, file, prefs);
-        validator.validateView(file, jsfReporter);
+        if (shouldValidate(file))
+        {
+             final IJSFViewValidator validator = JSFValidatorFactory
+                    .createDefaultXMLValidator();
+            final ValidationPreferences prefs = new ValidationPreferences(
+                    JSFCorePlugin.getDefault().getPreferenceStore());
+            prefs.load();
+    
+            final ValidationReporter jsfReporter = new ValidationReporter(this,
+                    reporter, file, prefs);
+            validator.validateView(file, jsfReporter);
+        }
     }
 
+    private boolean shouldValidate(final IFile file)
+    {
+        return (JSPUtil.isJSPContentType(file)
+                && JSFAppConfigUtils.isValidJSFProject(file.getProject()));
+    }
 }
