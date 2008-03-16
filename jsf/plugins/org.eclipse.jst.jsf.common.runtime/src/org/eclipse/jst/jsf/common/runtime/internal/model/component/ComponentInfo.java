@@ -44,7 +44,7 @@ public class ComponentInfo extends ViewObject implements Serializable
     /**
      * the component's parent or null if none
      */
-    protected final ComponentInfo _parent;
+    protected ComponentInfo _parent;
     /**
      * the type info for this component
      */
@@ -241,6 +241,8 @@ public class ComponentInfo extends ViewObject implements Serializable
             _children = new ArrayList(DEFAULT_ARRAY_SIZE);
         }
         _children.add(childComponent);
+        // we need to reset the child's parent to me
+        childComponent._parent = this;
     }
 
     /**
@@ -365,7 +367,7 @@ public class ComponentInfo extends ViewObject implements Serializable
     /**
      * @return the parent of this component or null.
      */
-    public final ComponentInfo getParent()
+    public synchronized final ComponentInfo getParent()
     {
         return _parent;
     }
