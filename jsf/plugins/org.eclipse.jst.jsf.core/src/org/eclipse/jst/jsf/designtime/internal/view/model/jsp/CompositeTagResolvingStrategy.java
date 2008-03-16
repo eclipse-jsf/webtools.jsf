@@ -10,14 +10,16 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement
  * 
  * @param <TLDELEMENT>
  */
-public class CompositeTagResolvingStrategy<TLDELEMENT> extends
+public class CompositeTagResolvingStrategy<TLDELEMENT>
+        extends
         PolicyBasedStrategyComposite<TLDELEMENT, ITagElement, String, ITagResolvingStrategy<TLDELEMENT, String>>
-        implements IIdentifiable<String>, ITagResolvingStrategy<TLDELEMENT, String>
+        implements IIdentifiable<String>,
+        ITagResolvingStrategy<TLDELEMENT, String>
 {
     private static final String ID = "org.eclipse.jst.jsf.designtime.CompositeTagResolvingStrategy";
 
     /**
-     * @param policy 
+     * @param policy
      * 
      */
     public CompositeTagResolvingStrategy(final IIteratorPolicy<String> policy)
@@ -25,14 +27,14 @@ public class CompositeTagResolvingStrategy<TLDELEMENT> extends
         super(policy);
     }
 
-    public String getId()
+    public final String getId()
     {
         return ID;
     }
 
-    public String getDisplayName()
+    public final String getDisplayName()
     {
-       return "Composite Tag Resolving Strategies";
+        return "Composite Tag Resolving Strategies";
     }
 
     @Override
@@ -41,13 +43,13 @@ public class CompositeTagResolvingStrategy<TLDELEMENT> extends
         return null;
     }
 
-    public ITagElement getNotFoundIndicator()
+    public final ITagElement getNotFoundIndicator()
     {
         return getNoResult();
     }
 
-    public ITagElement resolve(TLDELEMENT element)
+    public final ITagElement resolve(TLDELEMENT element)
     {
-            return perform(element);
+        return perform(element);
     }
 }

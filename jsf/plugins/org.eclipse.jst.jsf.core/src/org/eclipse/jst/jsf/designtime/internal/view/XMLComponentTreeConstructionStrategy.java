@@ -63,10 +63,39 @@ public class XMLComponentTreeConstructionStrategy extends
     {
         final ComponentInfo dummyRoot =
                 ComponentFactory.createComponentInfo(null, null, null, true);
+        // populate the dummy root
         recurseDOMModel(root, dummyRoot, document);
 
-        ComponentInfo foundRoot = null;
+        // try to extract the view defined root from the dummyRoot and update
+        // 'root' with its children.
+        populateViewRoot(viewRoot, dummyRoot.getChildren());
+        return viewRoot;
+    }
 
+    /**
+     * Tries to find the view defined view root in children and use it populate
+     * viewRoot.  Children may sub-class to a different algorithm or, in some cases
+     * create an implicit (i.e. Facelets does this) view root if one is not 
+     * explicitly created by the view definition.
+     * 
+     * Regardless of the strategy, the following post-conditions must be true
+     * 
+     * To the extend that children represent the top-level objects in the view
+     * under the presumed root, viewRoot must be populated with them either directly
+     * if the creation of a view root is implicit (i.e. Facelets) or through a 
+     * valid view root declaration found in the view definition (i.e. f:view in JSP)
+     * found the children list.
+     * 
+     * The default behaviour assumes the JSP case.
+     * 
+     * TODO: add validation cases for missing view roots in JSP.
+     * 
+     * @param viewRoot
+     * @param children
+     */
+    protected void populateViewRoot(final DTUIViewRoot viewRoot, final List children)
+    {
+        ComponentInfo foundRoot = null;
         // TODO: additional cases:
         // 1) Valid case: view is a fragment and has one or more non-view root
         // children
@@ -75,7 +104,7 @@ public class XMLComponentTreeConstructionStrategy extends
         // 4) Invalid case: any definition and has component siblings to the
         // view root
         FIND_VIEWROOT: for (final Iterator it =
-                dummyRoot.getChildren().iterator(); it.hasNext();)
+                children.iterator(); it.hasNext();)
         {
             final ComponentInfo topLevelChild = (ComponentInfo) it.next();
 
@@ -107,10 +136,7 @@ public class XMLComponentTreeConstructionStrategy extends
                 }
             }
         }
-
-        return viewRoot;
     }
-
     private void recurseDOMModel(final Node node, final ComponentInfo parent,
             final IDocument document)
     {

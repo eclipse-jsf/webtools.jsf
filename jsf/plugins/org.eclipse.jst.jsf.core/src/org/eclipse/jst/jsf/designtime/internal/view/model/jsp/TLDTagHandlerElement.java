@@ -12,13 +12,13 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
 public class TLDTagHandlerElement extends TLDJSFTagElement implements
         IHandlerTagElement
 {
-    private TagHandlerType      _tagHandlerType;
-    
+    private final TagHandlerType      _tagHandlerType;
+
     /**
      * @param elementDecl
      * @param tagHandlerType
      */
-    public TLDTagHandlerElement(TLDElementDeclaration elementDecl, TagHandlerType tagHandlerType)
+    public TLDTagHandlerElement(final TLDElementDeclaration elementDecl, final TagHandlerType tagHandlerType)
     {
         super(elementDecl);
         _tagHandlerType = tagHandlerType;

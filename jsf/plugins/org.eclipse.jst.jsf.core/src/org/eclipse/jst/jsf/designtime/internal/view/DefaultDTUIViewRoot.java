@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -19,19 +20,19 @@ public class DefaultDTUIViewRoot extends DTUIViewRoot
     /**
      * serializable
      */
-    private static final long serialVersionUID = -6948413077931237435L;
-    //private final DefaultDTViewHandler _viewHandler;
-    private final DTFacesContext _context;
-    private XMLViewDefnAdapter _viewAdapter;
-    private String _viewId;
+    private static final long                    serialVersionUID = -6948413077931237435L;
+    // private final DefaultDTViewHandler _viewHandler;
+    private final DTFacesContext                 _context;
+    private final XMLViewDefnAdapter             _viewAdapter;
+    private String                               _viewId;
     private XMLComponentTreeConstructionStrategy _constructionStrategy;
 
     /**
-     * @param context 
+     * @param context
      * @param viewHandler
      *            TODO: should we decouple from the viewHandler by creating and
      *            update proxy?
-     * @param adapter 
+     * @param adapter
      */
     public DefaultDTUIViewRoot(final DTFacesContext context,
             final IDTViewHandler viewHandler, final XMLViewDefnAdapter adapter)
@@ -41,7 +42,7 @@ public class DefaultDTUIViewRoot extends DTUIViewRoot
                 "javax.faces.component.UIViewRoot", "javax.faces.ViewRoot",
                 null));
         _context = context;
-        //_viewHandler = viewHandler;
+        // _viewHandler = viewHandler;
         _viewAdapter = adapter;
     }
 
@@ -58,26 +59,38 @@ public class DefaultDTUIViewRoot extends DTUIViewRoot
     }
 
     @Override
-    public void refresh(final Runnable runAfter)
+    public final void refresh(final Runnable runAfter)
     {
         if (_constructionStrategy == null)
         {
-            _constructionStrategy = new XMLComponentTreeConstructionStrategy(
-                    _viewAdapter, _context.adaptContextObject()
-                            .getProject());
+            _constructionStrategy = createTreeConstructionStrategy(_viewAdapter, _context
+                    .adaptContextObject().getProject());
         }
 
         final Job refreshTreeJob = new RefreshTreeJob(_constructionStrategy,
                 _context, this);
-        
+
         new RunOnCompletionPattern(refreshTreeJob, runAfter).run();
+    }
+
+    /**
+     * Sub-classes may override to provide a different strategy.
+     * 
+     * @param adapter
+     * @param project
+     * @return the construction strategy used to create this view's component tree
+     */
+    protected XMLComponentTreeConstructionStrategy createTreeConstructionStrategy(
+            XMLViewDefnAdapter adapter, IProject project)
+    {
+        return new XMLComponentTreeConstructionStrategy(adapter, project);
     }
 
     private static class RefreshTreeJob extends Job
     {
         private final XMLComponentTreeConstructionStrategy _strategy;
-        private final DTFacesContext _facesContext;
-        private final DTUIViewRoot _root;
+        private final DTFacesContext                       _facesContext;
+        private final DTUIViewRoot                         _root;
 
         public RefreshTreeJob(
                 final XMLComponentTreeConstructionStrategy strategy,
