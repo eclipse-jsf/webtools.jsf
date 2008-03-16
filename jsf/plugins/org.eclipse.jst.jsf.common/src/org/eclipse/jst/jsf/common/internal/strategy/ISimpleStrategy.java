@@ -23,7 +23,7 @@ public interface ISimpleStrategy<INPUT, OUTPUT>
     /**
      * @return the single value that perform will return if it cannot calculate
      * a meaningful result for an input.  The value must be unique, the same
-     * for all inputs and must be testable using 
+     * for all inputs and must be testable using the '==' operator.
      */
     public OUTPUT getNoResult();
 }
