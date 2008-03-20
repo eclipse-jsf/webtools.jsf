@@ -19,7 +19,7 @@
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeFromXPathOperation">
 						<parameter value="style"/>
-						<parameter value="concat('border:1px solid silver; padding:2px; ',@inlineStyle)"/>
+						<parameter value="concat('border:1px solid silver;padding:2px;',@inlineStyle)"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 						<parameter value="span"/>
@@ -59,6 +59,67 @@
 		</trait>
 	</entity>
 
+	<entity id="commandButton" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="button"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="type"/>
+						<parameter value="button"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@disabled='true'"/>
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+							<parameter value="disabled"/>
+							<parameter value=""/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;background-color:#e9e8e8;padding:0px;margin:1px;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@textAndAccessKey"/>
+						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+							<parameter value="textAndAccessKey"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@textAndAccessKey"/>
+						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+							<parameter value="text"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@icon"/>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+							<parameter value="img"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+							<parameter value="icon"/>
+							<parameter value="src"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					resolve-child-text="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="commandLink" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -74,19 +135,8 @@
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="inlineStyle"/>
-						<parameter value="style"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-						<parameter value="@styleClass"/>
-						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-							<parameter value="@inlineStyle"/>
-							<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-								<parameter value="style"/>
-								<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
-							</operation>
-						</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@textAndAccessKey"/>
@@ -141,19 +191,8 @@
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="inlineStyle"/>
-						<parameter value="style"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-						<parameter value="@styleClass"/>
-						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-							<parameter value="@inlineStyle"/>
-							<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-								<parameter value="style"/>
-								<parameter value="background-color:#ffffff;font-family:Arial,Helvetica,Geneva,sans-serif;"/>
-							</operation>
-						</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="background-color:#ffffff;font-family:Arial,Helvetica,Geneva,sans-serif;"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
@@ -184,6 +223,173 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					needBorderDecorator="true"					
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="goButton" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="button"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="type"/>
+						<parameter value="button"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@disabled='true'"/>
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+							<parameter value="disabled"/>
+							<parameter value=""/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;background-color:#e9e8e8;padding:0px;margin:1px;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@textAndAccessKey"/>
+						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+							<parameter value="textAndAccessKey"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@textAndAccessKey"/>
+						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+							<parameter value="text"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@icon"/>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+							<parameter value="img"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+							<parameter value="icon"/>
+							<parameter value="src"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					resolve-child-text="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="goLink" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="a"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="href"/>
+						<parameter value="#"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@textAndAccessKey"/>
+						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+							<parameter value="textAndAccessKey"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@textAndAccessKey"/>
+						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+							<parameter value="text"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="icon" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@name='required' or @name='AFRequiredIcon'"/>
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+							<parameter value="styleClass"/>
+							<parameter value="class"/>
+						</operation>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+							<parameter value="color:#669966;font-family:Courier,sans-serif;"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+							<parameter value="*"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@name='info' or @name='AFInfoIcon'"/>
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+							<parameter value="styleClass"/>
+							<parameter value="class"/>
+						</operation>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+							<parameter value="color:#669966;font-family:monospace;font-weight:bold;"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+							<parameter value="i"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@name='warning' or @name='AFWarningIcon'"/>
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+							<parameter value="styleClass"/>
+							<parameter value="class"/>
+						</operation>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+							<parameter value="color:#669966;font-family:monospace;font-weight:bold;"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+							<parameter value="!"/>
+						</operation>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@name='error' or @name='AFErrorIcon'"/>
+						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+							<parameter value="styleClass"/>
+							<parameter value="class"/>
+						</operation>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+							<parameter value="color:#cc0000;font-family:monospace;font-weight:bold;"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+							<parameter value="X"/>
+						</operation>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					widget="true"
 				/>
 			</value>
 		</trait>
@@ -269,19 +475,8 @@
 						<parameter value="styleClass"/>
 						<parameter value="class"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="inlineStyle"/>
-						<parameter value="style"/>
-					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-						<parameter value="@styleClass"/>
-						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-							<parameter value="@inlineStyle"/>
-							<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-								<parameter value="style"/>
-								<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;text-align:right;color:#000000;padding:0px 8px 0px 0px;font-weight:normal;"/>
-							</operation>
-						</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;text-align:right;color:#000000;padding:0px 8px 0px 0px;font-weight:normal;"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@valueAndAccessKey"/>

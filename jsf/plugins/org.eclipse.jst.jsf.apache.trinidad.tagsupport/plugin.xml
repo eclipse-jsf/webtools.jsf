@@ -34,6 +34,10 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit.TrinidadCoreElementEditFactory">
       </elementEditFactory>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.CreateStyleAttributeOperation"
+            id="CreateStyleAttributeOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.InputTextOperation"
             id="InputTextOperation">
       </tagTransformOperation>
