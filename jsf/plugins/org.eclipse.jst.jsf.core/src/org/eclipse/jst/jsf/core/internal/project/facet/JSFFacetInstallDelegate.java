@@ -272,27 +272,25 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		
 		IPath webXMLPath = new Path("WEB-INF").append("web.xml");
 		if (JSFUtils12.isWebApp25(webAppObj)) {			
-			final WebApp webApp = (WebApp)webAppObj;
-			provider.modify(new UpdateWebXMLForJavaEE(webApp, config), webXMLPath); //$NON-NLS-1$ //$NON-NLS-2$
+			provider.modify(new UpdateWebXMLForJavaEE(project, config), webXMLPath); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		else {//must be 2.3 or 2.4
-			final org.eclipse.jst.j2ee.webapplication.WebApp webApp = (org.eclipse.jst.j2ee.webapplication.WebApp)webAppObj;
-			provider.modify(new UpdateWebXMLForJ2EE(webApp, config), webXMLPath); //$NON-NLS-1$ //$NON-NLS-2$
+		else {//must be 2.3 or 2.4			
+			provider.modify(new UpdateWebXMLForJ2EE(project, config), webXMLPath); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 	}
 	
 	private class UpdateWebXMLForJavaEE implements Runnable {
-		private WebApp webApp;
+		private IProject project;
 		private IDataModel config;
 		
-		UpdateWebXMLForJavaEE(final WebApp webApp, final IDataModel config){
-			this.webApp = webApp;
+		UpdateWebXMLForJavaEE(final IProject project, final IDataModel config){
+			this.project = project;
 			this.config = config;
 		}
 		
 		public void run() {
-
+			WebApp webApp = (WebApp) ModelProviderManager.getModelProvider(project).getModelObject();
 			// create or update servlet ref
 			Servlet servlet = JSFUtils12.findJSFServlet(webApp);// check to see
 																// if already
@@ -314,16 +312,17 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		}
 	}
 	
-	private class UpdateWebXMLForJ2EE implements Runnable {
-		private org.eclipse.jst.j2ee.webapplication.WebApp webApp;
+	private class UpdateWebXMLForJ2EE implements Runnable {		
+		private IProject project;
 		private IDataModel config;
 		
-		UpdateWebXMLForJ2EE(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final IDataModel config){
-			this.webApp = webApp;
+		UpdateWebXMLForJ2EE(IProject project, final IDataModel config){
+			this.project = project ;
 			this.config = config;
 		}
 		
 		public void run() {
+			org.eclipse.jst.j2ee.webapplication.WebApp webApp = (org.eclipse.jst.j2ee.webapplication.WebApp)ModelProviderManager.getModelProvider(project).getModelObject();
 			// create or update servlet ref
 			org.eclipse.jst.j2ee.webapplication.Servlet servlet = JSFUtils11.findJSFServlet(webApp);// check to see
 																// if already
