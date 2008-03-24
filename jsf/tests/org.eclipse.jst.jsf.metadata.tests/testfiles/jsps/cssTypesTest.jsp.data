@@ -6,9 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="mystyle.css">
+<link rel="stylesheet" href="foo.css">
 <title>Insert title here</title>
 </head>
 <body>
-	<input id="a" class=""/>
+	<h:inputText styleClass=""/>
 </body>
 </html>

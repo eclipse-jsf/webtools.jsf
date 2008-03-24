@@ -11,13 +11,14 @@
 package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
 import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 
 public class CSSClassTypeTests extends SingleJSPTestCase {
-	private final String tagName = "commandButton";
-	private final String attrName = "class";
+	private final String tagName = "inputText";
+	private final String attrName = "styleClass";
 	
 	public CSSClassTypeTests(){
 		super(	"/testfiles/jsps/cssTypesTest.jsp.data/", 
@@ -26,14 +27,25 @@ public class CSSClassTypeTests extends SingleJSPTestCase {
 				"/testfiles/web/faces-config_1_1.xml.data");
 	}
 
+	public void setUp() throws Exception {
+		super.setUp();
+		_testEnv.loadResourceInWebRoot(MetadataTestsPlugin.getDefault().getBundle(),
+                "/testfiles/jsps/mystyle.css.data", 
+                "mystyle.css");
+		
+		_testEnv.loadResourceInWebRoot(MetadataTestsPlugin.getDefault().getBundle(),
+                "/testfiles/jsps/foo.css.data", 
+                "foo.css");
+	}
+	
 	public void testGetPossibleValues() {
 		IPossibleValues pv = (IPossibleValues)getProcessor(IPossibleValues.class, JSF_HTML_URI, tagName, attrName);		
 		assertNotNull(pv);		
-			
-		//TODO: fill me in
+		assertEquals(12, pv.getPossibleValues().size());		
 	}
 
 	public void testIsValidValue() {
+		//valid values not currently supported
 		IValidValues vv = (IValidValues)getProcessor(IValidValues.class, JSF_HTML_URI, tagName, attrName);		
 		assertNull(vv); 		
 
