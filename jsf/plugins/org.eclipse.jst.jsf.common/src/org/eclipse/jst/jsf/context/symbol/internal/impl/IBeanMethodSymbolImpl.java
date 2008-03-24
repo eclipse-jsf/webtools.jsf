@@ -11,11 +11,14 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IMethodSymbol;
@@ -353,11 +356,21 @@ public class IBeanMethodSymbolImpl extends EObjectImpl implements IBeanMethodSym
     }
 
 	public String getDetailedDescription() {
-		return ""; //$NON-NLS-1$
-	}
-
+	    StringBuffer descBuffer = new StringBuffer("<p><b>Signature:</b> ");
+        descBuffer.append(Signature.toString(signature, getName(), null, false, true)).append("</p>");
+        IMethod method = JavaUtil.findCorrespondingMethod(this);
+        if (method != null) {
+            String javadoc = JavaUtil.getMethodJavadoc(method);
+            if (javadoc != null) {
+                descBuffer.append("<p>").append(javadoc).append("</p>");
+            }
+        }
+        return descBuffer.toString();
+    }
+    
 	public void setDetailedDescription(String detailedDescription) {
 		throw new UnsupportedOperationException("Detailed Description is derived on property symbols"); //$NON-NLS-1$
 	}
+
 
 } //IBeanMethodSymbolImpl

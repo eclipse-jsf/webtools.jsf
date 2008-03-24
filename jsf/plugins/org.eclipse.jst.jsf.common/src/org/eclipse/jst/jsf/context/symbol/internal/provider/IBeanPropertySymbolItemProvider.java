@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
+import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 
@@ -41,6 +42,12 @@ public class IBeanPropertySymbolItemProvider
 	implements	
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, IContentProposalProvider
 {
+	private static final String PROPERTY_SYMBOL_WO = "full/obj16/IBeanPropertySymbol_wo";
+	private static final String PROPERTY_SYMBOL_RO = "full/obj16/IBeanPropertySymbol_ro";
+	private static final String PROPERTY_SYMBOL_RW = "full/obj16/IBeanPropertySymbol_rw";
+	private static final String PROPERTY_SYMBOL_WO_INDEXABLE = "full/obj16/IBeanPropertySymbol_wo_indexable";
+	private static final String PROPERTY_SYMBOL_RO_INDEXABLE = "full/obj16/IBeanPropertySymbol_ro_indexable";
+	private static final String PROPERTY_SYMBOL_RW_INDEXABLE = "full/obj16/IBeanPropertySymbol_rw_indexable";
 	/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -107,10 +114,31 @@ public class IBeanPropertySymbolItemProvider
      * @param object 
      * @return the image associated with object or null if not found 
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanPropertySymbol")); //$NON-NLS-1$
+		IBeanPropertySymbol propertySymbol = (IBeanPropertySymbol) object;
+		String imageFile = null;
+		ITypeDescriptor typeDescriptor = propertySymbol.getTypeDescriptor();
+		if (typeDescriptor != null && (typeDescriptor.isArray() || typeDescriptor.instanceOf("Ljava.util.List;") || typeDescriptor.instanceOf("Ljava.util.Map;"))) {
+			// property is somehow "indexable" by int/String:
+			if (propertySymbol.isReadable() && propertySymbol.isWritable()) {
+				imageFile = PROPERTY_SYMBOL_RW_INDEXABLE;
+			} else if (propertySymbol.isReadable()) {
+				imageFile = PROPERTY_SYMBOL_RO_INDEXABLE;
+			} else if (propertySymbol.isWritable()) {
+				imageFile = PROPERTY_SYMBOL_WO_INDEXABLE;
+			}
+		} else {
+			if (propertySymbol.isReadable() && propertySymbol.isWritable()) {
+				imageFile = PROPERTY_SYMBOL_RW;
+			} else if (propertySymbol.isReadable()) {
+				imageFile = PROPERTY_SYMBOL_RO;
+			} else if (propertySymbol.isWritable()) {
+				imageFile = PROPERTY_SYMBOL_WO;
+			}
+		}
+		return imageFile == null? null : overlayImage(object, getResourceLocator().getImage(imageFile));
 	}
 
 	/**

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IBoundedMapTypeDescriptor;
@@ -49,7 +50,7 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding")
+    @SuppressWarnings("hiding") //$NON-NLS-1$
 	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 
@@ -189,34 +190,7 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
 
 	public String getDetailedDescription() 
 	{
-//		IType ownerType = getOwner().getType();
-//		IMethod method =
-//			ownerType.getMethod(getName(), new String[0]);
-//		
-//		if (method != null)
-//		{
-//			try
-//			{
-//                if (method.isBinary())
-//                {
-//                    return method.getAttachedJavadoc(new NullProgressMonitor());
-//                }
-//                else
-//                {
-//                    final ISourceRange sourceRange = method.getJavadocRange();
-//                    if (sourceRange != null)
-//                    {
-//                        return method.getCompilationUnit().
-//                    }
-//                }
-//			}
-//			catch (JavaModelException jme)
-//			{
-//				// fall through, return empty
-//			}
-//		}
-		
-		return ""; //$NON-NLS-1$
+		return createDetailedDescription();
 	}
 
 	public void setDetailedDescription(String detailedDescription) 
@@ -258,6 +232,10 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
 
     }
 
+    /**
+     * @return the derived jdt element
+     * @generated NOT
+     */
     private IJavaElement deriveBestJdtContext()
     {
         IJavaElement contextElement = null;
@@ -327,6 +305,50 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
         return false;
     }
     
+    /**
+     * @return the detail description
+     * @generated NOT
+     */
+    private String createDetailedDescription()
+    {
+        StringBuffer additionalInfo = new StringBuffer("<p><b>"); //$NON-NLS-1$
+        ITypeDescriptor typeDescriptor_ = getTypeDescriptor();
+        if (typeDescriptor_ != null) {
+            additionalInfo.append(Messages.getString("IBeanPropertySymbolImpl.Type")); //$NON-NLS-1$
+            additionalInfo.append("</b>"); //$NON-NLS-1$
+            additionalInfo.append(Signature.toString(typeDescriptor_.getTypeSignature()));
+        }
+        additionalInfo.append("</p>"); //$NON-NLS-1$
+        additionalInfo.append("<p><b>"); //$NON-NLS-1$
+        
+        additionalInfo.append(Messages.getString("IBeanPropertySymbolImpl.Access"));  //$NON-NLS-1$
+        additionalInfo.append("</b>"); //$NON-NLS-1$
+        if (isReadable() && isWritable()) {
+            additionalInfo.append(Messages.getString("IBeanPropertySymbolImpl.read_write")); //$NON-NLS-1$
+        } else if (isReadable()) { 
+            additionalInfo.append(Messages.getString("IBeanPropertySymbolImpl.readonly")); //$NON-NLS-1$
+        } else if (isWritable()) { 
+            additionalInfo.append(Messages.getString("IBeanPropertySymbolImpl.writeonly")); //$NON-NLS-1$
+        } else {
+            additionalInfo.append(Messages.getString("IBeanPropertySymbolImpl.none")); //$NON-NLS-1$
+        }
+        additionalInfo.append("</p>"); //$NON-NLS-1$
+        JDTBeanProperty property = JavaUtil.findCorrespondingJDTProperty(this);
+        if (property != null) {
+            String javaDoc = null;
+            if (property.getGetter() != null) {
+                javaDoc = JavaUtil.getMethodJavadoc(property.getGetter());
+            }
+            if (javaDoc == null && property.getSetter() != null) {
+                javaDoc = JavaUtil.getMethodJavadoc(property.getSetter());
+            }
+            if (javaDoc != null) {
+                additionalInfo.append("<p>").append(javaDoc).append("</p>"); //$NON-NLS-1$ //$NON-NLS-2$
+            }
+        }
+
+        return additionalInfo.toString();
+    }
     
 } //IBeanPropertySymbolImpl
 
