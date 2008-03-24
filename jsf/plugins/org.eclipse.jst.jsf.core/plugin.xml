@@ -80,16 +80,9 @@
   
   <extension
         point="org.eclipse.wst.common.project.facet.core.presets">
-     <static-preset
-           id="preset.jst.jsf.v1_1">
-	    <label>%JSFv11Project</label>
-	    <facet id="jst.java" version="1.4" />
-	    <facet id="jst.web" version="2.3"/>
-	    <facet id="jst.jsf" version="1.1" />
-     <description>
-        %JSFv11PresetDesc
-     </description>
-     </static-preset>
+     <dynamic-preset id="preset.jst.jsf.v1_1">
+       <factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFConfigurationPresetFactory11"/>
+     </dynamic-preset>
      <static-preset
            id="preset.jst.jsf.v1_2">
 	    <label>%JSFv12Project</label>
