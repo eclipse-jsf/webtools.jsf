@@ -57,7 +57,7 @@ public class CSSClassType extends AbstractRootTypeDescriptor implements
 		return result;
 	}
 	
-	//code duplicated from pagedesigner CSSUtils.
+	//code duplicated from pagedesigner CSSUtils.  Uses internal CSSClassTraverser
 	private static String[] internalGetCSSClasses(Document doc) {
 		Collection c = Collections.EMPTY_SET;
 		if (doc instanceof INodeNotifier) {
