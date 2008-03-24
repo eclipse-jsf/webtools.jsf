@@ -59,8 +59,9 @@ public class FacesConfigResourceImpl extends TranslatorResourceImpl implements I
 			if (uriResolver == null) {
 				uriResolver = URIResolverPlugin.createResolver();
 			}
-			String physicalLocation = uriResolver.resolvePhysicalLocation(baseLocation, publicId, systemId);
-			return new InputSource(physicalLocation);
+			String logicalLocation = uriResolver.resolve(baseLocation, publicId, systemId);
+			String physicalLocation= uriResolver.resolvePhysicalLocation(baseLocation, publicId, logicalLocation);
+			return new InputSource(physicalLocation);		
 		}
 
 	}
