@@ -8,24 +8,26 @@
  * Contributors:
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.pagedesigner.taglibprocessing;
+package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 import org.eclipse.jst.jsf.metadataprocessors.AbstractRootTypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 
 /**
- * Represents CSS id attribute type
- * EXPERIMENTAL - may change or disappear
+ * Represents CSS style attribute.
+ * No features currently supported.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  *
  */
-public class CSSIdType extends AbstractRootTypeDescriptor implements
+public class CSSStyleType extends AbstractRootTypeDescriptor implements
 		IMetaDataEnabledFeature {
 
 	/**
 	 * Constructor
 	 */
-	public CSSIdType() {
-		// TODO Auto-generated constructor stub
+	public CSSStyleType() {
+		//
 	}
 
 }

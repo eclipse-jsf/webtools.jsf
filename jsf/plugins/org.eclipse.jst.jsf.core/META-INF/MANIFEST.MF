@@ -36,7 +36,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jst.jsf.common.runtime;bundle-version="[1.0.0,1.1.0)",
  org.eclipse.jem.proxy;bundle-version="[2.0.0,3.0.0)",
  javax.servlet;bundle-version="[2.4.0,3.0.0)",
- javax.servlet.jsp;bundle-version="[2.0.0,3.0.0)"
+ javax.servlet.jsp;bundle-version="[2.0.0,3.0.0)",
+ org.eclipse.wst.css.core;bundle-version="[1.1.200,1.2.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",

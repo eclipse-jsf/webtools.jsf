@@ -257,7 +257,16 @@
             id="attributevalues.ContentType"/>                  
       <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.URIType"
-            id="attributevalues.URIType"/>                                 
+            id="attributevalues.URIType"/>  
+     <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.CSSClassType"
+            id="attributevalues.CSSClassType"/> 
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.CSSIdType"
+            id="attributevalues.CSSIdType"/>    
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.CSSStyleType"
+            id="attributevalues.CSSStyleType"/>                                
    </extension>
    
    <extension

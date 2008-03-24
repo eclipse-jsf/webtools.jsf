@@ -785,7 +785,7 @@
 		</entity>		
 		<entity id="styleClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.jsf</value>
@@ -1080,7 +1080,7 @@
 		</entity>
 		<entity id="columnClasses">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.jsf</value>
@@ -1099,7 +1099,7 @@
 		</entity>
 		<entity id="footerClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.jsf</value>
@@ -1144,7 +1144,7 @@
 		</entity>			
 		<entity id="headerClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.jsf</value>
@@ -1152,7 +1152,7 @@
 		</entity>
 		<entity id="rowClasses">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.jsf</value>

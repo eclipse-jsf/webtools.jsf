@@ -532,7 +532,7 @@
 		</entity>
 		<entity id="class">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.core</value>
@@ -540,7 +540,7 @@
 		</entity>
 		<entity id="style">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value>org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value>%property.category.core</value>
