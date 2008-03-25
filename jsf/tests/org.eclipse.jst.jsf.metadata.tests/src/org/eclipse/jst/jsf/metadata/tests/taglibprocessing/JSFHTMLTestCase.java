@@ -18,9 +18,9 @@ import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
 import org.eclipse.jst.jsf.metadata.tests.util.JSPTestCase;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
 
 public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV11{
 	private String _uri;
