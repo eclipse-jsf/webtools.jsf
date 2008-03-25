@@ -51,10 +51,6 @@
             uri="http://org.eclipse.jsf/missingMDModelTest"/>  
                                              
    </extension>
-   	<extension point="org.eclipse.jst.pagedesigner.cmRegistry">
-		<registry configFile="/testfiles/metadata/sybasejsfhtml.xml"
-			uri="http://SybaseMD.test.jsfhtml" />
-	</extension>
    <extension
          point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
       <attributeValueRuntimeType
