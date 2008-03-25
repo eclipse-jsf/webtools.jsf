@@ -10,6 +10,10 @@ import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
  * A strategy composite that uses an iterator policy to provide the iterator
  * used to decide what order to execute the strategy in.
  * 
+ * This composite represents a grouping of strategies which represent N ways
+ * to perform a particular calculation and which any number for those N ways
+ * may be applicable to any particular situation given the policy in place.
+ * 
  * @author cbateman
  * 
  * @param <INPUT>
@@ -17,7 +21,7 @@ import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
  * @param <IDTYPE>
  * @param <STRATEGYTYPE>
  */
-public abstract class PolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE, STRATEGYTYPE extends IIdentifiableStrategy<INPUT, OUTPUT, IDTYPE>>
+public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE, STRATEGYTYPE extends IIdentifiableStrategy<INPUT, OUTPUT, IDTYPE>>
         extends StrategyComposite<INPUT, OUTPUT, IDTYPE, STRATEGYTYPE>
 {
     private final Map<IDTYPE, STRATEGYTYPE> _strategies;
@@ -26,7 +30,7 @@ public abstract class PolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE, STRATE
     /**
      * @param policy 
      */
-    protected PolicyBasedStrategyComposite(final IIteratorPolicy<IDTYPE> policy)
+    protected IteratorPolicyBasedStrategyComposite(final IIteratorPolicy<IDTYPE> policy)
     {
         _policy = policy;
         _strategies = new HashMap<IDTYPE, STRATEGYTYPE>();
