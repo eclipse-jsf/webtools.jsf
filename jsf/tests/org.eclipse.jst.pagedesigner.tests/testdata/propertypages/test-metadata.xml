@@ -45,7 +45,7 @@
     	</entity>
     	<entity id="aStyle">
     		<trait id="attribute-value-runtime-type">
-    			<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+    			<value>org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
     		</trait>
     	</entity>
     	    <entity id="aStringPropWithMd">

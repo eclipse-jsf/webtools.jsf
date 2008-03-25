@@ -209,12 +209,12 @@
   	</entity> 
   	<entity id="CSSClassType">
   		<trait id="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
   		</trait>
   	</entity> 
   	<entity id="CSSStyleType">
   		<trait id="attribute-value-runtime-type">
-  			<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
   		</trait>
   	</entity> 
   	<entity id="ComponentIDType">
