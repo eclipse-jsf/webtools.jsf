@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: org.eclipse.jst.jsf.facesconfig.ui;singleton:=true
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 1.0.2.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin
 Bundle-Vendor: %plugin.provider
 Bundle-Localization: plugin
