@@ -81,10 +81,10 @@ public class TestJSFELHover extends TestCase {
 		testJavaHoverHelp(706, "MyBean.java", "<p><b>Name: </b>myBean</p><p><b>Type: </b>beans.MyBean</p><p><b>Scope: </b>none</p>");
 
 		// hyperlink from property
-		testJavaHoverHelp(622, "MyBean.java", "");
+		testJavaHoverHelp(622, "MyBean.java", "<p><b>Type: </b>java.lang.String[]</p><p><b>Access: </b>read-only</p>");
 
 		// hyperlink from method
-		testJavaHoverHelp(714, "MyBean.java", "");
+		testJavaHoverHelp(714, "MyBean.java", "<p><b>Signature:</b> String actionMethod()</p>");
 	}
 
 	private void testJavaHoverHelp(final int regionStartOffset,
