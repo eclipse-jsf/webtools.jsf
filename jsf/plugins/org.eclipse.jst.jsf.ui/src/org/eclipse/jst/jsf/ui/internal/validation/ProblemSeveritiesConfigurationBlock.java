@@ -17,7 +17,8 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jst.jsf.core.internal.IJSFPreferenceModel;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
-import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences.Severity;
+import org.eclipse.jst.jsf.validation.internal.JSFTypeComparatorPreferences;
+import org.eclipse.jst.jsf.validation.internal.Severity;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -99,7 +100,22 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
     private final static Key PREF_MEMBER_IS_INTERMEDIATE =
         getJSFCoreKey(ELValidationPreferences.MEMBER_IS_INTERMEDIATE);
 
-    private final static int EXPECTED_PREFS = 28;
+    //  TypeComparator keys
+    private final static Key PREF_INCOMPATIBLE_METHOD_TYPES =
+        getJSFCoreKey(JSFTypeComparatorPreferences.INCOMPATIBLE_METHOD_TYPES);
+    private final static Key PREF_INCOMPATIBLE_TYPES =
+        getJSFCoreKey(JSFTypeComparatorPreferences.INCOMPATIBLE_TYPES);
+    private final static Key PREF_METHOD_EXPRESSION_EXPECTED =
+        getJSFCoreKey(JSFTypeComparatorPreferences.METHOD_EXPRESSION_EXPECTED);
+    private final static Key PREF_PROPERTY_NOT_READABLE =
+        getJSFCoreKey(JSFTypeComparatorPreferences.PROPERTY_NOT_READABLE);
+    private final static Key PREF_PROPERTY_NOT_WRITABLE =
+        getJSFCoreKey(JSFTypeComparatorPreferences.PROPERTY_NOT_WRITABLE);
+    private final static Key PREF_VALUE_EXPRESSION_EXPECTED =
+        getJSFCoreKey(JSFTypeComparatorPreferences.VALUE_EXPRESSION_EXPECTED);
+
+
+    private final static int EXPECTED_PREFS = 34;
     
     private PixelConverter fPixelConverter;
     
@@ -143,6 +159,12 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
                 , PREF_BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME
                 , PREF_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE
                 , PREF_MEMBER_IS_INTERMEDIATE
+                , PREF_INCOMPATIBLE_METHOD_TYPES
+                , PREF_INCOMPATIBLE_TYPES
+                , PREF_METHOD_EXPRESSION_EXPECTED
+                , PREF_PROPERTY_NOT_READABLE
+                , PREF_PROPERTY_NOT_WRITABLE
+                , PREF_VALUE_EXPRESSION_EXPECTED
           };
         
         if (EXPECTED_PREFS != keys.length)
@@ -346,6 +368,33 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
         label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_incompatible_enumeration_comparison; 
         addComboBox(inner, label, PREF_BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
+        // --- type comparison with expected
+        
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_section_type_comparison; 
+        excomposite= createStyleSection(composite, label, nColumns);
+        
+        inner= new Composite(excomposite, SWT.NONE);
+        inner.setFont(composite.getFont());
+        inner.setLayout(new GridLayout(nColumns, false));
+        excomposite.setClient(inner);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_method_expression_expected; 
+        addComboBox(inner, label, PREF_METHOD_EXPRESSION_EXPECTED, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_incompatible_type_assignment; 
+        addComboBox(inner, label, PREF_INCOMPATIBLE_TYPES, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_value_expression_expected; 
+        addComboBox(inner, label, PREF_VALUE_EXPRESSION_EXPECTED, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_incompatible_method_types; 
+        addComboBox(inner, label, PREF_INCOMPATIBLE_METHOD_TYPES, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_property_not_readable; 
+        addComboBox(inner, label, PREF_PROPERTY_NOT_READABLE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
+
+        label= PreferencesMessages.ProblemSeveritiesConfigurationBlock_pb_property_not_writable; 
+        addComboBox(inner, label, PREF_PROPERTY_NOT_WRITABLE, errorWarningIgnore, errorWarningIgnoreLabels, defaultIndent);
 
         new Label(composite, SWT.NONE);
         

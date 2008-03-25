@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jst.jsf.common.internal.policy.CanonicallyOrderedIteratorPolicy;
 import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
 import org.eclipse.jst.jsf.common.internal.strategy.IIdentifiableStrategy;
-import org.eclipse.jst.jsf.common.internal.strategy.PolicyBasedStrategyComposite;
+import org.eclipse.jst.jsf.common.internal.strategy.IteratorPolicyBasedStrategyComposite;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
 
@@ -174,7 +174,7 @@ public final class CompositeTagRegistryFactory
 
     private static class TagRegistrySelectionStrategy
             extends
-            PolicyBasedStrategyComposite<IProject, ITagRegistry, String, IIdentifiableStrategy<IProject, ITagRegistry, String>>
+            IteratorPolicyBasedStrategyComposite<IProject, ITagRegistry, String, IIdentifiableStrategy<IProject, ITagRegistry, String>>
     {
         private static final ITagRegistry NO_RESULT = null;
 

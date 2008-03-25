@@ -2,7 +2,7 @@ package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
 import org.eclipse.jst.jsf.common.internal.policy.IIdentifiable;
 import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
-import org.eclipse.jst.jsf.common.internal.strategy.PolicyBasedStrategyComposite;
+import org.eclipse.jst.jsf.common.internal.strategy.IteratorPolicyBasedStrategyComposite;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 
 /**
@@ -12,7 +12,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement
  */
 public class CompositeTagResolvingStrategy<TLDELEMENT>
         extends
-        PolicyBasedStrategyComposite<TLDELEMENT, ITagElement, String, ITagResolvingStrategy<TLDELEMENT, String>>
+        IteratorPolicyBasedStrategyComposite<TLDELEMENT, ITagElement, String, ITagResolvingStrategy<TLDELEMENT, String>>
         implements IIdentifiable<String>,
         ITagResolvingStrategy<TLDELEMENT, String>
 {

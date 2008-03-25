@@ -28,6 +28,11 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class DiagnosticFactory 
 {
+    /**
+     * The id used in the source field of all Diagnostic's created by this factory
+     * to uniquely identify EL validation as their source type.
+     */
+    public final static String      SOURCE_ID = "org.eclipse.jst.jsf.validation.el.Diagnostics";//$NON-NLS-1$
     
     /**
      * Problem id
@@ -548,7 +553,7 @@ public final class DiagnosticFactory
     private BasicDiagnostic create(int diagnosticId, String message)
     {
         final int severity = ELValidationPreferences.getDefaultSeverity(diagnosticId);
-        return new BasicDiagnostic(severity, "" //$NON-NLS-1$
+        return new BasicDiagnostic(severity, SOURCE_ID 
                 , diagnosticId
                 , message
                 , null);

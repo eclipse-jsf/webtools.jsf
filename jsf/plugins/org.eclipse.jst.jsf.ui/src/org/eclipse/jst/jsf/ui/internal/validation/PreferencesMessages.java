@@ -72,6 +72,10 @@ public final class PreferencesMessages extends NLS {
     /**
      * see messages.properties
      */
+    public static String  ProblemSeveritiesConfigurationBlock_section_type_comparison;
+    /**
+     * see messages.properties
+     */
     public static String ProblemSeveritiesConfigurationBlock_needsbuild_title;
     /**
      * see messages.properties
@@ -206,4 +210,28 @@ public final class PreferencesMessages extends NLS {
      * see messages.properties
      */
     public static String ProblemSeveritiesConfigurationBlock_pb_member_is_intermediate;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_method_expression_expected;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_incompatible_type_assignment;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_value_expression_expected;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_incompatible_method_types;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_property_not_readable;
+    /**
+     * see messages.properties
+     */
+    public static String ProblemSeveritiesConfigurationBlock_pb_property_not_writable;
 }

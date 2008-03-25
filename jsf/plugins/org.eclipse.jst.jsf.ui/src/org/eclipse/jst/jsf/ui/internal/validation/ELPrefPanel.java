@@ -12,8 +12,13 @@
 
 package org.eclipse.jst.jsf.ui.internal.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.jst.jsf.core.internal.CompositeJSFPreferenceModel;
+import org.eclipse.jst.jsf.core.internal.IJSFPreferenceModel;
 import org.eclipse.jst.jsf.ui.internal.Messages;
-import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
+import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -39,7 +44,7 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
     private final ProblemSeveritiesConfigurationBlock   _problemSeverities;
     
     /* model */
-    private ELValidationPreferences  _prefs;
+    private final ValidationPreferences  _prefs;
     
     /**
      * Allocates new container in parent.
@@ -47,7 +52,7 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
      * @param container 
      * @param prefs 
      */
-    public ELPrefPanel(Composite parent, IWorkbenchPreferenceContainer container, ELValidationPreferences prefs)
+    public ELPrefPanel(Composite parent, IWorkbenchPreferenceContainer container, ValidationPreferences prefs)
     {
         _prefs = prefs;
 
@@ -64,7 +69,7 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
         {
             public void widgetSelected(SelectionEvent e) 
             {
-                _prefs.setEnableBuildValidation(_chkBuildValidation.getSelection());
+                _prefs.getElPrefs().setEnableBuildValidation(_chkBuildValidation.getSelection());
                 refresh();
             }
         });
@@ -75,14 +80,20 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
         {
             public void widgetSelected(SelectionEvent e) 
             {
-                _prefs.setEnableIncrementalValidation(_chkIncrementalValidation.getSelection());
+                _prefs.getElPrefs().setEnableIncrementalValidation(_chkIncrementalValidation.getSelection());
                 refresh();
             }
         });
 
         new Label(_container, SWT.NONE);
         
-        _problemSeverities = new ProblemSeveritiesConfigurationBlock(prefs, null, container);
+        final List<IJSFPreferenceModel> models = new ArrayList<IJSFPreferenceModel>();
+        models.add(_prefs.getElPrefs());
+        models.add(_prefs.getTypeComparatorPrefs());
+        final IJSFPreferenceModel compositeModel = new CompositeJSFPreferenceModel(
+                models);
+
+        _problemSeverities = new ProblemSeveritiesConfigurationBlock(compositeModel, null, container);
         _problemSeverities.createContents(_container);
     }
     
@@ -100,9 +111,9 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
      */
     public void refresh()
     {
-        _chkBuildValidation.setSelection(_prefs.isEnableBuildValidation());
+        _chkBuildValidation.setSelection(_prefs.getElPrefs().isEnableBuildValidation());
         _chkIncrementalValidation.
-            setSelection(_prefs.isEnableIncrementalValidation());
+            setSelection(_prefs.getElPrefs().isEnableIncrementalValidation());
         _problemSeverities.updateControls();
     }
 

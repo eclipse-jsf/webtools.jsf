@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.osgi.util.NLS;
 
 /**
  * Static utility class used to compare two CompositeTypes for compatability
@@ -53,13 +51,24 @@ public final class TypeComparator {
         }
     }
 
+    private final TypeComparatorDiagnosticFactory   _factory;
+
+    /**
+     * Default Constructor
+     * @param factory 
+     */
+    public TypeComparator(final TypeComparatorDiagnosticFactory factory) 
+    {
+        _factory = factory;
+    }
+
     /**
      * @param firstType
      * @param secondType
      * @return true if firstType is assignable to secondType or vice-versa,
      *         depending on their assignment and runtime types
      */
-    public static Diagnostic calculateTypeCompatibility(
+    public Diagnostic calculateTypeCompatibility(
             final CompositeType firstType, final CompositeType secondType) {
         // first, box all primitives
         final CompositeType boxedFirstType = TypeTransformer
@@ -112,13 +121,11 @@ public final class TypeComparator {
         return bestResult.diagnostic;
     }
 
-    private static SignatureTestResult checkTypeSignature(
+    private SignatureTestResult checkTypeSignature(
             final String isSignature, final List<String> mustbeTypes,
             final List<String> mustbeMethods, final boolean mustbeWriteable) {
         if (mustbeTypes.isEmpty()) {
-            final Diagnostic diag = new BasicDiagnostic(
-                    Diagnostic.ERROR,
-                    "", 0, Messages.getString("TypeComparator.Expression.No_Method"), null); //$NON-NLS-1$ //$NON-NLS-2$
+            final Diagnostic diag = _factory.create_METHOD_EXPRESSION_EXPECTED();
             return new SignatureTestResult(diag, 0);
         }
         for (final String mustbeSignature : mustbeTypes) {
@@ -131,19 +138,15 @@ public final class TypeComparator {
         final String[] params = new String[2];
         params[0] = readableSignatures(mustbeTypes);
         params[1] = Signature.toString(isSignature);
-        final Diagnostic diag = new BasicDiagnostic(
-                Diagnostic.WARNING,
-                "", 0, NLS.bind(Messages.getString("TypeComparator.Expression.Incompatible_Value"), params), null); //$NON-NLS-1$ //$NON-NLS-2$
+        final Diagnostic diag = _factory.create_INCOMPATIBLE_TYPES(params);
         return new SignatureTestResult(diag, 1);
     }
 
-    private static SignatureTestResult checkMethodSignature(
+    private SignatureTestResult checkMethodSignature(
             final String isSignature, final List<String> mustbeTypes,
             final List<String> mustbeMethods) {
         if (mustbeMethods.isEmpty()) {
-            final Diagnostic diag = new BasicDiagnostic(
-                    Diagnostic.ERROR,
-                    "", 0, Messages.getString("TypeComparator.Expression.No_Value"), null); //$NON-NLS-1$ //$NON-NLS-2$
+            final Diagnostic diag = _factory.create_VALUE_EXPRESSION_EXPECTED();
             return new SignatureTestResult(diag, 0);
         }
         for (final String mustbeSignature : mustbeMethods) {
@@ -156,9 +159,7 @@ public final class TypeComparator {
         params[0] = readableSignatures(mustbeMethods);
         params[1] = Signature
                 .toString(isSignature, "method", null, false, true); //$NON-NLS-1$
-        final Diagnostic diag = new BasicDiagnostic(
-                Diagnostic.ERROR,
-                "", 0, NLS.bind(Messages.getString("TypeComparator.Expression.Incompatible_Method"), params), null); //$NON-NLS-1$ //$NON-NLS-2$
+        final Diagnostic diag = _factory.create_INCOMPATIBLE_METHOD_TYPES(params);
         return new SignatureTestResult(diag, 1);
     }
 
@@ -276,28 +277,16 @@ public final class TypeComparator {
      * @return a diagnostic validating that the two composite have compatible
      *         assignability
      */
-    private static Diagnostic checkAssignability(final CompositeType firstType,
+    private Diagnostic checkAssignability(final CompositeType firstType,
             final CompositeType secondType) {
         if (firstType.isRHS() && !secondType.isRHS()) {
-            return new BasicDiagnostic(
-                    Diagnostic.WARNING,
-                    "", 0, //$NON-NLS-1$
-                    Messages
-                            .getString("TypeComparator.Expression.Not.Gettable"), null); //$NON-NLS-1$
+            return _factory.create_PROPERTY_NOT_READABLE();
         }
 
         if (firstType.isLHS() && !secondType.isLHS()) {
-            return new BasicDiagnostic(
-                    Diagnostic.WARNING,
-                    "", 0, //$NON-NLS-1$
-                    Messages
-                            .getString("TypeComparator.Expression.Expected.Settable"), null); //$NON-NLS-1$
+            return _factory.create_PROPERTY_NOT_WRITABLE();
         }
 
         return Diagnostic.OK_INSTANCE;
-    }
-
-    private TypeComparator() {
-        // static utility class; not instantiable
     }
 }

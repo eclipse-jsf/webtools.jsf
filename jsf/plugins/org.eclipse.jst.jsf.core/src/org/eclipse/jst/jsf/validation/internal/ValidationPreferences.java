@@ -19,9 +19,9 @@ import org.eclipse.jface.preference.IPreferenceStore;
  */
 public class ValidationPreferences 
 {
-    private final IPreferenceStore          _prefStore;
-    private final ELValidationPreferences   _elPrefs;
-    
+    private final IPreferenceStore                      _prefStore;
+    private final ELValidationPreferences               _elPrefs;
+    private final JSFTypeComparatorPreferences          _typeComparatorPrefs;
     /**
      * Constructor
      * @param prefStore 
@@ -30,6 +30,7 @@ public class ValidationPreferences
     {
         _prefStore = prefStore;
         _elPrefs = new ELValidationPreferences();
+        _typeComparatorPrefs = new JSFTypeComparatorPreferences();
     }
 
     /**
@@ -38,6 +39,14 @@ public class ValidationPreferences
     public ELValidationPreferences getElPrefs() 
     {
         return _elPrefs;
+    }
+
+    /**
+     * @return the type comparator preferences.
+     */
+    public JSFTypeComparatorPreferences getTypeComparatorPrefs()
+    {
+        return _typeComparatorPrefs;
     }
 
     /**IPreferenceStore
@@ -56,6 +65,7 @@ public class ValidationPreferences
     private void load(IPreferenceStore prefStore)
     {
         _elPrefs.load(prefStore);
+        _typeComparatorPrefs.load(prefStore);
     }
 
     /**
@@ -66,6 +76,7 @@ public class ValidationPreferences
     public void commit(IPreferenceStore prefStore)
     {
         _elPrefs.commit(prefStore);
+        _typeComparatorPrefs.commit(prefStore);
     }
     
     /**
@@ -74,5 +85,6 @@ public class ValidationPreferences
     public void setDefaults()
     {
         _elPrefs.setDefaults();
+        _typeComparatorPrefs.setDefaults();
     }
 }

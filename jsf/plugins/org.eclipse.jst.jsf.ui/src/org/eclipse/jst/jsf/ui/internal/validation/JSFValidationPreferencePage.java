@@ -45,9 +45,10 @@ public class JSFValidationPreferencePage extends PreferencePage implements
         _prefs.load();
     }
     
-    protected Control createContents(Composite parent) 
+    protected Control createContents(Composite parent)
     {
-        _elPrefPanel = new ELPrefPanel(parent, (IWorkbenchPreferenceContainer) getContainer(), _prefs.getElPrefs());
+        _elPrefPanel = new ELPrefPanel(parent,
+                (IWorkbenchPreferenceContainer) getContainer(), _prefs);
         _elPrefPanel.refresh();
         return _elPrefPanel.getControl();
     }

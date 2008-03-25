@@ -13,6 +13,7 @@ import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.dom.DOMAdapter;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
+import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.region.Region2AttrAdapter;
@@ -58,7 +59,7 @@ public class AttributeValidatingStrategy extends
     private final static String        DISPLAY_NAME = "Attribute Validator";
 
     private final JSFValidationContext _validationContext;
-
+    private final TypeComparator       _typeComparator;
     /**
      * Default constructor
      * 
@@ -70,6 +71,7 @@ public class AttributeValidatingStrategy extends
         super(ID, DISPLAY_NAME);
 
         _validationContext = validationContext;
+        _typeComparator = new TypeComparator(new TypeComparatorDiagnosticFactory(validationContext.getPrefs().getTypeComparatorPrefs()));
     }
 
     @Override
@@ -298,7 +300,8 @@ public class AttributeValidatingStrategy extends
 
                     if (expectedType != null)
                     {
-                        status = TypeComparator.calculateTypeCompatibility(
+                        
+                        status = _typeComparator.calculateTypeCompatibility(
                                 expectedType, exprType);
                         if (status.getSeverity() != Diagnostic.OK)
                         {
