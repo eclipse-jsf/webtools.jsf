@@ -1,7 +1,6 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension-point id="pageDesignerExtension" name="Web Page Editor Extension" schema="schema/pageDesignerExtension.exsd" />
-	<extension-point id="propertySections" name="Property Section" schema="schema/propertySections.exsd" />
 	<extension-point id="propertyContributor" name="property contributor" schema="schema/propertyContributor.exsd" />
 	<extension-point id="popupMenuContributor" name="popupMenu Contributor" schema="schema/popupMenuContributor.exsd"/>
 	<extension-point id="cmRegistry" name="Content Model Meta Data" schema="schema/cmRegistry.exsd"/>
@@ -179,22 +178,6 @@
     </package>
    </extension>
 
- <extension
-         point="org.eclipse.jst.jsf.common.domainSourceModelTypes">
-      <domainSourceModelTypes
-            domainId="TagLibraryDomain"
-            domainSourceModelTypeId="SybaseCMConfigContentModelHandler"
-            locator="org.eclipse.jst.pagedesigner.internal.metadata.SybaseCMConfigMetaDataLocator"
-            ordinal="0">
-     </domainSourceModelTypes>
- </extension>
- <extension
-       point="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators">
-    <domainSourceModelTypeTranslator
-          domainSourceModelTypeId="SybaseCMConfigContentModelHandler"
-          translatorClass="org.eclipse.jst.pagedesigner.internal.metadata.SybaseCMConfigMetaDataTranslator">
-    </domainSourceModelTypeTranslator>
- </extension>
  <extension
        point="org.eclipse.ui.contexts">
     <context
