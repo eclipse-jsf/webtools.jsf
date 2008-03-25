@@ -34,17 +34,17 @@ public interface IAttributeRuntimeValueType {
 	/**
 	 * 
 	 */
-	public static final String CSSSTYLE = prefix2+"CSSStyleType";
+	public static final String CSSSTYLE = prefix1+"CSSStyleType";
 
 	/**
 	 * 
 	 */
-	public static final String CSSCLASS = prefix2+"CSSClassType";
+	public static final String CSSCLASS = prefix1+"CSSClassType";
 
 	/**
 	 * 
 	 */
-	public static final String CSSID = prefix2+"CSSIdType";
+	public static final String CSSID = prefix1+"CSSIdType";
 
 	/**
 	 * 
