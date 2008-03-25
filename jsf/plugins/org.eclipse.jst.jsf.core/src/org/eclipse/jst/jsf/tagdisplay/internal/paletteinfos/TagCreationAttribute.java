@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id$
+ * $Id: TagCreationAttribute.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,12 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getTagCreationAttribute()
+ * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getTagCreationAttribute()
  * @model
  * @generated
  */
@@ -43,14 +42,14 @@ public interface TagCreationAttribute extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getTagCreationAttribute_Id()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getTagCreationAttribute_Id()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -69,14 +68,14 @@ public interface TagCreationAttribute extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getTagCreationAttribute_Value()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getTagCreationAttribute_Value()
 	 * @model
 	 * @generated
 	 */
 	String getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.

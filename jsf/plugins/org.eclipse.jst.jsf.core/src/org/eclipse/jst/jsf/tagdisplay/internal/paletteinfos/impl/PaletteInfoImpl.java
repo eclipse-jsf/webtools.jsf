@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfoImpl.java,v 1.6 2007/09/25 00:31:41 cbateman Exp $
+ * $Id: PaletteInfoImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import java.util.Iterator;
 
@@ -18,10 +17,10 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,21 +29,21 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getTag() <em>Tag</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getDisplayLabel <em>Display Label</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getExpert <em>Expert</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getHidden <em>Hidden</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getSmallIcon <em>Small Icon</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getLargeIcon <em>Large Icon</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfoImpl#getTagCreation <em>Tag Creation</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getTag() <em>Tag</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getDisplayLabel <em>Display Label</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getExpert <em>Expert</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getHidden <em>Hidden</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getSmallIcon <em>Small Icon</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getLargeIcon <em>Large Icon</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfoImpl#getTagCreation <em>Tag Creation</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {	
+public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,8 +100,6 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	 * @ordered
 	 */
 	protected static final String DISPLAY_LABEL_EDEFAULT = null;
-
-
 
 	/**
 	 * The cached value of the '{@link #getDisplayLabel() <em>Display Label</em>}' attribute.
@@ -347,7 +344,8 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
                 // write code that expects to throw ClassCastExceptions and then hides them?  I hope so!
 				_tag = findTag(model, tagName);
 			} catch (ClassCastException e) {		
-			    PDPlugin.getLogger(getClass()).error(e);
+//			    PDPlugin.getLogger(getClass()).error(e);
+				JSFCorePlugin.log(e, "ClassCastException in getTag() for " + tagName);
 				return null;
 			}
 		}
@@ -367,7 +365,6 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 		}
 		return null;
 	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

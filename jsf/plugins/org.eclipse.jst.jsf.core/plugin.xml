@@ -17,6 +17,10 @@
       	 	uri = "http://org.eclipse.jst.jsf.core/constraints.ecore" 
        		class = "org.eclipse.jst.jsf.validation.internal.constraints.ConstraintsPackage"
        		genModel = "model/constraints.genmodel" /> 
+	     <package 
+	       uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+	       class = "org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage"
+	       genModel = "model/paletteInfos.genmodel" />
    </extension>   
   <!-- JSF Project Facets -->
 	<extension

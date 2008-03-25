@@ -1,23 +1,22 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosFactoryImpl.java,v 1.4 2007/09/25 00:32:06 cbateman Exp $
+ * $Id: PaletteInfosFactoryImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosFactory;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationTemplate;
 
 /**
  * <!-- begin-user-doc -->

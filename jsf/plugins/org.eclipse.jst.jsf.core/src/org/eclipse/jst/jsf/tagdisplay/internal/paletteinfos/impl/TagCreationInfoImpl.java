@@ -1,25 +1,29 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationInfoImpl.java,v 1.3 2007/04/16 19:55:08 itrimble Exp $
+ * $Id: TagCreationInfoImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
+
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,8 +32,8 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.TagCreationInfoImpl#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.TagCreationInfoImpl#getTemplate <em>Template</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.TagCreationInfoImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.TagCreationInfoImpl#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,7 +55,7 @@ public class TagCreationInfoImpl extends EObjectImpl implements TagCreationInfo 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList attributes = null;
+	protected EList attributes;
 
 	/**
 	 * The default value of the '{@link #getTemplate() <em>Template</em>}' attribute.
@@ -96,6 +100,18 @@ public class TagCreationInfoImpl extends EObjectImpl implements TagCreationInfo 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectContainmentEList(TagCreationAttribute.class, this, PaletteInfosPackage.TAG_CREATION_INFO__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object getTemplate() {
 		return template;
 	}
@@ -110,18 +126,6 @@ public class TagCreationInfoImpl extends EObjectImpl implements TagCreationInfo 
 		template = newTemplate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PaletteInfosPackage.TAG_CREATION_INFO__TEMPLATE, oldTemplate, template));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList getAttributes() {
-		if (attributes == null) {
-			attributes = new EObjectContainmentEList(TagCreationAttribute.class, this, PaletteInfosPackage.TAG_CREATION_INFO__ATTRIBUTES);
-		}
-		return attributes;
 	}
 
 	/**

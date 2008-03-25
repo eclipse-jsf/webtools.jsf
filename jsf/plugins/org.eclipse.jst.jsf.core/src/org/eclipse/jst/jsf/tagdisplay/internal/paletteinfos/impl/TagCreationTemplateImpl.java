@@ -1,20 +1,22 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationTemplateImpl.java,v 1.4 2007/09/25 00:32:06 cbateman Exp $
+ * $Id: TagCreationTemplateImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate;
+
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationTemplate;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemp
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.TagCreationTemplateImpl#getTemplate <em>Template</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.TagCreationTemplateImpl#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,7 +47,7 @@ public class TagCreationTemplateImpl extends EObjectImpl implements TagCreationT
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject template = null;
+	protected EObject template;
 
 	/**
 	 * <!-- begin-user-doc -->

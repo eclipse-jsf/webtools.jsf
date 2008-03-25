@@ -10,11 +10,11 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;

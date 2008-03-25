@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationAttributeImpl.java,v 1.2 2007/04/16 19:55:08 itrimble Exp $
+ * $Id: TagCreationAttributeImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -13,8 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,8 +22,8 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttr
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.TagCreationAttributeImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.TagCreationAttributeImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.TagCreationAttributeImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.TagCreationAttributeImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *

@@ -1,25 +1,27 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosPackageImpl.java,v 1.4 2007/09/25 00:32:06 cbateman Exp $
+ * $Id: PaletteInfosPackageImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationAttribute;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate;
+
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosFactory;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationTemplate;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +36,13 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass paletteInfosEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -64,13 +73,6 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	private EClass tagCreationAttributeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass paletteInfosEClass = null;
-
-	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -81,7 +83,7 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#eNS_URI
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -140,6 +142,24 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 		thePaletteInfosPackage.freeze();
 
 		return thePaletteInfosPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPaletteInfos() {
+		return paletteInfosEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPaletteInfos_Infos() {
+		return (EReference)paletteInfosEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -246,8 +266,8 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTagCreationInfo_Template() {
-		return (EAttribute)tagCreationInfoEClass.getEStructuralFeatures().get(1);
+	public EReference getTagCreationInfo_Attributes() {
+		return (EReference)tagCreationInfoEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -255,8 +275,8 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTagCreationInfo_Attributes() {
-		return (EReference)tagCreationInfoEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTagCreationInfo_Template() {
+		return (EAttribute)tagCreationInfoEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -302,24 +322,6 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 */
 	public EAttribute getTagCreationAttribute_Value() {
 		return (EAttribute)tagCreationAttributeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPaletteInfos() {
-		return paletteInfosEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPaletteInfos_Infos() {
-		return (EReference)paletteInfosEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -422,9 +424,9 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 		initEAttribute(getPaletteInfo_LargeIcon(), ecorePackage.getEString(), "largeIcon", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPaletteInfo_TagCreation(), this.getTagCreationInfo(), null, "tagCreation", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isExpert", 0, 1);
+		addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isExpert", 0, 1);
 
-		op = addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isHidden", 0, 1);
+		addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isHidden", 0, 1);
 
 		initEClass(tagCreationInfoEClass, TagCreationInfo.class, "TagCreationInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTagCreationInfo_Attributes(), this.getTagCreationAttribute(), null, "attributes", null, 0, -1, TagCreationInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

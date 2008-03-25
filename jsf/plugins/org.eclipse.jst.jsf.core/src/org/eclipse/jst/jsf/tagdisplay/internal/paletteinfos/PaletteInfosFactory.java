@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id$
+ * $Id: PaletteInfosFactory.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -13,7 +12,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage
+ * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage
  * @generated
  */
 public interface PaletteInfosFactory extends EFactory {
@@ -30,7 +29,16 @@ public interface PaletteInfosFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PaletteInfosFactory eINSTANCE = org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfosFactoryImpl.init();
+	PaletteInfosFactory eINSTANCE = org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfosFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>Palette Infos</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Palette Infos</em>'.
+	 * @generated
+	 */
+	PaletteInfos createPaletteInfos();
 
 	/**
 	 * Returns a new object of class '<em>Palette Info</em>'.
@@ -67,15 +75,6 @@ public interface PaletteInfosFactory extends EFactory {
 	 * @generated
 	 */
 	TagCreationAttribute createTagCreationAttribute();
-
-	/**
-	 * Returns a new object of class '<em>Palette Infos</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Palette Infos</em>'.
-	 * @generated
-	 */
-	PaletteInfos createPaletteInfos();
 
 	/**
 	 * Returns the package supported by this factory.

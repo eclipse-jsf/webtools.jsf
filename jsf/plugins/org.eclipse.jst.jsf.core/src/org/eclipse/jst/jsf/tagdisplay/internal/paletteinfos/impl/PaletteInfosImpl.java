@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosImpl.java,v 1.3 2007/04/16 19:55:08 itrimble Exp $
+ * $Id: PaletteInfosImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,9 +15,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos;
-import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
+import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +26,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.impl.PaletteInfosImpl#getInfos <em>Infos</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl.PaletteInfosImpl#getInfos <em>Infos</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,7 +48,7 @@ public class PaletteInfosImpl extends EObjectImpl implements PaletteInfos {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList infos = null;
+	protected EList infos;
 
 	/**
 	 * <!-- begin-user-doc -->

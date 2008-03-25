@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id$
+ * $Id: PaletteInfo.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,19 +15,19 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getId <em>Id</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getTag <em>Tag</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getDisplayLabel <em>Display Label</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getDescription <em>Description</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getExpert <em>Expert</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getHidden <em>Hidden</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getSmallIcon <em>Small Icon</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getLargeIcon <em>Large Icon</em>}</li>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getTagCreation <em>Tag Creation</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getTag <em>Tag</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getDisplayLabel <em>Display Label</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getExpert <em>Expert</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getHidden <em>Hidden</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getSmallIcon <em>Small Icon</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getLargeIcon <em>Large Icon</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getTagCreation <em>Tag Creation</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo()
+ * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo()
  * @model
  * @generated
  */
@@ -79,14 +78,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_Id()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_Id()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -105,14 +104,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tag</em>' attribute.
 	 * @see #setTag(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_Tag()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_Tag()
 	 * @model
 	 * @generated
 	 */
 	String getTag();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getTag <em>Tag</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getTag <em>Tag</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Tag</em>' attribute.
@@ -131,14 +130,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Display Label</em>' attribute.
 	 * @see #setDisplayLabel(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_DisplayLabel()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_DisplayLabel()
 	 * @model extendedMetaData="kind='element' name='display-label'"
 	 * @generated
 	 */
 	String getDisplayLabel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getDisplayLabel <em>Display Label</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getDisplayLabel <em>Display Label</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Display Label</em>' attribute.
@@ -157,14 +156,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_Description()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_Description()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	String getDescription();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getDescription <em>Description</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getDescription <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Description</em>' attribute.
@@ -183,14 +182,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expert</em>' attribute.
 	 * @see #setExpert(Boolean)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_Expert()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_Expert()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	Boolean getExpert();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getExpert <em>Expert</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getExpert <em>Expert</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Expert</em>' attribute.
@@ -209,14 +208,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Hidden</em>' attribute.
 	 * @see #setHidden(Boolean)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_Hidden()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_Hidden()
 	 * @model extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	Boolean getHidden();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getHidden <em>Hidden</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getHidden <em>Hidden</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Hidden</em>' attribute.
@@ -235,14 +234,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Small Icon</em>' attribute.
 	 * @see #setSmallIcon(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_SmallIcon()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_SmallIcon()
 	 * @model extendedMetaData="kind='element' name='small-icon'"
 	 * @generated
 	 */
 	String getSmallIcon();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getSmallIcon <em>Small Icon</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getSmallIcon <em>Small Icon</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Small Icon</em>' attribute.
@@ -261,14 +260,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Large Icon</em>' attribute.
 	 * @see #setLargeIcon(String)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_LargeIcon()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_LargeIcon()
 	 * @model extendedMetaData="kind='element' name='large-icon'"
 	 * @generated
 	 */
 	String getLargeIcon();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getLargeIcon <em>Large Icon</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getLargeIcon <em>Large Icon</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Large Icon</em>' attribute.
@@ -287,14 +286,14 @@ public interface PaletteInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tag Creation</em>' reference.
 	 * @see #setTagCreation(TagCreationInfo)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfo_TagCreation()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfo_TagCreation()
 	 * @model extendedMetaData="kind='element' name='tag-create'"
 	 * @generated
 	 */
 	TagCreationInfo getTagCreation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo#getTagCreation <em>Tag Creation</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo#getTagCreation <em>Tag Creation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Tag Creation</em>' reference.
@@ -305,7 +304,6 @@ public interface PaletteInfo extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-     * @return true if the expert flag is set 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -314,7 +312,6 @@ public interface PaletteInfo extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-     * @return true if the hidden flag is set 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated

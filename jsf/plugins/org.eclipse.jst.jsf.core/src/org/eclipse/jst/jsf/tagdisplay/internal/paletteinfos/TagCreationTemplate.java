@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id$
+ * $Id: TagCreationTemplate.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate#getTemplate <em>Template</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationTemplate#getTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getTagCreationTemplate()
+ * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getTagCreationTemplate()
  * @model
  * @generated
  */
@@ -36,20 +35,20 @@ public interface TagCreationTemplate extends EObject {
 	 * Returns the value of the '<em><b>Template</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Template</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Template</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Template</em>' containment reference.
 	 * @see #setTemplate(EObject)
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getTagCreationTemplate_Template()
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getTagCreationTemplate_Template()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EObject getTemplate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.TagCreationTemplate#getTemplate <em>Template</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationTemplate#getTemplate <em>Template</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Template</em>' containment reference.

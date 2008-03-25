@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
 	<extension-point id="pageDesignerExtension" name="Web Page Editor Extension" schema="schema/pageDesignerExtension.exsd" />
@@ -168,10 +167,6 @@
 	</extension>
 	
 	<extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
-       class = "org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage"
-       genModel = "model/paletteInfos.genmodel" /> 
     <package
           class="org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfoPackage"
           genModel="model/DTInfo.genmodel"

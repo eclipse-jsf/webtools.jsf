@@ -1,10 +1,9 @@
 /**
- * <copyright>
- * </copyright>
+ * Copyright (c) 2007 Oracle Corporation
  *
- * $Id$
+ * $Id: PaletteInfos.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
-package org.eclipse.jst.pagedesigner.editors.palette.paletteinfos;
+package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -18,11 +17,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfos#getInfos <em>Infos</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos#getInfos <em>Infos</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfos()
+ * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfos()
  * @model
  * @generated
  */
@@ -40,16 +39,16 @@ public interface PaletteInfos extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Infos</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfo}.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Infos</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Infos</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Infos</em>' containment reference list.
-	 * @see org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.PaletteInfosPackage#getPaletteInfos_Infos()
-	 * @model type="org.eclipse.jst.pagedesigner.editors.palette.paletteinfos.internal.provisional.PaletteInfo" containment="true"
+	 * @see org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage#getPaletteInfos_Infos()
+	 * @model type="org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo" containment="true"
 	 *        extendedMetaData="kind='element' name='item'"
 	 * @generated
 	 */
@@ -57,8 +56,6 @@ public interface PaletteInfos extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-     * @param id 
-     * @return the palette info by id 
 	 * <!-- end-user-doc -->
 	 * @model idRequired="true"
 	 * @generated
