@@ -14,7 +14,7 @@ import junit.framework.Assert;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
-import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences.Severity;
+import org.eclipse.jst.jsf.validation.internal.Severity;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 final class PrefTestUtil extends Assert

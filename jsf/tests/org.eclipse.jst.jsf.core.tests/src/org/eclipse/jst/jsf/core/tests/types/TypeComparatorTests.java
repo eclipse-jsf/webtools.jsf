@@ -20,6 +20,8 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
+import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
+import org.eclipse.jst.jsf.common.internal.types.TypeComparatorPreferences;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 
 /**
@@ -125,6 +127,17 @@ public class TypeComparatorTests extends TestCase
         new CompositeType(Signature.createMethodSignature(new String[]{TypeConstants.TYPE_BOXED_INTEGER}, Signature.SIG_VOID)
         , IAssignable.ASSIGNMENT_TYPE_NONE);
         
+    
+    private TypeComparator      _typeComparator;
+    
+    @Override
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+        
+        _typeComparator = new TypeComparator(new TypeComparatorDiagnosticFactory(new TypeComparatorPreferences()));
+    }
+
     /**
      * Sanity check on simple types
      */
@@ -132,31 +145,31 @@ public class TypeComparatorTests extends TestCase
     {
         // simple integers always same
         Diagnostic result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleInteger, simpleInteger);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // simple longs always same
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleLong, simpleLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // simple double always same
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleDouble, simpleDouble);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // simple boolean always same
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleBoolean, simpleBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // simple strings always same
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleString, simpleString);
         assertTrue(result.getSeverity() == Diagnostic.OK);
     }
@@ -168,25 +181,25 @@ public class TypeComparatorTests extends TestCase
     {
         // simple longs can coerce to integer
         Diagnostic result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleInteger, simpleLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // simple doubles can coerce to integer
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleInteger, simpleDouble);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // strings can coerce to integer
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleInteger, simpleString);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // booleans cannot coerce to integer
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleInteger, simpleBoolean);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
@@ -198,25 +211,25 @@ public class TypeComparatorTests extends TestCase
     {
         // simple integer can coerce to long
         Diagnostic result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleLong, simpleInteger);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // simple doubles can coerce to long
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleLong, simpleDouble);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // strings can coerce to long
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleLong, simpleString);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // booleans cannot coerce to long
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleLong, simpleBoolean);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
@@ -225,31 +238,31 @@ public class TypeComparatorTests extends TestCase
     {
         // noop: boolean should always coerce to boolean
         Diagnostic result =
-            TypeComparator.calculateTypeCompatibility
+            _typeComparator.calculateTypeCompatibility
                 (simpleBoolean, simpleBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // noop: works also for boxed
         result =
-            TypeComparator.calculateTypeCompatibility
+            _typeComparator.calculateTypeCompatibility
                 (simpleBoolean, boxedBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // noop: works also for boxed
         result =
-            TypeComparator.calculateTypeCompatibility
+            _typeComparator.calculateTypeCompatibility
                 (boxedBoolean, simpleBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // always coerce strings to booleans
         result =
-            TypeComparator.calculateTypeCompatibility
+            _typeComparator.calculateTypeCompatibility
                 (simpleBoolean, simpleString);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // no number -> boolean coercion
         result =
-            TypeComparator.calculateTypeCompatibility
+            _typeComparator.calculateTypeCompatibility
                 (simpleBoolean, simpleDouble);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
@@ -262,26 +275,26 @@ public class TypeComparatorTests extends TestCase
     {
         // simple longs can coerce to double
         Diagnostic result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleDouble, simpleLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // simple integer can coerce to double
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleDouble, simpleInteger);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // strings can coerce to double
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleDouble, simpleString);
         
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // booleans cannot coerce to double
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleDouble, simpleBoolean);
         
         assertFalse(result.getSeverity() == Diagnostic.OK);
@@ -293,25 +306,25 @@ public class TypeComparatorTests extends TestCase
     {
         // everything coerces to String
         Diagnostic result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleString, simpleLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // everything coerces to String
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleString, simpleDouble);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // everything coerces to String
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleString, simpleInteger);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // everything coerces to String
         result = 
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleString, simpleBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
     }
@@ -323,25 +336,25 @@ public class TypeComparatorTests extends TestCase
     {
         // Integer should convert to int
         Diagnostic result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleInteger, boxedInteger);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // Long should convert to long
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleLong, boxedLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // Double should convert to double
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleDouble, boxedDouble);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // Boolean should convert to boolean
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(simpleBoolean, boxedBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
     }
@@ -353,25 +366,25 @@ public class TypeComparatorTests extends TestCase
     {
         // int should convert to Integer
         Diagnostic result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(boxedInteger, simpleInteger);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // long should convert to Long
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(boxedLong, simpleLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // double should convert to Double
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(boxedDouble, simpleDouble);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // boolean should convert to Boolean
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(boxedBoolean, simpleBoolean);
         assertTrue(result.getSeverity() == Diagnostic.OK);
     }
@@ -384,23 +397,23 @@ public class TypeComparatorTests extends TestCase
     {
         // check for comparable
         Diagnostic result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(comparableType, objectAndComparable);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // not comparable
-        result = TypeComparator.
+        result = _typeComparator.
                 calculateTypeCompatibility(comparableType, objectAndCollection);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         // check for map
         result =
-            TypeComparator.
+            _typeComparator.
                 calculateTypeCompatibility(mapType, objectAndMap);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // not map
-        result = TypeComparator.
+        result = _typeComparator.
                 calculateTypeCompatibility(mapType, objectAndCollection);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
@@ -413,12 +426,12 @@ public class TypeComparatorTests extends TestCase
     {
         // can assign read/write to read-only
         Diagnostic result =
-            TypeComparator.calculateTypeCompatibility(simpleLong, readWritePrimitiveLong);
+            _typeComparator.calculateTypeCompatibility(simpleLong, readWritePrimitiveLong);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // can NOT assign read-only to read/write
         result =
-            TypeComparator.calculateTypeCompatibility(readWritePrimitiveLong, simpleLong);
+            _typeComparator.calculateTypeCompatibility(readWritePrimitiveLong, simpleLong);
         assertFalse(result.getSeverity() == Diagnostic.OK);
         
         // check bi-directional type comparison -- e.g when a read/write string
@@ -426,13 +439,13 @@ public class TypeComparatorTests extends TestCase
         // coerce to string.  But the other direction may not work because
         // you may not be able to coerce the string to the other thing
         result =
-            TypeComparator.calculateTypeCompatibility(readWriteString, readWriteObject);
+            _typeComparator.calculateTypeCompatibility(readWriteString, readWriteObject);
         assertFalse(result.getSeverity() == Diagnostic.OK);
         
         // this should fail because a readable object is expected, but one
         // is not provided (i.e. "not gettable")
         result =
-            TypeComparator.calculateTypeCompatibility(readWriteObject, writeOnlyObject);
+            _typeComparator.calculateTypeCompatibility(readWriteObject, writeOnlyObject);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
     
@@ -440,70 +453,70 @@ public class TypeComparatorTests extends TestCase
     {
         // compare a method to itself should always work; return type, no args
         Diagnostic result = 
-            TypeComparator.calculateTypeCompatibility(actionMethod, actionMethod);
+            _typeComparator.calculateTypeCompatibility(actionMethod, actionMethod);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // compare same when method has no return but args
         result =
-            TypeComparator.calculateTypeCompatibility(actionListener, actionListener);
+            _typeComparator.calculateTypeCompatibility(actionListener, actionListener);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // methods are not compatible
         result =
-            TypeComparator.calculateTypeCompatibility(actionMethod, actionListener);
+            _typeComparator.calculateTypeCompatibility(actionMethod, actionListener);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         // reverse order makes no diff
         result =
-            TypeComparator.calculateTypeCompatibility(actionListener,actionMethod);
+            _typeComparator.calculateTypeCompatibility(actionListener,actionMethod);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         // same signature must succeed
         result =
-            TypeComparator.calculateTypeCompatibility(hasReturnAndArg,hasReturnAndArg);
+            _typeComparator.calculateTypeCompatibility(hasReturnAndArg,hasReturnAndArg);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // boxed vs. unboxed arguments should succeed for same type
-        result = TypeComparator.calculateTypeCompatibility(takesBoxedInt, takesUnboxedInt);
+        result = _typeComparator.calculateTypeCompatibility(takesBoxedInt, takesUnboxedInt);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // and in reverse...
-        result = TypeComparator.calculateTypeCompatibility(takesUnboxedInt, takesBoxedInt);
+        result = _typeComparator.calculateTypeCompatibility(takesUnboxedInt, takesBoxedInt);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // won't satify, event though return matches
-        result = TypeComparator.calculateTypeCompatibility(actionMethod, hasReturnAndArg);
+        result = _typeComparator.calculateTypeCompatibility(actionMethod, hasReturnAndArg);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         // nor in reverse..
-        result = TypeComparator.calculateTypeCompatibility(hasReturnAndArg, actionMethod);
+        result = _typeComparator.calculateTypeCompatibility(hasReturnAndArg, actionMethod);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         // won't satify, event though args matches
-        result = TypeComparator.calculateTypeCompatibility(actionListener, hasReturnAndArg);
+        result = _typeComparator.calculateTypeCompatibility(actionListener, hasReturnAndArg);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         // nor in reverse...
-        result = TypeComparator.calculateTypeCompatibility(hasReturnAndArg, actionListener);
+        result = _typeComparator.calculateTypeCompatibility(hasReturnAndArg, actionListener);
         assertFalse(result.getSeverity() == Diagnostic.OK);
         
         // check same return and arg count, diff arg
-        result = TypeComparator.calculateTypeCompatibility(hasReturnAndArg, sameNumArgsDiffType);
+        result = _typeComparator.calculateTypeCompatibility(hasReturnAndArg, sameNumArgsDiffType);
         assertFalse(result.getSeverity() == Diagnostic.OK);
 
         
     // test multiple
         
         // this will succeed because actionMethod is in the list
-        result = TypeComparator.calculateTypeCompatibility(actionAndActionListener, actionMethod);
+        result = _typeComparator.calculateTypeCompatibility(actionAndActionListener, actionMethod);
         assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // this will succeed because actionListener is in the list
-        result = TypeComparator.calculateTypeCompatibility(actionAndActionListener, actionListener);
+        result = _typeComparator.calculateTypeCompatibility(actionAndActionListener, actionListener);
         assertTrue(result.getSeverity() == Diagnostic.OK);
 
         // this will fail because hasReturnAndArg is not in the list
-        result = TypeComparator.calculateTypeCompatibility(actionAndActionListener, hasReturnAndArg);
+        result = _typeComparator.calculateTypeCompatibility(actionAndActionListener, hasReturnAndArg);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
     
@@ -511,12 +524,12 @@ public class TypeComparatorTests extends TestCase
     {
         // a value binding will never be compatible with a method binding
         Diagnostic result = 
-            TypeComparator.calculateTypeCompatibility(actionMethod, readWriteObject);
+            _typeComparator.calculateTypeCompatibility(actionMethod, readWriteObject);
         assertFalse(result.getSeverity() == Diagnostic.OK);
         
         // nor in reverse...
         result = 
-            TypeComparator.calculateTypeCompatibility(readWriteObject,actionMethod);
+            _typeComparator.calculateTypeCompatibility(readWriteObject,actionMethod);
         assertFalse(result.getSeverity() == Diagnostic.OK);
     }
 }

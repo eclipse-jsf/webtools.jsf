@@ -24,7 +24,7 @@ import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.base.MockELValidationReporter;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
-import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences.Severity;
+import org.eclipse.jst.jsf.validation.internal.Severity;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;

@@ -18,7 +18,7 @@ import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
-import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences.Severity;
+import org.eclipse.jst.jsf.validation.internal.Severity;
 
 /**
  * Basic unit tests for ELValidationPreferences
