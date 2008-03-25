@@ -119,7 +119,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertTrue(beanProperty.getSetter() == simpleSetter);
 
         // the type should resolve to a String
-        assertTrue("Ljava.lang.String;".equals(beanProperty.getTypeSignature()));
+        assertEquals("Ljava.lang.String;",beanProperty.getTypeSignature());
 
         // should be able to resolve the IType
         assertNotNull(beanProperty.getType());
@@ -156,8 +156,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertTrue(beanProperty.getSetter() == simpleSetter);
 
         // the type should resolve to a String
-        assertTrue(Signature.SIG_BOOLEAN
-                .equals(beanProperty.getTypeSignature()));
+        assertEquals(Signature.SIG_BOOLEAN
+                , beanProperty.getTypeSignature());
 
         // should be a boolean so no IType
         assertNull(beanProperty.getType());
@@ -200,8 +200,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertTrue(beanProperty.getSetter() == simpleSetter);
 
         // the type should resolve to a String
-        assertTrue(Signature.SIG_BOOLEAN
-                .equals(beanProperty.getTypeSignature()));
+        assertEquals(Signature.SIG_BOOLEAN
+                , beanProperty.getTypeSignature());
 
         // should be a boolean so no IType
         assertNull(beanProperty.getType());
@@ -281,7 +281,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertNull(beanProperty.getSetter());
 
         // the type should resolve to a String
-        assertTrue("Ljava.lang.String;".equals(beanProperty.getTypeSignature()));
+        assertEquals("Ljava.lang.String;", beanProperty.getTypeSignature());
 
         // should be an IType for a String
         assertNotNull(beanProperty.getType());
@@ -319,7 +319,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertNull(beanProperty.getSetter());
 
         // the type should resolve to a String
-        assertTrue("Ljava.lang.String;".equals(beanProperty.getTypeSignature()));
+        assertEquals("Ljava.lang.String;", beanProperty.getTypeSignature());
 
         // should be an IType for a String
         assertNotNull(beanProperty.getType());
@@ -350,8 +350,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertNull(beanProperty.getSetter());
 
         // the type should resolve to a String
-        assertTrue(Signature.SIG_BOOLEAN
-                .equals(beanProperty.getTypeSignature()));
+        assertEquals(Signature.SIG_BOOLEAN
+                , beanProperty.getTypeSignature());
 
         // should not be an IType for a boolean
         assertNull(beanProperty.getType());
@@ -389,7 +389,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertNull(beanProperty.getGetter());
 
         // the type should resolve to a String
-        assertTrue("Ljava.lang.String;".equals(beanProperty.getTypeSignature()));
+        assertEquals("Ljava.lang.String;", beanProperty.getTypeSignature());
 
         // should be an IType for a String
         assertNotNull(beanProperty.getType());
@@ -429,8 +429,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertTrue(beanProperty.getSetter() == simpleSetter);
 
         // the type should resolve to a String[]
-        assertTrue("[Ljava.lang.String;"
-                .equals(beanProperty.getTypeSignature()));
+        assertEquals("[Ljava.lang.String;",
+                beanProperty.getTypeSignature());
 
         // Should resolve to base type (String)
         assertNotNull(beanProperty.getType());
@@ -470,8 +470,8 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertTrue(beanProperty.getSetter() == simpleSetter);
 
         // the type should resolve to java.util.Collection
-        assertTrue("Ljava.util.Collection;".equals(beanProperty
-                .getTypeSignature()));
+        assertEquals("Ljava.util.Collection;", beanProperty
+                .getTypeSignature());
 
         // should resolve a type
         assertNotNull(beanProperty.getType());
@@ -510,7 +510,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         assertTrue(beanProperty.getSetter() == simpleSetter);
 
         // the type should resolve to java.util.Map
-        assertTrue("Ljava.util.Map;".equals(beanProperty.getTypeSignature()));
+        assertEquals("Ljava.util.Map;", beanProperty.getTypeSignature());
 
         // should resolve a type
         assertNotNull(beanProperty.getType());
