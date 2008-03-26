@@ -23,11 +23,7 @@
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
         </entity>
-        <entity id="initialFocusId">
-            <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDReferenceType</value>
-            </trait>
-        </entity>
+        <entity id="initialFocusId"/>
     </entity>
     <entity id="cellFormat" type="tag">
 		<include-entity-group id="common-core-attributes" uri="http://myfaces.apache.org/trinidad"/>

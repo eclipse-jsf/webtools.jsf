@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Oracle - initial API and implementation
+ *	  Vadim Dmitriev
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
@@ -31,11 +32,11 @@ import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
  * 
  */
 
-public class LocaleType extends EnumerationType implements IPossibleValues, IValidValues, IValidELValues{
+public class LocaleType extends MultiSignatureEnumerationType implements IPossibleValues, IValidValues, IValidELValues{
 	private List<IPossibleValue> _pvs;
 	@Override
-	protected String getReturnType() {
-		return "java.util.Locale"; //$NON-NLS-1$
+	protected String[] getReturnTypes() {
+		return new String[]{"java.util.Locale", "java.lang.String"}; //$NON-NLS-1$
 	}
 
 	public List getPossibleValues() {
