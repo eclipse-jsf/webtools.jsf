@@ -113,7 +113,10 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         ISymbol symbol = testFacade.testCreateFromList("rawList", valueType, _jdtTestEnvironment.getJavaProject());
         {
             // should create the same as passing directly to default
-            final ISymbol compareSymbol = testFacade.createDefaultSymbol("rawListDefault");
+            final ISymbol compareSymbol = testFacade.getSymbolFactory()
+                    .createDefaultSymbol("rawListDefault",
+                            ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL,
+                            null);
             assertTrue(symbol instanceof IComponentSymbol);
             assertTrue(compareSymbol instanceof IComponentSymbol);
          
@@ -183,7 +186,10 @@ public class TestAbstractDataModelVariableFactory extends TestCase
     public final void testCreateDefaultSymbol() 
     {
         final DataModelVariableTestFacade testFacade = new DataModelVariableTestFacade();
-        final ISymbol defaultSymbol = testFacade.createDefaultSymbol("foo");
+        final ISymbol defaultSymbol = testFacade.getSymbolFactory()
+            .createDefaultSymbol("foo",
+                ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL,
+                "Test raw list dataTableVariable");
         assertNotNull(defaultSymbol);
         assertEquals("foo", defaultSymbol.getName());
         assertTrue(defaultSymbol instanceof  IComponentSymbol);
@@ -220,12 +226,15 @@ public class TestAbstractDataModelVariableFactory extends TestCase
         {
             final String dataModelSig = TypeConstants.TYPE_DATA_MODEL;
             final ValueType valueType = new ValueType(dataModelSig, new String[0], new String[0], new String[0], false, IAssignable.ASSIGNMENT_TYPE_RHS);
-            final ISymbol dataModel1 = testFacade.createFromType("dataModel", valueType, _jdtTestEnvironment.getJavaProject()); 
-            final ISymbol dataModel2 = testFacade.createDefaultSymbol("dataModel2");
+            final ISymbol dataModel1 = testFacade.createFromType("dataModel", valueType, _jdtTestEnvironment.getJavaProject());
+            final ISymbol dataModel2 = testFacade.getSymbolFactory()
+                    .createDefaultSymbol("dataModel2",
+                            ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL,
+                            "Row variable for dataTable");
             assertSame((IComponentSymbol)dataModel1, (IComponentSymbol)dataModel2);
         }
         
-        // if it's just some non-special object, like a String, then should be same a scalar
+        // if it's just some non-special object, like a String, then should be same as scalar
         {
             final String stringSig = TypeConstants.TYPE_STRING;
             final ValueType valueType = new ValueType(stringSig, new String[0], new String[0], new String[0], false, IAssignable.ASSIGNMENT_TYPE_RHS);

@@ -143,51 +143,32 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
         assertNoError(3295, Signature.SIG_INT);
         assertNoError(3363, TypeConstants.TYPE_STRING);
         assertNoError(3478, Signature.SIG_LONG);
+        
+        // can't know what's actually in the scope map.  so anything unresolved is just
+        // no error Java object.
+        assertNoError(3572, TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3632,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3688,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3744,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3794,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3850,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3900,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(3956,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(4009,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(4058,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(4113,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(4209,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(4270,TypeConstants.TYPE_JAVAOBJECT);
+        assertNoError(4327,TypeConstants.TYPE_JAVAOBJECT);
     }
     @Override
     public void testWarningExprs()
     {
-        List<ReportedProblem> list = assertSemanticWarning(3572,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3632,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3688,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3744,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3794,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3850,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3900,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(3956,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(4009,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(4058,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(4113,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(4209,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(4270,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
-
-        list = assertSemanticWarning(4327,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        // no warnings.  The issues marked warnings in the jsp test data
+        // are no longer, since we realized that maps can contain anything...
+        // the  only exceptino is FacesContext which is resovled to a map 
+        // at test time since the  API  is not in the classpath.  This
+        // should be changed if start using jsf api/impl in these tests TODO
     }
 
     @Override

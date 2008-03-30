@@ -97,13 +97,13 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 
 		ISymbol var =
 			factory.create("notAVariable"
-				, ISymbolConstants.SYMBOL_SCOPE_REQUEST, context, new ArrayList());
+				, ISymbolConstants.SYMBOL_SCOPE_REQUEST, context, new ArrayList(), null);
 		assertNull(var);
 
 		var = factory.create("bundle"
 			, ISymbolConstants.SYMBOL_SCOPE_REQUEST
 			, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 552)
-			, new ArrayList());
+			, new ArrayList(), null);
 		
 		// load bundle introduces a variable
 		assertNotNull(var);
@@ -113,7 +113,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 		var = factory.create("row"
 				, ISymbolConstants.SYMBOL_SCOPE_REQUEST
 				, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 1361)
-				, new ArrayList());
+				, new ArrayList(), null);
 		
 		// data table introduces a variable
 		assertNotNull(var);
