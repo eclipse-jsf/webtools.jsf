@@ -27,7 +27,7 @@ public abstract class AbstractDTPropertyResolver
      * properyId.  Note that getProperty may return *more* property symbols
      * for the same 'base' because some ISymbol's have unconstrained type
      * descriptors.  For example, a bean that implements java.util.Map,
-     * may have any number of possible properties add at runtime that cannot
+     * may have any number of possible properties added at runtime that cannot
      * be determined at design time.  It is up to implementers of this interface
      * to decide how (whether) to return these objects at design time 
      * 
