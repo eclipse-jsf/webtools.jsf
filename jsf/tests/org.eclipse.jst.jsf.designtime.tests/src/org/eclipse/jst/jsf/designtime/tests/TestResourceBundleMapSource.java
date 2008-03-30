@@ -129,20 +129,9 @@ public class TestResourceBundleMapSource extends TestCase
     protected void tearDown() throws Exception
     {
         super.tearDown();
-        try
-        {
-            _project1.close(null);
-            _project2.close(null);
-            _project3.close(null);
-            _project1.delete(true, null);
-            _project2.delete(true, null);
-            _project3.delete(true, null);
-        }
-        catch (final CoreException ce)
-        {
-            ce.printStackTrace(System.err);
-        }
-
+        JSFTestUtil.safeDelete(_project1, 25, 100);
+        JSFTestUtil.safeDelete(_project2, 25, 100);
+        JSFTestUtil.safeDelete(_project3, 25, 100);
     }
 
     /**
