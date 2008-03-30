@@ -57,5 +57,12 @@
           org.eclipse.emf.edit.provider.IItemPropertySource
           org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider" />
   </extension>
+  <extension
+        point="org.eclipse.jst.jsf.common.contextSymbolFactory">
+     <contextSymbolFactory
+           factory="org.eclipse.jst.jsf.context.symbol.internal.source.UnknownTypeContextSymbolFactory"
+           factoryId="org.eclipse.jst.jsf.common.unknownTypeSymbolFactory">
+     </contextSymbolFactory>
+  </extension>
  
 </plugin>

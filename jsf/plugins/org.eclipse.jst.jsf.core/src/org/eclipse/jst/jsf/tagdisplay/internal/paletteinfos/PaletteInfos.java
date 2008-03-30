@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfos.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
+ * $Id: PaletteInfos.java,v 1.2 2008/03/30 21:22:24 cbateman Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -56,6 +56,8 @@ public interface PaletteInfos extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @param id 
+     * @return the pallette info corresponding to id. 
 	 * <!-- end-user-doc -->
 	 * @model idRequired="true"
 	 * @generated

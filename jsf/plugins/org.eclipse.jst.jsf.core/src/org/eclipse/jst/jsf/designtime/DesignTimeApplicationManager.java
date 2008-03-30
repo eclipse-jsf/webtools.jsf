@@ -15,7 +15,6 @@ package org.eclipse.jst.jsf.designtime;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
@@ -35,6 +34,7 @@ import org.eclipse.jst.jsf.designtime.context.IExternalContextFactoryLocator;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
+import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory.ExtensionData;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 
 
@@ -85,10 +85,10 @@ public final class DesignTimeApplicationManager
         "org.eclipse.jst.jsf.core.externalcontext.default"; //$NON-NLS-1$
     
     private static final String   DEFAULT_VARIABLE_RESOLVER_ID = 
-        "org.eclipse.jst.jsf.core.variableresolver.default"; //$NON-NLS-1$
+        "org.eclipse.jst.jsf.core.variableresolver.default.decorative"; //$NON-NLS-1$
     
     private static final String   DEFAULT_PROPERTY_RESOLVER_ID =
-        "org.eclipse.jst.jsf.core.propertyresolver.default"; //$NON-NLS-1$
+        "org.eclipse.jst.jsf.core.propertyresolver.default.decorative"; //$NON-NLS-1$
         
     private static final String   DEFAULT_METHOD_RESOLVER_ID =
         "org.eclipse.jst.jsf.core.methodresolver.default"; //$NON-NLS-1$
@@ -255,7 +255,7 @@ public final class DesignTimeApplicationManager
         
         if (viewHandlerId != null)
         {
-            return JSFCorePlugin.getViewHandlers().get(viewHandlerId);
+            return JSFCorePlugin.getViewHandlers(viewHandlerId).getInstance(_project);
         }
 
         return null;
@@ -297,11 +297,22 @@ public final class DesignTimeApplicationManager
      */
     public synchronized AbstractDTVariableResolver getVariableResolver()
     {
-        return getResolver(PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER,
-                                                        JSFCorePlugin.getVariableResolvers(),
-                                                        DEFAULT_VARIABLE_RESOLVER_ID);
+        ExtensionData<AbstractDTVariableResolver> extData = null;
+
+        String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER);
+        if (id != null)
+        {
+            extData = JSFCorePlugin.getVariableResolvers(id);
+        }
+        
+        if (extData == null)
+        {
+            extData = JSFCorePlugin.getVariableResolvers(DEFAULT_VARIABLE_RESOLVER_ID);
+        }
+
+        return extData.getInstance(_project);
     }
-    
+
     /**
      * Sets the plugin used to determine the designtime variable resolver.  To 
      * reset to the default, pass null.
@@ -332,7 +343,7 @@ public final class DesignTimeApplicationManager
      */
     public synchronized AbstractDTPropertyResolver getDefaultPropertyResolver()
     {
-        return JSFCorePlugin.getPropertyResolvers().get(DEFAULT_PROPERTY_RESOLVER_ID);
+        return JSFCorePlugin.getPropertyResolver(DEFAULT_PROPERTY_RESOLVER_ID).getInstance(_project);
     }
     
     /**
@@ -340,9 +351,20 @@ public final class DesignTimeApplicationManager
      */
     public synchronized AbstractDTPropertyResolver getPropertyResolver()
     {
-        return getResolver(PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER,
-                JSFCorePlugin.getPropertyResolvers(),
-                DEFAULT_PROPERTY_RESOLVER_ID);
+        ExtensionData<AbstractDTPropertyResolver> extData = null;
+
+        String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER);
+        if (id != null)
+        {
+            extData = JSFCorePlugin.getPropertyResolver(id);
+        }
+        
+        if (extData == null)
+        {
+            extData = JSFCorePlugin.getPropertyResolver(DEFAULT_PROPERTY_RESOLVER_ID);
+        }
+
+        return extData.getInstance(_project);
     }
     
     /**
@@ -370,9 +392,20 @@ public final class DesignTimeApplicationManager
      */
     public synchronized AbstractDTMethodResolver getMethodResolver()
     {
-        return getResolver(PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER,
-                JSFCorePlugin.getMethodResolvers(),
-                DEFAULT_METHOD_RESOLVER_ID);
+        ExtensionData<AbstractDTMethodResolver> extData = null;
+
+        String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER);
+        if (id != null)
+        {
+            extData = JSFCorePlugin.getMethodResolvers(id);
+        }
+        
+        if (extData == null)
+        {
+            extData = JSFCorePlugin.getMethodResolvers(DEFAULT_METHOD_RESOLVER_ID);
+        }
+
+        return extData.getInstance(_project);
     }
 
     /**
@@ -396,32 +429,14 @@ public final class DesignTimeApplicationManager
                              DEFAULT_METHOD_RESOLVER_ID);
     }
 
-    
-    private <ResolverProvider> ResolverProvider getResolver(final QualifiedName pluginKey,
-                               final Map<String, ResolverProvider>   registry,
-                               final String defaultId)
+    private String getResolverId_OLD(final QualifiedName pluginKey)
     {
-        String pluginId = defaultId;
+        String pluginId = null;
         
         try
         {
            pluginId =
                 _project.getPersistentProperty(pluginKey);
-           
-           // if don't have the plugin in the registry, then 
-           // revert to default
-           if (pluginId == null)
-           {
-               pluginId = defaultId;
-           }
-           else if (registry.get(pluginId) == null)
-           {
-               JSFCorePlugin.getDefault().getLog().log(
-                       new Status(IStatus.WARNING, JSFCorePlugin.PLUGIN_ID,
-                                   0, "Plugin: "+pluginId+" not found", //$NON-NLS-1$ //$NON-NLS-2$
-                                   new Throwable()));
-               pluginId = defaultId;
-           }
         }
         catch (CoreException ce)
         {
@@ -429,13 +444,13 @@ public final class DesignTimeApplicationManager
                     new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID,
                                 0, "Error getting plugin property", //$NON-NLS-1$
                                 ce));
-            pluginId = defaultId;
+            pluginId = null;
             // fall-through and use the default
         }
 
-        return registry.get(pluginId);
+        return pluginId;
     }
-    
+
     private String getResolverId(final QualifiedName key, final String defaultValue)
     {
         String id = defaultValue; 
@@ -460,10 +475,22 @@ public final class DesignTimeApplicationManager
     
     private class MyExternalContextFactoryLocator implements IExternalContextFactoryLocator
     {
-        public AbstractDTExternalContextFactory getFactory() {
-            return getResolver(PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER,
-                    JSFCorePlugin.getExternalContextProviders(),
-                        DEFAULT_EXTERNAL_CONTEXT_ID);
+        public AbstractDTExternalContextFactory getFactory() 
+        {
+            ExtensionData<AbstractDTExternalContextFactory> extData = null;
+
+            String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER);
+            if (id != null)
+            {
+                extData = JSFCorePlugin.getExternalContextProviders(id);
+            }
+            
+            if (extData == null)
+            {
+                extData = JSFCorePlugin.getExternalContextProviders(DEFAULT_EXTERNAL_CONTEXT_ID);
+            }
+
+            return extData.getInstance(_project);
         }
     }
     

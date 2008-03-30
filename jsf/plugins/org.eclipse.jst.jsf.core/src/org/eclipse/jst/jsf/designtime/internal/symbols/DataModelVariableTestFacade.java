@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.designtime.internal.symbols;
 
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.designtime.symbols.AbstractDataModelVariableFactory;
 
@@ -36,7 +37,7 @@ public final class DataModelVariableTestFacade extends AbstractDataModelVariable
      */
     public final ISymbol testCreateArraySymbol(final String symbolName, final String signature, final IJavaProject javaProject)
     {
-        return createArraySymbol(symbolName, signature, javaProject);
+        return getSymbolFactory().createArraySymbol(symbolName, signature, ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL, javaProject);
     }
     
     /**
@@ -49,7 +50,7 @@ public final class DataModelVariableTestFacade extends AbstractDataModelVariable
      */
     public final ISymbol testCreateFromList(String symbolName, ValueType valueType, IJavaProject javaProject)
     {
-        return createFromList(symbolName, valueType, javaProject);
+        return getSymbolFactory().createFromList(symbolName, valueType, ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL, null, javaProject);
     }
     
     /**
@@ -60,7 +61,7 @@ public final class DataModelVariableTestFacade extends AbstractDataModelVariable
      */
     public ISymbol testCreateScalarSymbol(String symbolName, String signature, IJavaProject javaProject)
     {
-        return createScalarSymbol(symbolName, signature, javaProject);
+        return getSymbolFactory().createScalarSymbol(symbolName, signature, ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL, javaProject);
     }
 
     

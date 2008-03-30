@@ -54,5 +54,13 @@
             id="OutputFormattedOperation">
       </tagTransformOperation>
    </extension>
+   <extension
+         point="org.eclipse.jst.jsf.core.variableresolver">
+      <variableresolver
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.el.TrinidadDecorativeVariableResolver"
+            forRuntimeClass="org.apache.myfaces.trinidadinternal.el.TrinidadVariableResolver"
+            id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.variableresolver1">
+      </variableresolver>
+   </extension>
 
 </plugin>

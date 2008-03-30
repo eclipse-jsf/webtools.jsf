@@ -134,14 +134,28 @@
    <extension
          point="org.eclipse.jst.jsf.core.variableresolver">
       <variableresolver
+            class="org.eclipse.jst.jsf.designtime.internal.symbols.ConfigBasedDTVariableResolver"
+            id="org.eclipse.jst.jsf.core.variableresolver.default.decorative"/>
+   </extension>
+    <extension
+         point="org.eclipse.jst.jsf.core.variableresolver">
+        <variableresolver
             class="org.eclipse.jst.jsf.designtime.el.DefaultDTVariableResolver"
             id="org.eclipse.jst.jsf.core.variableresolver.default"/>
-   </extension>
+    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.propertyresolver">
       <propertyresolver
             class="org.eclipse.jst.jsf.designtime.el.DefaultDTPropertyResolver"
             id="org.eclipse.jst.jsf.core.propertyresolver.default"/>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.core.propertyresolver">
+      <propertyresolver
+            class="org.eclipse.jst.jsf.designtime.internal.symbols.ConfigBasedDTPropertyResolver"
+            id="org.eclipse.jst.jsf.core.propertyresolver.default.decorative"
+            instancePerProject="true">
+      </propertyresolver>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.methodresolver">
@@ -330,6 +344,20 @@
            class="org.eclipse.jst.jsf.designtime.internal.view.DefaultDTViewHandler"
            id="org.eclipse.jst.jsf.designtime.view.jspviewhandler">
      </viewhandler>
+  </extension>
+  <extension
+        point="org.eclipse.jst.jsf.common.contextSymbolFactory">
+     <contextSymbolFactory
+           factory="org.eclipse.jst.jsf.designtime.internal.symbols.StaticJavaTypeSymbolFactory"
+           factoryId="org.eclipse.jst.jsf.core.staticJavaTypeSymbol">
+     </contextSymbolFactory>
+  </extension>
+  <extension
+        point="org.eclipse.jst.jsf.common.contextSymbolFactory">
+     <contextSymbolFactory
+           factory="org.eclipse.jst.jsf.designtime.internal.symbols.ValueExpressionSymbolFactory"
+           factoryId="org.eclipse.jst.jsf.core.valueExpressionSymbolFactory">
+     </contextSymbolFactory>
   </extension>
   
 </plugin>

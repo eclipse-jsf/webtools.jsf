@@ -39,6 +39,8 @@ import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FromViewIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.facesconfig.emf.PropertyResolverType;
+import org.eclipse.jst.jsf.facesconfig.emf.VariableResolverType;
 
 /**
  * JSFAppConfigManager provides an entry point to an entire JSF application
@@ -447,6 +449,34 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 			allManagedBeans.addAll(managedBeans);
 		}
 		return allManagedBeans;
+    }
+
+    /**
+     * @return List of all variable resolver class names registered. 
+     */
+    public final List<String> getPropertyResolvers()
+    {
+        final List<String> allPropertyResolvers = new ArrayList<String>();
+        final List applications = getApplications();
+        final Iterator appIterator = applications.iterator();
+        while (appIterator.hasNext())
+        {
+            final ApplicationType  application = (ApplicationType) appIterator.next();
+            for (final Iterator it = application.getPropertyResolver().iterator(); it.hasNext();)
+            {
+                final PropertyResolverType propRes = (PropertyResolverType) it.next();
+                String propClass = propRes.getTextContent();
+                if (propClass != null)
+                {
+                    propClass = propClass.trim();
+                    if (!"".equals(propClass))
+                    {
+                        allPropertyResolvers.add(propClass);
+                    }
+                }
+            }
+        }
+        return allPropertyResolvers;
 	}
 
 	/**
@@ -467,6 +497,34 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		}
 		return allValidators;
 	}
+
+	/**
+	 * @return List of all variable resolver class names registered. 
+	 */
+	public final List<String> getVariableResolvers()
+    {
+        final List<String> allVariableResolvers = new ArrayList<String>();
+        final List applications = getApplications();
+        final Iterator appIterator = applications.iterator();
+        while (appIterator.hasNext())
+        {
+            final ApplicationType  application = (ApplicationType) appIterator.next();
+            for (final Iterator it = application.getVariableResolver().iterator(); it.hasNext();)
+            {
+                final VariableResolverType varRes = (VariableResolverType) it.next();
+                String varClass = varRes.getTextContent();
+                if (varClass != null)
+                {
+                    varClass = varClass.trim();
+                    if (!"".equals(varClass))
+                    {
+                        allVariableResolvers.add(varClass);
+                    }
+                }
+            }
+        }
+        return allVariableResolvers;
+    }
 
 	/**
 	 * Gets list of all ConverterType instances from all known faces-config

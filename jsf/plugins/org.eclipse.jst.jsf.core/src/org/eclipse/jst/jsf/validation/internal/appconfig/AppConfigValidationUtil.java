@@ -152,6 +152,7 @@ public final class AppConfigValidationUtil
      * from within the braces.  If a syntax error occurs in this extraction
      * message property of the result object will contain a validation message
      * and elText will be set to null.
+     * TODO: move this somewhere more generic and shared.
      */
     public static ELResultWrapper extractELExpression(final String textContent)
     {

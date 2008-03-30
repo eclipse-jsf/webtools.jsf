@@ -13,6 +13,7 @@
 package org.eclipse.jst.jsf.designtime.symbols;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
@@ -80,6 +81,24 @@ public final class FileContextUtil
         return null;
     }
     
+    /**
+     * Convenience method for getting the IProject for a document context.
+     * 
+     * @param context
+     * @return the project associated with context or null if can't be derived
+     */
+    public static IProject getProject(final IStructuredDocumentContext context)
+    {
+        final IWorkspaceContextResolver wkResolver = IStructuredDocumentContextResolverFactory.INSTANCE
+                .getWorkspaceContextResolver(context);
+
+        if (wkResolver != null)
+        {
+            return wkResolver.getProject();
+        }
+        return null;
+    }
+
     private FileContextUtil()
     {
         // no instantiation

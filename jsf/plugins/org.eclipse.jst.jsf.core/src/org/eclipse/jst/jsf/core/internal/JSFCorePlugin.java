@@ -12,11 +12,8 @@
 package org.eclipse.jst.jsf.core.internal;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -31,11 +28,13 @@ import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
+import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory;
+import org.eclipse.jst.jsf.designtime.internal.DecoratableExtensionFactory;
+import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory.ExtensionData;
 import org.eclipse.jst.jsf.designtime.internal.resolver.ViewBasedTaglibResolverFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.AbstractDTViewHandler;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.wst.common.frameworks.internal.WTPPlugin;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -76,13 +75,12 @@ public class JSFCorePlugin extends WTPPlugin
     public void start(final BundleContext context) throws Exception
     {
         super.start(context);
-        IStructuredDocumentContextResolverFactory2 factory = 
-            IStructuredDocumentContextResolverFactory2.INSTANCE;
+        final IStructuredDocumentContextResolverFactory2 factory = IStructuredDocumentContextResolverFactory2.INSTANCE;
         if (factory instanceof IDelegatingFactory)
         {
             _tagLibResolverFactory = new ViewBasedTaglibResolverFactory();
             ((IDelegatingFactory) factory)
-                    .addFactoryDelegate(_tagLibResolverFactory);
+            .addFactoryDelegate(_tagLibResolverFactory);
         }
         else
         {
@@ -101,13 +99,13 @@ public class JSFCorePlugin extends WTPPlugin
     {
         super.stop(context);
 
-        IStructuredDocumentContextResolverFactory factory = IStructuredDocumentContextResolverFactory.INSTANCE;
+        final IStructuredDocumentContextResolverFactory factory = IStructuredDocumentContextResolverFactory.INSTANCE;
 
         if (factory instanceof IDelegatingFactory
                 && _tagLibResolverFactory != null)
         {
             ((IDelegatingFactory) factory)
-                    .removeFactoryDelegate(_tagLibResolverFactory);
+            .removeFactoryDelegate(_tagLibResolverFactory);
         }
         plugin = null;
     }
@@ -183,194 +181,167 @@ public class JSFCorePlugin extends WTPPlugin
     }
 
     /**
+     * @param id 
      * @return all registered symbol source providers
      */
-    public synchronized static Map<String, AbstractDTVariableResolver> getVariableResolvers()
+    public synchronized static ExtensionData<AbstractDTVariableResolver> getVariableResolvers(final String id)
     {
-        if (_registeredVariableResolvers == null)
-        {
-            registerVariableResolverProviders();
-            if (_registeredVariableResolvers == null)
-            {
-                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
-            }
-        }
-        return Collections.unmodifiableMap(_registeredVariableResolvers);
-    }
-
-    private static Map<String, AbstractDTVariableResolver> _registeredVariableResolvers;
-    private final static String                            VARIABLE_RESOLVER_EXT_POINT_NAME = "variableresolver"; //$NON-NLS-1$
-
-    private static void registerVariableResolverProviders()
-    {
-        _registeredVariableResolvers = new HashMap();
-        loadRegisteredExtensions(VARIABLE_RESOLVER_EXT_POINT_NAME,
-                _registeredVariableResolvers, VARIABLE_RESOLVER_EXT_POINT_NAME);
+        checkAndInitVariableResolverFactory();
+        return _variableResolverFactory.getExtensions().get(id);
     }
 
     /**
+     * @param forName
+     * @return the ids of variable resolvers for 'forName'.
+     */
+    public synchronized static List<String> getVariableResolversForName(
+            final String forName)
+    {
+        checkAndInitVariableResolverFactory();
+        return Collections.unmodifiableList(_variableResolverFactory
+                .getIdsForName(forName));
+    }
+
+    /**
+     * @return true if there any decorative resolvers in the system.  This
+     * is provided so that decorative variable resolvers can avoid expensive
+     * calculations looking for these resolvers when there are none.
+     */
+    public synchronized static boolean hasDecorativeVariableResolvers()
+    {
+        checkAndInitVariableResolverFactory();
+        return _variableResolverFactory.getNumDecorativeResolvers() > 0;
+    }
+    
+    private synchronized static void checkAndInitVariableResolverFactory()
+    {
+        if (_variableResolverFactory == null)
+        {
+            _variableResolverFactory = new DecoratableExtensionFactory<AbstractDTVariableResolver>(
+                    getDefault().getBundle(), VARIABLE_RESOLVER_EXT_POINT_NAME,
+                    VARIABLE_RESOLVER_ELEMENT_NAME);
+        }
+    }
+
+    private static DecoratableExtensionFactory<AbstractDTVariableResolver> _variableResolverFactory;
+    private final static String                                            VARIABLE_RESOLVER_EXT_POINT_NAME = "variableresolver"; //$NON-NLS-1$
+    private final static String                                            VARIABLE_RESOLVER_ELEMENT_NAME   = "variableresolver"; //$NON-NLS-1$
+
+    /**
+     * @param id 
      * @return a map of all registered property resolvers by id
      */
-    public synchronized static Map<String, AbstractDTPropertyResolver> getPropertyResolvers()
+    public synchronized static ExtensionData<AbstractDTPropertyResolver> getPropertyResolver(final String id)
     {
-        if (_registeredPropertyResolvers == null)
-        {
-            registerPropertyResolverProviders();
-            if (_registeredPropertyResolvers == null)
-            {
-                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
-            }
-        }
-        return Collections.unmodifiableMap(_registeredPropertyResolvers);
+        checkAndInitPropertyFactory();
+        return _propertyResolverFactory.getExtensions().get(id);
     }
 
-    private static Map<String, AbstractDTPropertyResolver> _registeredPropertyResolvers;
-    private final static String                            PROPERTY_RESOLVER_EXT_POINT_NAME = "propertyresolver"; //$NON-NLS-1$
-
-    private static void registerPropertyResolverProviders()
+    private synchronized static void checkAndInitPropertyFactory()
     {
-        _registeredPropertyResolvers = new HashMap();
-        loadRegisteredExtensions(PROPERTY_RESOLVER_EXT_POINT_NAME,
-                _registeredPropertyResolvers, PROPERTY_RESOLVER_EXT_POINT_NAME);
+        if (_propertyResolverFactory == null)
+        {
+            _propertyResolverFactory = new DecoratableExtensionFactory<AbstractDTPropertyResolver>(
+                    getDefault().getBundle(), PROPERTY_RESOLVER_EXT_POINT_NAME,
+                    PROPERTY_RESOLVER_ELEMENT_NAME);
+        }
     }
 
     /**
+     * @param forName
+     * @return the ids of variable resolvers for 'forName'.
+     */
+    public synchronized static List<String> getPropertyResolversForName(
+            final String forName)
+    {
+        checkAndInitVariableResolverFactory();
+        return Collections.unmodifiableList(_propertyResolverFactory
+                .getIdsForName(forName));
+    }
+
+    /**
+     * @return true if there an decorating resolvers
+     */
+    public synchronized static boolean hasDecorativePropertyResolvers()
+    {
+        checkAndInitVariableResolverFactory();
+        return _propertyResolverFactory.getNumDecorativeResolvers() > 0;
+    }
+    
+    private static DecoratableExtensionFactory<AbstractDTPropertyResolver> _propertyResolverFactory;
+    private final static String                                     PROPERTY_RESOLVER_EXT_POINT_NAME = "propertyresolver"; //$NON-NLS-1$
+    private final static String                                     PROPERTY_RESOLVER_ELEMENT_NAME   = "propertyresolver"; //$NON-NLS-1$
+
+    /**
+     * @param id 
      * @return a map of all registered method resolvers by id
      */
-    public synchronized static Map<String, AbstractDTMethodResolver> getMethodResolvers()
+    public synchronized static ExtensionData<AbstractDTMethodResolver> getMethodResolvers(final String id)
     {
-        if (_registeredMethodResolvers == null)
+        checkAndInitMethodResolverFactory();
+        return _methodResolverFactory.getExtensions().get(id);
+    }
+
+    private synchronized static void checkAndInitMethodResolverFactory()
+    {
+        if (_methodResolverFactory == null)
         {
-            registerMethodResolverProviders();
-            if (_registeredMethodResolvers == null)
-            {
-                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
-            }
+            _methodResolverFactory = new BasicExtensionFactory<AbstractDTMethodResolver>(
+                    getDefault().getBundle(), METHOD_RESOLVER_EXT_POINT_NAME,
+                    METHOD_RESOLVER_ELEMENT_NAME);
         }
-        return Collections.unmodifiableMap(_registeredMethodResolvers);
     }
-
-    private static Map<String, AbstractDTMethodResolver> _registeredMethodResolvers;
-    private final static String                          METHOD_RESOLVER_EXT_POINT_NAME = "methodresolver"; //$NON-NLS-1$
-
-    private static void registerMethodResolverProviders()
-    {
-        _registeredMethodResolvers = new HashMap();
-        loadRegisteredExtensions(METHOD_RESOLVER_EXT_POINT_NAME,
-                _registeredMethodResolvers, METHOD_RESOLVER_EXT_POINT_NAME);
-
-    }
+    private static BasicExtensionFactory<AbstractDTMethodResolver> _methodResolverFactory;
+    private final static String                                   METHOD_RESOLVER_EXT_POINT_NAME = "methodresolver"; //$NON-NLS-1$
+    private final static String                                   METHOD_RESOLVER_ELEMENT_NAME   = "methodresolver"; //$NON-NLS-1$
 
     /**
+     * @param id 
      * @return a map of all registered external context providers by id
      */
-    public synchronized static Map<String, AbstractDTExternalContextFactory> getExternalContextProviders()
+    public synchronized static ExtensionData<AbstractDTExternalContextFactory> getExternalContextProviders(final String id)
     {
-        if (_registeredExternalContextProviders == null)
+        checkAndInitExternalContextFactory();
+        return _externalContextResolverFactory.getExtensions().get(id);
+    }
+
+    private synchronized static void checkAndInitExternalContextFactory()
+    {
+        if (_externalContextResolverFactory == null)
         {
-            registerExternalContextProviders();
-            if (_registeredExternalContextProviders == null)
-            {
-                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
-            }
+            _externalContextResolverFactory = new BasicExtensionFactory<AbstractDTExternalContextFactory>(
+                    getDefault().getBundle(), EXTERNAL_CONTEXT_EXT_POINT_NAME,
+                    EXTERNAL_CONTEXT_ELEMENT_NAME);
         }
-        return Collections.unmodifiableMap(_registeredExternalContextProviders);
     }
-
-    private static Map<String, AbstractDTExternalContextFactory> _registeredExternalContextProviders;
-    private final static String                                  EXTERNAL_CONTEXT_EXT_POINT_NAME = "externalcontext"; //$NON-NLS-1$
-
-    private static void registerExternalContextProviders()
-    {
-        _registeredExternalContextProviders = new HashMap();
-        loadRegisteredExtensions(EXTERNAL_CONTEXT_EXT_POINT_NAME,
-                _registeredExternalContextProviders,
-                EXTERNAL_CONTEXT_EXT_POINT_NAME);
-    }
-
     
+    private static BasicExtensionFactory<AbstractDTExternalContextFactory> _externalContextResolverFactory;
+    private final static String                                           EXTERNAL_CONTEXT_EXT_POINT_NAME = "externalcontext"; //$NON-NLS-1$
+    private final static String                                           EXTERNAL_CONTEXT_ELEMENT_NAME   = "externalcontext"; //$NON-NLS-1$
+
     /**
+     * @param id 
      * @return a map of all registered external context providers by id
      */
-    public synchronized static Map<String, AbstractDTViewHandler> getViewHandlers()
+    public synchronized static ExtensionData<AbstractDTViewHandler> getViewHandlers(final String id)
     {
-        if (_registeredViewHandlers == null)
-        {
-            registerViewHandlers();
-            if (_registeredViewHandlers == null)
-            {
-                throw new AssertionError("registerProviders failed"); //$NON-NLS-1$
-            }
-        }
-        return Collections.unmodifiableMap(_registeredViewHandlers);
+        checkAndInitViewHandler();
+        return _viewHandlerFactory.getExtensions().get(id);
     }
 
-    private static Map<String, AbstractDTViewHandler>           _registeredViewHandlers;
-    private final static String                                  VIEWHANDLER_EXT_POINT_NAME = "viewhandler"; //$NON-NLS-1$
-
-    private static void registerViewHandlers()
+    private synchronized static void checkAndInitViewHandler()
     {
-        _registeredViewHandlers = new HashMap();
-        loadRegisteredExtensions(VIEWHANDLER_EXT_POINT_NAME,
-                _registeredViewHandlers,
-                VIEWHANDLER_EXT_POINT_NAME);
-    }
-
-    private static <ResolverProvider> void loadRegisteredExtensions(
-            final String extName, final Map<String, ResolverProvider> registry,
-            final String elementName)
-    {
-        final IExtensionPoint point = Platform.getExtensionRegistry()
-                .getExtensionPoint(plugin.getBundle().getSymbolicName(),
-                        extName);
-        final IExtension[] extensions = point.getExtensions();
-
-        for (final IExtension extension : extensions)
+        if (_viewHandlerFactory == null)
         {
-            final IConfigurationElement[] elements = extension
-                    .getConfigurationElements();
-            final String bundleId = extension.getContributor().getName();
-
-            for (final IConfigurationElement element : elements)
-            {
-                if (elementName.equals(element.getName())
-                        && element.getAttribute("class") != null //$NON-NLS-1$
-                        && element.getAttribute("id") != null) //$NON-NLS-1$
-                {
-                    final String factoryClassName = element
-                            .getAttribute("class"); //$NON-NLS-1$
-                    final String id = element.getAttribute("id"); //$NON-NLS-1$
-                    final Bundle bundle = Platform.getBundle(bundleId);
-
-                    if (bundle != null)
-                    {
-                        try
-                        {
-                            final Class factoryClass = bundle
-                                    .loadClass(factoryClassName);
-
-                            final Object variableResolver = factoryClass
-                                    .newInstance();
-
-                            registry.put(id,
-                                    (ResolverProvider) variableResolver);
-                        }
-                        catch (final Exception e)
-                        {
-                            final ILog logger_ = getDefault().getLog();
-                            logger_
-                                    .log(new Status(
-                                            IStatus.ERROR,
-                                            plugin.getBundle()
-                                                    .getSymbolicName(),
-                                            0,
-                                            "Error loading resolver provider extension point", e)); //$NON-NLS-1$
-                        }
-                    }
-                }
-            }
+            _viewHandlerFactory = new BasicExtensionFactory<AbstractDTViewHandler>(
+                    getDefault().getBundle(), VIEWHANDLER_EXT_POINT_NAME,
+                    VIEWHANDLER_ELEMENT_NAME);
         }
     }
+
+    private static BasicExtensionFactory<AbstractDTViewHandler> _viewHandlerFactory;
+    private final static String                                VIEWHANDLER_EXT_POINT_NAME = "viewhandler"; //$NON-NLS-1$
+    private final static String                                VIEWHANDLER_ELEMENT_NAME   = "viewhandler"; //$NON-NLS-1$
 
     /**
      * @return the preference store for this bundle TODO: this is copied from
@@ -387,15 +358,14 @@ public class JSFCorePlugin extends WTPPlugin
         }
         return this.preferenceStore;
     }
-    
+
     /**
      * @param name
      * @return the extension point called name for this bundle
      */
     public IExtensionPoint getExtension(final String name)
     {
-        return Platform.getExtensionRegistry()
-        .getExtensionPoint(plugin.getBundle().getSymbolicName(),
-                name);
+        return Platform.getExtensionRegistry().getExtensionPoint(
+                plugin.getBundle().getSymbolicName(), name);
     }
 }

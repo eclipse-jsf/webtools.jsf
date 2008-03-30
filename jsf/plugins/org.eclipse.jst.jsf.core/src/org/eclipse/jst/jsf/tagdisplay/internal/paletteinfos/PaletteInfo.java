@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfo.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
+ * $Id: PaletteInfo.java,v 1.2 2008/03/30 21:22:24 cbateman Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -304,6 +304,7 @@ public interface PaletteInfo extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return true if is expert
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
@@ -312,6 +313,7 @@ public interface PaletteInfo extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+     * @return true if is hidden 
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated

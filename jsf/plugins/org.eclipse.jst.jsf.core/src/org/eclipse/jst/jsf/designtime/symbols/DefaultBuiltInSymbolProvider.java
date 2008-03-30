@@ -21,17 +21,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
-import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
-import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
@@ -50,6 +42,7 @@ import org.eclipse.jst.jsf.designtime.context.IDTExternalContext;
 public class DefaultBuiltInSymbolProvider
 {
     private static DefaultBuiltInSymbolProvider INSTANCE;
+    private static final JSFSymbolFactory    _symbolFactory;
 
     /**
      * @return the singleton instance
@@ -88,25 +81,27 @@ public class DefaultBuiltInSymbolProvider
     
     static
     {
+        _symbolFactory = new JSFSymbolFactory();
         // invariant request scope variables
-        SYMBOL_COOKIE_IMPLICIT_OBJ = createUnresolvedMapSymbol(COOKIE_IMPLICIT_OBJ);
-        SYMBOL_HEADER_IMPLICIT_OBJ = createUnresolvedMapSymbol(HEADER_IMPLICIT_OBJ);
-        SYMBOL_HEADER_VALUES_IMPLICIT_OBJ = createUnresolvedMapSymbol(HEADER_VALUES_IMPLICIT_OBJ);
-        SYMBOL_PARAM_IMPLICIT_OBJ = createUnresolvedMapSymbol(PARAM_IMPLICIT_OBJ);
-        SYMBOL_PARAM_VALUES_IMPLICIT_OBJ = createUnresolvedMapSymbol(PARAM_VALUES_IMPLICIT_OBJ); 
+        SYMBOL_COOKIE_IMPLICIT_OBJ = _symbolFactory.createUnknownInstanceSymbol(COOKIE_IMPLICIT_OBJ, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        SYMBOL_HEADER_IMPLICIT_OBJ = _symbolFactory.createUnknownInstanceSymbol(HEADER_IMPLICIT_OBJ, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        SYMBOL_HEADER_VALUES_IMPLICIT_OBJ = _symbolFactory.createUnknownInstanceSymbol(HEADER_VALUES_IMPLICIT_OBJ, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        SYMBOL_PARAM_IMPLICIT_OBJ = _symbolFactory.createUnknownInstanceSymbol(PARAM_IMPLICIT_OBJ, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        SYMBOL_PARAM_VALUES_IMPLICIT_OBJ = _symbolFactory.createUnknownInstanceSymbol(PARAM_VALUES_IMPLICIT_OBJ, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL); 
         
         // invariant application scope variables
-        SYMBOL_INIT_PARAM_IMPLICIT_OBJ = createUnresolvedMapSymbol(INIT_PARAM_IMPLICIT_OBJ);
+        SYMBOL_INIT_PARAM_IMPLICIT_OBJ = _symbolFactory.createUnknownInstanceSymbol(INIT_PARAM_IMPLICIT_OBJ, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
     }
     
 
     /**
-     * Now direct instantiation -- use getInstance
+     * No direct instantiation -- use getInstance
      * 
      * Made protected to allow sub-classing
      */
     protected DefaultBuiltInSymbolProvider()
-    {/* empty; do nothing */
+    {
+        // nothing to do.
     }
 
     /**
@@ -215,13 +210,15 @@ public class DefaultBuiltInSymbolProvider
         requestSymbols.put(SYMBOL_PARAM_VALUES_IMPLICIT_OBJ.getName(), SYMBOL_PARAM_VALUES_IMPLICIT_OBJ);
 
         // TODO: these aren't maps; need to find way to handle
-        symbol = createJavaInstanceSymbol(file.getProject(),
-                FACES_CONTEXT_FULLY_QUALIFIED_CLASS,
-                FACES_CONTEXT_IMPLICIT_OBJ);
+        symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
+                .getProject(), FACES_CONTEXT_FULLY_QUALIFIED_CLASS,
+                FACES_CONTEXT_IMPLICIT_OBJ,
+                ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
         requestSymbols.put(symbol.getName(), symbol);
-        
-        symbol = createJavaInstanceSymbol(file.getProject(),
-                VIEW_FULLY_QUALIFIED_CLASS, VIEW_IMPLICIT_OBJ);
+
+        symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
+                .getProject(), VIEW_FULLY_QUALIFIED_CLASS, VIEW_IMPLICIT_OBJ,
+                ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
         requestSymbols.put(symbol.getName(), symbol);
         
         return Collections.unmodifiableMap(requestSymbols);
@@ -255,7 +252,7 @@ public class DefaultBuiltInSymbolProvider
     {
         final Map mapSource = new ScopeMap(file, scopeMask);
         final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE
-                .createIMapTypeDescriptor();
+                .createIBoundedMapTypeDescriptor();
         typeDesc.setMapSource(mapSource);
         typeDesc.setImmutable(false); // scope maps are mutable
         final IInstanceSymbol symbol = SymbolFactory.eINSTANCE
@@ -265,59 +262,6 @@ public class DefaultBuiltInSymbolProvider
         symbol.setTypeDescriptor(typeDesc);
         // TODO:symbol.setDetailedDescription("A Map of the application scope
         // attribute values, keyed by attribute name");
-
-        return symbol;
-    }
-
-    // TODO: this one may be able to be factored up to the symbols plugin
-    private static ISymbol createUnresolvedMapSymbol(final String name)
-    {
-        final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE
-                .createIMapTypeDescriptor();
-        typeDesc.setMapSource(Collections.EMPTY_MAP);
-        final IInstanceSymbol symbol = SymbolFactory.eINSTANCE
-                .createIInstanceSymbol();
-        symbol.setName(name);
-        symbol.setRuntimeSource(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
-        symbol.setTypeDescriptor(typeDesc);
-
-        return symbol;
-    }
-
-    private ISymbol createJavaInstanceSymbol(final IProject project,
-            final String fullyQualifiedClass, final String symbolName)
-    {
-        final IJavaProject javaProject = JavaCore.create(project);
-        try
-        {
-            final IType type = javaProject.findType(fullyQualifiedClass);
-
-            // TODO: this is a high-bred since it consists of a java instance
-            // but also has properties we can populate at designtime such as
-            // the maps. Need to add the second part
-            if (type != null)
-            {
-                final IJavaTypeDescriptor2 typeDesc = SymbolFactory.eINSTANCE
-                        .createIJavaTypeDescriptor2();
-                typeDesc.setType(type);
-                final IBeanInstanceSymbol facesContextVar = SymbolFactory.eINSTANCE
-                        .createIBeanInstanceSymbol();
-                facesContextVar.setTypeDescriptor(typeDesc);
-                facesContextVar.setName(symbolName);
-                return facesContextVar;
-            }
-        }
-        catch (final JavaModelException jme)
-        {
-            // fall-through and fail with unresolved map
-        }
-
-        final ISymbol symbol = createUnresolvedMapSymbol(symbolName);
-        ((IInstanceSymbol) symbol)
-                .getTypeDescriptor()
-                .setTypeSignatureDelegate(
-                        Signature
-                                .createTypeSignature(fullyQualifiedClass, true));
 
         return symbol;
     }

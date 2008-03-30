@@ -34,6 +34,7 @@ import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory;
+import org.eclipse.jst.jsf.context.symbol.source.IAdditionalContextSymbolInfo;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
@@ -49,7 +50,7 @@ import org.w3c.dom.Node;
  */
 public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory 
 {
-    protected ISymbol internalCreate(String symbolName,int scope,IAdaptable context,List problems) 
+    protected ISymbol internalCreate(String symbolName,int scope,IAdaptable context,List problems, IAdditionalContextSymbolInfo additionInfo) 
     {
         final IStructuredDocumentContext sContext =
             (IStructuredDocumentContext) 

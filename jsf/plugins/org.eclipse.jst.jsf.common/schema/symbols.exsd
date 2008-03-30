@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.jst.jsf.common">
+<schema targetNamespace="org.eclipse.jst.jsf.common" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appInfo>
+      <appinfo>
          <meta.schema plugin="org.eclipse.jst.jsf.common" id="symbols" name="Symbol Source Provider"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          A symbol source provider is called to discover EL namespace variable symbols.  For example, managed bean variable symbols, are contributed through a symbol source provider.  A symbol source provider may or may not wish to use a context symbol factory depending on the situation.
 
 When an EL variable is resolved, each symbol provider will be considered equally.  All of the information that determines a symbol&apos;s characteristics must be encoded in the returned ISymbol object.
 
-A list of registered symbol providers may be found by calling SymbolsPlugin.getSymbolSourceProvider().
+A list of registered symbol providers may be found by calling JSFCommonPlugin.getSymbolSourceProvider().
       </documentation>
    </annotation>
 
@@ -38,9 +38,9 @@ A list of registered symbol providers may be found by calling SymbolsPlugin.getS
                <documentation>
                   
                </documentation>
-               <appInfo>
+               <appinfo>
                   <meta.attribute translatable="true"/>
-               </appInfo>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
@@ -53,27 +53,27 @@ A list of registered symbol providers may be found by calling SymbolsPlugin.getS
                <documentation>
                   An instance of the factory interface that will be invoked to create an instance of this symbol source provider.  Factory must have a zero-arg default constructor.
                </documentation>
-               <appInfo>
+               <appinfo>
                   <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProviderFactory"/>
-               </appInfo>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="since"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          1.5
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="examples"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          The following xml is used to contribute a set of default providers to contribute managed bean, built-in and tag contributed variables:
 
@@ -90,28 +90,13 @@ A list of registered symbol providers may be found by calling SymbolsPlugin.getS
       </documentation>
    </annotation>
 
-   <annotation>
-      <appInfo>
-         <meta.section type="apiInfo"/>
-      </appInfo>
-      <documentation>
-         
-      </documentation>
-   </annotation>
+
+
 
    <annotation>
-      <appInfo>
-         <meta.section type="implementation"/>
-      </appInfo>
-      <documentation>
-         
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="copyright"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          Copyright 2006 Oracle
 All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html

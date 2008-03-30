@@ -88,7 +88,7 @@ public class JSPModelProcessor
         {
             if (!file.isAccessible())
             {
-                throw new CoreException(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, "File must be accessible"));
+                throw new CoreException(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, "File must be accessible")); //$NON-NLS-1$
             }
 
             JSPModelProcessor processor = RESOURCE_MAP.get(file);
@@ -236,9 +236,9 @@ public class JSPModelProcessor
         
         throw new CoreException
             (new Status(IStatus.ERROR
-                        , "org.eclipse.blah"
+                        , "org.eclipse.blah" //$NON-NLS-1$
                         , 0  //$NON-NLS-1$
-                        ,"model not of expected type"
+                        ,"model not of expected type" //$NON-NLS-1$
                         , new Throwable())); //$NON-NLS-1$
     }
 
@@ -312,7 +312,7 @@ public class JSPModelProcessor
     {
         if (isDisposed())
         {
-            throw new IllegalStateException("Processor is disposed for file: "+_file.toString());
+            throw new IllegalStateException("Processor is disposed for file: "+_file.toString()); //$NON-NLS-1$
         }
 
         synchronized(_lastModificationStampMonitor)
@@ -342,9 +342,9 @@ public class JSPModelProcessor
                 }
             }
             catch (CoreException e) {
-               JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model");
+               JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model"); //$NON-NLS-1$
             } catch (IOException e) {
-                JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model");
+                JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model"); //$NON-NLS-1$
             }
             // make sure that we unsignal the monitor before releasing the
             // mutex
@@ -422,22 +422,29 @@ public class JSPModelProcessor
             if (factory != null)
             {
 //                long curTime = System.currentTimeMillis();
-                 
-                final List problems = new ArrayList();
-                ISymbol symbol =
-                    factory.create(symbolName, 
-                                  ISymbolConstants.SYMBOL_SCOPE_REQUEST, //TODO:
-                                  IStructuredDocumentContextFactory.INSTANCE.
-                                      getContext(model.getStructuredDocument(), 
-                                                 attribute),
-                                  problems);
+                final IStructuredDocumentContext context = 
+                    IStructuredDocumentContextFactory.INSTANCE.
+                        getContext(model.getStructuredDocument(), 
+                           attribute);
 
-//                long netTime = System.currentTimeMillis() - curTime;
-//                System.out.println("Time to process loadBundle: "+netTime);
-
-                if (symbol != null)
+                if (factory.supports(context))
                 {
-                    updateMap(symbol, aggregator.getScope());
+                    final List problems = new ArrayList();
+                    ISymbol symbol =
+                        factory.create(symbolName, 
+                                      ISymbolConstants.SYMBOL_SCOPE_REQUEST, //TODO:
+                                      context,
+                                      problems,
+                                      // TODO: add meta-data for signature
+                                      new AdditionalContextSymbolInfo(aggregator.getStaticType(), aggregator.getValueExpressionAttr()));
+    
+    //                long netTime = System.currentTimeMillis() - curTime;
+    //                System.out.println("Time to process loadBundle: "+netTime);
+    
+                    if (symbol != null)
+                    {
+                        updateMap(symbol, aggregator.getScope());
+                    }
                 }
             }
             else
@@ -451,7 +458,7 @@ public class JSPModelProcessor
         }
     }
     
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation") //$NON-NLS-1$
     private void processSetsLocale(final String uri, final String elementName, Node attribute)
     {
         LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file.getProject(), uri, elementName, attribute.getLocalName());
@@ -606,7 +613,9 @@ public class JSPModelProcessor
         private final static String VALUE_BINDING_SCOPE = "value-binding-scope"; //$NON-NLS-1$
         private final static String VALUE_BINDING_SYMBOL_FACTORY = 
             "value-binding-symbol-factory"; //$NON-NLS-1$
-
+        private final static String STATIC_TYPE_KEY = "optional-value-binding-static-type"; //$NON-NLS-1$
+        private final static String VALUEEXPRESSION_ATTR_NAME_KEY = "optional-value-binding-valueexpr-attr"; //$NON-NLS-1$
+        
         /**
          * @param attributeName
          * @return a new instance only if attributeName is a symbol contributor
@@ -633,21 +642,40 @@ public class JSPModelProcessor
                 if (scope != null && !scope.equals("")) //$NON-NLS-1$
                 {
                     trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SYMBOL_FACTORY);
-                    symbolFactory = TraitValueHelper.getValueAsString(trait);                      
+                    symbolFactory = TraitValueHelper.getValueAsString(trait);
                 }
 
-                return new SymbolContribAggregator(scope, symbolFactory);
+                trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, STATIC_TYPE_KEY);
+
+                String staticType = null;
+
+                if (trait != null)
+                {
+                    staticType = TraitValueHelper.getValueAsString(trait);
+                }
+
+                trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUEEXPRESSION_ATTR_NAME_KEY);
+
+                String valueExprAttr = null;
+                if (trait != null)
+                {
+                    valueExprAttr = TraitValueHelper.getValueAsString(trait);
+                }
+
+                return new SymbolContribAggregator(scope, symbolFactory, staticType, valueExprAttr);
             }
 
             return null;
         }
 
-        private final Map   _metadata = new HashMap(4);
+        private final Map<String, String>   _metadata = new HashMap<String, String>(4);
 
-        SymbolContribAggregator(final String scope, final String factory)
+        SymbolContribAggregator(final String scope, final String factory, final String staticType, final String valueExprAttr)
         {
             _metadata.put("scope", scope); //$NON-NLS-1$
             _metadata.put("factory", factory); //$NON-NLS-1$
+            _metadata.put("staticType", staticType); //$NON-NLS-1$
+            _metadata.put("valueExprAttr", valueExprAttr); //$NON-NLS-1$
         }
 
         /**
@@ -655,7 +683,7 @@ public class JSPModelProcessor
          */
         public String getScope()
         {
-            return (String) _metadata.get("scope"); //$NON-NLS-1$
+            return _metadata.get("scope"); //$NON-NLS-1$
         }
         
         /**
@@ -665,8 +693,18 @@ public class JSPModelProcessor
         {
             return JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory")); //$NON-NLS-1$
         }
+        
+        public String getStaticType()
+        {
+            return _metadata.get("staticType"); //$NON-NLS-1$
+        }
+        
+        public String getValueExpressionAttr()
+        {
+            return _metadata.get("valueExprAttr"); //$NON-NLS-1$
+        }
     }
-    
+
     private static class CountingMutex extends Object
     {
         private boolean _signalled = false;
