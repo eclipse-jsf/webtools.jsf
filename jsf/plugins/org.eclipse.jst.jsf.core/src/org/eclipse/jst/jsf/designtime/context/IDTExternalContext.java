@@ -19,8 +19,7 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
 /**
  * Interface that must be implemented by all design time external contexts
  * 
- * Clients may implement but should not sub-class. If implementing, sub-class
- * AbstractDTExternalContext instead.
+ * Clients must not implement or sub-class.  Sub-class AbstractDTExternalContext instead.
  * 
  * @author cbateman
  *
