@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.context.IDelegatingFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory2;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;

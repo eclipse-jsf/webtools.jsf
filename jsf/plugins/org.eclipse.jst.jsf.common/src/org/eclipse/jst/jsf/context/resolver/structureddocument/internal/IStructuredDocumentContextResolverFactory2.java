@@ -1,5 +1,7 @@
-package org.eclipse.jst.jsf.context.resolver.structureddocument;
+package org.eclipse.jst.jsf.context.resolver.structureddocument.internal;
 
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 
 /**
