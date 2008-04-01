@@ -26,7 +26,9 @@ import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
+import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IComponentSymbol;
+import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
@@ -323,7 +325,36 @@ public final class JSFSymbolFactory extends InitializedSymbolFactory
         return symbol;
     }
 
-//  /**
+    /**
+     * FUTURE use: added to support future API feature.  Should not be used.
+     * @param symbolName
+     * @param bundleName
+     * @param project
+     * @return an instance symbol for the message bundle
+     */
+    public IInstanceSymbol createMessageBundleSymbol(final String symbolName, final String bundleName, IJavaProject project)
+    {
+        // FUTURE USE
+        throw new UnsupportedOperationException("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=215461");
+    }
+
+    /**
+     * FUTURE use: added to support future API feature.  Should not be used.
+     * @param symbolName
+     * @param fullyQualifiedName 
+     * @param source 
+     * @param description 
+     * @param javaProject 
+     * @return an instance symbol for the message bundle
+     */
+    public IBeanInstanceSymbol createManagedBeanSymbol(final String symbolName, final String fullyQualifiedName,
+            ERuntimeSource source, final String description, final IJavaProject javaProject)
+    {
+        // FUTURE USE
+        throw new UnsupportedOperationException("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=215461");
+    }
+
+//    /  /**
 //  * @param symbolName
 //  * @param signature
 //  * @param javaProject
