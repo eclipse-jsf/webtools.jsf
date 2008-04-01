@@ -38,10 +38,9 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
-import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
-import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties.FacetDataModelMap;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
-import org.eclipse.wst.common.frameworks.internal.operations.IProjectCreationPropertiesNew;
+import org.eclipse.wst.common.project.facet.core.IFacetedProjectWorkingCopy;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
 
 /**
  * Provides a data model used by the JSF facet install.
@@ -181,12 +180,7 @@ public class JSFFacetInstallDataModelProvider extends
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileSlashes;
 			return createErrorStatus(errorMessage);
 		} 
-//		if (1 == 1){
-//			//FIXME!!!!
-//			//until i can figure out how to get WebContent dir from the WebApp config,
-//			//skip validation here
-//			return OK_STATUS;
-//		}
+
 		if (passedPath.getDevice() != null) {
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative1,
@@ -296,12 +290,13 @@ public class JSFFacetInstallDataModelProvider extends
 			return project.getLocation();
 		
 		String projName = (String)getProperty(FACET_PROJECT_NAME);
-		IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
-		if (projModel.getBooleanProperty(IProjectCreationPropertiesNew.USE_DEFAULT_LOCATION)){
-			return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.PROJECT_LOCATION)).append(projName);
-		}
+		IFacetedProjectWorkingCopy projModel = (IFacetedProjectWorkingCopy)getProperty(FACETED_PROJECT_WORKING_COPY );
 		
-		return new Path(projModel.getStringProperty(IProjectCreationPropertiesNew.USER_DEFINED_LOCATION)).append(projName);
+		if (projModel.getProjectLocation() != null)
+			return projModel.getProjectLocation().append(projName);
+
+		return ResourcesPlugin.getWorkspace().getRoot().getRawLocation().append(projName);
+		
 	}
 
 	private IPath getWebContentFolder() {
@@ -342,32 +337,18 @@ public class JSFFacetInstallDataModelProvider extends
 			return webContentPath.toString();
 		}
 		
-		IDataModel projModel = (IDataModel)getProperty(MASTER_PROJECT_DM);
-		FacetDataModelMap dmMap = (FacetDataModelMap)projModel.getProperty(IFacetProjectCreationDataModelProperties.FACET_DM_MAP);
-		IDataModel webFacet = dmMap.getFacetDataModel("jst.web"); //$NON-NLS-1$
-		return webFacet.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER );
+		IFacetedProjectWorkingCopy projWC = (IFacetedProjectWorkingCopy)getProperty(FACETED_PROJECT_WORKING_COPY);
+		Set<Action> pfas = projWC.getProjectFacetActions();
+		for (Action action : pfas){
+			if (action.getProjectFacetVersion().getProjectFacet().getId().equals("jst.web")){
+				IDataModel webFacet = (IDataModel) action.getConfig();
+				return webFacet.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER );
+			}
+		}
+		
+		//should not get here.   
+		return null;
 	}
-
-//	private String getStringPropertyValueRecursively(final IDataModel amodel, final  String propName){
-//		if (hasProperty(amodel, propName))
-//			return amodel.getStringProperty(propName);
-//		for (Iterator it=amodel.getNestedModels().iterator();it.hasNext();){
-//			IDataModel nestedModel = (IDataModel)it.next();
-//			String propvalue = getStringPropertyValueRecursively(nestedModel, propName);
-//			if(propvalue != null)
-//				return propvalue;
-//		}
-//		return null;
-//	}
-//	private boolean hasProperty(IDataModel model, String propertyName) {
-//		for (Iterator it= model.getAllProperties().iterator();it.hasNext();){
-//			String prop = (String)it.next();
-////			System.out.println(prop);
-//			if (propertyName.equals(prop))
-//				return true;
-//		}
-//		return false;
-//	}
 
 	private List getDefaultJSFImplementationLibraries() {
 		List list = new ArrayList();
