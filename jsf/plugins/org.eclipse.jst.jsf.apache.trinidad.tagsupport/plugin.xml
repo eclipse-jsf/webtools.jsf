@@ -42,16 +42,20 @@
             id="InputTextOperation">
       </tagTransformOperation>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.OutputFormattedOperation"
+            id="OutputFormattedOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelGroupLayoutOperation"
+            id="PanelGroupLayoutOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelTabbedOperation"
             id="PanelTabbedOperation">
       </tagTransformOperation>
       <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.ShowDetailItemOperation"
             id="ShowDetailItemOperation">
-      </tagTransformOperation>
-      <tagTransformOperation
-            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.OutputFormattedOperation"
-            id="OutputFormattedOperation">
       </tagTransformOperation>
    </extension>
    <extension

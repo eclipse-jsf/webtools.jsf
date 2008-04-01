@@ -328,6 +328,22 @@
 		</trait>
 	</entity>
 
+	<entity id="group" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"					
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="icon" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -391,6 +407,35 @@
 				<tag-decorate-info id="vpd-decorate-design"
 					widget="true"
 				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="image" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="img"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="source"/>
+						<parameter value="src"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					widget="true"
+				>
+					<resolve-attribute-value attributeName="src"/>
+				</tag-decorate-info>
+				<tag-decorate-info id="vpd-decorate-preview">
+					<resolve-attribute-value attributeName="src"/>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -531,6 +576,20 @@
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
 					resolveChildText="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="panelGroupLayout" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.PanelGroupLayoutOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
 				/>
 			</value>
 		</trait>

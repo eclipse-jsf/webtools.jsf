@@ -44,7 +44,7 @@ public class DTTagConverter implements
 	private ImageDescriptor visualImageDescriptor;
 	private IDOMDocument destDocument;
 	private List childNodeList = Collections.EMPTY_LIST;
-	private Map childVisualPositionMap = Collections.EMPTY_MAP;
+	private NodeConvertPositionMap childVisualPositionMap;
 	private List nonVisualChildElementList = Collections.EMPTY_LIST;
 	private boolean isMultiLevel = false;
 	private boolean isVisualByHTML = true;
@@ -69,7 +69,7 @@ public class DTTagConverter implements
 	 */
 	public void convertRefresh(Object context) {
 		childNodeList = new ArrayList();
-		childVisualPositionMap = new HashMap();
+		childVisualPositionMap = new NodeConvertPositionMap();
 		nonVisualChildElementList = new ArrayList();
 		resultElement = new DTHTMLOutputRenderer().render(new DTTagConverterContext(this));
 		new DTTagConverterDecorator().decorate(this);
@@ -91,6 +91,8 @@ public class DTTagConverter implements
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#getChildModeList()
 	 */
 	public List getChildModeList() {
+		//need to reset the NodeConvertPositionMap at this time
+		childVisualPositionMap.reset();
 		return childNodeList;
 	}
 
@@ -98,7 +100,7 @@ public class DTTagConverter implements
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#getChildVisualPosition(org.w3c.dom.Node)
 	 */
 	public ConvertPosition getChildVisualPosition(Node childModel) {
-		return (ConvertPosition)childVisualPositionMap.get(childModel);
+		return childVisualPositionMap.get(childModel);
 	}
 
 	/* (non-Javadoc)
@@ -395,6 +397,72 @@ public class DTTagConverter implements
 	 */
 	public void addNonVisualChildElement(Element childElement) {
 		nonVisualChildElementList.add(childElement);
+	}
+
+	/**
+	 * Supports multiple ConvertPosition instances associated with a single
+	 * Node instance.
+	 */
+	private class NodeConvertPositionMap {
+
+		private Map mapOfConvertPositions = new HashMap();
+		private Map mapOfIndexes = new HashMap();
+
+		/**
+		 * Puts a ConvertPosition instance for the specified Node instance into
+		 * the map.
+		 * 
+		 * @param node Node instance for which the ConvertPosition is to be
+		 * applied.
+		 * @param convertPosition ConvertPosition instance for the specified
+		 * Node instance.
+		 */
+		public void put(Node node, ConvertPosition convertPosition) {
+			List convertPositions = (List)mapOfConvertPositions.get(node);
+			if (convertPositions == null) {
+				convertPositions = new ArrayList();
+				mapOfConvertPositions.put(node, convertPositions);
+			}
+			convertPositions.add(convertPosition);
+		}
+
+		/**
+		 * Gets the current ConvertPosition instance for the specified Node
+		 * instance. Note that each time this is called without a reset having
+		 * occurred, the next ConvertPosition instance mapped to the Node
+		 * instance is returned.
+		 * 
+		 * @param node Node instance for which a ConvertPosition instance is
+		 * being requested.
+		 * @return the current ConvertPosition instance for the specified Node
+		 * instance.
+		 */
+		public ConvertPosition get(Node node) {
+			ConvertPosition convertPosition = null;
+			List convertPositions = (List)mapOfConvertPositions.get(node);
+			if (convertPositions != null) {
+				int index;
+				Object obj = mapOfIndexes.get(node);
+				if (obj != null) {
+					index = ((Integer)obj).intValue();
+				} else {
+					index = 0;
+				}
+				convertPosition = (ConvertPosition)convertPositions.get(index);
+				mapOfIndexes.put(node, new Integer(++index));
+			}
+			return convertPosition;
+		}
+
+		/**
+		 * Resets the concept of "current" ConvertPosition instance for all
+		 * Node instances. Typically called when the List of child Nodes is
+		 * retrieved.
+		 */
+		public void reset() {
+			mapOfIndexes.clear();
+		}
+
 	}
 
 }
