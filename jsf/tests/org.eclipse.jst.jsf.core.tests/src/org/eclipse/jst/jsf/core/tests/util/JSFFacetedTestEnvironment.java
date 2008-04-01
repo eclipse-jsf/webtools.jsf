@@ -88,7 +88,8 @@ public class JSFFacetedTestEnvironment
         final IFacetedProject facetedProject = ProjectFacetsManager.create(project);
         facetedProject.modify(actions, null);
 
-        FacetProjectCreationOperation.addDefaultFactets(facetedProject, null);
+        //Commenting out for [Bug 225130] Failing JSF Junits due to change in FacetProjectCreationOperation
+        //FacetProjectCreationOperation.addDefaultFactets(facetedProject, null);
     }
 
     private Set<Action> getAddFacetActions(final String jsfVersion)
