@@ -2,18 +2,18 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: org.eclipse.jst.jsf.ui; singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.ui.internal.JSFUiPlugin
 Bundle-Vendor: %plugin.provider
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
+Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.wst.common.project.facet.ui;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jdt.core;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jdt.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jst.j2ee;bundle-version="[1.1.0,1.2.0)",
  org.eclipse.wst.common.frameworks.ui;bundle-version="[1.1.0,1.2.0)",
- org.eclipse.jst.jsf.common;bundle-version="[1.0.0,1.1.0)",
+ org.eclipse.jst.jsf.common;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.jface.text;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.wst.xml.core;bundle-version="[1.1.0,1.2.0)",
  org.eclipse.wst.xml.ui;bundle-version="[1.0.100,1.1.0)",
@@ -23,10 +23,10 @@ Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.0.0,1.1.0)",
  org.eclipse.ui.forms;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.wst.sse.core;bundle-version="[1.0.101,1.2.0)",
  org.eclipse.ui.forms;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.jst.jsf.common.runtime;bundle-version="[1.0.0,1.1.0)",
+ org.eclipse.jst.jsf.common.runtime;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.jst.jsp.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.wst.validation;bundle-version="[1.1.0,2.0.0)",
- org.eclipse.jst.jsf.common.ui;bundle-version="[1.0.1,1.2.0)",
+ org.eclipse.jst.jsf.common.ui;bundle-version="[1.0.1,2.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.4.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.jst.jsf.ui.internal;x-friends:="org.eclipse.jst.jsf.ui.tests",
