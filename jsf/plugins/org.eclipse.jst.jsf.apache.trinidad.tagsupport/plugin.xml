@@ -38,8 +38,16 @@
             id="CreateStyleAttributeOperation">
       </tagTransformOperation>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.InputFileOperation"
+            id="InputFileOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.InputTextOperation"
             id="InputTextOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.InputTextWithIconOperation"
+            id="InputTextWithIconOperation">
       </tagTransformOperation>
       <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.OutputFormattedOperation"
