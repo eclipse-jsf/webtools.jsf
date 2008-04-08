@@ -21,6 +21,7 @@ import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.converter.IDOMFactory;
 import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.css2.style.ITagEditInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -82,9 +83,7 @@ public class DTTagConverter implements
 	 * @see org.eclipse.jst.pagedesigner.converter.ITagConverter#dispose()
 	 */
 	public void dispose() {
-		if (visualImage != null) {
-			visualImage.dispose();
-		}
+		visualImage = null;
 	}
 
 	/* (non-Javadoc)
@@ -157,7 +156,7 @@ public class DTTagConverter implements
 	 */
 	public Image getVisualImage() {
 		if (visualImage == null && visualImageDescriptor != null) {
-			visualImage = visualImageDescriptor.createImage();
+			visualImage = TagImageManager.getOrCreateImage(visualImageDescriptor);
 		}
 		return visualImage;
 	}

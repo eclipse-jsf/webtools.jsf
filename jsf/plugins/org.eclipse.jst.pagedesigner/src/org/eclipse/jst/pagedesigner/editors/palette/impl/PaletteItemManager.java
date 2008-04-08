@@ -197,13 +197,14 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * @param project
 	 */
 	private void registerTldFromClasspath(IProject project) {
-		ITaglibRecord[] tldrecs = TaglibIndex.getAvailableTaglibRecords(project.getFullPath());
-		CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
-		for (int i=0;i<tldrecs.length;i++){
-			TLDDocument doc = (TLDDocument)factory.createCMDocument(tldrecs[i]);
-			PaletteHelper.configPaletteItemsByTLD(this, getCurProject(), doc);			
-		}
-		
+		if (project != null) {
+			ITaglibRecord[] tldrecs = TaglibIndex.getAvailableTaglibRecords(project.getFullPath());
+			CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
+			for (int i=0;i<tldrecs.length;i++){
+				TLDDocument doc = (TLDDocument)factory.createCMDocument(tldrecs[i]);
+				PaletteHelper.configPaletteItemsByTLD(this, getCurProject(), doc);			
+			}
+		}			
 	}
 
 	/**

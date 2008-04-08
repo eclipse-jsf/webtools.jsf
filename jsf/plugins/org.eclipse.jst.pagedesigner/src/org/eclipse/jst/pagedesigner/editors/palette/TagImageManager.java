@@ -98,17 +98,22 @@ public class TagImageManager {
 		return image;
 	}
 	
-	private Image getOrCreateImage(ImageDescriptor imgDesc) {
+	/**
+	 * Gets, and creates if necessary, a shared image.
+	 * @param imageDescriptor
+	 * @return Image from shared cache
+	 */
+	public static Image getOrCreateImage(ImageDescriptor imageDescriptor) {
 		Image image = null;
-		if (imgDesc != null){
-			image = PDPlugin.getDefault().getImageRegistry().get(imgDesc.toString());
+		if (imageDescriptor != null){
+			image = PDPlugin.getDefault().getImageRegistry().get(imageDescriptor.toString());
 			if (image == null ){
-				image = imgDesc.createImage();
-				PDPlugin.getDefault().getImageRegistry().put(imgDesc.toString(), image);
+				image = imageDescriptor.createImage();
+				PDPlugin.getDefault().getImageRegistry().put(imageDescriptor.toString(), image);
 			} else if (image.isDisposed()){ //should not occur, but handling just in case				
-				PDPlugin.getDefault().getImageRegistry().remove(imgDesc.toString());
-				image = imgDesc.createImage();
-				PDPlugin.getDefault().getImageRegistry().put(imgDesc.toString(), image);
+				PDPlugin.getDefault().getImageRegistry().remove(imageDescriptor.toString());
+				image = imageDescriptor.createImage();
+				PDPlugin.getDefault().getImageRegistry().put(imageDescriptor.toString(), image);
 			}
 		}
 		return image;
@@ -166,7 +171,7 @@ public class TagImageManager {
 				}
 			}	
 		}
-		else {
+		if (icon == null) {
 			for (Iterator it=model.getChildEntities().iterator();it.hasNext();){
 				Entity tagAsEntity = (Entity)it.next();
 				if (tagAsEntity.getId().equalsIgnoreCase(tagName)){										
