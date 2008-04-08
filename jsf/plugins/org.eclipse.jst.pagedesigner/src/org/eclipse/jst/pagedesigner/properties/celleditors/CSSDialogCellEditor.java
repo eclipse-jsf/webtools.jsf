@@ -19,6 +19,7 @@ import org.eclipse.jst.pagedesigner.ui.dialogs.StyleDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSStyleDeclaration;
 import org.eclipse.wst.css.core.internal.util.declaration.CSSPropertyContext;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -52,12 +53,19 @@ public class CSSDialogCellEditor extends EditableDialogCellEditor {
 		PreferenceManager manager = new PreferenceManager();
 		Shell shell = cellEditorWindow.getShell();
 
-		CSSPropertyContext context = new CSSPropertyContext(styleDeclaration);
+		final CSSPropertyContext context = new CSSPropertyContext(styleDeclaration);
 		StyleDialog dialog = new StyleDialog(shell, manager, _element, context);
 		if (dialog.open() == Window.OK) {
-			if (context.isModified()) {
-				ChangeStyleCommand c = new ChangeStyleCommand(_element, context);
-				c.execute();
+			if (context.isModified()) {			
+				PlatformUI.getWorkbench().getDisplay().asyncExec(
+	                    new Runnable()
+	                    {
+	                        public void run()
+	                        {
+	            				ChangeStyleCommand c = new ChangeStyleCommand(_element, context);
+	                        	c.execute();
+	                        }
+	            });
 			}
 		}
 
