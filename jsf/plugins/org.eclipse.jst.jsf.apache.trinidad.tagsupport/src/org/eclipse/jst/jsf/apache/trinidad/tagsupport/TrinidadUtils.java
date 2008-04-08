@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
 public class TrinidadUtils {
 
 	private static final String KEY_CURRENT_CHILD_INDEX =
-		"KEY_CURRENT_CHILD_INDEX";
+		"KEY_CURRENT_CHILD_INDEX"; //$NON-NLS-1$
 
 	/**
 	 * Sets the index of the Node instance's "current" child as user data on

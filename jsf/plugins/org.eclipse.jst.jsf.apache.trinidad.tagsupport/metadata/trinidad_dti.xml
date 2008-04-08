@@ -774,6 +774,55 @@
 		</trait>
 	</entity>
 
+	<entity id="selectBooleanCheckbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectBooleanOperation">
+						<parameter value="checkbox"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectBooleanRadio" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectBooleanOperation">
+						<parameter value="radio"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectItem" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/small/selectItem.gif"
+					widget="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="separator" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
