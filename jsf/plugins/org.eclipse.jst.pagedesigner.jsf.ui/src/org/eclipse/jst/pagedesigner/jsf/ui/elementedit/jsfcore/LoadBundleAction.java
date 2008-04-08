@@ -85,7 +85,7 @@ public class LoadBundleAction extends Action
                 JSFUIPlugin.getAlerts().warning("Message.Warning.Title", e1.getLocalizedMessage());//$NON-NLS-1$     
             }
         }
-        else
+        else if (storage != null)
         {
             IEditorInput input = new JarEntryEditorInput(storage);
             try
@@ -96,6 +96,10 @@ public class LoadBundleAction extends Action
             {
                 JSFUIPlugin.getAlerts().warning("Message.Warning.Title", e1.getLocalizedMessage());//$NON-NLS-1$
             }
+        }
+        else {
+        	//create new file???  Will be covered by https://bugs.eclipse.org/bugs/show_bug.cgi?id=225232 
+        	
         }
     }
 
