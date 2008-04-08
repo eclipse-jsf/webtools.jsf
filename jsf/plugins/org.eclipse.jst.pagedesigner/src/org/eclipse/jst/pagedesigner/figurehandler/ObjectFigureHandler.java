@@ -11,8 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.figurehandler;
 
-import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
 import org.w3c.dom.Element;
 
 /**
@@ -28,8 +27,7 @@ import org.w3c.dom.Element;
 	 */
 	protected void initializeImage(Element node) {
 		if (_image == null) {
-			_image = new Image(null, PDPlugin.getDefault().getImage(
-					"palette/HTML/small/HTML_OBJECT.gif").getImageData());
+			_image = TagImageManager.getInstance().getSmallIconImage(null, "HTML", node.getTagName());
 		}
 	}
 }

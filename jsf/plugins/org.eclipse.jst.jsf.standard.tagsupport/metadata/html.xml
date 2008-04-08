@@ -217,7 +217,15 @@
 				<value>org.eclipse.jst.jsf.core.attributevalues.ContentType</value>
 			</trait>
 		</entity>
-	</entity>		
+	</entity>
+	<entity id="OBJECT">
+		<include-entity-group id="common-core-attributes"/>
+		<include-entity-group id="common-language-attributes"/>
+		<include-entity-group id="common-event-attributes"/>
+		<trait id="small-icon">
+			<value>small/HTML_OBJECT.gif</value>
+		</trait>
+	</entity>			
 	<entity id="SELECT">
 		<include-entity-group id="common-core-attributes"/>
 		<include-entity-group id="common-language-attributes"/>
