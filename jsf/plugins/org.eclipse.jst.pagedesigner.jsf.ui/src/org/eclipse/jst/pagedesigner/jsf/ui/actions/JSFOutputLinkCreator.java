@@ -11,24 +11,21 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.gef.EditPart;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
-
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.actions.link.AbstractLinkCreator;
 import org.eclipse.jst.pagedesigner.actions.link.LinkUtil;
 import org.eclipse.jst.pagedesigner.parts.TextEditPart;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
-import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.Text;
 
 /**
  * @author mengbo
@@ -77,18 +74,8 @@ public class JSFOutputLinkCreator extends AbstractLinkCreator
         EditPart part = startPosition.getContainerPart();
         IDOMNode node = (IDOMNode) part.getModel();
         IDOMModel model = node.getModel();
-        IFile openedFile = StructuredModelUtil.getFileFor(model);
-        if (openedFile == null)
-        {
-            return false;
-        }
-        boolean canSupportJSF = JSPUtil.supportTaglib(ITLDConstants.URI_JSF_HTML, openedFile);
-        if (!canSupportJSF)
-        {
-            return false;
-        }
-
-        return super.canExecute(range);
+        return model.getDocument().getElementsByTagNameNS(ITLDConstants.URI_JSF_HTML, "view") != null;
+    
     }
 
     public String getSourcePreview(EditPart part, DesignRange range)
