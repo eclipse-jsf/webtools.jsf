@@ -270,16 +270,20 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			return;
 		}			
 		
-		IPath webXMLPath = new Path("WEB-INF").append("web.xml");
+		IPath webXMLPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
 		if (JSFUtils12.isWebApp25(webAppObj)) {			
-			provider.modify(new UpdateWebXMLForJavaEE(project, config), webXMLPath); //$NON-NLS-1$ //$NON-NLS-2$
+			provider.modify(new UpdateWebXMLForJavaEE(project, config), doesDDFileExist(project, webXMLPath) ? webXMLPath : IModelProvider.FORCESAVE); 
 		}
 		else {//must be 2.3 or 2.4			
-			provider.modify(new UpdateWebXMLForJ2EE(project, config), webXMLPath); //$NON-NLS-1$ //$NON-NLS-2$
+			provider.modify(new UpdateWebXMLForJ2EE(project, config), webXMLPath);
 		}
 
 	}
-	
+
+	private boolean doesDDFileExist(IProject project, IPath webXMLPath) {
+		return project.getProjectRelativePath().append(webXMLPath).toFile().exists();		
+	}
+
 	private class UpdateWebXMLForJavaEE implements Runnable {
 		private IProject project;
 		private IDataModel config;
