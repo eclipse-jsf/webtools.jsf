@@ -440,6 +440,21 @@
 		</trait>
 	</entity>
 
+	<entity id="importScript" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/small/importScript.gif"
+					widget="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="inputColor" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -723,6 +738,21 @@
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="poll" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/small/poll.gif"
+					widget="true"
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
 				/>
 			</value>
 		</trait>
