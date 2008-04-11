@@ -36,4 +36,34 @@ public class Messages extends NLS {
 	 */
 	public static String ShowDetailItemOperation_EmptyShowDetailItemTag;
 
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectItemModel_SampleItem1Label;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectItemModel_SampleItem1Value;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectItemModel_SampleItem2Label;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectItemModel_SampleItem2Value;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectItemModel_SampleItem3Label;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectItemModel_SampleItem3Value;
+
 }

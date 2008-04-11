@@ -66,6 +66,10 @@
             id="SelectBooleanOperation">
       </tagTransformOperation>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.SelectManyCheckboxOneRadioOperation"
+            id="SelectManyCheckboxOneRadioOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.ShowDetailItemOperation"
             id="ShowDetailItemOperation">
       </tagTransformOperation>
