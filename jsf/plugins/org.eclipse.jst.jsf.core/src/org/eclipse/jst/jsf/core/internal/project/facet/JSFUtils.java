@@ -150,9 +150,9 @@ public abstract class JSFUtils {
 	 */
 	protected static String getDisplayName(IDataModel config) {
 		String displayName = config.getStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME);
-		if (displayName.equals("")) //$NON-NLS-1$
+		if (displayName == null || displayName.trim().equals("")) //$NON-NLS-1$
 			displayName = JSF_DEFAULT_SERVLET_NAME;
-		return displayName;
+		return displayName.trim();
 	}
 	
 	/**
@@ -161,9 +161,9 @@ public abstract class JSFUtils {
 	 */
 	protected static String getServletClassname(IDataModel config) {
 		String className = config.getStringProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME);
-		if (className.equals("")) //$NON-NLS-1$
+		if (className == null || className.trim().equals("")) //$NON-NLS-1$
 			className = JSF_SERVLET_CLASS;
-		return className;
+		return className.trim();
 	}
 	
 	/**
@@ -217,107 +217,95 @@ public abstract class JSFUtils {
 	 * @param prefPrefixMapping
 	 * @return the result
 	 */
-	public static MappingSearchResult searchServletMappings(final  List<String> mappings, String prefExtMapping, String prefPrefixMapping)
-	{
-	    String firstExtFound = null;
-	    String firstPrefixFound = null;
-	    boolean foundExtMapping = false;
-	    boolean foundPrefixMapping = false;
-	    
-	    // if the caller has no preferredMapping, then
-        // set it to something guaranteed to be non-null
-        // and which is guaranteed not to match anything
-        // that pass isExtensionMapping
-	    if (prefExtMapping == null)
-	    {
-	        prefExtMapping = "NOTANEXTENSIONMAPPING";
-	    }
-	    
-	    // similarly, guarantee that if the caller has no
-	    // preferred prefix mapping, that we set a non-null
-	    // comp mapping
-	    if (prefPrefixMapping == null)
-	    {
-	        prefPrefixMapping = "NOTAPREFIXMAPPING";
-	    }
+	public static MappingSearchResult searchServletMappings(
+			final List<String> mappings, String prefExtMapping,
+			String prefPrefixMapping) {
+		String firstExtFound = null;
+		String firstPrefixFound = null;
+		boolean foundExtMapping = false;
+		boolean foundPrefixMapping = false;
 
-        SEARCH_LOOP:for (String mapping : mappings)
-        {
-            if (isExtensionMapping(mapping))
-            {
-                // can assum that mapping is non-null since
-                // it is an ext mapping
-                if (prefExtMapping.equals(mapping.trim()))
-                {
-                    firstExtFound = prefExtMapping;
-                    continue;
-                }
+		// if the caller has no preferredMapping, then
+		// set it to something guaranteed to be non-null
+		// and which is guaranteed not to match anything
+		// that pass isExtensionMapping
+		if (prefExtMapping == null) {
+			prefExtMapping = "NOTANEXTENSIONMAPPING";
+		}
 
-                if (firstExtFound == null)
-                {
-                    firstExtFound = mapping.trim();
-                }
-            }
-            else if (isPrefixMapping(mapping))
-            {
-                if (prefPrefixMapping.equals(mapping.trim()))
-                {
-                    firstPrefixFound = prefPrefixMapping;
-                    continue;
-                }
-                
-                if (firstPrefixFound == null)
-                {
-                    firstPrefixFound = mapping.trim();
-                }
-            }
-            
-            if (foundExtMapping && foundPrefixMapping)
-            {
-                break SEARCH_LOOP;
-            }
-        }
-	    
-	    return new MappingSearchResult(firstExtFound, firstPrefixFound);
+		// similarly, guarantee that if the caller has no
+		// preferred prefix mapping, that we set a non-null
+		// comp mapping
+		if (prefPrefixMapping == null) {
+			prefPrefixMapping = "NOTAPREFIXMAPPING";
+		}
+
+		SEARCH_LOOP: for (String mapping : mappings) {
+			if (isExtensionMapping(mapping)) {
+				// can assum that mapping is non-null since
+				// it is an ext mapping
+				if (prefExtMapping.equals(mapping.trim())) {
+					firstExtFound = prefExtMapping;
+					continue;
+				}
+
+				if (firstExtFound == null) {
+					firstExtFound = mapping.trim();
+				}
+			} else if (isPrefixMapping(mapping)) {
+				if (prefPrefixMapping.equals(mapping.trim())) {
+					firstPrefixFound = prefPrefixMapping;
+					continue;
+				}
+
+				if (firstPrefixFound == null) {
+					firstPrefixFound = mapping.trim();
+				}
+			}
+
+			if (foundExtMapping && foundPrefixMapping) {
+				break SEARCH_LOOP;
+			}
+		}
+
+		return new MappingSearchResult(firstExtFound, firstPrefixFound);
 	}
 	
     /**
-     * The result of a servlet mapping search
-     *
-     */
-    public static class MappingSearchResult
-    {
-        private final String  _extensionMapping; // may be null;
-        private final String  _prefixMapping;    // may be null
-        
-        MappingSearchResult(final String extensionMapping, final String prefixMapping)
-        {
-            _extensionMapping = extensionMapping;
-            _prefixMapping = prefixMapping;
-        }
+	 * The result of a servlet mapping search
+	 * 
+	 */
+	public static class MappingSearchResult {
+		private final String _extensionMapping; // may be null;
+		private final String _prefixMapping; // may be null
 
-        /**
-         * @return true if the search yielded a valid result
-         */
-        public boolean isResult()
-        {
-            return _extensionMapping != null || _prefixMapping != null;
-        }
+		MappingSearchResult(final String extensionMapping,
+				final String prefixMapping) {
+			_extensionMapping = extensionMapping;
+			_prefixMapping = prefixMapping;
+		}
 
-        /**
-         * @return the first extension mapping matching search criteria or null
-         * if none
-         */
-        public final String getExtensionMapping() {
-            return _extensionMapping;
-        }
+		/**
+		 * @return true if the search yielded a valid result
+		 */
+		public boolean isResult() {
+			return _extensionMapping != null || _prefixMapping != null;
+		}
 
-        /**
-         * @return the first prefix mapping matching search criteria or null
-         * if none
-         */
-        public final String getPrefixMapping() {
-            return _prefixMapping;
-        }
+		/**
+		 * @return the first extension mapping matching search criteria or null
+		 * if none
+		 */
+		public final String getExtensionMapping() {
+			return _extensionMapping;
+		}
+
+		/**
+		 * @return the first prefix mapping matching search criteria or null
+		 * if none
+		 */
+		public final String getPrefixMapping() {
+			return _prefixMapping;
+		}
     }
 }

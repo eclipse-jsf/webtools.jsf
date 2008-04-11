@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,8 +50,9 @@ public class JSFUtils11 extends JSFUtils {
 	 * Convenience method for getting writeable WebApp model
 	 * @param project
 	 * @return WebArtifactEdit
+	 * @deprecated - must use IModelProviders
 	 */
-	public static WebArtifactEdit getWebArtifactEditForWrite(IProject project) {
+	public static WebArtifactEdit getWebArtifactEditForWrite(final IProject project) {
 		return WebArtifactEdit.getWebArtifactEditForWrite(project);
 	}
 
@@ -58,8 +60,9 @@ public class JSFUtils11 extends JSFUtils {
 	 * Convenience method for getting read-only WebApp model
 	 * @param project
 	 * @return WebArtifactEdit
+	 * @deprecated - must use IModelProviders
 	 */
-	public static WebArtifactEdit getWebArtifactEditForRead(IProject project) {
+	public static WebArtifactEdit getWebArtifactEditForRead(final IProject project) {
 		return WebArtifactEdit.getWebArtifactEditForRead(project);
 	}
 
@@ -67,7 +70,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webApp as Object
 	 * @return Servlet - the JSF Servlet for the specified WebApp or null if not present
 	 */
-	public static Servlet findJSFServlet(Object webApp) {
+	public static Servlet findJSFServlet(final Object webApp) {
 		Iterator it = null;
 		if (webApp == null)
 			return null;
@@ -83,12 +86,14 @@ public class JSFUtils11 extends JSFUtils {
 			if (servlet != null && servlet.getWebType() != null) {
 				
 				if(	servlet.getWebType().isServletType()) {
-					if (((ServletType) servlet.getWebType()).getClassName().equals(
+					if (((ServletType) servlet.getWebType()).getClassName() != null && 
+							((ServletType) servlet.getWebType()).getClassName().trim().equals(
 							JSF_SERVLET_CLASS)) {
 						return servlet;
 					}
 				} else if (servlet.getWebType().isJspType()) {
-					if (((JSPType) servlet.getWebType()).getJspFile().equals(
+					if (((JSPType) servlet.getWebType()).getJspFile() != null && 
+							((JSPType) servlet.getWebType()).getJspFile().trim().equals(
 							JSF_SERVLET_CLASS)) {
 						return servlet;
 					}
@@ -106,7 +111,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param jsfVersion
 	 * @param configPath
 	 */
-	public static void createConfigFile(String jsfVersion, IPath configPath) {
+	public static void createConfigFile(final String jsfVersion, final IPath configPath) {
 		FileOutputStream os = null;
 		PrintWriter pw = null;
 		final String QUOTE = new String(new char[] { '"' });
@@ -164,8 +169,8 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param servlet
 	 * @return Servlet servlet - if passed servlet was null, will return created servlet
 	 */
-	public static Servlet createOrUpdateServletRef(WebApp webApp,
-			IDataModel config, Servlet servlet) {
+	public static Servlet createOrUpdateServletRef(final WebApp webApp,
+			final IDataModel config, Servlet servlet) {
 		
 		String displayName 	= getDisplayName(config);
 		String className 	= getServletClassname(config);
@@ -185,17 +190,42 @@ public class JSFUtils11 extends JSFUtils {
 			webApp.getServlets().add(servlet);			
 		} else {
 			// update
+			updateServletMappings(webApp, servlet, servlet.getServletName().trim(), displayName);
 			servlet.setServletName(displayName);
 			servlet.setLoadOnStartup(Integer.valueOf(1));
 		}
 		return servlet;
 	}
 
+	private static void updateServletMappings(final WebApp webApp, final Servlet servlet,
+			final String servletName, final String newServletName) {
+		List<ServletMapping> mappings = findServletMappings(webApp, servlet, servletName);
+		for (ServletMapping map : mappings){
+			map.setName(newServletName);
+		}
+		
+	}
+
+	
+	private static List<ServletMapping> findServletMappings(final WebApp webApp, final Servlet servlet, final String servletName) {			
+		List<ServletMapping> mappings = new ArrayList<ServletMapping>();
+		List<ServletMapping> allMappings = webApp.getServletMappings();			
+		for (int i=allMappings.size()-1;i>=0;--i){
+			ServletMapping mapping = allMappings.get(i);
+			if (mapping != null && 
+					mapping.getServlet() != null && 
+					mapping.getServlet().getServletName() != null &&
+					mapping.getServlet().getServletName().trim().equals(servletName))
+				mappings.add(mapping);
+		}		
+		return mappings;		
+	}
+
 	/**
 	 * @param webApp as Object
 	 * @return true if webApp instanceof org.eclipse.jst.javaee.web.WebApp
 	 */
-	public static boolean isWebApp25(Object webApp) {
+	public static boolean isWebApp25(final Object webApp) {
 		if (webApp instanceof org.eclipse.jst.javaee.web.WebApp)
 			return true;
 		return false;
@@ -208,8 +238,8 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param urlMappingList - list of string values to  be used in url-pattern for servlet-mapping
 	 * @param servlet
 	 */
-	public static void setUpURLMappings(WebApp webApp, List urlMappingList,
-			Servlet servlet) {
+	public static void setUpURLMappings(final WebApp webApp, final List urlMappingList,
+			final Servlet servlet) {
 		// Add mappings
 		Iterator it = urlMappingList.iterator();
 		while (it.hasNext()) {
@@ -237,8 +267,9 @@ public class JSFUtils11 extends JSFUtils {
 				if (mapping != null && 
 						mapping.getServlet() != null && 
 						mapping.getServlet().getServletName() != null &&
-						mapping.getServlet().getServletName().equals(servletName) &&
-						mapping.getUrlPattern().equals(pattern)) {
+						mapping.getServlet().getServletName().trim().equals(servletName) &&
+						mapping.getUrlPattern() != null && 
+						mapping.getUrlPattern().trim().equals(pattern)) {
 					return true;
 				}
 			}
@@ -251,7 +282,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webApp
 	 * @param servlet
 	 */
-	public static void removeURLMappings(WebApp webApp, Servlet servlet) {
+	public static void removeURLMappings(final WebApp webApp, final Servlet servlet) {
 		List mappings = webApp.getServletMappings();
 		String servletName = servlet.getServletName();
 		if (servletName != null) {
@@ -260,7 +291,7 @@ public class JSFUtils11 extends JSFUtils {
 				if (mapping != null && 
 						mapping.getServlet() != null && 
 						mapping.getServlet().getServletName() != null &&
-						mapping.getServlet().getServletName()
+						mapping.getServlet().getServletName().trim()
 							.equals(servletName)) {
 					mappings.remove(mapping);
 				}
@@ -273,8 +304,8 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webApp
 	 * @param config
 	 */
-	public static void setupConfigFileContextParamForV2_3(WebApp webApp,
-			IDataModel config) {
+	public static void setupConfigFileContextParamForV2_3(final WebApp webApp,
+			final IDataModel config) {
 		// if not default name and location, then add context param
 		ContextParam cp = null;
 		ContextParam foundCP = null;
@@ -314,8 +345,8 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webApp
 	 * @param config
 	 */
-	public static void setupConfigFileContextParamForV2_4(WebApp webApp,
-			IDataModel config) {
+	public static void setupConfigFileContextParamForV2_4(final WebApp webApp,
+			final IDataModel config) {
 		// if not default name and location, then add context param
 		ParamValue foundCP = null;
 		ParamValue cp = null;
@@ -327,7 +358,7 @@ public class JSFUtils11 extends JSFUtils {
 				cp = (ParamValue) it.next();
 				if (cp != null && 
 						cp.getName() != null &&
-						cp.getName().equals(JSF_CONFIG_CONTEXT_PARAM)) {
+						cp.getName().trim().equals(JSF_CONFIG_CONTEXT_PARAM)) {
 					foundCP = cp;
 					found = true;
 				}
@@ -355,7 +386,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webAppObj as Object
 	 * @return true if webApp instanceof org.eclipse.jst.j2ee.web.WebApp and versionID == 24
 	 */
-	public static boolean isWebApp24(Object webAppObj) {
+	public static boolean isWebApp24(final Object webAppObj) {
 		if (webAppObj instanceof WebApp &&
 				((WebApp)webAppObj).getVersionID() == 24)
 			return true;
@@ -366,7 +397,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webAppObj as Object
 	 * @return true if webApp instanceof org.eclipse.jst.j2ee.web.WebApp and versionID == 23
 	 */
-	public static boolean isWebApp23(Object webAppObj) {
+	public static boolean isWebApp23(final Object webAppObj) {
 		if (webAppObj instanceof WebApp &&
 				((WebApp)webAppObj).getVersionID() == 23)
 			return true;
@@ -377,13 +408,13 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param webApp
 	 * @return the default file extension from the context param.  Default is "jsp" if no context param.
 	 */
-	public static String getDefaultSuffix(WebApp webApp) {
+	public static String getDefaultSuffix(final WebApp webApp) {
 		String defaultSuffix = "jsp"; //$NON-NLS-1$
 		for (Iterator it = webApp.getContexts().iterator();it.hasNext();) {		
 			ContextParam cp = (ContextParam) it.next();		
 			if (cp != null &&
 					cp.getParamName() != null && 
-					cp.getParamName().equals(JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
+					cp.getParamName().trim().equals(JSF_DEFAULT_SUFFIX_CONTEXT_PARAM)){				
 				String defSuffix = cp.getParamValue();
 				if (defSuffix.startsWith(".")) //$NON-NLS-1$
 					defSuffix = defSuffix.substring(1);
@@ -398,7 +429,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param map
 	 * @return prefix mapping.  may return null.
 	 */
-	public static String getPrefixMapping(ServletMapping map) {
+	public static String getPrefixMapping(final ServletMapping map) {
 		IPath extPath = new Path(map.getUrlPattern());
 		if (extPath != null){
 			String ext = extPath.getFileExtension();
@@ -420,7 +451,7 @@ public class JSFUtils11 extends JSFUtils {
 	 * @param map
 	 * @return extension from map.  Will return null if file extension not found in url patterns.
 	 */
-	public static String getFileExtensionFromMap(ServletMapping map) {
+	public static String getFileExtensionFromMap(final ServletMapping map) {
 		IPath extPath = new Path(map.getUrlPattern());
 		if (extPath != null){
 			String ext = extPath.getFileExtension();
