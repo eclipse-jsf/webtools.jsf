@@ -870,6 +870,60 @@
 		</trait>
 	</entity>
 
+	<entity id="selectManyListbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectListboxChoiceOperation">
+						<parameter value="true"/>
+						<parameter value="true"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectOneChoice" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectListboxChoiceOperation">
+						<parameter value="false"/>
+						<parameter value="false"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectOneListbox" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectListboxChoiceOperation">
+						<parameter value="false"/>
+						<parameter value="true"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="selectOneRadio" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
