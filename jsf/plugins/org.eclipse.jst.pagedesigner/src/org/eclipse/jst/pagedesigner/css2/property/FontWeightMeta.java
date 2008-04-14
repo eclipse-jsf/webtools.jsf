@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.property;
 
-import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.w3c.dom.css.CSSValue;
 
@@ -36,7 +34,6 @@ public class FontWeightMeta extends CSSPropertyMeta {
 			ICSSPropertyID.VAL_BOLD, ICSSPropertyID.VAL_BOLDER,
 			ICSSPropertyID.VAL_LIGHTER };
 
-	private Logger _log = PDPlugin.getLogger(FontWeightMeta.class);
 
 	/**
 	 * Default constructor
@@ -76,8 +73,7 @@ public class FontWeightMeta extends CSSPropertyMeta {
 				}
 				return new Integer(i);
 			} catch (Exception ex) {
-				// Error in integer processing.
-				_log.error("Info.FontWeightMeta.0", ex); //$NON-NLS-1$
+				// Error in integer processing
 				return NORMAL_WEIGHT;
 			}
 		} else if (ICSSPropertyID.VAL_NORMAL.equals(result)) {
