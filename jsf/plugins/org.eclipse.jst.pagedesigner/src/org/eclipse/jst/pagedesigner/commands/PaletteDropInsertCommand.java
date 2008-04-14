@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2008 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,31 +11,33 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.commands;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
-import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.SourceViewerDragDropHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.itemcreation.command.SingletonContainerCreationCommand;
+import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
+import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.IDropCustomizer;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
+ * Handles tag creation when dropped onto the WPE source view
+ * 
  * @author mengbo
  */
 public class PaletteDropInsertCommand extends SourceViewerCommand {
+
 	private final Logger _log = PDPlugin
 			.getLogger(PaletteDropInsertCommand.class);
 
@@ -43,9 +45,9 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 
 	private int _location;
 
-	private List _nodesToFormat = new ArrayList();
-
 	private Element _element;
+
+	private IAdaptable _customizationData;
 
 	/**
 	 * @param label
@@ -60,74 +62,88 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 		_location = location;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.gef.commands.Command#execute()
-	 */
 	public void doExecute() {
-		IDOMModel model = getModel();
+		Node node;
 		try {
-			Node node = getSourceEditingTextTools().getNode(_location);
-			IDOMPosition position = null;
-			if (node != null) {
+			node = getSourceEditingTextTools().getNode(_location);
+		} catch (Exception e) {
+			_log.error("Bad text insertion location", e);		
+			return;
+		}
+		IDOMPosition position = null;
+		if (node != null) {
+			position = SourceViewerDragDropHelper.getInstance()
+					.findPosition(_location, node);
+		} else {
+			if (getModel().getDocument().getFirstChild() != null) {
+				//Fix for 224541 - When palette item is dropped to end of file in source view of Web Page Editor, the item is inserted at the top of file
+				//add inside at end of necessary container
 				position = SourceViewerDragDropHelper.getInstance()
-						.findPosition(_location, node);
-			} else {
+					.findPosition(getModel().getDocument().getEndOffset(), getModel().getDocument().getFirstChild());
+			} 
+			else {
 				// empty file
 				position = new DOMPosition(getModel().getDocument(), 0);
 			}
-			Assert.isTrue(position != null);
-			if (!_tagItem.getURI().equalsIgnoreCase(ITLDConstants.URI_HTML)
-					&& //
-					!_tagItem.getURI().equalsIgnoreCase(
-							ITLDConstants.URI_JSP)) {
-			    SingletonContainerCreationCommand command = 
-			        new SingletonContainerCreationCommand
-			            (position, IJSFConstants.TAG_IDENTIFIER_VIEW, null);
-			    command.execute();
-			    Iterator it = command.getResult().iterator();
-			    
-			    if (it.hasNext())
-			    {
-	                position = command.getResult().iterator().next();
-			    }
-			    else
-			    {
-			        throw new IllegalStateException("Expected result of command");
-			    }
+		}
+		
+		//essentially copied from ItemCreationTool so that DesignView drop and SourceViewDrop are same.
+		// Note that SourceView does NO drop validation checking.   This is handled by ItemCreationPolicy in DesignView
+		IStatus status = performCustomization();
+		if (status.getSeverity() == IStatus.OK) {
+			Element element = CommandUtil.excuteInsertion(this._tagItem,
+					getModel(), position, getCustomizationData());
+			if (element != null) {				
+				formatNode(element);
 			}
-			_element = CommandUtil
-					.excuteInsertion(_tagItem, model, position, null);
-			if (_element != null) {
-				_nodesToFormat.add(_element);
-				SourceViewerDragDropHelper.getInstance().changeCaret(_editor,
-						true);
-				formatNodes();
-			}
-		} catch (Exception e) {
-			_log.error("Bad text insertion location", e);
+			this._element = element;
 		}
 	}
 
+	/**
+	 * @return status
+	 */
+	protected IStatus performCustomization() {
+		// essentially a copy from ItemCreationTool
+		IStatus status = Status.OK_STATUS;
+		TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(_tagItem
+				.getURI(), _tagItem.getTagName());
 
-	 //TODO: dead	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see org.eclipse.jst.pagedesigner.requests.NodeCreationFactory#getPrefix(int)
-//	 */
-//	public String getPrefix(String uri, IDOMModel model, String suggested,
-//			Node nodes[]) {
-//		if (ITLDConstants.URI_HTML.equals(uri)
-//				|| ITLDConstants.URI_JSP.equals(uri)) {
-//			return null;
-//		}
-//
-//		// now handles custom tag lib
-//
-//		return JSPUtil.getOrCreatePrefix(model, uri, suggested, nodes);
-//	}
+		IElementEdit elementEdit = ElementEditFactoryRegistry.getInstance()
+				.createElementEdit(tagId);
 
+		if (elementEdit != null) {
+			IDropCustomizer customizer = elementEdit.getDropCustomizer(tagId);
+
+			if (customizer != null) {
+				status = customizer.runCustomizer();
+
+				if (status.getSeverity() == IStatus.OK) {
+					setCustomizationData(customizer.getDropCustomizationData());
+				}
+			} 
+
+		}
+		return status;
+	}
+	
+    /**
+	 * @param customizationData
+	 */
+	public void setCustomizationData(IAdaptable customizationData) {
+		_customizationData = customizationData;
+	}
+
+	/**
+	 * This method is for test purposes and should generally not be 
+	 * used by clients.
+	 * 
+	 * @return the customization data
+	 */
+	protected final IAdaptable getCustomizationData() {
+		return _customizationData;
+	}
+	
 	public void setSelection() {
 		if (_element != null) {
 			int offset = EditModelQuery.getNodeStartIndex(_element);
@@ -135,10 +151,5 @@ public class PaletteDropInsertCommand extends SourceViewerCommand {
 			_editor.getTextViewer().setSelectedRange(offset, length);
 		}
 	}
-
-	private void formatNodes() {
-		for (int i = 0, n = _nodesToFormat.size(); i < n; i++) {
-			formatNode((Node) _nodesToFormat.get(i));
-		}
-	}
+	
 }

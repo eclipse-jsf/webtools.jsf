@@ -59,7 +59,7 @@ public abstract class AbstractTagCreationAdvisor implements ITagCreationAdvisor
 
     /**
      * Return position for tag after all necessary containers are created.  
-     * If nnecessary containers cannot be created and do not exist for any reason,
+     * If necessary containers cannot be created and do not exist for any reason,
      * implementer should return null
      * to signal that the tag creation should not occur.
      * 
