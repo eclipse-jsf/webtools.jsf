@@ -2,7 +2,6 @@ package org.eclipse.jst.jsf.common.runtime.internal.model.behavioural;
 
 import java.util.List;
 
-import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeListenerDecorator;
 
@@ -66,7 +65,7 @@ public interface IEditableValueHolderInfo extends IValueHolderInfo {
     /**
      * Add validator to the list of validators for this component. Should be
      * equivalent to
-     * {@link ViewObject#addDecorator(org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator, Class)}.
+     * {@link org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject#addDecorator(org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator, Class)}.
      * 
      * @param validator
      */

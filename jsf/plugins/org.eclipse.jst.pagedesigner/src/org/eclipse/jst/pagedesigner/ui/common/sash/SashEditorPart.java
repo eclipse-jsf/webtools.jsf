@@ -43,7 +43,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
-import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.MultiPageEditorSite;
 
 /**
@@ -80,7 +79,7 @@ public abstract class SashEditorPart extends EditorPart {
 	 *            the input for the nested editor
 	 * @exception PartInitException
 	 *                if a new page could not be created
-	 * @see MultiPageEditorPart#handlePropertyChange(int) the handler for
+	 * @see org.eclipse.ui.part.MultiPageEditorPart#handlePropertyChange(int) the handler for
 	 *      property change events from the nested editor
 	 */
 	public void addPage(final IEditorPart editor, IEditorInput input)
