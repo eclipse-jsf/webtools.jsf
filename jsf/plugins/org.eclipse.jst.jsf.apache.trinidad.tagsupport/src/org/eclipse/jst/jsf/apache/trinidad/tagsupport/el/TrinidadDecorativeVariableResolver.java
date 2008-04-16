@@ -26,8 +26,10 @@ public class TrinidadDecorativeVariableResolver extends
     private final static JSFSymbolFactory _symbolFactory                = new JSFSymbolFactory();
 
     public final static String            PAGE_FLOW_SCOPE_VARIABLE_NAME = "pageFlowScope";
-    public final static String            PAGE_FLOW_SCOPE_CLASS_NAME    = "org.apache.myfaces.trinidad.context.RequestContext";
     public final static String            PROCESS_SCOPE_VARIABLE_NAME   = "processScope";
+
+    public final static String            REQUEST_CONTEXT_VARIABLE_NAME = "requestContext";
+    public final static String            REQUEST_CONTEXT_CLASS_NAME    = "org.apache.myfaces.trinidad.context.RequestContext";
 
     @Override
     public ISymbol[] getAllVariables(final DTFacesContext facesContext,
@@ -55,19 +57,25 @@ public class TrinidadDecorativeVariableResolver extends
             {
                 final Map<String, ISymbol> symbols = new HashMap<String, ISymbol>();
 
-                final ISymbol pageFlowVar = _symbolFactory
+                final ISymbol requestContextVar = _symbolFactory
                         .createBeanOrUnknownInstanceSymbol(project,
-                                PAGE_FLOW_SCOPE_CLASS_NAME,
+                                REQUEST_CONTEXT_CLASS_NAME,
                                 PAGE_FLOW_SCOPE_VARIABLE_NAME,
                                 ERuntimeSource.OTHER_LITERAL);
-                symbols.put(pageFlowVar.getName(), pageFlowVar);
-
+                symbols.put(REQUEST_CONTEXT_VARIABLE_NAME, requestContextVar);
+                
+                // both pageFlowScope and processScope return the same variable
                 // TODO: we may be able to populate this map
-                final ISymbol processScopeVar = _symbolFactory
+                final ISymbol pageFlowVar = _symbolFactory
                         .createUnknownInstanceSymbol(
-                                PROCESS_SCOPE_VARIABLE_NAME,
+                                PAGE_FLOW_SCOPE_VARIABLE_NAME,
                                 ERuntimeSource.OTHER_LITERAL);
-                symbols.put(processScopeVar.getName(), processScopeVar);
+                symbols.put(PAGE_FLOW_SCOPE_VARIABLE_NAME, pageFlowVar);
+                final ISymbol processScopeVar = _symbolFactory
+                .createUnknownInstanceSymbol(
+                        PROCESS_SCOPE_VARIABLE_NAME,
+                        ERuntimeSource.OTHER_LITERAL);
+                symbols.put(PROCESS_SCOPE_VARIABLE_NAME, processScopeVar);
                 return symbols;
             }
         }
