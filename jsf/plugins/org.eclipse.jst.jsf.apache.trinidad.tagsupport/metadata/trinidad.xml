@@ -123,7 +123,17 @@
 				<section id="var"/>				
 			</value>
 		</trait>   
-        <entity id="var"/>
+        <entity id="var">
+            <trait id="contributes-value-binding">
+                <value>true</value>
+            </trait>
+            <trait id="value-binding-scope">
+                <value>request</value>
+            </trait>
+            <trait id="value-binding-symbol-factory">
+                <value>org.eclipse.jst.jsf.common.unknownTypeSymbolFactory</value>
+            </trait>
+        </entity>
     </entity>
     <entity id="facetRef" type="tag">
         <trait id="quick-edit-tab">
@@ -2947,7 +2957,7 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<trait id="supported-facets">
 			<value xsi:type="mdt:ListOfValues">
 				<item>actions</item>
 				<item>detailStamp</item>
@@ -2968,7 +2978,17 @@
 				<section id="allDetailsEnabled"/>					
 			</value>
 		</trait>        	    	
-        <entity id="var"/>
+        <entity id="var">
+            <trait id="contributes-value-binding">
+                <value>true</value>
+            </trait>
+            <trait id="value-binding-scope">
+                <value>request</value>
+            </trait>
+            <trait id="value-binding-symbol-factory">
+                <value>org.eclipse.jst.jsf.common.unknownTypeSymbolFactory</value>
+            </trait>
+        </entity>
         <entity id="varStatus"/>
         <entity id="value">
             <trait id="attribute-value-runtime-type">
