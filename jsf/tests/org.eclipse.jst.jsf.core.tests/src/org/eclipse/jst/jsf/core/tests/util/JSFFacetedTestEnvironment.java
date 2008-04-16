@@ -32,7 +32,6 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationH
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
-import org.eclipse.wst.common.componentcore.internal.operation.FacetProjectCreationOperation;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
