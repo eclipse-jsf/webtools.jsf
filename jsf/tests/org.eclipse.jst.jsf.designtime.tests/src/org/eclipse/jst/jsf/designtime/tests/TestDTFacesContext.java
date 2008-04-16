@@ -11,6 +11,7 @@ import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.context.IDTExternalContext;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
+import org.eclipse.jst.jsf.designtime.internal.view.IViewRootHandle;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
@@ -71,7 +72,8 @@ public class TestDTFacesContext extends TestCase
     {
         // other tests on viewroot in view.*
         final DTFacesContext facesContext = getFacesContext(_testJSP);
-        final DTUIViewRoot viewRoot = facesContext.getViewRoot();
+        IViewRootHandle  handle = facesContext.getViewRootHandle();
+        final DTUIViewRoot viewRoot = handle.updateViewRoot();
         assertNotNull(viewRoot);
         assertEquals("/"+TESTJSP1_PATH, viewRoot.getViewId());
     }

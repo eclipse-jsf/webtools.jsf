@@ -435,12 +435,10 @@ public class TypeComparatorTests extends TestCase
         assertFalse(result.getSeverity() == Diagnostic.OK);
         
         // check bi-directional type comparison -- e.g when a read/write string
-        // is expected, the read side will always work fine because you can always
-        // coerce to string.  But the other direction may not work because
-        // you may not be able to coerce the string to the other thing
+        // is expected, we can always coerce object to string.
         result =
             _typeComparator.calculateTypeCompatibility(readWriteString, readWriteObject);
-        assertFalse(result.getSeverity() == Diagnostic.OK);
+        assertTrue(result.getSeverity() == Diagnostic.OK);
         
         // this should fail because a readable object is expected, but one
         // is not provided (i.e. "not gettable")
