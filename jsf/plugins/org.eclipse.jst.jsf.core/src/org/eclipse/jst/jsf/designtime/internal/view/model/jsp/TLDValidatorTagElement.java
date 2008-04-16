@@ -12,6 +12,10 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
  */
 public class TLDValidatorTagElement extends TLDJSFTagElement implements IValidatorTagElement
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4251223772554969477L;
     private final ValidatorTypeInfo _validator;
     
     /**

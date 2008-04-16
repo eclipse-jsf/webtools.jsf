@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.designtime.internal.view;
 import java.util.List;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.datatypes.ELExpression;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
@@ -33,7 +34,27 @@ public interface IViewDefnAdapter<VIEW_DEFN_BASE_TYPE, VIEW_CONTAINER_TYPE>
     ViewObject mapToViewObject(
             VIEW_DEFN_BASE_TYPE viewDefnObject,
             ViewObjectConstructionStrategy<? extends VIEW_DEFN_BASE_TYPE> constructionData,
-            VIEW_CONTAINER_TYPE viewContainer);
+                    VIEW_CONTAINER_TYPE viewContainer);
+
+    /**
+     * This method may be expensive.
+     * 
+     * @param viewDefnObject
+     * @param root
+     * @return the view object corresponding to viewDefnObject in the
+     * component sub-tree rooted at root.
+     * <b>May return null if isn't found or can't be found</b>
+     */
+    ViewObject findViewObject(VIEW_DEFN_BASE_TYPE viewDefnObject, ComponentInfo root);
+
+    /**
+     * @param viewObject
+     * @param root
+     * @return the view definition object that viewObject was derived from
+     * using root as the component sub-tree root to search in.
+     * <b>May return null if isn't found or can't be found</b>
+     */
+    VIEW_DEFN_BASE_TYPE findViewDefn(ViewObject viewObject, ComponentInfo root);
 
     /**
      * @param viewDefnObject
@@ -48,7 +69,7 @@ public interface IViewDefnAdapter<VIEW_DEFN_BASE_TYPE, VIEW_CONTAINER_TYPE>
      * 
      */
     String getId(VIEW_DEFN_BASE_TYPE viewDefnObject)
-            throws IllegalArgumentException;
+    throws IllegalArgumentException;
 
     /**
      * Normally this is a workspace resource (IFile) or higher level document

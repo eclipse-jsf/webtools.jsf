@@ -79,6 +79,24 @@ public abstract class AbstractTagRegistry implements ITagRegistry
     }
 
     /**
+     * 
+     */
+    public final void destroy()
+    {
+        cleanupPersistentState();
+        dispose();
+    }
+    
+    /**
+     * Called by destroy before it calls dispose.  Sub-class should
+     * invalidate, and ideally delete, any persistent state. 
+     * 
+     * NOTE: DO NOT call dispose functionality from this call.  The framework
+     * will call dispose() immediately after cleanupPersistentState.
+     */
+    protected abstract void cleanupPersistentState();
+
+    /**
      * Must be factories or caches when disposing the registry.  Instances
      * must implement doDispose to provide their specific disposal operations.
      */

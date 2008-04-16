@@ -12,6 +12,10 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
  */
 public class TLDConverterTagElement extends TLDJSFTagElement implements IConverterTagElement
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2854457220470229847L;
     private final ConverterTypeInfo     _converterTypeInfo;
     
     /**

@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.AbstractVisitor.VisitationPolicy;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.FacetDecorator;
 
 /**
@@ -28,34 +29,22 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.FacetDecorato
  * @author cbateman
  * 
  */
-public class ComponentInfo extends ViewObject implements Serializable
+public class ComponentInfo extends ViewObject implements Serializable,
+        IVisitable
 {
     /**
      * serializable id
      */
-    private static final long serialVersionUID = 2517204356825585699L;
+    private static final long             serialVersionUID     = 2517204356825585699L;
 
-    private final static int DEFAULT_ARRAY_SIZE = 4;
-
-    /**
-     * the component id
-     */
-    protected final String _id;
-    /**
-     * the component's parent or null if none
-     */
-    protected ComponentInfo _parent;
-    /**
-     * the type info for this component
-     */
-    protected final ComponentTypeInfo _componentTypeInfo;
-    /**
-     * the rendered flage
-     */
-    protected final boolean _isRendered;
+    private final static int              DEFAULT_ARRAY_SIZE   = 4;
 
     private transient BeanPropertyManager _beanPropertyManager = new BeanPropertyManager(
-            this);
+                                                                       this);
+    /**
+     * Encapsulates all of the data for the view object
+     */
+    protected final ComponentInfoData     _data;
 
     // initialized
     // by
@@ -70,10 +59,17 @@ public class ComponentInfo extends ViewObject implements Serializable
     protected ComponentInfo(final String id, final ComponentInfo parent,
             final ComponentTypeInfo componentTypeInfo, final boolean isRendered)
     {
-        _id = translateForNull(id);
-        _parent = parent;
-        _componentTypeInfo = componentTypeInfo;
-        _isRendered = isRendered;
+        super(new ComponentInfoData(id, parent, componentTypeInfo, isRendered));
+        _data = (ComponentInfoData) super.getData();
+    }
+
+    /**
+     * @param data
+     */
+    protected ComponentInfo(final ComponentInfoData data)
+    {
+        super(data);
+        _data = data;
     }
 
     /**
@@ -179,24 +175,12 @@ public class ComponentInfo extends ViewObject implements Serializable
         return (ComponentInfo) attributes.get(key);
     }
 
-    private String translateForNull(final String arg)
-    {
-
-        if (arg == null || "!".equals(arg.trim()))
-        {
-            return null;
-        }
-        return arg.trim();
-    }
-
-    private List/* <ComponentInfo> */_children;
-
     /**
      * @return the id
      */
     public final String getId()
     {
-        return _id;
+        return _data.getId();
     }
 
     /**
@@ -204,20 +188,29 @@ public class ComponentInfo extends ViewObject implements Serializable
      */
     public final ComponentTypeInfo getComponentTypeInfo()
     {
-        return _componentTypeInfo;
+        return _data.getComponentTypeInfo();
+    }
+
+    /**
+     * Pre-condition: isModifiable() == true Post-condition: getChildren() will
+     * return an empty list.
+     */
+    protected final void clearChildren()
+    {
+        _data.getChildren().clear();
     }
 
     /**
      * @return the children. List is unmodifiable. List contains all children
      *         including facets.
      */
-    public final synchronized List/* <ComponentInfo> */getChildren()
+    public final List/* <ComponentInfo> */getChildren()
     {
-        if (_children == null)
+        if (_data.isProtected())
         {
-            return Collections.EMPTY_LIST;
+            return _data.getChildren();
         }
-        return Collections.unmodifiableList(_children);
+        return Collections.unmodifiableList(_data.getChildren());
     }
 
     /**
@@ -234,22 +227,31 @@ public class ComponentInfo extends ViewObject implements Serializable
     /**
      * @param childComponent
      */
-    public final synchronized void addChild(final ComponentInfo childComponent)
+    public final void addChild(final ComponentInfo childComponent)
     {
-        if (_children == null)
+        if (childComponent == this)
         {
-            _children = new ArrayList(DEFAULT_ARRAY_SIZE);
+            throw new IllegalArgumentException(
+                    "A component cannot be its own child");
         }
-        _children.add(childComponent);
+        _data.addChild(childComponent);
         // we need to reset the child's parent to me
-        childComponent._parent = this;
+        childComponent.setParent(this);
+    }
+
+    /**
+     * @param parent
+     */
+    public final void setParent(ComponentInfo parent)
+    {
+        _data.setParent(parent);
     }
 
     /**
      * @param name
      * @param facetComponent
      */
-    public final synchronized void addFacet(final String name,
+    public final void addFacet(final String name,
             final ComponentInfo facetComponent)
     {
         addChild(facetComponent);
@@ -288,7 +290,7 @@ public class ComponentInfo extends ViewObject implements Serializable
      * @return if this has a facet called name, then returns it's single root
      *         component.
      */
-    public final synchronized ComponentInfo getFacet(final String name)
+    public final ComponentInfo getFacet(final String name)
     {
         if (name == null)
         {
@@ -312,12 +314,13 @@ public class ComponentInfo extends ViewObject implements Serializable
 
     public String toString()
     {
-        final String parentId = _parent != null ? _parent.getId() : "null";
-        String toString = getMostSpecificComponentName() + ": id=" + _id
-                + ", parentId: " + parentId + ", family="
-                + _componentTypeInfo.getComponentFamily() + ", render="
-                + _componentTypeInfo.getRenderFamily() + ", rendered="
-                + _isRendered;
+        final String parentId = getParent() != null ? getParent().getId()
+                : "null";
+        String toString = getMostSpecificComponentName() + ": id="
+                + _data.getId() + ", parentId: " + parentId + ", family="
+                + getComponentTypeInfo().getComponentFamily() + ", render="
+                + getComponentTypeInfo().getRenderFamily() + ", rendered="
+                + isRendered();
 
         // use bean introspection to dump child properties
         if (this.getClass() != ComponentInfo.class)
@@ -367,9 +370,9 @@ public class ComponentInfo extends ViewObject implements Serializable
     /**
      * @return the parent of this component or null.
      */
-    public synchronized final ComponentInfo getParent()
+    public final ComponentInfo getParent()
     {
-        return _parent;
+        return _data.getParent();
     }
 
     /**
@@ -377,7 +380,7 @@ public class ComponentInfo extends ViewObject implements Serializable
      */
     public final boolean isRendered()
     {
-        return _isRendered;
+        return _data.isRendered();
     }
 
     public synchronized void addAdapter(final Class adapterType,
@@ -410,6 +413,127 @@ public class ComponentInfo extends ViewObject implements Serializable
     }
 
     /**
+     * @author cbateman
+     * 
+     */
+    public static class ComponentInfoData extends ViewObjectData
+    {
+        /**
+         * 
+         */
+        private static final long         serialVersionUID                = 5052732412917986062L;
+        /**
+         * the component id
+         */
+        private final String              _id;
+        /**
+         * the component's parent or null if none
+         */
+        private ComponentInfo             _parent;
+
+        /**
+         * the type info for this component
+         */
+        protected final ComponentTypeInfo _componentTypeInfo;
+        /**
+         * the rendered flage
+         */
+        protected final boolean           _isRendered;
+
+        private List                     /* <ComponentInfo> */_children = new ArrayList(
+                                                                                  DEFAULT_ARRAY_SIZE);
+
+        /**
+         * @param id
+         * @param parent
+         * @param componentTypeInfo
+         * @param isRendered
+         */
+        public ComponentInfoData(final String id, ComponentInfo parent,
+                ComponentTypeInfo componentTypeInfo, boolean isRendered)
+        {
+            super(false);
+            _id = id;
+            _parent = parent;
+            _componentTypeInfo = componentTypeInfo;
+            _isRendered = isRendered;
+        }
+
+        /**
+         * @param childComponent
+         */
+        protected void addChild(ComponentInfo childComponent)
+        {
+            enforceProtection();
+
+            getChildren().add(childComponent);
+        }
+
+        /**
+         * @return the modifiable list of children
+         */
+        protected final List/* <ComponentInfo> */getChildren()
+        {
+            return _children;
+        }
+
+        protected void doBeforeProtecting()
+        {
+            super.doBeforeProtecting();
+            // compact the children array list
+            if (_children.size() > 0)
+            {
+                _children = Collections.unmodifiableList(_children);
+            }
+            else
+            {
+                _children = Collections.EMPTY_LIST;
+            }
+        }
+
+        /**
+         * @return the isRendered flag
+         */
+        protected final boolean isRendered()
+        {
+            return _isRendered;
+        }
+
+        /**
+         * @return the component type info flag
+         */
+        protected final ComponentTypeInfo getComponentTypeInfo()
+        {
+            return _componentTypeInfo;
+        }
+
+        /**
+         * @return the parent or null if no parent
+         */
+        protected final ComponentInfo getParent()
+        {
+            return _parent;
+        }
+
+        /**
+         * @param parent
+         */
+        protected final void setParent(ComponentInfo parent)
+        {
+            enforceProtection();
+            _parent = parent;
+        }
+
+        /**
+         * @return the component id
+         */
+        protected final String getId()
+        {
+            return _id;
+        }
+    }
+
+    /**
      * This is similar to the runtime getAttributes().get(name) call. The reason
      * we don't implement a Map of all attribute values is that the implicit
      * property structure can change at any time due to add/removeAdapter. To
@@ -429,12 +553,13 @@ public class ComponentInfo extends ViewObject implements Serializable
     }
 
     /**
-     * @return the set of valid attribute names.  The Set is not modifiable.
+     * @return the set of valid attribute names. The Set is not modifiable.
      */
-    public synchronized Set/*<String>*/  getAttributeNames()
+    public synchronized Set/* <String> */getAttributeNames()
     {
         return getBeanProperties().keySet();
     }
+
     /**
      * Stores a bean property descriptor along information about which
      * implementation class declares it and what key to pass to getAdapter() in
@@ -444,8 +569,8 @@ public class ComponentInfo extends ViewObject implements Serializable
     public final static class ComponentBeanProperty
     {
         private final PropertyDescriptor _propertyDescriptor;
-        private final Object _declaringImplementation;
-        private final Class _adapterKeyClass;
+        private final Object             _declaringImplementation;
+        private final Class              _adapterKeyClass;
 
         // only instantiable locally
         private ComponentBeanProperty(Class adapterKeyClass,
@@ -530,7 +655,10 @@ public class ComponentInfo extends ViewObject implements Serializable
          * this is synthetic based the class definition and installed adapters
          * so as long that info is available, no need to serialize.
          */
-        protected transient Map/* <String, ComponentBeanProperty> */_beanProperties; // lazily
+        protected transient Map              /*
+                                                 * <String,
+                                                 * ComponentBeanProperty>
+                                                 */_beanProperties; // lazily
         private final transient ComponentInfo _component;
 
         /**
@@ -671,7 +799,7 @@ public class ComponentInfo extends ViewObject implements Serializable
          * 
          * MUST INITIALIZE early so can synchronize on it
          */
-        private transient static Map/* <Class, List<PropertyDescriptor> */PROPERTY_MAP = new HashMap();
+        private transient static Map /* <Class, List<PropertyDescriptor> */PROPERTY_MAP = new HashMap();
 
         /**
          * @param startClass
@@ -732,5 +860,50 @@ public class ComponentInfo extends ViewObject implements Serializable
             return names;
         }
 
+    }
+
+    /**
+     * Visits this node and it's entire tree and makes all nodes protected.
+     */
+    public final void setSubtreeProtected()
+    {
+        // lock children first
+        final ComponentTreeVisitor protectionVisitor = new ComponentTreeVisitor(VisitationPolicy.ChildrenFirstPolicy)
+        {
+            public void visit(ComponentInfo component)
+            {
+                component.setProtected();
+            }
+        };
+        
+        accept(protectionVisitor);
+    }
+
+    public void accept(AbstractVisitor visitor)
+    {
+        // check policy ordering
+        if (visitor.getPolicy().getOrdering() == VisitationPolicy.VISIT_PARENT_FIRST)
+        {
+            visitor.visit(this);
+            visitChildren(visitor);
+        }
+        else
+        {
+            visitChildren(visitor);
+            visitor.visit(this);
+        }
+    }
+
+    private void visitChildren(AbstractVisitor visitor)
+    {
+        for (final Iterator it = getVisitableChildren(); it.hasNext();)
+        {
+            visitor.visit(it.next());
+        }
+    }
+
+    public Iterator getVisitableChildren()
+    {
+        return getChildren().iterator();
     }
 }

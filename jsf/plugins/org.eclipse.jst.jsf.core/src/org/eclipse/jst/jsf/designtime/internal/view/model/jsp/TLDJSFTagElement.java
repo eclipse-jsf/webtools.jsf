@@ -13,6 +13,11 @@ public abstract class TLDJSFTagElement extends TLDTagElement implements
         IJSFTagElement
 {
     /**
+     * 
+     */
+    private static final long serialVersionUID = -7629153104201317346L;
+
+    /**
      * @param elementDecl
      */
     public TLDJSFTagElement(final TLDElementDeclaration elementDecl)

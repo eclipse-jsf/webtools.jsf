@@ -1,6 +1,5 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,13 +11,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject;
 import org.eclipse.jst.jsf.common.internal.policy.IdentifierOrderedIteratorPolicy;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
@@ -53,6 +50,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     private boolean                                                    _hasBeenInitialized = false;
     private final ConcurrentLinkedQueue<LibraryOperation>              _changeOperations   = new ConcurrentLinkedQueue<LibraryOperation>();
     private final Job                                                  _changeJob;
+//    private final PersistedDataTagStrategy                             _persistedTagStrategy;
     private TagIndexListener                                           _tagIndexListener;
     private TLDRegistryPreferences                                     _prefs;
 
@@ -78,6 +76,9 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         // makes sure that a tag element will always be created for any
         // given tag definition even if other methods fail
         _resolver.addStrategy(new UnresolvedJSPTagResolvingStrategy());
+//        _persistedTagStrategy = new PersistedDataTagStrategy(_project);
+//        _persistedTagStrategy.init();
+//        _resolver.addStrategy(_persistedTagStrategy);
 
         _changeJob = new ChangeJob(project.getName());
     }
@@ -104,6 +105,9 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                     + _project.toString());
         }
 
+        // call checkpoint to flush serializable data
+        checkpoint();
+
         _nsResolved.clear();
         _changeOperations.clear();
 
@@ -113,6 +117,17 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                     .log("TLDTagRegistry: Done disposing registry for "
                             + _project.toString());
         }
+    }
+
+    @Override
+    protected void cleanupPersistentState()
+    {
+       // TODO
+    }
+
+    public synchronized void checkpoint()
+    {
+        //_persistedTagStrategy.save();
     }
 
     @Override
@@ -158,9 +173,6 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     }
 
     /**
-     * @throws JavaModelException
-     * @throws CoreException
-     * @throws IOException
      */
     private void initialize()
     {
@@ -221,6 +233,13 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
             {
                 JSFCoreTraceOptions.log("TLDTagRegistry.initialize_TagRecord: Initializing new tld record: "+tagRecord.toString());
             }
+            long startTime = 0;
+            
+            if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
+            {
+                startTime = System.nanoTime();
+            }
+            
             final CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
             final TLDDocument doc = (TLDDocument) factory
                     .createCMDocument(tagRecord);
@@ -235,7 +254,13 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                             TagRegistryChangeEvent.EventType.ADDED_NAMESPACE,
                             Collections.singletonList(ns)));
                 }
-    
+
+                if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
+                {
+                    System.out.printf("Time to update namespace %s was %d\n",
+                            ns.getNSUri(), Long.valueOf(System.nanoTime()
+                                    - startTime));
+                }
                 return ns;
             }
         }
@@ -278,7 +303,13 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         {
             JSFCoreTraceOptions.log("TLDTagRegistry.getAllTagLibraries: start");
         }
-
+        long startTime = 0;
+        
+        if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
+        {
+            startTime = System.nanoTime();
+        }
+        
         if (!_hasBeenInitialized)
         {
             initialize();
@@ -287,6 +318,10 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         final Set<TLDNamespace> allTagLibraries = new HashSet<TLDNamespace>();
         allTagLibraries.addAll(_nsResolved.values());
 
+        if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
+        {
+            System.out.println("Time to getAllTagLibraries for JSP: "+(System.nanoTime()-startTime));
+        }
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
             JSFCoreTraceOptions
@@ -382,5 +417,4 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
             }
         }
     }
-
 }

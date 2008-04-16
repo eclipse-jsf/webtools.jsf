@@ -1,13 +1,19 @@
 package org.eclipse.jst.jsf.common.runtime.internal.view.model.common;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Abstracts an xml namespace used to define a set of view tags
  * 
  */
-public abstract class Namespace
+public abstract class Namespace implements Serializable
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6386464282396970948L;
+
     /**
      * @return the namespace uri. MUST NOT BE NULL
      */

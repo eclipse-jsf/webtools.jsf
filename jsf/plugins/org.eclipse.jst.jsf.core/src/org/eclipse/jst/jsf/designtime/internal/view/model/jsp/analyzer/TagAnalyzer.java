@@ -13,7 +13,6 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
 import org.eclipse.jem.internal.proxy.core.IBeanProxy;
 import org.eclipse.jem.internal.proxy.core.IBeanTypeProxy;
 import org.eclipse.jem.internal.proxy.core.IConfigurationContributor;
@@ -515,6 +514,11 @@ public final class TagAnalyzer
                                     "TagAnalyzer.createTLDTagElement: Start tld=%s, project=%s",
                                     tldDecl.getNodeName(), project.getName()));
         }
+        long startTime = 0;
+        if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
+        {
+            startTime = System.nanoTime();
+        }
 
         try
         {
@@ -523,8 +527,8 @@ public final class TagAnalyzer
 
             if (typeName == null
                     || JavaConventions.validateJavaTypeName(typeName,
-                            CompilerOptions.VERSION_1_3,
-                            CompilerOptions.VERSION_1_3).getSeverity() == IStatus.ERROR)
+                            JavaCore.VERSION_1_3,
+                            JavaCore.VERSION_1_3).getSeverity() == IStatus.ERROR)
             {
                 JSFCorePlugin.log(
                         "Bad tag class name in " + tldDecl.toString(),
@@ -552,19 +556,56 @@ public final class TagAnalyzer
 
             if (tagType == TagType.COMPONENT)
             {
-                return createComponentTagElement(tldDecl, project);
+                final TLDTagElement element = createComponentTagElement(tldDecl, project);
+                
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
+                {
+                    String name = element != null ? element.toString()
+                            : "<none>";
+                    System.out.printf(
+                            "Time to create component tag element %s was %d\n",
+                            name, Long.valueOf(System.nanoTime() - startTime));
+                }
+                return element;
             }
             else if (tagType == TagType.CONVERTER)
             {
-                return createConverterTagElement(tldDecl, project);
+                final TLDTagElement element =  createConverterTagElement(tldDecl, project);
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
+                {
+                    String name = element != null ? element.toString()
+                            : "<none>";
+                    System.out.printf(
+                            "Time to create converter tag element %s was %d\n",
+                            name, Long.valueOf(System.nanoTime() - startTime));
+                }
+                return element;
             }
             else if (tagType == TagType.VALIDATOR)
             {
-                return createValidatorTagElement(tldDecl, project);
+                final TLDTagElement element =  createValidatorTagElement(tldDecl, project);
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
+                {
+                    String name = element != null ? element.toString()
+                            : "<none>";
+                    System.out.printf(
+                            "Time to create validator tag element %s was %d\n",
+                            name, Long.valueOf(System.nanoTime() - startTime));
+                }
+                return element;
             }
             else if (tagType == TagType.HANDLER)
             {
-                return createHandlerTagElement(tldDecl, type);
+                final TLDTagElement element =  createHandlerTagElement(tldDecl, type);
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
+                {
+                    String name = element != null ? element.toString()
+                            : "<none>";
+                    System.out.printf(
+                            "Time to create handler tag element %s was %d\n",
+                            name, Long.valueOf(System.nanoTime() - startTime));
+                }
+                return element;
             }
         }
         catch (final JavaModelException jme)

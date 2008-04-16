@@ -12,6 +12,10 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
 public class TLDTagHandlerElement extends TLDJSFTagElement implements
         IHandlerTagElement
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8984277085824995102L;
     private final TagHandlerType      _tagHandlerType;
 
     /**

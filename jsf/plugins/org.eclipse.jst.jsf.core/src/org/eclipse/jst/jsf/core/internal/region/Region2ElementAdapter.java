@@ -16,6 +16,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentReg
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
 import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
@@ -89,6 +90,14 @@ public class Region2ElementAdapter extends ElementDOMAdapter
     public ITextRegionCollection getTextRegion()
     {
         return _regionParser._region;
+    }
+
+    /**
+     * @return the element
+     */
+    public Element getElement()
+    {
+        return (Element) _regionParser._node;
     }
 
     private class RegionProcessorStrategy

@@ -38,11 +38,12 @@ public class DecoratableExtensionFactory<EXTENSIONTYPE> extends
      * @param bundle
      * @param extName
      * @param elementName
+     * @param alwaysPerProject 
      */
     public DecoratableExtensionFactory(final Bundle bundle,
-            final String extName, final String elementName)
+            final String extName, final String elementName, final boolean alwaysPerProject)
     {
-        super(bundle, extName, elementName);
+        super(bundle, extName, elementName, alwaysPerProject);
         _forNameToId = new HashMap<String, List<String>>();
     }
 
@@ -88,9 +89,9 @@ public class DecoratableExtensionFactory<EXTENSIONTYPE> extends
 
     
     @Override
-    protected ExtensionData processExtension(IConfigurationElement element)
+    protected ExtensionData processExtension(IConfigurationElement element, boolean alwaysPerProject)
     {
-        final ExtensionData data = super.processExtension(element);
+        final ExtensionData data = super.processExtension(element, alwaysPerProject);
         final String forRuntimeClass = element
                 .getAttribute(DECORATOR_ATTRIBUTE_NAME);
         if (forRuntimeClass != null && !"".equals(forRuntimeClass.trim())){

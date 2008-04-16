@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.context.IDelegatingFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
@@ -99,7 +98,7 @@ public class JSFCorePlugin extends WTPPlugin
     {
         super.stop(context);
 
-        final IStructuredDocumentContextResolverFactory factory = IStructuredDocumentContextResolverFactory.INSTANCE;
+        final IStructuredDocumentContextResolverFactory2 factory = IStructuredDocumentContextResolverFactory2.INSTANCE;
 
         if (factory instanceof IDelegatingFactory
                 && _tagLibResolverFactory != null)
@@ -219,7 +218,7 @@ public class JSFCorePlugin extends WTPPlugin
         {
             _variableResolverFactory = new DecoratableExtensionFactory<AbstractDTVariableResolver>(
                     getDefault().getBundle(), VARIABLE_RESOLVER_EXT_POINT_NAME,
-                    VARIABLE_RESOLVER_ELEMENT_NAME);
+                    VARIABLE_RESOLVER_ELEMENT_NAME, false);
         }
     }
 
@@ -243,7 +242,7 @@ public class JSFCorePlugin extends WTPPlugin
         {
             _propertyResolverFactory = new DecoratableExtensionFactory<AbstractDTPropertyResolver>(
                     getDefault().getBundle(), PROPERTY_RESOLVER_EXT_POINT_NAME,
-                    PROPERTY_RESOLVER_ELEMENT_NAME);
+                    PROPERTY_RESOLVER_ELEMENT_NAME, false);
         }
     }
 
@@ -288,7 +287,7 @@ public class JSFCorePlugin extends WTPPlugin
         {
             _methodResolverFactory = new BasicExtensionFactory<AbstractDTMethodResolver>(
                     getDefault().getBundle(), METHOD_RESOLVER_EXT_POINT_NAME,
-                    METHOD_RESOLVER_ELEMENT_NAME);
+                    METHOD_RESOLVER_ELEMENT_NAME, false);
         }
     }
     private static BasicExtensionFactory<AbstractDTMethodResolver> _methodResolverFactory;
@@ -311,7 +310,7 @@ public class JSFCorePlugin extends WTPPlugin
         {
             _externalContextResolverFactory = new BasicExtensionFactory<AbstractDTExternalContextFactory>(
                     getDefault().getBundle(), EXTERNAL_CONTEXT_EXT_POINT_NAME,
-                    EXTERNAL_CONTEXT_ELEMENT_NAME);
+                    EXTERNAL_CONTEXT_ELEMENT_NAME, false);
         }
     }
     
@@ -335,7 +334,7 @@ public class JSFCorePlugin extends WTPPlugin
         {
             _viewHandlerFactory = new BasicExtensionFactory<AbstractDTViewHandler>(
                     getDefault().getBundle(), VIEWHANDLER_EXT_POINT_NAME,
-                    VIEWHANDLER_ELEMENT_NAME);
+                    VIEWHANDLER_ELEMENT_NAME, true);
         }
     }
 

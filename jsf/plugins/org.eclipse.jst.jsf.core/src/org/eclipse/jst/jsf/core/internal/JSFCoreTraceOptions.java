@@ -22,6 +22,10 @@ public final class JSFCoreTraceOptions
      * True if tag introspector tracing is enabled
      */
     public static final boolean TRACE_JSPTAGINTROSPECTOR;
+    /**
+     * True if tag introspector performance tracing is enabled
+     */
+    public static final boolean TRACE_JSPTAGINTROSPECTOR_PERF;
 
     /**
      * True if the JSP tag registry tracing is enabled
@@ -37,16 +41,25 @@ public final class JSFCoreTraceOptions
      * True if the TLD registry manager tracing is enabled
      */
     public static final boolean TRACE_TLDREGISTRYMANAGER;
+    
+    /**
+     * True if the TLD registry performance tracing is enabled
+     */
+    public static final boolean TRACE_JSPTAGREGISTRY_PERF;
 
     private static final String KEY_DEBUG_ENABLED = "/debug";
     private static final String KEY_DESIGNTIME = "/designtime";
     private static final String KEY_DESIGNTIME_VIEW = KEY_DESIGNTIME + "/view";
     private static final String KEY_VIEW_JSPTAGINTROSPECTOR = KEY_DESIGNTIME_VIEW
             + "/jsptagintrospection";
+    private static final String KEY_VIEW_JSPTAGINTROSPECTOR_PERF = 
+        KEY_VIEW_JSPTAGINTROSPECTOR + "/perf";
     private static final String KEY_VIEW_JSPTAGREGISTRY = KEY_DESIGNTIME_VIEW
             + "/jsptagregistry";
     private static final String KEY_VIEW_JSPTAGREGISTRY_CHANGES =
         KEY_VIEW_JSPTAGREGISTRY + "/changes";
+    private static final String KEY_VIEW_JSPTAGREGISTRY_PERF =
+        KEY_VIEW_JSPTAGREGISTRY + "/perf";
     private static final String KEY_VIEW_TLDREGISTRYMANAGER =
         KEY_DESIGNTIME_VIEW + "/tldregistrymanager";
     
@@ -68,6 +81,10 @@ public final class JSFCoreTraceOptions
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_CHANGES, false);
             TRACE_TLDREGISTRYMANAGER = debugOptions.getBooleanOption(
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_TLDREGISTRYMANAGER, false);
+            TRACE_JSPTAGREGISTRY_PERF = debugOptions.getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_PERF, false);
+            TRACE_JSPTAGINTROSPECTOR_PERF = debugOptions.getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR_PERF, false);
         }
         else
         {
@@ -75,6 +92,8 @@ public final class JSFCoreTraceOptions
             TRACE_JSPTAGREGISTRY = false;
             TRACE_JSPTAGREGISTRY_CHANGES = false;
             TRACE_TLDREGISTRYMANAGER = false;
+            TRACE_JSPTAGREGISTRY_PERF = false;
+            TRACE_JSPTAGINTROSPECTOR_PERF = false;
         }
     }
 

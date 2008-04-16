@@ -11,9 +11,14 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.ui.internal;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -73,6 +78,41 @@ public class JSFUiPlugin extends AbstractUIPlugin {
 		return AbstractUIPlugin.imageDescriptorFromPlugin("org.eclipse.jst.jsf.ui", path); //$NON-NLS-1$
 	}
 
+	   /**
+     * Returns a shared image for the given name
+     * <p>
+     * Note: Images returned from this method will be automitically disposed of
+     * when this plug-in shuts down. Callers must not dispose of these images
+     * themselves.
+     * </p>
+     * 
+     * @param name
+     *            the image name found in /icons (with extension)
+     * @return the image, null on error or not found.
+     */
+    public Image getImage(String name) {
+        if (name == null) {
+            return null;
+        }
+
+        ImageRegistry images = getImageRegistry();
+        Image image = images.get(name);
+        if (image == null) {
+            try {
+                final URL pluginBase= getBundle().getEntry("/");;
+                ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
+                        pluginBase, "icons/" + name));
+                images.put(name, id);
+
+                image = images.get(name);
+            } catch (MalformedURLException ee) {
+                // log.CommonPlugin.image.error=Image {0} not found.
+                //.error("log.msg", "log.CommonPlugin.image.error", name, ee);
+                log(IStatus.ERROR, "Loading image", ee);
+            }
+        }
+        return image;
+    }
 	/**
 	 * @return the plugin id
 	 */

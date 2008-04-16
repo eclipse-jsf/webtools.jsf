@@ -22,9 +22,13 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
  */
 public class TLDNamespace extends Namespace
 {
-    private final TLDDocument _tldDoc;
-    private final ITagResolvingStrategy<TLDElementDeclaration, String> _tagResolver;
-    private final ILock _tagMapReadWriteLock;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 9206460825737988441L;
+    private final transient TLDDocument _tldDoc;
+    private final transient ITagResolvingStrategy<TLDElementDeclaration, String> _tagResolver;
+    private final transient ILock _tagMapReadWriteLock;
 
     private Map<String, ITagElement> _tags; // lazy init in initializeTags
 

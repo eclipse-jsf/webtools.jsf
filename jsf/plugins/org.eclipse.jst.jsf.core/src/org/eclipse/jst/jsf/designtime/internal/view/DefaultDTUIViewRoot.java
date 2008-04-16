@@ -1,16 +1,12 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jst.jsf.common.internal.RunOnCompletionPattern;
+import java.io.Serializable;
+
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
-import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 
 /**
- * The default view root implementation
+ * The default view root implementation. Assumes an XML view definition.
  * 
  * @author cbateman
  * 
@@ -21,92 +17,45 @@ public class DefaultDTUIViewRoot extends DTUIViewRoot
      * serializable
      */
     private static final long                    serialVersionUID = -6948413077931237435L;
-    // private final DefaultDTViewHandler _viewHandler;
-    private final DTFacesContext                 _context;
-    private final XMLViewDefnAdapter             _viewAdapter;
-    private String                               _viewId;
-    private XMLComponentTreeConstructionStrategy _constructionStrategy;
+    private final DefaultServices                _defaultServices;
 
     /**
-     * @param context
-     * @param viewHandler
-     *            TODO: should we decouple from the viewHandler by creating and
-     *            update proxy?
-     * @param adapter
      */
-    public DefaultDTUIViewRoot(final DTFacesContext context,
-            final IDTViewHandler viewHandler, final XMLViewDefnAdapter adapter)
+    public DefaultDTUIViewRoot()
     {
         // TODO: refactor constants
         super(null, null, new ComponentTypeInfo("javax.faces.ViewRoot",
                 "javax.faces.component.UIViewRoot", "javax.faces.ViewRoot",
                 null));
-        _context = context;
-        // _viewHandler = viewHandler;
-        _viewAdapter = adapter;
+        _defaultServices = new DefaultServices();
     }
 
     @Override
-    public String getViewId()
+    public IAdaptable getServices()
     {
-        return _viewId;
+        return _defaultServices;
     }
 
-    @Override
-    public void setViewId(final String viewId)
+    private class DefaultServices implements IAdaptable, Serializable
     {
-        _viewId = viewId;
-    }
+        /**
+         * 
+         */
+        private static final long serialVersionUID = -5220371377352799212L;
+        private final XMLViewObjectMappingService   _xmlViewObjectMappingService;
 
-    @Override
-    public final void refresh(final Runnable runAfter)
-    {
-        if (_constructionStrategy == null)
+        private DefaultServices()
         {
-            _constructionStrategy = createTreeConstructionStrategy(_viewAdapter, _context
-                    .adaptContextObject().getProject());
+            _xmlViewObjectMappingService = new XMLViewObjectMappingService();
         }
 
-        final Job refreshTreeJob = new RefreshTreeJob(_constructionStrategy,
-                _context, this);
-
-        new RunOnCompletionPattern(refreshTreeJob, runAfter).run();
-    }
-
-    /**
-     * Sub-classes may override to provide a different strategy.
-     * 
-     * @param adapter
-     * @param project
-     * @return the construction strategy used to create this view's component tree
-     */
-    protected XMLComponentTreeConstructionStrategy createTreeConstructionStrategy(
-            XMLViewDefnAdapter adapter, IProject project)
-    {
-        return new XMLComponentTreeConstructionStrategy(adapter, project);
-    }
-
-    private static class RefreshTreeJob extends Job
-    {
-        private final XMLComponentTreeConstructionStrategy _strategy;
-        private final DTFacesContext                       _facesContext;
-        private final DTUIViewRoot                         _root;
-
-        public RefreshTreeJob(
-                final XMLComponentTreeConstructionStrategy strategy,
-                final DTFacesContext facesContext, final DTUIViewRoot root)
+        public Object getAdapter(final Class adapter)
         {
-            super("Refresh Tree Job");
-            _strategy = strategy;
-            _facesContext = facesContext;
-            _root = root;
-        }
-
-        @Override
-        protected IStatus run(final IProgressMonitor monitor)
-        {
-            _strategy.createComponentTree(_facesContext, _root);
-            return Status.OK_STATUS;
+            if (adapter.equals(XMLViewObjectMappingService.class))
+            {
+                return _xmlViewObjectMappingService;
+            }
+            return null;
         }
     }
 }

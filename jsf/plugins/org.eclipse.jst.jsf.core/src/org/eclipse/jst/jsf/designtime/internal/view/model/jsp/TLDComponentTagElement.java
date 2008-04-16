@@ -14,6 +14,10 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
 public class TLDComponentTagElement extends TLDJSFTagElement implements
         IComponentTagElement 
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6479445622102799425L;
     private final ComponentTypeInfo     _componentTypeInfo;
     
     /**

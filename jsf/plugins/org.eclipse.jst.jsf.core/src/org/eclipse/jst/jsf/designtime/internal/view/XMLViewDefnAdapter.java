@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.datatypes.ELExpression;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
@@ -16,6 +18,9 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService.ElementData;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -47,7 +52,7 @@ public abstract class XMLViewDefnAdapter extends
         throw new IllegalArgumentException(
                 "Only Elements can define view object ids");
     }
-    
+
     @Override
     public ViewObject mapToViewObject(
             final Node viewDefnObject,
@@ -73,8 +78,8 @@ public abstract class XMLViewDefnAdapter extends
      *         viewContainer or null if not found. Node must be an Element in
      *         order for this work.
      */
-    public ITagElement mapToTagElement(Node viewDefnObject,
-            IDocument viewContainer)
+    public ITagElement mapToTagElement(final Node viewDefnObject,
+            final IDocument viewContainer)
     {
         if (viewDefnObject instanceof Element)
         {
@@ -88,15 +93,13 @@ public abstract class XMLViewDefnAdapter extends
     {
         final List<Node> roots = new ArrayList<Node>();
 
-        final IStructuredDocumentContext context =
-            IStructuredDocumentContextFactory.INSTANCE.getContext(
-                    container, -1);
+        final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+                .getContext(container, -1);
 
         if (context != null)
         {
-            final IDOMContextResolver resolver =
-                IStructuredDocumentContextResolverFactory.INSTANCE
-                .getDOMContextResolver(context);
+            final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+                    .getDOMContextResolver(context);
 
             if (resolver != null)
             {
@@ -111,6 +114,55 @@ public abstract class XMLViewDefnAdapter extends
 
         return roots;
     }
+
+    @Override
+    public ViewObject findViewObject(final Node viewDefnObject,
+            final ComponentInfo root)
+    {
+        if (root instanceof DTUIViewRoot && viewDefnObject instanceof Element)
+        {
+            final IAdaptable services = ((DTUIViewRoot) root).getServices();
+            final Object serviceAdapter = services
+                    .getAdapter(XMLViewObjectMappingService.class);
+            if (serviceAdapter instanceof XMLViewObjectMappingService)
+            {
+                final IStructuredDocumentContext context = getContext(viewDefnObject);
+
+                if (context != null)
+                {
+                    final String uri = getNamespace((Element) viewDefnObject,
+                            context.getStructuredDocument());
+                    final ElementData elementData = XMLViewObjectMappingService
+                            .createElementData(uri, viewDefnObject
+                                    .getLocalName(), context);
+                    return ((XMLViewObjectMappingService) serviceAdapter)
+                            .findViewObject(elementData);
+                }
+            }
+        }
+        return null;
+    }
+
+    private IStructuredDocumentContext getContext(final Node viewDefnObject)
+    {
+        if (viewDefnObject instanceof IDOMNode)
+        {
+            final IStructuredDocument sdoc = ((IDOMNode) viewDefnObject)
+                    .getStructuredDocument();
+            return IStructuredDocumentContextFactory.INSTANCE.getContext(sdoc,
+                    viewDefnObject);
+        }
+        return null;
+    }
+
+    @Override
+    public Node findViewDefn(final ViewObject viewObject,
+            final ComponentInfo root)
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
     @Override
     public abstract DTELExpression getELExpression(IModelContext context)
             throws ViewHandlerException;
@@ -143,6 +195,7 @@ public abstract class XMLViewDefnAdapter extends
      * @return the prefix in doc for namespace or null if none.
      */
     public abstract String getPrefix(final String namespace, IDocument doc);
+
     /**
      * @param node
      * @param document
@@ -203,7 +256,8 @@ public abstract class XMLViewDefnAdapter extends
     {
         // TODO: need to make meta-data type driven and validate bad conversion
 
-        boolean mapByBeanName = true; // TODO: getMetadata for mapping instead
+        final boolean mapByBeanName = true; // TODO: getMetadata for mapping
+        // instead
 
         if (mapByBeanName)
         {
@@ -215,7 +269,7 @@ public abstract class XMLViewDefnAdapter extends
 
     /**
      * A design time EL expression
-     *
+     * 
      */
     public static class DTELExpression extends ELExpression
     {
@@ -240,14 +294,14 @@ public abstract class XMLViewDefnAdapter extends
         }
 
         /**
-         * @return the document context.  The document relative position of
-         * the start of the EL expression is used 
+         * @return the document context. The document relative position of the
+         *         start of the EL expression is used
          * 
          */
         public IStructuredDocumentContext getDocumentContext()
         {
             return _documentContext;
         }
-        
+
     }
 }

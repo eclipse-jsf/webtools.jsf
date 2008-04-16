@@ -69,8 +69,7 @@ public class XMLViewObjectConstructionStrategy extends
                 // only generate ids for non-viewroot components. This will
                 // make the generated id's more faithful to runtime since the
                 // running count won't be incremented for view roots (as they
-                // won't
-                // at runtime).
+                // won't at runtime).
                 if (!"javax.faces.ViewRoot".equals(typeInfo.getComponentType()))
                 {
                     id = calculateId(element, _constructionData);
@@ -227,11 +226,26 @@ public class XMLViewObjectConstructionStrategy extends
                 || Signature.SIG_BYTE.equals(signature)
                 || Signature.SIG_SHORT.equals(signature))
         {
-            return Integer.valueOf(convertValue);
+            try
+            {
+                return Integer.valueOf(convertValue);
+            }
+            catch (NumberFormatException nfe)
+            {
+                return null;
+            }
         }
         else if (Signature.SIG_LONG.equals(convertValue))
         {
-            return Long.valueOf(convertValue);
+            try
+            {
+
+                return Long.valueOf(convertValue);
+            }
+            catch (NumberFormatException nfe)
+            {
+                return null;
+            }
         }
 
         return null;

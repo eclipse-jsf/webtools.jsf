@@ -37,19 +37,22 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
     private Map<String, ExtensionData<EXTENSIONTYPE>> _registeredResolvers;
     private final String                              _elementName;
     private final ExtensionDataFactory                _extensionDataFactory;
+    private final boolean _alwaysPerProject;
 
     /**
      * @param bundle
      * @param extName
      * @param elementName
+     * @param alwaysPerProject 
      */
     public BasicExtensionFactory(final Bundle bundle, final String extName,
-            final String elementName)
+            final String elementName, final boolean alwaysPerProject)
     {
         _bundle = bundle;
         _extName = extName;
         _elementName = elementName;
         _extensionDataFactory = new ExtensionDataFactory<EXTENSIONTYPE>();
+        _alwaysPerProject = alwaysPerProject;
     }
 
     /**
@@ -88,7 +91,7 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
                         && element.getAttribute("class") != null //$NON-NLS-1$
                         && element.getAttribute("id") != null) //$NON-NLS-1$
                 {
-                    final ExtensionData extData = processExtension(element);
+                    final ExtensionData extData = processExtension(element, _alwaysPerProject);
 
                     if (extData != null)
                     {
@@ -102,11 +105,12 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
 
     /**
      * @param element
+     * @param alwaysPerProject 
      * @return the extension data for the extension or null if can't be created
      */
-    protected ExtensionData processExtension(final IConfigurationElement element)
+    protected ExtensionData processExtension(final IConfigurationElement element, final boolean alwaysPerProject)
     {
-        return _extensionDataFactory.createExtensionData(element);
+        return _extensionDataFactory.createExtensionData(element, alwaysPerProject);
     }
 
     /**
@@ -116,17 +120,22 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
      */
     protected static class ExtensionDataFactory<EXTENSIONTYPE>
     {
-        ExtensionData createExtensionData(final IConfigurationElement element)
+        ExtensionData createExtensionData(final IConfigurationElement element,
+                final boolean alwaysPerProject)
         {
-            if (isPerProjectExtension(element))
+            if (isPerProjectExtension(element, alwaysPerProject))
             {
                 return new PerProjectExtensionData<EXTENSIONTYPE>(element);
             }
             return new SingleInstanceExtensionData<EXTENSIONTYPE>(element);
         }
 
-        static boolean isPerProjectExtension(final IConfigurationElement element)
+        static boolean isPerProjectExtension(final IConfigurationElement element, final boolean alwaysPerProject)
         {
+            if (alwaysPerProject)
+            {
+                return true;
+            }
             final String flag = element.getAttribute("instancePerProject");
             // must check for null for backward compatibility, since
             // this attribute wasn't part of the original.
@@ -190,6 +199,12 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
             }
             return instance;
         }
+
+        @Override
+        public EXTENSIONTYPE removeInstance(IProject project)
+        {
+            return _extensions.remove(project);
+        }
     }
 
     /**
@@ -225,6 +240,14 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
                 }
             }
             return _instance;
+        }
+
+        @Override
+        public EXTENSIONTYPE removeInstance(IProject project)
+        {
+            final EXTENSIONTYPE removedItem = _instance;
+            _instance = null;
+            return removedItem;
         }
     }
 
@@ -263,20 +286,20 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
         public abstract EXTENSIONTYPE getInstance(final IProject project);
 
         /**
+         * @param project
+         * @return the extension for the project, removing from any internal
+         *         caching. May return null if getInstance was never called for
+         *         project.
+         */
+        public abstract EXTENSIONTYPE removeInstance(final IProject project);
+
+        /**
          * @return the resolver
          * @throws CoreException
          */
         protected EXTENSIONTYPE createInstance() throws CoreException
         {
             return (EXTENSIONTYPE) _element.createExecutableExtension("class");
-        }
-
-        /**
-         * @return true if a single instance should be created per project.
-         */
-        public boolean isInstancePerProject()
-        {
-            return ExtensionDataFactory.isPerProjectExtension(_element);
         }
     }
 }

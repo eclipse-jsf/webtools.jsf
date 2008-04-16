@@ -1,11 +1,16 @@
 package org.eclipse.jst.jsf.ui.internal.tagregistry;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
 import org.eclipse.jst.jsf.core.internal.TagRegistryFactoryInfo;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TagRegistryInstance;
+import org.eclipse.swt.widgets.Composite;
 
 /**
  * Details form for a tag registry
@@ -13,26 +18,45 @@ import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TagRegi
  * @author cbateman
  * 
  */
-public class TagRegistryDetailsForm extends AbstractDetailsForm
+public class TagRegistryDetailsForm extends AbstractXMLSectionsDetailsForm
 {
-    private TagRegistryInstance _tagRegistry;
+    private final static String TAGREGISTRY_SECTION_KEY = "tagRegistrySection";
+    private XMLTextSection      _tagRegistrySection;
+
+    @Override
+    protected Map<? extends Object, XMLTextSection> createXMLTextSections(
+            final Composite parent)
+    {
+        final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
+        _tagRegistrySection = new XMLTextSection(getToolkit(), parent,
+                "Namespace");
+        sections.put(TAGREGISTRY_SECTION_KEY, _tagRegistrySection);
+        return sections;
+    }
+
+    @Override
+    protected Set<XMLTextSection> getInitiallyExpanded(
+            final Map<Object, XMLTextSection> sections)
+    {
+        return Collections.singleton(_tagRegistrySection);
+    }
 
     @Override
     protected void doUpdateSelection(final Object newSelection)
     {
         if (newSelection instanceof TagRegistryInstance)
         {
-            _tagRegistry = (TagRegistryInstance) newSelection;
-            TagRegistryFactoryInfo info = _tagRegistry.getInfo();
+            final TagRegistryInstance tagRegistry = (TagRegistryInstance) newSelection;
+            final TagRegistryFactoryInfo info = tagRegistry.getInfo();
 
             if (info != null)
             {
                 final String format = "<form><p><b>Description:</b> %s</p> <p><b>Id:</b> %s</p> <p><b>Content-Types:</b> %s</p></form>";
                 final String description = info.getDescription();
                 final String id = info.getId();
-                Set<IContentType> contentTypes = info.getContentTypes();
+                final Set<IContentType> contentTypes = info.getContentTypes();
                 String contentTypeLabel = "";
-                Iterator<IContentType> it = contentTypes.iterator();
+                final Iterator<IContentType> it = contentTypes.iterator();
                 for (int i = 0; i < contentTypes.size() - 1 && it.hasNext(); i++)
                 {
                     final IContentType ctype = it.next();
@@ -45,20 +69,10 @@ public class TagRegistryDetailsForm extends AbstractDetailsForm
                     contentTypeLabel += ctype.getName();
                 }
 
-                getTextSection().setText(
-                        String
-                                .format(format, description, id,
-                                        contentTypeLabel), true, false);
-                getTextSection().refresh();
+                _tagRegistrySection.setText(String.format(format, description,
+                        id, contentTypeLabel), true, false);
+                _tagRegistrySection.refresh();
             }
         }
-
     }
-
-    @Override
-    protected String getTitle()
-    {
-        return "Tag Registry";
-    }
-
 }

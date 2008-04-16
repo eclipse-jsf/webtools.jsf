@@ -103,17 +103,16 @@
       </category>
       <view
             name="%jsf.ui.views.componentview.name"
-            icon="icons/sample.gif"
             category="org.eclipse.jst.jsf.ui.view.category"
             class="org.eclipse.jst.jsf.ui.internal.component.ComponentTreeView"
             id="org.eclipse.jst.jsf.ui.component.ComponentTreeView">
       </view>
       <view
-            name="%jsf.ui.views.jsftagregistry.name"
-            icon="icons/sample.gif"
             category="org.eclipse.jst.jsf.ui.view.category"
             class="org.eclipse.jst.jsf.ui.internal.tagregistry.TagRegistryView"
-            id="org.eclipse.jst.jsf.ui.tagregistry.TagRegistryView">
+            icon="icons/obj16/library_obj.gif"
+            id="org.eclipse.jst.jsf.ui.tagregistry.TagRegistryView"
+            name="%jsf.ui.views.jsftagregistry.name">
       </view>
    </extension>
    

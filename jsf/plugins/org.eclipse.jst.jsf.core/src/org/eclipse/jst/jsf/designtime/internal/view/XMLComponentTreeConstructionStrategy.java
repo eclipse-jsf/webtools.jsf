@@ -11,7 +11,11 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService.ElementData;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -26,6 +30,7 @@ public class XMLComponentTreeConstructionStrategy extends
 {
     private final XMLViewDefnAdapter                _adapter;
     private final XMLViewObjectConstructionStrategy _objectConstructionStrategy;
+    private XMLViewObjectMappingService             _tagMappingService;
 
     /**
      * @param adapter
@@ -35,21 +40,23 @@ public class XMLComponentTreeConstructionStrategy extends
             final XMLViewDefnAdapter adapter, final IProject project)
     {
         _adapter = adapter;
-        _objectConstructionStrategy =
-                new XMLViewObjectConstructionStrategy(adapter,
-                        new ComponentConstructionData(0, null, project));
+        _objectConstructionStrategy = new XMLViewObjectConstructionStrategy(
+                adapter, new ComponentConstructionData(0, null, project));
     }
 
     @Override
     public ComponentInfo createComponentTree(final DTFacesContext context,
             final DTUIViewRoot viewRoot)
     {
-        final IDocument container =
-                _adapter.getContainer(context, viewRoot.getViewId());
+        final IDocument container = _adapter.getContainer(context, viewRoot
+                .getViewId());
         final List<Node> roots = _adapter.getViewDefnRoots(container);
 
         if (roots.size() > 0)
         {
+            _tagMappingService = (XMLViewObjectMappingService) viewRoot
+                    .getServices()
+                    .getAdapter(XMLViewObjectMappingService.class);
             _objectConstructionStrategy.getConstructionData().setIdCounter(0);
             // can only handle a single root for XML; should be the DOM root
             return buildComponentTree(roots.get(0), viewRoot, container);
@@ -61,8 +68,8 @@ public class XMLComponentTreeConstructionStrategy extends
     private ComponentInfo buildComponentTree(final Node root,
             final DTUIViewRoot viewRoot, final IDocument document)
     {
-        final ComponentInfo dummyRoot =
-                ComponentFactory.createComponentInfo(null, null, null, true);
+        final ComponentInfo dummyRoot = ComponentFactory.createComponentInfo(
+                null, null, null, true);
         // populate the dummy root
         recurseDOMModel(root, dummyRoot, document);
 
@@ -74,17 +81,17 @@ public class XMLComponentTreeConstructionStrategy extends
 
     /**
      * Tries to find the view defined view root in children and use it populate
-     * viewRoot.  Children may sub-class to a different algorithm or, in some cases
-     * create an implicit (i.e. Facelets does this) view root if one is not 
-     * explicitly created by the view definition.
+     * viewRoot. Children may sub-class to a different algorithm or, in some
+     * cases create an implicit (i.e. Facelets does this) view root if one is
+     * not explicitly created by the view definition.
      * 
      * Regardless of the strategy, the following post-conditions must be true
      * 
      * To the extend that children represent the top-level objects in the view
-     * under the presumed root, viewRoot must be populated with them either directly
-     * if the creation of a view root is implicit (i.e. Facelets) or through a 
-     * valid view root declaration found in the view definition (i.e. f:view in JSP)
-     * found the children list.
+     * under the presumed root, viewRoot must be populated with them either
+     * directly if the creation of a view root is implicit (i.e. Facelets) or
+     * through a valid view root declaration found in the view definition (i.e.
+     * f:view in JSP) found the children list.
      * 
      * The default behaviour assumes the JSP case.
      * 
@@ -93,7 +100,8 @@ public class XMLComponentTreeConstructionStrategy extends
      * @param viewRoot
      * @param children
      */
-    protected void populateViewRoot(final DTUIViewRoot viewRoot, final List children)
+    protected void populateViewRoot(final DTUIViewRoot viewRoot,
+            final List children)
     {
         ComponentInfo foundRoot = null;
         // TODO: additional cases:
@@ -103,8 +111,8 @@ public class XMLComponentTreeConstructionStrategy extends
         // 3) Invalid case: any definition and has more than one view root
         // 4) Invalid case: any definition and has component siblings to the
         // view root
-        FIND_VIEWROOT: for (final Iterator it =
-                children.iterator(); it.hasNext();)
+        FIND_VIEWROOT: for (final Iterator it = children.iterator(); it
+                .hasNext();)
         {
             final ComponentInfo topLevelChild = (ComponentInfo) it.next();
 
@@ -137,6 +145,7 @@ public class XMLComponentTreeConstructionStrategy extends
             }
         }
     }
+
     private void recurseDOMModel(final Node node, final ComponentInfo parent,
             final IDocument document)
     {
@@ -144,11 +153,15 @@ public class XMLComponentTreeConstructionStrategy extends
 
         _objectConstructionStrategy.getConstructionData().setParent(parent);
 
-        mappedObject =
-                _adapter.mapToViewObject(node, _objectConstructionStrategy,
-                        document);
+        mappedObject = _adapter.mapToViewObject(node,
+                _objectConstructionStrategy, document);
 
         ComponentInfo newParent = parent;
+
+        if (node instanceof Element)
+        {
+            maybeAddMapping(mappedObject, (Element) node, document);
+        }
 
         if (mappedObject instanceof ComponentInfo)
         {
@@ -174,6 +187,20 @@ public class XMLComponentTreeConstructionStrategy extends
         for (int i = 0; i < numChildren; i++)
         {
             recurseDOMModel(children.item(i), newParent, document);
+        }
+    }
+
+    private void maybeAddMapping(ViewObject mappedObject, Element node,
+            IDocument document)
+    {
+        if (mappedObject != null && _tagMappingService != null)
+        {
+            final String uri = _adapter.getNamespace(node, document);
+            final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+                    .getContext(document, node);
+            final ElementData elementData = XMLViewObjectMappingService
+                    .createElementData(uri, node.getLocalName(), context);
+            _tagMappingService.createMapping(elementData, mappedObject);
         }
     }
 }

@@ -40,7 +40,6 @@ public abstract class TaglibBasedViewDefnAdapter extends XMLViewDefnAdapter
 
         if (uri != null)
         {
-            // currently tied to JSP, need to abstract for others
             final Namespace lib = getTagRegistry().getTagLibrary(uri);
 
             if (lib != null)
