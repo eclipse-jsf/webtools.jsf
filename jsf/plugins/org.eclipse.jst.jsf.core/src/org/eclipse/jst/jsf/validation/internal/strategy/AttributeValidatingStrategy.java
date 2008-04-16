@@ -4,8 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.dom.AttrDOMAdapter;
@@ -16,6 +18,7 @@ import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.region.Region2AttrAdapter;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
@@ -111,12 +114,28 @@ public class AttributeValidatingStrategy extends
             final IStructuredDocumentContext context,
             final Region2AttrAdapter attrAdapter)
     {
-        // if there's elText then validate it
-        // TODO: this approach will fail with mixed expressions
-        if (!checkIfELAndValidate(attrAdapter, context))
+        // so of the code in run calls out into extension code or code
+        // dependent on external data (meta-data)
+        SafeRunner.run(new ISafeRunnable()
         {
-            validateNonELAttributeValue(context, attrAdapter);
-        }
+            public void handleException(Throwable exception)
+            {
+                JSFCorePlugin.log(String.format(
+                        "Error validating attribute: %s on element %s",
+                        attrAdapter.getNodeName(), attrAdapter
+                                .getOwningElement().getNodeName()), exception);
+            }
+
+            public void run() throws Exception
+            {
+                // if there's elText then validate it
+                // TODO: this approach will fail with mixed expressions
+                if (!checkIfELAndValidate(attrAdapter, context))
+                {
+                    validateNonELAttributeValue(context, attrAdapter);
+                }
+            }
+        });
     }
 
     private boolean checkIfELAndValidate(final Region2AttrAdapter attrAdapter,
@@ -196,8 +215,9 @@ public class AttributeValidatingStrategy extends
                                     .getAttributeValueRuntimeTypeFeatureProcessors(
                                             IValidELValues.class, elContext,
                                             attrAdapter.getAttributeIdentifier());
+                            final String safeELText = elText.replaceAll("[\n\r\t]", " ");
                             validateELExpression(context, elContext, elVals,
-                                    attrAdapter.getValue(), elText);
+                                    attrAdapter.getValue(), safeELText);
                             isEL = true;
                         }
                     }
