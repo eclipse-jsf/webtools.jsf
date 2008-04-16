@@ -94,7 +94,7 @@ class LibraryOperationFactory
 
             synchronized (_tagRegistry)
             {
-                new RemoveTagLibrary(_tagRegistry, _changeRecord).doRun();
+                result = new RemoveTagLibrary(_tagRegistry, _changeRecord).doRun();
 
                 if (result.getSeverity() != IStatus.ERROR
                         && result.getSeverity() != IStatus.CANCEL)
