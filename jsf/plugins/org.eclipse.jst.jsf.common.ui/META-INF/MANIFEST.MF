@@ -26,9 +26,10 @@ Export-Package: org.eclipse.jst.jsf.common.ui;x-friends:="org.eclipse.jst.pagede
  org.eclipse.jst.jsf.common.ui.internal.actions;x-friends:="org.eclipse.jst.jsf.facesconfig.ui",
  org.eclipse.jst.jsf.common.ui.internal.dialogfield;x-friends:="org.eclipse.jst.pagedesigner,org.eclipse.jst.pagedesigner.jsf.ui",
  org.eclipse.jst.jsf.common.ui.internal.dialogs;x-friends:="org.eclipse.jst.pagedesigner",
+ org.eclipse.jst.jsf.common.ui.internal.form;x-internal=true,
  org.eclipse.jst.jsf.common.ui.internal.guiutils;x-friends:="org.eclipse.jst.pagedesigner",
  org.eclipse.jst.jsf.common.ui.internal.logging;x-friends:="org.eclipse.jst.pagedesigner,org.eclipse.jst.pagedesigner.jsf.ui",
- org.eclipse.jst.jsf.common.ui.internal.preferences,
+ org.eclipse.jst.jsf.common.ui.internal.preferences;x-internal=true,
  org.eclipse.jst.jsf.common.ui.internal.utils;x-friends:="org.eclipse.jst.pagedesigner,org.eclipse.jst.jsf.facesconfig.ui,org.eclipse.jst.pagedesigner.jsf.ui"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %pluginProvider

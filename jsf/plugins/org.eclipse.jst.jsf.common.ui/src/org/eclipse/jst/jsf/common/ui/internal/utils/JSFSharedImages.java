@@ -41,4 +41,12 @@ public interface JSFSharedImages
      */
     public final static String GENERIC_CONVERTER_IMG = "jsf_converter.gif";
 
+    /**
+     * A generic image suitable for representing a view root.  Same as the
+     * default image generally associated with f:view.
+     * 
+     * Size: 16x16.
+     */
+    public static final String GENERIC_VIEWROOT_IMG = "jsf_view.gif";
+
 }
