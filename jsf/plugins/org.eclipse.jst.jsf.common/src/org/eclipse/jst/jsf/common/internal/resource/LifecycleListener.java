@@ -20,24 +20,30 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
  * Listens to resource changes and fires lifecycle events
  * 
  * @author cbateman
- *
+ * 
  */
-public class LifecycleListener implements IResourceChangeListener
+public class LifecycleListener extends ImmutableLifecycleListener implements
+        IResourceChangeListener
 {
-    private final static boolean                            ENABLE_TEST_TRACKING
-                                                                = false;
-    private static long                                     _seqId;
-    
-    private final CopyOnWriteArrayList<IResource>                   _resources;
-    private final CopyOnWriteArrayList<IResourceLifecycleListener>  _listeners;
-    private AtomicBoolean                                   _isDisposed = new AtomicBoolean(false);
-    private ITestTracker                                    _testTracker; // == null; initialized by setter injection
+    private final static boolean                           ENABLE_TEST_TRACKING = false;
+    private static long                                    _seqId;
+
+    private final CopyOnWriteArrayList<IResource>          _resources;
+    final CopyOnWriteArrayList<IResourceLifecycleListener> _listeners;
+    private AtomicBoolean                                  _isDisposed          = new AtomicBoolean(
+                                                                                        false);
+    private ITestTracker                                   _testTracker;                       // ==
+                                                                                                // null;
+                                                                                                // initialized
+                                                                                                // by
+                                                                                                // setter
+                                                                                                // injection
 
     /**
-     * Initialize an inactive lifecycle listener.  A workspace listener will not
-     * be installed by this constructor.  The object created using this constructor
-     * will not fire any events until addResource is called at least once to add
-     * a target resource
+     * Initialize an inactive lifecycle listener. A workspace listener will not
+     * be installed by this constructor. The object created using this
+     * constructor will not fire any events until addResource is called at least
+     * once to add a target resource
      */
     public LifecycleListener()
     {
@@ -47,6 +53,7 @@ public class LifecycleListener implements IResourceChangeListener
 
     /**
      * Create a new lifecycle listener for the res
+     * 
      * @param res
      */
     public LifecycleListener(final IResource res)
@@ -65,7 +72,6 @@ public class LifecycleListener implements IResourceChangeListener
         _resources.addAll(resources);
         ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
     }
-    
 
     /**
      * @param testTracker
@@ -76,84 +82,9 @@ public class LifecycleListener implements IResourceChangeListener
     }
 
     /**
-     * @param res
-     */
-    public void addResource(final IResource res)
-    {
-        synchronized(_resources)
-        {
-            // don't add any resources if we've disposed before acquiring the lock
-            if (isDisposed()) return;
-
-            final int preSize = _resources.size();
-            if (!_resources.contains(res))
-            {
-                _resources.add(res);
-            }
-            
-            // if the size of the array was 0
-            // and is now greater, make sure the listener is added
-            if (preSize == 0
-                    && _resources.size() > 0)
-            {
-                ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
-            }
-        }
-    }
-
-    /**
-     * If there are no longer resources being targeted, the resource change
-     * listener will be removed.
-     * 
-     * @param res
-     */
-    public void removeResource(final IResource res)
-    {
-        synchronized(_resources)
-        {
-            // don't bother with this stuff if we're disposed.
-            if (isDisposed())   return;
-            _resources.remove(res);
-            
-            // if there are no longer target resources,
-            // remove the workspace listener
-            if (_resources.size() == 0)
-            {
-                ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
-            }
-        }
-    }
-
-    /**
-     * Release the resource change listener
-     */
-    public void dispose()
-    {
-        if (_isDisposed.compareAndSet(false, true))
-        {
-            // ensure that add/removeResource don't cause races to add or
-            // remove the resource listener
-            synchronized(_resources)
-            {
-                // remove first to minimize the chance that the listener will
-                // be triggered during the remainder of dispose
-                ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
-                _resources.clear();
-            }
-        }
-    }
-
-    /**
-     * @return true if the listener has been disposed
-     */
-    public boolean isDisposed() {
-        return _isDisposed.get();
-    }
-
-    /**
-     * Adds listener to the list of objects registered to receive 
-     * lifecycle events for this resource.  Only adds the listener
-     * if it is not already in the list.
+     * Adds listener to the list of objects registered to receive lifecycle
+     * events for this resource. Only adds the listener if it is not already in
+     * the list.
      * 
      * Method is thread-safe and may block the caller
      * 
@@ -176,7 +107,7 @@ public class LifecycleListener implements IResourceChangeListener
      * Method is thread-safe and may block the caller
      * 
      * Throws {@link IllegalStateException} if isDisposed() == true
-     *
+     * 
      * @param listener
      */
     public void removeListener(final IResourceLifecycleListener listener)
@@ -188,18 +119,103 @@ public class LifecycleListener implements IResourceChangeListener
         _listeners.remove(listener);
     }
 
-    public void resourceChanged(final IResourceChangeEvent event) 
+    /**
+     * @param res
+     */
+    public void addResource(final IResource res)
+    {
+        synchronized (_resources)
+        {
+            // don't add any resources if we've disposed before acquiring the
+            // lock
+            if (isDisposed())
+            {
+                return;
+            }
+
+            final int preSize = _resources.size();
+            if (!_resources.contains(res))
+            {
+                _resources.add(res);
+            }
+
+            // if the size of the array was 0
+            // and is now greater, make sure the listener is added
+            if (preSize == 0 && _resources.size() > 0)
+            {
+                ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+            }
+        }
+    }
+
+    /**
+     * If there are no longer resources being targeted, the resource change
+     * listener will be removed.
+     * 
+     * @param res
+     */
+    public void removeResource(final IResource res)
+    {
+        synchronized (_resources)
+        {
+            // don't bother with this stuff if we're disposed.
+            if (isDisposed())
+            {
+                return;
+            }
+            _resources.remove(res);
+
+            // if there are no longer target resources,
+            // remove the workspace listener
+            if (_resources.size() == 0)
+            {
+                ResourcesPlugin.getWorkspace().removeResourceChangeListener(
+                        this);
+            }
+        }
+    }
+
+    /**
+     * Release the resource change listener
+     */
+    public void dispose()
+    {
+        if (_isDisposed.compareAndSet(false, true))
+        {
+            // ensure that add/removeResource don't cause races to add or
+            // remove the resource listener
+            synchronized (_resources)
+            {
+                // remove first to minimize the chance that the listener will
+                // be triggered during the remainder of dispose
+                ResourcesPlugin.getWorkspace().removeResourceChangeListener(
+                        this);
+                _resources.clear();
+            }
+        }
+    }
+
+    /**
+     * @return true if the listener has been disposed
+     */
+    public boolean isDisposed()
+    {
+        return _isDisposed.get();
+    }
+
+    public void resourceChanged(final IResourceChangeEvent event)
     {
         final long seqId = _seqId++;
-        
+
         if (ENABLE_TEST_TRACKING && _testTracker != null)
         {
-            _testTracker.fireEvent(Event.START_TRACKING, seqId, "trackMethod_resourceChanged");
+            _testTracker.fireEvent(Event.START_TRACKING, seqId,
+                    "trackMethod_resourceChanged");
         }
 
-        assert(!isDisposed());
+        assert (!isDisposed());
 
-        switch(event.getType())
+        switch (event.getType())
         {
             case IResourceChangeEvent.PRE_CLOSE:
             {
@@ -210,8 +226,9 @@ public class LifecycleListener implements IResourceChangeListener
                 {
                     if (proj == res || proj == res.getProject())
                     {
-                        fireLifecycleEvent(
-                                new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_CLOSED));
+                        fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                                EventType.RESOURCE_INACCESSIBLE,
+                                ReasonType.RESOURCE_PROJECT_CLOSED));
                     }
                 }
             }
@@ -224,18 +241,23 @@ public class LifecycleListener implements IResourceChangeListener
                 // must use iterator to ensure copy on write behaviour
                 for (final IResource res : _resources)
                 {
-                    // if the resource being tracked is the resource being deleted,
+                    // if the resource being tracked is the resource being
+                    // deleted,
                     // then fire a resource delete event
                     if (proj == res)
                     {
-                        fireLifecycleEvent(new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_DELETED));
+                        fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                                EventType.RESOURCE_INACCESSIBLE,
+                                ReasonType.RESOURCE_DELETED));
                     }
-                    // if the resource being tracked is a resource in the project being
+                    // if the resource being tracked is a resource in the
+                    // project being
                     // deleted, then fire a project deleted event
                     else if (proj == res.getProject())
                     {
-                        fireLifecycleEvent(
-                            new ResourceLifecycleEvent(res, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_DELETED));
+                        fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                                EventType.RESOURCE_INACCESSIBLE,
+                                ReasonType.RESOURCE_PROJECT_DELETED));
                     }
                 }
             }
@@ -246,12 +268,13 @@ public class LifecycleListener implements IResourceChangeListener
                 for (final IResource res : _resources)
                 {
                     IResourceDelta delta = event.getDelta();
-                    
-//                            long seqId2 = _seqId++;
-//                            if (ENABLE_TEST_TRACKING && _testTracker != null)
-//                            {
-//                                _testTracker.fireEvent(Event.START_TRACKING, seqId2, "testFindMember");
-//                            }
+
+                    // long seqId2 = _seqId++;
+                    // if (ENABLE_TEST_TRACKING && _testTracker != null)
+                    // {
+                    // _testTracker.fireEvent(Event.START_TRACKING, seqId2,
+                    // "testFindMember");
+                    // }
                     // only care about post change events to resources
                     // that we are tracking
                     delta = delta.findMember(res.getFullPath());
@@ -261,35 +284,37 @@ public class LifecycleListener implements IResourceChangeListener
                         visit(delta);
                     }
 
-//                            if (ENABLE_TEST_TRACKING && _testTracker != null)
-//                            {
-//                                _testTracker.fireEvent(Event.STOP_TRACKING, seqId2, "testFindMember");
-//                            }
+                    // if (ENABLE_TEST_TRACKING && _testTracker != null)
+                    // {
+                    // _testTracker.fireEvent(Event.STOP_TRACKING, seqId2,
+                    // "testFindMember");
+                    // }
                 }
             }
             break;
 
             default:
-            // do nothing
-            // we only handle these three
+                // do nothing
+                // we only handle these three
         }
 
         if (ENABLE_TEST_TRACKING && _testTracker != null)
         {
-            _testTracker.fireEvent(Event.STOP_TRACKING, seqId, "trackMethod_resourceChanged");
+            _testTracker.fireEvent(Event.STOP_TRACKING, seqId,
+                    "trackMethod_resourceChanged");
         }
     }
 
     private void fireLifecycleEvent(final ResourceLifecycleEvent event)
     {
-        boolean  disposeAfter = false;
+        boolean disposeAfter = false;
 
-        // NOTE: must use iterator through _listeners so that 
+        // NOTE: must use iterator through _listeners so that
         // CopyOnWriteArrayList protects us from concurrent modification
         for (final IResourceLifecycleListener listener : _listeners)
         {
-           final EventResult result = listener.acceptEvent(event);
-           disposeAfter |= result.getDisposeAfterEvent();
+            final EventResult result = listener.acceptEvent(event);
+            disposeAfter |= result.getDisposeAfterEvent();
         }
 
         if (disposeAfter)
@@ -298,7 +323,7 @@ public class LifecycleListener implements IResourceChangeListener
         }
     }
 
-    private void visit(final IResourceDelta delta) 
+    private void visit(final IResourceDelta delta)
     {
         assert (!isDisposed());
 
@@ -319,19 +344,17 @@ public class LifecycleListener implements IResourceChangeListener
                 // the contents of the file have changed
                 if ((delta.getFlags() & IResourceDelta.CONTENT) != 0)
                 {
-                    fireLifecycleEvent(
-                        new ResourceLifecycleEvent
-                            (res, EventType.RESOURCE_CHANGED
-                                    , ReasonType.RESOURCE_CHANGED_CONTENTS));
+                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                            EventType.RESOURCE_CHANGED,
+                            ReasonType.RESOURCE_CHANGED_CONTENTS));
                 }
             }
             break;
             case IResourceDelta.REMOVED:
             {
-                fireLifecycleEvent(
-                    new ResourceLifecycleEvent
-                        (res, EventType.RESOURCE_INACCESSIBLE
-                                    , ReasonType.RESOURCE_DELETED));
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_INACCESSIBLE,
+                        ReasonType.RESOURCE_DELETED));
             }
             break;
         }
