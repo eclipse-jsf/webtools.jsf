@@ -61,6 +61,8 @@ public class XMLViewDefnValidator implements IJSFViewValidator
             final JSFValidationContext jsfValidationContext, 
             final ContainmentValidatingStrategy containmentStrategy)
     {
+        // TODO: later when we move to composite strategy, run in SafeRunner
+        // to protect against exceptions generated in external code.
         try
         {
             final Region2ElementAdapter regionAdapter = new Region2ElementAdapter(
