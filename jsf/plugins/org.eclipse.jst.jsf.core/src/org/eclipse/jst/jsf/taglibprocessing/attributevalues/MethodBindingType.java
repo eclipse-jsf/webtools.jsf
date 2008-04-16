@@ -12,9 +12,11 @@
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
@@ -39,14 +41,25 @@ public class MethodBindingType extends ExpressionBindingType implements IValidEL
         {
             params[param] = Signature.createTypeSignature(params[param],true);
         }
+        final String runtimeType = getReturnType();
         
-		String returnType = Signature.createTypeSignature(getReturnType(), true);
-		if (returnType == null)
+        String returnTypeSignature = null;
+        
+        if (runtimeType != null)
         {
-			return null;
+             returnTypeSignature = Signature.createTypeSignature(runtimeType, true);
+        }
+        else
+        {
+            JSFCorePlugin.log(IStatus.INFO, "Missing metadata for trait "+RUNTIME_RETURN_TYPE+" for entity "+getMetaDataContext().getEntity());
+        }
+
+		if (returnTypeSignature == null)
+        {
+		    return null;
         }
 		
-		String methodSig = Signature.createMethodSignature(params, returnType);
+		String methodSig = Signature.createMethodSignature(params, returnTypeSignature);
 		return new CompositeType(methodSig, IAssignable.ASSIGNMENT_TYPE_NONE);
 	}
 
