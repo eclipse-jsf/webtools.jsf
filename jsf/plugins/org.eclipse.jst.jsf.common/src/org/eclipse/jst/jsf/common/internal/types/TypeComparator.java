@@ -197,10 +197,10 @@ public final class TypeComparator {
 
     private static boolean canCoerce(final String testType,
             final String checkType) {
-        // can always to coerce to string
-        if (TypeCoercer.typeIsString(checkType)) {
-            // if check type expects writability, need to ensure that
-            // coercability is reversible
+        // can always to coerce to string or object
+        if (TypeCoercer.typeIsString(checkType)
+                || TypeConstants.TYPE_JAVAOBJECT.equals(checkType)) 
+        {
             return true;
         } else if (TypeCoercer.typeIsNumeric(checkType)) {
             return canCoerceNumeric(testType);
