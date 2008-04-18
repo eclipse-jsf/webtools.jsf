@@ -16,6 +16,7 @@ import java.util.Collections;
 import org.eclipse.draw2d.Cursors;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gef.tools.TargetingTool;
@@ -284,21 +285,25 @@ public class RangeDragTracker extends TargetingTool implements DragTracker {
 		// XXX: not using updateTargetEditPartUnderMouse. Maybe should. Don't
 		// want to
 		// go through the request mechanism, so simple implementation for now.
-		EditPart editPart = getCurrentViewer().findObjectAtExcluding(
+		
+		//to avoid 219038 and possibility of current viewer changing
+		final EditPartViewer viewer = getCurrentViewer();
+		final IHTMLGraphicalViewer graphicalViewer = (IHTMLGraphicalViewer)viewer;
+		EditPart editPart = viewer.findObjectAtExcluding(
 				getLocation(), Collections.EMPTY_LIST);
 		IPositionMediator positionMediator = new InlineEditingPositionMediator(
 				new ActionData(ActionData.INLINE_EDIT, null));
-		ExposeHelper exposeHelper = new ExposeHelper(getHTMLGraphicalViewer());
+		ExposeHelper exposeHelper = new ExposeHelper(graphicalViewer);
 		exposeHelper.adjustVertical(getCurrentInput().getMouseLocation());
 		DesignPosition position = EditPartPositionHelper.findEditPartPosition(
 				editPart, getCurrentInput().getMouseLocation(),
 				positionMediator);
 		if (b) {
-			getHTMLGraphicalViewer().setRangeEndPosition(position);
+			graphicalViewer.setRangeEndPosition(position);
 		} else {
-			getHTMLGraphicalViewer().setRange(position, position);
+			graphicalViewer.setRange(position, position);
 		}
-		getHTMLGraphicalViewer().updateHorizontalPos();
+		graphicalViewer.updateHorizontalPos();
 	}
 
     protected boolean handleHover() {
