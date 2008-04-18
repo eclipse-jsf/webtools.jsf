@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -24,7 +26,12 @@ import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentDescription;
+import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.common.ui.internal.utils.PathUtil;
@@ -308,8 +315,21 @@ public class PreviewUtil {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
+			
+			//fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=202613 kindly contributed by Eiji Morito. 
+			IContentTypeManager contentTypeManager = Platform.getContentTypeManager();
+			IContentType contentType = contentTypeManager.getContentType("org.eclipse.wst.html.core.htmlsource"); //$NON-NLS-1$
+			IContentDescription contentDescription = contentType.getDescriptionFor(new StringReader(result.toString()), null);
+			String charset = contentDescription.getCharset();
+			
+			if (charset == null || !Charset.isSupported(charset)) {
+				charset = ResourcesPlugin.getEncoding();
+				if (charset == null)
+					charset = "UTF-8"; //$NON-NLS-1$
+			}
+
 			FileOutputStream fos = new FileOutputStream(file);
-			PrintStream ps = new PrintStream(fos, true, "UTF-8"); //$NON-NLS-1$
+			PrintStream ps = new PrintStream(fos, true, charset);
 			ps.print(result.toString());
 			ps.close();
 			fos.close();
@@ -320,6 +340,7 @@ public class PreviewUtil {
 			return null;
 		}
 	}
+
 
 	/**
 	 * do preivew on Node recursively translate escape char for Node and Node's
