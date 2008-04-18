@@ -729,11 +729,66 @@
 		</trait>
 	</entity>
 
+	<entity id="panelLabelAndMessage" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.PanelLabelAndMessageOperation">
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="panelTabbed" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
 				<tag-convert-info>
 					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.PanelTabbedOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="panelTip" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#669966;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="style"/>
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:bold;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+						<parameter value="TIP "/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="span"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"

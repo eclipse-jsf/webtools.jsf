@@ -58,6 +58,10 @@
             id="PanelGroupLayoutOperation">
       </tagTransformOperation>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelLabelAndMessageOperation"
+            id="PanelLabelAndMessageOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelTabbedOperation"
             id="PanelTabbedOperation">
       </tagTransformOperation>
