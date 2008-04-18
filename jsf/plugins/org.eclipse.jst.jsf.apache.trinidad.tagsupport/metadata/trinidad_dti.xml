@@ -758,6 +758,79 @@
 		</trait>
 	</entity>
 
+	<entity id="progressIndicator" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="table"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="cellpadding"/>
+						<parameter value="0"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="cellspacing"/>
+						<parameter value="0"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="border"/>
+						<parameter value="0"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="align"/>
+						<parameter value="center"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="tr"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="td"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="align"/>
+						<parameter value="center"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="style"/>
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:bold;color:#669966;border-color:#99cc99;border-style:solid;border-width:1px;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+						<parameter value="Processing"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="tr"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="td"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="align"/>
+						<parameter value="center"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="resetButton" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -888,6 +961,23 @@
 		</trait>
 	</entity>
 
+	<entity id="selectManyShuttle" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectShuttleOperation">
+						<parameter value="false"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
 	<entity id="selectOneChoice" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -931,6 +1021,159 @@
 					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectManyCheckboxOneRadioOperation">
 						<parameter value="radio"/>
 					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectOrderShuttle" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.SelectShuttleOperation">
+						<parameter value="true"/>
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+
+	<entity id="selectRangeChoiceBar" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="table"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
+						<parameter value="inlineStyle"/>
+						<parameter value="style"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="cellpadding"/>
+						<parameter value="0"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="cellspacing"/>
+						<parameter value="0"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="border"/>
+						<parameter value="0"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="tr"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="td"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="valign"/>
+						<parameter value="middle"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="nowrap"/>
+						<parameter value=""/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="a"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="href"/>
+						<parameter value="#"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="style"/>
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
+						<parameter value="concat('Previous ',@rows)"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="td"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="valign"/>
+						<parameter value="middle"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="nowrap"/>
+						<parameter value=""/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="select"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="style"/>
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;margin:0px 3px;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="option"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
+						<parameter value="Show All n"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="option"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
+						<parameter value="concat('1 - ',@rows,' of n')"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="option"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
+						<parameter value="concat(@rows + 1,' - ',@rows * 2,' of n')"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="td"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="valign"/>
+						<parameter value="middle"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="nowrap"/>
+						<parameter value=""/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
+						<parameter value="a"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="href"/>
+						<parameter value="#"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="style"/>
+						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
+						<parameter value="concat('Next ',@rows)"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"

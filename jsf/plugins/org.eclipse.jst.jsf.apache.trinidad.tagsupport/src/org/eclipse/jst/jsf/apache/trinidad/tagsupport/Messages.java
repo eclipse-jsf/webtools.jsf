@@ -66,4 +66,49 @@ public class Messages extends NLS {
 	 */
 	public static String SelectItemModel_SampleItem3Value;
 
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_Description;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkMove;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkMoveAll;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkRemove;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkRemoveAll;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkTop;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkUp;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkDown;
+
+	/**
+	 * See messages.properties.
+	 */
+	public static String SelectShuttleOperation_LinkBottom;
+
 }
