@@ -277,7 +277,9 @@ public class JSPUtil {
 	 * @return boolean
 	 */
 	public static boolean supportTaglib(String uri, IFile baseFile) {
-		IPath location = baseFile.getLocation();
+		 //IPath location = baseFile.getLocation();
+		//Bug  https://bugs.eclipse.org/bugs/show_bug.cgi?id=221197 
+		 IPath location = baseFile.getFullPath();
 		if (location != null) {
 			return TaglibIndex.resolve(location.toString(), uri, false) != null;
 		}
