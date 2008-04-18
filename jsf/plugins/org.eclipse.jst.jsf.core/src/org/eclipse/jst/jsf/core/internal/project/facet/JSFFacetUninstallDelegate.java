@@ -31,7 +31,9 @@ import org.eclipse.jst.javaee.core.ParamValue;
 import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
@@ -57,6 +59,14 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 			}
 
 			try {
+				//Before we do any de-configuration, verify that web.xml is available for update
+				IModelProvider provider = JSFUtils.getModelProvider(project);
+				if (provider == null ) {				
+					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_ConfigErr, project.getName())); 
+				} else if (!(provider.validateEdit(null, null).isOK())){					
+					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_NonUpdateableWebXML, project.getName())); 
+				}
+				
 				// Remove JSF Libraries
 				removeJSFLibraries(project, fv, monitor);
 				
@@ -69,6 +79,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 				if (monitor != null) {
 					monitor.worked(1);
 				}
+				
 			} finally {
 				if (monitor != null) {
 					monitor.done();
@@ -119,7 +130,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 	private void uninstallJSFReferencesFromWebApp(final IProject project,
 			final IProgressMonitor monitor) {
 		
-		IModelProvider provider = ModelProviderManager.getModelProvider(project);
+		IModelProvider provider = JSFUtils.getModelProvider(project);
 		Object webAppObj = provider.getModelObject();
 		if (webAppObj != null) {
 			IPath ddPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -139,7 +150,6 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 				provider.modify(new RemoveJSFFromJ2EEWebAppOperation(project), ddPath);			
 			}
 		}
-
 	}
 
 	private boolean isJavaEEWebApp(final Object webAppObj) {

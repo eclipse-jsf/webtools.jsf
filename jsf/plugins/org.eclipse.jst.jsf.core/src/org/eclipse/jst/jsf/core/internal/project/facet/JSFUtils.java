@@ -14,10 +14,13 @@ package org.eclipse.jst.jsf.core.internal.project.facet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jst.j2ee.model.IModelProvider;
+import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
@@ -198,6 +201,19 @@ public abstract class JSFUtils {
 	    }
 	    
 	    return mapping.startsWith("*.");
+	}	
+
+	/**
+	 * @param webProject
+	 * @return IModelProvider
+	 */
+	public static IModelProvider getModelProvider(IProject webProject) {
+		IModelProvider provider = ModelProviderManager.getModelProvider(webProject); 
+		Object webAppObj = provider.getModelObject();
+		if (webAppObj == null){			
+			return null;
+		}			
+		return provider;
 	}
 	
 	/**

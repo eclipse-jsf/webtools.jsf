@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -38,9 +37,11 @@ import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
@@ -78,11 +79,20 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			if (cfg != null) {
 				config = (IDataModel) cfg;
 			} else {
-				throw new CoreException(
-						new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID,
-								"Internal Error creating JSF Facet.  Missing configuration."));
+				throw new JSFFacetException(						
+								Messages.JSFFacetInstallDelegate_InternalErr);
 			}
 
+			//Before we do any configuration, verify that web.xml is available for update
+			IModelProvider provider = JSFUtils.getModelProvider(project);
+			if (provider == null ) {				
+				throw new JSFFacetException( NLS.bind(Messages.JSFFacetInstallDelegate_ConfigErr, project.getName())); 
+			} else if (!(provider.validateEdit(null, null).isOK())){				
+				if (!(provider.validateEdit(null, null).isOK())) {//checks for web.xml file being read-only and allows user to set writeable		
+					throw new JSFFacetException(NLS.bind(Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,  project.getName())); //$NON-NLS-2$
+				}
+			}
+			
 			// Create JSF Libs as classpath containers and set WTP dependencies
 			// as required
 			createClasspathEntries(project, fv, config, monitor);
@@ -253,7 +263,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		}
 
 	}
-
+	
 	/**
 	 * Create servlet and URL mappings and update the webapp
 	 * @param project
@@ -263,15 +273,9 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 	private void createServletAndModifyWebXML(final IProject project,
 			final IDataModel config, final IProgressMonitor monitor) {
 		
-		IModelProvider provider = ModelProviderManager.getModelProvider(project); 
-		Object webAppObj = provider.getModelObject();
-		if (webAppObj == null){
-			JSFCorePlugin.log(IStatus.ERROR, project.getName()+": unable to configure web module for JavaServer Faces"); //$NON-NLS-1$
-			return;
-		}			
-		
+		IModelProvider provider = JSFUtils.getModelProvider(project);
 		IPath webXMLPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
-		if (JSFUtils12.isWebApp25(webAppObj)) {			
+		if (JSFUtils12.isWebApp25(provider.getModelObject())) {			
 			provider.modify(new UpdateWebXMLForJavaEE(project, config), doesDDFileExist(project, webXMLPath) ? webXMLPath : IModelProvider.FORCESAVE); 
 		}
 		else {//must be 2.3 or 2.4			
