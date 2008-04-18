@@ -10,6 +10,8 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.jsfappconfig;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -335,13 +337,19 @@ public class JSFAppConfigUtils {
 								String libraryPathString = libraryPath.toString();
 								JarFile jarFile = null;
 								try {
-									jarFile = new JarFile(libraryPathString, false);
-									if (jarFile != null) {
-										JarEntry jarEntry = jarFile.getJarEntry(FACES_CONFIG_IN_JAR_PATH);
-										if (jarEntry != null) {
-											JARsList.add(libraryPathString);
+									//check existence first [222249]
+									File file = new File(libraryPathString);
+									if (file.exists()) {
+										jarFile = new JarFile(file, false);
+										if (jarFile != null) {
+											JarEntry jarEntry = jarFile.getJarEntry(FACES_CONFIG_IN_JAR_PATH);
+											if (jarEntry != null) {
+												JARsList.add(libraryPathString);
+											}
 										}
 									}
+								} catch (FileNotFoundException fnfex) {
+									//should not get here, but eat error since this could only occur in under strange circumstances [222249]
 								} catch(IOException ioe) {
 									JSFCorePlugin.log(
 											IStatus.ERROR,
