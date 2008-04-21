@@ -105,8 +105,6 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
-import org.eclipse.wst.sse.core.StructuredModelManager;
-import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
@@ -1054,13 +1052,7 @@ public class FacesConfigEditor extends FormEditor implements
 		if (sourceCommandStack == null) {
             IDocument doc = sourcePage.getDocumentProvider().getDocument(getEditorInput());
             if (doc instanceof IStructuredDocument) {
-                IStructuredModel model = StructuredModelManager.getModelManager().getExistingModelForEdit(doc);
-                if (model == null) {
-                    model = StructuredModelManager.getModelManager().getModelForEdit((IStructuredDocument) doc);
-                }
-                sourceCommandStack = new EMFCommandStackGEFAdapter(
-                        (BasicCommandStack) model.getUndoManager()
-                                .getCommandStack());
+            	sourceCommandStack = new EMFCommandStackGEFAdapter(doc);
             }
             else
             {
@@ -1174,10 +1166,23 @@ public class FacesConfigEditor extends FormEditor implements
 
 		adapterFactory.dispose();
 
-		if (this.outlinePage != null) {
-			outlinePage.dispose();
-		}
-
+		if (this.outlinePage != null) 
+			outlinePage.dispose();		
+		
+		if (sourcePage != null) 
+			sourcePage.dispose();
+		
+		if (sourceCommandStack != null)
+			sourceCommandStack.dispose();
+		
+		if (pageflowPage != null) 
+			pageflowPage.dispose();					
+		
+	    if (multiPageCommandStackListener != null)
+	    	multiPageCommandStackListener.dispose();	    
+	    
+		//do not call dispose on delegatingCommandStack.   source and multiPage are already disposed
+		
 		super.dispose();
 	}
 

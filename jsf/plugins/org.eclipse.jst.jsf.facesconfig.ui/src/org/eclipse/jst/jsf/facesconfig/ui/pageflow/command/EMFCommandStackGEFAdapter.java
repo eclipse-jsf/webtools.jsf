@@ -13,9 +13,14 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.command;
 
 import java.util.EventObject;
 
+import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
 /**
  * This adapter is used to let editor be able to monitor EMF CommandStack, e.g.,
@@ -27,15 +32,30 @@ import org.eclipse.gef.commands.CommandStack;
 public class EMFCommandStackGEFAdapter extends CommandStack implements
 		CommandStackListener {
 	private org.eclipse.emf.common.command.BasicCommandStack emfCommandStack;
+	private IStructuredModel model;
 
 	/**
-	 * @param emfCommandStack 
+	 * @param doc
 	 */
-	public EMFCommandStackGEFAdapter(
-			org.eclipse.emf.common.command.BasicCommandStack emfCommandStack) {
+	public EMFCommandStackGEFAdapter (IDocument doc) {
+		
 		super();
-		this.emfCommandStack = emfCommandStack;
-		this.emfCommandStack.addCommandStackListener(this);
+		
+		model = StructuredModelManager.getModelManager().getExistingModelForEdit(doc);
+		
+		if (model == null) {
+			model = StructuredModelManager.getModelManager().getModelForEdit((IStructuredDocument) doc);
+		}
+		
+		emfCommandStack = ((BasicCommandStack) this.model.getUndoManager().getCommandStack());
+		emfCommandStack.addCommandStackListener(this);
+	}
+
+	
+	@Override
+	public void dispose() {
+		model.releaseFromEdit();
+		super.dispose();
 	}
 
 	/*
