@@ -147,12 +147,12 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait> 
-        <trait id="quick-edit-tab">
+   		</trait> -->
+   		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
 				<section id="binding"/>
@@ -324,12 +324,12 @@
      	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>header</item>
 				<item>footer</item>					
 			</value> 	
-   		</trait>    	
+   		</trait> -->   	
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -468,11 +468,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>metaContainer</item>					
 			</value> 	
-   		</trait>
+   		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -669,11 +669,11 @@
 				<section id="label"/>								
 			</value>
 		</trait>      	
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>                
+   		</trait>   -->             
         <entity id="action">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.ActionType</value>
@@ -733,11 +733,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>    
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>	
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait> 
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -801,11 +801,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>    
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>	
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait> 
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -849,11 +849,11 @@
     	<include-entity-group id="common-input-tag-attributes"/> 
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -928,11 +928,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>  
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>    	 
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 			
-   		</trait>  	
+   		</trait>  	-->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -994,11 +994,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait> 
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1188,11 +1188,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>					
 			</value> 	
-   		</trait>   
+   		</trait>   -->
      	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="for"/>
@@ -1243,11 +1243,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait> 
+   		</trait> -->
     	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1298,11 +1298,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1347,11 +1347,11 @@
     <entity id="outputDocument" type="tag">
     	<include-entity-group id="common-event-attributes"/>        
     	<include-entity-group id="common-value-holder-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait>
+   		</trait> -->
     	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1449,7 +1449,7 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>actions</item>
 				<item>appAbout</item>
@@ -1470,7 +1470,7 @@
 				<item>nodeStamp</item>
 				<item>search</item>	
 			</value> 	
-   		</trait>  
+   		</trait>  -->
     	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1542,7 +1542,7 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>bottom</item>
 				<item>end</item>
@@ -1557,7 +1557,7 @@
 				<item>start</item>
 				<item>top</item>
 			</value> 	
-   		</trait>   
+   		</trait>   -->
     	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1631,11 +1631,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>caption</item>
 			</value>
-		</trait>     	
+		</trait>     	-->
     	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1701,11 +1701,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>footer</item>
 			</value>
-		</trait>
+		</trait> -->
     	<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1740,11 +1740,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>separator</item>
 			</value>
-		</trait>        	
+		</trait>        -->	
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1805,11 +1805,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>separator</item>
 			</value>
-		</trait>
+		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1850,12 +1850,12 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>end</item>
 				<item>help</item>
 			</value>
-		</trait> 
+		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1912,7 +1912,7 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>appAbout</item>
 				<item>appCopyright</item>
@@ -1937,7 +1937,7 @@
 				<item>toolbar2</item>
 				<item>toolbarGlobal</item>
 			</value> 	
-   		</trait> 
+   		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1964,7 +1964,7 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>branding</item>
 				<item>brandingApp</item>
@@ -1975,7 +1975,7 @@
 				<item>navigationGlobal</item>
 				<item>search</item>	
 			</value> 	
-   		</trait> 
+   		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -1999,11 +1999,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>trigger</item>
 			</value>
-		</trait>   
+		</trait>   -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2121,11 +2121,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>filter</item>
 			</value> 	
-   		</trait> 
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2216,11 +2216,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>nodeStamp</item>					
 			</value> 	
-   		</trait> 
+   		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2328,11 +2328,11 @@
 				<section id="label"/>	
 			</value>
 		</trait>      	
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>      	
+   		</trait>   -->   	
     	<entity id="selected">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -2404,11 +2404,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-select-tag-attributes"/>
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2438,11 +2438,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-select-tag-attributes"/>
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2469,13 +2469,13 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-select-tag-attributes"/>
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>filter</item>
 				<item>leadingFooter</item>
 				<item>trailingFooter</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2519,11 +2519,11 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-select-tag-attributes"/>       
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait> 
+   		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2543,11 +2543,11 @@
     	<include-entity-group id="common-select-tag-attributes"/>
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>   
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait> 
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2567,11 +2567,11 @@
     	<include-entity-group id="common-select-tag-attributes"/>
     	<include-entity-group id="common-text-attributes"/>
     	<include-entity-group id="common-label-attributes"/>     
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>help</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2601,13 +2601,13 @@
     	<include-entity-group id="common-input-tag-attributes"/>
     	<include-entity-group id="common-select-tag-attributes"/>
     	<include-entity-group id="common-label-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>filter</item>
 				<item>leadingFooter</item>
 				<item>trailingFooter</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2650,11 +2650,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>rangeLabel</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2724,11 +2724,11 @@
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
 		<include-entity-group id="common-show-tag-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>prompt</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2793,11 +2793,11 @@
 				<section id="disabled"/>
 			</value>
 		</trait>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>toolbar</item>
 			</value> 	
-   		</trait>      	
+   		</trait>  -->    	
         <entity id="disabled">
             <trait id="attribute-value-runtime-type">
                 <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
@@ -2911,12 +2911,12 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">
 				<item>busy</item>
 				<item>ready</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -2957,14 +2957,14 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">
+    	<!-- <trait id="supported-facets">
 			<value xsi:type="mdt:ListOfValues">
 				<item>actions</item>
 				<item>detailStamp</item>
 				<item>footer</item>
 				<item>header</item>				
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -3120,11 +3120,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">				
 				<item>nodeStamp</item>
 			</value> 	
-   		</trait> 
+   		</trait> -->
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -3148,11 +3148,11 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">				
 				<item>nodeStamp</item>
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
@@ -3214,7 +3214,7 @@
     	<include-entity-group id="common-core-attributes"/>
     	<include-entity-group id="common-trinidad-attributes"/>
     	<include-entity-group id="common-event-attributes"/>
-    	<trait id="supported-facets">			
+    	<!-- <trait id="supported-facets">			
 			<value xsi:type="mdt:ListOfValues">				
 				<item>actions</item>
 				<item>footer</item>
@@ -3222,7 +3222,7 @@
 				<item>nodeStamp</item>
 				<item>pathStamp</item>				
 			</value> 	
-   		</trait>
+   		</trait> -->
    		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
 				<section id="id"/>
