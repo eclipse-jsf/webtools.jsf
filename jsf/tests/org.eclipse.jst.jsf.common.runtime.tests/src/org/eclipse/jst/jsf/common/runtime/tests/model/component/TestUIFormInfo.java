@@ -38,7 +38,12 @@ public class TestUIFormInfo extends TestComponentInfo {
 
     public void testImplicitAdapter() {
         RuntimeTestUtil.verifyImplicitAdapter(getComponentInfo(),
-                ComponentFactory.NAMING_CONTAINER, new INamingContainerInfo() {});
+                ComponentFactory.NAMING_CONTAINER, new INamingContainerInfo() {
+
+                    /**
+                     * 
+                     */
+                    private static final long serialVersionUID = -3927882952151032590L;});
     }
 
     @Override

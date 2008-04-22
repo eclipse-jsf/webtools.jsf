@@ -102,6 +102,11 @@ public class TestUIDataInfo extends TestComponentInfo {
     public void testImplicitAdapter() {
         RuntimeTestUtil.verifyImplicitAdapter(getComponentInfo(),
                 ComponentFactory.NAMING_CONTAINER, new INamingContainerInfo() {
+
+                    /**
+                     * 
+                     */
+                    private static final long serialVersionUID = -4727106447103788829L;
                 });
     }
 
