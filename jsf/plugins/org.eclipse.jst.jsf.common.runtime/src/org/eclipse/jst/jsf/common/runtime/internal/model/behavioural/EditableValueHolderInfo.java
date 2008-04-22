@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jst.jsf.common.runtime.internal.model.IDesigntimeAdapter;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeListenerDecorator;
@@ -15,12 +17,13 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValueChangeLi
  *
  */
 public class EditableValueHolderInfo extends ValueHolderInfo implements
-        IEditableValueHolderInfo 
+        IEditableValueHolderInfo, IDesigntimeAdapter
 {
     /**
      * 
      */
     private static final long serialVersionUID = -2115990809157328451L;
+    private static final String[]  INTERFACE = new String[] {ComponentFactory.INTERFACE_EDITABLEVALUEHOLDER};
     
     private final boolean       _localSetValue;
     private final Object        _submittedValue;
@@ -122,5 +125,10 @@ public class EditableValueHolderInfo extends ValueHolderInfo implements
         }
         
         return Collections.unmodifiableList(_valueChangeListeners);
+    }
+
+    public String[] getInterfaces()
+    {
+        return INTERFACE;
     }
 }

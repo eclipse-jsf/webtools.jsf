@@ -104,7 +104,7 @@ public abstract class AbstractTagRegistry implements ITagRegistry
     {
         // latch on the isDisposed flag so this block can only ever
         // execute once
-        if (!_isDisposed.compareAndSet(false, true))
+        if (_isDisposed.compareAndSet(false, true))
         {
             fireEvent(new TagRegistryChangeEvent(this,
                 TagRegistryChangeEvent.EventType.REGISTRY_DISPOSED));
@@ -121,9 +121,9 @@ public abstract class AbstractTagRegistry implements ITagRegistry
      */
     protected abstract void doDispose();
 
-    public final void refresh(Runnable runAfter)
+    public final void refresh(final Runnable runAfter, final boolean flushCaches)
     {
-        final Job refreshJob = getRefreshJob();
+        final Job refreshJob = getRefreshJob(flushCaches);
 
         final RunOnCompletionPattern runPattern = new RunOnCompletionPattern(
                 refreshJob, runAfter);
@@ -131,8 +131,9 @@ public abstract class AbstractTagRegistry implements ITagRegistry
     }
 
     /**
+     * @param flushCaches 
      * @return a job that, when run, will perform the registry refresh.  Job
      * must do any necessary synchronizing of internal state.
      */
-    protected abstract Job getRefreshJob();
+    protected abstract Job getRefreshJob(final boolean flushCaches);
 }

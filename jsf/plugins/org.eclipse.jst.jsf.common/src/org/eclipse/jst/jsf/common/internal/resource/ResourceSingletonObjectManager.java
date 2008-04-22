@@ -1,12 +1,16 @@
 package org.eclipse.jst.jsf.common.internal.resource;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
 
 /**
  * An object manager that manages a single instanceof an IManagedObject per
@@ -94,6 +98,16 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
         return _perResourceObjects.containsKey(resource);
     }
 
+    /**
+     * @return a copy of the current set of RESOURCE object keys that we
+     * are managing singletons for.  Collection is mutable, but as a copy,
+     * changes to it do not effect thie object manager.
+     */
+    public synchronized Collection<RESOURCE> getManagedResources()
+    {
+        final Set resources = new HashSet(_perResourceObjects.keySet());
+        return resources;
+    }
     /**
      * Should be called by concrete classes to indicate they have created a new
      * managed object for resource, for which they want to track lifecycle
@@ -221,7 +235,15 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
             {
                 try
                 {
-                    _managedObject.dispose();
+                    if (event.getReasonType() == ReasonType.RESOURCE_DELETED
+                            || event.getReasonType() == ReasonType.RESOURCE_PROJECT_DELETED)
+                    {
+                        _managedObject.destroy();
+                    }
+                    else
+                    {
+                        _managedObject.dispose();
+                    }
                 }
                 // dispose is external code out our control, so make sure
                 // unmanage gets called if it blows up.

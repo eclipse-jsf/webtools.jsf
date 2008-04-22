@@ -204,6 +204,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
                     switch (event.getChangeType())
                     {
                         case VIEW_DEFN_CHANGED:
+                        case PROJECT_CLEANED:
                         {
                             update();
                         }

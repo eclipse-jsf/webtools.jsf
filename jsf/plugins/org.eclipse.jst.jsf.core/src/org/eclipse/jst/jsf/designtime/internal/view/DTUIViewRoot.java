@@ -264,6 +264,10 @@ public abstract class DTUIViewRoot extends ComponentInfo
          * The type of staleness change
          * 
          */
+        /**
+         * @author cbateman
+         *
+         */
         public enum ChangeType
         {
             /**
@@ -282,7 +286,15 @@ public abstract class DTUIViewRoot extends ComponentInfo
              * closed, causing the definition to be made unavailable for an
              * indeterminate amount of time.
              */
-            VIEW_DEFN_PROJECT_CLOSED
+            VIEW_DEFN_PROJECT_CLOSED,
+
+            /**
+             * Indicates that a view root has been invalid due to a project 
+             * clean.  View root should generally be forcibly updated on
+             * a project clean even if other staleness preconditions haven't
+             * been met.
+             */
+            PROJECT_CLEANED
         }
 
         /**

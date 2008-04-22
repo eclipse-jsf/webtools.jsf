@@ -2,18 +2,21 @@ package org.eclipse.jst.jsf.designtime.internal.view.model.jsp.persistence;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
 import org.osgi.framework.Version;
 
 /**
@@ -34,33 +37,54 @@ class MasterIndex implements Serializable
     private static final long               serialVersionUID = -2725662604972649316L;
 
     private final transient String          _repositoryPath;
+    private final transient File            _storageFile;
 
     private IndexHeader                     _header;
     private List<ProjectIndex>              _projectIndices;
 
-    public MasterIndex(final String repositoryPath)
+    public MasterIndex(final File storageFile, final String repositoryPath)
     {
+        _storageFile = storageFile;
         _repositoryPath = repositoryPath;
     }
 
-    public void create(final File file, final SerializableVersion version)
+    public synchronized void create(final SerializableVersion version)
             throws IOException
     {
+        if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
+        {
+            JSFCoreTraceOptions.log("MasterIndex.create, version=:"
+                    + version.toString());
+        }
+
         _header = new IndexHeader(version);
         _projectIndices = new ArrayList<ProjectIndex>();
 
-        save(file);
+        save(_storageFile);
     }
 
-    public void save(final File file) throws IOException
+    public synchronized void save(final File file) throws IOException
     {
         FileOutputStream out = null;
 
         try
         {
+            if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
+            {
+                JSFCoreTraceOptions.log("Trying to save master index file: "
+                        + file.getAbsolutePath());
+            }
+
             out = new FileOutputStream(file);
             final ObjectOutputStream objStream = new ObjectOutputStream(out);
             objStream.writeObject(this);
+
+            if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
+            {
+                JSFCoreTraceOptions
+                        .log("Master index file written successfully: "
+                                + file.getAbsolutePath());
+            }
         }
         finally
         {
@@ -71,18 +95,33 @@ class MasterIndex implements Serializable
         }
     }
 
-    public void load(final File file, final SerializableVersion expectedVersion)
+    public synchronized void load(final SerializableVersion expectedVersion)
             throws IOException, ClassNotFoundException
     {
         FileInputStream in = null;
 
         try
         {
-            in = new FileInputStream(file);
+            if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
+            {
+                JSFCoreTraceOptions.log("Trying to load master index file: "
+                        + _storageFile.getAbsolutePath());
+            }
+
+            in = new FileInputStream(_storageFile);
             final ObjectInputStream objStream = new ObjectInputStream(in);
             MasterIndex index = (MasterIndex) objStream.readObject();
             _header = index._header;
             _projectIndices = index._projectIndices;
+
+            if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
+            {
+                JSFCoreTraceOptions
+                        .log("Loaded master index file successfully:"
+                                + _storageFile.getAbsolutePath());
+                JSFCoreTraceOptions.log("Initial contents: ");
+                System.out.println(index.toString());
+            }
         }
         finally
         {
@@ -93,7 +132,60 @@ class MasterIndex implements Serializable
         }
     }
 
+    public synchronized String toString()
+    {
+        StringBuffer buffer = new StringBuffer();
+
+        buffer.append(String.format("Header: %s\n\n", _header.toString()));
+
+        for (final ProjectIndex projIndex : _projectIndices)
+        {
+            buffer.append(String.format("\t%s\n", projIndex.toString()));
+        }
+
+        return buffer.toString();
+    }
+
     public synchronized ProjectIndex getProjectIndex(final IProject project)
+    {
+        ProjectIndex index = findIndex(project);
+
+        if (index != null)
+        {
+            return index;
+        }
+
+        // otherwise, create.
+        index = new ProjectIndex(0, project.getName(), _repositoryPath);
+        index.create();
+        _projectIndices.add(index);
+        try
+        {
+            save(_storageFile);
+        }
+        catch (IOException ioe)
+        {
+            JSFCorePlugin.log(ioe,
+                    "Failed to save master index.  Project Index for "
+                            + project.toString() + " may not be saved");
+        }
+        return index;
+    }
+
+    public synchronized void removeProjectIndex(final IProject project) throws IOException
+    {
+        final ProjectIndex index = findIndex(project);
+        if (index != null)
+        {
+            _projectIndices.remove(index);
+            if (!index.remove())
+            {
+                throw new IOException("Failed to remove index file");
+            }
+        }
+    }
+
+    private ProjectIndex findIndex(final IProject project)
     {
         // check if the project already exists
         for (final ProjectIndex index : _projectIndices)
@@ -103,12 +195,7 @@ class MasterIndex implements Serializable
                 return index;
             }
         }
-
-        final ProjectIndex index = new ProjectIndex(0, project.getName(),
-                _repositoryPath);
-        index.create();
-        _projectIndices.add(index);
-        return index;
+        return null;
     }
 
     private void writeObject(final java.io.ObjectOutputStream out)
@@ -128,7 +215,7 @@ class MasterIndex implements Serializable
     private class IndexHeader implements Serializable
     {
         /**
-         * 
+         * serializable
          */
         private static final long         serialVersionUID = 40851054201507727L;
 
@@ -143,7 +230,7 @@ class MasterIndex implements Serializable
 
         protected final Version getVersion()
         {
-            return _version;
+            return _version.getVersion();
         }
 
         protected final synchronized long modified()
@@ -155,10 +242,16 @@ class MasterIndex implements Serializable
         {
             return _lastModifiedStamp;
         }
+
+        public String toString()
+        {
+            return "Version: " + _version.toString();
+        }
     }
 
-    static class SerializableVersion extends Version implements Serializable
+    static class SerializableVersion implements Serializable
     {
+        private Version           _version;
         /**
          * 
          */
@@ -167,7 +260,34 @@ class MasterIndex implements Serializable
         public SerializableVersion(final int major, final int minor,
                 final int micro)
         {
-            super(major, minor, micro);
+            _version = new Version(major, minor, micro);
+        }
+
+        public SerializableVersion(final String versionString)
+        {
+            _version = new Version(versionString);
+        }
+
+        public Version getVersion()
+        {
+            return _version;
+        }
+
+        public String toString()
+        {
+            return _version.toString();
+        }
+
+        private void writeObject(ObjectOutputStream out) throws IOException
+        {
+            out.writeObject(_version.toString());
+        }
+
+        private void readObject(ObjectInputStream in) throws IOException,
+                ClassNotFoundException
+        {
+            final String versionString = (String) in.readObject();
+            _version = new Version(versionString);
         }
     }
 
@@ -197,17 +317,22 @@ class MasterIndex implements Serializable
             _relativePath = relativePath;
         }
 
+        public boolean remove()
+        {
+            return _file.delete();
+        }
+
         public synchronized void create()
         {
-            final int uniqueCode = _projectName.hashCode()
-                    ^ ((int) Math.random() * Integer.MAX_VALUE);
+            final long uniqueCode = Math
+                    .round((Math.random() * Integer.MAX_VALUE));
             final String fileName = String.format("Project_%s_%x.idx",
-                    _projectName, Integer.valueOf(uniqueCode));
+                    _projectName, Long.valueOf(uniqueCode));
             _file = new File(new Path(_relativePath).append(fileName)
                     .toOSString());
         }
 
-        public synchronized Map<String, Namespace> getNamespaces()
+        public synchronized Map<String, SerializableTLDNamespace> getNamespaces()
                 throws IOException, ClassNotFoundException
         {
             FileInputStream in = null;
@@ -216,9 +341,13 @@ class MasterIndex implements Serializable
             {
                 in = new FileInputStream(_file);
                 final ObjectInputStream objStream = new ObjectInputStream(in);
-                final Map<String, Namespace> namespaces = (Map<String, Namespace>) objStream
+                final Map<String, SerializableTLDNamespace> namespaces = (Map<String, SerializableTLDNamespace>) objStream
                         .readObject();
                 return namespaces;
+            }
+            catch (FileNotFoundException nfe)
+            {
+                return new HashMap<String, SerializableTLDNamespace>();
             }
             finally
             {
@@ -229,7 +358,9 @@ class MasterIndex implements Serializable
             }
         }
 
-        public synchronized void save(final Map<String, Namespace> namespaces) throws IOException
+        public synchronized void save(
+                final Map<String, SerializableTLDNamespace> namespaces)
+                throws IOException
         {
             FileOutputStream out = null;
 
@@ -246,6 +377,13 @@ class MasterIndex implements Serializable
                     out.close();
                 }
             }
+        }
+
+        public String toString()
+        {
+            return "project= " + _projectName + ", relativePath="
+                    + _relativePath + ", lastModified="
+                    + _lastModStampOnProject + ", saveFile=" + _file;
         }
 
         // public synchronized void save()

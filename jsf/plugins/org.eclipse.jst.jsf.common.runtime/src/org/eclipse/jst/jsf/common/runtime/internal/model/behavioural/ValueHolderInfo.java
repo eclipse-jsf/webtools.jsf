@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.behavioural;
 
+import org.eclipse.jst.jsf.common.runtime.internal.model.IDesigntimeAdapter;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
 
 /**
@@ -8,7 +10,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDeco
  * @author cbateman
  *
  */
-public class ValueHolderInfo implements IValueHolderInfo 
+public class ValueHolderInfo implements IValueHolderInfo, IDesigntimeAdapter
 {
     /**
      * 
@@ -48,5 +50,9 @@ public class ValueHolderInfo implements IValueHolderInfo
     }
     public final ConverterDecorator getConverter() {
         return _converterDecorator;
+    }
+    public String[] getInterfaces()
+    {
+        return new String[] {ComponentFactory.INTERFACE_VALUEHOLDER};
     }
 }

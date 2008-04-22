@@ -18,7 +18,7 @@ public class ActionListenerDecorator extends ComponentDecorator {
     /**
      * @param decorates
      */
-    public ActionListenerDecorator(ComponentInfo decorates) {
+    public ActionListenerDecorator(final ComponentInfo decorates) {
         super(decorates);
     }
 

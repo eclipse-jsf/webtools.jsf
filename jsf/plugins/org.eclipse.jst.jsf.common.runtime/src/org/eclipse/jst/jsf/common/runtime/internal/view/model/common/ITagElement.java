@@ -32,10 +32,10 @@ public interface ITagElement extends Serializable
      * and throw exceptions if attempts are made to implement.  Flag must
      * latch and become irrevocable.
      */
-    public abstract void setLocked();
+//    public abstract void setLocked();
     
     /**
      * @return true if setLocked has been called.
      */
-    public abstract boolean isLocked();
+//    public abstract boolean isLocked();
 }

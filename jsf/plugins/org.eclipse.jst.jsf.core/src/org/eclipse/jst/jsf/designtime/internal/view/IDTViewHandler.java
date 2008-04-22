@@ -172,7 +172,12 @@ public interface IDTViewHandler
              * The wrapped exception may provide tracing information to the
              * cause.
              */
-            BAD_STALENESS_ADVISOR
+            BAD_STALENESS_ADVISOR, 
+            
+            /**
+             * a general failure by the view creation to create a new view root.
+             */
+            UNABLE_TO_CREATE_VIEW
         }
 
         /**

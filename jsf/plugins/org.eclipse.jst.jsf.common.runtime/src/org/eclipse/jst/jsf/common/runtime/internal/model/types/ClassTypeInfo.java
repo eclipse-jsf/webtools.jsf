@@ -66,9 +66,7 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
             System.arraycopy(_interfaces, 0, copy, 0, _interfaces.length);
             return copy;
         }
-        // if array is empty, no need to allocate to new objects since
-        // it is effectively immutable anyway.
-        return _interfaces;
+        return new String[0];
     }
 
     public final String[] getSuperClasses()
@@ -79,9 +77,7 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
             System.arraycopy(_superClasses, 0, copy, 0, _superClasses.length);
             return copy;
         }
-        // if array is empty, no need to allocate to new objects since
-        // it is effectively immutable anyway.
-        return _superClasses;
+        return new String[0];
     }
 
     public final boolean isInstanceOf(String checkType)

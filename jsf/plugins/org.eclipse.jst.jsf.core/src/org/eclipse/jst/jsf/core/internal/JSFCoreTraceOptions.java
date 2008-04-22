@@ -38,9 +38,15 @@ public final class JSFCoreTraceOptions
     public static final boolean TRACE_JSPTAGREGISTRY_CHANGES;
 
     /**
+     * True if the JSP persistent jsp tag resolver strategy is being traced.
+     */
+    public static final boolean TRACE_JSPTAGPERSISTENCE;
+
+    /**
      * True if the TLD registry manager tracing is enabled
      */
     public static final boolean TRACE_TLDREGISTRYMANAGER;
+    
     
     /**
      * True if the TLD registry performance tracing is enabled
@@ -56,12 +62,15 @@ public final class JSFCoreTraceOptions
         KEY_VIEW_JSPTAGINTROSPECTOR + "/perf";
     private static final String KEY_VIEW_JSPTAGREGISTRY = KEY_DESIGNTIME_VIEW
             + "/jsptagregistry";
+    private static final String KEY_VIEW_JSPTAGPERSISTENCE = KEY_DESIGNTIME_VIEW
+            + "/jsptagpersistence";
     private static final String KEY_VIEW_JSPTAGREGISTRY_CHANGES =
         KEY_VIEW_JSPTAGREGISTRY + "/changes";
     private static final String KEY_VIEW_JSPTAGREGISTRY_PERF =
         KEY_VIEW_JSPTAGREGISTRY + "/perf";
     private static final String KEY_VIEW_TLDREGISTRYMANAGER =
         KEY_DESIGNTIME_VIEW + "/tldregistrymanager";
+
     
     static
     {
@@ -85,6 +94,8 @@ public final class JSFCoreTraceOptions
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_PERF, false);
             TRACE_JSPTAGINTROSPECTOR_PERF = debugOptions.getBooleanOption(
                     JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR_PERF, false);
+            TRACE_JSPTAGPERSISTENCE = debugOptions.getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGPERSISTENCE, false);
         }
         else
         {
@@ -94,6 +105,7 @@ public final class JSFCoreTraceOptions
             TRACE_TLDREGISTRYMANAGER = false;
             TRACE_JSPTAGREGISTRY_PERF = false;
             TRACE_JSPTAGINTROSPECTOR_PERF = false;
+            TRACE_JSPTAGPERSISTENCE = false;
         }
     }
 

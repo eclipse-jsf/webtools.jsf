@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.jst.jsf.common.runtime.internal.model.IDesigntimeAdapter;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ActionListenerDecorator;
 
 /**
@@ -12,13 +14,13 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ActionListene
  * @author cbateman
  *
  */
-public class ActionSourceInfo implements IActionSourceInfo 
+public class ActionSourceInfo implements IActionSourceInfo, IDesigntimeAdapter
 {
     /**
      * serializable id
      */
     private static final long serialVersionUID = 6531166406473466685L;
-
+    private static final String[]                INTERFACE = new String[]{ComponentFactory.INTERFACE_ACTIONSOURCE};
     private final String                                    _action;
     private final String                                    _actionListener;
     private final boolean                                   _immediate;
@@ -64,5 +66,10 @@ public class ActionSourceInfo implements IActionSourceInfo
 
     public boolean isImmediate() {
         return _immediate;
+    }
+
+    public String[] getInterfaces()
+    {
+        return INTERFACE;
     }
 }

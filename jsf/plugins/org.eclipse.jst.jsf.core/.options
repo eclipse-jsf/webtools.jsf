@@ -7,5 +7,9 @@ org.eclipse.jst.jsf.core/designtime/view/jsptagregistry=false
 org.eclipse.jst.jsf.core/designtime/view/jsptagregistry/changes=false
 org.eclipse.jst.jsf.core/designtime/view/jsptagregistry/perf=false
 
+org.eclipse.jst.jsf.core/designtime/view/tldregistrymanager=false
+
+org.eclipse.jst.jsf.core/designtime/view/jsptagpersistence=false
+
 org.eclipse.jst.jsf.core/designtime/view/jsptagintrospection=false
 org.eclipse.jst.jsf.core/designtime/view/jsptagintrospection/perf=false

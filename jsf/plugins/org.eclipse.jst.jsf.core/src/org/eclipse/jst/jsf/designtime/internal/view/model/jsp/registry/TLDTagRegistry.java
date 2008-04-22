@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,6 +28,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.DefaultJSPTagResol
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDNamespace;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TagIntrospectingStrategy;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.UnresolvedJSPTagResolvingStrategy;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.persistence.PersistedDataTagStrategy;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
@@ -50,7 +52,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     private boolean                                                    _hasBeenInitialized = false;
     private final ConcurrentLinkedQueue<LibraryOperation>              _changeOperations   = new ConcurrentLinkedQueue<LibraryOperation>();
     private final Job                                                  _changeJob;
-//    private final PersistedDataTagStrategy                             _persistedTagStrategy;
+    private final PersistedDataTagStrategy                             _persistedTagStrategy;
     private TagIndexListener                                           _tagIndexListener;
     private TLDRegistryPreferences                                     _prefs;
 
@@ -76,9 +78,9 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         // makes sure that a tag element will always be created for any
         // given tag definition even if other methods fail
         _resolver.addStrategy(new UnresolvedJSPTagResolvingStrategy());
-//        _persistedTagStrategy = new PersistedDataTagStrategy(_project);
-//        _persistedTagStrategy.init();
-//        _resolver.addStrategy(_persistedTagStrategy);
+        _persistedTagStrategy = new PersistedDataTagStrategy(_project);
+        _persistedTagStrategy.init();
+        _resolver.addStrategy(_persistedTagStrategy);
 
         _changeJob = new ChangeJob(project.getName());
     }
@@ -107,7 +109,8 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         // call checkpoint to flush serializable data
         checkpoint();
-
+        //_persistedTagStrategy.dispose();
+        
         _nsResolved.clear();
         _changeOperations.clear();
 
@@ -127,11 +130,22 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
     public synchronized void checkpoint()
     {
-        //_persistedTagStrategy.save();
+        try
+        {
+            _persistedTagStrategy.save(_nsResolved);
+        }
+        catch (IOException e)
+        {
+           JSFCorePlugin.log(e, "Checkpointing JSP tags failed");
+        }
+        catch (ClassNotFoundException e)
+        {
+            JSFCorePlugin.log(e, "Checkpointing JSP tags failed");
+        }
     }
 
     @Override
-    protected Job getRefreshJob()
+    protected Job getRefreshJob(final boolean flushCaches)
     {
         return new Job("Refreshing JSP tag registry for " + _project.getName())
         {
@@ -154,12 +168,24 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                     final List<Namespace> namespaces = new ArrayList(
                             _nsResolved.values());
 
+                    if (flushCaches)
+                    {
+                        _persistedTagStrategy.clear();
+                    }
+                    // if we aren't flushing caches, then check point the
+                    // current namespace data, so it isn't lost when we clear
+                    // the namespaces
+                    else
+                    {
+                        checkpoint();
+                    }
+
                     _nsResolved.clear();
 
                     fireEvent(new TagRegistryChangeEvent(TLDTagRegistry.this,
                             TagRegistryChangeEvent.EventType.REMOVED_NAMESPACE,
                             namespaces));
-                    initialize();
+                    initialize(true);
 
                     if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
                     {
@@ -174,7 +200,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
     /**
      */
-    private void initialize()
+    private void initialize(boolean fireEvent)
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
@@ -187,7 +213,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         for (final ITaglibRecord tldrec : tldrecs)
         {
             // defer the event
-            final Namespace ns = initialize(tldrec, false);
+            final Namespace ns = initialize(tldrec, fireEvent);
 
             if (ns != null)
             {
@@ -312,7 +338,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         
         if (!_hasBeenInitialized)
         {
-            initialize();
+            initialize(false);
         }
 
         final Set<TLDNamespace> allTagLibraries = new HashSet<TLDNamespace>();
@@ -345,7 +371,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         if (!_hasBeenInitialized)
         {
-            initialize();
+            initialize(false);
         }
 
         final Namespace ns = _nsResolved.get(uri);

@@ -9,6 +9,7 @@ import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider;
 import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider.OrderableObject;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.DefaultJSPTagResolver;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TagIntrospectingStrategy;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.persistence.PersistedDataTagStrategy;
 
 /**
  * Preferences model for the TLD registry
@@ -27,6 +28,8 @@ public class TLDRegistryPreferences
     static
     {
         final List<OrderableObject> list = new ArrayList<OrderableObject>();
+        list.add(new OrderableObject(new StrategyIdentifier(PersistedDataTagStrategy.DISPLAY_NAME,
+                PersistedDataTagStrategy.ID), true));
         list.add(new OrderableObject(new StrategyIdentifier(DefaultJSPTagResolver.DISPLAY_NAME,
                 DefaultJSPTagResolver.ID), true));
         list.add(new OrderableObject(new StrategyIdentifier(TagIntrospectingStrategy.DISPLAY_NAME,

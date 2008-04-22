@@ -1,5 +1,8 @@
 package org.eclipse.jst.jsf.common.runtime.internal.model.behavioural;
 
+import org.eclipse.jst.jsf.common.runtime.internal.model.IDesigntimeAdapter;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
+
 /**
  * Implementation of the IActionSource2Info
  * 
@@ -7,12 +10,14 @@ package org.eclipse.jst.jsf.common.runtime.internal.model.behavioural;
  *
  */
 public class ActionSourceInfo2 extends ActionSourceInfo implements
-        IActionSource2Info 
+        IActionSource2Info, IDesigntimeAdapter
 {
     /**
      * serializable id
      */
     private static final long serialVersionUID = 5811194815559772378L;
+    private static final String[]                INTERFACE = new String[]{ComponentFactory.INTERFACE_ACTIONSOURCE2};
+
     private final String        _actionExpression;
     
     /**
@@ -30,4 +35,10 @@ public class ActionSourceInfo2 extends ActionSourceInfo implements
     public String getActionExpression() {
         return _actionExpression;
     }
+
+    public String[] getInterfaces()
+    {
+        return INTERFACE;
+    }
+    
 }

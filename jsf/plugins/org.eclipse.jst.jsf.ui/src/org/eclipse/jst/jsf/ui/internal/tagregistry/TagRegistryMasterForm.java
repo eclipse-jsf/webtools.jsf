@@ -7,11 +7,14 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IComponentTagElement;
@@ -23,6 +26,7 @@ import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractMasterForm;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.ProjectTracker.ProjectAdvisor;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.ProjectTracker.ProjectTrackingListener;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TagRegistryInstance;
@@ -52,12 +56,13 @@ import org.eclipse.ui.model.WorkbenchViewerComparator;
  */
 public class TagRegistryMasterForm extends AbstractMasterForm
 {
-    private TreeViewer                _registryTreeViewer;
-//    private Action                    _selectProjectAction;
-    private Action                    _refreshAction;
+    private TreeViewer           _registryTreeViewer;
+    // private Action _selectProjectAction;
+    private Action               _refreshAction;
 
-    private final ProjectTracker      _projectTracker;
-    private final ProjectAdvisor      _advisor;
+    private final ProjectTracker _projectTracker;
+    private final ProjectAdvisor _advisor;
+
     /**
      * @param toolkit
      */
@@ -84,8 +89,8 @@ public class TagRegistryMasterForm extends AbstractMasterForm
     @Override
     public Control createClientArea(final Composite parent)
     {
-        final Tree tree = getToolkit().createTree(parent, SWT.SINGLE | SWT.H_SCROLL
-                | SWT.V_SCROLL);
+        final Tree tree = getToolkit().createTree(parent,
+                SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL);
 
         final GridData gridData = new GridData(SWT.FILL, SWT.CENTER, true, true);
         tree.setLayoutData(gridData);
@@ -164,7 +169,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
             IToolBarManager localManager)
     {
         // do nothing to the manager; we have our own toolbar
-        
+
         // contribute to local tool bar
         localManager.add(_refreshAction);
         localManager.update(false);
@@ -173,7 +178,8 @@ public class TagRegistryMasterForm extends AbstractMasterForm
     /**
      */
     @Override
-    protected void contributeToHeadArea(final FormToolkit toolkit, final Composite container)
+    protected void contributeToHeadArea(final FormToolkit toolkit,
+            final Composite container)
     {
         final Label label = new Label(container, SWT.NONE);
         label.setText("Project: ");
@@ -222,23 +228,88 @@ public class TagRegistryMasterForm extends AbstractMasterForm
 
     private void makeActions()
     {
-        _refreshAction = new Action()
+        if (_registryTreeViewer == null)
         {
-            @Override
-            public void run()
-            {
-                final Object input = _registryTreeViewer.getInput();
-
-                if (input instanceof IProject)
-                {
-                    _registryTreeViewer.setInput(input);
-                }
-            }
-        };
+            throw new IllegalStateException(
+                    "_registryTreeViewer must be initialized before calling makeActions");
+        }
+        _refreshAction = new RefreshAction(_registryTreeViewer);
         _refreshAction.setText("Refresh Registry");
         _refreshAction.setToolTipText("Refresh Registry");
         _refreshAction.setImageDescriptor(JSFUICommonPlugin.getDefault()
                 .getImageDescriptor("refresh_nav_16.gif"));
+    }
+
+    private static class RefreshAction extends Action
+    {
+        private final StructuredViewer _viewer;
+
+        /**
+         * @param viewer
+         */
+        private RefreshAction(final StructuredViewer viewer)
+        {
+            super();
+            _viewer = viewer;
+            setEnabled(false);
+            _viewer.addSelectionChangedListener(new ISelectionChangedListener()
+            {
+                public void selectionChanged(SelectionChangedEvent event)
+                {
+                    boolean enabled = false;
+                    final Object selectedObj = getSelected(event.getSelection());
+                    if (selectedObj instanceof TagRegistryInstance)
+                    {
+                        enabled = true;
+                    }
+                    setEnabled(enabled);
+                }
+            });
+        }
+
+        @Override
+        public void run()
+        {
+            final boolean flushCaches = MessageDialog
+                    .openQuestion(
+                            _viewer.getControl().getShell(),
+                            "Flush cached data?",
+                            "Flushing cached data may cause some operations slow until cached information is regenerated");
+            final Object selectedObj = getSelected(_viewer.getSelection());
+
+            if (selectedObj instanceof TagRegistryInstance)
+            {
+                final TagRegistryInstance registryInstance = (TagRegistryInstance) selectedObj;
+                final ITagRegistry registry = registryInstance.getRegistry();
+                if (registry != null)
+                {
+                    // need a non-null runnable so that refresh won't block,
+                    // but don't need to fire events, since the registry will
+                    // fire events on change.
+                    final Runnable nullRunnable = new Runnable()
+                    {
+                        public void run()
+                        {/* do nothing */
+                        }
+                    };
+
+                    registry.refresh(nullRunnable, flushCaches);
+                }
+            }
+        }
+
+        private Object getSelected(ISelection selection)
+        {
+            if (selection instanceof IStructuredSelection)
+            {
+                final IStructuredSelection structuredSel = (IStructuredSelection) selection;
+                if (structuredSel.size() == 1)
+                {
+                    return structuredSel.getFirstElement();
+                }
+            }
+            return null;
+        }
     }
 
     private static class ProjectContentProvider extends
@@ -290,7 +361,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
             }
             else if (obj instanceof IProject)
             {
-                return ((IProject)obj).getName();
+                return ((IProject) obj).getName();
             }
             return obj.toString();
         }

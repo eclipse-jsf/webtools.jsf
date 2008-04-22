@@ -5,8 +5,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jst.jsf.common.internal.resource.ImmutableLifecycleListener;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessAdvisor;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessListener;
@@ -41,6 +43,11 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
         }
 
         final DTUIViewRoot viewRoot = internalCreateView(facesContext, viewId);
+        
+        if (viewRoot == null)
+        {
+            throw new ViewHandlerException("Problem in createView", Cause.UNABLE_TO_CREATE_VIEW);
+        }
         viewRoot.setViewId(viewId);
         final VersionStamp versionStamp = createVersionStamp(facesContext,
                 viewId);
@@ -178,6 +185,40 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
                     .getUnderlyingFolder().getFullPath();
         }
         return null;
+    }
+
+    /**
+     * A default DTUIViewRoot that represents an uncreatable or uninitializable
+     * view root.
+     *
+     */
+    protected static final class NullViewRoot extends DTUIViewRoot
+    {
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 1187035338610719171L;
+
+        /**
+         */
+        protected NullViewRoot()
+        {
+            super(null, null, new ComponentTypeInfo("", "", "",""));
+        }
+
+        @Override
+        public IAdaptable getServices()
+        {
+            return new IAdaptable()
+            {
+                public Object getAdapter(Class adapter)
+                {
+                    // no services
+                    return null;
+                }
+            };
+        }
+        
     }
 
     /**

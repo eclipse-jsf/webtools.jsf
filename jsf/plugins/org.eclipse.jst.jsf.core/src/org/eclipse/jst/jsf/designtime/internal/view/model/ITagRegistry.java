@@ -33,9 +33,10 @@ public interface ITagRegistry
      * (no assumption should be made about what thread it is run on).
      * 
      * @param runAfter
+     * @param flushCaches true indicates that any cached data should be flushed.
      * 
      */
-    public abstract void refresh(final Runnable runAfter);
+    public abstract void refresh(final Runnable runAfter, final boolean flushCaches);
 
     /**
      * Callers should assume the collection is not modifiable.  Implementers

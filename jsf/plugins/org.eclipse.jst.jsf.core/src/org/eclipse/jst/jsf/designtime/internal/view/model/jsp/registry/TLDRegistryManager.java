@@ -1,7 +1,16 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry;
 
+import java.util.Collection;
+
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ISaveContext;
+import org.eclipse.core.resources.ISaveParticipant;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
@@ -13,36 +22,45 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
  * 
  */
 public final class TLDRegistryManager extends
-                        ResourceSingletonObjectManager<TLDTagRegistry, IProject>
+        ResourceSingletonObjectManager<TLDTagRegistry, IProject>
 {
     // STATIC
-    private static TLDRegistryManager                  INSTANCE;
+    private static TLDRegistryManager INSTANCE;
 
     /**
      * @return the singleton instance
      */
     private static TLDRegistryManager getGlobalManager()
     {
-        if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
-        {
-            JSFCoreTraceOptions
-                    .log("TLDRegistryManager: Initializing TLDRegistryManager singleton");
-        }
-
-        synchronized(TLDRegistryManager.class)
+        synchronized (TLDRegistryManager.class)
         {
             if (INSTANCE == null)
             {
+                if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
+                {
+                    JSFCoreTraceOptions
+                            .log("TLDRegistryManager: Initializing TLDRegistryManager singleton");
+                }
                 INSTANCE = new TLDRegistryManager();
             }
-            
+
             return INSTANCE;
         }
     }
 
     private TLDRegistryManager()
     {
-        // do nothing
+        final ISaveParticipant participant = new MyWorkspaceSaveParticipant();
+        
+        try
+        {
+            ResourcesPlugin.getWorkspace().addSaveParticipant(JSFCorePlugin.getDefault()
+                    , participant);
+        }
+        catch (CoreException e)
+        {
+            JSFCorePlugin.log(e, "TLDRegistryManager failed to install save participant");
+        }
     }
 
     @Override
@@ -50,8 +68,9 @@ public final class TLDRegistryManager extends
     {
         if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
         {
-            JSFCoreTraceOptions.log("TLDRegistryManager: creating new instance for "
-                    + project.toString());
+            JSFCoreTraceOptions
+                    .log("TLDRegistryManager: creating new instance for "
+                            + project.toString());
         }
 
         return new TLDTagRegistry(project);
@@ -62,8 +81,9 @@ public final class TLDRegistryManager extends
     {
         if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
         {
-            JSFCoreTraceOptions.log("TLDRegistryManager: Acquired instance for "
-                    + resource.toString());
+            JSFCoreTraceOptions
+                    .log("TLDRegistryManager: Acquired instance for "
+                            + resource.toString());
         }
     }
 
@@ -76,17 +96,18 @@ public final class TLDRegistryManager extends
                     + resource.toString());
         }
     }
-    
+
     /**
      * Adapter used to allow creation by extension point.
      * 
      * @author cbateman
-     *
+     * 
      */
     public static class MyRegistryFactory extends TagRegistryFactory
     {
         @Override
-        public ITagRegistry createTagRegistry(IProject project) throws TagRegistryFactoryException
+        public ITagRegistry createTagRegistry(IProject project)
+                throws TagRegistryFactoryException
         {
             try
             {
@@ -102,6 +123,79 @@ public final class TLDRegistryManager extends
         {
             return "JSP Registry Factory";
         }
-        
+
+    }
+
+    private class MyWorkspaceSaveParticipant implements ISaveParticipant
+    {
+        public void saving(ISaveContext context) throws CoreException
+        {
+            if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
+            {
+                JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saving: Kind="+context.getKind());
+            }
+            try
+            {
+                if (context.getKind() == ISaveContext.FULL_SAVE)
+                {
+                    final Collection<IProject> projects = TLDRegistryManager.this
+                            .getManagedResources();
+
+                    for (final IProject project : projects)
+                    {
+                        saveProject(project);
+                    }
+                }
+                else if (context.getKind() == ISaveContext.PROJECT_SAVE)
+                {
+                    saveProject(context.getProject());
+                }
+
+            }
+            catch (ManagedObjectException moe)
+            {
+                throw new CoreException(new Status(IStatus.ERROR,
+                        JSFCorePlugin.PLUGIN_ID, "Couldn't commit workspace",
+                        moe));
+            }
+        }
+
+        private void saveProject(final IProject project)
+                throws ManagedObjectException
+        {
+            if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
+            {
+                JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saveProject: Project="+project.toString());
+            }
+
+            // check that there is already instance -- don't do anything if there
+            // isn't already an instance for project.
+            if (TLDRegistryManager.this.isInstance(project))
+            {
+                final TLDTagRegistry registry = TLDRegistryManager.this
+                        .getInstance(project);
+                if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
+                {
+                    JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saveProject: calling checkpoint on registry: "+registry.toString());
+                }
+
+                registry.checkpoint();
+            }
+        }
+
+        public void doneSaving(ISaveContext context)
+        {
+            // nothing to do
+        }
+
+        public void prepareToSave(ISaveContext context) throws CoreException
+        {
+            // nothing to do
+        }
+
+        public void rollback(ISaveContext context)
+        {
+            // nothing to do
+        }
     }
 }

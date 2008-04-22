@@ -141,27 +141,41 @@ import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerEx
             // an issue.
             synchronized(_recalcViewRootExclusion)
             {
-                _waitingToAdd.add(listener);
+                synchronized(this)
+                {
+                    _waitingToAdd.add(listener);
+                }
             }
         }
     }
 
-    public synchronized void removeListener(StalenessListener listener)
+    public void removeListener(StalenessListener listener)
     {
-        if (_viewRoot != null)
+        DTUIViewRoot viewRoot = null;
+        
+        synchronized(this)
+        {
+            viewRoot = _viewRoot;
+        }
+
+        if (viewRoot != null)
         {
             synchronized(this)
             {
-                _viewRoot.removeListener(listener);
+                viewRoot.removeListener(listener);
             }
         }
         else
         {
             // ensure that if we calculating a new view root, then there isn't
             // an issue.
+            // always acquire the recalcViewRootExclusion first
             synchronized(_recalcViewRootExclusion)
             {
-                _waitingToAdd.add(listener);
+                synchronized(this)
+                {
+                    _waitingToAdd.add(listener);
+                }
             }
         }
     }

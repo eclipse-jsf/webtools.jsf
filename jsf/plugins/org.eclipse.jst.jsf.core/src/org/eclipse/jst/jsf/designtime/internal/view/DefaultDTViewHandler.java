@@ -5,11 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
@@ -37,7 +44,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
 
     @Override
     public String calculateLocale(final DTFacesContext context)
-            throws ViewHandlerException
+    throws ViewHandlerException
     {
         // TODO Auto-generated method stub
         return null;
@@ -46,15 +53,15 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     @Override
     public IResource getActionDefinition(final DTFacesContext context,
             final String viewId) throws ViewHandlerException
-    {
-        // TODO: this seems like a bit of a cope out...
+            {
+        // TODO: this seems like a bit of a cop out...
         return context.adaptContextObject();
-    }
+            }
 
     @Override
     public IPath getActionURL(final DTFacesContext context,
             final IResource resource, final IPath requestPath)
-            throws ViewHandlerException
+    throws ViewHandlerException
     {
         // TODO Auto-generated method stub
         return null;
@@ -63,7 +70,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     @Override
     public IPath getRelativeActionPath(final DTFacesContext context,
             final String relativeToViewId, final String uri)
-            throws ViewHandlerException
+    throws ViewHandlerException
     {
         // TODO Auto-generated method stub
         return null;
@@ -72,7 +79,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     @Override
     public IViewDefnAdapterFactory getViewMetadataAdapterFactory(
             final DTFacesContext context) throws ViewHandlerException
-    {
+            {
         final IResource res = context.adaptContextObject();
 
         if (res instanceof IFile)
@@ -81,7 +88,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         }
 
         return null;
-    }
+            }
 
     @Override
     protected VersionStamp createVersionStamp(
@@ -91,7 +98,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     }
 
     static class DefaultViewDefnAdapterFactory extends
-            AbstractViewDefnAdapterFactory
+    AbstractViewDefnAdapterFactory
     {
         private final DefaultDTViewHandler _myViewHandler;
 
@@ -103,7 +110,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         @Override
         public IViewDefnAdapter<Node, IDocument> createAdapter(
                 final DTFacesContext context, final String viewId)
-        {
+                {
             try
             {
                 final IResource res = _myViewHandler.getActionDefinition(
@@ -128,7 +135,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
 
             // not found or failed
             return null;
-        }
+                }
     }
 
     @Override
@@ -151,9 +158,26 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
                             (XMLViewDefnAdapter) adapter, res.getProject());
 
                     constructionStrategy
-                            .createComponentTree(facesContext, root);
+                    .createComponentTree(facesContext, root);
                     return root;
                 }
+                JSFCorePlugin
+                .log(
+                        IStatus.WARNING,
+                        String
+                        .format(
+                                "Could not get view adapter to construct design time view root for %s",
+                                viewId));
+            }
+            else
+            {
+                JSFCorePlugin
+                .log(
+                        IStatus.WARNING,
+                        String
+                        .format(
+                                "Could not get view adapter factory toconstruct design time view root for %s",
+                                viewId));
             }
         }
         catch (final ViewHandlerException e)
@@ -162,7 +186,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             // fall-through
         }
 
-        return null;
+        return new NullViewRoot();
     }
 
     /**
@@ -181,8 +205,8 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     }
 
     @Override
-    protected void registerView(DTUIViewRoot viewRoot,
-            DTFacesContext facesContext, String viewId)
+    protected void registerView(final DTUIViewRoot viewRoot,
+            final DTFacesContext facesContext, final String viewId)
     {
         final IResource res = facesContext.adaptContextObject();
         _lifecycleManager.addViewInfo(viewId, res);
@@ -215,9 +239,11 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             final String viewId)
     {
         final IResource res = facesContext.adaptContextObject();
-        if (res != null)
+        // if the view root is null or the res is null fall through
+        // and use the null staleness advisor
+        if (!(viewRoot instanceof NullViewRoot) && res != null)
         {
-            return new ResourceModStampStalenessAdvisor(viewRoot, res);
+            return new ResourceModStampStalenessAdvisor(viewRoot, res, viewId);
         }
         return new NullStalenessAdvisor();
     }
@@ -231,7 +257,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
      * 
      */
     protected final class ResourceModStampStalenessAdvisor extends
-            StalenessAdvisor implements Serializable
+    StalenessAdvisor implements Serializable
     {
         /**
          * version id
@@ -240,23 +266,48 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         private final long                                        _modificationStamp;
 
         private transient final IResource                         _res;
+        private transient final AtomicBoolean                     _forcedStale;
+        private transient final StalenessListener                 _myListener;
 
         /**
          * @param viewRoot
          * @param file
+         * @param viewId 
          */
         public ResourceModStampStalenessAdvisor(final DTUIViewRoot viewRoot,
-                final IResource file)
+                final IResource file, final String viewId)
         {
             _res = file;
             _modificationStamp = file.getModificationStamp();
+            _forcedStale = new AtomicBoolean(false);
+            _myListener = new StalenessListener()
+            {
+                @Override
+                protected void stalenessChanged(final StalenessEvent event)
+                {
+                    if (event.getChangeType() == ChangeType.PROJECT_CLEANED)
+                    {
+                        if (_forcedStale.compareAndSet(false, true))
+                        {
+                            _lifecycleManager.removeListener(_res, _myListener);
+                        }
+                    }
+                }
+            };
+            _lifecycleManager.addViewInfo(viewId, _res);
+            _lifecycleManager.addListener(_res, _myListener);
         }
 
         @Override
         public boolean isStale()
         {
-            final long curStamp = _res.getModificationStamp();
-            return curStamp != _modificationStamp;
+            if (!_forcedStale.get())
+            {
+                final long curStamp = _res.getModificationStamp();
+                return curStamp != _modificationStamp;
+            }
+            // else forced stale
+            return true;
         }
 
         @Override
@@ -279,7 +330,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     }
 
     @Override
-    public final void setLifecycleListener(ImmutableLifecycleListener listener)
+    public final void setLifecycleListener(final ImmutableLifecycleListener listener)
     {
         _lifecycleManager.update(listener);
     }
@@ -294,21 +345,46 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     {
         private ImmutableLifecycleListener     _listener;
         private final Map<IResource, ViewInfo> _stalenessListeners;
+        private final IResourceChangeListener  _buildListener;
 
         public MyLifecycleManager()
         {
             _stalenessListeners = new HashMap<IResource, ViewInfo>();
+            _buildListener = new IResourceChangeListener()
+            {
+                // on a clean build request, fire staleness for all project-related
+                // resources.
+                public void resourceChanged(final IResourceChangeEvent event)
+                {
+                    if (event.getType() == IResourceChangeEvent.PRE_BUILD)
+                    {
+                        if (event.getBuildKind() == IncrementalProjectBuilder.CLEAN_BUILD)
+                        {
+                            if (event.getSource() instanceof IProject)
+                            {
+                                cleanProject((IProject) event.getSource());
+                            }
+                            else if (event.getSource() instanceof IWorkspace)
+                            {
+                                cleanAll();
+                            }
+                        }
+                    }
+                }
+            };
+            ResourcesPlugin.getWorkspace().addResourceChangeListener(_buildListener,
+                    IResourceChangeEvent.PRE_BUILD);
         }
 
-        public void addListener(IResource res, StalenessListener listener)
+        public void addListener(final IResource res, final StalenessListener listener)
         {
-            ViewInfo viewInfo = getViewInfo(res);
+            final ViewInfo viewInfo = getViewInfo(res);
             viewInfo.getListeners().addIfAbsent(listener);
         }
 
-        public void removeListener(IResource res, StalenessListener listener)
+        public void removeListener(final IResource res, final StalenessListener listener)
         {
-            ViewInfo viewInfo = getViewInfo(res);
+            final ViewInfo viewInfo = getViewInfo(res);
             viewInfo.getListeners().remove(listener);
         }
 
@@ -323,7 +399,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
 
                 case RESOURCE_INACCESSIBLE:
                 {
-                    return handleInaccessibleChanageEvent(event);
+                    return handleInaccessibleChangeEvent(event);
                 }
 
                 default:
@@ -342,7 +418,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             }
 
             final IResource res = event.getAffectedResource();
-            List<StalenessListener> stalenessListeners = getListeners(res);
+            final List<StalenessListener> stalenessListeners = getListeners(res);
 
             if (stalenessListeners != null)
             {
@@ -355,7 +431,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             return EventResult.getDefaultEventResult();
         }
 
-        private EventResult handleInaccessibleChanageEvent(
+        private EventResult handleInaccessibleChangeEvent(
                 final ResourceLifecycleEvent event)
         {
             final IResource res = event.getAffectedResource();
@@ -375,7 +451,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             }
 
             final List<StalenessListener>  listeners = getListeners(res);
-            
+
             if (listeners != null)
             {
                 for (final StalenessListener listener : listeners)
@@ -385,6 +461,37 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
                 }
             }
             return EventResult.getDefaultEventResult();
+        }
+
+        private void cleanAll()
+        {
+            final StalenessEvent event = new StalenessEvent(ChangeType.PROJECT_CLEANED);
+            for (final Map.Entry<IResource, ViewInfo> entry : _stalenessListeners.entrySet())
+            {
+                final ViewInfo info = entry.getValue();
+                for (final StalenessListener listener : info.getListeners())
+                {
+                    listener.stalenessChanged(event);
+                }
+            }
+        }
+
+        private void cleanProject(final IProject project)
+        {
+            final StalenessEvent event = new StalenessEvent(ChangeType.PROJECT_CLEANED);
+            for (final Map.Entry<IResource, ViewInfo> entry : _stalenessListeners.entrySet())
+            {
+                final IResource res = entry.getKey();
+                
+                if (res.getProject().equals(project))
+                {
+                    final ViewInfo info = entry.getValue();
+                    for (final StalenessListener listener : info.getListeners())
+                    {
+                        listener.stalenessChanged(event);
+                    }
+                }
+            }
         }
 
         private List<StalenessListener> getListeners(final IResource res)
@@ -406,7 +513,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         public synchronized void addViewInfo(final String viewId,
                 final IResource res)
         {
-            ViewInfo viewInfo = _stalenessListeners.get(viewId);
+            ViewInfo viewInfo = _stalenessListeners.get(res);
 
             if (viewInfo == null)
             {
@@ -424,6 +531,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         {
             // updating with null effectively deregisters any existing listener
             // and doesn't register a new one.
+            ResourcesPlugin.getWorkspace().removeResourceChangeListener(_buildListener);
             update(null);
         }
 
