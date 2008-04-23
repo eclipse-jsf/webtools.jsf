@@ -75,7 +75,7 @@
         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
      <cheatsheet
            composite="false"
-           contentFile="cheatsheets/facesconfigeditor.xml"
+           contentFile="$nl$/cheatsheets/facesconfigeditor.xml"
            id="FacesConfigEditor.CheatSheet"
            name="FacesConfigEditor CheatSheet"/>
   </extension>
