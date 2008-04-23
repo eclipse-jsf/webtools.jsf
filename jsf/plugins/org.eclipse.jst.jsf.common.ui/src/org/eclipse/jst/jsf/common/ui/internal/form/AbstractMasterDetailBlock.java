@@ -77,8 +77,8 @@ public abstract class AbstractMasterDetailBlock implements
         _toolkit = toolkit;
 
         final GridLayout layout = new GridLayout();
-        layout.marginWidth = 0;
-        layout.marginHeight = 0;
+        layout.marginWidth = 5;
+        layout.marginHeight = 5;
         form.getBody().setLayout(layout);
         final SashForm sashForm = new SashForm(form.getBody(), SWT.NULL);
         // sashForm.setData("form", managedForm); //$NON-NLS-1$
