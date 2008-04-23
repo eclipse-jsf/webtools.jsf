@@ -74,10 +74,15 @@
   <extension
         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
      <cheatsheet
+           category="org.eclipse.jst.jsf"
            composite="false"
            contentFile="$nl$/cheatsheets/facesconfigeditor.xml"
            id="FacesConfigEditor.CheatSheet"
-           name="FacesConfigEditor CheatSheet"/>
+           name="Faces Configuration Editor"/>
+     <category
+           id="org.eclipse.jst.jsf"
+           name="JSF Development">
+     </category>
   </extension>
   <!--<extension
         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
