@@ -72,7 +72,7 @@ import org.eclipse.swt.widgets.Composite;
         final List<TitleValuePair> values = new ArrayList<TitleValuePair>();
         values.add(new TitleValuePair("Name", className != null ? Signature
                 .getSimpleName(className) : ""));
-        values.add(new TitleValuePair("Id", id));
+        values.add(new TitleValuePair("Id", id != null ? id : "<i>none</i>"));
         values
                 .add(new TitleValuePair("Parent Id", (parent != null && parent.getId() != null)
                         ? parent.getId()
