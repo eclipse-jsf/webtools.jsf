@@ -8,6 +8,7 @@ import java.util.Set;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IComponentTagElement;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
+import org.eclipse.jst.jsf.ui.internal.common.ViewObjectPresenter;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -19,7 +20,9 @@ import org.eclipse.swt.widgets.Composite;
 public class ComponentDetailSubForm extends AbstractXMLSectionsDetailsForm
 {
     private final static String  COMPONENT_TYPE_SECTION_KEY = "componentSection";
+    private static final String INTERFACES_SECTION_KEY = "interfacesSection";
     private XMLTextSection       _componentTypeSection;
+    private XMLTextSection       _interfacesSection;
 
     @Override
     protected Map<? extends Object, XMLTextSection> createXMLTextSections(Composite parent)
@@ -27,6 +30,9 @@ public class ComponentDetailSubForm extends AbstractXMLSectionsDetailsForm
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
         _componentTypeSection = new XMLTextSection(getToolkit(), parent, "Component Type Information");
         sections.put(COMPONENT_TYPE_SECTION_KEY, _componentTypeSection);
+        
+        _interfacesSection = new XMLTextSection(getToolkit(), parent, "Interface Information");
+        sections.put(INTERFACES_SECTION_KEY, _interfacesSection);
         return sections;
     }
 
@@ -48,16 +54,8 @@ public class ComponentDetailSubForm extends AbstractXMLSectionsDetailsForm
             final ComponentTypeInfo typeInfo = curTagElement.getComponent();
             if (typeInfo != null)
             {
-                final String formatText = "<form><p><b>Component Type:</b> %s</p> <p><b>Component Family:</b> %s</p> <p><b>Render Type:</b> %s</p><p><b>Component Class:</b> %s</p></form>";
-                final String componentType = typeInfo.getComponentType();
-                final String componentFamily = typeInfo.getComponentFamily();
-                final String renderType = typeInfo.getRenderFamily();
-                final String componentClass = typeInfo.getClassName();
-                _componentTypeSection.setText(String.format(formatText,
-                        componentType == null ? "" : componentType,
-                        componentFamily == null ? "" : componentFamily,
-                        renderType == null ? "" : renderType, 
-                        componentClass == null ? "" : componentClass), true, false);
+                _componentTypeSection.setText(ViewObjectPresenter.present(typeInfo), true, false);
+                _interfacesSection.setText(ViewObjectPresenter.presentCompInterfaces(typeInfo, null), true, false);
                 _componentTypeSection.refresh();
             }
         }

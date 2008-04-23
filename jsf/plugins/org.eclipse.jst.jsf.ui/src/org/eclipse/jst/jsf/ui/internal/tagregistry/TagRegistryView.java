@@ -3,7 +3,6 @@ package org.eclipse.jst.jsf.ui.internal.tagregistry;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
@@ -54,15 +53,10 @@ public class TagRegistryView extends ViewPart
     @Override
     public void createPartControl(final Composite parent)
     {
-        final GridLayout  gridLayout= new GridLayout(1,true);
-        parent.setLayout(gridLayout);
         _toolkit = new FormToolkit(parent.getDisplay());
 
-        //_form = createScrolledForm(parent);//_toolkit.createScrolledForm(parent);
         _form = _toolkit.createForm(parent);
         _form.setLayoutData(new  GridData(SWT.FILL, SWT.FILL, true,true));
-        //_form.getBody().setLayout(new GridLayout(2,true));
-        //final ManagedForm managedForm = new ManagedForm(_toolkit, _form);
         _masterDetailBlock =
             new TagRegistryMasterDetailBlock();
         _masterDetailBlock.createContent(_toolkit,_form);

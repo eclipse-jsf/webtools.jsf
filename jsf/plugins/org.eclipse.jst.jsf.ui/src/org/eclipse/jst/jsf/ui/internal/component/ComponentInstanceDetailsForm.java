@@ -1,17 +1,14 @@
 package org.eclipse.jst.jsf.ui.internal.component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jst.jsf.common.runtime.internal.model.IDesigntimeAdapter;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo.ComponentBeanProperty;
@@ -20,6 +17,8 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDeco
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.FacetDecorator;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
+import org.eclipse.jst.jsf.ui.internal.common.ViewObjectPresenter;
+import org.eclipse.jst.jsf.ui.internal.common.ViewObjectPresenter.TitleValuePair;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -70,70 +69,31 @@ import org.eclipse.swt.widgets.Composite;
         final String className = compInfo.getComponentTypeInfo().getClassName();
         final String id = compInfo.getId();
         final ComponentInfo parent = compInfo.getParent();
-        final Map<String, String> values = new HashMap<String, String>();
-        values.put("Name", className != null ? Signature
-                .getSimpleName(className) : "");
-        values.put("Id", id);
+        final List<TitleValuePair> values = new ArrayList<TitleValuePair>();
+        values.add(new TitleValuePair("Name", className != null ? Signature
+                .getSimpleName(className) : ""));
+        values.add(new TitleValuePair("Id", id));
         values
-                .put("Parent Id", parent != null ? parent.getId()
-                        : "<i>none</i>");
+                .add(new TitleValuePair("Parent Id", (parent != null && parent.getId() != null)
+                        ? parent.getId()
+                        : "<i>none</i>"));
 
         _componentSection.setText(String
-                .format(formatText, createLines(values)), true, false);
+                .format(formatText, ViewObjectPresenter.createLines(values)), true, false);
         _componentSection.refresh();
     }
 
     private void updateComponentTypeSection(final ComponentTypeInfo typeInfo)
     {
-        final String formatText = "<form>%s</form>";
-        final String componentType = typeInfo.getComponentType();
-        final String componentFamily = typeInfo.getComponentFamily();
-        final String renderType = typeInfo.getRenderFamily();
-        final String componentClass = typeInfo.getClassName();
-        final Map<String, String> values = new HashMap<String, String>();
-
-        values
-                .put("Component Type", componentType == null ? ""
-                        : componentType);
-        values.put("Component Family", componentFamily == null ? ""
-                : componentFamily);
-        values.put("Render Type", renderType == null ? "" : renderType);
-        values.put("Component Class", componentClass == null ? ""
-                : componentClass);
-
-        _componentTypeSection.setText(String.format(formatText,
-                createLines(values)), true, false);
+        _componentTypeSection.setText(ViewObjectPresenter.present(typeInfo), true, false);
         _componentTypeSection.refresh();
     }
 
     private void updateComponentInterfacesSection(final ComponentInfo compInfo,
             final ComponentTypeInfo typeInfo)
     {
-        final Set<String> interfaces = new HashSet<String>();
-
-        interfaces.addAll(Arrays.asList(typeInfo.getInterfaces()));
-
-        for (final Map.Entry entry : (Set<Map.Entry>) compInfo.getAllAdapters()
-                .entrySet())
-        {
-            final Object infObject = entry.getValue();
-            if (infObject instanceof IDesigntimeAdapter)
-            {
-                interfaces.addAll(Arrays.asList(((IDesigntimeAdapter)infObject).getInterfaces()));
-            }
-        }
-        final List<String> sortedInterfaceNames = new ArrayList<String>(
-                interfaces);
-        Collections.sort(sortedInterfaceNames);
-
-        String text = "";
-        for (final String name : sortedInterfaceNames)
-        {
-            text += createLine(null, name);
-        }
-
-        _componentInterfacesSection.setText(String.format("<form>%s</form>",
-                text), true, false);
+        _componentInterfacesSection.setText(
+                ViewObjectPresenter.presentCompInterfaces(typeInfo,compInfo), true, false);
         _componentInterfacesSection.refresh();
     }
     
@@ -147,7 +107,7 @@ import org.eclipse.swt.widgets.Composite;
             
             if (labelText != null)
             {
-                text += createLine(null, labelText);
+                text += ViewObjectPresenter.createLine(null, labelText);
             }
         }
         Collections.sort(decoratorLines);
@@ -172,7 +132,7 @@ import org.eclipse.swt.widgets.Composite;
                 Object value = propValue.getValue();
                 if (value != null)
                 {
-                    decoratorLines.add(createLine(propName, 
+                    decoratorLines.add(ViewObjectPresenter.createLine(propName, 
                             value.toString()));
                 }
             }
@@ -218,27 +178,7 @@ import org.eclipse.swt.widgets.Composite;
         return Collections.singleton(_componentSection);
     }
 
-    private String createLines(final Map<String, String> values)
-    {
-        String lines = "";
-        for (final Map.Entry<String, String> valueEntry : values.entrySet())
-        {
-            final String title = valueEntry.getKey();
-            final String value = valueEntry.getValue();
 
-            lines += createLine(title, value);
-        }
-        return lines;
-    }
-
-    private String createLine(final String title, final String value)
-    {
-        if (title == null)
-        {
-            return String.format("<p>%s</p>", value);
-        }
-        return String.format("<p><b>%s</b>: %s</p>", title, value);
-    }
     
     private static class MyLabelProvider extends LabelProvider
     {

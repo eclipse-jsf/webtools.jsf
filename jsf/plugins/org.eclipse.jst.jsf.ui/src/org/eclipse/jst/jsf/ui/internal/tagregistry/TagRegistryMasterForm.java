@@ -7,6 +7,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
@@ -270,11 +271,16 @@ public class TagRegistryMasterForm extends AbstractMasterForm
         @Override
         public void run()
         {
-            final boolean flushCaches = MessageDialog
-                    .openQuestion(
-                            _viewer.getControl().getShell(),
-                            "Flush cached data?",
-                            "Flushing cached data may cause some operations slow until cached information is regenerated");
+            MessageDialog dialog = new MessageDialog(_viewer.getControl().getShell(), "Also flush cached data?", null, // accept
+                    // the
+                    // default
+                    // window
+                    // icon
+                    "Flushing cached data may cause some operations to slow until cached information is regenerated.  If you answer no, the view will refresh but NOT flush cached data"
+                    , MessageDialog.QUESTION, new String[] { IDialogConstants.YES_LABEL,
+                            IDialogConstants.NO_LABEL }, 1); // no is the
+                                                                // default
+            final boolean flushCaches =  (dialog.open() == 0);
             final Object selectedObj = getSelected(_viewer.getSelection());
 
             if (selectedObj instanceof TagRegistryInstance)
@@ -296,6 +302,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
                     registry.refresh(nullRunnable, flushCaches);
                 }
             }
+            
         }
 
         private Object getSelected(ISelection selection)
