@@ -77,7 +77,7 @@ public abstract class OrderedListProvider
      * @author cbateman
      * 
      */
-    public static class OrderableObject
+    public static class OrderableObject implements Cloneable
     {
         private boolean _enabled;
         private Object  _object;
@@ -90,6 +90,12 @@ public abstract class OrderedListProvider
         {
             _object = object;
             _enabled = enabled;
+        }
+
+        private OrderableObject(final OrderableObject copyMe)
+        {
+            _object = copyMe._object;
+            _enabled = copyMe._enabled;
         }
 
         /**
@@ -122,6 +128,12 @@ public abstract class OrderedListProvider
         public void setObject(Object object)
         {
             _object = object;
+        }
+
+        @Override
+        public OrderableObject clone()
+        {
+            return new OrderableObject(this);
         }
 
         @Override

@@ -121,7 +121,12 @@ public class TLDRegistryPreferences
             ids = deserialize(serialize(DEFAULT_STRATEGY_ORDER));
         }
         _ids = ids;
-        List<OrderableObject> originalList = new ArrayList<OrderableObject>(_ids);
+        final List<OrderableObject> originalList = new ArrayList<OrderableObject>();
+        for (final OrderableObject id : _ids)
+        {
+            final OrderableObject copy = id.clone();
+            originalList.add(copy);
+        }
         _originalIds = Collections.unmodifiableList(originalList);
     }
 
