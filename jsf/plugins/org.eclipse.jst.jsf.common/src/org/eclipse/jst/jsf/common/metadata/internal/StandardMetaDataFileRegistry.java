@@ -133,14 +133,35 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		
 	}
 	
-	private URI getMDFileURI(){
-		try {
-			return URI.createURI(getFileLocator().getURL().toURI().toString());
-		} catch (URISyntaxException e) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Metadata File Load Error: "+getFileLocator().getFileInfo().toString()+": URISyntaxException: "+e.getMessage());
-		}
-		return null;
-	}
+	private URI getMDFileURI()
+        {
+            try
+            {
+                StandardMetaDataSourceFileLocator fileLocator2 = getFileLocator();
+                if (fileLocator2 != null)
+                {
+                    final URL url = fileLocator2.getURL();
+                    if (url == null)
+                    {
+                        JSFCommonPlugin.log(new RuntimeException(),
+                                "Couldn't locate meta-data file for "
+                                        + fileLocator2.getFileInfo()
+                                                .getLocation());
+                        return null;
+                    }
+
+                    java.net.URI uri = url.toURI();
+                    return URI.createURI(uri.toString());
+                }
+            }
+            catch (URISyntaxException e)
+            {
+                JSFCommonPlugin.log(IStatus.ERROR, "Metadata File Load Error: "
+                        + getFileLocator().getFileInfo().toString()
+                        + ": URISyntaxException: " + e.getMessage());
+            }
+            return null;
+        }
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider#getSourceModel()
@@ -153,7 +174,7 @@ class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 		try {
 			URI uri = getMDFileURI();
 			inputStream = getInputStream();
-			if (inputStream != null){
+			if (inputStream != null && uri != null){
 				EList contents = StandardModelFactory.getInstance().loadStandardFileResource(inputStream, this, uri);
 				//check to see if this is a Model
 				if (contents != null && !contents.isEmpty() &&

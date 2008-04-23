@@ -58,8 +58,8 @@ public abstract class StandardMetaDataSourceFileLocator {
 	
 	/**
 	 * Return URL to the meta-data source file.  
-	 * Must not be null.
-	 * @return URL
+ 
+	 * @return URL or null if cannot find a the file for getFileInfo
 	 */
 	public abstract URL getURL();
 	

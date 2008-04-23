@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 
 /**
  * Default implementation of StandardMetaDataSourceFileLocator that will locate standard metadata files
@@ -47,11 +48,17 @@ public class PluginRelativeStandardMetaDataSourceFileLocator extends StandardMet
         throw new FileNotFoundException("Metadata file not found: "+ fileName);
 	}
 	
-	/**
-	 * @return URL to metadata source.   Must not be null.
+	/* (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataSourceFileLocator#getURL()
 	 */
 	public URL getURL() {
-		return FileLocator.find(Platform.getBundle(fileInfo.getBundleId()), Path.fromOSString(fileInfo.getLocation()), null);
+	    final Bundle bundle = Platform.getBundle(fileInfo.getBundleId());
+	    if (bundle == null)
+	    {
+	        return null;
+	    }
+	    final IPath fromOSString = Path.fromOSString(fileInfo.getLocation());
+		return FileLocator.find(bundle, fromOSString, null);
 	}
 
 	

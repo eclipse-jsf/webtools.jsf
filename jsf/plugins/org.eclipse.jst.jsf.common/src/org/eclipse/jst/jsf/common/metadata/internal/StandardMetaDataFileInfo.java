@@ -16,9 +16,9 @@ package org.eclipse.jst.jsf.common.metadata.internal;
  */
 public final class StandardMetaDataFileInfo implements IStandardMetaDataSourceInfo{
 		
-	private String fileLocation;
-	private String fileLocatorClassname;
-	private String bundleId;
+	private final String fileLocation;
+	private final String fileLocatorClassname;
+	private final String bundleId;
 
 	/**
 	 * Constructor
