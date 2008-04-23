@@ -54,6 +54,10 @@
             id="OutputFormattedOperation">
       </tagTransformOperation>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelFormLayoutOperation"
+            id="PanelFormLayoutOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.PanelGroupLayoutOperation"
             id="PanelGroupLayoutOperation">
       </tagTransformOperation>

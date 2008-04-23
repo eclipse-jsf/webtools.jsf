@@ -14,6 +14,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.ITrinidadConstants;
+import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
@@ -169,27 +173,31 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 
 	protected boolean isRequired(Element srcElement) {
 		boolean required = false;
-		if (srcElement != null) {
-			String requiredVal = srcElement.getAttribute("required"); //$NON-NLS-1$
-			String showRequiredVal = srcElement.getAttribute("showRequired"); //$NON-NLS-1$
-			//if either are true, for the purposes of tag conversion, consider required to be true
-			required =
-				Boolean.parseBoolean(requiredVal) ||
-				Boolean.parseBoolean(showRequiredVal);
+		if (!isChildOfPanelFormLayout(srcElement)) {
+			if (srcElement != null) {
+				String requiredVal = srcElement.getAttribute("required"); //$NON-NLS-1$
+				String showRequiredVal = srcElement.getAttribute("showRequired"); //$NON-NLS-1$
+				//if either are true, for the purposes of tag conversion, consider required to be true
+				required =
+					Boolean.parseBoolean(requiredVal) ||
+					Boolean.parseBoolean(showRequiredVal);
+			}
 		}
 		return required;
 	}
 
 	protected String getLabel(Element srcElement) {
 		String label = null;
-		if (srcElement != null) {
-			String labelAndAccessKeyVal = srcElement.getAttribute("labelAndAccessKey"); //$NON-NLS-1$
-			if (labelAndAccessKeyVal != null && labelAndAccessKeyVal.length() > 0) {
-				label = labelAndAccessKeyVal;
-			} else {
-				String labelVal = srcElement.getAttribute("label"); //$NON-NLS-1$
-				if (labelVal != null && labelVal.length() > 0) {
-					label = labelVal;
+		if (!isChildOfPanelFormLayout(srcElement)) {
+			if (srcElement != null) {
+				String labelAndAccessKeyVal = srcElement.getAttribute("labelAndAccessKey"); //$NON-NLS-1$
+				if (labelAndAccessKeyVal != null && labelAndAccessKeyVal.length() > 0) {
+					label = labelAndAccessKeyVal;
+				} else {
+					String labelVal = srcElement.getAttribute("label"); //$NON-NLS-1$
+					if (labelVal != null && labelVal.length() > 0) {
+						label = labelVal;
+					}
 				}
 			}
 		}
@@ -219,6 +227,24 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 			}
 		}
 		return columns;
+	}
+
+	protected boolean isChildOfPanelFormLayout(Element srcElement) {
+		boolean isChild = false;
+		if (srcElement != null) {
+			Node parent = srcElement.getParentNode();
+			if (parent instanceof Element) {
+				TagIdentifier tagID = TagIdentifierFactory.createDocumentTagWrapper((Element)parent);
+				if (ITrinidadConstants.TAG_IDENTIFIER_PANELFORMLAYOUT.isSameTagType(tagID)) {
+					isChild = true;
+				} else if (ITrinidadConstants.TAG_IDENTIFIER_GROUP.isSameTagType(tagID)) {
+					isChild = isChildOfPanelFormLayout((Element)parent);
+				} else if (IJSFConstants.TAG_IDENTIFIER_FACET.isSameTagType(tagID)) {
+					isChild = isChildOfPanelFormLayout((Element)parent);
+				}
+			}
+		}
+		return isChild;
 	}
 
 }
