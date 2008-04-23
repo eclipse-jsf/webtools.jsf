@@ -24,6 +24,8 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryRefer
 
 /**
  * Helper class for adopters needing to deal with JSF Library References
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  * @since WTP JSF 1.0
  */
 public final class JSFLibraryConfigurationHelper {
