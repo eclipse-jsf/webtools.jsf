@@ -326,7 +326,9 @@ public class PaletteHelper {
 	private static String getStringTagTraitValue(Entity entity, String key, String defaultValue){
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
 		if (trait != null){
-			return TraitValueHelper.getValueAsString(trait);
+			String val = TraitValueHelper.getValueAsString(trait);
+			if (val != null)
+				return val;
 		}
 		return defaultValue;		
 	}
