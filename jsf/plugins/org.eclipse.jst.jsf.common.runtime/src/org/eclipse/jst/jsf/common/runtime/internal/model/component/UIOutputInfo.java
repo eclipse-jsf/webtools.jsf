@@ -61,11 +61,11 @@ public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
     protected UIOutputInfo(final ComponentInfo parent, final ComponentTypeInfo typeInfo,
             final Map attributes)
     {
-        this(getStringProperty("id", attributes, true),
+        this(getStringProperty("id", attributes, true), //$NON-NLS-1$
                 parent,
                 typeInfo,
-                getValueHolderInfo("$valueHolderInfo", attributes),
-                getBooleanProperty("rendered", attributes));
+                getValueHolderInfo("$valueHolderInfo", attributes), //$NON-NLS-1$
+                getBooleanProperty("rendered", attributes)); //$NON-NLS-1$
     }
     
     /**
@@ -81,7 +81,7 @@ public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
     
     // @Override
     protected String getMostSpecificComponentName() {
-        return "UIOutput";
+        return "UIOutput"; //$NON-NLS-1$
     }
 
     public final ConverterDecorator getConverter() {

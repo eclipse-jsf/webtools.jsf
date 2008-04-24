@@ -30,7 +30,7 @@ public class ValidatorTypeInfo extends ClassTypeInfo
         
         if (validatorClass == null && validatorId == null)
         {
-            throw new IllegalArgumentException("validatorClass and validatorId must not both be null.  For unknown validator use the UNKNOWN constant");
+            throw new IllegalArgumentException("validatorClass and validatorId must not both be null.  For unknown validator use the UNKNOWN constant"); //$NON-NLS-1$
         }
         _validatorId = validatorId;
     }
@@ -52,7 +52,7 @@ public class ValidatorTypeInfo extends ClassTypeInfo
         
         if (validatorClass == null && validatorId == null)
         {
-            throw new IllegalArgumentException("validatorClass and validatorId must not both be null.  For unknown validator use the UNKNOWN constant");
+            throw new IllegalArgumentException("validatorClass and validatorId must not both be null.  For unknown validator use the UNKNOWN constant"); //$NON-NLS-1$
         }
         _validatorId = validatorId;
     }
@@ -87,7 +87,7 @@ public class ValidatorTypeInfo extends ClassTypeInfo
     
     public String toString()
     {
-        return "Validator Type Info: type = " + _validatorId + ", "+super.toString();
+        return "Validator Type Info: type = " + _validatorId + ", "+super.toString(); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
 }

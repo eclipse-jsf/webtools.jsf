@@ -90,7 +90,7 @@ public class ComponentTypeInfo extends ClassTypeInfo
 
     public String toString()
     {
-        return "Component Type Info: type = " + _componentType + " family=" + _componentFamily
-                + " renderer=" + _renderFamily + ", "+super.toString();
+        return "Component Type Info: type = " + _componentType + " family=" + _componentFamily //$NON-NLS-1$ //$NON-NLS-2$
+                + " renderer=" + _renderFamily + ", "+super.toString(); //$NON-NLS-1$ //$NON-NLS-2$
     }
 }

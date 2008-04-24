@@ -24,7 +24,7 @@ public class TrinidadTagSupportActivator extends AbstractUIPlugin {
 	/**
 	 * the plugin id
 	 */
-	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.apache.trinidad.tagsupport";
+	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.apache.trinidad.tagsupport"; //$NON-NLS-1$
 
 	// The shared instance
 	private static TrinidadTagSupportActivator plugin;

@@ -40,17 +40,17 @@ public class FavoriteConfigurations {
 	private static Logger _log = JSFUICommonPlugin
 			.getLogger(FavoriteConfigurations.class);
 
-	private final static String FAV_EXTENSIONS = ".xml";
+	private final static String FAV_EXTENSIONS = ".xml"; //$NON-NLS-1$
 
-	private final static String ELEMENT_ROOT = "favorite";
+	private final static String ELEMENT_ROOT = "favorite"; //$NON-NLS-1$
 
-	private final static String ELEMENT_CONFIG = "config";
+	private final static String ELEMENT_CONFIG = "config"; //$NON-NLS-1$
 
-	private final static String ELEMENT_NAME = "name";
+	private final static String ELEMENT_NAME = "name"; //$NON-NLS-1$
 
-	private final static String ELEMENT_PROPERTY = "property";
+	private final static String ELEMENT_PROPERTY = "property"; //$NON-NLS-1$
 
-	private final static String ELEMENT_VALUE = "value";
+	private final static String ELEMENT_VALUE = "value"; //$NON-NLS-1$
 
 	private Map _favorites;
 
@@ -111,7 +111,7 @@ public class FavoriteConfigurations {
 		} catch (Exception ee) {
 			// log.FavoriteConfigurations.save.error=Failed to save {0}
 			// favorites. File={1}
-			_log.info("log.FavoriteConfigurations.save.error", _favoriteName,
+			_log.info("log.FavoriteConfigurations.save.error", _favoriteName, //$NON-NLS-1$
 					_favoriteFile.toOSString(), ee);
 		} finally {
 			if (fw != null) {
@@ -180,7 +180,7 @@ public class FavoriteConfigurations {
 		} catch (Exception ee) {
 			// log.FavoriteConfigurations.read.error=Failed to save {0}
 			// favorites. File={1}
-			_log.error("log.FavoriteConfigurations.read.error", _favoriteName,
+			_log.error("log.FavoriteConfigurations.read.error", _favoriteName, //$NON-NLS-1$
 					_favoriteFile.toOSString(), ee);
 		} finally {
 			if (fr != null) {

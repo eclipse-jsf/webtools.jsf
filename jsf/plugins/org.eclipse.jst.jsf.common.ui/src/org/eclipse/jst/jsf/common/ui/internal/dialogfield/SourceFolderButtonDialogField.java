@@ -66,10 +66,10 @@ public class SourceFolderButtonDialogField extends StringButtonDialogField {
 		_project = project;
 
 		setLabelText(DialogFieldResources.getInstance().getString(
-				"SourceFolderButtonDialogField.container.label"));
+				"SourceFolderButtonDialogField.container.label")); //$NON-NLS-1$
 
 		setButtonLabel(DialogFieldResources.getInstance().getString(
-				"SourceFolderButtonDialogField.container.button"));
+				"SourceFolderButtonDialogField.container.button")); //$NON-NLS-1$
 
 		setStringButtonAdapter(new IStringButtonAdapter() {
 			public void changeControlPressed(DialogField field) {

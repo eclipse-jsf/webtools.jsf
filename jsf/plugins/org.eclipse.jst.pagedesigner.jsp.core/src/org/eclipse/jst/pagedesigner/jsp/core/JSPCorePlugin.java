@@ -35,7 +35,7 @@ public class JSPCorePlugin extends Plugin {
 		plugin = this;
 		try {
 			resourceBundle = ResourceBundle
-					.getBundle("org.eclipse.jst.pagedesigner.jsp.core.JSPCorePluginResources");
+					.getBundle("org.eclipse.jst.pagedesigner.jsp.core.JSPCorePluginResources"); //$NON-NLS-1$
 		} catch (MissingResourceException x) {
 			resourceBundle = null;
 		}

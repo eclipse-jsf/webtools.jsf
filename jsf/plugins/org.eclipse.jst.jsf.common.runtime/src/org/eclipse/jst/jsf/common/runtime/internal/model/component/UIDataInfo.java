@@ -17,11 +17,11 @@ public class UIDataInfo extends ComponentInfo implements INamingContainerInfo
     /**
      * the standard name for the footer facet
      */
-    public final static String FACET_NAME_FOOTER = "footer";
+    public final static String FACET_NAME_FOOTER = "footer"; //$NON-NLS-1$
     /**
      * the standard name for the header facet.
      */
-    public final static String FACET_NAME_HEADER = "header";
+    public final static String FACET_NAME_HEADER = "header"; //$NON-NLS-1$
     /**
      * serialization id
      */
@@ -93,20 +93,20 @@ public class UIDataInfo extends ComponentInfo implements INamingContainerInfo
     public UIDataInfo(final ComponentInfo parent,
             final ComponentTypeInfo componentTypeInfo, Map attributes)
     {
-        this(getStringProperty("id", attributes, true), parent,
+        this(getStringProperty("id", attributes, true), parent, //$NON-NLS-1$
                 componentTypeInfo, 
-                getBooleanProperty("rendered", attributes),
-                getDataModelInfo("$dataModel", attributes), 
-                getIntegerProperty("first", attributes), 
-                getComponentProperty("footer", attributes),
-                getComponentProperty("header", attributes), 
-                getIntegerProperty("rowCount", attributes), 
-                getBooleanProperty("rowAvailable", attributes), 
-                attributes.get("rowData"),
-                getIntegerProperty("rowIndex", attributes), 
-                getIntegerProperty("rows", attributes), 
-                attributes.get("value"),
-                getStringProperty("var", attributes, true));
+                getBooleanProperty("rendered", attributes), //$NON-NLS-1$
+                getDataModelInfo("$dataModel", attributes),  //$NON-NLS-1$
+                getIntegerProperty("first", attributes),  //$NON-NLS-1$
+                getComponentProperty("footer", attributes), //$NON-NLS-1$
+                getComponentProperty("header", attributes),  //$NON-NLS-1$
+                getIntegerProperty("rowCount", attributes),  //$NON-NLS-1$
+                getBooleanProperty("rowAvailable", attributes),  //$NON-NLS-1$
+                attributes.get("rowData"), //$NON-NLS-1$
+                getIntegerProperty("rowIndex", attributes),  //$NON-NLS-1$
+                getIntegerProperty("rows", attributes),  //$NON-NLS-1$
+                attributes.get("value"), //$NON-NLS-1$
+                getStringProperty("var", attributes, true)); //$NON-NLS-1$
     }
 
     private static DataModelInfo getDataModelInfo(String key, Map attributes)
@@ -204,6 +204,6 @@ public class UIDataInfo extends ComponentInfo implements INamingContainerInfo
 
     protected String getMostSpecificComponentName()
     {
-        return "UIData";
+        return "UIData"; //$NON-NLS-1$
     }
 }

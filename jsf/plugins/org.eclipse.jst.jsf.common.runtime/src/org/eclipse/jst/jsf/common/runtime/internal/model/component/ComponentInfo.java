@@ -94,8 +94,8 @@ public class ComponentInfo extends ViewObject implements Serializable,
     protected ComponentInfo(final ComponentInfo parent,
             final ComponentTypeInfo componentTypeInfo, final Map attributes)
     {
-        this(getStringProperty("id", attributes, false), parent,
-                componentTypeInfo, getBooleanProperty("rendered", attributes));
+        this(getStringProperty("id", attributes, false), parent, //$NON-NLS-1$
+                componentTypeInfo, getBooleanProperty("rendered", attributes)); //$NON-NLS-1$
     }
 
     /**
@@ -117,7 +117,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
         if (mandatory && value == null)
         {
             throw new IllegalArgumentException(key
-                    + " is a mandatory attribute");
+                    + " is a mandatory attribute"); //$NON-NLS-1$
         }
         return (String) value;
     }
@@ -139,7 +139,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
 
         if (value == null)
         {
-            throw new IllegalArgumentException(key + "is mandatory");
+            throw new IllegalArgumentException(key + "is mandatory"); //$NON-NLS-1$
         }
 
         return value.booleanValue();
@@ -158,7 +158,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
 
         if (value == null)
         {
-            throw new IllegalArgumentException(key + " is mandatory");
+            throw new IllegalArgumentException(key + " is mandatory"); //$NON-NLS-1$
         }
 
         return value.intValue();
@@ -232,7 +232,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
         if (childComponent == this)
         {
             throw new IllegalArgumentException(
-                    "A component cannot be its own child");
+                    "A component cannot be its own child"); //$NON-NLS-1$
         }
         _data.addChild(childComponent);
         // we need to reset the child's parent to me
@@ -315,11 +315,11 @@ public class ComponentInfo extends ViewObject implements Serializable,
     public String toString()
     {
         final String parentId = getParent() != null ? getParent().getId()
-                : "null";
-        String toString = getMostSpecificComponentName() + ": id="
-                + _data.getId() + ", parentId: " + parentId + ", family="
-                + getComponentTypeInfo().getComponentFamily() + ", render="
-                + getComponentTypeInfo().getRenderFamily() + ", rendered="
+                : "null"; //$NON-NLS-1$
+        String toString = getMostSpecificComponentName() + ": id=" //$NON-NLS-1$
+                + _data.getId() + ", parentId: " + parentId + ", family=" //$NON-NLS-1$ //$NON-NLS-2$
+                + getComponentTypeInfo().getComponentFamily() + ", render=" //$NON-NLS-1$
+                + getComponentTypeInfo().getRenderFamily() + ", rendered=" //$NON-NLS-1$
                 + isRendered();
 
         // use bean introspection to dump child properties
@@ -333,7 +333,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
 
     private String dumpProperties()
     {
-        String properties = "";
+        String properties = ""; //$NON-NLS-1$
         try
         {
             final BeanInfo beanInfo = Introspector.getBeanInfo(this.getClass(),
@@ -347,13 +347,13 @@ public class ComponentInfo extends ViewObject implements Serializable,
                 final String name = desc.getName();
                 final Object valueObj = desc.getValue(name);
                 final String value = valueObj != null ? valueObj.toString()
-                        : "null";
-                properties += ", " + name + "=" + value;
+                        : "null"; //$NON-NLS-1$
+                properties += ", " + name + "=" + value; //$NON-NLS-1$ //$NON-NLS-2$
             }
         }
         catch (final IntrospectionException e)
         {
-            return "Error introspecting bean: " + e.getLocalizedMessage();
+            return "Error introspecting bean: " + e.getLocalizedMessage(); //$NON-NLS-1$
         }
 
         return properties;
@@ -364,7 +364,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
      */
     protected String getMostSpecificComponentName()
     {
-        return "UIComponent";
+        return "UIComponent"; //$NON-NLS-1$
     }
 
     /**
@@ -682,7 +682,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
             if (Thread.holdsLock(this))
             {
                 throw new IllegalStateException(
-                        "Must not already own this lock");
+                        "Must not already own this lock"); //$NON-NLS-1$
             }
 
             // must always acquire component lock first to prevent deadlock
@@ -713,7 +713,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
             if (Thread.holdsLock(this))
             {
                 throw new IllegalStateException(
-                        "Must not already own this lock");
+                        "Must not already own this lock"); //$NON-NLS-1$
             }
 
             // must always acquire component lock first to prevent deadlock
@@ -785,9 +785,9 @@ public class ComponentInfo extends ViewObject implements Serializable,
                 {
                     // TODO: need logging
                     System.err
-                            .println("Name collision in properties.  Trying to add ["
+                            .println("Name collision in properties.  Trying to add [" //$NON-NLS-1$
                                     + desc.toString()
-                                    + " when already have "
+                                    + " when already have " //$NON-NLS-1$
                                     + toMe.get(desc.getName()));
                 }
             }

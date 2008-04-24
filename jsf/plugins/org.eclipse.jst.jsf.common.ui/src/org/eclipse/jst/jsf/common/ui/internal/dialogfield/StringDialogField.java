@@ -159,9 +159,9 @@ public class StringDialogField extends DialogFieldBase implements
 
 			if (toolkit != null) {
 				if (_numRows <= 1) {
-					_textControl = toolkit.createText(parent, "");
+					_textControl = toolkit.createText(parent, ""); //$NON-NLS-1$
 				} else {
-					_textControl = toolkit.createText(parent, "", SWT.V_SCROLL);
+					_textControl = toolkit.createText(parent, "", SWT.V_SCROLL); //$NON-NLS-1$
 				}
 			} else {
 				if (_numRows <= 1) {
@@ -271,7 +271,7 @@ public class StringDialogField extends DialogFieldBase implements
 		_pending = false;
 
 		if (text == null)
-			text = "";
+			text = ""; //$NON-NLS-1$
 		_text = text;
 		if (isOkToUse(_textControl)) {
 			_textControl.removeModifyListener(_modifyListener);

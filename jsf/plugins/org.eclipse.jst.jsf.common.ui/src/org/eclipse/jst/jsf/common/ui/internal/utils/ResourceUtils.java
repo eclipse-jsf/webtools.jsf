@@ -26,6 +26,7 @@ import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
  * @author mengbo
  */
 public abstract class ResourceUtils {
+	private static final String LOG_RESOURCE_UTILS_MSG_KEY = "log.ResourceUtils"; //$NON-NLS-1$
 	private static Logger _log = JSFUICommonPlugin.getLogger(ResourceUtils.class);
 	/**
 	 * the resource bundle accessible by all children
@@ -50,9 +51,9 @@ public abstract class ResourceUtils {
 		_resources = resource;
 		if (_resources == null) {
 			// log.ResourceUtils=Missing Resource Bundle "{0}".
-			_log.error("log.ResourceUtils", bundleLocation);
+			_log.error(LOG_RESOURCE_UTILS_MSG_KEY, bundleLocation);
 			// pluginName=Web Application Development Common
-			JSFUICommonPlugin.getAlerts().error("pluginName", "log.ResourceUtils",
+			JSFUICommonPlugin.getAlerts().error("pluginName", LOG_RESOURCE_UTILS_MSG_KEY, //$NON-NLS-1$
 					bundleLocation);
 		}
 	}
@@ -117,7 +118,7 @@ public abstract class ResourceUtils {
 	 * @return true if there is a resource corresponding to key
 	 */
 	public boolean isResource(String key) {
-		return getString(key).equals("" + true);
+		return getString(key).equals("" + true); //$NON-NLS-1$
 	}
 
 	/**

@@ -175,7 +175,7 @@ public class ColorButtonDialogField extends StyleComboDialogField {
 		if (_button == null) {
 			assertCompositeNotNull(parent);
 			if (toolkit != null) {
-				_button = toolkit.createButton(parent, "", SWT.PUSH);
+				_button = toolkit.createButton(parent, "", SWT.PUSH); //$NON-NLS-1$
 			} else {
 				_button = new Button(parent, SWT.PUSH);
 			}

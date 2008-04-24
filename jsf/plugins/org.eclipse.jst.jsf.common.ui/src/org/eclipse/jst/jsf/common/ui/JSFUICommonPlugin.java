@@ -39,28 +39,28 @@ import org.osgi.framework.Version;
  */
 public class JSFUICommonPlugin extends AbstractUIPlugin {
 	// Properties contains general properties and defaults to preferences.
-	private static final String PROPERTIES = "default.properties";
+	private static final String PROPERTIES = "default.properties"; //$NON-NLS-1$
 	// preferences will
 	// contain this string
 	// in the key.
 
-	private static final String P_CONSOLE_LOGGING = "console.logging.on";
+	private static final String P_CONSOLE_LOGGING = "console.logging.on"; //$NON-NLS-1$
 
-	private static final String P_CONSOLE_LOG_LEVEL = "console.logging.max.level";
+	private static final String P_CONSOLE_LOG_LEVEL = "console.logging.max.level"; //$NON-NLS-1$
 
-	private static final String P_ECLIPSE_LOGGING = "eclipse.logging.on";
+	private static final String P_ECLIPSE_LOGGING = "eclipse.logging.on"; //$NON-NLS-1$
 
-	private static final String P_ECLIPSE_LOG_LEVEL = "eclipse.logging.max.level";
+	private static final String P_ECLIPSE_LOG_LEVEL = "eclipse.logging.max.level"; //$NON-NLS-1$
 
-	private static final String P_FILE_LOGGING = "file.logging.on";
+	private static final String P_FILE_LOGGING = "file.logging.on"; //$NON-NLS-1$
 
-	private static final String P_FILE_LOG_LEVEL = "file.logging.max.level";
+	private static final String P_FILE_LOG_LEVEL = "file.logging.max.level"; //$NON-NLS-1$
 
-	private static final String P_FILE_PATH = "file.logging.path";
+	private static final String P_FILE_PATH = "file.logging.path"; //$NON-NLS-1$
 
-	private static final String P_FILE_CLEAR = "file.logging.startup.clear";
+	private static final String P_FILE_CLEAR = "file.logging.startup.clear"; //$NON-NLS-1$
 
-	private static final String P_FILE_ROLLOVER_FREQUENCY = "file.logging.rollover.frequency";
+	private static final String P_FILE_ROLLOVER_FREQUENCY = "file.logging.rollover.frequency"; //$NON-NLS-1$
 
 	private static final int DEBUG_LEVEL = 0;
 
@@ -122,19 +122,19 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 		if (isThreeDot() == false) {
 			throw new CoreException(new Status(IStatus.ERROR, getBundle()
 					.getSymbolicName(), IStatus.OK,
-					"Requires eclipse version 3.x", null));
+					"Requires eclipse version 3.x", null)); //$NON-NLS-1$
 		}
 
 		try {
 			// get resource bundle.
 			_resourceBundle = ResourceBundle
-					.getBundle("org.eclipse.jst.jsf.common.ui.CommonResources");
+					.getBundle("org.eclipse.jst.jsf.common.ui.CommonResources"); //$NON-NLS-1$
 			_alerts = new Alerts(this, _resourceBundle);
 
 			// get properties.
 			_properties = new Properties();
 			InputStream input = null;
-			_pluginBase = getBundle().getEntry("/");
+			_pluginBase = getBundle().getEntry("/"); //$NON-NLS-1$
 			try {
 				input = (new URL(_pluginBase, PROPERTIES)).openStream();
 				_properties.load(input);
@@ -162,8 +162,8 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 			if (_log != null) {
 				_log
 						.error(
-								"log.msg",
-								"Problems starting plug-in Web Application Development Common.",
+								"log.msg", //$NON-NLS-1$
+								"Problems starting plug-in Web Application Development Common.", //$NON-NLS-1$
 								ee);
 			}
 
@@ -172,7 +172,7 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 							IStatus.ERROR,
 							getBundle().getSymbolicName(),
 							IStatus.OK,
-							"Problems starting plug-in Web Application Development Common",
+							"Problems starting plug-in Web Application Development Common", //$NON-NLS-1$
 							ee));
 		}
 	}
@@ -284,13 +284,13 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 		if (image == null) {
 			try {
 				ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
-						_pluginBase, "icons/" + name));
+						_pluginBase, "icons/" + name)); //$NON-NLS-1$
 				images.put(name, id);
 
 				image = images.get(name);
 			} catch (MalformedURLException ee) {
 				// log.CommonPlugin.image.error=Image {0} not found.
-				_log.error("log.msg", "log.CommonPlugin.image.error", name, ee);
+				_log.error("log.msg", "log.CommonPlugin.image.error", name, ee); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		return image;
@@ -318,11 +318,11 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 		if (id == null) {
 			try {
 				id = ImageDescriptor.createFromURL(new URL(_pluginBase,
-						"icons/" + name));
+						"icons/" + name)); //$NON-NLS-1$
 				images.put(name, id);
 			} catch (MalformedURLException ee) {
 				// log.CommonPlugin.image.error=Image {0} not found.
-				_log.error("log.msg", "log.CommonPlugin.image.error", name, ee);
+				_log.error("log.msg", "log.CommonPlugin.image.error", name, ee); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		return id;
@@ -370,22 +370,22 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 		store.setDefault(P_CONSOLE_LOGGING, _properties.getProperty(
 				P_CONSOLE_LOGGING, Boolean.TRUE.toString()));
 		store.setDefault(P_CONSOLE_LOG_LEVEL, strToIntLogLevel(_properties
-				.getProperty(P_CONSOLE_LOG_LEVEL, "ERROR")));
+				.getProperty(P_CONSOLE_LOG_LEVEL, "ERROR"))); //$NON-NLS-1$
 
 		store.setDefault(P_ECLIPSE_LOGGING, _properties.getProperty(
 				P_ECLIPSE_LOGGING, Boolean.TRUE.toString()));
 		store.setDefault(P_ECLIPSE_LOG_LEVEL, strToIntLogLevel(_properties
-				.getProperty(P_ECLIPSE_LOG_LEVEL, "ERROR")));
+				.getProperty(P_ECLIPSE_LOG_LEVEL, "ERROR"))); //$NON-NLS-1$
 
 		store.setDefault(P_FILE_LOGGING, _properties.getProperty(
 				P_FILE_LOGGING, Boolean.FALSE.toString()));
 		store.setDefault(P_FILE_LOG_LEVEL, strToIntLogLevel(_properties
-				.getProperty(P_FILE_LOG_LEVEL, "ERROR")));
-		store.setDefault(P_FILE_PATH, _properties.getProperty(P_FILE_PATH, ""));
+				.getProperty(P_FILE_LOG_LEVEL, "ERROR"))); //$NON-NLS-1$
+		store.setDefault(P_FILE_PATH, _properties.getProperty(P_FILE_PATH, "")); //$NON-NLS-1$
 		store.setDefault(P_FILE_CLEAR, _properties.getProperty(P_FILE_CLEAR,
 				Boolean.TRUE.toString()));
 		store.setDefault(P_FILE_ROLLOVER_FREQUENCY, _properties.getProperty(
-				P_FILE_ROLLOVER_FREQUENCY, "DAILY"));
+				P_FILE_ROLLOVER_FREQUENCY, "DAILY")); //$NON-NLS-1$
 	}
 
 	/**
@@ -400,16 +400,16 @@ public class JSFUICommonPlugin extends AbstractUIPlugin {
 		if (str == null) {
 			return ERROR_LEVEL;
 		}
-		if (str.equalsIgnoreCase("DEBUG")) {
+		if (str.equalsIgnoreCase("DEBUG")) { //$NON-NLS-1$
 			return DEBUG_LEVEL;
 		}
-		if (str.equalsIgnoreCase("INFO")) {
+		if (str.equalsIgnoreCase("INFO")) { //$NON-NLS-1$
 			return INFO_LEVEL;
 		}
-		if (str.equalsIgnoreCase("WARN")) {
+		if (str.equalsIgnoreCase("WARN")) { //$NON-NLS-1$
 			return WARN_LEVEL;
 		}
-		if (str.equalsIgnoreCase("FATAL")) {
+		if (str.equalsIgnoreCase("FATAL")) { //$NON-NLS-1$
 			return FATAL_LEVEL;
 		}
 		return ERROR_LEVEL;

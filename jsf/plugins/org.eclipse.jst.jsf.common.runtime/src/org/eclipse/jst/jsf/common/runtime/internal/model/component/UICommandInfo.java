@@ -63,10 +63,10 @@ public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
     protected UICommandInfo(final ComponentInfo parent, final ComponentTypeInfo componentTypeInfo,
             Map attributes)
     {
-        this(getStringProperty("id", attributes, true),
+        this(getStringProperty("id", attributes, true), //$NON-NLS-1$
                 parent, componentTypeInfo,
-                getBooleanProperty("rendered", attributes),
-                getActionSourceInfo("$actionSourceInfo", attributes)
+                getBooleanProperty("rendered", attributes), //$NON-NLS-1$
+                getActionSourceInfo("$actionSourceInfo", attributes) //$NON-NLS-1$
                 );
     }
     
@@ -102,6 +102,6 @@ public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
 
     protected String getMostSpecificComponentName()
     {
-        return "UICommand";
+        return "UICommand"; //$NON-NLS-1$
     }
 }

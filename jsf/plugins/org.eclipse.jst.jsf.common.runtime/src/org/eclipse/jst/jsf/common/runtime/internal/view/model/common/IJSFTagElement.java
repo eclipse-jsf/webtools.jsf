@@ -29,7 +29,7 @@ public interface IJSFTagElement extends ITagElement
         //private final static int TYPE_UNKNOWN = 4;
 
         private final static String[]  strValues =
-            {"component", "converter", "validator", "handler"};
+            {"component", "converter", "validator", "handler"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
         private final int _intValue;
         

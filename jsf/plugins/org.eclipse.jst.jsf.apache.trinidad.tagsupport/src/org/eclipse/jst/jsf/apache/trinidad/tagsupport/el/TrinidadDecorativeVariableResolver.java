@@ -25,11 +25,11 @@ public class TrinidadDecorativeVariableResolver extends
 {
     private final static JSFSymbolFactory _symbolFactory                = new JSFSymbolFactory();
 
-    public final static String            PAGE_FLOW_SCOPE_VARIABLE_NAME = "pageFlowScope";
-    public final static String            PROCESS_SCOPE_VARIABLE_NAME   = "processScope";
+    public final static String            PAGE_FLOW_SCOPE_VARIABLE_NAME = "pageFlowScope"; //$NON-NLS-1$
+    public final static String            PROCESS_SCOPE_VARIABLE_NAME   = "processScope"; //$NON-NLS-1$
 
-    public final static String            REQUEST_CONTEXT_VARIABLE_NAME = "requestContext";
-    public final static String            REQUEST_CONTEXT_CLASS_NAME    = "org.apache.myfaces.trinidad.context.RequestContext";
+    public final static String            REQUEST_CONTEXT_VARIABLE_NAME = "requestContext"; //$NON-NLS-1$
+    public final static String            REQUEST_CONTEXT_CLASS_NAME    = "org.apache.myfaces.trinidad.context.RequestContext"; //$NON-NLS-1$
 
     @Override
     public ISymbol[] getAllVariables(final DTFacesContext facesContext,

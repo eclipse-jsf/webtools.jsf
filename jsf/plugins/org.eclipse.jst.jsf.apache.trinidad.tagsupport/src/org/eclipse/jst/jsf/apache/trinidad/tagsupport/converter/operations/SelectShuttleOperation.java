@@ -31,12 +31,13 @@ import org.w3c.dom.Element;
  */
 public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 
-	private static final String STYLE_HEADER = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:9pt;color:#669966;font-weight:bold;padding:0px 0px 0px 18px;";
-	private static final String STYLE_REQUIRED = "color:#669966;font-family:Courier,sans-serif;";
-	private static final String STYLE_LISTCOLUMN = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;";
-	private static final String STYLE_SELECT = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;";
-	private static final String STYLE_DESCRIPTION = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;";
-	private static final String STYLE_LINK = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;";
+	private static final String STYLE_HEADER = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:9pt;color:#669966;font-weight:bold;padding:0px 0px 0px 18px;"; //$NON-NLS-1$
+	private static final String STYLE_REQUIRED = "color:#669966;font-family:Courier,sans-serif;"; //$NON-NLS-1$
+	private static final String STYLE_LISTCOLUMN = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;"; //$NON-NLS-1$
+	private static final String STYLE_SELECT = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
+	private static final String STYLE_DESCRIPTION = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
+	private static final String STYLE_LINK = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"; //$NON-NLS-1$
+	private static final String DEFAULT_SIZE = "10"; //$NON-NLS-1$
 
 	private static final String[] LINKS_MOVE = new String[]{
 		Messages.SelectShuttleOperation_LinkMove,
@@ -205,9 +206,9 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		//build footer structure
 		String footerFacetName;
 		if (isLeadingColumn) {
-			footerFacetName = "leadingFooter";
+			footerFacetName = "leadingFooter"; //$NON-NLS-1$
 		} else {
-			footerFacetName = "trailingFooter";
+			footerFacetName = "trailingFooter"; //$NON-NLS-1$
 		}
 		Element footerFacet = getChildFacetByName(srcElement, footerFacetName); //$NON-NLS-1$
 		if (footerFacet != null) {
@@ -238,8 +239,8 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 	}
 
 	private String getSizeString(Element srcElement) {
-		String size = "10";
-		String sizeAttr = srcElement.getAttribute("size");
+		String size = DEFAULT_SIZE;
+		String sizeAttr = srcElement.getAttribute("size"); //$NON-NLS-1$
 		if (sizeAttr != null && sizeAttr.length() > 0) {
 			try {
 				int iSize = Integer.parseInt(sizeAttr);

@@ -43,12 +43,12 @@ public class UIFormInfo extends ComponentInfo implements INamingContainerInfo
     protected UIFormInfo(final ComponentInfo parent, ComponentTypeInfo componentTypeInfo,
             Map attributes)
     {
-        this(getStringProperty("id", attributes, true),
+        this(getStringProperty("id", attributes, true), //$NON-NLS-1$
                 parent,
                 componentTypeInfo,
-                getBooleanProperty("rendered", attributes),
-                getBooleanProperty("prependId", attributes),
-                getBooleanProperty("submitted", attributes));
+                getBooleanProperty("rendered", attributes), //$NON-NLS-1$
+                getBooleanProperty("prependId", attributes), //$NON-NLS-1$
+                getBooleanProperty("submitted", attributes)); //$NON-NLS-1$
     }
     
     /**
@@ -71,6 +71,6 @@ public class UIFormInfo extends ComponentInfo implements INamingContainerInfo
 
     protected String getMostSpecificComponentName()
     {
-        return "UIForm";
+        return "UIForm"; //$NON-NLS-1$
     } 
 }

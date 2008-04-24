@@ -66,9 +66,9 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 		} else {
 			outerElement = createElement("table"); //$NON-NLS-1$
 			//append table-specific attributes
-			appendAttribute(outerElement, "cellpadding", "0"); //$NON-NLS-1$
-			appendAttribute(outerElement, "cellspacing", "0"); //$NON-NLS-1$
-			appendAttribute(outerElement, "border", "0"); //$NON-NLS-1$
+			appendAttribute(outerElement, "cellpadding", "0"); //$NON-NLS-1$ //$NON-NLS-2$
+			appendAttribute(outerElement, "cellspacing", "0"); //$NON-NLS-1$ //$NON-NLS-2$
+			appendAttribute(outerElement, "border", "0"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		//append common attributes

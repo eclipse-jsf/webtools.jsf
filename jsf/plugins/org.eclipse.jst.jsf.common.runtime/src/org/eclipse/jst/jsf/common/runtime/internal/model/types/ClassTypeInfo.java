@@ -99,7 +99,7 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
 
     public String toString()
     {
-        String supers = "[";
+        String supers = "["; //$NON-NLS-1$
         
         for (int i = 0; i < _superClasses.length; i++)
         {
@@ -107,7 +107,7 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
             
             if (i < _superClasses.length-1)
             {
-                supers += ",";
+                supers += ","; //$NON-NLS-1$
             }
         }
         
@@ -117,11 +117,11 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
             
             if (i < _interfaces.length-1)
             {
-                supers += ",";
+                supers += ","; //$NON-NLS-1$
             }
         }
-        supers +="]";
+        supers +="]"; //$NON-NLS-1$
         
-        return "class= "+getClassName()+ ", supers="+ supers;
+        return "class= "+getClassName()+ ", supers="+ supers; //$NON-NLS-1$ //$NON-NLS-2$
     }
 }

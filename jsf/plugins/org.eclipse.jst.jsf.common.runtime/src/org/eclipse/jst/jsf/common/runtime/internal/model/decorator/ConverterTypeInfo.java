@@ -32,7 +32,7 @@ public class ConverterTypeInfo extends ClassTypeInfo
         if (className == null && converterId == null)
         {
             throw new IllegalArgumentException(
-                    "converterClass and converterId must not both be null.  For unknown validator use the UNKNOWN constant");
+                    "converterClass and converterId must not both be null.  For unknown validator use the UNKNOWN constant"); //$NON-NLS-1$
         }
 
         _converterId = converterId;
@@ -56,7 +56,7 @@ public class ConverterTypeInfo extends ClassTypeInfo
         if (className == null && converterId == null)
         {
             throw new IllegalArgumentException(
-                    "converterClass and converterId must not both be null.  For unknown validator use the UNKNOWN constant");
+                    "converterClass and converterId must not both be null.  For unknown validator use the UNKNOWN constant"); //$NON-NLS-1$
         }
 
         _converterId = converterId;
@@ -93,6 +93,6 @@ public class ConverterTypeInfo extends ClassTypeInfo
 
     public String toString()
     {
-        return "Converter Type Info: type = " + _converterId + ", "+super.toString();
+        return "Converter Type Info: type = " + _converterId + ", "+super.toString(); //$NON-NLS-1$ //$NON-NLS-2$
     }
 }

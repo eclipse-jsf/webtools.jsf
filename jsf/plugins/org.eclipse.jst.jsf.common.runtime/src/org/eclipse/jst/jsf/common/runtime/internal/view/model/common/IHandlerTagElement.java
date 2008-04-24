@@ -31,7 +31,7 @@ public interface IHandlerTagElement extends IJSFTagElement
         private final static int HANDLER_TYPE_ATTRIBUTE = 3;
 
         private final static String[]  strValues =
-            {"facet", "actionLister", "valueChangeListener"};
+            {"facet", "actionListener", "valueChangeListener"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
         private final int _intValue;
         

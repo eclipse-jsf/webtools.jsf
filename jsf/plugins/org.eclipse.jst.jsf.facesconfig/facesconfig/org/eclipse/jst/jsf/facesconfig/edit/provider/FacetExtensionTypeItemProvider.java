@@ -46,7 +46,7 @@ public class FacetExtensionTypeItemProvider
      * @generated
      */
 	@SuppressWarnings("hiding")
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -80,7 +80,7 @@ public class FacetExtensionTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetExtensionType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetExtensionType")); //$NON-NLS-1$
     }
 
     /**
@@ -92,8 +92,8 @@ public class FacetExtensionTypeItemProvider
 	public String getText(Object object) {
         String label = ((FacetExtensionType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_FacetExtensionType_type") :
-            getString("_UI_FacetExtensionType_type") + " " + label;
+            getString("_UI_FacetExtensionType_type") : //$NON-NLS-1$
+            getString("_UI_FacetExtensionType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

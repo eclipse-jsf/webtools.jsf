@@ -40,7 +40,7 @@ public class StringButtonDialogField extends StringDialogField {
 	public StringButtonDialogField(IStringButtonAdapter adapter) {
 		_stringButtonAdapter = adapter;
 		_browseButtonLabel = JSFUICommonPlugin
-				.getResourceString("DialogField.Browse");
+				.getResourceString("DialogField.Browse"); //$NON-NLS-1$
 		_buttonEnabled = true;
 	}
 

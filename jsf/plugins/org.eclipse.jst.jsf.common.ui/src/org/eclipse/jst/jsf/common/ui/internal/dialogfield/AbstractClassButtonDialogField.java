@@ -87,10 +87,10 @@ import org.eclipse.ui.forms.events.HyperlinkEvent;
 			try {
 				if (_project == null || !_project.hasNature(JavaCore.NATURE_ID)) {
 					ResourceBundle rb = ResourceBundle
-							.getBundle("org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldResources");
+							.getBundle("org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldResources"); //$NON-NLS-1$
 					Alerts alerts = new Alerts(JSFUICommonPlugin.getDefault(), rb);
-					alerts.error("ClassButtonDialogField.Alert.Title",
-							"ClassButtonDialogField.Alert.Msg");
+					alerts.error("ClassButtonDialogField.Alert.Title", //$NON-NLS-1$
+							"ClassButtonDialogField.Alert.Msg"); //$NON-NLS-1$
 					return;
 				}
 			} catch (CoreException e) {

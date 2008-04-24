@@ -60,14 +60,14 @@ public class RenderNode extends JSFMonitorMessage
     }
     public String toString()
     {
-        String toString = "Root node: "+_renderedNodeName+", attributes: [";
+        String toString = "Root node: "+_renderedNodeName+", attributes: ["; //$NON-NLS-1$ //$NON-NLS-2$
         
         for (Iterator it = _renderedAttributes.iterator(); it.hasNext();)
         {
             final RenderAttribute attribute = (RenderAttribute) it.next();
-            toString+=attribute.getName() + "=" + attribute.getValue();
+            toString+=attribute.getName() + "=" + attribute.getValue(); //$NON-NLS-1$
             
-            toString+=it.hasNext() ? ", " : "]";
+            toString+=it.hasNext() ? ", " : "]"; //$NON-NLS-1$ //$NON-NLS-2$
         }
         
         return toString;

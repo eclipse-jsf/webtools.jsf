@@ -90,9 +90,9 @@ public class OutputFormattedOperation extends AbstractTrinidadTransformOperation
 		String value = srcElement.getAttribute("value"); //$NON-NLS-1$
 		if (value != null && value.length() > 0) {
 			StringBuffer wrappedValue = new StringBuffer();
-			wrappedValue.append("<?xml version=\"1.0\"?><value>");
+			wrappedValue.append("<?xml version=\"1.0\"?><value>"); //$NON-NLS-1$
 			wrappedValue.append(value);
-			wrappedValue.append("</value>");
+			wrappedValue.append("</value>"); //$NON-NLS-1$
 			InputStream inputStream = new ByteArrayInputStream(wrappedValue.toString().getBytes());
 			Element valueElement = getValueDocumentElement(inputStream);
 			if (valueElement != null) {

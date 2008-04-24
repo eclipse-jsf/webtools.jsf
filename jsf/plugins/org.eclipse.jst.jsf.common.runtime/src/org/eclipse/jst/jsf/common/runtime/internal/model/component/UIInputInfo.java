@@ -90,9 +90,9 @@ public class UIInputInfo extends UIOutputInfo implements
     protected UIInputInfo(final ComponentInfo parent,
             final ComponentTypeInfo typeInfo, Map attributes)
     {
-        this(getStringProperty("id", attributes, true), parent, typeInfo,
-                getEditableValueHolderInfo("$editableValueHolderInfo",
-                        attributes), getBooleanProperty("rendered", attributes));
+        this(getStringProperty("id", attributes, true), parent, typeInfo, //$NON-NLS-1$
+                getEditableValueHolderInfo("$editableValueHolderInfo", //$NON-NLS-1$
+                        attributes), getBooleanProperty("rendered", attributes)); //$NON-NLS-1$
     }
 
     private static IEditableValueHolderInfo getEditableValueHolderInfo(
@@ -110,7 +110,7 @@ public class UIInputInfo extends UIOutputInfo implements
     // @Override
     protected String getMostSpecificComponentName()
     {
-        return "UIInput";
+        return "UIInput"; //$NON-NLS-1$
     }
 
     public final boolean isValid()

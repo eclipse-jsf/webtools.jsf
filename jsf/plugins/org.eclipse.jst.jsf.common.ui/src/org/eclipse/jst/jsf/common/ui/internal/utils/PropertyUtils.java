@@ -36,6 +36,16 @@ import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
  * @author mengbo
  */
 public final class PropertyUtils {
+
+	private static final String ENCODED_CHAR_PERCENT = "%25"; //$NON-NLS-1$
+	private static final String ENCODED_CHAR_CARRIAGE_RETURN = "%0d"; //$NON-NLS-1$
+	private static final String ENCODED_CHAR_TAB = "%09"; //$NON-NLS-1$
+	private static final String ENCODED_CHAR_NEWLINE = "%0a"; //$NON-NLS-1$
+	private static final String ENCODED_CHAR_SPACE = "%20"; //$NON-NLS-1$
+	private static final String ENCODED_CHAR_COLON = "%3a"; //$NON-NLS-1$
+	private static final String ENCODED_CHAR_EQUALS = "%3d"; //$NON-NLS-1$
+
+	
 	// WARNING: There can be NO static logging line here since the logger uses
 	// this class to figure out the preferences
 	// for the logging system. "Logging" an error here would be useless since
@@ -340,26 +350,26 @@ public final class PropertyUtils {
 			switch (ch) {
 			// these are the set of illegal characters in a Property name
 			case '=': // %3d
-				encoded.append("%3d");
+				encoded.append(ENCODED_CHAR_EQUALS);
 				break;
 			case ':': // %3a
-				encoded.append("%3a");
+				encoded.append(ENCODED_CHAR_COLON);
 				break;
 			case ' ': // %20
-				encoded.append("%20");
+				encoded.append(ENCODED_CHAR_SPACE);
 				break;
 			case '\n': // %0a
-				encoded.append("%0a");
+				encoded.append(ENCODED_CHAR_NEWLINE);
 				break;
 			case '\t': // %09
-				encoded.append("%09");
+				encoded.append(ENCODED_CHAR_TAB);
 				break;
 			case '\r': // %0d
-				encoded.append("%0d");
+				encoded.append(ENCODED_CHAR_CARRIAGE_RETURN);
 				break;
 			case '%': // %25
 				// added because its our encoding flag
-				encoded.append("%25");
+				encoded.append(ENCODED_CHAR_PERCENT);
 				break;
 			default:
 				encoded.append(ch);

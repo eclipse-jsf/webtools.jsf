@@ -361,7 +361,7 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
 
             if (decorator == null || associatedType == null)
             {
-                throw new IllegalArgumentException("Arguments must not be null");
+                throw new IllegalArgumentException("Arguments must not be null"); //$NON-NLS-1$
             }
 
             final List decoratorsByType = (List) getDecoratorMap().get(
@@ -385,18 +385,18 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
 
             if (adapterType == null || adapter == null)
             {
-                throw new IllegalArgumentException("Arguments must not be null");
+                throw new IllegalArgumentException("Arguments must not be null"); //$NON-NLS-1$
             }
 
             if (!adapterType.isInstance(adapter))
             {
-                throw new IllegalArgumentException("adapter: " + adapter
-                        + " must be cast compatible to class: " + adapterType);
+                throw new IllegalArgumentException("adapter: " + adapter //$NON-NLS-1$
+                        + " must be cast compatible to class: " + adapterType); //$NON-NLS-1$
             }
             else if (adapterType.isInstance(_owner))
             {
-                throw new IllegalArgumentException("this: " + _owner
-                        + " must not already be an instance of class: "
+                throw new IllegalArgumentException("this: " + _owner //$NON-NLS-1$
+                        + " must not already be an instance of class: " //$NON-NLS-1$
                         + adapterType);
             }
             getAdapterMap().put(adapterType, adapter);
@@ -411,7 +411,7 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
 
             if (decorator == null)
             {
-                throw new IllegalArgumentException("Arguments must not be null");
+                throw new IllegalArgumentException("Arguments must not be null"); //$NON-NLS-1$
             }
             final Class associationType = decorator.getClass();
             addDecorator(decorator, associationType);
@@ -427,7 +427,7 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
 
             if (decorator == null || associatedType == null)
             {
-                throw new IllegalArgumentException("Arguments must not be null");
+                throw new IllegalArgumentException("Arguments must not be null"); //$NON-NLS-1$
             }
 
             List decoratorsByType = (List) getDecoratorMap().get(associatedType);
@@ -500,7 +500,7 @@ public abstract class ViewObject implements Serializable /* IAdaptable? */
         {
             if (isProtected())
             {
-                throw new UnsupportedOperationException("Object "+this.toString()+ " is locked for modification");
+                throw new UnsupportedOperationException("Object "+this.toString()+ " is locked for modification"); //$NON-NLS-1$ //$NON-NLS-2$
             }
         }
 

@@ -68,44 +68,44 @@ public class ComponentFactory
     /**
      * Base class name for UIInput's
      */
-    public final static String BASE_CLASS_UIINPUT = "javax.faces.component.UIInput";
+    public final static String BASE_CLASS_UIINPUT = "javax.faces.component.UIInput"; //$NON-NLS-1$
     /**
      * Base class name for UIOutput's
      */
-    public final static String BASE_CLASS_UIOUTPUT = "javax.faces.component.UIOutput";
+    public final static String BASE_CLASS_UIOUTPUT = "javax.faces.component.UIOutput"; //$NON-NLS-1$
     /**
      * Base class name for UICommand's
      */
-    public final static String BASE_CLASS_UICOMMAND = "javax.faces.component.UICommand";
+    public final static String BASE_CLASS_UICOMMAND = "javax.faces.component.UICommand"; //$NON-NLS-1$
     /**
      * Base class name for UIData's
      */
-    public final static String BASE_CLASS_UIDATA = "javax.faces.component.UIData";
+    public final static String BASE_CLASS_UIDATA = "javax.faces.component.UIData"; //$NON-NLS-1$
     /**
      * Base class name for UIForm's
      */
-    public final static String BASE_CLASS_UIFORM = "javax.faces.component.UIForm";
+    public final static String BASE_CLASS_UIFORM = "javax.faces.component.UIForm"; //$NON-NLS-1$
 
     /**
      * Interface name for ValueHolder's
      */
-    public final static String INTERFACE_VALUEHOLDER = "javax.faces.component.ValueHolder";
+    public final static String INTERFACE_VALUEHOLDER = "javax.faces.component.ValueHolder"; //$NON-NLS-1$
     /**
      * Interface name for EditableValueHolder's
      */
-    public final static String INTERFACE_EDITABLEVALUEHOLDER = "javax.faces.component.EditableValueHolder";
+    public final static String INTERFACE_EDITABLEVALUEHOLDER = "javax.faces.component.EditableValueHolder"; //$NON-NLS-1$
     /**
      * Interface name for ActionSource's
      */
-    public final static String INTERFACE_ACTIONSOURCE = "javax.faces.component.ActionSource";
+    public final static String INTERFACE_ACTIONSOURCE = "javax.faces.component.ActionSource"; //$NON-NLS-1$
     /**
      * Interface name for ActionSource2's
      */
-    public final static String INTERFACE_ACTIONSOURCE2 = "javax.faces.component.ActionSource2";
+    public final static String INTERFACE_ACTIONSOURCE2 = "javax.faces.component.ActionSource2"; //$NON-NLS-1$
     /**
      * Interface name for NamingContainer's
      */
-    public final static String INTERFACE_NAMINGCONTAINER = "javax.faces.component.NamingContainer";
+    public final static String INTERFACE_NAMINGCONTAINER = "javax.faces.component.NamingContainer"; //$NON-NLS-1$
 
     /**
      * @param id
@@ -128,9 +128,9 @@ public class ComponentFactory
      */
     public static void maybeDefaultRendered(final Map attributes)
     {
-        if (!(attributes.get("rendered") instanceof Boolean))
+        if (!(attributes.get("rendered") instanceof Boolean)) //$NON-NLS-1$
         {
-            attributes.put("rendered", Boolean.TRUE);
+            attributes.put("rendered", Boolean.TRUE); //$NON-NLS-1$
         }
     }
 
@@ -270,17 +270,17 @@ public class ComponentFactory
 
     private static void maybeDefaultSubmitted(Map attributes)
     {
-        if (!(attributes.get("submitted") instanceof Boolean))
+        if (!(attributes.get("submitted") instanceof Boolean)) //$NON-NLS-1$
         {
-            attributes.put("submitted", Boolean.FALSE);
+            attributes.put("submitted", Boolean.FALSE); //$NON-NLS-1$
         }
     }
 
     private static void maybeDefaultPrependId(Map attributes)
     {
-        if (!(attributes.get("prependId") instanceof Boolean))
+        if (!(attributes.get("prependId") instanceof Boolean)) //$NON-NLS-1$
         {
-            attributes.put("prependId", Boolean.FALSE);
+            attributes.put("prependId", Boolean.FALSE); //$NON-NLS-1$
         }
     }
 
@@ -341,49 +341,49 @@ public class ComponentFactory
 
     private static void maybeDefaultFirst(Map attributes)
     {
-        if (!(attributes.get("first") instanceof Integer))
+        if (!(attributes.get("first") instanceof Integer)) //$NON-NLS-1$
         {
-            attributes.put("first", ZERO);
+            attributes.put("first", ZERO); //$NON-NLS-1$
         }
     }
 
     private static void maybeDefaultRowCount(Map attributes)
     {
-        if (!(attributes.get("rowCount") instanceof Integer))
+        if (!(attributes.get("rowCount") instanceof Integer)) //$NON-NLS-1$
         {
-            attributes.put("rowCount", MINUS_ONE);
+            attributes.put("rowCount", MINUS_ONE); //$NON-NLS-1$
         }
     }
 
     private static void maybeDefaultRowAvailable(Map attributes)
     {
-        if (! (attributes.get("rowAvailable") instanceof Boolean))
+        if (! (attributes.get("rowAvailable") instanceof Boolean)) //$NON-NLS-1$
         {
-            attributes.put("rowAvailable", Boolean.FALSE);
+            attributes.put("rowAvailable", Boolean.FALSE); //$NON-NLS-1$
         }
     }
 
     private static void maybeDefaultRowIndex(Map attributes)
     {
-        if (! (attributes.get("rowIndex") instanceof Integer))
+        if (! (attributes.get("rowIndex") instanceof Integer)) //$NON-NLS-1$
         {
-            attributes.put("rowIndex", MINUS_ONE);
+            attributes.put("rowIndex", MINUS_ONE); //$NON-NLS-1$
         }
     }
 
     private static void maybeDefaultRows(Map attributes)
     {
-        if (! (attributes.get("rows") instanceof Integer))
+        if (! (attributes.get("rows") instanceof Integer)) //$NON-NLS-1$
         {
-            attributes.put("rows", ZERO);
+            attributes.put("rows", ZERO); //$NON-NLS-1$
         }
     }
 
     private static void maybeDefaultVar(Map attributes)
     {
-        if (! (attributes.get("var") instanceof String))
+        if (! (attributes.get("var") instanceof String)) //$NON-NLS-1$
         {
-            attributes.put("var", "** default variable **");
+            attributes.put("var", "** default variable **"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 }

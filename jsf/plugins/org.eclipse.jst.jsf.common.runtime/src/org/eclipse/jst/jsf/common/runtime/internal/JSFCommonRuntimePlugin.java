@@ -14,7 +14,7 @@ public class JSFCommonRuntimePlugin extends Plugin {
     /**
      *  The plug-in ID
      */
-    public static final String PLUGIN_ID = "CommonComponentPlugin";
+    public static final String PLUGIN_ID = "CommonComponentPlugin"; //$NON-NLS-1$
 
     // The shared instance
     private static JSFCommonRuntimePlugin plugin;

@@ -133,7 +133,7 @@ public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 		appendAttribute(tableElement, "border", "0"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tableElement, "width", "100%"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tableElement, "summary", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		Element trElement = appendChildElement("tr", tableElement);
+		Element trElement = appendChildElement("tr", tableElement); //$NON-NLS-1$
 
 		//append first separator
 		appendSeparatorTD(trElement, SEP_POS_START);
