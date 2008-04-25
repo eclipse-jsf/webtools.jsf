@@ -858,8 +858,7 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
-					widget="true"
-					setNonVisualChildElements="true"
+					needBorderDecorator="true"
 				/>
 			</value>
 		</trait>

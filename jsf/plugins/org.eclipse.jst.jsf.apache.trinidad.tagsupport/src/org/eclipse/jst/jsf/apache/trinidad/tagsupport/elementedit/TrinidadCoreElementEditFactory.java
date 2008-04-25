@@ -39,6 +39,23 @@ public class TrinidadCoreElementEditFactory extends AbstractElementEditFactory {
 			return new PanelTabbedElementEdit();
 		} else if (ITrinidadConstants.TAG_IDENTIFIER_SHOWDETAILITEM.isSameTagType(tagIdentifier)) {
 			return new ShowDetailItemElementEdit();
+		} else if (
+				ITrinidadConstants.TAG_IDENTIFIER_INPUTCOLOR.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_INPUTDATE.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_INPUTFILE.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_INPUTLISTOFVALUES.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_INPUTNUMBERSPINBOX.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_INPUTTEXT.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTBOOLEANCHECKBOX.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTBOOLEANRADIO.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTMANYCHECKBOX.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTMANYLISTBOX.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTONECHOICE.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTONELISTBOX.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_SELECTONERADIO.isSameTagType(tagIdentifier) ||
+				ITrinidadConstants.TAG_IDENTIFIER_PANELLABELANDMESSAGE.isSameTagType(tagIdentifier)
+				) {
+			return new PanelFormLayoutChildElementEdit();
 		} else {
 			return new DefaultTrinidadCoreElementEdit();
 		}
