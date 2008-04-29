@@ -220,7 +220,7 @@
 					setNonVisualChildElements="true"
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
-					resolve-child-text="true"
+					resolveChildText="true"
 				/>
 			</value>
 		</trait>
@@ -385,7 +385,7 @@
 					setNonVisualChildElements="true"
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
-					resolve-child-text="true"
+					resolveChildText="true"
 				/>
 			</value>
 		</trait>
@@ -1045,7 +1045,7 @@
 					setNonVisualChildElements="true"
 				/>
 				<tag-decorate-info id="vpd-decorate-preview"
-					resolve-child-text="true"
+					resolveChildText="true"
 				/>
 			</value>
 		</trait>
