@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>JSF Tag Library Registry</title>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1 style="text-align:center">JSF Tag Library Registry</H1>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.jst.jsf.core.tagregistry<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Since: </h6>3.0
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>Internal.  Not for external use.<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.tagRegistry">tagRegistry</a>)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.tagRegistry">tagRegistry</a> (<a href="#e.content-type">content-type</a>+)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST tagRegistry</p>
+<p class="code SchemaDtdAttlist">class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">description&nbsp;CDATA #IMPLIED&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>class</b> - The class implementing the registry.  Must extend org.eclipse.jst.jsf.designtime.internal.view.model.AbstractTagRegistry.</li>
+<li><b>id</b> - An identifier that is unique within the defining plugin for tagRegistries.  The id will be prepended with the id of the defining plugin to ensure system uniqueness.</li>
+<li><b>description</b> - Used as user viewable short name for this tag registry in the tag registry view, preference pages and other UI.</li>
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.content-type">content-type</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST content-type</p>
+<p class="code SchemaDtdAttlist">contentTypeId&nbsp;CDATA #REQUIRED&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>contentTypeId</b> - Content type identifier. This is an ID defined by the 'org.eclipse.core.runtime.contentTypes' extension point.</li>
+</ul>
+<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6>[Enter extension point usage example here.]
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">API Information: </h6>[Enter API information here.]
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Supplied Implementation: </h6>[Enter information about supplied implementation of this extension point.]
+<p></p>
+
+<br>
+<p class="note SchemaCopyright">
+</p>
+</BODY>
+</HTML>

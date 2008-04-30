@@ -2,55 +2,54 @@
 <HTML>
 <HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Symbol Source Provider</title>
-<style>@import url("../../book.css");</style>
-<style>@import url("../../schema.css");</style>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
 </HEAD>
 <BODY>
-<H1><CENTER>Symbol Source Provider</CENTER></H1>
+<H1 style="text-align:center">Symbol Source Provider</H1>
 <p></p>
-<h6 class=CaptionFigColumn id=header>Identifier: </h6>org.eclipse.jst.jsf.common.symbols<p></p>
-<h6 class=CaptionFigColumn id=header>Since: </h6>1.5
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.jst.jsf.common.symbols<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Since: </h6>1.5
 <p></p>
 
-<p>
-<h6 class=CaptionFigColumn id=header>Description: </h6>A symbol source provider is called to discover EL namespace variable symbols.  For example, managed bean variable symbols, are contributed through a symbol source provider.  A symbol source provider may or may not wish to use a context symbol factory depending on the situation.
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>A symbol source provider is called to discover EL namespace variable symbols.  For example, managed bean variable symbols, are contributed through a symbol source provider.  A symbol source provider may or may not wish to use a context symbol factory depending on the situation.
 
 When an EL variable is resolved, each symbol provider will be considered equally.  All of the information that determines a symbol's characteristics must be encoded in the returned ISymbol object.
 
-A list of registered symbol providers may be found by calling SymbolsPlugin.getSymbolSourceProvider().</p>
-<p><h6 class=CaptionFigColumn id=header>Configuration Markup:</h6></p>
-<p class=code id=dtd>&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.symbolSourceId">symbolSourceId</a>)&gt;</p>
-<p class=code id=dtd>&lt;!ATTLIST extension</p>
-<p class=code id=dtdAttlist>point&nbsp;CDATA #REQUIRED<p class=code id=dtdAttlist>id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class=code id=dtdAttlist>name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+A list of registered symbol providers may be found by calling JSFCommonPlugin.getSymbolSourceProvider().<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
 <p></p>
-<ul class=ConfigMarkup id=attlistDesc>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.symbolSourceId">symbolSourceId</a>)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
 </ul>
-<br><p class=code id=dtd>&lt;!ELEMENT <a name="e.symbolSourceId">symbolSourceId</a> EMPTY&gt;</p>
-<p class=code id=dtd>&lt;!ATTLIST symbolSourceId</p>
-<p class=code id=dtdAttlist>factory&nbsp;CDATA #REQUIRED&gt;</p>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.symbolSourceId">symbolSourceId</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST symbolSourceId</p>
+<p class="code SchemaDtdAttlist">factory&nbsp;CDATA #REQUIRED&gt;</p>
 <p></p>
-<ul class=ConfigMarkup id=attlistDesc>
+<ul class="ConfigMarkupAttlistDesc">
 <li><b>factory</b> - An instance of the factory interface that will be invoked to create an instance of this symbol source provider.  Factory must have a zero-arg default constructor.</li>
 </ul>
-<br><h6 class=CaptionFigColumn id=header>Examples: </h6>The following xml is used to contribute a set of default providers to contribute managed bean, built-in and tag contributed variables:
+<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6>The following xml is used to contribute a set of default providers to contribute managed bean, built-in and tag contributed variables:
 
 <p>
-<pre>
-   <p class=code id=tag>&lt;extension
-         point=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.context.symbol.symbolSourceProvider&quot;</p><p class=code id=tag>&gt;</p>
-      <p class=code id=tag>&lt;symbolSourceId factory=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.designtime.internal.symbols.DefaultBeanSymbolSourceProvider&quot;</p><p class=code id=tag>/&gt;</p>
-      <p class=code id=tag>&lt;symbolSourceId factory=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.designtime.internal.symbols.JSPTagVariableSymbolSourceProvider&quot;</p><p class=code id=tag>/&gt;</p>
-      <p class=code id=tag>&lt;symbolSourceId factory=<p class=code id=cstring>&quot;org.eclipse.jst.jsf.designtime.internal.symbols.DefaultBuiltInSymbolProvider&quot;</p><p class=code id=tag>/&gt;</p>
-   <p class=code id=tag>&lt;/extension&gt;</p>
-</pre>
+<pre class="Example"><span class="code SchemaTag">
+   &lt;extension
+         point=</span><span class="code SchemaCstring">&quot;org.eclipse.jst.jsf.context.symbol.symbolSourceProvider&quot;</span><span class="code SchemaTag">&gt;
+      &lt;symbolSourceId factory=</span><span class="code SchemaCstring">&quot;org.eclipse.jst.jsf.designtime.internal.symbols.DefaultBeanSymbolSourceProvider&quot;</span><span class="code SchemaTag">/&gt;
+      &lt;symbolSourceId factory=</span><span class="code SchemaCstring">&quot;org.eclipse.jst.jsf.designtime.internal.symbols.JSPTagVariableSymbolSourceProvider&quot;</span><span class="code SchemaTag">/&gt;
+      &lt;symbolSourceId factory=</span><span class="code SchemaCstring">&quot;org.eclipse.jst.jsf.designtime.internal.symbols.DefaultBuiltInSymbolProvider&quot;</span><span class="code SchemaTag">/&gt;
+   &lt;/extension&gt;
+</span></pre>
 </p>
 <p></p>
 
 <br>
-<p class=note id=copyright>
+<p class="note SchemaCopyright">
 Copyright 2006 Oracle
 All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
-<p></p>
 
 </p>
 </BODY>
