@@ -5,27 +5,8 @@
 	<topic label="API Reference" href="html/api_reference/overview-summary.html">
 		<link toc="javadoctoc.xml" />
 	</topic>
+	
 	<topic label="Extension Points Reference" href="html/extpts_reference/index.html">
-		<topic label="org.eclipse.jst.jsf.common.annotationFiles" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_annotationFiles.html"/>
-		<topic label="org.eclipse.jst.jsf.common.contextSymbolFactory" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html"/>
-		<topic label="org.eclipse.jst.jsf.common.domainLoadingStrategies" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_domainLoadingStrategies.html"/>
-		<topic label="org.eclipse.jst.jsf.common.domainSourceModelTypes" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_domainSourceModelTypes.html"/>
-		<topic label="org.eclipse.jst.jsf.common.domainSourceModelTypeTranslators" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_domainSourceModelTypeTranslators.html"/>
-		<topic label="org.eclipse.jst.jsf.common.standardMetaDataFiles" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_standardMetaDataFiles.html"/>
-		<topic label="org.eclipse.jst.jsf.common.symbolSourceProvider" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_symbolSourceProvider.html"/>
-		<topic label="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_AttributeValueRuntimeTypes.html"/>
-		<topic label="org.eclipse.jst.jsf.core.externalcontext" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_externalcontext.html"/>
-		<topic label="org.eclipse.jst.jsf.core.jsfLibraries" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_jsfLibraries.html"/>
-		<topic label="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_MetaDataEnabledFeatures.html"/>
-		<topic label="org.eclipse.jst.jsf.core.methodresolver" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_methodresolver.html"/>
-		<topic label="org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_pluginProvidedJsfLibraries.html"/>
-		<topic label="org.eclipse.jst.jsf.core.propertyresolver" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_propertyresolver.html"/>
-		<topic label="org.eclipse.jst.jsf.core.variableresolver" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_variableresolver.html"/>
-		<topic label="org.eclipse.jst.pagedesigner.cmRegistry" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_cmRegistry.html"/>
-		<topic label="org.eclipse.jst.pagedesigner.pageDesignerExtension" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_pageDesignerExtension.html"/>
-		<topic label="org.eclipse.jst.pagedesigner.popupMenuContributor" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_popupMenuContributor.html"/>
-		<topic label="org.eclipse.jst.pagedesigner.propertyContributor" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_propertyContributor.html"/>
-		<topic label="org.eclipse.jst.pagedesigner.propertySections" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_propertySections.html"/>
-		<topic label="org.eclipse.jst.pagedesigner.tagCreationFactories" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_tagCreationFactories.html"/>
+		<link toc="topics_ExtPoint_Reference.xml" />
 	</topic>
 </toc>

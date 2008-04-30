@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?NLS TYPE="org.eclipse.help.toc"?>
-	 	<toc label="Extension Points Reference">
-<topic label="org.eclipse.jst.jsf.common.annotationFiles" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_annotationFiles.html"/>
+	 	<toc label="Ext-pts Reference">
 <topic label="org.eclipse.jst.jsf.common.contextSymbolFactory" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html"/>
 <topic label="org.eclipse.jst.jsf.common.domainLoadingStrategies" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_domainLoadingStrategies.html"/>
 <topic label="org.eclipse.jst.jsf.common.domainSourceModelTypes" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_common_domainSourceModelTypes.html"/>
@@ -17,10 +16,7 @@
 <topic label="org.eclipse.jst.jsf.core.pluginProvidedJsfLibraries" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_pluginProvidedJsfLibraries.html"/>
 <topic label="org.eclipse.jst.jsf.core.propertyresolver" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_propertyresolver.html"/>
 <topic label="org.eclipse.jst.jsf.core.variableresolver" href="html/extpts_reference/jsf/org_eclipse_jst_jsf_core_variableresolver.html"/>
-<topic label="org.eclipse.jst.pagedesigner.cmRegistry" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_cmRegistry.html"/>
 <topic label="org.eclipse.jst.pagedesigner.pageDesignerExtension" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_pageDesignerExtension.html"/>
 <topic label="org.eclipse.jst.pagedesigner.popupMenuContributor" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_popupMenuContributor.html"/>
 <topic label="org.eclipse.jst.pagedesigner.propertyContributor" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_propertyContributor.html"/>
-<topic label="org.eclipse.jst.pagedesigner.propertySections" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_propertySections.html"/>
-<topic label="org.eclipse.jst.pagedesigner.tagCreationFactories" href="html/extpts_reference/jsf/org_eclipse_jst_pagedesigner_tagCreationFactories.html"/>
 </toc>

@@ -6,8 +6,16 @@
 	<property name="outputDir" value="${basedir}"/>
 	<property name="eclipse.home" value="${basedir}/.."/>
 	
-	<target name="main" depends="prephtml, javadoc, packagetoc" description="Builds Plugin Javadoc" />
+	<target name="main" depends="clean, prephtml, javadoc, packagetoc" description="Builds Plugin Javadoc" />
 
+	<target name="clean">
+		<delete>
+			<fileset dir="${outputDir}/html/api_reference/" >
+				<include name="**/*.html"/>
+			</fileset>
+		</delete>
+	</target>
+	
 	<target name="prephtml" description="Transforms XML to HTML.">	
 		<xslt 	style="javadoc.xsl" 
 				destdir=".." 
@@ -18,15 +26,14 @@
 	</target>
 
     <target name="javadoc">
-<echo message="========= ${eclipse.home}"/>
-<echo message="========= ${classpath}"/>
+	    <echo message="========= ${eclipse.home}"/>
     	<mkdir dir="${outputDir}/api-overview/overview" />
 
 		<copy todir="${outputDir}/api-overview/overview" flatten="true" >
 			<fileset dir="${basedir}/api-overview/overview/"/> 
 			<fileset dir="${basedir}/.." includes="*/javadoc-images/*.jpg"/> 
 		</copy>
-        <javadoc
+        <javadoc 
         	access="public" 
     		additionalparam="-breakiterator -tag model:X -tag generated:X -tag ordered:X"
 			author="false" 
@@ -46,7 +53,7 @@
 			version="true"
 			breakiterator="yes"
         	verbose="false"
-        	failonerror="true"
+        	failonerror="false"
 			>
 				<tag name="ignore"     description="ignore" enabled="false"/>
 				<tag name="generated"  description="ignore" enabled="false"/>
@@ -58,10 +65,10 @@
         	</javadoc>
     </target> 
 	
-	<target name="packagetoc">
+	<target name="packagetoc">			
 			<loadfile
 				  failonerror="false"
-			      property="wtp.packages"
+			      property="jsf.packages"
 			      srcFile="${outputDir}/html/api_reference/package-list">
 				  <filterchain>
 				  	<filterreader classname="org.apache.tools.ant.filters.PrefixLines">
@@ -72,9 +79,9 @@
 			</loadfile>
 			
 			<!-- Create packages.xml file -->
-			<echo file="packages.xml">&lt;packages&gt;&lt;package&gt;${wtp.packages}&lt;/package&gt;&lt;/packages&gt;</echo>
+			<echo file="packages.xml">&lt;packages&gt;&lt;package&gt;${jsf.packages}&lt;/package&gt;&lt;/packages&gt;</echo>
 			
-			<xslt basedir="${basedir}" in="packages.xml" out="javadoctoc.xml" style="javadocToc.xsl">
+			<xslt basedir="${outputdir}" in="packages.xml" out="javadoctoc.xml" style="javadocToc.xsl">
 				<outputproperty name="method" value="xml"/>
 				<outputproperty name="indent" value="yes"/>
 			</xslt>

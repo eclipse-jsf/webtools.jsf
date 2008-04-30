@@ -10,7 +10,6 @@
 <topic label="org.eclipse.jst.jsf.common.sets.constraint" href="html/api_reference/org/eclipse/jst/jsf/common/sets/constraint/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.common.sets.mapping" href="html/api_reference/org/eclipse/jst/jsf/common/sets/mapping/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.common.util" href="html/api_reference/org/eclipse/jst/jsf/common/util/package-summary.html"/>
-<topic label="org.eclipse.jst.jsf.contentmodel.annotation" href="html/api_reference/org/eclipse/jst/jsf/contentmodel/annotation/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.context" href="html/api_reference/org/eclipse/jst/jsf/context/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.context.resolver" href="html/api_reference/org/eclipse/jst/jsf/context/resolver/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.context.resolver.structureddocument" href="html/api_reference/org/eclipse/jst/jsf/context/resolver/structureddocument/package-summary.html"/>
@@ -22,7 +21,6 @@
 <topic label="org.eclipse.jst.jsf.core.jsfappconfig" href="html/api_reference/org/eclipse/jst/jsf/core/jsfappconfig/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.core.jsflibraryconfiguration" href="html/api_reference/org/eclipse/jst/jsf/core/jsflibraryconfiguration/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.core.jsflibraryregistry" href="html/api_reference/org/eclipse/jst/jsf/core/jsflibraryregistry/package-summary.html"/>
-<topic label="org.eclipse.jst.jsf.core.set" href="html/api_reference/org/eclipse/jst/jsf/core/set/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.core.set.constraint" href="html/api_reference/org/eclipse/jst/jsf/core/set/constraint/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.core.set.mapping" href="html/api_reference/org/eclipse/jst/jsf/core/set/mapping/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.core.tagmatcher" href="html/api_reference/org/eclipse/jst/jsf/core/tagmatcher/package-summary.html"/>
@@ -38,11 +36,12 @@
 <topic label="org.eclipse.jst.jsf.metadataprocessors" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.metadataprocessors.features" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/features/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.taglibprocessing.attributevalues" href="html/api_reference/org/eclipse/jst/jsf/taglibprocessing/attributevalues/package-summary.html"/>
-<topic label="org.eclipse.jst.pagedesigner" href="html/api_reference/org/eclipse/jst/pagedesigner/package-summary.html"/>
 <topic label="org.eclipse.jst.pagedesigner.converter" href="html/api_reference/org/eclipse/jst/pagedesigner/converter/package-summary.html"/>
 <topic label="org.eclipse.jst.pagedesigner.dtmanager" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/package-summary.html"/>
 <topic label="org.eclipse.jst.pagedesigner.dtmanager.converter" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/converter/package-summary.html"/>
 <topic label="org.eclipse.jst.pagedesigner.dtmanager.converter.operations" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/converter/operations/package-summary.html"/>
 <topic label="org.eclipse.jst.pagedesigner.dtmanager.dtinfo" href="html/api_reference/org/eclipse/jst/pagedesigner/dtmanager/dtinfo/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.editors.properties" href="html/api_reference/org/eclipse/jst/pagedesigner/editors/properties/package-summary.html"/>
+<topic label="org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections" href="html/api_reference/org/eclipse/jst/pagedesigner/editors/properties/quickedittabsections/package-summary.html"/>
 <topic label="org.eclipse.jst.pagedesigner.extensionpoint" href="html/api_reference/org/eclipse/jst/pagedesigner/extensionpoint/package-summary.html"/>
 </toc>
