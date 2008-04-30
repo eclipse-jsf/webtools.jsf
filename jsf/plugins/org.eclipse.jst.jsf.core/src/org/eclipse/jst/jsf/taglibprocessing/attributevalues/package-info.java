@@ -11,7 +11,7 @@
  ********************************************************************************/
 
 /**
- * This package is used to provide types for tag attribute values so that the 
+ * Provides type system for tag attribute values so that the 
  * org.eclipse.jst.jsf.core.metadataprocessors.features can be applied.  
  * 
  * A type is added using the org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes extension point.

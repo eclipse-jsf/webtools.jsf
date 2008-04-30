@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007 Oracle Corporation.
+ * Copyright (c) 2008 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,7 +11,8 @@
  ********************************************************************************/
 
 /**
- * Design-time metadata framework.
- * <p><b>Deprecated - and no longer in use.   Use common.metadata</b></p>
+ * Project-level support for JSF application configuration files. 
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
-package org.eclipse.jst.jsf.contentmodel.annotation;
+package org.eclipse.jst.jsf.core.jsfappconfig;

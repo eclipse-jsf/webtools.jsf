@@ -11,8 +11,9 @@
  ********************************************************************************/
 
 /**
- * This package is used to provide tooling support for taglibraries using the Design-time Metadata
- * feature (org.eclipse.jst.jsf.common.metadata).<p>
+ * Provides tooling support for taglibraries using the Design-time Metadata
+ * feature (org.eclipse.jst.jsf.common.metadata).
+ * <p>
  * The MetaDataEnabledProcessingFactory singleton instance is the entry point.   The tool requests
  * the IMetaDataEnabled feature for a particular tag attribute, and through metadata, will locate the 
  * "metadata processing" feature using the attribute value runtime type system.

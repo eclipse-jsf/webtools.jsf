@@ -11,7 +11,8 @@
  ********************************************************************************/
 
 /**
- * Design-time metadata framework.
- * <p><b>Deprecated - and no longer in use.   Use common.metadata</b></p>
+ * JSF Core Tag Matching Support. 
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
  */
-package org.eclipse.jst.jsf.contentmodel.annotation;
+package org.eclipse.jst.jsf.core.tagmatcher;

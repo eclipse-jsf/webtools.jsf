@@ -11,7 +11,8 @@
  ********************************************************************************/
 
 /**
- * This package is used to provide adopters with a mechanism to deal with JSF Library references.
+ * API for configuring JSF Library References. 
+ * 
  * <p><b>Provisional API - subject to change</b></p>
  */
 package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
