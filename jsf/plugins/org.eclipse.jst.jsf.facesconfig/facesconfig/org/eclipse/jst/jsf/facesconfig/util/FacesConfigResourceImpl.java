@@ -27,9 +27,7 @@ import org.xml.sax.SAXException;
 
 /**
  * <!-- begin-user-doc -->
- * The <b>Resource </b> associated with the package.
- * 
- * This class is NOT intended for external use.
+ * The <b>Resource </b> associated with the package - NOT intended for external use.
  * Should not be used or implemented by external clients
  * 
  * <!-- end-user-doc -->
@@ -39,7 +37,8 @@ import org.xml.sax.SAXException;
 public class FacesConfigResourceImpl extends TranslatorResourceImpl implements IFacesConfigResource {
 
 	/**
-	 * Local entity resolver used to help loading entities
+	 * Local entity resolver used to help loading entities - NOT intended for external use.
+	 * Should not be used or implemented by external clients
 	 */
 	public static class MyEntityResolver implements EntityResolver {
 

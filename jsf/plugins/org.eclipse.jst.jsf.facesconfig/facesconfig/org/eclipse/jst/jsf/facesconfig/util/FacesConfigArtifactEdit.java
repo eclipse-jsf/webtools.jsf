@@ -27,9 +27,9 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 
 
 /**
- * The artifact edit for the JSF Application Configuration (faces-config) model
+ * The artifact edit for the JSF Application Configuration (faces-config) model - may be used but not extended by clients.
  * 
- * May be used but not extended by clients.
+ * This class maybe refactored to a different package in the future.
  */
 public final class FacesConfigArtifactEdit extends ArtifactEdit {
 	private String sFileName = null;

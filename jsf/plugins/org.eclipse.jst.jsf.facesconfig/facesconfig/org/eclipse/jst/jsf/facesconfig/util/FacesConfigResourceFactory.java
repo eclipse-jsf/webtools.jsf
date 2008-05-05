@@ -19,7 +19,7 @@ import org.eclipse.wst.common.internal.emf.resource.TranslatorResource;
 import org.eclipse.wst.common.internal.emf.resource.TranslatorResourceFactory;
 
 /**
- * May be referenced by should NOT be extended by clients
+ * May be referenced but should NOT be extended by clients
  * 
  * @author xjiang
  *

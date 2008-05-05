@@ -11,6 +11,9 @@
  ********************************************************************************/
 
 /**
- * EMF generated util classes for JSF application configuration files.  
+ * EMF generated utility classes for JSF application configuration files (deprecated).
+ * <p>
+ * Deprecated - should be using classes in org.eclipse.jst.jsf.facesconfig.edit.provider.   
+ * This package will be removed from the MANIFEST.MF as public API in a future release.
  */
 package org.eclipse.jst.jsf.facesconfig.emf.util;

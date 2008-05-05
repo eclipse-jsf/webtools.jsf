@@ -11,9 +11,6 @@
  ********************************************************************************/
 
 /**
- * EMF model implementations for JSF application configuration files (deprecated). 
- * <p>
- * Deprecated - should use interfaces in the org.eclipse.jst.jsf.facesconfig.emf package   
- * This package will be removed from the MANIFEST.MF as public API in a future release.
+ * Not considered an API package and will be made internal in the MANIFEST in some future release
  */
-package org.eclipse.jst.jsf.facesconfig.emf.impl;
+package org.eclipse.jst.jsf.facesconfig;

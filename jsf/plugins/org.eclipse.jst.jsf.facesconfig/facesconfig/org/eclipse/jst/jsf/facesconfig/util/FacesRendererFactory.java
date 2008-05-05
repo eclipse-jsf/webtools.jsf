@@ -30,7 +30,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * This class should not be referenced or sub-classed enternally.
+ * This class should not be referenced or sub-classed externally.
  * 
  * The custom render factory for the Faces Config model EMF2DOM translations.
  * A singleton factory.
