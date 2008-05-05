@@ -29,10 +29,12 @@
 <topic label="org.eclipse.jst.jsf.designtime.el" href="html/api_reference/org/eclipse/jst/jsf/designtime/el/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.designtime.resolver" href="html/api_reference/org/eclipse/jst/jsf/designtime/resolver/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.designtime.symbols" href="html/api_reference/org/eclipse/jst/jsf/designtime/symbols/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.facesconfig" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.facesconfig.edit.provider" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/edit/provider/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.facesconfig.emf" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/emf/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.facesconfig.emf.impl" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/emf/impl/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.facesconfig.emf.util" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/emf/util/package-summary.html"/>
+<topic label="org.eclipse.jst.jsf.facesconfig.util" href="html/api_reference/org/eclipse/jst/jsf/facesconfig/util/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.metadataprocessors" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.metadataprocessors.features" href="html/api_reference/org/eclipse/jst/jsf/metadataprocessors/features/package-summary.html"/>
 <topic label="org.eclipse.jst.jsf.taglibprocessing.attributevalues" href="html/api_reference/org/eclipse/jst/jsf/taglibprocessing/attributevalues/package-summary.html"/>
