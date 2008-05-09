@@ -25,7 +25,7 @@ public class RenderKitIdTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public RenderKitIdTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);
+		super(domNameAndPath, aFeature, END_TAG_NO_INDENT);
 	}
 
 	/* (non-Javadoc)

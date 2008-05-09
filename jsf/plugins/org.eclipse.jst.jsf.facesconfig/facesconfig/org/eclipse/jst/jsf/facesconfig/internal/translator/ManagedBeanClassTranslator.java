@@ -25,7 +25,7 @@ public class ManagedBeanClassTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public ManagedBeanClassTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);
+		super(domNameAndPath, aFeature, END_TAG_NO_INDENT);
 	}
 
 	/* (non-Javadoc)

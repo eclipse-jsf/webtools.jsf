@@ -27,7 +27,7 @@ public class DefaultRenderKitIdTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public DefaultRenderKitIdTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature); //$NON-NLS-1$
+		super(domNameAndPath, aFeature, END_TAG_NO_INDENT); //$NON-NLS-1$
 	}
 
 	/* (non-Javadoc)

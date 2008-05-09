@@ -28,7 +28,7 @@ public class MessageBundleTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public MessageBundleTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);
+		super(domNameAndPath, aFeature, END_TAG_NO_INDENT);
 	}
 
 	/* (non-Javadoc)

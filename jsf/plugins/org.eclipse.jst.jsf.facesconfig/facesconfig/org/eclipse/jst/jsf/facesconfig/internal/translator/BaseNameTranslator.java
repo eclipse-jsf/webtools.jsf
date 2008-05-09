@@ -27,7 +27,7 @@ public class BaseNameTranslator extends Translator {
      * @param feature
      */
     public BaseNameTranslator(String domNameAndPath, EStructuralFeature feature) {
-        super(domNameAndPath, feature);
+        super(domNameAndPath, feature, END_TAG_NO_INDENT);
     }
 
     public Translator[] getChildren()

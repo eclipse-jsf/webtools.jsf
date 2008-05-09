@@ -24,7 +24,7 @@ public class VarTranslator extends Translator {
      * @param feature
      */
     public VarTranslator(String domNameAndPath, EStructuralFeature feature) {
-        super(domNameAndPath, feature);
+        super(domNameAndPath, feature, END_TAG_NO_INDENT);
     }
 
     public Translator[] getChildren()

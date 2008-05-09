@@ -28,7 +28,7 @@ public class ViewHandlerTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public ViewHandlerTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);
+		super(domNameAndPath, aFeature, END_TAG_NO_INDENT);
 	}
 
 	/* (non-Javadoc)
