@@ -5,4 +5,6 @@
 	<topic label="Requirements"  href="html/gettingstarted/jsf_requirements.html" />
 	<topic label="JSF Basic Tutorial" href="html/gettingstarted/tutorial/JSFTools_tutorial.html"/>
 	<topic label="Web Page Editor" href="html/gettingstarted/wpe/wpe_getting_started.html"/>
+ <topic href="html/gettingstarted/trinidad/trinidad_initialsetupguide.html" label="Apache MyFaces Trinidad - Initial Setup Guide">
+ </topic>
 </toc>
