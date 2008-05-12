@@ -22,25 +22,27 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
  *
  */
 public class TLDComponentTagElement extends TLDJSFTagElement implements
-        IComponentTagElement 
+IComponentTagElement
 {
     /**
      * 
      */
     private static final long serialVersionUID = -6479445622102799425L;
     private final ComponentTypeInfo     _componentTypeInfo;
-    
+
     /**
      * @param elementDecl
      * @param componentTypeInfo
+     * @param advisor 
      */
-    public TLDComponentTagElement(final TLDElementDeclaration elementDecl, final ComponentTypeInfo componentTypeInfo) 
+    public TLDComponentTagElement(final TLDElementDeclaration elementDecl
+            , final ComponentTypeInfo componentTypeInfo, final IAttributeAdvisor advisor)
     {
-        super(elementDecl);
+        super(elementDecl, advisor);
         _componentTypeInfo = componentTypeInfo;
     }
 
-    public ComponentTypeInfo getComponent() 
+    public ComponentTypeInfo getComponent()
     {
         return _componentTypeInfo;
     }
@@ -54,6 +56,8 @@ public class TLDComponentTagElement extends TLDJSFTagElement implements
     @Override
     public String toString()
     {
-        return _componentTypeInfo.toString();
+        final String attributes = constructAttributesString();
+        return _componentTypeInfo.toString() +
+            (!"".equals(attributes) ? "\n" + attributes : "");
     }
 }

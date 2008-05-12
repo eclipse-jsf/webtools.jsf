@@ -46,6 +46,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDConverterTagEle
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagElement;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagHandlerElement;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDValidatorTagElement;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor.NullAttributeAdvisor;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 
 /**
@@ -651,7 +652,7 @@ public final class TagAnalyzer
                 if (typeInfo != null)
                 {
                     final TLDComponentTagElement tagElement = new TLDComponentTagElement(
-                            tldDecl, typeInfo);
+                            tldDecl, typeInfo, new NullAttributeAdvisor());
                     return tagElement;
                 }
             }
@@ -681,14 +682,14 @@ public final class TagAnalyzer
                 final ConverterTypeInfo typeInfo = DTComponentIntrospector
                         .getConverter(converterId, converterClass);
                 final TLDConverterTagElement tagElement = new TLDConverterTagElement(
-                        tldDecl, typeInfo);
+                        tldDecl, typeInfo, new NullAttributeAdvisor());
                 return tagElement;
             }
         }
 
         // we know (actually we assume by contract) that this a converter
         // so create an unknown converter tag for it
-        return new TLDConverterTagElement(tldDecl, ConverterTypeInfo.UNKNOWN);
+        return new TLDConverterTagElement(tldDecl, ConverterTypeInfo.UNKNOWN, new NullAttributeAdvisor());
     }
 
     /**
@@ -711,13 +712,13 @@ public final class TagAnalyzer
                 final ValidatorTypeInfo typeInfo = DTComponentIntrospector
                         .getValidator(validatorId, validatorClass);
                 final TLDValidatorTagElement tagElement = new TLDValidatorTagElement(
-                        tldDecl, typeInfo);
+                        tldDecl, typeInfo, new NullAttributeAdvisor());
                 return tagElement;
             }
         }
         // we know (actually we assume by contract) that this a validator
         // so create an unknown converter tag for it
-        return new TLDValidatorTagElement(tldDecl, ValidatorTypeInfo.UNKNOWN);
+        return new TLDValidatorTagElement(tldDecl, ValidatorTypeInfo.UNKNOWN, new NullAttributeAdvisor());
     }
 
     /**
@@ -731,12 +732,12 @@ public final class TagAnalyzer
         if (DTComponentIntrospector.isTypeNameInstanceOfClass(type,
                 FACET_TAG_HANDLER))
         {
-            return new TLDTagHandlerElement(tldDecl, TagHandlerType.FACET);
+            return new TLDTagHandlerElement(tldDecl, TagHandlerType.FACET, new NullAttributeAdvisor());
         }
         else if (DTComponentIntrospector.isTypeNameInstanceOfClass(type,
                 ATTRIBUTE_TAG_HANDLER))
         {
-            return new TLDTagHandlerElement(tldDecl, TagHandlerType.ATTRIBUTE);
+            return new TLDTagHandlerElement(tldDecl, TagHandlerType.ATTRIBUTE, new NullAttributeAdvisor());
         }
         // else if (isTypeNameInstanceOfClass(type, ACTIONLISTENER_TAG_HANDLER))
         // {

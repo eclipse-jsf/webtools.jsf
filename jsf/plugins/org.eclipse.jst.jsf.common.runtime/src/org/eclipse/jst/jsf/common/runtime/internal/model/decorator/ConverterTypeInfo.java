@@ -24,8 +24,9 @@ public class ConverterTypeInfo extends ClassTypeInfo
      * serializable id
      */
     private static final long serialVersionUID = -7238952424045449907L;
-
-    private final String _converterId;
+    private static final String[]  NO_FOR_CLASS = new  String[0];
+    private final String        _converterId;
+    private final String[]      _forClasses;
 
     /**
      * For unknown converters, use the UNKNOWN constant.
@@ -46,6 +47,7 @@ public class ConverterTypeInfo extends ClassTypeInfo
         }
 
         _converterId = converterId;
+        _forClasses = NO_FOR_CLASS;
     }
 
     /**
@@ -55,12 +57,13 @@ public class ConverterTypeInfo extends ClassTypeInfo
      * @param superClasses 
      * @param interfaces 
      * @param converterId
+     * @param forClass 
      * @throws java.lang.IllegalArgumentException
      *             if both className and converterId are null.
      * 
      */
     public ConverterTypeInfo(String className, String[] superClasses,
-            String[] interfaces, String converterId)
+            String[] interfaces, String converterId, String[] forClass)
     {
         super(className, superClasses, interfaces);
         if (className == null && converterId == null)
@@ -70,6 +73,14 @@ public class ConverterTypeInfo extends ClassTypeInfo
         }
 
         _converterId = converterId;
+        if (forClass == null)
+        {
+            _forClasses = NO_FOR_CLASS;
+        }
+        else
+        {
+            _forClasses = forClass;
+        }
     }
 
     /**
@@ -91,6 +102,7 @@ public class ConverterTypeInfo extends ClassTypeInfo
     {
         super(null, new String[0], new String[0]);
         _converterId = null;
+        _forClasses = NO_FOR_CLASS;
     }
 
     /**
@@ -101,8 +113,34 @@ public class ConverterTypeInfo extends ClassTypeInfo
         return _converterId;
     }
 
+    /**
+     * @return a copy of the listof classes that this type converters to.  May
+     * be empty.  Never null.
+     */
+    public final String[] getForClass()
+    {
+        final String[]  returnArray = new String[_forClasses.length];
+        System.arraycopy(_forClasses, 0, returnArray, 0, _forClasses.length);
+        return returnArray;
+    }
+
     public String toString()
     {
-        return "Converter Type Info: type = " + _converterId + ", "+super.toString(); //$NON-NLS-1$ //$NON-NLS-2$
+        String toString = "";
+
+        if (_forClasses.length  > 0)
+        {
+            toString = "For-Classes: [";
+            for (int i = 0; i < _forClasses.length; i++)
+            {
+                toString += _forClasses[i];
+                if (i < _forClasses.length-1)
+                {
+                    toString += ", ";
+                }
+            }
+            toString += "], ";
+        }
+        return toString + "Converter Type Info: type = " + _converterId + ", "+super.toString(); //$NON-NLS-1$ //$NON-NLS-2$
     }
 }

@@ -27,14 +27,15 @@ public class TLDConverterTagElement extends TLDJSFTagElement implements IConvert
      */
     private static final long serialVersionUID = 2854457220470229847L;
     private final ConverterTypeInfo     _converterTypeInfo;
-    
+
     /**
      * @param elementDecl
      * @param converterTypeInfo
+     * @param advisor 
      */
-    public TLDConverterTagElement(TLDElementDeclaration elementDecl, ConverterTypeInfo converterTypeInfo)
+    public TLDConverterTagElement(final TLDElementDeclaration elementDecl, final ConverterTypeInfo converterTypeInfo, final IAttributeAdvisor advisor)
     {
-        super(elementDecl);
+        super(elementDecl, advisor);
         _converterTypeInfo = converterTypeInfo;
     }
 
@@ -51,7 +52,7 @@ public class TLDConverterTagElement extends TLDJSFTagElement implements IConvert
     {
         return _converterTypeInfo;
     }
-    
+
     @Override
     public String toString()
     {

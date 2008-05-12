@@ -75,7 +75,7 @@ public class UICommandInfo extends ComponentInfo implements IActionSource2Info {
     {
         this(getStringProperty("id", attributes, true), //$NON-NLS-1$
                 parent, componentTypeInfo,
-                getBooleanProperty("rendered", attributes), //$NON-NLS-1$
+                getBooleanProperty("rendered", attributes, false), //$NON-NLS-1$
                 getActionSourceInfo("$actionSourceInfo", attributes) //$NON-NLS-1$
                 );
     }

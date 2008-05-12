@@ -30,6 +30,14 @@
       <standardMetaDataFile
             location="$nl$/metadata/symbolInfoMetadata.xml"
             uri="http://java.sun.com/jsf/core"/>
+      <standardMetaDataFile
+            location="$nl$/metadata/viewMappings_core.xml"
+            uri="http://java.sun.com/jsf/core">
+      </standardMetaDataFile>
+      <standardMetaDataFile
+            location="$nl$/metadata/viewMappings_html.xml"
+            uri="http://java.sun.com/jsf/html">
+      </standardMetaDataFile>
    </extension>
    
 </plugin>

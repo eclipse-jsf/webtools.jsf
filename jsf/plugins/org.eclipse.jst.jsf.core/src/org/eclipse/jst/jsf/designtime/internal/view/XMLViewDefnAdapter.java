@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.designtime.internal.view;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -144,7 +145,8 @@ public abstract class XMLViewDefnAdapter extends
                             context.getStructuredDocument());
                     final ElementData elementData = XMLViewObjectMappingService
                             .createElementData(uri, viewDefnObject
-                                    .getLocalName(), context);
+                                    .getLocalName(), context,
+                                    Collections.EMPTY_MAP);
                     return ((XMLViewObjectMappingService) serviceAdapter)
                             .findViewObject(elementData);
                 }

@@ -1,0 +1,1913 @@
+<?xml version="1.0" encoding="ASCII"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:viewMap="http://org.eclipse.jst.jsf.core/componentMapping.ecore" xsi:noNamespaceSchemaLocation="http://org.eclipse.jst.jsf.core/componentMapping.ecore" xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" id="http://myfaces.apache.org/trinidad" type="tagFile">
+  <entity id="panelList" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelList</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelList</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.List</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectManyListbox" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectManyListbox</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectMany</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectManyListbox</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectMany</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Listbox</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="tree" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.data.CoreTree</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXTree</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreTree</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Tree</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Tree</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateDateTimeRange" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.DateTimeRangeValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.DateTimeRange</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="showDetailItem" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CoreShowDetailItem</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXShowDetail</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreShowDetailItem</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ShowDetail</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Item</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelTabbed" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelTabbed</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXShowOne</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelTabbed</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ShowOne</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Tab</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectItem" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectItem</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectItem</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectItem</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectItem</componentFamily>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelPopup" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelPopup</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelPopup</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Popup</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="singleStepButtonBar" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreSingleStepButtonBar</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSingleStep</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSingleStepButtonBar</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SingleStep</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.ButtonBar</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="componentRef" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.UIXComponentRef</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.ComponentRef</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ComponentRef</componentFamily>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelChoice" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelChoice</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXShowOne</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelChoice</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ShowOne</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Choice</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="showDetail" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CoreShowDetail</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXShowDetail</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreShowDetail</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ShowDetail</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.ShowDetail</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="processChoiceBar" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreProcessChoiceBar</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXProcess</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreProcessChoiceBar</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Process</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.ChoiceBar</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="treeTable" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.data.CoreTreeTable</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXTreeTable</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXTree</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreTreeTable</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.TreeTable</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.TreeTable</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="subform" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.CoreSubform</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSubform</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSubform</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Subform</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Subform</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelPage" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelPage</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelPage</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Page</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="page" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CorePage</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPage</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePage</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Page</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Page</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="messages" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreMessages</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXMessages</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreMessages</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Messages</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Messages</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="convertNumber" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ConverterTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.convert.NumberConverter</className>
+            <converterId>org.apache.myfaces.trinidad.Number</converterId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="message" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreMessage</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXMessage</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreMessage</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Message</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Message</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="showDetailHeader" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CoreShowDetailHeader</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXShowDetail</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreShowDetailHeader</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ShowDetail</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Header</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="chart" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.data.CoreChart</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXChart</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreChart</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Chart</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Chart</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateRegExp" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.RegExpValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.RegExp</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="outputDocument" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreOutputDocument</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXOutput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreOutputDocument</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Output</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Document</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="convertColor" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ConverterTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.convert.ColorConverter</className>
+            <converterId>org.apache.myfaces.trinidad.Color</converterId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="icon" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreIcon</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreIcon</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Icon</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="image" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreImage</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreImage</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Image</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputText" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputText</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputText</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Input</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Text</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="poll" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.CorePoll</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPoll</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePoll</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Poll</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Poll</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="goButton" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreGoButton</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXGo</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreGoButton</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Go</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Button</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateDoubleRange" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.DoubleRangeValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.DoubleRange</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="media" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreMedia</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreMedia</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Media</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="outputText" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreOutputText</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXOutput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreOutputText</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Output</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Text</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectRangeChoiceBar" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.data.CoreSelectRangeChoiceBar</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectRange</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectRangeChoiceBar</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectRange</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.ChoiceBar</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelHorizontalLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelHorizontalLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelHorizontalLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.HorizontalLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="resetButton" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreResetButton</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXReset</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreResetButton</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ResetButton</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Button</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputHidden" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputHidden</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputHidden</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Input</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Hidden</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="spacer" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreSpacer</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSpacer</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Spacer</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectOneChoice" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectOneChoice</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectOne</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectOneChoice</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectOne</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Choice</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="table" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.data.CoreTable</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXTable</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXIterator</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreTable</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Table</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Table</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="switcher" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.UIXSwitcher</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.Switcher</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Switcher</componentFamily>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelGroupLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelGroupLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelGroupLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.GroupLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelHeader" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelHeader</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelHeader</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Header</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelTip" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelTip</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelTip</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Tip</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectManyShuttle" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectManyShuttle</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectMany</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectManyShuttle</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectMany</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Shuttle</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelCaptionGroup" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelCaptionGroup</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelCaptionGroup</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.PanelCaptionGroup</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelPageHeader" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelPageHeader</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelPageHeader</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.PageHeader</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectOneRadio" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectOneRadio</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectOne</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectOneRadio</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectOne</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Radio</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectOneListbox" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectOneListbox</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectOne</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectOneListbox</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectOne</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Listbox</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectBooleanRadio" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectBooleanRadio</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectBoolean</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectBooleanRadio</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectBoolean</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Radio</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="commandButton" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreCommandButton</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCommand</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.DialogSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreCommandButton</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Command</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Button</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputListOfValues" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputListOfValues</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputListOfValues</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectInput</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Text</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="goLink" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreGoLink</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXGo</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreGoLink</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Go</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Link</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="importScript" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.CoreImportScript</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreImportScript</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ImportScript</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.ImportScript</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="group" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.UIXGroup</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.Group</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Group</componentFamily>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="train" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreTrain</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXProcess</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreTrain</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Process</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Train</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="chooseColor" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreChooseColor</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXChoose</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreChooseColor</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Choose</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Color</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="commandNavigationItem" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreCommandNavigationItem</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCommand</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.DialogSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreCommandNavigationItem</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Command</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.NavigationItem</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="chooseDate" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreChooseDate</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXChoose</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreChooseDate</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Choose</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Date</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelButtonBar" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelButtonBar</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelButtonBar</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.ButtonBar</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="legend" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreLegend</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreLegend</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Legend</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputColor" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputColor</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputColor</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectInput</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Color</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="outputLabel" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreOutputLabel</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXOutput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreOutputLabel</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Output</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Label</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputFile" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputFile</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputFile</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Input</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.File</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelFormLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelFormLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelFormLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.FormLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="form" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.CoreForm</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXForm</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreForm</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Form</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Form</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateLongRange" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.LongRangeValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.LongRange</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="column" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.data.CoreColumn</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXColumn</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreColumn</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Column</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Column</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputDate" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputDate</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputDate</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectInput</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Date</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateLength" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.LengthValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.Length</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="progressIndicator" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreProgressIndicator</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXProgress</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreProgressIndicator</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Progress</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Indicator</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateDateRestriction" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.DateRestrictionValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.DateRestriction</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelSideBar" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelSideBar</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelSideBar</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.SideBar</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="convertDateTime" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ConverterTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.convert.DateTimeConverter</className>
+            <converterId>org.apache.myfaces.trinidad.DateTime</converterId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="separator" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreSeparator</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSeparator</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Separator</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="document" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.CoreDocument</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXDocument</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreDocument</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Document</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Document</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="inputNumberSpinbox" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreInputNumberSpinbox</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXInput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreInputNumberSpinbox</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Input</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.NumberSpinbox</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateByteLength" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>org.apache.myfaces.trinidadinternal.validator.ByteLengthValidator</className>
+            <validatorId>org.apache.myfaces.trinidad.ByteLength</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="navigationTree" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreNavigationTree</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationTree</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreNavigationTree</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.NavigationTree</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.NavigationTree</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectBooleanCheckbox" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectBooleanCheckbox</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectBoolean</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectBooleanCheckbox</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectBoolean</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Checkbox</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="navigationPane" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreNavigationPane</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationLevel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreNavigationPane</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.NavigationLevel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Pane</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectManyCheckbox" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectManyCheckbox</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectMany</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectManyCheckbox</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectMany</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Checkbox</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="statusIndicator" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreStatusIndicator</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXObject</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreStatusIndicator</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Object</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.StatusIndicator</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelRadio" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelRadio</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXShowOne</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelRadio</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.ShowOne</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Radio</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelBox" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelBox</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelBox</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Box</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="iterator" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.UIXIterator</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.Iterator</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Iterator</componentFamily>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelBorderLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelBorderLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelBorderLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.BorderLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelAccordion" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelAccordion</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelAccordion</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Accordion</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="commandLink" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreCommandLink</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCommand</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ActionSource</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.DialogSource</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreCommandLink</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Command</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Link</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="panelLabelAndMessage" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.layout.CorePanelLabelAndMessage</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXPanel</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CorePanelLabelAndMessage</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Panel</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.LabelAndMessage</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="selectOrderShuttle" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.input.CoreSelectOrderShuttle</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectOrder</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXSelectMany</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXEditableValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreSelectOrderShuttle</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.SelectOrder</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Shuttle</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="outputFormatted" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.output.CoreOutputFormatted</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXOutput</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXValue</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreOutputFormatted</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Output</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Formatted</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="breadCrumbs" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.nav.CoreBreadCrumbs</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationPath</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXNavigationHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXHierarchy</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXCollection</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.model.RowKeyIndex</interfaces>
+            <interfaces>org.apache.myfaces.trinidad.component.CollectionComponent</interfaces>
+            <interfaces>javax.faces.component.NamingContainer</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreBreadCrumbs</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.NavigationPath</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.BreadCrumbs</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+</md:metadatamodel>

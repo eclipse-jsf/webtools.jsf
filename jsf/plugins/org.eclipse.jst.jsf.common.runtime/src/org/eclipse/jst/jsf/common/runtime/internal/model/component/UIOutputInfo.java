@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.IValueHolderInfo;
+import org.eclipse.jst.jsf.common.runtime.internal.model.behavioural.ValueHolderInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
 
 /**
@@ -75,7 +76,7 @@ public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
                 parent,
                 typeInfo,
                 getValueHolderInfo("$valueHolderInfo", attributes), //$NON-NLS-1$
-                getBooleanProperty("rendered", attributes)); //$NON-NLS-1$
+                getBooleanProperty("rendered", attributes, false)); //$NON-NLS-1$
     }
     
     /**
@@ -86,7 +87,21 @@ public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
      */
     protected static IValueHolderInfo getValueHolderInfo(String key, Map attributes)
     {
-        return (IValueHolderInfo) attributes.get(key);
+        IValueHolderInfo info =  (IValueHolderInfo) attributes.get(key);
+        
+        if (info != null)
+        {
+            return info;
+        }
+        Object value = attributes.get("value");
+        if (value != null)
+        {
+            Object converter = attributes.get("converter");
+            Object localValue = attributes.get("localValue");
+            
+            return new ValueHolderInfo((ConverterDecorator) converter, localValue, value);
+        }
+        return null;
     }
     
     // @Override

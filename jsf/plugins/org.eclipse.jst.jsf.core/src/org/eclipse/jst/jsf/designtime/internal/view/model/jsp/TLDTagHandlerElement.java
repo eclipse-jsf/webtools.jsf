@@ -20,7 +20,7 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
  *
  */
 public class TLDTagHandlerElement extends TLDJSFTagElement implements
-        IHandlerTagElement
+IHandlerTagElement
 {
     /**
      * 
@@ -31,10 +31,11 @@ public class TLDTagHandlerElement extends TLDJSFTagElement implements
     /**
      * @param elementDecl
      * @param tagHandlerType
+     * @param advisor 
      */
-    public TLDTagHandlerElement(final TLDElementDeclaration elementDecl, final TagHandlerType tagHandlerType)
+    public TLDTagHandlerElement(final TLDElementDeclaration elementDecl, final TagHandlerType tagHandlerType, final IAttributeAdvisor advisor)
     {
-        super(elementDecl);
+        super(elementDecl, advisor);
         _tagHandlerType = tagHandlerType;
     }
 

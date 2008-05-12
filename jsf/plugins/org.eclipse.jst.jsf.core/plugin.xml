@@ -11,6 +11,7 @@
    <extension-point id="MetaDataEnabledFeatures" name="MetaDataEnabledFeatures" schema="schema/MetaDataEnabledFeatures.exsd"/>
    <extension-point id="tagregistry" name="JSF Tag Library Registry" schema="schema/tagregistry.exsd"/>
    <extension-point id="viewhandler" name="JSF View Handler Extension" schema="schema/viewhandler.exsd"/>
+   <extension-point id="customViewMapper" name="customViewMapper" schema="schema/customViewMapper.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
     	<package 
@@ -21,6 +22,10 @@
 	       uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
 	       class = "org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage"
 	       genModel = "model/paletteInfos.genmodel" />
+         <package 
+           uri = "http://org.eclipse.jst.jsf.core/componentMapping.ecore" 
+           class = "org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.ComponentMappingPackage"
+           genModel = "model/componentMapping.genmodel" />
    </extension>   
   <!-- JSF Project Facets -->
 	<extension
@@ -358,6 +363,13 @@
            factory="org.eclipse.jst.jsf.designtime.internal.symbols.ValueExpressionSymbolFactory"
            factoryId="org.eclipse.jst.jsf.core.valueExpressionSymbolFactory">
      </contextSymbolFactory>
+  </extension>
+  <extension
+        point="org.eclipse.jst.jsf.core.customViewMapper">
+     <customViewMapper
+           class="org.eclipse.jst.jsf.designtime.internal.view.mapping.mappers.ValueHolderAttributeMapper"
+           id="valueHolderAttributeMapper">
+     </customViewMapper>
   </extension>
   
 </plugin>

@@ -105,18 +105,18 @@ public class UIDataInfo extends ComponentInfo implements INamingContainerInfo
     {
         this(getStringProperty("id", attributes, true), parent, //$NON-NLS-1$
                 componentTypeInfo, 
-                getBooleanProperty("rendered", attributes), //$NON-NLS-1$
+                getBooleanProperty("rendered", attributes, false), //$NON-NLS-1$
                 getDataModelInfo("$dataModel", attributes),  //$NON-NLS-1$
                 getIntegerProperty("first", attributes),  //$NON-NLS-1$
                 getComponentProperty("footer", attributes), //$NON-NLS-1$
                 getComponentProperty("header", attributes),  //$NON-NLS-1$
                 getIntegerProperty("rowCount", attributes),  //$NON-NLS-1$
-                getBooleanProperty("rowAvailable", attributes),  //$NON-NLS-1$
+                getBooleanProperty("rowAvailable", attributes, false),  //$NON-NLS-1$
                 attributes.get("rowData"), //$NON-NLS-1$
                 getIntegerProperty("rowIndex", attributes),  //$NON-NLS-1$
                 getIntegerProperty("rows", attributes),  //$NON-NLS-1$
                 attributes.get("value"), //$NON-NLS-1$
-                getStringProperty("var", attributes, true)); //$NON-NLS-1$
+                getStringProperty("var", attributes, false)); //$NON-NLS-1$
     }
 
     private static DataModelInfo getDataModelInfo(String key, Map attributes)

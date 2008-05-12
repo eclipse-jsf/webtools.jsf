@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.common.runtime.internal.view.model.common;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Super-interface of all JSF tag elements.
@@ -37,6 +38,13 @@ public interface ITagElement extends Serializable
      */
     public abstract String getTagHandlerClassName();
     
+    /**
+     * @return an unmodifiable map, indexed by name, of all the attribute
+     * handlers available for this tag element.  Each value in the Map
+     * must be a ITagAttributeHandler.
+     */
+    public abstract Map    getAttributeHandlers();
+
     /**
      * Signals that the tag element should  make any mutable data immutable
      * and throw exceptions if attempts are made to implement.  Flag must

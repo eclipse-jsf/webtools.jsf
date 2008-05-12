@@ -16,7 +16,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -38,6 +41,7 @@ import org.eclipse.jst.jsf.common.ui.internal.form.AbstractMasterForm;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.ui.internal.JSFUITraceOptions;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.ProjectTracker.ProjectAdvisor;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.ProjectTracker.ProjectTrackingListener;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TagRegistryInstance;
@@ -48,6 +52,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
@@ -73,6 +78,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
 
     private final ProjectTracker _projectTracker;
     private final ProjectAdvisor _advisor;
+    private GenerateMetadataAction _generateMetadataAction;
 
     /**
      * @param toolkit
@@ -149,9 +155,11 @@ public class TagRegistryMasterForm extends AbstractMasterForm
                             final SelectionChangedEvent event)
                     {
                         getListener().selectionChanged(event);
+                        updateActions(event.getSelection());
                     }
                 });
         makeActions();
+        createContextMenuManager(_registryTreeViewer.getControl());
         return tree;
     }
 
@@ -249,8 +257,63 @@ public class TagRegistryMasterForm extends AbstractMasterForm
         _refreshAction.setToolTipText("Refresh Registry");
         _refreshAction.setImageDescriptor(JSFUICommonPlugin.getDefault()
                 .getImageDescriptor("refresh_nav_16.gif"));
+        
+        if (JSFUITraceOptions.TRACE_METADATAGEN)
+        {
+            _generateMetadataAction = new GenerateMetadataAction();
+        }
     }
 
+    private void createContextMenuManager(final Control control)
+    {
+        // Create menu manager.
+        MenuManager menuMgr = new MenuManager();
+           menuMgr.setRemoveAllWhenShown(true);
+           menuMgr.addMenuListener(new IMenuListener() {
+                   public void menuAboutToShow(IMenuManager mgr) {
+                           fillContextMenu(mgr);
+                   }
+           });
+           
+           // Create menu.
+        Menu menu = menuMgr.createContextMenu(control);
+           control.setMenu(menu);
+           
+           // Register menu for extension.
+        //getSite().registerContextMenu(menuMgr, viewer);
+    }
+    
+    private void fillContextMenu(IMenuManager mgr)
+    {
+        if (JSFUITraceOptions.TRACE_METADATAGEN)
+        {
+            mgr.add(_generateMetadataAction);
+        }
+    }
+    
+    private void updateActions(final ISelection selection)
+    {
+        if (JSFUITraceOptions.TRACE_METADATAGEN)
+        {
+            updateMetadataGenAction(selection);
+        }
+    }
+
+    private void updateMetadataGenAction(final ISelection selection)
+    {
+        if (selection instanceof IStructuredSelection)
+        {
+            if (((IStructuredSelection)selection).getFirstElement() instanceof Namespace)
+            {
+                Namespace ns =  (Namespace) ((IStructuredSelection)selection).getFirstElement();
+                _generateMetadataAction.setNamespace(ns);
+                _generateMetadataAction.setEnabled(true);
+                return;
+            }
+        }
+        _generateMetadataAction.setEnabled(false);
+    }
+    
     private static class RefreshAction extends Action
     {
         private final StructuredViewer _viewer;
@@ -312,7 +375,6 @@ public class TagRegistryMasterForm extends AbstractMasterForm
                     registry.refresh(nullRunnable, flushCaches);
                 }
             }
-            
         }
 
         private Object getSelected(ISelection selection)

@@ -169,8 +169,14 @@ public class TLDRegistryPreferences
         for (int i = 0; i < ids.length; i += 3)
         {
             final String displayName = ids[i];
-            final String id = ids[i + 1];
+            String id = ids[i + 1];
             final String enabled = ids[i + 2];
+
+            // fix old id for meta-data resolver
+            if ("org.eclipse.jst.jsf.THISISTEMPORARY".equals(id))
+            {
+                id = DefaultJSPTagResolver.ID;
+            }
 
             final StrategyIdentifier strategyIdentifier = new StrategyIdentifier(
                     displayName, id);

@@ -71,7 +71,7 @@ public final class DefaultTagTypeInfo
      * @param uri
      * @return true if uri is covered by this class
      */
-    public boolean isDefaultLib(final String uri)
+    public static boolean isDefaultLib(final String uri)
     {
         return URI_IS_A_JSF_LIB.contains(uri);
     }
@@ -536,120 +536,120 @@ public final class DefaultTagTypeInfo
 
     static
     {
-        final Map<TagIdentifier, TypeInfo> elements = new HashMap<TagIdentifier, TypeInfo>();
+        final Map<TagIdentifier, TypeInfo> commonElements = new HashMap<TagIdentifier, TypeInfo>();
         // IJSFConstants.TAG_IDENTIFIER_PHASELISTENER);
         // IJSFConstants.TAG_IDENTIFIER_SETPROPERTYACTIONLISTENER);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_ACTIONLISTENER,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_ACTIONLISTENER,
                 TagHandlerType.ACTIONLISTENER);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_ATTRIBUTE,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_ATTRIBUTE,
                 TagHandlerType.ATTRIBUTE);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_CONVERTDATETIME,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_CONVERTDATETIME,
                 CONVERTERINFO_DATETIME);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_CONVERTER,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_CONVERTER,
                 ConverterTypeInfo.UNKNOWN);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_CONVERTNUMBER,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_CONVERTNUMBER,
                 CONVERTERINFO_NUMBER);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_FACET, TagHandlerType.FACET);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_FACET, TagHandlerType.FACET);
         // elements.put(IJSFConstants.TAG_IDENTIFIER_LOADBUNDLE,
         // TagHandlerType.);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_PARAM, COMPINFO_PARAM);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTITEM,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_PARAM, COMPINFO_PARAM);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTITEM,
                 COMPINFO_SELECTITEM);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTITEMS,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTITEMS,
                 COMPINFO_SELECTITEMS);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SUBVIEW, COMPINFO_SUBVIEW);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATEDOUBLERANGE,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SUBVIEW, COMPINFO_SUBVIEW);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATEDOUBLERANGE,
                 VALIDATORINFO_DOUBLERANGE);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATELENGTH,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATELENGTH,
                 VALIDATORINFO_LENGTH);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATELONGRANGE,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATELONGRANGE,
                 VALIDATORINFO_LONGRANGE);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATOR,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATOR,
                 ValidatorTypeInfo.UNKNOWN);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VALUECHANGELISTENER,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VALUECHANGELISTENER,
                 TagHandlerType.VALUECHANGELISTENER);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VERBATIM, COMPINFO_VERBATIM);
-        elements.put(IJSFConstants.TAG_IDENTIFIER_VIEW, COMPINFO_VIEW);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VERBATIM, COMPINFO_VERBATIM);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_VIEW, COMPINFO_VIEW);
 
         // JSF 1.2 core elements
         // none currently...
 
         // JSF 1.1/1.2 HTML tags
         // html verifier
-        elements.put(IJSFConstants.TAG_IDENTIFIER_COLUMN, COMPINFO_COLUMN);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_COLUMN, COMPINFO_COLUMN);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON,
                 COMPINFO_COMMAND);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_COMMANDLINK,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_COMMANDLINK,
                 COMPINFO_COMMANDLINK);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_DATA_TABLE,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_DATA_TABLE,
                 COMPINFO_DATATABLE);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_FORM, COMPINFO_FORM);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_FORM, COMPINFO_FORM);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_GRAPHICIMAGE,
                 COMPINFO_GRAPHIC);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_INPUTHIDDEN, COMPINFO_HIDDEN);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_INPUTHIDDEN, COMPINFO_HIDDEN);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_INPUTSECRET, COMPINFO_SECRET);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_INPUTSECRET, COMPINFO_SECRET);
 
-        elements
+        commonElements
                 .put(IJSFConstants.TAG_IDENTIFIER_INPUTTEXT, COMPINFO_INPUTTEXT);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA,
                 COMPINFO_INPUTTEXTAREA);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_MESSAGE, COMPINFO_MESSAGE);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_MESSAGE, COMPINFO_MESSAGE);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_MESSAGES, COMPINFO_MESSAGES);
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_MESSAGES, COMPINFO_MESSAGES);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTFORMAT,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTFORMAT,
                 COMPINFO_OUTPUTFORMAT);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTLABEL,
                 COMPINFO_OUTPUTLABEL);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTLINK,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTLINK,
                 COMPINFO_OUTPUTLINK);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_OUTPUTTEXT,
                 COMPINFO_OUTPUTTEXT);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_PANEL_GRID,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_PANEL_GRID,
                 COMPINFO_PANELGRID);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_PANEL_GROUP,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_PANEL_GROUP,
                 COMPINFO_PANELGROUP);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTBOOLEANCHECKBOX,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTBOOLEANCHECKBOX,
                 COMPINFO_SELECTBOOLEANCHECKBOX);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTMANYCHECKBOX,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTMANYCHECKBOX,
                 COMPINFO_SELECTMANYCHECKBOX);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTMANYLISTBOX,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTMANYLISTBOX,
                 COMPINFO_SELECTMANYLISTBOX);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTMANYMENU,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTMANYMENU,
                 COMPINFO_SELECTMANYMENU);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTONELISTBOX,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTONELISTBOX,
                 COMPINFO_SELECTONELISTBOX);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTONEMENU,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTONEMENU,
                 COMPINFO_SELECTONEMENU);
 
-        elements.put(IJSFConstants.TAG_IDENTIFIER_SELECTONERADIO,
+        commonElements.put(IJSFConstants.TAG_IDENTIFIER_SELECTONERADIO,
                 COMPINFO_SELECTONERADIO);
 
-        JSF11_ELEMENTS = Collections.unmodifiableMap(elements);
+        JSF11_ELEMENTS = Collections.unmodifiableMap(commonElements);
 
         JSF12_ELEMENTS = Collections
-                .unmodifiableMap(new HashMap<TagIdentifier, TypeInfo>(elements));
+                .unmodifiableMap(new HashMap<TagIdentifier, TypeInfo>(commonElements));
     }
 
 }

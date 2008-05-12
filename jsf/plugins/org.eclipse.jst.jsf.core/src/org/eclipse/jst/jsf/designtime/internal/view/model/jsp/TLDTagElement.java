@@ -11,7 +11,11 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttributeHandler;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.TagElement;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
@@ -24,67 +28,26 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
  * @author cbateman
  *
  */
-public class TLDTagElement extends TagElement 
+public class TLDTagElement extends TagElement
 {
     /**
      * 
      */
     private static final long serialVersionUID = -874272538404837105L;
-    private TLDElementData                  _tldData;
-//    private final transient AtomicBoolean   _locked;
+    private final TLDElementData                  _tldData;
 
-    /** 
+    /**
      * @param elementDecl
+     * @param advisor 
      */
-    public TLDTagElement(TLDElementDeclaration elementDecl)
+    public TLDTagElement(final TLDElementDeclaration elementDecl
+            , final IAttributeAdvisor advisor)
     {
-        _tldData = new DocumentElementData(elementDecl);
-//        _locked = new AtomicBoolean(false);
+        _tldData = new DocumentElementData(elementDecl, advisor);
     }
-//    /**
-//     * DO NOT use directly.
-//     * 
-//     * Used to initialize transient fields during deserialization.
-//     */
-//    protected TLDTagElement()
-//    {
-//        _locked = new AtomicBoolean(false);
-//    }
-//    /**
-//     * Change the element decl.  This should only be used during deserialization
-//     * to set the transient field.  Will throw an UnsupportedOperationException
-//     * if called after setLocked()
-//     * 
-//     * @param elementDecl
-//     */
-//    public final void setElementDecl(final TLDElementDeclaration elementDecl)
-//    {
-//        if (_locked.get())
-//        {
-//            throw new UnsupportedOperationException("object is locked");
-//        }
-//        _tldData = new DocumentElementData(elementDecl);
-//    }
-
-    /**
-     * Signals that the class should become immutable and throw exceptions
-     * if mutation is attempted on non-final data
-     */
-//    public final void setLocked()
-//    {
-//        _locked.set(true);
-//    }
-
-    /**
-     * @return true if setLocked has been called.
-     */
-//    public final boolean isLocked()
-//    {
-//        return _locked.get();
-//    }
 
     @Override
-    public String getName() 
+    public String getName()
     {
         return _tldData.getName();
     }
@@ -99,25 +62,55 @@ public class TLDTagElement extends TagElement
     public String getTagHandlerClassName() {
         return _tldData.getTagHandlerClassName();
     }
-    
+
     @Override
     public String toString()
     {
-        return String.format("Tag: Tag Handler: name=%s, uri=%s, tagHandlerClassName=%s"
-                , getName(), getUri(), getTagHandlerClassName());
+        return String.format("Tag: Tag Handler: name=%s, uri=%s, tagHandlerClassName=%s\n"
+                , getName(), getUri(), getTagHandlerClassName())
+                + constructAttributesString();
+    }
+
+    /**
+     * @return a string representation of the attributes.
+     */
+    protected String constructAttributesString()
+    {
+        String attributes = "";
+
+        for (final Iterator it = getAttributeHandlers().entrySet().iterator(); it.hasNext();)
+        {
+            final Map.Entry entry = (Entry) it.next();
+            final String name = (String) entry.getKey();
+            final ITagAttributeHandler handler = (ITagAttributeHandler) entry.getValue();
+
+            attributes += String.format("\t\t\tAttribute: name=%s, customHandler=%s, propertyName=%s, isELAllowed=%b\n", 
+                    name, handler.getCustomHandler(), handler.getName(),
+                    Boolean.valueOf(handler.isELAllowed()));
+        }
+        return attributes;
+    }
+
+    @Override
+    public Map getAttributeHandlers()
+    {
+        return _tldData.getAttributes();
     }
 
     private static class DocumentElementData extends TLDElementData
     {
         /**
-         * 
+         * serialization id
          */
         private static final long serialVersionUID = -6160324802818766058L;
         private final TLDElementDeclaration _tldDoc;
+        private final CMNodeNamedMapAdapter _adapter;
 
-        public DocumentElementData(final TLDElementDeclaration tldDoc)
+        public DocumentElementData(final TLDElementDeclaration tldDoc,
+                final IAttributeAdvisor advisor)
         {
             _tldDoc = tldDoc;
+            _adapter = new CMNodeNamedMapAdapter(tldDoc, advisor);
         }
 
         @Override
@@ -136,20 +129,31 @@ public class TLDTagElement extends TagElement
         public String getUri()
         {
             final CMDocument owner = _tldDoc.getOwnerDocument();
-            
+
             if (owner instanceof TLDDocument)
             {
                 return ((TLDDocument)owner).getUri();
             }
             return null;
         }
-        
+
         private Object writeReplace()
         {
-            return new SerializedTLDElementData(getName(), getTagHandlerClassName(), getUri());
+            return new SerializedTLDElementData(getName(), getTagHandlerClassName(), getUri()
+                    , _adapter);
+        }
+
+        @Override
+        public Map<String, ? extends ITagAttributeHandler> getAttributes()
+        {
+            return _adapter;
         }
     }
-    
+
+    /**
+     * @author cbateman
+     *
+     */
     private static class SerializedTLDElementData extends TLDElementData
     {
         /**
@@ -159,20 +163,23 @@ public class TLDTagElement extends TagElement
         private final String        _name;
         private final String        _uri;
         private final String        _tagHandlerClassName;
+        private final Map<String, ? extends ITagAttributeHandler>  _tagAttributes;
 
-        
         /**
          * @param name
          * @param tagHandlerClassName
          * @param uri
+         * @param tagAttributes
          */
-        private SerializedTLDElementData(String name,
-                String tagHandlerClassName, String uri)
+        private SerializedTLDElementData(final String name,
+                final String tagHandlerClassName, final String uri,
+                final Map<String, ? extends ITagAttributeHandler> tagAttributes)
         {
             super();
             _name = name;
             _tagHandlerClassName = tagHandlerClassName;
             _uri = uri;
+            _tagAttributes = tagAttributes;
         }
 
         @Override
@@ -192,8 +199,14 @@ public class TLDTagElement extends TagElement
         {
             return _uri;
         }
-        
+
+        @Override
+        public Map<String, ? extends ITagAttributeHandler> getAttributes()
+        {
+            return _tagAttributes;
+        }
     }
+
     private static abstract class TLDElementData implements Serializable
     {
         /**
@@ -203,5 +216,6 @@ public class TLDTagElement extends TagElement
         public abstract String getTagHandlerClassName();
         public abstract String getName();
         public abstract String getUri();
+        public abstract Map<String, ? extends ITagAttributeHandler>  getAttributes();
     }
 }

@@ -27,6 +27,14 @@
             location="$nl$/metadata/trinidad_html_dti.xml"
             uri="http://myfaces.apache.org/trinidad/html">
       </standardMetaDataFile>
+      <standardMetaDataFile
+            location="$nl$/metadata/viewMapping_trinidad.xml"
+            uri="http://myfaces.apache.org/trinidad">
+      </standardMetaDataFile>
+      <standardMetaDataFile
+            location="$nl$/metadata/viewMapping_trinidad_html.xml"
+            uri="http://myfaces.apache.org/trinidad/html">
+      </standardMetaDataFile>
    </extension>
    <extension
          point="org.eclipse.jst.pagedesigner.pageDesignerExtension">

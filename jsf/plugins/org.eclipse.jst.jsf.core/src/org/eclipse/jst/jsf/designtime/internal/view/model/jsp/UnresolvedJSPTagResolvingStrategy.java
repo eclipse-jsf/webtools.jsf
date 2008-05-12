@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor.NullAttributeAdvisor;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 
 /**
@@ -47,7 +48,7 @@ public class UnresolvedJSPTagResolvingStrategy extends JSPTagResolvingStrategy
     public ITagElement resolve(TLDElementDeclaration element)
     {
         // just create a tag element
-        return new TLDTagElement(element);
+        return new TLDTagElement(element, new NullAttributeAdvisor());
     }
 
 }

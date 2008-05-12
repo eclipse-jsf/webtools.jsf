@@ -115,7 +115,7 @@ public abstract class ClassTypeInfo extends TypeInfo implements IClassTypeInfo
         {
             supers += _superClasses[i];
             
-            if (i < _superClasses.length-1)
+            if (i < _superClasses.length)
             {
                 supers += ","; //$NON-NLS-1$
             }

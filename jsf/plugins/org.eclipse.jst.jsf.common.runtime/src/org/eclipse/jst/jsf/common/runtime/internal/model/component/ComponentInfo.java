@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +50,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
 
     private final static int              DEFAULT_ARRAY_SIZE   = 4;
 
-    private transient BeanPropertyManager _beanPropertyManager = new BeanPropertyManager(
-                                                                       this);
+    private transient BeanPropertyManager _beanPropertyManager;
     /**
      * Encapsulates all of the data for the view object
      */
@@ -71,6 +71,14 @@ public class ComponentInfo extends ViewObject implements Serializable,
     {
         super(new ComponentInfoData(id, parent, componentTypeInfo, isRendered));
         _data = (ComponentInfoData) super.getData();
+        
+        final Set propExclude = new HashSet();
+        propExclude.add("attributeNames");
+        propExclude.add("componentTypeInfo");
+        propExclude.add("valueChangeListeners");
+        propExclude.add("visitableChildren");
+
+        _beanPropertyManager = new BeanPropertyManager(this, propExclude);
     }
 
     /**
@@ -105,7 +113,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
             final ComponentTypeInfo componentTypeInfo, final Map attributes)
     {
         this(getStringProperty("id", attributes, false), parent, //$NON-NLS-1$
-                componentTypeInfo, getBooleanProperty("rendered", attributes)); //$NON-NLS-1$
+                componentTypeInfo, getBooleanProperty("rendered", attributes, false)); //$NON-NLS-1$
     }
 
     /**
@@ -135,21 +143,26 @@ public class ComponentInfo extends ViewObject implements Serializable,
     /**
      * @param key
      * @param attributes
+     * @param mandatory 
      * 
      * @return the value in attributes at location, forcing a ClassCastExceptio
-     *         if it is no a Boolean.
+     *         if it is not a Boolean and mandatory.  returns false if no value
+     *         and not mandatory
      * @throws IllegalArgumentException
-     *             if key is not found (all boolean attributes are mandatory
-     *             since there is no valid state for unset.
+     *             if key is not found and value is mandatory
      */
     protected static boolean getBooleanProperty(final String key,
-            final Map attributes)
+            final Map attributes, final boolean mandatory)
     {
         final Boolean value = (Boolean) attributes.get(key);
 
         if (value == null)
         {
-            throw new IllegalArgumentException(key + "is mandatory"); //$NON-NLS-1$
+            if (mandatory)
+            {
+                throw new IllegalArgumentException(key + "is mandatory"); //$NON-NLS-1$
+            }
+            return false;
         }
 
         return value.booleanValue();
@@ -159,7 +172,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
      * @param key
      * @param attributes
      * @return the integer property for key. Casts the value to Number and calls
-     *         Number.intValue().
+     *         Number.intValue().  0 if no value.
      */
     protected static int getIntegerProperty(final String key,
             final Map attributes)
@@ -168,7 +181,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
 
         if (value == null)
         {
-            throw new IllegalArgumentException(key + " is mandatory"); //$NON-NLS-1$
+            return 0;
         }
 
         return value.intValue();
@@ -670,13 +683,17 @@ public class ComponentInfo extends ViewObject implements Serializable,
                                                  * ComponentBeanProperty>
                                                  */_beanProperties; // lazily
         private final transient ComponentInfo _component;
+        private final transient Set _excludeNames;
 
         /**
          * @param component
+         * @param excludeNames 
          */
-        protected BeanPropertyManager(final ComponentInfo component)
+        protected BeanPropertyManager(final ComponentInfo component,
+                final Set excludeNames)
         {
             _component = component;
+            _excludeNames = excludeNames;
         }
 
         /**
@@ -756,7 +773,7 @@ public class ComponentInfo extends ViewObject implements Serializable,
                 final List myProperties = getOrCreateBeanProperties(myClass,
                         stopClass);
 
-                addToMap(myProperties, _component, myClass, allProperties);
+                addToMap(myProperties, _component, myClass, allProperties, _excludeNames);
             }
 
             {
@@ -770,7 +787,8 @@ public class ComponentInfo extends ViewObject implements Serializable,
                     // get all props, excluding the ones on Object.
                     final List props = getOrCreateBeanProperties(adapterClass,
                             null);
-                    addToMap(props, declaringClass, adapterClass, allProperties);
+                    addToMap(props, declaringClass, adapterClass, allProperties,
+                            _excludeNames);
                 }
             }
 
@@ -780,25 +798,18 @@ public class ComponentInfo extends ViewObject implements Serializable,
         private static void addToMap(
                 final List/* <ComponentBeanProperty> */addThese,
                 final Object declaringObject, final Class declaringAdapter,
-                final Map toMe)
+                final Map toMe,
+                Set excludeNames)
         {
             for (final Iterator it = addThese.iterator(); it.hasNext();)
             {
                 final PropertyDescriptor desc = (PropertyDescriptor) it.next();
 
-                if (!toMe.containsKey(desc.getName()))
+                if (!toMe.containsKey(desc.getName())
+                    && !excludeNames.contains(desc.getName()))
                 {
                     toMe.put(desc.getName(), new ComponentBeanProperty(
                             declaringAdapter, declaringObject, desc));
-                }
-                else
-                {
-                    // TODO: need logging
-                    System.err
-                            .println("Name collision in properties.  Trying to add [" //$NON-NLS-1$
-                                    + desc.toString()
-                                    + " when already have " //$NON-NLS-1$
-                                    + toMe.get(desc.getName()));
                 }
             }
         }

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ASCII"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:viewMap="http://org.eclipse.jst.jsf.core/componentMapping.ecore" xsi:noNamespaceSchemaLocation="http://org.eclipse.jst.jsf.core/componentMapping.ecore" xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" id="http://myfaces.apache.org/trinidad/html" type="tagFile">
+  <entity id="frame" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlFrame</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlFrame</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Frame</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Frame</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="html" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlHtml</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlHtml</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Html</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Html</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="script" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlScript</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlScript</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Script</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Script</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="head" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlHead</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlHead</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Head</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Head</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="rowLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlRowLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlRowLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.RowLayout</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.RowLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="frameBorderLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlFrameBorderLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlFrameBorderLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.FrameBorderLayout</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.FrameBorderLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="styleSheet" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.core.CoreStyleSheet</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.CoreStyleSheet</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.StyleSheet</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.StyleSheet</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="cellFormat" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlCellFormat</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlCellFormat</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.CellFormat</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.CellFormat</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="tableLayout" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlTableLayout</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlTableLayout</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.TableLayout</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.TableLayout</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="body" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>org.apache.myfaces.trinidad.component.html.HtmlBody</className>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponentBase</superClasses>
+            <superClasses>org.apache.myfaces.trinidad.component.UIXComponent</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>org.apache.myfaces.trinidad.HtmlBody</componentType>
+            <componentFamily>org.apache.myfaces.trinidad.Body</componentFamily>
+            <renderType>org.apache.myfaces.trinidad.Body</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+</md:metadatamodel>

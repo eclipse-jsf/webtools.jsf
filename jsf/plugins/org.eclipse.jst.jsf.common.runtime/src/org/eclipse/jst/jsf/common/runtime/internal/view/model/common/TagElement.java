@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.runtime.internal.view.model.common;
 
+import java.util.Map;
+
 /**
  * Abstract a tag element used to construct a view element
  * 
@@ -38,4 +40,9 @@ public abstract class TagElement implements ITagElement
      * @see org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement#getTagHandlerClassName()
      */
     public abstract String getTagHandlerClassName();
+
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement#getAttributeHandlers()
+     */
+    public abstract Map getAttributeHandlers();
 }

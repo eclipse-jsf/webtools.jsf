@@ -102,7 +102,7 @@ public class UIInputInfo extends UIOutputInfo implements
     {
         this(getStringProperty("id", attributes, true), parent, typeInfo, //$NON-NLS-1$
                 getEditableValueHolderInfo("$editableValueHolderInfo", //$NON-NLS-1$
-                        attributes), getBooleanProperty("rendered", attributes)); //$NON-NLS-1$
+                        attributes), getBooleanProperty("rendered", attributes, false)); //$NON-NLS-1$
     }
 
     private static IEditableValueHolderInfo getEditableValueHolderInfo(

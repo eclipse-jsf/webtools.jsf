@@ -16,7 +16,7 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
 
 /**
  * A TLD-defined tag (i.e. JSP) that maps one-to-one with a JSF Converter
- *  
+ * 
  * @author cbateman
  *
  */
@@ -27,14 +27,15 @@ public class TLDValidatorTagElement extends TLDJSFTagElement implements IValidat
      */
     private static final long serialVersionUID = 4251223772554969477L;
     private final ValidatorTypeInfo _validator;
-    
+
     /**
      * @param elementDecl
-     * @param validatorTypeInfo 
+     * @param validatorTypeInfo
+     * @param advisor 
      */
-    public TLDValidatorTagElement(TLDElementDeclaration elementDecl, ValidatorTypeInfo validatorTypeInfo)
+    public TLDValidatorTagElement(final TLDElementDeclaration elementDecl, final ValidatorTypeInfo validatorTypeInfo, final IAttributeAdvisor advisor)
     {
-        super(elementDecl);
+        super(elementDecl, advisor);
         _validator = validatorTypeInfo;
     }
 
@@ -46,7 +47,7 @@ public class TLDValidatorTagElement extends TLDJSFTagElement implements IValidat
     @Override
     public final TagType getType()
     {
-       return TagType.VALIDATOR;
+        return TagType.VALIDATOR;
     }
 
     @Override

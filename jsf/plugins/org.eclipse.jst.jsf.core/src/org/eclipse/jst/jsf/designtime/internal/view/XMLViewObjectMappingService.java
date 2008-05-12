@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.designtime.internal.view;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -226,10 +227,12 @@ public final class XMLViewObjectMappingService implements Serializable
      * @param namespace
      * @param tagName
      * @param context
+     * @param attributeToPropertyMap 
      * @return a new Element data for the namespace/element name in 'context'
      */
     public static ElementData createElementData(final String namespace,
-            final String tagName, final IStructuredDocumentContext context)
+            final String tagName, final IStructuredDocumentContext context, 
+            final Map<String, String> attributeToPropertyMap)
     {
         final IFile file = getFile(context);
         final int offset = context.getDocumentPosition();
@@ -239,7 +242,8 @@ public final class XMLViewObjectMappingService implements Serializable
         {
             return new ElementData(offset, file.getFullPath().toString(),
                     TagIdentifierFactory
-                            .createJSPTagWrapper(namespace, tagName));
+                            .createJSPTagWrapper(namespace, tagName),
+                     attributeToPropertyMap);
         }
         return null;
     }
@@ -272,6 +276,7 @@ public final class XMLViewObjectMappingService implements Serializable
         private static final long       serialVersionUID = 7937312530318827977L;
 
         private transient TagIdentifier _tagId;
+        private Map<String, String>     _attributeToPropertyMap;
         private String                  _documentPath;
         private int                     _startOffset;
 
@@ -279,14 +284,18 @@ public final class XMLViewObjectMappingService implements Serializable
          * @param startOffset
          * @param documentPath
          * @param tagId
+         * @param attributeToPropertyMap constructor takes copy of map
          */
         private ElementData(final int startOffset, final String documentPath,
-                final TagIdentifier tagId)
+                final TagIdentifier tagId, Map<String, String> attributeToPropertyMap)
         {
             super();
             _startOffset = startOffset;
+            
             _tagId = tagId;
             _documentPath = documentPath;
+            _attributeToPropertyMap = Collections.unmodifiableMap(
+                    new HashMap<String,String>(attributeToPropertyMap));
         }
 
         /**
@@ -303,6 +312,16 @@ public final class XMLViewObjectMappingService implements Serializable
         public final TagIdentifier getTagId()
         {
             return _tagId;
+        }
+
+        /**
+         * @param forTagAttribute
+         * @return the name of the view object property that forTagAttribute
+         * maps to on this element or null if none.
+         */
+        public final String getPropertyName(final String forTagAttribute)
+        {
+            return _attributeToPropertyMap.get(forTagAttribute);
         }
 
         final int getStartOffset()
@@ -359,6 +378,5 @@ public final class XMLViewObjectMappingService implements Serializable
             hashCode ^= ~(_startOffset * 104551);
             return hashCode;
         }
-
     }
 }

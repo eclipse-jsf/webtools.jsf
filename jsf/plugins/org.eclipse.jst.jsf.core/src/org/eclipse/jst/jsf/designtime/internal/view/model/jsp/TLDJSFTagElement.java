@@ -29,10 +29,12 @@ public abstract class TLDJSFTagElement extends TLDTagElement implements
 
     /**
      * @param elementDecl
+     * @param advisor 
      */
-    public TLDJSFTagElement(final TLDElementDeclaration elementDecl)
+    public TLDJSFTagElement(final TLDElementDeclaration elementDecl
+            , final IAttributeAdvisor advisor)
     {
-        super(elementDecl);
+        super(elementDecl, advisor);
     }
 
     public abstract TagType getType();

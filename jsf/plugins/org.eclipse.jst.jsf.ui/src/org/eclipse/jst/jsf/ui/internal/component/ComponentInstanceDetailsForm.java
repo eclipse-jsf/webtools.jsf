@@ -44,16 +44,15 @@ import org.eclipse.swt.widgets.Composite;
     private static final String COMPONENT_SECTION_KEY      = "componentSection";
     private final static String COMPONENT_TYPE_SECTION_KEY = "componentTypeSection";
     private static final String COMPONENT_INTERFACES_KEY   = "componentInterfacesSection";
-    private static final String COMPONENT_DECORATORS_KEY = "componentDecorators";
-    private static final String COMPONENT_PROPERTIES_KEY = "componentProperties";
-    private final LabelProvider _labelProvider = new MyLabelProvider();
+    private static final String COMPONENT_DECORATORS_KEY   = "componentDecorators";
+    private static final String COMPONENT_PROPERTIES_KEY   = "componentProperties";
+    private final LabelProvider _labelProvider             = new MyLabelProvider();
 
     private XMLTextSection      _componentTypeSection;
     private XMLTextSection      _componentSection;
     private XMLTextSection      _componentInterfacesSection;
     private XMLTextSection      _componentDecoratorsSection;
-    private XMLTextSection _componentPropertiesSection;
-    
+    private XMLTextSection      _componentPropertiesSection;
 
     @Override
     protected void doUpdateSelection(final Object newSelection)
@@ -68,7 +67,7 @@ import org.eclipse.swt.widgets.Composite;
             if (typeInfo != null)
             {
                 updateComponentTypeSection(typeInfo);
-                updateComponentInterfacesSection(compInfo,typeInfo);
+                updateComponentInterfacesSection(compInfo, typeInfo);
             }
         }
     }
@@ -83,46 +82,46 @@ import org.eclipse.swt.widgets.Composite;
         values.add(new TitleValuePair("Name", className != null ? Signature
                 .getSimpleName(className) : ""));
         values.add(new TitleValuePair("Id", id != null ? id : "<i>none</i>"));
-        values
-                .add(new TitleValuePair("Parent Id", (parent != null && parent.getId() != null)
-                        ? parent.getId()
-                        : "<i>none</i>"));
+        values.add(new TitleValuePair("Parent Id", (parent != null && parent
+                .getId() != null) ? parent.getId() : "<i>none</i>"));
 
-        _componentSection.setText(String
-                .format(formatText, ViewObjectPresenter.createLines(values)), true, false);
+        _componentSection.setText(String.format(formatText, ViewObjectPresenter
+                .createLines(values)), true, false);
         _componentSection.refresh();
     }
 
     private void updateComponentTypeSection(final ComponentTypeInfo typeInfo)
     {
-        _componentTypeSection.setText(ViewObjectPresenter.present(typeInfo), true, false);
+        _componentTypeSection.setText(ViewObjectPresenter.present(typeInfo),
+                true, false);
         _componentTypeSection.refresh();
     }
 
     private void updateComponentInterfacesSection(final ComponentInfo compInfo,
             final ComponentTypeInfo typeInfo)
     {
-        _componentInterfacesSection.setText(
-                ViewObjectPresenter.presentCompInterfaces(typeInfo,compInfo), true, false);
+        _componentInterfacesSection.setText(ViewObjectPresenter
+                .presentCompInterfaces(typeInfo, compInfo), true, false);
         _componentInterfacesSection.refresh();
     }
-    
+
     private void updateComponentDecoratorsSection(final ComponentInfo compInfo)
     {
-        List<String>  decoratorLines = new ArrayList<String>();
+        List<TitleValuePair> decoratorLines = new ArrayList<TitleValuePair>();
         String text = "";
-        for (final ComponentDecorator decorator : (List<ComponentDecorator>)compInfo.getAllDecorators())
+        for (final ComponentDecorator decorator : (List<ComponentDecorator>) compInfo
+                .getAllDecorators())
         {
             String labelText = _labelProvider.getText(decorator);
-            
+
             if (labelText != null)
             {
-                text += ViewObjectPresenter.createLine(null, labelText);
+                //text += ViewObjectPresenter.createLine(null, labelText);
+                decoratorLines.add(new TitleValuePair(null, labelText));
             }
         }
         Collections.sort(decoratorLines);
-
-        
+        text = ViewObjectPresenter.createLines(decoratorLines);
         _componentDecoratorsSection.setText(String.format("<form>%s</form>",
                 text), true, false);
         _componentDecoratorsSection.refresh();
@@ -130,29 +129,31 @@ import org.eclipse.swt.widgets.Composite;
 
     private void updateComponentPropertiesSection(final ComponentInfo compInfo)
     {
-        List<String>  decoratorLines = new ArrayList<String>();
+        List<TitleValuePair> propertyLines = new ArrayList<TitleValuePair>();
         String text = "";
-        Set<String>  propNames = compInfo.getAttributeNames();
-        
+        Set<String> propNames = compInfo.getAttributeNames();
+
         for (final String propName : propNames)
         {
-            final ComponentBeanProperty propValue = compInfo.getAttribute(propName);
+            final ComponentBeanProperty propValue = compInfo
+                    .getAttribute(propName);
             if (propValue != null)
             {
                 Object value = propValue.getValue();
                 if (value != null)
                 {
-                    decoratorLines.add(ViewObjectPresenter.createLine(propName, 
-                            value.toString()));
+                    propertyLines.add(new TitleValuePair(propName, value.toString()));
                 }
             }
         }
+        Collections.sort(propertyLines);
+        text = ViewObjectPresenter.createLines(propertyLines);
         _componentPropertiesSection.setText(String.format("<form>%s</form>",
                 text), true, false);
         _componentPropertiesSection.refresh();
-        
+
     }
-    
+
     @Override
     protected Map<? extends Object, XMLTextSection> createXMLTextSections(
             final Composite parent)
@@ -169,11 +170,11 @@ import org.eclipse.swt.widgets.Composite;
         _componentInterfacesSection = new XMLTextSection(getToolkit(), parent,
                 "Interfaces");
         sections.put(COMPONENT_INTERFACES_KEY, _componentInterfacesSection);
-        
+
         _componentDecoratorsSection = new XMLTextSection(getToolkit(), parent,
                 "Decorators");
         sections.put(COMPONENT_DECORATORS_KEY, _componentDecoratorsSection);
-        
+
         _componentPropertiesSection = new XMLTextSection(getToolkit(), parent,
                 "Properties");
         sections.put(COMPONENT_PROPERTIES_KEY, _componentPropertiesSection);
@@ -188,8 +189,6 @@ import org.eclipse.swt.widgets.Composite;
         return Collections.singleton(_componentSection);
     }
 
-
-    
     private static class MyLabelProvider extends LabelProvider
     {
         @Override
@@ -197,29 +196,32 @@ import org.eclipse.swt.widgets.Composite;
         {
             if (element instanceof ComponentDecorator)
             {
-                if  (element instanceof ConverterDecorator)
+                if (element instanceof ConverterDecorator)
                 {
                     final ConverterDecorator converter = (ConverterDecorator) element;
-                    return "Converter: id=\""+
-                        converter.getTypeInfo().getConverterId()
-                        +"\", converter-class="+converter.getTypeInfo().getClassName();
+                    return "Converter: id=\""
+                            + converter.getTypeInfo().getConverterId()
+                            + "\", converter-class="
+                            + converter.getTypeInfo().getClassName();
                 }
                 else if (element instanceof ValidatorDecorator)
                 {
                     final ValidatorDecorator validator = (ValidatorDecorator) element;
-                    return "Validator: id=\""+
-                        validator.getTypeInfo().getValidatorId()
-                        +"\", validator-class="+validator.getTypeInfo().getClassName();
+                    return "Validator: id=\""
+                            + validator.getTypeInfo().getValidatorId()
+                            + "\", validator-class="
+                            + validator.getTypeInfo().getClassName();
                 }
                 else if (element instanceof FacetDecorator)
                 {
                     final FacetDecorator decorator = (FacetDecorator) element;
-                    return "Facet: "+decorator.getName()+", component="+decorator.getDecorates().getId();
+                    return "Facet: " + decorator.getName() + ", component="
+                            + decorator.getDecorates().getId();
                 }
             }
-            
+
             return null;
         }
-        
+
     }
 }

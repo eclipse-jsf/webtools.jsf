@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 
 /**
@@ -24,18 +25,20 @@ public class ComponentConstructionData
     private ComponentInfo _parent;
     private int _idCounter;
     private final IProject _project;
-
+    private final IDocument _document;
     /**
      * @param idCounter
      * @param parent
      * @param project
+     * @param document
      */
     public ComponentConstructionData(final int idCounter,
-            final ComponentInfo parent, final IProject project)
+            final ComponentInfo parent, final IProject project, final IDocument document)
     {
         _parent = parent;
         _idCounter = idCounter;
         _project = project;
+        _document = document;
     }
 
     /**
@@ -87,4 +90,13 @@ public class ComponentConstructionData
     {
         return _project;
     }
+
+    /**
+     * @return the document context for the construction
+     */
+    public final IDocument getDocument()
+    {
+        return _document;
+    }
+    
 }

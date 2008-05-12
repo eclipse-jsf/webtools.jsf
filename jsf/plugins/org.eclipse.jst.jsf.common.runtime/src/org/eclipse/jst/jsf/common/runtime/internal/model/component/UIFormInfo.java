@@ -56,9 +56,9 @@ public class UIFormInfo extends ComponentInfo implements INamingContainerInfo
         this(getStringProperty("id", attributes, true), //$NON-NLS-1$
                 parent,
                 componentTypeInfo,
-                getBooleanProperty("rendered", attributes), //$NON-NLS-1$
-                getBooleanProperty("prependId", attributes), //$NON-NLS-1$
-                getBooleanProperty("submitted", attributes)); //$NON-NLS-1$
+                getBooleanProperty("rendered", attributes, false), //$NON-NLS-1$
+                getBooleanProperty("prependId", attributes, false), //$NON-NLS-1$
+                getBooleanProperty("submitted", attributes, false)); //$NON-NLS-1$
     }
     
     /**

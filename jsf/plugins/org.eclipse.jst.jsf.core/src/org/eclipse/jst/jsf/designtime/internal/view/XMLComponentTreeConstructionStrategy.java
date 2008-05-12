@@ -14,18 +14,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
-import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
-import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.Decorator;
-import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDecorator;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
-import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService.ElementData;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -38,9 +32,10 @@ import org.w3c.dom.NodeList;
 public class XMLComponentTreeConstructionStrategy extends
         ComponentTreeConstructionStrategy<Node, IDocument>
 {
-    private final XMLViewDefnAdapter                _adapter;
-    private final XMLViewObjectConstructionStrategy _objectConstructionStrategy;
-    private XMLViewObjectMappingService             _tagMappingService;
+    private final XMLViewDefnAdapter _adapter;
+    // private final XMLViewObjectConstructionStrategy
+    // _objectConstructionStrategy;
+    private final IProject           _project;
 
     /**
      * @param adapter
@@ -50,8 +45,7 @@ public class XMLComponentTreeConstructionStrategy extends
             final XMLViewDefnAdapter adapter, final IProject project)
     {
         _adapter = adapter;
-        _objectConstructionStrategy = new XMLViewObjectConstructionStrategy(
-                adapter, new ComponentConstructionData(0, null, project));
+        _project = project;
     }
 
     @Override
@@ -64,24 +58,36 @@ public class XMLComponentTreeConstructionStrategy extends
 
         if (roots.size() > 0)
         {
-            _tagMappingService = (XMLViewObjectMappingService) viewRoot
-                    .getServices()
-                    .getAdapter(XMLViewObjectMappingService.class);
-            _objectConstructionStrategy.getConstructionData().setIdCounter(0);
+            final IAdaptable adaptable = viewRoot.getServices();
+
+            XMLViewObjectMappingService tagMappingService = null;
+            if (adaptable != null)
+            {
+                tagMappingService = (XMLViewObjectMappingService) adaptable
+                        .getAdapter(XMLViewObjectMappingService.class);
+            }
+            final XMLViewObjectConstructionStrategy objectConstructionStrategy = 
+                new XMLViewObjectConstructionStrategy(
+                    _adapter, new ComponentConstructionData(0, null, _project,
+                            container), tagMappingService);
+
+            objectConstructionStrategy.getConstructionData().setIdCounter(0);
             // can only handle a single root for XML; should be the DOM root
-            return buildComponentTree(roots.get(0), viewRoot, container);
+            return buildComponentTree(roots.get(0), viewRoot, container,
+                    objectConstructionStrategy);
         }
 
         return viewRoot;
     }
 
     private ComponentInfo buildComponentTree(final Node root,
-            final DTUIViewRoot viewRoot, final IDocument document)
+            final DTUIViewRoot viewRoot, final IDocument document,
+            final XMLViewObjectConstructionStrategy objectConstructionStrategy)
     {
         final ComponentInfo dummyRoot = ComponentFactory.createComponentInfo(
                 null, null, null, true);
         // populate the dummy root
-        recurseDOMModel(root, dummyRoot, document);
+        recurseDOMModel(root, dummyRoot, document, objectConstructionStrategy);
 
         // try to extract the view defined root from the dummyRoot and update
         // 'root' with its children.
@@ -157,38 +163,22 @@ public class XMLComponentTreeConstructionStrategy extends
     }
 
     private void recurseDOMModel(final Node node, final ComponentInfo parent,
-            final IDocument document)
+            final IDocument document,
+            XMLViewObjectConstructionStrategy objectConstructionStrategy)
     {
         ViewObject mappedObject = null;
 
-        _objectConstructionStrategy.getConstructionData().setParent(parent);
+        objectConstructionStrategy.getConstructionData().setParent(parent);
 
         mappedObject = _adapter.mapToViewObject(node,
-                _objectConstructionStrategy, document);
+                objectConstructionStrategy, document);
 
         ComponentInfo newParent = parent;
-
-        if (node instanceof Element)
-        {
-            maybeAddMapping(mappedObject, (Element) node, document);
-        }
 
         if (mappedObject instanceof ComponentInfo)
         {
             parent.addChild((ComponentInfo) mappedObject);
             newParent = (ComponentInfo) mappedObject;
-        }
-        else if (mappedObject instanceof ConverterDecorator)
-        {
-            // TODO: validate for parent is not a ValueHolder
-            parent.addDecorator((Decorator) mappedObject,
-                    ComponentFactory.CONVERTER);
-        }
-        else if (mappedObject instanceof ValidatorDecorator)
-        {
-            // TODO: validate for parent is a not an EditableValueHolder
-            parent.addDecorator((Decorator) mappedObject,
-                    ComponentFactory.VALIDATOR);
         }
 
         final NodeList children = node.getChildNodes();
@@ -196,21 +186,8 @@ public class XMLComponentTreeConstructionStrategy extends
 
         for (int i = 0; i < numChildren; i++)
         {
-            recurseDOMModel(children.item(i), newParent, document);
-        }
-    }
-
-    private void maybeAddMapping(ViewObject mappedObject, Element node,
-            IDocument document)
-    {
-        if (mappedObject != null && _tagMappingService != null)
-        {
-            final String uri = _adapter.getNamespace(node, document);
-            final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-                    .getContext(document, node);
-            final ElementData elementData = XMLViewObjectMappingService
-                    .createElementData(uri, node.getLocalName(), context);
-            _tagMappingService.createMapping(elementData, mappedObject);
+            recurseDOMModel(children.item(i), newParent, document,
+                    objectConstructionStrategy);
         }
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.jst.jsf.core/src"
+    modelPluginID="org.eclipse.jst.jsf.core" modelName="ComponentMapping" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" language="">
+  <foreignModel>componentMapping.ecore</foreignModel>
+  <genPackages prefix="ComponentMapping" basePackage="org.eclipse.jst.jsf.designtime.internal.view.mapping"
+      resource="XML" disposableProviderFactory="true" ecorePackage="componentMapping.ecore#/">
+    <genClasses ecoreClass="componentMapping.ecore#//TagComponentMapping">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference componentMapping.ecore#//TagComponentMapping/typeInfo"/>
+    </genClasses>
+    <genClasses ecoreClass="componentMapping.ecore#//ClassTypeInfo_">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ClassTypeInfo_/className"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ClassTypeInfo_/superClasses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ClassTypeInfo_/interfaces"/>
+    </genClasses>
+    <genClasses ecoreClass="componentMapping.ecore#//ComponentTypeInfo_">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ComponentTypeInfo_/componentType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ComponentTypeInfo_/componentFamily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ComponentTypeInfo_/renderType"/>
+    </genClasses>
+    <genClasses ecoreClass="componentMapping.ecore#//ConverterTypeInfo_">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ConverterTypeInfo_/converterId"/>
+    </genClasses>
+    <genClasses ecoreClass="componentMapping.ecore#//ValidatorTypeInfo_">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute componentMapping.ecore#//ValidatorTypeInfo_/validatorId"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
