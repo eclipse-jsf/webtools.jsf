@@ -427,24 +427,24 @@ public class TypeComparatorTests extends TestCase
         // can assign read/write to read-only
         Diagnostic result =
             _typeComparator.calculateTypeCompatibility(simpleLong, readWritePrimitiveLong);
-        assertTrue(result.getSeverity() == Diagnostic.OK);
+        assertEquals(result.getSeverity(), Diagnostic.OK);
         
         // can NOT assign read-only to read/write
         result =
             _typeComparator.calculateTypeCompatibility(readWritePrimitiveLong, simpleLong);
-        assertFalse(result.getSeverity() == Diagnostic.OK);
+        assertNotSame(result.getSeverity(), Diagnostic.OK);
         
         // check bi-directional type comparison -- e.g when a read/write string
         // is expected, we can always coerce object to string.
         result =
             _typeComparator.calculateTypeCompatibility(readWriteString, readWriteObject);
-        assertTrue(result.getSeverity() == Diagnostic.OK);
+        assertNotSame(result.getSeverity(), Diagnostic.OK);
         
         // this should fail because a readable object is expected, but one
         // is not provided (i.e. "not gettable")
         result =
             _typeComparator.calculateTypeCompatibility(readWriteObject, writeOnlyObject);
-        assertFalse(result.getSeverity() == Diagnostic.OK);
+        assertNotSame(result.getSeverity(), Diagnostic.OK);
     }
     
     public void testMethodSignatures()

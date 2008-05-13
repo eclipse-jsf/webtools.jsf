@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import junit.framework.Assert;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator.ReporterAdapter;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
@@ -75,6 +77,35 @@ public class MockValidationReporter extends ReporterAdapter
         return messages;
     }
     
+    public void assertExpectedMessage(
+            final int offset, final int length, final int severity)
+    {
+        final List<ReportedProblem> reportedProblems = getMessageListForOffset(offset);
+        final List<ReportedProblem> reportedProblemsNotMatching = new ArrayList<ReportedProblem>();
+
+        Assert.assertTrue(reportedProblems.size() > 0);
+
+        for (final ReportedProblem problem : reportedProblems)
+        {
+            if (problem.getLength() == length && problem.getSeverity() == severity)
+            {
+                // we found the expected message
+                return;
+            }
+            else
+            {
+                reportedProblemsNotMatching.add(problem);
+            }
+        }
+
+        String failMessage = "";
+
+        for (final ReportedProblem problem : reportedProblems)
+        {
+            failMessage += "\n" + problem.getText();
+        }
+        Assert.fail(String.format("Failed to find expected message at offset %d, found instead %s", offset, failMessage));
+    }
     
     public static class ReportedProblem
     {

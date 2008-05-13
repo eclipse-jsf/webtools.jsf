@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.tests.validation;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.zip.ZipFile;
 
 import junit.framework.TestCase;
@@ -21,7 +19,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.common.project.facet.JavaFacetUtils;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
-import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.internal.XMLViewDefnValidator;
@@ -92,9 +89,9 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         // since the f:view in the doc can't be fully resolved.
         assertEquals(4, mockReporter.getReportedProblems().size());
 
-        assertExpectedMessage(mockReporter, 591, 25, IMessage.HIGH_SEVERITY);
-        assertExpectedMessage(mockReporter, 936, 1, IMessage.NORMAL_SEVERITY);
-        assertExpectedMessage(mockReporter, 969, 9, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(591, 25, IMessage.HIGH_SEVERITY);
+        mockReporter.assertExpectedMessage(936, 1, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(969, 9, IMessage.NORMAL_SEVERITY);
     }
 
     public void testELValidation() throws Exception
@@ -116,46 +113,18 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         // at 845 we also get two, one for syntax error and one for missing bracket
         assertEquals(9, mockReporter.getReportedProblems().size());
 
-        assertExpectedMessage(mockReporter, 603, 2, IMessage.NORMAL_SEVERITY);
-        assertExpectedMessage(mockReporter, 648, 4, IMessage.NORMAL_SEVERITY);
-        assertExpectedMessage(mockReporter, 696, 5, IMessage.NORMAL_SEVERITY);
-        assertExpectedMessage(mockReporter, 753, 6, IMessage.NORMAL_SEVERITY);
-        assertExpectedMessage(mockReporter, 802, 4, IMessage.HIGH_SEVERITY);
+        mockReporter.assertExpectedMessage(603, 2, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(648, 4, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(696, 5, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(753, 6, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(802, 4, IMessage.HIGH_SEVERITY);
 
         // two on this one: syntax error and missing bracket
-        assertExpectedMessage(mockReporter, 846, 5, IMessage.HIGH_SEVERITY);
-        assertExpectedMessage(mockReporter, 847, 3, IMessage.NORMAL_SEVERITY);
+        mockReporter.assertExpectedMessage(846, 5, IMessage.HIGH_SEVERITY);
+        mockReporter.assertExpectedMessage(847, 3, IMessage.NORMAL_SEVERITY);
 
-        assertExpectedMessage(mockReporter, 963, 40, IMessage.HIGH_SEVERITY);
+        mockReporter.assertExpectedMessage(963, 40, IMessage.HIGH_SEVERITY);
     }
 
-    private void assertExpectedMessage(final MockValidationReporter reporter,
-            final int offset, final int length, final int severity)
-    {
-        final List<ReportedProblem> reportedProblems = reporter.getMessageListForOffset(offset);
-        final List<ReportedProblem> reportedProblemsNotMatching = new ArrayList<ReportedProblem>();
-
-        assertTrue(reportedProblems.size() > 0);
-
-        for (final ReportedProblem problem : reportedProblems)
-        {
-            if (problem.getLength() == length && problem.getSeverity() == severity)
-            {
-                // we found the expected message
-                return;
-            }
-            else
-            {
-                reportedProblemsNotMatching.add(problem);
-            }
-        }
-
-        String failMessage = "";
-
-        for (final ReportedProblem problem : reportedProblems)
-        {
-            failMessage += "\n" + problem.getText();
-        }
-        fail(String.format("Failed to find expected message at offset %d, found instead %s", offset, failMessage));
-    }
+    
 }
