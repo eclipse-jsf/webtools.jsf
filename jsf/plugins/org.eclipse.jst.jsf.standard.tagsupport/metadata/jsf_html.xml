@@ -535,9 +535,17 @@
 			</trait>
 			<trait id="default-value">
 				<value>lineDirection</value>
-			</trait>				
-		</entity>		
-	</entity>
+			</trait>
+		</entity>
+		<entity id="value">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+            </trait>
+            <trait id="runtime-type-setter-required">
+                <value>true</value>
+            </trait>
+        </entity>
+    </entity>
 	<entity id="selectManyListbox" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
 		<include-entity-group id="common-jsf-html-attributes"/>
@@ -568,6 +576,14 @@
 				</satisfies-set>
 			</value>
 		</trait>
+	    <entity id="value">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+            </trait>
+            <trait id="runtime-type-setter-required">
+                <value>true</value>
+            </trait>
+        </entity>
 	</entity>
 	<entity id="selectManyMenu" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
@@ -598,6 +614,14 @@
 				</satisfies-set>
 			</value>
 		</trait>
+		<entity id="value">
+            <trait id="attribute-value-runtime-type">
+                <value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+            </trait>
+            <trait id="runtime-type-setter-required">
+                <value>true</value>
+            </trait>
+        </entity>
 	</entity>
 	<entity id="selectOneListbox" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>

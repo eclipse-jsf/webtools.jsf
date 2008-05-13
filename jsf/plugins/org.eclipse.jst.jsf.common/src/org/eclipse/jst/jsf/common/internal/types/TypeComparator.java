@@ -198,8 +198,8 @@ public final class TypeComparator {
     private static boolean canCoerce(final String testType,
             final String checkType) {
         // can always to coerce to string or object
-        if (TypeCoercer.typeIsString(checkType)
-                || TypeConstants.TYPE_JAVAOBJECT.equals(checkType)) 
+        if (TypeCoercer.typeIsString(checkType)/*
+                || TypeConstants.TYPE_JAVAOBJECT.equals(checkType)*/) 
         {
             return true;
         } else if (TypeCoercer.typeIsNumeric(checkType)) {

@@ -15,12 +15,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.IViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.IViewDefnAdapterFactory;
+import org.eclipse.jst.jsf.designtime.internal.view.IViewRootHandle;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 
@@ -124,5 +126,46 @@ public class DTAppManagerUtil
         }
         return DesignTimeApplicationManager.getInstance(project)
                 .getViewHandler();
+    }
+
+    /**
+     * @param context
+     * @return the view root handle from this context or null if can't get one.
+     *     
+     */
+    public static IViewRootHandle getViewRootHandle(final IStructuredDocumentContext context)
+    {
+        final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory2.INSTANCE
+                .getWorkspaceContextResolver(context);
+
+        if (resolver == null)
+        {
+            return null;
+        }
+        IProject project = null;
+        project = resolver.getProject();
+
+        if (project == null)
+        {
+            return null;
+        }
+
+        final DesignTimeApplicationManager manager = DesignTimeApplicationManager
+                .getInstance(project);
+
+        if (manager != null)
+        {
+            final IResource res = resolver.getResource();
+            if (res instanceof IFile)
+            {
+                final DTFacesContext facesContext = manager
+                        .getFacesContext((IFile) res);
+                if (facesContext != null)
+                {
+                    return facesContext.getViewRootHandle();
+                }
+            }
+        }
+        return null;
     }
 }

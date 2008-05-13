@@ -10,30 +10,52 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.validation.internal.strategy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.jdt.core.Signature;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.common.dom.AttrDOMAdapter;
 import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.dom.DOMAdapter;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
+import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
+import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
+import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterDecorator;
+import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterTypeInfo;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.region.Region2AttrAdapter;
+import org.eclipse.jst.jsf.core.internal.region.Region2ElementAdapter;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
+import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
+import org.eclipse.jst.jsf.designtime.internal.view.IViewRootHandle;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter.DTELExpression;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService.ElementData;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterForClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.ELIsNotValidException;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidELValues;
@@ -55,24 +77,27 @@ import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
  * 
  */
 public class AttributeValidatingStrategy extends
-        AbstractXMLViewValidationStrategy
+AbstractXMLViewValidationStrategy
 {
+    private static final  String       DISABLE_ALTERATIVE_TYPES_KEY = "jsfCoreDisableConverterValidation"; //$NON-NLS-1$
     static final boolean               DEBUG;
     static
     {
         final String value = Platform
-                .getDebugOption("org.eclipse.jst.jsf.validation.internal.el/debug/jspsemanticsvalidator"); //$NON-NLS-1$
+        .getDebugOption("org.eclipse.jst.jsf.validation.internal.el/debug/jspsemanticsvalidator"); //$NON-NLS-1$
         DEBUG = value != null && value.equalsIgnoreCase("true"); //$NON-NLS-1$
     }
 
     /**
      * identifier
      */
-    public final static String         ID           = "org.eclipse.jst.jsf.validation.strategy.AttributeValidatingStrategy";
-    private final static String        DISPLAY_NAME = "Attribute Validator";
+    public final static String         ID           = "org.eclipse.jst.jsf.validation.strategy.AttributeValidatingStrategy"; //$NON-NLS-1$
+    private final static String        DISPLAY_NAME = "Attribute Validator"; //$NON-NLS-1$
 
     private final JSFValidationContext _validationContext;
     private final TypeComparator       _typeComparator;
+    private Set<String>                _conversionTypes;
+
     /**
      * Default constructor
      * 
@@ -84,7 +109,9 @@ public class AttributeValidatingStrategy extends
         super(ID, DISPLAY_NAME);
 
         _validationContext = validationContext;
-        _typeComparator = new TypeComparator(new TypeComparatorDiagnosticFactory(validationContext.getPrefs().getTypeComparatorPrefs()));
+        _typeComparator = new TypeComparator(
+                new TypeComparatorDiagnosticFactory(validationContext
+                        .getPrefs().getTypeComparatorPrefs()));
     }
 
     @Override
@@ -99,16 +126,18 @@ public class AttributeValidatingStrategy extends
         if (domAdapter instanceof AttrDOMAdapter)
         {
             final Region2AttrAdapter attrAdapter = (Region2AttrAdapter) domAdapter;
-            //check that this is attribute value region - 221722
-            if (attrAdapter.getAttributeValueRegion() != null) { 
-	            final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-	                    .getContext(attrAdapter.getDocumentContext()
-	                            .getStructuredDocument(), attrAdapter
-	                            .getOwningElement().getDocumentContext()
-	                            .getDocumentPosition()
-	                            + attrAdapter.getAttributeValueRegion().getStart());
-            
-	            validateAttributeValue(context, attrAdapter);
+            // check that this is attribute value region - 221722
+            if (attrAdapter.getAttributeValueRegion() != null)
+            {
+                final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+                .getContext(attrAdapter.getDocumentContext()
+                        .getStructuredDocument(), attrAdapter
+                        .getOwningElement().getDocumentContext()
+                        .getDocumentPosition()
+                        + attrAdapter.getAttributeValueRegion()
+                        .getStart());
+
+                validateAttributeValue(context, attrAdapter);
             }
         }
     }
@@ -128,19 +157,21 @@ public class AttributeValidatingStrategy extends
         // dependent on external data (meta-data)
         SafeRunner.run(new ISafeRunnable()
         {
-            public void handleException(Throwable exception)
+            public void handleException(final Throwable exception)
             {
                 JSFCorePlugin.log(String.format(
-                        "Error validating attribute: %s on element %s",
+                        "Error validating attribute: %s on element %s", //$NON-NLS-1$
                         attrAdapter.getNodeName(), attrAdapter
-                                .getOwningElement().getNodeName()), exception);
+                        .getOwningElement().getNodeName()), exception);
             }
 
             public void run() throws Exception
             {
+                final Region2ElementAdapter elementAdapter =
+                    attrAdapter.getOwningElement();
                 // if there's elText then validate it
                 // TODO: this approach will fail with mixed expressions
-                if (!checkIfELAndValidate(attrAdapter, context))
+                if (!checkIfELAndValidate(elementAdapter, attrAdapter, context))
                 {
                     validateNonELAttributeValue(context, attrAdapter);
                 }
@@ -148,7 +179,8 @@ public class AttributeValidatingStrategy extends
         });
     }
 
-    private boolean checkIfELAndValidate(final Region2AttrAdapter attrAdapter,
+    private boolean checkIfELAndValidate(final Region2ElementAdapter elementAdapter,
+            final Region2AttrAdapter attrAdapter,
             final IStructuredDocumentContext context)
     {
         int offsetOfFirstEL = -1;
@@ -168,7 +200,7 @@ public class AttributeValidatingStrategy extends
         }
 
         final XMLViewDefnAdapter adapter = DTAppManagerUtil
-                .getXMLViewDefnAdapter(context);
+        .getXMLViewDefnAdapter(context);
 
         boolean isEL = false;
         if (adapter != null && offsetOfFirstEL != -1)
@@ -181,18 +213,18 @@ public class AttributeValidatingStrategy extends
                 // string returned by attrAdapter will have the value quotes
                 // removed, but the region offsets include the quotes.
                 IStructuredDocumentContext elContext = IStructuredDocumentContextFactory.INSTANCE
-                        .getContext(context.getStructuredDocument(), context
-                                .getDocumentPosition()
-                                + offsetOfFirstEL + 1);
+                .getContext(context.getStructuredDocument(), context
+                        .getDocumentPosition()
+                        + offsetOfFirstEL + 1);
                 final DTELExpression elExpression = adapter
-                        .getELExpression(elContext);
+                .getELExpression(elContext);
                 if (elExpression != null)
                 {
                     final String elText = elExpression.getText();
 
                     if (DEBUG)
                     {
-                        System.out.println(addDebugSpacer(3) + "EL attrVal= "
+                        System.out.println(addDebugSpacer(3) + "EL attrVal= " //$NON-NLS-1$
                                 + elText);
                     }
 
@@ -202,15 +234,16 @@ public class AttributeValidatingStrategy extends
                     if (_validationContext.shouldValidateEL())
                     {
                         // also, skip the validation if the expression is empty
-                        // or only whitespace, since the parser doesn't handle it
+                        // or only whitespace, since the parser doesn't handle
+                        // it
                         // anyway.
-                        if ("".equals(elText.trim()))
+                        if ("".equals(elText.trim())) //$NON-NLS-1$
                         {
-                            final int offset = elContext.getDocumentPosition()-1;
-                            final int length = elText.length()+2;
+                            final int offset = elContext.getDocumentPosition() - 1;
+                            final int length = elText.length() + 2;
                             final Diagnostic diagnostic = _validationContext
-                                    .getDiagnosticFactory()
-                                    .create_EMPTY_EL_EXPRESSION();
+                            .getDiagnosticFactory()
+                            .create_EMPTY_EL_EXPRESSION();
                             // detected empty EL expression
                             if (_validationContext.shouldValidateEL())
                             {
@@ -221,13 +254,16 @@ public class AttributeValidatingStrategy extends
                         else
                         {
                             final List elVals = MetaDataEnabledProcessingFactory
-                                    .getInstance()
-                                    .getAttributeValueRuntimeTypeFeatureProcessors(
-                                            IValidELValues.class, elContext,
-                                            attrAdapter.getAttributeIdentifier());
-                            final String safeELText = elText.replaceAll("[\n\r\t]", " ");
+                            .getInstance()
+                            .getAttributeValueRuntimeTypeFeatureProcessors(
+                                    IValidELValues.class,
+                                    elContext,
+                                    attrAdapter
+                                    .getAttributeIdentifier());
+                            final String safeELText = elText.replaceAll(
+                                    "[\n\r\t]", " "); //$NON-NLS-1$ //$NON-NLS-2$
                             validateELExpression(context, elContext, elVals,
-                                    attrAdapter.getValue(), safeELText);
+                                    elementAdapter, attrAdapter, safeELText);
                             isEL = true;
                         }
                     }
@@ -262,7 +298,7 @@ public class AttributeValidatingStrategy extends
             final ITextRegionCollection parentRegion = ((ITextRegionCollection) attrValueRegion);
             if (parentRegion.getType() == DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE)
             {
-                ITextRegionList regionList = parentRegion.getRegions();
+                final ITextRegionList regionList = parentRegion.getRegions();
 
                 if (regionList.size() >= 3)
                 {
@@ -306,7 +342,8 @@ public class AttributeValidatingStrategy extends
 
     private void validateELExpression(final IStructuredDocumentContext context,
             final IStructuredDocumentContext elContext, final List elVals,
-            final String attributeVal, final String elText)
+            final Region2ElementAdapter elementAdapter,
+            final Region2AttrAdapter attrAdapter, final String elText)
     {
         // Call EL validator which will perform at least the syntactical
         // validation
@@ -322,6 +359,7 @@ public class AttributeValidatingStrategy extends
             for (final Iterator it = elVals.iterator(); it.hasNext();)
             {
                 final IValidELValues elval = (IValidELValues) it.next();
+                final String attributeVal = attrAdapter.getValue();
                 CompositeType expectedType;
                 Diagnostic status = null;
                 try
@@ -330,7 +368,9 @@ public class AttributeValidatingStrategy extends
 
                     if (expectedType != null)
                     {
-                        
+                        expectedType = maybeAddAlternativeTypes(
+                                expectedType, exprType, elementAdapter,
+                                attrAdapter);
                         status = _typeComparator.calculateTypeCompatibility(
                                 expectedType, exprType);
                         if (status.getSeverity() != Diagnostic.OK)
@@ -349,6 +389,167 @@ public class AttributeValidatingStrategy extends
                 }
             }
         }
+    }
+
+    private boolean disableAlternativeTypes()
+    {
+        String res = System.getProperty(DISABLE_ALTERATIVE_TYPES_KEY);
+        if (res == null) {
+            //check env var also
+            res = System.getenv(DISABLE_ALTERATIVE_TYPES_KEY);
+        }
+        if (res != null)
+        {
+            return true;
+        }
+        final IPreferenceStore prefStore = JSFCorePlugin.getDefault().getPreferenceStore();
+        return prefStore.getBoolean("org.eclipse.jst.jsf.core."+DISABLE_ALTERATIVE_TYPES_KEY); //$NON-NLS-1$
+    }
+    /**
+     * @return true if alternative type comparison (i.e. post-conversion) passes
+     */
+    private CompositeType maybeAddAlternativeTypes(
+            final CompositeType expectedType,
+            final CompositeType exprTypes,
+            final Region2ElementAdapter elementAdapter,
+            final Region2AttrAdapter attrAdapter)
+    {
+        if (disableAlternativeTypes())
+        {
+            return expectedType;
+        }
+
+        final IStructuredDocumentContext context = elementAdapter
+                .getDocumentContext();
+        final IViewRootHandle viewRootHandle = DTAppManagerUtil
+                .getViewRootHandle(context);
+        if (viewRootHandle != null)
+        {
+            // ok to call update view root here since validation not called
+            // on the UI thread.
+            final DTUIViewRoot viewRoot = viewRootHandle.updateViewRoot();
+            final IAdaptable serviceAdaptable = viewRoot.getServices();
+            final XMLViewObjectMappingService mappingService = (XMLViewObjectMappingService) serviceAdaptable
+                    .getAdapter(XMLViewObjectMappingService.class);
+            if (mappingService != null)
+            {
+                final ElementData elementData = XMLViewObjectMappingService
+                        .createElementData(elementAdapter.getNamespace(),
+                                elementAdapter.getLocalName(), context,
+                                Collections.EMPTY_MAP);
+                final ViewObject viewObject = mappingService
+                        .findViewObject(elementData);
+                // if the corresponding view object is a valueholder, then
+                // we need to see if you think there a valid conversion
+                // available
+                if (viewObject instanceof ComponentInfo
+                        && ((ComponentInfo) viewObject).getComponentTypeInfo() != null
+                        && ((ComponentInfo) viewObject).getComponentTypeInfo()
+                                .isInstanceOf(
+                                        ComponentFactory.INTERFACE_VALUEHOLDER))
+                {
+                    final ComponentInfo component = (ComponentInfo) viewObject;
+                    // get the original elementData
+                    final ElementData mappedElementData = mappingService
+                            .findElementData(component);
+                    final String propName = mappedElementData
+                            .getPropertyName(attrAdapter.getLocalName());
+                    if ("value".equals(propName)) //$NON-NLS-1$
+                    {
+                        // final List converters =
+                        // component.getDecorators(ComponentFactory.CONVERTER);
+
+                        // (ConverterDecorator) it.next();
+                        return createCompositeType(
+                                expectedType,
+                                exprTypes,
+                                component
+                                        .getDecorators(ComponentFactory.CONVERTER));
+                    }
+                }
+            }
+        }
+        // don't add anything by default
+        return expectedType;
+    }
+
+    private CompositeType createCompositeType(final CompositeType initialTypes,
+            final CompositeType testTypes, final List<ConverterDecorator> decorators)
+    {
+        // indicates unknown converter
+        final Set<String> types = new HashSet(Arrays.asList(initialTypes
+                .getSignatures()));
+        // look for converters.  If there's one where we don't know the type,
+        // simply copy over the testTypes to force validation to ignore, since
+        // we have no  idea.
+        for (final ConverterDecorator decorator : decorators)
+        {
+            if (decorator.getTypeInfo() != null)
+            {
+                final ConverterTypeInfo converterTypeInfo = decorator.getTypeInfo();
+                if (converterTypeInfo.getForClass().length == 0)
+                {
+                    types.addAll(Arrays.asList(testTypes.getSignatures()));
+                    break;
+                }
+                types.addAll(createSignatures(converterTypeInfo.getForClass()));
+            }
+        }
+        types.addAll(getRegisteredConversionTypesByClass());
+        return new CompositeType(types.toArray(new String[0])
+                , initialTypes.getAssignmentTypeMask());
+    }
+
+    private Set<String>  getRegisteredConversionTypesByClass()
+    {
+        if (_conversionTypes == null)
+        {
+            _conversionTypes = new HashSet<String>();
+            final IProject project = _validationContext.getFile().getProject();
+            final JSFAppConfigManager appConfig = JSFAppConfigManager.getInstance(project);
+            final List converters = appConfig.getConverters();
+            for (final Iterator it = converters.iterator(); it.hasNext();)
+            {
+                final ConverterType converterType = (ConverterType) it.next();
+                final ConverterForClassType forClassType = converterType.getConverterForClass();
+                if (forClassType != null)
+                {
+                    final String forClass = forClassType.getTextContent();
+                    if (forClass != null)
+                    {
+                        String signature = forClass.trim();
+                        try
+                        {
+                            signature = Signature.createTypeSignature(signature, true);
+                            _conversionTypes.add(signature);
+                        }
+                        catch (final Exception e)
+                        {
+                            JSFCorePlugin.log(IStatus.INFO, "Could not use registered converter for-class: "+forClass); //$NON-NLS-1$
+                        }
+                    }
+                }
+            }
+        }
+        return _conversionTypes;
+    }
+
+    private List<String> createSignatures(final String[] classNames)
+    {
+        final List<String> signatures = new ArrayList<String>();
+        for (final String className : classNames)
+        {
+            try
+            {
+                String signature = Signature.createTypeSignature(className, true);
+                signatures.add(signature);
+            }
+            catch (final Exception e)
+            {
+                JSFCorePlugin.log(e, "Trying to create signature"); //$NON-NLS-1$
+            }
+        }
+        return signatures;
     }
 
     /**
@@ -372,15 +573,14 @@ public class AttributeValidatingStrategy extends
         // else validate as static attribute value
         if (DEBUG)
         {
-            System.out.println(addDebugSpacer(3) + "attrVal= "
-                    + (attributeValue != null ? attributeValue : "null"));
+            System.out.println(addDebugSpacer(3) + "attrVal= " //$NON-NLS-1$
+                    + (attributeValue != null ? attributeValue : "null")); //$NON-NLS-1$
         }
 
         final AttributeIdentifier attributeId = attrAdapter
-                .getAttributeIdentifier();
+        .getAttributeIdentifier();
 
         if (attributeId.getTagIdentifier() == null
-                || attributeId.getTagIdentifier().getTagName() == null
                 || attributeId.getTagIdentifier().getTagName() == null
                 || attributeId.getName() == null)
         {
@@ -388,8 +588,8 @@ public class AttributeValidatingStrategy extends
         }
 
         final List vv = MetaDataEnabledProcessingFactory.getInstance()
-                .getAttributeValueRuntimeTypeFeatureProcessors(
-                        IValidValues.class, context, attributeId);
+        .getAttributeValueRuntimeTypeFeatureProcessors(
+                IValidValues.class, context, attributeId);
         if (!vv.isEmpty())
         {
             for (final Iterator it = vv.iterator(); it.hasNext();)
@@ -399,29 +599,29 @@ public class AttributeValidatingStrategy extends
                 {
                     if (DEBUG)
                     {
-                        System.out.println(addDebugSpacer(4) + "NOT VALID ");
+                        System.out.println(addDebugSpacer(4) + "NOT VALID "); //$NON-NLS-1$
                     }
 
                     for (final Iterator msgs = v.getValidationMessages()
                             .iterator(); msgs.hasNext();)
                     {
                         final IValidationMessage msg = (IValidationMessage) msgs
-                                .next();
+                        .next();
                         reportValidationMessage(createValidationMessage(
                                 context, attributeValue, msg.getSeverity(), msg
-                                        .getMessage(), _validationContext
-                                        .getFile()), context, attributeValue);
+                                .getMessage(), _validationContext
+                                .getFile()), context, attributeValue);
                     }
                 }
                 else if (DEBUG)
                 {
-                    System.out.println(addDebugSpacer(5) + "VALID ");
+                    System.out.println(addDebugSpacer(5) + "VALID "); //$NON-NLS-1$
                 }
             }
         }
         else if (DEBUG)
         {
-            System.out.println(addDebugSpacer(4) + "NO META DATA ");
+            System.out.println(addDebugSpacer(4) + "NO META DATA "); //$NON-NLS-1$
         }
     }
 
@@ -440,15 +640,15 @@ public class AttributeValidatingStrategy extends
             final IFile file)
     {
         // TODO: need factory
-        final Diagnostic diagnostic = new BasicDiagnostic(severity, "", -1,
+        final Diagnostic diagnostic = new BasicDiagnostic(severity, "", -1, //$NON-NLS-1$
                 msg, null);
         return diagnostic;
     }
 
     private String addDebugSpacer(final int count)
     {
-        final String TAB = "\t";
-        final StringBuffer ret = new StringBuffer("");
+        final String TAB = "\t"; //$NON-NLS-1$
+        final StringBuffer ret = new StringBuffer(""); //$NON-NLS-1$
         for (int i = 0; i <= count; i++)
         {
             ret.append(TAB);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:viewMap="http://org.eclipse.jst.jsf.core/componentMapping.ecore" xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" xsi:noNamespaceSchemaLocation="http://org.eclipse.jst.jsf.core/componentMapping.ecore" id="http://java.sun.com/jsf/html" type="tagFile">
   <entity id="selectOneMenu" type="tag">
+    <include-entity-group id="common-valueholder-attributes"/>
     <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
         <versionedTagToViewMappings>
@@ -24,7 +25,8 @@
     </trait>
   </entity>
   <entity id="selectManyListbox" type="tag">
-    <trait id="viewElementMapping">
+      <include-entity-group id="common-valueholder-attributes"/>
+      <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
         <versionedTagToViewMappings>
           <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
@@ -144,6 +146,7 @@
     </trait>
   </entity>
   <entity id="selectManyMenu" type="tag">
+   <include-entity-group id="common-valueholder-attributes"/>
     <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
         <versionedTagToViewMappings>
@@ -167,7 +170,8 @@
     </trait>
   </entity>
   <entity id="selectOneRadio" type="tag">
-    <trait id="viewElementMapping">
+      <include-entity-group id="common-valueholder-attributes"/>
+      <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
         <versionedTagToViewMappings>
           <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
@@ -209,7 +213,8 @@
     </trait>
   </entity>
   <entity id="selectOneListbox" type="tag">
-    <trait id="viewElementMapping">
+    <include-entity-group id="common-valueholder-attributes"/>
+      <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
         <versionedTagToViewMappings>
           <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
@@ -295,26 +300,27 @@
     </trait>
   </entity>
   <entity id="selectBooleanCheckbox" type="tag">
-    <trait id="viewElementMapping">
-      <md:value xsi:type="viewMap:TagMapping">
-        <versionedTagToViewMappings>
-          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
-            <className>javax.faces.component.html.HtmlSelectBooleanCheckbox</className>
-            <superClasses>javax.faces.component.UISelectBoolean</superClasses>
-            <superClasses>javax.faces.component.UIInput</superClasses>
-            <superClasses>javax.faces.component.UIOutput</superClasses>
-            <superClasses>javax.faces.component.UIComponentBase</superClasses>
-            <superClasses>javax.faces.component.UIComponent</superClasses>
-            <superClasses>java.lang.Object</superClasses>
-            <interfaces>javax.faces.component.EditableValueHolder</interfaces>
-            <interfaces>javax.faces.component.ValueHolder</interfaces>
-            <interfaces>javax.faces.component.StateHolder</interfaces>
-            <componentType>javax.faces.HtmlSelectBooleanCheckbox</componentType>
-            <componentFamily>javax.faces.SelectBoolean</componentFamily>
-            <renderType>javax.faces.Checkbox</renderType>
-          </typeInfo>
-        </versionedTagToViewMappings>
-      </md:value>
+      <include-entity-group id="common-valueholder-attributes"/>
+      <trait id="viewElementMapping">
+       <md:value xsi:type="viewMap:TagMapping">
+         <versionedTagToViewMappings>
+           <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+             <className>javax.faces.component.html.HtmlSelectBooleanCheckbox</className>
+             <superClasses>javax.faces.component.UISelectBoolean</superClasses>
+             <superClasses>javax.faces.component.UIInput</superClasses>
+             <superClasses>javax.faces.component.UIOutput</superClasses>
+             <superClasses>javax.faces.component.UIComponentBase</superClasses>
+             <superClasses>javax.faces.component.UIComponent</superClasses>
+             <superClasses>java.lang.Object</superClasses>
+             <interfaces>javax.faces.component.EditableValueHolder</interfaces>
+             <interfaces>javax.faces.component.ValueHolder</interfaces>
+             <interfaces>javax.faces.component.StateHolder</interfaces>
+             <componentType>javax.faces.HtmlSelectBooleanCheckbox</componentType>
+             <componentFamily>javax.faces.SelectBoolean</componentFamily>
+             <renderType>javax.faces.Checkbox</renderType>
+           </typeInfo>
+         </versionedTagToViewMappings>
+       </md:value>
     </trait>
   </entity>
   <entity id="outputText" type="tag">
@@ -339,6 +345,7 @@
     </trait>
   </entity>
   <entity id="selectManyCheckbox" type="tag">
+    <include-entity-group id="common-valueholder-attributes"/>
     <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
         <versionedTagToViewMappings>

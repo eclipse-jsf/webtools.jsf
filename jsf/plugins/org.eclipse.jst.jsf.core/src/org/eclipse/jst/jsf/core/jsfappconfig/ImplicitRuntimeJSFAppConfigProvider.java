@@ -15,6 +15,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterForClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
@@ -66,7 +67,7 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 	 */
 	protected void createModel() {
 		facesConfig = FacesConfigFactory.eINSTANCE.createFacesConfigType();
-		//create and add converters
+		//create and add converters by id
 		EList converters = facesConfig.getConverter();
 		converters.add(createConverter("BigDecimal")); //$NON-NLS-1$
 		converters.add(createConverter("BigInteger")); //$NON-NLS-1$
@@ -80,6 +81,15 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		converters.add(createConverter("Long")); //$NON-NLS-1$
 		converters.add(createConverter("Number")); //$NON-NLS-1$
 		converters.add(createConverter("Short")); //$NON-NLS-1$
+		// converters by for-class (see spec 3.3.3 -- Standard Converter Implementions
+		converters.add(createForClassConverter("java.lang.Boolean", "javax.faces.convert.BooleanConverter"));
+        converters.add(createForClassConverter("java.lang.Byte", "javax.faces.convert.ByteConverter"));
+        converters.add(createForClassConverter("java.lang.Character", "javax.faces.convert.CharacterConverter"));
+        converters.add(createForClassConverter("java.lang.Double", "javax.faces.convert.DoubleConverter"));
+        converters.add(createForClassConverter("java.lang.Float", "javax.faces.convert.FloatConverter"));
+        converters.add(createForClassConverter("java.lang.Integer", "javax.faces.convert.IntegerConverter"));
+        converters.add(createForClassConverter("java.lang.Long", "javax.faces.convert.LongConverter"));
+        converters.add(createForClassConverter("java.lang.Short", "javax.faces.converter.ShortConverter"));
 		//create and add validators
 		EList validators = facesConfig.getValidator();
 		validators.add(createValidator("DoubleRange")); //$NON-NLS-1$
@@ -159,6 +169,20 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		return converterType;
 	}
 
+	private ConverterType createForClassConverter(String forClass, String converterClass)
+	{
+        ConverterType converterType = FacesConfigFactory.eINSTANCE.createConverterType();
+        //set converter-id
+        ConverterForClassType converterForClass = FacesConfigFactory.eINSTANCE.createConverterForClassType();
+        converterForClass.setTextContent(forClass);
+        converterType.setConverterForClass(converterForClass);
+        //set converter-class
+        ConverterClassType converterClassType = FacesConfigFactory.eINSTANCE.createConverterClassType();
+        converterClassType.setTextContent(converterClass);
+        converterType.setConverterClass(converterClassType);
+        return converterType;
+	}
+	
 	/**
 	 * Creates a {@link ValidatorType} instance.
 	 * 
