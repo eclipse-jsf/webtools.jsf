@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>JSP JSF Source Page Editing Tools</title>
+</head>
+<body>
+<h1>JSF Component Tree</h1>
+<br>
+<p>The JSF Component Tree is a design time approximation of the component tree that a view will generate at runtime. 
+ The component tree is created by the design time view handler, using the active tag registry for a project and input document 
+ (i.e. JSP or XHTML).  The component tree is used to better determine characteristics of a view such as what validators and converters
+  are registered on which components.</p>  
+
+<h2><a id="tagRegistryView">Component Tree  View</a></h2>
+<br>
+<p>The Component Tree View is an Eclipse view that visualizes the design time component tree.
+The view is keyed to the active editor and is updated whenever a page is saved or a clean build is requested.</p>
+
+<img alt="Tag Registry View" src="./images/componentTreeView.png" / >
+<br>
+<h2><a id="viewDetails">View Details</a></h2>
+<p>The annotated diagram above shows the most important features of the component tree view.</p>
+
+<ol>
+<li>The component tree view is tied to the current JSF View. The current JSF View is tied to the active editor.  
+If the active editor has a valid JSF View source page open  (i.e. a JSP page), 
+then its component tree will become active in the view.  The refresh button can be used to force an update on the the tree. 
+ <b>Note that the refresh button will <i>not</i> force an unconditional update of the view if the framework thinks it is in sync.</b> 
+  To force an unconditional tree update, either save the page or do a clean build on the project.</li>
+
+<li>The left-hand, &quot;master form&quot;, shows the component tree as a standard tree.  
+Each node in the tree is a component.  Note that tags in your page that do not result in components at 
+runtime will not appear directly in the tree.  However, if they have known effects, these will appear.  
+For example, converters and validators will appear in the details form for a component in the decorators tab.</li>
+
+<li>The details view on the right side is activated by clicking a component in the left-hand tree.  
+Information about the component are shown in a number of clickable tabs.</li>
+
+</ol>
+
+<br>
+<img src="../../images/ngrelc.png"  alt="Related concepts" border="0"> 
+ <p>
+ <a href="./jsf_tag_registry.html">JSF Tag Registry</a><br>
+ </p>
+
+</body>
+</html>

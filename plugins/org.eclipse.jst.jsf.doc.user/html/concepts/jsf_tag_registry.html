@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>JSP JSF Source Page Editing Tools</title>
+</head>
+<body>
+<h1>JSF Tag Registry</h1>
+<br>
+<p>The JSF Tag Registry is a central registry that shows all of the tags that the framework knows about for use in constructing JSF pages. By default, the registry knows about JavaServer Pages (JSP) tags.  It can also be extended to know about other JSF tag types like Facelets.</p>  
+
+<h2><a id="tagRegistryView">Tag Registry View</a></h2>
+<br>
+<p>The Tag Registry View is an Eclipse view that shows all of the tags that the framework knows about in each project.  The view, like the registry, is organized by project since this is the basic structure upon which Eclipse derives classpath information.  Project classpath searches are the usual way to find JSF tags.</p>
+
+<img alt="Tag Registry View" src="./images/tagRegistryView.png" / >
+<br>
+<h2><a id="viewDetails">View Details</a></h2>
+<p>The annotated diagram above shows the most important features of the tag registry view.</p>
+
+<ol>
+<li>The project combo allows you to select the current project being examined.  The refresh button activates
+when you click is on a tag registry in the master form (see 2,3,4 below).  Pressing the refresh button causes the current registry information to be
+forcibly updated.  A dialog allows you to decide whether or not to flush caches as well. Use of the refresh
+feature is useful if you think the system is out of sync but may be cause long running background jobs to start.</li>
+
+<li>Each tag registry for a project is listed in the master tag registry tree.  The JSP tag registry is always
+present.  Additional tag registries (such as the Facelets one shown) are added through Eclipse extension.  The
+tag registries available will depend on what extensions you have installed.</li>
+
+<li>Tag libraries are normally organized by namespace.  If a descriptive name is present, this is used in the tree.
+Otherwise, the uri used to identify the namespace in views are used as shown.</li>
+
+<li>Each tag in the namespace is listed in the tree.  Selecting a tag, as shown, opens the detail form for that tag
+on the right (see 5).</li>
+
+<li>The detail form is activated for any tag registry, namespace or tag.  Here we see the detail information for the
+the html inputText tag that is part of the default JSF runtime implementation.  The detail for this tag shows 
+the information about the component that will be created due to this tag at runtime.  Included is the name and type of
+the component, as well as the standard interfaces (i.e. javax.faces.component.ValueHolder) that the component implements.</li>
+</ol>
+
+<br>
+<img src="../../images/ngrelc.png"  alt="Related concepts" border="0"> 
+ <p>
+ <a href="./jsf_component_tree.html">JSF Component Tree</a><br>
+ </p>
+</body>
+</html>

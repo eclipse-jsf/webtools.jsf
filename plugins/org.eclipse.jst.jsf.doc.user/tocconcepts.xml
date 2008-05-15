@@ -16,5 +16,9 @@
 -->
 		<topic label="Future Features" href="html/concepts/jsf_source_editing.html#futures" /> 
 	</topic> 
-	<topic label="JSF Application Configuration" href="html/concepts/jsf_app_config_mgr.html" />	
+	<topic label="JSF Application Configuration" href="html/concepts/jsf_app_config_mgr.html" />
+ <topic href="html/concepts/jsf_tag_registry.html" label="JSF Tag Registry">
+ </topic>
+ <topic href="html/concepts/jsf_component_tree.html" label="JSF Component Tree">
+ </topic>	
 </toc>

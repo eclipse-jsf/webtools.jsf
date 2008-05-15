@@ -33,6 +33,9 @@
         <topic href="html/tasks/facesconfig_ui/add_rederkit_factory.html" label="Adding a RenderKit Factory"/>
         <topic href="html/tasks/facesconfig_ui/add_phase_listener.html" label="Adding a Phase Listener"/>
     </topic>
-	<topic label="Validating JSF Applications" href="html/tasks/jsf_validation.html" /> 
+	<topic href="html/tasks/jsf_validation.html" label="Validating JSF Applications">
+    <topic href="html/tasks/jsf_elvalidation_prefs.html" label="Changing EL Validation Preferences">
+    </topic>
+ </topic> 
 	<topic label="Executing JSF Pages" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#testpage" /> 
 </toc>
