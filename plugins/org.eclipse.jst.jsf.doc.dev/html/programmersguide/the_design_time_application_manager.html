@@ -10,30 +10,37 @@
 </head>
 <body>
 <table summary="" cellpadding="0" cellspacing="0" width="100%">
-<tbody><tr valign="bottom">
-<td align="left" width="86%">
-<h1>The Design Time Application Manager</h1>
-</td>
-</tr>
-</tbody></table>
+	<tbody>
+		<tr valign="bottom">
+			<td align="left" width="86%">
+			<h1>The Design Time Application Manager</h1>
+			</td>
+		</tr>
+	</tbody>
+</table>
 <hr>
 <h3>Overview</h3>
-The Design Time Application Manager (DTAppMgr), defines the early
-stages of a mechanism to simulate JSF runtime state conditions at
-design time.&nbsp; While it is not intended to replace a runtime
-simulator, it provides an extensible framework to allow adopters to
-provide end-user features that depend on simulating certain specific
-runtime behavior.&nbsp; These features include validation and content
-assist for EL expressions.
+The Design Time Application Manager (DTAppMgr), defines the early stages
+of a mechanism to simulate JSF runtime state conditions at design
+time.&nbsp; While it is not intended to replace a runtime simulator, it
+provides an extensible framework to allow adopters to provide end-user
+features that depend on simulating certain specific runtime
+behavior.&nbsp; These features include validation and content assist for
+EL expressions.
 
 <p>The DTAppMgr is comprised of the following main components:</p>
 <ul>
-  <li>a simulated FacesContext, called DTFacesContext, used to simulates part of this key runtime context object.</li>
-  <li>a pluggable ExternalContext, called DTExternalContext to support different behaviors in different containers (i.e. JSP).</li>
-  <li>pluggable resolvers for EL variables, properties and methods including default implementations.</li>
-  <li>a JSP processor that can update simulated design time state based on a JSP page and tag-based meta-data.</li>
+	<li>a simulated FacesContext, called DTFacesContext, used to
+	simulates part of this key runtime context object.</li>
+	<li>a pluggable ExternalContext, called DTExternalContext to
+	support different behaviors in different containers (i.e. JSP).</li>
+	<li>pluggable resolvers for EL variables, properties and methods
+	including default implementations.</li>
+	<li>a JSP processor that can update simulated design time state
+	based on a JSP page and tag-based meta-data.</li>
 </ul>
-<h3><span style="font-weight: bold;">The simulated FacesContext</span></h3>
+<h3><span style="font-weight: bold;">The simulated
+FacesContext</span></h3>
 The simulated FacesContext, called DTFacesContext, currently supports a
 very limited subset of the runtime FacesContext object.&nbsp; Its main
 function is to allow for a pluggable external context.&nbsp; At
@@ -42,126 +49,148 @@ design-time, one FacesContext is created per IFile.
 The ExternalContext is used to separate container-dependent context
 information from the rest of the FacesContext.&nbsp; At design time, we
 support a DTExternalContext with much the same function.&nbsp; This
-external context can be configured by adopters by implementing a
-factory extension point.&nbsp; The extension point is
-org.eclipse.jst.jsf.designtime.externalcontext.&nbsp; You extension
-will define an id and class.&nbsp; The id uniquely identifies you
-factory class, which must extend
-<code>org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory</code>.&nbsp;
-To set your external context factory as the current one, use
-<code>DesignTimeApplicationManager.setExternalContextProvider(String)</code>.&nbsp;
-Note that by changing the current ExternalContextProvider on a project,
-you will significantly change the behavior of how variables are
+external context can be configured by adopters by implementing a factory
+extension point.&nbsp; The extension point is
+org.eclipse.jst.jsf.designtime.externalcontext.&nbsp; You extension will
+define an id and class.&nbsp; The id uniquely identifies you factory
+class, which must extend
+<code>org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory</code>
+.&nbsp; To set your external context factory as the current one, use
+<code>DesignTimeApplicationManager.setExternalContextProvider(String)</code>
+.&nbsp; Note that by changing the current ExternalContextProvider on a
+project, you will significantly change the behavior of how variables are
 resolved in EL expressions.
 <h3>Pluggable resolvers</h3>
 JSF EL expressions may contain variable and method bindings that
 reference external objects.&nbsp; At runtime, this is accomplished
-through several mechanisms that convert different types of
-identifier symbols into objects and methods.&nbsp; At design-time the
-JSF tooling tries to parallel these as closely as possible.&nbsp; These
-mechanisms are:
+through several mechanisms that convert different types of identifier
+symbols into objects and methods.&nbsp; At design-time the JSF tooling
+tries to parallel these as closely as possible.&nbsp; These mechanisms
+are:
 
 <ul>
-<li>VariableResolver</li><li>PropertyResolver</li><li>MethodBinding
-</li>
+	<li>VariableResolver</li>
+	<li>PropertyResolver</li>
+	<li>MethodBinding</li>
 </ul>
 
 <h4>VariableResolver</h4>
-All identifier symbol resolution in EL starts with the
-VariableResolver.&nbsp; An expression like "myBean.property" is
-resolved by first extracting the symbol "myBean" and requesting the
+<p>All identifier symbol resolution in EL starts with the
+VariableResolver.&nbsp; An expression like "myBean.property" is resolved
+by first extracting the symbol "myBean" and requesting the
 VariableResolver to return a matching runtime object.&nbsp; At design
-time, we parallel this exactly but constructing a design-time description of
-the object rather than its actual value (since the actual value cannot
-be fully computed until runtime in most cases).&nbsp; The concept of a
-"DTVariableResolver" is introduced.&nbsp; A default implementation is
-automatically provided which closely mirrors the default runtime
-resolver.&nbsp; New variable resolvers can be contributed through the
-Eclipse extension point mechanism to support custom runtime
-counterparts.&nbsp; To learn more about contributing new variables, see <a href="contributing_el_variables.html">Contributing EL Variables</a>.
+time, we parallel this exactly but constructing a design-time
+description of the object rather than its actual value (since the actual
+value cannot be fully computed until runtime in most cases).&nbsp; The
+concept of a "DTVariableResolver" is introduced.&nbsp; A default
+implementation is automatically provided which closely mirrors the
+default runtime resolver.&nbsp; New variable resolvers can be
+contributed through the Eclipse extension point mechanism to support
+custom runtime counterparts.&nbsp; To learn more about contributing new
+variables, see <a href="contributing_el_variables.html">Contributing
+EL Variables</a>.</p>
 <h4>PropertyResolver</h4>
 
-Once a variable is resolved, the next step in resolving a value binding
-is to resolve its properties.&nbsp; To return to our simple example,
-"myBean.property", the JSF runtime will pass the object returned for
-'myBean' to the property resolver along with the name 'property' and
-ask it to resolve it to an object.&nbsp; At design time, we parallel
-this by introducing the "DTPropertyResolver".<br>
+<p>Once a variable is resolved, the next step in resolving a value
+binding is to resolve its properties.&nbsp; To return to our simple
+example, "myBean.property", the JSF runtime will pass the object
+returned for 'myBean' to the property resolver along with the name
+'property' and ask it to resolve it to an object.&nbsp; At design time,
+we parallel this by introducing the "DTPropertyResolver".</p>
 
 <h4>MethodBinding</h4>
 
-The method binding mechanism implemented by the JSF runtime, differs
-from the way variables and properties are resolved.&nbsp; At design
-time however, we support them in the same way by providing a
-"DTMethodResolver".&nbsp; The main reason for this divergence is that
-at runtime, the method binding need know only enough to invoke a
+<p>The method binding mechanism implemented by the JSF runtime,
+differs from the way variables and properties are resolved.&nbsp; At
+design time however, we support them in the same way by providing a
+"DTMethodResolver".&nbsp; The main reason for this divergence is that at
+runtime, the method binding need know only enough to invoke a
 method.&nbsp; However at design time, we want to be able resolve a
 method binding in such a way that we can provide the same kinds of
 features we provide for properties such as signature validation and
-content assist.
-<h3>JSP document processor</h3>
+content assist.</p>
+<h3><a id="jsp_document_processor">JSP document processor</a></h3>
 The JSP document processor parses JSP document models looking for
 information to update in the simulated design time.&nbsp; The primary
 objective of the processor is to allow component writers to add support
-for tags that contribute EL variables.&nbsp; They can accomplish this
-by contributing JSF tooling meta-data for a particular
+for tags that contribute EL variables.&nbsp; They can accomplish this by
+contributing JSF tooling meta-data for a particular
 uri/element/attribute that defines such a variable.&nbsp; The meta-data
 properties that are supported are as follows:
 
-<table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;font-weight: bold">Meta-data Trait<br>
-      </td>
-      <td style="vertical-align: top;font-weight: bold">Valid Values<br>
-      </td>
-      <td style="vertical-align: top; font-weight: bold">Description<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">contributes-value-binding<br>
-      </td>
-      <td style="vertical-align: top;">true or false<br>
-      </td>
-      <td style="vertical-align: top;">This
-property alerts the model
-processor that this attribute contributes a variable to the EL name
-space at runtime.&nbsp; If no further meta-data is provided, this will
-cause a default variable using the text of the attribute as the name to
-be added to the name space for this document at 'request' scope.&nbsp;
-The variable will have&nbsp; no properties or methods.&nbsp; More
-information about the variable can be provided using the extra
-meta-data defined below.<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">value-binding-scope<br>
-      </td>
-      <td style="vertical-align: top;">'request', 'session', 'application'<br>
-      </td>
-      <td style="vertical-align: top;">This property will set the runtime scope for the contribute variable. The default is 'request' if not provided.<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">value-binding-symbol-factory<br>
-      </td>
-      <td style="vertical-align: top;">An corresponding to a 'factoryId' field on a valid extension of '<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a>'.<br>
-      </td>
-      <td style="vertical-align: top;">If you wish to customize the
-variable created for this attribute, you can specify this factory
-extension.&nbsp; Your factory will be passed all available context,
-including DOM context, with which you can decide how to create a custom
-symbol for your variable.&nbsp;&nbsp; See <a href="./contributing_el_variables.html">Contributing EL Variables</a> for
-more details.<br>
-      </td>
-    </tr>
-  </tbody>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2"
+	cellspacing="2">
+	<tbody>
+		<tr>
+			<td style="vertical-align: top; font-weight: bold">Meta-data
+			Trait<br>
+			</td>
+			<td style="vertical-align: top; font-weight: bold">Valid Values<br>
+			</td>
+			<td style="vertical-align: top; font-weight: bold">Description<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;">contributes-value-binding<br>
+			</td>
+			<td style="vertical-align: top;">true or false<br>
+			</td>
+			<td style="vertical-align: top;">This property alerts the model
+			processor that this attribute contributes a variable to the EL name
+			space at runtime.&nbsp; If no further meta-data is provided, this
+			will cause a default variable using the text of the attribute as the
+			name to be added to the name space for this document at 'request'
+			scope.&nbsp; The variable will have&nbsp; no properties or
+			methods.&nbsp; More information about the variable can be provided
+			using the extra meta-data defined below.<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;">value-binding-scope<br>
+			</td>
+			<td style="vertical-align: top;">'request', 'session',
+			'application'<br>
+			</td>
+			<td style="vertical-align: top;">This property will set the
+			runtime scope for the contribute variable. The default is 'request'
+			if not provided.<br>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;">value-binding-symbol-factory<br>
+			</td>
+			<td style="vertical-align: top;">An corresponding to a
+			'factoryId' field on a valid extension of '<a
+				href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a>'.<br>
+			</td>
+			<td style="vertical-align: top;">If you wish to customize the
+			variable created for this attribute, you can specify this factory
+			extension.&nbsp; Your factory will be passed all available context,
+			including DOM context, with which you can decide how to create a
+			custom symbol for your variable.&nbsp;&nbsp; See <a
+				href="./contributing_el_variables.html">Contributing EL
+			Variables</a> for more details.<br>
+			</td>
+		</tr>
+		<tr>
+			<td><p>optional-value-binding-static-type</p>
+			
+			<p><b>From 3.0</b></p></td>
+			<td>Must be of the form &quot;Ljava.lang.String;&quot;. See the
+			JDT Signature class for more information</td>
+			<td>A java signature that suggests a static type for the
+			resulting symbol. <b>Optional.</b></td>
+		</tr>
+		<tr>
+		<td><p>optional-value-binding-valueexpr-attr</p><p><b>From 3.0</b></p></td><td>Must be the name of an attribute on the same element.</td><td>The name of the attribute on the same element that will hold a value expression whose type will be used as the type of the resulting symbol.  <b>Optional.</b></td>
+		</tr>
+	</tbody>
 </table>
 
 <h4>Loadbundle example</h4>
-Below is the meta-data markup for the built-in core loadBundle variable contributor meta-data:
-<div class="code">
-<pre>
+Below is the meta-data markup for the built-in core loadBundle variable
+contributor meta-data:
+<div class="code"><pre>
  &lt;entity id="loadBundle"&gt;
  	&lt;entity id="var"&gt;
  		&lt;trait id="contributes-value-binding"&gt;
@@ -175,19 +204,24 @@ Below is the meta-data markup for the built-in core loadBundle variable contribu
  		&lt;/trait&gt;
  	&lt;/entity&gt;
  &lt;/entity&gt;
-</pre>
-</div>
-<p>This fragment defines meta-data for the attribute 'var' of tag element
-'loadBundle' (the uri for the tag library is declared in the extension
-point).&nbsp; The meta-data tells the processor to add a variable with
-scope 'request' using the factory defined by the extension factory id
-'org.eclipse.jst.jsf.designtime.core.loadBundle'.</p>
+</pre></div>
+<p>This fragment defines meta-data for the attribute 'var' of tag
+element 'loadBundle' (the uri for the tag library is declared in the
+extension point).&nbsp; The meta-data tells the processor to add a
+variable with scope 'request' using the factory defined by the extension
+factory id 'org.eclipse.jst.jsf.designtime.core.loadBundle'.</p>
 
 <h4>Other Information</h4>
 <ul>
-<li><a href="./metadata_framework.html">Design-time Meta-data Framework</a></li>
-<li><a href="../tutorials/implementing_a_new_tag_based_el_variable_contributor_for_jsp.html">EL Variable Contributor Tutorial</a></li>
-<li><a href="../tutorials/supplying_tag_library_metadata_for_apache_myfaces_tomahawk.html">Contributing Meta-data for Apache Tomahawk Component Tutorial</a></li>
+	<li><a href="./metadata_framework.html">Design-time Meta-data
+	Framework</a></li>
+	<li><a
+		href="../tutorials/implementing_a_new_tag_based_el_variable_contributor_for_jsp.html">EL
+	Variable Contributor Tutorial</a></li>
+	<li><a
+		href="../tutorials/supplying_tag_library_metadata_for_apache_myfaces_tomahawk.html">Contributing
+	Meta-data for Apache Tomahawk Component Tutorial</a></li>
 </ul>
 
-</body></html>
+</body>
+</html>
