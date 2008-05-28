@@ -23,6 +23,7 @@ following ways:
 <a id="ImplVsComponents"></a><h2>Implementations vs Component Libraries</h2>
 <br>
 <p>A JSF Library is simply a set of jars that will be put on the classpath and optionally deployed to the WEB-INF/lib directory at publish time using the J2EE Module Dependencies.</p>
+As of the WTP 2.0 release, a JSF Library is created as a classpath container and is managed just like any classpath container library.
 <p>Why do some libraries have the "implementation" flag?</p>
 A library marked as a JSF implementation differentiates it from a normal set of jars that make up a library.  This flag is meant as an on-your-honor marking that this set of jars meets the JSF specification for an implementation.  
 The JSF tooling requires a Faces Servlet implementation for compilation and "Run on Server" feature of a JSF JSP page.  
@@ -56,23 +57,10 @@ It will be necessary to edit the JSF Library and fix the references before the l
 <a id="projectrefs"></a><h2>Project References</h2>
 <br>
 <p>
-When a library is referenced by a project, either at JSF Facet install time, or at a later time by adding it using JSF Library Reference project property page, the following occurs:
+When a library is referenced by a project, either at JSF Facet install time, or at a later time by adding it using projects Java Build Path property page, the library is placed on the project's build classpath as a classpath container.   
+In order for the jars in the library to be deployed with the application, the library must <b>also</b> be selected in the J2EE Module Dependencies page.   
+This handles placing each jar in the library into the WEB-INF/lib directory of the deployed application.     
 </p>
-<ul>
-<li>If a library was marked for deployment, each jar is added as a J2EE Module Dependency for the project.   This places each jar on the build classpath and allows it to be deployed to WEB-INF/lib directory </li>
-<li>If library is not marked for deployment, each individual jar in the library is added as a classpath library reference in the build path.</li>
-</ul>
-<br>
-<p>
-Note: if adding a reference to a library that contains a jar that is already referenced (same name and location), the newly referenced jar will be skipped.     
-</p>
-<p>
-When a library is removed as a reference by a project, the following occurs:
-</p>
-<ul>
-<li>If a library was marked for deployment, each jar is removed as a J2EE Module Dependency.</li>
-<li>If library is not marked for deployment, each individual jar in the library is removed from the classpath library reference in the build path.</li>
-</ul>
 <p>
 <img src="../../images/ngrelc.png"  alt="Related concepts" border="0"><br> 
 <a href="../concepts/jsf_facets.html">JSF Facets</a><br>

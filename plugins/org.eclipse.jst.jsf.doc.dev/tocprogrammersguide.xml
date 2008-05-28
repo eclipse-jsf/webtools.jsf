@@ -12,5 +12,8 @@
 		<topic label="Contributing EL Variables" href="html/programmersguide/contributing_el_variables.html"/>
 		<topic label="The Design Time Application Manager" href="html/programmersguide/the_design_time_application_manager.html"/>
 	</topic>
-	<topic label="Design-Time Tag Metadata Operations" href="html/programmersguide/design-time_tag_metadata_operations.html"/>
+	<topic href="html/programmersguide/design-time_tag_metadata_operations.html" label="Design-Time Tag Metadata Operations">
+ </topic>
+ <topic href="http://wiki.eclipse.org/index.php/JSF_Tools_Project" label="WTP JSF Home Page">
+ </topic>>
 </toc>
