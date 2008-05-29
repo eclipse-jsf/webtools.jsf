@@ -332,25 +332,35 @@ public class XMLViewObjectConstructionStrategy extends
     private void maybeUpdateViewObject(final ComponentInfo bestComponent,
             final Element srcElement, final ITagElement tagElement)
     {
+        if (srcElement.getAttributes() == null)
+            return;
+
         for (int i = 0; i < srcElement.getAttributes().getLength(); i++)
         {
             final Attr attr = (Attr) srcElement.getAttributes().item(i);
             final Map<String, ITagAttributeHandler> attributeHandlers = tagElement
                     .getAttributeHandlers();
-            
+
             if (attributeHandlers != null)
             {
-                final String id = attributeHandlers.get(attr.getLocalName())
-                        .getCustomHandler();
-    
-                ICustomViewMapper mapper = null;
-    
-                if (id != null)
+                final ITagAttributeHandler handler = attributeHandlers.get(attr
+                        .getLocalName());
+
+                if (handler != null)
                 {
-                    mapper = CustomViewMapperExtensionLoader.getCustomViewMapper(id);
-                    if (mapper != null)
+                    final String id = handler.getCustomHandler();
+
+                    ICustomViewMapper mapper = null;
+
+                    if (id != null)
                     {
-                        mapper.doAttributeActions(bestComponent, srcElement, attr);
+                        mapper = CustomViewMapperExtensionLoader
+                                .getCustomViewMapper(id);
+                        if (mapper != null)
+                        {
+                            mapper.doAttributeActions(bestComponent,
+                                    srcElement, attr);
+                        }
                     }
                 }
             }
