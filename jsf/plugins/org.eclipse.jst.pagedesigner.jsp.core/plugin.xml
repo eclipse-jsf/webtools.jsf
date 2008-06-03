@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-   <extension-point id="pageVar" name="page variable" schema="schema/pageVar.exsd"/>
+   <extension-point id="pageVar" name="%extension-point.name.0" schema="schema/pageVar.exsd"/>
 </plugin>

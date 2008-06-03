@@ -31,11 +31,14 @@ Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)",
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.jst.jsf.ui.internal;x-friends:="org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.ui.internal.classpath;x-friends:="org.eclipse.jst.jsf.ui.tests",
+ org.eclipse.jst.jsf.ui.internal.common;x-internal:=true,
+ org.eclipse.jst.jsf.ui.internal.component;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.contentassist;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.contentassist.el;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.jspeditor;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.preferences;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.project.facet;x-friends:="org.eclipse.jst.jsf.ui.tests",
+ org.eclipse.jst.jsf.ui.internal.tagregistry;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.validation;x-internal:=true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

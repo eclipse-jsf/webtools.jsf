@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-   <extension-point id="jsfLibraries" name="jsfLibraries" schema="schema/jsfLibraries.exsd"/>
-   <extension-point id="pluginProvidedJsfLibraries" name="pluginProvidedJsfLibraries" schema="schema/pluginProvidedJsfLibraries.exsd"/>
-   <extension-point id="variableresolver" name="Variable Resolver Ext Point" schema="schema/variableresolver.exsd"/>
-   <extension-point id="propertyresolver" name="Property Resolver Ext Point" schema="schema/propertyresolver.exsd"/>
-   <extension-point id="methodresolver" name="Method Resolver Ext Point" schema="schema/methodresolver.exsd"/>
-   <extension-point id="externalcontext" name="External Context Ext Point" schema="schema/externalcontext.exsd"/>
-   <extension-point id="AttributeValueRuntimeTypes" name="AttributeValueRuntimeTypes" schema="schema/AttributeValueRuntimeTypes.exsd"/>
-   <extension-point id="MetaDataEnabledFeatures" name="MetaDataEnabledFeatures" schema="schema/MetaDataEnabledFeatures.exsd"/>
-   <extension-point id="tagregistry" name="JSF Tag Library Registry" schema="schema/tagregistry.exsd"/>
-   <extension-point id="viewhandler" name="JSF View Handler Extension" schema="schema/viewhandler.exsd"/>
-   <extension-point id="customViewMapper" name="customViewMapper" schema="schema/customViewMapper.exsd"/>
+   <extension-point id="jsfLibraries" name="%extension-point.name.0" schema="schema/jsfLibraries.exsd"/>
+   <extension-point id="pluginProvidedJsfLibraries" name="%extension-point.name.1" schema="schema/pluginProvidedJsfLibraries.exsd"/>
+   <extension-point id="variableresolver" name="%extension-point.name.8" schema="schema/variableresolver.exsd"/>
+   <extension-point id="propertyresolver" name="%extension-point.name.2" schema="schema/propertyresolver.exsd"/>
+   <extension-point id="methodresolver" name="%extension-point.name.3" schema="schema/methodresolver.exsd"/>
+   <extension-point id="externalcontext" name="%extension-point.name.4" schema="schema/externalcontext.exsd"/>
+   <extension-point id="AttributeValueRuntimeTypes" name="%extension-point.name.9" schema="schema/AttributeValueRuntimeTypes.exsd"/>
+   <extension-point id="MetaDataEnabledFeatures" name="%extension-point.name.5" schema="schema/MetaDataEnabledFeatures.exsd"/>
+   <extension-point id="tagregistry" name="%extension-point.name.10" schema="schema/tagregistry.exsd"/>
+   <extension-point id="viewhandler" name="%extension-point.name.6" schema="schema/viewhandler.exsd"/>
+   <extension-point id="customViewMapper" name="%extension-point.name.7" schema="schema/customViewMapper.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
     	<package 
@@ -336,7 +336,7 @@
         point="org.eclipse.jst.jsf.core.tagregistry">
      <tagRegistry
            class="org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryManager$MyRegistryFactory"
-           description="JSP tag registry"
+           description="%JSP_TAG_REGISTRY_DESCRIPTION"
            id="default.jsp">
         <content-type
               contentTypeId="org.eclipse.jst.jsp.core.jspsource">

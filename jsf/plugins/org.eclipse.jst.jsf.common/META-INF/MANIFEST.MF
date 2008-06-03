@@ -43,6 +43,7 @@ Export-Package: org.eclipse.jst.jsf.common;x-internal:=true,
  org.eclipse.jst.jsf.context.symbol,
  org.eclipse.jst.jsf.context.symbol.internal.impl;x-internal:=true,
  org.eclipse.jst.jsf.context.symbol.internal.provider;x-internal:=true,
+ org.eclipse.jst.jsf.context.symbol.internal.source;x-internal:=true,
  org.eclipse.jst.jsf.context.symbol.internal.util;x-internal:=true,
  org.eclipse.jst.jsf.context.symbol.provider,
  org.eclipse.jst.jsf.context.symbol.source
