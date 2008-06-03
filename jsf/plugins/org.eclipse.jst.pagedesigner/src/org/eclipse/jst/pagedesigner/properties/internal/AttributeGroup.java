@@ -28,12 +28,15 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
+import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
 import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.properties.attrgroup.IElementContextable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
@@ -54,6 +57,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	private Entity _tagEntity;
 	private List<String> _attrNames;
 	private List<IPropertyPageDescriptor> _attrPDs;
+	private IStructuredDocumentContext _sdContext;
 
 	private String _uri;
 	private String _tagName;
@@ -101,7 +105,7 @@ public class AttributeGroup extends DialogFieldGroup {
 		Entity attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(tagEntity, attrName);
 		if (attrEntity != null){
 			List pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(
-							IPropertyPageDescriptor.class, null/* can we get this null info?   do we need/want it? */, attrEntity);					
+							IPropertyPageDescriptor.class, getStructuredDocumentContext(), attrEntity);					
 			if (pds != null && !pds.isEmpty())
 				pd = (IPropertyPageDescriptor)pds.get(0);
 			else 
@@ -110,13 +114,26 @@ public class AttributeGroup extends DialogFieldGroup {
 		return pd;
 	}
 
-//	/**
-//	 * Constructor
-//	 */
-//	public AttributeGroup() {
-//		//
-//	}
 
+	private void resetStructuredDocumentContext() {
+		_sdContext = null;
+		getStructuredDocumentContext();		
+	}
+
+	private IStructuredDocumentContext getStructuredDocumentContext() {
+		if (_sdContext == null) {
+			if (_ownerElement != null) {
+				_sdContext = IStructuredDocumentContextFactory.INSTANCE.getContext(_ownerElement.getStructuredDocument(), _ownerElement);				
+				
+			} else {
+				IEditorPart edPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if (edPart != null && edPart instanceof HTMLEditor) {//edPart will always be the WPE, but checking just to be safe
+					_sdContext = IStructuredDocumentContextFactory.INSTANCE.getContext(((HTMLEditor)edPart).getDocument(), 0);
+				}
+			} 
+		}
+		return _sdContext;
+	}
 
 	/**
 	 * @return tag entity for this attribute group
@@ -271,6 +288,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	 */
 	public void setElementContext(IDOMNode context, IDOMElement owner) {
 		this._ownerElement = owner;
+		resetStructuredDocumentContext();
 		initialize();
 		if (context != null) {
 			for (int i = 0, size = _dialogFields.size(); i < size; i++) {
