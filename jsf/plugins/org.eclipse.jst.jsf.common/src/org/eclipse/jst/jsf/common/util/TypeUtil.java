@@ -322,9 +322,13 @@ public final class TypeUtil
     public static String resolveMethodSignature(final IType  owner, 
                                          final String unresolvedSignature)
     {
+        
+        final String unresolvedSignatureNormalized =
+            unresolvedSignature.replaceAll("/", ".");
+        
         // get the list of parameters
         final String[] parameters = 
-            Signature.getParameterTypes(unresolvedSignature);
+            Signature.getParameterTypes(unresolvedSignatureNormalized);
         
         for (int i = 0; i < parameters.length; i++)
         {
@@ -335,7 +339,7 @@ public final class TypeUtil
         // resolve return type
         final String resolvedReturn = 
             resolveTypeSignature(owner, 
-                                  Signature.getReturnType(unresolvedSignature));
+                                  Signature.getReturnType(unresolvedSignatureNormalized));
         
         return Signature.createMethodSignature(parameters, resolvedReturn);
     }
