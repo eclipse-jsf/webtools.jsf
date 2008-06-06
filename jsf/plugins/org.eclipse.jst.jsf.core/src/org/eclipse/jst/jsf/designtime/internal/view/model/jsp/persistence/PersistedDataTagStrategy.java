@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
+import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.JSPTagResolvingStrategy;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDNamespace;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagElement;
@@ -35,11 +36,11 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
     /**
      * the identifier of this strategy
      */
-    public final static String                    ID              = "org.eclipse.jst.jsf.designtime.PersistedDataTagStrategy";
+    public final static String                    ID              = "org.eclipse.jst.jsf.designtime.PersistedDataTagStrategy"; //$NON-NLS-1$
     /**
      * the display name
      */
-    public final static String                    DISPLAY_NAME    = "Cached Data Tag Resolver";
+    public final static String                    DISPLAY_NAME    = Messages.PersistedDataTagStrategy_DisplayName;
 
     private final IProject                        _project;
     private final TagRepository                   _repository;
@@ -64,7 +65,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
             JSFCoreTraceOptions
-                    .log("Initializing PersistedDataTagStrategy for project: "
+                    .log("Initializing PersistedDataTagStrategy for project: " //$NON-NLS-1$
                             + _project.toString());
         }
         try
@@ -76,13 +77,13 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         {
             JSFCorePlugin
                     .log(e,
-                            "JSP tag registry cached failed to load.  Strategy will not be used");
+                            "JSP tag registry cached failed to load.  Strategy will not be used"); //$NON-NLS-1$
         }
         catch (final ClassNotFoundException e)
         {
             JSFCorePlugin
                     .log(e,
-                            "JSP tag registry cached failed to load.  Strategy will not be used");
+                            "JSP tag registry cached failed to load.  Strategy will not be used"); //$NON-NLS-1$
         }
         _namespaces = new HashMap<String, SerializableTLDNamespace>();
     }
@@ -98,7 +99,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
             JSFCoreTraceOptions
-                    .log("Saving PersistedDataTagStrategy for project: "
+                    .log("Saving PersistedDataTagStrategy for project: " //$NON-NLS-1$
                             + _project.toString());
         }
 
@@ -117,7 +118,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
                 if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                 {
                     JSFCoreTraceOptions.log(String.format(
-                            "Adding namespace %s for project", ns.getNSUri(),
+                            "Adding namespace %s for project", ns.getNSUri(), //$NON-NLS-1$
                             _project.toString()));
                 }
 
@@ -128,7 +129,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
                 if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                 {
                     JSFCoreTraceOptions.log(String.format(
-                            "Updating namespace %s for project", ns.getNSUri(),
+                            "Updating namespace %s for project", ns.getNSUri(), //$NON-NLS-1$
                             _project.toString()));
                 }
 
@@ -138,7 +139,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
                     if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                     {
                         JSFCoreTraceOptions.log(String.format(
-                                "Putting element %s", elementEntry.getKey()));
+                                "Putting element %s", elementEntry.getKey())); //$NON-NLS-1$
                     }
                     myNs.put(elementEntry.getKey(), elementEntry.getValue());
                 }
@@ -154,7 +155,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
             JSFCoreTraceOptions.log(String.format(
-                    "Attempting to resolve element %s for project %s", element
+                    "Attempting to resolve element %s for project %s", element //$NON-NLS-1$
                             .getElementName(), _project));
         }
 
@@ -162,7 +163,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         {
             if (!_reentrancyFlag.compareAndSet(false, true))
             {
-                throw new IllegalStateException("Reentrant call to resolve");
+                throw new IllegalStateException("Reentrant call to resolve"); //$NON-NLS-1$
             }
 
             final String uri = getUri(element);
@@ -181,7 +182,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
                         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                         {
                             JSFCoreTraceOptions.log(String.format(
-                                    "Resolved element %s for project %s",
+                                    "Resolved element %s for project %s", //$NON-NLS-1$
                                     element.getElementName(), _project));
                         }
                         return tagElement;
@@ -204,7 +205,7 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
             JSFCoreTraceOptions.log(String.format(
-                    "Flushing all data for project %s", _project));
+                    "Flushing all data for project %s", _project)); //$NON-NLS-1$
         }
 
         try
@@ -213,12 +214,12 @@ public class PersistedDataTagStrategy extends JSPTagResolvingStrategy
         }
         catch (IOException e)
         {
-            JSFCorePlugin.log(e, "Failure during cache flushing on project: "
+            JSFCorePlugin.log(e, "Failure during cache flushing on project: " //$NON-NLS-1$
                     + _project);
         }
         catch (ClassNotFoundException e)
         {
-            JSFCorePlugin.log(e, "Failure during cache flushing on project: "
+            JSFCorePlugin.log(e, "Failure during cache flushing on project: " //$NON-NLS-1$
                     + _project);
         }
         _namespaces.clear();

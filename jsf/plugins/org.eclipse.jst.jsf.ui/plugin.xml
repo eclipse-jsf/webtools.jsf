@@ -248,7 +248,7 @@ ${cursor}
        <template
              autoinsert="true"
              contextTypeId="jsp_new"
-             description="%NewJSFPage_html_description"
+             description="%NewJSFPage_xhtml_description"
              id="org.eclipse.jst.jsf.ui.new_jsf_page_xhtml"
              name="%NewJSFPage_xhtml">
           <pattern>

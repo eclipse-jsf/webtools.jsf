@@ -16,7 +16,6 @@ import org.eclipse.jst.jsf.common.ui.internal.dialogfield.LayoutUtil;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.StringDialogField;
 import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
-import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -114,7 +113,7 @@ public class AddEditMapEntryDialog extends Dialog {
 		keyField.setText(key);
 		if (this.isNullValue) {
 			nullValueTypeButton.setSelection(true);
-			valueField.setText("");
+			valueField.setText(""); //$NON-NLS-1$
 			valueField.setEnabled(false);
 		} else {
 			nullValueTypeButton.setSelection(false);
@@ -163,7 +162,7 @@ public class AddEditMapEntryDialog extends Dialog {
 		valueSection.setLayout(gl);
 
 		nullValueTypeButton = SWTUtils.createCheckBox(valueSection,
-				IFacesConfigConstants.NULL_VALUE, 2);
+				EditorMessages.AddEditMapEntryDialog_NullValue, 2);
 
 		nullValueTypeButton.addSelectionListener(new SelectionAdapter() {
 

@@ -57,7 +57,7 @@ public class JSPTagRegistryPreferencePage extends PreferencePage implements
         _panel = new StrategyOrderingPanel(
                 _provider,
                 new MyLabelProvider(),
-                "Set the order in which tag resolvers are consulted when constructing the JSP tag registry");
+                Messages.JSPTagRegistryPreferencePage_PanelDescription);
         final Control contents = _panel.createContents(parent);
         _panel.refresh();
         return contents;

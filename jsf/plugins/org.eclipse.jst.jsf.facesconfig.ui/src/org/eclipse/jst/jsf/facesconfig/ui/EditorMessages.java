@@ -39,6 +39,8 @@ public final class EditorMessages extends NLS {
 	 */
 	public static String AddEditManagedPropertyDialog_Edit;
 
+	public static String AddEditMapEntryDialog_NullValue;
+
 	/**
 	 * see EditorMessages.properties
 	 */

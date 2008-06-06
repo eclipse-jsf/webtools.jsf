@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jst.jsf.common.ui.internal.dialogs.CommonResourceDialog;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -44,19 +45,19 @@ public class ProjectWebPageSelectionDialog extends CommonResourceDialog {
 	}
 
 	private void init() {
-		setResourceDescription("Web page");
-		setSuffixs(new String[] { "jsp", "jspx", "jsf", "html", "htm" });
+		setResourceDescription(PageflowMessages.ProjectWebPageSelectionDialog_Description);
+		setSuffixs(new String[] { "jsp", "jspx", "jsf", "html", "htm" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 	}
 
 	/**
 	 * @return the rseult file path
 	 */
 	public String getResultFilePath() {
-		String result = "";
+		String result = ""; //$NON-NLS-1$
 		IFile selectedFile = (IFile) getResult()[0];
 		IPath path = selectedFile.getProjectRelativePath();
 		path = path.removeFirstSegments(1);
-		result = "/" + path.toString();
+		result = "/" + path.toString(); //$NON-NLS-1$
 		return result;
 	}
 }

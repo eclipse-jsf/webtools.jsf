@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.types.TypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IHandlerTagElement.TagHandlerType;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.mapping.ViewMetadataLoader;
 import org.eclipse.jst.jsf.designtime.internal.view.mapping.ViewMetadataMapper;
 import org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.TagMapping;
@@ -41,11 +42,11 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
     /**
      * strategy id
      */
-    public final static String                                   ID           = "org.eclipse.jst.jsf.metadata.DefaultJSPTagResolver";
+    public final static String                                   ID           = "org.eclipse.jst.jsf.metadata.DefaultJSPTagResolver"; //$NON-NLS-1$
     /**
      * displayable nameb
      */
-    public final static String                                   DISPLAY_NAME = "Meta-data Driven Resolver";
+    public final static String                                   DISPLAY_NAME = Messages.DefaultJSPTagResolver_DisplayName;
 
     private final ViewMetadataLoader                                 _loader;
     private final ViewMetadataMapper                                 _mapper;
@@ -75,7 +76,7 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
         TypeInfo elementType = null;
         if (mapping != null)
         {
-            elementType = findTypeInfo(mapping, "1.1", null);
+            elementType = findTypeInfo(mapping, "1.1", null); //$NON-NLS-1$
         }
 
         if (elementType instanceof ComponentTypeInfo)

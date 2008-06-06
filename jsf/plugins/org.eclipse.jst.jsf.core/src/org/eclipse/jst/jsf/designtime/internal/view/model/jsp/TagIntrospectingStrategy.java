@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
+import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.analyzer.TagAnalyzer;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 
@@ -26,11 +27,11 @@ public final class TagIntrospectingStrategy extends JSPTagResolvingStrategy
     /**
      * the identifier of this strategy
      */
-    public final static String ID = "org.eclipse.jst.jsf.designtime.TagIntrospectingStrategy";
+    public final static String ID = "org.eclipse.jst.jsf.designtime.TagIntrospectingStrategy"; //$NON-NLS-1$
     /**
      * the display name
      */
-    public final static String DISPLAY_NAME = "Introspecting Tag Resolver";
+    public final static String DISPLAY_NAME = Messages.TagIntrospectingStrategy_DisplayName;
 
     private final IProject _project;
 

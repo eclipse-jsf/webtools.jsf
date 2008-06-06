@@ -439,4 +439,6 @@ public final class PageflowMessages extends NLS {
 	 * see PageFlowMessages.properties
 	 */
 	public static String PageflowLinkEditPart_FromOutcome;
+
+	public static String ProjectWebPageSelectionDialog_Description;
 }
