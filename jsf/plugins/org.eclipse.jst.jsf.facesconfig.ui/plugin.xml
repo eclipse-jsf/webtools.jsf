@@ -78,10 +78,10 @@
            composite="false"
            contentFile="$nl$/cheatsheets/facesconfigeditor.xml"
            id="FacesConfigEditor.CheatSheet"
-           name="Faces Configuration Editor"/>
+           name="%cheatsheet.jsf.facesconfig.title"/>
      <category
            id="org.eclipse.jst.jsf"
-           name="JSF Development">
+           name="%cheatsheet.jsf.title">
      </category>
   </extension>
   <!--<extension
