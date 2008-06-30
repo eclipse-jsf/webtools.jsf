@@ -68,8 +68,18 @@ public class MockValidationReporter extends ReporterAdapter
     {
         List<ReportedProblem>  messages = _messagesByOffset.get(offset);
 
-        if (messages == null)
+        if (messages == null || messages.size() == 0)
         {
+            for (final Map.Entry<Integer, List<ReportedProblem>> entry : _messagesByOffset.entrySet())
+            {
+                int entryOffset = entry.getKey().intValue();
+                // if the offset looked for is within +/-5 of an entry,
+                // dump it to stderr for debugging slightly off offsets
+                if (offset >= entryOffset - 5 && offset <= entryOffset+5)
+                {
+                    System.err.printf("Offset %d requested not found but close is: %d", offset, entryOffset);
+                }
+            }
             messages = new ArrayList<ReportedProblem>();
             _messagesByOffset.put(offset, messages);
         }
@@ -80,8 +90,13 @@ public class MockValidationReporter extends ReporterAdapter
     public void assertExpectedMessage(
             final int offset, final int length, final int severity)
     {
+        assertExpectedMessage(offset, length, severity, null);
+    }
+
+    public void assertExpectedMessage(
+            final int offset, final int length, final int severity, final Integer code)
+    {
         final List<ReportedProblem> reportedProblems = getMessageListForOffset(offset);
-        final List<ReportedProblem> reportedProblemsNotMatching = new ArrayList<ReportedProblem>();
 
         Assert.assertTrue(reportedProblems.size() > 0);
 
@@ -89,12 +104,11 @@ public class MockValidationReporter extends ReporterAdapter
         {
             if (problem.getLength() == length && problem.getSeverity() == severity)
             {
-                // we found the expected message
-                return;
-            }
-            else
-            {
-                reportedProblemsNotMatching.add(problem);
+                if (code == null || code == Integer.valueOf(problem.getErrorCode()))
+                {
+                    // we found the expected message
+                    return;
+                }
             }
         }
 
@@ -102,11 +116,16 @@ public class MockValidationReporter extends ReporterAdapter
 
         for (final ReportedProblem problem : reportedProblems)
         {
-            failMessage += "\n" + problem.getText();
+            failMessage += 
+                String.format("\n at offset offset %d, code=%d, length=%d, message=%s", problem.getOffset(), 
+                        problem.getErrorCode(), problem.getLength(), problem.getText());
         }
-        Assert.fail(String.format("Failed to find expected message at offset %d, found instead %s", offset, failMessage));
+        Assert.fail(String.format(
+                "Failed to find expected message at offset %d%s, length %d, found instead %s"
+                , offset, length, (code == null ? "" : ", with errorCode "+code), failMessage));
+
     }
-    
+
     public static class ReportedProblem
     {
         private final int _offset;

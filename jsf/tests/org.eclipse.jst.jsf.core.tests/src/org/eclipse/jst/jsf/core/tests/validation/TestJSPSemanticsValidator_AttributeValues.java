@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
@@ -111,7 +112,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         // in the path, we trigger a containment warning on the loadBundle
         // since the f:view in the doc can't be fully resolved.
         // at 845 we also get two, one for syntax error and one for missing bracket
-        assertEquals(9, mockReporter.getReportedProblems().size());
+        assertEquals(10, mockReporter.getReportedProblems().size());
 
         mockReporter.assertExpectedMessage(603, 2, IMessage.NORMAL_SEVERITY);
         mockReporter.assertExpectedMessage(648, 4, IMessage.NORMAL_SEVERITY);
@@ -123,7 +124,9 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         mockReporter.assertExpectedMessage(846, 5, IMessage.HIGH_SEVERITY);
         mockReporter.assertExpectedMessage(847, 3, IMessage.NORMAL_SEVERITY);
 
-        mockReporter.assertExpectedMessage(963, 40, IMessage.HIGH_SEVERITY);
+        mockReporter.assertExpectedMessage(946, 24, IMessage.NORMAL_SEVERITY, TypeComparatorDiagnosticFactory.PROPERTY_NOT_WRITABLE_ID);
+
+        mockReporter.assertExpectedMessage(1015, 40, IMessage.HIGH_SEVERITY);
     }
 
     
