@@ -38,6 +38,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -131,7 +132,9 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractOverviewSection#refreshAll()
 	 */
 	public void refreshAll() {
-
+		if(getSection() == null || getSection().isDisposed()) {
+			return;
+		}
 		List othersNodesList = new ArrayList();
 		if (getInput() instanceof FacesConfigType) {
 			Object[] applicationNodes = null;
@@ -341,7 +344,11 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 				if (msg.getEventType() == Notification.ADD
 						|| msg.getEventType() == Notification.REMOVE
 						|| msg.getEventType() == Notification.SET) {
-					refreshAll();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							refreshAll();
+						}
+					});
 				}
 			}
 

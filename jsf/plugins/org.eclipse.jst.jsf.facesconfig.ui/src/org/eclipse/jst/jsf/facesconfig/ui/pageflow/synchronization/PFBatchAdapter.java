@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * @author hmeng
@@ -41,9 +42,13 @@ public abstract class PFBatchAdapter extends AdapterImpl {
 		this.needPostpone = needPostpone;
 	}
 
-	final public void notifyChanged(Notification msg) {
+	final public void notifyChanged(final Notification msg) {
 		if (!isNeedPostpone(msg)) {
-			doNotifyChanged(msg);
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					doNotifyChanged(msg);
+				}
+			});
 		}
 	}
 

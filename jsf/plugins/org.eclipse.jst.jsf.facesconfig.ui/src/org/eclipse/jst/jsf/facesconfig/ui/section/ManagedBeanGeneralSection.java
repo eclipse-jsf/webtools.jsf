@@ -36,6 +36,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -232,6 +233,9 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 	 * 
 	 */
 	public void refresh() {
+		if(getSection() == null || getSection().isDisposed()) {
+			return;
+		}
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof ManagedBeanType) {
@@ -308,7 +312,11 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 								.getManagedBeanType_ManagedBeanClass()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getManagedBeanType_ManagedBeanScope()) {
-					refresh();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							refresh();
+						}
+					});
 				}
 			}
 		}

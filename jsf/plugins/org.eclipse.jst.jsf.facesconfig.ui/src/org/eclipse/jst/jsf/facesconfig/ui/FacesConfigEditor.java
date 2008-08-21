@@ -641,9 +641,15 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @see org.eclipse.ui.ISaveablePart#isDirty()
 	 */
 	public boolean isDirty() {
-		return ((BasicCommandStack) editingDomain.getCommandStack())
+		final boolean[] result = new boolean[1];
+		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+			public void run() {
+		result[0] = ((BasicCommandStack) editingDomain.getCommandStack())
 				.isSaveNeeded()
-				|| super.isDirty();
+				|| FacesConfigEditor.super.isDirty();
+			}
+		});
+		return result[0];
 	}
 
 	/**

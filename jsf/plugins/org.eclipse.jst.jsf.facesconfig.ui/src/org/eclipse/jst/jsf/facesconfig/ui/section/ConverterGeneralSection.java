@@ -44,6 +44,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.util.ModelUtil;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -303,6 +304,9 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 	 * 
 	 */
 	public void refresh() {
+		if(getSection() == null || getSection().isDisposed()) {
+			return;
+		}
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof ConverterType) {
@@ -459,12 +463,20 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 								.getConverterType_Description()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getConverterType_DisplayName()) {
-					refresh();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							refresh();
+						}
+					});
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getDisplayNameType_TextContent()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getDescriptionType_TextContent()) {
-					refresh();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							refresh();
+						}
+					});
 				}
 			}
 		}

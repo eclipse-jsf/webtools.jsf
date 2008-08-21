@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPropertySource;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 /**
@@ -173,11 +174,19 @@ public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 		case Notification.ADD_MANY:
 		case Notification.REMOVE:
 		case Notification.REMOVE_MANY:
-			refreshChildren();
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					refreshChildren();
+				}
+			});
 			break;
 
 		case Notification.SET:
-			refreshVisuals();
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					refreshVisuals();
+				}
+			});
 			break;
 		}
 	}

@@ -43,6 +43,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -370,7 +371,15 @@ public class LocaleConfigSection extends ApplicationSection implements
 					 * a <locale-config> was created or removed, notify this
 					 * section to reset it's input.
 					 */
-					setInput(getInput());
+					
+					if(getSection() == null || getSection().isDisposed()) {
+						return;
+					}
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							setInput(getInput());
+						}
+					});
 
 				}
 			}

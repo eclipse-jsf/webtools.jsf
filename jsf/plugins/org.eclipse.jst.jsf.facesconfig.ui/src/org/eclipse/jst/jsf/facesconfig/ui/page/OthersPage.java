@@ -56,6 +56,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -443,17 +444,31 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	 */
 	class FacesConfigOthersAdapter extends AdapterImpl {
 		public void notifyChanged(Notification msg) {
+			if(getPartControl().isDisposed()) {
+				return;
+			}
 			if (msg.getEventType() == Notification.REMOVE
 					|| msg.getEventType() == Notification.ADD) {
 				if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getFacesConfigType_Application()) {
-					resetApplicationInput();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							resetApplicationInput();
+						}
+					});
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getFacesConfigType_Factory()) {
-					resetFactoryInput();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							resetFactoryInput();
+						}
+					});
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getFacesConfigType_Lifecycle()) {
-					resetLifecycleInput();
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							resetLifecycleInput();						}
+					});
 				}
 			}
 		}
