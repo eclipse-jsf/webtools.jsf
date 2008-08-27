@@ -36,6 +36,7 @@ import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.IndexedRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
+import org.eclipse.wst.validation.ValidationFramework;
 import org.eclipse.wst.validation.internal.ConfigurationManager;
 import org.eclipse.wst.validation.internal.GlobalConfiguration;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMAttr;
@@ -74,10 +75,14 @@ public final class JSFTestUtil
      */
     public static void setValidationEnabled(final boolean isEnabled) throws InvocationTargetException
     {
+        // old way (just in case)
         final GlobalConfiguration config = new GlobalConfiguration(ConfigurationManager.getManager().getGlobalConfiguration());
         config.setDisableAllValidation(!isEnabled);
         config.passivate();
         config.store();
+        
+        // new way
+        ValidationFramework.getDefault().suspendAllValidation(!isEnabled);
     }
 
     /**
