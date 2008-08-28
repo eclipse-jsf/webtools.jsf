@@ -314,11 +314,10 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
     void remove(final ITaglibRecord tagRecord)
     {
-        final CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
-        final TLDDocument doc = (TLDDocument) factory
-                .createCMDocument(tagRecord);
-
-        final TLDNamespace ns = _nsResolved.remove(doc.getUri());
+        // this is safer, since we likely fail to create a TLDDocument for
+        // a tagRecord that has been removed.
+        final String uri = tagRecord.getDescriptor().getURI();
+        final TLDNamespace ns = _nsResolved.remove(uri);
 
         if (ns != null)
         {
