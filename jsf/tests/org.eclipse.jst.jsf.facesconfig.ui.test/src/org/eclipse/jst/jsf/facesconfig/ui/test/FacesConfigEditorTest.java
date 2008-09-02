@@ -93,8 +93,15 @@ public abstract class FacesConfigEditorTest extends TestCase {
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		closeEditor();
+		TestUtil.removeResource(project);
+//		JSFTestUtil.safeDelete(project, 10, 200);
+	}
+	
+	protected void closeEditor() throws Exception {
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.closeEditor(editor, false);
-		JSFTestUtil.safeDelete(project, 10, 200);
+			.closeEditor(editor, false);
+		
+		editor = null;
 	}
 }

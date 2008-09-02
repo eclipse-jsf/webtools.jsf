@@ -45,6 +45,8 @@ public class AllTestCases {
 		suite.addTestSuite(NewManagedBeanWizardTest.class);
 
 		suite.addTestSuite(PageflowEditorTest.class);
+		
+		suite.addTestSuite(TestNotificationsOnNonUIThread.class);
 		return suite;
 	}
 }
