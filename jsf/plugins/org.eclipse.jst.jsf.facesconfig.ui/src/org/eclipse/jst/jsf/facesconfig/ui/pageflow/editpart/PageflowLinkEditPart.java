@@ -43,6 +43,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 /**
@@ -164,8 +165,8 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 					PageflowAnnotationUtil
 							.validateLink(PageflowLinkEditPart.this);
 				}
-
-				refreshVisuals();
+				
+				refreshVisualsOnUIThread();
 				break;
 			}
 		}
@@ -247,7 +248,19 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 			refreshBendpoints();
 		}
 	}
-
+	
+	private void refreshVisualsOnUIThread() {
+		if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+			refreshVisuals();
+		} else {
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+				public void run() {
+					refreshVisuals();
+				}			
+			});
+		}
+	}
+	
 	/**
 	 * set the bendpoint constraints of the pflink connection
 	 * 
@@ -366,12 +379,17 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 	 * @see com.sybase.stf.jmt.editors.pageflow.editparts.IEditPartDecorator#undecorateEditPart()
 	 */
 	public void removeAnnotation() {
-		getViewer().getControl().getDisplay().asyncExec(new Runnable() {
-			public void run() {
-				((PFLinkFigure) getFigure()).clearIcon();
-				resetLabel();
-			}
-		});
+		if (Thread.currentThread() == getViewer().getControl().getDisplay().getThread()) {
+			((PFLinkFigure) getFigure()).clearIcon();
+			resetLabel();
+		} else {
+			getViewer().getControl().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					((PFLinkFigure) getFigure()).clearIcon();
+					resetLabel();
+				}
+			});
+		}
 	}
 
 	private void resetLabel() {

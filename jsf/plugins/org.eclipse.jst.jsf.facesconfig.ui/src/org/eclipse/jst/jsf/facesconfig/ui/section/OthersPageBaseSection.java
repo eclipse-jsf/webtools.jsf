@@ -81,6 +81,11 @@ public abstract class OthersPageBaseSection extends AbstractFacesConfigSection {
 		this(parent, managedForm, page, toolkit, null, null);
 	}
 
+	public void dispose() {
+		tableViewer.removeSelectionChangedListener(this);
+		tableViewer = null;
+		super.dispose();
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -104,16 +104,16 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 
 				case 0:
 					return ((NavigationRuleType) navigationCase.eContainer())
-							.getFromViewId() == null ? ""
+							.getFromViewId() == null ? "" //$NON-NLS-1$
 							: ((NavigationRuleType) navigationCase.eContainer())
 									.getFromViewId().getTextContent();
 
 				case 1:
-					return navigationCase.getFromOutcome() == null ? ""
+					return navigationCase.getFromOutcome() == null ? "" //$NON-NLS-1$
 							: navigationCase.getFromOutcome().getTextContent();
 
 				case 2:
-					return navigationCase.getToViewId() == null ? ""
+					return navigationCase.getToViewId() == null ? "" //$NON-NLS-1$
 							: navigationCase.getToViewId().getTextContent();
 				}
 				return null;
@@ -188,10 +188,7 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 	 * 
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.IFacesConfigSection#refreshAll()
 	 */
-	public void refreshAll() {
-		if(getSection() == null || getSection().isDisposed()) {
-			return;
-		}
+	public void refreshAll() {			
 		List navigationCaseList = new ArrayList();
 		if (getInput() instanceof FacesConfigType) {
 			List navigationRules = ((FacesConfigType) getInput())
@@ -252,11 +249,10 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 	 * @see org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection#removeAdaptersFromInput(java.lang.Object)
 	 */
 	protected void removeAdaptersFromInput(Object oldInput) {
-		super.removeAdaptersFromInput(oldInput);
-
+		super.removeAdaptersFromInput(oldInput);		
 		FacesConfigType facesConfig = (FacesConfigType) oldInput;
 		removeOverviewNavigationSectionAdapter(facesConfig);
-
+		
 		for (Iterator it = facesConfig.getNavigationRule().iterator(); it
 				.hasNext();) {
 			NavigationRuleType navigationRule = (NavigationRuleType) it.next();
@@ -295,9 +291,9 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 		}
 
 	}
-
+	
 	private void removeOverviewNavigationSectionAdapter(EObject object) {
-		if (EcoreUtil.getExistingAdapter(object,
+		if (object != null && EcoreUtil.getExistingAdapter(object,
 				OverviewNavigationSection.class) != null) {
 			object.eAdapters().remove(getOverviewNavigationSectionAdapter());
 		}
@@ -337,12 +333,16 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 				if (msg.getEventType() == Notification.ADD
 						|| msg.getEventType() == Notification.REMOVE
 						|| msg.getEventType() == Notification.SET)
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refreshAll();
-						}	
-					});
-				return;
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refreshAll();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refreshAll();
+							}	
+						});
+					}
+					return;
 			}
 
 			if (msg.getFeature() == FacesConfigPackage.eINSTANCE
@@ -362,15 +362,9 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 				|| msg.getEventType() == Notification.REMOVE
 						|| msg.getEventType() == Notification.SET) {
 
-					final NavigationCaseType navigationCase = (NavigationCaseType) msg
+					NavigationCaseType navigationCase = (NavigationCaseType) msg
 							.getNotifier();
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							if(!tableViewer.getControl().isDisposed()) {
-								tableViewer.refresh(navigationCase);
-							}
-						}
-					});
+					refreshViewerOnUIThread(navigationCase);
 				}
 				return;
 			}
@@ -383,19 +377,27 @@ public class OverviewNavigationSection extends AbstractOverviewSection {
 				if (msg.getEventType() == Notification.ADD
 						|| msg.getEventType() == Notification.REMOVE
 						|| msg.getEventType() == Notification.SET) {
-					final NavigationCaseType navigationCase = (NavigationCaseType) ((EObject) msg
+					NavigationCaseType navigationCase = (NavigationCaseType) ((EObject) msg
 							.getNotifier()).eContainer();
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							if(!tableViewer.getControl().isDisposed()) {
-								tableViewer.refresh(navigationCase);
-							}
-						}
-					});
+					refreshViewerOnUIThread(navigationCase);
 				}
 				return;
 			}
 
 		}
+
+		private void refreshViewerOnUIThread(final NavigationCaseType navigationCase) {
+			if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+					tableViewer.refresh(navigationCase);
+			} else {
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+					public void run() {
+						tableViewer.refresh(navigationCase);
+					}
+				});
+			}
+			
+		}
 	}
+
 }

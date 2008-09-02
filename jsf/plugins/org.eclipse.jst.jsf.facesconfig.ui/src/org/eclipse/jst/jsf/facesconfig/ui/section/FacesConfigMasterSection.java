@@ -66,6 +66,11 @@ public abstract class FacesConfigMasterSection extends AbstractFacesConfigSectio
 		super(parent, managedForm, page, toolkit, helpContextId, helpTooltip);
 	}
 
+	public void dispose() {
+		structuredViewer.removeSelectionChangedListener(this);
+		super.dispose();
+	}
+	
 	/**
 	 * 
 	 */

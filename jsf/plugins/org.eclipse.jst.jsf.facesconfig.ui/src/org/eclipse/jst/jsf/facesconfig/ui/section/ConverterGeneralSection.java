@@ -304,58 +304,56 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 	 * 
 	 */
 	public void refresh() {
-		if(getSection() == null || getSection().isDisposed()) {
-			return;
-		}
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof ConverterType) {
-			ConverterType Converter = (ConverterType) input;
-
-			if (Converter.getDisplayName().size() > 0) {
-				DisplayNameType displayName = (DisplayNameType) Converter
-						.getDisplayName().get(0);
-				displayNameField.setTextWithoutUpdate(displayName
-						.getTextContent());
-			} else {
-				displayNameField.setTextWithoutUpdate("");
-			}
-
-			if (Converter.getDescription().size() > 0) {
-				DescriptionType description = (DescriptionType) Converter
-						.getDescription().get(0);
-				String descriptionString = description.getTextContent();
-				descriptionString = ModelUtil
-						.unEscapeEntities(descriptionString);
-				descriptionField.setTextWithoutUpdate(descriptionString);
-			} else {
-				descriptionField.setTextWithoutUpdate("");
-			}
-
-			if (Converter.getConverterId() != null) {
-				converterIdField.setTextWithoutUpdate(Converter
-						.getConverterId().getTextContent());
-			} else {
-				converterIdField.setTextWithoutUpdate("");
-			}
-
-			if (Converter.getConverterForClass() != null) {
-				converterForClassField.setTextWithoutUpdate(Converter
-						.getConverterForClass().getTextContent());
-			} else {
-				converterForClassField.setTextWithoutUpdate("");
-			}
-
-			if (Converter.getConverterClass() != null) {
-				converterClassField.setTextWithoutUpdate(Converter
-						.getConverterClass().getTextContent());
-			} else {
-				converterClassField.setTextWithoutUpdate("");
-			}
-
+			final ConverterType converter = (ConverterType) input;
+			refreshControls(converter);
 		}
 	}
 
+	private void refreshControls(ConverterType converter) {
+		if (converter.getDisplayName().size() > 0) {
+			DisplayNameType displayName = (DisplayNameType) converter
+					.getDisplayName().get(0);
+			displayNameField.setTextWithoutUpdate(displayName
+					.getTextContent());
+		} else {
+			displayNameField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (converter.getDescription().size() > 0) {
+			DescriptionType description = (DescriptionType) converter
+					.getDescription().get(0);
+			String descriptionString = description.getTextContent();
+			descriptionString = ModelUtil
+					.unEscapeEntities(descriptionString);
+			descriptionField.setTextWithoutUpdate(descriptionString);
+		} else {
+			descriptionField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (converter.getConverterId() != null) {
+			converterIdField.setTextWithoutUpdate(converter
+					.getConverterId().getTextContent());
+		} else {
+			converterIdField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (converter.getConverterForClass() != null) {
+			converterForClassField.setTextWithoutUpdate(converter
+					.getConverterForClass().getTextContent());
+		} else {
+			converterForClassField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (converter.getConverterClass() != null) {
+			converterClassField.setTextWithoutUpdate(converter
+					.getConverterClass().getTextContent());
+		} else {
+			converterClassField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+	}
 	/**
 	 * Add ConverterGeneralAdapter onto <converter> and the first <display-name>
 	 * and <description> elements.
@@ -463,20 +461,28 @@ public class ConverterGeneralSection extends AbstractFacesConfigSection {
 								.getConverterType_Description()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getConverterType_DisplayName()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refresh();
+					} else {						
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refresh();
+							}
+						});
+					}
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getDisplayNameType_TextContent()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getDescriptionType_TextContent()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refresh();
+					} else {						
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refresh();
+							}
+						});
+					}
 				}
 			}
 		}

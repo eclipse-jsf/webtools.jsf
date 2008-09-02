@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
@@ -53,6 +54,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class LocaleConfigSection extends ApplicationSection implements
 		ICheckStateListener {
+	private LocaleConfigAdapter _localeConfigAdapter;
+
 	/**
 	 * 
 	 * @param componentClass
@@ -83,6 +86,10 @@ public class LocaleConfigSection extends ApplicationSection implements
 		this(componentClass, parent, managedForm, page, toolkit, null, null);
 	}
 
+	public void dispose() {
+		((CheckboxTableViewer)tableViewer).removeCheckStateListener(this);
+		super.dispose();		
+	}
 	/**
 	 * create a CheckboxTableViewer for this section.
 	 */
@@ -321,6 +328,34 @@ public class LocaleConfigSection extends ApplicationSection implements
 		}
 	}
 
+	@Override
+	protected void addAdaptersOntoInput(Object input) {
+		super.addAdaptersOntoInput(input);
+		if (input != null && input instanceof ApplicationType) {
+			ApplicationType application = (ApplicationType) input;
+			if (EcoreUtil.getExistingAdapter(application,
+					LocaleConfigSection.class) == null) {
+				application.eAdapters().add(getLocaleConfigAdapter());
+			}
+		}
+	}
+
+	private Adapter getLocaleConfigAdapter() {
+		if (_localeConfigAdapter == null) {
+			_localeConfigAdapter = new LocaleConfigAdapter();
+		}
+		return _localeConfigAdapter;
+	}
+
+	@Override
+	protected void removeAdaptersFromInput(Object input) {
+		if (input != null && input instanceof ApplicationType && _localeConfigAdapter != null) {
+			ApplicationType application = (ApplicationType) input;			
+			application.eAdapters().remove(_localeConfigAdapter);			
+		}
+		super.removeAdaptersFromInput(input);
+	}
+
 	/**
 	 * set the structuredViewer's input. Set the first LocaleConfig as input.
 	 * 
@@ -329,10 +364,6 @@ public class LocaleConfigSection extends ApplicationSection implements
 	protected void setViewerInput(Object input) {
 		if (input instanceof ApplicationType) {
 			ApplicationType application = (ApplicationType) input;
-			if (EcoreUtil.getExistingAdapter(application,
-					LocaleConfigSection.class) == null) {
-				application.eAdapters().add(new LocaleConfigAdapter());
-			}
 			if (application.getLocaleConfig().size() > 0) {
 				tableViewer.setInput(application.getLocaleConfig().get(0));
 			} else
@@ -372,14 +403,15 @@ public class LocaleConfigSection extends ApplicationSection implements
 					 * section to reset it's input.
 					 */
 					
-					if(getSection() == null || getSection().isDisposed()) {
-						return;
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						setInput(getInput());
+					} else {							
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								setInput(getInput());
+							}
+						});
 					}
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							setInput(getInput());
-						}
-					});
 
 				}
 			}

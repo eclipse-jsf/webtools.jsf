@@ -242,48 +242,49 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 	 * 
 	 */
 	public void refresh() {
-		if(getSection() == null || getSection().isDisposed()) {
-			return;
-		}
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof ValidatorType) {
-			ValidatorType validator = (ValidatorType) input;
-
-			if (validator.getDisplayName().size() > 0) {
-				DisplayNameType displayName = (DisplayNameType) validator
-						.getDisplayName().get(0);
-				displayNameField.setTextWithoutUpdate(displayName
-						.getTextContent());
-			} else {
-				displayNameField.setTextWithoutUpdate("");
-			}
-
-			if (validator.getDescription().size() > 0) {
-				DescriptionType description = (DescriptionType) validator
-						.getDescription().get(0);
-				String descriptionString = description.getTextContent();
-				descriptionString = ModelUtil
-						.unEscapeEntities(descriptionString);
-				descriptionField.setTextWithoutUpdate(descriptionString);
-			} else {
-				descriptionField.setTextWithoutUpdate("");
-			}
-
-			if (validator.getValidatorId() != null) {
-				validatorIDField.setTextWithoutUpdate(validator
-						.getValidatorId().getTextContent());
-			} else {
-				validatorIDField.setTextWithoutUpdate("");
-			}
-
-			if (validator.getValidatorClass() != null) {
-				validatorClassField.setTextWithoutUpdate(validator
-						.getValidatorClass().getTextContent());
-			} else {
-				validatorClassField.setTextWithoutUpdate("");
-			}
+			final ValidatorType validator = (ValidatorType) input;
+			refreshControls(validator);
 		}
+	}
+	
+	private void refreshControls(final ValidatorType validator) {
+		if (validator.getDisplayName().size() > 0) {
+			DisplayNameType displayName = (DisplayNameType) validator
+					.getDisplayName().get(0);
+			displayNameField.setTextWithoutUpdate(displayName
+					.getTextContent());
+		} else {
+			displayNameField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (validator.getDescription().size() > 0) {
+			DescriptionType description = (DescriptionType) validator
+					.getDescription().get(0);
+			String descriptionString = description.getTextContent();
+			descriptionString = ModelUtil
+					.unEscapeEntities(descriptionString);
+			descriptionField.setTextWithoutUpdate(descriptionString);
+		} else {
+			descriptionField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (validator.getValidatorId() != null) {
+			validatorIDField.setTextWithoutUpdate(validator
+					.getValidatorId().getTextContent());
+		} else {
+			validatorIDField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (validator.getValidatorClass() != null) {
+			validatorClassField.setTextWithoutUpdate(validator
+					.getValidatorClass().getTextContent());
+		} else {
+			validatorClassField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
 	}
 
 	/**
@@ -391,22 +392,25 @@ public class ValidatorGeneralSection extends AbstractFacesConfigSection {
 								.getValidatorType_Description()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getValidatorType_DisplayName()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					refreshInUIThread();
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getDisplayNameType_TextContent()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getDescriptionType_TextContent()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					refreshInUIThread();
 				}
 			}
+		}
+		private void refreshInUIThread() {
+			if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+				refresh();
+			} else {				
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+					public void run() {
+						refresh();
+					}
+				});
+			}		
 		}
 	}
 }

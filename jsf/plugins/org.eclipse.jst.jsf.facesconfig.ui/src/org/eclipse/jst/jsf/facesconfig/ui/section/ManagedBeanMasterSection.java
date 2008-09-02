@@ -229,8 +229,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 		}
 	}
 
-	protected void removeAdaptersFromInput(Object oldInput) {
-		super.removeAdaptersFromInput(oldInput);
+	protected void removeAdaptersFromInput(Object oldInput) {		
 		FacesConfigType facesConfig = (FacesConfigType) oldInput;
 		if (EcoreUtil.getExistingAdapter(facesConfig,
 				ManagedBeanMasterSection.class) != null) {
@@ -249,6 +248,7 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 						getManagedBeanMasterSectionAdapter());
 			}
 		}
+		super.removeAdaptersFromInput(oldInput);
 	}
 
 	private ManagedBeanMasterSectionAdapter getManagedBeanMasterSectionAdapter() {
@@ -279,38 +279,55 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 						mbean.eAdapters().add(
 								getManagedBeanMasterSectionAdapter());
 					}
-
-					Runnable run = new Runnable() {
-
-						public void run() {
-							getStructuredViewer().refresh(true);
-							IStructuredSelection selection = new StructuredSelection(
-									mbean);
-							getStructuredViewer().setSelection(selection);
-						}
-
-					};
-					PlatformUI.getWorkbench().getDisplay().asyncExec(run);
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						getStructuredViewer().refresh(true);
+						IStructuredSelection selection = new StructuredSelection(
+								mbean);
+						getStructuredViewer().setSelection(selection);
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								getStructuredViewer().refresh(true);
+								IStructuredSelection selection = new StructuredSelection(
+										mbean);
+								getStructuredViewer().setSelection(selection);
+							}
+						});
+					}
 				} else if (msg.getEventType() == Notification.REMOVE) {
+					final EObject mbean = (EObject) msg.getOldValue();
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						getStructuredViewer().refresh(true);
+						if (EcoreUtil.getExistingAdapter(mbean,
+								ManagedBeanMasterSection.class) == null) {
+				
+								mbean.eAdapters().remove(
+										getManagedBeanMasterSectionAdapter());
+							}
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								getStructuredViewer().refresh(true);
+								if (EcoreUtil.getExistingAdapter(mbean,
+										ManagedBeanMasterSection.class) == null) {
+						
+										mbean.eAdapters().remove(
+												getManagedBeanMasterSectionAdapter());
+									}
+							}
+						});
+					}
 
-					Runnable run = new Runnable() {
-						public void run() {
-							getStructuredViewer().refresh(true);
-						}
-
-					};
-					PlatformUI.getWorkbench().getDisplay().asyncExec(run);
-				}
-
-				else if (msg.getEventType() == Notification.SET) {
+				} else if (msg.getEventType() == Notification.SET) {
 					final Object mbean = msg.getNewValue();
-					Runnable run = new Runnable() {
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						getStructuredViewer().refresh(mbean, true);
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 						public void run() {
 							getStructuredViewer().refresh(mbean, true);
 						}
-
-					};
-					PlatformUI.getWorkbench().getDisplay().asyncExec(run);
+					});
 				}
 			}
 
@@ -320,35 +337,39 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 							.getManagedBeanType_ManagedBeanName()) {
 
 				final Object bean = msg.getNotifier();
-
-				Runnable run = new Runnable() {
-
-					public void run() {
-						getStructuredViewer().refresh(bean, true);
-					}
-
-				};
-				PlatformUI.getWorkbench().getDisplay().asyncExec(run);
+				if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+					getStructuredViewer().refresh(bean, true);
+				} else {
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							getStructuredViewer().refresh(bean, true);
+						}	
+					});
+				}
+				
 
 			} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 					.getManagedBeanType_ManagedBeanScope()) {
 
 				final Object mbean = msg.getNotifier();
-
-				Runnable run1 = new Runnable() {
-
-					public void run() {
-						getStructuredViewer().refresh();
-						IStructuredSelection selection = new StructuredSelection(
-								mbean);
-						getStructuredViewer().setSelection(selection);
-					}
-
-				};
-				PlatformUI.getWorkbench().getDisplay().asyncExec(run1);
+				if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+					getStructuredViewer().refresh();
+					IStructuredSelection selection = new StructuredSelection(
+							mbean);
+					getStructuredViewer().setSelection(selection);
+				} else {	
+					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							getStructuredViewer().refresh();
+							IStructuredSelection selection = new StructuredSelection(
+									mbean);
+							getStructuredViewer().setSelection(selection);
+						}
+					});
+				}				
 			}
-
 		}
+	}
 	}
 
 }

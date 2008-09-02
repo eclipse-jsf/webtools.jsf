@@ -344,14 +344,18 @@ public class OverviewOthersSection extends AbstractOverviewSection {
 				if (msg.getEventType() == Notification.ADD
 						|| msg.getEventType() == Notification.REMOVE
 						|| msg.getEventType() == Notification.SET) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refreshAll();
-						}
-					});
+					
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refreshAll();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refreshAll();
+							}
+						});
+					}
 				}
 			}
-
 		}
 	}
 }

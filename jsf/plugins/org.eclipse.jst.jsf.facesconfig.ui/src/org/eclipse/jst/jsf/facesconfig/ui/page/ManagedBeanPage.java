@@ -63,6 +63,13 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 				EditorMessages.FacesConfigEditor_ManagedBeans_TabName);
 	}
 
+	public void dispose() {
+		if (contentOutlinePage != null) {
+			contentOutlinePage.dispose();
+			contentOutlinePage = null;
+		}
+		super.dispose();
+	}
 	protected FacesConfigMasterSection[] createMasterSections(
 			Composite composite, IManagedForm managedForm, FormToolkit toolkit,
 			FacesConfigMasterDetailPage page) {

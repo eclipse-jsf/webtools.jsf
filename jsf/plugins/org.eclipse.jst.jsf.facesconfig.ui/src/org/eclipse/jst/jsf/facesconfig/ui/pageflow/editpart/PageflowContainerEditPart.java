@@ -20,6 +20,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PageflowContainerE
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.editpolicy.PageflowXYLayoutEditPolicy;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * abstract class for pageflow container.
@@ -70,10 +71,10 @@ abstract class PageflowContainerEditPart extends PageflowElementEditPart {
 				case Notification.ADD_MANY:
 				case Notification.REMOVE:
 				case Notification.REMOVE_MANY:
-					refreshChildren();
+					refreshChildrenOnUIThread();
 					break;
 				case Notification.SET:
-					refreshVisuals();
+					refreshVisualsOnUIThread();
 					break;
 				}
 				super.notifyChanged(notification);
@@ -81,4 +82,27 @@ abstract class PageflowContainerEditPart extends PageflowElementEditPart {
 		};
 	}
 
+	private void refreshChildrenOnUIThread() {
+		if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+			refreshChildren();
+		} else {
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+				public void run() {
+					refreshChildren();
+				}			
+			});
+		}
+	}
+	
+	private void refreshVisualsOnUIThread() {
+		if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+			refreshVisuals();
+		} else {
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+				public void run() {
+					refreshVisuals();
+				}			
+			});
+		}
+	}
 }

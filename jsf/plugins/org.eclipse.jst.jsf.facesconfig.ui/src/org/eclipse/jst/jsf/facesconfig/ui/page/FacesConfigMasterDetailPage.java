@@ -88,6 +88,17 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 		super(editor, id, title);
 	}
 
+	public void dispose() {
+		for(int i=0; i < facesConfigMasterSections.length;i++) {
+			FacesConfigMasterSection master = facesConfigMasterSections[i];
+			if (master != null)
+				master.dispose();
+		}
+		
+		selectionChangedListeners.clear();
+		
+		super.dispose();
+	}
 	public EditingDomain getEditingDomain() {
 		return ((FacesConfigEditor) getEditor()).getEditingDomain();
 	}

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -40,9 +41,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
 import org.eclipse.jst.jsf.facesconfig.emf.LifecycleType;
+import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
-import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.section.AbstractFacesConfigSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ApplicationSection;
 import org.eclipse.jst.jsf.facesconfig.ui.section.FactorySection;
@@ -98,6 +99,8 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 
 	private ISelection currentSelection;
 
+	private FacesConfigOthersAdapter _facesConfigOthersAdapter;
+
 	/**
 	 * Constructor of OthersPage;
 	 * 
@@ -130,6 +133,22 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		list.add(section);
 	}
 
+	public void dispose() {
+		disposeFormSections(rightSections);
+		disposeFormSections(leftSections);
+		removeAdapterFromInput(getInput());
+		getSite().setSelectionProvider(null);
+		super.dispose();
+	}
+
+	private void disposeFormSections(List sections) {
+		for (int i=0; i < sections.size();i++) {
+			OthersPageBaseSection section = (OthersPageBaseSection) sections.get(i);
+			section.removeSelectionChangedListener(this);
+			section.dispose();
+		}
+	}
+	
 	private void fillBody(IManagedForm managedForm, FormToolkit toolkit) {
 		Composite body = managedForm.getForm().getBody();
 
@@ -293,11 +312,24 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		if (input instanceof FacesConfigType) {
 			this.input = input;
 			FacesConfigType facesConfig = (FacesConfigType) input;
-			facesConfig.eAdapters().add(new FacesConfigOthersAdapter());
+			facesConfig.eAdapters().add(getFacesConfigAdapter());
 			setInputForApplicationSections(facesConfig);
 			setInputForFactorySections(facesConfig);
 			setInputForLifecycleSections(facesConfig);
 		}
+	}
+
+	private void removeAdapterFromInput(Object input) {
+		if (_facesConfigOthersAdapter != null && input != null && input instanceof FacesConfigType) {
+			((FacesConfigType)input).eAdapters().remove(_facesConfigOthersAdapter);
+		}
+	}
+	
+	private Adapter getFacesConfigAdapter() {
+		if (_facesConfigOthersAdapter == null) {
+			_facesConfigOthersAdapter = new FacesConfigOthersAdapter();
+		}
+		return _facesConfigOthersAdapter;
 	}
 
 	public boolean isEditor() {
@@ -444,31 +476,41 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	 */
 	class FacesConfigOthersAdapter extends AdapterImpl {
 		public void notifyChanged(Notification msg) {
-			if(getPartControl().isDisposed()) {
-				return;
-			}
 			if (msg.getEventType() == Notification.REMOVE
 					|| msg.getEventType() == Notification.ADD) {
 				if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getFacesConfigType_Application()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							resetApplicationInput();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						resetApplicationInput();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								resetApplicationInput();
+							}
+						});
+					}
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getFacesConfigType_Factory()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							resetFactoryInput();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						resetFactoryInput();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								resetFactoryInput();
+							}
+						});	
+					}
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getFacesConfigType_Lifecycle()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							resetLifecycleInput();						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						resetLifecycleInput();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								resetLifecycleInput();
+							}
+						});	
+					}
 				}
 			}
 		}
@@ -701,7 +743,7 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 			if (ss.isEmpty())
 				return;
 
-			EObject object = (EObject) ss.getFirstElement();
+			final EObject object = (EObject) ss.getFirstElement();
 			OthersPageBaseSection section = null;
 
 			if (FacesConfigPackage.eINSTANCE.getActionListenerType()
@@ -754,19 +796,33 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 				section = (OthersPageBaseSection) rightSections.get(4);
 			}
 			if (section != null) {
-				if (!section.getSection().isExpanded()) {
-					this.closeOtherSections(section);
-					GridData gd = new GridData(GridData.FILL_BOTH);
-					section.getSection().setLayoutData(gd);
-					section.getSection().setExpanded(true);
-				}
-				IStructuredSelection newselection = new StructuredSelection(
-						object);
-				section.getTableViewer().setSelection(newselection);
+				if ((Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread())) {
+					 setSelectionInSection(section, object);
+				} 
+				else {
+					final OthersPageBaseSection baseSection = section;
+					PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+						public void run() {
+							setSelectionInSection(baseSection, object);							
+						}
+					});
+				 }
 			}
 		}
 	}
 
+	private void setSelectionInSection(final OthersPageBaseSection section, final Object object) {
+		if (!section.getSection().isExpanded()) {
+			this.closeOtherSections(section);
+			GridData gd = new GridData(GridData.FILL_BOTH);
+			section.getSection().setLayoutData(gd);
+			section.getSection().setExpanded(true);
+		}
+		IStructuredSelection newselection = new StructuredSelection(
+				object);
+		section.getTableViewer().setSelection(newselection);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

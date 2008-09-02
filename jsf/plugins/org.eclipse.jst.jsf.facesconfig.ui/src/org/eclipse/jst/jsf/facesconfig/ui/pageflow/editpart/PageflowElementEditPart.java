@@ -36,6 +36,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PageflowElementPro
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.PFBatchAdapter;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 /**
@@ -196,17 +197,32 @@ public abstract class PageflowElementEditPart extends AbstractGraphicalEditPart
 	 */
 	protected void refreshVisuals() {
 		if (getParent() != null) {
-			Point loc = new Point(getPageflowElement().getX(),
-					getPageflowElement().getY());
-			Dimension size = new Dimension(getPageflowElement().getWidth(),
-					getPageflowElement().getHeight());
-			Rectangle r = new Rectangle(loc, size);
-
-			((GraphicalEditPart) getParent()).setLayoutConstraint(this,
-					getFigure(), r);
+			final AbstractGraphicalEditPart part = this;
+			//ensure that this is executed on the UI thread
+			if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+				refreshVisuals(part);
+			} else {
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+	
+					public void run() {
+						refreshVisuals(part);
+					}			
+				});
+			}
 		}
 	}
+	
+	private void refreshVisuals(AbstractGraphicalEditPart part) {
+		Point loc = new Point(getPageflowElement().getX(),
+				getPageflowElement().getY());
+		Dimension size = new Dimension(getPageflowElement().getWidth(),
+				getPageflowElement().getHeight());
+		Rectangle r = new Rectangle(loc, size);
 
+		((GraphicalEditPart) getParent()).setLayoutConstraint(part,
+				getFigure(), r);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

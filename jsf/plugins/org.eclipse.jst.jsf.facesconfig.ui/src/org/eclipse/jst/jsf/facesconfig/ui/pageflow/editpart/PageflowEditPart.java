@@ -51,6 +51,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * The container editr part for the whole pageflow, which uses the
@@ -188,17 +189,52 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 				case Notification.ADD_MANY:
 				case Notification.REMOVE:
 				case Notification.REMOVE_MANY:
-					refreshChildren();
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refreshChildren();
+					}
+					else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+	
+							public void run() {
+								refreshChildren();		
+							}
+							
+						});
+					}
 					break;
 
 				case Notification.SET:
-					refreshChildren();
-					refreshVisuals();
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refreshChildren();
+						refreshVisuals();
+					}
+					else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				
+							public void run() {
+								refreshChildren();	
+								refreshVisuals();
+							}
+							
+						});
+					}
 					break;
 				case FC2PFTransformer.MY_NOTIFICATION_TYPE1:
 					restore((Pageflow) getModel());
-					refreshChildren();
-					refreshVisuals();
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refreshChildren();
+						refreshVisuals();
+					}
+					else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+				
+							public void run() {
+								refreshChildren();	
+								refreshVisuals();
+							}
+							
+						});
+					}
 					break;
 				// restore all children
 				case FC2PFTransformer.MY_NOTIFICATION_TYPE:
@@ -283,6 +319,7 @@ public class PageflowEditPart extends PageflowContainerEditPart implements
 	 * @see com.sybase.stf.jmt.editors.pageflow.editparts.ILayerPanePreference#setConnectionRouterStyle(int)
 	 */
 	public void setConnectionRouterStyle(int style) {
+		//TODO does this need to be execed on UI thread only???
 		connectionStyle = style;
 		ConnectionLayer cLayer = (ConnectionLayer) getLayer(CONNECTION_LAYER);
 		if (style == ILayerPanePreference.LINE_ROUTING_MANHATTAN) {

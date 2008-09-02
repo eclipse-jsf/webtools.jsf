@@ -126,7 +126,12 @@ public class FacesConfigEditor extends FormEditor implements
      * This editor's ID.  TODO: this should prob be in plugin.properties?
      */
     public static final String EDITOR_ID = "org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"; //$NON-NLS-1$
-
+    
+    
+    /**
+     * Page id for Source page.   Used for testing only.
+     */
+    public static final String SOURCE_PAGE_ID = "SourcePageId"; //$NON-NLS-1$
 	/**
 	 * editing domain that is used to track all changes to the model
 	 */
@@ -447,7 +452,8 @@ public class FacesConfigEditor extends FormEditor implements
          */
         public synchronized void removeWaitPage()
         {
-            if (_waitPage != null)
+            if (_waitPage != null 
+            		&& !_waitPage.getPartControl().isDisposed()) 
             {
                 int index = _waitPage.getIndex();
                 
@@ -640,16 +646,10 @@ public class FacesConfigEditor extends FormEditor implements
 	/*
 	 * @see org.eclipse.ui.ISaveablePart#isDirty()
 	 */
-	public boolean isDirty() {
-		final boolean[] result = new boolean[1];
-		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
-			public void run() {
-		result[0] = ((BasicCommandStack) editingDomain.getCommandStack())
+	public boolean isDirty() { 
+		return ((BasicCommandStack) editingDomain.getCommandStack()) 
 				.isSaveNeeded()
-				|| FacesConfigEditor.super.isDirty();
-			}
-		});
-		return result[0];
+				|| super.isDirty(); 
 	}
 
 	/**
@@ -1320,6 +1320,8 @@ public class FacesConfigEditor extends FormEditor implements
 			setActivePage(componentsPageID);
 		} else if (pageID.equals(OthersPage.PAGE_ID)) {
 			setActivePage(othersPageID);
+		} else if (pageID.equals(SOURCE_PAGE_ID)) {
+			setActivePage(sourcePageId);			
 		}
 	}
 

@@ -44,11 +44,15 @@ public abstract class PFBatchAdapter extends AdapterImpl {
 
 	final public void notifyChanged(final Notification msg) {
 		if (!isNeedPostpone(msg)) {
-			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-				public void run() {
-					doNotifyChanged(msg);
-				}
-			});
+			if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread())
+				doNotifyChanged(msg);
+			else {
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+					public void run() {
+						doNotifyChanged(msg);
+					}
+				});
+			}
 		}
 	}
 

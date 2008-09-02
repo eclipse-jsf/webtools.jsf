@@ -233,39 +233,39 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 	 * 
 	 */
 	public void refresh() {
-		if(getSection() == null || getSection().isDisposed()) {
-			return;
-		}
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof ManagedBeanType) {
-			ManagedBeanType component = (ManagedBeanType) input;
-
-			if (component.getManagedBeanName() != null) {
-				mbNameField.setTextWithoutUpdate(component.getManagedBeanName()
-						.getTextContent());
-			} else {
-				mbNameField.setTextWithoutUpdate("");
-			}
-
-			if (component.getManagedBeanClass() != null) {
-				mbClassField.setTextWithoutUpdate(component
-						.getManagedBeanClass().getTextContent());
-			} else {
-				mbClassField.setTextWithoutUpdate("");
-			}
-
-			if (component.getManagedBeanScope() != null) {
-				mbScopeField.setTextWithoutUpdate(component
-						.getManagedBeanScope().getTextContent());
-			} else {
-				// defaultly set it's scope to "session";
-				mbScopeField
-						.setTextWithoutUpdate(IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION);
-			}
+			final ManagedBeanType component = (ManagedBeanType) input;
+			refreshControls(component);
 		}
 	}
 
+	private void refreshControls(ManagedBeanType component) {
+		if (component.getManagedBeanName() != null) {
+			mbNameField.setTextWithoutUpdate(component.getManagedBeanName()
+					.getTextContent());
+		} else {
+			mbNameField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (component.getManagedBeanClass() != null) {
+			mbClassField.setTextWithoutUpdate(component
+					.getManagedBeanClass().getTextContent());
+		} else {
+			mbClassField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (component.getManagedBeanScope() != null) {
+			mbScopeField.setTextWithoutUpdate(component
+					.getManagedBeanScope().getTextContent());
+		} else {
+			// defaultly set it's scope to "session";
+			mbScopeField
+					.setTextWithoutUpdate(IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION);
+		}
+	
+	}
 	protected void addAdaptersOntoInput(Object newInput) {
 		super.addAdaptersOntoInput(newInput);
 		ManagedBeanType managedBean = (ManagedBeanType) newInput;
@@ -312,11 +312,15 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 								.getManagedBeanType_ManagedBeanClass()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getManagedBeanType_ManagedBeanScope()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refresh();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refresh();
+							}
+						});
+					}
 				}
 			}
 		}

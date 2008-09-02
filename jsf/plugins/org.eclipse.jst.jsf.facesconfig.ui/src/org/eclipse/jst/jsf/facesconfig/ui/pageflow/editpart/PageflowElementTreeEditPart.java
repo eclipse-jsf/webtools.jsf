@@ -174,19 +174,16 @@ public class PageflowElementTreeEditPart extends AbstractTreeEditPart implements
 		case Notification.ADD_MANY:
 		case Notification.REMOVE:
 		case Notification.REMOVE_MANY:
-			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-				public void run() {
-					refreshChildren();
-				}
-			});
-			break;
-
 		case Notification.SET:
-			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-				public void run() {
-					refreshVisuals();
-				}
-			});
+			if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+				refreshVisuals();
+			} else {
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+					public void run() {
+						refreshVisuals();
+					}
+				});
+			}
 			break;
 		}
 	}

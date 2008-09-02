@@ -47,6 +47,8 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.PageflowAnnotationUtil;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.PlatformUI;
+
 
 /**
  * The base class for the applications EditParts that represent
@@ -201,9 +203,19 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 				case Notification.REMOVE:
 				case Notification.REMOVE_MANY:
 					if (notification.getNewValue() instanceof PageflowLink) {
-						refreshTargetConnections();
-						refreshSourceConnections();
-						validate();
+						if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+							refreshTargetConnections();
+							refreshSourceConnections();
+							validate();
+						} else {
+							PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+								public void run() {
+									refreshTargetConnections();
+									refreshSourceConnections();
+									validate();
+								}
+							});
+						}
 					}
 					break;
 
@@ -213,7 +225,15 @@ public class PageflowNodeEditPart extends PageflowElementEditPart implements
 					if (needValidation(featureId)) {
 						validate();
 					}
-					refreshVisuals();
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refreshVisuals();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
+							public void run() {
+								refreshVisuals();
+							}
+						});
+					}
 					break;
 				}
 			}

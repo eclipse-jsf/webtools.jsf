@@ -41,6 +41,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.forms.widgets.Section;
 
+
 /**
  * The abstract implementation of IFacesConfigSection.
  * 
@@ -94,6 +95,12 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 		this.helpTooltip = helpTooltip;
 	}
 
+	public void dispose() {
+		selectionChangedListeners.clear();
+		if (input != null) 
+			removeAdaptersFromInput(input);		
+		super.dispose();
+	}
 	/**
 	 * 
 	 */

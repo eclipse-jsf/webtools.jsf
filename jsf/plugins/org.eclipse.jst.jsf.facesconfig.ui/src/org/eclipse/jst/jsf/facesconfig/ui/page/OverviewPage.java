@@ -40,6 +40,12 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 public class OverviewPage extends FormPage implements ISelectionProvider,
 		IFacesConfigPage {
 
+
+    /**
+     * The id of this page in the faces-config editor.
+     */
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OverviewPage";
+	
 	private static final int LAYOUT_MARGIN_HEIGHT = 2;
 
 	private static final int LAYOUT_MARGIN_WIDTH = 2;
@@ -229,5 +235,14 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	 */
 	public void setSelection(ISelection selection) {
 	    // do not support change in selection
+	}
+	
+	public void dispose() {
+		beanSection.dispose();
+		componentsSection.dispose();
+		generalSection.dispose();
+		navigationSection.dispose();
+		otherSection.dispose();
+		super.dispose();
 	}
 }

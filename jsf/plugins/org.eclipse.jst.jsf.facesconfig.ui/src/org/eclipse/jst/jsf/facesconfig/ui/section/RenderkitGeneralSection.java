@@ -241,50 +241,50 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 	 * 
 	 */
 	public void refresh() {
-		if(getSection() == null || getSection().isDisposed()) {
-			return;
-		}
 		super.refresh();
 		Object input = this.getInput();
 		if (input instanceof RenderKitType) {
-			RenderKitType Renderkit = (RenderKitType) input;
-
-			if (Renderkit.getDisplayName().size() > 0) {
-				DisplayNameType displayName = (DisplayNameType) Renderkit
-						.getDisplayName().get(0);
-				displayNameField.setTextWithoutUpdate(displayName
-						.getTextContent());
-			} else {
-				displayNameField.setTextWithoutUpdate("");
-			}
-
-			if (Renderkit.getDescription().size() > 0) {
-				DescriptionType description = (DescriptionType) Renderkit
-						.getDescription().get(0);
-				String descriptionString = description.getTextContent();
-				descriptionString = ModelUtil
-						.unEscapeEntities(descriptionString);
-				descriptionField.setTextWithoutUpdate(descriptionString);
-			} else {
-				descriptionField.setTextWithoutUpdate("");
-			}
-
-			if (Renderkit.getRenderKitId() != null) {
-				renderkitIdField.setTextWithoutUpdate(Renderkit
-						.getRenderKitId().getTextContent());
-			} else {
-				renderkitIdField.setTextWithoutUpdate("");
-			}
-
-			if (Renderkit.getRenderKitClass() != null) {
-				renderkitClassField.setTextWithoutUpdate(Renderkit
-						.getRenderKitClass().getTextContent());
-			} else {
-				renderkitClassField.setTextWithoutUpdate("");
-			}
+			final RenderKitType renderkit = (RenderKitType) input;
+			refreshControls(renderkit);
 		}
 	}
 
+	private void refreshControls(RenderKitType renderkit) {
+		if (renderkit.getDisplayName().size() > 0) {
+			DisplayNameType displayName = (DisplayNameType) renderkit
+					.getDisplayName().get(0);
+			displayNameField.setTextWithoutUpdate(displayName
+					.getTextContent());
+		} else {
+			displayNameField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (renderkit.getDescription().size() > 0) {
+			DescriptionType description = (DescriptionType) renderkit
+					.getDescription().get(0);
+			String descriptionString = description.getTextContent();
+			descriptionString = ModelUtil
+					.unEscapeEntities(descriptionString);
+			descriptionField.setTextWithoutUpdate(descriptionString);
+		} else {
+			descriptionField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (renderkit.getRenderKitId() != null) {
+			renderkitIdField.setTextWithoutUpdate(renderkit
+					.getRenderKitId().getTextContent());
+		} else {
+			renderkitIdField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+		if (renderkit.getRenderKitClass() != null) {
+			renderkitClassField.setTextWithoutUpdate(renderkit
+					.getRenderKitClass().getTextContent());
+		} else {
+			renderkitClassField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
+
+	}
 	/**
 	 * Add RenderKitGeneralAdapter onto <render-kit> and the first
 	 * <display-name> and <description> elements.
@@ -390,23 +390,27 @@ public class RenderkitGeneralSection extends AbstractFacesConfigSection {
 								.getRenderKitType_Description()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getRenderKitType_DisplayName()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
-
+					refreshInUIThread();
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getDisplayNameType_TextContent()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getDescriptionType_TextContent()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					refreshInUIThread();
 				}
 			}
 		}
+
+		private void refreshInUIThread() {
+			if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+				refresh();
+			} else {				
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+					public void run() {
+						refresh();
+					}
+				});
+			}		
+		}
 	}
+	
 }

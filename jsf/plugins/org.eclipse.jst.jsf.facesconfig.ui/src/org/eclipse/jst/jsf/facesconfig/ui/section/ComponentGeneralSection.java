@@ -246,46 +246,46 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 	 * Refresh the content on this section.
 	 */
 	public void refresh() {
-		if(getSection() == null || getSection().isDisposed()) {
-			return;
-		}
 		super.refresh();
 		Object input = this.getInput();
-		if (input instanceof ComponentType) {
-			ComponentType component = (ComponentType) input;
+		if (input instanceof ComponentType) {			
+			final ComponentType component = (ComponentType) input;
+			refreshControls(component);
+		}
+	}
 
-			if (component.getDisplayName().size() > 0) {
-				DisplayNameType displayName = (DisplayNameType) component
-						.getDisplayName().get(0);
-				displayNameField.setTextWithoutUpdate(displayName
-						.getTextContent());
-			} else {
-				displayNameField.setTextWithoutUpdate("");
-			}
+	private void refreshControls(ComponentType component) {
+		if (component.getDisplayName().size() > 0) {
+			DisplayNameType displayName = (DisplayNameType) component
+					.getDisplayName().get(0);
+			displayNameField.setTextWithoutUpdate(displayName
+					.getTextContent());
+		} else {
+			displayNameField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
 
-			if (component.getDescription().size() > 0) {
-				DescriptionType description = (DescriptionType) component
-						.getDescription().get(0);
-				String descriptionString = description.getTextContent();
-				descriptionString = ModelUtil.unEscapeEntities(descriptionString);
-				descriptionField.setTextWithoutUpdate(descriptionString);
-			} else {
-				descriptionField.setTextWithoutUpdate("");
-			}
+		if (component.getDescription().size() > 0) {
+			DescriptionType description = (DescriptionType) component
+					.getDescription().get(0);
+			String descriptionString = description.getTextContent();
+			descriptionString = ModelUtil.unEscapeEntities(descriptionString);
+			descriptionField.setTextWithoutUpdate(descriptionString);
+		} else {
+			descriptionField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
 
-			if (component.getComponentType() != null) {
-				componentTypeField.setTextWithoutUpdate(component
-						.getComponentType().getTextContent());
-			} else {
-				componentTypeField.setTextWithoutUpdate("");
-			}
+		if (component.getComponentType() != null) {
+			componentTypeField.setTextWithoutUpdate(component
+					.getComponentType().getTextContent());
+		} else {
+			componentTypeField.setTextWithoutUpdate(""); //$NON-NLS-1$
+		}
 
-			if (component.getComponentClass() != null) {
-				componentClassField.setTextWithoutUpdate(component
-						.getComponentClass().getTextContent());
-			} else {
-				componentClassField.setTextWithoutUpdate("");
-			}
+		if (component.getComponentClass() != null) {
+			componentClassField.setTextWithoutUpdate(component
+					.getComponentClass().getTextContent());
+		} else {
+			componentClassField.setTextWithoutUpdate(""); //$NON-NLS-1$
 		}
 	}
 
@@ -394,20 +394,28 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 								.getComponentType_DisplayName()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getComponentType_Description()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refresh();
+					} else {
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refresh();
+							}
+						});
+					}
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getDisplayNameType_TextContent()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getDescriptionType_TextContent()) {
-					PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							refresh();
-						}
-					});
+					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
+						refresh();
+					} else {						
+						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+							public void run() {
+								refresh();
+							}
+						});
+					}
 				}
 			}
 		}
