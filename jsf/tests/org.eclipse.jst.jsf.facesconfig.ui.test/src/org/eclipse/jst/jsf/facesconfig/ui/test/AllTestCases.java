@@ -46,7 +46,8 @@ public class AllTestCases {
 
 		suite.addTestSuite(PageflowEditorTest.class);
 		
-		suite.addTestSuite(TestNotificationsOnNonUIThread.class);
+// 		246164 - Invalid JUnit test - to be uncommented when test is fixed		 
+//		suite.addTestSuite(TestNotificationsOnNonUIThread.class);
 		return suite;
 	}
 }
