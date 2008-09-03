@@ -217,7 +217,7 @@ public class DomainSourceModelTypeDescriptor {
 	/**
 	 * Internal class implementing a descriptor for DomainSourceModelTranslators
 	 */
-	class DomainSourceModelTranslatorDescriptor {
+	static class DomainSourceModelTranslatorDescriptor {
 
 		private String _translator;
 		private String _bundleId;

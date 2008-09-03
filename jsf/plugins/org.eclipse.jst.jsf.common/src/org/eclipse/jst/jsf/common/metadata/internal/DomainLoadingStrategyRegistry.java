@@ -112,7 +112,7 @@ public class DomainLoadingStrategyRegistry{
 	/**
 	 * Implementation of a DomainLoadingStrategy descriptor that is responsible for creating instances of the IDomainLoadingStrategy
 	 */
-	private class DomainLoadingStrategyDescriptorImpl {
+	private static class DomainLoadingStrategyDescriptorImpl {
 		String domain;
 		String loadingStrategyClassName;
 		String bundleId;

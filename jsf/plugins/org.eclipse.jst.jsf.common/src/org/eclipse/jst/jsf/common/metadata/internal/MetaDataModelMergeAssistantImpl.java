@@ -196,7 +196,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	private boolean addTraitAsNecessary(Entity mergedEntity, Trait trait) {
 		Trait mmTrait = getMergedTrait(mergedEntity, trait);
 		if (mmTrait == null){			
-			mmTrait = addTraitInternal(mergedEntity, trait);
+			addTraitInternal(mergedEntity, trait);
 			return true;
 
 		}
@@ -208,8 +208,13 @@ public class MetaDataModelMergeAssistantImpl implements
 	 */
 	public void setMergeComplete() {
 		Model model = (Model)getMergedModel().getRoot();
-		if (model != null)
-			processIncludeGroups(model);		
+		if (model != null){
+			StandardModelFactory.debug(">> Begin processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
+			
+			processIncludeGroups(model);			
+			
+			StandardModelFactory.debug(">> End processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
+		}		
 	}
 	
 	/**

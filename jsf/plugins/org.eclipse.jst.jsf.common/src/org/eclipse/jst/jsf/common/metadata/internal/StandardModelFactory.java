@@ -44,7 +44,8 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
  */
 public class StandardModelFactory {
 	private static StandardModelFactory INSTANCE;
-	private static boolean DEBUG_MD_LOAD = false;
+	static boolean DEBUG_MD_LOAD = false;
+	static boolean DEBUG_MD_GET = false;
 	private ExtendedMetaData extendedMetaData;
 	private ResourceSet resourceSet;
 
@@ -59,6 +60,7 @@ public class StandardModelFactory {
 			
 			if (JSFCommonPlugin.getPlugin().isDebugging()){
 				DEBUG_MD_LOAD = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataload")).booleanValue();
+				DEBUG_MD_GET  = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataget")).booleanValue();
 			}
 		}
 		return INSTANCE;
@@ -108,24 +110,33 @@ public class StandardModelFactory {
 	 * @return the root of the standard model from the resource as an EList
 	 * @throws IOException
 	 */
-	public EList loadStandardFileResource(final InputStream inputStream, final IMetaDataSourceModelProvider provider, final org.eclipse.emf.common.util.URI uri) throws IOException {
-		final XMLResource res = new MetadataResourceImpl(provider); 		
-		res.setURI(uri);
-		resourceSet.getResources().add(res);
-		setLoadOptions(res);
-		res.load(inputStream, null);
-		if (DEBUG_MD_LOAD)
-			reportErrors(res);
-		final EList root = res.getContents();		
-		return root;	
-	}
+	public EList loadStandardFileResource(final InputStream inputStream,
+            final IMetaDataSourceModelProvider provider,
+            final org.eclipse.emf.common.util.URI uri) throws IOException
+    {
+        final XMLResource res = new MetadataResourceImpl(provider);
+        
+        debug(String.format(
+                ">>> Loading standard meta-data file for uri %s", uri), DEBUG_MD_LOAD);
+        
+        res.setURI(uri);
+        resourceSet.getResources().add(res);
+        setLoadOptions(res);
+        res.load(inputStream, null);
+        if (DEBUG_MD_LOAD)
+        {
+            reportErrors(res);
+        }
+        final EList root = res.getContents();
+        return root;
+    }
 
 	private void reportErrors(Resource res) {
 		EList<Resource.Diagnostic> errs = res.getErrors();
 		if (! errs.isEmpty()){
-			for (Iterator<Resource.Diagnostic> it= errs.iterator();it.hasNext();){				
+			for (Iterator<Resource.Diagnostic> it= errs.iterator();it.hasNext();){
 				StandardModelErrorMessageFactory.logErrorMessage(it.next());
-			}		
+			}
 		}
 	}
 	/**
@@ -141,6 +152,10 @@ public class StandardModelFactory {
 		options.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
 		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.FALSE);//turning this off so that res.getErrors() has values to check!  bizarre that I should need to do this.
 //		options.put(XMLResource.OPTION_DOM_USE_NAMESPACES_IN_SCOPE, Boolean.TRUE);
+//		if (DEBUG_MD_LOAD)
+//		{
+//		    System.out.println("Using load options: "+options);
+//		}
 	}
 
 
@@ -186,5 +201,15 @@ public class StandardModelFactory {
 				.append(ex.getLine()).append(": Column = ").append(ex.getColumn());
 			return buf.toString();
 		}
+	}
+	
+	/**
+	 * Debug output.  Paren shows thread id.
+	 * @param msg
+	 * @param debugFlag
+	 */
+	public static void debug(String msg, boolean debugFlag) {
+		if (debugFlag)
+			System.out.println(msg + "["+Thread.currentThread().getId()+"]");
 	}
 }

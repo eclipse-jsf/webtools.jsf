@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -46,8 +48,11 @@ public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 		else {
 			//for each entity and trait call "add".   assistant will handle merge.
 			Model mk = (Model)assistant.getSourceModelProvider().getSourceModel();
-			if (mk != null)//possible that model was not loaded
+			if (mk != null) {//possible that model was not loaded 
 				traverseAndAdd(assistant, mk);
+			} else if (StandardModelFactory.DEBUG_MD_LOAD) {
+				JSFCommonPlugin.log(IStatus.ERROR,"Unable to load source model: "+assistant.getSourceModelProvider());
+			}
 		}			
 	}
 	

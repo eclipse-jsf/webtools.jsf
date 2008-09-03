@@ -18,10 +18,10 @@ import org.eclipse.core.resources.IProject;
  *
  */
 public class ModelKeyDescriptor {
-	private IProject project;
-	private String domain;
-	private String uri;
-	private String key;
+	private final IProject project;
+	private final String domain;
+	private final String uri;
+	private final String key;
 	
 	/**
 	 * Constructor
@@ -33,7 +33,9 @@ public class ModelKeyDescriptor {
 		this.project = project;
 		this.domain = domain;
 		this.uri = uri;
-		StringBuffer buf = new StringBuffer(domain);
+		StringBuffer buf = new StringBuffer(project.getName());
+		buf.append(":");
+		buf.append(domain);
 		buf.append(":");
 		buf.append(uri);
 		key = buf.toString();
@@ -42,28 +44,28 @@ public class ModelKeyDescriptor {
 	/**
 	 * @return domain id
 	 */
-	public String getDomain(){
+	public final String getDomain(){
 		return domain;
 	}
 	
 	/**
 	 * @return model uri
 	 */
-	public String getUri(){
+	public final String getUri(){
 		return uri;
 	}
 
 	/**
 	 * @return project
 	 */
-	public IProject getProject(){
+	public final IProject getProject(){
 		return project;
 	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	public String toString(){		
+	public final String toString(){		
 		return key;
 	}
 	

@@ -17,9 +17,10 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
 /**
  * Simple implementation of {@link ITaglibDomainMetaDataModelContext}
  */
-public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextImpl implements ITaglibDomainMetaDataModelContext, Cloneable{
-	private IProject _project;
-	private String _uri;
+public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextImpl implements ITaglibDomainMetaDataModelContext, Cloneable
+{
+	private final IProject _project;
+	private final String _uri;
 	
 	/**
 	 * Constructor
@@ -27,7 +28,7 @@ public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextIm
 	 * @param domain
 	 * @param uri
 	 */
-	public TaglibDomainMetaDataModelContextImpl(String domain, IProject project, String uri){
+	public TaglibDomainMetaDataModelContextImpl(final String domain, final IProject project, final String uri){
 		super(domain);
 		this._project = project;
 		this._uri = uri;
@@ -54,4 +55,8 @@ public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextIm
 		return super.getAdapter(adapter);
 	}
 
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

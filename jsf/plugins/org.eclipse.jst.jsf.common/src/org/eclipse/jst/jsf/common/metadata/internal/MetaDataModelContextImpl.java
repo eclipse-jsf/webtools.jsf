@@ -17,14 +17,14 @@ import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
  * Simple implementation of {@link IMetaDataModelContext}
  *
  */
-public class MetaDataModelContextImpl implements IMetaDataModelContext {
-	private String _domain;
+public class MetaDataModelContextImpl implements IMetaDataModelContext, Cloneable {
+	private final String _domain;
 	
 	/**
 	 * Constructor
 	 * @param domain id
 	 */
-	public MetaDataModelContextImpl(String domain){
+	public MetaDataModelContextImpl(final String domain){
 		_domain = domain;
 	}
 	
@@ -32,10 +32,14 @@ public class MetaDataModelContextImpl implements IMetaDataModelContext {
 		return _domain;
 	}
 
-	public Object getAdapter(Class adapter) {
-		if (adapter.equals(IMetaDataModelContext.class))
+	public Object getAdapter(final Class adapter) {
+		if (IMetaDataModelContext.class.equals(adapter))
 			return this;
 		return null;
 	}
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

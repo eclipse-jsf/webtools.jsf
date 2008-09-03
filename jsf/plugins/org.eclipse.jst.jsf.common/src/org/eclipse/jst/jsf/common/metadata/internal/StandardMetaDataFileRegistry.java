@@ -89,7 +89,7 @@ public final class StandardMetaDataFileRegistry {
  * Internal implementation of IMetaDataSourceModelProvider for "standard" metadata sources
  *
  */
-class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
+static class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvider {
 	
 	private org.eclipse.jst.jsf.common.metadata.internal.IStandardMetaDataSourceInfo info;
 	private Object model;

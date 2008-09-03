@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+
 /**
  * Default class used for loading metadata.  
  * Loads the source types from extensions defined against the domain.
@@ -73,6 +76,9 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * @param sources
 	 */
 	protected void mergeModel(MetaDataModel model, List/*<IMetaDataSourceModelProvider>*/ sources) {		
+
+		StandardModelFactory.debug(">> Begin Merge: "+model.getModelKey()+"("+sources.size()+ " sources)", StandardModelFactory.DEBUG_MD_LOAD);
+
 		IMetaDataModelMergeAssistant assistant = createModelMergeAssistant(model);
 		for (Iterator/*<IMetaDataSourceModelProvider>*/ it = sources.iterator();it.hasNext();){
 			IMetaDataSourceModelProvider mds = (IMetaDataSourceModelProvider)it.next();		
@@ -80,12 +86,19 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 			while (translators.hasNext()){
 				IMetaDataTranslator translator = (IMetaDataTranslator)translators.next();
 				if (translator.canTranslate(mds)){
+					StandardModelFactory.debug(">>> Merging: "+model.getModelKey()+"::"+mds, StandardModelFactory.DEBUG_MD_LOAD);
 					assistant.setSourceModelProvider(mds);
-					translator.translate(assistant);
+					try {
+						translator.translate(assistant);
+					} catch (Exception e) {							
+						StandardModelFactory.debug(">>>> Error during translate/merge of: "+model.getModelKey()+": "+mds, StandardModelFactory.DEBUG_MD_LOAD);															
+						JSFCommonPlugin.log(IStatus.ERROR, "Error during load of: "+mds, e);
+					}
 				}				
 			}
 		}
 		assistant.setMergeComplete();
+		StandardModelFactory.debug(">> End Merge: "+model.getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
 	}
 	
 	/**

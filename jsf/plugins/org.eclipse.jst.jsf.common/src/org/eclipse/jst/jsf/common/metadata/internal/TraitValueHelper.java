@@ -135,7 +135,7 @@ public class TraitValueHelper {
 		if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){ 
 			String key = rawValue.substring(1);
 			result = getNLSPropertyValue(trait, key);	
-			if (rawValue == null){
+			if (result == null){
 				result = rawValue;
 			}
 		}
@@ -143,7 +143,7 @@ public class TraitValueHelper {
 	}
 
 	//will return null if there is an IOException with ResourceBundle
-	private static String getNLSPropertyValue(Trait trait, String key){
+	private static String getNLSPropertyValue(final Trait trait, final String key){
 		try{			
 			IMetaDataSourceModelProvider provider = trait.getSourceModelProvider();
 			IResourceBundleProvider resourceBundleProvider = (IResourceBundleProvider)provider.getAdapter(IResourceBundleProvider.class);		

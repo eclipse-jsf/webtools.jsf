@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.Path;
  * ResourceBundleHelper
  *
  */
-public class ResourceBundleHelper {
+public final class ResourceBundleHelper {
 
 	/**
 	 * @param resourceURL
@@ -35,7 +35,7 @@ public class ResourceBundleHelper {
 	 * @throws MalformedURLException - may return null
 	 * @throws IOException
 	 */
-	public static ResourceBundle getResourceBundle(URL resourceURL) throws MalformedURLException, IOException {
+	public static ResourceBundle getResourceBundle(final URL resourceURL) throws MalformedURLException, IOException {
 		return getResourceBundle(resourceURL, Locale.getDefault());
 	}
 
@@ -46,27 +46,35 @@ public class ResourceBundleHelper {
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 */
-	public static ResourceBundle getResourceBundle(URL resourceURL, Locale targetLocale) throws MalformedURLException, IOException {
+	public static ResourceBundle getResourceBundle(final URL resourceURL, final Locale targetLocale) throws MalformedURLException, IOException {
 		// try to load bundle from the location specified in the resourceURL
 		//
-		String protocol	= resourceURL.getProtocol();
-		String host		= resourceURL.getHost();
-		String file		= resourceURL.getFile();
-		IPath path 		= new Path(file);
+		final String protocol	= resourceURL.getProtocol();
+		final String host		= resourceURL.getHost();
+		final String file		= resourceURL.getFile();
+		final IPath path 		= new Path(file);
 		
 		String dir = "./";
-		String bundleName = path.removeFileExtension().segment(path.segmentCount() - 1);
+		final String bundleName = path.removeFileExtension().segment(path.segmentCount() - 1);
 		if (path.segmentCount() > 1)
+		{
 			dir = path.removeLastSegments(1).toString();
-		
+		}
+
 		// create a class loader with a class path that points to the resource
 		// bundle's location
 		//         
-		URL[] classpath = new URL[1];
+		final URL[] classpath = new URL[1];
 		classpath[0] = FileLocator.resolve(new URL(protocol, host, dir));
-		ClassLoader resourceLoader = new URLClassLoader(classpath, null);
+		// TODO: does this need to be in a doPrivileged block?
+		final ClassLoader resourceLoader = new URLClassLoader(classpath, null);
 
 		return ResourceBundle.getBundle(bundleName, targetLocale, resourceLoader);
+	}
+	
+	private ResourceBundleHelper()
+	{
+	    // no instantiation
 	}
 }
 

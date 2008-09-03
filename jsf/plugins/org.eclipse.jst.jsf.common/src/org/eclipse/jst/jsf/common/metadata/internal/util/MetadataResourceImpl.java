@@ -2,16 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.9 2008/02/01 20:20:47 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.10 2008/09/03 23:29:03 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLLoad;
@@ -19,6 +22,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -93,12 +97,24 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	}
 	
 	public void postLoad(XMLResource resource, InputStream inputStream,
-			Map options) {
-		Object aRoot = resource.getContents().get(0);
-		if (aRoot instanceof Model){			
-			setModelKeyInTraits((Model)aRoot, (Model)aRoot);
-		}
-	}
+            Map options)
+    {
+        final List<EObject>  resContents = resource.getContents();
+        
+        if (resContents.size() > 0)
+        {
+            final Object aRoot = resContents.get(0);
+            if (aRoot instanceof Model)
+            {
+                setModelKeyInTraits((Model) aRoot, (Model) aRoot);
+            }
+        }
+        else
+        {
+            JSFCommonPlugin.log(IStatus.WARNING, 
+               "No model loaded for "+getURI());
+        }
+    }
 
 	private void setModelKeyInTraits(Model root, Entity currentEntity) {
 		// TODO: does this have side effect that we care about? nothing is done with the return value
@@ -138,7 +154,7 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	 * when appropriate
 	 *
 	 */
-	private class MetadataXMLLoad extends XMLLoadImpl {
+	private static class MetadataXMLLoad extends XMLLoadImpl {
 
 		public MetadataXMLLoad(XMLHelper helper) {
 			super(helper);

@@ -186,7 +186,7 @@ public final class TaglibDomainMetaDataQueryHelper{
 	 * @param modelContext
 	 * @return MetaDataModel
 	 */
-	private synchronized static MetaDataModel getMDModel(final ITaglibDomainMetaDataModelContext modelContext){
+	private static MetaDataModel getMDModel(final ITaglibDomainMetaDataModelContext modelContext){
 		MetaDataModelManager mgr = null;
 		if (modelContext.getProject() != null)
 			mgr = MetaDataModelManager.getInstance(modelContext.getProject());

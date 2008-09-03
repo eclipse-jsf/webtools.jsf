@@ -75,8 +75,10 @@ public class MetaDataModel {
 	/**
 	 * Load the model.  Delegates to the strategy.
 	 */
-	public void load(){
+	public synchronized void load(){
+		StandardModelFactory.debug("> Begin Loading: "+getModelKey(), StandardModelFactory.DEBUG_MD_LOAD);
 		strategy.load(this);
+		StandardModelFactory.debug("> End Loading: "+getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
 	}
 	
 	/**
