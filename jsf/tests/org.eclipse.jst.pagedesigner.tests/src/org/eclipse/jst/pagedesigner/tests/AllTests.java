@@ -43,8 +43,7 @@ public class AllTests
 
         // tests requiring jsfRuntimeJarsDirectoryV1.1
 
-        //GK 08/13/08: Below was temporarily commented out for https://bugs.eclipse.org/bugs/show_bug.cgi?id=243614.   To be re-enabled after fix
-        // addTestRequiringJSFRuntime(suite, Test_DTManager.class, JSFVersion.V1_1);
+        addTestRequiringJSFRuntime(suite, Test_DTManager.class, JSFVersion.V1_1);
         
         addTestRequiringJSFRuntime(suite, Test_TransformOperations.class,
                 JSFVersion.V1_1);
