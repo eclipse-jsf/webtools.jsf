@@ -15,7 +15,6 @@ package org.eclipse.jst.jsf.common.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaProject;
@@ -370,21 +369,10 @@ public final class TypeUtil
         LOOP_UNTIL_FIRST_MATCH:
             for (int i = 0; i < superTypes.length; i++)
         {
-            IType type = superTypes[i];
-            
-            // XXX: this is a partial workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=212225
-            // In certain cases, unresolved type names may cause resolveType to
-            // throw array out of bounds.
-            try
-            {
-            	resolved = type.resolveType(fullyQualifiedName);
-            }
-            catch (ArrayIndexOutOfBoundsException ae)
-            {
-            	resolved = null;
-            	JSFCommonPlugin.log(IStatus.WARNING, "Known issue detected.  See https://bugs.eclipse.org/bugs/show_bug.cgi?id=212225");
-            }
-            
+            final IType type = superTypes[i];
+
+            resolved = type.resolveType(fullyQualifiedName);
+
             if (resolved != null && resolved.length > 0)
             {
                 resolvedType = childType.getJavaProject().findType(resolved[0][0], resolved[0][1]);
