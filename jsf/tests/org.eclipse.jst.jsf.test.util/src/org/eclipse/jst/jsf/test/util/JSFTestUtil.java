@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -25,6 +26,7 @@ import java.util.zip.ZipFile;
 
 import junit.framework.Assert;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -209,26 +211,36 @@ public final class JSFTestUtil
         return Arrays.equals(loadFromFile(file).toByteArray(), testFile.toBytes());
     }
 
+    public static ByteArrayOutputStream loadFromFile(final IFile file) throws IOException
+    {
+        InputStream inStream = null;
+
+        try
+        {
+            inStream = file.getContents();
+            return loadFromInputStream(inStream);
+        }
+        catch(final CoreException ce)
+        {
+            return new ByteArrayOutputStream();
+        }
+        finally
+        {
+            if (inStream != null)
+            {
+                inStream.close();
+            }
+        }
+    }
+
     public static ByteArrayOutputStream loadFromFile(final File file) throws IOException
     {
         FileInputStream  inFile = null;
-        ByteArrayOutputStream buffer = null;
 
         try
         {
             inFile=new FileInputStream(file);
-
-            buffer = new ByteArrayOutputStream();
-            final byte[]  inBuffer = new byte[1024];
-            int bytesRead;
-            int curPos = 0;
-            while ((bytesRead = inFile.read(inBuffer)) != -1)
-            {
-                buffer.write(inBuffer,0,bytesRead);
-                curPos+=bytesRead;
-            }
-
-            return buffer;
+            return loadFromInputStream(inFile);
         }
         finally
         {
@@ -239,6 +251,26 @@ public final class JSFTestUtil
         }
     }
 
+    /**
+     * Caller is responsible for closing the stream
+     * @param stream
+     * @return the byte stream loaded from the file
+     * @throws IOException
+     */
+    public static ByteArrayOutputStream loadFromInputStream(final InputStream stream) throws IOException
+    {
+        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        final byte[]  inBuffer = new byte[1024];
+        int bytesRead;
+        int curPos = 0;
+        while ((bytesRead = stream.read(inBuffer)) != -1)
+        {
+            buffer.write(inBuffer,0,bytesRead);
+            curPos+=bytesRead;
+        }
+
+        return buffer;
+    }
 
     public static IndexedRegion getIndexedRegion(final IStructuredDocument document, final int documentOffset)
     {
