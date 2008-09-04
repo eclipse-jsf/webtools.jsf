@@ -33,10 +33,11 @@ public class ModelKeyDescriptor {
 		this.project = project;
 		this.domain = domain;
 		this.uri = uri;
-		StringBuffer buf = new StringBuffer(project.getName());
-		buf.append(":");
+		String proj = project != null ? project.getName() : "Null"; //$NON-NLS-1$
+		StringBuffer buf = new StringBuffer(proj);
+		buf.append(":"); //$NON-NLS-1$
 		buf.append(domain);
-		buf.append(":");
+		buf.append(":"); //$NON-NLS-1$
 		buf.append(uri);
 		key = buf.toString();
 	}
