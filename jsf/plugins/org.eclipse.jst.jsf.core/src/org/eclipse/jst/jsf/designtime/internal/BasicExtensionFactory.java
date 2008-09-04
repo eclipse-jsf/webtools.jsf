@@ -203,7 +203,11 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
         @Override
         public EXTENSIONTYPE removeInstance(IProject project)
         {
-            return _extensions.remove(project);
+            if (_extensions != null)
+            {
+                return _extensions.remove(project);
+            }
+            return null;
         }
     }
 

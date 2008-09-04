@@ -15,13 +15,20 @@ package org.eclipse.jst.jsf.designtime;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -53,17 +60,14 @@ import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
  */
 public final class DesignTimeApplicationManager
 {
-    // TODO: load from property file?
+    private static final String SETTINGS_DIR_NAME = ".settings";
+    private static final String ORG_ECLIPSE_JST_JSF_DESIGNTIME_APPMGR_PREFS = "org.eclipse.jst.jsf.designtime.appmgr.prefs";
+
     private static final String        PROPERTY_QUALIFIER                               = "org.eclipse.jst.jsf.designtime.internal";                     //$NON-NLS-1$
     private static final String        SESSION_PROPERTY_NAME_PROJECT                    = "DesignTimeApplicationManager";                                //$NON-NLS-1$
     private static final QualifiedName SESSION_PROPERTY_KEY_PROJECT                     = new QualifiedName(
                                                                                                 PROPERTY_QUALIFIER,
                                                                                                 SESSION_PROPERTY_NAME_PROJECT);
-
-    private static final String        SESSION_PROPERTY_NAME_FACES_CONTEXT              = "DTFacesContext";                                              //$NON-NLS-1$
-    private static final QualifiedName SESSION_PROPERTY_KEY_FACES_CONTEXT               = new QualifiedName(
-                                                                                                PROPERTY_QUALIFIER,
-                                                                                                SESSION_PROPERTY_NAME_FACES_CONTEXT);
 
     private static final String        PERSIST_PROPERTY_NAME_EXTERNAL_CONTEXT_PROVIDER  = "ExternalContextProvider";                                     //$NON-NLS-1$
     private static final QualifiedName PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER   = new QualifiedName(
@@ -97,11 +101,13 @@ public final class DesignTimeApplicationManager
 
     private static final String        DEFAULT_VIEW_HANDLER_ID                          = "org.eclipse.jst.jsf.designtime.view.jspviewhandler";          //$NON-NLS-1$
 
+    private static final Object        GET_INSTANCE_LOCK = new Object();
+
     /**
      * @param project
      * @return the app manager associated with project
      */
-    public final static DesignTimeApplicationManager getInstance(
+    public static DesignTimeApplicationManager getInstance(
             final IProject project)
     {
         if (!hasJSFDesignTime(project))
@@ -111,53 +117,26 @@ public final class DesignTimeApplicationManager
 
         try
         {
-            synchronized (project)
+            synchronized (GET_INSTANCE_LOCK)
             {
                 DesignTimeApplicationManager manager = (DesignTimeApplicationManager) project
                         .getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
+
+                if (manager != null && !project.equals(manager._project))
+                {
+                    if (!manager._isDisposed.get())
+                    {
+                        manager.dispose();
+                    }
+                    // bug 147729: pretend we starting with a new project (we kind of are)
+                    manager = null;
+                }
 
                 if (manager == null)
                 {
                     manager = new DesignTimeApplicationManager(project);
                     project.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT,
                             manager);
-
-                    final DesignTimeApplicationManager localManager = manager;
-                    localManager._lifecycleListener
-                            .addListener(new IResourceLifecycleListener()
-                            {
-                                public EventResult acceptEvent(
-                                        ResourceLifecycleEvent event)
-                                {
-                                    if (event.getAffectedResource() == project)
-                                    {
-                                        if (event.getEventType() == ResourceLifecycleEvent.EventType.RESOURCE_INACCESSIBLE
-                                                && event.getReasonType() == ResourceLifecycleEvent.ReasonType.RESOURCE_PROJECT_CLOSED)
-                                        {
-                                            synchronized (project)
-                                            {
-                                                localManager.dispose();
-                                            }
-                                            return EventResult.getDisposeAfterEventResult();
-                                        }
-                                    }
-                                    return EventResult.getDefaultEventResult();
-                                }
-                            });
-                }
-
-                // bug 147729: if project was renamed, the project param will be
-                // valid, but it will not be in sync with the one for _project
-                // unfortunately, since we are using session propertie
-                else
-                {
-                    synchronized (manager)
-                    {
-                        if (!project.equals(manager._project))
-                        {
-                            manager._project = project;
-                        }
-                    }
                 }
 
                 return manager;
@@ -173,23 +152,42 @@ public final class DesignTimeApplicationManager
                                     JSFCorePlugin.getDefault().getBundle()
                                             .getSymbolicName(),
                                     0,
-                                    "Problem loading design time appmanager", new Throwable(ce))); //$NON-NLS-1$
+                                    "Problem loading design time appmanager", new Exception(ce))); //$NON-NLS-1$
         }
 
         return null;
     }
 
-    private void dispose()
+//    private void checkAndMaybeUpdateProject(final IProject project)
+//    {
+//    	boolean needsPropertyStore = false;
+//
+//    	synchronized(this)
+//    	{
+//    		if (!project.equals(_project))
+//    		{
+//    			_lifecycleListener.removeResource(_project);
+//    			_project = project;
+//    			_lifecycleListener.addResource(_project);
+//    			_properties.setProject(project);
+//    			needsPropertyStore = true;
+//    		}
+//    	}
+//    	
+//    	if (needsPropertyStore)
+//    	{
+//    		_properties.store();
+//    	}
+//    }
+
+    private synchronized void dispose()
     {
         if (_isDisposed.compareAndSet(false, true))
         {
             // dispose viewhandler
-            IDTViewHandler handler = removeViewHandler();
-            
-            if (handler != null)
-            {
-                handler.dispose();
-            }
+            removeViewHandler();
+            _lifecycleListener.dispose();
+            _facesContexts.clear();
         }
     }
 
@@ -219,63 +217,72 @@ public final class DesignTimeApplicationManager
     // instance definition
     // _project must be writable in case the manager needs to be retargetted
     // after a rename/move etc.
-    private IProject                             _project;
+    private final IProject                       _project;
     private final IExternalContextFactoryLocator _locator;
-    // private IDTViewHandler _viewHandler;
-    private final Properties                     _properties;
     private final LifecycleListener              _lifecycleListener;
     private final AtomicBoolean                  _isDisposed;
+    private final ViewHandlerManager             _viewHandlerManager;
+    private final Map<IFile, DTFacesContext>     _facesContexts;
 
     private DesignTimeApplicationManager(final IProject project)
     {
         _project = project;
         _locator = new MyExternalContextFactoryLocator();
-        _properties = loadProperties(_project);
         _isDisposed = new AtomicBoolean();
         _lifecycleListener = new LifecycleListener(_project);
+        _lifecycleListener.addListener(new IResourceLifecycleListener()
+        {
+            public EventResult acceptEvent(final ResourceLifecycleEvent event)
+            {
+                if (event.getAffectedResource() == _project)
+                {
+                    if (event.getEventType() == ResourceLifecycleEvent.EventType.RESOURCE_INACCESSIBLE
+                            && event.getReasonType() == ResourceLifecycleEvent.ReasonType.RESOURCE_PROJECT_CLOSED)
+                    {
+                        dispose();
+                    }
+                }
+                return EventResult.getDefaultEventResult();
+            }
+        });
+
+        final PropertyFileManager properties = new PropertyFileManager(_project);
+
+        _viewHandlerManager = new ViewHandlerManager(properties);
+        _facesContexts = new HashMap<IFile, DTFacesContext>();
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @param file
      *            must not be null
      * @return the faces context for the file or null if not found
      */
     public DTFacesContext getFacesContext(final IFile file)
     {
+        checkIsDisposed();
         if (!hasDTFacesContext(file))
         {
             return null;
         }
 
-        try
+        synchronized (_facesContexts)
         {
-            synchronized (file)
+            DTFacesContext context = _facesContexts.get(file);
+            if (context == null)
             {
-                Object context = file
-                        .getSessionProperty(SESSION_PROPERTY_KEY_FACES_CONTEXT);
-                if (context == null)
-                {
-                    context = new DTFacesContext(file, _locator);
-                    ((DTFacesContext) context).initialize(_lifecycleListener);
-                    file.setSessionProperty(SESSION_PROPERTY_KEY_FACES_CONTEXT,
-                            context);
-                }
-                return (DTFacesContext) context;
+                context = new DTFacesContext(file, _locator);
+                context.initialize(_lifecycleListener);
+                _facesContexts.put(file, context);
             }
+            return context;
         }
-        catch (final CoreException ce)
-        {
-            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(
-                    new Status(IStatus.ERROR, JSFCorePlugin.getDefault()
-                            .getBundle().getSymbolicName(), 0,
-                            "Problem loading design time facescontext", //$NON-NLS-1$
-                            new Throwable(ce)));
-        }
-
-        return null;
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * Only files for which a runtime request context will be generated have a
      * corresponding design time context. This is generally confined to view
      * definition files such as JSP's.
@@ -293,6 +300,7 @@ public final class DesignTimeApplicationManager
      */
     public boolean hasDTFacesContext(final IFile file)
     {
+        checkIsDisposed();
         final IDTViewHandler viewHandler = getViewHandler();
 
         if (file != null && file.isAccessible() && viewHandler != null
@@ -304,76 +312,82 @@ public final class DesignTimeApplicationManager
     }
 
     /**
-     * @return the design time view handler for this webap (project).
+     * Method is thread-safe and may block the caller.
+     * 
+     * @return the design time view handler for this webapp (project).
      */
-    public synchronized IDTViewHandler getViewHandler()
+    public IDTViewHandler getViewHandler()
     {
-        final String viewHandlerId = getFromProjectSettings(
-                PERSIST_PROPERTY_NAME_VIEW_HANDLER, DEFAULT_VIEW_HANDLER_ID);
-
-        if (viewHandlerId != null)
-        {
-            final AbstractDTViewHandler viewHandler = JSFCorePlugin.getViewHandlers(viewHandlerId).getInstance(
-                    _project);
-            viewHandler.setLifecycleListener(_lifecycleListener);
-            return viewHandler;
-        }
-
-        return null;
+    	checkIsDisposed();
+      /* NOTE: it is critical that view handler calls _NEVER_ take the 
+         DesignTimeApplicationManager lock.  let ViewHandlerManager manage it
+         instead.*/
+        return _viewHandlerManager.getViewHandler(_project, _lifecycleListener);
     }
 
     /**
-     * @return the view handler, removing the instance from any caching
+     * Remove and dispose of any currently registered view handler
      */
-    private synchronized IDTViewHandler removeViewHandler()
+    private void removeViewHandler()
     {
-        final String viewHandlerId = getFromProjectSettings(
-                PERSIST_PROPERTY_NAME_VIEW_HANDLER, DEFAULT_VIEW_HANDLER_ID);
-
-        if (viewHandlerId != null)
-        {
-            return JSFCorePlugin.getViewHandlers(viewHandlerId).removeInstance(_project);
-        }
-        return null;
+        /* NOTE: it is critical that view handler calls _NEVER_ take the 
+        DesignTimeApplicationManager lock.  let ViewHandlerManager manage it
+        instead.*/
+        _viewHandlerManager.removeViewHandler(_project);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * Sets the persistent id on this project that will be used to load the view
      * handler.
      * 
      * @param viewHandlerId
      */
-    public synchronized void setViewHandlerId(final String viewHandlerId)
+    public void setViewHandlerId(final String viewHandlerId)
     {
-        setProjectSetting(PERSIST_PROPERTY_NAME_VIEW_HANDLER, viewHandlerId);
+        checkIsDisposed();
+        /* NOTE: it is critical that view handler calls _NEVER_ take the 
+        DesignTimeApplicationManager lock.  let ViewHandlerManager manage it
+        instead.*/
+        _viewHandlerManager.setViewHandlerId(_project, viewHandlerId);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @param resolverPluginId
      * @throws CoreException
      */
     public synchronized void setExternalContextProvider(
             final String resolverPluginId) throws CoreException
     {
+        checkIsDisposed();
         _project.setPersistentProperty(
                 PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER,
                 resolverPluginId);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the id of the active design time external context provider
      */
     public synchronized String getExternalContextProvider()
     {
+    	checkIsDisposed();
         return getResolverId(PERSIST_PROPERTY_KEY_EXTERNAL_CONTEXT_PROVIDER,
                 DEFAULT_EXTERNAL_CONTEXT_ID);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the designtime variable resolver for this application
      */
     public synchronized AbstractDTVariableResolver getVariableResolver()
     {
+        checkIsDisposed();
         ExtensionData<AbstractDTVariableResolver> extData = null;
 
         final String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER);
@@ -392,6 +406,8 @@ public final class DesignTimeApplicationManager
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * Sets the plugin used to determine the designtime variable resolver. To
      * reset to the default, pass null.
      * 
@@ -402,36 +418,47 @@ public final class DesignTimeApplicationManager
     public synchronized void setVariableResolverProvider(
             final String resolverPluginId) throws CoreException
     {
+        checkIsDisposed();
         _project.setPersistentProperty(
                 PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER,
                 resolverPluginId);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the id of the active design time variable resolver
      */
     public synchronized String getVariableResolverProvider()
     {
+    	checkIsDisposed();
         return getResolverId(PERSIST_PROPERTY_KEY_VARIABLE_RESOLVER_PROVIDER,
                 DEFAULT_VARIABLE_RESOLVER_ID);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the default property resolver that will be used if no other is
      *         provided. The default property resolver is intended to match the
      *         similar resolver used by the runtime.
      */
     public synchronized AbstractDTPropertyResolver getDefaultPropertyResolver()
     {
+        checkIsDisposed();
         return JSFCorePlugin.getPropertyResolver(DEFAULT_PROPERTY_RESOLVER_ID)
                 .getInstance(_project);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the designtime property resolver for this application
      */
     public synchronized AbstractDTPropertyResolver getPropertyResolver()
     {
+        checkIsDisposed();
+
         ExtensionData<AbstractDTPropertyResolver> extData = null;
 
         final String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER);
@@ -450,6 +477,8 @@ public final class DesignTimeApplicationManager
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @param resolverPluginId
      * @throws CoreException --
      *             if setting the provider fails
@@ -457,25 +486,32 @@ public final class DesignTimeApplicationManager
     public synchronized void setPropertyResolverProvider(
             final String resolverPluginId) throws CoreException
     {
+        checkIsDisposed();
         _project.setPersistentProperty(
                 PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER,
                 resolverPluginId);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the id of the active design time variable resolver
      */
     public synchronized String getPropertyResolverProvider()
     {
+        checkIsDisposed();
         return getResolverId(PERSIST_PROPERTY_KEY_PROPERTY_RESOLVER_PROVIDER,
                 DEFAULT_PROPERTY_RESOLVER_ID);
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the designtime method resolver for this application
      */
     public synchronized AbstractDTMethodResolver getMethodResolver()
     {
+    	checkIsDisposed();
         ExtensionData<AbstractDTMethodResolver> extData = null;
 
         final String id = getResolverId_OLD(PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER);
@@ -494,6 +530,8 @@ public final class DesignTimeApplicationManager
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @param resolverPluginId
      * @throws CoreException --
      *             if setting the plugin fails
@@ -501,18 +539,21 @@ public final class DesignTimeApplicationManager
     public synchronized void setMethodResolverProvider(
             final String resolverPluginId) throws CoreException
     {
+        checkIsDisposed();
         _project
                 .setPersistentProperty(
                         PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER,
                         resolverPluginId);
-
     }
 
     /**
+     * Method is thread-safe and may block the caller.
+     * 
      * @return the id of the active design time variable resolver
      */
     public synchronized String getMethodResolverProvider()
     {
+        checkIsDisposed();
         return getResolverId(PERSIST_PROPERTY_KEY_METHOD_RESOLVER_PROVIDER,
                 DEFAULT_METHOD_RESOLVER_ID);
     }
@@ -583,82 +624,217 @@ public final class DesignTimeApplicationManager
         }
     }
 
-    private String getFromProjectSettings(final String key,
-            final String defaultValue)
+    private void checkIsDisposed()
     {
-        return _properties.getProperty(key, defaultValue);
-    }
-
-    private void setProjectSetting(final String key, final String value)
-    {
-        _properties.setProperty(key, value);
-        storeProperties(_properties);
-    }
-
-    private void storeProperties(final Properties properties)
-    {
-        IFile propFile;
-        try
+        // TODO: need to add isDisposed to this and throw an exception
+        // for now, we just log what's happening to aid debugging
+        if (_isDisposed.get())
         {
-            propFile = getPropsFile(_project);
-            if (propFile != null)
+            JSFCorePlugin
+                    .log(
+                            "A call to a disposed DesignTimeApplicationManager was attempted",
+                            new Throwable(
+                                    "This exception is only to record a stack trace"));
+        }
+    }
+
+    private static class ViewHandlerManager
+    {
+        private final PropertyFileManager _propertyFileManager;
+
+        ViewHandlerManager(final PropertyFileManager properties)
+        {
+            _propertyFileManager = properties;
+        }
+
+        public synchronized void removeViewHandler(final IProject project)
+        {
+            final String viewHandlerId = _propertyFileManager
+                    .getProperty(PERSIST_PROPERTY_NAME_VIEW_HANDLER,
+                            DEFAULT_VIEW_HANDLER_ID);
+
+            if (viewHandlerId != null)
             {
-                final ByteArrayOutputStream outstream = new ByteArrayOutputStream();
-                properties.store(outstream, null);
-                propFile.setContents(new ByteArrayInputStream(outstream
-                        .toByteArray()), true, true, null);
+                final ExtensionData<AbstractDTViewHandler> extData =
+                    JSFCorePlugin.getViewHandlers(viewHandlerId);
+                
+                if (extData != null)
+                {
+                    final AbstractDTViewHandler handler = extData.removeInstance(project);
+                    if (handler != null)
+                    {
+                        handler.dispose();
+                    }
+                }
             }
         }
-        catch (final CoreException e)
+
+        public synchronized IDTViewHandler getViewHandler(
+                final IProject project, final LifecycleListener listener)
         {
-            JSFCorePlugin.log(e, "Problem storing properties");
+            final String viewHandlerId = _propertyFileManager
+                    .getProperty(PERSIST_PROPERTY_NAME_VIEW_HANDLER,
+                            DEFAULT_VIEW_HANDLER_ID);
+
+            if (viewHandlerId != null)
+            {
+                ExtensionData<AbstractDTViewHandler> viewHandlers = JSFCorePlugin
+                        .getViewHandlers(viewHandlerId);
+                if (viewHandlers == null)
+                {
+                    viewHandlers = JSFCorePlugin
+                            .getViewHandlers(DEFAULT_VIEW_HANDLER_ID);
+                }
+
+                final AbstractDTViewHandler viewHandler = viewHandlers
+                        .getInstance(project);
+                viewHandler.setLifecycleListener(listener);
+                return viewHandler;
+            }
+            return null;
         }
-        catch (final IOException e)
+
+        public void setViewHandlerId(final IProject project,
+                final String viewHandlerId)
         {
-            JSFCorePlugin.log(e, "Problem storing properties");
+            // remove any previous handler before the id is lost
+            removeViewHandler(project);
+            _propertyFileManager.setProperty(
+                    PERSIST_PROPERTY_NAME_VIEW_HANDLER, viewHandlerId);
         }
     }
-
-    private Properties loadProperties(final IProject project)
+    
+    private static class PropertyFileManager
     {
-        final Properties props = new Properties();
-        try
-        {
-            final IFile propFile = getPropsFile(project);
+        private final Properties                     _properties;
+        private IProject                             _project;
 
-            if (propFile != null)
+        PropertyFileManager(final IProject project)
+        {
+            _project = project;
+            _properties = new Properties();
+            load(_project, _properties);
+        }
+
+        private synchronized IProject getProject()
+        {
+            return _project;
+        }
+
+        public void setProperty(final String key, final String value) {
+            _properties.setProperty(key, value);
+            store();
+        }
+
+        public String getProperty(final String key, final String defaultValue) {
+            return _properties.getProperty(key, defaultValue);
+        }
+
+        public void store()
+        {
+            final IWorkspaceRunnable storeJob = new IWorkspaceRunnable()
             {
-                props.load(propFile.getContents());
+                public void run(IProgressMonitor monitor) throws CoreException {
+                    IFile propFile;
+
+                    try {
+                        propFile = getPropsFile(getProject());
+                        if (propFile != null) {
+                            final ByteArrayOutputStream outstream = new ByteArrayOutputStream();
+                            // properties will thread-safe save to the array
+                            // stream
+                            // no further locking is needed since we have
+                            // already have a lock
+                            // on the workspace sub-tree for the settings file
+                            // if this job
+                            // is running.
+                            _properties.store(outstream, null);
+                            propFile.setContents(new ByteArrayInputStream(
+                                    outstream.toByteArray()), true, true, null);
+                        }
+                    } catch (final CoreException e) {
+                        JSFCorePlugin.log(e, "Problem storing properties");
+                    } catch (final IOException e) {
+                        JSFCorePlugin.log(e, "Problem storing properties");
+                    }
+                }
+            };
+
+            final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+            
+            try
+            {
+                // need to lock the project tree, since may need to create
+                // .settings directory
+                workspace.run(storeJob, getProject(), IWorkspace.AVOID_UPDATE,
+                        null);
+            } catch (CoreException ce)
+            {
+                JSFCorePlugin.log(ce, "Problem storing properties");
             }
         }
-        catch (final CoreException ce)
+
+        private static void load(final IProject project,
+                final Properties properties)
         {
-            JSFCorePlugin.log(ce, "Problem loading properties");
+            try
+            {
+                final IFile propFile = getPropsFileHandle(project);
+
+                if (propFile != null && propFile.isAccessible())
+                {
+                    InputStream inStream = null;
+
+                    try
+                    {
+                        inStream = propFile.getContents();
+                        properties.load(inStream);
+                    } 
+                    finally
+                    {
+                        if (inStream != null)
+                        {
+                            inStream.close();
+                        }
+                    }
+                }
+            } 
+            catch (final CoreException ce)
+            {
+                JSFCorePlugin.log(ce, "Problem loading properties");
+            } 
+            catch (final IOException ce)
+            {
+                JSFCorePlugin.log(ce, "Problem loading properties");
+            }
         }
-        catch (final IOException ce)
+
+        private static IFile getPropsFile(final IProject project) throws CoreException
         {
-            JSFCorePlugin.log(ce, "Problem loading properties");
+            final IFolder folder = project.getFolder(new Path(SETTINGS_DIR_NAME));
+            if (!folder.exists())
+            {
+                folder.create(false, true, null);
+            }
+
+            final IFile file = folder.getFile(new Path(ORG_ECLIPSE_JST_JSF_DESIGNTIME_APPMGR_PREFS));
+
+            if (!file.exists())
+            {
+                file.create(new ByteArrayInputStream(new byte[0]), false, null);
+            }
+
+            return file;
         }
-
-        return props;
-    }
-
-    private IFile getPropsFile(final IProject project) throws CoreException
-    {
-        final IFolder folder = project.getFolder(new Path(".settings"));
-        if (!folder.exists())
+        
+        /**
+         * @param project
+         * @return the file handle for the properties file.  Doesn't create the
+         * resource if it doesn't exist
+         */
+        private static IFile getPropsFileHandle(final IProject project)
         {
-            folder.create(false, true, null);
+            return project.getFile(new Path(SETTINGS_DIR_NAME).append(ORG_ECLIPSE_JST_JSF_DESIGNTIME_APPMGR_PREFS));
         }
-
-        final IFile file = folder.getFile(new Path(
-                "org.eclipse.jst.jsf.designtime.appmgr.prefs"));
-
-        if (!file.exists())
-        {
-            file.create(new ByteArrayInputStream(new byte[0]), false, null);
-        }
-
-        return file;
     }
 }
