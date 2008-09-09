@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -156,6 +157,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
                 ((Model) model.getRoot())
                         .setCurrentModelContext(modelKeyDescriptor);
 
+            StandardModelFactory.debug(">END getModel: "+modelKeyDescriptor, StandardModelFactory.DEBUG_MD_GET);
             return model;
         }
     }
@@ -270,25 +272,25 @@ public class MetaDataModelManager implements IResourceChangeListener{
             final String key = calculateKey(model);
             synchronized(this)
             {
-                unprotectedRemove(key);
+                map.remove(key);
             }
-        }
-
-        private void unprotectedRemove(final String key)
-        {
-            map.remove(key);
         }
 
         public void dispose() {
             if (_isDisposed.compareAndSet(false, true)) {
                 synchronized(this)
                 {
-                    for (final MetaDataModel model : map.values()) 
+                    for (final Iterator<Map.Entry<String, MetaDataModel>> it = map.entrySet().iterator(); it.hasNext();) 
                     {
                         // System.out.println("kill mmModel: "+model.toString());
-                        final String key = calculateKey(model);
-                        unprotectedRemove(key);
-                        model.cleanup();
+                        final Map.Entry<String, MetaDataModel> entry = it.next();
+                        final MetaDataModel model = entry.getValue();
+
+                        if (model != null)
+                        {
+                            model.cleanup();
+                        }
+                        it.remove();
                     }
                 }
             }
