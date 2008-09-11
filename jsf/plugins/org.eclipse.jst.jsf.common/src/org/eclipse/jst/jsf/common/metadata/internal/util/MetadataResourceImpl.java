@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.10 2008/09/03 23:29:03 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.11 2008/09/11 17:22:00 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -16,9 +16,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.xmi.PackageNotFoundException;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLLoad;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.SAXXMLHandler;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
@@ -28,6 +30,7 @@ import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
+import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,7 +72,7 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 
 
 	/**
-	 * Constructorb
+	 * Constructor
 	 * @param provider
 	 */
 	public MetadataResourceImpl(IMetaDataSourceModelProvider provider){
@@ -153,6 +156,7 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	 * Override the handleErrors() method so that resource will load gracefully, and errors reported later
 	 * when appropriate
 	 *
+	 * @generated NOT
 	 */
 	private static class MetadataXMLLoad extends XMLLoadImpl {
 
@@ -165,5 +169,54 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 			//by doing nothing here, this allows the list of non-fatal errors (res.getErrors()) to be returned
 		}
 		
+		@Override
+		protected DefaultHandler makeDefaultHandler() {
+			return new MetadataXMLHandler(resource, helper, options);
+		}
+	}
+	
+	/**
+	 * Ensures that only EMF extension models registered with the EMF Package Registry are considered.
+	 * @generated NOT
+	 */
+	private static class MetadataXMLHandler extends SAXXMLHandler {
+
+		public MetadataXMLHandler(XMLResource xmiResource, XMLHelper helper,
+				Map<?, ?> options) {
+			super(xmiResource, helper, options);
+		}
+
+		@Override
+		protected EPackage getPackageForURI(String uriString) {
+			//code taken from  super and modified so that only package registry is considered
+		    if (uriString == null)
+		    {
+		      return null;
+		    }
+
+		    EPackage ePackage = packageRegistry.getEPackage(uriString);
+
+		    if (ePackage != null && ePackage.eIsProxy())
+		    {
+		      ePackage = null;
+		    }
+
+		    if (ePackage == null)
+		    {
+		      ePackage = handleMissingPackage(uriString);
+		    }
+
+		    if (ePackage == null)
+		    {
+		      error
+		        (new PackageNotFoundException
+		           (uriString,
+		            getLocation(),
+		            getLineNumber(),
+		            getColumnNumber()));
+		    }
+
+		    return ePackage;		  
+		}
 	}
 } //MetadataResourceImpl

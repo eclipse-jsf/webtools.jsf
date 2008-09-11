@@ -13,8 +13,11 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
@@ -33,14 +36,31 @@ import org.eclipse.emf.ecore.xmi.XMIException;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.util.MetadataResourceImpl;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 
 /**
  * Singleton that produces and loads standard metadata models.  
- * All models are loaded into the same ResourceSet 
- *
- * see Model
+ * All models are loaded into the same ResourceSet.
+ * <p>
+ * All metadata extension models must be registered with org.eclipse.emf.ecore.generated_package extension-point.
+ * No other mechanism is provided for model uri resolution.
+ * <p>
+ * Debug tracing for model loading is available: <code>org.eclipse.jst.jsf.common/debug/metadataload=true</code>
+ * <p>
+ * When the /debug/metadataload trace flag is set, and in case extension models are known not to be available, 
+ * and metadata is referencing those models, error logging can be suppressed by launching with the following properties set:<br>
+ * &nbsp;&nbsp;&nbsp;metadata.package.ignores<br>
+ * &nbsp;&nbsp;&nbsp;metadata.classname.ignores
+ *  <p>
+ *  eg. Usage for when WPE is not present<p>
+ *  <code>
+ 	-Dmetadata.package.ignores=http://org.eclipse.jsf.pagedesigner/dtinfo.ecore,<br>http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore<br>
+ 	-Dmetadata.classname.ignores=DTInfo,QuickEditTabSections<br>
+ *  </code>
+ * <p>
+ * see {@link Model}
  */
 public class StandardModelFactory {
 	private static StandardModelFactory INSTANCE;
@@ -59,8 +79,8 @@ public class StandardModelFactory {
 			INSTANCE.init();	
 			
 			if (JSFCommonPlugin.getPlugin().isDebugging()){
-				DEBUG_MD_LOAD = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataload")).booleanValue();
-				DEBUG_MD_GET  = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataget")).booleanValue();
+				DEBUG_MD_LOAD = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataload")).booleanValue();//$NON-NLS-1$
+				DEBUG_MD_GET  = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/metadataget")).booleanValue();//$NON-NLS-1$
 			}
 		}
 		return INSTANCE;
@@ -76,7 +96,7 @@ public class StandardModelFactory {
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put
 			(Resource.Factory.Registry.DEFAULT_EXTENSION, 
 			 new XMLResourceFactoryImpl());
-
+		
 		//relying on the org.eclipse.emf.ecore.generated_package ext-pt to register traits
 	}
 
@@ -117,7 +137,7 @@ public class StandardModelFactory {
         final XMLResource res = new MetadataResourceImpl(provider);
         
         debug(String.format(
-                ">>> Loading standard meta-data file for uri %s", uri), DEBUG_MD_LOAD);
+                ">>> Loading standard meta-data file for uri %s", uri), DEBUG_MD_LOAD); //$NON-NLS-1$
         
         res.setURI(uri);
         resourceSet.getResources().add(res);
@@ -139,6 +159,7 @@ public class StandardModelFactory {
 			}
 		}
 	}
+	
 	/**
 	 * Sets default load options for the resource
 	 * @param resource 
@@ -152,6 +173,7 @@ public class StandardModelFactory {
 		options.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
 		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.FALSE);//turning this off so that res.getErrors() has values to check!  bizarre that I should need to do this.
 //		options.put(XMLResource.OPTION_DOM_USE_NAMESPACES_IN_SCOPE, Boolean.TRUE);
+		
 //		if (DEBUG_MD_LOAD)
 //		{
 //		    System.out.println("Using load options: "+options);
@@ -160,6 +182,8 @@ public class StandardModelFactory {
 
 
 	static class StandardModelErrorMessageFactory {
+		private static List<String> _missingPackageURIs;
+		private static List<String> _missingClassnames;
 		
 		/**
 		 * Simply logs all messages against JSFCommonPlugin, for now.
@@ -170,24 +194,31 @@ public class StandardModelFactory {
 			if (diagnostic instanceof XMIException) {
 				XMIException ex = (XMIException)diagnostic;				
 				String msg = createMessage(ex);
-				JSFCommonPlugin.log(IStatus.ERROR, msg);
-//				System.out.println(msg);
+				if (msg != null)
+					JSFCommonPlugin.log(IStatus.ERROR, msg);
 			}
 			else {
 				JSFCommonPlugin.log(IStatus.ERROR, diagnostic.toString());//do better???
-//				System.out.println(diagnostic.toString());	
 			}
 		}
 
 		private static String createMessage(XMIException ex) {
 			
-			StringBuffer buf = new StringBuffer("Metadata Load Error: ")
-				.append(ex.getClass().getSimpleName()).append(": ");
+			StringBuffer buf = new StringBuffer("Metadata Load Error: ") //$NON-NLS-1$
+				.append(ex.getClass().getSimpleName()).append(": "); //$NON-NLS-1$
 			
-			if (ex instanceof PackageNotFoundException)
+			if (ex instanceof PackageNotFoundException) {				
+				if (shouldIgnore(ex)) 
+					return null;
+				
 				buf.append(((PackageNotFoundException)ex).uri());			
-			else if (ex instanceof ClassNotFoundException)
+			} 
+			else if (ex instanceof ClassNotFoundException) {
+				if (shouldIgnore(ex)) 
+					return null;
+				
 				buf.append(((ClassNotFoundException)ex).getName());
+			}
 			else if (ex instanceof FeatureNotFoundException)
 				buf.append(((FeatureNotFoundException)ex).getName());
 			else if (ex instanceof IllegalValueException)
@@ -197,19 +228,66 @@ public class StandardModelFactory {
 			else
 				buf.append(ex.getMessage());
 			
-			buf.append(" in ").append(ex.getLocation()).append(": Line = ")
-				.append(ex.getLine()).append(": Column = ").append(ex.getColumn());
+			buf.append(" in ").append(ex.getLocation()).append(": Line = ") //$NON-NLS-1$ //$NON-NLS-2$
+				.append(ex.getLine()).append(": Column = ").append(ex.getColumn()); //$NON-NLS-1$
 			return buf.toString();
 		}
+
+		private static boolean shouldIgnore(XMIException ex) {
+			if (ex instanceof PackageNotFoundException) {
+				String uri = ((PackageNotFoundException)ex).uri();
+				return getMissingPackageURIs().contains(uri);
+			}
+			else if (ex instanceof ClassNotFoundException) {
+				String className = ((ClassNotFoundException)ex).getName();
+				return getMissingClassnames().contains(className);
+			}
+			return false;
+		}
+
+		private static List<String> getMissingPackageURIs() {
+			if (_missingPackageURIs == null) {
+				_missingPackageURIs = buildList("metadata.package.ignores"); //$NON-NLS-1$
+
+			}
+			return _missingPackageURIs;
+		}
+		
+		private static List<String> getMissingClassnames() {
+			if (_missingClassnames == null) {
+				_missingClassnames = buildList("metadata.classname.ignores"); //$NON-NLS-1$
+			}
+			return _missingClassnames;
+		}
+
+		private static List<String> buildList(String propertyName) {
+			List<String> ret = new ArrayList<String>();
+			String ignoreSet = System.getProperty(propertyName);
+			if (ignoreSet == null )//try env
+				ignoreSet = System.getenv(propertyName);
+			
+			if (ignoreSet != null && !(ignoreSet.equals(""))){ //$NON-NLS-1$
+				StringTokenizer st = new StringTokenizer(ignoreSet, ","); //$NON-NLS-1$
+				while(st.hasMoreTokens()){
+					String uri = st.nextToken();
+					if (!(uri.equals("")))
+							ret.add(uri);
+				}
+			}
+
+			return ret;
+		}
+		 
 	}
 	
 	/**
-	 * Debug output.  Paren shows thread id.
+	 * Debug output.  The parenthesis shows thread id.
 	 * @param msg
 	 * @param debugFlag
 	 */
 	public static void debug(String msg, boolean debugFlag) {
 		if (debugFlag)
-			System.out.println(msg + "["+Thread.currentThread().getId()+"]");
+			System.out.println(msg + "["+Thread.currentThread().getId()+"]"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
+	
 }
