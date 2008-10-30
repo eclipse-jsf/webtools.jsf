@@ -1266,6 +1266,17 @@ public class FacesConfigEditor extends FormEditor implements
 		return getActionBarContributor().getActionBars();
 	}
 
+	public Object getSelectedPage() {
+		IFormPage page = getActivePageInstance();
+		if (page != null) 
+			return page;
+			
+		if (getActiveEditor() instanceof PageflowEditor)
+			return getActiveEditor();
+		
+		return null;
+	}
+
 	/**
 	 * Shows a dialog that asks if conflicting changes should be discarded.
 	 * @return the user's response.
