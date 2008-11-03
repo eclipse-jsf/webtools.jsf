@@ -10,10 +10,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.internal.strategy;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
 
 /**
@@ -36,6 +38,7 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
 {
     private final Map<IDTYPE, STRATEGYTYPE> _strategies;
     private IIteratorPolicy<IDTYPE>         _policy;
+    private final Object                    _changeLock = new Object();
 
     /**
      * @param policy 
@@ -53,7 +56,10 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
      */
     public final void addStrategy(final STRATEGYTYPE strategy)
     {
-        _strategies.put(strategy.getId(), strategy);
+        synchronized(_changeLock)
+        {
+            _strategies.put(strategy.getId(), strategy);
+        }
     }
 
     /**
@@ -61,7 +67,10 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
      */
     public final void removeStrategy(final STRATEGYTYPE strategy)
     {
-        _strategies.remove(strategy.getId());
+        synchronized(_changeLock)
+        {
+            _strategies.remove(strategy.getId());
+        }
     }
 
     /**
@@ -74,15 +83,34 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
      */
     public final void setPolicy(final IIteratorPolicy<IDTYPE>  policy)
     {
-        _policy = policy;
+        // policy may not be null
+        if (policy == null)
+        {
+            JSFCommonPlugin.log(new Exception("stack trace only"), "Policy can't be null");
+            return;
+        }
+        
+        // protect access in case getIterator is being called simulataneously
+        synchronized(_changeLock)
+        {
+            _policy = policy;
+        }
     }
 
     @Override
     public final Iterator<STRATEGYTYPE> getIterator()
     {
-        final Iterator<IDTYPE> idType = _policy.getIterator(_strategies
-                .keySet());
-        return new StrategyIterator<IDTYPE, STRATEGYTYPE>(_strategies, idType);
+        IIteratorPolicy<IDTYPE> policy = null;
+        Map<IDTYPE, STRATEGYTYPE>  strategies = Collections.emptyMap();
+
+        synchronized(_changeLock)
+        {
+            policy = _policy;
+            strategies = Collections.unmodifiableMap(new HashMap<IDTYPE, STRATEGYTYPE>(_strategies));
+        }
+
+        final Iterator<IDTYPE> iterator = policy.getIterator(strategies.keySet());
+        return new StrategyIterator<IDTYPE, STRATEGYTYPE>(strategies, iterator);
     }
 
     @Override

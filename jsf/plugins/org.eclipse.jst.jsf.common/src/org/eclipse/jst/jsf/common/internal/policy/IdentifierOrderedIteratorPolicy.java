@@ -17,6 +17,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
+ * An iterator policy that creates Iterators that traverse a target collection
+ * by returning items in the order they are in the policyOrder object pased at
+ * construction.  The target collection passed to getIterator is copied, so the
+ * iterator will not be effected by subsequent changes to the target.
+ * 
+ * NOTE: the policyOrder iterable collection should not be modified after it is
+ * passed to the constructor.
+ * 
+ * The class is thread-safe, however the iterators are not.  That is, more than
+ * one thread can safely call any of the public methods, however each Iterator
+ * returned by getIterator can only be used safely by a single thread.
  * 
  * @author cbateman
  *
@@ -28,8 +39,8 @@ public class IdentifierOrderedIteratorPolicy<ITERATORTYPE> implements
     private final Iterable<ITERATORTYPE>   _policyOrder;
     // controls whether the policy iterator will return items that are
     // not explicitly listed in policyOrder.
-    private boolean                        _excludeNonExplicitValues = false;
-    
+    private volatile boolean               _excludeNonExplicitValues = false;
+
     /**
      * @param policyOrder
      */
@@ -62,7 +73,8 @@ public class IdentifierOrderedIteratorPolicy<ITERATORTYPE> implements
     public Iterator<ITERATORTYPE> getIterator(
             final Collection<ITERATORTYPE> forCollection)
     {
-        return new MyIterator<ITERATORTYPE>(forCollection, _excludeNonExplicitValues, _policyOrder);
+        final boolean excludeNonExplicitValues = _excludeNonExplicitValues;
+        return new MyIterator<ITERATORTYPE>(forCollection, excludeNonExplicitValues, _policyOrder);
     }
 
     private static class MyIterator<ITERATORTYPE> implements Iterator<ITERATORTYPE>
