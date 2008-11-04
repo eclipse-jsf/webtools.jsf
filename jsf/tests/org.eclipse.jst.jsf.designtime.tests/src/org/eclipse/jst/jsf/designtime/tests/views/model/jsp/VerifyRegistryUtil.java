@@ -33,10 +33,10 @@ import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 public class VerifyRegistryUtil extends Assert
 {
     // core verifiers
-    public static final Verifier ACTIONLISTENENER_VERIFIER = new JSFTagElementVerifier(
+    public static final Verifier ACTIONLISTENENER_VERIFIER = new TagHandlerVerifier(
             IJSFConstants.TAG_IDENTIFIER_ACTIONLISTENER);
 
-    public static final Verifier ATTRIBUTE_VERIFIER = new JSFTagElementVerifier(
+    public static final Verifier ATTRIBUTE_VERIFIER = new TagHandlerVerifier(
             IJSFConstants.TAG_IDENTIFIER_ATTRIBUTE);
 
     public static final Verifier CONVERTDATETIME_VERIFIER = new ConverterTagVerifier(
@@ -50,7 +50,7 @@ public class VerifyRegistryUtil extends Assert
             IJSFConstants.TAG_IDENTIFIER_CONVERTNUMBER,
             RuntimeTestUtil.CONVERTERINFO_NUMBER);
 
-    public static final Verifier FACET_VERIFIER = new JSFTagElementVerifier(
+    public static final Verifier FACET_VERIFIER = new TagHandlerVerifier(
             IJSFConstants.TAG_IDENTIFIER_FACET);
 
     public static final Verifier LOADBUNDLE_VERIFIER = new TagHandlerVerifier(
@@ -92,7 +92,7 @@ public class VerifyRegistryUtil extends Assert
     public static final Verifier VALIDATOR_VERIFIER = new ValidatorTagVerifier(
             IJSFConstants.TAG_IDENTIFIER_VALIDATOR, ValidatorTypeInfo.UNKNOWN);
 
-    public static final Verifier VALUECHANGELISTENER_VERIFIER = new JSFTagElementVerifier(
+    public static final Verifier VALUECHANGELISTENER_VERIFIER = new TagHandlerVerifier(
             IJSFConstants.TAG_IDENTIFIER_VALUECHANGELISTENER);
 
     public static final Verifier VERBATIM_VERIFIER = new ComponentTagVerifier(
@@ -328,7 +328,7 @@ public class VerifyRegistryUtil extends Assert
             }
             catch (final AssertionFailedError afe)
             {
-                System.err.printf("Failure occurred in tag %s", _tagId
+                System.err.printf("Failure occurred in tag %s\n", _tagId
                         .asQName().toString());
                 throw afe;
             }
@@ -361,7 +361,7 @@ public class VerifyRegistryUtil extends Assert
             }
             catch (final AssertionFailedError afe)
             {
-                System.err.printf("Failure occurred in tag %s", _tagId
+                System.err.printf("Failure occurred in tag %s\n", _tagId
                         .asQName().toString());
                 throw afe;
             }
@@ -394,7 +394,7 @@ public class VerifyRegistryUtil extends Assert
             }
             catch (final AssertionFailedError afe)
             {
-                System.err.printf("Failure occurred in tag %s", _tagId
+                System.err.printf("Failure occurred in tag %s\n", _tagId
                         .asQName().toString());
                 throw afe;
             }

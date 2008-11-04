@@ -32,7 +32,8 @@ public abstract class BaseStrategyTestClass extends BaseTestClass
         _strategy = createStrategy();
     }
 
-    public void testResolveTLDElementDeclaration()
+    // TODO: fix problems related to finding renderer type in commandButton
+    public final void testResolveTLDElementDeclaration()
     {
         for (final String uri : getTestUris())
         {

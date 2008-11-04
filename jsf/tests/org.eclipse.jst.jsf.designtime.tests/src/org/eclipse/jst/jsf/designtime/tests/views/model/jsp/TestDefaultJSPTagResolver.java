@@ -35,7 +35,7 @@ public class TestDefaultJSPTagResolver extends BaseStrategyTestClass
 
     public void testGetId()
     {
-        assertEquals("org.eclipse.jst.jsf.THISISTEMPORARY", _strategy.getId());
+        assertEquals("org.eclipse.jst.jsf.metadata.DefaultJSPTagResolver", _strategy.getId());
     }
 
     @Override
