@@ -26,4 +26,43 @@ public abstract class JSPTagResolvingStrategy extends
     public abstract ITagElement resolve(TLDElementDeclaration element);
 
     public abstract String getId();
+    
+    public abstract String getDisplayName();
+    
+    /**
+     * A descriptor for JSP tag resolving strategies
+     * 
+     * @author cbateman
+     *
+     */
+    public final static class StrategyDescriptor
+    {
+        private final String _id;
+        private final String _displayName;
+
+        /**
+         * @param id
+         * @param displayName
+         */
+        public StrategyDescriptor(final String id, final String displayName)
+        {
+            _id = id;
+            _displayName = displayName;
+        }
+        
+        /**
+         * @return the id of the strategy
+         */
+        public String getId()
+        {
+            return _id;
+        }
+        /**
+         * @return the human-readable displayable name of the strategy
+         */
+        public String getDisplayName()
+        {
+            return _displayName;
+        }
+    }
 }

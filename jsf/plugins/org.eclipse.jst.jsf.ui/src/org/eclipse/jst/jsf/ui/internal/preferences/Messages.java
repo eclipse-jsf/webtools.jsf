@@ -12,6 +12,18 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
+	public static String JSPTagRegistryPreferencePage_0;
+    /**
+     * see messages.properties
+     */
+    public static String JSPTagRegistryPreferencePage_1;
+    /**
+     * see messages.properties
+     */
+    public static String JSPTagRegistryPreferencePage_2;
+    /**
+	 * see messages.properties
+	 */
 	public static String JSPTagRegistryPreferencePage_PanelDescription;
 	static {
 		// initialize resource bundle

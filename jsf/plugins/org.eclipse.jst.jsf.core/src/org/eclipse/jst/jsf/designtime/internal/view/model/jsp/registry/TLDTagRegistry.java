@@ -64,7 +64,8 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     private final Job                                                  _changeJob;
     private final PersistedDataTagStrategy                             _persistedTagStrategy;
     private TagIndexListener                                           _tagIndexListener;
-    private TLDRegistryPreferences                                     _prefs;
+    private final TLDRegistryPreferences                               _prefs;
+    private final MyPropertyListener                                   _myPropertyListener;
 
     TLDTagRegistry(final IProject project)
     {
@@ -72,13 +73,12 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         _nsResolved = new HashMap<String, TLDNamespace>();
 
         _prefs = new TLDRegistryPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
+        _myPropertyListener = new MyPropertyListener();
+        _prefs.addListener(_myPropertyListener);
         _prefs.load();
         final IdentifierOrderedIteratorPolicy<String> policy =
             getTagResolvingPolicy();
-        // exclude things that are not explicitly listed in the policy.  That
-        // way preference-based disablement will cause those strategies to
-        // be excluded.
-        policy.setExcludeNonExplicitValues(true);
+
         _resolver = new CompositeTagResolvingStrategy<TLDElementDeclaration>(
                 policy);
 
@@ -106,6 +106,10 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         final IdentifierOrderedIteratorPolicy<String> policy = new IdentifierOrderedIteratorPolicy<String>(
                 strategyOrdering);
+        // exclude things that are not explicitly listed in the policy.  That
+        // way preference-based disablement will cause those strategies to
+        // be excluded.
+        policy.setExcludeNonExplicitValues(true);
         return  policy;
     }
 
@@ -449,6 +453,21 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                 }
 
                 return multiStatus;
+            }
+        }
+    }
+    
+    private class MyPropertyListener extends TLDRegistryPreferences.PropertyListener
+    {
+        @Override
+        public void strategyOrderChanged()
+        {
+            synchronized(TLDTagRegistry.this)
+            {
+                _prefs.load();
+                final IdentifierOrderedIteratorPolicy<String> policy =
+                    getTagResolvingPolicy();
+                _resolver.setPolicy(policy);
             }
         }
     }

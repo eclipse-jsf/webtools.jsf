@@ -346,7 +346,7 @@ public class JSFCorePlugin extends WTPPlugin
      * @return the preference store for this bundle TODO: this is copied from
      *         AbstractUIPlugin; need to upgrade to new IPreferencesService
      */
-    public IPreferenceStore getPreferenceStore()
+    public synchronized IPreferenceStore getPreferenceStore()
     {
         // Create the preference store lazily.
         if (this.preferenceStore == null)

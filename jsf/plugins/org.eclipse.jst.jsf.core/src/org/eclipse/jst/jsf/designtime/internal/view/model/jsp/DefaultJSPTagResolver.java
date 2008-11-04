@@ -52,6 +52,14 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
     private final ViewMetadataMapper                                 _mapper;
 
     /**
+     * @return the descriptor for this resolver strategy
+     */
+    public static StrategyDescriptor createDescriptor()
+    {
+        return new StrategyDescriptor(ID, DISPLAY_NAME);
+    }
+
+    /**
      * @param project
      */
     public DefaultJSPTagResolver(final IProject project)

@@ -144,32 +144,42 @@ public final class TagAnalyzer
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
         { new ServletBeanProxyContributor(project) };
-        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
-                contributor, project);
 
-        if (registry != null)
+        ProxyFactoryRegistry registry = null;
+        try
         {
-            final IStandardBeanTypeProxyFactory factory = registry
-                    .getBeanTypeProxyFactory();
-            final IBeanTypeProxy classTypeProxy = factory
-                    .getBeanTypeProxy(className);
-            final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
-                    classTypeProxy);
-
-            try
+            registry = getProxyFactoryRegistry(contributor, project);
+    
+            if (registry != null)
             {
-                classTypeWrapper.init();
-                return classTypeWrapper.callStringMethod("getComponentType");
-            }
-            catch (final ProxyException tp)
-            {
-                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                final IStandardBeanTypeProxyFactory factory = registry
+                        .getBeanTypeProxyFactory();
+                final IBeanTypeProxy classTypeProxy = factory
+                        .getBeanTypeProxy(className);
+                final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
+                        classTypeProxy);
+    
+                try
                 {
-                    JSFCoreTraceOptions.log("TagAnalyzer.findComponentType", tp);
+                    classTypeWrapper.init();
+                    return classTypeWrapper.callStringMethod("getComponentType");
+                }
+                catch (final ProxyException tp)
+                {
+                    if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                    {
+                        JSFCoreTraceOptions.log("TagAnalyzer.findComponentType", tp);
+                    }
                 }
             }
         }
-
+        finally
+        {
+            if (registry != null)
+            {
+                registry.terminateRegistry(true);
+            }
+        }
         return null;
     }
 
@@ -193,61 +203,71 @@ public final class TagAnalyzer
         // based on the doStartTag method. They also don't provide a standard
         // interface for acquiring the id so instead we make some guess on
         // the internal field name.
-        final String className = tldDecl.getTagclass();
-
-        final IConfigurationContributor[] contributor = new IConfigurationContributor[]
-        { new ServletBeanProxyContributor(project) };
-        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
-                contributor, project);
-
-        if (registry != null)
+        ProxyFactoryRegistry registry = null;
+        try
         {
-            final IStandardBeanTypeProxyFactory factory = registry
-                    .getBeanTypeProxyFactory();
-            final IBeanTypeProxy classTypeProxy = factory
-                    .getBeanTypeProxy(className);
-
-            try
+            final String className = tldDecl.getTagclass();
+    
+            final IConfigurationContributor[] contributor = new IConfigurationContributor[]
+            { new ServletBeanProxyContributor(project) };
+            registry = getProxyFactoryRegistry(
+                    contributor, project);
+    
+            if (registry != null)
             {
-                final IType type = JavaCore.create(project).findType(className);
-
-                if (type != null
-                        && DTComponentIntrospector
-                                .isTypeNameInstanceOfClass(
-                                        type,
-                                        Collections
-                                                .singleton(JAVAX_FACES_WEBAPP_CONVERTER_ELTAG)))
+                final IStandardBeanTypeProxyFactory factory = registry
+                        .getBeanTypeProxyFactory();
+                final IBeanTypeProxy classTypeProxy = factory
+                        .getBeanTypeProxy(className);
+    
+                try
                 {
-                    return findConverterType_InELTag(factory, classTypeProxy);
+                    final IType type = JavaCore.create(project).findType(className);
+    
+                    if (type != null
+                            && DTComponentIntrospector
+                                    .isTypeNameInstanceOfClass(
+                                            type,
+                                            Collections
+                                                    .singleton(JAVAX_FACES_WEBAPP_CONVERTER_ELTAG)))
+                    {
+                        return findConverterType_InELTag(factory, classTypeProxy,project);
+                    }
+                    // the assumption is that this is a component tag, so we assume
+                    // it is one.
+                    else if (type != null
+                            && DTComponentIntrospector
+                                    .isTypeNameInstanceOfClass(
+                                            type,
+                                            Collections
+                                                    .singleton(JAVAX_FACES_WEBAPP_CONVERTER_TAG)))
+                    {
+                        return findConverterType_InTag(factory, classTypeProxy, project);
+                    }
                 }
-                // the assumption is that this is a component tag, so we assume
-                // it is one.
-                else if (type != null
-                        && DTComponentIntrospector
-                                .isTypeNameInstanceOfClass(
-                                        type,
-                                        Collections
-                                                .singleton(JAVAX_FACES_WEBAPP_CONVERTER_TAG)))
+                catch (final JavaModelException jme)
                 {
-                    return findConverterType_InTag(factory, classTypeProxy);
+                    // suppress for now
                 }
-            }
-            catch (final JavaModelException jme)
-            {
-                // suppress for now
             }
         }
-
+        finally
+        {
+            if (registry != null)
+            {
+                registry.terminateRegistry(true);
+            }
+        }
         return null;
     }
 
     private static String findConverterType_InTag(
             final IStandardBeanTypeProxyFactory factory,
-            final IBeanTypeProxy classTypeProxy)
+            final IBeanTypeProxy classTypeProxy, final IProject project)
     {
         final IBeanTypeProxy nullPageContextType = factory
                 .getBeanTypeProxy("javax.servlet.jsp.PageContext");
-        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
+        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
                 classTypeProxy);
 
         try
@@ -295,9 +315,9 @@ public final class TagAnalyzer
 
     private static String findConverterType_InELTag(
             final IStandardBeanTypeProxyFactory factory,
-            final IBeanTypeProxy classTypeProxy)
+            final IBeanTypeProxy classTypeProxy, final IProject project)
     {
-        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
+        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
                 classTypeProxy);
         final IBeanTypeProxy elExpressionType = factory
                 .getBeanTypeProxy("javax.el.ValueExpression");
@@ -320,7 +340,7 @@ public final class TagAnalyzer
             if (converterId != null)
             {
                 converterId.getTypeProxy().isKindOf(elExpressionType);
-                final BeanProxyWrapper elExprValue = new BeanProxyWrapper(
+                final BeanProxyWrapper elExprValue = new BeanProxyWrapper(project,
                         converterId.getTypeProxy());
                 final String value = elExprValue
                         .callStringMethod("getExpressionString");
@@ -361,60 +381,71 @@ public final class TagAnalyzer
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
         { new ServletBeanProxyContributor(project) };
-        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
-                contributor, project);
 
-        if (registry != null)
+        ProxyFactoryRegistry registry = null;
+
+        try
         {
-            final IStandardBeanTypeProxyFactory factory = registry
-                    .getBeanTypeProxyFactory();
-            final IBeanTypeProxy classTypeProxy = factory
-                    .getBeanTypeProxy(className);
-            final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
-                    classTypeProxy);
-            final IBeanTypeProxy converterProxy = factory
-                    .getBeanTypeProxy(JAVAX_FACES_WEBAPP_VALIDATOR_TAG);
-            try
+            registry = getProxyFactoryRegistry(contributor, project);
+    
+            if (registry != null)
             {
-                classTypeWrapper.init();
-
-                callSuppressExceptions(classTypeWrapper, "doStartTag");
-                callSuppressExceptions(classTypeWrapper, "createValidator");
-
-                // hopefully doStartTag set the converter field before it
-                // failed.
-                // now try to guess what it's called
-                String validatorId = getStringField(classTypeWrapper,
-                        converterProxy, "validatorId");
-
-                if (validatorId != null)
+                final IStandardBeanTypeProxyFactory factory = registry
+                        .getBeanTypeProxyFactory();
+                final IBeanTypeProxy classTypeProxy = factory
+                        .getBeanTypeProxy(className);
+                final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
+                        classTypeProxy);
+                final IBeanTypeProxy converterProxy = factory
+                        .getBeanTypeProxy(JAVAX_FACES_WEBAPP_VALIDATOR_TAG);
+                try
                 {
-                    return validatorId;
+                    classTypeWrapper.init();
+    
+                    callSuppressExceptions(classTypeWrapper, "doStartTag");
+                    callSuppressExceptions(classTypeWrapper, "createValidator");
+    
+                    // hopefully doStartTag set the converter field before it
+                    // failed.
+                    // now try to guess what it's called
+                    String validatorId = getStringField(classTypeWrapper,
+                            converterProxy, "validatorId");
+    
+                    if (validatorId != null)
+                    {
+                        return validatorId;
+                    }
+    
+                    validatorId = getStringField(classTypeWrapper, converterProxy,
+                            "_validatorId");
+    
+                    if (validatorId != null)
+                    {
+                        return validatorId;
+                    }
+    
+                    // no? then see if there's a VALIDATOR_ID field *on the tag*
+                    validatorId = getStringField(classTypeWrapper, classTypeProxy,
+                            "VALIDATOR_ID");
+    
+                    if (validatorId != null)
+                    {
+                        return validatorId;
+                    }
                 }
-
-                validatorId = getStringField(classTypeWrapper, converterProxy,
-                        "_validatorId");
-
-                if (validatorId != null)
+                catch (final ProxyException tp)
                 {
-                    return validatorId;
+                    // fall through
                 }
-
-                // no? then see if there's a VALIDATOR_ID field *on the tag*
-                validatorId = getStringField(classTypeWrapper, classTypeProxy,
-                        "VALIDATOR_ID");
-
-                if (validatorId != null)
-                {
-                    return validatorId;
-                }
-            }
-            catch (final ProxyException tp)
-            {
-                // fall through
             }
         }
-
+        finally
+        {
+            if (registry != null)
+            {
+                registry.terminateRegistry(true);
+            }
+        }
         return null;
 
     }

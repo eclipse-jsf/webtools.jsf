@@ -129,11 +129,16 @@ public final class TLDRegistryManager extends
             }
         }
 
+        @Override
+        public boolean isInstance(IProject project)
+        {
+           return getGlobalManager().isInstance(project);
+        }
+
         public String getDisplayName()
         {
             return "JSP Registry Factory";
         }
-
     }
 
     private class MyWorkspaceSaveParticipant implements ISaveParticipant

@@ -10,17 +10,27 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.ui.internal.preferences;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider;
 import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider.OrderableObject;
 import org.eclipse.jst.jsf.common.ui.internal.preferences.StrategyOrderingPanel;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryManager;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryPreferences;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryPreferences.StrategyIdentifier;
+import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -72,7 +82,34 @@ public class JSPTagRegistryPreferencePage extends PreferencePage implements
     {
         if (_tldRegistryPreferences.isDirty())
         {
-            _tldRegistryPreferences.commit(getPreferenceStore());
+            final MessageDialogWithToggle dialog = 
+                MessageDialogWithToggle.openOkCancelConfirm(getShell(), 
+                    Messages.JSPTagRegistryPreferencePage_0, 
+                    Messages.JSPTagRegistryPreferencePage_1, 
+                    Messages.JSPTagRegistryPreferencePage_2, false, null, null);
+    
+            if (dialog.getReturnCode() == Window.OK)
+            {
+                _tldRegistryPreferences.commit(getPreferenceStore());
+                final TagRegistryFactory myRegistryFactory = new TLDRegistryManager.MyRegistryFactory();
+                for (final IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects())
+                {
+                    if (project.isAccessible()
+                            && myRegistryFactory.isInstance(project))
+                    {
+                        try
+                        {
+                            final ITagRegistry tagRegistry = 
+                                myRegistryFactory.createTagRegistry(project);
+                            tagRegistry.refresh(null, dialog.getToggleState());
+                        } 
+                        catch (TagRegistryFactoryException e)
+                        {
+                            JSFUiPlugin.log(IStatus.ERROR, "Error getting JSP tag registry on project: "+project.getName(), e); //$NON-NLS-1$
+                        }
+                    }
+                }
+            }
         }
     }
 
