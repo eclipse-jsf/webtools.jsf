@@ -52,27 +52,31 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
     public void testGetPropertyNames() {	
 		Set names = dm.getPropertyNames();
 		Assert.assertNotNull(names);
-		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
-		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION));
+//		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
+//		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION));
 		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.CONFIG_PATH));
 		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.SERVLET_NAME));
 		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS));
 		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.WEBCONTENT_DIR));
+		
+		Assert.assertTrue(names.contains(IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE));
 	}
 
 	/*
 	 * Test method for 'org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider.getDefaultProperty(String)'
 	 */
 	public void testGetDefaultPropertyString() {
-		Assert.assertNotNull(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
-		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) instanceof JSFLibraryInternalReference);
-		JSFLibraryInternalReference ref = (JSFLibraryInternalReference)dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) ;
-		Assert.assertTrue(ref.getLibrary() == jsfLib);
-		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION) == Boolean.TRUE);
+//		Assert.assertNotNull(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
+//		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) instanceof JSFLibraryInternalReference);
+//		JSFLibraryInternalReference ref = (JSFLibraryInternalReference)dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION) ;
+//		Assert.assertTrue(ref.getLibrary() == jsfLib);
+//		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION) == Boolean.TRUE);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH) != null);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME) != null);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS) != null);
 		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.WEBCONTENT_DIR) != null);
+		
+//		Assert.assertTrue(dm.getDefaultProperty(IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE) != null);
 	}
 
 	/*

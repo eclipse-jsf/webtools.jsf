@@ -74,9 +74,9 @@ public class AllTests
 		// test the jar file appconfig provider
 		// TODO C.B: add this back suite.addTestSuite(TestJARFileJSFAppConfigProvider.class);
 		
-		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
+//		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
 		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
-		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
+//		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 
 		suite.addTestSuite(TestJSPSemanticsValidator_Containment.class);
