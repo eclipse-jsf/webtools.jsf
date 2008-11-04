@@ -15,14 +15,21 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
  * 
  */
 
-public class CustomizationDataImpl implements ICustomizationData, IAdaptable
+public class CustomizationDataImpl implements IWritableCustomizationData, IAdaptable
 {
     private TagIdentifier tagIdentifier;
     private AttributeData _attrs;
     private ChildrenData childrenData;
     private ParentData parentData;
+
     
-   
+	/**
+	 * Constructor.
+	 * 
+	 * @param target
+	 *            Tag identifier for the tag whose customization data this is
+	 * 
+	 */
     public CustomizationDataImpl(final TagIdentifier target)
     {
         tagIdentifier = target;
@@ -32,6 +39,9 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     }
 
     
+    /* (non-Javadoc)
+     * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
+     */
     public Object getAdapter(Class adapter)
     {
         if (ICustomizationData.class.equals(adapter))
@@ -48,12 +58,8 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     //------------------------------------------------------------
 
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData
-     * #getTagIdentifier()
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData#getTagIdentifier()
      */
     public TagIdentifier getTagIdentifier()
     {
@@ -61,6 +67,9 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     }
 
     
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#setTagIdentifier(org.eclipse.jst.jsf.common.dom.TagIdentifier)
+     */
     public void setTagIdentifier(TagIdentifier tagId)
     {
         this.tagIdentifier = tagId;
@@ -72,12 +81,8 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     //------------------------------------------------------------
 
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData
-     * #getAttributeData()
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData#getAttributeData()
      */
     public final AttributeData getAttributeData()
     {
@@ -85,12 +90,18 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     }
 
     
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#setAttributes(org.eclipse.jst.pagedesigner.itemcreation.customizer.AttributeData)
+     */
     public void setAttributes(AttributeData attrs)
     {
         _attrs = attrs;
     }
 
     
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#addAttribute(java.lang.String, java.lang.String)
+     */
     public void addAttribute(String attributeName, String attributeValue)
     {
         getAttributeData().addAttribute(attributeName, attributeValue);
@@ -102,12 +113,8 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     //------------------------------------------------------------
 
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData
-     * #getChildrenData()
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData#getChildrenData()
      */
     public final ChildrenData getChildrenData()
     {
@@ -115,15 +122,21 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     }    
 
     
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#setChildrenData(org.eclipse.jst.pagedesigner.itemcreation.customizer.ChildrenData)
+     */
     public void setChildrenData(ChildrenData data)
     {
         childrenData = data;
     }
 
     
-    public void addChildrenData (ICustomizationData childrenData)
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#addChildrenData(org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData)
+     */
+    public void addChildrenData (ICustomizationData childData)
     {
-        getChildrenData().add(childrenData);
+        getChildrenData().add(childData);
     }
     
     
@@ -132,12 +145,8 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     //------------------------------------------------------------
     
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData
-     * #getParentData()
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData#getParentData()
      */
     public final ParentData getParentData()
     {
@@ -145,22 +154,20 @@ public class CustomizationDataImpl implements ICustomizationData, IAdaptable
     }
 
     
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#setParentData(org.eclipse.jst.pagedesigner.itemcreation.customizer.ParentData)
+     */
     public void setParentData(ParentData parentData)
     {
         this.parentData = parentData;
     }
 
     
-    /**
-     * Attaches a parent to a tag (The customization data for a parent is added
-     * to the tag's customization data). The oldest parent (outermost container
-     * tag) should be attached (added) first.
-     * 
-     * @param parentData
-     *            Parent customization data
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#addParentData(org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData)
      */
-    public void addParentData (ICustomizationData parentData)
+    public void addParentData (ICustomizationData parentData_)
     {
-        getParentData().add(parentData);
+        getParentData().add(parentData_);
     }
 }

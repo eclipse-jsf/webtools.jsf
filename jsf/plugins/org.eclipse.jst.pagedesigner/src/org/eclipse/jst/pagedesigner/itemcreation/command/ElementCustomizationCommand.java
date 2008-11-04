@@ -66,6 +66,10 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
         _creationData = creationData;
     }
 
+    
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.internal.AbstractCreationCommand#execute()
+     */
     @Override
     public void execute()
     {
@@ -73,6 +77,10 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
         applyAttributeCustomization();
     }
 
+    
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.internal.AbstractCreationCommand#prepare()
+     */
     @Override
     protected boolean prepare()
     {
@@ -159,12 +167,20 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
         }
     }
 
+    
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.internal.AbstractCreationCommand#chain(org.eclipse.emf.common.command.Command)
+     */
     @Override
     public final Command chain(final Command command)
     {
         return super.chain(command);
     }
 
+    
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.itemcreation.internal.AbstractCreationCommand#getResult()
+     */
     @Override
     public final Collection<Element> getResult()
     {

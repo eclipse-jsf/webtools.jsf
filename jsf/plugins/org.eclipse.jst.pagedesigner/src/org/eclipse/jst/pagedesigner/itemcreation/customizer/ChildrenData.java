@@ -16,12 +16,24 @@ public class ChildrenData
     private List<ICustomizationData> childList;
 
     
+    /**
+     * Default constructor
+     * 
+     */
     public ChildrenData()
     {
         this.childList = new ArrayList<ICustomizationData>();
     }
 
     
+	/**
+	 * Constructor to initialize a ChildrenData object with a list of
+	 * customization data for the child tags
+	 * 
+	 * @param childList
+	 *            List of customization data objects for child tags
+	 * 
+	 */
     public ChildrenData(List<ICustomizationData> childList)
     {
         this.childList = childList;
