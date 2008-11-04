@@ -11,13 +11,17 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.dnd.internal;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.dnd.TemplateTransfer;
 import org.eclipse.jst.pagedesigner.PDPlugin;
+import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.DropCustomizationController;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetEvent;
 
@@ -109,5 +113,44 @@ public class PDTemplateTransferDropTargetListener extends
 			super.drop(event);
 		}
 	}
+
+    @Override
+    protected void handleDrop()
+    {
+        // copied from AbstractTransferDropListener and modified for drop 
+        // customization
+        updateTargetRequest();
+        updateTargetEditPart();
+
+        if (getTargetEditPart() != null) {
+            Command command = getCommand();
+            if (command != null && command.canExecute())
+                if (customizeAndCheckExecute(command))
+                {
+                    getViewer().getEditDomain().getCommandStack().execute(command);
+                }
+            else
+                getCurrentEvent().detail = DND.DROP_NONE;
+        } else
+            getCurrentEvent().detail = DND.DROP_NONE;
+    }
+
+    private boolean customizeAndCheckExecute(final Command command)
+    {
+        if (command instanceof CreateItemCommand)
+        {
+            final ItemCreationRequest request = (ItemCreationRequest) getCreateRequest();
+            final String name = request.getTagToolPaletteEntry().getTagName();
+            final String uri = request.getTagToolPaletteEntry().getURI();
+            final CreateItemCommand createCommand = (CreateItemCommand) command;
+            final IStatus status  = 
+                new DropCustomizationController(createCommand, uri, name, createCommand.getDocument(), createCommand.getPosition())
+                    .performCustomization();
+            
+            return status.getSeverity() == IStatus.OK;
+        }
+        // don't block a drop if the command is not customizable
+        return true;
+    }
 
 }

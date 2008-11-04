@@ -17,13 +17,9 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.SharedCursors;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.tools.TargetingTool;
-import org.eclipse.jst.jsf.common.dom.TagIdentifier;
-import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
-import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
-import org.eclipse.jst.pagedesigner.itemcreation.customizer.IDropCustomizer;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.DropCustomizationController;
 import org.eclipse.swt.graphics.Cursor;
 
 /**
@@ -162,51 +158,30 @@ public class ItemCreationTool extends TargetingTool {
 	}
 
 	/**
-	 * @param button
-	 */
-	protected void customizeDropAndMaybeExecute(final int button)
-	{
+     * @param button
+     */
+    protected void customizeDropAndMaybeExecute(final int button)
+    {
         Command command = getCurrentCommand();
-        
-        int status = IStatus.OK;
+
+        IStatus status = Status.OK_STATUS;
         if (command instanceof CreateItemCommand)
         {
-            status = performCustomization((CreateItemCommand)command);
+            status = new DropCustomizationController((CreateItemCommand) command,
+                    _tagPaletteItem.getURI(), _tagPaletteItem.getTagName(), 
+                    ((CreateItemCommand)command).getDocument(),
+                    ((CreateItemCommand)command).getPosition()).
+                performCustomization();
         }
-        
-        if (status == IStatus.OK)
+
+        if (status.getSeverity() == IStatus.OK)
         {
             performCreation(button);
         }
-	}
+    }
 
-	private int performCustomization(CreateItemCommand command)
-	{
-	    IStatus status = Status.OK_STATUS;
-	    TagIdentifier tagId = 
-	        TagIdentifierFactory.createJSPTagWrapper
-	            (_tagPaletteItem.getURI(), _tagPaletteItem.getTagName());
-	    
-	    IElementEdit elementEdit = ElementEditFactoryRegistry.getInstance().createElementEdit(tagId);
 
-	    if (elementEdit != null)
-	    {
-	        IDropCustomizer customizer = elementEdit.getDropCustomizer(tagId);
-    	    
-    	    if (customizer != null)
-    	    {
-        	    status = customizer.runCustomizer();
-        	    
-        	    if (status.getSeverity() == IStatus.OK)
-        	    {
-        	        command.setCustomizationData(customizer.getDropCustomizationData());
-        	    }
-    	    }
-	    }
-	    return status.getSeverity();
-	}
-
-	/**
+    /**
 	 * Updates the request, sets the current command, and asks to show feedback.
 	 * 
 	 * @see org.eclipse.gef.tools.AbstractTool#handleDragInProgress()

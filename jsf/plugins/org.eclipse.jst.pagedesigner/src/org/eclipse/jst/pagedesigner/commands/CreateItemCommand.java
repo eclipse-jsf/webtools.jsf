@@ -22,7 +22,8 @@ import org.w3c.dom.Element;
 /**
  * @author mengbo
  */
-public class CreateItemCommand extends DesignerCommand {
+public class CreateItemCommand extends DesignerCommand implements ICustomizableCommand 
+{
 	private final IDOMPosition _position;
 
 	private final TagToolPaletteEntry _tagItem;
@@ -42,7 +43,17 @@ public class CreateItemCommand extends DesignerCommand {
 		this._tagItem = tagItem;
 	}
 
-	/*
+	
+	/**
+	 * @return the dom position for the drop
+	 */
+	public IDOMPosition getPosition()
+    {
+        return _position;
+    }
+
+
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()

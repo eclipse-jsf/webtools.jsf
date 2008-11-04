@@ -24,16 +24,16 @@ import org.w3c.dom.Element;
 
 /**
  * IElementEdit support additional edit support to an element.
- * 
+ *
  * This interface should not be extended by clients.  Extend AbstractElementEdit
  * instead.
- * 
+ *
  * <p><b>Provisional API - subject to change</b></p>
- * 
+ *
  * @author mengbo
  * @version 1.5
  */
-public interface IElementEdit 
+public interface IElementEdit
 {
 	/**
 	 * override default edit policies on part
@@ -43,10 +43,10 @@ public interface IElementEdit
 
 	/**
 	 * The element (or its decendent) changed.
-	 * 
+	 *
 	 * @param ele
 	 * @param part
-	 * @param recursive 
+	 * @param recursive
 	 * @return handle model changes on part.
 	 */
 	public boolean handleModelChange(Element ele, ElementEditPart part,
@@ -54,9 +54,9 @@ public interface IElementEdit
 
 	/**
 	 * Add special menu items for the particular element to the context menu.
-	 * 
+	 *
 	 * @param contextMenu
-	 * @param ele 
+	 * @param ele
 	 */
 	public void fillContextMenu(IMenuManager contextMenu, Element ele);
 
@@ -67,7 +67,7 @@ public interface IElementEdit
 	 * "innerSelection" could be something inside a cell. Then could fill in
 	 * actions relating to the table and the cell, such as "add row before",
 	 * "delete current column", etc.
-	 * 
+	 *
 	 * @param contextMenu
 	 * @param elePart
 	 *            the elementeditpart corresponding to this ElementEdit
@@ -86,35 +86,35 @@ public interface IElementEdit
 	 * whether the corresponding element support resize. If it does, then the
 	 * corresponding policy installed through <code>createEditPolicies</code>
 	 * should handle resize.
-	 * @param ele 
-	 * 
+	 * @param ele
+	 *
 	 * @return true if ele has resize support
 	 */
 	public boolean isResizable(Element ele);
-    
+
     /**
      * @param tag the element to return a drop location strategy for.
      * This is the requesting element (being dropped), not the drop target
-     * 
+     *
      * @param viewer is the viewer where the new strategy will optionally
      * add feedback
-     * 
+     *
      * @return the strategy to be used to use to find a drop location when
      * the corresponding element is being dropped (the source part).  May
      * be null signalling that the caller should use its default strategy.
-     * 
+     *
      */
      public IDropLocationStrategy getDropRequestorLocationStrategy(TagIdentifier tag, EditPartViewer viewer);
 
     /**
-     * @param tagId 
+     * @param tagId
      * @return the drop customizer for this edit's element.  May return null.
      * Returning null and returning a IDropCustomizer whose runCustomizer always returns
-     * OK and getDropCustomizationData always returns null will be considered 
+     * OK and getDropCustomizationData always returns null will be considered
      * equivalent by the framework.
      */
     public IDropCustomizer getDropCustomizer(TagIdentifier tagId);
-    
+
     /**
      * @param tagId
      * @return a tag creator for the indicated tag or null to indicate that the
