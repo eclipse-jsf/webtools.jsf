@@ -14,7 +14,7 @@ package org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;
  * Listener interface when a new JSF implementation library is created.
  * 
  * @author Justin Chen - Oracle
- *
+ * @deprecated
  */
 public interface IJSFImplLibraryCreationListener extends java.util.EventListener {
 	/**

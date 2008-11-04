@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
  * to a JSF library when it is referenced by a project.  
  * 
  * @author Justin Chen - Oracle
+ * @deprecated
  */
 public class JSFLibraryInternalReference {
 	final private JSFLibrary jsfLib;
@@ -89,8 +90,8 @@ public class JSFLibraryInternalReference {
 	 * @return String
 	 */
 	protected String generatePersistString() {
-		return (getID() + JSFLibraryConfigProjectData.SPTR_TUPLE + 
-				String.valueOf(isSelected()) + JSFLibraryConfigProjectData.SPTR_TUPLE + 
+		return (getID() + JSFLibraryConfigDialogSettingData.SPTR_TUPLE + 
+				String.valueOf(isSelected()) + JSFLibraryConfigDialogSettingData.SPTR_TUPLE + 
 				String.valueOf(isCheckedToBeDeployed())); 
 	}
 

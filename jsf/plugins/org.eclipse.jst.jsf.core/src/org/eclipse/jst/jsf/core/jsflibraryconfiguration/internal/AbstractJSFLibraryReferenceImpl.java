@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReference;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFVersion;
 /**
  * @author gekessle
- *
+ * @deprecated
  */
 public abstract class AbstractJSFLibraryReferenceImpl implements JSFLibraryReference {
 	

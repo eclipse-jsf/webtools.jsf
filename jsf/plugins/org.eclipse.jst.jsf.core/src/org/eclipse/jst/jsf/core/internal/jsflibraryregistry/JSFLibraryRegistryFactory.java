@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage
  * @generated
+ * @deprecated
  */
 public interface JSFLibraryRegistryFactory extends EFactory{
 	/**

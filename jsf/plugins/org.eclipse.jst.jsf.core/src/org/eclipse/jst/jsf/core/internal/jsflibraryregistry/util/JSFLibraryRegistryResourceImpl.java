@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryResourceImpl extends XMLResourceImpl {
 	/**

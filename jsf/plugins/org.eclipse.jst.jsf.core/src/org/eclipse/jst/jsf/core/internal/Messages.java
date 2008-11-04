@@ -24,11 +24,6 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
-	public static String JSFFacetInstallDataModelProvider_ClientImplValidationMsg;
-
-	/**
-	 * see messages.properties
-	 */
 	public static String JSFFacetInstallDataModelProvider_DupeJarValidation;
 
 	/**
@@ -97,10 +92,6 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFFacetInstallDataModelProvider_ValidateServletName;
-    /**
-     * see messages.properties
-     */
-	public static String JSFFacetInstallDataModelProvider_ValidateJSFImpl;
     /**
      * see messages.properties
      */

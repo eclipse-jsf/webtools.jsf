@@ -58,6 +58,7 @@ import org.osgi.framework.Bundle;
  * </p>
  *
  * @generated
+ * @deprecated
  */
 public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	/**

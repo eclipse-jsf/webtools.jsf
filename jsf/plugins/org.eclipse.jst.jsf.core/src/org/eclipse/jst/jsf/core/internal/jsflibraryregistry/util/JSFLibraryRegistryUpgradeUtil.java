@@ -26,6 +26,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
  * Utility for checking for, and upgrading the JSF Library Registry when the EMF model changes.
+ * @deprecated
  */
 public class JSFLibraryRegistryUpgradeUtil {	
 	static String v1Tov2UpgradeURL = "http://www.eclipse.org/JSFxxxxxxxxxxxxxxxxxxxxxx";

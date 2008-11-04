@@ -53,6 +53,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * Common control for adding JSF library instances
+ * @deprecated
  */
 public class JSFLibraryEditControl extends Composite implements ModifyListener, SelectionListener 
 {
@@ -61,7 +62,6 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 	private CCombo cboVersions;
 	private Label lblVersions;
 	private Button chkDeploy;
-	private Button chkImpl;
 	private Composite btnBar;
 	private Button btnAdd;
 	private Button btnRemove;
@@ -139,13 +139,6 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 
 		createButtons(jarsComp);
 
-		chkImpl = new Button(this, SWT.CHECK);
-		chkImpl.setText(Messages.JSFLibraryWizard_IsJSFImplementation);
-		GridData gd3 = new GridData();
-		gd3.horizontalSpan = 2;
-		chkImpl.setLayoutData(gd3);
-		chkImpl.addSelectionListener(this);
-
 		chkDeploy = new Button(this, SWT.CHECK);
 		chkDeploy.setText(Messages.JSFLibraryWizard_DeployJars);
 		GridData gd4 = new GridData();
@@ -164,7 +157,6 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 				cboVersions.setText(workingCopyLibrary.getJSFVersion().getName());
 			}
 			chkDeploy.setSelection(workingCopyLibrary.isDeployed());
-			chkImpl.setSelection(workingCopyLibrary.isImplementation());
 		}
 		jars.setInput(workingCopyLibrary);
 
@@ -459,13 +451,6 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 
 
 	/**
-	 * @return the value of the user input for the isJSFImplementation checkbox
-	 */
-	public boolean getIsImplementation() {
-		return chkImpl.getSelection();
-	}
-
-	/**
 	 * @return the jsf version selected in the version dropping
 	 */
 	public JSFVersion getJSFVersion() {
@@ -477,23 +462,4 @@ public class JSFLibraryEditControl extends Composite implements ModifyListener, 
 		return JSFVersion.UNKNOWN_LITERAL;
 	}
 
-	/**
-	 * @param implsOnly
-	 */
-	public void setImplOnly(boolean implsOnly) {
-		if (implsOnly){
-			chkImpl.setSelection(true);
-			chkImpl.setEnabled(false);
-		}
-	}
-	
-	/**
-	 * @param nonImplsOnly
-	 */
-	public void setNonImplOnly(boolean nonImplsOnly) {
-		if (nonImplsOnly){
-			chkImpl.setSelection(false);
-			chkImpl.setEnabled(false);
-		}
-	}
 }

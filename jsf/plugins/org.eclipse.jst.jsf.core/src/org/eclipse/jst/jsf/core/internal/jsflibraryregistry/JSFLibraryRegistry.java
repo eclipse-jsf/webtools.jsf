@@ -31,6 +31,7 @@ import org.eclipse.jst.jsf.core.internal.Messages;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFLibraryRegistry()
  * @model
  * @generated
+ * @deprecated
  */
 public interface JSFLibraryRegistry extends EObject{
 	/**

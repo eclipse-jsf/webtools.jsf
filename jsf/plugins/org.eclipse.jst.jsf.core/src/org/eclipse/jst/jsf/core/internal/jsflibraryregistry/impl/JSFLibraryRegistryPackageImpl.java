@@ -31,6 +31,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLibraryRegistryPackage {
 	/**

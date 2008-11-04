@@ -13,87 +13,44 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryconfig;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
-import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
-
 /**
  * To construct implementation library and component libraries from sticky values 
  * in DialogSettings as saved libraries.  
  * 
  * @author Justin Chen - Oracle
+ * @deprecated
  */
-public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModelSource {
+public class JSFLibraryConfigDialogSettingData {
 	/**
 	 * Delimintor for parsing a persistent property string.
 	 */
 	final protected static String SEPARATOR =":";	//$NON-NLS-1$
 
+    /**
+     * Parsing delimnitor for elements in a tuple.
+     */
+    final protected static String SPTR_TUPLE = ":"; //$NON-NLS-1$
+    /**
+     * Parsing delimintor for tuples in a persistent property string.
+     */
+    final protected static String EO_TUPLE = ";";   //$NON-NLS-1$
+    
 	final private JSFLibraryRegistryUtil jsfLibReg;
-	final private boolean dftImplLibDeployFlag;
 	private String[] savedCompLibs;
-	private JSFLibraryInternalReference selJSFLibImpl;	// lazy initialized	
 	private List selJSFLibComp;							// lazy initialized
-
-	private IMPLEMENTATION_TYPE implType;
 	
 	
 	/**
 	 * Constructor where implementation type was chosen to be USER_SPECIFIED.  Created for backwards compatibilty when server supplied was not an option.
-	 * @param implLibDeployFlag
 	 * @param compLibs
 	 */
-	public JSFLibraryConfigDialogSettingData(boolean implLibDeployFlag, String[] compLibs) {
-		this(IMPLEMENTATION_TYPE.USER_SPECIFIED, implLibDeployFlag, compLibs);		
-	}
-	
-	/**
-	 * Constructor
-	 * @param implType {@link IMPLEMENTATION_TYPE}
-	 * @param implLibDeployFlag String  valid options are "true" or "false"
-	 * @param compLibs String[]  saved component library settings in string array
-	 * 
-	public JSFLibraryConfigDialogSettingData(String implLibDeployFlag, String[] compLibs) {
+	public JSFLibraryConfigDialogSettingData( String[] compLibs) {
 		this.jsfLibReg = JSFLibraryRegistryUtil.getInstance();
-		this.dftImplLibDeployFlag = implLibDeployFlag;
 		this.savedCompLibs = compLibs;
-		
-		// Verify and log a message if a saved component library no longer exists. 
-		verifySavedLibAvailability();
-	}
-	*/
-	public JSFLibraryConfigDialogSettingData(IMPLEMENTATION_TYPE implType, boolean implLibDeployFlag, String[] compLibs) {
-		
-		this.jsfLibReg = JSFLibraryRegistryUtil.getInstance();
-		this.dftImplLibDeployFlag = implLibDeployFlag;
-		this.savedCompLibs = compLibs;
-		this.implType = implType;
 		
 		// Verify and log a message if a saved component library no longer exists. 
 		verifySavedLibAvailability();
 	}	
-	
-	/**
-	 * There is no saved JSFImplLibrary per se if initializing from DialogSettings 
-	 * since default implementation library is always selected and only the 
-	 * deployment flag is saved.  
-	 * 
-	 * A null is returned when there is no default 
-	 * implementation library in registry.
-	 *     
-	 * @return selJSFLibImpl JSFLibraryInternalReference return default implementation library with updated deployment flag 
-	 */
-	public JSFLibraryInternalReference getJSFImplementationLibrary() {
-		if (selJSFLibImpl == null) {
-			// To instanciate a JSFLibraryReferenceUserSpecified object from default impl lib as the saved library.  
-			JSFLibraryInternalReference dftImplLib = jsfLibReg.getDefaultJSFImplementationLibrary(); 		
-			if (dftImplLib != null) {
-				selJSFLibImpl = new JSFLibraryInternalReference(dftImplLib.getLibrary(), 
-						true,	// selected 
-						dftImplLibDeployFlag);
-			}
-		}
-		return selJSFLibImpl;
-	}
 	
 	/**
 	 * Return the list of saved component libraries and their deployment settings.
@@ -160,12 +117,5 @@ public class JSFLibraryConfigDialogSettingData implements JSFLibraryConfiglModel
 		}	
 		
 
- 	}
-	
- 	/**
- 	 * @return {@link IMPLEMENTATION_TYPE}
- 	 */
- 	public IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE getImplementationType(){
- 		return implType;
  	}
 }

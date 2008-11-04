@@ -26,7 +26,7 @@ import org.eclipse.core.runtime.Status;
  * Encapsulates a chain of one or more version steps into a full upgrade.
  * 
  * @author cbateman
- *
+ * @deprecated
  */
 public class UpgradeOperation extends AbstractOperation {
 

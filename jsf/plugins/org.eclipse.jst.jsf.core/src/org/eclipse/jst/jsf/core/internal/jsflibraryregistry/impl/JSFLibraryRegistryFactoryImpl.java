@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLibraryRegistryFactory {
 	/**

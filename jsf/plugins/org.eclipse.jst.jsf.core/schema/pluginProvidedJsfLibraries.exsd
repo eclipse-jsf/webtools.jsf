@@ -1,18 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.jst.jsf.core">
+<schema targetNamespace="extension" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appInfo>
-         <meta.schema plugin="org.eclipse.jst.jsf.core" id="pluginProvidedJsfLibraries" name="JSF Libraries"/>
-      </appInfo>
+      <appinfo>
+         <meta.schema plugin="extension" id="pluginProvidedJsfLibraries" name="JSF Libraries"/>
+      </appinfo>
       <documentation>
          This extension point allows clients to create named sets of jars for use with JavaServer Faces Applications.
 
 &lt;p&gt;&lt;b&gt;This extension point is provisional and subject to change&lt;/b&gt;&lt;/p&gt;
+
+&lt;b&gt;Deprecated&lt;/b&gt; Use org.eclipse.jst.common.project.facet.libraryProviders ext-pt
       </documentation>
    </annotation>
 
    <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element deprecated="true" replacement="org.eclipse.jst.common.project.facet.libraryProviders" />
+         </appinfo>
+      </annotation>
       <complexType>
          <sequence>
             <element ref="jsfLibrary" minOccurs="0" maxOccurs="unbounded"/>
@@ -22,6 +29,9 @@
                <documentation>
                   
                </documentation>
+               <appinfo>
+                  <meta.attribute deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="id" type="string" use="required">
@@ -29,6 +39,9 @@
                <documentation>
                   
                </documentation>
+               <appinfo>
+                  <meta.attribute deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="name" type="string">
@@ -36,9 +49,9 @@
                <documentation>
                   
                </documentation>
-               <appInfo>
-                  <meta.attribute translatable="true"/>
-               </appInfo>
+               <appinfo>
+                  <meta.attribute translatable="true" deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
@@ -46,9 +59,9 @@
 
    <element name="jsfLibrary">
       <annotation>
-         <appInfo>
-            <meta.element labelAttribute="name"/>
-         </appInfo>
+         <appinfo>
+            <meta.element labelAttribute="name" deprecated="true"/>
+         </appinfo>
          <documentation>
             A named collection of jars that will be added to the classpath as a classpath container to a project that references it.
          </documentation>
@@ -59,6 +72,9 @@
                <documentation>
                   A unique, non-translatable, name for the library.  The plugin developer is responsible for ensuring uniqueness within the plugin.  This name, in combination with the plugin id, is used to identify the classpath container reference.
                </documentation>
+               <appinfo>
+                  <meta.attribute deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="label" type="string">
@@ -66,9 +82,9 @@
                <documentation>
                   Translatable string for displaying the library name.
                </documentation>
-               <appInfo>
-                  <meta.attribute translatable="true"/>
-               </appInfo>
+               <appinfo>
+                  <meta.attribute translatable="true" deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="isImplementation" type="boolean" use="required">
@@ -76,6 +92,9 @@
                <documentation>
                   Flag indicating that this libary is declared to be a JSF implementation and not just a JSF component library.
                </documentation>
+               <appinfo>
+                  <meta.attribute deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="maxVersionSupported">
@@ -83,6 +102,9 @@
                <documentation>
                   Used to declare which JSF specification this library will support.
                </documentation>
+               <appinfo>
+                  <meta.attribute deprecated="true"/>
+               </appinfo>
             </annotation>
             <simpleType>
                <restriction base="string">
@@ -100,27 +122,27 @@
                <documentation>
                   class that must extend org.eclipse.jst.jsf.core.jsflibraryregistry.JSFLibraryArchiveFilesDelegate to supply a collection of IPaths to jars in the library
                </documentation>
-               <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryArchiveFilesDelegate"/>
-               </appInfo>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryArchiveFilesDelegate" deprecated="true"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="since"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          2.0
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="examples"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          The following is an example of usage of pluginProvidedJsfLibraries extension point:
 
@@ -140,27 +162,29 @@
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="apiInfo"/>
-      </appInfo>
+      </appinfo>
       <documentation>
-         Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class &lt;code&gt;org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryJarFilesDelegate&lt;/code&gt; and has a public 0-arg constructor.
+         This extension point is deprecated.
+
+Value of the attribute class must be a fully qualified name of a Java class that extends the abstract class &lt;code&gt;org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryJarFilesDelegate&lt;/code&gt; and has a public 0-arg constructor.
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="implementation"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          none
       </documentation>
    </annotation>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="copyright"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          Copyright (c) 2007 Oracle Corporation.
 All rights reserved. This program and the accompanying materials

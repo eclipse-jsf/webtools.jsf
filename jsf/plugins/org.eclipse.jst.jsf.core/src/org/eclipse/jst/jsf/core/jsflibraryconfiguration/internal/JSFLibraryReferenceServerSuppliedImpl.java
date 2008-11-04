@@ -16,7 +16,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFVersion;
 
 /**
  * @author gekessle
- *
+ * @deprecated
  */
 public class JSFLibraryReferenceServerSuppliedImpl 
 	extends AbstractJSFLibraryReferenceImpl 

@@ -25,11 +25,14 @@ public class Messages extends NLS {
         NLS.initializeMessages(BUNDLE_NAME, Messages.class);
     }
 
+    /**
+     * see messages.properties
+     */
+    public static String JSFFacetInstallPage_JSFImplementationLibrariesFrame;
 	/**
 	 * see messages.properties
 	 */
-	public static String JSFFacetInstallPage_JSFLibraryLabel0;
-
+	public static String JSFFacetInstallPage_JSFComponentLibrariesFrame;
     /**
      * see messages.properties
      */
@@ -157,18 +160,6 @@ public class Messages extends NLS {
     /**
      * see messages.properties
      */
-	public static String JSFLibraryConfigControl_ComponentLibrary;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryConfigControl_DeployButtonLabel;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryConfigControl_DeployJAR;
-    /**
-     * see messages.properties
-     */
 	public static String JSFLibraryConfigControl_ImplementationLibrary;
     /**
      * see messages.properties
@@ -177,15 +168,11 @@ public class Messages extends NLS {
     /**
      * see messages.properties
      */
-	public static String JSFLibraryConfigControl_NewImplButtonTooltip;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryConfigControl_NewImplementationLibrary;
-    /**
-     * see messages.properties
-     */
 	public static String JSFLibraryConfigControl_NullProject;
+    /**
+     * see messages.properties
+     */
+	public static String JSFLibraryConfigControl_DeployJAR;
     /**
      * see messages.properties
      */
@@ -194,14 +181,6 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFLibraryConfigControl_RemoveAll;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryConfigControl_ServerSuppliedButtonLabel;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryConfigControl_ServerSuppliedButtonTooltip;
     /**
      * see messages.properties
      */
@@ -254,14 +233,6 @@ public class Messages extends NLS {
 	public static String JSFLibraryContainerWizardPage_SelectOneImpl;
     /**
      * see messages.properties
-     */    
-	public static String JSFLibraryContainerWizardPage_V1Registry_Warning_DialogTitle;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryContainerWizardPage_V1Registry_Warning_DialogText;
-    /**
-     * see messages.properties
      */
     public static String JSFLibraryContainerWizardPage_EditLibrary_DescriptionText;
     /**
@@ -276,14 +247,6 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFLibraryWizard_DESCRIPTION;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryWizard_IMPLS_ONLY_DESC;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryWizard_CreateImplementation;
     /**
      * see messages.properties
      */
@@ -307,23 +270,11 @@ public class Messages extends NLS {
     /**
      * see messages.properties
      */
-    public static String JSFLibraryWizard_V1JSFLibrary_DialogMessage;
-    /**
-     * see messages.properties
-     */
-    public static String JSFLibraryWizard_V1JSFLibrary_DialogTitle;
-    /**
-     * see messages.properties
-     */
 	public static String JSFLibraryWizard_VersionSupported;
     /**
      * see messages.properties
      */
 	public static String JSFLibraryWizard_LibraryJars;
-    /**
-     * see messages.properties
-     */
-	public static String JSFLibraryWizard_IsJSFImplementation;
     /**
      * see messages.properties
      */
@@ -376,4 +327,5 @@ public class Messages extends NLS {
      * see messages.properties
      */
     public static String JSFPreferences_RootPage_Description;
+    
 }

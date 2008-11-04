@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryResourceFactoryImpl extends ResourceFactoryImpl {
 	/**

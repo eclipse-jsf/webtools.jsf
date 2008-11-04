@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JSFLibraryRegistryXMLProcessor.java,v 1.2 2007/04/04 18:50:17 cbateman Exp $
+ * $Id: JSFLibraryRegistryXMLProcessor.java,v 1.3 2008/11/04 01:28:34 gkessler Exp $
  */
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util;
 
@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPa
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryXMLProcessor extends XMLProcessor {
 	/**

@@ -18,10 +18,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IPath;
@@ -30,7 +28,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -53,7 +50,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegis
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceFactoryImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryUpgradeUtil;
-import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryCreationHelper;
 import org.eclipse.jst.jsf.core.jsflibraryregistry.internal.PluginProvidedJSFLibraryCreationHelper2;
@@ -68,6 +64,7 @@ import org.eclipse.jst.jsf.core.jsflibraryregistry.internal.PluginProvidedJSFLib
  * The lists are updated when there are changes in JSF library registry.
  * 
  * @author Justin Chen, etc. - Oracle
+ * @deprecated
  */
 @SuppressWarnings("deprecation")
 public class JSFLibraryRegistryUtil {
@@ -410,58 +407,6 @@ public class JSFLibraryRegistryUtil {
 		} catch (JavaModelException e) {
 			JSFCorePlugin.log(e, "Unable to set classpath for: "+project.getProject().getName());
 		}
-	}
-	
-	/**
-	 * @param iproject
-	 * @return true if iproject has persistent properties indicating that it may still
-	 * be using V1 JSF Library references
-	 */
-	public static boolean doesProjectHaveV1JSFLibraries(IProject iproject)
-	{
-	   if (iproject == null || !iproject.isAccessible())
-	   {
-	       return false; // won't be able to get reading on a null or closed project
-	   }
-	   
-       try
-        {
-            Object compLib = iproject.getPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES));
-            Object implLib = iproject.getPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES));
-            
-            if (compLib != null || implLib != null)
-            {
-                return true;
-            }
-        }
-        catch(CoreException ce)
-        {
-            JSFCorePlugin.log(ce, "Error checking age of project");
-        }
-        // by default, fall through to false
-        return false;
-	}
-	
-	/**
-	 * Removes the persistent property from JSF projects tagged with
-	 * V1 JSF libraries.
-	 * @param projects
-	 */
-	public static void removeV1JSFLibraryProperty(List<IProject> projects)
-	{
-	    for (final Iterator<IProject> it = projects.iterator(); it.hasNext();)
-	    {
-	        IProject project = it.next();
-            try {
-                if (project.isAccessible())
-                {
-                    project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_COMPONENT_LIBRARIES), null);
-                    project.setPersistentProperty(new QualifiedName(JSFLibraryConfigProjectData.QUALIFIEDNAME, JSFUtils.PP_JSF_IMPLEMENTATION_LIBRARIES), null);
-                }
-            } catch (CoreException e) {
-                JSFCorePlugin.log(e, "Error removing JSF library persistent property");
-            }
-	    }
 	}
 	
 	/**

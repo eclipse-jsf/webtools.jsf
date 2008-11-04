@@ -26,6 +26,9 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 
+/**
+ * @deprecated
+ */
 class MigrateV1toV2Operation extends VersionUpgradeOperation {
 
 	private final URI		_v1Registry;

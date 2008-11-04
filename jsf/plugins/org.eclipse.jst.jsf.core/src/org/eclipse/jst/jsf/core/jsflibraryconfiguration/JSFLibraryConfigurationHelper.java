@@ -27,6 +27,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryRefer
  * 
  * <p><b>Provisional API - subject to change</b></p>
  * @since WTP JSF 1.0
+ * @deprecated
  */
 public final class JSFLibraryConfigurationHelper {
 	/**

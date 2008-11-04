@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceServe
 
 /**
  * Factory for producing facade objects for references to the internal EMF JSF Library classes
+ * @deprecated
  */
 public class JSFLibraryReferenceFacadeFactory {
 	/**

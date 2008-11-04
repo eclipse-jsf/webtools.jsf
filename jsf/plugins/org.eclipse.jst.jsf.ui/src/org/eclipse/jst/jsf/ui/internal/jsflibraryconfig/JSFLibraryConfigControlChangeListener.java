@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.ui.internal.jsflibraryconfig;
 
 /**
  * Interface to be implemented to listen to changes in the JSFLibraryConfigControl object
- *
+ * @deprecated
  */
 public interface JSFLibraryConfigControlChangeListener {
 	/**

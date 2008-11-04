@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getArchiveFile()
  * @model
  * @generated
+ * @deprecated
  */
 public interface ArchiveFile extends EObject{
 	/**

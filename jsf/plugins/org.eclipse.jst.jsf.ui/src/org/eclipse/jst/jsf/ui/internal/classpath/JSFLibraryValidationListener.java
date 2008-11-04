@@ -12,7 +12,7 @@ package org.eclipse.jst.jsf.ui.internal.classpath;
 
 /**
  * Listeners of  {@link JSFLibraryValidationEvent}s should implement
- *
+ * @deprecated
  */
 public interface JSFLibraryValidationListener {
 	/**

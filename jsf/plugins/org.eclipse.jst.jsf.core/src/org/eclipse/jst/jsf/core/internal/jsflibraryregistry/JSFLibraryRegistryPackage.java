@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory
  * @model kind="package"
  * @generated
+ * @deprecated
  */
 @SuppressWarnings("hiding")
 public interface JSFLibraryRegistryPackage extends EPackage{

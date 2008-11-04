@@ -27,6 +27,7 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getPluginProvidedJSFLibrary()
  * @model
  * @generated
+ * @deprecated
  */
 public interface PluginProvidedJSFLibrary extends JSFLibrary{
 	/**

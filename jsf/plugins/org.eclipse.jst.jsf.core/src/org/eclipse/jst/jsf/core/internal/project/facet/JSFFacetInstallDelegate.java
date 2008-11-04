@@ -20,16 +20,9 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.IClasspathAttribute;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jst.common.project.facet.core.ClasspathHelper;
-import org.eclipse.jst.j2ee.classpathdep.ClasspathDependencyUtil;
-import org.eclipse.jst.j2ee.classpathdep.IClasspathDependencyConstants;
+import org.eclipse.jst.common.project.facet.core.libprov.LibraryInstallDelegate;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
@@ -38,9 +31,6 @@ import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
-import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
@@ -93,10 +83,13 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 				}
 			}
 			
-			// Create JSF Libs as classpath containers and set WTP dependencies
-			// as required
-			createClasspathEntries(project, fv, config, monitor);
-
+//			// Create JSF Libs as classpath containers and set WTP dependencies
+//			// as required
+//			createClasspathEntries(project, fv, config, monitor);
+			
+			//Configure libraries
+			( (LibraryInstallDelegate) config.getProperty( IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE ) ).execute( new NullProgressMonitor() );
+			
 			// Create config file
 			createConfigFile(project, fv, config, monitor);
 
@@ -114,84 +107,64 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		}
 	}
 
-	/**
-	 * Adds the JSF Library references specified in the wizard to the project as
-	 * classpath containers. Marks the containers as J2EE module dependencies as
-	 * required
-	 * 
-	 * @param project
-	 * @param config
-	 * @param monitor
-	 */
-	private void createClasspathEntries(final IProject project, final IProjectFacetVersion fv, final IDataModel config, final IProgressMonitor monitor) {
-		IJavaProject javaProject = JavaCore.create(project);	
-		List cpEntries = new ArrayList();
-		try {
-			for (int i=0;i<javaProject.getRawClasspath().length;i++){
-				cpEntries.add(javaProject.getRawClasspath()[i]);
-			}
-		} catch (JavaModelException e) {
-			JSFCorePlugin.log(e, "Unable to read classpath"); //$NON-NLS-1$
-		}
-		
-		IPath path, cp = null;
-		IClasspathEntry entry = null;
-		JSFLibraryInternalReference libref = null;
-		
-		//Implementation
-		if (config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME) 
-				== IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.USER_SPECIFIED){
-			cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
-			libref = (JSFLibraryInternalReference)config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION);
-			path = cp.append(new Path(libref.getID()));
-			entry = getNewCPEntry(path, libref);		
-			cpEntries.add(entry);
-		} 
+//	/**
+//	 * Adds the JSF Library references specified in the wizard to the project as
+//	 * classpath containers. Marks the containers as J2EE module dependencies as
+//	 * required
+//	 * 
+//	 * @param project
+//	 * @param config
+//	 * @param monitor
+//	 */
+//	private void createClasspathEntries(final IProject project, final IProjectFacetVersion fv, final IDataModel config, final IProgressMonitor monitor) throws CoreException {
+//		IJavaProject javaProject = JavaCore.create(project);	
+//		List cpEntries = new ArrayList();
+//		try {
+//			for (int i=0;i<javaProject.getRawClasspath().length;i++){
+//				cpEntries.add(javaProject.getRawClasspath()[i]);
+//			}
+//		} catch (JavaModelException e) {
+//			JSFCorePlugin.log(e, "Unable to read classpath"); //$NON-NLS-1$
+//		}
+//		
+//		IPath path, cp = null;
+//		IClasspathEntry entry = null;
+//		JSFLibraryInternalReference libref = null;
+//		
+//		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
+//		for (int i=0;i<compLibs.length;i++){
+//			libref = compLibs[i];		
+//			cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
+//			path = cp.append(new Path(libref.getID()));
+//			entry = getNewCPEntry(path, libref);
+//			if (entry != null)
+//				cpEntries.add(entry);
+//		}	
+//
+//		JSFLibraryRegistryUtil.setRawClasspath(javaProject, cpEntries, monitor);
+//		
+//		( (LibraryInstallDelegate) config.getProperty( IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE ) ).execute( new NullProgressMonitor() );
+//	}
 
-		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[])config.getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
-		for (int i=0;i<compLibs.length;i++){
-			libref = compLibs[i];		
-			cp = new Path(JSFLibraryConfigurationHelper.JSF_LIBRARY_CP_CONTAINER_ID);		
-			path = cp.append(new Path(libref.getID()));
-			entry = getNewCPEntry(path, libref);
-			if (entry != null)
-				cpEntries.add(entry);
-		}	
-
-		JSFLibraryRegistryUtil.setRawClasspath(javaProject, cpEntries, monitor);
-	
-		//allow for the raw classpath to be set from JSF Libs before setting the server supplied impl libs from the server, if available
-		if (config.getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME) 
-				== IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.SERVER_SUPPLIED) {
-			try {
-				ClasspathHelper.removeClasspathEntries(project, fv);
-				ClasspathHelper.addClasspathEntries(project, fv);
-			} catch (CoreException e) {
-				JSFCorePlugin.log(IStatus.ERROR, "Unable to add server supplied implementation to the classpath.", e);//$NON-NLS-1$
-			}
-		}
-		
-	}
-
-	/**
-	 * @param path
-	 * @param lib
-	 * @return creates new IClasspathEntry with WTP dependency attribute set, if required
-	 */
-	private IClasspathEntry getNewCPEntry(final IPath path, final JSFLibraryInternalReference lib) {
-		
-		IClasspathEntry entry = null;
-		if (lib.isCheckedToBeDeployed()){
-			IClasspathAttribute depAttrib = JavaCore.newClasspathAttribute(IClasspathDependencyConstants.CLASSPATH_COMPONENT_DEPENDENCY,
-					 ClasspathDependencyUtil.getDefaultRuntimePath(true).toString());
-			entry = JavaCore.newContainerEntry(path,null, new IClasspathAttribute[]{depAttrib}, true);
-		}
-		else {
-			entry = JavaCore.newContainerEntry(path);
-		}
-		
-		return entry;
-	}		
+//	/**
+//	 * @param path
+//	 * @param lib
+//	 * @return creates new IClasspathEntry with WTP dependency attribute set, if required
+//	 */
+//	private IClasspathEntry getNewCPEntry(final IPath path, final JSFLibraryInternalReference lib) {
+//		
+//		IClasspathEntry entry = null;
+//		if (lib.isCheckedToBeDeployed()){
+//			IClasspathAttribute depAttrib = JavaCore.newClasspathAttribute(IClasspathDependencyConstants.CLASSPATH_COMPONENT_DEPENDENCY,
+//					 ClasspathDependencyUtil.getDefaultRuntimePath(true).toString());
+//			entry = JavaCore.newContainerEntry(path,null, new IClasspathAttribute[]{depAttrib}, true);
+//		}
+//		else {
+//			entry = JavaCore.newContainerEntry(path);
+//		}
+//		
+//		return entry;
+//	}		
 
 	/**
 	 * @param config

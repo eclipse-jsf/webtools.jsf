@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.ui.internal.classpath;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -71,6 +70,7 @@ import org.eclipse.ui.PlatformUI;
  * Provides a classpath container wizard page for JSF Libraries.
  * 
  * @author Gerry Kessler - Oracle
+ * @deprecated
  */
 public class JSFLibraryContainerWizardPage extends WizardPage implements
 		IClasspathContainerPage, IClasspathContainerPageExtension, IClasspathContainerPageExtension2{
@@ -85,7 +85,6 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 	private Map _currentLibs;
 	private JSFLibrary currentLib;
 	
-	private boolean   _projectHaveV1JSFLibraries; // = false;
 	private IProject  _iproject;
 
 	/**
@@ -107,33 +106,13 @@ public class JSFLibraryContainerWizardPage extends WizardPage implements
 
         _iproject = project.getProject();
         this.isJSFProject = JSFAppConfigUtils.isValidJSFProject(_iproject);
-        if (this.isJSFProject)
-		{
-			_projectHaveV1JSFLibraries = 
-			    JSFLibraryRegistryUtil.doesProjectHaveV1JSFLibraries(_iproject);
-		}
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jdt.ui.wizards.IClasspathContainerPage#finish()
 	 */
 	public boolean finish() {
-	    boolean finish = true;
-	    if (_projectHaveV1JSFLibraries)
-	    {
-	        // if the user doesn't want to confirm, back off on the change
-	        // and let them decide if they want to hit cancel
-	        finish = WarningMessageDialog.
-	            openConfirm(getShell()
-	                        , Messages.JSFLibraryContainerWizardPage_V1Registry_Warning_DialogTitle
-	                        , Messages.JSFLibraryContainerWizardPage_V1Registry_Warning_DialogText);
-	        
-	        if (finish)
-	        {
-	            JSFLibraryRegistryUtil.removeV1JSFLibraryProperty(Collections.singletonList(_iproject));
-	        }
-	    }
-		return finish;
+		return true;
 	}
 
 	/* (non-Javadoc)

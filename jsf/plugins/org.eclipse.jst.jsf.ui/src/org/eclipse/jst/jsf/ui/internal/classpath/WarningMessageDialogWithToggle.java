@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Text;
  * Customized warning dialog for JSF Library Upgrade warnings.
  * 
  * @author cbateman
- *
+ * @deprecated
  */
 class WarningMessageDialogWithToggle extends MessageDialogWithToggle 
 {

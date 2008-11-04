@@ -16,7 +16,7 @@ import java.util.EventObject;
  * JSF Implementation library creation event.
  * 
  * @author Justin Chen - Oracle
- *
+ * @deprecated
  */
 public class JSFImplLibraryCreationEvent extends EventObject {
 

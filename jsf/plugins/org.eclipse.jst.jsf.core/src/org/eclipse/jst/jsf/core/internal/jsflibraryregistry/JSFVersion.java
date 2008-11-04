@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFVersion()
  * @model
  * @generated
+ * @deprecated
  */
 public final class JSFVersion extends AbstractEnumerator {
 	/**

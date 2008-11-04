@@ -42,6 +42,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * </p>
  *
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryRegistry {
 	/**

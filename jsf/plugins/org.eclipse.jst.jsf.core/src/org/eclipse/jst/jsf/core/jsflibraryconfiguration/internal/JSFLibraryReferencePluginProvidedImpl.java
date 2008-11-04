@@ -15,7 +15,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferencePluginProvided;
 
 /**
- *
+ * @deprecated
  */
 public class JSFLibraryReferencePluginProvidedImpl extends AbstractJSFLibraryReferenceImpl implements JSFLibraryReferencePluginProvided {
 

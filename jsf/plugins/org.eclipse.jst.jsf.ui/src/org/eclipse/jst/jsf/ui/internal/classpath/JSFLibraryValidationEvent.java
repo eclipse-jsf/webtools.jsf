@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.IStatus;
 
 /**
  * Validation event used by JSFLibraryControl to notify containers of updates
- *
+ * @deprecated
  */
 public class JSFLibraryValidationEvent {
 	private String msg;

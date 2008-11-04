@@ -46,6 +46,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefa
  * </p>
  *
  * @generated
+ * @deprecated
  */
 public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	/**

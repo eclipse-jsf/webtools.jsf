@@ -25,7 +25,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -44,30 +43,24 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigModel;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfiglModelSource;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
-import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryWizard;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -80,6 +73,7 @@ import org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelSynchHel
  * A custom control used in wizard and property pages.
  * 
  * @author Justin Chen
+ * @deprecated
  */
 public class JSFLibraryConfigControl extends Composite { 
 
@@ -88,15 +82,10 @@ public class JSFLibraryConfigControl extends Composite {
 
 	private JSFLibraryConfigModel workingCopyModel = null;
 	
-	private Button btnServerSupplied;
-	private Button btnUserSupplied;
-	private ComboViewer cvImplLib;
 	private CheckboxTableViewer ctvSelCompLib;
-	private Button btnDeployJars;
 	private TreeViewer tvCompLib;
 	private TreeViewerAdapter tvAdapter;
 	private TreeLabelProvider tvLabelProvider;
-	private Combo comboImplLib;
 	private Button btnAddAll;
 	private Button btnRemoveAll;
 	
@@ -171,7 +160,7 @@ public class JSFLibraryConfigControl extends Composite {
 	 * 
 	 * @param source
 	 */
-	public void loadControlValuesFromModel(JSFLibraryConfiglModelSource source) {
+	public void loadControlValuesFromModel(JSFLibraryConfigDialogSettingData source) {
 		if (source != null) {
 			// never read persistentModel = source;
 			workingCopyModel = JSFLibraryConfigModel.JSFLibraryConfigModelFactory.createInstance(source);
@@ -191,16 +180,6 @@ public class JSFLibraryConfigControl extends Composite {
 	}
 	
 	/**
-	 * Return current selected JSF Implementation Library.
-	 * Otherwise, return null.
-	 *  
-	 * @return JSFLibraryInternalReference
-	 */
-	public JSFLibraryInternalReference getSelectedJSFLibImplementation() {
-		return workingCopyModel.getCurrentJSFImplementationLibrarySelection();
-	}
-	 
-	/**
 	 * Return a list of selected JSF Component Libraries.
 	 * Otherwise, return an empty list.
 	 * 
@@ -219,29 +198,6 @@ public class JSFLibraryConfigControl extends Composite {
 	}
 	
 	private void initializeControlValues() {
-		loadJSFImplList();
-		
-		btnDeployJars.setSelection(false);
-		JSFLibraryInternalReference savedImplLib = workingCopyModel.getSavedJSFImplementationLibrary();
-		if ( savedImplLib != null ) {
-			/*
-			 * Get the input for the control to set selection.
-			 */
-			JSFLibraryInternalReference selected = JSFLibraryRegistryUtil.getInstance().getJSFLibraryReferencebyID(savedImplLib.getID());
-			if (selected != null) {
-				btnDeployJars.setSelection(selected.isCheckedToBeDeployed());			
-				cvImplLib.setSelection(new StructuredSelection(selected), true);
-			}
-		} else {
-			JSFLibraryInternalReference dftJSFImplLib = JSFLibraryRegistryUtil.getInstance().getDefaultJSFImplementationLibrary();
-			if (dftJSFImplLib != null) {			
-				btnDeployJars.setSelection(dftJSFImplLib.isCheckedToBeDeployed());	
-				cvImplLib.setSelection(new StructuredSelection(dftJSFImplLib), true);				
-			}
-			else 
-				btnDeployJars.setEnabled(false);
-		}
-		
 		loadJSFCompList();
 
 		JSFLibraryInternalReference savedCompLib = null; 
@@ -258,28 +214,7 @@ public class JSFLibraryConfigControl extends Composite {
 
 		setCompListModelProperty();
 		
-		initializeImplementationType();
-		
 		redraw();
-	}
-	
-	private void initializeImplementationType() {
-		IMPLEMENTATION_TYPE implType = workingCopyModel.getImplementationType();
-		if (implType == IMPLEMENTATION_TYPE.SERVER_SUPPLIED) {
-			btnServerSupplied.setSelection(true);
-			btnUserSupplied.setSelection(false);
-			enableUserSupplied(false);
-		} else if (implType == IMPLEMENTATION_TYPE.USER_SPECIFIED) {
-			btnServerSupplied.setSelection(false);
-			btnUserSupplied.setSelection(true);
-			enableUserSupplied(true);
-		} else {
-			enableUserSupplied(false);
-		}	
-		model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME, implType);
-	}
-	private void loadJSFImplList() {
-		cvImplLib.setInput(workingCopyModel.getJSFImplementationLibraries());
 	}
 	
 	private void loadJSFCompList() {
@@ -287,199 +222,18 @@ public class JSFLibraryConfigControl extends Composite {
 		ctvSelCompLib.setInput(workingCopyModel.getJSFComponentLibraries());		
 	}
 	
-	private JSFLibraryInternalReference getCurrentSelectedJSFImplLib() {
-		JSFLibraryInternalReference selJSFImpl = null;
-		StructuredSelection objs = (StructuredSelection)cvImplLib.getSelection();
-		if (objs != null){
-			if (objs.getFirstElement() instanceof JSFLibraryInternalReference){
-				selJSFImpl = (JSFLibraryInternalReference)objs.getFirstElement();
-			}
-		}
-		return selJSFImpl;		
-	}
-
-	private void createImplLibControls(Composite parent) {
-		final Composite cmpImpls = new Composite(parent, SWT.NONE);
-		final GridLayout gridLayoutImpls = new GridLayout();
-		gridLayoutImpls.numColumns = 4;
-		gridLayoutImpls.marginLeft = 0;
-		gridLayoutImpls.marginTop = 0;
-		gridLayoutImpls.marginBottom = 0;
-		
-		cmpImpls.setLayout(gridLayoutImpls);
-		GridData gdCmpImpls = new GridData();
-		gdCmpImpls.horizontalAlignment = SWT.FILL;
-		gdCmpImpls.grabExcessHorizontalSpace = true;
-		cmpImpls.setLayoutData(gdCmpImpls);
-
-		btnServerSupplied = new Button(cmpImpls, SWT.RADIO);
-		btnServerSupplied.setToolTipText(Messages.JSFLibraryConfigControl_ServerSuppliedButtonTooltip);
-		GridData gdSS = new GridData();
-		gdSS.horizontalAlignment = SWT.BEGINNING;
-		btnServerSupplied.setLayoutData(gdSS);
-		
-		btnServerSupplied.addSelectionListener(new SelectionAdapter(){
-			public void widgetSelected(SelectionEvent e) {
-				setServerSuppliedLibrarySelection(e);
-			}			
-		});
-		
-		Label lblServerSupplied = new Label(cmpImpls, SWT.NONE);
-		lblServerSupplied.setText(Messages.JSFLibraryConfigControl_ServerSuppliedButtonLabel);
-		GridData lblSS = new GridData();
-		lblSS.grabExcessHorizontalSpace = true;
-		lblServerSupplied.setLayoutData(lblSS);
-		lblServerSupplied.addMouseListener(new MouseAdapter(){
-			public void mouseUp(MouseEvent e) {
-				btnServerSupplied.setSelection(true);
-				setServerSuppliedLibrarySelection(e);				
-			}			
-		});
-		
-		
-		Label lblSpacer1 = new Label(cmpImpls, SWT.NONE);
-		GridData gdSpc1 = new GridData();
-		gdSpc1.horizontalAlignment = SWT.END;
-		gdSpc1.horizontalSpan = 2;
-		lblSpacer1.setLayoutData(gdSpc1);
-		
-		btnUserSupplied = new Button(cmpImpls, SWT.RADIO);
-		btnUserSupplied.setLayoutData(new GridData());
-		btnUserSupplied.addSelectionListener(new SelectionAdapter(){
-			public void widgetSelected(SelectionEvent e) {
-				setUserSuppliedLibrarySelection(e);
-			}			
-		});
-		
-		this.addOkClickedListener(new IJSFImplLibraryCreationListener() {
-			public void okClicked(JSFImplLibraryCreationEvent event) {				
-				if (! btnUserSupplied.getSelection()  && event.isLibraryCreated()) {
-					btnServerSupplied.setSelection(false);
-					setUserSuppliedLibrarySelection(event);
-				}				
-			}			
-		});
-			
-		cvImplLib = new ComboViewer(cmpImpls, SWT.READ_ONLY);
-		cvImplLib.setLabelProvider(new ImplLibCVListLabelProvider());
-		cvImplLib.setContentProvider(new ImplLibCVContentProvider());
-		comboImplLib = cvImplLib.getCombo();
-		GridData gd_cvImplLib = new GridData();
-		gd_cvImplLib.horizontalAlignment = SWT.FILL;
-		gd_cvImplLib.grabExcessHorizontalSpace = true;
-		comboImplLib.setLayoutData(gd_cvImplLib);
-		cvImplLib.addSelectionChangedListener(
-			new ISelectionChangedListener() {
-				public void selectionChanged(SelectionChangedEvent event) {
-					StructuredSelection ss = (StructuredSelection) event.getSelection();
-					JSFLibraryInternalReference crtSelImplLib = (JSFLibraryInternalReference) ss.getFirstElement();
-					if (crtSelImplLib != null)
-					{
-					    btnDeployJars.setEnabled(true);
-	                    crtSelImplLib.setToBeDeployed(btnDeployJars.getSelection());
-					}
-					workingCopyModel.setCurrentJSFImplementationLibrarySelection(crtSelImplLib);
-					model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION, crtSelImplLib);
-					fireChangedEvent(event);
-				}
-			}
-		);
-			
-		btnDeployJars = new Button(cmpImpls, SWT.CHECK);
-		GridData gdDeploy = new GridData();
-		btnDeployJars.setLayoutData(gdDeploy);
-		btnDeployJars.setText(Messages.JSFLibraryConfigControl_DeployButtonLabel);
-		btnDeployJars.setToolTipText(Messages.JSFLibraryConfigControl_DeployJAR);
-		btnDeployJars.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				if (! _initing){
-					JSFLibraryInternalReference jsflib = getCurrentSelectedJSFImplLib();
-					if (jsflib != null)
-						jsflib.setToBeDeployed(btnDeployJars.getSelection());
-					workingCopyModel.setCurrentJSFImplementationLibrarySelection(jsflib);//why r we doing this here???
-	//				model.setProperty(IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION, btnDeployJars.getSelection());
-					fireChangedEvent(e);
-				}
-			}
-		}
-		);
-		
-		final Button btnNewImpl = new Button(cmpImpls, SWT.NONE); //compTest,
-		GridData gdNew = new GridData();
-		gdNew.horizontalAlignment = SWT.END;
-		btnNewImpl.setLayoutData(gdNew);
-		btnNewImpl.setText(Messages.JSFLibraryConfigControl_NewImplementationLibrary);	
-		btnNewImpl.setToolTipText(Messages.JSFLibraryConfigControl_NewImplButtonTooltip);
-		btnNewImpl.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				JSFLibraryWizard wizard = new JSFLibraryWizard(JSFLibraryWizard.IMPLS);
-				IWorkbench wb = PlatformUI.getWorkbench();
-				wizard.init(wb, null);
-				WizardDialog dialog = new WizardDialog(wb
-						.getActiveWorkbenchWindow().getShell(), wizard);
-				int ret = dialog.open();
-				if (ret == Window.OK) {	
-					JSFLibraryInternalReference lib = new JSFLibraryInternalReference(wizard.getJSFLibrary(), true, true);
-					JSFLibraryRegistryUtil.getInstance().addJSFLibrary(lib);
-					workingCopyModel.getJSFImplementationLibraries().add(lib);
-					workingCopyModel.setCurrentJSFImplementationLibrarySelection(lib);
-					
-					loadJSFImplList();
-					btnDeployJars.setSelection(true);
-					cvImplLib.setSelection(new StructuredSelection(lib), true);
-					
-				}
-				// notify listeners that a JSF implementation is created.
-				JSFImplLibraryCreationEvent event = new JSFImplLibraryCreationEvent(this, (ret == Window.OK));
-				int size = newJSFLibCreatedListeners.size();
-				for (int i = 0; i < size; i++) {
-					IJSFImplLibraryCreationListener listener = 
-						(IJSFImplLibraryCreationListener) newJSFLibCreatedListeners.elementAt(i);
-					listener.okClicked(event);
-				}
-			}
-		});		
-	}
-	
-	private void setServerSuppliedLibrarySelection(final EventObject e) {
-		btnUserSupplied.setSelection(false);
-		model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME, IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.SERVER_SUPPLIED);
-		enableUserSupplied(false);
-		fireChangedEvent(e);
-		
-	}
-	
-	private void setUserSuppliedLibrarySelection(final EventObject e) {
-		btnUserSupplied.setSelection(true);
-		model.setProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE_PROPERTY_NAME, IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE.USER_SPECIFIED);
-		enableUserSupplied(true);	
-		fireChangedEvent(e);
-	}
-	
-	private void enableUserSupplied(boolean enabled) {
-		cvImplLib.getCombo().setEnabled(enabled);
-		btnDeployJars.setEnabled(enabled);		
-	}
-	
 	private void createCompLibControls(Composite parent) {
 		final Composite cmpCompLibs = new Composite(parent, SWT.NONE);
 		final GridLayout gridLayoutCompLibs = new GridLayout();
 		gridLayoutCompLibs.numColumns = 4;
-		gridLayoutCompLibs.marginLeft = 0;
-		gridLayoutCompLibs.marginRight = 0;
 		gridLayoutCompLibs.marginWidth = 0;
+        gridLayoutCompLibs.marginHeight = 0;
 		cmpCompLibs.setLayout(gridLayoutCompLibs);
 		GridData gdComp = new GridData();
 		gdComp.horizontalAlignment = SWT.FILL;
 		gdComp.grabExcessHorizontalSpace = true;
 		cmpCompLibs.setLayoutData(gdComp);
 		
-		
-		final Label lblCompLib = new Label(cmpCompLibs, SWT.NONE);
-		final GridData gd_lbl_complib = new GridData(GridData.FILL, GridData.CENTER, false, false, 4, 1);
-		lblCompLib.setLayoutData(gd_lbl_complib);
-		lblCompLib.setText(Messages.JSFLibraryConfigControl_ComponentLibrary);
-				
 		tvCompLib = new TreeViewer(cmpCompLibs, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		tvAdapter = new TreeViewerAdapter();
 		tvLabelProvider = new TreeLabelProvider();
@@ -505,7 +259,7 @@ public class JSFLibraryConfigControl extends Composite {
 		composite_Single.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		final GridLayout gl_Single = new GridLayout();
 		gl_Single.marginHeight = 4;
-		composite_Single.setLayout(gl_Single);
+		composite_Single.setLayout(new GridLayout());
 		
 		final Button btnAdd = new Button(composite_Single, SWT.NONE);
 		btnAdd.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false));
@@ -542,7 +296,7 @@ public class JSFLibraryConfigControl extends Composite {
 		btnNewCompLib.setText(Messages.JSFLibraryConfigControl_NewComponentLibrary);		
 		btnNewCompLib.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				JSFLibraryWizard wizard = new JSFLibraryWizard(JSFLibraryWizard.NONIMPLS);				
+				JSFLibraryWizard wizard = new JSFLibraryWizard();				
 				IWorkbench wb = PlatformUI.getWorkbench();
 				wizard.init(wb, null);
 				WizardDialog dialog = new WizardDialog(wb
@@ -668,23 +422,9 @@ public class JSFLibraryConfigControl extends Composite {
 		gridLayout.marginTop = 0;
 		this.setLayout(gridLayout);
 		
-		createImplLibControls(this);
-		createSeparator(this);
 		createCompLibControls(this);
-		
-
-
-
 	}
 
-	private void createSeparator(Composite parent) {
-		final Label lblSeparator = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL );
-		GridData gd_lbl_spacer = new GridData();
-		gd_lbl_spacer.horizontalAlignment = SWT.FILL;
-		lblSeparator.setLayoutData(gd_lbl_spacer);
-		lblSeparator.setAlignment(SWT.CENTER);
-	}
-	
 	/*
 	 * Event handling helper methods
 	 */	
@@ -767,10 +507,6 @@ public class JSFLibraryConfigControl extends Composite {
 	 */
 	public void setSynchHelper(DataModelSynchHelper synchHelper) {	
 		model = synchHelper.getDataModel();
-		synchHelper.synchCombo(cvImplLib.getCombo(), IJSFFacetInstallDataModelProperties.IMPLEMENTATION_LIBRARIES, null);
-		synchHelper.synchCheckbox(btnDeployJars, IJSFFacetInstallDataModelProperties.DEPLOY_IMPLEMENTATION, null);
-		//not using synch helper for IMPLEMENTATION_TYPE
-//		synchHelper.synchCheckBoxTableViewer(ctvSelCompLib, IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES, new Control[]{hiddenList});
 	}
 
 	/**
@@ -812,24 +548,6 @@ public class JSFLibraryConfigControl extends Composite {
 			}
 		}
 	}
-	private static class ImplLibCVContentProvider implements IStructuredContentProvider {
-		private List jsfImplLibs = new ArrayList(0);
-		
-		public Object[] getElements(Object inputElement) {
-			return jsfImplLibs.toArray();
-		}
-		public void dispose() {
-            // do nothing
-		}
-		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			if (newInput == null) {
-				jsfImplLibs = Collections.EMPTY_LIST;
-			} else {
-				jsfImplLibs = (List)newInput;
-			}
-		}
-	}
-	
 	// Label Provider
 	private static class SelectedCompLibCTVLabelProvider extends LabelProvider implements ITableLabelProvider {
 		public String getColumnText(Object element, int columnIndex) {
@@ -849,31 +567,6 @@ public class JSFLibraryConfigControl extends Composite {
 			return null;
 		}
 	}
-	private static class ImplLibCVListLabelProvider extends LabelProvider {
-		private JSFLibrary defaultImpl = null;
-		
-		public String getText(Object element) {
-			if (element instanceof JSFLibraryInternalReference){
-				StringBuffer labelBuf = new StringBuffer(((JSFLibraryInternalReference)element).getLabel());
-				JSFLibrary lib = ((JSFLibraryInternalReference)element).getLibrary();
-				if (getDefaultImpl()!= null && lib != null && lib.getID().equals(getDefaultImpl().getID()))
-					labelBuf.append(" ").append(JSFLibraryRegistry.DEFAULT_IMPL_LABEL); //$NON-NLS-1$
-				return labelBuf.toString() ;
-			}
-			return null;
-		}
-		private JSFLibrary getDefaultImpl() {
-			if (defaultImpl == null){
-				JSFLibraryRegistry jsflibreg = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
-				defaultImpl = jsflibreg.getDefaultImplementation();
-			}
-			return defaultImpl;
-		}
-		public Image getImage(Object element) {
-			return null;
-		}
-	}
-	
 	// Sorter
 	private static class SelectedCompLibCTVSorter extends ViewerSorter {
 		public int compare(Viewer viewer, Object e1, Object e2) {

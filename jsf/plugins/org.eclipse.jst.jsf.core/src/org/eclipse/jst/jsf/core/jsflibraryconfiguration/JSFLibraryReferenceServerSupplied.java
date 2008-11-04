@@ -15,6 +15,8 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
  * server
  * 
  * <p><b>Provisional API - subject to change</b></p>
+ * 
+ * @deprecated
  */
 public interface JSFLibraryReferenceServerSupplied extends
 		JSFLibraryReference {

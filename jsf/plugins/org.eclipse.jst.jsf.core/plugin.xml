@@ -63,8 +63,8 @@
     </action>  
       
     <action id="jst.jsf.v11.uninstall" facet="jst.jsf" type="UNINSTALL" version="1.1" >
-	 	<delegate
-        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallConfig$Factory"/>
+	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
  	</action>
 	
  	<action id="jst.jsf.v12.install" facet="jst.jsf" type="INSTALL" version="[1.2">
@@ -73,8 +73,8 @@
     </action>  
       
     <action id="jst.jsf.v12.uninstall" facet="jst.jsf" version="[1.2" type="UNINSTALL">
-	 	<delegate
-        class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallConfig$Factory"/>
+	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
  	</action>  
 	      	
   </extension> 
@@ -370,6 +370,40 @@
            class="org.eclipse.jst.jsf.designtime.internal.view.mapping.mappers.ValueHolderAttributeMapper"
            id="valueHolderAttributeMapper">
      </customViewMapper>
+  </extension>
+  
+  <!--
+    *****************************
+    * JSF User Library Provider *
+    *****************************
+  -->
+  
+  <extension point="org.eclipse.jst.common.project.facet.core.libraryProviders">
+    <provider id="jsf-user-library-provider" extends="wtp-user-library-provider">
+      <enablement>
+        <with variable="requestingProjectFacet">
+          <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf" forcePluginActivation="true"/>
+        </with>
+      </enablement>
+    </provider>
+  </extension>
+  
+  <!--
+    ******************************
+    * JSF Legacy Library Support *
+    ******************************
+  -->
+  
+  <extension point="org.eclipse.jst.common.project.facet.core.libraryProviders">
+    <provider id="legacy-jsf-library-provider" extends="legacy-library-provider" hidden="true">
+      <action type="UNINSTALL">
+        <operation class="org.eclipse.jst.jsf.core.internal.project.facet.LegacyJSFLibraryProviderUninstallOperation"/>
+      </action>
+    </provider>
+  </extension>
+
+  <extension point="org.eclipse.jst.common.project.facet.core.legacyLibraryProviderDetectors">
+    <detector class="org.eclipse.jst.jsf.core.internal.project.facet.LegacyJSFLibraryProviderDetector"/>
   </extension>
   
 </plugin>

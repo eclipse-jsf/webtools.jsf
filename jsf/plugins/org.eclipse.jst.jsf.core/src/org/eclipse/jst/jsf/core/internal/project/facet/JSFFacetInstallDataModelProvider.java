@@ -10,10 +10,8 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
@@ -26,12 +24,13 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.common.project.facet.core.libprov.IPropertyChangeListener;
+import org.eclipse.jst.common.project.facet.core.libprov.LibraryInstallDelegate;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.osgi.util.NLS;
@@ -40,6 +39,7 @@ import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvi
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 import org.eclipse.wst.common.project.facet.core.IFacetedProjectWorkingCopy;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
 
 /**
@@ -51,37 +51,54 @@ public class JSFFacetInstallDataModelProvider extends
 		FacetInstallDataModelProvider implements
 		IJSFFacetInstallDataModelProperties {
 
+    private LibraryInstallDelegate libraryInstallDelegate = null;
+    
+    private void initLibraryInstallDelegate()
+    {
+        final IFacetedProjectWorkingCopy fpjwc = (IFacetedProjectWorkingCopy) getProperty( FACETED_PROJECT_WORKING_COPY );
+        final IProjectFacetVersion fv = (IProjectFacetVersion) getProperty( FACET_VERSION );
+        
+        if( this.libraryInstallDelegate == null && fpjwc != null && fv != null )
+        {
+            this.libraryInstallDelegate = new LibraryInstallDelegate( fpjwc, fv );
+            
+            this.libraryInstallDelegate.addListener
+            ( 
+                new IPropertyChangeListener()
+                {
+                    public void propertyChanged( final String property,
+                                                 final Object oldValue,
+                                                 final Object newValue )
+                    {
+                        final IDataModel dm = getDataModel();
+    
+                        if( dm != null )
+                        {
+                            dm.notifyPropertyChange( LIBRARY_PROVIDER_DELEGATE, IDataModel.VALUE_CHG );
+                        }
+                    }
+                }
+            );
+        }
+    }
+    
 	private String 	errorMessage;
 	
 	public Set getPropertyNames() {
 		Set names = super.getPropertyNames();
-		names.add(IMPLEMENTATION_TYPE_PROPERTY_NAME);
-		names.add(IMPLEMENTATION);
-		names.add(DEPLOY_IMPLEMENTATION);
 		names.add(CONFIG_PATH);
 		names.add(SERVLET_NAME);
 		names.add(SERVLET_CLASSNAME);
 		names.add(SERVLET_URL_PATTERNS);
 		names.add(WEBCONTENT_DIR);
-		
-		names.add(IMPLEMENTATION_LIBRARIES);
+		names.add(LIBRARY_PROVIDER_DELEGATE);
 		names.add(COMPONENT_LIBRARIES);
-		names.add(DEFAULT_IMPLEMENTATION_LIBRARY);
 		
 		return names;
 	}
 
 	public Object getDefaultProperty(String propertyName) {
-		if (propertyName.equals(IMPLEMENTATION_TYPE_PROPERTY_NAME)){
-			return IMPLEMENTATION_TYPE.UNKNOWN;
-		}
-		else if (propertyName.equals(IMPLEMENTATION)) {
-			if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() == null)
-				return null;
-			return getDefaultImplementationLibrary();//JSFCorePlugin.getDefault().getJSFLibraryRegistry().getDefaultImplementation();
-		} else if (propertyName.equals(DEPLOY_IMPLEMENTATION)) {
-			return Boolean.TRUE;
-		} else if (propertyName.equals(CONFIG_PATH)) {
+		if (propertyName.equals(CONFIG_PATH)) {
 			return JSFUtils.JSF_DEFAULT_CONFIG_PATH; 
 		} else if (propertyName.equals(SERVLET_NAME)) {
 			return JSFUtils.JSF_DEFAULT_SERVLET_NAME;
@@ -93,36 +110,35 @@ public class JSFFacetInstallDataModelProvider extends
 			return IJSFCoreConstants.JSF_CORE_FACET_ID;
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this //$NON-NLS-1$
+        } else if (propertyName.equals(LIBRARY_PROVIDER_DELEGATE)) {
+            return this.libraryInstallDelegate;
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
 			return new JSFLibraryInternalReference[0];
-		} else if (propertyName.equals(IMPLEMENTATION_LIBRARIES)) {
-			return getDefaultJSFImplementationLibraries();
-		} else if (propertyName.equals(DEFAULT_IMPLEMENTATION_LIBRARY)) {
-			return getDefaultImplementationLibrary();
 		}
 		return super.getDefaultProperty(propertyName);
 	}
 	
-	public IStatus validate(String name) {
+	@Override
+    public boolean propertySet( final String propertyName,
+                                final Object propertyValue )
+    {
+	    if( propertyName.equals( FACETED_PROJECT_WORKING_COPY ) || propertyName.equals( FACET_VERSION ) )
+	    {
+	        initLibraryInstallDelegate();
+	    }
+
+        return super.propertySet( propertyName, propertyValue );
+    }
+
+    public IStatus validate(String name) {
 		errorMessage = null;
-		if (name.equals(IMPLEMENTATION_TYPE_PROPERTY_NAME)) {
-			if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.UNKNOWN) {
-				return createErrorStatus(Messages.JSFFacetInstallDataModelProvider_INITIAL_VALIDATION_IMPL_TYPE);
-			}
-		}
-		else if (name.equals(IMPLEMENTATION)) {
-			if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.USER_SPECIFIED) {
-				JSFLibraryInternalReference lib = (JSFLibraryInternalReference)getProperty(IMPLEMENTATION);
-				IStatus status = validateImpl(lib.getLibrary());
-				if (!OK_STATUS.equals(status))
-					return status;
-					
-	            return validateClasspath();
-			}
-		} else if (name.equals(CONFIG_PATH)) {
+		if (name.equals(CONFIG_PATH)) {
 			return validateConfigLocation(getStringProperty(CONFIG_PATH));
 		} else if (name.equals(SERVLET_NAME)) {			
 			return validateServletName(getStringProperty(SERVLET_NAME));
+		}
+		else if (name.equals(LIBRARY_PROVIDER_DELEGATE)) {
+		    return ((LibraryInstallDelegate) getProperty(LIBRARY_PROVIDER_DELEGATE)).validate();
 		}
 		else if (name.equals(COMPONENT_LIBRARIES)) {
 			return validateClasspath();
@@ -143,16 +159,6 @@ public class JSFFacetInstallDataModelProvider extends
 		return OK_STATUS;
 	}
 
-	private IStatus validateImpl(JSFLibrary impl) {
-		if (impl == null) {
-			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateJSFImpl; 
-		}
-		if (errorMessage != null) {
-			return createErrorStatus(errorMessage);
-		}
-		return OK_STATUS;
-	}
-	
 	private IStatus validateConfigLocation(String text) {
 		if (text == null || text.trim().equals("")) { //$NON-NLS-1$
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileEmpty;
@@ -220,19 +226,6 @@ public class JSFFacetInstallDataModelProvider extends
 		
 		IStatus status = null;
 		
-		JSFLibraryInternalReference ref = null;
-		if (getProperty(IMPLEMENTATION_TYPE_PROPERTY_NAME) == IMPLEMENTATION_TYPE.USER_SPECIFIED) {
-			ref = ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION));
-			if (ref != null){
-				status = checkForDupeArchiveFiles(jars, ((JSFLibraryInternalReference)getProperty(IJSFFacetInstallDataModelProperties.IMPLEMENTATION)).getLibrary());
-				if (!OK_STATUS.equals(status)){
-					return status;
-				}
-			} else {
-				return createErrorStatus(Messages.JSFFacetInstallDataModelProvider_ClientImplValidationMsg);
-			}
-		}
-
 		JSFLibraryInternalReference[] compLibs = (JSFLibraryInternalReference[]) getProperty(IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES);
 		if (compLibs != null){
 			for (int i=0;i<compLibs.length;i++){
@@ -350,24 +343,4 @@ public class JSFFacetInstallDataModelProvider extends
 		return null;
 	}
 
-	private List getDefaultJSFImplementationLibraries() {
-		List list = new ArrayList();
-		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() != null) {
-			JSFLibrary jsfLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
-			if (jsfLib != null){
-				JSFLibraryInternalReference prjJSFLib = new JSFLibraryInternalReference(jsfLib, true, true);
-				list.add(prjJSFLib);
-			}
-		}
-		return list;
-	}	
-	
-	private JSFLibraryInternalReference getDefaultImplementationLibrary() {		
-		if (JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry() != null) {
-			JSFLibrary jsfLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
-			return new JSFLibraryInternalReference(jsfLib, true, true);	
-		}
-		return null;	
-	}	
-	
 }

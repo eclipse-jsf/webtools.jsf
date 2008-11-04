@@ -14,7 +14,7 @@ import java.util.EventObject;
 
 /**
  * Event that something has changed in the JSFLibraryConfigControl
- *
+ * @deprecated
  */
 public class JSFLibraryConfigControlChangeEvent {
 	private EventObject event;

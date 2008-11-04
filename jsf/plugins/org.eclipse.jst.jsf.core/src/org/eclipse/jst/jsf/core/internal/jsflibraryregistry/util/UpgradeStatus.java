@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
  * Communicates the status of the JSF Library Registry
- *
+ * @deprecated
  */
 public class UpgradeStatus extends Status
 {

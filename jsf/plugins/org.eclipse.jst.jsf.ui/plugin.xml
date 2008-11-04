@@ -6,11 +6,6 @@
         point="org.eclipse.ui.preferencePages">
      <page
            category="org.eclipse.jst.jsf.ui.JSFRootPage"
-           class="org.eclipse.jst.jsf.ui.internal.classpath.JSFLibrariesPreferencePage"
-           id="org.eclipse.jst.jsf.ui.jsfLibraryPage"
-           name="%preferencepage.jsflibraries.name"/>
-     <page
-           category="org.eclipse.jst.jsf.ui.JSFRootPage"
            class="org.eclipse.jst.jsf.ui.internal.validation.JSFValidationPreferencePage"
            id="org.eclipse.jst.jsf.ui.JSFValidationPage"
            name="%preferencepage.jsfvalidation.name"/>
@@ -32,6 +27,25 @@
            id="org.eclipse.jst.jsf.ui.viewRoot"
            name="%View_Preference_Root">
      </page>
+  </extension>
+  
+  <extension point="org.eclipse.ui.propertyPages">
+    <page
+          adaptable="true"
+          category="org.eclipse.wst.common.project.facet.ui.FacetsPropertyPage"
+          class="org.eclipse.jst.jsf.ui.internal.project.facet.JSFLibraryPropertyPage"
+          id="org.eclipse.jst.jsf.ui.internal.project.facet.JSFLibraryPropertyPage"
+          name="%jsf.library.property.page"
+          objectClass="org.eclipse.core.resources.IProject">
+      <enabledWhen>
+        <adapt type="org.eclipse.core.resources.IProject">
+          <test 
+            forcePluginActivation="true"
+            property="org.eclipse.wst.common.project.facet.core.projectFacet"
+            value="jst.jsf"/>
+        </adapt>
+      </enabledWhen>          
+    </page>
   </extension>
 
   <extension 
@@ -77,14 +91,6 @@
 			</contentTypeIdentifier>
 		</validator>
 	</extension>
-    <extension
-          point="org.eclipse.jdt.ui.classpathContainerPage">
-       <classpathContainerPage
-             class="org.eclipse.jst.jsf.ui.internal.classpath.JSFLibraryContainerWizardPage"
-             id="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"
-             name="%classpathContainerPage.name.0">
-       </classpathContainerPage>
-    </extension>
     <extension
           point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
        <hyperlinkDetector

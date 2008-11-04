@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFLibrary()
  * @model
  * @generated
+ * @deprecated
  */
 public interface JSFLibrary extends EObject{
 	/**

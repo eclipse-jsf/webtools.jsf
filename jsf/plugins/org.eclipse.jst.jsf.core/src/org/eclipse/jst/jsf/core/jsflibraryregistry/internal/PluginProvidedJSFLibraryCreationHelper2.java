@@ -28,6 +28,7 @@ import org.eclipse.osgi.util.NLS;
  * <br>
  * 
  * @author Gerry Kessler - Oracle
+ * @deprecated
  */
 public final class PluginProvidedJSFLibraryCreationHelper2 {
 	private PluginProvidedJSFLibrary newLib;

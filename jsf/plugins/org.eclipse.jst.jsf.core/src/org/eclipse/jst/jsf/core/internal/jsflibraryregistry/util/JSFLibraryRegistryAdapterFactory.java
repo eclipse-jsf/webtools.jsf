@@ -28,6 +28,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage
  * @generated
+ * @deprecated
  */
 public class JSFLibraryRegistryAdapterFactory extends AdapterFactoryImpl {
 	/**

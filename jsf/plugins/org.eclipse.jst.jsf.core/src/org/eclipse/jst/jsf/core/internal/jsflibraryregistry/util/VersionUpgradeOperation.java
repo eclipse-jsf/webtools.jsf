@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IStatus;
  * API rules
  * 
  * @author cbateman
- *
+ * @deprecated
  */
 public abstract class VersionUpgradeOperation extends AbstractOperation 
 {
