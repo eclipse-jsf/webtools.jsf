@@ -319,9 +319,9 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		}
 	}
 
-	private void removeAdapterFromInput(Object input) {
-		if (_facesConfigOthersAdapter != null && input != null && input instanceof FacesConfigType) {
-			((FacesConfigType)input).eAdapters().remove(_facesConfigOthersAdapter);
+	private void removeAdapterFromInput(Object input_) {
+		if (_facesConfigOthersAdapter != null && input_ != null && input_ instanceof FacesConfigType) {
+			((FacesConfigType)input_).eAdapters().remove(_facesConfigOthersAdapter);
 		}
 	}
 	
