@@ -1,0 +1,5 @@
+org.eclipse.jst.pagedesigner/debug=true
+org.eclipse.jst.pagedesigner/debug/converter/load=false
+org.eclipse.jst.pagedesigner/debug/converter/selection=false
+org.eclipse.jst.pagedesigner/debug/elementedit/load=false
+org.eclipse.jst.pagedesigner/debug/elementedit/selection=false
