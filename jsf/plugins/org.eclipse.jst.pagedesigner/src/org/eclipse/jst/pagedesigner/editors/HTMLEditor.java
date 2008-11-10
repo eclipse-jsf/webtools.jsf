@@ -66,13 +66,12 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
+import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.ui.part.MultiPageEditorSite;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
-import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageEditorSite;
-import org.eclipse.wst.common.ui.provisional.editors.PostMultiPageSelectionProvider;
-import org.eclipse.wst.common.ui.provisional.editors.PostSelectionMultiPageEditorPart;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
@@ -86,7 +85,7 @@ import org.w3c.dom.Document;
  * 
  * @author mengbo
  */
-public final class HTMLEditor extends PostSelectionMultiPageEditorPart implements
+public final class HTMLEditor extends MultiPageEditorPart implements
 		IPropertyListener, ITabbedPropertySheetPageContributor {
 	// private static final String PAGE_NAME_DESIGN = "Design"; //$NON-NLS-1$
 	// private static final String PAGE_NAME_SOURCE = "Source"; //$NON-NLS-1$
@@ -214,7 +213,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 			if (selectionProvider instanceof IPostSelectionProvider) {
 				_selChangedListener =  new ISelectionChangedListener() {
 				public void selectionChanged(SelectionChangedEvent event) {
-						((PostMultiPageSelectionProvider) getSite()
+						((MultiPageSelectionProvider) getSite()
 								.getSelectionProvider())
 								.firePostSelectionChanged(event);
 					}
@@ -273,7 +272,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	 * @see org.eclipse.ui.part.MultiPageEditorPart#createSite(org.eclipse.ui.IEditorPart)
 	 */
 	protected IEditorSite createSite(IEditorPart editor) {
-		return new PostMultiPageEditorSite(this, editor);
+		return new MultiPageEditorSite(this, editor);
 	}
 
 	private void tabbed_createAndAddDesignSourcePage()
