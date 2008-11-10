@@ -219,15 +219,17 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		});
 	}
 
-	private void createPhaseListener(FacesConfigArtifactEdit edit){
+	@SuppressWarnings("unchecked")
+    private void createPhaseListener(FacesConfigArtifactEdit edit){
 		LifecycleType app = getOrCreateLCType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		PhaseListenerType t = fac.createPhaseListenerType();
-		t.setTextContent("PhaseListener"+System.currentTimeMillis());					
+		t.setTextContent("PhaseListener"+System.currentTimeMillis());
 		app.getPhaseListener().add(t);		
 	}
 
-	private LifecycleType getOrCreateLCType(
+	@SuppressWarnings("unchecked")
+    private LifecycleType getOrCreateLCType(
 			FacesConfigArtifactEdit edit) {
 		
 		List<LifecycleType> lcs = edit.getFacesConfig().getLifecycle();
@@ -239,7 +241,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		return lcs.get(0);
 	}
 	
-	private void createRKFactory(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createRKFactory(FacesConfigArtifactEdit edit) {
 		FactoryType app = getOrCreateFactoryType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		RenderKitFactoryType t = fac.createRenderKitFactoryType();
@@ -247,7 +250,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getRenderKitFactory().add(t);
 	}
 
-	private void createLCFactory(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createLCFactory(FacesConfigArtifactEdit edit) {
 		FactoryType app = getOrCreateFactoryType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		LifecycleFactoryType t = fac.createLifecycleFactoryType();
@@ -255,7 +259,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getLifecycleFactory().add(t);		
 	}
 
-	private void createFCFactory(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createFCFactory(FacesConfigArtifactEdit edit) {
 		FactoryType app = getOrCreateFactoryType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		FacesContextFactoryType t = fac.createFacesContextFactoryType();
@@ -263,7 +268,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getFacesContextFactory().add(t);				
 	}
 
-	private void createAppFactory(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createAppFactory(FacesConfigArtifactEdit edit) {
 		FactoryType app = getOrCreateFactoryType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		ApplicationFactoryType t = fac.createApplicationFactoryType();
@@ -271,7 +277,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getApplicationFactory().add(t);
 	}
 
-	private FactoryType getOrCreateFactoryType(
+	@SuppressWarnings("unchecked")
+    private FactoryType getOrCreateFactoryType(
 			FacesConfigArtifactEdit edit) {
 		List<FactoryType> facs = edit.getFacesConfig().getFactory();
 		if (facs == null || facs.size() == 0){					
@@ -283,7 +290,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 
 	}
 
-	private void createViewHandler(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createViewHandler(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		ViewHandlerType t = fac.createViewHandlerType();
@@ -291,7 +299,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getViewHandler().add(t);			
 	}
 
-	private void createVarResolver(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createVarResolver(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		VariableResolverType t = fac.createVariableResolverType();
@@ -299,7 +308,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getVariableResolver().add(t);
 	}
 
-	private void createStateManager(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createStateManager(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		StateManagerType t = fac.createStateManagerType();
@@ -307,7 +317,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getStateManager().add(t);
 	}
 
-	private void createPropertyResolver(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createPropertyResolver(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		PropertyResolverType t = fac.createPropertyResolverType();
@@ -315,7 +326,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getPropertyResolver().add(t);	
 	}
 
-	private void createNavHandler(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createNavHandler(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		NavigationHandlerType t = fac.createNavigationHandlerType();
@@ -323,7 +335,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getNavigationHandler().add(t);
 	}
 
-	private void createMessageBundle(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createMessageBundle(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		MessageBundleType t = fac.createMessageBundleType();
@@ -331,7 +344,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getMessageBundle().add(t);
 	}
 
-	private void createLocaleConfig(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createLocaleConfig(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		LocaleConfigType t = fac.createLocaleConfigType();
@@ -341,7 +355,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getLocaleConfig().add(t);
 	}
 
-	private void createActionListener(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createActionListener(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		ActionListenerType t = fac.createActionListenerType();
@@ -349,7 +364,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getActionListener().add(t);		
 	}
 
-	private void createDefRenderKit(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createDefRenderKit(FacesConfigArtifactEdit edit) {
 		ApplicationType app = getOrCreateAppType(edit);
 		FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		DefaultRenderKitIdType t = fac.createDefaultRenderKitIdType();
@@ -357,7 +373,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		app.getDefaultRenderKitId().add(t);
 	}
 
-	private ApplicationType getOrCreateAppType(
+	@SuppressWarnings("unchecked")
+    private ApplicationType getOrCreateAppType(
 			FacesConfigArtifactEdit edit) {
 		List<ApplicationType> apps = edit.getFacesConfig().getApplication();
 		if (apps == null || apps.size() == 0){
@@ -368,7 +385,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		return apps.get(0);
 	}
 
-	private void createComp(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createComp(FacesConfigArtifactEdit edit) {
 		 FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		 ComponentType comp = fac.createComponentType();
 		 ComponentTypeType ttype = fac.createComponentTypeType();
@@ -380,7 +398,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		 edit.getFacesConfig().getComponent().add(comp);
 	}
 
-	private void createConv(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createConv(FacesConfigArtifactEdit edit) {
 		 FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		 ConverterType conv = fac.createConverterType();
 		 ConverterClassType klass = fac.createConverterClassType();
@@ -415,7 +434,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 	}
 	
 	
-	private void createVal(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createVal(FacesConfigArtifactEdit edit) {
 		 FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		 ValidatorType val = fac.createValidatorType();
 		 ValidatorClassType klass = fac.createValidatorClassType();
@@ -446,7 +466,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		 edit.getFacesConfig().getValidator().add(val);
 	}
 
-	private void createRenderkit(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createRenderkit(FacesConfigArtifactEdit edit) {
 		 FacesConfigFactory fac = FacesConfigFactory.eINSTANCE;
 		 RenderKitType rt = fac.createRenderKitType();
 		 RenderKitIdType id = fac.createRenderKitIdType();
@@ -471,7 +492,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		 edit.getFacesConfig().getRenderKit().add(rt);
 	}
 
-	private void createNavRule(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createNavRule(FacesConfigArtifactEdit edit) {
 		NavigationRuleType newNavRule = FacesConfigFactory.eINSTANCE.createNavigationRuleType();
 		FromViewIdType fromView = FacesConfigFactory.eINSTANCE.createFromViewIdType();
 		fromView.setTextContent("JSP"+String.valueOf(System.currentTimeMillis()));
@@ -487,7 +509,8 @@ public class TestNotificationsOnNonUIThread extends FacesConfigEditorTest {
 		edit.getFacesConfig().getNavigationRule().add(newNavRule);
 	}
 
-	private void createMBean(FacesConfigArtifactEdit edit) {
+	@SuppressWarnings("unchecked")
+    private void createMBean(FacesConfigArtifactEdit edit) {
     	ManagedBeanType newBean = FacesConfigFactory.eINSTANCE.createManagedBeanType();	
     	ManagedBeanNameType name = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
     	ManagedBeanScopeType scope = FacesConfigFactory.eINSTANCE.createManagedBeanScopeType();
