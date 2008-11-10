@@ -46,7 +46,7 @@ public class PageDesignerActionBarContributor2 extends
 
 	private IExtendedContributor _extendedContributor;
 
-	DesignerStyleActionGroup _group = new DesignerStyleActionGroup();
+	private DesignerStyleActionGroup _group = new DesignerStyleActionGroup();
 
 	/**
 	 * Default constructor

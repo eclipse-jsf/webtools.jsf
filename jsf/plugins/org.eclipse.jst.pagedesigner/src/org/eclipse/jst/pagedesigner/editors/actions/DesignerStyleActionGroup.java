@@ -11,23 +11,29 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.actions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.commands.ActionHandler;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IKeyBindingService;
+import org.eclipse.ui.actions.ActionGroup;
+import org.eclipse.ui.handlers.IHandlerActivation;
+import org.eclipse.ui.handlers.IHandlerService;
 
 /**
  * @author mengbo
  * @version 1.5
  */
-public class DesignerStyleActionGroup {
+public class DesignerStyleActionGroup extends ActionGroup
+{
 	private static HashMap IMAGE_NAMES = new HashMap();
 
 	private static final String VERTICAL = ActionsMessages
@@ -60,13 +66,14 @@ public class DesignerStyleActionGroup {
 		IMAGE_NAMES.put(SOURCE, "PD_Toolbar_source.gif"); //$NON-NLS-1$
 	}
 
-	class ChangeDesignerStyleAction extends Action {
+    private class ChangeDesignerStyleAction extends Action {
 		int _mode;
 
-		ChangeDesignerStyleAction(String text, ImageDescriptor image, int mode) {
+		ChangeDesignerStyleAction(String actionId, String text, ImageDescriptor image, int mode) {
 			super(text, IAction.AS_RADIO_BUTTON);
 			this.setImageDescriptor(image);
 			_mode = mode;
+			setId(actionId);
 		}
 
 		/**
@@ -82,60 +89,76 @@ public class DesignerStyleActionGroup {
 		 * @see org.eclipse.jface.action.Action#run()
 		 */
 		public void run() {
+		    //final IWorkbenchPart editorPart = getActivePart();
 			if (_htmlEditor != null) {
-				_htmlEditor.setDesignerMode(_mode);
+			    _htmlEditor.setDesignerMode(_mode);
 				updateActionBars();
 			}
 		}
+
 	};
 
-	HTMLEditor _htmlEditor;
+	private HTMLEditor _htmlEditor;
 
-	ChangeDesignerStyleAction[] _actions = null;
+	private final ChangeDesignerStyleAction[] _actions;
 
+    private final  List<ActionHandler> _actionHandlers;
+    
+    private final List<IHandlerActivation>    _handlers;
+
+    /**
+     * constructor
+     */
+    public DesignerStyleActionGroup()
 	{
-		ChangeDesignerStyleAction _verAction = new ChangeDesignerStyleAction(
-				VERTICAL, PDPlugin.getDefault().getImageDescriptor(
+		ChangeDesignerStyleAction verAction = new ChangeDesignerStyleAction(
+		        "org.eclipse.jst.pagedesigner.vertical",
+		        VERTICAL, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(VERTICAL)),
 				HTMLEditor.MODE_SASH_VERTICAL);
-		_verAction.setId("org.eclipse.jst.pagedesigner.vertical");
-		_verAction
+		verAction
 				.setActionDefinitionId("org.eclipse.jst.pagedesigner.vertical");
-		_verAction.setToolTipText(VERTICAL_TOOLTIP);
+		verAction.setToolTipText(VERTICAL_TOOLTIP);
 
-		ChangeDesignerStyleAction _horAction = new ChangeDesignerStyleAction(
+		ChangeDesignerStyleAction horAction = new ChangeDesignerStyleAction(
+		        "org.eclipse.jst.pagedesigner.horizotal",
 				HORIZONTAL, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(HORIZONTAL)),
 				HTMLEditor.MODE_SASH_HORIZONTAL);
-		_horAction.setId("org.eclipse.jst.pagedesigner.horizotal");
-		_horAction
+		horAction
 				.setActionDefinitionId("org.eclipse.jst.pagedesigner.horizotal");
-		_horAction.setToolTipText(HORIZONTAL_TOOLTIP);
+		horAction.setToolTipText(HORIZONTAL_TOOLTIP);
 
-		ChangeDesignerStyleAction _designAction = new ChangeDesignerStyleAction(
+		ChangeDesignerStyleAction designAction = new ChangeDesignerStyleAction(
+		        "org.eclipse.jst.pagedesigner.design",
 				DESIGN, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(DESIGN)),
 				HTMLEditor.MODE_DESIGNER);
-		_designAction.setId("org.eclipse.jst.pagedesigner.design");
-		_designAction
+		designAction
 				.setActionDefinitionId("org.eclipse.jst.pagedesigner.design");
-		_designAction.setToolTipText(DESIGN_TOOLTIP);
+		designAction.setToolTipText(DESIGN_TOOLTIP);
 
-		ChangeDesignerStyleAction _sourceAction = new ChangeDesignerStyleAction(
+		ChangeDesignerStyleAction sourceAction = new ChangeDesignerStyleAction(
+		        "org.eclipse.jst.pagedesigner.source",
 				SOURCE, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(SOURCE)),
 				HTMLEditor.MODE_SOURCE);
-		_sourceAction.setId("org.eclipse.jst.pagedesigner.source");
-		_sourceAction
+		sourceAction
 				.setActionDefinitionId("org.eclipse.jst.pagedesigner.source");
-		_sourceAction.setToolTipText(SOURCE_TOOLTIP);
+		sourceAction.setToolTipText(SOURCE_TOOLTIP);
 
-		_actions = new ChangeDesignerStyleAction[] { _verAction, _horAction,
-				_designAction, _sourceAction };
+		_actions = new ChangeDesignerStyleAction[] { verAction, horAction,
+				designAction, sourceAction };
+        _actionHandlers = new ArrayList<ActionHandler>();
+		for (int i = 0; i < _actions.length; i++)
+		{
+	        _actionHandlers.add(new ActionHandler(_actions[i]));
+		}
+		_handlers = new ArrayList<IHandlerActivation>();
 	}
 
 
-	private void updateActionBars() {
+	public void updateActionBars() {
 		if (_htmlEditor == null) {
 			for (int i = 0; i < _actions.length; i++) {
 				_actions[i].setEnabled(false);
@@ -149,44 +172,69 @@ public class DesignerStyleActionGroup {
 		}
 	}
 
-	/**
-	 * @param editor
-	 */
-	public void setHTMLEditor(HTMLEditor editor) {
-		this._htmlEditor = editor;
-		if (editor != null) {
-			IKeyBindingService keyBindingService = editor.getSite()
-					.getKeyBindingService();
-			for (int i = 0; i < _actions.length; i++) {
-				keyBindingService.registerAction(_actions[i]);
-			}
-		}
-		updateActionBars();
-	}
+    /**
+     * @param editor
+     */
+    public void setHTMLEditor(HTMLEditor editor)
+    {
+        if (_htmlEditor != editor)
+        {
+            if (_htmlEditor != null)
+            {
+                deactivateHandlers();
+            }
 
+            this._htmlEditor = editor;
+            if (_htmlEditor != null)
+            {
+                activateHandlers();
+            }
+            updateActionBars();
+        }
+    }
 
-	/**
-	 * @param actionBars
-	 */
-	public void fillActionBars(IActionBars actionBars) {
-		IToolBarManager toolbar = actionBars.getToolBarManager();
-		for (int i = 0; i < _actions.length; i++) {
-			toolbar.add(_actions[i]);
-		}
-		toolbar.add(new Separator());
-	}
+    private void deactivateHandlers()
+    {
+        final IHandlerService service = (IHandlerService) _htmlEditor.getSite()
+                .getService(IHandlerService.class);
+        for (final IHandlerActivation activation : _handlers)
+        {
+            service.deactivateHandler(activation);
+        }
+        _handlers.clear();
+    }
 
-	/**
-	 * dispose the action
-	 */
-	public void dispose() {
-		if (_htmlEditor != null) {
-			IKeyBindingService keyBindingService = _htmlEditor.getSite()
-					.getKeyBindingService();
-			for (int i = 0; i < _actions.length; i++) {
-				keyBindingService.unregisterAction(_actions[i]);
-			}
-		}
+    private void activateHandlers()
+    {
+        final IHandlerService service = (IHandlerService) _htmlEditor.getSite()
+                .getService(IHandlerService.class);
+        for (int i = 0; i < _actions.length; i++)
+        {
+            _handlers.add(service.activateHandler(_actions[i].getId(), _actionHandlers.get(i)));
+        }
+    }
 
-	}
+    /**
+     * @param actionBars
+     */
+    public void fillActionBars(IActionBars actionBars)
+    {
+        IToolBarManager toolbar = actionBars.getToolBarManager();
+        for (int i = 0; i < _actions.length; i++)
+        {
+            toolbar.add(_actions[i]);
+        }
+        toolbar.add(new Separator());
+    }
+
+    /**
+     * dispose the action
+     */
+    public void dispose()
+    {
+        for (final ActionHandler actionHandler : _actionHandlers)
+        {
+            actionHandler.dispose();
+        }
+    }
 }
