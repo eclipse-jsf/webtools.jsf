@@ -20,6 +20,7 @@ import org.w3c.dom.Element;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class SelectBooleanCheckboxTagConverter extends AbstractTagConverter
 {

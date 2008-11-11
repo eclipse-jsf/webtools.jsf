@@ -28,6 +28,7 @@ import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class PanelGridTagConverter extends AbstractTagConverter
 {

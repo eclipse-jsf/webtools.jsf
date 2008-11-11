@@ -26,6 +26,7 @@ import org.w3c.dom.NodeList;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class CommandButtonTagConverter extends AbstractTagConverter
 {

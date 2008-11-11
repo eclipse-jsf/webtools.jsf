@@ -25,6 +25,7 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class CommandLinkTagConverter extends AbstractTagConverter
 {

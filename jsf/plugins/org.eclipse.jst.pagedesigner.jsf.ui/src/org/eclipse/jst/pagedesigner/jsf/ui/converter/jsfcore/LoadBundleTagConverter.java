@@ -37,6 +37,7 @@ import org.w3c.dom.Element;
 
 /**
  * @author mengbo
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class LoadBundleTagConverter extends HiddenTagConverter
 {

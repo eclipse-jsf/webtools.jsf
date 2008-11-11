@@ -16,6 +16,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfhtml;
  * 
  * @author mengbo
  * @version 1.5
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class SelectItemModel
 {

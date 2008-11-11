@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 /**
  * @author mengbo
  * @version 1.5
+ * @deprecated Use DTTagConverter meta-data instead
  */
 public class TableBasedSelectTagConverter extends SelectTagConverter
 {
