@@ -42,7 +42,7 @@ import org.eclipse.swt.widgets.Shell;
  * @version 1.5
  */
 public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
-	private static final String DEFAULT_CUSTOMIZATIONS_EXPORT_FILENAME = "WPDPaletteCustomizations.xml";
+	private static final String DEFAULT_CUSTOMIZATIONS_EXPORT_FILENAME = "WPDPaletteCustomizations.xml"; //$NON-NLS-1$
 	
 	private static String DEFAULTEXTENSION = ".xml";//$NON-NLS-1$ 
 
@@ -148,12 +148,12 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 		private void handleExport() {
 			final FileDialog fileDialog = new FileDialog(PDPlugin
 					.getActiveWorkbenchShell());
-			fileDialog.setFileName(DEFAULT_CUSTOMIZATIONS_EXPORT_FILENAME); //$NON-NLS-1$
+			fileDialog.setFileName(DEFAULT_CUSTOMIZATIONS_EXPORT_FILENAME);
 			String[] filterExtensions = new String[2];
 			filterExtensions[0] = "*.xml"; //$NON-NLS-1$
 			filterExtensions[1] = "*.*"; //$NON-NLS-1$
 			fileDialog.setFilterExtensions(filterExtensions);
-			fileDialog.setText("Export Palette Customizations");
+			fileDialog.setText(Messages.DesignerPaletteCustomizerDialog_ExportCustomizations);
 			String filename = fileDialog.open();
 			if (filename != null) {
 				if (!filename.endsWith(DEFAULTEXTENSION)) {
@@ -222,12 +222,12 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 //			PaletteEntry entry = designerPaletteCustomizerDialog.getSelectedPaletteEntry();
 			final FileDialog fileDialog = new FileDialog(PDPlugin
 					.getActiveWorkbenchShell());
-			fileDialog.setFileName(DEFAULT_CUSTOMIZATIONS_EXPORT_FILENAME); //$NON-NLS-1$
+			fileDialog.setFileName(DEFAULT_CUSTOMIZATIONS_EXPORT_FILENAME);
 			String[] filterExtensions = new String[2];
 			filterExtensions[0] = "*.xml"; //$NON-NLS-1$
 			filterExtensions[1] = "*.*"; //$NON-NLS-1$
 			fileDialog.setFilterExtensions(filterExtensions);
-			fileDialog.setText("Import Palette Customizations");
+			fileDialog.setText(Messages.DesignerPaletteCustomizerDialog_ImportCustomizations);
 			String filename = fileDialog.open();
 			if (filename != null) {		
 					//deselect current entry first

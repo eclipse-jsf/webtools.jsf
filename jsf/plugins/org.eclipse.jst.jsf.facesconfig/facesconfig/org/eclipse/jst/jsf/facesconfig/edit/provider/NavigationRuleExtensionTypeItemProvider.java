@@ -50,7 +50,7 @@ public class NavigationRuleExtensionTypeItemProvider
      * @generated
      */
     @SuppressWarnings("hiding")
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -84,7 +84,7 @@ public class NavigationRuleExtensionTypeItemProvider
      * @generated
      */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/NavigationRuleExtensionType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/NavigationRuleExtensionType")); //$NON-NLS-1$
     }
 
     /**
@@ -96,8 +96,8 @@ public class NavigationRuleExtensionTypeItemProvider
     public String getText(Object object) {
         String label = ((NavigationRuleExtensionType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_NavigationRuleExtensionType_type") :
-            getString("_UI_NavigationRuleExtensionType_type") + " " + label;
+            getString("_UI_NavigationRuleExtensionType_type") : //$NON-NLS-1$
+            getString("_UI_NavigationRuleExtensionType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

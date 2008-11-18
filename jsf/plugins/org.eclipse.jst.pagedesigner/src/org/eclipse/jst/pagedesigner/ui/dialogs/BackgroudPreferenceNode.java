@@ -80,7 +80,7 @@ public class BackgroudPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "Background";
+		return "Background"; //$NON-NLS-1$
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class BackgroudPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("BackgroundPreferenceNode.LabelText");
+		return DialogsMessages.getString("BackgroundPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

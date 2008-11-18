@@ -108,7 +108,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerEx
                     catch (final ViewHandlerException e)
                     {
                         JSFCorePlugin.log(e,
-                                "While creating dt viewroot for viewId: "
+                                "While creating dt viewroot for viewId: " //$NON-NLS-1$
                                         + viewId);
                     }
                 }
@@ -125,7 +125,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerEx
         if (!Thread.holdsLock(_recalcViewRootExclusion))
         {
             throw new IllegalStateException(
-                    "Must hold _recalcViewRootExclusion to modify view root");
+                    "Must hold _recalcViewRootExclusion to modify view root"); //$NON-NLS-1$
         }
         _viewRoot = newViewRoot;
     }

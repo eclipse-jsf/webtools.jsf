@@ -327,7 +327,7 @@ import org.eclipse.swt.widgets.Composite;
 	public String getLabel(int index) {
 		if (index >= 0 && index < getTabList().size())
 			return ((Tab) tabList.get(index)).getLabel();
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -451,7 +451,7 @@ import org.eclipse.swt.widgets.Composite;
 	}
 
 	private class Tab {
-		private String label = "";
+		private String label = ""; //$NON-NLS-1$
 
 		private Object contents = null;
 
@@ -506,7 +506,7 @@ import org.eclipse.swt.widgets.Composite;
 		 */
 		public void setLabel(String text) {
 			if (text == null)
-				this.label = "";
+				this.label = ""; //$NON-NLS-1$
 			else
 				this.label = text;
 			textExtents = null;
@@ -516,7 +516,7 @@ import org.eclipse.swt.widgets.Composite;
 		 * @return the text extents
 		 */
 		public Dimension calculateTextExtents() {
-			textExtents = FigureUtilities.getTextExtents(label == null ? "W"
+			textExtents = FigureUtilities.getTextExtents(label == null ? "W" //$NON-NLS-1$
 					: label, getFont());
 			textExtents.width += getPadding().getWidth();
 			textExtents.height += getPadding().getHeight();

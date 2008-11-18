@@ -39,7 +39,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation";
+	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The package name.
@@ -47,7 +47,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "jsflibraryregistry";
+	String eNAME = "jsflibraryregistry"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
@@ -55,7 +55,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd";
+	String eNS_URI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -63,7 +63,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "jsflibreg";
+	String eNS_PREFIX = "jsflibreg"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.

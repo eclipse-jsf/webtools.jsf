@@ -54,7 +54,7 @@ public class ManagedBeanNameTypeItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -95,8 +95,8 @@ public class ManagedBeanNameTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedBeanNameType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanNameType_textContent_feature", "_UI_ManagedBeanNameType_type"),
+                 getString("_UI_ManagedBeanNameType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanNameType_textContent_feature", "_UI_ManagedBeanNameType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_BEAN_NAME_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -118,8 +118,8 @@ public class ManagedBeanNameTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedBeanNameType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanNameType_id_feature", "_UI_ManagedBeanNameType_type"),
+                 getString("_UI_ManagedBeanNameType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanNameType_id_feature", "_UI_ManagedBeanNameType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_BEAN_NAME_TYPE__ID,
                  true,
                  false,
@@ -136,7 +136,7 @@ public class ManagedBeanNameTypeItemProvider
      * @generated
      */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedBeanNameType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedBeanNameType")); //$NON-NLS-1$
     }
 
     /**
@@ -148,8 +148,8 @@ public class ManagedBeanNameTypeItemProvider
     public String getText(Object object) {
         String label = ((ManagedBeanNameType)object).getTextContent();
         return label == null || label.length() == 0 ?
-            getString("_UI_ManagedBeanNameType_type") :
-            getString("_UI_ManagedBeanNameType_type") + " " + label;
+            getString("_UI_ManagedBeanNameType_type") : //$NON-NLS-1$
+            getString("_UI_ManagedBeanNameType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

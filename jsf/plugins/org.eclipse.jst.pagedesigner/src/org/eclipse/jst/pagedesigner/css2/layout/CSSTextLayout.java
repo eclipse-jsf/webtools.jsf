@@ -108,7 +108,7 @@ public class CSSTextLayout extends FlowFigureLayout {
 		box._offset = 0;
 		box._height = 0;
 		box._width = 0;
-		box.setTextData("");
+		box.setTextData(""); //$NON-NLS-1$
 
 		// {following comments deprecated XXX: If is empty string, we only want
 		// to this figure to have a size, but don't

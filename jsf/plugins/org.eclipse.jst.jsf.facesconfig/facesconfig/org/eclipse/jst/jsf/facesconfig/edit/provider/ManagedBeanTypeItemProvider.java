@@ -50,7 +50,7 @@ public class ManagedBeanTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -93,8 +93,8 @@ public class ManagedBeanTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedBeanType_managedBeanName_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_managedBeanName_feature", "_UI_ManagedBeanType_type"),
+                 getString("_UI_ManagedBeanType_managedBeanName_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_managedBeanName_feature", "_UI_ManagedBeanType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_BEAN_TYPE__MANAGED_BEAN_NAME,
                  true,
                  false,
@@ -116,8 +116,8 @@ public class ManagedBeanTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedBeanType_managedBeanClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_managedBeanClass_feature", "_UI_ManagedBeanType_type"),
+                 getString("_UI_ManagedBeanType_managedBeanClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_managedBeanClass_feature", "_UI_ManagedBeanType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_BEAN_TYPE__MANAGED_BEAN_CLASS,
                  true,
                  false,
@@ -139,8 +139,8 @@ public class ManagedBeanTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedBeanType_managedBeanScope_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_managedBeanScope_feature", "_UI_ManagedBeanType_type"),
+                 getString("_UI_ManagedBeanType_managedBeanScope_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_managedBeanScope_feature", "_UI_ManagedBeanType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_BEAN_TYPE__MANAGED_BEAN_SCOPE,
                  true,
                  false,
@@ -162,8 +162,8 @@ public class ManagedBeanTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedBeanType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_id_feature", "_UI_ManagedBeanType_type"),
+                 getString("_UI_ManagedBeanType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedBeanType_id_feature", "_UI_ManagedBeanType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_BEAN_TYPE__ID,
                  true,
                  false,
@@ -214,7 +214,7 @@ public class ManagedBeanTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedBeanType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedBeanType")); //$NON-NLS-1$
     }
 
     /**
@@ -234,7 +234,7 @@ public class ManagedBeanTypeItemProvider
                 label = ((ManagedBeanType) object).getManagedBeanClass()
                         .getTextContent();
         }
-        return label == null || label.length() == 0 ? getString("_UI_ManagedBeanType_type")
+        return label == null || label.length() == 0 ? getString("_UI_ManagedBeanType_type") //$NON-NLS-1$
                 : label;
     }
 
@@ -335,14 +335,14 @@ public class ManagedBeanTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return managedBean.getManagedBeanName() == null ? "" : managedBean
+			return managedBean.getManagedBeanName() == null ? "" : managedBean //$NON-NLS-1$
 					.getManagedBeanName().getTextContent();
 		case 1:
-			return managedBean.getManagedBeanScope() == null ? "" : managedBean
+			return managedBean.getManagedBeanScope() == null ? "" : managedBean //$NON-NLS-1$
 					.getManagedBeanScope().getTextContent();
 
 		case 2:
-			return managedBean.getManagedBeanClass() == null ? "" : managedBean
+			return managedBean.getManagedBeanClass() == null ? "" : managedBean //$NON-NLS-1$
 					.getManagedBeanClass().getTextContent();
 		}
 		return null;

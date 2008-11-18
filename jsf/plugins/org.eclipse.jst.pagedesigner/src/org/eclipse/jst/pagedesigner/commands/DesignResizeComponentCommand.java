@@ -81,10 +81,10 @@ public class DesignResizeComponentCommand extends Command {
 			style = new StringBuffer(50);
 		}
 		if (null == width) {
-			style.append(";").append(ICSSPropertyID.ATTR_WIDTH).append(":")
-					.append(((Rectangle) _constraint).width).append(";");
-			style.append(ICSSPropertyID.ATTR_HEIGHT).append(":").append(
-					((Rectangle) _constraint).height).append("");
+			style.append(";").append(ICSSPropertyID.ATTR_WIDTH).append(":") //$NON-NLS-1$ //$NON-NLS-2$
+					.append(((Rectangle) _constraint).width).append(";"); //$NON-NLS-1$
+			style.append(ICSSPropertyID.ATTR_HEIGHT).append(":").append( //$NON-NLS-1$
+					((Rectangle) _constraint).height).append(""); //$NON-NLS-1$
 		}
 		element.setAttribute(ICSSPropertyID.ATTR_STYLE, style.toString());
 	}

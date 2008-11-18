@@ -30,7 +30,7 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 
 	private static DialogFieldResources _resource; // singleton
 
-	private static final String BUNDLE = DialogFieldResources.class.getName(); //$NON-NLS-1$
+	private static final String BUNDLE = DialogFieldResources.class.getName();
 
 	/**
 	 * Empty Constructor.

@@ -28,7 +28,7 @@ public class PropertiesViewAction extends ShowViewAction {
 	public PropertiesViewAction() 
     {
 		super(ActionsMessages
-				.getString("PropertiesViewAction.Menu.Properties")
-              , IPageLayout.ID_PROP_SHEET); //$NON-NLS-1$
+				.getString("PropertiesViewAction.Menu.Properties") //$NON-NLS-1$
+              , IPageLayout.ID_PROP_SHEET);
 	}
 }

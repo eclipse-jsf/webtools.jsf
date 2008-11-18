@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassTypeInfo_Impl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
+ * $Id: ClassTypeInfo_Impl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -251,11 +251,11 @@ public class ClassTypeInfo_Impl extends EObjectImpl implements ClassTypeInfo_
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (className: ");
+        result.append(" (className: "); //$NON-NLS-1$
         result.append(className);
-        result.append(", superClasses: ");
+        result.append(", superClasses: "); //$NON-NLS-1$
         result.append(superClasses);
-        result.append(", interfaces: ");
+        result.append(", interfaces: "); //$NON-NLS-1$
         result.append(interfaces);
         result.append(')');
         return result.toString();

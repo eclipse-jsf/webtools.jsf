@@ -95,7 +95,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		super();
 		if (!(field instanceof ISupportTextValue)) {
 			throw new IllegalArgumentException(
-					"Field must be ISupportTextValue");
+					"Field must be ISupportTextValue"); //$NON-NLS-1$
 		}
 		_wrapped = field;
 		this._image = image;
@@ -140,7 +140,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 		super();
 		if (!(field instanceof ISupportTextValue)) {
 			throw new IllegalArgumentException(
-					"Field must be ISupportTextValue");
+					"Field must be ISupportTextValue"); //$NON-NLS-1$
 		}
 		_wrapped = field;
 		this._image = image;
@@ -270,7 +270,7 @@ public class DialogFieldWrapper implements DialogField, ISupportTextValue,
 			Assert.isNotNull(parent,
 					"uncreated control requested with composite null"); //$NON-NLS-1$
 			if (toolkit != null) {
-				_databindingButton = toolkit.createButton(parent, "", SWT.PUSH);
+				_databindingButton = toolkit.createButton(parent, "", SWT.PUSH); //$NON-NLS-1$
 				_databindingButton.setImage(getImage());
 			} else {
 				_databindingButton = new Button(parent, SWT.PUSH);

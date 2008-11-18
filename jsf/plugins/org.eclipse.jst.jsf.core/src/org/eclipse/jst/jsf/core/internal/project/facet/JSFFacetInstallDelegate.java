@@ -79,7 +79,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 				throw new JSFFacetException( NLS.bind(Messages.JSFFacetInstallDelegate_ConfigErr, project.getName())); 
 			} else if (!(provider.validateEdit(null, null).isOK())){				
 				if (!(provider.validateEdit(null, null).isOK())) {//checks for web.xml file being read-only and allows user to set writeable		
-					throw new JSFFacetException(NLS.bind(Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,  project.getName())); //$NON-NLS-2$
+					throw new JSFFacetException(NLS.bind(Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,  project.getName()));
 				}
 			}
 			

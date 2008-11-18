@@ -77,7 +77,7 @@ public class CommandUtil {
 
 			return tagCreator.createTag(creationData);
 		} catch (Exception e) {
-			_log.error("Problem creating tag "+tagItem.getTagName()+" at:" + domPosition + "\n", e);
+			_log.error("Problem creating tag "+tagItem.getTagName()+" at:" + domPosition + "\n", e); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
         return null;
 	}

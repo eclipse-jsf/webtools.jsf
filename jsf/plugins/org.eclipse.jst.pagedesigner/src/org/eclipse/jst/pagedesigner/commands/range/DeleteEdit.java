@@ -79,7 +79,7 @@ public class DeleteEdit extends DesignEdit {
 			}
 			return result;
 		} catch (Exception e) {
-			_log.error("Exception", e);
+			_log.error("Exception", e); //$NON-NLS-1$
 			return false;
 		}
 	}
@@ -94,7 +94,7 @@ public class DeleteEdit extends DesignEdit {
 						ActionData.INLINE_EDIT, null)));
 		// for inner debug
 		if (INNER_DEBUG) {
-			_log.info("EditHelper, now we are at:" + opPosition);
+			_log.info("EditHelper, now we are at:" + opPosition); //$NON-NLS-1$
 		}
 		if (EditModelQuery.isSame(opPosition, getOperationPosition())) {
 			return;

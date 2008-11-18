@@ -68,7 +68,7 @@ public class TransformUtil {
 	 * @return gets the from-view-id from rule
 	 */
 	public static String getFromViewID(NavigationRuleType rule) {
-		String result = "*";
+		String result = "*"; //$NON-NLS-1$
 		if (rule.getFromViewId() != null) {
 			result = rule.getFromViewId().getTextContent();
 		}
@@ -80,7 +80,7 @@ public class TransformUtil {
 	 * @return gets the to-view-id from navCase
 	 */
 	public static String getToViewID(NavigationCaseType navCase) {
-		String result = "*";
+		String result = "*"; //$NON-NLS-1$
 		if (navCase.getToViewId() != null) {
 			result = navCase.getToViewId().getTextContent();
 		}
@@ -118,7 +118,7 @@ public class TransformUtil {
 		List links = action.getOutlinks();
 		for (int i = 0; i < links.size(); i++) {
 			PageflowLink link = (PageflowLink) links.get(i);
-			String outcomeStr = "";
+			String outcomeStr = ""; //$NON-NLS-1$
 			if (outcome != null) {
 				outcomeStr = outcome.getTextContent();
 			}

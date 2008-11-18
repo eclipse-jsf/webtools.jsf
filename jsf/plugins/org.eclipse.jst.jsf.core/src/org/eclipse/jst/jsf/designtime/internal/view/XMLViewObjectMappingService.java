@@ -67,11 +67,11 @@ public final class XMLViewObjectMappingService implements Serializable
     {
         if (elementData == null)
         {
-            throw new IllegalArgumentException("elementData cannot be null");
+            throw new IllegalArgumentException("elementData cannot be null"); //$NON-NLS-1$
         }
         else if (viewObject == null)
         {
-            throw new IllegalArgumentException("viewObject cannot be null");
+            throw new IllegalArgumentException("viewObject cannot be null"); //$NON-NLS-1$
         }
 
         synchronized(this)
@@ -101,7 +101,7 @@ public final class XMLViewObjectMappingService implements Serializable
     {
         if (elementData == null)
         {
-            throw new IllegalArgumentException("elementData mustn't be null");
+            throw new IllegalArgumentException("elementData mustn't be null"); //$NON-NLS-1$
         }
 
         ViewObject viewObject = null;
@@ -124,7 +124,7 @@ public final class XMLViewObjectMappingService implements Serializable
     {
         if (viewObject == null)
         {
-            throw new IllegalArgumentException("elementData mustn't be null");
+            throw new IllegalArgumentException("elementData mustn't be null"); //$NON-NLS-1$
         }
         
         ElementData elementData = null;
@@ -184,22 +184,22 @@ public final class XMLViewObjectMappingService implements Serializable
                 catch (CoreException ce)
                 {
                     JSFCorePlugin.log(ce,
-                            "While finding element for viewObject: "
-                                    + viewObject.toString() + " in "
+                            "While finding element for viewObject: " //$NON-NLS-1$
+                                    + viewObject.toString() + " in " //$NON-NLS-1$
                                     + file.getFullPath());
                 }
                 catch (IOException e)
                 {
                     JSFCorePlugin.log(e,
-                            "While finding element for viewObject: "
-                                    + viewObject.toString() + " in "
+                            "While finding element for viewObject: " //$NON-NLS-1$
+                                    + viewObject.toString() + " in " //$NON-NLS-1$
                                     + file.getFullPath());
                 }
                 catch (NoElementException e)
                 {
                     JSFCorePlugin.log(e,
-                            "While finding element for viewObject: "
-                                    + viewObject.toString() + " in "
+                            "While finding element for viewObject: " //$NON-NLS-1$
+                                    + viewObject.toString() + " in " //$NON-NLS-1$
                                     + file.getFullPath());
                 }
                 finally

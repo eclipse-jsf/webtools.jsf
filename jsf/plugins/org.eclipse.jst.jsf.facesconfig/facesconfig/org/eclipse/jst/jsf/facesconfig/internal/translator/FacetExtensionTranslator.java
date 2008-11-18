@@ -23,6 +23,6 @@ public class FacetExtensionTranslator extends ExtensionTypeTranslator {
 	 * @param aFeature
 	 */
 	public FacetExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature); //$NON-NLS-1$
+		super(domNameAndPath, aFeature);
 	}
 }

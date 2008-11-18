@@ -73,7 +73,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Group styleGroup = new Group(top, SWT.NONE);
 		styleGroup.setText(DialogsMessages
-				.getString("BorderPreferencePage.Style"));
+				.getString("BorderPreferencePage.Style")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		styleGroup.setLayoutData(data);
 		layout = new GridLayout(2, false);
@@ -81,7 +81,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label styleTopLabel = new Label(styleGroup, SWT.NONE);
 		styleTopLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Top"));
+				.getString("BorderPreferencePage.Top")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		styleTopLabel.setLayoutData(data);
 
@@ -98,7 +98,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label styleRightLabel = new Label(styleGroup, SWT.NONE);
 		styleRightLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Right"));
+				.getString("BorderPreferencePage.Right")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		styleRightLabel.setLayoutData(data);
 
@@ -115,7 +115,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label styleBottomLabel = new Label(styleGroup, SWT.NONE);
 		styleBottomLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Bottom"));
+				.getString("BorderPreferencePage.Bottom")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		styleBottomLabel.setLayoutData(data);
 
@@ -132,7 +132,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label styleLeftLabel = new Label(styleGroup, SWT.NONE);
 		styleLeftLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Left"));
+				.getString("BorderPreferencePage.Left")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		styleLeftLabel.setLayoutData(data);
 
@@ -149,7 +149,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Group colorGroup = new Group(top, SWT.NONE);
 		colorGroup.setText(DialogsMessages
-				.getString("BorderPreferencePage.Color"));
+				.getString("BorderPreferencePage.Color")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		colorGroup.setLayoutData(data);
 		layout = new GridLayout(3, false);
@@ -157,7 +157,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		_colorTopField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorTopField.setLabelText(DialogsMessages
-				.getString("BorderPreferencePage.Top"));
+				.getString("BorderPreferencePage.Top")); //$NON-NLS-1$
 
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		_colorTopField.getLabelControl(null, colorGroup).setLayoutData(data);
@@ -177,7 +177,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		_colorRightField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorRightField.setLabelText(DialogsMessages
-				.getString("BorderPreferencePage.Right"));
+				.getString("BorderPreferencePage.Right")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		_colorRightField.getLabelControl(null, colorGroup).setLayoutData(data);
 
@@ -196,7 +196,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		_colorBottomField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorBottomField.setLabelText(DialogsMessages
-				.getString("BorderPreferencePage.Bottom"));
+				.getString("BorderPreferencePage.Bottom")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		_colorBottomField.getLabelControl(null, colorGroup).setLayoutData(data);
 
@@ -216,7 +216,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		_colorLeftField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorLeftField.setLabelText(DialogsMessages
-				.getString("BorderPreferencePage.Left"));
+				.getString("BorderPreferencePage.Left")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		_colorLeftField.getLabelControl(null, colorGroup).setLayoutData(data);
 
@@ -235,7 +235,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Group widthGroup = new Group(top, SWT.NONE);
 		widthGroup.setText(DialogsMessages
-				.getString("BorderPreferencePage.Width"));
+				.getString("BorderPreferencePage.Width")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		widthGroup.setLayoutData(data);
 		layout = new GridLayout(3, false);
@@ -243,7 +243,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label widthTopLabel = new Label(widthGroup, SWT.NONE);
 		widthTopLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Top"));
+				.getString("BorderPreferencePage.Top")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		widthTopLabel.setLayoutData(data);
 
@@ -288,7 +288,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label widthRightLabel = new Label(widthGroup, SWT.NONE);
 		widthRightLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Right"));
+				.getString("BorderPreferencePage.Right")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		widthRightLabel.setLayoutData(data);
 
@@ -333,7 +333,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label widthBottomLabel = new Label(widthGroup, SWT.NONE);
 		widthBottomLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Bottom"));
+				.getString("BorderPreferencePage.Bottom")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		widthBottomLabel.setLayoutData(data);
 
@@ -378,7 +378,7 @@ public class BorderPreferencePage extends PreferencePage {
 
 		Label widthLeftLabel = new Label(widthGroup, SWT.NONE);
 		widthLeftLabel.setText(DialogsMessages
-				.getString("BorderPreferencePage.Left"));
+				.getString("BorderPreferencePage.Left")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		widthLeftLabel.setLayoutData(data);
 

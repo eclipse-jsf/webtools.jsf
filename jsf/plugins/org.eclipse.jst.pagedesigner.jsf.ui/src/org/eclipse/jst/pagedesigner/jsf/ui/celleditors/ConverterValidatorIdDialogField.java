@@ -24,7 +24,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
  */
 public class ConverterValidatorIdDialogField extends ComboDialogField implements IElementContextable
 {
-    private String _elementId = "";
+    private String _elementId = ""; //$NON-NLS-1$
 
     /**
      * The default constructor

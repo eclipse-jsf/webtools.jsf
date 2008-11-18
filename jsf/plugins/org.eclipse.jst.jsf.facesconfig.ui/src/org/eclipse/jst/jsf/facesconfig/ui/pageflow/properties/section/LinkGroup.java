@@ -62,8 +62,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 		 * @see org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.IStringButtonAdapter#changeControlPressed(org.eclipse.jst.jsf.facesconfig.ui.common.dialogfield.DialogField)
 		 */
 		public void changeControlPressed(DialogField field) {
-			String outcome = "";
-			String jspPage = "";
+			String outcome = ""; //$NON-NLS-1$
+			String jspPage = ""; //$NON-NLS-1$
 			Shell shell = field.getLabelControl(null, null).getShell();
 			if (pfLink != null) {
 				outcome = pfLink.getOutcome();
@@ -105,7 +105,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 		fromOutcomeField = new StringButtonDialogField(
 				new StringButtonAdapter());
 		fromOutcomeField.setLabelText(PropertyMessages.property_fromOutcome);
-		fromOutcomeField.setButtonLabel("...");
+		fromOutcomeField.setButtonLabel(PropertyMessages.property_browseButton);
 		fromOutcomeField
 				.setDialogFieldChangeListener(getDefaultChangeListener());
 		fromActionField = new StringDialogField();

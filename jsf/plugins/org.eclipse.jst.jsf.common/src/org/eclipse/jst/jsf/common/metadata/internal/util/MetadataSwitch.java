@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataSwitch.java,v 1.6 2007/10/01 04:29:45 cbateman Exp $
+ * $Id: MetadataSwitch.java,v 1.7 2008/11/18 22:24:36 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -39,7 +39,7 @@ public class MetadataSwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached model package

@@ -37,7 +37,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 /*package*/ class DivArithmeticBinaryOperator extends ArithmeticBinaryOperator 
 {
 
-    private static final String DIVISION = "division";
+    private static final String DIVISION = "division"; //$NON-NLS-1$
 
     DivArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
         super(diagnosticFactory);

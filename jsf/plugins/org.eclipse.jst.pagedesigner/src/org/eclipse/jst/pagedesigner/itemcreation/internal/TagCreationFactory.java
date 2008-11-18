@@ -67,7 +67,7 @@ public class TagCreationFactory
             catch (Exception e)
             {
                 PDPlugin.getLogger(getClass()).error(
-                        "Error.ProblemLoadingTagCreatorFactory",
+                        "Error.ProblemLoadingTagCreatorFactory", //$NON-NLS-1$
                         elementEdit.getClass().toString(), e);
             }
 
@@ -79,8 +79,8 @@ public class TagCreationFactory
                 }
                 // if non-null, skipped, log the issue
                 PDPlugin.getLogger(getClass()).error(
-                        "Error.ProblemLoadingTagCreatorFactory",
-                        "Tag creator must extend AbstractTagCreator",
+                        "Error.ProblemLoadingTagCreatorFactory", //$NON-NLS-1$
+                        "Tag creator must extend AbstractTagCreator", //$NON-NLS-1$
                         new Throwable());
             }
         }

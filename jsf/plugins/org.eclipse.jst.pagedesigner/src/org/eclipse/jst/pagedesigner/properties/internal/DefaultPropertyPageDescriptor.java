@@ -84,7 +84,7 @@ public class DefaultPropertyPageDescriptor implements IPropertyPageDescriptor
 
     public String getLabel()
     {
-        return getAttributeName() + ":";
+        return getAttributeName() + ":"; //$NON-NLS-1$
     }
 
     public String getTagName()

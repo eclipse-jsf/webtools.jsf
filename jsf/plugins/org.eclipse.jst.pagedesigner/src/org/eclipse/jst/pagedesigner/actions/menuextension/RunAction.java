@@ -27,14 +27,14 @@ public class RunAction extends Action {
 	/**
 	 * constant for debug launch mode
 	 */
-	public static final String LAUNCH_MODE_DEBUG = "debug";
+	public static final String LAUNCH_MODE_DEBUG = "debug"; //$NON-NLS-1$
 
 	/**
 	 * constant for run launch mode
 	 */
-	public static final String LAUNCH_MODE_RUN = "run";
+	public static final String LAUNCH_MODE_RUN = "run"; //$NON-NLS-1$
 
-	private final String ID = "org.eclipse.jst.pagedesigner.actions.menuextension.RunAction";
+	private final String ID = "org.eclipse.jst.pagedesigner.actions.menuextension.RunAction"; //$NON-NLS-1$
 
 	//private EditorPart _editor;
 
@@ -50,7 +50,7 @@ public class RunAction extends Action {
 	}
 
 	public void run() {
-	    PDPlugin.getLogger(getClass()).error("Obsolete.  Shouldn't be used", new Throwable());
+	    PDPlugin.getLogger(getClass()).error("Obsolete.  Shouldn't be used", new Throwable()); //$NON-NLS-1$
 	    // FIXME: we don't support this feature and it seems to depend
 	    // on debugger internal code anyway...
 	    //		List allShortCuts = DebugUIPlugin.getDefault()
@@ -92,14 +92,14 @@ public class RunAction extends Action {
 
 	private ImageDescriptor getImageDescriptorForModel(String id) {
 		IConfigurationElement[] elements = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor("org.eclipse.ui.actionSets");
+				.getConfigurationElementsFor("org.eclipse.ui.actionSets"); //$NON-NLS-1$
 		for (int i = 0; i < elements.length; i++) {
-			if ("actionSet".equals(elements[i].getName())) {
+			if ("actionSet".equals(elements[i].getName())) { //$NON-NLS-1$
 				IConfigurationElement[] actions = elements[i]
-						.getChildren("action");
+						.getChildren("action"); //$NON-NLS-1$
 				for (int j = 0; j < actions.length; j++) {
-					if (id.equals(actions[j].getAttribute("id"))) {
-						String iconPath = actions[j].getAttribute("icon");
+					if (id.equals(actions[j].getAttribute("id"))) { //$NON-NLS-1$
+						String iconPath = actions[j].getAttribute("icon"); //$NON-NLS-1$
 						if (iconPath != null) {
 							return AbstractUIPlugin.imageDescriptorFromPlugin(
 									actions[j].getDeclaringExtension()
@@ -115,9 +115,9 @@ public class RunAction extends Action {
 
 	public ImageDescriptor getImageDescriptor() {
 		if (_mode == LAUNCH_MODE_DEBUG) {
-			return getImageDescriptorForModel("org.eclipse.debug.internal.ui.actions.DebugDropDownAction");
+			return getImageDescriptorForModel("org.eclipse.debug.internal.ui.actions.DebugDropDownAction"); //$NON-NLS-1$
 		} else if (_mode == LAUNCH_MODE_RUN) {
-			return getImageDescriptorForModel("org.eclipse.debug.internal.ui.actions.RunDropDownAction");
+			return getImageDescriptorForModel("org.eclipse.debug.internal.ui.actions.RunDropDownAction"); //$NON-NLS-1$
 		} else {
 			return super.getImageDescriptor();
 		}

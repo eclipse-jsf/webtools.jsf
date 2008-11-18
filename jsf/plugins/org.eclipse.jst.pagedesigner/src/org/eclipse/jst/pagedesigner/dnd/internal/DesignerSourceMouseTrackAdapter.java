@@ -140,7 +140,7 @@ public class DesignerSourceMouseTrackAdapter extends
 					PageDesignerResources
 							.getInstance()
 							.getString(
-									"DesignerSourceDropTargetListener.InserCommandLabel"),
+									"DesignerSourceDropTargetListener.InserCommandLabel"), //$NON-NLS-1$
 					_textEditor, descriptor, _location);
 		}
 		return command;

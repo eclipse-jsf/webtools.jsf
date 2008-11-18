@@ -58,7 +58,7 @@ public class PagePathDialogCellEditor extends EditableDialogCellEditor {
 	 * @see DialogCellEditor#openDialogBox(Control)
 	 */
 	protected Object openDialogBox(Control cellEditorWindow) {
-		String jsfSelection = "";
+		String jsfSelection = ""; //$NON-NLS-1$
 		if (getDefaultText() != null && getDefaultText().getText().length() > 0) {
 			jsfSelection = getDefaultText().getText();
 			IProject project = WebrootUtil.getProject(element);

@@ -198,7 +198,7 @@ public class PreviewUtil {
 							.trim();
 					String bundleVariable = attrValue.substring(2, i).trim();
 					if (BUNDLE_MAP == null) {
-						return attrValue; //$NON-NLS-1$
+						return attrValue;
 					}
 					PropertyResourceBundle bundle = (PropertyResourceBundle) BUNDLE_MAP
 							.get(bundleVariable);
@@ -209,7 +209,7 @@ public class PreviewUtil {
 							if (value != null) {
 								return value;
 							}
-                            return attrValue; //$NON-NLS-1$
+                            return attrValue;
 						} catch (MissingResourceException e1) {
 							// "Error in resource bundle processing:"
 							_log.info("PreviewUtil.Error.0", e1); //$NON-NLS-1$

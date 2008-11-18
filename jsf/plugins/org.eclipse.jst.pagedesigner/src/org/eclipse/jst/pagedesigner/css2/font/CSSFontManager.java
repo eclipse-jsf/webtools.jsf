@@ -43,21 +43,21 @@ public class CSSFontManager implements ICSSFontManager {
 			.getDPI().x) / 72;
 
 	static String cssFontToLocalFont(String original) {
-		if ("serif".equalsIgnoreCase(original)) {
-			return "Georgia";
-		} else if ("sans-serif".equalsIgnoreCase(original)) {
-			return "Arial";
-		} else if ("cursive".equalsIgnoreCase(original)) {
+		if ("serif".equalsIgnoreCase(original)) { //$NON-NLS-1$
+			return "Georgia"; //$NON-NLS-1$
+		} else if ("sans-serif".equalsIgnoreCase(original)) { //$NON-NLS-1$
+			return "Arial"; //$NON-NLS-1$
+		} else if ("cursive".equalsIgnoreCase(original)) { //$NON-NLS-1$
 			// FIXME: MS windows does not support the alternative fonts that
 			// match cursive defined at
 			// http://www.w3.org/TR/REC-CSS2/fonts.html#generic-font-families,
 			// We use Comic Sans MS font family
 			// because it is MS alternative.
-			return "Comic Sans MS";
-		} else if ("fantasy".equalsIgnoreCase(original)) {
-			return cssFontToLocalFont("serif");
-		} else if ("monospace".equalsIgnoreCase(original)) {
-			return "Courier New";
+			return "Comic Sans MS"; //$NON-NLS-1$
+		} else if ("fantasy".equalsIgnoreCase(original)) { //$NON-NLS-1$
+			return cssFontToLocalFont("serif"); //$NON-NLS-1$
+		} else if ("monospace".equalsIgnoreCase(original)) { //$NON-NLS-1$
+			return "Courier New"; //$NON-NLS-1$
 		} else {
 			return original;
 		}
@@ -68,7 +68,7 @@ public class CSSFontManager implements ICSSFontManager {
 				public Font createEntry(CSSFont key) {
 					if (DEBUG) {
 						_totalFont++;
-						System.out.println("TotalFont++: " + _totalFont);
+						System.out.println("TotalFont++: " + _totalFont); //$NON-NLS-1$
 					}
 					Font font = new Font(null, cssFontToLocalFont(key
 							.getFontFamily()), (int) Math.round(key
@@ -80,7 +80,7 @@ public class CSSFontManager implements ICSSFontManager {
 				public void dispose(CSSFont key, Font entry) {
 					if (DEBUG) {
 						_totalFont--;
-						System.out.println("TotalFont--: " + _totalFont);
+						System.out.println("TotalFont--: " + _totalFont); //$NON-NLS-1$
 					}
 					entry.dispose();
 
@@ -96,24 +96,24 @@ public class CSSFontManager implements ICSSFontManager {
 
 	private String resolveFontStyleString(ICSSStyle style) {
 		StringBuffer sb = new StringBuffer();
-		sb.append(ICSSPropertyID.ATTR_FONT_FAMILY).append(":");
-		sb.append("'").append(
+		sb.append(ICSSPropertyID.ATTR_FONT_FAMILY).append(":"); //$NON-NLS-1$
+		sb.append("'").append( //$NON-NLS-1$
 				(String) style
 						.getStyleProperty(ICSSPropertyID.ATTR_FONT_FAMILY))
-				.append("'");
-		sb.append(";");
-		sb.append(ICSSPropertyID.ATTR_FONT_STYLE).append(":");
+				.append("'"); //$NON-NLS-1$
+		sb.append(";"); //$NON-NLS-1$
+		sb.append(ICSSPropertyID.ATTR_FONT_STYLE).append(":"); //$NON-NLS-1$
 		sb
 				.append(
 						(String) style
 								.getStyleProperty(ICSSPropertyID.ATTR_FONT_STYLE))
-				.append(";");
-		sb.append(ICSSPropertyID.ATTR_FONT_WEIGHT).append(":");
+				.append(";"); //$NON-NLS-1$
+		sb.append(ICSSPropertyID.ATTR_FONT_WEIGHT).append(":"); //$NON-NLS-1$
 		sb.append(
 				((Integer) style
 						.getStyleProperty(ICSSPropertyID.ATTR_FONT_WEIGHT))
-						.toString()).append(";");
-		sb.append(ICSSPropertyID.ATTR_FONT_SIZE).append(":");
+						.toString()).append(";"); //$NON-NLS-1$
+		sb.append(ICSSPropertyID.ATTR_FONT_SIZE).append(":"); //$NON-NLS-1$
 		int fontSize = getFontSize(style, style
 				.getStyleProperty(ICSSPropertyID.ATTR_FONT_SIZE));
 		sb.append(Integer.toString(fontSize));
@@ -176,7 +176,7 @@ public class CSSFontManager implements ICSSFontManager {
 	public ICSSFont createDefaultFont() {
 		CSSFont result = new CSSFont(FontFamilyMeta.DEFAULT_FONT,
 				(int) FontSizeMeta.MEDIUM_VAL_INT, SWT.NORMAL,
-				FontWeightMeta.NORMAL_WEIGHT.intValue(), "");
+				FontWeightMeta.NORMAL_WEIGHT.intValue(), ""); //$NON-NLS-1$
 		return result;
 	}
 

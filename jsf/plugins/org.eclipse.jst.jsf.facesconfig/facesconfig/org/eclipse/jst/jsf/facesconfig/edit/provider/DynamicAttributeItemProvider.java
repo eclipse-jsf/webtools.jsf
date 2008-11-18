@@ -54,7 +54,7 @@ public class DynamicAttributeItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -95,8 +95,8 @@ public class DynamicAttributeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_DynamicAttribute_name_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_DynamicAttribute_name_feature", "_UI_DynamicAttribute_type"),
+                 getString("_UI_DynamicAttribute_name_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_DynamicAttribute_name_feature", "_UI_DynamicAttribute_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.DYNAMIC_ATTRIBUTE__NAME,
                  true,
                  false,
@@ -118,8 +118,8 @@ public class DynamicAttributeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_DynamicAttribute_value_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_DynamicAttribute_value_feature", "_UI_DynamicAttribute_type"),
+                 getString("_UI_DynamicAttribute_value_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_DynamicAttribute_value_feature", "_UI_DynamicAttribute_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.DYNAMIC_ATTRIBUTE__VALUE,
                  true,
                  false,
@@ -136,7 +136,7 @@ public class DynamicAttributeItemProvider
      * @generated
      */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/DynamicAttribute"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/DynamicAttribute")); //$NON-NLS-1$
     }
 
     /**
@@ -148,8 +148,8 @@ public class DynamicAttributeItemProvider
     public String getText(Object object) {
         String label = ((DynamicAttribute)object).getName();
         return label == null || label.length() == 0 ?
-            getString("_UI_DynamicAttribute_type") :
-            getString("_UI_DynamicAttribute_type") + " " + label;
+            getString("_UI_DynamicAttribute_type") : //$NON-NLS-1$
+            getString("_UI_DynamicAttribute_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

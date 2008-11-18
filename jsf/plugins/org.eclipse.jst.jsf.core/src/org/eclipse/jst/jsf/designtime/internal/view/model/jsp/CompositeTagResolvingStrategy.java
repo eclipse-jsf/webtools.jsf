@@ -14,6 +14,7 @@ import org.eclipse.jst.jsf.common.internal.policy.IIdentifiable;
 import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
 import org.eclipse.jst.jsf.common.internal.strategy.IteratorPolicyBasedStrategyComposite;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
+import org.eclipse.jst.jsf.designtime.internal.Messages;
 
 /**
  * @author cbateman
@@ -26,7 +27,7 @@ public class CompositeTagResolvingStrategy<TLDELEMENT>
         implements IIdentifiable<String>,
         ITagResolvingStrategy<TLDELEMENT, String>
 {
-    private static final String ID = "org.eclipse.jst.jsf.designtime.CompositeTagResolvingStrategy";
+    private static final String ID = "org.eclipse.jst.jsf.designtime.CompositeTagResolvingStrategy"; //$NON-NLS-1$
 
     /**
      * @param policy
@@ -44,7 +45,7 @@ public class CompositeTagResolvingStrategy<TLDELEMENT>
 
     public final String getDisplayName()
     {
-        return "Composite Tag Resolving Strategies";
+        return Messages.CompositeTagResolvingStrategy_DisplayName;
     }
 
     @Override

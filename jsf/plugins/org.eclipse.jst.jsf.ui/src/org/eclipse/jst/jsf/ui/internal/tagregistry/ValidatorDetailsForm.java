@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IValidatorTagElement;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -27,14 +28,14 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class ValidatorDetailsForm extends AbstractXMLSectionsDetailsForm
 {
-    private final static String  VALIDATOR_TYPE_SECTION_KEY = "validatorSection";
+    private final static String  VALIDATOR_TYPE_SECTION_KEY = "validatorSection"; //$NON-NLS-1$
     private XMLTextSection       _validatorTypeSection;
 
     @Override
     protected Map<? extends Object, XMLTextSection> createXMLTextSections(Composite parent)
     {
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
-        _validatorTypeSection = new XMLTextSection(getToolkit(), parent, "Validator Type Information");
+        _validatorTypeSection = new XMLTextSection(getToolkit(), parent, Messages.ValidatorDetailsForm_SectionLabel);
         sections.put(VALIDATOR_TYPE_SECTION_KEY, _validatorTypeSection);
         return sections;
     }
@@ -57,13 +58,12 @@ public class ValidatorDetailsForm extends AbstractXMLSectionsDetailsForm
 
             if (typeInfo != null)
             {
-                final String formatText = "<form><p><b>Class:</b> %s</p>  <p><b>Validator Id:</b> %s</p></form>";
                 final String className = typeInfo.getClassName();
                 final String validatorId = typeInfo.getValidatorId();
 
-                _validatorTypeSection.setText(String.format(formatText,
-                        className == null ? "" : className,
-                        validatorId == null ? "" : validatorId), true, false);
+                String text = NLS.bind(Messages.ValidatorDetailsForm_SectionText, className == null ? "" : className, validatorId == null ? "" : validatorId); //$NON-NLS-1$ //$NON-NLS-2$
+                _validatorTypeSection.setText(text, true, false); 
+
                 _validatorTypeSection.refresh();
             }
         }

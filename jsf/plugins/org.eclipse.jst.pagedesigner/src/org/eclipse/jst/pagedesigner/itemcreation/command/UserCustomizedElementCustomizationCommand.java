@@ -127,7 +127,7 @@ public class UserCustomizedElementCustomizationCommand extends
             // Go through each attribute/value pair and configure it
             for (String id : attrs.keySet())
             {
-                attributes.put(id, attrs.get(id) == null ? "" : attrs.get(id));
+                attributes.put(id, attrs.get(id) == null ? "" : attrs.get(id)); //$NON-NLS-1$
             }
         }
     }
@@ -144,7 +144,7 @@ public class UserCustomizedElementCustomizationCommand extends
                 {
                     final TagCreationAttribute attr = (TagCreationAttribute) it
                             .next();
-                    attributes.put(attr.getId(), (attr.getValue() == null ? ""
+                    attributes.put(attr.getId(), (attr.getValue() == null ? "" //$NON-NLS-1$
                             : attr.getValue()));
                 }
             }

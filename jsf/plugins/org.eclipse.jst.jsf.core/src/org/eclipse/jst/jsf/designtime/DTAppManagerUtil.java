@@ -106,7 +106,7 @@ public class DTAppManagerUtil
         }
         catch (final ViewHandlerException e)
         {
-            JSFCorePlugin.log(e, "");
+            JSFCorePlugin.log(e, ""); //$NON-NLS-1$
         }
         return null;
     }

@@ -41,7 +41,7 @@ public class PageflowPaletteRoot extends PaletteRoot {
 		// a group of default control tools
 		// Pageflow.PaletteTool.Group.Controls = Controls
 		PaletteGroup controls = new PaletteGroup(
-				PageflowMessages.Pageflow_PaletteTool_Group_Controls); //$NON-NLS-1$
+				PageflowMessages.Pageflow_PaletteTool_Group_Controls);
 		add(controls);
 
 		// the selection tool
@@ -49,7 +49,7 @@ public class PageflowPaletteRoot extends PaletteRoot {
 		// Pageflow.PaletteTool.Select.Description = Select one or more items
 		ToolEntry tool = new SelectionToolEntry(
 				PageflowMessages.Pageflow_PaletteTool_Select_Label,
-				PageflowMessages.Pageflow_PaletteTool_Select_Description); //$NON-NLS-1$
+				PageflowMessages.Pageflow_PaletteTool_Select_Description);
 
 		controls.add(tool);
 
@@ -60,7 +60,7 @@ public class PageflowPaletteRoot extends PaletteRoot {
 		// Pageflow.PaletteTool.Marquee.Label = Marquee
 		// Pageflow.PaletteTool.Marquee.Description = Marquee one or more items
 		controls.add(new MarqueeToolEntry(
-				PageflowMessages.Pageflow_PaletteTool_Marquee_Label, //$NON-NLS-1$
+				PageflowMessages.Pageflow_PaletteTool_Marquee_Label,
 				PageflowMessages.Pageflow_PaletteTool_Marquee_Description));
 
 		controls.add(new PaletteSeparator());
@@ -83,7 +83,7 @@ public class PageflowPaletteRoot extends PaletteRoot {
 
 		// Pageflow.PaletteTool.Group.Nodes = Nodes
 		PaletteDrawer nodes = new PaletteDrawer(
-				PageflowMessages.Pageflow_PaletteTool_Group_Nodes); //$NON-NLS-1$
+				PageflowMessages.Pageflow_PaletteTool_Group_Nodes);
 		add(nodes);
 
 		// use CombinedTemplateCreationEntry which can be also dragged

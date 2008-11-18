@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComponentMappingFactoryImpl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
+ * $Id: ComponentMappingFactoryImpl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -35,7 +35,7 @@ public class ComponentMappingFactoryImpl extends EFactoryImpl implements Compone
     {
         try
         {
-            ComponentMappingFactory theComponentMappingFactory = (ComponentMappingFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.core/componentMapping.ecore"); 
+            ComponentMappingFactory theComponentMappingFactory = (ComponentMappingFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.core/componentMapping.ecore");  //$NON-NLS-1$
             if (theComponentMappingFactory != null)
             {
                 return theComponentMappingFactory;
@@ -77,7 +77,7 @@ public class ComponentMappingFactoryImpl extends EFactoryImpl implements Compone
             case ComponentMappingPackage.VALIDATOR_TYPE_INFO_: return createValidatorTypeInfo_();
             case ComponentMappingPackage.ATTRIBUTE_TO_PROPERTY_MAPPING: return createAttributeToPropertyMapping();
             default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 

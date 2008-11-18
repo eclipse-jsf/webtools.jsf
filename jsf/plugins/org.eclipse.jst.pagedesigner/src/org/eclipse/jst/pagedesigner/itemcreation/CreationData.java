@@ -160,7 +160,7 @@ public final class CreationData
             //tag-creation trait on entity directly?
             Entity tag = getTagEntity();
             if (tag != null){//metadata exists
-                trait = TaglibDomainMetaDataQueryHelper.getTrait(tag, "tag-create");
+                trait = TaglibDomainMetaDataQueryHelper.getTrait(tag, "tag-create"); //$NON-NLS-1$
                 if (trait != null && trait.getValue() != null){
                     return (TagCreationInfo)trait.getValue();                   
                 }
@@ -185,7 +185,7 @@ public final class CreationData
      * @return flag indicating that html form container ancestor is required
      */
     public boolean isHTMLFormRequired() {
-        Trait t = TaglibDomainMetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form");
+        Trait t = TaglibDomainMetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form"); //$NON-NLS-1$
         if (t != null)
             return TraitValueHelper.getValueAsBoolean(t);
         
@@ -197,7 +197,7 @@ public final class CreationData
      */
     public boolean isJSFComponent() {      
         Model model = TaglibDomainMetaDataQueryHelper.getModel(_taglibMetaDataContext);
-        Trait t = TaglibDomainMetaDataQueryHelper.getTrait(model, "is-jsf-component-library");
+        Trait t = TaglibDomainMetaDataQueryHelper.getTrait(model, "is-jsf-component-library"); //$NON-NLS-1$
         if (t != null)
             return TraitValueHelper.getValueAsBoolean(t);
         

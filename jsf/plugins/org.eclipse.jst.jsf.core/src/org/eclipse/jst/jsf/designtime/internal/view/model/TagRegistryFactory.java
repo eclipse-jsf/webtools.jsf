@@ -25,7 +25,7 @@ public abstract class TagRegistryFactory implements IIdentifiableStrategy<IProje
 {
     private static final ITagRegistry NO_RESULT = null;
 
-    private static final String ID = "org.eclipse.jst.jsf.designtime.view.model.TagRegistryFactory";
+    private static final String ID = "org.eclipse.jst.jsf.designtime.view.model.TagRegistryFactory"; //$NON-NLS-1$
 
     /**
      * @param project
@@ -76,7 +76,7 @@ public abstract class TagRegistryFactory implements IIdentifiableStrategy<IProje
          */
         public TagRegistryFactoryException(Throwable cause)
         {
-            super("Problem during tag registry construction", cause);
+            super("Problem during tag registry construction", cause); //$NON-NLS-1$
         }
         
     }

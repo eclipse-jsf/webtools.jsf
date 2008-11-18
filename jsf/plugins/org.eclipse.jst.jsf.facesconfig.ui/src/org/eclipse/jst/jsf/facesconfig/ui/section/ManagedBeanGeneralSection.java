@@ -96,7 +96,7 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 			int numberOfColumns) {
 		mbNameField = new StringDialogField();
 		mbNameField
-				.setLabelText(EditorMessages.ManagedBeanGeneralSection_ManagedBeanName);//$NON-NLS-1$
+				.setLabelText(EditorMessages.ManagedBeanGeneralSection_ManagedBeanName);
 		mbNameField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		LayoutUtil.setHorizontalGrabbing(mbNameField.getTextControl(toolkit,
 				container));
@@ -141,7 +141,7 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 			final FormToolkit toolkit, int numberOfColumns) {
 		mbClassField = new ClassButtonDialogField(null);
 		mbClassField
-				.setLabelText(EditorMessages.ManagedBeanGeneralSection_ManagedBeanClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.ManagedBeanGeneralSection_ManagedBeanClass);
 		mbClassField.setProject((IProject) getPage().getEditor().getAdapter(
 				IProject.class));
 		mbClassField.doFillIntoGrid(toolkit, container, numberOfColumns);
@@ -188,7 +188,7 @@ public class ManagedBeanGeneralSection extends AbstractFacesConfigSection {
 			int numberOfColumns) {
 		mbScopeField = new ComboDialogField(SWT.DROP_DOWN | SWT.READ_ONLY | SWT.BORDER);
 		mbScopeField
-				.setLabelText(EditorMessages.ManagedBeanGeneralSection_ManagedBeanScope);//$NON-NLS-1$
+				.setLabelText(EditorMessages.ManagedBeanGeneralSection_ManagedBeanScope);
 		mbScopeField.doFillIntoGrid(toolkit, container, numberOfColumns);
 		LayoutUtil.setHorizontalGrabbing(mbScopeField.getComboControl(toolkit,
 				container));

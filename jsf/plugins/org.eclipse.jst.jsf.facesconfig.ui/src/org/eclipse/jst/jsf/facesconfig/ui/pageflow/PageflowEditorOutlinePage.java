@@ -538,8 +538,8 @@ public class PageflowEditorOutlinePage extends Page implements
 		viewer.setContextMenu(provider);
 		getSite().registerContextMenu(
 				EditorPlugin.getPluginId()
-						+ ".pageflow.editor.outlineview.contextmenu", provider,
-				getSite().getSelectionProvider()); //$NON-NLS-1$
+						+ ".pageflow.editor.outlineview.contextmenu", provider, //$NON-NLS-1$
+				getSite().getSelectionProvider());
 	}
 
 }

@@ -19,17 +19,17 @@ public class VisibilityMeta extends CSSPropertyMeta {
 	/**
 	 * visible keyword
 	 */
-	public static final String VISIBLE = "visible";
+	public static final String VISIBLE = "visible"; //$NON-NLS-1$
 
 	/**
 	 * hidden keyword
 	 */
-	public static final String HIDDEN = "hidden";
+	public static final String HIDDEN = "hidden"; //$NON-NLS-1$
 
 	/**
 	 * collapse keyword
 	 */
-	public static final String COLLAPSE = "collapse";
+	public static final String COLLAPSE = "collapse"; //$NON-NLS-1$
 
 	private static final String[] KEYWORDS = new String[] { VISIBLE, HIDDEN,
 			COLLAPSE };

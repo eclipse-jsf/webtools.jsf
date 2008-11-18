@@ -18,7 +18,7 @@ import org.eclipse.gef.Request;
  * @version 1.5
  */
 public class TableResizeRequest extends Request {
-	private static final String TABLE_RESIZE_REQ = "Table Resize";
+	private static final String TABLE_RESIZE_REQ = "Table Resize"; //$NON-NLS-1$
 
 	private boolean _row;
 

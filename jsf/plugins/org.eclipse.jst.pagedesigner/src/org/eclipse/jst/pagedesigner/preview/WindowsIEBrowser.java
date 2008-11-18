@@ -41,7 +41,7 @@ public class WindowsIEBrowser implements ProgressListener {
 		if (_browser == null) {
 			return;
 		}
-        String s = "file:" + file.getAbsolutePath();
+        String s = "file:" + file.getAbsolutePath(); //$NON-NLS-1$
         _browser.setUrl(s);
         return;
 	}

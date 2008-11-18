@@ -1,7 +1,7 @@
 /**
  * Copyright 2006 Oracle
  *
- * $Id: SymbolPackage.java,v 1.9 2007/10/01 04:29:43 cbateman Exp $
+ * $Id: SymbolPackage.java,v 1.10 2008/11/18 22:24:37 gkessler Exp $
  */
 package org.eclipse.jst.jsf.context.symbol;
 
@@ -35,7 +35,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright 2006 Oracle";
+    String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
     /**
      * The package name.
@@ -43,7 +43,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNAME = "symbol";
+    String eNAME = "symbol"; //$NON-NLS-1$
 
     /**
      * The package namespace URI.
@@ -51,7 +51,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http:///org/eclipse/jst/jsf/context/symbol.ecore";
+    String eNS_URI = "http:///org/eclipse/jst/jsf/context/symbol.ecore"; //$NON-NLS-1$
 
     /**
      * The package namespace name.
@@ -59,7 +59,7 @@ public interface SymbolPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_PREFIX = "org.eclipse.jst.jsf.context.symbol";
+    String eNS_PREFIX = "org.eclipse.jst.jsf.context.symbol"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the package.

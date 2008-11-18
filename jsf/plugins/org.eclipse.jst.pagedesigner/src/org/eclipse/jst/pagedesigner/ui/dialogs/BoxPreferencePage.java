@@ -187,7 +187,7 @@ public class BoxPreferencePage extends PreferencePage {
 
 		Group paddingGroup = new Group(top, SWT.NONE);
 		paddingGroup.setText(DialogsMessages
-				.getString("BoxPreferencePage.Padding"));
+				.getString("BoxPreferencePage.Padding")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 3;
 		data.verticalSpan = 4;
@@ -373,7 +373,7 @@ public class BoxPreferencePage extends PreferencePage {
 
 		Group marginGroup = new Group(top, SWT.NONE);
 		marginGroup.setText(DialogsMessages
-				.getString("BoxPreferencePage.Margin"));
+				.getString("BoxPreferencePage.Margin")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 3;
 		data.verticalSpan = 4;

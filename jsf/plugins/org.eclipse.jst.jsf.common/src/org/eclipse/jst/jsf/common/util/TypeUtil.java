@@ -323,7 +323,7 @@ public final class TypeUtil
     {
         
         final String unresolvedSignatureNormalized =
-            unresolvedSignature.replaceAll("/", ".");
+            unresolvedSignature.replaceAll("/", "."); //$NON-NLS-1$ //$NON-NLS-2$
         
         // get the list of parameters
         final String[] parameters = 

@@ -83,7 +83,7 @@ public class HiddenProvider extends ImageWidgetProvider {
 	}
 
 	private int getLabelHeight() {
-		if (_labelVisible && (_label != null) && (!_label.equals(""))
+		if (_labelVisible && (_label != null) && (!_label.equals("")) //$NON-NLS-1$
 				&& (_fontMetrics != null)) {
 			return _fontMetrics.getHeight();
 		}
@@ -94,7 +94,7 @@ public class HiddenProvider extends ImageWidgetProvider {
 	 * @return the label width
 	 */
 	public int getLabelWidth() {
-		if (_labelVisible && _label != null && !_label.equals("")
+		if (_labelVisible && _label != null && !_label.equals("") //$NON-NLS-1$
 				&& _fontMetrics != null) {
 			Font swtfont = Display.getCurrent().getSystemFont();
 			return FigureUtilities.getTextWidth(_label, swtfont) + GAP;

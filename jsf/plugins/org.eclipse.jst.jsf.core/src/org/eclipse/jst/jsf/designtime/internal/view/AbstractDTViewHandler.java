@@ -39,7 +39,7 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
     /**
      * the path separator
      */
-    public static final String  PATH_SEPARATOR = "/";
+    public static final String  PATH_SEPARATOR = "/"; //$NON-NLS-1$
 
     public abstract String calculateLocale(DTFacesContext context)
             throws ViewHandlerException;
@@ -49,14 +49,14 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
     {
         if (_isDisposed.get())
         {
-            throw new IllegalStateException("View handler is disposed");
+            throw new IllegalStateException("View handler is disposed"); //$NON-NLS-1$
         }
 
         final DTUIViewRoot viewRoot = internalCreateView(facesContext, viewId);
         
         if (viewRoot == null)
         {
-            throw new ViewHandlerException("Problem in createView", Cause.UNABLE_TO_CREATE_VIEW);
+            throw new ViewHandlerException("Problem in createView", Cause.UNABLE_TO_CREATE_VIEW); //$NON-NLS-1$
         }
         viewRoot.setViewId(viewId);
         final VersionStamp versionStamp = createVersionStamp(facesContext,
@@ -64,7 +64,7 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
         if (versionStamp == null)
         {
             throw new ViewHandlerException(new Throwable(
-                    "Bad version stamp detected"), Cause.BAD_VERSION_STAMP);
+                    "Bad version stamp detected"), Cause.BAD_VERSION_STAMP); //$NON-NLS-1$
         }
         viewRoot.setVersionStamp(versionStamp);
 
@@ -74,7 +74,7 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
         if (advisor == null)
         {
             throw new ViewHandlerException(new Throwable(
-                    "Bad staleness advisor"), Cause.BAD_STALENESS_ADVISOR);
+                    "Bad staleness advisor"), Cause.BAD_STALENESS_ADVISOR); //$NON-NLS-1$
         }
         viewRoot.setStalenessAdvisor(advisor);
 
@@ -171,7 +171,7 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
     public String getViewId(final DTFacesContext context, final IResource res)
     {
         // TODO: sync with WebrootUtil?
-        String strWebrootPath = "";
+        String strWebrootPath = ""; //$NON-NLS-1$
         final IProject project = res.getProject();
         final IPath path = res.getFullPath();
         final IPath webContentPath = getWebContentPath(project);
@@ -213,7 +213,7 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
          */
         protected NullViewRoot()
         {
-            super(null, null, new ComponentTypeInfo("", "", "",""));
+            super(null, null, new ComponentTypeInfo("", "", "","")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
         }
 
         @Override

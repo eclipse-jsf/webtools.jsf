@@ -143,7 +143,7 @@ public final class CMUtil {
                 
                 if (tracker.getURI().equals(uri))
                 {
-                    return (CMElementDeclaration) tracker.getElements().getNamedItem(tracker.getPrefix()+":"+elementName);
+                    return (CMElementDeclaration) tracker.getElements().getNamedItem(tracker.getPrefix()+":"+elementName); //$NON-NLS-1$
                 }
             }
 	    }

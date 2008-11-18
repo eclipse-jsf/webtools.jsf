@@ -161,7 +161,7 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
                     final TagCreationAttribute attr = (TagCreationAttribute) it
                             .next();
                     _element.setAttribute(attr.getId(),
-                            (attr.getValue() == null ? "" : attr.getValue()));
+                            (attr.getValue() == null ? "" : attr.getValue())); //$NON-NLS-1$
                 }
             }
         }

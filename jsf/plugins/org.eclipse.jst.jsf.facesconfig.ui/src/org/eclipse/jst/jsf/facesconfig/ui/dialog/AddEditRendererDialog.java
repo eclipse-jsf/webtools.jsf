@@ -146,7 +146,7 @@ public class AddEditRendererDialog extends Dialog {
 		rendererClassField = new ClassButtonDialogField(getProject());
 //		rendererClassField.setRequired(true);
 		rendererClassField
-				.setLabelText(EditorMessages.RendererSection_Dialog_RendererClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.RendererSection_Dialog_RendererClass);
 		rendererClassField.setProject(getProject());
 		rendererClassField.setSuperClassName(IFacesConfigConstants.RENDERER_SUPER_CLASS);
 		rendererClassField.setAutoOpenResource(false);

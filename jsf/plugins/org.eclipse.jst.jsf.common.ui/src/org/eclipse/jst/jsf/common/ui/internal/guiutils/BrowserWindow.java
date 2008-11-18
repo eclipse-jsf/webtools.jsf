@@ -40,9 +40,23 @@ import org.eclipse.swt.widgets.ToolItem;
 /**
  * Brings up a browser into a separate window.
  * 
- * @author mengbo
+ * @author mengbo.  
+ * 
+ * Unused???
  */
 public class BrowserWindow extends ApplicationWindow {
+
+	private static final String RELOAD_ITEM_IMAGE_FILE = "reload_nav_16.gif"; //$NON-NLS-1$
+
+	private static final String REFRESH_ITEM_IMAGE_FILE = "refresh_nav_16.gif"; //$NON-NLS-1$
+
+	private static final String STOP_ITEM_IMAGE_FILE = "stop_nav_16.gif"; //$NON-NLS-1$
+
+	private static final String FORWARD_ITEM_IMAGE_FILE = "forward_nav_16.gif"; //$NON-NLS-1$
+
+	private static final String BACK_ITEM_IMAGE_FILE = "back_nav_16.gif"; //$NON-NLS-1$
+
+	
 	/**
 	 * Command to send to the browser.
 	 */
@@ -230,7 +244,7 @@ public class BrowserWindow extends ApplicationWindow {
 		} else if (_startContent != null) {
 			_browser.setText(_startContent);
 		} else {
-			_browser.setText("<b>Loading...</b>");
+			_browser.setText(Messages.BrowserWindow_loading);
 		}
 
 		// send the browser status messages to eclipse.
@@ -280,9 +294,9 @@ public class BrowserWindow extends ApplicationWindow {
 		// Back browser
 		_backItem = new ToolItem(tb, SWT.PUSH);
 		_backItem.setImage(JSFUICommonPlugin.getDefault()
-				.getImage("back_nav_16.gif"));
+				.getImage(BACK_ITEM_IMAGE_FILE));
 		_backItem.setToolTipText(JSFUICommonPlugin
-				.getResourceString("BrowserWindow.back.tooltip"));
+				.getResourceString("BrowserWindow.back.tooltip")); //$NON-NLS-1$
 		SelectionListener backSelectionListener = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				browserCmd(BROWSER_CMD_BACK);
@@ -293,9 +307,9 @@ public class BrowserWindow extends ApplicationWindow {
 		// Forward Browser
 		_forwardItem = new ToolItem(tb, SWT.PUSH);
 		_forwardItem.setImage(JSFUICommonPlugin.getDefault().getImage(
-				"forward_nav_16.gif"));
+				FORWARD_ITEM_IMAGE_FILE));
 		_forwardItem.setToolTipText(JSFUICommonPlugin
-				.getResourceString("BrowserWindow.forward.tooltip"));
+				.getResourceString("BrowserWindow.forward.tooltip")); //$NON-NLS-1$
 		SelectionListener forwardSelectionListener = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				browserCmd(BROWSER_CMD_FORWARD);
@@ -306,9 +320,9 @@ public class BrowserWindow extends ApplicationWindow {
 		// Stop Browser
 		ToolItem stopItem = new ToolItem(tb, SWT.PUSH);
 		stopItem
-				.setImage(JSFUICommonPlugin.getDefault().getImage("stop_nav_16.gif"));
+				.setImage(JSFUICommonPlugin.getDefault().getImage(STOP_ITEM_IMAGE_FILE));
 		stopItem.setToolTipText(JSFUICommonPlugin
-				.getResourceString("BrowserWindow.stop.tooltip"));
+				.getResourceString("BrowserWindow.stop.tooltip")); //$NON-NLS-1$
 		SelectionListener stopSelectionListener = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				browserCmd(BROWSER_CMD_STOP);
@@ -319,9 +333,9 @@ public class BrowserWindow extends ApplicationWindow {
 		// Refresh Browser
 		ToolItem refreshItem = new ToolItem(tb, SWT.PUSH);
 		refreshItem.setImage(JSFUICommonPlugin.getDefault().getImage(
-				"refresh_nav_16.gif"));
+				REFRESH_ITEM_IMAGE_FILE));
 		refreshItem.setToolTipText(JSFUICommonPlugin
-				.getResourceString("BrowserWindow.refresh.tooltip"));
+				.getResourceString("BrowserWindow.refresh.tooltip")); //$NON-NLS-1$
 		SelectionListener refreshServiceSelectionListener = new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				browserCmd(BROWSER_CMD_REFRESH);
@@ -333,9 +347,9 @@ public class BrowserWindow extends ApplicationWindow {
 			// Reload Browser.
 			ToolItem reloadItem = new ToolItem(tb, SWT.PUSH);
 			reloadItem.setImage(JSFUICommonPlugin.getDefault().getImage(
-					"reload_nav_16.gif"));
+					RELOAD_ITEM_IMAGE_FILE));
 			reloadItem.setToolTipText(JSFUICommonPlugin
-					.getResourceString("BrowserWindow.reload.tooltip"));
+					.getResourceString("BrowserWindow.reload.tooltip")); //$NON-NLS-1$
 			SelectionListener reloadSelectionListener = new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent event) {
 					browserCmd(BROWSER_CMD_RELOAD);

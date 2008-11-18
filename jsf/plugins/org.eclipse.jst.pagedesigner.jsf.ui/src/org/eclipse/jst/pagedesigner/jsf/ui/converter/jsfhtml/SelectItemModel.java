@@ -149,7 +149,7 @@ public class SelectItemModel
         }
         else
         {
-            return "SelectItem";
+            return "SelectItem"; //$NON-NLS-1$
         }
     }
 }

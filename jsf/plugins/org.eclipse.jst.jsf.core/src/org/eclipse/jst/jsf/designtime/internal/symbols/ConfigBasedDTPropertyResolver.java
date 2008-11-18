@@ -140,7 +140,7 @@ public class ConfigBasedDTPropertyResolver extends DefaultDTPropertyResolver
                 }
                 else
                 {
-                    JSFCorePlugin.log(new Exception(), String.format("resolver %s must implement the IDecorativeResolver interface to be used", id));
+                    JSFCorePlugin.log(new Exception(), String.format("resolver %s must implement the IDecorativeResolver interface to be used", id)); //$NON-NLS-1$
                 }
             }
         }

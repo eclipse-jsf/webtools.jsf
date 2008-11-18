@@ -150,7 +150,7 @@ public abstract class AbstractXMLSectionsDetailsForm extends
             _section.setText(title);
 
             _formText = toolkit.createFormText(_section, true);
-            _formText.setText("", false, false);
+            _formText.setText("", false, false); //$NON-NLS-1$
 
             _section.setClient(_formText);
         }

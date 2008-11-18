@@ -54,7 +54,7 @@ public abstract class FlowFigure extends Figure {
 			if (getLayoutManager() instanceof FlowContext) {
 				ff.setOriginalFlowContext((FlowContext) getLayoutManager());
 			} else {
-				PDPlugin.getLogger(this.getClass()).error("layout is not FlowContext", new Throwable("This exception is artificial so  we can get a stack trace"));
+				PDPlugin.getLogger(this.getClass()).error("layout is not FlowContext", new Throwable("This exception is artificial so  we can get a stack trace")); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}
@@ -114,7 +114,7 @@ public abstract class FlowFigure extends Figure {
         {
 			return super.toString();
         }
-        return _displayString + " " + getClass().getName();
+        return _displayString + " " + getClass().getName(); //$NON-NLS-1$
 	}
 
 	private String _displayString; // for debug

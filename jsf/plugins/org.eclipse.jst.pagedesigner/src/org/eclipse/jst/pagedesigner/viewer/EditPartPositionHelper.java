@@ -671,7 +671,7 @@ public class EditPartPositionHelper {
 			}
 			figure.translateToAbsolute(rect);
 		} else {
-			System.out.println("No concrete part?");
+			System.out.println("No concrete part?"); //$NON-NLS-1$
 		}
 		return rect;
 	}

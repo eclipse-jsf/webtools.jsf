@@ -43,7 +43,7 @@ import org.xml.sax.SAXException;
 public class PaletteElementTemplateHelper {
 	//private static final String TEMPLATE_ITEM_NAME = "template";
 
-	private static final String PREFIX_ATTRIBUTE = "_uri_";
+	private static final String PREFIX_ATTRIBUTE = "_uri_"; //$NON-NLS-1$
 
 //	private static Logger _log = PDPlugin
 //			.getLogger(PaletteElementTemplateHelper.class);
@@ -111,9 +111,9 @@ public class PaletteElementTemplateHelper {
 	 * @return xml as String wrapped by a <begin> node as template may not have a single root element
 	 */
 	private static String prepareNode(String template) {
-		StringBuffer buf = new StringBuffer("<begin>");
+		StringBuffer buf = new StringBuffer("<begin>"); //$NON-NLS-1$
 		buf.append(template);
-		buf.append("</begin>");
+		buf.append("</begin>"); //$NON-NLS-1$
 		return buf.toString();
 	}
 
@@ -145,7 +145,7 @@ public class PaletteElementTemplateHelper {
 	 */
 	private static void internalApplyPrefixes(IDOMModel model, Element refNode, Element node) {
 		if (node != null && refNode != null) {
-			String uri = refNode.getAttribute(PREFIX_ATTRIBUTE); //$NON-NLS-1$
+			String uri = refNode.getAttribute(PREFIX_ATTRIBUTE);
 			if (uri != null) {
 				String prefix = JSPUtil.getOrCreatePrefix(model, uri, null);
 				node.setPrefix(prefix);

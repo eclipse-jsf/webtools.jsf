@@ -470,7 +470,7 @@ public final  class LayoutPart {
 	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("editPart:" + _part + ", --- box: " + getBox());
+		sb.append("editPart:" + _part + ", --- box: " + getBox()); //$NON-NLS-1$ //$NON-NLS-2$
 		return sb.toString();
 	}
 }

@@ -91,7 +91,7 @@ public class LocalDropCommand extends Command {
 				CommonWizardDialog wizardDialog = new CommonWizardDialog(
 						getShell(), wizard);
 				wizardDialog.setTitle(Messages
-						.getString("LocalDropCommand.DropHandler"));
+						.getString("LocalDropCommand.DropHandler")); //$NON-NLS-1$
 				wizardDialog.create();
 				wizardDialog.open();
 			} else {
@@ -105,7 +105,7 @@ public class LocalDropCommand extends Command {
 			CommonWizardDialog wizardDialog = new CommonWizardDialog(
 					getShell(), getWizard());
 			wizardDialog.setTitle(Messages
-					.getString("LocalDropCommand.DropHandler"));
+					.getString("LocalDropCommand.DropHandler")); //$NON-NLS-1$
 			wizardDialog.setBlockOnOpen(false);
 			wizardDialog.create();
 			wizardDialog.open();

@@ -253,7 +253,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		};
 		int sashIndex = addPage(_sashEditorPart, getEditorInput());
 
-		setPageText(sashIndex, PDPlugin.getResourceString("HTMLEditor.Design"));
+		setPageText(sashIndex, PDPlugin.getResourceString("HTMLEditor.Design")); //$NON-NLS-1$
 
 		// the update's critical, to get viewer selection manager and
 		// highlighting to work
@@ -294,12 +294,12 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		// // IEditorPart, page switches will indicate
 		// // a "null" active editor when the design page is made active
 		setPageText(designPageIndex, PDPlugin
-				.getResourceString("HTMLEditor.Design"));
+				.getResourceString("HTMLEditor.Design")); //$NON-NLS-1$
 
 		// add source page
 		int sourcePageIndex = addPage(_textEditor, getEditorInput());
 		setPageText(sourcePageIndex, PDPlugin
-				.getResourceString("HTMLEditor.Source"));
+				.getResourceString("HTMLEditor.Source")); //$NON-NLS-1$
 		// the update's critical, to get viewer selection manager and
 		// highlighting to work
 		_textEditor.update();
@@ -538,10 +538,10 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 							_log.error("Error.HTMLEditor.0", ce); //$NON-NLS-1$
 						}
 					}
-					throw new PartInitException("Resource " + input.getName()
-							+ " does not exist.");
+					throw new PartInitException("Resource " + input.getName() //$NON-NLS-1$
+							+ " does not exist."); //$NON-NLS-1$
 				}
-                throw new PartInitException("Editor could not be open on "
+                throw new PartInitException("Editor could not be open on " //$NON-NLS-1$
                 		+ input.getName());
 			}
 		} else if (input instanceof IStorageEditorInput) {
@@ -550,7 +550,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				contents = ((IStorageEditorInput) input).getStorage()
 						.getContents();
 				if (contents == null) {
-					throw new PartInitException("Editor could not be open on "
+					throw new PartInitException("Editor could not be open on " //$NON-NLS-1$
 							+ input.getName());
 				}
 			} catch (CoreException noStorageExc) {
@@ -743,7 +743,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			// enable our editor context
 			IContextService contextService = (IContextService) getSite()
 			  .getService(IContextService.class);
-			contextService.activateContext("org.eclipse.jst.pagedesigner.editorContext");
+			contextService.activateContext("org.eclipse.jst.pagedesigner.editorContext"); //$NON-NLS-1$
 
 		} catch (Exception e) {
 			// Error in editor initialization

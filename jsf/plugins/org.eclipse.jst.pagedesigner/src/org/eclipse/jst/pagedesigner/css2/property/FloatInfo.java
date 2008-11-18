@@ -88,52 +88,52 @@ public final class FloatInfo {
 			} else {
 				valueType = ICSSPrimitiveValue.CSS_INTEGER;
 			}
-		} else if (ident.equals("%")) {
+		} else if (ident.equals("%")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_PERCENTAGE;
-		} else if (ident.equalsIgnoreCase("em")) {
+		} else if (ident.equalsIgnoreCase("em")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_EMS;
-		} else if (ident.equalsIgnoreCase("ex")) {
+		} else if (ident.equalsIgnoreCase("ex")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_EXS;
-		} else if (ident.equalsIgnoreCase("px")) {
+		} else if (ident.equalsIgnoreCase("px")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_PX;
-		} else if (ident.equalsIgnoreCase("cm")) {
+		} else if (ident.equalsIgnoreCase("cm")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_CM;
-		} else if (ident.equalsIgnoreCase("mm")) {
+		} else if (ident.equalsIgnoreCase("mm")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_MM;
-		} else if (ident.equalsIgnoreCase("in")) {
+		} else if (ident.equalsIgnoreCase("in")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_IN;
-		} else if (ident.equalsIgnoreCase("pt")) {
+		} else if (ident.equalsIgnoreCase("pt")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_PT;
-		} else if (ident.equalsIgnoreCase("pc")) {
+		} else if (ident.equalsIgnoreCase("pc")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_PC;
-		} else if (ident.equalsIgnoreCase("deg")) {
+		} else if (ident.equalsIgnoreCase("deg")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_DEG;
-		} else if (ident.equalsIgnoreCase("rad")) {
+		} else if (ident.equalsIgnoreCase("rad")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_RAD;
-		} else if (ident.equalsIgnoreCase("grad")) {
+		} else if (ident.equalsIgnoreCase("grad")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_GRAD;
-		} else if (ident.equalsIgnoreCase("ms")) {
+		} else if (ident.equalsIgnoreCase("ms")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_MS;
-		} else if (ident.equalsIgnoreCase("s")) {
+		} else if (ident.equalsIgnoreCase("s")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_S;
-		} else if (ident.equalsIgnoreCase("hz")) {
+		} else if (ident.equalsIgnoreCase("hz")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_HZ;
-		} else if (ident.equalsIgnoreCase("khz")) {
+		} else if (ident.equalsIgnoreCase("khz")) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			valueType = CSSPrimitiveValue.CSS_KHZ;
 		} else {

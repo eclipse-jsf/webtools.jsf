@@ -43,7 +43,7 @@ public class AddValidatorAction extends JSFAddChildAction
     public void run()
     {
         Map attributes = new HashMap();
-        attributes.put("validatorId", _validatorId);
+        attributes.put("validatorId", _validatorId); //$NON-NLS-1$
         AddJSFCoreChildCommand command = new AddJSFCoreChildCommand(this.getParentElement(),
             IJSFConstants.TAG_VALIDATOR, attributes);
         command.execute();

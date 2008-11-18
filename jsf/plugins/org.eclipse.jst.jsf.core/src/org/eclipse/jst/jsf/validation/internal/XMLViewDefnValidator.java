@@ -111,7 +111,7 @@ public class XMLViewDefnValidator implements IJSFViewValidator
         IStructuredModel model = null;
         if (DEBUG)
         {
-            System.out.println("executing JSPSemanticsValidator.validateFile");
+            System.out.println("executing JSPSemanticsValidator.validateFile"); //$NON-NLS-1$
         }
 
         try
@@ -136,11 +136,11 @@ public class XMLViewDefnValidator implements IJSFViewValidator
         }
         catch (final CoreException e)
         {
-            JSFCorePlugin.log("Error validating JSF", e);
+            JSFCorePlugin.log("Error validating JSF", e); //$NON-NLS-1$
         }
         catch (final IOException e)
         {
-            JSFCorePlugin.log("Error validating JSF", e);
+            JSFCorePlugin.log("Error validating JSF", e); //$NON-NLS-1$
         }
         finally
         {

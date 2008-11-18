@@ -60,9 +60,9 @@ public class MetaDataLocatorFactory {
 					locator.startLocating();
 				}
 			} catch (InstantiationException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "Could not instantiate IMetaDataLocator: "+key, e);
+				JSFCommonPlugin.log(IStatus.ERROR, "Could not instantiate IMetaDataLocator: "+key, e); //$NON-NLS-1$
 			} catch (IllegalAccessException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException while creating IMetaDataLocator: "+key, e);
+				JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException while creating IMetaDataLocator: "+key, e); //$NON-NLS-1$
 			}
 		}
 		return locator;
@@ -70,7 +70,7 @@ public class MetaDataLocatorFactory {
 
 	private String getKey(String locatorClassName, String bundleId) {
 		StringBuffer buf = new StringBuffer(bundleId);
-		buf.append(":");
+		buf.append(":"); //$NON-NLS-1$
 		buf.append(locatorClassName);
 		return buf.toString();
 	}

@@ -345,7 +345,7 @@ public final class JavaModelUtil {
 		int type = member.getElementType();
 		if (type == IJavaElement.INITIALIZER
 				|| (type == IJavaElement.METHOD && member.getElementName()
-						.startsWith("<"))) {
+						.startsWith("<"))) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			return false;
 		}
@@ -381,7 +381,7 @@ public final class JavaModelUtil {
 		int type = member.getElementType();
 		if (type == IJavaElement.INITIALIZER
 				|| (type == IJavaElement.METHOD && member.getElementName()
-						.startsWith("<"))) {
+						.startsWith("<"))) { //$NON-NLS-1$
 			//$NON-NLS-1$
 			return false;
 		}
@@ -984,7 +984,7 @@ public final class JavaModelUtil {
 			fgIsJDTCore_1_5 = JavaCore
 					.getDefaultOptions()
 					.containsKey(
-							"org.eclipse.jdt.core.compiler.problem.unsafeTypeOperation") ? Boolean.TRUE
+							"org.eclipse.jdt.core.compiler.problem.unsafeTypeOperation") ? Boolean.TRUE //$NON-NLS-1$
 					: Boolean.FALSE;
 		}
 		return fgIsJDTCore_1_5.booleanValue();

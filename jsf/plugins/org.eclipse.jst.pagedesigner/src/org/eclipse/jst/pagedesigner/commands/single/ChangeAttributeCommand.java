@@ -90,13 +90,13 @@ public class ChangeAttributeCommand extends SingleNodeCommand {
 	}
 
 	private boolean isSameValue(String value1, String value2) {
-		value1 = value1 == null ? "" : value1;
-		value2 = value2 == null ? "" : value2;
+		value1 = value1 == null ? "" : value1; //$NON-NLS-1$
+		value2 = value2 == null ? "" : value2; //$NON-NLS-1$
 		return value1.equals(value2);
 	}
 
 	private boolean isEmptyString(String str) {
-		if (str == null || str.equals("")) {
+		if (str == null || str.equals("")) { //$NON-NLS-1$
 			return true;
 		}
         return false;

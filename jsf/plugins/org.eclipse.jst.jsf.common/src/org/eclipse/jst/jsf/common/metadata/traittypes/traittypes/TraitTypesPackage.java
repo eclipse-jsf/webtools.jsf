@@ -35,7 +35,7 @@ public interface TraitTypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The package name.
@@ -43,7 +43,7 @@ public interface TraitTypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "traittypes";
+	String eNAME = "traittypes"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
@@ -51,7 +51,7 @@ public interface TraitTypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore";
+	String eNS_URI = "http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -59,7 +59,7 @@ public interface TraitTypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "mdt";
+	String eNS_PREFIX = "mdt"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.

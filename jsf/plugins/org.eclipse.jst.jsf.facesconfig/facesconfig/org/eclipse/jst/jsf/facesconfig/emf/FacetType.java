@@ -42,7 +42,7 @@ public interface FacetType extends EObject {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>Description</b></em>' containment reference list.

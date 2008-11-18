@@ -457,7 +457,7 @@ public class EditHelper {
 							Element pNode = (Element) container;
 							String align = pNode
 									.getAttribute(IHTMLConstants.ATTR_ALIGN);
-							if (align != null && !"".equalsIgnoreCase(align)) {
+							if (align != null && !"".equalsIgnoreCase(align)) { //$NON-NLS-1$
 								((Element) newContainer).setAttribute(
 										IHTMLConstants.ATTR_ALIGN, align);
 							}

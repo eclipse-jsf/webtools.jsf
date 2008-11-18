@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesFactoryImpl.java,v 1.5 2007/05/11 17:54:57 gkessler Exp $
+ * $Id: TraitTypesFactoryImpl.java,v 1.6 2008/11/18 22:24:38 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -28,7 +28,7 @@ public class TraitTypesFactoryImpl extends EFactoryImpl implements TraitTypesFac
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
      * Creates the default factory implementation.
@@ -39,7 +39,7 @@ public class TraitTypesFactoryImpl extends EFactoryImpl implements TraitTypesFac
      */
     public static TraitTypesFactory init() {
         try {
-            TraitTypesFactory theTraitTypesFactory = (TraitTypesFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"); 
+            TraitTypesFactory theTraitTypesFactory = (TraitTypesFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore");  //$NON-NLS-1$
             if (theTraitTypesFactory != null) {
                 return theTraitTypesFactory;
             }
@@ -70,7 +70,7 @@ public class TraitTypesFactoryImpl extends EFactoryImpl implements TraitTypesFac
             case TraitTypesPackage.LIST_OF_VALUES: return createListOfValues();
             case TraitTypesPackage.SET_GENERATOR: return createSetGenerator();
             default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 

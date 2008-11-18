@@ -110,5 +110,5 @@ public class TypeConstants
     /**
      * Type signature of the base type of all enum types
      */
-    public static final String TYPE_ENUM_BASE = "Ljava.lang.Enum;";  // $NON-NLS-1$
+    public static final String TYPE_ENUM_BASE = "Ljava.lang.Enum;";  //$NON-NLS-1$
 }

@@ -360,7 +360,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (configfile: ");
+		result.append(" (configfile: "); //$NON-NLS-1$
 		result.append(configfile);
 		result.append(')');
 		return result.toString();
@@ -396,7 +396,7 @@ public class PageflowImpl extends PageflowElementImpl implements Pageflow {
 	private HashMap getNodePrefixMap() {
 		if (mapNodePrefix == null) {
 			mapNodePrefix = new HashMap();
-			mapNodePrefix.put(PageflowPageImpl.class, new String("Page"));
+			mapNodePrefix.put(PageflowPageImpl.class, new String("Page")); //$NON-NLS-1$
 		}
 		return mapNodePrefix;
 	}

@@ -38,7 +38,7 @@ public class RedirectTypeImpl extends EObjectImpl implements RedirectType {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -162,7 +162,7 @@ public class RedirectTypeImpl extends EObjectImpl implements RedirectType {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (id: ");
+        result.append(" (id: "); //$NON-NLS-1$
         result.append(id);
         result.append(')');
         return result.toString();

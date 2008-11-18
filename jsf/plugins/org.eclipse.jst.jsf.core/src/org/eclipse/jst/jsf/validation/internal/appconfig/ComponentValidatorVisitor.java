@@ -66,7 +66,7 @@ public class ComponentValidatorVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.component.UIComponent";
+            return "javax.faces.component.UIComponent"; //$NON-NLS-1$
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {
@@ -116,7 +116,7 @@ public class ComponentValidatorVisitor extends EObjectValidationVisitor
                 boolean   isValid = false;
                 
                 if (name.getTextContent() != null
-                        || "".equals(name.getTextContent().trim()))
+                        || "".equals(name.getTextContent().trim())) //$NON-NLS-1$
                 {
                     String nameValue = name.getTextContent().trim();
 
@@ -137,7 +137,7 @@ public class ComponentValidatorVisitor extends EObjectValidationVisitor
                 if (!isValid)
                 {
                     addMessageInfo(messages, 
-                            DiagnosticFactory.create_MUST_BE_A_VALID_JAVA_IDENT("Facet name")
+                            DiagnosticFactory.create_MUST_BE_A_VALID_JAVA_IDENT("Facet name") //$NON-NLS-1$
                             , object, file);
                 }
             }

@@ -20,6 +20,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.gef.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.AddNodeCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.CreateNodeCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.SetConstraintCommand;
@@ -44,14 +45,14 @@ public class PageflowXYLayoutEditPolicy extends XYLayoutEditPolicy {
 		AddNodeCommand add = new AddNodeCommand();
 		add.setParent((Pageflow) getHost().getModel());
 		add.setChild(part);
-		add.setLabel("add");
+		add.setLabel(PageflowMessages.PageflowXYLayoutEditPolicy_Add);
 		add.setDebugLabel("PageFlowXYEP add subpart"); //$NON-NLS-1$
 
 		SetConstraintCommand setConstraint = new SetConstraintCommand();
 
 		setConstraint.setLocation(rect);
 		setConstraint.setPart(part);
-		setConstraint.setLabel("add");
+		setConstraint.setLabel(PageflowMessages.PageflowXYLayoutEditPolicy_Add);
 		setConstraint.setDebugLabel("PageFlowXYEP setConstraint"); //$NON-NLS-1$
 		return add.chain(setConstraint);
 	}
@@ -93,7 +94,7 @@ public class PageflowXYLayoutEditPolicy extends XYLayoutEditPolicy {
 		create.setChild((PageflowNode) request.getNewObject());
 		Rectangle constraint = (Rectangle) getConstraintFor(request);
 		create.setLocation(constraint);
-		create.setLabel("Add");
+		create.setLabel(PageflowMessages.PageflowXYLayoutEditPolicy_Add);
 		return create;
 	}
 

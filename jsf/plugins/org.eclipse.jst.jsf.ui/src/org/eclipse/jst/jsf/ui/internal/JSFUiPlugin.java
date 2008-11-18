@@ -99,16 +99,16 @@ public class JSFUiPlugin extends AbstractUIPlugin {
         Image image = images.get(name);
         if (image == null) {
             try {
-                final URL pluginBase= getBundle().getEntry("/");;
+                final URL pluginBase= getBundle().getEntry("/");; //$NON-NLS-1$
                 ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
-                        pluginBase, "icons/" + name));
+                        pluginBase, "icons/" + name)); //$NON-NLS-1$
                 images.put(name, id);
 
                 image = images.get(name);
             } catch (MalformedURLException ee) {
                 // log.CommonPlugin.image.error=Image {0} not found.
                 //.error("log.msg", "log.CommonPlugin.image.error", name, ee);
-                log(IStatus.ERROR, "Loading image", ee);
+                log(IStatus.ERROR, "Loading image", ee); //$NON-NLS-1$
             }
         }
         return image;

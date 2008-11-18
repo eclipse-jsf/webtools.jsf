@@ -54,9 +54,9 @@ public class ContainmentValidatingStrategy extends
      * identifier
      */
     public final static String                         ID = 
-        "org.eclipse.jst.jsf.validation.strategy.ElementValidatingStrategy";
+        "org.eclipse.jst.jsf.validation.strategy.ElementValidatingStrategy"; //$NON-NLS-1$
     private final static String                        DISPLAY_NAME =
-        "Tag Containment Validator";
+        Messages.ContainmentValidatingStrategy_DisplayName;
     private final static ElementToTagIdentifierMapping elem2TagIdMapper = 
         new ElementToTagIdentifierMapping();
     private int                                        _containmentValidationCount;  // = 0;
@@ -122,7 +122,7 @@ public class ContainmentValidatingStrategy extends
         if (entity != null)
         {
             final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(
-                    entity, "containment-constraint");
+                    entity, "containment-constraint"); //$NON-NLS-1$
 
             if (trait != null)
             {
@@ -134,7 +134,7 @@ public class ContainmentValidatingStrategy extends
 
                 // TODO: need generalized factory mechanism for registering and
                 // constructing algorithms.
-                if (!"xpath".equals(algorithm))
+                if (!"xpath".equals(algorithm)) //$NON-NLS-1$
                 {
                     return;
                 }
@@ -156,14 +156,14 @@ public class ContainmentValidatingStrategy extends
                 }
                 catch (final InvalidExpressionException e)
                 {
-                    JSFCorePlugin.log(e, "Problem with expression: " + expr
-                            + " on node " + node);
+                    JSFCorePlugin.log(e, "Problem with expression: " + expr //$NON-NLS-1$
+                            + " on node " + node); //$NON-NLS-1$
                     return;
                 }
                 catch (final EvaluationException e)
                 {
-                    JSFCorePlugin.log(e, "Problem evaluating expression: "
-                            + expr + " on node " + node);
+                    JSFCorePlugin.log(e, "Problem evaluating expression: " //$NON-NLS-1$
+                            + expr + " on node " + node); //$NON-NLS-1$
                     return;
                 }
 
@@ -202,7 +202,7 @@ public class ContainmentValidatingStrategy extends
     }
 
     private static final String MESSAGE_PATTERN = 
-        "Tag {0} is missing required parent tag \"{1}\" ({2})";
+        "Tag {0} is missing required parent tag \"{1}\" ({2})"; //$NON-NLS-1$
 
     // TODO: need a diagnostic factory
     private void reportContainmentProblem(
@@ -216,7 +216,7 @@ public class ContainmentValidatingStrategy extends
                                            {nodeName, tagName, uri});
 
         final Diagnostic problem = 
-            new BasicDiagnostic(severity, "", -1, msg, null);
+            new BasicDiagnostic(severity, "", -1, msg, null); //$NON-NLS-1$
         // add one so that the start offset is at the node name, rather
         // than the opening brace.
         final int start = context.getDocumentPosition()+1;

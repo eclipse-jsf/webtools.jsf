@@ -34,26 +34,26 @@ public class CounterValueGenerator implements ICounterValueGenerator {
 
 	static final Set NON_STRING_TYPES = new HashSet();
 	static {
-		NON_STRING_TYPES.add("disc");
-		NON_STRING_TYPES.add("circle");
-		NON_STRING_TYPES.add("square");
-		STRING_TYPES.add("decimal");
-		STRING_TYPES.add("decimal-leading-zero");
-		STRING_TYPES.add("lower-roman");
-		STRING_TYPES.add("upper-roman");
-		STRING_TYPES.add("lower-greek");
-		STRING_TYPES.add("lower-alpha");
-		STRING_TYPES.add("lower-latin");
-		STRING_TYPES.add("upper-alpha");
-		STRING_TYPES.add("upper-latin");
-		STRING_TYPES.add("hebrew");
-		STRING_TYPES.add("armenian");
-		STRING_TYPES.add("georgian");
-		STRING_TYPES.add("cjk-ideographic");
-		STRING_TYPES.add("hiragana");
-		STRING_TYPES.add("katakana");
-		STRING_TYPES.add("hiragana-iroha");
-		STRING_TYPES.add("katakana-iroha");
+		NON_STRING_TYPES.add("disc"); //$NON-NLS-1$
+		NON_STRING_TYPES.add("circle"); //$NON-NLS-1$
+		NON_STRING_TYPES.add("square"); //$NON-NLS-1$
+		STRING_TYPES.add("decimal"); //$NON-NLS-1$
+		STRING_TYPES.add("decimal-leading-zero"); //$NON-NLS-1$
+		STRING_TYPES.add("lower-roman"); //$NON-NLS-1$
+		STRING_TYPES.add("upper-roman"); //$NON-NLS-1$
+		STRING_TYPES.add("lower-greek"); //$NON-NLS-1$
+		STRING_TYPES.add("lower-alpha"); //$NON-NLS-1$
+		STRING_TYPES.add("lower-latin"); //$NON-NLS-1$
+		STRING_TYPES.add("upper-alpha"); //$NON-NLS-1$
+		STRING_TYPES.add("upper-latin"); //$NON-NLS-1$
+		STRING_TYPES.add("hebrew"); //$NON-NLS-1$
+		STRING_TYPES.add("armenian"); //$NON-NLS-1$
+		STRING_TYPES.add("georgian"); //$NON-NLS-1$
+		STRING_TYPES.add("cjk-ideographic"); //$NON-NLS-1$
+		STRING_TYPES.add("hiragana"); //$NON-NLS-1$
+		STRING_TYPES.add("katakana"); //$NON-NLS-1$
+		STRING_TYPES.add("hiragana-iroha"); //$NON-NLS-1$
+		STRING_TYPES.add("katakana-iroha"); //$NON-NLS-1$
 	}
 
 	private final static int DEFAULT_INCREMENT = 1;

@@ -91,25 +91,25 @@ public class ElementDescReader {
 		}
 
 		Element taglib = doc.getDocumentElement();
-		String nameSpace = taglib.getAttribute("uri");
+		String nameSpace = taglib.getAttribute("uri"); //$NON-NLS-1$
 
-		NodeList list = doc.getElementsByTagName("tag");
+		NodeList list = doc.getElementsByTagName("tag"); //$NON-NLS-1$
 		if (list != null && list.getLength() != 0) {
 			int size = list.getLength();
 			for (int i = 0; i < size; i++) {
 				Element tag = (Element) list.item(i);
 				ElementDescriptor desc = new ElementDescriptor();
-				desc.setTagName(tag.getAttribute("name"));
+				desc.setTagName(tag.getAttribute("name")); //$NON-NLS-1$
 				desc.setNamespaceURI(nameSpace);
 
 				// support for help context id.
-				desc.setHelpContextID(tag.getAttribute("helpContextId"));
+				desc.setHelpContextID(tag.getAttribute("helpContextId")); //$NON-NLS-1$
 
 				NodeList children = tag.getChildNodes();
 				// first calculate category and refered category quantity
-				NodeList cateNodes = tag.getElementsByTagName("category");
+				NodeList cateNodes = tag.getElementsByTagName("category"); //$NON-NLS-1$
 				NodeList referedCateNodes = tag
-						.getElementsByTagName("referedcategory");
+						.getElementsByTagName("referedcategory"); //$NON-NLS-1$
 				int cateNum = 0;
 				if (cateNodes != null) {
 					cateNum += cateNodes.getLength();
@@ -128,21 +128,21 @@ public class ElementDescReader {
 						if (node.getNodeType() == Node.ELEMENT_NODE) {
 							Element element = (Element) node;
 							String tagName = element.getTagName();
-							if ("category".equals(tagName)
-									|| "referedcategory".equals(tagName)) {
+							if ("category".equals(tagName) //$NON-NLS-1$
+									|| "referedcategory".equals(tagName)) { //$NON-NLS-1$
 								String categoryName = element
-										.getAttribute("name");
+										.getAttribute("name"); //$NON-NLS-1$
 								if (categoryName != null
-										&& !"".equals(categoryName)) {
+										&& !"".equals(categoryName)) { //$NON-NLS-1$
 									cates[realCate++] = categoryName;
 									parseCategory(element, element, attrList);
 								} else {
 									Element definedCategory = handleReference(
 											doc, element, true);
 									String labelKey = definedCategory
-											.getAttribute("displaylabel");
+											.getAttribute("displaylabel"); //$NON-NLS-1$
 									if (labelKey != null
-											&& !"".equals(labelKey)) {
+											&& !"".equals(labelKey)) { //$NON-NLS-1$
 										cates[realCate++] = getValue(labelKey);
 									} else {
 										cates[realCate++] = calculateDisplayLabel(definedCategory);
@@ -171,7 +171,7 @@ public class ElementDescReader {
 	}
 
 	private String calculateDisplayLabel(Element definedElement) {
-		String label = definedElement.getAttribute("displaylabel");
+		String label = definedElement.getAttribute("displaylabel"); //$NON-NLS-1$
 		return getValue(label);
 	}
 
@@ -180,8 +180,8 @@ public class ElementDescReader {
 		String cateLabel = calculateDisplayLabel(definedCategory);
 		// if the category is a referedcategory tag
 		if (category != definedCategory) {
-			String labelKey = category.getAttribute("displaylabel");
-			if (labelKey != null && !"".equals(labelKey)) {
+			String labelKey = category.getAttribute("displaylabel"); //$NON-NLS-1$
+			if (labelKey != null && !"".equals(labelKey)) { //$NON-NLS-1$
 				cateLabel = getValue(labelKey);
 			}
 		}
@@ -192,7 +192,7 @@ public class ElementDescReader {
 
 		// the category should be a referedcategory tag
 		// include/add more attributes to category
-		NodeList includes = category.getElementsByTagName("includeattrs");
+		NodeList includes = category.getElementsByTagName("includeattrs"); //$NON-NLS-1$
 		if (includes != null && includes.getLength() != 0) {
 			Element includeAttrsTag = (Element) includes.item(0);
 			handleAttributes(includeAttrsTag, cateLabel, attrList);
@@ -221,11 +221,11 @@ public class ElementDescReader {
 		}
 
 		// exclude attributes from category
-		NodeList excludes = category.getElementsByTagName("excludeattrs");
+		NodeList excludes = category.getElementsByTagName("excludeattrs"); //$NON-NLS-1$
 		if (excludes != null && excludes.getLength() != 0) {
 			String displayNames = ((Element) excludes.item(0))
-					.getAttribute("refs");
-			StringTokenizer tokenizer = new StringTokenizer(displayNames, ", ");
+					.getAttribute("refs"); //$NON-NLS-1$
+			StringTokenizer tokenizer = new StringTokenizer(displayNames, ", "); //$NON-NLS-1$
 
 			while (tokenizer.hasMoreTokens()) {
 				String name = tokenizer.nextToken();
@@ -253,9 +253,9 @@ public class ElementDescReader {
 	 */
 	private void handleAttributes(Element root, String cateLabel, List attrList) {
 		NodeList allNodes = root.getChildNodes();
-		NodeList attrNodes = root.getElementsByTagName("attribute");
+		NodeList attrNodes = root.getElementsByTagName("attribute"); //$NON-NLS-1$
 		NodeList referedattrNodes = root
-				.getElementsByTagName("referedattribute");
+				.getElementsByTagName("referedattribute"); //$NON-NLS-1$
 		int attrNum = 0;
 		if (attrNodes != null) {
 			attrNum += attrNodes.getLength();
@@ -271,26 +271,26 @@ public class ElementDescReader {
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element incAttr = (Element) node;
 					String tagName = incAttr.getTagName();
-					if ("attribute".equals(tagName)
-							|| "referedattribute".equals(tagName)) {
-						String incAtrName = incAttr.getAttribute("name");
+					if ("attribute".equals(tagName) //$NON-NLS-1$
+							|| "referedattribute".equals(tagName)) { //$NON-NLS-1$
+						String incAtrName = incAttr.getAttribute("name"); //$NON-NLS-1$
 						Element refAttr = incAttr;
-						if (incAtrName == null || "".equals(incAtrName)) {
+						if (incAtrName == null || "".equals(incAtrName)) { //$NON-NLS-1$
 							incAttr = handleReference(root.getOwnerDocument(),
 									incAttr, false);
 						}
 						AttributeDescriptor attrDesc = parseAttribute(
 								cateLabel, incAttr);
 						String overrideName = refAttr
-								.getAttribute("overridename");
+								.getAttribute("overridename"); //$NON-NLS-1$
 						if (overrideName != null
-								&& !"".equalsIgnoreCase(overrideName)) {
+								&& !"".equalsIgnoreCase(overrideName)) { //$NON-NLS-1$
 							attrDesc.setAttributeName(overrideName);
 						}
 						String ovDisplayLabel = refAttr
-								.getAttribute("displaylabel");
+								.getAttribute("displaylabel"); //$NON-NLS-1$
 						if (ovDisplayLabel != null
-								&& !"".equalsIgnoreCase(ovDisplayLabel)) {
+								&& !"".equalsIgnoreCase(ovDisplayLabel)) { //$NON-NLS-1$
 							attrDesc.setLabelString(getValue(ovDisplayLabel));
 						}
 						attrList.add(attrDesc);
@@ -304,7 +304,7 @@ public class ElementDescReader {
 
 	private Element handleReference(Document doc, Element refElment,
 			boolean isCategory) {
-		String refName = refElment.getAttribute("ref");
+		String refName = refElment.getAttribute("ref"); //$NON-NLS-1$
 		if (isCategory) {
 			if (_definedCategoryMap.get(refName) != null) {
 				Element definedCategory = (Element) _definedCategoryMap
@@ -321,19 +321,19 @@ public class ElementDescReader {
 
 		NodeList catgs = null;
 		if (isCategory) {
-			NodeList defineCates = doc.getElementsByTagName("categories");
+			NodeList defineCates = doc.getElementsByTagName("categories"); //$NON-NLS-1$
 			Element firstCate = (Element) defineCates.item(0);
-			catgs = firstCate.getElementsByTagName("category");
+			catgs = firstCate.getElementsByTagName("category"); //$NON-NLS-1$
 		} else {
-			NodeList defineCates = doc.getElementsByTagName("attributes");
+			NodeList defineCates = doc.getElementsByTagName("attributes"); //$NON-NLS-1$
 			Element firstCate = (Element) defineCates.item(0);
-			catgs = firstCate.getElementsByTagName("attribute");
+			catgs = firstCate.getElementsByTagName("attribute"); //$NON-NLS-1$
 		}
 		int cateLen = catgs.getLength();
 		Element definedElement = null;
 		for (int n = 0; n < cateLen; n++) {
-			String cateName = ((Element) catgs.item(n)).getAttribute("name");
-			if (refName.equals(cateName) && !"".equals(refName)) {
+			String cateName = ((Element) catgs.item(n)).getAttribute("name"); //$NON-NLS-1$
+			if (refName.equals(cateName) && !"".equals(refName)) { //$NON-NLS-1$
 				definedElement = (Element) catgs.item(n);
 				break;
 			}
@@ -351,27 +351,27 @@ public class ElementDescReader {
 		AttributeDescriptor attrDesc = new AttributeDescriptor();
 		attrDesc.setCategory(categoryName);
 
-		attrDesc.setAttributeName(attribute.getAttribute("name"));
-		attrDesc.setDescription(attribute.getAttribute("description"));
-		attrDesc.setValueType(attribute.getAttribute("type"));
-		attrDesc.setRequired(attribute.hasAttribute("required"));
-		attrDesc.setTypeParameter(attribute.getAttribute("typeparam"));
-		String labelKey = attribute.getAttribute("displaylabel");
+		attrDesc.setAttributeName(attribute.getAttribute("name")); //$NON-NLS-1$
+		attrDesc.setDescription(attribute.getAttribute("description")); //$NON-NLS-1$
+		attrDesc.setValueType(attribute.getAttribute("type")); //$NON-NLS-1$
+		attrDesc.setRequired(attribute.hasAttribute("required")); //$NON-NLS-1$
+		attrDesc.setTypeParameter(attribute.getAttribute("typeparam")); //$NON-NLS-1$
+		String labelKey = attribute.getAttribute("displaylabel"); //$NON-NLS-1$
 		attrDesc.setLabelString(getValue(labelKey));
 
-		NodeList optionNodes = attribute.getElementsByTagName("option");
+		NodeList optionNodes = attribute.getElementsByTagName("option"); //$NON-NLS-1$
 		if (optionNodes != null && optionNodes.getLength() != 0) {
 			HashMap optionMap = new HashMap();
 			int opLength = optionNodes.getLength();
 			String defaultValue = null;
 			for (int m = 0; m < opLength; m++) {
 				Element optNode = (Element) optionNodes.item(m);
-				String key = optNode.getAttribute("key");
-				String value = optNode.getAttribute("value");
+				String key = optNode.getAttribute("key"); //$NON-NLS-1$
+				String value = optNode.getAttribute("value"); //$NON-NLS-1$
 				if (value == null || value.length() == 0) {
 					value = key;
 				}
-				if (optNode.hasAttribute("default")) {
+				if (optNode.hasAttribute("default")) { //$NON-NLS-1$
 					defaultValue = value;
 				}
 				optionMap.put(key, value);
@@ -383,9 +383,9 @@ public class ElementDescReader {
 	}
 
 	private String getValue(String key) {
-		if (key != null && key.startsWith("%")) {
+		if (key != null && key.startsWith("%")) { //$NON-NLS-1$
 			String cmStr = this._url.toString();
-			String propBaseStr = cmStr.substring(0, cmStr.lastIndexOf("."));
+			String propBaseStr = cmStr.substring(0, cmStr.lastIndexOf(".")); //$NON-NLS-1$
 
 			String[] localeOptions = LocaleFallback.fallBack(Locale
 					.getDefault());
@@ -397,7 +397,7 @@ public class ElementDescReader {
 				StringBuffer sb = new StringBuffer();
 				sb.append(propBaseStr);
 				sb.append(options[i]);
-				sb.append(".properties");
+				sb.append(".properties"); //$NON-NLS-1$
 				String str = sb.toString();
 
 				ResourceBundle rb = null;
@@ -420,7 +420,7 @@ public class ElementDescReader {
 				try {
 					value = rb.getString(rbKey);
 				} catch (Exception e) {
-					_log.info("Info.ElementDescReader.ReadPropertyFile.Key",
+					_log.info("Info.ElementDescReader.ReadPropertyFile.Key", //$NON-NLS-1$
 							rbKey, str, null);
 					continue;
 				}

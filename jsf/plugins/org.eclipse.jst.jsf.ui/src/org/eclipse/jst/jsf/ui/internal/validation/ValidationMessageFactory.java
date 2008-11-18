@@ -125,7 +125,7 @@ public final class ValidationMessageFactory
         @Override
         public String getDisplayName()
         {
-            return "EL Preference Severities";
+            return Messages.ValidationMessageFactory_DefaultElSeverityDisplayName;
         }
     }
 
@@ -153,7 +153,7 @@ public final class ValidationMessageFactory
         @Override
         public String getDisplayName()
         {
-            return "Type Comparison Preference Severities";
+            return Messages.ValidationMessageFactory_DefaultTypeComparatorDisplayName;
         }
     }
 }

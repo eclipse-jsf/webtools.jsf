@@ -142,7 +142,7 @@ public class PF2FCSynchronizer extends AdapterImpl {
 				setProperties(notification, element, value);
 			} else if (element instanceof PageflowLink) {
 				if (DEBUG)
-					System.out.println("The link property is changed");
+					System.out.println("The link property is changed"); //$NON-NLS-1$
 				setProperties(notification, element, value);
 			}
 		}

@@ -80,7 +80,7 @@ public class ListPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "List";
+		return "List"; //$NON-NLS-1$
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class ListPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("ListPreferenceNode.LabelText");
+		return DialogsMessages.getString("ListPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

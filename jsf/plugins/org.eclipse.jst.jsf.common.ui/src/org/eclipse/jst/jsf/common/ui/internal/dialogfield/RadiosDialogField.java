@@ -32,7 +32,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  * @author mengbo
  */
 public class RadiosDialogField extends DialogFieldBase {
-	final static private String INDEXKEY = "INDEX";
+	final static private String INDEXKEY = "INDEX"; //$NON-NLS-1$
 
 	private Composite _group;
 

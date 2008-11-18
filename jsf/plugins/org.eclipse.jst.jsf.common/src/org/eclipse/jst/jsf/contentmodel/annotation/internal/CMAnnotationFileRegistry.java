@@ -109,7 +109,7 @@ public final class CMAnnotationFileRegistry {
 	 */
 	public synchronized List getAnnotationMaps(String uri) {
 		if (DISABLED){
-			JSFCommonPlugin.log(IStatus.ERROR, "Attempted metadata access using CMAnnotationFiles for uri: "+uri+".   Use org.eclipse.jst.jsf.common.metadata, instead." );
+			JSFCommonPlugin.log(IStatus.ERROR, "Attempted metadata access using CMAnnotationFiles for uri: "+uri+".   Use org.eclipse.jst.jsf.common.metadata, instead." ); //$NON-NLS-1$ //$NON-NLS-2$
 			return Collections.EMPTY_LIST;
 		}
 		
@@ -150,7 +150,7 @@ public final class CMAnnotationFileRegistry {
 	 */
 	public boolean hasAnnotations(String uri){
 		if (DISABLED){
-			JSFCommonPlugin.log(IStatus.ERROR, "Attempted metadata access using CMAnnotationFiles for uri: "+uri+".   Use org.eclipse.jst.jsf.common.metadata, instead." );
+			JSFCommonPlugin.log(IStatus.ERROR, "Attempted metadata access using CMAnnotationFiles for uri: "+uri+".   Use org.eclipse.jst.jsf.common.metadata, instead." ); //$NON-NLS-1$ //$NON-NLS-2$
 			return false;
 		}
 		if (annotationFilesMap.get(uri) != null)

@@ -52,7 +52,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
         _plugin = this;
         try
         {
-            _resourceBundle = ResourceBundle.getBundle("org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPluginResources");
+            _resourceBundle = ResourceBundle.getBundle("org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPluginResources"); //$NON-NLS-1$
         }
         catch (MissingResourceException x)
         {
@@ -69,7 +69,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
         _alerts = new Alerts(this, _resourceBundle);
         _logger = JSFUICommonPlugin.getLogger(JSFUIPlugin.class);
 //        _logger.setResourceBundle(_resourceBundle);
-        _pluginBase = getBundle().getEntry("/");
+        _pluginBase = getBundle().getEntry("/"); //$NON-NLS-1$
     }
 
     /**
@@ -145,14 +145,14 @@ public class JSFUIPlugin extends AbstractUIPlugin
             try
             {
                 ImageDescriptor id = ImageDescriptor.createFromURL(new URL(_pluginBase,
-                        IFileFolderConstants.FOLDER_ICONS + "/" + name));
+                        IFileFolderConstants.FOLDER_ICONS + "/" + name)); //$NON-NLS-1$
                 images.put(name, id);
 
                 image = images.get(name);
             }
             catch (MalformedURLException ee)
             {
-                _logger.error("Error.JSFUIPlugin", name, ee); //$NON-NLS-2$
+                _logger.error("Error.JSFUIPlugin", name, ee); //$NON-NLS-1$
             }
         }
         return image;
@@ -169,7 +169,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
     	ILog log = getDefault().getLog();
     	IStatus status = new Status(
     			severity,
-    			"org.eclipse.jst.pagedesigner.jsf.ui",
+    			"org.eclipse.jst.pagedesigner.jsf.ui", //$NON-NLS-1$
     			message,
     			exception);
     	log.log(status);
@@ -185,7 +185,7 @@ public class JSFUIPlugin extends AbstractUIPlugin
     	ILog log = getDefault().getLog();
     	IStatus status = new Status(
     			severity,
-    			"org.eclipse.jst.pagedesigner.jsf.ui",
+    			"org.eclipse.jst.pagedesigner.jsf.ui", //$NON-NLS-1$
     			message);
     	log.log(status);
     }

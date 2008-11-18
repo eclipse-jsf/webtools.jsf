@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsPackageImpl.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
+ * $Id: QuickEditTabSectionsPackageImpl.java,v 1.3 2008/11/18 22:22:35 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.impl;
 
@@ -28,7 +28,7 @@ public class QuickEditTabSectionsPackageImpl extends EPackageImpl implements Qui
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -243,15 +243,15 @@ public class QuickEditTabSectionsPackageImpl extends EPackageImpl implements Qui
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(quickEditTabSectionsEClass, QuickEditTabSections.class, "QuickEditTabSections", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getQuickEditTabSections_Sections(), this.getSectionInfo(), null, "sections", null, 0, -1, QuickEditTabSections.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(quickEditTabSectionsEClass, QuickEditTabSections.class, "QuickEditTabSections", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getQuickEditTabSections_Sections(), this.getSectionInfo(), null, "sections", null, 0, -1, QuickEditTabSections.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(sectionInfoEClass, SectionInfo.class, "SectionInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSectionInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, SectionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSectionInfo_Type(), this.getSECTION_TYPE(), "type", "ATTRIBUTE", 0, 1, SectionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sectionInfoEClass, SectionInfo.class, "SectionInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getSectionInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, SectionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getSectionInfo_Type(), this.getSECTION_TYPE(), "type", "ATTRIBUTE", 0, 1, SectionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// Initialize enums and add enum literals
-		initEEnum(sectioN_TYPEEEnum, org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.SECTION_TYPE.class, "SECTION_TYPE");
+		initEEnum(sectioN_TYPEEEnum, org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.SECTION_TYPE.class, "SECTION_TYPE"); //$NON-NLS-1$
 		addEEnumLiteral(sectioN_TYPEEEnum, org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.SECTION_TYPE.ATTRIBUTE);
 		addEEnumLiteral(sectioN_TYPEEEnum, org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.SECTION_TYPE.SECTION);
 
@@ -270,13 +270,13 @@ public class QuickEditTabSectionsPackageImpl extends EPackageImpl implements Qui
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
 		addAnnotation
 		  (getQuickEditTabSections_Sections(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "section"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "section" //$NON-NLS-1$ //$NON-NLS-2$
 		   });
 	}
 

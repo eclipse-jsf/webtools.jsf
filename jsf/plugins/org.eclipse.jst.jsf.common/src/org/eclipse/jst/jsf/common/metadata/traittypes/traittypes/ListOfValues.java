@@ -33,7 +33,7 @@ public interface ListOfValues extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Entries</b></em>' containment reference list.

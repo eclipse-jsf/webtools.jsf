@@ -41,7 +41,7 @@ public class DataTableUtil
      */
     public int getColumnIndex(Element column)
     {
-        NodeList nodeList = this._dataTable.getElementsByTagName("h:column");
+        NodeList nodeList = this._dataTable.getElementsByTagName("h:column"); //$NON-NLS-1$
         if (nodeList != null)
         {
             for (int i = 0, size = nodeList.getLength(); i < size; i++)

@@ -34,7 +34,7 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * Creates the default factory implementation.
@@ -45,7 +45,7 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
      */
     public static FacesConfigFactory init() {
         try {
-            FacesConfigFactory theFacesConfigFactory = (FacesConfigFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/webtools/jsf/schema/facesconfig.xsd"); 
+            FacesConfigFactory theFacesConfigFactory = (FacesConfigFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/webtools/jsf/schema/facesconfig.xsd");  //$NON-NLS-1$
             if (theFacesConfigFactory != null) {
                 return theFacesConfigFactory;
             }
@@ -170,7 +170,7 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
             case FacesConfigPackage.VAR_TYPE: return createVarType();
             case FacesConfigPackage.RENDER_KIT_EXTENSION_TYPE: return createRenderKitExtensionType();
             default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 

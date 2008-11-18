@@ -120,7 +120,7 @@ IStructuredDocumentContextResolverFactory, IAdaptable
             if (DTAppManagerUtil.getXMLViewDefnAdapter(project, file) == null)
             {
                 throw new IllegalArgumentException(
-                "View definition adapter not found");
+                "View definition adapter not found"); //$NON-NLS-1$
             }
         }
 
@@ -203,7 +203,7 @@ IStructuredDocumentContextResolverFactory, IAdaptable
             }
             // shouldn't happen since the constuctor throws an exceptino
             // if can't get the adapter
-            JSFCorePlugin.log("Unexpected case",
+            JSFCorePlugin.log("Unexpected case", //$NON-NLS-1$
                     new Throwable(_file.toString()));
             return null;
         }

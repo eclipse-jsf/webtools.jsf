@@ -25,7 +25,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 /*package*/ class MultiplyArithmeticBinaryOperator extends
         NoDivArithmeticBinaryOperator 
 {
-    private static final String MULTIPLICATION = "multiplication";
+    private static final String MULTIPLICATION = "multiplication"; //$NON-NLS-1$
 
 
     MultiplyArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) 

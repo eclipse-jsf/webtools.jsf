@@ -302,9 +302,9 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		}
 		if (isDesignerMode()) {
 			// if there has jsf binding expressions
-			int checkPos = value.indexOf("#{");
+			int checkPos = value.indexOf("#{"); //$NON-NLS-1$
 			if (checkPos != -1) {
-				String mapValue = "";
+				String mapValue = ""; //$NON-NLS-1$
 				int preferType = PreferenceReader.getMapValueType();
 				switch (preferType) {
 				case PreferenceReader.FULL_EXPRESSION_TYPE:
@@ -313,15 +313,15 @@ public abstract class AbstractTagConverter implements ITagConverter,
 				case PreferenceReader.LAST_EXPRESSION_TYPE:
 					String strBackup = value;
 					StringBuffer sb = new StringBuffer();
-					while (strBackup.indexOf("#{") != -1) {
-						int pos = strBackup.indexOf("#{");
-						int endBracketPos = strBackup.indexOf("}", pos + 1);
+					while (strBackup.indexOf("#{") != -1) { //$NON-NLS-1$
+						int pos = strBackup.indexOf("#{"); //$NON-NLS-1$
+						int endBracketPos = strBackup.indexOf("}", pos + 1); //$NON-NLS-1$
 						if (endBracketPos != -1) {
 							sb.append(strBackup.substring(0, pos + 2));
 							String exp = strBackup.substring(pos + 2,
 									endBracketPos);
 							if (allowTrim(exp)) {
-								int lastDotPos = exp.lastIndexOf(".");
+								int lastDotPos = exp.lastIndexOf("."); //$NON-NLS-1$
 								if (lastDotPos != -1) {
 									String convertedExp = exp
 											.substring(lastDotPos + 1);
@@ -333,14 +333,14 @@ public abstract class AbstractTagConverter implements ITagConverter,
 							} else {
 								sb.append(exp);
 							}
-							sb.append("}");
+							sb.append("}"); //$NON-NLS-1$
 						} else {
 							break;
 						}
 						if (strBackup.length() > endBracketPos + 1) {
 							strBackup = strBackup.substring(endBracketPos + 1);
 						} else {
-							strBackup = "";
+							strBackup = ""; //$NON-NLS-1$
 							break;
 						}
 

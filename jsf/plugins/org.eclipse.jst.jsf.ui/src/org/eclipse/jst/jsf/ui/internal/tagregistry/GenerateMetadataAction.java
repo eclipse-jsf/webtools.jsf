@@ -22,7 +22,7 @@ class GenerateMetadataAction extends Action
 
     public GenerateMetadataAction()
     {
-        super("Generate metadata");
+        super("Generate metadata"); //$NON-NLS-1$
     }
 
     public void setNamespace(final Namespace ns)

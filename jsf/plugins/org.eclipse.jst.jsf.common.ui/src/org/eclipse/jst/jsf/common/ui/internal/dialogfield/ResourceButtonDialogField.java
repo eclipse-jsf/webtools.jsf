@@ -52,7 +52,7 @@ public class ResourceButtonDialogField extends StringButtonDialogField {
 
 	private IFolder _folder;
 
-	private String _separator = "";
+	private String _separator = ""; //$NON-NLS-1$
 
 	/**
 	 * @param project
@@ -86,7 +86,7 @@ public class ResourceButtonDialogField extends StringButtonDialogField {
 	protected String browseButtonPressed() {
 		Shell shell = getShell();
 		CommonResourceDialog dialog = null;
-		int style = "".equals(_separator) ? SWT.NONE : SWT.MULTI | SWT.H_SCROLL
+		int style = "".equals(_separator) ? SWT.NONE : SWT.MULTI | SWT.H_SCROLL //$NON-NLS-1$
 				| SWT.V_SCROLL;
 		if (_folder != null) {
 			dialog = new CommonResourceDialog(shell, _folder.getProject(), style);

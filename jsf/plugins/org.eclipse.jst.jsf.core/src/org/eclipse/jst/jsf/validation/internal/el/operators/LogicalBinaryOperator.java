@@ -59,7 +59,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             catch (TypeCoercionException tce)
             {
                 // should never be throw due to already checking if can coerce
-                throw new AssertionError("coercion already checked; this should never be reached");
+                throw new AssertionError("coercion already checked; this should never be reached"); //$NON-NLS-1$
             }
         }
     
@@ -73,7 +73,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             catch (TypeCoercionException tce)
             {
                 // should never be throw due to already checking if can coerce
-                throw new AssertionError("coercion already checked; this should never be reached");
+                throw new AssertionError("coercion already checked; this should never be reached"); //$NON-NLS-1$
             }
         }
 
@@ -101,14 +101,14 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         if (!canCoerceFirstArg)
         {
             return _diagnosticFactory.
-                    create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first");
+                    create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first"); //$NON-NLS-1$
             //return new BasicDiagnostic(Diagnostic.ERROR, "", 0, "Cannot coerce first argument of "+readableOperatorName()+" to boolean", null);
         }
        
         if (!canCoerceSecondArg)
         {
             return _diagnosticFactory.
-                create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first");
+                create_BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN("first"); //$NON-NLS-1$
 
             //return new BasicDiagnostic(Diagnostic.ERROR, "", 0, "Cannot coerce second argument of "+readableOperatorName()+" to boolean", null);
         }
@@ -130,7 +130,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             catch (TypeCoercionException tce)
             {
                 // should never be throw due to already checking if can coerce
-                throw new AssertionError("coercion already checked; this should never be reached");
+                throw new AssertionError("coercion already checked; this should never be reached"); //$NON-NLS-1$
             }
         }
         
@@ -151,7 +151,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
             catch (TypeCoercionException tce)
             {
                 // should never be throw due to already checking if can coerce
-                throw new AssertionError("coercion already checked; this should never be reached");
+                throw new AssertionError("coercion already checked; this should never be reached"); //$NON-NLS-1$
             }
         }
            

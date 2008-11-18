@@ -50,7 +50,7 @@ public class ManagedBeanExtensionTypeItemProvider
      * @generated
      */
     @SuppressWarnings("hiding")
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -84,7 +84,7 @@ public class ManagedBeanExtensionTypeItemProvider
      * @generated
      */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedBeanExtensionType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedBeanExtensionType")); //$NON-NLS-1$
     }
 
     /**
@@ -96,8 +96,8 @@ public class ManagedBeanExtensionTypeItemProvider
     public String getText(Object object) {
         String label = ((ManagedBeanExtensionType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ManagedBeanExtensionType_type") :
-            getString("_UI_ManagedBeanExtensionType_type") + " " + label;
+            getString("_UI_ManagedBeanExtensionType_type") : //$NON-NLS-1$
+            getString("_UI_ManagedBeanExtensionType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

@@ -19,7 +19,7 @@ public class TableInsertRequest extends TableRowColumnRequest {
 	/**
 	 * 
 	 */
-	private static final String TABLE_INSERT_REQUEST = "Table Insert";
+	private static final String TABLE_INSERT_REQUEST = "Table Insert"; //$NON-NLS-1$
 
 	boolean _before;
 

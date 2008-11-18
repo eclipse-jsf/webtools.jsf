@@ -93,7 +93,7 @@ public class ConverterUtil {
 		if (document == null) {
 			return null;
 		}
-		Element span = document.createElement(IHTMLConstants.TAG_SPAN); //$NON-NLS-1$
+		Element span = document.createElement(IHTMLConstants.TAG_SPAN);
 		span.setAttribute(
 				"style", "color:gray;font-style:italic;font-size:normal;"); //$NON-NLS-1$ //$NON-NLS-2$
 		if (text == null) {

@@ -68,7 +68,7 @@ public class ManagedBeanValidationVisitor extends EObjectValidationVisitor
             String classTypeValue = classType.getTextContent();
             addMessageInfo(messages
                 , AppConfigValidationUtil.validateClassName
-                    (classTypeValue == null ? "" : classTypeValue
+                    (classTypeValue == null ? "" : classTypeValue //$NON-NLS-1$
                             , null, true,   // a managed bean must be a class 
                             file.getProject())
                             , classType, file);
@@ -88,8 +88,8 @@ public class ManagedBeanValidationVisitor extends EObjectValidationVisitor
                 managedBeanType.getManagedBeanClass().getTextContent();
             
             if (propertyName == null || propertyClass == null
-                    || "".equals(propertyName.trim())
-                    || "".equals(propertyClass.trim()))
+                    || "".equals(propertyName.trim()) //$NON-NLS-1$
+                    || "".equals(propertyClass.trim())) //$NON-NLS-1$
             {
                 return;
             }

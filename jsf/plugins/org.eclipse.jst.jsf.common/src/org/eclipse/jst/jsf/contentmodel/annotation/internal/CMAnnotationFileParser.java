@@ -61,7 +61,7 @@ public class CMAnnotationFileParser implements ICMAnnotationFileParser {
 				try {
 					input.close();
 				} catch (IOException e) {
-                    JSFCommonPlugin.log(e, "error closing annotation file");
+                    JSFCommonPlugin.log(e, "error closing annotation file"); //$NON-NLS-1$
 				}
 			}
 		}

@@ -144,7 +144,7 @@ static class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvid
                     if (url == null)
                     {
                         JSFCommonPlugin.log(new RuntimeException(),
-                                "Couldn't locate meta-data file for "
+                                "Couldn't locate meta-data file for " //$NON-NLS-1$
                                         + fileLocator2.getFileInfo()
                                                 .getLocation());
                         return null;
@@ -156,9 +156,9 @@ static class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvid
             }
             catch (URISyntaxException e)
             {
-                JSFCommonPlugin.log(IStatus.ERROR, "Metadata File Load Error: "
+                JSFCommonPlugin.log(IStatus.ERROR, "Metadata File Load Error: " //$NON-NLS-1$
                         + getFileLocator().getFileInfo().toString()
-                        + ": URISyntaxException: " + e.getMessage());
+                        + ": URISyntaxException: " + e.getMessage()); //$NON-NLS-1$
             }
             return null;
         }
@@ -225,9 +225,9 @@ static class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvid
 			try {
 				return fileLocator.getResourceBundle();
 			} catch (MissingResourceException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "InternalGetResourceBundle1", e);
+				JSFCommonPlugin.log(IStatus.ERROR, "InternalGetResourceBundle1", e); //$NON-NLS-1$
 			} catch (IOException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "InternalGetResourceBundle2", e);			
+				JSFCommonPlugin.log(IStatus.ERROR, "InternalGetResourceBundle2", e);			 //$NON-NLS-1$
 			}
 		}
 		return null;

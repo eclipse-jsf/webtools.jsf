@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationAttributeImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
+ * $Id: TagCreationAttributeImpl.java,v 1.2 2008/11/18 22:24:03 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
@@ -35,7 +35,7 @@ public class TagCreationAttributeImpl extends EObjectImpl implements TagCreation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -210,9 +210,9 @@ public class TagCreationAttributeImpl extends EObjectImpl implements TagCreation
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
+		result.append(" (id: "); //$NON-NLS-1$
 		result.append(id);
-		result.append(", value: ");
+		result.append(", value: "); //$NON-NLS-1$
 		result.append(value);
 		result.append(')');
 		return result.toString();

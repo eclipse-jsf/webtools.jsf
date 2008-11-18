@@ -28,11 +28,11 @@ public interface IPropertyPageDescriptor extends IMetaDataEnabledFeature, IAdapt
 	 * Trait id for defining quick edit tab sections.   Value must be of type qe:QuickEditTabSections
 	 * eg. <value xsi:type="qe:QuickEditTabSections">
 	 */
-	public static final String QUICK_EDIT_TAB = "quick-edit-tab";
+	public static final String QUICK_EDIT_TAB = "quick-edit-tab"; //$NON-NLS-1$
 	/**
 	 * Trait id for category name value
 	 */
-	public static final String PROP_DESC_CATEGORY = "category";
+	public static final String PROP_DESC_CATEGORY = "category"; //$NON-NLS-1$
 	
 //	/**
 //	 * Trait id for fully qualified cell editor class name

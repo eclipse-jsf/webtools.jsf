@@ -20,7 +20,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class PropertyMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages";
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.PropertyMessages"; //$NON-NLS-1$
 
 	private PropertyMessages() {
 		// Do not instantiate

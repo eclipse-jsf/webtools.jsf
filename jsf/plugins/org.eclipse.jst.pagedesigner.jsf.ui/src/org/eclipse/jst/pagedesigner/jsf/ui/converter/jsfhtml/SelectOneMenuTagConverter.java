@@ -36,9 +36,9 @@ public class SelectOneMenuTagConverter extends SelectBasedTagConverter
     protected void handleMultipleAndSize(Element hostEle, Element selectEle)
     {
         // always not multiple
-        selectEle.removeAttribute("multiple");
+        selectEle.removeAttribute("multiple"); //$NON-NLS-1$
 
-        selectEle.setAttribute("size", "1");
+        selectEle.setAttribute("size", "1"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
 }

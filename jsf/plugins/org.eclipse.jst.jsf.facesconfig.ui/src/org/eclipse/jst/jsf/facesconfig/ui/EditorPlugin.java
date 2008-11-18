@@ -64,9 +64,9 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 		try {
 			// get resource bundle.
 			resourceBundle = ResourceBundle
-					.getBundle("org.eclipse.jst.jsf.facesconfig.ui.EditorPluginResources");
+					.getBundle("org.eclipse.jst.jsf.facesconfig.ui.EditorPluginResources"); //$NON-NLS-1$
 			alerts = new Alerts(this, resourceBundle);
-			pluginBase = getBundle().getEntry("/");
+			pluginBase = getBundle().getEntry("/"); //$NON-NLS-1$
 
 			// set up logging for this plugin and everthing under it.
 			log = new Logger(this.getBundle(), resourceBundle);
@@ -75,13 +75,13 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 		} catch (Exception ee) {
 			// only log if the logger was configured correctly.
 			if (log != null) {
-				log.error("log.msg",
-						"Problems starting plug-in Faces Config Editor.", ee);
+				log.error("log.msg", //$NON-NLS-1$
+						"Problems starting plug-in Faces Config Editor.", ee); //$NON-NLS-1$
 			}
 
 			throw new CoreException(new Status(IStatus.ERROR, getBundle()
 					.getSymbolicName(), IStatus.OK,
-					"Problems starting plug-in Faces Config Editor", ee));
+					"Problems starting plug-in Faces Config Editor", ee)); //$NON-NLS-1$
 		}
 		
 	}
@@ -212,13 +212,13 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 		if (image == null) {
 			try {
 				ImageDescriptor id = ImageDescriptor.createFromURL(new URL(
-						pluginBase, "icons/" + name));
+						pluginBase, "icons/" + name)); //$NON-NLS-1$
 				images.put(name, id);
 
 				image = images.get(name);
 			} catch (MalformedURLException ee) {
 				// log.EditorPlugin.image.error=Image {0} not found.
-				log.error("log.msg", "log.EditorPlugin.image.error", name, ee);
+				log.error("log.msg", "log.EditorPlugin.image.error", name, ee); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		return image;
@@ -241,12 +241,12 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 		ImageDescriptor id = images.getDescriptor(path);
 		if (id == null) {
 			try {
-				id = ImageDescriptor.createFromURL(new URL(pluginBase, "icons/"
+				id = ImageDescriptor.createFromURL(new URL(pluginBase, "icons/" //$NON-NLS-1$
 						+ path));
 				images.put(path, id);
 			} catch (MalformedURLException ee) {
 				// log.EditorPlugin.image.error=Image {0} not found.
-				log.error("log.msg", "log.EditorPlugin.image.error", path, ee);
+				log.error("log.msg", "log.EditorPlugin.image.error", path, ee); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 		return id;

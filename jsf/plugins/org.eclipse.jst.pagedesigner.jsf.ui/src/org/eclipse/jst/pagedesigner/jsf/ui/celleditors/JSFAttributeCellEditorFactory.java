@@ -71,7 +71,7 @@ public class JSFAttributeCellEditorFactory implements IAttributeCellEditorFactor
         if (type.equalsIgnoreCase(CONVERTERID))
         {
             ConverterValidatorIdDialogField dialogField = new ConverterValidatorIdDialogField();
-            dialogField.setElementId("converter-id");
+            dialogField.setElementId("converter-id"); //$NON-NLS-1$
             dialogField.setRequired(attr.isRequired());
             dialogField.setToolTip(attr.getDescription());
             return dialogField;
@@ -79,7 +79,7 @@ public class JSFAttributeCellEditorFactory implements IAttributeCellEditorFactor
         else if (type.equalsIgnoreCase(VALIDATORID))
         {
             ConverterValidatorIdDialogField dialogField = new ConverterValidatorIdDialogField();
-            dialogField.setElementId("validator-id");
+            dialogField.setElementId("validator-id"); //$NON-NLS-1$
             dialogField.setRequired(attr.isRequired());
             dialogField.setToolTip(attr.getDescription());
             return dialogField;

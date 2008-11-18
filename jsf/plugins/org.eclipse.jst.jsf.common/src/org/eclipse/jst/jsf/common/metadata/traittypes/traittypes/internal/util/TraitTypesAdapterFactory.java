@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesAdapterFactory.java,v 1.4 2007/04/16 19:54:18 itrimble Exp $
+ * $Id: TraitTypesAdapterFactory.java,v 1.5 2008/11/18 22:24:43 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -29,7 +29,7 @@ public class TraitTypesAdapterFactory extends AdapterFactoryImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
      * The cached model package.

@@ -36,7 +36,7 @@ public final class MessageFormater {
 			return formatter.format(args);
 		} catch (Exception e) {
 			_log.error("Log.Error.MessageFormater.Format0", e); //$NON-NLS-1$
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 	}
 
@@ -52,8 +52,8 @@ public final class MessageFormater {
 			MessageFormat formatter = new MessageFormat(message);
 			return formatter.format(args);
 		} catch (Exception e) {
-			_log.error("Log.Error.MessageFormater.Format0", e);
-			return "";
+			_log.error("Log.Error.MessageFormater.Format0", e); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
 		}
 	}
 
@@ -70,8 +70,8 @@ public final class MessageFormater {
 			MessageFormat formatter = new MessageFormat(message);
 			return formatter.format(args);
 		} catch (Exception e) {
-			_log.error("Log.Error.MessageFormater.Format0", e);
-			return "";
+			_log.error("Log.Error.MessageFormater.Format0", e); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
 		}
 	}
 
@@ -85,8 +85,8 @@ public final class MessageFormater {
 			MessageFormat formater = new MessageFormat(message);
 			return formater.format(o);
 		} catch (Exception e) {
-			_log.error("Log.Error.MessageFormater.Format0", e);
-			return "";
+			_log.error("Log.Error.MessageFormater.Format0", e); //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
 		}
 	}
 	

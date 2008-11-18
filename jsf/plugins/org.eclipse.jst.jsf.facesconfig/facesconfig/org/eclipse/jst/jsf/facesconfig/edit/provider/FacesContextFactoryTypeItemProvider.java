@@ -44,7 +44,7 @@ public class FacesContextFactoryTypeItemProvider extends ItemProviderAdapter
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -88,8 +88,8 @@ public class FacesContextFactoryTypeItemProvider extends ItemProviderAdapter
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacesContextFactoryType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacesContextFactoryType_textContent_feature", "_UI_FacesContextFactoryType_type"),
+                 getString("_UI_FacesContextFactoryType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacesContextFactoryType_textContent_feature", "_UI_FacesContextFactoryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACES_CONTEXT_FACTORY_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -111,8 +111,8 @@ public class FacesContextFactoryTypeItemProvider extends ItemProviderAdapter
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacesContextFactoryType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacesContextFactoryType_id_feature", "_UI_FacesContextFactoryType_type"),
+                 getString("_UI_FacesContextFactoryType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacesContextFactoryType_id_feature", "_UI_FacesContextFactoryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACES_CONTEXT_FACTORY_TYPE__ID,
                  true,
                  false,
@@ -129,7 +129,7 @@ public class FacesContextFactoryTypeItemProvider extends ItemProviderAdapter
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacesContextFactoryType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacesContextFactoryType")); //$NON-NLS-1$
     }
 
     /**
@@ -141,8 +141,8 @@ public class FacesContextFactoryTypeItemProvider extends ItemProviderAdapter
 	public String getText(Object object) {
         String label = ((FacesContextFactoryType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_FacesContextFactoryType_type") :
-            getString("_UI_FacesContextFactoryType_type") + " " + label;
+            getString("_UI_FacesContextFactoryType_type") : //$NON-NLS-1$
+            getString("_UI_FacesContextFactoryType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -203,7 +203,7 @@ public class FacesContextFactoryTypeItemProvider extends ItemProviderAdapter
 		case 0:
 			return getText(object);
 		case 1:
-			return getString("_UI_FacesContextFactoryType_type");
+			return getString("_UI_FacesContextFactoryType_type"); //$NON-NLS-1$
 		}
 
 		return null;

@@ -27,7 +27,7 @@ public class ConverterTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public ConverterTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature); //$NON-NLS-1$
+		super(domNameAndPath, aFeature);
 	}
 
 	/* (non-Javadoc)

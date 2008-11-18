@@ -42,7 +42,7 @@ public class TypeComparatorPreferences
             case TypeComparatorDiagnosticFactory.PROPERTY_NOT_WRITABLE_ID:
                 return Diagnostic.WARNING;
             default:
-                throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range");
+                throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range"); //$NON-NLS-1$ //$NON-NLS-2$
 
         }
     }

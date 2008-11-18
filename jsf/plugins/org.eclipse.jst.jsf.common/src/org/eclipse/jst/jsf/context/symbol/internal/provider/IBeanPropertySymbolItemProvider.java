@@ -42,12 +42,12 @@ public class IBeanPropertySymbolItemProvider
 	implements	
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, IContentProposalProvider
 {
-	private static final String PROPERTY_SYMBOL_WO = "full/obj16/IBeanPropertySymbol_wo";
-	private static final String PROPERTY_SYMBOL_RO = "full/obj16/IBeanPropertySymbol_ro";
-	private static final String PROPERTY_SYMBOL_RW = "full/obj16/IBeanPropertySymbol_rw";
-	private static final String PROPERTY_SYMBOL_WO_INDEXABLE = "full/obj16/IBeanPropertySymbol_wo_indexable";
-	private static final String PROPERTY_SYMBOL_RO_INDEXABLE = "full/obj16/IBeanPropertySymbol_ro_indexable";
-	private static final String PROPERTY_SYMBOL_RW_INDEXABLE = "full/obj16/IBeanPropertySymbol_rw_indexable";
+	private static final String PROPERTY_SYMBOL_WO = "full/obj16/IBeanPropertySymbol_wo"; //$NON-NLS-1$
+	private static final String PROPERTY_SYMBOL_RO = "full/obj16/IBeanPropertySymbol_ro"; //$NON-NLS-1$
+	private static final String PROPERTY_SYMBOL_RW = "full/obj16/IBeanPropertySymbol_rw"; //$NON-NLS-1$
+	private static final String PROPERTY_SYMBOL_WO_INDEXABLE = "full/obj16/IBeanPropertySymbol_wo_indexable"; //$NON-NLS-1$
+	private static final String PROPERTY_SYMBOL_RO_INDEXABLE = "full/obj16/IBeanPropertySymbol_ro_indexable"; //$NON-NLS-1$
+	private static final String PROPERTY_SYMBOL_RW_INDEXABLE = "full/obj16/IBeanPropertySymbol_rw_indexable"; //$NON-NLS-1$
 	/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -120,7 +120,7 @@ public class IBeanPropertySymbolItemProvider
 		IBeanPropertySymbol propertySymbol = (IBeanPropertySymbol) object;
 		String imageFile = null;
 		ITypeDescriptor typeDescriptor = propertySymbol.getTypeDescriptor();
-		if (typeDescriptor != null && (typeDescriptor.isArray() || typeDescriptor.instanceOf("Ljava.util.List;") || typeDescriptor.instanceOf("Ljava.util.Map;"))) {
+		if (typeDescriptor != null && (typeDescriptor.isArray() || typeDescriptor.instanceOf("Ljava.util.List;") || typeDescriptor.instanceOf("Ljava.util.Map;"))) { //$NON-NLS-1$ //$NON-NLS-2$
 			// property is somehow "indexable" by int/String:
 			if (propertySymbol.isReadable() && propertySymbol.isWritable()) {
 				imageFile = PROPERTY_SYMBOL_RW_INDEXABLE;

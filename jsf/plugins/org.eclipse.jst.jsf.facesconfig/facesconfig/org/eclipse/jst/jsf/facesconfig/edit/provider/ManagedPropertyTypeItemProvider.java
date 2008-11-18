@@ -50,7 +50,7 @@ public class ManagedPropertyTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -94,8 +94,8 @@ public class ManagedPropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedPropertyType_propertyName_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_propertyName_feature", "_UI_ManagedPropertyType_type"),
+                 getString("_UI_ManagedPropertyType_propertyName_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_propertyName_feature", "_UI_ManagedPropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_PROPERTY_TYPE__PROPERTY_NAME,
                  true,
                  false,
@@ -117,8 +117,8 @@ public class ManagedPropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedPropertyType_propertyClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_propertyClass_feature", "_UI_ManagedPropertyType_type"),
+                 getString("_UI_ManagedPropertyType_propertyClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_propertyClass_feature", "_UI_ManagedPropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_PROPERTY_TYPE__PROPERTY_CLASS,
                  true,
                  false,
@@ -140,8 +140,8 @@ public class ManagedPropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedPropertyType_nullValue_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_nullValue_feature", "_UI_ManagedPropertyType_type"),
+                 getString("_UI_ManagedPropertyType_nullValue_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_nullValue_feature", "_UI_ManagedPropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_PROPERTY_TYPE__NULL_VALUE,
                  true,
                  false,
@@ -163,8 +163,8 @@ public class ManagedPropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedPropertyType_value_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_value_feature", "_UI_ManagedPropertyType_type"),
+                 getString("_UI_ManagedPropertyType_value_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_value_feature", "_UI_ManagedPropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_PROPERTY_TYPE__VALUE,
                  true,
                  false,
@@ -186,8 +186,8 @@ public class ManagedPropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ManagedPropertyType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_id_feature", "_UI_ManagedPropertyType_type"),
+                 getString("_UI_ManagedPropertyType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ManagedPropertyType_id_feature", "_UI_ManagedPropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MANAGED_PROPERTY_TYPE__ID,
                  true,
                  false,
@@ -236,7 +236,7 @@ public class ManagedPropertyTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedPropertyType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ManagedPropertyType")); //$NON-NLS-1$
     }
 
     /**
@@ -251,7 +251,7 @@ public class ManagedPropertyTypeItemProvider
             label = ((ManagedPropertyType) object).getPropertyName()
                     .getTextContent();
         }
-        return label == null || label.length() == 0 ? getString("_UI_ManagedPropertyType_type")
+        return label == null || label.length() == 0 ? getString("_UI_ManagedPropertyType_type") //$NON-NLS-1$
                 : label;
 
     }
@@ -336,10 +336,10 @@ public class ManagedPropertyTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return attribute.getPropertyName() == null ? "" : attribute
+			return attribute.getPropertyName() == null ? "" : attribute //$NON-NLS-1$
 					.getPropertyName().getTextContent();
 		case 1:
-			return attribute.getPropertyClass() == null ? "" : attribute
+			return attribute.getPropertyClass() == null ? "" : attribute //$NON-NLS-1$
 					.getPropertyClass().getTextContent();
 		case 2:
 			if(attribute.getValue() != null)
@@ -347,12 +347,12 @@ public class ManagedPropertyTypeItemProvider
 				return attribute.getValue().getTextContent();
 			}
 			else if(attribute.getNullValue() != null)
-				return "<null-value>";
+				return "<null-value>"; //$NON-NLS-1$
 			else if(attribute.getMapEntries() != null)
-				return "<map-entries>";
+				return "<map-entries>"; //$NON-NLS-1$
 			else if(attribute.getListEntries() != null)
-				return "<list-entries>";
-			return "";
+				return "<list-entries>"; //$NON-NLS-1$
+			return ""; //$NON-NLS-1$
 		}
 		return null;
 	}

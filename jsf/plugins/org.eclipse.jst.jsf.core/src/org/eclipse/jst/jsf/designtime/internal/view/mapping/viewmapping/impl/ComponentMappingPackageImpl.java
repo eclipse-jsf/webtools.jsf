@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComponentMappingPackageImpl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
+ * $Id: ComponentMappingPackageImpl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -497,41 +497,41 @@ public class ComponentMappingPackageImpl extends EPackageImpl implements Compone
         validatorTypeInfo_EClass.getESuperTypes().add(this.getClassTypeInfo_());
 
         // Initialize classes and features; add operations and parameters
-        initEClass(tagMappingEClass, TagMapping.class, "TagMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getTagMapping_VersionedTagToViewMappings(), this.getTagToViewObjectMapping(), null, "versionedTagToViewMappings", null, 0, -1, TagMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getTagMapping_CustomConversionFactoryId(), ecorePackage.getEString(), "customConversionFactoryId", null, 0, 1, TagMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getTagMapping_BeanMappedProperties(), ecorePackage.getEString(), "beanMappedProperties", "", 0, -1, TagMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(tagMappingEClass, TagMapping.class, "TagMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getTagMapping_VersionedTagToViewMappings(), this.getTagToViewObjectMapping(), null, "versionedTagToViewMappings", null, 0, -1, TagMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getTagMapping_CustomConversionFactoryId(), ecorePackage.getEString(), "customConversionFactoryId", null, 0, 1, TagMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getTagMapping_BeanMappedProperties(), ecorePackage.getEString(), "beanMappedProperties", "", 0, -1, TagMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-        EOperation op = addEOperation(tagMappingEClass, null, "findBestMapping", 0, 1, IS_UNIQUE, IS_ORDERED);
-        addEParameter(op, ecorePackage.getEString(), "jsfVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
-        addEParameter(op, ecorePackage.getEString(), "libVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+        EOperation op = addEOperation(tagMappingEClass, null, "findBestMapping", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "jsfVersion", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+        addEParameter(op, ecorePackage.getEString(), "libVersion", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(tagToViewObjectMappingEClass, TagToViewObjectMapping.class, "TagToViewObjectMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getTagToViewObjectMapping_TypeInfo(), this.getClassTypeInfo_(), null, "typeInfo", null, 0, 1, TagToViewObjectMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getTagToViewObjectMapping_MinJSFVersion(), ecorePackage.getEString(), "minJSFVersion", "1.1", 0, 1, TagToViewObjectMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getTagToViewObjectMapping_MinLibraryVersion(), ecorePackage.getEString(), "minLibraryVersion", "", 0, 1, TagToViewObjectMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(tagToViewObjectMappingEClass, TagToViewObjectMapping.class, "TagToViewObjectMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getTagToViewObjectMapping_TypeInfo(), this.getClassTypeInfo_(), null, "typeInfo", null, 0, 1, TagToViewObjectMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getTagToViewObjectMapping_MinJSFVersion(), ecorePackage.getEString(), "minJSFVersion", "1.1", 0, 1, TagToViewObjectMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute(getTagToViewObjectMapping_MinLibraryVersion(), ecorePackage.getEString(), "minLibraryVersion", "", 0, 1, TagToViewObjectMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-        initEClass(classTypeInfo_EClass, ClassTypeInfo_.class, "ClassTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getClassTypeInfo__ClassName(), ecorePackage.getEString(), "className", null, 0, 1, ClassTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getClassTypeInfo__SuperClasses(), ecorePackage.getEString(), "superClasses", null, 0, -1, ClassTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getClassTypeInfo__Interfaces(), ecorePackage.getEString(), "interfaces", null, 0, -1, ClassTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(classTypeInfo_EClass, ClassTypeInfo_.class, "ClassTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getClassTypeInfo__ClassName(), ecorePackage.getEString(), "className", null, 0, 1, ClassTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getClassTypeInfo__SuperClasses(), ecorePackage.getEString(), "superClasses", null, 0, -1, ClassTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getClassTypeInfo__Interfaces(), ecorePackage.getEString(), "interfaces", null, 0, -1, ClassTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(componentTypeInfo_EClass, ComponentTypeInfo_.class, "ComponentTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getComponentTypeInfo__ComponentType(), ecorePackage.getEString(), "componentType", null, 0, 1, ComponentTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getComponentTypeInfo__ComponentFamily(), ecorePackage.getEString(), "componentFamily", null, 0, 1, ComponentTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getComponentTypeInfo__RenderType(), ecorePackage.getEString(), "renderType", null, 0, 1, ComponentTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(componentTypeInfo_EClass, ComponentTypeInfo_.class, "ComponentTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getComponentTypeInfo__ComponentType(), ecorePackage.getEString(), "componentType", null, 0, 1, ComponentTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getComponentTypeInfo__ComponentFamily(), ecorePackage.getEString(), "componentFamily", null, 0, 1, ComponentTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getComponentTypeInfo__RenderType(), ecorePackage.getEString(), "renderType", null, 0, 1, ComponentTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(converterTypeInfo_EClass, ConverterTypeInfo_.class, "ConverterTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getConverterTypeInfo__ConverterId(), ecorePackage.getEString(), "converterId", null, 0, 1, ConverterTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getConverterTypeInfo__ForClasses(), ecorePackage.getEString(), "forClasses", null, 0, -1, ConverterTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(converterTypeInfo_EClass, ConverterTypeInfo_.class, "ConverterTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getConverterTypeInfo__ConverterId(), ecorePackage.getEString(), "converterId", null, 0, 1, ConverterTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getConverterTypeInfo__ForClasses(), ecorePackage.getEString(), "forClasses", null, 0, -1, ConverterTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(validatorTypeInfo_EClass, ValidatorTypeInfo_.class, "ValidatorTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getValidatorTypeInfo__ValidatorId(), ecorePackage.getEString(), "validatorId", null, 0, 1, ValidatorTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(validatorTypeInfo_EClass, ValidatorTypeInfo_.class, "ValidatorTypeInfo_", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getValidatorTypeInfo__ValidatorId(), ecorePackage.getEString(), "validatorId", null, 0, 1, ValidatorTypeInfo_.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(attributeToPropertyMappingEClass, AttributeToPropertyMapping.class, "AttributeToPropertyMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getAttributeToPropertyMapping_PropertyName(), ecorePackage.getEString(), "propertyName", null, 0, 1, AttributeToPropertyMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getAttributeToPropertyMapping_ElAllowed(), ecorePackage.getEBoolean(), "elAllowed", "true", 0, 1, AttributeToPropertyMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getAttributeToPropertyMapping_CustomConversionFactoryId(), ecorePackage.getEString(), "customConversionFactoryId", null, 0, 1, AttributeToPropertyMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(attributeToPropertyMappingEClass, AttributeToPropertyMapping.class, "AttributeToPropertyMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getAttributeToPropertyMapping_PropertyName(), ecorePackage.getEString(), "propertyName", null, 0, 1, AttributeToPropertyMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getAttributeToPropertyMapping_ElAllowed(), ecorePackage.getEBoolean(), "elAllowed", "true", 0, 1, AttributeToPropertyMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute(getAttributeToPropertyMapping_CustomConversionFactoryId(), ecorePackage.getEString(), "customConversionFactoryId", null, 0, 1, AttributeToPropertyMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
         // Create resource
         createResource(eNS_URI);
@@ -549,150 +549,150 @@ public class ComponentMappingPackageImpl extends EPackageImpl implements Compone
      */
     protected void createExtendedMetaDataAnnotations()
     {
-        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
         addAnnotation
           (getTagMapping_VersionedTagToViewMappings(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "versionedTagToViewMappings"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "versionedTagToViewMappings" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagMapping_CustomConversionFactoryId(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "customConversionFactoryId"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "customConversionFactoryId" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagMapping_BeanMappedProperties(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "beanMappedProperties"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "beanMappedProperties" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagToViewObjectMapping_TypeInfo(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "typeInfo"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "typeInfo" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagToViewObjectMapping_MinJSFVersion(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "minVersion"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "minVersion" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagToViewObjectMapping_MinLibraryVersion(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "minLibraryVersion"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "minLibraryVersion" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getClassTypeInfo__ClassName(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "className"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "className" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getClassTypeInfo__SuperClasses(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "superClasses"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "superClasses" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getClassTypeInfo__Interfaces(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "interfaces"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "interfaces" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentTypeInfo__ComponentType(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "componentType"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "componentType" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentTypeInfo__ComponentFamily(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "componentFamily"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "componentFamily" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentTypeInfo__RenderType(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "renderType"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderType" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterTypeInfo__ConverterId(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "converterId"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converterId" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterTypeInfo__ForClasses(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "forClass"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "forClass" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorTypeInfo__ValidatorId(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "validatorId"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validatorId" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeToPropertyMapping_PropertyName(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "propertyName"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "propertyName" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeToPropertyMapping_ElAllowed(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "elAllowed"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "elAllowed" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeToPropertyMapping_CustomConversionFactoryId(), 
            source, 
            new String[] 
            {
-             "kind", "element",
-             "name", "customConversionFactoryId"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "customConversionFactoryId" //$NON-NLS-1$ //$NON-NLS-2$
            });
     }
 

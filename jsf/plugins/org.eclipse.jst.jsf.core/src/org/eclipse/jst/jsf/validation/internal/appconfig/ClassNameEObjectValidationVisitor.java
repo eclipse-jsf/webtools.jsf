@@ -38,7 +38,7 @@ public abstract class ClassNameEObjectValidationVisitor extends
     {
         String fullyQualifiedName = getFullyQualifiedName(object);
         // protect against null
-        fullyQualifiedName = fullyQualifiedName == null ? "" : fullyQualifiedName;
+        fullyQualifiedName = fullyQualifiedName == null ? "" : fullyQualifiedName; //$NON-NLS-1$
         addMessageInfo(messages,  
             AppConfigValidationUtil
                 .validateClassName(fullyQualifiedName, getInstanceOf()

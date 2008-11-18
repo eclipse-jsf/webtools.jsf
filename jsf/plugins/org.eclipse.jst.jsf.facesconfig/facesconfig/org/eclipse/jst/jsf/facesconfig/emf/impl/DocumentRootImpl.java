@@ -208,7 +208,7 @@ public class DocumentRootImpl extends EObjectImpl implements DocumentRoot {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
@@ -3757,7 +3757,7 @@ public class DocumentRootImpl extends EObjectImpl implements DocumentRoot {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (mixed: ");
+        result.append(" (mixed: "); //$NON-NLS-1$
         result.append(mixed);
         result.append(')');
         return result.toString();

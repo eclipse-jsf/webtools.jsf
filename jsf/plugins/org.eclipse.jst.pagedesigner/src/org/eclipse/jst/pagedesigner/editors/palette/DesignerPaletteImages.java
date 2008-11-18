@@ -19,31 +19,31 @@ public class DesignerPaletteImages {
 	/**
 	 * Import hover image
 	 */
-	public static final String IMG_CLCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import_Hover.gif";
+	public static final String IMG_CLCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import_Hover.gif"; //$NON-NLS-1$
 
 	/**
 	 * Export hover image
 	 */
-	public static final String IMG_CLCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export_Hover.gif";
+	public static final String IMG_CLCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export_Hover.gif"; //$NON-NLS-1$
 
 	/**
 	 * Import disabled image
 	 */
-	public static final String IMG_DLCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import_Disabled.gif";
+	public static final String IMG_DLCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import_Disabled.gif"; //$NON-NLS-1$
 
 	/**
 	 * Export disabled image
 	 */
-	public static final String IMG_DLCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export_Disabled.gif";
+	public static final String IMG_DLCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export_Disabled.gif"; //$NON-NLS-1$
 
 	/**
 	 * Import image
 	 */
-	public static final String IMG_ELCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import.gif";
+	public static final String IMG_ELCL_IMPORT = "icons/palette/GENERIC/small/PD_Palette_Import.gif"; //$NON-NLS-1$
 
 	/**
 	 * Export image
 	 */
-	public static final String IMG_ELCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export.gif";
+	public static final String IMG_ELCL_EXPORT = "icons/palette/GENERIC/small/PD_Palette_Export.gif"; //$NON-NLS-1$
 
 }

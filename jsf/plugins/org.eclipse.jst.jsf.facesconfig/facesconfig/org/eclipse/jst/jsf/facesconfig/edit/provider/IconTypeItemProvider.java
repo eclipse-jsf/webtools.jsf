@@ -51,7 +51,7 @@ public class IconTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -94,8 +94,8 @@ public class IconTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_IconType_smallIcon_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_smallIcon_feature", "_UI_IconType_type"),
+                 getString("_UI_IconType_smallIcon_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_smallIcon_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ICON_TYPE__SMALL_ICON,
                  true,
                  false,
@@ -117,8 +117,8 @@ public class IconTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_IconType_largeIcon_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_largeIcon_feature", "_UI_IconType_type"),
+                 getString("_UI_IconType_largeIcon_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_largeIcon_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ICON_TYPE__LARGE_ICON,
                  true,
                  false,
@@ -140,8 +140,8 @@ public class IconTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_IconType_lang_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_lang_feature", "_UI_IconType_type"),
+                 getString("_UI_IconType_lang_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_lang_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ICON_TYPE__LANG,
                  true,
                  false,
@@ -163,8 +163,8 @@ public class IconTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_IconType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_id_feature", "_UI_IconType_type"),
+                 getString("_UI_IconType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_id_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ICON_TYPE__ID,
                  true,
                  false,
@@ -181,7 +181,7 @@ public class IconTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/IconType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/IconType")); //$NON-NLS-1$
     }
 
     /**
@@ -193,8 +193,8 @@ public class IconTypeItemProvider
 	public String getText(Object object) {
         String label = ((IconType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_IconType_type") :
-            getString("_UI_IconType_type") + " " + label;
+            getString("_UI_IconType_type") : //$NON-NLS-1$
+            getString("_UI_IconType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

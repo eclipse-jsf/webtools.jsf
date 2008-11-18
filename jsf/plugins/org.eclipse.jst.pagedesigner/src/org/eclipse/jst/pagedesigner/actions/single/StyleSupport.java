@@ -45,7 +45,7 @@ public final class StyleSupport {
 		if (decl == null) {
 			return false;
 		}
-		if (decl.getAttributes().getNamedItem("style") != null) {
+		if (decl.getAttributes().getNamedItem("style") != null) { //$NON-NLS-1$
 			return true;
 		}
 		return false;

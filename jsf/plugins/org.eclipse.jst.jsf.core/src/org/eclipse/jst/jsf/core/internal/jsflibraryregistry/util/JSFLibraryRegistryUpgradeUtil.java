@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  * @deprecated
  */
 public class JSFLibraryRegistryUpgradeUtil {	
-	static String v1Tov2UpgradeURL = "http://www.eclipse.org/JSFxxxxxxxxxxxxxxxxxxxxxx";
+	static String v1Tov2UpgradeURL = "http://www.eclipse.org/JSFxxxxxxxxxxxxxxxxxxxxxx"; //$NON-NLS-1$
 	
 	/**
 	 * default state is OK, no upgrade
@@ -89,7 +89,7 @@ public class JSFLibraryRegistryUpgradeUtil {
 	 */
 	public static String getBackupFileName(final String originalFile)
 	{
-	    return originalFile.concat(".bkp");
+	    return originalFile.concat(".bkp"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -118,18 +118,17 @@ public class JSFLibraryRegistryUpgradeUtil {
 					catch (ExecutionException e)
 					{
 						// should never happen since we control the URL's
-						JSFCorePlugin.log(IStatus.ERROR, "Error during loading JSF Library registry", e);
+						JSFCorePlugin.log(IStatus.ERROR, "Error during loading JSF Library registry", e); //$NON-NLS-1$
 						//TODO: flag failure in status
 						upgradeStatus = 
-							new UpgradeStatus(IStatus.ERROR, true, "Error detected during upgrade!");
+							new UpgradeStatus(IStatus.ERROR, true, Messages.JSFLibraryRegistryUpgradeUtil_Error); 
 					}
 				}
 				else
 				{
     				// TODO: what if can't execute?
                     upgradeStatus = 
-                        new UpgradeStatus(IStatus.ERROR, false, "Error detected during upgrade!");
-				}
+                        new UpgradeStatus(IStatus.ERROR, false, Messages.JSFLibraryRegistryUpgradeUtil_Error); 				}
 			}
 			else
 			{
@@ -139,7 +138,7 @@ public class JSFLibraryRegistryUpgradeUtil {
 		}
 	    catch (MalformedURLException e) {	
 			// should never happen since we control the URL's
-			JSFCorePlugin.log(IStatus.ERROR, "Error during loading JSF Library registry", e);
+			JSFCorePlugin.log(IStatus.ERROR, "Error during loading JSF Library registry", e); //$NON-NLS-1$
 		}
 	}
 
@@ -169,12 +168,12 @@ public class JSFLibraryRegistryUpgradeUtil {
 	 */
 	protected UpgradeOperation getUpgradeOperation(int curVersion) throws MalformedURLException
 	{
-		UpgradeOperation  op = new UpgradeOperation("JSF Registry Upgrade");
+		UpgradeOperation  op = new UpgradeOperation(Messages.JSFLibraryRegistryUpgradeUtil_Operation); 
 		switch(curVersion)
 		{
 			case 1:
 				op.addVersionUpgrade(
-						new MigrateV1toV2Operation("Upgrade v1 to v2"
+						new MigrateV1toV2Operation(Messages.JSFLibraryRegistryUpgradeUtil_v1Tov2Operation 
 								,getRegistryURI(JSF_LIBRARY_REGISTRY_V1_URL)
 								, getRegistryURI(JSF_LIBRARY_REGISTRY_V2_URL)));
 		}
@@ -215,19 +214,19 @@ public class JSFLibraryRegistryUpgradeUtil {
 			while ((bytesRead = from.read(buffer)) != -1)
 				to.write(buffer, 0, bytesRead); // write
 		} catch (IOException ioe){
-			JSFCorePlugin.log(ioe, "Error during file copy");
+			JSFCorePlugin.log(ioe, "Error during file copy"); //$NON-NLS-1$
 		} finally {
 			if (from != null)
 				try {
 					from.close();
 				} catch (IOException e) {
-		            JSFCorePlugin.log(e, "Error during file close");
+		            JSFCorePlugin.log(e, "Error during file close"); //$NON-NLS-1$
 				}
 			if (to != null)
 				try {
 					to.close();
 				} catch (IOException e) {
-                    JSFCorePlugin.log(e, "Error during file close");
+                    JSFCorePlugin.log(e, "Error during file close"); //$NON-NLS-1$
 				}
 		}
 

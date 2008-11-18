@@ -64,7 +64,7 @@ public class PaletteDropInsertCommand extends SourceViewerCommand implements ICu
 		try {
 			node = getSourceEditingTextTools().getNode(_location);
 		} catch (Exception e) {
-			_log.error("Bad text insertion location", e);		
+			_log.error("Bad text insertion location", e);		 //$NON-NLS-1$
 			return;
 		}
 		IDOMPosition position = null;

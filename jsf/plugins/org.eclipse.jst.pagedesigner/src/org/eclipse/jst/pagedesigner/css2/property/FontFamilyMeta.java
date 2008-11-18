@@ -30,7 +30,7 @@ public class FontFamilyMeta extends CSSPropertyMeta {
 	/**
 	 * the default font name
 	 */
-	public static final String DEFAULT_FONT = "Times New Roman";
+	public static final String DEFAULT_FONT = "Times New Roman"; //$NON-NLS-1$
 
 	private static FontData[] _FontData;
 
@@ -86,8 +86,8 @@ public class FontFamilyMeta extends CSSPropertyMeta {
 	private String trimPadding(String name) {
 		String value = name;
 		if (value != null) {
-			value = value.replaceAll("\"", "");
-			value = value.replaceAll("'", "");
+			value = value.replaceAll("\"", ""); //$NON-NLS-1$ //$NON-NLS-2$
+			value = value.replaceAll("'", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return value;
 	}
@@ -111,9 +111,9 @@ public class FontFamilyMeta extends CSSPropertyMeta {
 	 */
 	public Object calculateHTMLAttributeOverride(Element element,
 			String htmltag, String propertyName, ICSSStyle style) {
-		if ("FONT".equalsIgnoreCase(htmltag)
-				|| "BASEFONT".equalsIgnoreCase(htmltag)) {
-			String face = DOMUtil.getAttributeIgnoreCase(element, "face");
+		if ("FONT".equalsIgnoreCase(htmltag) //$NON-NLS-1$
+				|| "BASEFONT".equalsIgnoreCase(htmltag)) { //$NON-NLS-1$
+			String face = DOMUtil.getAttributeIgnoreCase(element, "face"); //$NON-NLS-1$
 			if (face != null) {
 				String[] names = getFontNameList(face);
 				for (int i = 0; i < names.length; i++) {
@@ -129,7 +129,7 @@ public class FontFamilyMeta extends CSSPropertyMeta {
 	}
 
 	private String[] getFontNameList(String face) {
-		StringTokenizer tokenizer = new StringTokenizer(face, ",");
+		StringTokenizer tokenizer = new StringTokenizer(face, ","); //$NON-NLS-1$
 		String[] names = new String[tokenizer.countTokens()];
 		for (int i = 0; i < names.length; i++) {
 			names[i] = trimPadding(tokenizer.nextToken());

@@ -142,7 +142,7 @@ public class AddEditPropertyDialog extends Dialog {
 		propertyClassField = new ClassButtonDialogField(getProject());
 		// propertyClassField.setRequired(true);
 		propertyClassField
-				.setLabelText(EditorMessages.PropertySection_Dialog_PropertyClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.PropertySection_Dialog_PropertyClass);
 
 		propertyClassField.setAutoOpenResource(false);
 

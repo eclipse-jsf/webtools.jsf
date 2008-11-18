@@ -58,7 +58,7 @@ public class CellEditorFacRegistryReader {
 						IJMTConstants.TAG_ATTRIBUTE_CELLEDITOR_FACTORY)) {
 					Object obj;
 					try {
-						obj = facs[j].createExecutableExtension("class");
+						obj = facs[j].createExecutableExtension("class"); //$NON-NLS-1$
 
 						if (obj instanceof ITagAttributeCellEditorFactory) {
 							result.add(obj);

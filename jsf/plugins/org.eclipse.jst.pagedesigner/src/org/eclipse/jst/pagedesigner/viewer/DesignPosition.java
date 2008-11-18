@@ -164,23 +164,23 @@ public class DesignPosition {
 	 */
 	public StringBuffer debugDump(StringBuffer buffer) {
 //		try {
-			buffer.append("DesignPosition: ").append(this._containerPart)
-					.append(": ").append(this._offset).append("\n");
+			buffer.append("DesignPosition: ").append(this._containerPart) //$NON-NLS-1$
+					.append(": ").append(this._offset).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
 
 			if (this._containerPart.getModel() instanceof Text) {
 				// skip
 			} else {
 				if (this._offset > 0) {
-					buffer.append("after: ").append(
+					buffer.append("after: ").append( //$NON-NLS-1$
 							this._containerPart.getChildren().get(
-									this._offset - 1)).append("\n");
+									this._offset - 1)).append("\n"); //$NON-NLS-1$
 				}
 
 				if (this._offset < (this._containerPart.getChildren().size() - 1)) {
-					buffer.append("before: ")
+					buffer.append("before: ") //$NON-NLS-1$
 							.append(
 									this._containerPart.getChildren().get(
-											this._offset)).append("\n");
+											this._offset)).append("\n"); //$NON-NLS-1$
 				}
 			}
             //TODO: what was being caught here?

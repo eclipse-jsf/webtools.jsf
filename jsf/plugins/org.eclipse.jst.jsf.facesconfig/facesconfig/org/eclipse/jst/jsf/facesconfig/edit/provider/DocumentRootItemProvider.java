@@ -50,7 +50,7 @@ public class DocumentRootItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -100,7 +100,7 @@ public class DocumentRootItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/DocumentRoot"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/DocumentRoot")); //$NON-NLS-1$
     }
 
     /**
@@ -110,7 +110,7 @@ public class DocumentRootItemProvider
      * @generated
      */
 	public String getText(Object object) {
-        return getString("_UI_DocumentRoot_type");
+        return getString("_UI_DocumentRoot_type"); //$NON-NLS-1$
     }
 
     /**

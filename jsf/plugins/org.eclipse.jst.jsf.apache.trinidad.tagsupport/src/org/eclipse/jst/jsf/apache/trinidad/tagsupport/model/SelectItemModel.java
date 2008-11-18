@@ -93,7 +93,7 @@ public class SelectItemModel {
 						if (label == null || label.length() < 1) {
 							label = value;
 						}
-						selectItems.add(new SelectItem(label, value)); //$NON-NLS-1$
+						selectItems.add(new SelectItem(label, value));
 					}
 				}
 			}

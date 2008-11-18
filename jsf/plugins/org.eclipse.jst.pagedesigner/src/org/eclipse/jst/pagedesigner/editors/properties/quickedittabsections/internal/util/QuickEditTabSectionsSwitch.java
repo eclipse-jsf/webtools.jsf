@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsSwitch.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
+ * $Id: QuickEditTabSectionsSwitch.java,v 1.3 2008/11/18 22:22:46 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.util;
 
@@ -33,7 +33,7 @@ public class QuickEditTabSectionsSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached model package

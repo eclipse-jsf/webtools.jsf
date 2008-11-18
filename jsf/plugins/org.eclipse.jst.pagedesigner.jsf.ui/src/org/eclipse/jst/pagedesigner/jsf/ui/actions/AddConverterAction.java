@@ -43,7 +43,7 @@ public class AddConverterAction extends JSFAddChildAction
     public void run()
     {
         Map attributes = new HashMap();
-        attributes.put("converterId", _converterId);
+        attributes.put("converterId", _converterId); //$NON-NLS-1$
         AddJSFCoreChildCommand command = new AddJSFCoreChildCommand(this.getParentElement(),
             IJSFConstants.TAG_CONVERTER, attributes);
         command.execute();

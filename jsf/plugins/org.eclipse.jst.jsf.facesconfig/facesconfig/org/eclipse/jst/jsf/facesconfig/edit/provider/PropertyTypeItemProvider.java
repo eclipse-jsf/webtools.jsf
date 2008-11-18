@@ -57,7 +57,7 @@ public class PropertyTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -101,8 +101,8 @@ public class PropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PropertyType_propertyName_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_propertyName_feature", "_UI_PropertyType_type"),
+                 getString("_UI_PropertyType_propertyName_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_propertyName_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_NAME,
                  true,
                  false,
@@ -124,8 +124,8 @@ public class PropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PropertyType_propertyClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_propertyClass_feature", "_UI_PropertyType_type"),
+                 getString("_UI_PropertyType_propertyClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_propertyClass_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_CLASS,
                  true,
                  false,
@@ -147,8 +147,8 @@ public class PropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PropertyType_defaultValue_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_defaultValue_feature", "_UI_PropertyType_type"),
+                 getString("_UI_PropertyType_defaultValue_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_defaultValue_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PROPERTY_TYPE__DEFAULT_VALUE,
                  true,
                  false,
@@ -170,8 +170,8 @@ public class PropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PropertyType_suggestedValue_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_suggestedValue_feature", "_UI_PropertyType_type"),
+                 getString("_UI_PropertyType_suggestedValue_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_suggestedValue_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PROPERTY_TYPE__SUGGESTED_VALUE,
                  true,
                  false,
@@ -193,8 +193,8 @@ public class PropertyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PropertyType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_id_feature", "_UI_PropertyType_type"),
+                 getString("_UI_PropertyType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_id_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PROPERTY_TYPE__ID,
                  true,
                  false,
@@ -242,7 +242,7 @@ public class PropertyTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyType")); //$NON-NLS-1$
     }
 
     /**
@@ -254,8 +254,8 @@ public class PropertyTypeItemProvider
 	public String getText(Object object) {
         String label = ((PropertyType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_PropertyType_type") :
-            getString("_UI_PropertyType_type") + " " + label;
+            getString("_UI_PropertyType_type") : //$NON-NLS-1$
+            getString("_UI_PropertyType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -332,16 +332,16 @@ public class PropertyTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return property.getPropertyName() == null ? "" : property
+			return property.getPropertyName() == null ? "" : property //$NON-NLS-1$
 					.getPropertyName().getTextContent();
 		case 1:
-			return property.getPropertyClass() == null ? "" : property
+			return property.getPropertyClass() == null ? "" : property //$NON-NLS-1$
 					.getPropertyClass().getTextContent();
 		case 2:
-			return property.getDefaultValue() == null ? "" : property
+			return property.getDefaultValue() == null ? "" : property //$NON-NLS-1$
 					.getDefaultValue().getTextContent();
 		case 3:
-			return property.getSuggestedValue() == null ? "" : property
+			return property.getSuggestedValue() == null ? "" : property //$NON-NLS-1$
 					.getSuggestedValue().getTextContent();
 		}
 		return null;

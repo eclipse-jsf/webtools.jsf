@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackageImpl.java,v 1.6 2007/05/11 17:54:55 gkessler Exp $
+ * $Id: MetadataPackageImpl.java,v 1.7 2008/11/18 22:24:39 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -38,7 +38,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -456,51 +456,51 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 		entityGroupEClass.getESuperTypes().add(this.getEntity());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModel_EntityGroups(), this.getEntityGroup(), null, "entityGroups", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModel_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getModel_CurrentModelContext(), this.getModelContext(), "currentModelContext", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getModel_EntityGroups(), this.getEntityGroup(), null, "entityGroups", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getModel_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getModel_CurrentModelContext(), this.getModelContext(), "currentModelContext", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		EOperation op = addEOperation(modelEClass, this.getEntityGroup(), "findIncludeGroup", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "groupId", 0, 1);
+		EOperation op = addEOperation(modelEClass, this.getEntityGroup(), "findIncludeGroup", 0, 1); //$NON-NLS-1$
+		addEParameter(op, ecorePackage.getEString(), "groupId", 0, 1); //$NON-NLS-1$
 
-		op = addEOperation(modelEClass, null, "accept");
-		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1);
+		op = addEOperation(modelEClass, null, "accept"); //$NON-NLS-1$
+		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1); //$NON-NLS-1$
 
-		initEClass(entityGroupEClass, EntityGroup.class, "EntityGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(entityGroupEClass, EntityGroup.class, "EntityGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
-		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntity_ChildEntities(), this.getEntity(), null, "childEntities", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getEntity_ChildEntities(), this.getEntity(), null, "childEntities", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		getEntity_ChildEntities().getEKeys().add(this.getEntity_Id());
 		getEntity_ChildEntities().getEKeys().add(this.getEntity_Type());
-		initEReference(getEntity_Traits(), this.getTrait(), null, "traits", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntity_Traits(), this.getTrait(), null, "traits", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		getEntity_Traits().getEKeys().add(this.getTrait_Id());
-		initEAttribute(getEntity_Id(), ecorePackage.getEString(), "id", null, 1, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEntity_Type(), ecorePackage.getEString(), "type", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntity_IncludeGroups(), this.getIncludeEntityGroup(), null, "includeGroups", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEntity_Id(), ecorePackage.getEString(), "id", null, 1, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getEntity_Type(), ecorePackage.getEString(), "type", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getEntity_IncludeGroups(), this.getIncludeEntityGroup(), null, "includeGroups", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(entityEClass, null, "accept");
-		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1);
+		op = addEOperation(entityEClass, null, "accept"); //$NON-NLS-1$
+		addEParameter(op, this.getIEntityVisitor(), "visitor", 0, 1); //$NON-NLS-1$
 
-		op = addEOperation(entityEClass, this.getModel(), "getModel", 0, 1);
+		op = addEOperation(entityEClass, this.getModel(), "getModel", 0, 1); //$NON-NLS-1$
 
-		initEClass(traitEClass, Trait.class, "Trait", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTrait_Id(), ecorePackage.getEString(), "id", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTrait_Value(), ecorePackage.getEObject(), null, "value", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTrait_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(traitEClass, Trait.class, "Trait", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getTrait_Id(), ecorePackage.getEString(), "id", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getTrait_Value(), ecorePackage.getEObject(), null, "value", null, 1, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTrait_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Trait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		op = addEOperation(traitEClass, null, "accept");
-		addEParameter(op, this.getITraitVisitor(), "visitor", 0, 1);
+		op = addEOperation(traitEClass, null, "accept"); //$NON-NLS-1$
+		addEParameter(op, this.getITraitVisitor(), "visitor", 0, 1); //$NON-NLS-1$
 
-		initEClass(includeEntityGroupEClass, IncludeEntityGroup.class, "IncludeEntityGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIncludeEntityGroup_Id(), ecorePackage.getEString(), "id", null, 1, 1, IncludeEntityGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIncludeEntityGroup_ModelUri(), ecorePackage.getEString(), "modelUri", null, 0, 1, IncludeEntityGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(includeEntityGroupEClass, IncludeEntityGroup.class, "IncludeEntityGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getIncludeEntityGroup_Id(), ecorePackage.getEString(), "id", null, 1, 1, IncludeEntityGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getIncludeEntityGroup_ModelUri(), ecorePackage.getEString(), "modelUri", null, 0, 1, IncludeEntityGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize data types
-		initEDataType(iTraitVisitorEDataType, ITraitVisitor.class, "ITraitVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(iEntityVisitorEDataType, IEntityVisitor.class, "IEntityVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(iMetaDataSourceModelProviderEDataType, IMetaDataSourceModelProvider.class, "IMetaDataSourceModelProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(modelContextEDataType, ModelKeyDescriptor.class, "ModelContext", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iTraitVisitorEDataType, ITraitVisitor.class, "ITraitVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(iEntityVisitorEDataType, IEntityVisitor.class, "IEntityVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(iMetaDataSourceModelProviderEDataType, IMetaDataSourceModelProvider.class, "IMetaDataSourceModelProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(modelContextEDataType, ModelKeyDescriptor.class, "ModelContext", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);
@@ -519,68 +519,68 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
 		addAnnotation
 		  (modelEClass, 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "metadatamodel"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "metadatamodel" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getModel_EntityGroups(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "entityGroup"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "entityGroup" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (entityEClass, 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "entity"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "entity" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getEntity_ChildEntities(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "entity"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "entity" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getEntity_Traits(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "trait"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "trait" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getEntity_IncludeGroups(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "include-entity-group"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "include-entity-group" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getIncludeEntityGroup_ModelUri(), 
 		   source, 
 		   new String[] {
-			 "name", "uri"
+			 "name", "uri" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (traitEClass, 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "trait"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "trait" //$NON-NLS-1$ //$NON-NLS-2$
 		   });			
 		addAnnotation
 		  (getTrait_Value(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "namespace", "##targetNamespace"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
 		   });
 	}
 
@@ -592,12 +592,12 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 	 */
 	@SuppressWarnings("cast")
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";										
+		String source = "http://www.eclipse.org/emf/2002/GenModel"; //$NON-NLS-1$
 		addAnnotation
 		  ((EOperation)traitEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
-			 "body", "visitor.visit(this);"
+			 "body", "visitor.visit(this);" //$NON-NLS-1$ //$NON-NLS-2$
 		   });	
 	}
 

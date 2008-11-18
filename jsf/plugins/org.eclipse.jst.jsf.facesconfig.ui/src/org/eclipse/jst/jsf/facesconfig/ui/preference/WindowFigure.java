@@ -128,7 +128,7 @@ import org.eclipse.swt.widgets.Composite;
 		getGridLayer().setSpacing(defaultGridSpacing);
 		getGridLayer().setForegroundColor(defaultGridColor);
 
-		setText("Window");
+		setText(PreferenceMessages.WindowFigure_Title);
 
 		addTabbedWindowListener(new WindowFigureListener() {
 			public void tabChanged(int oldIndex, int newIndex) {
@@ -478,7 +478,7 @@ import org.eclipse.swt.widgets.Composite;
 	 */
 	public String getText() {
 		if (titleBarBorder == null)
-			return "??";
+			return PreferenceMessages.WindowFigure_NoTitleText;
 		return titleBarBorder.getLabel();
 	}
 

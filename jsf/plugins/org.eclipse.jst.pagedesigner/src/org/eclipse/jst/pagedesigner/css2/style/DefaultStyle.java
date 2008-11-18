@@ -176,7 +176,7 @@ public class DefaultStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getDisplay()
 	 */
 	public String getDisplay() {
-		return "inline";
+		return "inline"; //$NON-NLS-1$
 	}
 
 	/*

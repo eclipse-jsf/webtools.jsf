@@ -45,7 +45,7 @@ public class ComponentMasterSection extends FacesConfigMasterSection {
 	public ComponentMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {
 		super(parent, managedForm, toolkit, page, null, null);
-		getSection().setText(EditorMessages.ComponentMasterSection_Name); //$NON-NLS-1$
+		getSection().setText(EditorMessages.ComponentMasterSection_Name);
 		getSection().setDescription(
 				EditorMessages.ComponentMasterSection_Description);
 	}

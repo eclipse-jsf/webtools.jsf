@@ -185,22 +185,22 @@ public class JSFCoreConvertNumberGroup extends AttributeGroup
         // update the model
         if (type.equalsIgnoreCase(TYPES[3]))
         {
-            type = "";
+            type = ""; //$NON-NLS-1$
         }
 
         if (!_currencyCodeField.isEnabled())
         {
-            currencyCode = "";
+            currencyCode = ""; //$NON-NLS-1$
         }
 
         if (!_currencySymbolField.isEnabled())
         {
-            currencySymbol = "";
+            currencySymbol = ""; //$NON-NLS-1$
         }
 
         if (!_patternField.isEnabled())
         {
-            pattern = "";
+            pattern = ""; //$NON-NLS-1$
         }
 
         Map map = new HashMap();
@@ -210,7 +210,7 @@ public class JSFCoreConvertNumberGroup extends AttributeGroup
         map.put(IJSFConstants.ATTR_PATTERN, pattern);
 
         ChangeAttributeCommand c = new ChangeAttributeCommand(SectionResources
-                .getString("JSFCoreConvertNumberSection.CommandLabel.ChangeAttribute"), getElement(), map);
+                .getString("JSFCoreConvertNumberSection.CommandLabel.ChangeAttribute"), getElement(), map); //$NON-NLS-1$
         c.execute();
     }
 }

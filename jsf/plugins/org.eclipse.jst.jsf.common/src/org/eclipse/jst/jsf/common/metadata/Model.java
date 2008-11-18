@@ -36,7 +36,7 @@ public interface Model extends Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Source Model Provider</b></em>' attribute.

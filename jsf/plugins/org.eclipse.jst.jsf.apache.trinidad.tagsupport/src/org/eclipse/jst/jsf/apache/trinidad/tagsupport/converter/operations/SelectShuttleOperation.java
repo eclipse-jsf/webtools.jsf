@@ -164,7 +164,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 			while (itSelectItems.hasNext()) {
 				SelectItem selectItem = itSelectItems.next();
 				Element optionElement = appendChildElement("option", selectElement); //$NON-NLS-1$
-				appendChildText(selectItem.getLabel(), optionElement); //$NON-NLS-1$
+				appendChildText(selectItem.getLabel(), optionElement);
 			}
 		}
 		Element optionElement = appendChildElement("option", selectElement); //$NON-NLS-1$
@@ -210,7 +210,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		} else {
 			footerFacetName = "trailingFooter"; //$NON-NLS-1$
 		}
-		Element footerFacet = getChildFacetByName(srcElement, footerFacetName); //$NON-NLS-1$
+		Element footerFacet = getChildFacetByName(srcElement, footerFacetName); 
 		if (footerFacet != null) {
 			Element trFooterElement = appendChildElement("tr", tableElement1); //$NON-NLS-1$
 			Element tdFooterElement = appendChildElement("td", trFooterElement); //$NON-NLS-1$

@@ -16,6 +16,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 
 /**
@@ -24,10 +25,10 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
  */
 public class SetConstraintCommand extends Command {
 	/** location command label */
-	private static final String COMMAND_LABEL_LOCATION = "change location command";
+	private static final String COMMAND_LABEL_LOCATION = PageflowMessages.SetConstraintCommand_Location;
 
 	/** resize command label */
-	private static final String COMMAND_LABEL_RESIZE = "resize command";
+	private static final String COMMAND_LABEL_RESIZE = PageflowMessages.SetConstraintCommand_Resize;
 
 	/** new position */
 	private Point newPos;
@@ -83,7 +84,7 @@ public class SetConstraintCommand extends Command {
 	}
 
 	/**
-	 * return the label of the constaints
+	 * return the label of the constraints
 	 */
 	public String getLabel() {
 		if (oldSize.equals(newSize)) {

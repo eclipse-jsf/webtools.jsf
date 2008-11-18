@@ -23,11 +23,11 @@ class AttributeData
     /**
      * possible key in the param map
      */
-    static final String SuperType = "superTyle";
+    static final String SuperType = "superTyle"; //$NON-NLS-1$
     /**
      * possible key in the param map
      */
-    static final String Project = "project";
+    static final String Project = "project"; //$NON-NLS-1$
 
     private final String uri;
     private final String elementName;

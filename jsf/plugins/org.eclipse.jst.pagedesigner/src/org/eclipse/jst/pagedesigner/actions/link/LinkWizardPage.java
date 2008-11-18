@@ -37,10 +37,10 @@ import org.eclipse.swt.widgets.Label;
  */
 /*package*/ class LinkWizardPage extends WizardPage {
 	private static final String GROUP_TITLE = PDPlugin
-			.getResourceString("LinkWizardPage.GroupTitle");
+			.getResourceString("LinkWizardPage.GroupTitle"); //$NON-NLS-1$
 
 	private static final String PREVIEW_TAG_LABEL = PDPlugin
-			.getResourceString("LinkWizardPage.PreviewLabel");
+			.getResourceString("LinkWizardPage.PreviewLabel"); //$NON-NLS-1$
 
 	private StyledText _text = null;
 
@@ -89,7 +89,7 @@ import org.eclipse.swt.widgets.Label;
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		group.setLayoutData(data);
 
-		String defaultLink = "";
+		String defaultLink = ""; //$NON-NLS-1$
 		Set<String> set = this._linkMap.keySet();
 		int size = set.size();
 		String[] keys = new String[size];
@@ -123,7 +123,7 @@ import org.eclipse.swt.widgets.Label;
 		ILinkCreator creator = _linkMap.get(defaultLink);
 		_linkType = creator.getLinkIdentifier();
 		String previewText = creator.getSourcePreview(_part, _range);
-		previewText = previewText == null ? "" : previewText;
+		previewText = previewText == null ? "" : previewText; //$NON-NLS-1$
 		_text.setText(previewText);
 		_text.setEditable(false);
 
@@ -160,7 +160,7 @@ import org.eclipse.swt.widgets.Label;
 			ILinkCreator creator = _linkMap.get(this._key);
 			_linkType = creator.getLinkIdentifier();
 			String previewText = creator.getSourcePreview(_part, _range);
-			previewText = previewText == null ? "" : previewText;
+			previewText = previewText == null ? "" : previewText; //$NON-NLS-1$
 			_text.setText(previewText);
 			super.widgetSelected(e);
 		}

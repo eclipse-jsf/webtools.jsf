@@ -140,7 +140,7 @@ public class PageflowModelManager {
 			Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 			Map regMap = reg.getExtensionToFactoryMap();
 			// m.put("pageflow", new XMIResourceFactoryImpl());
-			regMap.put("pageflow", new PageflowResourceFactoryImpl());
+			regMap.put("pageflow", new PageflowResourceFactoryImpl()); //$NON-NLS-1$
 
 			resourceSet = new ResourceSetImpl();
 		}
@@ -268,12 +268,12 @@ public class PageflowModelManager {
 		IPath pageflowPath;
 		String[] segs = pathFacesConfig.removeFileExtension().segments();
 		pageflowPath = new Path(segs[0]).makeAbsolute();
-		pageflowPath = pageflowPath.append(".metadata");
+		pageflowPath = pageflowPath.append(".metadata"); //$NON-NLS-1$
 		for (int i = 1; i < segs.length; i++) {
 			pageflowPath = pageflowPath.append(segs[i]);
 		}
 		// pageflowPath.removeFileExtension();
-		pageflowPath = pageflowPath.addFileExtension("pageflow");
+		pageflowPath = pageflowPath.addFileExtension("pageflow"); //$NON-NLS-1$
 		return pageflowPath;
 	}
 }

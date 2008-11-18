@@ -285,7 +285,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		mapValueSection.setLayout(gl);
 		DialogField valuesTitle = new DialogFieldBase();
 		valuesTitle
-				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);//$NON-NLS-1$    
+				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);    
 
 		valuesTitle.doFillIntoGrid(toolkit, mapValueSection, numberOfColumns);
 		Table table;
@@ -314,13 +314,13 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		table.setLayout(layout);
 
 		TableColumn keyCol = new TableColumn(table, SWT.NONE);
-		keyCol.setText(EditorMessages.InitializationSection_MapTable_Key);//$NON-NLS-1$
+		keyCol.setText(EditorMessages.InitializationSection_MapTable_Key);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		keyCol.setResizable(true);
 
 		TableColumn valueCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
-		valueCol.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
+		valueCol.setText(EditorMessages.InitializationSection_MapTable_Value);
 		valueCol.setResizable(true);
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
@@ -359,11 +359,11 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 		Button addButton = null;
 		if (toolkit != null) {
 			addButton = toolkit.createButton(operationContainer,
-					EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
+					EditorMessages.UI_Button_Add_more,
 					SWT.PUSH);
 		} else {
 			addButton = SWTUtils.createPushButton(operationContainer,
-					EditorMessages.UI_Button_Add_more); //$NON-NLS-1$
+					EditorMessages.UI_Button_Add_more);
 		}
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -375,7 +375,7 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 					EditorMessages.UI_Button_Edit_more, SWT.PUSH);
 		} else {
 			editButton = SWTUtils.createPushButton(operationContainer,
-					EditorMessages.UI_Button_Edit_more); //$NON-NLS-1$
+					EditorMessages.UI_Button_Edit_more);
 		}
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -384,11 +384,11 @@ public class MapEntriesEditGroup extends DialogFieldGroup implements
 
 		if (toolkit != null) {
 			removeButton = toolkit.createButton(operationContainer,
-					EditorMessages.UI_Button_Remove, //$NON-NLS-1$
+					EditorMessages.UI_Button_Remove,
 					SWT.PUSH);
 		} else {
 			removeButton = SWTUtils.createPushButton(operationContainer,
-					EditorMessages.UI_Button_Remove); //$NON-NLS-1$
+					EditorMessages.UI_Button_Remove);
 		}
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

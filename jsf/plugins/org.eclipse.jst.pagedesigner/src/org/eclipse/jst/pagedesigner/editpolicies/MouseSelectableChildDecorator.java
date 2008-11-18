@@ -41,7 +41,11 @@ import org.eclipse.swt.widgets.Display;
  */
 class MouseSelectableChildDecorator extends NonVisualChildDecorator
 {
-    // no visual or affordance showing
+    private static final String PIN_UP_IMAGE_FILE = "pin_up.gif"; //$NON-NLS-1$
+    
+	private static final String PIN_DOWN_IMAGE_FILE = "pin_down.gif"; //$NON-NLS-1$
+
+	// no visual or affordance showing
     private static final int           STATE_START = 0;
     
     // the host is showing hover feedback, but is not selected
@@ -164,11 +168,11 @@ class MouseSelectableChildDecorator extends NonVisualChildDecorator
         
         if (_stateMachine.isMenuShowing())
         {
-            arrowImage = PDPlugin.getDefault().getImage("pin_down.gif");
+            arrowImage = PDPlugin.getDefault().getImage(PIN_DOWN_IMAGE_FILE);
         }
         else
         {
-            arrowImage = PDPlugin.getDefault().getImage("pin_up.gif");
+            arrowImage = PDPlugin.getDefault().getImage(PIN_UP_IMAGE_FILE);
         }
         
         Rectangle r = getBounds();

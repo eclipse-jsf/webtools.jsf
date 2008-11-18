@@ -167,7 +167,7 @@ public class JavaClassUtils {
 	 *         or java.util package
 	 */
 	public static boolean isPrimitiveType(IType classType, String signatureName) {
-		while (signatureName.startsWith("[")) {
+		while (signatureName.startsWith("[")) { //$NON-NLS-1$
 			signatureName = signatureName.substring(1);
 		}
 		int kind = Signature.getTypeSignatureKind(signatureName);
@@ -180,7 +180,7 @@ public class JavaClassUtils {
 		String qualifiedName = getQualifiedTypeNameInTypeHierarchy(classType,
 				signatureName);
 
-		if ((qualifiedName.startsWith("java.lang")) || (qualifiedName.startsWith("java.util"))) //$NON-NLS-1$
+		if ((qualifiedName.startsWith("java.lang")) || (qualifiedName.startsWith("java.util"))) //$NON-NLS-1$ //$NON-NLS-2$
 		{
 			return true;
 		}
@@ -366,7 +366,7 @@ public class JavaClassUtils {
 			if (superTypes != null && superTypes.length > 0) {
 				for (int i = 0; i < superTypes.length; i++) {
 					if (!superTypes[i].getFullyQualifiedName().equals(
-							"java.lang.Object")) {
+							"java.lang.Object")) { //$NON-NLS-1$
 						methods = superTypes[i].getMethods();
 
 						copyToMethodList(methodList, methods);
@@ -401,7 +401,7 @@ public class JavaClassUtils {
 	public static String getQualifiedTypeNameInTypeHierarchy(IType classType,
 			String signatureName) {
 		int arrayNum = 0;
-		while (signatureName.startsWith("[")) {
+		while (signatureName.startsWith("[")) { //$NON-NLS-1$
 			arrayNum++;
 			signatureName = signatureName.substring(1);
 		}
@@ -412,7 +412,7 @@ public class JavaClassUtils {
 				|| signatureName.equals(Signature.SIG_VOID)) {
 			// Add back array identifiers
 			while (arrayNum > 0) {
-				qualifiedTypeName = qualifiedTypeName + "[]";
+				qualifiedTypeName = qualifiedTypeName + "[]"; //$NON-NLS-1$
 				arrayNum--;
 			}
 			return qualifiedTypeName;
@@ -438,7 +438,7 @@ public class JavaClassUtils {
 				if (superTypes != null && superTypes.length > 0) {
 					for (int i = 0; i < superTypes.length; i++) {
 						if (!superTypes[i].getFullyQualifiedName().equals(
-								"java.lang.Object")) {
+								"java.lang.Object")) { //$NON-NLS-1$
 							foundName = getQualifiedTypeName(superTypes[i],
 									typeName);
 							if (foundName != null) {
@@ -453,7 +453,7 @@ public class JavaClassUtils {
 
 		// Add back array identifiers
 		while (arrayNum > 0) {
-			qualifiedTypeName = qualifiedTypeName + "[]";
+			qualifiedTypeName = qualifiedTypeName + "[]"; //$NON-NLS-1$
 			arrayNum--;
 		}
 		return qualifiedTypeName;

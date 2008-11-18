@@ -56,7 +56,7 @@ public class ComponentTreeView extends PageBookView
         final MessagePage page = new MessagePage();
         initPage(page);
         page.createControl(book);
-        page.setMessage("Nothing to display");
+        page.setMessage(Messages.ComponentTreeView_NothingToDisplayMessage);
         return page;
     }
 

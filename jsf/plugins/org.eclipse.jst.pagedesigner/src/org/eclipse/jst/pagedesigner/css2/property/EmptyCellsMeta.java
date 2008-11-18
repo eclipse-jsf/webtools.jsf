@@ -16,9 +16,9 @@ package org.eclipse.jst.pagedesigner.css2.property;
  * @version 1.5
  */
 public class EmptyCellsMeta extends CSSPropertyMeta {
-	private static final String SHOW = "show";
+	private static final String SHOW = "show"; //$NON-NLS-1$
 
-	static final String HIDE = "hide";
+	static final String HIDE = "hide"; //$NON-NLS-1$
 
 	private static final String[] _keywords = new String[] { SHOW, HIDE };
 

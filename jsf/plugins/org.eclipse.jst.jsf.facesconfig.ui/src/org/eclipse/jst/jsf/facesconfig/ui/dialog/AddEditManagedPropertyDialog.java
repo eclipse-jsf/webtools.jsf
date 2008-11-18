@@ -209,7 +209,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 
 		});
 
-		valueField.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_Value);//$NON-NLS-1$
+		valueField.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_Value);
 		valueField.setButtonLabel(EditorMessages.UI_Button_Edit_more);
 
 		valueField.setDialogFieldApplyListener(new IDialogFieldApplyListener() {

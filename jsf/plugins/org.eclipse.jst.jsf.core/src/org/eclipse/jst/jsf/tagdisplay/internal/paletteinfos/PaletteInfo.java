@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfo.java,v 1.2 2008/03/30 21:22:24 cbateman Exp $
+ * $Id: PaletteInfo.java,v 1.3 2008/11/18 22:23:54 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -35,38 +35,38 @@ public interface PaletteInfo extends EObject {
 	/**
 	 * the trait id name
 	 */
-	public static final String TRAIT_ID				= "paletteInfo";
+	public static final String TRAIT_ID				= "paletteInfo"; //$NON-NLS-1$
 	/**
 	 * the display label name
 	 */
-	public static final String TRAIT_DISPLAY_LABEL 	= "display-label";
+	public static final String TRAIT_DISPLAY_LABEL 	= "display-label"; //$NON-NLS-1$
 	/**
 	 * the trait description name
 	 */
-	public static final String TRAIT_DESCRIPTION 	= "description";
+	public static final String TRAIT_DESCRIPTION 	= "description"; //$NON-NLS-1$
 	/**
 	 * the expert trait
 	 */
-	public static final String TRAIT_IS_EXPERT 		= "expert";
+	public static final String TRAIT_IS_EXPERT 		= "expert"; //$NON-NLS-1$
 	/**
 	 * the hiddent trait
 	 */
-	public static final String TRAIT_IS_HIDDEN 		= "hidden";
+	public static final String TRAIT_IS_HIDDEN 		= "hidden"; //$NON-NLS-1$
 	/**
 	 * the small icon trait
 	 */
-	public static final String TRAIT_SMALL_ICON 	= "small-icon";
+	public static final String TRAIT_SMALL_ICON 	= "small-icon"; //$NON-NLS-1$
 	/**
 	 * the large icon trait
 	 */
-	public static final String TRAIT_LARGE_ICON 	= "large-icon";
+	public static final String TRAIT_LARGE_ICON 	= "large-icon"; //$NON-NLS-1$
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.

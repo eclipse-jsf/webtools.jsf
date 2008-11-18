@@ -55,7 +55,7 @@ public class MapEntryTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -98,8 +98,8 @@ public class MapEntryTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntryType_key_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_key_feature", "_UI_MapEntryType_type"),
+                 getString("_UI_MapEntryType_key_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_key_feature", "_UI_MapEntryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRY_TYPE__KEY,
                  true,
                  false,
@@ -121,8 +121,8 @@ public class MapEntryTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntryType_nullValue_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_nullValue_feature", "_UI_MapEntryType_type"),
+                 getString("_UI_MapEntryType_nullValue_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_nullValue_feature", "_UI_MapEntryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRY_TYPE__NULL_VALUE,
                  true,
                  false,
@@ -144,8 +144,8 @@ public class MapEntryTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntryType_value_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_value_feature", "_UI_MapEntryType_type"),
+                 getString("_UI_MapEntryType_value_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_value_feature", "_UI_MapEntryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRY_TYPE__VALUE,
                  true,
                  false,
@@ -167,8 +167,8 @@ public class MapEntryTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntryType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_id_feature", "_UI_MapEntryType_type"),
+                 getString("_UI_MapEntryType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntryType_id_feature", "_UI_MapEntryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRY_TYPE__ID,
                  true,
                  false,
@@ -185,7 +185,7 @@ public class MapEntryTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/MapEntryType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/MapEntryType")); //$NON-NLS-1$
     }
 
     /**
@@ -199,7 +199,7 @@ public class MapEntryTypeItemProvider
         
         String label = key != null ? key.getTextContent() : null;
         return label == null || label.length() == 0 ?
-            getString("_UI_MapEntryType_type") : label;
+            getString("_UI_MapEntryType_type") : label; //$NON-NLS-1$
     }
 
     /**
@@ -250,14 +250,14 @@ public class MapEntryTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return mapEntry.getKey() == null ? "" : mapEntry.getKey()
+			return mapEntry.getKey() == null ? "" : mapEntry.getKey() //$NON-NLS-1$
 					.getTextContent();
 		case 1:
 			if (mapEntry.getNullValue() != null)
             {
-				return "<null-value>";
+				return "<null-value>"; //$NON-NLS-1$
             }
-			return mapEntry.getValue() == null ? "" : mapEntry.getValue()
+			return mapEntry.getValue() == null ? "" : mapEntry.getValue() //$NON-NLS-1$
 					.getTextContent();
 		}
 		return null;

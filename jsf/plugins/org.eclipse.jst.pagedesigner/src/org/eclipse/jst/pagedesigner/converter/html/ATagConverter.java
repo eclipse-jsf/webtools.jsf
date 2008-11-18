@@ -38,9 +38,9 @@ public class ATagConverter extends DumTagConverter {
 	protected Element doConvertRefresh() {
 		_emptyContainer = ConverterUtil.isEmptyContainer(getHostElement());
 		if (_emptyContainer) {
-			Element resultEle = createElement("a");
+			Element resultEle = createElement("a"); //$NON-NLS-1$
 			ConverterUtil.copyAllAttributes(getHostElement(), resultEle, null);
-			Text fakedNode = createText("link");
+			Text fakedNode = createText("link"); //$NON-NLS-1$
 			resultEle.appendChild(fakedNode);
 			return resultEle;
 		}

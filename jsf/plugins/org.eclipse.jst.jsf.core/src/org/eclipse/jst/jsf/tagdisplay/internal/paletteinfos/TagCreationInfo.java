@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationInfo.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
+ * $Id: TagCreationInfo.java,v 1.2 2008/11/18 22:23:54 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -30,13 +30,13 @@ public interface TagCreationInfo extends EObject {
 	/**
 	 * the name of the trait id
 	 */
-	public static final String TRAIT_ID = "tag-create";
+	public static final String TRAIT_ID = "tag-create"; //$NON-NLS-1$
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

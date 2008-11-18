@@ -53,7 +53,7 @@ public class TaglibMetadataContext extends MetaDataContext {
 		this.uri = tagAttrEntity.getModel().getCurrentModelContext().getUri();
 		if (!(tagAttrEntity.eContainer() instanceof Entity))
 		{
-		    throw new IllegalArgumentException("tagAttrEntity must be contained in a tag Entity to use this constructor");
+		    throw new IllegalArgumentException("tagAttrEntity must be contained in a tag Entity to use this constructor"); //$NON-NLS-1$
 		}
 		this.tagName = ((Entity)tagAttrEntity.eContainer()).getId();
 		this.attributeName = tagAttrEntity.getId();

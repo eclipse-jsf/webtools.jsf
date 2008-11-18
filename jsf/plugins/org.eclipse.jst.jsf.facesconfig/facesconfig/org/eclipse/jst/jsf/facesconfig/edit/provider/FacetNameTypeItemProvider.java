@@ -51,7 +51,7 @@ public class FacetNameTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -92,8 +92,8 @@ public class FacetNameTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacetNameType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacetNameType_textContent_feature", "_UI_FacetNameType_type"),
+                 getString("_UI_FacetNameType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacetNameType_textContent_feature", "_UI_FacetNameType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACET_NAME_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -115,8 +115,8 @@ public class FacetNameTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacetNameType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacetNameType_id_feature", "_UI_FacetNameType_type"),
+                 getString("_UI_FacetNameType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacetNameType_id_feature", "_UI_FacetNameType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACET_NAME_TYPE__ID,
                  true,
                  false,
@@ -133,7 +133,7 @@ public class FacetNameTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetNameType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetNameType")); //$NON-NLS-1$
     }
 
     /**
@@ -145,8 +145,8 @@ public class FacetNameTypeItemProvider
 	public String getText(Object object) {
         String label = ((FacetNameType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_FacetNameType_type") :
-            getString("_UI_FacetNameType_type") + " " + label;
+            getString("_UI_FacetNameType_type") : //$NON-NLS-1$
+            getString("_UI_FacetNameType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

@@ -39,26 +39,26 @@ public class DefaultUnknownTagConverter extends AbstractTagConverter {
 	 */
 	protected Element doConvertRefresh() {
 		Element hostEle = this.getHostElement();
-		Element divEle = createElement("div");
-		String style = DOMUtil.getAttributeIgnoreCase(hostEle, "style");
+		Element divEle = createElement("div"); //$NON-NLS-1$
+		String style = DOMUtil.getAttributeIgnoreCase(hostEle, "style"); //$NON-NLS-1$
 		if (style == null) {
-			style = "";
+			style = ""; //$NON-NLS-1$
 		}
-		if (style.length() > 0 && !style.endsWith(";")) {
-			style += ";";
+		if (style.length() > 0 && !style.endsWith(";")) { //$NON-NLS-1$
+			style += ";"; //$NON-NLS-1$
 		}
-		style += "border: none; padding: 0; margin: 0";
-		divEle.setAttribute("style", style);
-		Element div2 = createElement("span");
-        String border = isPreviewMode() ? "border-style: solid;border-width: 1px" : "border:none";
-		div2.setAttribute("style", "background-color: white;"+border+";color:gray");
+		style += "border: none; padding: 0; margin: 0"; //$NON-NLS-1$
+		divEle.setAttribute("style", style); //$NON-NLS-1$
+		Element div2 = createElement("span"); //$NON-NLS-1$
+        String border = isPreviewMode() ? "border-style: solid;border-width: 1px" : "border:none"; //$NON-NLS-1$ //$NON-NLS-2$
+		div2.setAttribute("style", "background-color: white;"+border+";color:gray"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		Text txt = createText(hostEle.getTagName());
 		div2.appendChild(txt);
 
 		divEle.appendChild(div2);
 
-		Element div3 = createElement("div");
-		div3.setAttribute("style", "margin: 0; padding: 0");
+		Element div3 = createElement("div"); //$NON-NLS-1$
+		div3.setAttribute("style", "margin: 0; padding: 0"); //$NON-NLS-1$ //$NON-NLS-2$
 		divEle.appendChild(div3);
 
 		copyChildren(getHostElement(), div3);

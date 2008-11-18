@@ -278,8 +278,8 @@ public class PageflowValidation {
 		String managedBeanName = null;
 		if (isValidActionEL(actionEL)) {
 			actionEL = actionEL.substring(2, actionEL.length() - 1);
-			String[] actionParts = actionEL.split("[.]");
-			managedBeanName = actionParts[0];//$NON-NLS-1$
+			String[] actionParts = actionEL.split("[.]"); //$NON-NLS-1$
+			managedBeanName = actionParts[0];
 		}
 
 		return managedBeanName;

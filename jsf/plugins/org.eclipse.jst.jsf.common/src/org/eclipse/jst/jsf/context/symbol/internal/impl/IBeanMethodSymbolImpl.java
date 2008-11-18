@@ -356,13 +356,15 @@ public class IBeanMethodSymbolImpl extends EObjectImpl implements IBeanMethodSym
     }
 
 	public String getDetailedDescription() {
-	    StringBuffer descBuffer = new StringBuffer("<p><b>Signature:</b> ");
-        descBuffer.append(Signature.toString(signature, getName(), null, false, true)).append("</p>");
+	    StringBuffer descBuffer = new StringBuffer("<p><b>"); //$NON-NLS-1$
+	    descBuffer.append(Messages.getString("IBeanMethodSymbolImpl.DetailDesc")); //$NON-NLS-1$
+	    descBuffer.append("</b> "); //$NON-NLS-1$
+        descBuffer.append(Signature.toString(signature, getName(), null, false, true)).append("</p>"); //$NON-NLS-1$
         IMethod method = JavaUtil.findCorrespondingMethod(this);
         if (method != null) {
             String javadoc = JavaUtil.getMethodJavadoc(method);
             if (javadoc != null) {
-                descBuffer.append("<p>").append(javadoc).append("</p>");
+                descBuffer.append("<p>").append(javadoc).append("</p>"); //$NON-NLS-1$ //$NON-NLS-2$
             }
         }
         return descBuffer.toString();

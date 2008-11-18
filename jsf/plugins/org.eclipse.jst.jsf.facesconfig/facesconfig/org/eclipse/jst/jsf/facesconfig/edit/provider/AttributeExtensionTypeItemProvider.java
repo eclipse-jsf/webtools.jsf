@@ -46,7 +46,7 @@ public class AttributeExtensionTypeItemProvider
      * @generated
      */
 	@SuppressWarnings("hiding")
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -80,7 +80,7 @@ public class AttributeExtensionTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/AttributeExtensionType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/AttributeExtensionType")); //$NON-NLS-1$
     }
 
     /**
@@ -92,8 +92,8 @@ public class AttributeExtensionTypeItemProvider
 	public String getText(Object object) {
         String label = ((AttributeExtensionType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_AttributeExtensionType_type") :
-            getString("_UI_AttributeExtensionType_type") + " " + label;
+            getString("_UI_AttributeExtensionType_type") : //$NON-NLS-1$
+            getString("_UI_AttributeExtensionType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

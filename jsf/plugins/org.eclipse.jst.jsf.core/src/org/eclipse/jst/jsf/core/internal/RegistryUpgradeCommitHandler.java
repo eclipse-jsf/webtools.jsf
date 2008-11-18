@@ -65,7 +65,7 @@ public class RegistryUpgradeCommitHandler
     		public void run()
     		{
     			final Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-    			MessageDialog.openError(shell, "Serious Error Encountered!", "An unrecoverable error occurred while trying to migrate your JSF Library Registry to a newer version.  This may cause your library references to be broken in your JSF projects.");
+    			MessageDialog.openError(shell, Messages.RegistryUpgradeCommitHandler_Title, Messages.RegistryUpgradeCommitHandler_Text);
     		}
     	});
     }

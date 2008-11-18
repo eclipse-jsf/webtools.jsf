@@ -42,18 +42,18 @@ public class ColumnOperation extends AbstractTransformOperation {
 	public Element transform(Element srcElement, Element curElement) {
 
 		//create "td" Element
-		Element tdElement = createElement("td");
+		Element tdElement = createElement("td"); //$NON-NLS-1$
 
 		//get parent Node
 		Node parentNode = srcElement.getParentNode();
 
 		//process if parentNode is a "dataTable" Element
-		if (parentNode != null && parentNode.getNodeType() == Node.ELEMENT_NODE && parentNode.getLocalName().equals("dataTable")) {
+		if (parentNode != null && parentNode.getNodeType() == Node.ELEMENT_NODE && parentNode.getLocalName().equals("dataTable")) { //$NON-NLS-1$
 			//tokenize "columnClasses" attribute into a List
 			List columnClassesList = new ArrayList();
-			String columnClassesAttribute = ((Element)parentNode).getAttribute("columnClasses");
+			String columnClassesAttribute = ((Element)parentNode).getAttribute("columnClasses"); //$NON-NLS-1$
 			if (columnClassesAttribute != null && columnClassesAttribute.length() > 0) {
-				StringTokenizer tokenizer = new StringTokenizer(columnClassesAttribute, ", ");
+				StringTokenizer tokenizer = new StringTokenizer(columnClassesAttribute, ", "); //$NON-NLS-1$
 				while (tokenizer.hasMoreTokens()) {
 					columnClassesList.add(tokenizer.nextToken());
 				}
@@ -64,13 +64,13 @@ public class ColumnOperation extends AbstractTransformOperation {
 				ITransformOperation operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"class", (String)columnClassesList.get(offset)});
+							new String[]{"class", (String)columnClassesList.get(offset)}); //$NON-NLS-1$
 				operation.transform(srcElement, tdElement);
 			}
 		}
 
 		//add non-transparent (?), non-facet children (for further processing)
-        if (EditModelQuery.getInstance().hasNonTransparentChild(srcElement, new String[] {"facet"})) {
+        if (EditModelQuery.getInstance().hasNonTransparentChild(srcElement, new String[] {"facet"})) { //$NON-NLS-1$
         	Node childNode = srcElement.getFirstChild();
         	int index = 0;
         	while (childNode != null) {
@@ -81,7 +81,7 @@ public class ColumnOperation extends AbstractTransformOperation {
         	}
         } else {
         	//append single space for esthetics of the "td" Element
-        	appendChildText(" ", tdElement);
+        	appendChildText(" ", tdElement); //$NON-NLS-1$
         }
 
 		return tdElement;

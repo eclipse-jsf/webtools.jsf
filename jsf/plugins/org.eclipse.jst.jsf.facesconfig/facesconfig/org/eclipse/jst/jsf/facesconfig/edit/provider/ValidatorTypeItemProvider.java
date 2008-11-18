@@ -49,7 +49,7 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -95,8 +95,8 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ValidatorType_validatorId_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ValidatorType_validatorId_feature", "_UI_ValidatorType_type"),
+                 getString("_UI_ValidatorType_validatorId_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ValidatorType_validatorId_feature", "_UI_ValidatorType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.VALIDATOR_TYPE__VALIDATOR_ID,
                  true,
                  false,
@@ -120,8 +120,8 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ValidatorType_validatorClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ValidatorType_validatorClass_feature", "_UI_ValidatorType_type"),
+                 getString("_UI_ValidatorType_validatorClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ValidatorType_validatorClass_feature", "_UI_ValidatorType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.VALIDATOR_TYPE__VALIDATOR_CLASS,
                  true,
                  false,
@@ -143,8 +143,8 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ValidatorType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ValidatorType_id_feature", "_UI_ValidatorType_type"),
+                 getString("_UI_ValidatorType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ValidatorType_id_feature", "_UI_ValidatorType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.VALIDATOR_TYPE__ID,
                  true,
                  false,
@@ -192,7 +192,7 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ValidatorType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ValidatorType")); //$NON-NLS-1$
     }
 
     /**
@@ -204,8 +204,8 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
         String label = ((ValidatorType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ValidatorType_type") :
-            getString("_UI_ValidatorType_type") + " " + label;
+            getString("_UI_ValidatorType_type") : //$NON-NLS-1$
+            getString("_UI_ValidatorType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -306,7 +306,7 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 		case 0:
 			return getText(object);
 		case 1:
-			return validator.getValidatorClass() == null ? "" : validator
+			return validator.getValidatorClass() == null ? "" : validator //$NON-NLS-1$
 					.getValidatorClass().getTextContent();
 		}
 		return null;

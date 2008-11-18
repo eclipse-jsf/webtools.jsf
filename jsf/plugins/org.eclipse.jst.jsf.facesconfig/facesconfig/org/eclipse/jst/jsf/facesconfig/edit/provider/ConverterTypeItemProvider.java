@@ -48,7 +48,7 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -94,8 +94,8 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ConverterType_converterId_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_converterId_feature", "_UI_ConverterType_type"),
+                 getString("_UI_ConverterType_converterId_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_converterId_feature", "_UI_ConverterType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.CONVERTER_TYPE__CONVERTER_ID,
                  true,
                  false,
@@ -119,8 +119,8 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ConverterType_converterForClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_converterForClass_feature", "_UI_ConverterType_type"),
+                 getString("_UI_ConverterType_converterForClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_converterForClass_feature", "_UI_ConverterType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.CONVERTER_TYPE__CONVERTER_FOR_CLASS,
                  true,
                  false,
@@ -143,8 +143,8 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ConverterType_converterClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_converterClass_feature", "_UI_ConverterType_type"),
+                 getString("_UI_ConverterType_converterClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_converterClass_feature", "_UI_ConverterType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.CONVERTER_TYPE__CONVERTER_CLASS,
                  true,
                  false,
@@ -166,8 +166,8 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ConverterType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_id_feature", "_UI_ConverterType_type"),
+                 getString("_UI_ConverterType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ConverterType_id_feature", "_UI_ConverterType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.CONVERTER_TYPE__ID,
                  true,
                  false,
@@ -215,7 +215,7 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ConverterType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ConverterType")); //$NON-NLS-1$
     }
 
     /**
@@ -227,8 +227,8 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
         String label = ((ConverterType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ConverterType_type") :
-            getString("_UI_ConverterType_type") + " " + label;
+            getString("_UI_ConverterType_type") : //$NON-NLS-1$
+            getString("_UI_ConverterType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -329,7 +329,7 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
 		case 0:
 			return getText(object);
 		case 1:
-			return converter.getConverterClass() == null ? "" : converter
+			return converter.getConverterClass() == null ? "" : converter //$NON-NLS-1$
 					.getConverterClass().getTextContent();
 		}
 		return null;

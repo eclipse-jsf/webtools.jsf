@@ -69,7 +69,7 @@ public class FacesConfigTypeImpl extends EObjectImpl implements FacesConfigType 
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The cached value of the '{@link #getApplication() <em>Application</em>}' containment reference list.
@@ -189,7 +189,7 @@ public class FacesConfigTypeImpl extends EObjectImpl implements FacesConfigType 
      * @generated
      * @ordered
      */
-	protected static final String XMLNS_EDEFAULT = "http://java.sun.com/JSF/Configuration";
+	protected static final String XMLNS_EDEFAULT = "http://java.sun.com/JSF/Configuration"; //$NON-NLS-1$
 
     /**
      * The cached value of the '{@link #getXmlns() <em>Xmlns</em>}' attribute.
@@ -672,9 +672,9 @@ public class FacesConfigTypeImpl extends EObjectImpl implements FacesConfigType 
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (xmlns: ");
-        if (xmlnsESet) result.append(xmlns); else result.append("<unset>");
-        result.append(", id: ");
+        result.append(" (xmlns: "); //$NON-NLS-1$
+        if (xmlnsESet) result.append(xmlns); else result.append("<unset>"); //$NON-NLS-1$
+        result.append(", id: "); //$NON-NLS-1$
         result.append(id);
         result.append(')');
         return result.toString();

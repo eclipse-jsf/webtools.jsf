@@ -81,7 +81,7 @@ public class PositioningPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "Positioning";
+		return "Positioning"; //$NON-NLS-1$
 	}
 
 	/*
@@ -99,7 +99,7 @@ public class PositioningPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("PositioningPreferenceNode.LabelText");
+		return DialogsMessages.getString("PositioningPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

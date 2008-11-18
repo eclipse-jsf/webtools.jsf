@@ -14,7 +14,7 @@ public final class JSFLibraryPropertyPage
     @Override
     public IProjectFacetVersion getProjectFacetVersion()
     {
-        final IProjectFacet jsfFacet = ProjectFacetsManager.getProjectFacet( "jst.jsf" );
+        final IProjectFacet jsfFacet = ProjectFacetsManager.getProjectFacet( "jst.jsf" ); //$NON-NLS-1$
         final IFacetedProject fproj = getFacetedProject();
         return fproj.getInstalledVersion( jsfFacet );
     }

@@ -44,7 +44,7 @@ public abstract class AbstractTransformOperation implements ITransformOperation 
 
 	private String[] params;
 
-	private String id = "<not set>";
+	private String id = "<not set>"; //$NON-NLS-1$
 	
 	/**
 	 * Zero-argument constructor

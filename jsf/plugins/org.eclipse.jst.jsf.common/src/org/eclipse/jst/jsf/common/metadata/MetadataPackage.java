@@ -34,7 +34,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The package name.
@@ -42,7 +42,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "metadata";
+	String eNAME = "metadata"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
@@ -50,7 +50,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org.eclipse.jst.jsf.common.metadata/metadata.ecore";
+	String eNS_URI = "http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -58,7 +58,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "md";
+	String eNS_PREFIX = "md"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.

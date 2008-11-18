@@ -149,7 +149,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		TableColumn displayNameCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		displayNameCol
-				.setText(EditorMessages.FacetSection_Table_DisplayNameColumn);//$NON-NLS-1$
+				.setText(EditorMessages.FacetSection_Table_DisplayNameColumn);
 
 		TableColumn descriptionCol = new TableColumn(table, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
@@ -202,7 +202,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		operationContainer.setLayout(gl);
 
 		Button addButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more,
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -210,7 +210,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		addButton.setLayoutData(gd);
 
 		editButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Edit_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Edit_more,
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -218,7 +218,7 @@ public class FacetSection extends AbstractFacesConfigSection {
 		editButton.setLayoutData(gd);
 
 		removeButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Remove, //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove,
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

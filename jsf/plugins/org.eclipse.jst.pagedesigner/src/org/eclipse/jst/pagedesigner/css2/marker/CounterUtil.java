@@ -44,7 +44,7 @@ public final class CounterUtil {
 				index = index % 26;
 			}
 			buffer.append((char) (charA + (index - 1)));
-			buffer.append(".");
+			buffer.append("."); //$NON-NLS-1$
 			break;
 		case CounterHelper.LIST_T_UPPER_ROMAN:
 		case CounterHelper.LIST_T_LOWER_ROMAN:
@@ -54,7 +54,7 @@ public final class CounterUtil {
 			} else {
 				buffer.append(string);
 			}
-			buffer.append(".");
+			buffer.append("."); //$NON-NLS-1$
 			break;
 		case CounterHelper.LIST_T_ARMENIAN:
 			break;

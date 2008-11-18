@@ -41,7 +41,7 @@ public class TagConverterToSpan extends AbstractTagConverter {
 		// closest parent UIComponent custom action.
 		// we'll render facet as a inline flow figure. so treat it as simple
 		// <span> here.
-		Element result = createElement("span");
+		Element result = createElement("span"); //$NON-NLS-1$
 		copyChildren(getHostElement(), result);
 		return result;
 	}

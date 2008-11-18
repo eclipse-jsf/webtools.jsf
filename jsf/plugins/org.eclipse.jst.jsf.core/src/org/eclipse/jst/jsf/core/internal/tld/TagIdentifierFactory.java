@@ -52,7 +52,7 @@ public final class TagIdentifierFactory
     {
         if (!(elementDecl.getOwnerDocument() instanceof TLDDocument))
         {
-            throw new IllegalArgumentException("Element decl must have a tlddoc for a parent: "+elementDecl.toString());
+            throw new IllegalArgumentException("Element decl must have a tlddoc for a parent: "+elementDecl.toString()); //$NON-NLS-1$
         }
         return new TLDTagIdentifier(elementDecl);
     }

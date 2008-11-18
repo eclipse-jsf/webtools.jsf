@@ -33,14 +33,14 @@ class TagIndexListener implements ITaglibIndexListener
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
         {
-            JSFCoreTraceOptions.log("TagIndexListener.indexChanged: start");
+            JSFCoreTraceOptions.log("TagIndexListener.indexChanged: start"); //$NON-NLS-1$
         }
 
         visitDelta(delta);
 
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
         {
-            JSFCoreTraceOptions.log("TagIndexListener.indexChanged: finish");
+            JSFCoreTraceOptions.log("TagIndexListener.indexChanged: finish"); //$NON-NLS-1$
         }
     }
 
@@ -58,7 +58,7 @@ class TagIndexListener implements ITaglibIndexListener
                     if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
                     {
                         JSFCoreTraceOptions.log(String.format(
-                                "Processing add change: project=%s", project
+                                "Processing add change: project=%s", project //$NON-NLS-1$
                                         .getName()));
                     }
 
@@ -73,7 +73,7 @@ class TagIndexListener implements ITaglibIndexListener
                         JSFCoreTraceOptions
                                 .log(String
                                         .format(
-                                                "Processing remove change: project=%s, tagrecord=%s",
+                                                "Processing remove change: project=%s, tagrecord=%s", //$NON-NLS-1$
                                                 project.getName()));
                     }
                     _registry.addLibraryOperation(_factory
@@ -85,7 +85,7 @@ class TagIndexListener implements ITaglibIndexListener
                     if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
                     {
                         JSFCoreTraceOptions.log(String.format(
-                                "Processing change: project=%s, tagrecord=%s",
+                                "Processing change: project=%s, tagrecord=%s", //$NON-NLS-1$
                                 project.getName()));
                     }
                     _registry.addLibraryOperation(_factory

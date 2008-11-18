@@ -129,7 +129,7 @@ public abstract class AbstractFacesConfigSection extends SectionPart implements
 
 		toolkit.adapt(helpImage, true, true);
 
-		helpImage.setImage(HELP_IMAGE); //$NON-NLS-1$    	
+		helpImage.setImage(HELP_IMAGE);
 
 		helpImage.setBackground(getSection().getTitleBarGradientBackground());
 		if (helpTooltip != null) {

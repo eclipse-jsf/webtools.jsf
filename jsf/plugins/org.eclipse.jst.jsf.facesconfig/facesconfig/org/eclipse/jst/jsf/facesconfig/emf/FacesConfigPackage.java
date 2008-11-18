@@ -122,7 +122,7 @@ public interface FacesConfigPackage extends EPackage {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The package name.
@@ -130,7 +130,7 @@ public interface FacesConfigPackage extends EPackage {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	String eNAME = "facesconfig";
+	String eNAME = "facesconfig"; //$NON-NLS-1$
 
     /**
      * The package namespace URI.
@@ -138,7 +138,7 @@ public interface FacesConfigPackage extends EPackage {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	String eNS_URI = "http://www.eclipse.org/webtools/jsf/schema/facesconfig.xsd";
+	String eNS_URI = "http://www.eclipse.org/webtools/jsf/schema/facesconfig.xsd"; //$NON-NLS-1$
 
     /**
      * The package namespace name.
@@ -146,7 +146,7 @@ public interface FacesConfigPackage extends EPackage {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	String eNS_PREFIX = "facesconfig";
+	String eNS_PREFIX = "facesconfig"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the package.

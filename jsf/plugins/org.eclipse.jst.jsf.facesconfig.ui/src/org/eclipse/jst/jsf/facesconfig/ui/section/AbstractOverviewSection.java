@@ -59,8 +59,8 @@ public abstract class AbstractOverviewSection extends
 			String helpTooltip) {
 		super(parent, managedForm, page, toolkit, helpContextId, helpTooltip);
 		this.targetPageID = targetPageID;
-		getSection().setText(title); //$NON-NLS-1$
-		getSection().setDescription(description); //$NON-NLS-1$
+		getSection().setText(title);
+		getSection().setDescription(description);
 	}
 
 	/*

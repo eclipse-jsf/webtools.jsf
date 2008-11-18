@@ -182,7 +182,7 @@ public class Logger {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(source);
 		if (message != null) {
-			buffer.append(": ");
+			buffer.append(": "); //$NON-NLS-1$
 			buffer.append(message);
 		}
 		return buffer.toString();

@@ -100,7 +100,7 @@ public class CommonListDialog extends Dialog implements
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = SWTUtils.createComposite(parent, 1);
 
-		SWTUtils.createLabel(composite, label, 1); //$NON-NLS-1$
+		SWTUtils.createLabel(composite, label, 1);
 
 		inputText = SWTUtils.createTextBox(composite, 1);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);

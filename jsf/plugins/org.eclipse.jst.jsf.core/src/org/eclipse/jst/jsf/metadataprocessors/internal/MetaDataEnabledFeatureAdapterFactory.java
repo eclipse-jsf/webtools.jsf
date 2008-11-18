@@ -126,7 +126,7 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 			if (! typesCache.containsKey(featureExt.getTypeID())){
 				Bundle bundle =Platform.getBundle(featureExt.getBundleID());
 				if (bundle == null){
-					JSFCorePlugin.log(IStatus.ERROR, featureExt.getBundleID() + " could not be created to load " + className);
+					JSFCorePlugin.log(IStatus.ERROR, featureExt.getBundleID() + " could not be created to load " + className); //$NON-NLS-1$
 					return null;
 				}
 				klass = bundle.loadClass(className);
@@ -138,7 +138,7 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 				klass = typesCache.get(featureExt.getTypeID());
 			
 			if (!IMetaDataEnabledFeature.class.isAssignableFrom(klass)){
-				JSFCorePlugin.log(IStatus.INFO, className + " is not a IMetaDataEnabledFeature. " + featureExt.getBundleID() +" : " + featureExt.getTypeID());
+				JSFCorePlugin.log(IStatus.INFO, className + " is not a IMetaDataEnabledFeature. " + featureExt.getBundleID() +" : " + featureExt.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$
 			} 
 			else if (klass != null && processingFeature.isAssignableFrom(klass)){
 				IMetaDataEnabledFeature obj = (IMetaDataEnabledFeature)klass.newInstance();
@@ -146,11 +146,11 @@ public final class MetaDataEnabledFeatureAdapterFactory {
 			}
 						
 		} catch (ClassNotFoundException e) {
-			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
+			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + featureExt.getBundleID() +" for " + featureExt.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (InstantiationException e) {
-			JSFCorePlugin.log(IStatus.ERROR, "InstantiationException: " + className + " in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
+			JSFCorePlugin.log(IStatus.ERROR, "InstantiationException: " + className + " in " + featureExt.getBundleID() +" for " + featureExt.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} catch (IllegalAccessException e) {
-			JSFCorePlugin.log(IStatus.ERROR,  "IllegalAccessException: " + className + " in " + featureExt.getBundleID() +" for " + featureExt.getTypeID());
+			JSFCorePlugin.log(IStatus.ERROR,  "IllegalAccessException: " + className + " in " + featureExt.getBundleID() +" for " + featureExt.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return null;
 	}

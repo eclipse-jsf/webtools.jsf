@@ -48,9 +48,9 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 	// character height.
 	private final static double VERTICAL_PADDING_RATE = 0.36;
 
-	private static final String[] DEFAULTLINES = new String[] { "  " };
+	private static final String[] DEFAULTLINES = new String[] { "  " }; //$NON-NLS-1$
 
-	private String _value = "";
+	private String _value = ""; //$NON-NLS-1$
 
 	private String[] _lines = DEFAULTLINES;
 
@@ -133,7 +133,7 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 		Object textAlign = style
 				.getStyleProperty(ICSSPropertyID.ATTR_TEXTALIGN);
 		if (ICSSPropertyMeta.NOT_SPECIFIED == textAlign) {
-			textAlign = "center";
+			textAlign = "center"; //$NON-NLS-1$
 		}
 		Font font = style.getCSSFont().getSwtFont();
 		g.setFont(font);
@@ -177,7 +177,7 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 	 */
 	public void setValue(String value) {
 		if (value == null) {
-			value = "";
+			value = ""; //$NON-NLS-1$
 		}
 		_value = value;
 		_lines = splitValue(_value);
@@ -190,14 +190,14 @@ public class ButtonWidgetProvider extends AbstractWidgetProvider {
 	 * @return
 	 */
 	private String[] splitValue(String _value2) {
-		if (_value2 == null || "".equals(_value2)) {
+		if (_value2 == null || "".equals(_value2)) { //$NON-NLS-1$
 			return DEFAULTLINES;
 		}
 
-		StringTokenizer tokenizer = new StringTokenizer(_value2, "\r\n");
+		StringTokenizer tokenizer = new StringTokenizer(_value2, "\r\n"); //$NON-NLS-1$
 		String[] result = new String[tokenizer.countTokens()];
 		for (int i = 0; i < result.length; i++) {
-			result[i] = tokenizer.nextToken().replaceAll("\t", "    ");
+			result[i] = tokenizer.nextToken().replaceAll("\t", "    "); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return result;
 	}

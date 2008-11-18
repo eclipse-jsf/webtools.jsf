@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesResourceFactoryImpl.java,v 1.3 2007/02/28 21:12:40 cbateman Exp $
+ * $Id: TraitTypesResourceFactoryImpl.java,v 1.4 2008/11/18 22:24:43 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -27,7 +27,7 @@ public class TraitTypesResourceFactoryImpl extends ResourceFactoryImpl {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
      * Creates an instance of the resource factory.

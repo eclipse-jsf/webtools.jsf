@@ -33,7 +33,7 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 	/**
 	 * Key (in metadata) of IDTInfo trait.
 	 */
-	public static final String DTINFO_TRAIT_KEY = "dt-info";
+	public static final String DTINFO_TRAIT_KEY = "dt-info"; //$NON-NLS-1$
 
 	/*
 	 * (non-Javadoc)

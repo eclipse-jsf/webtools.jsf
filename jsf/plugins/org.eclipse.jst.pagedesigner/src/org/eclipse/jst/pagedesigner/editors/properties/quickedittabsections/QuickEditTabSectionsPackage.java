@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsPackage.java,v 1.4 2008/02/01 21:52:33 gkessler Exp $
+ * $Id: QuickEditTabSectionsPackage.java,v 1.5 2008/11/18 22:22:35 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections;
 
@@ -33,7 +33,7 @@ public interface QuickEditTabSectionsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The package name.
@@ -41,7 +41,7 @@ public interface QuickEditTabSectionsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "quickedittabsections";
+	String eNAME = "quickedittabsections"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI.
@@ -49,7 +49,7 @@ public interface QuickEditTabSectionsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore";
+	String eNS_URI = "http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
@@ -57,7 +57,7 @@ public interface QuickEditTabSectionsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "qe";
+	String eNS_PREFIX = "qe"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package.

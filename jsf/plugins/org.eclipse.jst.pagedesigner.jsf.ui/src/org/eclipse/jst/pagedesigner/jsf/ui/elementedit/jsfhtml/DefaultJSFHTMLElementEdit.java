@@ -56,7 +56,7 @@ public class DefaultJSFHTMLElementEdit extends AbstractElementEdit
         public boolean isActionSource()
         {
             // UICommand.
-            return _localName.startsWith("command");
+            return _localName.startsWith("command"); //$NON-NLS-1$
         }
 
         /* (non-Javadoc)
@@ -73,8 +73,8 @@ public class DefaultJSFHTMLElementEdit extends AbstractElementEdit
         public boolean isValueHolder()
         {
             // UIOutput
-            return _localName.startsWith("output") || _localName.startsWith("input")
-                || _localName.startsWith("select");
+            return _localName.startsWith("output") || _localName.startsWith("input") //$NON-NLS-1$ //$NON-NLS-2$
+                || _localName.startsWith("select"); //$NON-NLS-1$
         }
 
         /* (non-Javadoc)
@@ -83,7 +83,7 @@ public class DefaultJSFHTMLElementEdit extends AbstractElementEdit
         public boolean isEditableValueHolder()
         {
             // UIInput
-            return _localName.startsWith("input") || _localName.startsWith("select");
+            return _localName.startsWith("input") || _localName.startsWith("select"); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         /* (non-Javadoc)
@@ -91,7 +91,7 @@ public class DefaultJSFHTMLElementEdit extends AbstractElementEdit
          */
         public boolean supportSelectItems()
         {
-            return _localName.startsWith("select");
+            return _localName.startsWith("select"); //$NON-NLS-1$
         }
 
     }

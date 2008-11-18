@@ -211,10 +211,10 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 	 * @param style 
 	 */
 	public CommonResourceDialog(Shell parentShell, IProject project, int style) {
-		super(parentShell, "", style);
+		super(parentShell, "", style); //$NON-NLS-1$
 		if (project == null) {
 			throw new IllegalArgumentException(
-					"Argument(project) cannot be null");
+					"Argument(project) cannot be null"); //$NON-NLS-1$
 		}
 		_project = project;
 		setContentProvider(new ProjectFileDialogContentProvider());
@@ -239,7 +239,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 
 	private String getStatusMessage() {
 		if (_resourceDescription == null) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 		return _resourceDescription;
 	}
@@ -354,7 +354,7 @@ public class CommonResourceDialog extends TreeViewerSelectionDialog {
 		} else {
 			int count = 0;
 			for (int i = 0, size = _suffixs.length; i < size; i++) {
-				if (_suffixs[i] != null && !"".equals(_suffixs[i])) {
+				if (_suffixs[i] != null && !"".equals(_suffixs[i])) { //$NON-NLS-1$
 					count++;
 					break;
 				}

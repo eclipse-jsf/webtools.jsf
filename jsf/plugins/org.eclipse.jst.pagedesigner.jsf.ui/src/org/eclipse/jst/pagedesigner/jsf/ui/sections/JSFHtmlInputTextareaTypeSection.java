@@ -78,8 +78,8 @@ public class JSFHtmlInputTextareaTypeSection extends BaseCustomSection
                     String size = _element.getAttribute(IJSFConstants.ATTR_COLS);
                     if (size != null && size.length() != 0)
                     {
-                        attrs.put(IJSFConstants.ATTR_COLS, null); //$NON-NLS-1$
-                        attrs.put(IJSFConstants.ATTR_SIZE, size); //$NON-NLS-1$
+                        attrs.put(IJSFConstants.ATTR_COLS, null);
+                        attrs.put(IJSFConstants.ATTR_SIZE, size);
                     }
                 }
                 ChangeTagCommand c = new ChangeTagCommand(SectionResources

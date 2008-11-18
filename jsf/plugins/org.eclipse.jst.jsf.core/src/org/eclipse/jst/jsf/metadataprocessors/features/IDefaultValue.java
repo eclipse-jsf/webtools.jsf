@@ -26,7 +26,7 @@ public interface IDefaultValue extends IMetaDataEnabledFeature {
 	/**
 	 * Default name of property in annotation file to use when supplying default values from meta-data 
 	 */
-	String DEFAULT_VALUE_PROP_NAME = "default-value";	
+	String DEFAULT_VALUE_PROP_NAME = "default-value";	 //$NON-NLS-1$
 	
 	/**
 	 * @return default value or null if one not defined

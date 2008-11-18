@@ -79,11 +79,11 @@ public class JSPViewDefnAdapter extends TaglibBasedViewDefnAdapter
             }
             catch (final IOException e)
             {
-                JSFCorePlugin.log(e, "Acquiring model for view root");
+                JSFCorePlugin.log(e, "Acquiring model for view root"); //$NON-NLS-1$
             }
             catch (final CoreException e)
             {
-                JSFCorePlugin.log(e, "Acquiring model for view root");
+                JSFCorePlugin.log(e, "Acquiring model for view root"); //$NON-NLS-1$
             }
             finally
             {
@@ -201,7 +201,7 @@ public class JSPViewDefnAdapter extends TaglibBasedViewDefnAdapter
     @Override
     public String getGeneratedIdPrefix()
     {
-        return "_idJsp";
+        return "_idJsp"; //$NON-NLS-1$
     }
 
     @Override

@@ -39,7 +39,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 	public Element transform(Element srcElement, Element curElement) {
 		Element tableElement = null;
 		//create table element, copy all attributes, rename "styleClass" attribute to "class"
-		tableElement = createElement("table");
+		tableElement = createElement("table"); //$NON-NLS-1$
 		ITransformOperation operation =
 			TransformOperationFactory.getInstance().getTransformOperation(
 					TransformOperationFactory.OP_CopyAllAttributesOperation,
@@ -48,7 +48,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 		operation =
 			TransformOperationFactory.getInstance().getTransformOperation(
 					TransformOperationFactory.OP_RenameAttributeOperation,
-					new String[]{"styleClass", "class"});
+					new String[]{"styleClass", "class"}); //$NON-NLS-1$ //$NON-NLS-2$
 		operation.transform(srcElement, tableElement);
 		//build thead
 		buildHeaderOrFooter(srcElement, tableElement, true);
@@ -61,16 +61,16 @@ public class DataTableOperation extends AbstractTransformOperation {
 
 	private void buildHeaderOrFooter(Element srcElement, Element tableElement, boolean isHeader) {
 		//setup vars depending on whether we are building thead or tfoot
-		String facetName = isHeader ? "header" : "footer";
-		String headerOrFooterTagName = isHeader ? "thead" : "tfoot";
-		String thOrTdTagName = isHeader ? "th" : "td";
-		String headerClassOrFooterClassAttrName = isHeader ? "headerClass" : "footerClass";
+		String facetName = isHeader ? "header" : "footer"; //$NON-NLS-1$ //$NON-NLS-2$
+		String headerOrFooterTagName = isHeader ? "thead" : "tfoot"; //$NON-NLS-1$ //$NON-NLS-2$
+		String thOrTdTagName = isHeader ? "th" : "td"; //$NON-NLS-1$ //$NON-NLS-2$
+		String headerClassOrFooterClassAttrName = isHeader ? "headerClass" : "footerClass"; //$NON-NLS-1$ //$NON-NLS-2$
 
 		//look for facet ("header" or "footer")
 		Element facetElement = getChildFacetByName(srcElement, facetName);
 
 		//get list of child "column" elements
-		List columnElementList = getChildElements(srcElement, "column");
+		List columnElementList = getChildElements(srcElement, "column"); //$NON-NLS-1$
 
 		//look for facet ("header" or "footer") on child "column" elements
 		boolean hasColumnFacet = false;
@@ -95,7 +95,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 		//if facetElement exists, build appropriate thead or tfoot children
 		if (facetElement != null) {
 			//append "tr" Element
-			Element trElement = appendChildElement("tr", headerOrFooterElement);
+			Element trElement = appendChildElement("tr", headerOrFooterElement); //$NON-NLS-1$
 			//append "th" or "td" Element
 			Element thOrTdElement = appendChildElement(thOrTdTagName, trElement);
 			//set "class" attribute
@@ -104,7 +104,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 				ITransformOperation operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"class", headerClassOrFooterClassAttribute});
+							new String[]{"class", headerClassOrFooterClassAttribute}); //$NON-NLS-1$
 				operation.transform(srcElement, thOrTdElement);
 			}
 			//set "colspan" attribute
@@ -112,7 +112,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 				ITransformOperation operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"colspan", String.valueOf(columnElementList.size())});
+							new String[]{"colspan", String.valueOf(columnElementList.size())}); //$NON-NLS-1$
 				operation.transform(srcElement, thOrTdElement);
 			}
 			//add facet Element as child (to be processed further)
@@ -122,7 +122,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 		//if any child column has "header" or "footer" facet, build "tr" element
 		if (hasColumnFacet) {
 			//append "tr" Element
-			Element trElement = appendChildElement("tr", headerOrFooterElement);
+			Element trElement = appendChildElement("tr", headerOrFooterElement); //$NON-NLS-1$
 			//iterate through columnElementList
 			itColumnElementList = columnElementList.iterator();
 			while (itColumnElementList.hasNext()) {
@@ -137,7 +137,7 @@ public class DataTableOperation extends AbstractTransformOperation {
 					ITransformOperation operation =
 						TransformOperationFactory.getInstance().getTransformOperation(
 								TransformOperationFactory.OP_CreateAttributeOperation,
-								new String[]{"class", headerClassOrFooterClassAttribute});
+								new String[]{"class", headerClassOrFooterClassAttribute}); //$NON-NLS-1$
 					operation.transform(srcElement, thOrTdElement);
 				}
 				//if facet exists, add facet Element as child (to be processed further)
@@ -150,23 +150,23 @@ public class DataTableOperation extends AbstractTransformOperation {
 
 	private void buildBody(Element srcElement, Element tableElement) {
 		//append "tbody" element
-		Element tbodyElement = appendChildElement("tbody", tableElement);
+		Element tbodyElement = appendChildElement("tbody", tableElement); //$NON-NLS-1$
 		//append "tr" element
-		Element trElement = appendChildElement("tr", tbodyElement);
+		Element trElement = appendChildElement("tr", tbodyElement); //$NON-NLS-1$
 		//parse "rowClasses" attribute and set "class" attribute
-		String rowClassesAttribute = srcElement.getAttribute("rowClasses");
+		String rowClassesAttribute = srcElement.getAttribute("rowClasses"); //$NON-NLS-1$
 		if (rowClassesAttribute != null && rowClassesAttribute.length() > 0) {
-			StringTokenizer tokenizer = new StringTokenizer(rowClassesAttribute, ", ");
+			StringTokenizer tokenizer = new StringTokenizer(rowClassesAttribute, ", "); //$NON-NLS-1$
 			if (tokenizer.hasMoreTokens()) {
 				ITransformOperation operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"class", tokenizer.nextToken()});
+							new String[]{"class", tokenizer.nextToken()}); //$NON-NLS-1$
 				operation.transform(srcElement, trElement);
 			}
 		}
 		//add child columns (to be processed further)
-		List columnElementList = getChildElements(srcElement, "column");
+		List columnElementList = getChildElements(srcElement, "column"); //$NON-NLS-1$
 		Iterator itColumnElementList = columnElementList.iterator();
 		int index = 0;
 		while (itColumnElementList.hasNext()) {
@@ -185,11 +185,11 @@ public class DataTableOperation extends AbstractTransformOperation {
 	 */
 	private Element getChildFacetByName(Element srcElement, String facetName) {
 		Element element = null;
-		List facets = getChildElements(srcElement, "facet");
+		List facets = getChildElements(srcElement, "facet"); //$NON-NLS-1$
 		Iterator itFacets = facets.iterator();
 		while (itFacets.hasNext()) {
 			Element facet = (Element)itFacets.next();
-			if (facet.getAttribute("name").equals(facetName)) {
+			if (facet.getAttribute("name").equals(facetName)) { //$NON-NLS-1$
 				element = facet;
 				break;
 			}

@@ -100,7 +100,7 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 			String borderstr = DOMUtil.getAttributeIgnoreCase(tableEle,
 					IHTMLConstants.ATTR_BORDER);
 			if (rules == null || rules.length() == 0) {
-				if (borderstr == null || "0".equals(borderstr.trim())) {
+				if (borderstr == null || "0".equals(borderstr.trim())) { //$NON-NLS-1$
 					return ICSSPropertyID.VAL_NONE;
 				}
                 return ICSSPropertyID.VAL_TDBORDERSTYLE;
@@ -125,7 +125,7 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 		String borderstr = DOMUtil.getAttributeIgnoreCase(element,
 				IHTMLConstants.ATTR_BORDER);
 		// border="0" implies frame="void"
-		if ("0".equals(borderstr)) {
+		if ("0".equals(borderstr)) { //$NON-NLS-1$
 			return ICSSPropertyID.VAL_NONE;
 		}
 		if (frame == null || frame.length() == 0) {
@@ -152,15 +152,15 @@ public class BorderStyleMeta extends CSSPropertyMeta {
 	static String extractEdge(String propertyName) {
 		if (ICSSPropertyID.ATTR_BORDER_BOTTOM_STYLE
 				.equalsIgnoreCase(propertyName)) {
-			return "bottom";
+			return "bottom"; //$NON-NLS-1$
 		} else if (ICSSPropertyID.ATTR_BORDER_LEFT_STYLE
 				.equalsIgnoreCase(propertyName)) {
-			return "left";
+			return "left"; //$NON-NLS-1$
 		} else if (ICSSPropertyID.ATTR_BORDER_RIGHT_STYLE
 				.equalsIgnoreCase(propertyName)) {
-			return "right";
+			return "right"; //$NON-NLS-1$
 		} else {
-			return "top";
+			return "top"; //$NON-NLS-1$
 		}
 	}
 

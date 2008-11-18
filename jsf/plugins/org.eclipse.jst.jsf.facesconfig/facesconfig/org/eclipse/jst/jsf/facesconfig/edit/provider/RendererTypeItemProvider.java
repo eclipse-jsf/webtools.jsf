@@ -51,7 +51,7 @@ public class RendererTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -94,8 +94,8 @@ public class RendererTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RendererType_componentFamily_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_componentFamily_feature", "_UI_RendererType_type"),
+                 getString("_UI_RendererType_componentFamily_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_componentFamily_feature", "_UI_RendererType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDERER_TYPE__COMPONENT_FAMILY,
                  true,
                  false,
@@ -117,8 +117,8 @@ public class RendererTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RendererType_rendererType_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_rendererType_feature", "_UI_RendererType_type"),
+                 getString("_UI_RendererType_rendererType_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_rendererType_feature", "_UI_RendererType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDERER_TYPE__RENDERER_TYPE,
                  true,
                  false,
@@ -140,8 +140,8 @@ public class RendererTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RendererType_rendererClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_rendererClass_feature", "_UI_RendererType_type"),
+                 getString("_UI_RendererType_rendererClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_rendererClass_feature", "_UI_RendererType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDERER_TYPE__RENDERER_CLASS,
                  true,
                  false,
@@ -163,8 +163,8 @@ public class RendererTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RendererType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_id_feature", "_UI_RendererType_type"),
+                 getString("_UI_RendererType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RendererType_id_feature", "_UI_RendererType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDERER_TYPE__ID,
                  true,
                  false,
@@ -214,7 +214,7 @@ public class RendererTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/RendererType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/RendererType")); //$NON-NLS-1$
     }
 
     /**
@@ -226,8 +226,8 @@ public class RendererTypeItemProvider
 	public String getText(Object object) {
         String label = ((RendererType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_RendererType_type") :
-            getString("_UI_RendererType_type") + " " + label;
+            getString("_UI_RendererType_type") : //$NON-NLS-1$
+            getString("_UI_RendererType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -315,16 +315,16 @@ public class RendererTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return renderer.getDisplayName() == null || renderer.getDisplayName().size()==0 ? ""
+			return renderer.getDisplayName() == null || renderer.getDisplayName().size()==0 ? "" //$NON-NLS-1$
 					: ((DisplayNameType) renderer.getDisplayName().get(0)).getTextContent();
 		case 1:
-			return renderer.getComponentFamily() == null ? ""
+			return renderer.getComponentFamily() == null ? "" //$NON-NLS-1$
 					: renderer.getComponentFamily().getTextContent();
 		case 2:
-			return renderer.getRendererType()==null  ? ""
+			return renderer.getRendererType()==null  ? "" //$NON-NLS-1$
 					: renderer.getRendererType().getTextContent();
 		case 3:
-			return renderer.getRendererClass() == null ? "" : renderer
+			return renderer.getRendererClass() == null ? "" : renderer //$NON-NLS-1$
 					.getRendererClass().getTextContent();
 		}
 		return null;

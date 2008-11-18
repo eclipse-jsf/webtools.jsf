@@ -76,7 +76,7 @@ public class TextAlignMeta extends CSSPropertyMeta {
 		if (value != null) {
 			return value;
 		}
-		if ("middle".equalsIgnoreCase(align)) {
+		if ("middle".equalsIgnoreCase(align)) { //$NON-NLS-1$
 			return ICSSPropertyID.VAL_CENTER;
 		}
 

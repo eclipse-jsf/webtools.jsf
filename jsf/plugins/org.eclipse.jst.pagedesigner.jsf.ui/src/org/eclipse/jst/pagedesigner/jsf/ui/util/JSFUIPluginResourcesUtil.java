@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
  */
 public class JSFUIPluginResourcesUtil extends ResourceUtils
 {
-    private final static String             bundleName = "org.eclipse.jst.pagedesigner.jsf.ui.JSFUIResources";
+    private final static String             bundleName = "org.eclipse.jst.pagedesigner.jsf.ui.JSFUIResources"; //$NON-NLS-1$
     private static Logger                   _log       = JSFUICommonPlugin.getLogger(JSFUIPluginResourcesUtil.class);
     private static JSFUIPluginResourcesUtil _resource;                                                          // singleton
 
@@ -35,7 +35,7 @@ public class JSFUIPluginResourcesUtil extends ResourceUtils
         }
         catch (MissingResourceException e)
         {
-            _log.error("Error in getting show messages resource bundle file", e);
+            _log.error("Error in getting show messages resource bundle file", e); //$NON-NLS-1$
         }
     }
 

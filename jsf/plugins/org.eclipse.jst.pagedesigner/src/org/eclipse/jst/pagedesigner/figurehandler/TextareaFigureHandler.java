@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 	protected ICSSWidgetProvider initializeWidgetProvider(Element node) {
 		TextAreaWidgetProvider provider = new TextAreaWidgetProvider(
 				getCSSStyle(node));
-		String s = DOMUtil.getAttributeIgnoreCase(node, "cols");
+		String s = DOMUtil.getAttributeIgnoreCase(node, "cols"); //$NON-NLS-1$
 		if (s != null) {
 			try {
 				provider.setColumns(Integer.parseInt(s));
@@ -32,7 +32,7 @@ import org.w3c.dom.Element;
 				// ignore
 			}
 		}
-		s = DOMUtil.getAttributeIgnoreCase(node, "rows");
+		s = DOMUtil.getAttributeIgnoreCase(node, "rows"); //$NON-NLS-1$
 		if (s != null) {
 			try {
 				provider.setRows(Integer.parseInt(s));

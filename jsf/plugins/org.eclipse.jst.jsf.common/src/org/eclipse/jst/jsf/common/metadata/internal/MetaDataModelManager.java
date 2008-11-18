@@ -137,7 +137,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
         synchronized (GLOBAL_INSTANCE_LOCK) {
             ModelKeyDescriptor modelKeyDescriptor = StandardModelFactory.getInstance().createModelKeyDescriptor(modelContext);
 
-            StandardModelFactory.debug(">START getModel: "+modelKeyDescriptor, StandardModelFactory.DEBUG_MD_GET);
+            StandardModelFactory.debug(">START getModel: "+modelKeyDescriptor, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
 
             MetaDataModel model = models.get(modelKeyDescriptor);
             if (model == null || project == null) {
@@ -157,7 +157,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
                 ((Model) model.getRoot())
                         .setCurrentModelContext(modelKeyDescriptor);
 
-            StandardModelFactory.debug(">END getModel: "+modelKeyDescriptor, StandardModelFactory.DEBUG_MD_GET);
+            StandardModelFactory.debug(">END getModel: "+modelKeyDescriptor, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
             return model;
         }
     }
@@ -194,7 +194,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
         if (!Thread.holdsLock(GLOBAL_INSTANCE_LOCK)) {
             JSFCommonPlugin
                     .log(IStatus.ERROR,
-                            "Internal Error: loadMetadata must not be called if class lock not held");
+                            "Internal Error: loadMetadata must not be called if class lock not held"); //$NON-NLS-1$
             return null;
         }
 

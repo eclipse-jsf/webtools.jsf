@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataXMLProcessor.java,v 1.3 2007/04/16 19:54:01 itrimble Exp $
+ * $Id: MetadataXMLProcessor.java,v 1.4 2008/11/18 22:24:36 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -25,7 +25,7 @@ public class MetadataXMLProcessor extends XMLProcessor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 
 	/**

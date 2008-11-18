@@ -49,7 +49,7 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -762,27 +762,27 @@ public class TagDecorateInfoImpl extends EObjectImpl implements TagDecorateInfo 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
+		result.append(" (id: "); //$NON-NLS-1$
 		result.append(id);
-		result.append(", minHeight: ");
+		result.append(", minHeight: "); //$NON-NLS-1$
 		result.append(minHeight);
-		result.append(", minWidth: ");
+		result.append(", minWidth: "); //$NON-NLS-1$
 		result.append(minWidth);
-		result.append(", multiLevel: ");
+		result.append(", multiLevel: "); //$NON-NLS-1$
 		result.append(multiLevel);
-		result.append(", needBorderDecorator: ");
+		result.append(", needBorderDecorator: "); //$NON-NLS-1$
 		result.append(needBorderDecorator);
-		result.append(", needTableDecorator: ");
+		result.append(", needTableDecorator: "); //$NON-NLS-1$
 		result.append(needTableDecorator);
-		result.append(", nonVisual: ");
+		result.append(", nonVisual: "); //$NON-NLS-1$
 		result.append(nonVisual);
-		result.append(", nonVisualImagePath: ");
+		result.append(", nonVisualImagePath: "); //$NON-NLS-1$
 		result.append(nonVisualImagePath);
-		result.append(", resolveChildText: ");
+		result.append(", resolveChildText: "); //$NON-NLS-1$
 		result.append(resolveChildText);
-		result.append(", setNonVisualChildElements: ");
+		result.append(", setNonVisualChildElements: "); //$NON-NLS-1$
 		result.append(setNonVisualChildElements);
-		result.append(", widget: ");
+		result.append(", widget: "); //$NON-NLS-1$
 		result.append(widget);
 		result.append(')');
 		return result.toString();

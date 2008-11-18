@@ -106,15 +106,15 @@ public final class DTComponentIntrospector
                 try
                 {
                     classTypeWrapper.init();
-                    family = classTypeWrapper.callStringMethod("getFamily");
-                    renderer = classTypeWrapper.callStringMethod("getRendererType");
+                    family = classTypeWrapper.callStringMethod("getFamily"); //$NON-NLS-1$
+                    renderer = classTypeWrapper.callStringMethod("getRendererType"); //$NON-NLS-1$
                 }
                 catch (ProxyException e1)
                 {
                     // fall through
                     if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
                     {
-                        JSFCoreTraceOptions.log("DTComponentIntrospector.getComponent:", e1);
+                        JSFCoreTraceOptions.log("DTComponentIntrospector.getComponent:", e1); //$NON-NLS-1$
                     }
                 }
     
@@ -364,7 +364,7 @@ public final class DTComponentIntrospector
         }
         catch (JavaModelException e)
         {
-            JSFCorePlugin.log("Error finding component type", e);
+            JSFCorePlugin.log("Error finding component type", e); //$NON-NLS-1$
         }
 
         return properties;
@@ -387,7 +387,7 @@ public final class DTComponentIntrospector
         }
         catch (final CoreException e)
         {
-            JSFCorePlugin.log("Error starting vm for project: "
+            JSFCorePlugin.log("Error starting vm for project: " //$NON-NLS-1$
                     + project.getName(), e);
         }
 

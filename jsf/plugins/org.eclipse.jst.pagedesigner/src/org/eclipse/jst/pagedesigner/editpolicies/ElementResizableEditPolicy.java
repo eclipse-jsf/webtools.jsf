@@ -374,10 +374,10 @@ public class ElementResizableEditPolicy extends ResizableEditPolicy implements I
 			int height) {
 		Map map = new HashMap();
 		if (width > 0) {
-			map.put("width", width + "px");
+			map.put("width", width + "px"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (height > 0) {
-			map.put("height", height + "px");
+			map.put("height", height + "px"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (!map.isEmpty()) {
             return new ChangeStyleCommand(element, map);

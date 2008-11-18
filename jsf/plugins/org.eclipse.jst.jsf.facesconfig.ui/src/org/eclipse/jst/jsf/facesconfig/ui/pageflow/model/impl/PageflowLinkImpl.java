@@ -24,12 +24,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPage;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>PF Link</b></em>'.
@@ -172,7 +174,7 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 				|| (eContainerFeatureID != PageflowPackage.PF_LINK__PAGEFLOW && newPageflow != null)) {
 			if (EcoreUtil.isAncestor(this, newPageflow))
 				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
+												NLS.bind(PageflowMessages.PageflowNode_NoRecursiveContainment,toString()));
 			NotificationChain msgs = null;
 			if (eContainer != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -692,15 +694,15 @@ public class PageflowLinkImpl extends PageflowElementImpl implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (smallicon: ");
+		result.append(" (smallicon: "); //$NON-NLS-1$
 		result.append(getSmallicon());
-		result.append(", largeicon: ");
+		result.append(", largeicon: "); //$NON-NLS-1$
 		result.append(getLargeicon());
-		result.append(", fromaction: ");
+		result.append(", fromaction: "); //$NON-NLS-1$
 		result.append(getFromaction());
-		result.append(", outcome: ");
+		result.append(", outcome: "); //$NON-NLS-1$
 		result.append(getOutcome());
-		result.append(", redirect: ");
+		result.append(", redirect: "); //$NON-NLS-1$
 		result.append(isRedirect());
 		result.append(')');
 		return result.toString();

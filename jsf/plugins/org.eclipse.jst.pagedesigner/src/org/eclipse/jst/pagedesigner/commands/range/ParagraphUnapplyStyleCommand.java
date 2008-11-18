@@ -33,7 +33,7 @@ public class ParagraphUnapplyStyleCommand extends ApplyStyleCommand {
 	 */
 	public ParagraphUnapplyStyleCommand(IHTMLGraphicalViewer viewer,
 			String[] tags, String property, String value) {
-		super(viewer, "", property, value);
+		super(viewer, "", property, value); //$NON-NLS-1$
 		_groupTags = tags;
 	}
 

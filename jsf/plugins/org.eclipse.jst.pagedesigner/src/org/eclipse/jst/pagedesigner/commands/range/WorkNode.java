@@ -147,7 +147,7 @@ public final class WorkNode {
 	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Node:").append(node).append(" pos[]:").append(pos);
+		sb.append("Node:").append(node).append(" pos[]:").append(pos); //$NON-NLS-1$ //$NON-NLS-2$
 		return sb.toString();
 	}
 

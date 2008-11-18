@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfos.java,v 1.2 2008/03/30 21:22:24 cbateman Exp $
+ * $Id: PaletteInfos.java,v 1.3 2008/11/18 22:23:54 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -29,13 +29,13 @@ public interface PaletteInfos extends EObject {
 	/**
 	 * the palette infos trait id
 	 */
-	public static final String TRAIT_ID				= "paletteInfos";
+	public static final String TRAIT_ID				= "paletteInfos"; //$NON-NLS-1$
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Infos</b></em>' containment reference list.

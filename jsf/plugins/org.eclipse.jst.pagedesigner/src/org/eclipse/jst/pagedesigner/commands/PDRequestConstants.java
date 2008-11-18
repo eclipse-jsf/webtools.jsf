@@ -19,5 +19,5 @@ public interface PDRequestConstants {
 	/**
 	 * TODO: purpose?
 	 */
-	String REQ_DROP = "pd drop";
+	String REQ_DROP = "pd drop"; //$NON-NLS-1$
 }

@@ -47,22 +47,22 @@ public interface ICSSStyle extends INodeAdapter, IAdaptable {
 	/**
 	 * the top attribute vale
 	 */
-	public static final String TOP = "top";
+	public static final String TOP = "top"; //$NON-NLS-1$
 
 	/**
 	 * the right attribute value
 	 */
-	public static final String RIGHT = "right";
+	public static final String RIGHT = "right"; //$NON-NLS-1$
 
 	/**
 	 * the left attribute value
 	 */
-	public static final String LEFT = "left";
+	public static final String LEFT = "left"; //$NON-NLS-1$
 
 	/**
 	 * the bottom attribute value
 	 */
-	public static final String BOTTOM = "bottom";
+	public static final String BOTTOM = "bottom"; //$NON-NLS-1$
 
 	/**
 	 * 

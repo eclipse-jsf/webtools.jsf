@@ -27,7 +27,7 @@ public final class EmptyResultSet implements IResultSet {
 	
 	public List getResults() throws MetaDataException{
 		if (_isClosed)
-			throw new MetaDataException("Resultset is closed");
+			throw new MetaDataException("Resultset is closed"); //$NON-NLS-1$
 		
 		return Collections.EMPTY_LIST;		
 	}

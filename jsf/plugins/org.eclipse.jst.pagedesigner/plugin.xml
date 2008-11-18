@@ -34,8 +34,8 @@
        point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
 		<propertyTabs
 			contributorId="org.eclipse.jst.pagedesigner.tabPropertyContributor">
-			<propertyTab label="Quick Edit" category="Quick Edit" id="org.eclipse.jst.pagedesigner.tabQuickEdit" />
-			<propertyTab label="Attributes" category="Attributes" id="org.eclipse.jst.pagedesigner.tabAttributes" />
+			<propertyTab label="%propertyTab.label.QuickEdit" category="Quick Edit" id="org.eclipse.jst.pagedesigner.tabQuickEdit" />
+			<propertyTab label="%propertyTab.label.Attributes" category="Attributes" id="org.eclipse.jst.pagedesigner.tabAttributes" />
 		</propertyTabs>
  	</extension>
  	

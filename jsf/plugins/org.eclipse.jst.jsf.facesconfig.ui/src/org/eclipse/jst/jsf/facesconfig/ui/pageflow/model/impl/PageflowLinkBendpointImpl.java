@@ -20,9 +20,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLinkBendpoint;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowPackage;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>PF Link Bendpoint</b></em>'.
@@ -303,7 +305,7 @@ public class PageflowLinkBendpointImpl extends EObjectImpl implements PageflowLi
 				|| (eContainerFeatureID != PageflowPackage.PF_LINK_BENDPOINT__LINK && newLink != null)) {
 			if (EcoreUtil.isAncestor(this, newLink))
 				throw new IllegalArgumentException(
-						"Recursive containment not allowed for " + toString());
+						NLS.bind(PageflowMessages.PageflowNode_NoRecursiveContainment,toString()));
 			NotificationChain msgs = null;
 			if (eContainer != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -497,15 +499,15 @@ public class PageflowLinkBendpointImpl extends EObjectImpl implements PageflowLi
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (d1Width: ");
+		result.append(" (d1Width: "); //$NON-NLS-1$
 		result.append(d1Width);
-		result.append(", d1Height: ");
+		result.append(", d1Height: "); //$NON-NLS-1$
 		result.append(d1Height);
-		result.append(", d2Width: ");
+		result.append(", d2Width: "); //$NON-NLS-1$
 		result.append(d2Width);
-		result.append(", d2Height: ");
+		result.append(", d2Height: "); //$NON-NLS-1$
 		result.append(d2Height);
-		result.append(", weight: ");
+		result.append(", weight: "); //$NON-NLS-1$
 		result.append(weight);
 		result.append(')');
 		return result.toString();

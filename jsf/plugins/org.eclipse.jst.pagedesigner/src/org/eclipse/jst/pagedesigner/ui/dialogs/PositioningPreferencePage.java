@@ -239,7 +239,7 @@ public class PositioningPreferencePage extends PreferencePage {
 
 		Group placementGroup = new Group(top, SWT.NONE);
 		placementGroup.setText(DialogsMessages
-				.getString("PositioningPreferencePage.Placement"));
+				.getString("PositioningPreferencePage.Placement")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 3;
 		data.verticalSpan = 4;
@@ -429,7 +429,7 @@ public class PositioningPreferencePage extends PreferencePage {
 
 		Group clipGroup = new Group(top, SWT.NONE);
 		clipGroup.setText(DialogsMessages
-				.getString("PositioningPreferencePage.Clip"));
+				.getString("PositioningPreferencePage.Clip")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.horizontalSpan = 3;
 		data.verticalSpan = 4;

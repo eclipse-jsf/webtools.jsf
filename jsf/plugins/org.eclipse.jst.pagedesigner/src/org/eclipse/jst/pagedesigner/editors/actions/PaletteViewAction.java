@@ -30,8 +30,8 @@ public class PaletteViewAction extends ShowViewAction {
 	 * @param editDomain
 	 */
 	public PaletteViewAction(Element element, EditDomain editDomain) {
-        super(ActionsMessages.getString("PaletteViewAction.Menu.PaletteView")
-                , PaletteView.ID); //$NON-NLS-1$
+        super(ActionsMessages.getString("PaletteViewAction.Menu.PaletteView") //$NON-NLS-1$
+                , PaletteView.ID);
         //_element = element;
         //_editDomain = editDomain;
 	}

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosFactoryImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
+ * $Id: PaletteInfosFactoryImpl.java,v 1.2 2008/11/18 22:24:03 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
@@ -30,7 +30,7 @@ public class PaletteInfosFactoryImpl extends EFactoryImpl implements PaletteInfo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Creates the default factory implementation.
@@ -41,7 +41,7 @@ public class PaletteInfosFactoryImpl extends EFactoryImpl implements PaletteInfo
 	 */
 	public static PaletteInfosFactory init() {
 		try {
-			PaletteInfosFactory thePaletteInfosFactory = (PaletteInfosFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"); 
+			PaletteInfosFactory thePaletteInfosFactory = (PaletteInfosFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore");  //$NON-NLS-1$
 			if (thePaletteInfosFactory != null) {
 				return thePaletteInfosFactory;
 			}
@@ -75,7 +75,7 @@ public class PaletteInfosFactoryImpl extends EFactoryImpl implements PaletteInfo
 			case PaletteInfosPackage.TAG_CREATION_TEMPLATE: return createTagCreationTemplate();
 			case PaletteInfosPackage.TAG_CREATION_ATTRIBUTE: return createTagCreationAttribute();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

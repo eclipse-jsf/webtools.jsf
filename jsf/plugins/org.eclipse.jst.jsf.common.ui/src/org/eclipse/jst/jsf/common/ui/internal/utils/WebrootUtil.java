@@ -47,7 +47,7 @@ public class WebrootUtil {
 	 * @return the web path
 	 */
 	public static String getWebPath(IPath path) {
-		String strWebrootPath = "";
+		String strWebrootPath = ""; //$NON-NLS-1$
 		IProject project = WorkspaceUtil.getProjectFor(path);
 		IPath webContentPath = getWebContentPath(project);
 		if (webContentPath != null && webContentPath.isPrefixOf(path)) {
@@ -163,7 +163,7 @@ public class WebrootUtil {
 	 * @deprecated use getWebPath(IPath path) instead.
 	 */
 	public static String getWebPath(String strPath) {
-		String strWebrootPath = "";
+		String strWebrootPath = ""; //$NON-NLS-1$
 		if (strPath != null) {
 			IPath path = new Path(strPath);
 			return getWebPath(path);
@@ -203,7 +203,7 @@ public class WebrootUtil {
 	public static String[] getJSPFileExtensions() {
 		IContentTypeManager typeManager = Platform.getContentTypeManager();
 		IContentType jspContentType = typeManager
-				.getContentType("org.eclipse.jst.jsp.core.jspsource");
+				.getContentType("org.eclipse.jst.jsp.core.jspsource"); //$NON-NLS-1$
 		if (jspContentType != null) {
 			return jspContentType
 					.getFileSpecs(IContentType.FILE_EXTENSION_SPEC);
@@ -248,7 +248,7 @@ public class WebrootUtil {
 					}
 				}
 			} catch (CoreException ce) {
-                JSFUICommonPlugin.getLogger(WebrootUtil.class).error("checking web project", ce);
+                JSFUICommonPlugin.getLogger(WebrootUtil.class).error("checking web project", ce); //$NON-NLS-1$
 			}
 		}
 		return isValid;

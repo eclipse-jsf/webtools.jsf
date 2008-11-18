@@ -79,19 +79,19 @@ public class CMRegistry implements ICMRegistry {
 						monitor
 								.beginTask(
 										PDPlugin
-												.getResourceString("CMRegistry.ReadConfigration"),
+												.getResourceString("CMRegistry.ReadConfigration"), //$NON-NLS-1$
 										IProgressMonitor.UNKNOWN);
 						monitor
 								.subTask(PDPlugin
-										.getResourceString("CMRegistry.HTMLConfigration"));
-						loadCM("configs/cm/html.xml", _htmlMap);
+										.getResourceString("CMRegistry.HTMLConfigration")); //$NON-NLS-1$
+						loadCM("configs/cm/html.xml", _htmlMap); //$NON-NLS-1$
 						monitor
 								.subTask(PDPlugin
-										.getResourceString("CMRegistry.JSPConfigration"));
-						loadCM("configs/cm/jsp.xml", _jspMap);
+										.getResourceString("CMRegistry.JSPConfigration")); //$NON-NLS-1$
+						loadCM("configs/cm/jsp.xml", _jspMap); //$NON-NLS-1$
 						monitor
 								.subTask(PDPlugin
-										.getResourceString("CMRegistry.OtherConfigration"));
+										.getResourceString("CMRegistry.OtherConfigration")); //$NON-NLS-1$
 						readExtensions();
 					} finally {
 						monitor.done();
@@ -116,13 +116,13 @@ public class CMRegistry implements ICMRegistry {
 				.getConfigurationElements();
 
 		for (int i = 0; i < eles.length; i++) {
-			if (eles[i].getName().equals("registry")) {
-				String uri = eles[i].getAttribute("uri");
+			if (eles[i].getName().equals("registry")) { //$NON-NLS-1$
+				String uri = eles[i].getAttribute("uri"); //$NON-NLS-1$
 				if (uri == null || uri.length() == 0) {
 					// no uri, skip
 					continue;
 				}
-				String configFile = eles[i].getAttribute("configFile");
+				String configFile = eles[i].getAttribute("configFile"); //$NON-NLS-1$
 				if (configFile != null && configFile.length() > 0) {
 					String bundleName = eles[i].getDeclaringExtension()
 							.getContributor().getName();
@@ -142,10 +142,10 @@ public class CMRegistry implements ICMRegistry {
                         PDPlugin.getLogger(getClass()).error(new Throwable(e));
                     }
 				}
-				String className = eles[i].getAttribute("class");
+				String className = eles[i].getAttribute("class"); //$NON-NLS-1$
 				if (className != null && className.length() > 0) {
 					try {
-						Object obj = eles[i].createExecutableExtension("class");
+						Object obj = eles[i].createExecutableExtension("class"); //$NON-NLS-1$
 
 						if (obj instanceof ICMRegistry) {
 							_contributedRegistries.add(obj);
@@ -173,7 +173,7 @@ public class CMRegistry implements ICMRegistry {
 			ElementDescReader reader = new ElementDescReader(url);
 			reader.readElements(map);
 		} catch (Exception e) {
-			_log.error("Error loading " + fileName + ": " + e.getMessage());
+			_log.error("Error loading " + fileName + ": " + e.getMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

@@ -32,7 +32,7 @@ public class AttributeExtensionTypeImpl extends ExtensionTypeImpl implements Att
      * @generated
      */
 	@SuppressWarnings("hiding")
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->

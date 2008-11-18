@@ -50,10 +50,10 @@ public class JSPDomAdapter {
     .getLogger(JSPDomAdapter.class);
 
     /** JSP Taglib's tag name */
-    public static String JSP_TAGLIB_TAG = "jsp:directive.taglib";
+    public static String JSP_TAGLIB_TAG = "jsp:directive.taglib"; //$NON-NLS-1$
 
     /** JSF HTML TagLib name */
-    public static String JSF_HTML_TAGLIB = "http://java.sun.com/jsf/html";
+    public static String JSF_HTML_TAGLIB = "http://java.sun.com/jsf/html"; //$NON-NLS-1$
 
     /** singleton model manager */
     private static IModelManager modelManager;

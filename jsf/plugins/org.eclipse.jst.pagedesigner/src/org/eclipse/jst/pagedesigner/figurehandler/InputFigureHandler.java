@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.figurehandler;
 
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
+import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.css2.provider.ICSSWidgetProvider;
 import org.eclipse.jst.pagedesigner.css2.widget.ButtonWidgetProvider;
@@ -37,7 +38,7 @@ import org.w3c.dom.Element;
 		if (_image != null) {
 			_image.dispose();
 		}
-		_image = ImageResolver.initializeImage(node, "src");
+		_image = ImageResolver.initializeImage(node, "src"); //$NON-NLS-1$
 	}
 
 	ImageWidgetProvider getImageProvider(Element node) {
@@ -68,7 +69,7 @@ import org.w3c.dom.Element;
 		// XXX: should we use the defaultstyle for the button?
 		ButtonWidgetProvider browsebutton = new ButtonWidgetProvider(
 				getCSSStyle(node));
-		browsebutton.setValue("Browse...");
+		browsebutton.setValue(Messages.InputFigureHandler_Browse);
 		InputFileWidgetProvider provider = new InputFileWidgetProvider(
 				getCSSStyle(node), textprovider, browsebutton);
 		return provider;
@@ -92,7 +93,7 @@ import org.w3c.dom.Element;
 		TextInputWidgetProvider provider = new TextInputWidgetProvider(
 				getCSSStyle(node), TextInputWidgetProvider.PWD_SIZE);
 		provider.setSize(getSize(node));
-		provider.setValue("********");
+		provider.setValue("********"); //$NON-NLS-1$
 		return provider;
 	}
 
@@ -105,7 +106,7 @@ import org.w3c.dom.Element;
 	}
 
 	private int getSize(Element node) {
-		String s = DOMUtil.getAttributeIgnoreCase(node, "size");
+		String s = DOMUtil.getAttributeIgnoreCase(node, "size"); //$NON-NLS-1$
 		try {
 			if (s != null) {
 				return Integer.parseInt(s);
@@ -120,7 +121,7 @@ import org.w3c.dom.Element;
 	 * @return
 	 */
 	private String getValue(Element node) {
-		return DOMUtil.getAttributeIgnoreCase(node, "value");
+		return DOMUtil.getAttributeIgnoreCase(node, "value"); //$NON-NLS-1$
 	}
 
 	private String getButtonValue(Element node) {
@@ -129,9 +130,9 @@ import org.w3c.dom.Element;
 			String type = DOMUtil.getAttributeIgnoreCase(node,
 					ICSSPropertyID.ATTR_TYPE);
 			if (type.equalsIgnoreCase(ICSSPropertyID.VAL_SUBMIT)) {
-				return "Submit Query";
+				return IHTMLConstants.SUBMIT_LABEL;
 			} else if (type.equalsIgnoreCase(ICSSPropertyID.VAL_RESET)) {
-				return "Reset";
+				return IHTMLConstants.RESET_LABEL;
 			}
 		}
 		return value;
@@ -159,12 +160,12 @@ import org.w3c.dom.Element;
 		} else if (type.equalsIgnoreCase(ICSSPropertyID.VAL_RADIO)) {
 			RadioWidgetProvider provider = new RadioWidgetProvider(
 					getCSSStyle(node));
-			provider.setChecked(node.hasAttribute("checked"));
+			provider.setChecked(node.hasAttribute("checked")); //$NON-NLS-1$
 			return provider;
 		} else if (type.equalsIgnoreCase(ICSSPropertyID.VAL_CHECKBOX)) {
 			CheckboxWidgetProvider provider = new CheckboxWidgetProvider(
 					getCSSStyle(node));
-			provider.setChecked(node.hasAttribute("checked"));
+			provider.setChecked(node.hasAttribute("checked")); //$NON-NLS-1$
 			return provider;
 		} else if (type.equalsIgnoreCase(ICSSPropertyID.VAL_HIDDEN)) {
 			return getHiddenProvider(node);

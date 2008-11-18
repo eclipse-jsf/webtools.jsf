@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.TableItem;
  */
 public class SummaryPage extends WizardPage
 {
-	private static final String WIZARD_SUMMARY_PAGE = "WizardSummaryPage";
+	private static final String WIZARD_SUMMARY_PAGE = "WizardSummaryPage"; //$NON-NLS-1$
 
 	/** The source of the summary items */
 	private ISummaryDataSource source;

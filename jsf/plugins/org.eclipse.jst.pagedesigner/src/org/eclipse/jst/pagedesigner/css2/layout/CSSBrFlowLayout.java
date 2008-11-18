@@ -22,6 +22,9 @@ import org.eclipse.swt.graphics.Image;
  * @author mengbo
  */
 public class CSSBrFlowLayout extends CSSInlineFlowLayout implements ICSSPainter {
+
+	private static final String LINE_BREAK_IMAGE_FILE = "LineBreak.gif"; //$NON-NLS-1$
+
 	/**
 	 * @param flow
 	 */
@@ -58,6 +61,6 @@ public class CSSBrFlowLayout extends CSSInlineFlowLayout implements ICSSPainter 
 
 	private static Image getSharedHTMLImage() {
 		
-		return PDPlugin.getDefault().getImage("LineBreak.gif");
+		return PDPlugin.getDefault().getImage(LINE_BREAK_IMAGE_FILE);
 	}
 }

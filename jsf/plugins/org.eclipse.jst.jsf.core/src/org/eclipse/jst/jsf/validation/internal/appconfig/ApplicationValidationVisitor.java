@@ -139,7 +139,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
          */
         public ActionListenerValidationVisitor(final String version) {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ActionListener(),
-                    version,"javax.faces.event.ActionListener", true);
+                    version,"javax.faces.event.ActionListener", true); //$NON-NLS-1$
         }
     }
     
@@ -150,7 +150,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
          */
         public NavigationHandlerValidationVisitor(final String version) {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_NavigationHandler(),
-                    version,"javax.faces.application.NavigationHandler", true);
+                    version,"javax.faces.application.NavigationHandler", true); //$NON-NLS-1$
         }
     }
     
@@ -159,7 +159,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         ViewHandlerValidationVisitor(final String version)
         {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ViewHandler(),
-                    version,"javax.faces.application.ViewHandler", true);
+                    version,"javax.faces.application.ViewHandler", true); //$NON-NLS-1$
         }
     }
     
@@ -170,7 +170,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             // must a concrete class with a zero arg constructor:
             //   JSF1.1_3.2.3.2 and JSF1.2_3.2.4.2
             super(FacesConfigPackage.eINSTANCE.getApplicationType_StateManager(),
-                    version,"javax.faces.application.StateManager", true);
+                    version,"javax.faces.application.StateManager", true); //$NON-NLS-1$
         }    
     }
     
@@ -179,7 +179,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         PropertyResolverValidationVisitor(final String version)
         {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_PropertyResolver(),
-                    version,"javax.faces.el.PropertyResolver", true);
+                    version,"javax.faces.el.PropertyResolver", true); //$NON-NLS-1$
         }
 
         protected void doValidate(EObject object, List messages, IFile file) {
@@ -192,7 +192,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_DEPRECATED_AFTER_VERSION_ID
-                            ("property-resolver", IJSFCoreConstants.FACET_VERSION_1_1, "el-resolver")
+                            ("property-resolver", IJSFCoreConstants.FACET_VERSION_1_1, "el-resolver") //$NON-NLS-1$ //$NON-NLS-2$
                         , object, file);
             }
         }
@@ -203,7 +203,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
         VariableResolverValidationVisitor(final String version)
         {
             super(FacesConfigPackage.eINSTANCE.getApplicationType_VariableResolver(),
-                    version, "javax.faces.el.VariableResolver", true);
+                    version, "javax.faces.el.VariableResolver", true); //$NON-NLS-1$
         }
 
         protected void doValidate(EObject object, List messages, IFile file) {
@@ -215,7 +215,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_DEPRECATED_AFTER_VERSION_ID
-                            ("variable-resolver", IJSFCoreConstants.JSF_VERSION_1_1, "el-resolver")
+                            ("variable-resolver", IJSFCoreConstants.JSF_VERSION_1_1, "el-resolver") //$NON-NLS-1$ //$NON-NLS-2$
                         , object, file);
             }
 
@@ -229,7 +229,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             // must be a class and have zero-arg constructor
             //   JSF1.2_5.6.1.4
             super(FacesConfigPackage.eINSTANCE.getApplicationType_ELResolver(),
-               version, "javax.el.ELResolver", true);
+               version, "javax.el.ELResolver", true); //$NON-NLS-1$
         }
 
         protected void doValidate(EObject object, List messages, IFile file) {
@@ -240,7 +240,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             {
                 addMessageInfo(messages, 
                         DiagnosticFactory.create_API_NOT_AVAILABLE_BEFORE_VERSION
-                            ("el-resolver", IJSFCoreConstants.JSF_VERSION_1_2, "variable-resolver or property-resolver")
+                            ("el-resolver", IJSFCoreConstants.JSF_VERSION_1_2, "variable-resolver or property-resolver") //$NON-NLS-1$ //$NON-NLS-2$
                         , object, file);
             }
             else
@@ -271,7 +271,7 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
 
         protected String getFullyQualifiedName(EObject eobj) 
         {
-            EStructuralFeature feature = eobj.eClass().getEStructuralFeature("textContent");
+            EStructuralFeature feature = eobj.eClass().getEStructuralFeature("textContent"); //$NON-NLS-1$
             
             if (feature != null)
             {

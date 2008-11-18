@@ -42,7 +42,7 @@ public class JSFDOMUtil
             if (node.getNodeType() == Node.ELEMENT_NODE && JSFDOMUtil.isFacet((Element)node))
             {
                 Element ele = (Element) node;
-                if (name.equals(ele.getAttribute("name")))
+                if (name.equals(ele.getAttribute("name"))) //$NON-NLS-1$
                 {
                     return ele;
                 }
@@ -60,7 +60,7 @@ public class JSFDOMUtil
         if (node instanceof Element)
         {
             Element ele = (Element) node;
-            if ("column".equalsIgnoreCase(ele.getLocalName()) && ITLDConstants.URI_JSF_HTML.equals(CMUtil.getElementNamespaceURI(ele)))
+            if ("column".equalsIgnoreCase(ele.getLocalName()) && ITLDConstants.URI_JSF_HTML.equals(CMUtil.getElementNamespaceURI(ele))) //$NON-NLS-1$
             {
                 return true;
             }
@@ -101,7 +101,7 @@ public class JSFDOMUtil
     public static boolean isFacet(Element ele)
     {
         // XXX: here we are not checking namespace! for error tolerant.
-        return "facet".equals(ele.getLocalName());
+        return "facet".equals(ele.getLocalName()); //$NON-NLS-1$
     }
 
     /**
@@ -110,7 +110,7 @@ public class JSFDOMUtil
      */
     public static boolean isUIParameter(Element ele)
     {
-        return "param".equals(ele.getLocalName());
+        return "param".equals(ele.getLocalName()); //$NON-NLS-1$
     }
 
 }

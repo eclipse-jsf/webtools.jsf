@@ -117,7 +117,7 @@ public class GeneralViewSectionDescriptor implements ISectionDescriptor {
 	 * @see ISectionDescriptor#getAfterSection()
 	 */
 	public String getAfterSection() {
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	public int getEnablesFor() {

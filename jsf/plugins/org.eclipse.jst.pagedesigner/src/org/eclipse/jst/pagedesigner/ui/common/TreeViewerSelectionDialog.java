@@ -217,7 +217,7 @@ abstract class TreeViewerSelectionDialog extends SelectionDialog {
 
 		_statusImage = SWTUtils.createLabelImage(area,
 				getMessageImage(STYLE_ERROR), 1, null);
-		_statusLabel = SWTUtils.createLabel(area, "", 1);
+		_statusLabel = SWTUtils.createLabel(area, "", 1); //$NON-NLS-1$
 		// Link to model
 		setTreeViewerProviders();
 
@@ -259,7 +259,7 @@ abstract class TreeViewerSelectionDialog extends SelectionDialog {
 	private void updateStatus() {
 		if (isValidSelection(_selection)) {
 			_statusImage.setImage(getMessageImage(STYLE_NONE));
-			_statusLabel.setText("");
+			_statusLabel.setText(""); //$NON-NLS-1$
 			getOkButton().setEnabled(true);
 		} else {
 			_statusImage.setImage(getMessageImage(STYLE_ERROR));

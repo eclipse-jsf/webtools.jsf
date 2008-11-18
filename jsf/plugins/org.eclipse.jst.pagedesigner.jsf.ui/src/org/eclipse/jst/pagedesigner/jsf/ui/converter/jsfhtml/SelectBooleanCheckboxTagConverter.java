@@ -45,11 +45,11 @@ public class SelectBooleanCheckboxTagConverter extends AbstractTagConverter
         JSFConverterUtil.copyAttribute(hostEle, IJSFConstants.ATTR_STYLECLASS, inputEle, IHTMLConstants.ATTR_CLASS);
         inputEle.removeAttribute(IJSFConstants.ATTR_STYLECLASS);
 
-        inputEle.setAttribute(IHTMLConstants.ATTR_TYPE, "checkbox");
+        inputEle.setAttribute(IHTMLConstants.ATTR_TYPE, "checkbox"); //$NON-NLS-1$
         
-        if ("true".equalsIgnoreCase(inputEle.getAttribute(IHTMLConstants.ATTR_VALUE)))
+        if ("true".equalsIgnoreCase(inputEle.getAttribute(IHTMLConstants.ATTR_VALUE))) //$NON-NLS-1$
         {
-            inputEle.setAttribute(IHTMLConstants.ATTR_CHECKED,"checked");
+            inputEle.setAttribute(IHTMLConstants.ATTR_CHECKED,"checked"); //$NON-NLS-1$
         }
         return inputEle;
     }

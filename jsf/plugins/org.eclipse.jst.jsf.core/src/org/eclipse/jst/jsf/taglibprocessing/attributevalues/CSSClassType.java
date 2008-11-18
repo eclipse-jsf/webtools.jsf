@@ -75,7 +75,7 @@ public class CSSClassType extends AbstractRootTypeDescriptor implements
 					try {
 						traverser.apply((ICSSNode) ss);
 					} catch (ClassCastException ex) {
-						JSFCorePlugin.log(ex, "Unable to cast to CSS style");
+						JSFCorePlugin.log(ex, "Unable to cast to CSS style"); //$NON-NLS-1$
 					}
 				}
 				c = traverser.getClassNames();

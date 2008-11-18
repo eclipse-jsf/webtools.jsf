@@ -39,7 +39,7 @@ public interface ExtensionType extends EObject {
      * <!-- end-user-doc -->
      * @generated
      */
-    String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * Returns the value of the '<em><b>Child Nodes</b></em>' reference list.

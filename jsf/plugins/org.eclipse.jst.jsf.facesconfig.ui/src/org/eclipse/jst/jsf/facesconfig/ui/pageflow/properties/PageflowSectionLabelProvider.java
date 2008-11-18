@@ -32,6 +32,8 @@ import org.eclipse.swt.graphics.Image;
  */
 public class PageflowSectionLabelProvider extends LabelProvider {
 
+	private static final String PAGEFLOW_IMAGE_FILE = "facesconfig/FacesConfig_Pageflow16.gif"; //$NON-NLS-1$
+
 	/**
 	 * Default constructor
 	 */
@@ -46,7 +48,7 @@ public class PageflowSectionLabelProvider extends LabelProvider {
 	 */
 	public Image getImage(Object object) {
 		Image result = EditorPlugin.getDefault().getImage(
-				"facesconfig/FacesConfig_Pageflow16.gif");
+				PAGEFLOW_IMAGE_FILE);
 
 		return result;
 	}

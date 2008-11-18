@@ -28,7 +28,7 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Creates the default factory implementation.
@@ -39,7 +39,7 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 	 */
 	public static DTInfoFactory init() {
 		try {
-			DTInfoFactory theDTInfoFactory = (DTInfoFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jsf.pagedesigner/dtinfo.ecore"); 
+			DTInfoFactory theDTInfoFactory = (DTInfoFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jsf.pagedesigner/dtinfo.ecore");  //$NON-NLS-1$
 			if (theDTInfoFactory != null) {
 				return theDTInfoFactory;
 			}
@@ -74,7 +74,7 @@ public class DTInfoFactoryImpl extends EFactoryImpl implements DTInfoFactory {
 			case DTInfoPackage.TAG_DECORATE_INFO: return createTagDecorateInfo();
 			case DTInfoPackage.RESOLVE_ATTRIBUTE_VALUE: return createResolveAttributeValue();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

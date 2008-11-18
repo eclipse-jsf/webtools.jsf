@@ -69,7 +69,7 @@ public final class DropCustomizationController
                 }
                 else 
                 {
-                    PDPlugin.log("Could not find file.", new Exception("Not a real exception"));
+                    PDPlugin.log("Could not find file.", new Exception("Not a real exception")); //$NON-NLS-1$ //$NON-NLS-2$
                     status = Status.CANCEL_STATUS;
                 }
 

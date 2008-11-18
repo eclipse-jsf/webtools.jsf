@@ -57,12 +57,12 @@ public class CommandLinkTagConverter extends AbstractTagConverter
         aEle.removeAttribute(IJSFConstants.ATTR_STYLECLASS);
 
         // Render "#" as the value of the "href" attribute.
-        aEle.setAttribute(IHTMLConstants.ATTR_HREF, "#");
+        aEle.setAttribute(IHTMLConstants.ATTR_HREF, "#"); //$NON-NLS-1$
         // Extend the container border a little to make it selectable
         if (!isPreviewMode())
         {
             String style = aEle.getAttribute(IHTMLConstants.ATTR_STYLE);
-            style = "padding:0.3em;" + style;
+            style = "padding:0.3em;" + style; //$NON-NLS-1$
             aEle.setAttribute(IHTMLConstants.ATTR_STYLE, style);
         }
 

@@ -54,7 +54,7 @@ public class BaseNameTypeItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -95,8 +95,8 @@ public class BaseNameTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_BaseNameType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_BaseNameType_textContent_feature", "_UI_BaseNameType_type"),
+                 getString("_UI_BaseNameType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_BaseNameType_textContent_feature", "_UI_BaseNameType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.BASE_NAME_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -118,8 +118,8 @@ public class BaseNameTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_BaseNameType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_BaseNameType_id_feature", "_UI_BaseNameType_type"),
+                 getString("_UI_BaseNameType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_BaseNameType_id_feature", "_UI_BaseNameType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.BASE_NAME_TYPE__ID,
                  true,
                  false,
@@ -136,7 +136,7 @@ public class BaseNameTypeItemProvider
      * @generated
      */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/BaseNameType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/BaseNameType")); //$NON-NLS-1$
     }
 
     /**
@@ -148,8 +148,8 @@ public class BaseNameTypeItemProvider
     public String getText(Object object) {
         String label = ((BaseNameType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_BaseNameType_type") :
-            getString("_UI_BaseNameType_type") + " " + label;
+            getString("_UI_BaseNameType_type") : //$NON-NLS-1$
+            getString("_UI_BaseNameType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

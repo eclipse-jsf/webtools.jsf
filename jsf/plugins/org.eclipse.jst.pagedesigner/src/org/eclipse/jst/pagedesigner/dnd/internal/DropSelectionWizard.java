@@ -25,7 +25,7 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class DropSelectionWizard extends Wizard {
-	private final String INTIAL_DEFAULT_PAGE_IMAGE = "newsuade_wiz.gif";
+	private final String INTIAL_DEFAULT_PAGE_IMAGE = "newsuade_wiz.gif"; //$NON-NLS-1$
 
 	private Object _localData;
 

@@ -72,7 +72,9 @@ import org.eclipse.ui.model.WorkbenchViewerComparator;
  */
 public class TagRegistryMasterForm extends AbstractMasterForm
 {
-    private TreeViewer           _registryTreeViewer;
+    private static final String REFRESH_NAV_IMAGE_FILE = "refresh_nav_16.gif"; //$NON-NLS-1$
+    
+	private TreeViewer           _registryTreeViewer;
     // private Action _selectProjectAction;
     private Action               _refreshAction;
 
@@ -119,7 +121,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
 
         PlatformUI.getWorkbench().getHelpSystem()
                 .setHelp(_registryTreeViewer.getControl(),
-                        "ViewHandlerPrototype.viewer");
+                        "ViewHandlerPrototype.viewer"); //$NON-NLS-1$
 
         _projectTracker.addListener(new ProjectTrackingListener()
         {
@@ -201,7 +203,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
             final Composite container)
     {
         final Label label = new Label(container, SWT.NONE);
-        label.setText("Project: ");
+        label.setText(Messages.TagRegistryMasterForm_Project);
         final ComboViewer combo = new ComboViewer(container, SWT.FLAT
                 | SWT.READ_ONLY);
         getToolkit().adapt(combo.getControl(), true, false);
@@ -250,13 +252,13 @@ public class TagRegistryMasterForm extends AbstractMasterForm
         if (_registryTreeViewer == null)
         {
             throw new IllegalStateException(
-                    "_registryTreeViewer must be initialized before calling makeActions");
+                    "_registryTreeViewer must be initialized before calling makeActions"); //$NON-NLS-1$
         }
         _refreshAction = new RefreshAction(_registryTreeViewer);
-        _refreshAction.setText("Refresh Registry");
-        _refreshAction.setToolTipText("Refresh Registry");
+        _refreshAction.setText(Messages.TagRegistryMasterForm_RefreshRegistry);
+        _refreshAction.setToolTipText(Messages.TagRegistryMasterForm_RefreshRegistry);
         _refreshAction.setImageDescriptor(JSFUICommonPlugin.getDefault()
-                .getImageDescriptor("refresh_nav_16.gif"));
+                .getImageDescriptor(REFRESH_NAV_IMAGE_FILE));
         
         if (JSFUITraceOptions.TRACE_METADATAGEN)
         {
@@ -344,12 +346,12 @@ public class TagRegistryMasterForm extends AbstractMasterForm
         @Override
         public void run()
         {
-            MessageDialog dialog = new MessageDialog(_viewer.getControl().getShell(), "Also flush cached data?", null, // accept
+            MessageDialog dialog = new MessageDialog(_viewer.getControl().getShell(), Messages.TagRegistryMasterForm_FlushCacheQuestion, null, // accept
                     // the
                     // default
                     // window
                     // icon
-                    "Flushing cached data may cause some operations to slow until cached information is regenerated.  If you answer no, the view will refresh but NOT flush cached data"
+                    Messages.TagRegistryMasterForm_FlushCacheMessage
                     , MessageDialog.QUESTION, new String[] { IDialogConstants.YES_LABEL,
                             IDialogConstants.NO_LABEL }, 1); // no is the
                                                                 // default
@@ -415,7 +417,9 @@ public class TagRegistryMasterForm extends AbstractMasterForm
 
     private static class CommonLabelProvider extends LabelProvider
     {
-        @Override
+        private static final String CONFIGS_IMAGE_FILE = "configs.gif"; //$NON-NLS-1$
+
+		@Override
         public String getText(final Object obj)
         {
             if (obj instanceof TagRegistryInstance)
@@ -481,7 +485,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
             }
             else if (obj instanceof TreePlaceholder)
             {
-                return JSFUICommonPlugin.getDefault().getImage("configs.gif");
+                return JSFUICommonPlugin.getDefault().getImage(CONFIGS_IMAGE_FILE);
             }
 
             final String imageKey = ISharedImages.IMG_OBJ_ELEMENT;

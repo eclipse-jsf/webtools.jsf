@@ -62,7 +62,7 @@ public abstract class SelectTagConverter extends AbstractTagConverter
                     item.setItemValue(ele.getAttribute(IJSFConstants.ATTR_ITEMVALUE));
                     item.setValue(ele.getAttribute(IJSFConstants.ATTR_VALUE));
                     item.setId(ele.getAttribute(IJSFConstants.ATTR_ID));
-                    item.setDisabled("true".equalsIgnoreCase(ele.getAttribute(IJSFConstants.ATTR_ITEMDISABLED)));
+                    item.setDisabled("true".equalsIgnoreCase(ele.getAttribute(IJSFConstants.ATTR_ITEMDISABLED))); //$NON-NLS-1$
                     result.add(item);
                 }
                 else if (IJSFConstants.TAG_SELECTITEMS.equalsIgnoreCase(tagname))
@@ -75,11 +75,11 @@ public abstract class SelectTagConverter extends AbstractTagConverter
                         value = IJSFConstants.ATTR_VALUE;
                     }
                     SelectItemModel item1 = new SelectItemModel();
-                    item1.setValue(value + "_1");
+                    item1.setValue(value + "_1"); //$NON-NLS-1$
                     item1.setId(ele.getAttribute(IJSFConstants.ATTR_ID));
                     result.add(item1);
                     SelectItemModel item2 = new SelectItemModel();
-                    item2.setValue(value + "_2");
+                    item2.setValue(value + "_2"); //$NON-NLS-1$
                     item2.setId(ele.getAttribute(IJSFConstants.ATTR_ID));
                     result.add(item2);
                 }
@@ -98,11 +98,11 @@ public abstract class SelectTagConverter extends AbstractTagConverter
         SelectItemModel item = new SelectItemModel();
         if (parent.getLocalName().equals(IJSFConstants.TAG_SELECTONERADIO))
         {
-            item.setLabel("radio");
+            item.setLabel("radio"); //$NON-NLS-1$
         }
         else if (parent.getLocalName().equals(IJSFConstants.TAG_SELECTMANYCHECKBOX))
         {
-            item.setLabel("checkBox");
+            item.setLabel("checkBox"); //$NON-NLS-1$
         }
         else
         {

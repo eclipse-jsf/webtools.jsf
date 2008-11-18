@@ -23,7 +23,7 @@ import org.eclipse.swt.graphics.Image;
  * @author mengbo
  */
 public class ImageWidgetProvider extends AbstractWidgetProvider {
-	private static final String NOPIC_IMAGE_NAME = "PD_nopic.jpg";
+	private static final String NOPIC_IMAGE_NAME = "PD_nopic.jpg"; //$NON-NLS-1$
 
 	private static Image _noPicImage;
 

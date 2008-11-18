@@ -42,6 +42,8 @@ import org.eclipse.ui.forms.widgets.Section;
  */
 public class OverviewSection extends SectionPart {
 
+	private static final String HELP_IMAGE_FILE = "help.gif"; //$NON-NLS-1$
+
 	private static Logger log = JSFUICommonPlugin.getLogger(OverviewSection.class);
 
 	private String editorId;
@@ -164,7 +166,7 @@ public class OverviewSection extends SectionPart {
 		helpImage = new ImageHyperlink(textClient, SWT.NONE);
 		toolkit.adapt(helpImage, true, true);
 		toolkit.adapt(textClient, true, true);
-		helpImage.setImage(JSFUICommonPlugin.getDefault().getImage("help.gif")); //$NON-NLS-1$
+		helpImage.setImage(JSFUICommonPlugin.getDefault().getImage(HELP_IMAGE_FILE)); 
 		getSection().setTextClient(textClient);
 		if (helpTooltip != null) {
 			helpImage.setToolTipText(helpTooltip);
@@ -230,10 +232,10 @@ public class OverviewSection extends SectionPart {
 					// log.IntroductionSection.action.error=Failed to launch the
 					// link {0}.
 					log
-							.error("log.OverviewSection.action.error",
+							.error("log.OverviewSection.action.error", //$NON-NLS-1$
 									hyperlink, ee);
 					JSFUICommonPlugin.getAlerts().detailError(hyperlink,
-							"log.OverviewSection.action.error", hyperlink, ee);
+							"log.OverviewSection.action.error", hyperlink, ee); //$NON-NLS-1$
 				}
 			}
 		}

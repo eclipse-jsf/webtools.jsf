@@ -58,6 +58,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * @author collinsc,jchoi
  */
 public class IntroductionSection extends SectionPart {
+
+	private static final String HELP_IMAGE_FILE = "help.gif"; //$NON-NLS-1$
+
 	private static Logger _log = JSFUICommonPlugin
 			.getLogger(IntroductionSection.class);
 
@@ -128,7 +131,7 @@ public class IntroductionSection extends SectionPart {
 			ImageHyperlink helpImage = new ImageHyperlink(this._textClient,
 					SWT.NONE);
 			this._toolkit.adapt(helpImage, true, true);
-			helpImage.setImage(JSFUICommonPlugin.getDefault().getImage("help.gif"));
+			helpImage.setImage(JSFUICommonPlugin.getDefault().getImage(HELP_IMAGE_FILE));
 			if (this._helpTooltip != null) {
 				helpImage.setToolTipText(this._helpTooltip);
 			}
@@ -173,9 +176,9 @@ public class IntroductionSection extends SectionPart {
 				processItems(container, factory, children[ii]);
 			}
 		} else {
-			setText("No Introduction");
+			setText(Messages.IntroductionSection_noIntroTitle);
 
-			setDescription("No Introduction page configuration found in the plugin.xml");
+			setDescription(Messages.IntroductionSection_noIntroDescription);
 		}
 
 		factory.paintBordersFor(container);
@@ -255,12 +258,12 @@ public class IntroductionSection extends SectionPart {
 				}
 				else
 				{
-					JSFUICommonPlugin.getLogger(this.getClass()).error(new Throwable("Image not created for "+element));
+					JSFUICommonPlugin.getLogger(this.getClass()).error(new Throwable("Image not created for "+element)); //$NON-NLS-1$
 				}
 			}
 			else
 			{
-				JSFUICommonPlugin.getLogger(this.getClass()).error(new Throwable("Image Descriptor not found for "+element));
+				JSFUICommonPlugin.getLogger(this.getClass()).error(new Throwable("Image Descriptor not found for "+element)); //$NON-NLS-1$
 			}
 		}
 
@@ -285,10 +288,10 @@ public class IntroductionSection extends SectionPart {
 				} catch (Exception ee) {
 					// log.IntroductionSection.action.error=Failed to launch the
 					// link {0}.
-					_log.error("log.IntroductionSection.action.error",
+					_log.error("log.IntroductionSection.action.error", //$NON-NLS-1$
 							hyperlink, ee);
 					JSFUICommonPlugin.getAlerts().detailError(hyperlink,
-							"log.IntroductionSection.action.error", hyperlink,
+							"log.IntroductionSection.action.error", hyperlink, //$NON-NLS-1$
 							ee);
 				}
 			}
@@ -311,7 +314,7 @@ public class IntroductionSection extends SectionPart {
 		IConfigurationElement[] elements = Platform
 				.getExtensionRegistry()
 				.getConfigurationElementsFor(
-						"org.eclipse.jst.jsf.common.ui.introductionPage");
+						"org.eclipse.jst.jsf.common.ui.introductionPage"); //$NON-NLS-1$
 		if (elements.length > 0) {
 			for (int ii = 0; ii < elements.length; ii++) {
 				// get extensions for this dialog

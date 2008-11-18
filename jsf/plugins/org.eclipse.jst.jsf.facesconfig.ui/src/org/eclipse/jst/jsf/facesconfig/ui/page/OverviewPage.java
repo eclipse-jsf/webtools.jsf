@@ -44,7 +44,7 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
     /**
      * The id of this page in the faces-config editor.
      */
-	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OverviewPage";
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OverviewPage"; //$NON-NLS-1$
 	
 	private static final int LAYOUT_MARGIN_HEIGHT = 2;
 
@@ -69,7 +69,7 @@ public class OverviewPage extends FormPage implements ISelectionProvider,
 	 * @param editor
 	 */
 	public OverviewPage(FormEditor editor) {
-		super(editor, "OverviewPage", EditorMessages.OverviewPage_page_name);
+		super(editor, "OverviewPage", EditorMessages.OverviewPage_page_name); //$NON-NLS-1$
 	}
 
 	/*

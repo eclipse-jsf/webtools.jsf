@@ -25,11 +25,11 @@ import org.eclipse.jst.pagedesigner.viewer.DesignRange;
  */
 public class CreateLinkWizard extends Wizard {
 	private static final String WIZARD_TITLE = PDPlugin
-			.getResourceString("CreateLinkWizard.Title");
+			.getResourceString("CreateLinkWizard.Title"); //$NON-NLS-1$
 
-	private static final String INTIAL_DEFAULT_PAGE_IMAGE = "newsuade_wiz.gif";
+	private static final String INTIAL_DEFAULT_PAGE_IMAGE = "newsuade_wiz.gif"; //$NON-NLS-1$
 
-	private static final String PAGE_NAME = "first";
+	private static final String PAGE_NAME = "first"; //$NON-NLS-1$
 
 	private String _pageTitle;
 

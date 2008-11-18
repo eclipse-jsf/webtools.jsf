@@ -36,14 +36,14 @@ public class JavaUtil {
 			Object parent) {
 		IPath result = null;
 		if (javaProject == null || parent == null) {
-			return new Path("");
+			return new Path(""); //$NON-NLS-1$
 		}
 		IClasspathEntry[] entries = javaProject.readRawClasspath();
 		IPath classPath = null;
 		if (parent instanceof IResource) {
 			if (((javaProject != null) && !javaProject
 					.isOnClasspath((IResource) parent))) {
-				return new Path("");
+				return new Path(""); //$NON-NLS-1$
 			}
 			if (parent instanceof IFile) {
 				IPath elementPath = ((IFile) parent).getFullPath();
@@ -76,7 +76,7 @@ public class JavaUtil {
 						// Error.DesignerPropertyTool.NatureQuerying = Error in
 						// project java nature querying
 						PDPlugin.getLogger(JavaUtil.class).error(
-								"Error.DesignerPropertyTool.NatureQuerying", e);
+								"Error.DesignerPropertyTool.NatureQuerying", e); //$NON-NLS-1$
 						return null;
 					}
 				}
@@ -91,7 +91,7 @@ public class JavaUtil {
 		if (result != null) {
 			return result;
 		}
-		return new Path("");
+		return new Path(""); //$NON-NLS-1$
 	}
 
 }

@@ -41,7 +41,7 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
     /**
      * the list of possible html heading tags
      */
-    private static final String[] HH = { "h1", "h2", "h3", "h4", "h5", "h6" };
+    private static final String[] HH = { "h1", "h2", "h3", "h4", "h5", "h6" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 
     /**
 	 * @param viewer
@@ -403,6 +403,6 @@ public class ParagraphApplyStyleCommand extends ApplyStyleCommand {
 	}
 
 	private static String getAName(String name) {
-		return name == null ? "" : name;
+		return name == null ? "" : name; //$NON-NLS-1$
 	}
 }

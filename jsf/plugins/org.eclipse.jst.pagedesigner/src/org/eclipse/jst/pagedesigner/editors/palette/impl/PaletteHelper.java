@@ -54,13 +54,13 @@ import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 public class PaletteHelper {
 	
     // pattern to strip all <x> and </x> HTML tags
-    final private static Pattern removeHTMLTags = Pattern.compile("<[/?\\w\\s=\"\\.\\#]+>");
+    final private static Pattern removeHTMLTags = Pattern.compile("<[/?\\w\\s=\"\\.\\#]+>"); //$NON-NLS-1$
     
     // pattern to find all runs of spaces longer than one
-    final private static Pattern trimInteriorWhitespace = Pattern.compile("[ ]+");
+    final private static Pattern trimInteriorWhitespace = Pattern.compile("[ ]+"); //$NON-NLS-1$
     
     // pattern to find all new lines for removal
-    final private static Pattern removeNewLines = Pattern.compile("[\n]");
+    final private static Pattern removeNewLines = Pattern.compile("[\n]"); //$NON-NLS-1$
     
 	private final static ImageDescriptor DEFAULT_SMALL_ICON = JSFUICommonPlugin
 		.getDefault().getImageDescriptor(
@@ -68,7 +68,7 @@ public class PaletteHelper {
 
 	private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		.getDefault().getImageDescriptor(
-				"palette/GENERIC/large/PD_Palette_Default.gif");
+				"palette/GENERIC/large/PD_Palette_Default.gif"); //$NON-NLS-1$
 
 
 
@@ -166,7 +166,7 @@ public class PaletteHelper {
 			CMDocument doc,Model model) {
 		
 		if (model != null) {//load from metadata - should always drop in here
-			Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "paletteInfos");
+			Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "paletteInfos"); //$NON-NLS-1$
 			if (trait != null){
 				PaletteInfos tags = (PaletteInfos)trait.getValue();
 				for (Iterator it=tags.getInfos().iterator();it.hasNext();){
@@ -192,26 +192,26 @@ public class PaletteHelper {
 		TaglibPaletteDrawer	 category = null;
 		if (model != null){
 			//do we create it?
-			boolean isHidden = getBooleanTagTraitValue(model, "hidden", false);			
+			boolean isHidden = getBooleanTagTraitValue(model, "hidden", false);			 //$NON-NLS-1$
 			if (isHidden){
 				return null;
 			}
 						
-			String label = getStringTagTraitValue(model, "display-label", model.getId());
-			label = label.equals("") ? model.getId() : label;
+			String label = getStringTagTraitValue(model, "display-label", model.getId()); //$NON-NLS-1$
+			label = label.equals("") ? model.getId() : label; //$NON-NLS-1$
 			category = manager.createTaglibPaletteDrawer(model.getId(), label);
 			
-			String desc = getStringTagTraitValue(model, "description", model.getId());
+			String desc = getStringTagTraitValue(model, "description", model.getId()); //$NON-NLS-1$
 			category.setDescription(formatDescription(desc));
 			
-			ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(model, "small-icon", null);
+			ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(model, "small-icon", null); //$NON-NLS-1$
 			if (largeIconImage != null)
 				category.setLargeIcon(largeIconImage);			
 			
-			String prefix = getStringTagTraitValue(model, "default-prefix", null);
+			String prefix = getStringTagTraitValue(model, "default-prefix", null); //$NON-NLS-1$
 			category.setDefaultPrefix(prefix);
 			
-			boolean isVisible = !(getBooleanTagTraitValue(model, "expert", false));
+			boolean isVisible = !(getBooleanTagTraitValue(model, "expert", false)); //$NON-NLS-1$
 			category.setVisible(isVisible);
 			
 			category.setInitialState(PaletteDrawer.INITIAL_STATE_CLOSED);
@@ -253,7 +253,7 @@ public class PaletteHelper {
 			TagToolPaletteEntry item;
 			if (tagName.equalsIgnoreCase(IHTMLConstants.TAG_INPUT)) {//TODO:  fix this nonsense!
 				StringBuffer name = new StringBuffer(category.getURI());
-				name.append(":").append(tagName).append(":").append(tagName);
+				name.append(":").append(tagName).append(":").append(tagName); //$NON-NLS-1$ //$NON-NLS-2$
 				item = category.getTagPaletteEntryById(name.toString());
 			} else {
 				item = category.getTagPaletteEntryByTagName(tagName);
@@ -288,16 +288,16 @@ public class PaletteHelper {
 	private static void createTagEntry(TaglibPaletteDrawer category,
 			Entity entity) {
 		
-		boolean hidden = getBooleanTagTraitValue(entity, "hidden", false);
+		boolean hidden = getBooleanTagTraitValue(entity, "hidden", false); //$NON-NLS-1$
 		if (hidden)//do not create a palette entry
 			return; 
 		
 		String tagName = entity.getId();
-		String label = getStringTagTraitValue(entity, "display-label", tagName);
-		String desc = formatDescription(getStringTagTraitValue(entity, "description", tagName));		
-		ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(entity, "small-icon", DEFAULT_SMALL_ICON);
-		ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(entity, "large-icon", DEFAULT_LARGE_ICON);
-		boolean expert = getBooleanTagTraitValue(entity, "expert", false);
+		String label = getStringTagTraitValue(entity, "display-label", tagName); //$NON-NLS-1$
+		String desc = formatDescription(getStringTagTraitValue(entity, "description", tagName));		 //$NON-NLS-1$
+		ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(entity, "small-icon", DEFAULT_SMALL_ICON); //$NON-NLS-1$
+		ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(entity, "large-icon", DEFAULT_LARGE_ICON); //$NON-NLS-1$
+		boolean expert = getBooleanTagTraitValue(entity, "expert", false); //$NON-NLS-1$
 				
 		internalCreateTagEntry(category, tagName, tagName, label, desc, smallIcon, largeIcon, expert);
 		
@@ -364,16 +364,16 @@ public class PaletteHelper {
 			desc = tag.getDescription();						
 		}
 		
-		if (label == null || label.equals(""))
+		if (label == null || label.equals("")) //$NON-NLS-1$
 			label = tagName;
 		
 		if (desc == null )
-			desc = "";
+			desc = ""; //$NON-NLS-1$
 		else
 			desc = formatDescription(desc);
 		
 		TagToolPaletteEntry item = internalCreateTagEntry(category, tagName, tagName, label, desc, getDefaultSmallIcon(), getDefaultLargeIcon(), false);
-		item.setToolProperty("CMElementDeclaration", eledecl);
+		item.setToolProperty("CMElementDeclaration", eledecl); //$NON-NLS-1$
 		
 	}
 	
@@ -397,23 +397,23 @@ public class PaletteHelper {
 		if (aDesc != null){
 			if (aDesc.length() > DESCRIPTION_TRUNCATE_HARD_LENGTH) {
 				StringBuffer result = new StringBuffer(aDesc.substring(0, DESCRIPTION_TRUNCATE_HARD_LENGTH));
-				result.append("...");
+				result.append("..."); //$NON-NLS-1$
 				return result.toString();
 			}
 			return aDesc;
 
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 	
 	private static String filterConvertString(String text) {
 		if (text == null) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
          
-		String result = removeHTMLTags.matcher(text).replaceAll("");
-		result = removeNewLines.matcher(result).replaceAll(" ");
-        result = trimInteriorWhitespace.matcher(result).replaceAll(" ");        
+		String result = removeHTMLTags.matcher(text).replaceAll(""); //$NON-NLS-1$
+		result = removeNewLines.matcher(result).replaceAll(" "); //$NON-NLS-1$
+        result = trimInteriorWhitespace.matcher(result).replaceAll(" ");         //$NON-NLS-1$
 
 		return result;
 	}

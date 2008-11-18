@@ -44,7 +44,7 @@ public class ComponentListDialog extends CommonListDialog {
 				if (element.getComponentType() != null)
 					setValue(element.getComponentType().getTextContent());
 				else
-					setValue("");
+					setValue(""); //$NON-NLS-1$
 			}
 
 		}

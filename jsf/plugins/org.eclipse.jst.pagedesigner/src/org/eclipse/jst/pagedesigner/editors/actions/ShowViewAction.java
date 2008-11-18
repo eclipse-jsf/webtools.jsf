@@ -35,7 +35,7 @@ public class ShowViewAction extends Action {
     public ShowViewAction(String text, String viewId) 
     {
         _viewId = viewId;
-        setText(text); //$NON-NLS-1$
+        setText(text);
     }
 
     /*
@@ -47,7 +47,7 @@ public class ShowViewAction extends Action {
         try {
             getPage().showView(_viewId);
         } catch (PartInitException e) {
-            _log.info("Open the view: "+_viewId, e);
+            _log.info("Open the view: "+_viewId, e); //$NON-NLS-1$
         }
 
     }

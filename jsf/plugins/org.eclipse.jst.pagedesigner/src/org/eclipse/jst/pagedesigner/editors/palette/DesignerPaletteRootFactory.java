@@ -27,13 +27,13 @@ public class DesignerPaletteRootFactory {
 	private static final int DEFAULT_PALETTE_SIZE = 125;
 
 	/** Preference ID used to persist the palette location. */
-	private static final String PALETTE_DOCK_LOCATION = "DesignerPaletteRootFactory.Location";
+	private static final String PALETTE_DOCK_LOCATION = "DesignerPaletteRootFactory.Location"; //$NON-NLS-1$
 
 	/** Preference ID used to persist the palette size. */
-	private static final String PALETTE_SIZE = "DesignerPaletteRootFactory.Size";
+	private static final String PALETTE_SIZE = "DesignerPaletteRootFactory.Size"; //$NON-NLS-1$
 
 	/** Preference ID used to persist the flyout palette's state. */
-	private static final String PALETTE_STATE = "DesignerPaletteRootFactory.State";
+	private static final String PALETTE_STATE = "DesignerPaletteRootFactory.State"; //$NON-NLS-1$
 
 	/**
 	 * Return a {@link FlyoutPreferences} instance used to save/load the preferences of

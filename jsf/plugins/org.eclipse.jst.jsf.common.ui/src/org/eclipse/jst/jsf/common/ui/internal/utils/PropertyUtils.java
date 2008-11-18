@@ -55,9 +55,9 @@ public final class PropertyUtils {
 
 	// This is the name for the properties file.
 	// The prop-name will be prepended to this string....
-	private static final String NAME_PROPERTIES = ".props";
+	private static final String NAME_PROPERTIES = ".props"; //$NON-NLS-1$
 
-	private static final String STR_BOUNDS_END = ".bounds"; // assumes the
+	private static final String STR_BOUNDS_END = ".bounds"; // assumes the //$NON-NLS-1$
 
 	// window name or
 	// name list is
@@ -176,7 +176,7 @@ public final class PropertyUtils {
 	 */
 	public static boolean isProperty(Properties props, String key,
 			boolean bDefault) {
-		return getProperty(props, key, "" + bDefault).equals("" + true);
+		return getProperty(props, key, "" + bDefault).equals("" + true); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -191,7 +191,7 @@ public final class PropertyUtils {
 		if (tokenString == null) {
 			return new String[0];
 		}
-        StringTokenizer tokenizer = new StringTokenizer(tokenString, ",");
+        StringTokenizer tokenizer = new StringTokenizer(tokenString, ","); //$NON-NLS-1$
         String[] pNames = new String[tokenizer.countTokens()];
 
         for (int ii = 0; ii < pNames.length; ii++) {
@@ -329,8 +329,8 @@ public final class PropertyUtils {
 	 */
 	public static boolean isResourceProperty(ResourceBundle bundle, String key,
 			boolean bDefault) {
-		return getResourceProperty(bundle, key, "" + bDefault)
-				.equals("" + true);
+		return getResourceProperty(bundle, key, "" + bDefault) //$NON-NLS-1$
+				.equals("" + true); //$NON-NLS-1$
 	}
 
 	// ///////////////////////////////////////////////////////////////////////
@@ -476,8 +476,8 @@ public final class PropertyUtils {
 		Properties theNewProperties = new Properties();
 
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		defaultProperties.store(os, "");
-		localProperties.store(os, "");
+		defaultProperties.store(os, ""); //$NON-NLS-1$
+		localProperties.store(os, ""); //$NON-NLS-1$
 		byte[] theData = os.toByteArray();
 		ByteArrayInputStream is = new ByteArrayInputStream(theData);
 		theNewProperties.load(is);
@@ -491,7 +491,7 @@ public final class PropertyUtils {
 	 */ 
 	public static String encodeFilename(String theFilename) {
 		// make theFilename legal on the local system....
-		String theSeparator = System.getProperty("file.separator");
+		String theSeparator = System.getProperty("file.separator"); //$NON-NLS-1$
 		// replace all occurrances of the file separator with a ' '
 		for (int ii = 0; ii < theSeparator.length(); ii++) {
 			char theChar = theSeparator.charAt(ii);
@@ -507,12 +507,12 @@ public final class PropertyUtils {
 	 */
 	public static String getPropertiesPathname(String baseName) {
 		if (baseName.endsWith(NAME_PROPERTIES)) {
-			return System.getProperty("user.dir")
-					+ System.getProperty("file.separator")
+			return System.getProperty("user.dir") //$NON-NLS-1$
+					+ System.getProperty("file.separator") //$NON-NLS-1$
 					+ encodeFilename(baseName);
 		}
-        return System.getProperty("user.dir")
-        		+ System.getProperty("file.separator")
+        return System.getProperty("user.dir") //$NON-NLS-1$
+        		+ System.getProperty("file.separator") //$NON-NLS-1$
         		+ encodeFilename(baseName) + NAME_PROPERTIES;
 	}
 
@@ -624,14 +624,14 @@ public final class PropertyUtils {
 	 */
 	public static String getComponentPropertyName(String names[],
 			String subsystemName) {
-		String tmpString = "";
+		String tmpString = ""; //$NON-NLS-1$
 
 		for (int ii = 0; ii < names.length; ii++) {
-			tmpString = tmpString + (ii > 0 ? "." : "")
+			tmpString = tmpString + (ii > 0 ? "." : "") //$NON-NLS-1$ //$NON-NLS-2$
 					+ PropertyUtils.encodeName(names[ii]);
 		}
-		if (subsystemName.startsWith(".") == false)
-			tmpString += ".";
+		if (subsystemName.startsWith(".") == false) //$NON-NLS-1$
+			tmpString += "."; //$NON-NLS-1$
 		tmpString = tmpString + subsystemName;
 		return tmpString;
 	}
@@ -656,7 +656,7 @@ public final class PropertyUtils {
 		}
 		try {
 			for (ii = 0; ii < 4; ii++) {
-				index = restString.indexOf(",");
+				index = restString.indexOf(","); //$NON-NLS-1$
 				if (index > 0) {
 					tmpString = restString.substring(0, index);
 					restString = restString.substring(index + 1);
@@ -684,7 +684,7 @@ public final class PropertyUtils {
 	 * @return the encoded bounds
 	 */
 	public static String encodeBounds(Rectangle rBounds) {
-		return "" + rBounds.x + "," + rBounds.y + "," + rBounds.width + ","
+		return "" + rBounds.x + "," + rBounds.y + "," + rBounds.width + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				+ rBounds.height;
 	}
 
@@ -774,10 +774,10 @@ public final class PropertyUtils {
 	 */
 	public static String propertiesToEncodedString(Properties props) {
 		try {
-			return savePropertiesToEncodedString(props, "");
+			return savePropertiesToEncodedString(props, ""); //$NON-NLS-1$
 		} catch (IOException ee)// NOPMD
 		{
-            JSFUICommonPlugin.getLogger(PropertyUtils.class).error("saving properties", ee);
+            JSFUICommonPlugin.getLogger(PropertyUtils.class).error("saving properties", ee); //$NON-NLS-1$
 		}
 		return null;
 	}

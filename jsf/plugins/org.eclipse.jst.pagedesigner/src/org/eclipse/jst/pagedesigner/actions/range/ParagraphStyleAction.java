@@ -100,11 +100,11 @@ public class ParagraphStyleAction extends DesignerToolBarAction {
 							common.getNodeName().toLowerCase());
 		}
         
-        String align = ((Element) _applyingNode).getAttribute("align");
+        String align = ((Element) _applyingNode).getAttribute("align"); //$NON-NLS-1$
         if (!(common instanceof Element)) {
         	return false;
         }
-        String cAlign = ((Element) common).getAttribute("align");
+        String cAlign = ((Element) common).getAttribute("align"); //$NON-NLS-1$
         if (align == null || cAlign == null) {
         	return false;
         }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SetGeneratorImpl.java,v 1.2 2007/04/16 19:54:01 itrimble Exp $
+ * $Id: SetGeneratorImpl.java,v 1.3 2008/11/18 22:24:38 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -36,7 +36,7 @@ public class SetGeneratorImpl extends EObjectImpl implements SetGenerator {
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getAlgorithm() <em>Algorithm</em>}' attribute.
@@ -211,9 +211,9 @@ public class SetGeneratorImpl extends EObjectImpl implements SetGenerator {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (algorithm: ");
+        result.append(" (algorithm: "); //$NON-NLS-1$
         result.append(algorithm);
-        result.append(", expression: ");
+        result.append(", expression: "); //$NON-NLS-1$
         result.append(expression);
         result.append(')');
         return result.toString();

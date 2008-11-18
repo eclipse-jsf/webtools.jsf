@@ -51,7 +51,7 @@ public class MethodBindingType extends ExpressionBindingType implements IValidEL
         }
         else
         {
-            JSFCorePlugin.log(IStatus.INFO, "Missing metadata for trait "+RUNTIME_RETURN_TYPE+" for entity "+getMetaDataContext().getEntity());
+            JSFCorePlugin.log(IStatus.INFO, "Missing metadata for trait "+RUNTIME_RETURN_TYPE+" for entity "+getMetaDataContext().getEntity()); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
 		if (returnTypeSignature == null)

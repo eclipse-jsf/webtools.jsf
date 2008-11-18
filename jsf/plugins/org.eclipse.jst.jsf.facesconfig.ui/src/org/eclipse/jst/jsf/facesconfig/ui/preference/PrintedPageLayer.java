@@ -35,7 +35,7 @@ import org.eclipse.gef.LayerConstants;
  */
 /*package*/ class PrintedPageLayer extends FreeformLayer {
 	// our layer name
-	static final String PRINTED_PAGE_LAYER = "Printed Page";
+	static final String PRINTED_PAGE_LAYER = "Printed Page"; //$NON-NLS-1$
 
 	// the size of the page tiles (this should be the printer's resolution)
 	private Dimension pageSize = new Dimension(850, 1100);

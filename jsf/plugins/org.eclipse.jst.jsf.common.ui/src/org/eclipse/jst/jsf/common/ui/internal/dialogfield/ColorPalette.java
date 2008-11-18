@@ -108,14 +108,14 @@ public abstract class ColorPalette
      */
     public static String getStringColor(RGB rgb) {
         if (rgb == null) {
-            return "";
+            return ""; //$NON-NLS-1$
         }
 
-        StringBuffer buffer = new StringBuffer("#");
+        StringBuffer buffer = new StringBuffer("#"); //$NON-NLS-1$
         int[] intRGBs = new int[] { rgb.red, rgb.green, rgb.blue };
         for (int i = 0; i < 3; i++) {
             if (intRGBs[i] < 16) {
-                buffer.append("0");
+                buffer.append("0"); //$NON-NLS-1$
             }
             buffer.append(Integer.toHexString(intRGBs[i]).toUpperCase());
         }

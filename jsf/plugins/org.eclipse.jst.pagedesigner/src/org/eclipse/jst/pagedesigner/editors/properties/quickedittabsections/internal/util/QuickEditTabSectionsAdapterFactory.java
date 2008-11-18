@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsAdapterFactory.java,v 1.1 2007/12/07 23:43:50 gkessler Exp $
+ * $Id: QuickEditTabSectionsAdapterFactory.java,v 1.2 2008/11/18 22:22:46 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.util;
 
@@ -28,7 +28,7 @@ public class QuickEditTabSectionsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached model package.

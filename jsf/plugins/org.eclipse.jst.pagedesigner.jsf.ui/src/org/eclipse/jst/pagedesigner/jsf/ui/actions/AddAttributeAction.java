@@ -36,7 +36,7 @@ public class AddAttributeAction extends JSFAddChildAction
      */
     public void run()
     {
-        DialogUtil.createSubElement(getShell(), getParentElement(), ITLDConstants.URI_JSF_CORE, "attribute", new String[]{"name", "value"});
+        DialogUtil.createSubElement(getShell(), getParentElement(), ITLDConstants.URI_JSF_CORE, "attribute", new String[]{"name", "value"}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 //        CommonDialogFieldGroup group = new CommonDialogFieldGroup();
 //
 //        AttributeData[] data = createAttributeData();

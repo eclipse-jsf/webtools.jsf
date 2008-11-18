@@ -248,7 +248,7 @@ public class JSFFacetInstallDataModelProvider extends
 
 	private IProject getProject(){
 		String projName = (String)getProperty(FACET_PROJECT_NAME);
-		if (projName == null || "".equals(projName))
+		if (projName == null || "".equals(projName)) //$NON-NLS-1$
 			return null;
 		
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
@@ -333,7 +333,7 @@ public class JSFFacetInstallDataModelProvider extends
 		IFacetedProjectWorkingCopy projWC = (IFacetedProjectWorkingCopy)getProperty(FACETED_PROJECT_WORKING_COPY);
 		Set<Action> pfas = projWC.getProjectFacetActions();
 		for (Action action : pfas){
-			if (action.getProjectFacetVersion().getProjectFacet().getId().equals("jst.web")){
+			if (action.getProjectFacetVersion().getProjectFacet().getId().equals("jst.web")){ //$NON-NLS-1$
 				IDataModel webFacet = (IDataModel) action.getConfig();
 				return webFacet.getStringProperty(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER );
 			}

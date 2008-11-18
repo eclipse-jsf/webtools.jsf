@@ -50,10 +50,10 @@ public class ShowPropertyViewAction extends SelectionAction {
 	public ShowPropertyViewAction(IWorkbenchPart part) {
 		super(part);
 		// Pageflow.Action.ShowPropertyView.Label = Properties
-		setText(PageflowMessages.Pageflow_Action_ShowPropertyView_Label); //$NON-NLS-1$
+		setText(PageflowMessages.Pageflow_Action_ShowPropertyView_Label);
 		setId(SHOW_PROPERTY_VIEW);
 		// Pageflow.Action.ShowPropertyView.ToolTip = Show properties
-		setToolTipText(PageflowMessages.Pageflow_Action_ShowPropertyView_ToolTip); //$NON-NLS-1$
+		setToolTipText(PageflowMessages.Pageflow_Action_ShowPropertyView_ToolTip);
 	}
 
 	/**
@@ -103,13 +103,13 @@ public class ShowPropertyViewAction extends SelectionAction {
 				IWorkbenchPage page = dw.getActivePage();
 				if (page != null) {
 					try {
-						page.showView("org.eclipse.ui.views.PropertySheet");
+						page.showView("org.eclipse.ui.views.PropertySheet"); //$NON-NLS-1$
 					} catch (PartInitException e) {
 						// Pageflow.PageflowEditor.Error.canNotShowPropertyView
 						// = Failed to show property sheet view.
 						log
 								.error(
-										"Pageflow.PageflowEditor.Error.canNotShowPropertyView",
+										"Pageflow.PageflowEditor.Error.canNotShowPropertyView", //$NON-NLS-1$
 										e);
 					}
 

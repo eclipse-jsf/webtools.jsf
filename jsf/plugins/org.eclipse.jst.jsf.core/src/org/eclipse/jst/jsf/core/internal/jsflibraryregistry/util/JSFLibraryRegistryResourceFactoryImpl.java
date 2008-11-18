@@ -28,7 +28,7 @@ public class JSFLibraryRegistryResourceFactoryImpl extends ResourceFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Creates an instance of the resource factory.

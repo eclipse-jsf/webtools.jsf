@@ -47,7 +47,7 @@ public class DataBindingViewAction extends Action {
 			getPage().showView(
 					"org.eclipse.jst.pagedesigner.databinding.ui.views.DataBindingsView");//$NON-NLS-1$
 		} catch (PartInitException e) {
-			_log.error("Error opening the DataBindingView");
+			_log.error("Error opening the DataBindingView"); //$NON-NLS-1$
 		}
 	}
 

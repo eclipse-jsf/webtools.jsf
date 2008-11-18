@@ -69,8 +69,8 @@ public class RelatedViewActionGroup extends ActionGroup
 		viewMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
                 // TODO: don't like this at all
-				String[] views = { "org.eclipse.ui.views.PropertySheet",
-						"org.eclipse.gef.ui.palette_view", "org.eclipse.ui.views.ContentOutline"};
+				String[] views = { "org.eclipse.ui.views.PropertySheet", //$NON-NLS-1$
+						"org.eclipse.gef.ui.palette_view", "org.eclipse.ui.views.ContentOutline"}; //$NON-NLS-1$ //$NON-NLS-2$
 
                 Map icons = getIconForView(views);
                 // TODO: is this the best way to do this?
@@ -125,12 +125,12 @@ public class RelatedViewActionGroup extends ActionGroup
 		Map icons = new HashMap();
 
 		IConfigurationElement[] elements = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor("org.eclipse.ui.views");
+				.getConfigurationElementsFor("org.eclipse.ui.views"); //$NON-NLS-1$
 		for (int i = 0; i < elements.length; i++) {
 			String name = elements[i].getName();
-			String id = elements[i].getAttribute("id");
-			if ("view".equals(name) && views.contains(id)) {
-				String iconPath = elements[i].getAttribute("icon");
+			String id = elements[i].getAttribute("id"); //$NON-NLS-1$
+			if ("view".equals(name) && views.contains(id)) { //$NON-NLS-1$
+				String iconPath = elements[i].getAttribute("icon"); //$NON-NLS-1$
 				if (iconPath != null) {
 					icons.put(id, AbstractUIPlugin.imageDescriptorFromPlugin(
 							elements[i].getDeclaringExtension().getContributor().getName(),

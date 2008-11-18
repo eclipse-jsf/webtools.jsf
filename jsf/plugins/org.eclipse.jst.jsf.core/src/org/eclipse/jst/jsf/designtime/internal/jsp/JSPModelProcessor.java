@@ -237,9 +237,9 @@ public class JSPModelProcessor
         throw new CoreException
             (new Status(IStatus.ERROR
                         , "org.eclipse.blah" //$NON-NLS-1$
-                        , 0  //$NON-NLS-1$
+                        , 0
                         ,"model not of expected type" //$NON-NLS-1$
-                        , new Throwable())); //$NON-NLS-1$
+                        , new Throwable()));
     }
 
     private void dispose()
@@ -458,7 +458,7 @@ public class JSPModelProcessor
         }
     }
     
-    @SuppressWarnings("deprecation") //$NON-NLS-1$
+    @SuppressWarnings("deprecation")
     private void processSetsLocale(final String uri, final String elementName, Node attribute)
     {
         LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file.getProject(), uri, elementName, attribute.getLocalName());

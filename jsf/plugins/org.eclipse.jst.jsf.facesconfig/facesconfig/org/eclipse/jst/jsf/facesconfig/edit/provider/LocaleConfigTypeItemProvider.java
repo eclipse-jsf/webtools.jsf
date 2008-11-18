@@ -50,7 +50,7 @@ public class LocaleConfigTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -90,8 +90,8 @@ public class LocaleConfigTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_LocaleConfigType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_LocaleConfigType_id_feature", "_UI_LocaleConfigType_type"),
+                 getString("_UI_LocaleConfigType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_LocaleConfigType_id_feature", "_UI_LocaleConfigType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.LOCALE_CONFIG_TYPE__ID,
                  true,
                  false,
@@ -137,7 +137,7 @@ public class LocaleConfigTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/LocaleConfigType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/LocaleConfigType")); //$NON-NLS-1$
     }
 
     /**
@@ -149,8 +149,8 @@ public class LocaleConfigTypeItemProvider
 	public String getText(Object object) {
         String label = ((LocaleConfigType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_LocaleConfigType_type") :
-            getString("_UI_LocaleConfigType_type") + " " + label;
+            getString("_UI_LocaleConfigType_type") : //$NON-NLS-1$
+            getString("_UI_LocaleConfigType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -225,7 +225,7 @@ public class LocaleConfigTypeItemProvider
 		case 0:
 			return getText(object);
 		case 1:
-			return getString("_UI_LocaleConfigType_type");
+			return getString("_UI_LocaleConfigType_type"); //$NON-NLS-1$
 		}
 
 		return null;

@@ -35,7 +35,7 @@ import org.w3c.dom.Node;
  */
 public class DataTableTagConverter extends AbstractTagConverter
 {
-    private static final String FACET_NAME_HEADER = "header";
+    private static final String FACET_NAME_HEADER = "header"; //$NON-NLS-1$
 
     /**
      * @param host
@@ -137,7 +137,7 @@ public class DataTableTagConverter extends AbstractTagConverter
         if (rowClasses != null)
         {
             // as we are only rendering one row, so we only get the first rowclass
-            StringTokenizer tokenizer = new StringTokenizer(rowClasses, ", ");
+            StringTokenizer tokenizer = new StringTokenizer(rowClasses, ", "); //$NON-NLS-1$
             if (tokenizer.hasMoreTokens())
             {
                 trEle.setAttribute(IHTMLConstants.ATTR_CLASS, tokenizer.nextToken());
@@ -149,7 +149,7 @@ public class DataTableTagConverter extends AbstractTagConverter
         List columnClasses = new ArrayList();
         if (columnClassesAttr != null)
         {
-            StringTokenizer tokenizer = new StringTokenizer(columnClassesAttr, ", ");
+            StringTokenizer tokenizer = new StringTokenizer(columnClassesAttr, ", "); //$NON-NLS-1$
             while (tokenizer.hasMoreTokens())
             {
                 columnClasses.add(tokenizer.nextToken());
@@ -187,12 +187,12 @@ public class DataTableTagConverter extends AbstractTagConverter
     {
         // If the UIData component has a "header" facet, or any of the child UIColumn
         // components has a "header" facet, render a "thead" element.
-        Element facetEle = JSFDOMUtil.findFacet(hostEle, header ? FACET_NAME_HEADER : "footer");
+        Element facetEle = JSFDOMUtil.findFacet(hostEle, header ? FACET_NAME_HEADER : "footer"); //$NON-NLS-1$
         boolean hasColHeader = false;
         for (int i = 0, size = columns.size(); i < size; i++)
         {
             Element uicolumnEle = (Element) columns.get(i);
-            Element columnFacet = JSFDOMUtil.findFacet(uicolumnEle, header ? FACET_NAME_HEADER : "footer");
+            Element columnFacet = JSFDOMUtil.findFacet(uicolumnEle, header ? FACET_NAME_HEADER : "footer"); //$NON-NLS-1$
             if (columnFacet != null)
             {
                 hasColHeader = true;
@@ -240,7 +240,7 @@ public class DataTableTagConverter extends AbstractTagConverter
             for (int i = 0, size = columns.size(); i < size; i++)
             {
                 Element uicolumnEle = (Element) columns.get(i);
-                Element columnFacet = JSFDOMUtil.findFacet(uicolumnEle, header ? FACET_NAME_HEADER : "footer");
+                Element columnFacet = JSFDOMUtil.findFacet(uicolumnEle, header ? FACET_NAME_HEADER : "footer"); //$NON-NLS-1$
                 Element thEle = createElement(header ? IHTMLConstants.TAG_TH : IHTMLConstants.TAG_TD);
                 trEle.appendChild(thEle);
                 if (columnFacet != null)

@@ -53,13 +53,13 @@ public class JSPConverterFactory implements IConverterFactory {
 			// handle differently
 			if (IJSPCoreConstants.TAG_INCLUDE.equalsIgnoreCase(tagName)) {
 				IncludeTagConverterPreview c = new IncludeTagConverterPreview(
-						element, "page");
+						element, "page"); //$NON-NLS-1$
 				c.setMode(mode);
 				return c;
 			} else if (IJSPCoreConstants.TAG_DIRECTIVE_INCLUDE
 					.equalsIgnoreCase(tagName)) {
 				IncludeTagConverterPreview c = new IncludeTagConverterPreview(
-						element, "file");
+						element, "file"); //$NON-NLS-1$
 				c.setMode(mode);
 				return c;
 			} else if (IJSPCoreConstants.TAG_ROOT.equalsIgnoreCase(tagName)) {
@@ -92,7 +92,7 @@ public class JSPConverterFactory implements IConverterFactory {
                 if (context != null){                	
                 	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
                 	if (wsResolver != null){
-                		return TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"JSP11", ITLDConstants.URI_JSP + ":"+hostElement.getLocalName());
+                		return TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"JSP11", ITLDConstants.URI_JSP + ":"+hostElement.getLocalName()); //$NON-NLS-1$ //$NON-NLS-2$
                 	}
                 }
             }

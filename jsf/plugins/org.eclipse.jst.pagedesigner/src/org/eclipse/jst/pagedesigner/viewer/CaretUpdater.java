@@ -84,7 +84,7 @@ import org.eclipse.swt.widgets.Caret;
 							if ((propertychangeevent.getSource() instanceof RangeModel)
 									&& (propertychangeevent.getPropertyName()
 											.equals(ICSSPropertyID.ATTR_VALUE) || propertychangeevent
-											.getPropertyName().equals("extent")))
+											.getPropertyName().equals("extent"))) //$NON-NLS-1$
 								updateCaret();
 						}
 
@@ -97,7 +97,7 @@ import org.eclipse.swt.widgets.Caret;
 							if ((propertychangeevent.getSource() instanceof RangeModel)
 									&& (propertychangeevent.getPropertyName()
 											.equals(ICSSPropertyID.ATTR_VALUE) || propertychangeevent
-											.getPropertyName().equals("extent")))
+											.getPropertyName().equals("extent"))) //$NON-NLS-1$
 								updateCaret();
 						}
 

@@ -28,9 +28,9 @@ import org.w3c.dom.Text;
 public class MessageTagConverter extends AbstractTagConverter
 {
     private static final String MESSAGE_CONTENT = JSFUIPluginResourcesUtil.getInstance().getString(
-                                                        "MessageTagConverter.defaultValue");
+                                                        "MessageTagConverter.defaultValue"); //$NON-NLS-1$
     private static final String MESSAGE_TOOLTIP = JSFUIPluginResourcesUtil.getInstance().getString(
-                                                        "MessageTagConverter.defaultTooltip");
+                                                        "MessageTagConverter.defaultTooltip"); //$NON-NLS-1$
 
     /**
      * @param host
@@ -71,36 +71,36 @@ public class MessageTagConverter extends AbstractTagConverter
         String warnClass = hostEle.getAttribute(IJSFConstants.ATTR_WARNCLASS);
         String infoClass = hostEle.getAttribute(IJSFConstants.ATTR_INFOCLASS);
 
-        if ((!"".equals(fatalStyle)) && (fatalStyle != null))
+        if ((!"".equals(fatalStyle)) && (fatalStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, fatalStyle);
         }
-        else if ((!"".equals(errorStyle)) && (errorStyle != null))
+        else if ((!"".equals(errorStyle)) && (errorStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, errorStyle);
         }
-        else if ((!"".equals(warnStyle)) && (warnStyle != null))
+        else if ((!"".equals(warnStyle)) && (warnStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, warnStyle);
         }
-        else if ((!"".equals(infoStyle)) && (infoStyle != null))
+        else if ((!"".equals(infoStyle)) && (infoStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, infoStyle);
         }
 
-        if ((!"".equals(fatalClass)) && (fatalClass != null))
+        if ((!"".equals(fatalClass)) && (fatalClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, fatalClass);
         }
-        else if ((!"".equals(errorClass)) && (errorClass != null))
+        else if ((!"".equals(errorClass)) && (errorClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, errorClass);
         }
-        else if ((!"".equals(warnClass)) && (warnClass != null))
+        else if ((!"".equals(warnClass)) && (warnClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, warnClass);
         }
-        else if ((!"".equals(infoClass)) && (infoClass != null))
+        else if ((!"".equals(infoClass)) && (infoClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, infoClass);
         }
@@ -110,11 +110,11 @@ public class MessageTagConverter extends AbstractTagConverter
         //the "showSummary",then output the "summary" as the value of the "title" attribute on the "span". 
         String hasToolTip = hostEle.getAttribute(IJSFConstants.ATTR_TOOLTIP);
         String showSummary = hostEle.getAttribute(IJSFConstants.ATTR_SHOWSUMMARY);
-        if ("true".equalsIgnoreCase(hasToolTip))
+        if ("true".equalsIgnoreCase(hasToolTip)) //$NON-NLS-1$
         {
-            if ("true".equalsIgnoreCase(showSummary))
+            if ("true".equalsIgnoreCase(showSummary)) //$NON-NLS-1$
             {
-                spanEle.setAttribute("title", MESSAGE_TOOLTIP);
+                spanEle.setAttribute("title", MESSAGE_TOOLTIP); //$NON-NLS-1$
             }
         }
         Text text = createText(MESSAGE_CONTENT);

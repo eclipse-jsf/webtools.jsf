@@ -35,7 +35,7 @@ public class ContentCommand extends RangeModeCommand {
 	 * @param content 
 	 */
 	public ContentCommand(IHTMLGraphicalViewer viewer, String content) {
-		super("", viewer);
+		super("", viewer); //$NON-NLS-1$
 		_content = content;
 	}
 
@@ -44,7 +44,7 @@ public class ContentCommand extends RangeModeCommand {
 	 * @param c
 	 */
 	public ContentCommand(IHTMLGraphicalViewer viewer, char c) {
-		super("", viewer);
+		super("", viewer); //$NON-NLS-1$
 		_content = String.valueOf(c);
 	}
 

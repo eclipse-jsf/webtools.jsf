@@ -22,13 +22,13 @@ public class StringUtil {
     
     // pattern to find all end-of-paragraph and end-of-line html tags
     // so they can be converted to newlines
-    final private static Pattern htmlToNewline = Pattern.compile("</p>|<br>");
+    final private static Pattern htmlToNewline = Pattern.compile("</p>|<br>"); //$NON-NLS-1$
     
     // pattern to strip all <x> and </x> HTML tags
-    final private static Pattern removeHTMLTags = Pattern.compile("<[/?\\w\\s=\"\\.\\#]+>");
+    final private static Pattern removeHTMLTags = Pattern.compile("<[/?\\w\\s=\"\\.\\#]+>"); //$NON-NLS-1$
     
     // pattern to find all runs of spaces longer than one
-    final private static Pattern trimInteriorWhitespace = Pattern.compile("[ ]+");
+    final private static Pattern trimInteriorWhitespace = Pattern.compile("[ ]+"); //$NON-NLS-1$
     
 	/**
 	 * Split a java variable name into words For example, "_aJavaVariable" will
@@ -39,7 +39,7 @@ public class StringUtil {
 	 * @return String
 	 */
 	public static String splitVariable(String variable) {
-		StringBuffer output = new StringBuffer("");
+		StringBuffer output = new StringBuffer(""); //$NON-NLS-1$
 		boolean isCapitalLeading = false;
 		boolean isLastSpace = false;
 
@@ -47,7 +47,7 @@ public class StringUtil {
 			char letter = variable.charAt(i);
 
 			if (letter == '_' || letter == '$') {
-				output.append(" ");
+				output.append(" "); //$NON-NLS-1$
 				isCapitalLeading = false;
 				isLastSpace = true;
 				continue;
@@ -131,12 +131,12 @@ public class StringUtil {
 	 */
 	public static String filterConvertString(String text) {
 		if (text == null) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
         
-		String result = htmlToNewline.matcher(text).replaceAll("\n"); 
-        result = removeHTMLTags.matcher(result).replaceAll("");
-        result = trimInteriorWhitespace.matcher(result).replaceAll(" ");
+		String result = htmlToNewline.matcher(text).replaceAll("\n");  //$NON-NLS-1$
+        result = removeHTMLTags.matcher(result).replaceAll(""); //$NON-NLS-1$
+        result = trimInteriorWhitespace.matcher(result).replaceAll(" "); //$NON-NLS-1$
 
 		return result;
 	}

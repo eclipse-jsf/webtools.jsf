@@ -63,7 +63,7 @@ public class ExtensionsPreferencePage extends PreferencePage {
 
 		Group pageGroup = new Group(top, SWT.NONE);
 		pageGroup.setText(DialogsMessages
-				.getString("ExtensionsPreferencePage.PageBreak"));
+				.getString("ExtensionsPreferencePage.PageBreak")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		pageGroup.setLayoutData(data);
 		layout = new GridLayout(2, false);
@@ -105,7 +105,7 @@ public class ExtensionsPreferencePage extends PreferencePage {
 
 		Group visualGroup = new Group(top, SWT.NONE);
 		visualGroup.setText(DialogsMessages
-				.getString("ExtensionsPreferencePage.VisualEffect"));
+				.getString("ExtensionsPreferencePage.VisualEffect")); //$NON-NLS-1$
 		data = new GridData(GridData.FILL_HORIZONTAL);
 		visualGroup.setLayoutData(data);
 		layout = new GridLayout(2, false);

@@ -28,9 +28,9 @@ import org.w3c.dom.Text;
 public class MessagesTagConverter extends AbstractTagConverter
 {
     private static final String MESSAGE_CONTENT = JSFUIPluginResourcesUtil.getInstance().getString(
-                                                        "MessageTagConverter.defaultValue");
+                                                        "MessageTagConverter.defaultValue"); //$NON-NLS-1$
     private static final String MESSAGE_TOOLTIP = JSFUIPluginResourcesUtil.getInstance().getString(
-                                                        "MessageTagConverter.defaultTooltip");
+                                                        "MessageTagConverter.defaultTooltip"); //$NON-NLS-1$
 
     /**
      * @param host
@@ -50,7 +50,7 @@ public class MessagesTagConverter extends AbstractTagConverter
         if (IHTMLConstants.TAG_TABLE.equalsIgnoreCase(layout))
         {
             Element table = createElement(IHTMLConstants.TAG_TABLE);
-            table.setAttribute(IHTMLConstants.ATTR_BORDER, "1");
+            table.setAttribute(IHTMLConstants.ATTR_BORDER, "1"); //$NON-NLS-1$
             for (int i = 0; i < 2; i++)
             {
                 Element tr = createElement(IHTMLConstants.TAG_TR);
@@ -125,36 +125,36 @@ public class MessagesTagConverter extends AbstractTagConverter
         String warnClass = hostEle.getAttribute(IJSFConstants.ATTR_WARNCLASS);
         String infoClass = hostEle.getAttribute(IJSFConstants.ATTR_INFOCLASS);
 
-        if ((!"".equals(fatalStyle)) && (fatalStyle != null))
+        if ((!"".equals(fatalStyle)) && (fatalStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, fatalStyle);
         }
-        else if ((!"".equals(errorStyle)) && (errorStyle != null))
+        else if ((!"".equals(errorStyle)) && (errorStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, errorStyle);
         }
-        else if ((!"".equals(warnStyle)) && (warnStyle != null))
+        else if ((!"".equals(warnStyle)) && (warnStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, warnStyle);
         }
-        else if ((!"".equals(infoStyle)) && (infoStyle != null))
+        else if ((!"".equals(infoStyle)) && (infoStyle != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IHTMLConstants.ATTR_STYLE, infoStyle);
         }
 
-        if ((!"".equals(fatalClass)) && (fatalClass != null))
+        if ((!"".equals(fatalClass)) && (fatalClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, fatalClass);
         }
-        else if ((!"".equals(errorClass)) && (errorClass != null))
+        else if ((!"".equals(errorClass)) && (errorClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, errorClass);
         }
-        else if ((!"".equals(warnClass)) && (warnClass != null))
+        else if ((!"".equals(warnClass)) && (warnClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, warnClass);
         }
-        else if ((!"".equals(infoClass)) && (infoClass != null))
+        else if ((!"".equals(infoClass)) && (infoClass != null)) //$NON-NLS-1$
         {
             spanEle.setAttribute(IJSFConstants.ATTR_STYLECLASS, infoClass);
         }
@@ -163,9 +163,9 @@ public class MessagesTagConverter extends AbstractTagConverter
         //the "showSummary",then output the "summary" as the value of the "title" attribute on the "span". 
         String hasToolTip = hostEle.getAttribute(IJSFConstants.ATTR_TOOLTIP);
         String showSummary = hostEle.getAttribute(IJSFConstants.ATTR_SHOWSUMMARY);
-        if ("true".equalsIgnoreCase(hasToolTip))
+        if ("true".equalsIgnoreCase(hasToolTip)) //$NON-NLS-1$
         {
-            if ("true".equalsIgnoreCase(showSummary))
+            if ("true".equalsIgnoreCase(showSummary)) //$NON-NLS-1$
             {
                 spanEle.setAttribute(IHTMLConstants.ATTR_TITLE, MESSAGE_TOOLTIP);
             }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataFactoryImpl.java,v 1.4 2007/05/11 17:54:55 gkessler Exp $
+ * $Id: MetadataFactoryImpl.java,v 1.5 2008/11/18 22:24:39 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -37,7 +37,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Creates the default factory implementation.
@@ -48,7 +48,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 */
 	public static MetadataFactory init() {
 		try {
-			MetadataFactory theMetadataFactory = (MetadataFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"); 
+			MetadataFactory theMetadataFactory = (MetadataFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.common.metadata/metadata.ecore");  //$NON-NLS-1$
 			if (theMetadataFactory != null) {
 				return theMetadataFactory;
 			}
@@ -82,7 +82,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 			case MetadataPackage.TRAIT: return createTrait();
 			case MetadataPackage.INCLUDE_ENTITY_GROUP: return createIncludeEntityGroup();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -98,7 +98,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 			case MetadataPackage.MODEL_CONTEXT:
 				return createModelContextFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -114,7 +114,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 			case MetadataPackage.MODEL_CONTEXT:
 				return convertModelContextToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 

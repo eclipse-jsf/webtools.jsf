@@ -26,7 +26,7 @@ public class ActionListenerTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public ActionListenerTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature, END_TAG_NO_INDENT);//$NON-NLS-1$
+		super(domNameAndPath, aFeature, END_TAG_NO_INDENT);
 	}
 
 	/*  (non-Javadoc)

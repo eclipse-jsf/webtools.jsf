@@ -31,7 +31,7 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
  */
 public class ChangeStyleAction extends Action {
 	private static final String MY_TEXT = PDPlugin
-			.getResourceString("ChangeStyleAction.Text");
+			.getResourceString("ChangeStyleAction.Text"); //$NON-NLS-1$
 
 	private ElementEditPart _editPart;
 

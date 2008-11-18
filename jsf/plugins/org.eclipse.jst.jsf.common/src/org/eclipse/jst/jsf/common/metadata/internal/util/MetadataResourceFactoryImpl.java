@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceFactoryImpl.java,v 1.2 2007/01/24 17:22:46 gkessler Exp $
+ * $Id: MetadataResourceFactoryImpl.java,v 1.3 2008/11/18 22:24:36 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -24,7 +24,7 @@ public class MetadataResourceFactoryImpl extends ResourceFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Creates an instance of the resource factory.

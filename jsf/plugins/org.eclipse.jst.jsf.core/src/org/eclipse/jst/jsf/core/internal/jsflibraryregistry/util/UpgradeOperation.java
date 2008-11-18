@@ -82,7 +82,7 @@ public class UpgradeOperation extends AbstractOperation {
 			}
 		}
 
-		return new UpgradeStatus(IStatus.OK, upgraded, "Upgrade succeeded");
+		return new UpgradeStatus(IStatus.OK, upgraded, Messages.UpgradeOperation_Success); 
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class UpgradeOperation extends AbstractOperation {
 			}
 		}
 		
-		return new UpgradeStatus(IStatus.OK, true, "Upgrade succeeded");
+		return new UpgradeStatus(IStatus.OK, true, Messages.UpgradeOperation_Success); 
 	}
 
 	/**

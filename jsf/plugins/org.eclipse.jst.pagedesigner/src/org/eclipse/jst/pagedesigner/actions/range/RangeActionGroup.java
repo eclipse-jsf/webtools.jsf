@@ -153,8 +153,8 @@ public class RangeActionGroup extends ActionGroup {
 			final DesignRange selection, final IHTMLGraphicalViewer viewer) {
 		// we have to initialize align nodes here for some refresh problem
 		Element[] alignNodes = new Element[4];
-		final String[] alignValues = new String[] { "left", "center", "right",
-				"justify" };
+		final String[] alignValues = new String[] { "left", "center", "right", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"justify" }; //$NON-NLS-1$
 		Document document = viewer.getModel().getDocument();
 		for (int i = 0; i < 4; i++) {
 			Element node = document.createElement(IHTMLConstants.TAG_P);

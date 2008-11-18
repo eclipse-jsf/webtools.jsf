@@ -26,9 +26,9 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 	/** the current ZoomManager all work is delegated to */
 	private final static int DEFAULT_ZOOM = 1;
 
-	private final static String ZOOM_AS_TEXT = "100%";
+	private final static String ZOOM_AS_TEXT = "100%"; //$NON-NLS-1$
 
-	private final static String ZOOM_LEVEL_AS_TEXT = "100%";
+	private final static String ZOOM_LEVEL_AS_TEXT = "100%"; //$NON-NLS-1$
 
 	private ZoomManager _currentZoomManager;
 

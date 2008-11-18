@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComponentMappingPackage.java,v 1.1 2008/05/12 17:42:19 cbateman Exp $
+ * $Id: ComponentMappingPackage.java,v 1.2 2008/11/18 22:24:15 gkessler Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping;
 
@@ -34,7 +34,7 @@ public interface ComponentMappingPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNAME = "viewmapping";
+    String eNAME = "viewmapping"; //$NON-NLS-1$
 
     /**
      * The package namespace URI.
@@ -42,7 +42,7 @@ public interface ComponentMappingPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http://org.eclipse.jst.jsf.core/componentMapping.ecore";
+    String eNS_URI = "http://org.eclipse.jst.jsf.core/componentMapping.ecore"; //$NON-NLS-1$
 
     /**
      * The package namespace name.
@@ -50,7 +50,7 @@ public interface ComponentMappingPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_PREFIX = "viewMap";
+    String eNS_PREFIX = "viewMap"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the package.

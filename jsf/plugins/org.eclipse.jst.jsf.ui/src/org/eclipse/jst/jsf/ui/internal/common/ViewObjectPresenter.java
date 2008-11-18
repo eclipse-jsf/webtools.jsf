@@ -45,16 +45,13 @@ public final class ViewObjectPresenter
         final List<TitleValuePair> values = new ArrayList<TitleValuePair>();
 
         values.add(new TitleValuePair(Messages.ViewObjectPresenter_ComponentType,
-                componentType == null ? "" //$NON-NLS-2$
-                        : componentType));
+                componentType == null ? "" : componentType)); //$NON-NLS-1$
         values.add(new TitleValuePair(Messages.ViewObjectPresenter_ComponentClass,
-                componentClass == null ? "" //$NON-NLS-2$
-                        : componentClass));
+                componentClass == null ? "" : componentClass)); //$NON-NLS-1$
         values.add(new TitleValuePair(Messages.ViewObjectPresenter_ComponentFamily,
-                componentFamily == null ? "" //$NON-NLS-2$
-                        : componentFamily));
+                componentFamily == null ? "" : componentFamily)); //$NON-NLS-1$
         values.add(new TitleValuePair(Messages.ViewObjectPresenter_RenderType,
-                renderType == null ? "" : renderType)); //$NON-NLS-2$
+                renderType == null ? "" : renderType)); //$NON-NLS-1$
         return String.format(formatText, ViewObjectPresenter.createLines(values));
     }
     
@@ -86,12 +83,12 @@ public final class ViewObjectPresenter
                 interfaces);
         Collections.sort(sortedInterfaceNames);
 
-        String text = "";
+        String text = ""; //$NON-NLS-1$
         for (final String name : sortedInterfaceNames)
         {
             text += ViewObjectPresenter.createLine(null, name);
         }
-        return String.format("<form>%s</form>", text);
+        return String.format("<form>%s</form>", text); //$NON-NLS-1$
     }
 
     /**
@@ -150,7 +147,7 @@ public final class ViewObjectPresenter
             super();
             if (value == null)
             {
-                throw new IllegalArgumentException("Value must not be null");
+                throw new IllegalArgumentException("Value must not be null"); //$NON-NLS-1$
             }
 
             _title = title;

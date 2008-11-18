@@ -79,7 +79,7 @@ public class LoadBundleTagConverter extends HiddenTagConverter
         {
             return;
         }
-        String prop = (new StringBuffer("webroot")
+        String prop = (new StringBuffer("webroot") //$NON-NLS-1$
             .append(IFileFolderConstants.PATH_SEPARATOR).append(IFileFolderConstants.FOLDER_WEBINF).append(
             IFileFolderConstants.PATH_SEPARATOR).append(IFileFolderConstants.FOLDER_CLASS).append(
             IFileFolderConstants.PATH_SEPARATOR).append(baseName)).toString();
@@ -120,12 +120,12 @@ public class LoadBundleTagConverter extends HiddenTagConverter
         }
         catch (MalformedURLException e)
         {
-            _log.error("LoadBundleTagConverter.convertRefresh.MalformedURLException", e);
+            _log.error("LoadBundleTagConverter.convertRefresh.MalformedURLException", e); //$NON-NLS-1$
             return;
         }
         catch (IOException e)
         {
-            _log.error("LoadBundleTagConverter.convertRefresh.IOException", e);
+            _log.error("LoadBundleTagConverter.convertRefresh.IOException", e); //$NON-NLS-1$
             return;
         }
         finally

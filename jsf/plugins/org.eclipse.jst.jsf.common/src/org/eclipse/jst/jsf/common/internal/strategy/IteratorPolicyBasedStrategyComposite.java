@@ -86,7 +86,7 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
         // policy may not be null
         if (policy == null)
         {
-            JSFCommonPlugin.log(new Exception("stack trace only"), "Policy can't be null");
+            JSFCommonPlugin.log(new Exception("stack trace only"), "Policy can't be null"); //$NON-NLS-1$ //$NON-NLS-2$
             return;
         }
         

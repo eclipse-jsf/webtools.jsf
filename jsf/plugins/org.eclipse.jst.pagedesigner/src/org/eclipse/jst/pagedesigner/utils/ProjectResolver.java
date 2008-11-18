@@ -50,11 +50,11 @@ import org.w3c.dom.NodeList;
  *
  */
 public class ProjectResolver implements URIResolver {
-	private static final String TLD_TAG_URI = "uri";
+	private static final String TLD_TAG_URI = "uri"; //$NON-NLS-1$
 
-	private static final String URI_PREFIX_HTTP = "http";
+	private static final String URI_PREFIX_HTTP = "http"; //$NON-NLS-1$
 
-	private static final String FILE_PROTOCOL = "file";
+	private static final String FILE_PROTOCOL = "file"; //$NON-NLS-1$
 
 	/** Create the logger for this class */
 	private static Logger _log = PDPlugin.getLogger(ProjectResolver.class);
@@ -108,7 +108,7 @@ public class ProjectResolver implements URIResolver {
 				}
 			}
 		} catch (CoreException e) {
-			_log.error("Error.ProjectResolver.GetlocationByURI.0", e);
+			_log.error("Error.ProjectResolver.GetlocationByURI.0", e); //$NON-NLS-1$
 		}
 	}
 
@@ -147,7 +147,7 @@ public class ProjectResolver implements URIResolver {
 				}
 			}
 		} catch (IOException e1) {
-			_log.error("Error.ProjectResolver.GetlocationByURI.0", e1);
+			_log.error("Error.ProjectResolver.GetlocationByURI.0", e1); //$NON-NLS-1$
 		}
 	}
 
@@ -166,7 +166,7 @@ public class ProjectResolver implements URIResolver {
 		try {
 			in = new FileInputStream(tldFile);
 		} catch (FileNotFoundException e) {
-			_log.error("RenderingTraverser.Error.FileNotFound", e);
+			_log.error("RenderingTraverser.Error.FileNotFound", e); //$NON-NLS-1$
 			return null;
 		}
 //		IDOMModel xmlModel = null;
@@ -181,9 +181,9 @@ public class ProjectResolver implements URIResolver {
 				return uri.getChildNodes().item(0).getNodeValue();
 			}
 		} catch (UnsupportedEncodingException e1) {
-			_log.error("RenderingTraverser.Error.UnsupportedEncoding", e1);
+			_log.error("RenderingTraverser.Error.UnsupportedEncoding", e1); //$NON-NLS-1$
 		} catch (IOException e1) {
-			_log.error("RenderingTraverser.Error.IO", e1);
+			_log.error("RenderingTraverser.Error.IO", e1); //$NON-NLS-1$
 		} finally {
 			ResourceUtils.ensureClosed(in);
 			
@@ -218,7 +218,7 @@ public class ProjectResolver implements URIResolver {
 			// Error in taglib locating.
 			_log.error("Error.ProjectResolver.GetlocationByURI.0", e); //$NON-NLS-1$
 		} catch (CoreException e1) {
-			_log.error("Error.ProjectResolver.GetlocationByURI.0", e1);
+			_log.error("Error.ProjectResolver.GetlocationByURI.0", e1); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -242,7 +242,7 @@ public class ProjectResolver implements URIResolver {
 			seekTld(webinf);
 		}
 
-		String locate = PDPlugin.getInstallLocation().append("/jsf-tld")
+		String locate = PDPlugin.getInstallLocation().append("/jsf-tld") //$NON-NLS-1$
 				.toString();
 		File jsfDir = new File(locate);
 		seekTld(jsfDir);
@@ -293,8 +293,8 @@ public class ProjectResolver implements URIResolver {
 							Node taglibNode = taglibNodeList.item(i);
 
 							NodeList childList = taglibNode.getChildNodes();
-							String taguri = "";
-							String taglocation = "";
+							String taguri = ""; //$NON-NLS-1$
+							String taglocation = ""; //$NON-NLS-1$
 							for (int j = 0, childSize = childList.getLength(); j < childSize; j++) {
 								Node childTaglibNode = childList.item(j);
 								if (ICSSPropertyID.ATTR_TAGLIB_URI
@@ -328,7 +328,7 @@ public class ProjectResolver implements URIResolver {
 								"Error.ProjectResolver.GetlocationByURI.0", e); //$NON-NLS-1$
 					} catch (CoreException e1) {
 						e1.printStackTrace();
-						_log.error("Error.ProjectResolver.GetlocationByURI.0",
+						_log.error("Error.ProjectResolver.GetlocationByURI.0", //$NON-NLS-1$
 								e1);
 					}
 
@@ -350,7 +350,7 @@ public class ProjectResolver implements URIResolver {
 				URL url = new URL(uri);
 				return getPath(url);
 			} catch (MalformedURLException e) {
-				_log.error("Error.ProjectResolver.GetlocationByURI.0", e);
+				_log.error("Error.ProjectResolver.GetlocationByURI.0", e); //$NON-NLS-1$
 			}
 		}
 		// defect 244817 end
@@ -362,8 +362,8 @@ public class ProjectResolver implements URIResolver {
 		// DataWindow may generate URL like "d:\somefile" (dos path). We may
 		// need some
 		// special support. (lium)
-		int columnIndex = uri.indexOf(":");
-		int slashIndex = uri.indexOf("/");
+		int columnIndex = uri.indexOf(":"); //$NON-NLS-1$
+		int slashIndex = uri.indexOf("/"); //$NON-NLS-1$
 		if (columnIndex != -1 && (slashIndex == -1 || columnIndex < slashIndex)) {
 			return uri;
 		}
@@ -408,7 +408,7 @@ public class ProjectResolver implements URIResolver {
 			}
 		}
 		return (newProtocol != null && newProtocol
-				.compareToIgnoreCase(FILE_PROTOCOL) == 0); //$NON-NLS-1$
+				.compareToIgnoreCase(FILE_PROTOCOL) == 0);
 	}
 
 	/**

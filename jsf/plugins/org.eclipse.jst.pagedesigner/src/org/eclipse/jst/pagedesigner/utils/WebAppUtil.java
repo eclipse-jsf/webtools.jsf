@@ -24,7 +24,7 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
  * @version 1.5
  */
 public class WebAppUtil {
-	private final static String FACES_SERVLET_NAME = "javax.faces.webapp.FacesServlet";
+	private final static String FACES_SERVLET_NAME = "javax.faces.webapp.FacesServlet"; //$NON-NLS-1$
 
 	/**
 	 * @param url
@@ -38,7 +38,7 @@ public class WebAppUtil {
 				&& url != null
 				&& url.endsWith(IFileFolderConstants.DOT
 						+ IFileFolderConstants.EXT_JSP)) {
-			String urlPattern = "";
+			String urlPattern = ""; //$NON-NLS-1$
 			IVirtualResource[] resources = ComponentCore
 					.createResources(openedFile);
 			IVirtualComponent component = null;

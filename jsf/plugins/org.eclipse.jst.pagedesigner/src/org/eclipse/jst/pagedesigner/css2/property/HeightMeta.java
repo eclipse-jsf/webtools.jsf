@@ -38,7 +38,7 @@ public class HeightMeta extends LengthMeta {
 		if (!"input".equalsIgnoreCase(htmltag)) //$NON-NLS-1$
 		{
 			String attributeName = ICSSPropertyID.ATTR_HEIGHT;
-			if ("hr".equalsIgnoreCase(htmltag)) {
+			if ("hr".equalsIgnoreCase(htmltag)) { //$NON-NLS-1$
 				attributeName = ICSSPropertyID.ATTR_SIZE;
 			}
 

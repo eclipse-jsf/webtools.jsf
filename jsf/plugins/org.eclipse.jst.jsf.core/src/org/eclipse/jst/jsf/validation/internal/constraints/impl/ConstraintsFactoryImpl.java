@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsFactoryImpl.java,v 1.2 2007/03/22 23:56:16 cbateman Exp $
+ * $Id: ConstraintsFactoryImpl.java,v 1.3 2008/11/18 22:23:52 gkessler Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -32,7 +32,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
      */
     public static ConstraintsFactory init() {
         try {
-            ConstraintsFactory theConstraintsFactory = (ConstraintsFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.core/constraints.ecore"); 
+            ConstraintsFactory theConstraintsFactory = (ConstraintsFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.core/constraints.ecore");  //$NON-NLS-1$
             if (theConstraintsFactory != null) {
                 return theConstraintsFactory;
             }
@@ -66,7 +66,7 @@ public class ConstraintsFactoryImpl extends EFactoryImpl implements ConstraintsF
             case ConstraintsPackage.TAG_SET: return createTagSet();
             case ConstraintsPackage.CONTAINS_TAG_CONSTRAINT: return createContainsTagConstraint();
             default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 

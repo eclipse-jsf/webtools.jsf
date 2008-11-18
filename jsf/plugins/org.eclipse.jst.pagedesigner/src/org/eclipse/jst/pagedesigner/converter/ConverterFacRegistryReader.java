@@ -64,18 +64,18 @@ public class ConverterFacRegistryReader {
                 if (element.getName().equals(
                         IJMTConstants.TAG_CONVERTER_FACTORY))
                 {
-                    element.getAttribute("class");
+                    element.getAttribute("class"); //$NON-NLS-1$
                     Object obj;
                     try
                     {
-                        obj = element.createExecutableExtension("class");
+                        obj = element.createExecutableExtension("class"); //$NON-NLS-1$
 
                         if (element.getContributor().getName().startsWith(
-                                "org.eclipse.jst"))
+                                "org.eclipse.jst")) //$NON-NLS-1$
                         {
                             if (PageDesignerTraceOptions.TRACE_CONVERTERLOAD)
                             {
-                                PageDesignerTraceOptions.log("ConverterFacRegistryReader: Appending to list:"+obj.getClass().getName());
+                                PageDesignerTraceOptions.log("ConverterFacRegistryReader: Appending to list:"+obj.getClass().getName()); //$NON-NLS-1$
                             }
                             // push JSF tools provided ones to the end
                             result.add((IConverterFactory) obj);
@@ -85,7 +85,7 @@ public class ConverterFacRegistryReader {
                         {
                             if (PageDesignerTraceOptions.TRACE_CONVERTERLOAD)
                             {
-                                PageDesignerTraceOptions.log("ConverterFacRegistryReader: Prepending to list:"+obj.getClass().getName());
+                                PageDesignerTraceOptions.log("ConverterFacRegistryReader: Prepending to list:"+obj.getClass().getName()); //$NON-NLS-1$
                             }
                             // this way, adopters can put their overrides
                             // of factories with built-in support like
@@ -96,7 +96,7 @@ public class ConverterFacRegistryReader {
                     } 
                     catch (CoreException e)
                     {
-                        PDPlugin.log("Problem loading tag converter extension for "+element.toString(), e);
+                        PDPlugin.log("Problem loading tag converter extension for "+element.toString(), e); //$NON-NLS-1$
                     }
                 }
             }
@@ -104,12 +104,12 @@ public class ConverterFacRegistryReader {
 
         if (PageDesignerTraceOptions.TRACE_CONVERTERLOAD)
         {
-            PageDesignerTraceOptions.log("\nFinal converterFactory list in order:");
+            PageDesignerTraceOptions.log("\nFinal converterFactory list in order:"); //$NON-NLS-1$
             for (final IConverterFactory factory : result)
             {
                 PageDesignerTraceOptions.log(factory.getClass().getName());
             }
-            PageDesignerTraceOptions.log("\n");
+            PageDesignerTraceOptions.log("\n"); //$NON-NLS-1$
         }
         return result;
     }

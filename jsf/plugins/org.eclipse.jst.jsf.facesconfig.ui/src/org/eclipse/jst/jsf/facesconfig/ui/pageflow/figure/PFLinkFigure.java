@@ -102,7 +102,7 @@ public class PFLinkFigure extends PolylineConnection {
 	 * Set the label to empty string
 	 */
 	public void clearOutcome() {
-		setLabel("");
+		setLabel(""); //$NON-NLS-1$
 	}
 
 	/**

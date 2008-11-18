@@ -80,7 +80,7 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
     {
         if (DEBUG)
         {
-            System.out.println("exec JSPSemanticsValidator.validateRegion");
+            System.out.println("exec JSPSemanticsValidator.validateRegion"); //$NON-NLS-1$
         }
 
         final IFile file = getFile(helper);

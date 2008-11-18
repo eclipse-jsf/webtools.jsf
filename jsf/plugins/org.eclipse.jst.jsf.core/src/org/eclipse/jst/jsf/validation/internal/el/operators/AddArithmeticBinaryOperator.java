@@ -24,7 +24,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ class AddArithmeticBinaryOperator extends NoDivArithmeticBinaryOperator {
 
-    private static final String ADDITION = "addition";
+    private static final String ADDITION = "addition"; //$NON-NLS-1$
 
     AddArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
         super(diagnosticFactory);

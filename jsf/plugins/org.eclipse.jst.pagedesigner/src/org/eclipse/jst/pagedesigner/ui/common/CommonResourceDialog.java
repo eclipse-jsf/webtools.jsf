@@ -268,7 +268,7 @@ class CommonResourceDialog extends TreeViewerSelectionDialog {
 						PDPlugin
 								.getAlerts()
 								.detailError(
-										"Error.ImgFileFilter.0", "Error.ImgFileFilter.2"); //$NON-NLS-2$
+										"Error.ImgFileFilter.0", "Error.ImgFileFilter.2");  //$NON-NLS-1$//$NON-NLS-2$
 						_mylog.error(
 								"Error.ProjectFileDialogContentProvider.0", e); //$NON-NLS-1$
 						return false;
@@ -364,7 +364,7 @@ class CommonResourceDialog extends TreeViewerSelectionDialog {
 		if (returnValue != null) {
 			if (!(returnValue.toString().startsWith(
 					IFileFolderConstants.PATH_SEPARATOR) || returnValue
-					.toString().startsWith("\\"))) {
+					.toString().startsWith("\\"))) { //$NON-NLS-1$
 				Path tempPath = new Path(IFileFolderConstants.PATH_SEPARATOR
 						+ returnValue.toString());
 				returnValue = tempPath;

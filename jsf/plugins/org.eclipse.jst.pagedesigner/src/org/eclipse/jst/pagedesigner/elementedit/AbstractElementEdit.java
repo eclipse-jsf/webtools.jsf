@@ -90,7 +90,7 @@ public class AbstractElementEdit implements IElementEdit {
 			// XXX: default implementation, if this element support "style"
 			// attribute,
 			// then we think it support resize.
-			return decl.getAttributes().getNamedItem("style") != null;
+			return decl.getAttributes().getNamedItem("style") != null; //$NON-NLS-1$
 		}
 		return true;
 	}

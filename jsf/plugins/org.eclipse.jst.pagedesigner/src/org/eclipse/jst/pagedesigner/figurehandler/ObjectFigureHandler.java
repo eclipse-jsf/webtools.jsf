@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 	 */
 	protected void initializeImage(Element node) {
 		if (_image == null) {
-			_image = TagImageManager.getInstance().getSmallIconImage(null, "HTML", node.getTagName());
+			_image = TagImageManager.getInstance().getSmallIconImage(null, "HTML", node.getTagName()); //$NON-NLS-1$
 		}
 	}
 }

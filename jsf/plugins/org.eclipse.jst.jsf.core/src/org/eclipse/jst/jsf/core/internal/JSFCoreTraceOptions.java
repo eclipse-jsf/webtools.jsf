@@ -63,23 +63,23 @@ public final class JSFCoreTraceOptions
      */
     public static final boolean TRACE_JSPTAGREGISTRY_PERF;
 
-    private static final String KEY_DEBUG_ENABLED = "/debug";
-    private static final String KEY_DESIGNTIME = "/designtime";
-    private static final String KEY_DESIGNTIME_VIEW = KEY_DESIGNTIME + "/view";
+    private static final String KEY_DEBUG_ENABLED = "/debug"; //$NON-NLS-1$
+    private static final String KEY_DESIGNTIME = "/designtime"; //$NON-NLS-1$
+    private static final String KEY_DESIGNTIME_VIEW = KEY_DESIGNTIME + "/view"; //$NON-NLS-1$
     private static final String KEY_VIEW_JSPTAGINTROSPECTOR = KEY_DESIGNTIME_VIEW
-            + "/jsptagintrospection";
+            + "/jsptagintrospection"; //$NON-NLS-1$
     private static final String KEY_VIEW_JSPTAGINTROSPECTOR_PERF = 
-        KEY_VIEW_JSPTAGINTROSPECTOR + "/perf";
+        KEY_VIEW_JSPTAGINTROSPECTOR + "/perf"; //$NON-NLS-1$
     private static final String KEY_VIEW_JSPTAGREGISTRY = KEY_DESIGNTIME_VIEW
-            + "/jsptagregistry";
+            + "/jsptagregistry"; //$NON-NLS-1$
     private static final String KEY_VIEW_JSPTAGPERSISTENCE = KEY_DESIGNTIME_VIEW
-            + "/jsptagpersistence";
+            + "/jsptagpersistence"; //$NON-NLS-1$
     private static final String KEY_VIEW_JSPTAGREGISTRY_CHANGES =
-        KEY_VIEW_JSPTAGREGISTRY + "/changes";
+        KEY_VIEW_JSPTAGREGISTRY + "/changes"; //$NON-NLS-1$
     private static final String KEY_VIEW_JSPTAGREGISTRY_PERF =
-        KEY_VIEW_JSPTAGREGISTRY + "/perf";
+        KEY_VIEW_JSPTAGREGISTRY + "/perf"; //$NON-NLS-1$
     private static final String KEY_VIEW_TLDREGISTRYMANAGER =
-        KEY_DESIGNTIME_VIEW + "/tldregistrymanager";
+        KEY_DESIGNTIME_VIEW + "/tldregistrymanager"; //$NON-NLS-1$
 
     
     static
@@ -133,9 +133,9 @@ public final class JSFCoreTraceOptions
      */
     public static void log(final String msg, final Throwable t)
     {
-        System.out.printf("%s: Exception Trace:\n\n",msg);
+        System.out.printf("%s: Exception Trace:\n\n",msg); //$NON-NLS-1$
         t.printStackTrace(System.out);
-        System.out.print("\n\n\n");
+        System.out.print("\n\n\n"); //$NON-NLS-1$
     }
 
     private JSFCoreTraceOptions()

@@ -54,7 +54,7 @@ public final class ResourceBundleHelper {
 		final String file		= resourceURL.getFile();
 		final IPath path 		= new Path(file);
 		
-		String dir = "./";
+		String dir = "./"; //$NON-NLS-1$
 		final String bundleName = path.removeFileExtension().segment(path.segmentCount() - 1);
 		if (path.segmentCount() > 1)
 		{

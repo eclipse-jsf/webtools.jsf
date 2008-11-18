@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.8 2008/09/03 23:29:04 gkessler Exp $
+ * $Id: TraitImpl.java,v 1.9 2008/11/18 22:24:39 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -38,7 +38,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -302,9 +302,9 @@ public class TraitImpl extends EObjectImpl implements Trait {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
+		result.append(" (id: "); //$NON-NLS-1$
 		result.append(id);
-		result.append(", sourceModelProvider: ");
+		result.append(", sourceModelProvider: "); //$NON-NLS-1$
 		result.append(sourceModelProvider);
 		result.append(')');
 		return result.toString();

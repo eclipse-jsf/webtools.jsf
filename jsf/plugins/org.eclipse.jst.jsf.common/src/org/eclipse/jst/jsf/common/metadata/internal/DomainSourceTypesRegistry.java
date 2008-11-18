@@ -30,7 +30,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.DomainSourceModelTypeDescrip
  * Registry of Domain Source Types loaded from domainSourceModelTypes ext-pt.
  */
 public class DomainSourceTypesRegistry{
-	private static final String EXTENSION_POINT_ID = "domainSourceModelTypes";
+	private static final String EXTENSION_POINT_ID = "domainSourceModelTypes"; //$NON-NLS-1$
 	private static DomainSourceTypesRegistry INSTANCE;
 	private Map/*<String, List/*<DomainSourceModelTypeDescriptor>>*/ domainSourceTypeDescriptors;
 	private Map/*<String, List/*<IDomainSourceModelType>*/ domainSourceTypes;
@@ -110,12 +110,12 @@ public class DomainSourceTypesRegistry{
 	}
 
 	private void addDomainSourceTypeDescriptor(IConfigurationElement element) {
-		String domainId = element.getAttribute("domainId");
-		String srcHdlrId = element.getAttribute("domainSourceModelTypeId");
-		String locator = element.getAttribute("locator");
-		String ordinalStr = element.getAttribute("ordinal");
+		String domainId = element.getAttribute("domainId"); //$NON-NLS-1$
+		String srcHdlrId = element.getAttribute("domainSourceModelTypeId"); //$NON-NLS-1$
+		String locator = element.getAttribute("locator"); //$NON-NLS-1$
+		String ordinalStr = element.getAttribute("ordinal"); //$NON-NLS-1$
 		int ordinal = 1;
-		if (ordinalStr!=null && !ordinalStr.equals("")){
+		if (ordinalStr!=null && !ordinalStr.equals("")){ //$NON-NLS-1$
 			ordinal = Integer.parseInt(ordinalStr);
 		}
 		DomainSourceModelTypeDescriptor d = new DomainSourceModelTypeDescriptor(domainId, srcHdlrId, locator, element.getContributor().getName(), ordinal);

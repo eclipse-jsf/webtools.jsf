@@ -27,7 +27,7 @@ public interface FacesConfigFactory extends EFactory {
 	 * <!-- end-user-doc -->
      * @generated
      */
-	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The singleton instance of the factory.

@@ -34,9 +34,9 @@ public class JSFLibraryReferenceUserSpecifiedImpl extends AbstractJSFLibraryRefe
 	 * @see org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.AbstractJSFLibraryReferenceImpl#toString()
 	 */
 	public String toString() {
-		StringBuffer buf = new StringBuffer("UserSpecified: (");
+		StringBuffer buf = new StringBuffer("UserSpecified: ("); //$NON-NLS-1$
 		buf.append(super.toString());
-		buf.append(")");
+		buf.append(")"); //$NON-NLS-1$
 		
 		return buf.toString();
 	}

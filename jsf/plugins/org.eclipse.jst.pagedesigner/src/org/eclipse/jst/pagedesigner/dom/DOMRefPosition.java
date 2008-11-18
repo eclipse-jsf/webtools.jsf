@@ -123,8 +123,8 @@ public class DOMRefPosition implements IDOMRefPosition {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "DOMRefPosition: (" + (_forward ? "after " : "before ")
-				+ _refNode + ")";
+		return "DOMRefPosition: (" + (_forward ? "after " : "before ") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				+ _refNode + ")"; //$NON-NLS-1$
 	}
 
 	/*

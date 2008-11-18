@@ -21,7 +21,7 @@ public class StandardTagSupportPlugin extends AbstractUIPlugin {
 	/**
 	 * the plugin id
 	 */
-	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.standard.tagsupport";
+	public static final String PLUGIN_ID = "org.eclipse.jst.jsf.standard.tagsupport"; //$NON-NLS-1$
 
 	// The shared instance
 	private static StandardTagSupportPlugin plugin;

@@ -192,25 +192,25 @@ public class DOMUtil {
 		int type = node.getNodeType();
 		switch (type) {
 		case Node.DOCUMENT_NODE:
-			sb.append("<?xml version=\"1.0\" ?>");
+			sb.append("<?xml version=\"1.0\" ?>"); //$NON-NLS-1$
 			nodeToString(((Document) node).getDocumentElement(), sb);
 			break;
 
 		case Node.ELEMENT_NODE:
-			sb.append("<");
+			sb.append("<"); //$NON-NLS-1$
 			sb.append(node.getNodeName());
 			NamedNodeMap attrs = node.getAttributes();
 			for (int i = 0; i < attrs.getLength(); i++) {
 				Node attr = attrs.item(i);
-				sb.append(" " + attr.getNodeName() + "=\""
-						+ attr.getNodeValue() + "\"");
+				sb.append(" " + attr.getNodeName() + "=\"" //$NON-NLS-1$ //$NON-NLS-2$
+						+ attr.getNodeValue() + "\""); //$NON-NLS-1$
 			}
 
 			NodeList children = node.getChildNodes();
 			if (children != null) {
 				int len = children.getLength();
 				if (len != 0) {
-					sb.append(">");
+					sb.append(">"); //$NON-NLS-1$
 				}
 				for (int i = 0; i < len; i++) {
 					nodeToString(children.item(i), sb);
@@ -219,15 +219,15 @@ public class DOMUtil {
 			break;
 
 		case Node.ENTITY_REFERENCE_NODE:
-			sb.append("&");
+			sb.append("&"); //$NON-NLS-1$
 			sb.append(node.getNodeName());
-			sb.append(";");
+			sb.append(";"); //$NON-NLS-1$
 			break;
 
 		case Node.CDATA_SECTION_NODE:
-			sb.append("<![CDATA[");
+			sb.append("<![CDATA["); //$NON-NLS-1$
 			sb.append(node.getNodeValue());
-			sb.append("]]>");
+			sb.append("]]>"); //$NON-NLS-1$
 			break;
 
 		case Node.TEXT_NODE:
@@ -235,24 +235,24 @@ public class DOMUtil {
 			break;
 
 		case Node.PROCESSING_INSTRUCTION_NODE:
-			sb.append("<?");
+			sb.append("<?"); //$NON-NLS-1$
 			sb.append(node.getNodeName());
 			String data = node.getNodeValue();
 			{
-				sb.append(" ");
+				sb.append(" "); //$NON-NLS-1$
 				sb.append(data);
 			}
-			sb.append("?>");
+			sb.append("?>"); //$NON-NLS-1$
 			break;
 		}
 
 		if (type == Node.ELEMENT_NODE) {
 			if (node.getFirstChild() != null) {
-				sb.append("</");
+				sb.append("</"); //$NON-NLS-1$
 				sb.append(node.getNodeName());
-				sb.append(">");
+				sb.append(">"); //$NON-NLS-1$
 			} else {
-				sb.append("/>");
+				sb.append("/>"); //$NON-NLS-1$
 			}
 
 		}

@@ -145,7 +145,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 				.createLabel(
 						generalSection,
 						WizardMessages.ManagedBeanPropertyWizardPage_ManagedBeanScope,
-						1); //$NON-NLS-1$
+						1);
 
 		String[] items = {
 				IFacesConfigConstants.MANAGED_BEAN_SCOPE_APPLICATION,
@@ -163,7 +163,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 				.createLabel(
 						generalSection,
 						WizardMessages.ManagedBeanPropertyWizardPage_ManagedBeanDescription,
-						1); //$NON-NLS-1$
+						1);
 
 		gd = new GridData(GridData.VERTICAL_ALIGN_BEGINNING);
 		labelDesp.setLayoutData(gd);
@@ -183,13 +183,13 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 	private boolean isValidManagedBeanName(boolean reportError) {
 		if (managedBeanNameText.getText().length() == 0) {
 			if (reportError) {
-				setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_MissingManagedBeanName); //$NON-NLS-1$
+				setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_MissingManagedBeanName);
 			}
 			return false;
 		} else if (JavaClassUtils.hasIllegalCharacters(managedBeanNameText
 				.getText())) {
 			if (reportError) {
-				setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_InvalidManagedBeanName); //$NON-NLS-1$
+				setErrorMessage(WizardMessages.ManagedBeanPropertyWizardPage_Warning_InvalidManagedBeanName);
 			}
 			return false;
 		} else {
@@ -221,7 +221,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		if (defaultScope != null && defaultScope.length() > 0)
 			scopeCombo.setText(defaultScope);
 		else
-			scopeCombo.setText("session");
+			scopeCombo.setText("session"); //$NON-NLS-1$
 
 		if (((NewManagedBeanWizard) getWizard()).getSuggestedBeanName() != null) {
 			this.managedBeanNameText
@@ -236,7 +236,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 				beanName = ((NewJavaClassPage) this.getPreviousPage())
 						.getTypeName();
 			}
-			beanName = beanName.substring(beanName.lastIndexOf(".") + 1);
+			beanName = beanName.substring(beanName.lastIndexOf(".") + 1); //$NON-NLS-1$
 			if (beanName != null && beanName.length() > 0) {
 				beanName = (beanName.substring(0, 1)).toLowerCase()
 						+ (beanName.substring(1));
@@ -245,7 +245,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 						currentProject, beanName);
 
 			} else
-				beanName = "";
+				beanName = ""; //$NON-NLS-1$
 			managedBeanNameText.setText(beanName);
 		}
 	}
@@ -261,7 +261,7 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 		data
 				.add(new String[] {
 						WizardMessages.NewJavaManagedBeanWizard_Summary_ManagedBeanName,
-						getManagedBeanName() }); //$NON-NLS-1$
+						getManagedBeanName() });
 		data
 				.add(new String[] {
 						WizardMessages.NewJavaManagedBeanWizard_Summary_ManagedBeanScope,

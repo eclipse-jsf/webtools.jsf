@@ -133,7 +133,7 @@ public class TLDNamespace extends Namespace
         public String getDisplayName()
         {
             String displayName = _tldDoc.getDisplayName();
-            if (displayName == null || "".equals(displayName.trim()))
+            if (displayName == null || "".equals(displayName.trim())) //$NON-NLS-1$
             {
                 displayName = getUri();
             }

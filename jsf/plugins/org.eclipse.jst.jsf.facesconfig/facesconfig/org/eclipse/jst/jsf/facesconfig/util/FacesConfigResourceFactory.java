@@ -83,7 +83,7 @@ public final class FacesConfigResourceFactory extends TranslatorResourceFactory
 	 */
 	private static void registerWith(String sFileName, FacesRendererFactory aRendererFactory) {
 		if (sFileName != null) {
-			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment(sFileName, new FacesConfigResourceFactory(FacesRendererFactory.INSTANCE)); //$NON-NLS-1$
+			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment(sFileName, new FacesConfigResourceFactory(FacesRendererFactory.INSTANCE));
 		} else {
 			WTPResourceFactoryRegistry.INSTANCE.registerLastFileSegment("faces-config.xml", new FacesConfigResourceFactory(FacesRendererFactory.INSTANCE)); //$NON-NLS-1$
 		}

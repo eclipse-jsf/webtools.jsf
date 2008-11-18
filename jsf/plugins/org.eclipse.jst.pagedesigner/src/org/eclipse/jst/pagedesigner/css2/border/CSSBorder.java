@@ -31,9 +31,9 @@ import org.eclipse.swt.widgets.Display;
  */
 public class CSSBorder extends AbstractBorder {
 
-	private static final String BODER_QUERY_TEMPLETE = "border-{0}-style";
+	private static final String BODER_QUERY_TEMPLETE = "border-{0}-style"; //$NON-NLS-1$
 
-	private static final String COLOR_QUERY_TEMPLETE = "border-{0}-color";
+	private static final String COLOR_QUERY_TEMPLETE = "border-{0}-color"; //$NON-NLS-1$
 
 	private final ICSSStyle _style;
 

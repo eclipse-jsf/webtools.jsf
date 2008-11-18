@@ -67,7 +67,7 @@ public class RunOnCompletionPattern implements Runnable
             }
             catch (InterruptedException e)
             {
-                JSFCommonPlugin.log(e, "Joining on job");
+                JSFCommonPlugin.log(e, "Joining on job"); //$NON-NLS-1$
             }
         }
     }

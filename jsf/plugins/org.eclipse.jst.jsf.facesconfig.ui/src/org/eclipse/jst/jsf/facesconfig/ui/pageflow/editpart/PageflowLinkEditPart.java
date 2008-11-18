@@ -57,6 +57,8 @@ import org.eclipse.ui.views.properties.IPropertySource;
  */
 public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 		IConnectionPreference, IAnnotationEditPart, PFValidator {
+	private static final String PAGEFLOW_ERROR_IMAGE_FILE = "facesconfig/Pageflow_Quickfix_Error.gif"; //$NON-NLS-1$
+
 	/** adapter for notification */
 	private PFLinkAdapter adapter = new PFLinkAdapter();
 
@@ -65,7 +67,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 
 	/** image description for different edit part */
 	public static final ImageDescriptor IMG_WARNING = EditorPlugin.getDefault()
-			.getImageDescriptor("facesconfig/Pageflow_Quickfix_Error.gif");
+			.getImageDescriptor(PAGEFLOW_ERROR_IMAGE_FILE);
 
 	private int connectionStyle = -1;
 
@@ -405,7 +407,7 @@ public class PageflowLinkEditPart extends AbstractConnectionEditPart implements
 			((PFLinkFigure) getFigure()).setLabel(((PageflowLink) getModel())
 					.getOutcome());
 			if (tip.length() > 0)
-				tip.append("\n");
+				tip.append("\n"); //$NON-NLS-1$
 			tip.append(PageflowMessages.PageflowLinkEditPart_FromOutcome).append(
 					((PageflowLink) getModel()).getOutcome());
 		} else {

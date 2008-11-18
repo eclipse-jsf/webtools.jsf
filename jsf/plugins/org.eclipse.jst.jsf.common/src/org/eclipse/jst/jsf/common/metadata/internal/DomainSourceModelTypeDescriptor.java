@@ -28,11 +28,11 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * <code>com.eclipse.jst.jsf.common.domainSourceModelTypeTranslators</code> ext-pt
  */
 public class DomainSourceModelTypeDescriptor {
-	private static final String TRANSLATORS_EXTENSION_POINT_ID = "domainSourceModelTypeTranslators";
-	private static final String STANDARD_FILE_NULL_TRANSLATOR = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFilesTranslator";
-	private String domain = "DEFAULT";
+	private static final String TRANSLATORS_EXTENSION_POINT_ID = "domainSourceModelTypeTranslators"; //$NON-NLS-1$
+	private static final String STANDARD_FILE_NULL_TRANSLATOR = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFilesTranslator"; //$NON-NLS-1$
+	private String domain = "DEFAULT"; //$NON-NLS-1$
 	private String domainSourceModelTypeId;
-	private String locatorClassName = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator";
+	private String locatorClassName = "org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataLocator"; //$NON-NLS-1$
 	private Set translatorDescriptors;
 	private String bundleId = JSFCommonPlugin.PLUGIN_ID;
 	private int ordinal;
@@ -70,7 +70,7 @@ public class DomainSourceModelTypeDescriptor {
 			IConfigurationElement[] elements = point.getConfigurationElements();
 			for (int i = 0; i < elements.length; i++) {
 				IConfigurationElement element = elements[i];
-				String srcHdlrId = element.getAttribute("domainSourceModelTypeId");
+				String srcHdlrId = element.getAttribute("domainSourceModelTypeId"); //$NON-NLS-1$
 				if (srcHdlrId.equals(domainSourceModelTypeId))
 					addTranslatorDescriptor(element);
 			}
@@ -78,7 +78,7 @@ public class DomainSourceModelTypeDescriptor {
 	}
 	
 	private void addTranslatorDescriptor(IConfigurationElement element) {
-		String translator = element.getAttribute("translatorClass");
+		String translator = element.getAttribute("translatorClass"); //$NON-NLS-1$
 		DomainSourceModelTranslatorDescriptor d = new DomainSourceModelTranslatorDescriptor(translator, element.getContributor().getName());
 		getTranslatorDescriptors().add(d);
 	}
@@ -165,12 +165,12 @@ public class DomainSourceModelTypeDescriptor {
 		 * @see java.lang.Object#toString()
 		 */
 		public String toString(){
-			StringBuffer buf = new StringBuffer("DomainSourceModelTypeImpl");
-			buf.append("(domain = ");
+			StringBuffer buf = new StringBuffer("DomainSourceModelTypeImpl"); //$NON-NLS-1$
+			buf.append("(domain = "); //$NON-NLS-1$
 			buf.append(getDomain());
-			buf.append(", locator = ");
+			buf.append(", locator = "); //$NON-NLS-1$
 			buf.append(getLocator());
-			buf.append(")");
+			buf.append(")"); //$NON-NLS-1$
 			return buf.toString();
 		}
 		
@@ -187,10 +187,10 @@ public class DomainSourceModelTypeDescriptor {
 					return translators;
 				} catch (InstantiationException e) {
                     // TODO: other error handling?
-					JSFCommonPlugin.log(e, "Error in createTranslatorInstances(STANDARD_FILE_NULL_TRANSLATOR)");
+					JSFCommonPlugin.log(e, "Error in createTranslatorInstances(STANDARD_FILE_NULL_TRANSLATOR)"); //$NON-NLS-1$
 				} catch (IllegalAccessException e) {
                     // TODO: other error handling?
-                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances(STANDARD_FILE_NULL_TRANSLATOR)");
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances(STANDARD_FILE_NULL_TRANSLATOR)"); //$NON-NLS-1$
 				}
 
 			}
@@ -203,10 +203,10 @@ public class DomainSourceModelTypeDescriptor {
 					translators.add(klass.newInstance());
 				} catch (InstantiationException e) {
                     // TODO: other error handling?
-                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances"); //$NON-NLS-1$
 				} catch (IllegalAccessException e) {
                     // TODO: other error handling?
-                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances");
+                    JSFCommonPlugin.log(e, "Error in createTranslatorInstances"); //$NON-NLS-1$
 				}
 			}
 			return translators;

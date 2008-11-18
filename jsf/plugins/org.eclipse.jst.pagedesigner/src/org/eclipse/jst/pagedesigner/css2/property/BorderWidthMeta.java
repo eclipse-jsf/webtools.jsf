@@ -66,8 +66,8 @@ public class BorderWidthMeta extends LengthMeta {
 			ICSSStyle style) {
 		// Computed value: absolute length; '0' if the border style is 'none' or
 		// 'hidden'
-		Object stylevalue = style.getStyleProperty("border-"
-				+ extractEdge(propertyName) + "-style");
+		Object stylevalue = style.getStyleProperty("border-" //$NON-NLS-1$
+				+ extractEdge(propertyName) + "-style"); //$NON-NLS-1$
 		if (ICSSPropertyID.VAL_NONE.equals(stylevalue)
 				|| ICSSPropertyID.VAL_HIDDEN.equals(stylevalue)) {
 			return Length.LENGTH_0;
@@ -93,13 +93,13 @@ public class BorderWidthMeta extends LengthMeta {
 	 */
 	public Object calculateHTMLAttributeOverride(Element element,
 			String htmltag, String propertyName, ICSSStyle style) {
-		if ("table".equalsIgnoreCase(htmltag)) {
+		if ("table".equalsIgnoreCase(htmltag)) { //$NON-NLS-1$
 			return calculateTableOverride(element, propertyName);
-		} else if ("td".equalsIgnoreCase(htmltag)
-				|| "th".equalsIgnoreCase(htmltag)) {
+		} else if ("td".equalsIgnoreCase(htmltag) //$NON-NLS-1$
+				|| "th".equalsIgnoreCase(htmltag)) { //$NON-NLS-1$
 			return calculateTDOverride(element, propertyName);
-		} else if ("img".equalsIgnoreCase(htmltag)) {
-			String border = DOMUtil.getAttributeIgnoreCase(element, "border");// ICSSPropertyID.ATTR_BORDERSIZE);
+		} else if ("img".equalsIgnoreCase(htmltag)) { //$NON-NLS-1$
+			String border = DOMUtil.getAttributeIgnoreCase(element, "border");// ICSSPropertyID.ATTR_BORDERSIZE); //$NON-NLS-1$
 			if (border != null) {
 				try {
 					return new Length(Integer.parseInt(border), false);
@@ -124,18 +124,18 @@ public class BorderWidthMeta extends LengthMeta {
 		Element tableEle = null;
 		while ((parent = parent.getParentNode()) != null
 				&& parent instanceof Element) {
-			if (((Element) parent).getTagName().equalsIgnoreCase("table")) {
+			if (((Element) parent).getTagName().equalsIgnoreCase("table")) { //$NON-NLS-1$
 				tableEle = (Element) parent;
 				break;
 			}
 
 		}
 		if (tableEle != null) {
-			String rules = DOMUtil.getAttributeIgnoreCase(tableEle, "rules");
+			String rules = DOMUtil.getAttributeIgnoreCase(tableEle, "rules"); //$NON-NLS-1$
 			String borderstr = DOMUtil.getAttributeIgnoreCase(tableEle,
-					"border");
+					"border"); //$NON-NLS-1$
 			if (rules == null || rules.length() == 0) {
-				if (borderstr == null || "0".equals(borderstr.trim())) {
+				if (borderstr == null || "0".equals(borderstr.trim())) { //$NON-NLS-1$
 					return null;
 				}
                 return Length.LENGTH_1;
@@ -155,10 +155,10 @@ public class BorderWidthMeta extends LengthMeta {
 	 * @return
 	 */
 	private Object calculateTableOverride(Element element, String propertyName) {
-		String frame = DOMUtil.getAttributeIgnoreCase(element, "frame");
-		String borderstr = DOMUtil.getAttributeIgnoreCase(element, "border");
+		String frame = DOMUtil.getAttributeIgnoreCase(element, "frame"); //$NON-NLS-1$
+		String borderstr = DOMUtil.getAttributeIgnoreCase(element, "border"); //$NON-NLS-1$
 		// border="0" implies frame="void"
-		if ("0".equals(borderstr)) {
+		if ("0".equals(borderstr)) { //$NON-NLS-1$
 			return Length.LENGTH_0;
 		}
 		if (frame == null || frame.length() == 0) {
@@ -191,15 +191,15 @@ public class BorderWidthMeta extends LengthMeta {
 	static String extractEdge(String propertyName) {
 		if (ICSSPropertyID.ATTR_BORDER_BOTTOM_WIDTH
 				.equalsIgnoreCase(propertyName)) {
-			return "bottom";
+			return "bottom"; //$NON-NLS-1$
 		} else if (ICSSPropertyID.ATTR_BORDER_LEFT_WIDTH
 				.equalsIgnoreCase(propertyName)) {
-			return "left";
+			return "left"; //$NON-NLS-1$
 		} else if (ICSSPropertyID.ATTR_BORDER_RIGHT_WIDTH
 				.equalsIgnoreCase(propertyName)) {
-			return "right";
+			return "right"; //$NON-NLS-1$
 		} else {
-			return "top";
+			return "top"; //$NON-NLS-1$
 		}
 	}
 
@@ -227,8 +227,8 @@ public class BorderWidthMeta extends LengthMeta {
 	public Object getInitialValue(String propertyName, ICSSStyle style) {
 		// Computed value: absolute length; '0' if the border style is 'none' or
 		// 'hidden'
-		Object stylevalue = style.getStyleProperty("border-"
-				+ extractEdge(propertyName) + "-style");
+		Object stylevalue = style.getStyleProperty("border-" //$NON-NLS-1$
+				+ extractEdge(propertyName) + "-style"); //$NON-NLS-1$
 		if (ICSSPropertyID.VAL_NONE.equals(stylevalue)
 				|| ICSSPropertyID.VAL_HIDDEN.equals(stylevalue)) {
 			return Length.LENGTH_0;

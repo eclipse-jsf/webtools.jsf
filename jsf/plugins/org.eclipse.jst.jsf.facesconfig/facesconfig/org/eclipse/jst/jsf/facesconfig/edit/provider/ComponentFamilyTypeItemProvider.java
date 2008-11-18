@@ -51,7 +51,7 @@ public class ComponentFamilyTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -92,8 +92,8 @@ public class ComponentFamilyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ComponentFamilyType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ComponentFamilyType_textContent_feature", "_UI_ComponentFamilyType_type"),
+                 getString("_UI_ComponentFamilyType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ComponentFamilyType_textContent_feature", "_UI_ComponentFamilyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.COMPONENT_FAMILY_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -115,8 +115,8 @@ public class ComponentFamilyTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ComponentFamilyType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ComponentFamilyType_id_feature", "_UI_ComponentFamilyType_type"),
+                 getString("_UI_ComponentFamilyType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ComponentFamilyType_id_feature", "_UI_ComponentFamilyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.COMPONENT_FAMILY_TYPE__ID,
                  true,
                  false,
@@ -133,7 +133,7 @@ public class ComponentFamilyTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ComponentFamilyType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ComponentFamilyType")); //$NON-NLS-1$
     }
 
     /**
@@ -145,8 +145,8 @@ public class ComponentFamilyTypeItemProvider
 	public String getText(Object object) {
         String label = ((ComponentFamilyType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ComponentFamilyType_type") :
-            getString("_UI_ComponentFamilyType_type") + " " + label;
+            getString("_UI_ComponentFamilyType_type") : //$NON-NLS-1$
+            getString("_UI_ComponentFamilyType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

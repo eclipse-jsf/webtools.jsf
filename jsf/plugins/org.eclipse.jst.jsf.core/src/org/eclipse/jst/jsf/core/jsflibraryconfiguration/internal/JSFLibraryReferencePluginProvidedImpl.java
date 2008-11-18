@@ -36,7 +36,7 @@ public class JSFLibraryReferencePluginProvidedImpl extends AbstractJSFLibraryRef
 	}
 
 	public String toString() {
-		StringBuffer buf = new StringBuffer("PluginProvided: (");
+		StringBuffer buf = new StringBuffer("PluginProvided: ("); //$NON-NLS-1$
 		buf.append(super.toString());
 		
 		return buf.toString();

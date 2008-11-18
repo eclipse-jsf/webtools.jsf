@@ -129,9 +129,9 @@ public class AbstractStyle implements ICSSStyle
 	 * @return the style
 	 */
 	protected CSSStyleDeclaration calculateDeclaration() {
-		String name = getHtmlElement().getAttribute("id");
+		String name = getHtmlElement().getAttribute("id"); //$NON-NLS-1$
 		if (name == null || name.length() == 0) {
-			name = getHtmlElement().getAttribute("name");
+			name = getHtmlElement().getAttribute("name"); //$NON-NLS-1$
 		}
 		return CSSUtil.getCSSDeclaration(this.getHtmlElement(), name);
 	}
@@ -440,11 +440,11 @@ public class AbstractStyle implements ICSSStyle
 	 */
 	public boolean isSizeIncludeBorderPadding() {
 		String display = this.getDisplay();
-		if ("table-cell".equalsIgnoreCase(display)) {
+		if ("table-cell".equalsIgnoreCase(display)) { //$NON-NLS-1$
 			return false;
 		}
 		String tag = this.getHTMLTag();
-		if ("img".equalsIgnoreCase(tag)) {
+		if ("img".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return false;
 		}
 		return true;
@@ -588,12 +588,12 @@ public class AbstractStyle implements ICSSStyle
 	 */
 	public void dumpDebugInfo(StringBuffer buffer) {
 		if (_cache != null) {
-			buffer.append("cache:\n");
-			buffer.append(_cache.getCssText()).append("\n");
+			buffer.append("cache:\n"); //$NON-NLS-1$
+			buffer.append(_cache.getCssText()).append("\n"); //$NON-NLS-1$
 		}
 		if (_defaultCache != null) {
-			buffer.append("default cache:\n");
-			buffer.append(_defaultCache.getCssText()).append("\n");
+			buffer.append("default cache:\n"); //$NON-NLS-1$
+			buffer.append(_defaultCache.getCssText()).append("\n"); //$NON-NLS-1$
 		}
 
 	}
@@ -605,7 +605,7 @@ public class AbstractStyle implements ICSSStyle
 	 */
 	public int getColSpan() {
 		int colspan = DOMUtil.getIntAttributeIgnoreCase(getHtmlElement(),
-				"colspan", 1);
+				"colspan", 1); //$NON-NLS-1$
 		// if span == 0, means span all col from the current column to end
 		// colume
 		if (colspan < 0) {
@@ -621,7 +621,7 @@ public class AbstractStyle implements ICSSStyle
 	 */
 	public int getRowSpan() {
 		int rowspan = DOMUtil.getIntAttributeIgnoreCase(getHtmlElement(),
-				"rowspan", 1);
+				"rowspan", 1); //$NON-NLS-1$
 		if (rowspan < 0) {
 			return 1;
 		}

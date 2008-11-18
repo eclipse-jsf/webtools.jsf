@@ -69,7 +69,7 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
     private TableViewer           _choiceViewer;
     private CCombo                _choiceTypeCombo;
     private Button                _choiceAddButton, _choiceRemoveButton, _choiceMoveUpButton, _choiceMoveDownButton;
-    private static final String[] COLUMN_NAMES = new String[] {"choices","itemLabel", "itemValue", "id"};
+    private static final String[] COLUMN_NAMES = new String[] {"choices","itemLabel", "itemValue", "id"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
     private class ChoiceCotentLabelProvider implements IStructuredContentProvider, ITableLabelProvider
     {
@@ -123,15 +123,15 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
                 String attrName = null;
                 if (columnIndex == 1)
                 {
-                    attrName = "itemLabel";
+                    attrName = "itemLabel"; //$NON-NLS-1$
                 }
                 else if (columnIndex == 2)
                 {
-                    attrName = "itemValue";
+                    attrName = "itemValue"; //$NON-NLS-1$
                 }
                 else if (columnIndex == 3)
                 {
-                    attrName = "id";
+                    attrName = "id"; //$NON-NLS-1$
                 }
 
                 switch (columnIndex)
@@ -144,11 +144,11 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
                         attrNode = node.getAttributes().getNamedItem(attrName);
                         if (attrNode != null)
                         {
-                            result = attrNode.getNodeValue()!=null ? attrNode.getNodeValue() : " - ";
+                            result = attrNode.getNodeValue()!=null ? attrNode.getNodeValue() : " - "; //$NON-NLS-1$
                         }
                         else
                         {
-                            result = " - ";
+                            result = " - "; //$NON-NLS-1$
                         }
                     }
                 }
@@ -225,15 +225,15 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
         choiceColumn.setWidth(100);
 
         final TableColumn labelColumn = new TableColumn(_choiceTable, SWT.NONE);
-        labelColumn.setText("itemLabel");
+        labelColumn.setText("itemLabel"); //$NON-NLS-1$
         labelColumn.setWidth(100);
 
         final TableColumn valueColumn = new TableColumn(_choiceTable, SWT.NONE);
-        valueColumn.setText("itemValue");
+        valueColumn.setText("itemValue"); //$NON-NLS-1$
         valueColumn.setWidth(100);
 
         final TableColumn idColumn = new TableColumn(_choiceTable, SWT.NONE);
-        idColumn.setText("id");
+        idColumn.setText("id"); //$NON-NLS-1$
         idColumn.setWidth(100);
 
         _choiceViewer = new TableViewer(_choiceTable);
@@ -253,17 +253,17 @@ public class JSFHtmlSelectChoicesSection extends BaseCustomSection
 
             public boolean canModify(final Object element, final String property) {
                 final IDOMElement node = (IDOMElement)element;
-                if (node.getLocalName().equals("selectItem"))
+                if (node.getLocalName().equals("selectItem")) //$NON-NLS-1$
                 {
-                    return ! property.equals("choices");
+                    return ! property.equals("choices"); //$NON-NLS-1$
                 }
 
-                return property.equals("id");
+                return property.equals("id"); //$NON-NLS-1$
             }
 
             public Object getValue(final Object element, final String property) {
                 final IDOMElement node = (IDOMElement) element;
-                final String val = node.getAttribute(property) != null ? node.getAttribute(property) : "";
+                final String val = node.getAttribute(property) != null ? node.getAttribute(property) : ""; //$NON-NLS-1$
                 return val;
             }
 

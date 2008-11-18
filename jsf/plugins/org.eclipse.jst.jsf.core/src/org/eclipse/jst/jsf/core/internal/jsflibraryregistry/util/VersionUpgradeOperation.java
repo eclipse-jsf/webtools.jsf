@@ -80,7 +80,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot execute");
+		throw new ExecutionException("Cannot execute"); //$NON-NLS-1$
 	}
 
 	/**
@@ -114,7 +114,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot execute");
+		throw new ExecutionException("Cannot execute"); //$NON-NLS-1$
 	}
 
 	/**
@@ -141,7 +141,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot redo");
+		throw new ExecutionException("Cannot redo"); //$NON-NLS-1$
 	}
 
 	/**
@@ -168,7 +168,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot redo");
+		throw new ExecutionException("Cannot redo"); //$NON-NLS-1$
 	}
 
 	/**

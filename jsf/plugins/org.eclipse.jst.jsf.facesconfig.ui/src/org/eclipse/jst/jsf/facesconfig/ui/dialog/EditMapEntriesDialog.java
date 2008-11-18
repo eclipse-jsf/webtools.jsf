@@ -103,7 +103,7 @@ public class EditMapEntriesDialog extends Dialog {
 	 */
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Editing map-entries");
+		newShell.setText(EditorMessages.EditMapEntriesDialog_EditingMapEntries);
 	}
 
 	/*
@@ -140,12 +140,12 @@ public class EditMapEntriesDialog extends Dialog {
 	private void createKeyValueSection(Composite parent) {
 		keyClassField = new ClassButtonDialogField(getProject());
 		keyClassField
-				.setLabelText(EditorMessages.InitializationSection_MapType_KeyClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_KeyClass);
 
 		valueClassField = new ClassButtonDialogField(getProject());
 
 		valueClassField
-				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);
 
 		Composite typeSelectionSection = SWTUtils.createComposite(parent,
 				SWT.NONE);
@@ -182,7 +182,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 		DialogField valuesTitle = new DialogFieldBase();
 		valuesTitle
-				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);//$NON-NLS-1$    
+				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);    
 
 		valuesTitle.doFillIntoGrid(null, mapValueSection, numberOfColumns);
 
@@ -214,7 +214,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 		TableColumn keyCol = new TableColumn(mapTable, SWT.NONE);
 		keyCol
-				.setText(EditorMessages.InitializationSection_MapTable_Key);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Key);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		keyCol.setResizable(true);
 
@@ -222,7 +222,7 @@ public class EditMapEntriesDialog extends Dialog {
 		layout.addColumnData(new ColumnWeightData(1, true));
 
 		valueCol
-				.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Value);
 		valueCol.setResizable(true);
 
 		tableViewer = new TableViewer(mapTable);
@@ -251,7 +251,7 @@ public class EditMapEntriesDialog extends Dialog {
 		operationContainer.setLayout(gl);
 
 		Button addButton = SWTUtils.createPushButton(operationContainer,
-				EditorMessages.UI_Button_Add_more); //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more);
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -277,7 +277,7 @@ public class EditMapEntriesDialog extends Dialog {
 
 		});
 		removeButton = SWTUtils.createPushButton(operationContainer,
-				EditorMessages.UI_Button_Remove); //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove);
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

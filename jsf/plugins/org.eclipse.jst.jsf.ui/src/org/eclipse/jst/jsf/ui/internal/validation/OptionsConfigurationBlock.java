@@ -702,7 +702,7 @@ abstract class OptionsConfigurationBlock
             return (String) fDisabledProjectSettings.put(key, value);
         }
         Object newValue =  key.setCurValue(_prefs, fLookupOrder[0], Severity.valueOfString(value), fManager);
-        return newValue != null ? newValue.toString() : "";
+        return newValue != null ? newValue.toString() : ""; //$NON-NLS-1$
     }
     
     String setValue(Key key, boolean value) {
@@ -811,7 +811,7 @@ abstract class OptionsConfigurationBlock
 
         boolean doBuild= false;
         
-        final String  showBuildWarningKey = JSFCorePlugin.PLUGIN_ID + "." + "buildwarning_dont_show_again";
+        final String  showBuildWarningKey = JSFCorePlugin.PLUGIN_ID + "." + "buildwarning_dont_show_again"; //$NON-NLS-1$ //$NON-NLS-2$
         final IPreferenceStore prefStore = JSFCorePlugin.getDefault().getPreferenceStore();
         final boolean showDialog = !MessageDialogWithToggle.ALWAYS.equals(prefStore.getString(showBuildWarningKey));
         
@@ -841,7 +841,7 @@ abstract class OptionsConfigurationBlock
             try {
                 fManager.applyChanges();
             } catch (BackingStoreException e) {
-                JSFUiPlugin.log(IStatus.ERROR, "Error applying changes", e);
+                JSFUiPlugin.log(IStatus.ERROR, "Error applying changes", e); //$NON-NLS-1$
                 return false;
             }
             if (doBuild) {

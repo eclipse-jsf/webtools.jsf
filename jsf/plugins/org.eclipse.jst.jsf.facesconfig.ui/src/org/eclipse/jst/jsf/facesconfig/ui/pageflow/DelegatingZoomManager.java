@@ -27,7 +27,7 @@ import org.eclipse.gef.editparts.ZoomManager;
  */
 public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 	/** Default string or double value of zoom level */
-	private static final String DEFAULT_ZOOM_LEVEL_STRING = "100%";
+	private static final String DEFAULT_ZOOM_LEVEL_STRING = "100%"; //$NON-NLS-1$
 
 	private static final double DEFAULT_ZOOM_LEVEL = 1;
 

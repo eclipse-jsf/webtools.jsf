@@ -90,7 +90,7 @@ public class CSSHtmlListStyleData {
 		//if (textValue != null && textValue.length() > 0) {
 		//	return resolver.getLocationByURI(textValue);
 		//}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class CSSHtmlListStyleData {
 			return null;
 		}
 		// ICounter counter = CounterFactory.getInstance().getCounter(_type);
-		return "";
+		return ""; //$NON-NLS-1$
 
 	}
 

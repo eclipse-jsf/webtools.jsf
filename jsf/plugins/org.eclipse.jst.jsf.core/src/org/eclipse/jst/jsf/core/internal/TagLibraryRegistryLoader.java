@@ -27,8 +27,8 @@ import org.eclipse.core.runtime.IExtensionPoint;
  */
 /* package */class TagLibraryRegistryLoader
 {
-    private final static String              EXTENSION_ID = "tagregistry";
-    private final static String              ELEMENT_NAME = "tagRegistry";
+    private final static String              EXTENSION_ID = "tagregistry"; //$NON-NLS-1$
+    private final static String              ELEMENT_NAME = "tagRegistry"; //$NON-NLS-1$
 
     private static Set<TagRegistryFactoryInfo> _extensions;
 
@@ -73,9 +73,9 @@ import org.eclipse.core.runtime.IExtensionPoint;
                     catch (CoreException e)
                     {
                         JSFCorePlugin.log(e,
-                                "Error loading tag registry extension: "
+                                "Error loading tag registry extension: " //$NON-NLS-1$
                                         + element.getContributor().getName()
-                                        + "." + element.getAttribute("id"));
+                                        + "." + element.getAttribute("id")); //$NON-NLS-1$ //$NON-NLS-2$
                     }
                 }
             }

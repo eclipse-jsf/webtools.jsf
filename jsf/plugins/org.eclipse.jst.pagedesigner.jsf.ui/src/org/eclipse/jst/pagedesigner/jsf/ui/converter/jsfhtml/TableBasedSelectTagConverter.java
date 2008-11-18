@@ -60,7 +60,7 @@ public class TableBasedSelectTagConverter extends SelectTagConverter
         // If the "layout" attribute is specified, and its value is "pageDirection", 
         // render the children elements vertically, otherwise horizontally, in the table. 
         boolean horizontal = true;
-        if ("pageDirection".equalsIgnoreCase(hostEle.getAttribute(IJSFConstants.ATTR_LAYOUT)))
+        if ("pageDirection".equalsIgnoreCase(hostEle.getAttribute(IJSFConstants.ATTR_LAYOUT))) //$NON-NLS-1$
         {
             horizontal = false;
         }
@@ -106,11 +106,11 @@ public class TableBasedSelectTagConverter extends SelectTagConverter
             inputEle.setAttribute(IHTMLConstants.ATTR_TYPE, getInputType());
             if (isDisabled || item.isDisabled())
             {
-                inputEle.setAttribute(IHTMLConstants.ATTR_DISABLED, "disabled");
+                inputEle.setAttribute(IHTMLConstants.ATTR_DISABLED, "disabled"); //$NON-NLS-1$
             }
             if (isReadonly)
             {
-                inputEle.setAttribute(IHTMLConstants.ATTR_READONLY, "readonly");
+                inputEle.setAttribute(IHTMLConstants.ATTR_READONLY, "readonly"); //$NON-NLS-1$
             }
 
             // As an exception to the general 

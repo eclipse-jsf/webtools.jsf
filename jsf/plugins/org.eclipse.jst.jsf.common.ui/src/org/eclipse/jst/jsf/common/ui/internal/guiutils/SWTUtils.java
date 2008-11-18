@@ -979,7 +979,7 @@ public class SWTUtils {
 			return new String[0];
 		}
 
-		return tokenString.split(",");
+		return tokenString.split(","); //$NON-NLS-1$
 	}
 
 	/**

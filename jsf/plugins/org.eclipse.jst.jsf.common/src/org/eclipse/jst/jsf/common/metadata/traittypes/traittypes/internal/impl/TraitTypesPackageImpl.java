@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.5 2007/05/11 17:54:57 gkessler Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.6 2008/11/18 22:24:38 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -32,7 +32,7 @@ public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPac
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->
@@ -230,12 +230,12 @@ public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPac
         // Add supertypes to classes
 
         // Initialize classes and features; add operations and parameters
-        initEClass(listOfValuesEClass, ListOfValues.class, "ListOfValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getListOfValues_Entries(), theXMLTypePackage.getSimpleAnyType(), null, "entries", null, 0, -1, ListOfValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(listOfValuesEClass, ListOfValues.class, "ListOfValues", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getListOfValues_Entries(), theXMLTypePackage.getSimpleAnyType(), null, "entries", null, 0, -1, ListOfValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(setGeneratorEClass, SetGenerator.class, "SetGenerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getSetGenerator_Algorithm(), ecorePackage.getEString(), "algorithm", null, 0, 1, SetGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getSetGenerator_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, SetGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(setGeneratorEClass, SetGenerator.class, "SetGenerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getSetGenerator_Algorithm(), ecorePackage.getEString(), "algorithm", null, 0, 1, SetGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getSetGenerator_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, SetGenerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
         // Create resource
         createResource(eNS_URI);
@@ -252,25 +252,25 @@ public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPac
      * @generated
      */
     protected void createExtendedMetaDataAnnotations() {
-        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
         addAnnotation
           (getListOfValues_Entries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "item"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "item" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSetGenerator_Algorithm(), 
            source, 
            new String[] {
-             "kind", "element"
+             "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSetGenerator_Expression(), 
            source, 
            new String[] {
-             "kind", "element"
+             "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
            });
     }
 

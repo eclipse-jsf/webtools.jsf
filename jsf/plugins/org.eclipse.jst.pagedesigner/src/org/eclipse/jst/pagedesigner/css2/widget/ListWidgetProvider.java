@@ -167,7 +167,7 @@ public class ListWidgetProvider extends AbstractWidgetProvider {
 	 */
 	private String normalize(String string) {
 		if (string == null) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 		int index = string.indexOf('\r');
 		if (index >= 0) {

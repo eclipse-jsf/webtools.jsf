@@ -509,11 +509,11 @@ public class PageflowPageImpl extends PageflowNodeImpl implements PageflowPage {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (path: ");
+		result.append(" (path: "); //$NON-NLS-1$
 		result.append(getPath());
-		result.append(", smallicon: ");
+		result.append(", smallicon: "); //$NON-NLS-1$
 		result.append(getSmallicon());
-		result.append(", largeicon: ");
+		result.append(", largeicon: "); //$NON-NLS-1$
 		result.append(getLargeicon());
 		result.append(')');
 		return result.toString();

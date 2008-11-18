@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataResourceImpl.java,v 1.11 2008/09/11 17:22:00 gkessler Exp $
+ * $Id: MetadataResourceImpl.java,v 1.12 2008/11/18 22:24:36 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -46,7 +46,7 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Oracle inc.";
+	public static final String copyright = "Oracle inc."; //$NON-NLS-1$
 	
 	/**
 	 * IMetaDataSourceModelProvider
@@ -115,7 +115,7 @@ public class MetadataResourceImpl extends XMLResourceImpl implements XMLResource
         else
         {
             JSFCommonPlugin.log(IStatus.WARNING, 
-               "No model loaded for "+getURI());
+               "No model loaded for "+getURI()); //$NON-NLS-1$
         }
     }
 

@@ -65,7 +65,7 @@ public abstract class HTMLStringTagConverter extends AbstractTagConverter {
 		// }
 		InputStream stream = null;
 		try {
-			String id = "" + System.currentTimeMillis() + ".html";
+			String id = "" + System.currentTimeMillis() + ".html"; //$NON-NLS-1$ //$NON-NLS-2$
 			IModelManager manager = StructuredModelManager.getModelManager();
 			stream = new ByteArrayInputStream(getGeneratedHTML().getBytes());
 			IDOMModel model = (IDOMModel) manager.getModelForRead(id, stream,
@@ -76,9 +76,9 @@ public abstract class HTMLStringTagConverter extends AbstractTagConverter {
 			model.releaseFromRead();
 			return resultEle;
 		} catch (Exception ex) {
-			_log.error("Log.Error.HTMLStringTagConverter.Error", ex);
-			Element temp = createElement("div");
-			temp.appendChild(createText("Error loading: " + ex.getMessage()));
+			_log.error("Log.Error.HTMLStringTagConverter.Error", ex); //$NON-NLS-1$
+			Element temp = createElement("div"); //$NON-NLS-1$
+			temp.appendChild(createText("Error loading: " + ex.getMessage())); //$NON-NLS-1$
 			return temp;
 		} finally {
 			ResourceUtils.ensureClosed(stream);

@@ -111,11 +111,11 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         }
         else if (IJSFConstants.TAG_INPUTSECRET.equalsIgnoreCase(tagName))
         {
-            converter = new InputTagConverter(element, "password");
+            converter = new InputTagConverter(element, "password"); //$NON-NLS-1$
         }
         else if (IJSFConstants.TAG_INPUTTEXT.equalsIgnoreCase(tagName))
         {
-            converter = new InputTagConverter(element, "text");
+            converter = new InputTagConverter(element, "text"); //$NON-NLS-1$
         }
         else if (IJSFConstants.TAG_INPUTTEXTAREA.equalsIgnoreCase(tagName))
         {
@@ -153,7 +153,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         }
         else if (IJSFConstants.TAG_SELECTMANYCHECKBOX.equalsIgnoreCase(tagName))
         {
-            converter = new TableBasedSelectTagConverter(element, "checkbox");
+            converter = new TableBasedSelectTagConverter(element, "checkbox"); //$NON-NLS-1$
         }
         else if (IJSFConstants.TAG_SELECTMANYLISTBOX.equalsIgnoreCase(tagName))
         {
@@ -173,7 +173,7 @@ public class JSFHTMLConverterFactory implements IConverterFactory
         }
         else if (IJSFConstants.TAG_SELECTONERADIO.equalsIgnoreCase(tagName))
         {
-            converter = new TableBasedSelectTagConverter(element, "radio");
+            converter = new TableBasedSelectTagConverter(element, "radio"); //$NON-NLS-1$
         }
         else
         {

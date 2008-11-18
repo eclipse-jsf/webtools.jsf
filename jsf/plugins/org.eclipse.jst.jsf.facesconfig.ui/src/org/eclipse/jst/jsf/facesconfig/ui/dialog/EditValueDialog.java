@@ -115,7 +115,7 @@ public class EditValueDialog extends Dialog {
 		// ManagedBeansPage.ManagedBeanInitializationSection.MapTable.Title =
 		// Values:
 		valueTitle
-				.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_Value);//$NON-NLS-1$
+				.setLabelText(EditorMessages.ManagedBeanPropertyEditDialog_Value);
 		valueTitle.doFillIntoGrid(null, container, 1);
 
 		gd = new GridData(GridData.FILL_BOTH);
@@ -160,7 +160,7 @@ public class EditValueDialog extends Dialog {
 
 		// ManagedBeanPropertyEditDialog.Value = Value:
 		lblValue
-				.setText(EditorMessages.ManagedBeanPropertyEditDialog_Value); //$NON-NLS-1$
+				.setText(EditorMessages.ManagedBeanPropertyEditDialog_Value);
 
 		gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL
 				| GridData.FILL_HORIZONTAL);
@@ -188,7 +188,7 @@ public class EditValueDialog extends Dialog {
 	 */
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText(EditorMessages.ValueEditDialog_Title); //$NON-NLS-1$
+		newShell.setText(EditorMessages.ValueEditDialog_Title);
 	}
 
 	/*

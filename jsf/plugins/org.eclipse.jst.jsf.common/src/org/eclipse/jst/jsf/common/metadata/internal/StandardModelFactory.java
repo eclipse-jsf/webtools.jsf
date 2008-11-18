@@ -270,7 +270,7 @@ public class StandardModelFactory {
 				StringTokenizer st = new StringTokenizer(ignoreSet, ","); //$NON-NLS-1$
 				while(st.hasMoreTokens()){
 					String uri = st.nextToken();
-					if (!(uri.equals("")))
+					if (!(uri.equals(""))) //$NON-NLS-1$
 							ret.add(uri);
 				}
 			}

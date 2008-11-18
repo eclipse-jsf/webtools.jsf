@@ -85,7 +85,7 @@ public class FacesConfigValidator extends EObjectValidationVisitor
             }
 
             protected String getInstanceOf() {
-                return "javax.faces.event.PhaseListener";
+                return "javax.faces.event.PhaseListener"; //$NON-NLS-1$
             }
 
             protected EObjectValidationVisitor[] getChildNodeValidators() {

@@ -58,7 +58,7 @@ public class LocaleFallback {
 			}
 		}
 		// last add blank string in order to search the base file
-		options[size] = "";
+		options[size] = ""; //$NON-NLS-1$
 		map.put(locale, options);
 
 		return options;

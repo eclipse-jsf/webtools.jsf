@@ -29,8 +29,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class ComponentDetailSubForm extends AbstractXMLSectionsDetailsForm
 {
-    private final static String  COMPONENT_TYPE_SECTION_KEY = "componentSection";
-    private static final String INTERFACES_SECTION_KEY = "interfacesSection";
+    private final static String  COMPONENT_TYPE_SECTION_KEY = "componentSection"; //$NON-NLS-1$
+    private static final String INTERFACES_SECTION_KEY = "interfacesSection"; //$NON-NLS-1$
     private XMLTextSection       _componentTypeSection;
     private XMLTextSection       _interfacesSection;
 
@@ -38,10 +38,10 @@ public class ComponentDetailSubForm extends AbstractXMLSectionsDetailsForm
     protected Map<? extends Object, XMLTextSection> createXMLTextSections(Composite parent)
     {
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
-        _componentTypeSection = new XMLTextSection(getToolkit(), parent, "Component Type Information");
+        _componentTypeSection = new XMLTextSection(getToolkit(), parent, Messages.ComponentDetailSubForm_TypeInfo);
         sections.put(COMPONENT_TYPE_SECTION_KEY, _componentTypeSection);
         
-        _interfacesSection = new XMLTextSection(getToolkit(), parent, "Interface Information");
+        _interfacesSection = new XMLTextSection(getToolkit(), parent, Messages.ComponentDetailSubForm_InterfaceInfo);
         sections.put(INTERFACES_SECTION_KEY, _interfacesSection);
         return sections;
     }

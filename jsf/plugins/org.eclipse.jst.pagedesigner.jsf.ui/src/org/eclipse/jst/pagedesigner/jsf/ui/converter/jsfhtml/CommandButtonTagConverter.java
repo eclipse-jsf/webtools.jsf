@@ -72,12 +72,12 @@ public class CommandButtonTagConverter extends AbstractTagConverter
             type = hostEle.getAttribute(IJSFConstants.ATTR_TYPE);
             if (type == null || type.length() == 0)
             {
-                type = "submit";	// default type
+                type = "submit";	// default type //$NON-NLS-1$
             }
         }
         else
         {
-            type = "image";
+            type = "image"; //$NON-NLS-1$
             // copy the image attribute as the src attribute
             String src = mapURL(imageAttr);
             inputEle.setAttribute(IHTMLConstants.ATTR_SRC, src);

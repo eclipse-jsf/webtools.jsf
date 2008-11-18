@@ -55,7 +55,7 @@ public class AttributeTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -98,8 +98,8 @@ public class AttributeTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_AttributeType_attributeClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_attributeClass_feature", "_UI_AttributeType_type"),
+                 getString("_UI_AttributeType_attributeClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_attributeClass_feature", "_UI_AttributeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ATTRIBUTE_TYPE__ATTRIBUTE_CLASS,
                  true,
                  false,
@@ -121,8 +121,8 @@ public class AttributeTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_AttributeType_defaultValue_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_defaultValue_feature", "_UI_AttributeType_type"),
+                 getString("_UI_AttributeType_defaultValue_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_defaultValue_feature", "_UI_AttributeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ATTRIBUTE_TYPE__DEFAULT_VALUE,
                  true,
                  false,
@@ -144,8 +144,8 @@ public class AttributeTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_AttributeType_suggestedValue_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_suggestedValue_feature", "_UI_AttributeType_type"),
+                 getString("_UI_AttributeType_suggestedValue_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_suggestedValue_feature", "_UI_AttributeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ATTRIBUTE_TYPE__SUGGESTED_VALUE,
                  true,
                  false,
@@ -167,8 +167,8 @@ public class AttributeTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_AttributeType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_id_feature", "_UI_AttributeType_type"),
+                 getString("_UI_AttributeType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_AttributeType_id_feature", "_UI_AttributeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.ATTRIBUTE_TYPE__ID,
                  true,
                  false,
@@ -217,7 +217,7 @@ public class AttributeTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/AttributeType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/AttributeType")); //$NON-NLS-1$
     }
 
     /**
@@ -229,8 +229,8 @@ public class AttributeTypeItemProvider
 	public String getText(Object object) {
         String label = ((AttributeType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_AttributeType_type") :
-            getString("_UI_AttributeType_type") + " " + label;
+            getString("_UI_AttributeType_type") : //$NON-NLS-1$
+            getString("_UI_AttributeType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -312,16 +312,16 @@ public class AttributeTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return attribute.getAttributeName() == null ? "" : attribute
+			return attribute.getAttributeName() == null ? "" : attribute //$NON-NLS-1$
 					.getAttributeName().getTextContent();
 		case 1:
-			return attribute.getAttributeClass() == null ? "" : attribute
+			return attribute.getAttributeClass() == null ? "" : attribute //$NON-NLS-1$
 					.getAttributeClass().getTextContent();
 		case 2:
-			return attribute.getDefaultValue() == null ? "" : attribute
+			return attribute.getDefaultValue() == null ? "" : attribute //$NON-NLS-1$
 					.getDefaultValue().getTextContent();
 		case 3:
-			return attribute.getSuggestedValue() == null ? "" : attribute
+			return attribute.getSuggestedValue() == null ? "" : attribute //$NON-NLS-1$
 					.getSuggestedValue().getTextContent();
 		}
 		return null;

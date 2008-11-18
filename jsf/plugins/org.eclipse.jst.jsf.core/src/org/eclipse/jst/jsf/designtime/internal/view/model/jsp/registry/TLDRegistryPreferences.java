@@ -44,7 +44,7 @@ public class TLDRegistryPreferences
     private final CopyOnWriteArrayList<PropertyListener> _listeners;
     private final AtomicBoolean                _isDisposed = new AtomicBoolean(false);
 
-    private final static String                KEY_STRATEGY_ID_ORDER = "org.eclipse.jst.jsf.designtime.jsp.registry.StrategyIDOrder";
+    private final static String                KEY_STRATEGY_ID_ORDER = "org.eclipse.jst.jsf.designtime.jsp.registry.StrategyIDOrder"; //$NON-NLS-1$
 
     private final static List<OrderableObject> DEFAULT_STRATEGY_ORDER;
 
@@ -158,7 +158,7 @@ public class TLDRegistryPreferences
     {
         if (_isDisposed.get())
         {
-            JSFCorePlugin.log(new Exception("Stack trace only"), "TLDRegistryPreferences is disposed");
+            JSFCorePlugin.log(new Exception("Stack trace only"), "TLDRegistryPreferences is disposed"); //$NON-NLS-1$ //$NON-NLS-2$
             return false;
         }
         return true;
@@ -249,12 +249,12 @@ public class TLDRegistryPreferences
         for (final OrderableObject id : ids)
         {
             StrategyIdentifier strategyId = (StrategyIdentifier) id.getObject();
-            buffer.append("dummyValue");
-            buffer.append(",");
+            buffer.append("dummyValue"); //$NON-NLS-1$
+            buffer.append(","); //$NON-NLS-1$
             buffer.append(strategyId.getId());
-            buffer.append(",");
+            buffer.append(","); //$NON-NLS-1$
             buffer.append(id.isEnabled());
-            buffer.append(",");
+            buffer.append(","); //$NON-NLS-1$
         }
         return buffer.toString();
     }
@@ -262,7 +262,7 @@ public class TLDRegistryPreferences
     private List<OrderableObject> deserialize(final String serializedList)
     {
         final List<OrderableObject> list = new ArrayList<OrderableObject>();
-        final String[] ids = serializedList.split(",");
+        final String[] ids = serializedList.split(","); //$NON-NLS-1$
         if ((ids.length % 3) != 0)
         {
             return null;
@@ -275,7 +275,7 @@ public class TLDRegistryPreferences
             final String enabled = ids[i + 2];
 
             // fix old id for meta-data resolver
-            if ("org.eclipse.jst.jsf.THISISTEMPORARY".equals(id))
+            if ("org.eclipse.jst.jsf.THISISTEMPORARY".equals(id)) //$NON-NLS-1$
             {
                 id = DefaultJSPTagResolver.ID;
             }
@@ -284,7 +284,7 @@ public class TLDRegistryPreferences
             
             if (desc == null)
             {
-                JSFCorePlugin.log(new Exception("Stack trace only"), "Error: unknown strategy id: "+id);
+                JSFCorePlugin.log(new Exception("Stack trace only"), "Error: unknown strategy id: "+id); //$NON-NLS-1$ //$NON-NLS-2$
             }
             else
             {

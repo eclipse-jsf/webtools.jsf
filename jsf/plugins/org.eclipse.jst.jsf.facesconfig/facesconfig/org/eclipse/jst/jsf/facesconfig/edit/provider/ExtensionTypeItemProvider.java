@@ -54,7 +54,7 @@ public class ExtensionTypeItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -96,8 +96,8 @@ public class ExtensionTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ExtensionType_childNodes_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ExtensionType_childNodes_feature", "_UI_ExtensionType_type"),
+                 getString("_UI_ExtensionType_childNodes_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ExtensionType_childNodes_feature", "_UI_ExtensionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.EXTENSION_TYPE__CHILD_NODES,
                  true,
                  false,
@@ -119,8 +119,8 @@ public class ExtensionTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ExtensionType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ExtensionType_textContent_feature", "_UI_ExtensionType_type"),
+                 getString("_UI_ExtensionType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ExtensionType_textContent_feature", "_UI_ExtensionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.EXTENSION_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -142,8 +142,8 @@ public class ExtensionTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ExtensionType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ExtensionType_id_feature", "_UI_ExtensionType_type"),
+                 getString("_UI_ExtensionType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ExtensionType_id_feature", "_UI_ExtensionType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.EXTENSION_TYPE__ID,
                  true,
                  false,
@@ -162,8 +162,8 @@ public class ExtensionTypeItemProvider
     public String getText(Object object) {
         String label = ((ExtensionType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ExtensionType_type") :
-            getString("_UI_ExtensionType_type") + " " + label;
+            getString("_UI_ExtensionType_type") : //$NON-NLS-1$
+            getString("_UI_ExtensionType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

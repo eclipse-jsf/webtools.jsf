@@ -33,7 +33,7 @@ public final class JSFLibraryConfigurationHelper {
 	/**
 	 * container id for JSF Library Classpath Containers 
 	 */
-	public static final String JSF_LIBRARY_CP_CONTAINER_ID="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer";
+	public static final String JSF_LIBRARY_CP_CONTAINER_ID="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"; //$NON-NLS-1$
 
 	/**
 	 * @param project 
@@ -57,7 +57,7 @@ public final class JSFLibraryConfigurationHelper {
 				results.add(JSFLibraryReferenceFacadeFactory.createServerSuppliedJSFLibRef());
 			}
 		} catch (JavaModelException e) {
-			JSFCorePlugin.log(e, "Exception occurred calling getJSFLibraryReferences for "+project.getName());
+			JSFCorePlugin.log(e, "Exception occurred calling getJSFLibraryReferences for "+project.getName()); //$NON-NLS-1$
 		}
 		return results;
 	}

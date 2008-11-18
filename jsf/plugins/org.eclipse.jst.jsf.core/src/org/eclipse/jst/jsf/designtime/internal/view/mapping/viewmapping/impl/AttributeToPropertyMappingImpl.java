@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AttributeToPropertyMappingImpl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
+ * $Id: AttributeToPropertyMappingImpl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -280,11 +280,11 @@ public class AttributeToPropertyMappingImpl extends EObjectImpl implements Attri
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (propertyName: ");
+        result.append(" (propertyName: "); //$NON-NLS-1$
         result.append(propertyName);
-        result.append(", elAllowed: ");
+        result.append(", elAllowed: "); //$NON-NLS-1$
         result.append(elAllowed);
-        result.append(", customConversionFactoryId: ");
+        result.append(", customConversionFactoryId: "); //$NON-NLS-1$
         result.append(customConversionFactoryId);
         result.append(')');
         return result.toString();

@@ -142,15 +142,15 @@ public abstract class AbstractJSFLibraryReferenceImpl implements JSFLibraryRefer
 	}
 
 	public String toString(){
-		StringBuffer buf = new StringBuffer("id: ");
+		StringBuffer buf = new StringBuffer("id: "); //$NON-NLS-1$
 		buf.append(getId());
-		buf.append(", label: ");
+		buf.append(", label: "); //$NON-NLS-1$
 		buf.append(getLabel());
-		buf.append(", isDeployed: ");
+		buf.append(", isDeployed: "); //$NON-NLS-1$
 		buf.append(isDeployed());
-		buf.append(", isImpl: ");
+		buf.append(", isImpl: "); //$NON-NLS-1$
 		buf.append(isJSFImplementation());
-		buf.append(", version: ");
+		buf.append(", version: "); //$NON-NLS-1$
 		buf.append(getMaxSupportedVersion().name());
 		
 		return buf.toString();

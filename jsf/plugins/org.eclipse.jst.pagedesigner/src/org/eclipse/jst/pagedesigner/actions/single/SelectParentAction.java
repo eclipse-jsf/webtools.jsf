@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.actions.single;
 
 import org.eclipse.gef.EditPart;
+import org.eclipse.osgi.util.NLS;
 import org.w3c.dom.Node;
 
 /**
@@ -35,10 +36,10 @@ public class SelectParentAction extends SelectNodeAction {
         
         if (parent != null)
         {
-            final String text = "Parent ("+parent.getNodeName()+")";
+            final String text = NLS.bind(Messages.SelectParentAction_MenuTextParent, parent.getNodeName()); 
             return new SelectParentAction(text, node, editPart);
         }
-        SelectParentAction action = new SelectParentAction("Parent", node, editPart);
+        SelectParentAction action = new SelectParentAction(Messages.SelectParentAction_MenuTextNoParent, node, editPart); 
         action.setEnabled(false);
         return action;
     }

@@ -41,7 +41,7 @@ public class JSFLibraryRegistrySwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached model package

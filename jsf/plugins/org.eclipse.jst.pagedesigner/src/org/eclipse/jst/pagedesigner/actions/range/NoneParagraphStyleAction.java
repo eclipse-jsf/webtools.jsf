@@ -36,7 +36,7 @@ public class NoneParagraphStyleAction extends ParagraphStyleAction {
 	 */
 	public NoneParagraphStyleAction(String text, String[] tags,
 			ImageDescriptor image, int style) {
-		super(text, "", image, style);
+		super(text, "", image, style); //$NON-NLS-1$
 		_applyingTags = tags;
 	}
 

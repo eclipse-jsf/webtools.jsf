@@ -121,7 +121,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
                 catch (TagRegistryFactoryException e)
                 {
                     JSFUiPlugin.log(IStatus.ERROR,
-                            "Problem getting tag registry", e);
+                            "Problem getting tag registry", e); //$NON-NLS-1$
                 }
             }
         }
@@ -144,7 +144,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             
             if (!regInstance.isUpToDate())
             {
-                return new Object[] {new TreePlaceholder("Calculating...", null)};
+                return new Object[] {new TreePlaceholder(Messages.TaglibContentProvider_Calculating, null)};
             }
             return regInstance.getNamespaces().values().toArray();
         }
@@ -160,7 +160,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
 
             // fire up a job that ensures the namespace is initialized
             // and then fires refresh again on this element
-            final Job updateNamespaceJob = new Job("Updating namespace")
+            final Job updateNamespaceJob = new Job(Messages.TaglibContentProvider_JobDesc)
             {
                 @Override
                 protected IStatus run(final IProgressMonitor monitor)
@@ -184,8 +184,8 @@ public class TaglibContentProvider implements IStructuredContentProvider,
                                                         Display
                                                                 .getCurrent()
                                                                 .getActiveShell(),
-                                                        "Error updating namespace",
-                                                        "There was a problem initializing the namespace");
+                                                        Messages.TaglibContentProvider_NamespaceErrorTitle,
+                                                        Messages.TaglibContentProvider_NamespaceErrorDescription);
                                     }
                                 }
                             });
@@ -196,7 +196,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             updateNamespaceJob.schedule();
 
             return new Object[]
-            { new TreePlaceholder("Calculating tags, please wait...", null) };
+            { new TreePlaceholder(Messages.TaglibContentProvider_TagCalculatingWaitMessage, null) };
         }
 //        else if (parentElement instanceof IJSFTagElement)
 //        {
@@ -327,7 +327,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
         public UpdateNamespacesListJob(final IProject project,
                 final long timestamp, final TagRegistryInstance registry)
         {
-            super("Updating available namespaces for project "
+            super("Updating available namespaces for project " //$NON-NLS-1$
                     + project.getName());
             _project = project;
             _timestamp = timestamp;
@@ -340,7 +340,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             if (!_project.isAccessible()
                     || _registry.isUpToDate())
             {
-                return new Status(IStatus.CANCEL, JSFUiPlugin.PLUGIN_ID, "");
+                return new Status(IStatus.CANCEL, JSFUiPlugin.PLUGIN_ID, ""); //$NON-NLS-1$
             }
 
             final Collection<? extends Namespace> libs = _registry.getRegistry()

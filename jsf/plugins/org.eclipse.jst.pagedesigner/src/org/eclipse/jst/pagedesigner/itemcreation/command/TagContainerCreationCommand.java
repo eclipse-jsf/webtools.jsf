@@ -67,6 +67,6 @@ public class TagContainerCreationCommand extends ContainerCreationCommand {
     @Override
     protected final boolean prepare()
     {
-        throw new UnsupportedOperationException("don't use");
+        throw new UnsupportedOperationException("don't use"); //$NON-NLS-1$
     }
 }

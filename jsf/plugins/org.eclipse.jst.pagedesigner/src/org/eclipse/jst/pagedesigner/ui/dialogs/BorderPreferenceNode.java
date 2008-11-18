@@ -80,7 +80,7 @@ public class BorderPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "Border";
+		return "Border"; //$NON-NLS-1$
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class BorderPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("BorderPreferenceNode.LabelText");
+		return DialogsMessages.getString("BorderPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

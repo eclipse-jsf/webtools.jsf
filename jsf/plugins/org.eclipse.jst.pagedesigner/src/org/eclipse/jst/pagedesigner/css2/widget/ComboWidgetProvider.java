@@ -134,8 +134,8 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 			}
 			g.clipRect(rect);
 			String label = _label != null ? _label : _firstString;
-			label = label.replaceAll("[ \r\n]+", " ");
-			if (label.endsWith(" ")) {
+			label = label.replaceAll("[ \r\n]+", " "); //$NON-NLS-1$ //$NON-NLS-2$
+			if (label.endsWith(" ")) { //$NON-NLS-1$
 				label = label.substring(0, label.length() - 1);
 			}
 			g.drawString(label, rect.x + HORIZONTAL_PADDING / 2, rect.y
@@ -184,7 +184,7 @@ public class ComboWidgetProvider extends AbstractWidgetProvider {
 			this._longestString = null;
 		} else {
 			this._firstString = options[0];
-			this._longestString = (options[0] == null ? "" : options[0]);
+			this._longestString = (options[0] == null ? "" : options[0]); //$NON-NLS-1$
 			for (int i = 1; i < options.length; i++) {
 				if (options[i] == null) {
 					continue;

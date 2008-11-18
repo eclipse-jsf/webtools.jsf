@@ -64,7 +64,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
                 if (managedObject == null)
                 {
                     throw new ManagedObjectException(
-                            "No object available for resource");
+                            "No object available for resource"); //$NON-NLS-1$
                 }
                 managedResObject = manageResource(key, managedObject);
             }

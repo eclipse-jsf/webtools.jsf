@@ -62,7 +62,7 @@ public class VerticalMoveCommand extends Command {
 		int OFFSET = 2;
 		DesignRange range = _viewer.getRangeSelection();
 		if (range == null || !range.isValid()) {
-			_log.error("invalud range");
+			_log.error("invalid range"); //$NON-NLS-1$
 			return;
 		}
 		IMovementMediator moveMediator = new InlineEditingNavigationMediator(

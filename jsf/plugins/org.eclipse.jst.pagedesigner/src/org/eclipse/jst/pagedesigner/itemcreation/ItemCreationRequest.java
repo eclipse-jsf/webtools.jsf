@@ -25,15 +25,15 @@ public class ItemCreationRequest extends Request implements DropRequest {
 	/**
 	 * Constant used for item creation request
 	 */
-	public static final String REQ_ITEM_CREATION = "Item Creation";
+	public static final String REQ_ITEM_CREATION = "Item Creation"; //$NON-NLS-1$
 	/**
 	 * Constant used for tag tool item
 	 */
-	public static final String TAG_TOOL_PALETTE_ENTRY = "TagToolPaletteEntry";
+	public static final String TAG_TOOL_PALETTE_ENTRY = "TagToolPaletteEntry"; //$NON-NLS-1$
 	/**
 	 * Constant used for location during creation request
 	 */
-	public static final String LOCATION = "location";
+	public static final String LOCATION = "location"; //$NON-NLS-1$
 	
 
 	/**

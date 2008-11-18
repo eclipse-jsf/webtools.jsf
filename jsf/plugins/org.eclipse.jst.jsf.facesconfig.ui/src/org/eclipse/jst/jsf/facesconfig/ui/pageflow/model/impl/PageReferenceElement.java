@@ -317,7 +317,7 @@ public class PageReferenceElement extends ReferenceElement {
 				}
 			}
 			// Create new fromViewID or toViewID node as needed.
-			else if (newValue != null && !"*".equals(newValue)) {
+			else if (newValue != null && !"*".equals(newValue)) { //$NON-NLS-1$
 				if (((PageflowPage) pageflowElement).getOutlinks().size() > 0) {
 					List links = ((PageflowPage) pageflowElement).getOutlinks();
 					for (int i = 0, n = links.size(); i < n; i++) {

@@ -35,7 +35,7 @@ import org.w3c.dom.Element;
 		if (_image != null) {
 			_image.dispose();
 		}
-		_image = ImageResolver.initializeImage(node, "src");
+		_image = ImageResolver.initializeImage(node, "src"); //$NON-NLS-1$
 	}
 
 	public void dispose() {

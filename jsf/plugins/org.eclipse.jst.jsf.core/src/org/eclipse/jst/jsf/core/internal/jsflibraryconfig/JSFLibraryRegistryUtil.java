@@ -405,7 +405,7 @@ public class JSFLibraryRegistryUtil {
 		try {
 			project.setRawClasspath(entries, monitor);
 		} catch (JavaModelException e) {
-			JSFCorePlugin.log(e, "Unable to set classpath for: "+project.getProject().getName());
+			JSFCorePlugin.log(e, "Unable to set classpath for: "+project.getProject().getName()); //$NON-NLS-1$
 		}
 	}
 	

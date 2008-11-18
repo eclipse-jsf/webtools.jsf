@@ -122,7 +122,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		librariesComposite.setLayoutData( gd );
 		
 		final Label spacer = new Label( composite, SWT.NONE );
-		spacer.setText( "" );
+		spacer.setText( "" ); //$NON-NLS-1$
 
         gd = new GridData( GridData.FILL_HORIZONTAL );
         gd.horizontalSpan = 3;

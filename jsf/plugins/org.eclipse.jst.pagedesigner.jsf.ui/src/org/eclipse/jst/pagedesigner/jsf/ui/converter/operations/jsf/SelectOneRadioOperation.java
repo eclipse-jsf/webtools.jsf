@@ -27,7 +27,7 @@ public class SelectOneRadioOperation extends TableBasedOperation {
 	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.TableBasedOperation#getInputType()
 	 */
 	protected String getInputType() {
-		return "radio";
+		return "radio"; //$NON-NLS-1$
 	}
 
 }

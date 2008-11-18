@@ -27,7 +27,7 @@ public class SelectManyCheckboxOperation extends TableBasedOperation {
 	 * @see org.eclipse.jst.pagedesigner.jsf.ui.converter.operations.jsf.TableBasedOperation#getInputType()
 	 */
 	protected String getInputType() {
-		return "checkbox";
+		return "checkbox"; //$NON-NLS-1$
 	}
 
 }

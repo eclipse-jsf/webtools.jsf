@@ -53,7 +53,7 @@ public class FactoryTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -94,8 +94,8 @@ public class FactoryTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FactoryType_factoryExtension_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FactoryType_factoryExtension_feature", "_UI_FactoryType_type"),
+                 getString("_UI_FactoryType_factoryExtension_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FactoryType_factoryExtension_feature", "_UI_FactoryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACTORY_TYPE__FACTORY_EXTENSION,
                  true,
                  false,
@@ -117,8 +117,8 @@ public class FactoryTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FactoryType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FactoryType_id_feature", "_UI_FactoryType_type"),
+                 getString("_UI_FactoryType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FactoryType_id_feature", "_UI_FactoryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACTORY_TYPE__ID,
                  true,
                  false,
@@ -166,7 +166,7 @@ public class FactoryTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/FactoryType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/FactoryType")); //$NON-NLS-1$
     }
 
     /**
@@ -178,8 +178,8 @@ public class FactoryTypeItemProvider
 	public String getText(Object object) {
         String label = ((FactoryType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_FactoryType_type") :
-            getString("_UI_FactoryType_type") + " " + label;
+            getString("_UI_FactoryType_type") : //$NON-NLS-1$
+            getString("_UI_FactoryType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

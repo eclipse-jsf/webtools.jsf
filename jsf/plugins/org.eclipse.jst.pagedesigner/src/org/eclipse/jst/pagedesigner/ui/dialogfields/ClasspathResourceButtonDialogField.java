@@ -33,7 +33,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 public class ClasspathResourceButtonDialogField extends StringButtonDialogField implements IElementContextable
 {
 
-	private static final String[] PROPERTIES_FILES_SUFFIXS = new String[] { IFileFolderConstants.EXT_PROPERTIES }; //$NON-NLS-1$
+	private static final String[] PROPERTIES_FILES_SUFFIXS = new String[] { IFileFolderConstants.EXT_PROPERTIES };
 
 	private static class MyStringButtonAdapter implements IStringButtonAdapter
 	{

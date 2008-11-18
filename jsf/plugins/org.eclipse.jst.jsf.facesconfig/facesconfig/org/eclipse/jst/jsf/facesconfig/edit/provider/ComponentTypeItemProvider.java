@@ -48,7 +48,7 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -85,10 +85,10 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory)
 						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_ComponentType_componentClass_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ComponentType_componentClass_feature",
-						"_UI_ComponentType_type"), FacesConfigPackage.eINSTANCE
+				getString("_UI_ComponentType_componentClass_feature"), //$NON-NLS-1$
+				getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$
+						"_UI_ComponentType_componentClass_feature", //$NON-NLS-1$
+						"_UI_ComponentType_type"), FacesConfigPackage.eINSTANCE //$NON-NLS-1$
 						.getComponentType_ComponentClass(), true, null, null,
 				null));
 	}
@@ -100,10 +100,10 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 		itemPropertyDescriptors.add(createItemPropertyDescriptor(
 				((ComposeableAdapterFactory) adapterFactory)
 						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_ComponentType_componentType_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_ComponentType_componentType_feature",
-						"_UI_ComponentType_type"), FacesConfigPackage.eINSTANCE
+				getString("_UI_ComponentType_componentType_feature"), //$NON-NLS-1$
+				getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$
+						"_UI_ComponentType_componentType_feature", //$NON-NLS-1$
+						"_UI_ComponentType_type"), FacesConfigPackage.eINSTANCE //$NON-NLS-1$
 						.getComponentType_ComponentType(), true, null, null,
 				null));
 	}
@@ -121,8 +121,8 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ComponentType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_id_feature", "_UI_ComponentType_type"),
+                 getString("_UI_ComponentType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ComponentType_id_feature", "_UI_ComponentType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.COMPONENT_TYPE__ID,
                  true,
                  false,
@@ -173,7 +173,7 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ComponentType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ComponentType")); //$NON-NLS-1$
     }
 
 	/**
@@ -197,8 +197,8 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 			}
 		}
 		
-		return label == null || label.length() == 0 ? getString("_UI_ComponentType_type")
-				: getString("_UI_ComponentType_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_ComponentType_type") //$NON-NLS-1$
+				: getString("_UI_ComponentType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
     /**
@@ -315,7 +315,7 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 		case 0:
 			return getText(object);
 		case 1:
-			return component.getComponentClass() == null ? "" : component
+			return component.getComponentClass() == null ? "" : component //$NON-NLS-1$
 					.getComponentClass().getTextContent();
 		}
 		return null;

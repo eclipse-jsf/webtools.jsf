@@ -44,9 +44,9 @@ public class OverviewGeneralSection extends AbstractFacesConfigSection {
 		super(parent, managedForm, page, toolkit, null, null);
 
 		getSection().setText(
-				EditorMessages.OverviewPage_GeneralSection_name); //$NON-NLS-1$
+				EditorMessages.OverviewPage_GeneralSection_name);
 		getSection().setDescription(
-				EditorMessages.OverviewPage_GeneralSection_description); //$NON-NLS-1$
+				EditorMessages.OverviewPage_GeneralSection_description);
 	}
 
 	/*
@@ -63,15 +63,15 @@ public class OverviewGeneralSection extends AbstractFacesConfigSection {
 		IEditorInput editorInput = this.getPage().getEditor().getEditorInput();
 
 		toolkit.createLabel(container,
-				EditorMessages.OverviewPage_GeneralSection_label_name); //$NON-NLS-1$ 	 
+				EditorMessages.OverviewPage_GeneralSection_label_name); 	 
 		Text typeText = toolkit.createText(container, ((FileEditorInput)editorInput).getName());
 		typeText.setEditable(false);
 		GridData data = new GridData(GridData.FILL_HORIZONTAL);
 		typeText.setLayoutData(data);
 
 		toolkit.createLabel(container,
-				EditorMessages.OverviewPage_GeneralSection_label_version); //$NON-NLS-1$
-		versionText = toolkit.createText(container, "");
+				EditorMessages.OverviewPage_GeneralSection_label_version);
+		versionText = toolkit.createText(container, ""); //$NON-NLS-1$
 		versionText.setLayoutData(data);
 		versionText.setEditable(false);
 

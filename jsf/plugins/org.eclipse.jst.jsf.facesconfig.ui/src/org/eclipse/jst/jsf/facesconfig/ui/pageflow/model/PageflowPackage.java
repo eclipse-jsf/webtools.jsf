@@ -36,21 +36,21 @@ public interface PageflowPackage extends EPackage {
 	 * 
 	 * @generated
 	 */
-	String eNAME = "pageflow";
+	String eNAME = "pageflow"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	String eNS_URI = "http://www.sybase.com/suade/pageflow";
+	String eNS_URI = "http://www.sybase.com/suade/pageflow"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	String eNS_PREFIX = "pageflow";
+	String eNS_PREFIX = "pageflow"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the package. <!-- begin-user-doc --> <!--

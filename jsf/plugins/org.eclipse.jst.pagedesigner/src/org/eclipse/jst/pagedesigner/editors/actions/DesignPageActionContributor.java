@@ -46,7 +46,7 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 	/**
 	 * paragraph
 	 */
-	public static final String PARAGRAPH_ACTION_ID = "paragraph";
+	public static final String PARAGRAPH_ACTION_ID = "paragraph"; //$NON-NLS-1$
 
 	private IEditorPart _editorPart;
 
@@ -60,7 +60,7 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 				manager.remove(id);
 			}
 		} catch (Exception e) {
-			_log.info("Error:", e);
+			_log.info("Error:", e); //$NON-NLS-1$
 		}
 	}
 

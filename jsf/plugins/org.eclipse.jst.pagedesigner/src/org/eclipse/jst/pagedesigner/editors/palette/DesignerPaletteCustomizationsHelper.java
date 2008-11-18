@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
  * Helper class that all clients should use when dealing with palette customizations 
  */
 public final class DesignerPaletteCustomizationsHelper {
-	private static final String PREFS_TAGLIBHIDE_PREFIX = "hidden_taglib:";
+	private static final String PREFS_TAGLIBHIDE_PREFIX = "hidden_taglib:"; //$NON-NLS-1$
 
 	private static Logger _log = PDPlugin.getLogger(DesignerPaletteCustomizationsHelper.class);
 	
@@ -165,12 +165,12 @@ public final class DesignerPaletteCustomizationsHelper {
 			if (builder != null) {
 				document = builder.parse(filename);
 			} else {
-				_log.error("DesignerPaletteCustomizationsHelper.importCustomizations.error.getDocumentBuilderFail");// $NON-NLS-1$
+				_log.error("DesignerPaletteCustomizationsHelper.importCustomizations.error.getDocumentBuilderFail");// $NON-NLS-1$ //$NON-NLS-1$
 			}
 		} catch (FileNotFoundException e) {
 			//should never get here as user chose file thru a file chooser dialog
 			_log.error(
-					"DesignerPaletteCustomizationsHelper.importCustomizations.error.FileNotFoundException");// $NON-NLS-1$
+					"DesignerPaletteCustomizationsHelper.importCustomizations.error.FileNotFoundException");// $NON-NLS-1$ //$NON-NLS-1$
 			document = null;
 		} catch (IOException e) {
 			_log.error(

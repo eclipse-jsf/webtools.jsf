@@ -34,52 +34,52 @@ public class PageVariableAdatperRegistry {
 	/**
 	 * pageVar
 	 */
-	public static final String PAGEVAR = "pageVar";
+	public static final String PAGEVAR = "pageVar"; //$NON-NLS-1$
 
 	/**
 	 * taglib
 	 */
-	public static final String TAGLIB = "taglib";
+	public static final String TAGLIB = "taglib"; //$NON-NLS-1$
 
 	/**
 	 * tag
 	 */
-	public static final String TAG = "tag";
+	public static final String TAG = "tag"; //$NON-NLS-1$
 
 	/**
 	 * varName
 	 */
-	public static final String VARNAME = "varName";
+	public static final String VARNAME = "varName"; //$NON-NLS-1$
 
 	/**
 	 * varNameIsAttr
 	 */
-	public static final String VARNAMEISATTR = "varNameIsAttr";
+	public static final String VARNAMEISATTR = "varNameIsAttr"; //$NON-NLS-1$
 
 	/**
 	 * varTypeMode
 	 */
-	public static final String VARTYPEMODE = "varTypeMode";
+	public static final String VARTYPEMODE = "varTypeMode"; //$NON-NLS-1$
 
 	/**
 	 * tagName
 	 */
-	public static final String TAGNAME = "tagName";
+	public static final String TAGNAME = "tagName"; //$NON-NLS-1$
 
 	/**
 	 * varTypeString
 	 */
-	public static final String VARTYPESTRING = "varTypeString";
+	public static final String VARTYPESTRING = "varTypeString"; //$NON-NLS-1$
 
 	/**
 	 * varTypeStringIsAttr
 	 */
-	public static final String VARTYPESTRINGISATTR = "varTypeStringIsAttr";
+	public static final String VARTYPESTRINGISATTR = "varTypeStringIsAttr"; //$NON-NLS-1$
 
 	/**
 	 * uri
 	 */
-	public static final String URI = "uri";
+	public static final String URI = "uri"; //$NON-NLS-1$
 
 	private static PageVariableAdatperRegistry _instance = null;
 
@@ -145,11 +145,11 @@ public class PageVariableAdatperRegistry {
 
 						String tag = tags[k].getAttribute(TAGNAME);
 						String varName = tags[k].getAttribute(VARNAME);
-						boolean varNameIsAttr = "true".equalsIgnoreCase(tags[k]
+						boolean varNameIsAttr = "true".equalsIgnoreCase(tags[k] //$NON-NLS-1$
 								.getAttribute(VARNAMEISATTR));
 						String varTypeString = tags[k]
 								.getAttribute(VARTYPESTRING);
-						boolean varTypeStringIsAttr = "true"
+						boolean varTypeStringIsAttr = "true" //$NON-NLS-1$
 								.equalsIgnoreCase(tags[k]
 										.getAttribute(VARTYPESTRINGISATTR));
 						String varTypeModeString = tags[k]
@@ -164,7 +164,7 @@ public class PageVariableAdatperRegistry {
 						desc.setTagName(tag);
 
 						// Use uri#tag as key.
-						map.put(uri + "#" + tag, desc);
+						map.put(uri + "#" + tag, desc); //$NON-NLS-1$
 					}
 				}
 			}
@@ -178,14 +178,14 @@ public class PageVariableAdatperRegistry {
 	 * @return variable typemode
 	 */
 	public static int toVarTypeMode(String varTypeModeString) {
-		if ("CLASSNAME".equalsIgnoreCase(varTypeModeString)) {
+		if ("CLASSNAME".equalsIgnoreCase(varTypeModeString)) { //$NON-NLS-1$
 			return IVariableInfo.CLASSNAME;
-		} else if ("EXPRESSION".equalsIgnoreCase(varTypeModeString)) {
+		} else if ("EXPRESSION".equalsIgnoreCase(varTypeModeString)) { //$NON-NLS-1$
 			return IVariableInfo.EXPRESSION;
-		} else if ("EXPRESSION_COLLECTION_ITEM"
+		} else if ("EXPRESSION_COLLECTION_ITEM" //$NON-NLS-1$
 				.equalsIgnoreCase(varTypeModeString)) {
 			return IVariableInfo.EXPRESSION_LISTITEM;
-		} else if ("BUNDLE".equalsIgnoreCase(varTypeModeString)) {
+		} else if ("BUNDLE".equalsIgnoreCase(varTypeModeString)) { //$NON-NLS-1$
 			return IVariableInfo.RESOURCEBUNDLE;
 		} else {
 			return IVariableInfo.EXPRESSION; // default
@@ -198,7 +198,7 @@ public class PageVariableAdatperRegistry {
 	 * @return the tag variable descriptor for the given tag (may be null)
 	 */
 	public TagVarDescriptor getTagVarDescriptor(String uri, String tagname) {
-		String key = uri + "#" + tagname;
+		String key = uri + "#" + tagname; //$NON-NLS-1$
 		return (TagVarDescriptor) _registry.get(key);
 	}
 

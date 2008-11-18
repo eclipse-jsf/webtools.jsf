@@ -80,7 +80,7 @@ public class PanelGridDeleteColumnCommand extends DesignerCommand
 
         if (_columnIndex >= columns)
         {
-            JSFUIPlugin.log(IStatus.ERROR, "Should not happen", new Throwable());
+            JSFUIPlugin.log(IStatus.ERROR, "Should not happen", new Throwable()); //$NON-NLS-1$
             return;
         }
         List children = JSFDOMUtil.getUIComponentChildren(_panelGridEle);

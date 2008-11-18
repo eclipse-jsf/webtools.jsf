@@ -82,8 +82,8 @@ public class ElementEditFactoryRegistry
                 {
                     if (PageDesignerTraceOptions.TRACE_ELEMENTEDITSELECTION)
                     {
-                        PageDesignerTraceOptions.log("ElementEditFactoryRegistry: first loop, "+
-                                String.format("Selected %s for uri=%s, tagname=%s", elementEdit.getClass().getName(),uri, tagIdentifier.getTagName()));
+                        PageDesignerTraceOptions.log("ElementEditFactoryRegistry: first loop, "+ //$NON-NLS-1$
+                                String.format("Selected %s for uri=%s, tagname=%s", elementEdit.getClass().getName(),uri, tagIdentifier.getTagName())); //$NON-NLS-1$
                     }
                     return elementEdit;
                 }
@@ -101,8 +101,8 @@ public class ElementEditFactoryRegistry
                 {
                     if (PageDesignerTraceOptions.TRACE_ELEMENTEDITSELECTION)
                     {
-                        PageDesignerTraceOptions.log("ElementEditFactoryRegistry: second loop, "+
-                                String.format("Selected %s for uri=%s, tagname=%s", elementEdit.getClass().getName(),uri, tagIdentifier.getTagName()));
+                        PageDesignerTraceOptions.log("ElementEditFactoryRegistry: second loop, "+ //$NON-NLS-1$
+                                String.format("Selected %s for uri=%s, tagname=%s", elementEdit.getClass().getName(),uri, tagIdentifier.getTagName())); //$NON-NLS-1$
                     }
                     return elementEdit;
                 }
@@ -111,8 +111,8 @@ public class ElementEditFactoryRegistry
 
         if (PageDesignerTraceOptions.TRACE_ELEMENTEDITSELECTION)
         {
-            PageDesignerTraceOptions.log("ElementEditFactoryRegistry: no element edit found, returning null for "+
-                    String.format("uri=%s, name=%s", tagIdentifier.getUri(), tagIdentifier.getTagName()));
+            PageDesignerTraceOptions.log("ElementEditFactoryRegistry: no element edit found, returning null for "+ //$NON-NLS-1$
+                    String.format("uri=%s, name=%s", tagIdentifier.getUri(), tagIdentifier.getTagName())); //$NON-NLS-1$
         }
 
         return null;

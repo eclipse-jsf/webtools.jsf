@@ -50,7 +50,7 @@ public class IBeanPropertySymbolImpl extends IPropertySymbolImpl implements IBea
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("hiding") //$NON-NLS-1$
+    @SuppressWarnings("hiding")
 	public static final String copyright = "Copyright 2006 Oracle"; //$NON-NLS-1$
 
 

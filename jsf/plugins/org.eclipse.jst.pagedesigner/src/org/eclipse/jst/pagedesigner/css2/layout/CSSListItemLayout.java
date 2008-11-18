@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class CSSListItemLayout extends CSSBlockFlowLayout implements
 		ICSSPainter {
-	private static final String DEFAULT_LIST_COUNTER = "_anonymous";
+	private static final String DEFAULT_LIST_COUNTER = "_anonymous"; //$NON-NLS-1$
 
 	private static final int CIRCLE_DIAMETER = 6;
 

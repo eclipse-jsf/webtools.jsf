@@ -25,7 +25,7 @@ public interface JSFSharedImages
      * 
      * Size: 16x16
      */
-    public final static String DEFAULT_PALETTE_TAG_IMG = "PD_Palette_Default.gif";
+    public final static String DEFAULT_PALETTE_TAG_IMG = "PD_Palette_Default.gif"; //$NON-NLS-1$
     
     /**
      * A yellow cube on a white background.  Suitable for representing 
@@ -33,7 +33,7 @@ public interface JSFSharedImages
      * 
      * Size: 16x16
      */
-    public final static String GENERIC_OBJECT_IMG = "object.gif";
+    public final static String GENERIC_OBJECT_IMG = "object.gif"; //$NON-NLS-1$
     
     /**
      * A generic image suitable for representing JSF validators.  Consists of
@@ -41,7 +41,7 @@ public interface JSFSharedImages
      * 
      * Size: 16x16
      */
-    public final static String GENERIC_VALIDATOR_IMG = "jsf_validator.gif";
+    public final static String GENERIC_VALIDATOR_IMG = "jsf_validator.gif"; //$NON-NLS-1$
 
     /**
      * A generic image suitable for representing JSF converter.  Consists of
@@ -49,7 +49,7 @@ public interface JSFSharedImages
      * 
      * Size: 16x16
      */
-    public final static String GENERIC_CONVERTER_IMG = "jsf_converter.gif";
+    public final static String GENERIC_CONVERTER_IMG = "jsf_converter.gif"; //$NON-NLS-1$
 
     /**
      * A generic image suitable for representing a view root.  Same as the
@@ -57,6 +57,6 @@ public interface JSFSharedImages
      * 
      * Size: 16x16.
      */
-    public static final String GENERIC_VIEWROOT_IMG = "jsf_view.gif";
+    public static final String GENERIC_VIEWROOT_IMG = "jsf_view.gif"; //$NON-NLS-1$
 
 }

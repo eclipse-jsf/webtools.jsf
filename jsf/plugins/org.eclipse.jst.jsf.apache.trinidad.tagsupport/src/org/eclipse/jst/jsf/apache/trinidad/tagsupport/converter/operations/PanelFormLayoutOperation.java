@@ -59,9 +59,9 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 		}
 		String inlineStyle = srcElement.getAttribute("inlineStyle"); //$NON-NLS-1$
 		if (inlineStyle != null && inlineStyle.length() > 0) {
-			appendAttribute(outerTableElement, "style", inlineStyle + ";width:100%;"); //$NON-NLS-1$
+			appendAttribute(outerTableElement, "style", inlineStyle + ";width:100%;"); //$NON-NLS-1$ //$NON-NLS-2$
 		} else {
-			appendAttribute(outerTableElement, "style", "width:100%;"); //$NON-NLS-1$
+			appendAttribute(outerTableElement, "style", "width:100%;"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		appendAttribute(outerTableElement, "cellpadding", "0"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(outerTableElement, "cellspacing", "0"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -111,7 +111,7 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 		}
 
 		//handle "footer" facet
-		Element footerElement = getChildFacetByName(srcElement, "footer");
+		Element footerElement = getChildFacetByName(srcElement, "footer"); //$NON-NLS-1$
 		if (footerElement != null) {
 			List<Element> footerChildElements = getChildElementsSkipFacets(footerElement);
 			if (footerChildElements.size() > 0) {
@@ -295,7 +295,7 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 	private Element buildColumnStart(
 			Element parentElement, int columnCount, int currentColumn,
 			String labelWidth, String fieldWidth) {
-		Element tdElement = appendChildElement("td", parentElement);
+		Element tdElement = appendChildElement("td", parentElement); //$NON-NLS-1$
 		appendAttribute(tdElement, "style", "vertical-align:top;"); //$NON-NLS-1$ //$NON-NLS-2$
 		if (currentColumn < columnCount) {
 			String width = String.valueOf(100 / columnCount) + "%"; //$NON-NLS-1$
@@ -385,7 +385,7 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 
 	private Element buildFooterStart(
 			Element parentElement, int columnCount, String labelWidth) {
-		Element tdElement = appendChildElement("td", parentElement);
+		Element tdElement = appendChildElement("td", parentElement); //$NON-NLS-1$
 		appendAttribute(tdElement, "style", "vertical-align:top;"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tdElement, "colspan", String.valueOf(columnCount)); //$NON-NLS-1$
 		Element tableElement = appendChildElement("table", tdElement); //$NON-NLS-1$
@@ -398,12 +398,12 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 		String footerLabelWidth = null;
 		String footerFieldWidth = null;
 		if (labelWidth != null && labelWidth.length() > 0) {
-			if (labelWidth.endsWith("%")) {
+			if (labelWidth.endsWith("%")) { //$NON-NLS-1$
 				try {
 					int iLabelWidth = Integer.parseInt(labelWidth.substring(0, labelWidth.length() - 1));
 					iLabelWidth = iLabelWidth / columnCount;
-					footerLabelWidth = String.valueOf(iLabelWidth) + "%";
-					footerFieldWidth = String.valueOf(100 - iLabelWidth) + "%";
+					footerLabelWidth = String.valueOf(iLabelWidth) + "%"; //$NON-NLS-1$
+					footerFieldWidth = String.valueOf(100 - iLabelWidth) + "%"; //$NON-NLS-1$
 				} catch(NumberFormatException nfe) {
 					//ignore - cannot calculate, widths remain null
 				}
@@ -414,12 +414,12 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 		Element tdLabelElement = appendChildElement("td", trElement); //$NON-NLS-1$
 		if (footerLabelWidth != null && footerLabelWidth.length() > 0) {
 			//appendAttribute(tdLabelElement, "style", "width:" + footerLabelWidth); //$NON-NLS-1$ //$NON-NLS-2$
-			appendAttribute(tdLabelElement, "width", footerLabelWidth); //$NON-NLS-1$ //$NON-NLS-2$
+			appendAttribute(tdLabelElement, "width", footerLabelWidth); //$NON-NLS-1$
 		}
 		Element tdFieldElement = appendChildElement("td", trElement); //$NON-NLS-1$
 		if (footerFieldWidth != null && footerFieldWidth.length() > 0) {
 			//appendAttribute(tdFieldElement, "style", "width:" + footerFieldWidth); //$NON-NLS-1$ //$NON-NLS-2$
-			appendAttribute(tdFieldElement, "width", footerFieldWidth); //$NON-NLS-1$ //$NON-NLS-2$
+			appendAttribute(tdFieldElement, "width", footerFieldWidth); //$NON-NLS-1$
 		}
 		return tBodyElement;
 	}

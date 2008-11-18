@@ -79,10 +79,10 @@ public class InitializationSection extends AbstractFacesConfigSection {
 	 */
 	public InitializationSection(Composite parent, IManagedForm managedForm,
 			IFacesConfigPage page, FormToolkit toolkit) {
-		super(parent, managedForm, page, toolkit, null, null); //$NON-NLS-1$
-		getSection().setText(EditorMessages.InitializationSection_Name); //$NON-NLS-1$
+		super(parent, managedForm, page, toolkit, null, null);
+		getSection().setText(EditorMessages.InitializationSection_Name);
 		getSection().setDescription(
-				EditorMessages.InitializationSection_Description); //$NON-NLS-1$
+				EditorMessages.InitializationSection_Description);
 
 	}
 
@@ -227,8 +227,8 @@ public class InitializationSection extends AbstractFacesConfigSection {
 					|| EditorPlugin
 							.getAlerts()
 							.confirm(
-									"ManagedBeanInitializationSection.Remove.Title",
-									"ManagedBeanInitializationSection.RemoveManagedProperty")) {
+									"ManagedBeanInitializationSection.Remove.Title", //$NON-NLS-1$
+									"ManagedBeanInitializationSection.RemoveManagedProperty")) { //$NON-NLS-1$
 				Command cmd = SetCommand.create(this.getEditingDomain(),
 						managedBean, FacesConfigPackage.eINSTANCE
 								.getManagedBeanType_ManagedProperty(),
@@ -249,8 +249,8 @@ public class InitializationSection extends AbstractFacesConfigSection {
 					|| EditorPlugin
 							.getAlerts()
 							.confirm(
-									"ManagedBeanInitializationSection.Remove.Title",
-									"ManagedBeanInitializationSection.RemoveMapEntries")) {
+									"ManagedBeanInitializationSection.Remove.Title", //$NON-NLS-1$
+									"ManagedBeanInitializationSection.RemoveMapEntries")) { //$NON-NLS-1$
 				Command cmd = SetCommand.create(this.getEditingDomain(),
 						managedBean, FacesConfigPackage.eINSTANCE
 								.getManagedBeanType_MapEntries(),
@@ -269,8 +269,8 @@ public class InitializationSection extends AbstractFacesConfigSection {
 					|| EditorPlugin
 							.getAlerts()
 							.confirm(
-									"ManagedBeanInitializationSection.Remove.Title",
-									"ManagedBeanInitializationSection.RemoveListEntries")) {
+									"ManagedBeanInitializationSection.Remove.Title", //$NON-NLS-1$
+									"ManagedBeanInitializationSection.RemoveListEntries")) { //$NON-NLS-1$
 				Command cmd = SetCommand.create(this.getEditingDomain(),
 						managedBean, FacesConfigPackage.eINSTANCE
 								.getManagedBeanType_ListEntries(),

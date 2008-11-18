@@ -26,6 +26,9 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
  * @deprecated
  */
 public class BindingHandlerDelegate implements IBindingHandler {
+	private static final String BINDING_DISABLED_IMAGE_FILE = "PD_Binding_disabled.gif"; //$NON-NLS-1$
+	private static final String BINDING_IMAGE_FILE = "PD_Binding_disabled.gif"; //$NON-NLS-1$
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -84,11 +87,11 @@ public class BindingHandlerDelegate implements IBindingHandler {
 	 * @see org.eclipse.jst.pagedesigner.meta.IBindingHandler#getImage()
 	 */
 	public Image getImage() {
-		return PDPlugin.getDefault().getImage("PD_Binding.gif");
+		return PDPlugin.getDefault().getImage(BINDING_IMAGE_FILE);
 	}
 
 	public Image getDisabledImage() {
-		return PDPlugin.getDefault().getImage("PD_Binding_disabled.gif");
+		return PDPlugin.getDefault().getImage(BINDING_DISABLED_IMAGE_FILE);
 	}
 
 	private IBindingHandler getDelegatedHandler(IDOMNode ancester,

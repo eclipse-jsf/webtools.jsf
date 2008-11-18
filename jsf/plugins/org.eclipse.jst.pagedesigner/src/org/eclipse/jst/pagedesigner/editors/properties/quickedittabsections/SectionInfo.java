@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: SectionInfo.java,v 1.1 2007/12/07 23:43:40 gkessler Exp $
+ * $Id: SectionInfo.java,v 1.2 2008/11/18 22:22:35 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections;
 
@@ -30,7 +30,7 @@ public interface SectionInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation";
+	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.

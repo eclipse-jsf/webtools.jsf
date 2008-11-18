@@ -39,7 +39,7 @@ public final class DisplayToLayout {
 		} else if ("inline".equalsIgnoreCase(display)) //$NON-NLS-1$
 		{
 			return new CSSInlineFlowLayout(figure);
-		} else if ("table".equalsIgnoreCase(display) || "inline-table".equalsIgnoreCase(display)) //$NON-NLS-1$ $NON-NLS-2$
+		} else if ("table".equalsIgnoreCase(display) || "inline-table".equalsIgnoreCase(display)) //$NON-NLS-1$ //$NON-NLS-2$ $NON-NLS-2$
 		{
 			return new CSSTableLayout2(figure);
 		} else if ("table-row".equalsIgnoreCase(display)) //$NON-NLS-1$

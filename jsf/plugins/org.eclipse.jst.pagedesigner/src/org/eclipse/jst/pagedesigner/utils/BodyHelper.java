@@ -270,8 +270,8 @@ public class BodyHelper {
 
 		final String prefix = JSPUtil.getOrCreatePrefix(((IDOMNode) node).getModel(),
 				body.getNamespaceURI(), defaultPrefix);
-		final Element ele = ownerDoc.createElement((prefix == null ? ""
-				: (prefix + ":"))
+		final Element ele = ownerDoc.createElement((prefix == null ? "" //$NON-NLS-1$
+				: (prefix + ":")) //$NON-NLS-1$
 				+ body.getLocalPart());
 
 		// need to find out the insertion point
@@ -328,7 +328,7 @@ public class BodyHelper {
 	 */
 	public static boolean shouldIgnoreAdjust(String uri, String tag) {
 		// FIXME:
-		return (ITLDConstants.URI_HTML.equalsIgnoreCase(uri) && "script"
+		return (ITLDConstants.URI_HTML.equalsIgnoreCase(uri) && "script" //$NON-NLS-1$
 				.equalsIgnoreCase(tag))
 				|| (ITLDConstants.URI_JSP.equals(uri));
 	}

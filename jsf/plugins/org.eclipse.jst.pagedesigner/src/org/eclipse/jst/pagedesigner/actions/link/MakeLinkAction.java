@@ -39,10 +39,10 @@ import org.w3c.dom.NodeList;
  */
 public class MakeLinkAction extends Action {
 	private final static String MAKE_LINK = PDPlugin
-			.getResourceString("ActionGroup.Submenu.Link");
+			.getResourceString("ActionGroup.Submenu.Link"); //$NON-NLS-1$
 
 	private final static String WIZARD_PAGE_TITLE = PDPlugin
-			.getResourceString("MakeLinkAction.Wizard.PageTitle");
+			.getResourceString("MakeLinkAction.Wizard.PageTitle"); //$NON-NLS-1$
 
 	private EditPart _editPart;
 

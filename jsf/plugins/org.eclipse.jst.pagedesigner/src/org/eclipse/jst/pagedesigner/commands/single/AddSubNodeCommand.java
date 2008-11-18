@@ -56,7 +56,7 @@ public class AddSubNodeCommand extends SingleNodeCommand {
 		String prefix = JSPUtil.getOrCreatePrefix(_parent.getModel(), _url,
 				null);
 		_child = (IDOMElement) _parent.getOwnerDocument().createElement(
-				prefix + ":" + _tagName);
+				prefix + ":" + _tagName); //$NON-NLS-1$
 		for (Iterator iterator = _attributes.keySet().iterator(); iterator
 				.hasNext();) {
 			String key = (String) iterator.next();

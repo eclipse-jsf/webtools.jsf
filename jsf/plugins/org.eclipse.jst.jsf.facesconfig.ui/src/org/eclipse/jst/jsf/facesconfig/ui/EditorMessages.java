@@ -19,7 +19,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class EditorMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.EditorMessages";
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.EditorMessages"; //$NON-NLS-1$
 
 	private EditorMessages() {
 		// Do not instantiate
@@ -1548,6 +1548,16 @@ public final class EditorMessages extends NLS {
 	 * Align top action tooltip.
 	 */
 	public static String AlignmentAction_AlignTopAction_Tooltip;
+
+	/**
+	 * see EditorMessages.properties
+	 */
+	public static String EditListEntriesDialog_EditingListEntries;
+
+	/**
+	 * see EditorMessages.properties
+	 */
+	public static String EditMapEntriesDialog_EditingMapEntries;
 
     /**
      * User can turn off intro page in faces-config editor

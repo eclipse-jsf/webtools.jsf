@@ -53,7 +53,7 @@ public class ApplicationTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -96,8 +96,8 @@ public class ApplicationTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ApplicationType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_id_feature", "_UI_ApplicationType_type"),
+                 getString("_UI_ApplicationType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_id_feature", "_UI_ApplicationType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.APPLICATION_TYPE__ID,
                  true,
                  false,
@@ -119,8 +119,8 @@ public class ApplicationTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ApplicationType_eLResolver_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_eLResolver_feature", "_UI_ApplicationType_type"),
+                 getString("_UI_ApplicationType_eLResolver_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_eLResolver_feature", "_UI_ApplicationType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.APPLICATION_TYPE__EL_RESOLVER,
                  true,
                  false,
@@ -142,8 +142,8 @@ public class ApplicationTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ApplicationType_resourceBundle_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_resourceBundle_feature", "_UI_ApplicationType_type"),
+                 getString("_UI_ApplicationType_resourceBundle_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_resourceBundle_feature", "_UI_ApplicationType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.APPLICATION_TYPE__RESOURCE_BUNDLE,
                  true,
                  false,
@@ -165,8 +165,8 @@ public class ApplicationTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ApplicationType_applicationExtension_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_applicationExtension_feature", "_UI_ApplicationType_type"),
+                 getString("_UI_ApplicationType_applicationExtension_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ApplicationType_applicationExtension_feature", "_UI_ApplicationType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.APPLICATION_TYPE__APPLICATION_EXTENSION,
                  true,
                  false,
@@ -219,7 +219,7 @@ public class ApplicationTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ApplicationType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ApplicationType")); //$NON-NLS-1$
     }
 
     /**
@@ -231,8 +231,8 @@ public class ApplicationTypeItemProvider
 	public String getText(Object object) {
         String label = ((ApplicationType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ApplicationType_type") :
-            getString("_UI_ApplicationType_type") + " " + label;
+            getString("_UI_ApplicationType_type") : //$NON-NLS-1$
+            getString("_UI_ApplicationType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

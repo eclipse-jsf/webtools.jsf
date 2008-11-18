@@ -54,8 +54,8 @@ public class ManagedPropertyValidationVisitor extends EObjectValidationVisitor
             managedPropertyType.getPropertyClass().getTextContent();
         
         if (propertyName == null || propertyClass == null
-                || "".equals(propertyName.trim())
-                || "".equals(propertyClass.trim()))
+                || "".equals(propertyName.trim()) //$NON-NLS-1$
+                || "".equals(propertyClass.trim())) //$NON-NLS-1$
         {
             return;
         }

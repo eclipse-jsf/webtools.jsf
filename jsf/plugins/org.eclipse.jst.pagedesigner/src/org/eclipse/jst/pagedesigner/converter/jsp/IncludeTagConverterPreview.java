@@ -154,11 +154,11 @@ public class IncludeTagConverterPreview extends AbstractTagConverter {
 				}
 			}
 		} catch (CoreException e) {
-			_log.error("PreviewUtil.previewFile.CoreException", e);
+			_log.error("PreviewUtil.previewFile.CoreException", e); //$NON-NLS-1$
 		} catch (IOException e) {
-			_log.error("PreviewUtil.previewFile.IOException", e);
+			_log.error("PreviewUtil.previewFile.IOException", e); //$NON-NLS-1$
 		} catch (Exception ex) {
-			_log.error("PreviewUtil.previewFile.CoreException", ex);
+			_log.error("PreviewUtil.previewFile.CoreException", ex); //$NON-NLS-1$
 		} finally {
 			if (pushedPageVarProvider) {
 				PageExpressionContext.getCurrent().popPageVarProvider(provider);

@@ -48,7 +48,7 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -93,8 +93,8 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RendererTypeType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RendererTypeType_textContent_feature", "_UI_RendererTypeType_type"),
+                 getString("_UI_RendererTypeType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RendererTypeType_textContent_feature", "_UI_RendererTypeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDERER_TYPE_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -116,8 +116,8 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RendererTypeType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RendererTypeType_id_feature", "_UI_RendererTypeType_type"),
+                 getString("_UI_RendererTypeType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RendererTypeType_id_feature", "_UI_RendererTypeType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDERER_TYPE_TYPE__ID,
                  true,
                  false,
@@ -134,7 +134,7 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/RendererTypeType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/RendererTypeType")); //$NON-NLS-1$
     }
 
     /**
@@ -146,8 +146,8 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
         String label = ((RendererTypeType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_RendererTypeType_type") :
-            getString("_UI_RendererTypeType_type") + " " + label;
+            getString("_UI_RendererTypeType_type") : //$NON-NLS-1$
+            getString("_UI_RendererTypeType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -195,16 +195,16 @@ public class RendererTypeTypeItemProvider extends ItemProviderAdapter implements
 		switch (columnIndex) {
 
 		case 0:
-			return renderer.getDisplayName().get(0) == null ? ""
+			return renderer.getDisplayName().get(0) == null ? "" //$NON-NLS-1$
 					: (String) renderer.getDisplayName().get(0);
 		case 1:
-			return renderer.getRendererClass() == null ? "" : renderer
+			return renderer.getRendererClass() == null ? "" : renderer //$NON-NLS-1$
 					.getRendererClass().getTextContent();
 		case 2:
-			return renderer.getComponentFamily().getTextContent() == null ? ""
+			return renderer.getComponentFamily().getTextContent() == null ? "" //$NON-NLS-1$
 					: renderer.getComponentFamily().getTextContent();
 		case 3:
-			return renderer.getRendererType().getTextContent() == null ? ""
+			return renderer.getRendererType().getTextContent() == null ? "" //$NON-NLS-1$
 					: renderer.getRendererType().getTextContent();
 		}
 		return null;

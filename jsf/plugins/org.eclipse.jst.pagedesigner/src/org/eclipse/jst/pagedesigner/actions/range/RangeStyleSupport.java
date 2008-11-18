@@ -31,8 +31,8 @@ public class RangeStyleSupport {
 	private static final String[] CSSProperty = new String[] {
 			"font-weight", "font-style", "text-decoration", }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-	private static final String[] CSSValue = new String[] { "bolder", "italic",
-			"underline", };
+	private static final String[] CSSValue = new String[] { "bolder", "italic", //$NON-NLS-1$ //$NON-NLS-2$
+			"underline", }; //$NON-NLS-1$
 
 	/**
 	 * @param menu

@@ -51,7 +51,7 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
     /**
      * The id of this page in the faces-config editor.
      */
-	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage";
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ManagedBeanPage"; //$NON-NLS-1$
 
 	private IContentOutlinePage contentOutlinePage;
 
@@ -59,7 +59,7 @@ public class ManagedBeanPage extends FacesConfigMasterDetailPage {
 	 * @param editor
 	 */
 	public ManagedBeanPage(FacesConfigEditor editor) {
-		super(editor, "ManagedBeanPage",
+		super(editor, "ManagedBeanPage", //$NON-NLS-1$
 				EditorMessages.FacesConfigEditor_ManagedBeans_TabName);
 	}
 

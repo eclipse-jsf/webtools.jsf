@@ -23,17 +23,21 @@ public class JSFLibraryReferenceServerSuppliedImpl
 	implements JSFLibraryReferenceServerSupplied {
 	
 	/**
+	 * Library display Label 
+	 */
+	public final static String SERVER_SUPPLIED = Messages.JSFLibraryReferenceServerSuppliedImpl_Label; 
+	/**
 	 * Constructor
 	 */
 	public JSFLibraryReferenceServerSuppliedImpl(){
 		//TODO: replace label with constant
-		super(JSFLibraryReferenceServerSupplied.ID, "Server Supplied", true);
+		super(JSFLibraryReferenceServerSupplied.ID, SERVER_SUPPLIED, true); 
 	}
 	
 	public String toString() {
-		StringBuffer buf = new StringBuffer("ServerSupplied: (");
+		StringBuffer buf = new StringBuffer("ServerSupplied: ("); //$NON-NLS-1$
 		buf.append(super.toString());
-		buf.append(")");
+		buf.append(")"); //$NON-NLS-1$
 		
 		return buf.toString();
 	}

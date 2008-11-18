@@ -87,7 +87,7 @@ public class StandardMetaDataFileRegistryReader {
 					annotationFileRegistry.addStandardMetaDataFileInfo(uri, fileInfo);
 				}
 				catch (Exception e) {
-					JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: exception occurred while reading StandardMetaDataFile ext-pt: "+location + ":"+uri, e); //$NON-NLS-1$		}
+					JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: exception occurred while reading StandardMetaDataFile ext-pt: "+location + ":"+uri, e); //$NON-NLS-1$ //$NON-NLS-2$		}
 				}
 			}
 		}

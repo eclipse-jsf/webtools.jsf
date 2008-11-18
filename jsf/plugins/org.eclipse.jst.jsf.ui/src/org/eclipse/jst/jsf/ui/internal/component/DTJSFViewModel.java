@@ -241,7 +241,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
         public UpdateRootAndRefreshJob(final IViewRootHandle viewRootHandle)
         {
-            super("Updating view root");
+            super(Messages.DTJSFViewModel_JobDesc);
             _viewRootHandle = viewRootHandle;
         }
 

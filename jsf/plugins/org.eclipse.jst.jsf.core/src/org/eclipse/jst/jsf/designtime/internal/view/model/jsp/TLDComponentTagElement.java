@@ -58,6 +58,6 @@ IComponentTagElement
     {
         final String attributes = constructAttributesString();
         return _componentTypeInfo.toString() +
-            (!"".equals(attributes) ? "\n" + attributes : "");
+            (!"".equals(attributes) ? "\n" + attributes : ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     }
 }

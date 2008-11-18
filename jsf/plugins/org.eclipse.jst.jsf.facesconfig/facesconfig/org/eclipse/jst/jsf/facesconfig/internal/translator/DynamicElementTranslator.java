@@ -47,7 +47,7 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
 
         return new Translator[]
         {
-            new DynamicElementTranslator("*", facesConfigPackage.getDynamicElement_ChildNodes()),
+            new DynamicElementTranslator("*", facesConfigPackage.getDynamicElement_ChildNodes()), //$NON-NLS-1$
             new Translator(TEXT_ATTRIBUTE_VALUE, facesConfigPackage.getDynamicElement_TextContent())
             {
                 public Object getMOFValue(EObject object)
@@ -59,7 +59,7 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
                     // Returning an non-null empty value seems to work
                     // around this for now.
                     Object value = super.getMOFValue(object);
-                    return value != null ? value : "";
+                    return value != null ? value : ""; //$NON-NLS-1$
                 }
             }
         };
@@ -91,7 +91,7 @@ class DynamicElementTranslator extends Translator implements IAnyTranslator
         {
             return ((DynamicElement)value).getName();
         }
-        return "";
+        return ""; //$NON-NLS-1$
     }
 
     public Translator[] getDynamicAttributeTranslators(Node element) {

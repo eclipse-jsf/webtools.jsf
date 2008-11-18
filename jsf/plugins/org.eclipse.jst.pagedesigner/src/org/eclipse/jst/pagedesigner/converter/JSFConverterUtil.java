@@ -25,7 +25,7 @@ import org.w3c.dom.NamedNodeMap;
  */
 public class JSFConverterUtil {
 	private static List NamedBooleanList = Arrays.asList(new String[] {
-			"disabled", "readonly", "ismap" });
+			"disabled", "readonly", "ismap" }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class JSFConverterUtil {
 			Attr attr = (Attr) attrs.item(i);
 			if (ignore == null || !ignore.contains(attr.getName())) {
 				if (NamedBooleanList.contains(attr.getName())
-						&& "false".equalsIgnoreCase(attr.getValue())) {
+						&& "false".equalsIgnoreCase(attr.getValue())) { //$NON-NLS-1$
 					continue;
 				}
 				dest.setAttribute(attr.getName(), attr.getValue());

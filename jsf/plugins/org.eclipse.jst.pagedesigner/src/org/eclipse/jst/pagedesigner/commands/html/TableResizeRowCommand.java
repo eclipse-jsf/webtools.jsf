@@ -87,7 +87,7 @@ public class TableResizeRowCommand extends DesignerCommand {
 		}
 		Map map = new HashMap();
 		if (newHeight > 0) {
-			map.put(ICSSPropertyID.ATTR_HEIGHT, newHeight + "px"); //$NON-NLS-1$ //$NON-NLS-2$
+			map.put(ICSSPropertyID.ATTR_HEIGHT, newHeight + "px"); //$NON-NLS-1$
 			DOMStyleUtil.insertStyle(tr, map);
 		}
 	}

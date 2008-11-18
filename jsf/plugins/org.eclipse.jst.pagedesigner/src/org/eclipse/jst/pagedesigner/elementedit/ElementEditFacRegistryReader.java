@@ -62,22 +62,22 @@ public class ElementEditFacRegistryReader {
                 if (element.getName().equals(
                         IJMTConstants.ELEMENT_EDIT_FACTORY))
                 {
-                    elementEditElement[j].getAttribute("class");
+                    elementEditElement[j].getAttribute("class"); //$NON-NLS-1$
                     Object obj;
                     try
                     {
                         obj = elementEditElement[j]
-                                .createExecutableExtension("class");
+                                .createExecutableExtension("class"); //$NON-NLS-1$
 
                         // TODO: we need a policy based solution here,
                         // but this will do for now
                         if (obj instanceof IElementEditFactory)
                         {
-                            if (element.getContributor().getName().startsWith("org.eclipse.jst"))
+                            if (element.getContributor().getName().startsWith("org.eclipse.jst")) //$NON-NLS-1$
                             {
                                 if (PageDesignerTraceOptions.TRACE_ELEMENTEDITLOAD)
                                 {
-                                    PageDesignerTraceOptions.log("ElementEditFacRegistryReader: Appending to list:"+obj.getClass().getName());
+                                    PageDesignerTraceOptions.log("ElementEditFacRegistryReader: Appending to list:"+obj.getClass().getName()); //$NON-NLS-1$
                                 }
                                 // push JSF tools provided ones to the end
                                 result.add((IElementEditFactory) obj);
@@ -87,7 +87,7 @@ public class ElementEditFacRegistryReader {
                             {
                                 if (PageDesignerTraceOptions.TRACE_ELEMENTEDITLOAD)
                                 {
-                                    PageDesignerTraceOptions.log("ElementEditFacRegistryReader: Prepending to list:"+obj.getClass().getName());
+                                    PageDesignerTraceOptions.log("ElementEditFacRegistryReader: Prepending to list:"+obj.getClass().getName()); //$NON-NLS-1$
                                 }
                                 // this way, adopters can put their overrides
                                 // of factories with built-in support like
@@ -97,7 +97,7 @@ public class ElementEditFacRegistryReader {
                         }
                     } catch (CoreException e)
                     {
-                        PDPlugin.log("Problem loading element edit extension for "+element.toString(), e);
+                        PDPlugin.log("Problem loading element edit extension for "+element.toString(), e); //$NON-NLS-1$
                     }
                 }
             }
@@ -106,12 +106,12 @@ public class ElementEditFacRegistryReader {
 
         if (PageDesignerTraceOptions.TRACE_ELEMENTEDITLOAD)
         {
-            PageDesignerTraceOptions.log("\nFinal elementEditFactory list in order:");
+            PageDesignerTraceOptions.log("\nFinal elementEditFactory list in order:"); //$NON-NLS-1$
             for (final IElementEditFactory factory : result)
             {
                 PageDesignerTraceOptions.log(factory.getClass().getName());
             }
-            PageDesignerTraceOptions.log("\n");
+            PageDesignerTraceOptions.log("\n"); //$NON-NLS-1$
         }
 
         return result;

@@ -44,7 +44,7 @@ public class ValidatorMasterSection extends FacesConfigMasterSection {
 	public ValidatorMasterSection(Composite parent, IManagedForm managedForm,
 			FormToolkit toolkit, FacesConfigMasterDetailPage page) {
 		super(parent, managedForm, toolkit, page, null, null);
-		getSection().setText(EditorMessages.ValidatorMasterSection_Name); //$NON-NLS-1$
+		getSection().setText(EditorMessages.ValidatorMasterSection_Name);
 		getSection().setDescription(
 				EditorMessages.ValidatorMasterSection_Description);
 	}

@@ -248,7 +248,7 @@ public class DelegatingCommandStack extends CommandStack implements
 	 * @see Object#toString()
 	 */
 	public String toString() {
-		return "DelegatingCommandStack(" + currentCommandStack + ")";
+		return "DelegatingCommandStack(" + currentCommandStack + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/*

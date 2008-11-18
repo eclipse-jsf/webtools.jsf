@@ -37,12 +37,12 @@ public final class JavaBeanUtils {
 	/**
 	 * fully qualified name of a List
 	 */
-	private static final String JAVA_UTIL_LIST = "java.util.List";
+	private static final String JAVA_UTIL_LIST = "java.util.List"; //$NON-NLS-1$
 
 	/**
 	 * fully qualifed name of a Map
 	 */
-	private static final String JAVA_UTIL_MAP = "java.util.Map";
+	private static final String JAVA_UTIL_MAP = "java.util.Map"; //$NON-NLS-1$
 
 	/**
 	 * 
@@ -76,12 +76,12 @@ public final class JavaBeanUtils {
 					+ propertyName.substring(1);
 		}
 
-		String getterMethodName = "get" + methodBaseName;
+		String getterMethodName = "get" + methodBaseName; //$NON-NLS-1$
 
 		getterMethod = type.getMethod(getterMethodName, null);
 		if (getterMethod == null || !getterMethod.exists()
 				|| !JavaClassUtils.isPublicMethod(getterMethod)) {
-			getterMethodName = "is" + methodBaseName;
+			getterMethodName = "is" + methodBaseName; //$NON-NLS-1$
 			getterMethod = type.getMethod(getterMethodName, null);
 
 			if (getterMethod == null || !getterMethod.exists()
@@ -125,7 +125,7 @@ public final class JavaBeanUtils {
 			}
 			for (int i = 0; i < superTypes.length; i++) {
 				if (!superTypes[i].getFullyQualifiedName().equals(
-						"java.lang.Object")) {
+						"java.lang.Object")) { //$NON-NLS-1$
 					getterMethod = getPropertyGetterMethod(superTypes[i],
 							propertyName);
 					if (getterMethod != null) {
@@ -169,7 +169,7 @@ public final class JavaBeanUtils {
 			}
 			for (int i = 0; i < superTypes.length; i++) {
 				if (!superTypes[i].getFullyQualifiedName().equals(
-						"java.lang.Object")) {
+						"java.lang.Object")) { //$NON-NLS-1$
 					setterMethod = getPropertySetterMethod(superTypes[i],
 							propertyName);
 					if (setterMethod != null) {
@@ -206,7 +206,7 @@ public final class JavaBeanUtils {
 					+ propertyName.substring(1);
 		}
 
-		String setterMethodName = "set" + methodBaseName;
+		String setterMethodName = "set" + methodBaseName; //$NON-NLS-1$
 
 		IMethod[] methods = null;
 
@@ -441,7 +441,7 @@ public final class JavaBeanUtils {
 			}
 
 			// Starts with "get"
-			if (!(method.getElementName().startsWith("get") || method.getElementName().startsWith("is"))) //$NON-NLS-1$
+			if (!(method.getElementName().startsWith("get") || method.getElementName().startsWith("is"))) //$NON-NLS-1$ //$NON-NLS-2$
 			{
 				return false;
 			}
@@ -545,9 +545,9 @@ public final class JavaBeanUtils {
 		String methodName = method.getElementName();
 		String propertyName = null;
 		// Starts with "get"
-		if (methodName.startsWith("get") && methodName.length() > 3) {
+		if (methodName.startsWith("get") && methodName.length() > 3) { //$NON-NLS-1$
 			propertyName = methodName.substring(3);
-		} else if (methodName.startsWith("is") && methodName.length() > 2) // Starts
+		} else if (methodName.startsWith("is") && methodName.length() > 2) // Starts //$NON-NLS-1$
 		// with
 		// "is"
 		{
@@ -570,7 +570,7 @@ public final class JavaBeanUtils {
 		String methodName = method.getElementName();
 		String propertyName = null;
 		// Starts with "get"
-		if (methodName.startsWith("set") && methodName.length() > 3) {
+		if (methodName.startsWith("set") && methodName.length() > 3) { //$NON-NLS-1$
 			propertyName = methodName.substring(3);
 		}
 		propertyName = Introspector.decapitalize(propertyName);
@@ -692,9 +692,9 @@ public final class JavaBeanUtils {
 			propertyName = JavaBeanUtils
 					.getPropertyNameFromGetterMethod(methods[m]);
 
-			if (propertyName != null && propertyName.length() > 0) //$NON-NLS-1$
+			if (propertyName != null && propertyName.length() > 0)
 			{
-				String setterMethodName = "set"
+				String setterMethodName = "set" //$NON-NLS-1$
 						+ JavaBeanUtils.toUpperCaseFirstChar(propertyName);
 
 				String getterReturnType = null;
@@ -719,10 +719,10 @@ public final class JavaBeanUtils {
 			propertyName = JavaBeanUtils
 					.getPropertyNameFromSetterMethod(methods[m]);
 
-			if (propertyName != null && propertyName.length() > 0) //$NON-NLS-1$
+			if (propertyName != null && propertyName.length() > 0)
 			{
 				// first form of getter method, "get..."
-				String getterMethodName = "get"
+				String getterMethodName = "get" //$NON-NLS-1$
 						+ JavaBeanUtils.toUpperCaseFirstChar(propertyName);
 				IMethod getterMethod = getMethodWithSameParamters(methods,
 						visitedMethods, methods[m], getterMethodName, null);
@@ -738,7 +738,7 @@ public final class JavaBeanUtils {
 					}
 				} else {
 					// another form of getter method, "is...".
-					getterMethodName = "is"
+					getterMethodName = "is" //$NON-NLS-1$
 							+ JavaBeanUtils.toUpperCaseFirstChar(propertyName);
 					getterMethod = getMethodWithSameParamters(methods,
 							visitedMethods, methods[m], getterMethodName, null);

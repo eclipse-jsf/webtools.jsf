@@ -33,7 +33,7 @@ public class ExtensionReader {
 
 	private static List<ILinkCreator> _handlers = null;
 
-	private static final String ATTR_CLASS = "class";
+	private static final String ATTR_CLASS = "class"; //$NON-NLS-1$
 
 	/** 
 	 * @return the ext-pts for the link handler
@@ -73,7 +73,7 @@ public class ExtensionReader {
 						}
 					} catch (CoreException e) {
 						_log
-								.error("Log.Error.ExtensionReader.ReadLinkExtension");
+								.error("Log.Error.ExtensionReader.ReadLinkExtension"); //$NON-NLS-1$
 					}
 				}
 			}

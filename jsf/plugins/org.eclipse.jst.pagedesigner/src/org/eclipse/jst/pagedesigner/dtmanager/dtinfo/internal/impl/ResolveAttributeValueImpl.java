@@ -35,7 +35,7 @@ public class ResolveAttributeValueImpl extends EObjectImpl implements ResolveAtt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The default value of the '{@link #getAttributeName() <em>Attribute Name</em>}' attribute.
@@ -159,7 +159,7 @@ public class ResolveAttributeValueImpl extends EObjectImpl implements ResolveAtt
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (attributeName: ");
+		result.append(" (attributeName: "); //$NON-NLS-1$
 		result.append(attributeName);
 		result.append(')');
 		return result.toString();

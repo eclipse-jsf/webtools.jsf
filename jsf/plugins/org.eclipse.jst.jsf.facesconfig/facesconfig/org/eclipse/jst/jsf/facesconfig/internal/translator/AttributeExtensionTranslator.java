@@ -23,6 +23,6 @@ public class AttributeExtensionTranslator extends ExtensionTypeTranslator {
 	 * @param aFeature
 	 */
 	public AttributeExtensionTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);//$NON-NLS-1$
+		super(domNameAndPath, aFeature);
 	}
 }

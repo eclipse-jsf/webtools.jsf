@@ -43,12 +43,12 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	/**
 	 * Prefix required to turn filename into a JAR URI.
 	 */
-	public static final String JARFILE_URI_PREFIX = "jar:file:///";
+	public static final String JARFILE_URI_PREFIX = "jar:file:///"; //$NON-NLS-1$
 
 	/**
 	 * Suffix required to turn filename into a JAR URI.
 	 */
-	public static final String FACES_CONFIG_IN_JAR_SUFFIX = "!/META-INF/faces-config.xml";
+	public static final String FACES_CONFIG_IN_JAR_SUFFIX = "!/META-INF/faces-config.xml"; //$NON-NLS-1$
 
 	/**
 	 * Name of a JAR file that contains a /META-INF/faces-config.xml entry.
@@ -165,13 +165,13 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 		try
 		{
 			jarFile = new JarFile(filename, false);
-			ZipEntry entry = jarFile.getEntry("META-INF/faces-config.xml");
+			ZipEntry entry = jarFile.getEntry("META-INF/faces-config.xml"); //$NON-NLS-1$
 
 			if (entry != null)
 			{
 				InputStream stream = jarFile.getInputStream(entry);
 	
-				tempFile = File.createTempFile("tempfile", ".xml");
+				tempFile = File.createTempFile("tempfile", ".xml"); //$NON-NLS-1$ //$NON-NLS-2$
 				tempFileStream = new FileOutputStream(tempFile);
 	
 				int read = 0;

@@ -49,7 +49,7 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -95,8 +95,8 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RenderKitType_renderKitId_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_renderKitId_feature", "_UI_RenderKitType_type"),
+                 getString("_UI_RenderKitType_renderKitId_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_renderKitId_feature", "_UI_RenderKitType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDER_KIT_ID,
                  true,
                  false,
@@ -120,8 +120,8 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RenderKitType_renderKitClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_renderKitClass_feature", "_UI_RenderKitType_type"),
+                 getString("_UI_RenderKitType_renderKitClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_renderKitClass_feature", "_UI_RenderKitType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDER_KIT_TYPE__RENDER_KIT_CLASS,
                  true,
                  false,
@@ -144,8 +144,8 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_RenderKitType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_id_feature", "_UI_RenderKitType_type"),
+                 getString("_UI_RenderKitType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_RenderKitType_id_feature", "_UI_RenderKitType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RENDER_KIT_TYPE__ID,
                  true,
                  false,
@@ -192,7 +192,7 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/RenderKitType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/RenderKitType")); //$NON-NLS-1$
     }
 
     /**
@@ -204,8 +204,8 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	public String getText(Object object) {
         String label = ((RenderKitType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_RenderKitType_type") :
-            getString("_UI_RenderKitType_type") + " " + label;
+            getString("_UI_RenderKitType_type") : //$NON-NLS-1$
+            getString("_UI_RenderKitType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -300,7 +300,7 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 		case 0:
 			return getText(object);
 		case 1:
-			return renderkit.getRenderKitClass() == null ? "" : renderkit
+			return renderkit.getRenderKitClass() == null ? "" : renderkit //$NON-NLS-1$
 					.getRenderKitClass().getTextContent();
 		}
 		return null;

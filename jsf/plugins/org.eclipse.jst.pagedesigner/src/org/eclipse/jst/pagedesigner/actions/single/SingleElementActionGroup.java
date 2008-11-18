@@ -127,8 +127,7 @@ public class SingleElementActionGroup extends ActionGroup {
             // don't add the select Children menu unless there are actually children
             if (children.size() > 0)
             {
-                MenuManager selectChildMenu = new MenuManager("Children"/*PDPlugin
-                .getResourceString("ActionGroup.Submenu.StyleClasses")*/);
+                MenuManager selectChildMenu = new MenuManager(Messages.SingleElementActionGroup_ChildrenActionText);
                 subMenu.add(selectChildMenu);
 
                 for (final Iterator it = children.iterator(); it.hasNext();)
@@ -140,7 +139,7 @@ public class SingleElementActionGroup extends ActionGroup {
             {   // Eclipse UI guideline 6.13
                 // create the child actions even if no children but make it
                 // a disabled option if no children
-                Action childrenAction = new Action("Children"){/* do nothing*/};
+                Action childrenAction = new Action(Messages.SingleElementActionGroup_ChildrenActionText){/* do nothing*/};
                 childrenAction.setEnabled(false);
                 subMenu.add(childrenAction);
             }

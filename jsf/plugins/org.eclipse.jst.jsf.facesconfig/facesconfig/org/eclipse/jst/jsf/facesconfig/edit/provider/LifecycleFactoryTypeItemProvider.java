@@ -47,7 +47,7 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -93,8 +93,8 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_LifecycleFactoryType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_LifecycleFactoryType_textContent_feature", "_UI_LifecycleFactoryType_type"),
+                 getString("_UI_LifecycleFactoryType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_LifecycleFactoryType_textContent_feature", "_UI_LifecycleFactoryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.LIFECYCLE_FACTORY_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -116,8 +116,8 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_LifecycleFactoryType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_LifecycleFactoryType_id_feature", "_UI_LifecycleFactoryType_type"),
+                 getString("_UI_LifecycleFactoryType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_LifecycleFactoryType_id_feature", "_UI_LifecycleFactoryType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.LIFECYCLE_FACTORY_TYPE__ID,
                  true,
                  false,
@@ -134,7 +134,7 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/LifecycleFactoryType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/LifecycleFactoryType")); //$NON-NLS-1$
     }
 
     /**
@@ -146,8 +146,8 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
 	public String getText(Object object) {
         String label = ((LifecycleFactoryType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_LifecycleFactoryType_type") :
-            getString("_UI_LifecycleFactoryType_type") + " " + label;
+            getString("_UI_LifecycleFactoryType_type") : //$NON-NLS-1$
+            getString("_UI_LifecycleFactoryType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -209,7 +209,7 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
 			case 0:
 				return getText(object);
 			case 1:
-				return getString("_UI_LifecycleFactoryType_type");
+				return getString("_UI_LifecycleFactoryType_type"); //$NON-NLS-1$
 			}
 
 			return null;

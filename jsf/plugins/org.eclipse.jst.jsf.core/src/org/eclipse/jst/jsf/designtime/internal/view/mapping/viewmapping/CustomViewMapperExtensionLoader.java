@@ -27,8 +27,8 @@ import org.eclipse.jst.jsf.designtime.internal.view.mapping.ICustomViewMapper;
  */
 public class CustomViewMapperExtensionLoader
 {
-    private final static String                   EXTENSION_ID = "customViewMapper";
-    private final static String                   ELEMENT_NAME = "customViewMapper";
+    private final static String                   EXTENSION_ID = "customViewMapper"; //$NON-NLS-1$
+    private final static String                   ELEMENT_NAME = "customViewMapper"; //$NON-NLS-1$
 
     private static Map<String, ICustomViewMapper> _extensions;
 
@@ -67,30 +67,30 @@ public class CustomViewMapperExtensionLoader
                     {
                         final String pluginId = element.getContributor()
                                 .getName();
-                        final String name = element.getAttribute("id");
+                        final String name = element.getAttribute("id"); //$NON-NLS-1$
                         final Object customHandler = element
-                                .createExecutableExtension("class");
+                                .createExecutableExtension("class"); //$NON-NLS-1$
                         if (customHandler instanceof ICustomViewMapper
                                 && name != null)
                         {
-                            handlers.put(pluginId + "." + name,
+                            handlers.put(pluginId + "." + name, //$NON-NLS-1$
                                     (ICustomViewMapper) customHandler);
                         }
                         else
                         {
                             JSFCorePlugin.log(
-                                    "Error loading tag registry extension: "
+                                    "Error loading tag registry extension: " //$NON-NLS-1$
                                             + element.getContributor().getName()
-                                            + "." + element.getAttribute("id")
-                                      , new Throwable("No exception: stack trace only"));
+                                            + "." + element.getAttribute("id") //$NON-NLS-1$ //$NON-NLS-2$
+                                      , new Throwable("No exception: stack trace only")); //$NON-NLS-1$
                         }
                     }
                     catch (final CoreException e)
                     {
                         JSFCorePlugin.log(e,
-                                "Error loading tag registry extension: "
+                                "Error loading tag registry extension: " //$NON-NLS-1$
                                         + element.getContributor().getName()
-                                        + "." + element.getAttribute("id"));
+                                        + "." + element.getAttribute("id")); //$NON-NLS-1$ //$NON-NLS-2$
                     }
                 }
             }

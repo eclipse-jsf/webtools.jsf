@@ -76,7 +76,7 @@ public final class DialogUtil {
 				RenderKitIdType renderKitId = ((RenderKitType) list.get(i))
 						.getRenderKitId();
 				if (renderKitId != null) {
-					if (!"".equals(renderKitId.getTextContent())) {
+					if (!"".equals(renderKitId.getTextContent())) { //$NON-NLS-1$
 						ids.add(renderKitId.getTextContent());
 					}
 				}
@@ -89,7 +89,7 @@ public final class DialogUtil {
 					EditorMessages.DefaultRenderKitIDSection_Wizard_Page_LabelText);
 			if (dialog.open() == SelectionDialog.OK) {
 				String result = dialog.getResult();
-				if (!"".equals(result)) {
+				if (!"".equals(result)) { //$NON-NLS-1$
 					return result;
 				}
 			}
@@ -106,7 +106,7 @@ public final class DialogUtil {
 		LocaleDialog dialog = new LocaleDialog(shell, existedLocaleList);
 		if (dialog.open() == Window.OK) {
 			String result = dialog.getResult();
-			if (!"".equals(result)) {
+			if (!"".equals(result)) { //$NON-NLS-1$
 				return result;
 			}
 		}
@@ -137,7 +137,7 @@ public final class DialogUtil {
 
 		if (dialog.open() == SelectionDialog.OK) {
 			String newValue = (String) dialog.getResult()[0];
-			if (!"".equalsIgnoreCase(newValue)) {
+			if (!"".equalsIgnoreCase(newValue)) { //$NON-NLS-1$
 				return newValue;
 			}
 		}

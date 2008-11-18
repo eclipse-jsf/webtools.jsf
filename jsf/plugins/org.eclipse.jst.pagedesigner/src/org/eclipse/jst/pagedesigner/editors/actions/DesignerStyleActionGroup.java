@@ -112,39 +112,39 @@ public class DesignerStyleActionGroup extends ActionGroup
     public DesignerStyleActionGroup()
 	{
 		ChangeDesignerStyleAction verAction = new ChangeDesignerStyleAction(
-		        "org.eclipse.jst.pagedesigner.vertical",
+		        "org.eclipse.jst.pagedesigner.vertical", //$NON-NLS-1$
 		        VERTICAL, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(VERTICAL)),
 				HTMLEditor.MODE_SASH_VERTICAL);
 		verAction
-				.setActionDefinitionId("org.eclipse.jst.pagedesigner.vertical");
+				.setActionDefinitionId("org.eclipse.jst.pagedesigner.vertical"); //$NON-NLS-1$
 		verAction.setToolTipText(VERTICAL_TOOLTIP);
 
 		ChangeDesignerStyleAction horAction = new ChangeDesignerStyleAction(
-		        "org.eclipse.jst.pagedesigner.horizotal",
+		        "org.eclipse.jst.pagedesigner.horizotal", //$NON-NLS-1$
 				HORIZONTAL, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(HORIZONTAL)),
 				HTMLEditor.MODE_SASH_HORIZONTAL);
 		horAction
-				.setActionDefinitionId("org.eclipse.jst.pagedesigner.horizotal");
+				.setActionDefinitionId("org.eclipse.jst.pagedesigner.horizotal"); //$NON-NLS-1$
 		horAction.setToolTipText(HORIZONTAL_TOOLTIP);
 
 		ChangeDesignerStyleAction designAction = new ChangeDesignerStyleAction(
-		        "org.eclipse.jst.pagedesigner.design",
+		        "org.eclipse.jst.pagedesigner.design", //$NON-NLS-1$
 				DESIGN, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(DESIGN)),
 				HTMLEditor.MODE_DESIGNER);
 		designAction
-				.setActionDefinitionId("org.eclipse.jst.pagedesigner.design");
+				.setActionDefinitionId("org.eclipse.jst.pagedesigner.design"); //$NON-NLS-1$
 		designAction.setToolTipText(DESIGN_TOOLTIP);
 
 		ChangeDesignerStyleAction sourceAction = new ChangeDesignerStyleAction(
-		        "org.eclipse.jst.pagedesigner.source",
+		        "org.eclipse.jst.pagedesigner.source", //$NON-NLS-1$
 				SOURCE, PDPlugin.getDefault().getImageDescriptor(
 						(String) IMAGE_NAMES.get(SOURCE)),
 				HTMLEditor.MODE_SOURCE);
 		sourceAction
-				.setActionDefinitionId("org.eclipse.jst.pagedesigner.source");
+				.setActionDefinitionId("org.eclipse.jst.pagedesigner.source"); //$NON-NLS-1$
 		sourceAction.setToolTipText(SOURCE_TOOLTIP);
 
 		_actions = new ChangeDesignerStyleAction[] { verAction, horAction,

@@ -226,8 +226,16 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String RegistryMigrationStartupHandler_Launch_Migration_Doc_On_Confirm;
-	
-    /**
+	/**
+	 * see messages.properties
+	 */
+    public static String RegistryUpgradeCommitHandler_Text;
+	/**
+	 * see messages.properties
+	 */
+	public static String RegistryUpgradeCommitHandler_Title;
+
+	/**
      * see messages.properties
      */
 	public static String JSFFacet11_presetLabel;

@@ -29,7 +29,7 @@ public class OutlineViewAction extends ShowViewAction
     public OutlineViewAction() 
     {
         super(ActionsMessages
-                .getString("OutlineViewAction.Menu.OutlineView")
-              , IPageLayout.ID_OUTLINE); //$NON-NLS-1$
+                .getString("OutlineViewAction.Menu.OutlineView") //$NON-NLS-1$
+              , IPageLayout.ID_OUTLINE);
     }
 }

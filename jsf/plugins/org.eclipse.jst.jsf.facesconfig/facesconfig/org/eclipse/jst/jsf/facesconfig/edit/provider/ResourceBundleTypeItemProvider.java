@@ -57,7 +57,7 @@ public class ResourceBundleTypeItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -99,8 +99,8 @@ public class ResourceBundleTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ResourceBundleType_baseName_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ResourceBundleType_baseName_feature", "_UI_ResourceBundleType_type"),
+                 getString("_UI_ResourceBundleType_baseName_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ResourceBundleType_baseName_feature", "_UI_ResourceBundleType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RESOURCE_BUNDLE_TYPE__BASE_NAME,
                  true,
                  false,
@@ -122,8 +122,8 @@ public class ResourceBundleTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ResourceBundleType_var_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ResourceBundleType_var_feature", "_UI_ResourceBundleType_type"),
+                 getString("_UI_ResourceBundleType_var_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ResourceBundleType_var_feature", "_UI_ResourceBundleType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RESOURCE_BUNDLE_TYPE__VAR,
                  true,
                  false,
@@ -145,8 +145,8 @@ public class ResourceBundleTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ResourceBundleType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ResourceBundleType_id_feature", "_UI_ResourceBundleType_type"),
+                 getString("_UI_ResourceBundleType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ResourceBundleType_id_feature", "_UI_ResourceBundleType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.RESOURCE_BUNDLE_TYPE__ID,
                  true,
                  false,
@@ -193,7 +193,7 @@ public class ResourceBundleTypeItemProvider
      * @generated
      */
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/ResourceBundleType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/ResourceBundleType")); //$NON-NLS-1$
     }
 
     /**
@@ -205,8 +205,8 @@ public class ResourceBundleTypeItemProvider
     public String getText(Object object) {
         String label = ((ResourceBundleType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_ResourceBundleType_type") :
-            getString("_UI_ResourceBundleType_type") + " " + label;
+            getString("_UI_ResourceBundleType_type") : //$NON-NLS-1$
+            getString("_UI_ResourceBundleType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

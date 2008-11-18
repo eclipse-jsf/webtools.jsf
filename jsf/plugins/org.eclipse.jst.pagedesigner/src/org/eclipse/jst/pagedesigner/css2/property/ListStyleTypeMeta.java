@@ -60,23 +60,23 @@ public class ListStyleTypeMeta extends CSSPropertyMeta {
 	// */
 	public Object calculateHTMLAttributeOverride(Element element,
 			String htmltag, String propertyName, ICSSStyle style) {
-		String listStyle = DOMUtil.getAttributeIgnoreCase(element, "type");
+		String listStyle = DOMUtil.getAttributeIgnoreCase(element, "type"); //$NON-NLS-1$
 		if (listStyle == null && element != null
 				&& element.getParentNode() != null) {
 			listStyle = DOMUtil.getAttributeIgnoreCase((Element) element
-					.getParentNode(), "type");
+					.getParentNode(), "type"); //$NON-NLS-1$
 		}
 		if (listStyle != null) {
 			listStyle = listStyle.trim();
-			if (listStyle.equals("1")) {
+			if (listStyle.equals("1")) { //$NON-NLS-1$
 				return ICSSPropertyID.VAL_DECIMAL;
-			} else if (listStyle.equals("a")) {
+			} else if (listStyle.equals("a")) { //$NON-NLS-1$
 				return ICSSPropertyID.VAL_LOWER_ALPHA;
-			} else if (listStyle.equals("A")) {
+			} else if (listStyle.equals("A")) { //$NON-NLS-1$
 				return ICSSPropertyID.VAL_UPPER_ALPHA;
-			} else if (listStyle.equals("i")) {
+			} else if (listStyle.equals("i")) { //$NON-NLS-1$
 				return ICSSPropertyID.VAL_LOWER_ROMAN;
-			} else if (listStyle.equals("I")) {
+			} else if (listStyle.equals("I")) { //$NON-NLS-1$
 				return ICSSPropertyID.VAL_UPPER_ROMAN;
 			}
 			return listStyle;

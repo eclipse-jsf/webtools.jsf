@@ -81,19 +81,19 @@ public class PropertyDescriptor extends AbstractMetaDataEnabledFeature
 	}
 
 	public String getDescription() {
-		return getTraitValueAsString("description");
+		return getTraitValueAsString("description"); //$NON-NLS-1$
 	}
 
 	public String getLabel() {
-		String label = getTraitValueAsString("display-label");
+		String label = getTraitValueAsString("display-label"); //$NON-NLS-1$
 		if (label == null) {
 			label = getMetaDataContext().getEntity().getId();
 		}
-		return label + ":";
+		return label + ":"; //$NON-NLS-1$
 	}
 
 	public boolean isRequired() {
-		return getTraitValueAsBoolean("required");
+		return getTraitValueAsBoolean("required"); //$NON-NLS-1$
 	}
 
 	public DialogField getDialogFieldEditor() {
@@ -189,6 +189,6 @@ public class PropertyDescriptor extends AbstractMetaDataEnabledFeature
 	}
 	
 	public String toString() {
-		return getUri()+"/"+getTagName()+"/"+getAttributeName();
+		return getUri()+"/"+getTagName()+"/"+getAttributeName(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

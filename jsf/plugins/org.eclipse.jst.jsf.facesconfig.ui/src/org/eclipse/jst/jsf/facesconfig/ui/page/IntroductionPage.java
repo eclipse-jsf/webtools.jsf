@@ -41,6 +41,8 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
  */
 public class IntroductionPage extends FormPage implements IFacesConfigPage, ISelectionProvider, IPropertyChangeListener{
 	
+	private static final String FORM_BANNER_IMAGE_FILE = "form_banner.gif"; //$NON-NLS-1$
+	
 	private Button noIntroPageButton = null;
 
 	/**
@@ -62,7 +64,7 @@ public class IntroductionPage extends FormPage implements IFacesConfigPage, ISel
 		FormToolkit toolkit = getEditor().getToolkit();
 		form.setText(EditorMessages.editor_pageflow_page_intro_title);
 
-		form.setBackgroundImage(EditorPlugin.getDefault().getImage("form_banner.gif"));
+		form.setBackgroundImage(EditorPlugin.getDefault().getImage(FORM_BANNER_IMAGE_FILE));
 
 		// create a layout
 		TableWrapLayout layout = new TableWrapLayout();

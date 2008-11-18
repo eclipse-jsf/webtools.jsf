@@ -38,7 +38,7 @@ public final class DOMStyleUtil {
 			CSSStyleDeclaration styledecl = ((ElementCSSInlineStyle) original)
 					.getStyle();
 			if (styledecl == null) {
-				if (original.getAttribute("style") == null) {
+				if (original.getAttribute("style") == null) { //$NON-NLS-1$
 					return null;
 				}
 				// else mean it has style attribute.
@@ -55,11 +55,11 @@ public final class DOMStyleUtil {
 		// normally should not happen. But anyway, we need to have a fail safe
 		// path.
 
-		String oldstyle = original.getAttribute("style");
+		String oldstyle = original.getAttribute("style"); //$NON-NLS-1$
 		if (oldstyle == null || oldstyle.length() == 0) {
 			return null;
 		}
-		StringTokenizer tokenizer = new StringTokenizer(oldstyle, ";");
+		StringTokenizer tokenizer = new StringTokenizer(oldstyle, ";"); //$NON-NLS-1$
 
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken().trim();
@@ -90,8 +90,8 @@ public final class DOMStyleUtil {
 			CSSStyleDeclaration styledecl = ((ElementCSSInlineStyle) original)
 					.getStyle();
 			if (styledecl == null) {
-				if (original.getAttribute("style") == null) {
-					original.setAttribute("style", "");
+				if (original.getAttribute("style") == null) { //$NON-NLS-1$
+					original.setAttribute("style", ""); //$NON-NLS-1$ //$NON-NLS-2$
 					styledecl = ((ElementCSSInlineStyle) original).getStyle();
 				}
 			}
@@ -117,11 +117,11 @@ public final class DOMStyleUtil {
 		// normally should not happen. But anyway, we need to have a fail safe
 		// path.
 
-		String oldstyle = original.getAttribute("style");
+		String oldstyle = original.getAttribute("style"); //$NON-NLS-1$
 		if (oldstyle == null) {
-			oldstyle = "";
+			oldstyle = ""; //$NON-NLS-1$
 		}
-		StringTokenizer tokenizer = new StringTokenizer(oldstyle, ";");
+		StringTokenizer tokenizer = new StringTokenizer(oldstyle, ";"); //$NON-NLS-1$
 
 		StringBuffer buffer = new StringBuffer();
 		while (tokenizer.hasMoreTokens()) {
@@ -132,7 +132,7 @@ public final class DOMStyleUtil {
 			int index = token.indexOf(':');
 			if (index == -1) {
 				// wrong property? ignore.
-				buffer.append(token).append("; ");
+				buffer.append(token).append("; "); //$NON-NLS-1$
 				continue;
 			}
 			String propertyName = token.substring(0, index).trim();
@@ -143,11 +143,11 @@ public final class DOMStyleUtil {
 					// we want to remove this css property. so don't append
 					// anything here
 				} else {
-					buffer.append(propertyName).append(": ").append(
-							propertyValue).append("; ");
+					buffer.append(propertyName).append(": ").append( //$NON-NLS-1$
+							propertyValue).append("; "); //$NON-NLS-1$
 				}
 			} else {
-				buffer.append(token).append("; ");
+				buffer.append(token).append("; "); //$NON-NLS-1$
 			}
 		}
 		// ok, we have loop through existing properties and did replacement.
@@ -156,10 +156,10 @@ public final class DOMStyleUtil {
 			String key = (String) iter.next();
 			String value = (String) map.get(key);
 			if (value != null) {
-				buffer.append(key).append(": ").append(value).append("; ");
+				buffer.append(key).append(": ").append(value).append("; "); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
-		original.setAttribute("style", buffer.toString());
+		original.setAttribute("style", buffer.toString()); //$NON-NLS-1$
 	}
 
 	/**
@@ -168,7 +168,7 @@ public final class DOMStyleUtil {
 	 */
 	public static boolean supportStyleAttribute(IDOMElement ele) {
 		CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
-		if (decl != null && decl.getAttributes().getNamedItem("style") != null) {
+		if (decl != null && decl.getAttributes().getNamedItem("style") != null) { //$NON-NLS-1$
 			return true;
 		}
         return false;

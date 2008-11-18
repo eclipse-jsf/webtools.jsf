@@ -226,7 +226,7 @@ public class RendererSection extends AbstractFacesConfigSection {
 		operationContainer.setLayout(gl);
 
 		Button addButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more,
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -234,7 +234,7 @@ public class RendererSection extends AbstractFacesConfigSection {
 		addButton.setLayoutData(gd);
 
 		editButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Edit_more, //$NON-NLS-1$
+				EditorMessages.UI_Button_Edit_more,
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -242,7 +242,7 @@ public class RendererSection extends AbstractFacesConfigSection {
 		editButton.setLayoutData(gd);
 
 		removeButton = toolkit.createButton(operationContainer,
-				EditorMessages.UI_Button_Remove, //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove,
 				SWT.PUSH);
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -382,7 +382,7 @@ public class RendererSection extends AbstractFacesConfigSection {
 			String name = ((DisplayNameType) (renderer.getDisplayName().get(0)))
 					.getTextContent();
 			if (name == null) {
-				name = "";
+				name = ""; //$NON-NLS-1$
 			}
 			dialog.setRendererName(name);
 		}

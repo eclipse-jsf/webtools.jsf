@@ -24,7 +24,7 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class RootContainerPositionRule extends DefaultPositionRule {
-	static final String[] HTML_ROOT_CONTAINERS = { "body" };
+	static final String[] HTML_ROOT_CONTAINERS = { "body" }; //$NON-NLS-1$
 
 	/**
 	 * @param actionData

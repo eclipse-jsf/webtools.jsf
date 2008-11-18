@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowElement;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowLink;
@@ -165,14 +166,14 @@ public class PageflowLinkPropertySource extends PageflowElementPropertySource {
 								// Pageflow.PageflowEditor.Alert.ExistingPage =
 								// The web page {0} is already existed in
 								// current PageFlow.
-								EditorPlugin.getAlerts().info("Note",
-										"Please select an existing page");
+								EditorPlugin.getAlerts().info(PageflowMessages.PageflowLinkPropertySource_Title,
+										PageflowMessages.PageflowLinkPropertySource_Text);
 								// "Pageflow.PageflowEditor.Alert.DNDResourceTitle",
 								// "Pageflow.PageflowEditor.Alert.ExistingPage",
 								// (String) value);
 
 								return EditorPlugin
-										.getResourceString("Pageflow.PageflowEditor.Alert.ExistingPage");
+										.getResourceString("Pageflow.PageflowEditor.Alert.ExistingPage"); //$NON-NLS-1$
 							}
 						}
 						return null;

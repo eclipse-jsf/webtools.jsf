@@ -33,7 +33,7 @@ public class NoneStyleAction extends ChangeStyleAction {
 	 */
 	public NoneStyleAction(String text, String[] names, ImageDescriptor image,
 			int style) {
-		super(text, "", image, style);
+		super(text, "", image, style); //$NON-NLS-1$
 		_applyingStyleTags = names;
 	}
 

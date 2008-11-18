@@ -68,14 +68,14 @@ public class DesignRange implements ISelection
 	 */
 	public StringBuffer debugDump(StringBuffer buffer) {
 		if (_start != null) {
-			buffer.append("Start: ").append(_start);
+			buffer.append("Start: ").append(_start); //$NON-NLS-1$
 		} else {
-			buffer.append("Start: null");
+			buffer.append("Start: null"); //$NON-NLS-1$
 		}
 		if (_end != null) {
-			buffer.append("End: ").append(_end);
+			buffer.append("End: ").append(_end); //$NON-NLS-1$
 		} else {
-			buffer.append("End: null");
+			buffer.append("End: null"); //$NON-NLS-1$
 		}
 		return buffer;
 	}

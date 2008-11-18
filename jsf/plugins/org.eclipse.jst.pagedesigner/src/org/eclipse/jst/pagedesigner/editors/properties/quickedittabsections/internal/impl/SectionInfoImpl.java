@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: SectionInfoImpl.java,v 1.1 2007/12/07 23:43:47 gkessler Exp $
+ * $Id: SectionInfoImpl.java,v 1.2 2008/11/18 22:22:35 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.impl;
 
@@ -33,7 +33,7 @@ public class SectionInfoImpl extends EObjectImpl implements SectionInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -214,9 +214,9 @@ public class SectionInfoImpl extends EObjectImpl implements SectionInfo {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
+		result.append(" (id: "); //$NON-NLS-1$
 		result.append(id);
-		result.append(", type: ");
+		result.append(", type: "); //$NON-NLS-1$
 		result.append(type);
 		result.append(')');
 		return result.toString();

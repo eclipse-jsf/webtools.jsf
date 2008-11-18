@@ -21,6 +21,7 @@ import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.Separator;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.util.JSPUtil;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -70,9 +71,9 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 
 	private static final int DIALOG_DEFAULT_HEIGHT = 300;
 
-	private static String JSF_EL_LEFT_BRACE = "#{";
+	private static String JSF_EL_LEFT_BRACE = "#{"; //$NON-NLS-1$
 
-	private static String JSF_EL_RIGHT_BRACE = "}";
+	private static String JSF_EL_RIGHT_BRACE = "}"; //$NON-NLS-1$
 
 	/** the listener for the text modification */
 	private ModifyListener modifyListener;
@@ -170,11 +171,13 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		actionSection.setLayoutData(gd);
 
-		String actionListTitle = PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Title;//$NON-NLS-1$
-
+		String actionListTitle = null;
 		if (jspName != null && jspName.length() > 0) {
-			actionListTitle += " in " + jspName;
+			actionListTitle = NLS.bind(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTableWithJSP_Title, jspName);			
+		} else {
+			actionListTitle = PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Title;
 		}
+
 		// Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Title
 		// = Actions
 		actionSection.setText(actionListTitle);
@@ -192,13 +195,13 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		// Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Component
 		// = Component ID
 		componentCol
-				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Component); //$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Component);
 		TableColumn actionCol = new TableColumn(actionTable, SWT.NONE);
 
 		// Pageflow.Property.Action.OutcomeSelectionDialog.ActionListTable.Action
 		// = Action
 		actionCol
-				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Action);//$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Action);
 
 		actionTable.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -252,7 +255,7 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 		// Pageflow.Property.Action.OutcomeSelectionDialog.Title = Outcome
 		// Selection
 		newShell
-				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_Title); //$NON-NLS-1$
+				.setText(PageflowMessages.Pageflow_Property_Action_OutcomeSelectionDialog_Title);
 
 	}
 
@@ -327,13 +330,13 @@ public class ActionOutcomeSelectionDialog extends Dialog {
 				Element node = (Element) actionNodes.get(i);
 				StringBuffer componentName = new StringBuffer();
 
-				Attr idAttr = node.getAttributeNode("id");
+				Attr idAttr = node.getAttributeNode("id"); //$NON-NLS-1$
 				if (idAttr != null)
 					componentName.append(idAttr.getNodeValue());
 
-				componentName.append("(").append(node.getTagName()).append(")"); //$NON-NLS-1$
+				componentName.append("(").append(node.getTagName()).append(")"); //$NON-NLS-1$ //$NON-NLS-2$
 
-				Attr actionAttr = node.getAttributeNode("action");
+				Attr actionAttr = node.getAttributeNode("action"); //$NON-NLS-1$
 				if (actionAttr != null) {
 					String action = actionAttr.getValue();
 					if (isValidEL(action))

@@ -41,7 +41,7 @@ public class Logger {
 		bundleId = bundle.getSymbolicName();
 		if (resourceBundle == null) {
 			IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK,
-					"The resource Bundle for logger could not be null!", null);
+					"The resource Bundle for logger could not be null!", null); //$NON-NLS-1$
 			log.log(status);
 		}
 	}
@@ -129,7 +129,7 @@ public class Logger {
 	 * @param e
 	 */
 	public void error(Throwable e) {
-		IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK, "", e);
+		IStatus status = new Status(IStatus.ERROR, bundleId, IStatus.OK, "", e); //$NON-NLS-1$
 		log.log(status);
 	}
 
@@ -209,7 +209,7 @@ public class Logger {
         // throw a new exception
         catch(Exception e)
         {
-            return "!!missing resource: " + key + "!!";
+            return "!!missing resource: " + key + "!!"; //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 }

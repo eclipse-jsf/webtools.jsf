@@ -127,7 +127,7 @@ public class AddEditMapEntryDialog extends Dialog {
 	 */
 	public void layoutKeySection(Composite parent) {
 		keyField = new StringDialogField();
-		keyField.setLabelText(EditorMessages.MapEntryEditGroup_Key); //$NON-NLS-1$
+		keyField.setLabelText(EditorMessages.MapEntryEditGroup_Key);
 		Composite
 
 		keySection = SWTUtils.createComposite(parent, SWT.NONE);
@@ -174,7 +174,7 @@ public class AddEditMapEntryDialog extends Dialog {
 		});
 		valueField = new StringDialogField(VALUE_DEFAULT_LINENUMS);
 
-		valueField.setLabelText(EditorMessages.ValueEditGroup_Value); //$NON-NLS-1$
+		valueField.setLabelText(EditorMessages.ValueEditGroup_Value);
 		valueField.doFillIntoGrid(null, valueSection, numberOfColumns);
 
 		gd = (GridData) valueField.getLabelControl(null, valueSection)

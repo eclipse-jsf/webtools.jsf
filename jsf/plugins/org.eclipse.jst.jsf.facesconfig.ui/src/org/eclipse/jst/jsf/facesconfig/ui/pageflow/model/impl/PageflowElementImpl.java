@@ -40,7 +40,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.pageflow.synchronization.TransformUtil
  */
 public abstract class PageflowElementImpl extends EObjectImpl implements
 		PageflowElement {
-	private static final String idPrefix = "pf";
+	private static final String idPrefix = "pf"; //$NON-NLS-1$
 
 	/**
 	 * @generated NOT
@@ -65,7 +65,7 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = "unnamed";
+	protected static final String NAME_EDEFAULT = "unnamed"; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -175,7 +175,7 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REFERENCE_LINK_EDEFAULT = "";
+	protected static final String REFERENCE_LINK_EDEFAULT = ""; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getReferenceLink() <em>Reference Link</em>}'
@@ -557,19 +557,19 @@ public abstract class PageflowElementImpl extends EObjectImpl implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
+		result.append(" (name: "); //$NON-NLS-1$
 		result.append(name);
-		result.append(", comment: ");
+		result.append(", comment: "); //$NON-NLS-1$
 		result.append(comment);
-		result.append(", x: ");
+		result.append(", x: "); //$NON-NLS-1$
 		result.append(x);
-		result.append(", y: ");
+		result.append(", y: "); //$NON-NLS-1$
 		result.append(y);
-		result.append(", width: ");
+		result.append(", width: "); //$NON-NLS-1$
 		result.append(width);
-		result.append(", height: ");
+		result.append(", height: "); //$NON-NLS-1$
 		result.append(height);
-		result.append(", referenceLink: ");
+		result.append(", referenceLink: "); //$NON-NLS-1$
 		result.append(referenceLink);
 		result.append(')');
 		return result.toString();

@@ -37,11 +37,11 @@ public class SelectManyMenuTagConverter extends SelectBasedTagConverter
     {
         // If the component is a UISelectMany instance, render "multiple" as the value of the 
         // "multiple" attribute.
-        selectEle.setAttribute("multiple", "multiple");
+        selectEle.setAttribute("multiple", "multiple"); //$NON-NLS-1$ //$NON-NLS-2$
 
         // If the "size" attribute is specified, render its value as the value of the "size" 
         // attribute. Otherwise use the number of items as the value of the "size" attribute.
-        selectEle.setAttribute("size", "1");
+        selectEle.setAttribute("size", "1"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
 }

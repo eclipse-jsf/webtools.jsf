@@ -42,8 +42,8 @@ public class PanelGridUtil
      */
     public int convertRowIndexFromDomToView(int domIndex)
     {
-        boolean hasHeaderRow = (JSFDOMUtil.findFacet(this._panelGrid, "header") != null);
-        boolean hasFooterRow = (JSFDOMUtil.findFacet(this._panelGrid, "footer") != null);
+        boolean hasHeaderRow = (JSFDOMUtil.findFacet(this._panelGrid, "header") != null); //$NON-NLS-1$
+        boolean hasFooterRow = (JSFDOMUtil.findFacet(this._panelGrid, "footer") != null); //$NON-NLS-1$
         if (!hasFooterRow)
         {
             return domIndex;
@@ -77,8 +77,8 @@ public class PanelGridUtil
      */
     public int getDomRowIndex(Element cell)
     {
-        boolean hasHeaderRow = (JSFDOMUtil.findFacet(this._panelGrid, "header") != null);
-        boolean hasFooterRow = (JSFDOMUtil.findFacet(this._panelGrid, "footer") != null);
+        boolean hasHeaderRow = (JSFDOMUtil.findFacet(this._panelGrid, "header") != null); //$NON-NLS-1$
+        boolean hasFooterRow = (JSFDOMUtil.findFacet(this._panelGrid, "footer") != null); //$NON-NLS-1$
         //if cell is header or footer
         boolean isFacet = JSFDOMUtil.isFacet(cell);
         Element parent = (Element) cell.getParentNode();
@@ -89,12 +89,12 @@ public class PanelGridUtil
         }
         if (isFacet || isParentFacet)
         {
-            String attrName = cell.getAttribute("name");
-            if ("header".equalsIgnoreCase(attrName))
+            String attrName = cell.getAttribute("name"); //$NON-NLS-1$
+            if ("header".equalsIgnoreCase(attrName)) //$NON-NLS-1$
             {
                 return 0;
             }
-            else if ("footer".equalsIgnoreCase(attrName))
+            else if ("footer".equalsIgnoreCase(attrName)) //$NON-NLS-1$
             {
                 if (hasHeaderRow)
                 {

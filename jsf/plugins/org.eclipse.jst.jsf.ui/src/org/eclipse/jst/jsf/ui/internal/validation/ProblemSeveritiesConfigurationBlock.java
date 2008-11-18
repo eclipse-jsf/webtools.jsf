@@ -169,7 +169,7 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
         
         if (EXPECTED_PREFS != keys.length)
         {
-            JSFUiPlugin.log(IStatus.WARNING, "Expected "+EXPECTED_PREFS+" preferences but was "+keys.length, new Throwable());
+            JSFUiPlugin.log(IStatus.WARNING, "Expected "+EXPECTED_PREFS+" preferences but was "+keys.length, new Throwable()); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         return keys;

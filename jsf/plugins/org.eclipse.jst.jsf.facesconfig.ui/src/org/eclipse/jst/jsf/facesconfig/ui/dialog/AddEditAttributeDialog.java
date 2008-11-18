@@ -139,7 +139,7 @@ public class AddEditAttributeDialog extends Dialog {
 		attributeClassField = new ClassButtonDialogField(getProject());
 //		attributeClassField.setRequired(true);
 		attributeClassField
-				.setLabelText(EditorMessages.AttributeSection_Dialog_AttributeClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.AttributeSection_Dialog_AttributeClass);
 
 		attributeClassField.setAutoOpenResource(false);
 

@@ -46,7 +46,7 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
      * <!-- begin-user-doc --> <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. 
@@ -91,8 +91,8 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PhaseListenerType_textContent_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PhaseListenerType_textContent_feature", "_UI_PhaseListenerType_type"),
+                 getString("_UI_PhaseListenerType_textContent_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PhaseListenerType_textContent_feature", "_UI_PhaseListenerType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PHASE_LISTENER_TYPE__TEXT_CONTENT,
                  true,
                  false,
@@ -114,8 +114,8 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_PhaseListenerType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_PhaseListenerType_id_feature", "_UI_PhaseListenerType_type"),
+                 getString("_UI_PhaseListenerType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_PhaseListenerType_id_feature", "_UI_PhaseListenerType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.PHASE_LISTENER_TYPE__ID,
                  true,
                  false,
@@ -132,7 +132,7 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/PhaseListenerType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/PhaseListenerType")); //$NON-NLS-1$
     }
 
     /**
@@ -144,8 +144,8 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
 	public String getText(Object object) {
         String label = ((PhaseListenerType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_PhaseListenerType_type") :
-            getString("_UI_PhaseListenerType_type") + " " + label;
+            getString("_UI_PhaseListenerType_type") : //$NON-NLS-1$
+            getString("_UI_PhaseListenerType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -207,7 +207,7 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
 			case 0:
 				return getText(object);
 			case 1:
-				return getString("_UI_ActionListenerType_type");
+				return getString("_UI_ActionListenerType_type"); //$NON-NLS-1$
 			}
 
 			return null;

@@ -27,7 +27,7 @@ import org.eclipse.jst.pagedesigner.editors.pagedesigner.MessageFormater;
  * @author mengbo
  */
 public class InputFileWidgetProvider extends AbstractWidgetProvider {
-	private static final String BODER_QUERY_TEMPLETE = "border-{0}-style";
+	private static final String BODER_QUERY_TEMPLETE = "border-{0}-style"; //$NON-NLS-1$
 
 	private static final int GAP = 2;
 

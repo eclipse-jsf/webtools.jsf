@@ -78,7 +78,7 @@ public abstract class ReferenceElement {
 			String uriTarget = object.eResource().getURIFragment(object);
 			return uriTarget;
 		}
-        return "";
+        return ""; //$NON-NLS-1$
 	}
 
 	/**
@@ -88,9 +88,9 @@ public abstract class ReferenceElement {
 	 * @return the resolved string 
 	 */
 	public String resolveReferenceString() {
-		String result = "";
+		String result = ""; //$NON-NLS-1$
 		for (int i = 0, n = data.size(); i < n; i++) {
-			result += resolvePath((EObject) data.get(i)) + "|";
+			result += resolvePath((EObject) data.get(i)) + "|"; //$NON-NLS-1$
 		}
 		if (result.length() > 0) {
 			result = result.substring(0, result.length());

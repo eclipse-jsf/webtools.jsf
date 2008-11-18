@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: SECTION_TYPE.java,v 1.2 2007/12/12 16:43:21 gkessler Exp $
+ * $Id: SECTION_TYPE.java,v 1.3 2008/11/18 22:22:35 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections;
 
@@ -29,7 +29,7 @@ public enum SECTION_TYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ATTRIBUTE(0, "ATTRIBUTE", "ATTRIBUTE"),
+	ATTRIBUTE(0, "ATTRIBUTE", "ATTRIBUTE"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * The '<em><b>SECTION</b></em>' literal object.
@@ -39,14 +39,14 @@ public enum SECTION_TYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SECTION(1, "SECTION", "SECTION");
+	SECTION(1, "SECTION", "SECTION"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The '<em><b>ATTRIBUTE</b></em>' literal value.

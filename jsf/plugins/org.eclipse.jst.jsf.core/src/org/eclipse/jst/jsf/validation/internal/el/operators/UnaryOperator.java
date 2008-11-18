@@ -51,7 +51,7 @@ public abstract class UnaryOperator
     {
         if (!isUnaryOperator(token))
         {
-            throw new IllegalArgumentException("token must be a unary operator");
+            throw new IllegalArgumentException("token must be a unary operator"); //$NON-NLS-1$
         }
         
         switch(token.kind)

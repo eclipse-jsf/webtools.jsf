@@ -20,170 +20,170 @@ public interface IAttributeRuntimeValueType {
 	/**
 	 * 
 	 */
-	static final String prefix1 = "org.eclipse.jst.jsf.core.attributevalues.";
+	static final String prefix1 = "org.eclipse.jst.jsf.core.attributevalues."; //$NON-NLS-1$
 	/**
 	 * 
 	 */
-	static final String prefix2 = "org.eclipse.jst.pagedesigner.attributevalues.";
+	static final String prefix2 = "org.eclipse.jst.pagedesigner.attributevalues."; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String BASE = prefix1+"BaseType";
+	public static final String BASE = prefix1+"BaseType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String CSSSTYLE = prefix1+"CSSStyleType";
+	public static final String CSSSTYLE = prefix1+"CSSStyleType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String CSSCLASS = prefix1+"CSSClassType";
+	public static final String CSSCLASS = prefix1+"CSSClassType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String CSSID = prefix1+"CSSIdType";
+	public static final String CSSID = prefix1+"CSSIdType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String STRING = prefix1+"StringType";
+	public static final String STRING = prefix1+"StringType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String BOOLEAN = prefix1+"BooleanType";
+	public static final String BOOLEAN = prefix1+"BooleanType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String RELATIVEPATH = prefix1+"RelativePathType";
+	public static final String RELATIVEPATH = prefix1+"RelativePathType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String WEBPATH = prefix1+"WebPathType"; //FIXME
+	public static final String WEBPATH = prefix1+"WebPathType"; //FIXME //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String COLOR = prefix1+"ColorType";
+	public static final String COLOR = prefix1+"ColorType"; //$NON-NLS-1$
 
 //	public static final String NAMED_BOOLEAN = prefix1+"NAMED-BOOLEAN";
 	
 	/**
 	 * 
 	 */
-	public static final String LONG = prefix1+"LongType";
+	public static final String LONG = prefix1+"LongType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String INTEGER = prefix1+"IntegerType";
+	public static final String INTEGER = prefix1+"IntegerType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String DOUBLE = prefix1+"DoubleType";
+	public static final String DOUBLE = prefix1+"DoubleType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String METHODBINDING = prefix1+"MethodBindingType";
+	public static final String METHODBINDING = prefix1+"MethodBindingType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String JAVACLASS = prefix1+"JavaClassType";
+	public static final String JAVACLASS = prefix1+"JavaClassType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String SCRIPT = prefix1+"ScriptType";
+	public static final String SCRIPT = prefix1+"ScriptType"; //$NON-NLS-1$
 
 //	public static final String PROPERTYBINDING = prefix1+"PROPERTYBINDING";
 	
 	/**
 	 * 
 	 */
-	public static final String VALUE = prefix1+"ValueType";
+	public static final String VALUE = prefix1+"ValueType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String VALUEBINDING = prefix1+"ValueBindingType";
+	public static final String VALUEBINDING = prefix1+"ValueBindingType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String TIMEZONE = prefix1+"TimeZoneType";
+	public static final String TIMEZONE = prefix1+"TimeZoneType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String ACTION = prefix1+"ActionType";
+	public static final String ACTION = prefix1+"ActionType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String CLASSPATH_RESOURCE = prefix1+"CLASSPATH_RESOURCE";
+	public static final String CLASSPATH_RESOURCE = prefix1+"CLASSPATH_RESOURCE"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String CURRENCYCODE = prefix1+"CurrencyCodeType";
+	public static final String CURRENCYCODE = prefix1+"CurrencyCodeType"; //$NON-NLS-1$
 
 	/**
 	 * 
 	 */
-	public static final String LINK = prefix1+"LinkType";
+	public static final String LINK = prefix1+"LinkType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String LOCALE = prefix1+"LocaleType";
+	public static final String LOCALE = prefix1+"LocaleType"; //$NON-NLS-1$
 
 //	public static final String MULTICHOICE = prefix1+"MULTICHOICE";
 	
 	/**
 	 * 
 	 */
-	public static final String FACESCONFIGIDENTIFIER = prefix1+"FacesConfigIdentifierType";
+	public static final String FACESCONFIGIDENTIFIER = prefix1+"FacesConfigIdentifierType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String FACESCONFIGVALIDATORID = prefix1+"FacesConfigValidatorIDType";
+	public static final String FACESCONFIGVALIDATORID = prefix1+"FacesConfigValidatorIDType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String FACESCONFIGCONVERTERID = prefix1+"FacesConfigConverterIDType";
+	public static final String FACESCONFIGCONVERTERID = prefix1+"FacesConfigConverterIDType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String COMPONENTBINDING = prefix1+"ComponentBindingType";
+	public static final String COMPONENTBINDING = prefix1+"ComponentBindingType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String COMPONENTID = prefix1+"ComponentIDType";
+	public static final String COMPONENTID = prefix1+"ComponentIDType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String LENGTH = prefix1+"LengthType";
+	public static final String LENGTH = prefix1+"LengthType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String RESOURCEBUNDLE = prefix1+"ResourceBundleType";
+	public static final String RESOURCEBUNDLE = prefix1+"ResourceBundleType"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
-	public static final String LANGUAGECODE = prefix1+"LanguageCodeType";
+	public static final String LANGUAGECODE = prefix1+"LanguageCodeType"; //$NON-NLS-1$
 }

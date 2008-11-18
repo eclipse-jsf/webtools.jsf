@@ -63,7 +63,7 @@ public class ExpressionAction extends Action
         boolean flag = false;
         if (_action != null)
         {
-            flag = _action.startsWith("#{") && _action.endsWith("}");//$NON-NLS-1$ $NON-NLS-2$
+            flag = _action.startsWith("#{") && _action.endsWith("}");//$NON-NLS-1$ //$NON-NLS-2$ $NON-NLS-2$
         }
         return flag;
     }
@@ -77,7 +77,7 @@ public class ExpressionAction extends Action
                 IPageVariablesProvider.class);
         pageVarProvider.refresh();
 
-        JSFUIPlugin.getAlerts().warning("Message.Warning.Title", "Message.Warning.InvalidateExpression");//$NON-NLS-1$ $NON-NLS-2$
+        JSFUIPlugin.getAlerts().warning("Message.Warning.Title", "Message.Warning.InvalidateExpression");//$NON-NLS-1$ //$NON-NLS-2$ $NON-NLS-2$
     }
 
     /**

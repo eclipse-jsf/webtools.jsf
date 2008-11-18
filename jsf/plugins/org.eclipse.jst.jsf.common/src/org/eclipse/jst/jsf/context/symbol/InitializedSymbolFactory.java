@@ -137,7 +137,7 @@ public class InitializedSymbolFactory
         if (name == null || typeDesc == null)
         {
             throw new IllegalArgumentException(
-                    "name and typeDesc must not be null");
+                    "name and typeDesc must not be null"); //$NON-NLS-1$
         }
 
         final IComponentSymbol symbol = SymbolFactory.eINSTANCE

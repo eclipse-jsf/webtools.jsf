@@ -53,13 +53,13 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                     // we are logically notting, so coerced is true, then false
                     // if false then true
                     return _diagnosticFactory.create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID(
-                                 "not"
+                                 "not" //$NON-NLS-1$
                                  , Boolean.valueOf(!coercedValue.booleanValue()).toString()); 
                         
                 }
                 catch (TypeCoercionException tce)
                 {
-                    throw new AssertionError("coerce should not throw exception");
+                    throw new AssertionError("coerce should not throw exception"); //$NON-NLS-1$
                 }
             }
             
@@ -90,7 +90,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                 }
                 catch (TypeCoercionException tce)
                 {
-                    throw new AssertionError("coerce should not throw exception");
+                    throw new AssertionError("coerce should not throw exception"); //$NON-NLS-1$
                 }
             }
             

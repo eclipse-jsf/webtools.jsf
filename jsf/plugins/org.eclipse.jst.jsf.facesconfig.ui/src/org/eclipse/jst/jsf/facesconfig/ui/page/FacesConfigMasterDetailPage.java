@@ -59,8 +59,10 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 		IFacesConfigPage, IDetailsPageProvider, ISelectionChangedListener,
 		ISelectionProvider, IEditingDomainProvider {
 
+	private static final String BANNER_IMAGE_FILE = "form_banner.gif"; //$NON-NLS-1$
+
 	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
-			.getImage("form_banner.gif");
+			.getImage(BANNER_IMAGE_FILE);
 
 	private FacesConfigMasterSection[] facesConfigMasterSections;
 
@@ -110,8 +112,8 @@ public abstract class FacesConfigMasterDetailPage extends FormPage implements
 	protected void createFormContent(IManagedForm managedForm) {
 
 		ScrolledForm form = managedForm.getForm();
-		form.setText(this.getTitle());//$NON-NLS-1$
-		form.setBackgroundImage(BANNER_IMAGE); //$NON-NLS-1$ 
+		form.setText(this.getTitle());
+		form.setBackgroundImage(BANNER_IMAGE); 
 		fillBody(managedForm, managedForm.getToolkit());
 		managedForm.refresh();
 	}

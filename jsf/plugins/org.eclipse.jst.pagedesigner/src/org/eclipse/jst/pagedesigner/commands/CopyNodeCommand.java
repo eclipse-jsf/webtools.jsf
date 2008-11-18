@@ -38,7 +38,7 @@ public class CopyNodeCommand extends Command {
 	 * @param viewer
 	 */
 	public CopyNodeCommand(IHTMLGraphicalViewer viewer) {
-		super("");
+		super(""); //$NON-NLS-1$
 		this._viewer = viewer;
 	}
 

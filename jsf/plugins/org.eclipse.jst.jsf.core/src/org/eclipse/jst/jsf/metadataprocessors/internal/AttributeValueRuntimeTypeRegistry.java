@@ -21,8 +21,8 @@ package org.eclipse.jst.jsf.metadataprocessors.internal;
  */
 public class AttributeValueRuntimeTypeRegistry extends AbstractMetaDataEnabledTypeRegistry {
 
-	private static final String EXTPTID = "AttributeValueRuntimeTypes";
-	private static final String DEFAULT_CLASS = "org.eclipse.jst.jsf.metadataprocessors.DefaultTypeDescriptor";
+	private static final String EXTPTID = "AttributeValueRuntimeTypes"; //$NON-NLS-1$
+	private static final String DEFAULT_CLASS = "org.eclipse.jst.jsf.metadataprocessors.DefaultTypeDescriptor"; //$NON-NLS-1$
 	private static AttributeValueRuntimeTypeRegistry INSTANCE;
 	
 	/**

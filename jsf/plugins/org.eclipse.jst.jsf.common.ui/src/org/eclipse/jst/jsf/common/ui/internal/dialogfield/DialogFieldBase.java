@@ -108,7 +108,7 @@ public class DialogFieldBase implements DialogField {
 	public void setHyperLink(IHyperlinkListener listener) {
 		if (_label != null) {
 			throw new RuntimeException(
-					"The Label instance does not support the listener");
+					"The Label instance does not support the listener"); //$NON-NLS-1$
 		}
         this._listener = listener;
 	}
@@ -117,7 +117,7 @@ public class DialogFieldBase implements DialogField {
 	 * Sets the label of the dialog field.
 	 */
 	public void setLabelText(String labeltext) {
-		_labelText = labeltext == null ? "" : labeltext;
+		_labelText = labeltext == null ? "" : labeltext; //$NON-NLS-1$
 		// if (_isRequired)
 		// {
 		// _labelText = "* " + _labelText;
@@ -286,11 +286,11 @@ public class DialogFieldBase implements DialogField {
 			assertCompositeNotNull(parent);
 
 			String label = null;
-			if (_labelText != null && !"".equals(_labelText)) {
+			if (_labelText != null && !"".equals(_labelText)) { //$NON-NLS-1$
 				//$NON-NLS-1$
 				label = _labelText;
 			} else {
-				label = ".";
+				label = "."; //$NON-NLS-1$
 			}
 
 			if (_listener == null) {
@@ -334,13 +334,13 @@ public class DialogFieldBase implements DialogField {
 			if (_formToolkit == null) {
 				_requiredLabel = new Label(parent, SWT.LEFT | SWT.WRAP);
 			} else {
-				_requiredLabel = _formToolkit.createLabel(parent, "", SWT.LEFT
+				_requiredLabel = _formToolkit.createLabel(parent, "", SWT.LEFT //$NON-NLS-1$
 						| SWT.WRAP);
 				_requiredLabel.setForeground(getLabelColor());
 			}
 			if (_isRequired) {
 				_requiredLabel.setText(DialogFieldResources.getInstance()
-						.getString("DialogFieldBase.Label.RequiredSymbol"));
+						.getString("DialogFieldBase.Label.RequiredSymbol")); //$NON-NLS-1$
 			}
 		}
 		return _requiredLabel;
@@ -360,11 +360,11 @@ public class DialogFieldBase implements DialogField {
 	}
 
 	/**
-	 * get color for lable
+	 * get color for label
 	 */
 	private Color getLabelColor() {
-		String osname = System.getProperty("os.name").toLowerCase();
-		if (osname.startsWith("mac os")) {
+		String osname = System.getProperty("os.name").toLowerCase(); //$NON-NLS-1$
+		if (osname.startsWith("mac os")) { //$NON-NLS-1$
 			return Display.getCurrent().getSystemColor(
 					SWT.COLOR_LIST_FOREGROUND);
 		}
@@ -424,7 +424,7 @@ public class DialogFieldBase implements DialogField {
 			int span) {
 		Label label;
 		if (toolkit != null) {
-			label = toolkit.createLabel(parent, "");
+			label = toolkit.createLabel(parent, ""); //$NON-NLS-1$
 		} else {
 			label = new Label(parent, SWT.LEFT);
 		}

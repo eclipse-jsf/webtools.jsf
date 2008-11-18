@@ -583,7 +583,7 @@ public class FC2PFTransformer extends AdapterImpl {
 
 	private PageflowPage getOrCreateStartPage(NavigationCaseType navCase) {// FromViewIdType
 		PageflowPage startPageflowNode = null;
-		String path = "*";
+		String path = "*"; //$NON-NLS-1$
 		NavigationRuleType rule = (NavigationRuleType) navCase.eContainer();
 		FromViewIdType source = getSource(navCase);
 		if (source != null) {
@@ -595,7 +595,7 @@ public class FC2PFTransformer extends AdapterImpl {
 			if (startPageflowNode == null) {
 				// not exist or is "*"
 				if (DEBUG)
-					System.out.println("Create new start page");
+					System.out.println("Create new start page"); //$NON-NLS-1$
 				startPageflowNode = createPFPage(path);
 				pageflowChanged = true;
 			}
@@ -633,7 +633,7 @@ public class FC2PFTransformer extends AdapterImpl {
 				if (endPageflowNode == null) {
 					endPageflowNode = createPFPage(path);
 					if (DEBUG)
-						System.out.println("Create new end page");
+						System.out.println("Create new end page"); //$NON-NLS-1$
 					pageflowChanged = true;
 				}
 				mapPaths2PF.put(path, endPageflowNode);
@@ -723,7 +723,7 @@ public class FC2PFTransformer extends AdapterImpl {
 		if ((link = findUnmappedLink(start, end, caseFC)) == null) {
 			if (end != null) {
 				if (DEBUG)
-					System.out.println("Create new link");
+					System.out.println("Create new link"); //$NON-NLS-1$
 				link = createPFLink(start, end, action, fromOutCome);
 				pageflowChanged = true;
 			}

@@ -58,7 +58,7 @@ import org.w3c.dom.NodeList;
  */
 public class JSFHtmlActionListenerSection extends BaseCustomSection
 {
-    final private static String[] LISTENTYPES = { "Action"};
+    final private static String[] LISTENTYPES = { "Action"}; //$NON-NLS-1$
 
     private IDOMElement            _element;
     private Table                 _listenersTable;
@@ -114,7 +114,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
             if (element instanceof Node)
             {
                 Node node = (Node) element;
-                String nodeName = getTableNodeName(node, "type");
+                String nodeName = getTableNodeName(node, "type"); //$NON-NLS-1$
                 switch (columnIndex)
                 {
                     case 0:
@@ -135,7 +135,7 @@ public class JSFHtmlActionListenerSection extends BaseCustomSection
         	for (String attrName : attrNames) {
         		Node attr = node.getAttributes().getNamedItem(attrName);
         		if (attr != null && attr.getNodeValue()!= null && 
-        				! attr.getNodeValue().trim().equals(""))
+        				! attr.getNodeValue().trim().equals("")) //$NON-NLS-1$
         			return attr.getNodeValue().trim();
         	}
 			return node.getNodeName();

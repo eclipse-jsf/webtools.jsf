@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorDeco
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
 import org.eclipse.jst.jsf.ui.internal.common.ViewObjectPresenter;
 import org.eclipse.jst.jsf.ui.internal.common.ViewObjectPresenter.TitleValuePair;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -41,12 +42,12 @@ import org.eclipse.swt.widgets.Composite;
         AbstractXMLSectionsDetailsForm
 {
 
-    private static final String COMPONENT_SECTION_KEY      = "componentSection";
-    private final static String COMPONENT_TYPE_SECTION_KEY = "componentTypeSection";
-    private static final String COMPONENT_INTERFACES_KEY   = "componentInterfacesSection";
-    private static final String COMPONENT_DECORATORS_KEY   = "componentDecorators";
-    private static final String COMPONENT_PROPERTIES_KEY   = "componentProperties";
-    private final LabelProvider _labelProvider             = new MyLabelProvider();
+    private static final String COMPONENT_SECTION_KEY      = "componentSection"; //$NON-NLS-1$
+    private final static String COMPONENT_TYPE_SECTION_KEY = "componentTypeSection"; //$NON-NLS-1$
+    private static final String COMPONENT_INTERFACES_KEY   = "componentInterfacesSection"; //$NON-NLS-1$
+    private static final String COMPONENT_DECORATORS_KEY = "componentDecorators"; //$NON-NLS-1$
+    private static final String COMPONENT_PROPERTIES_KEY = "componentProperties"; //$NON-NLS-1$
+    private final LabelProvider _labelProvider = new MyLabelProvider();
 
     private XMLTextSection      _componentTypeSection;
     private XMLTextSection      _componentSection;
@@ -74,19 +75,21 @@ import org.eclipse.swt.widgets.Composite;
 
     private void updateComponentSection(final ComponentInfo compInfo)
     {
-        final String formatText = "<form>%s</form>";
+        final String formatText = "<form>%s</form>"; //$NON-NLS-1$
         final String className = compInfo.getComponentTypeInfo().getClassName();
         final String id = compInfo.getId();
         final ComponentInfo parent = compInfo.getParent();
         final List<TitleValuePair> values = new ArrayList<TitleValuePair>();
-        values.add(new TitleValuePair("Name", className != null ? Signature
-                .getSimpleName(className) : ""));
-        values.add(new TitleValuePair("Id", id != null ? id : "<i>none</i>"));
-        values.add(new TitleValuePair("Parent Id", (parent != null && parent
-                .getId() != null) ? parent.getId() : "<i>none</i>"));
+        values.add(new TitleValuePair(Messages.ComponentInstanceDetailsForm_Name, className != null ? Signature
+                .getSimpleName(className) : "")); //$NON-NLS-1$
+        values.add(new TitleValuePair(Messages.ComponentInstanceDetailsForm_Id, id != null ? id : Messages.ComponentInstanceDetailsForm_None));
+        values
+                .add(new TitleValuePair(Messages.ComponentInstanceDetailsForm_ParentId, (parent != null && parent.getId() != null)
+                        ? parent.getId()
+                        : Messages.ComponentInstanceDetailsForm_None));
 
-        _componentSection.setText(String.format(formatText, ViewObjectPresenter
-                .createLines(values)), true, false);
+        _componentSection.setText(String
+                .format(formatText, ViewObjectPresenter.createLines(values)), true, false);
         _componentSection.refresh();
     }
 
@@ -108,7 +111,7 @@ import org.eclipse.swt.widgets.Composite;
     private void updateComponentDecoratorsSection(final ComponentInfo compInfo)
     {
         List<TitleValuePair> decoratorLines = new ArrayList<TitleValuePair>();
-        String text = "";
+        String text = ""; //$NON-NLS-1$
         for (final ComponentDecorator decorator : (List<ComponentDecorator>) compInfo
                 .getAllDecorators())
         {
@@ -122,15 +125,16 @@ import org.eclipse.swt.widgets.Composite;
         }
         Collections.sort(decoratorLines);
         text = ViewObjectPresenter.createLines(decoratorLines);
-        _componentDecoratorsSection.setText(String.format("<form>%s</form>",
+        _componentDecoratorsSection.setText(String.format("<form>%s</form>", //$NON-NLS-1$
                 text), true, false);
         _componentDecoratorsSection.refresh();
-    }
+
+     }
 
     private void updateComponentPropertiesSection(final ComponentInfo compInfo)
     {
         List<TitleValuePair> propertyLines = new ArrayList<TitleValuePair>();
-        String text = "";
+        String text = ""; //$NON-NLS-1$
         Set<String> propNames = compInfo.getAttributeNames();
 
         for (final String propName : propNames)
@@ -148,7 +152,7 @@ import org.eclipse.swt.widgets.Composite;
         }
         Collections.sort(propertyLines);
         text = ViewObjectPresenter.createLines(propertyLines);
-        _componentPropertiesSection.setText(String.format("<form>%s</form>",
+        _componentPropertiesSection.setText(String.format("<form>%s</form>", //$NON-NLS-1$
                 text), true, false);
         _componentPropertiesSection.refresh();
 
@@ -160,23 +164,23 @@ import org.eclipse.swt.widgets.Composite;
     {
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
         _componentSection = new XMLTextSection(getToolkit(), parent,
-                "Instance Info");
+                Messages.ComponentInstanceDetailsForm_InstanceInfo);
         sections.put(COMPONENT_SECTION_KEY, _componentSection);
 
         _componentTypeSection = new XMLTextSection(getToolkit(), parent,
-                "Type Info Information");
+                Messages.ComponentInstanceDetailsForm_TypeInstanceInfo);
         sections.put(COMPONENT_TYPE_SECTION_KEY, _componentTypeSection);
 
         _componentInterfacesSection = new XMLTextSection(getToolkit(), parent,
-                "Interfaces");
+                Messages.ComponentInstanceDetailsForm_Interfaces);
         sections.put(COMPONENT_INTERFACES_KEY, _componentInterfacesSection);
-
+        
         _componentDecoratorsSection = new XMLTextSection(getToolkit(), parent,
-                "Decorators");
+                Messages.ComponentInstanceDetailsForm_Decorators);
         sections.put(COMPONENT_DECORATORS_KEY, _componentDecoratorsSection);
-
+        
         _componentPropertiesSection = new XMLTextSection(getToolkit(), parent,
-                "Properties");
+                Messages.ComponentInstanceDetailsForm_Properties);
         sections.put(COMPONENT_PROPERTIES_KEY, _componentPropertiesSection);
 
         return sections;
@@ -196,27 +200,20 @@ import org.eclipse.swt.widgets.Composite;
         {
             if (element instanceof ComponentDecorator)
             {
-                if (element instanceof ConverterDecorator)
+                if  (element instanceof ConverterDecorator)
                 {
                     final ConverterDecorator converter = (ConverterDecorator) element;
-                    return "Converter: id=\""
-                            + converter.getTypeInfo().getConverterId()
-                            + "\", converter-class="
-                            + converter.getTypeInfo().getClassName();
+                    return NLS.bind(Messages.ComponentInstanceDetailsForm_Converter, converter.getTypeInfo().getConverterId(), converter.getTypeInfo().getClassName());                    
                 }
                 else if (element instanceof ValidatorDecorator)
                 {
                     final ValidatorDecorator validator = (ValidatorDecorator) element;
-                    return "Validator: id=\""
-                            + validator.getTypeInfo().getValidatorId()
-                            + "\", validator-class="
-                            + validator.getTypeInfo().getClassName();
+                    return NLS.bind(Messages.ComponentInstanceDetailsForm_Validator, validator.getTypeInfo().getValidatorId(), validator.getTypeInfo().getClassName());
                 }
                 else if (element instanceof FacetDecorator)
                 {
                     final FacetDecorator decorator = (FacetDecorator) element;
-                    return "Facet: " + decorator.getName() + ", component="
-                            + decorator.getDecorates().getId();
+                    return NLS.bind(Messages.ComponentInstanceDetailsForm_Facet, decorator.getName(), decorator.getDecorates().getId());
                 }
             }
 

@@ -77,7 +77,7 @@ public abstract class ElementDOMAdapter extends DOMAdapter
         public boolean isJSPTag()
         {
             // shouldn't be called
-            throw new UnsupportedOperationException("jsp flag not supported on this identifier");
+            throw new UnsupportedOperationException("jsp flag not supported on this identifier"); //$NON-NLS-1$
         }
         
     }

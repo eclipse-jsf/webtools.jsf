@@ -22,27 +22,27 @@ public interface IAttributeDescriptor {
 	/**
 	 * suffix
 	 */
-	final String PARAMETER_SUFFIX = "suffix";
+	final String PARAMETER_SUFFIX = "suffix"; //$NON-NLS-1$
 
 	/**
 	 * style
 	 */
-	final String PARAMETER_STYLE = "style";
+	final String PARAMETER_STYLE = "style"; //$NON-NLS-1$
 
 	/**
 	 * super type
 	 */
-	final String PARAMETER_SUPER_TYPE = "superType";
+	final String PARAMETER_SUPER_TYPE = "superType"; //$NON-NLS-1$
 
 	/**
 	 * separator
 	 */
-	final String PARAMETER_SEPARATOR = "separator";
+	final String PARAMETER_SEPARATOR = "separator"; //$NON-NLS-1$
 
 	/**
 	 * default
 	 */
-	final String PARAMETER_DEFAULT = "default";
+	final String PARAMETER_DEFAULT = "default"; //$NON-NLS-1$
 
 	/**
 	 * get the name of the attribute.

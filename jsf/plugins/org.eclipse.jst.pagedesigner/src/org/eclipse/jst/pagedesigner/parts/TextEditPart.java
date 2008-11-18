@@ -67,7 +67,7 @@ public class TextEditPart extends SubNodeEditPart implements ICSSTextProvider {
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
-		this.installEditPolicy("link editpolicy", new LinkEditPolicy());
+		this.installEditPolicy("link editpolicy", new LinkEditPolicy()); //$NON-NLS-1$
 	}
 
 	/*

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConverterTypeInfo_Impl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
+ * $Id: ConverterTypeInfo_Impl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -211,9 +211,9 @@ public class ConverterTypeInfo_Impl extends ClassTypeInfo_Impl implements Conver
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (converterId: ");
+        result.append(" (converterId: "); //$NON-NLS-1$
         result.append(converterId);
-        result.append(", forClasses: ");
+        result.append(", forClasses: "); //$NON-NLS-1$
         result.append(forClasses);
         result.append(')');
         return result.toString();

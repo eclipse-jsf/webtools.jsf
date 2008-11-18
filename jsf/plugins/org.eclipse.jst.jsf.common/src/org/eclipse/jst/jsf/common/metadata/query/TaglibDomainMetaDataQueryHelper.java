@@ -47,7 +47,7 @@ public final class TaglibDomainMetaDataQueryHelper{
 	/**
 	 * Domain id for Tag library domain of metatdata  
 	 */
-	public static final String TAGLIB_DOMAIN = "TagLibraryDomain"; //need better place for this
+	public static final String TAGLIB_DOMAIN = "TagLibraryDomain"; //need better place for this //$NON-NLS-1$
 	
 	/**
 	 * private constructor
@@ -94,7 +94,7 @@ public final class TaglibDomainMetaDataQueryHelper{
 			}
 			rs.close();
 		} catch (MetaDataException ex) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getEntity() - 1", ex);
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getEntity() - 1", ex); //$NON-NLS-1$
 		}
 
 		return e;
@@ -129,7 +129,7 @@ public final class TaglibDomainMetaDataQueryHelper{
 			}
 			rs.close();
 		} catch (MetaDataException ex) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getTrait()", ex);
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getTrait()", ex); //$NON-NLS-1$
 		}
 
 		return t;
@@ -162,7 +162,7 @@ public final class TaglibDomainMetaDataQueryHelper{
 			}
 			rs.close();
 		} catch (MetaDataException ex) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getEntity() - 0", ex);
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in Helper.getEntity() - 0", ex); //$NON-NLS-1$
 		}		
 
 		return e;		

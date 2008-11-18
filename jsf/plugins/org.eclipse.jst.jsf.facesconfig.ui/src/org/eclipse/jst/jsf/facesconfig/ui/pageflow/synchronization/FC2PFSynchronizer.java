@@ -120,7 +120,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 		if (feature == FacesConfigPackage.eINSTANCE
 				.getNavigationRuleType_NavigationCase()) {
 			if (DEBUG)
-				System.out.println("New navigation case");
+				System.out.println("New navigation case"); //$NON-NLS-1$
 			NavigationCaseType newCase = (NavigationCaseType) notification
 					.getNewValue();
 			transformer.updatePageflowElements(transformer.getPageflow(),
@@ -137,9 +137,9 @@ public class FC2PFSynchronizer extends AdapterImpl {
 				}
 			}
 			if (DEBUG)
-				System.out.println("New navigation rule");
+				System.out.println("New navigation rule"); //$NON-NLS-1$
 		} else if (DEBUG)
-			System.out.println("Something is added");
+			System.out.println("Something is added"); //$NON-NLS-1$
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 				transformer.removeLink(caseType);
 			}
 			if (DEBUG)
-				System.out.println("Navigation case");
+				System.out.println("Navigation case"); //$NON-NLS-1$
 		} else if (notification.getFeature() == FacesConfigPackage.eINSTANCE
 				.getNavigationCaseType()) {
 			if (notification.getOldValue() instanceof NavigationRuleType) {
@@ -182,7 +182,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 				}
 			}
 			if (DEBUG)
-				System.out.println("navigation rule");
+				System.out.println("navigation rule"); //$NON-NLS-1$
 		} else if (notification.getFeature() == FacesConfigPackage.eINSTANCE
 				.getFacesConfigType_NavigationRule()) {
 			if (notification.getOldValue() instanceof NavigationRuleType) {
@@ -196,7 +196,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 			}
 		}
 		if (DEBUG)
-			System.out.println("Something is removed");
+			System.out.println("Something is removed"); //$NON-NLS-1$
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class FC2PFSynchronizer extends AdapterImpl {
 			toViewIdChanged(notification);
 		}
 		if (DEBUG)
-			System.out.println("Something is set");
+			System.out.println("Something is set"); //$NON-NLS-1$
 	}
 
 	private void fromViewIdChanged(Notification notification) {

@@ -35,7 +35,7 @@ import org.eclipse.ui.IWorkbenchWindow;
  * @author Xiao-guang Zhang
  */
 public class CreateNodeCommand extends Command implements IPreExecuteCommand {
-	private static final String UNNAMED_NODE = "unnamed";
+	private static final String UNNAMED_NODE = "unnamed"; //$NON-NLS-1$
 
 	/** new pageflow node */
 	private PageflowNode child;
@@ -160,8 +160,8 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 							EditorPlugin
 									.getAlerts()
 									.error(
-											"Pageflow.PageflowEditor.Alert.DNDResourceTitle",
-											"Pageflow.PageflowEditor.Alert.ExistingPage",
+											"Pageflow.PageflowEditor.Alert.DNDResourceTitle", //$NON-NLS-1$
+											"Pageflow.PageflowEditor.Alert.ExistingPage", //$NON-NLS-1$
 											jsfSelection);
 							return false;
 						}
@@ -236,8 +236,8 @@ public class CreateNodeCommand extends Command implements IPreExecuteCommand {
 					// Pageflow.PageflowEditor.Alert.ExistingPage = The web page
 					// {0} is already existed in current PageFlow.
 					EditorPlugin.getAlerts().error(
-							"Pageflow.PageflowEditor.Alert.DNDResourceTitle",
-							"Pageflow.PageflowEditor.Alert.ExistingPage",
+							"Pageflow.PageflowEditor.Alert.DNDResourceTitle", //$NON-NLS-1$
+							"Pageflow.PageflowEditor.Alert.ExistingPage", //$NON-NLS-1$
 							((PageflowPage) child).getPath());
 					return false;
 				}

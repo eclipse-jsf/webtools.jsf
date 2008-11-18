@@ -78,7 +78,7 @@ public final class SingletonContainerCreationCommand extends ContainerCreationCo
             if (!containerTag.equals(tagBeingCreated)) 
             {
             // if the container is different and doesn't exist, then add it.
-                domPosition = BodyHelper.insertBody(domPosition, containerTag.asQName(), "f");
+                domPosition = BodyHelper.insertBody(domPosition, containerTag.asQName(), "f"); //$NON-NLS-1$
             }
             // otherwise, fall through leaving domPosition unchanged
         }
@@ -89,6 +89,6 @@ public final class SingletonContainerCreationCommand extends ContainerCreationCo
     @Override
     protected boolean prepare()
     {
-        throw new UnsupportedOperationException("don't use");
+        throw new UnsupportedOperationException("don't use"); //$NON-NLS-1$
     }
 }

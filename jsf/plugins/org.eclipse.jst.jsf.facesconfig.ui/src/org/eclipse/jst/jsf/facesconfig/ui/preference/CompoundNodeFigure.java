@@ -34,6 +34,19 @@ import org.eclipse.swt.graphics.Image;
  */
 /*package*/ class CompoundNodeFigure extends BaseNodeFigure implements
 		FreeformFigure, IContainerFigure {
+	
+	private static final String RESTORE_HILITE_IMAGE_FILE = "restore_hilite.gif"; //$NON-NLS-1$
+
+	private static final String RESTORE_IMAGE_FILE = "restore.gif"; //$NON-NLS-1$
+
+	private static final String MAXIMIZE_HILITE_IMAGE_FILE = "maximize_hilite.gif"; //$NON-NLS-1$
+
+	private static final String MAXIMIZE_IMAGE_FILE = "maximize.gif"; //$NON-NLS-1$
+
+	private static final String MINIMIZE_HILITE_IMAGE_FILE = "minimize_hilite.gif"; //$NON-NLS-1$
+
+	private static final String MINIMIZE_IMAGE_FILE = "minimize.gif"; //$NON-NLS-1$
+
 	private final static int MINIMIZED = 1;
 
 	final static int RESTORED = 2;
@@ -50,27 +63,27 @@ import org.eclipse.swt.graphics.Image;
 
 	private WindowFigure windowFigure;
 
-	private static String DEFAULT_NAME = "CompoundNode";
+	private static String DEFAULT_NAME = "CompoundNode"; //$NON-NLS-1$
 
-	private static String DEFAULT_ICON = "editor/CompoundNode.gif";
+	private static String DEFAULT_ICON = "editor/CompoundNode.gif"; //$NON-NLS-1$
 
 	private static Image minimizeImage = EditorPlugin.getDefault().getImage(
-			"minimize.gif");
+			MINIMIZE_IMAGE_FILE);
 
 	private static Image minimizeHiliteImage = EditorPlugin.getDefault()
-			.getImage("minimize_hilite.gif");
+			.getImage(MINIMIZE_HILITE_IMAGE_FILE);
 
 	private static Image maximizeImage = EditorPlugin.getDefault().getImage(
-			"maximize.gif");
+			MAXIMIZE_IMAGE_FILE);
 
 	private static Image maximizeHiliteImage = EditorPlugin.getDefault()
-			.getImage("maximize_hilite.gif");
+			.getImage(MAXIMIZE_HILITE_IMAGE_FILE);
 
 	private static Image restoreImage = EditorPlugin.getDefault().getImage(
-			"restore.gif");
+			RESTORE_IMAGE_FILE);
 
 	private static Image restoreHiliteImage = EditorPlugin.getDefault()
-			.getImage("restore_hilite.gif");
+			.getImage(RESTORE_HILITE_IMAGE_FILE);
 
 	/**
 	 * Default constructor
@@ -187,11 +200,11 @@ import org.eclipse.swt.graphics.Image;
 
 			minButton.setVisible(true);
 			minButton.setState(false);
-			minButton.setToolTip(new Label("Minimize"));
+			minButton.setToolTip(new Label(PreferenceMessages.CompoundNodeFigure_MinimizeLabel));
 
 			maxButton.setVisible(true);
 			maxButton.setState(false);
-			maxButton.setToolTip(new Label("Maximize"));
+			maxButton.setToolTip(new Label(PreferenceMessages.CompoundNodeFigure_MaximizeLabel));
 
 			setAnchorsVisible(true);
 		} else if (state == MAXIMIZED) {
@@ -219,7 +232,7 @@ import org.eclipse.swt.graphics.Image;
 
 			maxButton.setVisible(true);
 			maxButton.setState(true);
-			maxButton.setToolTip(new Label("Restore"));
+			maxButton.setToolTip(new Label(PreferenceMessages.CompoundNodeFigure_RestoreLabel));
 		}
 		// CR400779: GEM minimizing a complex activity sometimes leaves junk on
 		// the screen

@@ -20,6 +20,7 @@ import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editpolicies.ContainerEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.GroupRequest;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.OrphanChildCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.Pageflow;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.model.PageflowNode;
@@ -45,14 +46,14 @@ public class PageflowContainerEditPolicy extends ContainerEditPolicy {
 	 */
 	public Command getOrphanChildrenCommand(GroupRequest request) {
 		List parts = request.getEditParts();
-		CompoundCommand result = new CompoundCommand("orphanchildcommand");
+		CompoundCommand result = new CompoundCommand("orphanchildcommand"); //$NON-NLS-1$
 		for (int i = 0; i < parts.size(); i++) {
 			OrphanChildCommand orphan = new OrphanChildCommand();
 			orphan
 					.setChild((PageflowNode) ((EditPart) parts.get(i))
 							.getModel());
 			orphan.setParent((Pageflow) getHost().getModel());
-			orphan.setLabel("label here");
+			orphan.setLabel(PageflowMessages.PageflowContainerEditPolicy_OrphanLabel);
 			result.add(orphan);
 		}
 		return result.unwrap();

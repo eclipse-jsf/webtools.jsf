@@ -51,7 +51,7 @@ public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 			if (mk != null) {//possible that model was not loaded 
 				traverseAndAdd(assistant, mk);
 			} else if (StandardModelFactory.DEBUG_MD_LOAD) {
-				JSFCommonPlugin.log(IStatus.ERROR,"Unable to load source model: "+assistant.getSourceModelProvider());
+				JSFCommonPlugin.log(IStatus.ERROR,"Unable to load source model: "+assistant.getSourceModelProvider()); //$NON-NLS-1$
 			}
 		}			
 	}

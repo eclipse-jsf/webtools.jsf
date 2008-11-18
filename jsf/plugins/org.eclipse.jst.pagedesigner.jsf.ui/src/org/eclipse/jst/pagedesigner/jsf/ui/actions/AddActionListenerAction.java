@@ -37,6 +37,6 @@ public class AddActionListenerAction extends JSFAddChildAction
      */
     public void run()
     {
-        DialogUtil.createSubElement(getShell(), getParentElement(), ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_ACTIONLISTENER, new String[]{"type"});
+        DialogUtil.createSubElement(getShell(), getParentElement(), ITLDConstants.URI_JSF_CORE, IJSFConstants.TAG_ACTIONLISTENER, new String[]{"type"}); //$NON-NLS-1$
     }
 }

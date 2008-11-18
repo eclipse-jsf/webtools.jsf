@@ -117,7 +117,7 @@ public class DOMUtil {
 					resultEle.setAttribute(a.getName(), a.getValue());
 				} catch (Exception ex) {
 					// ignore
-					_logger.info("Exception", ex);
+					_logger.info("Exception", ex); //$NON-NLS-1$
 				}
 			}
 			NodeList children = sourceEle.getChildNodes();
@@ -129,7 +129,7 @@ public class DOMUtil {
 						resultEle.appendChild(d);
 					} catch (Exception ex) {
 						// ignore
-						_logger.info("Exception", ex);
+						_logger.info("Exception", ex); //$NON-NLS-1$
 					}
 				}
 			}
@@ -184,7 +184,7 @@ public class DOMUtil {
 							.getSource());
 				} catch (Exception ex) {
 					// ignore
-					_logger.info("Exception", ex);
+					_logger.info("Exception", ex); //$NON-NLS-1$
 				}
 			}
 			return txt;

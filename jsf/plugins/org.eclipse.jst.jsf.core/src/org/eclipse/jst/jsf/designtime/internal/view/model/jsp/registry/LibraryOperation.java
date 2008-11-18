@@ -37,7 +37,7 @@ abstract class LibraryOperation implements Runnable
         catch (final Exception e)
         {
             _result = new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID,
-                    "Problem during run", e);
+                    "Problem during run", e); //$NON-NLS-1$
         }
     }
 

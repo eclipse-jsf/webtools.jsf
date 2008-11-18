@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IConverterTagElement;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -28,14 +29,14 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class ConverterDetailsForm extends AbstractXMLSectionsDetailsForm
 {
-    private final static String  CONVERTER_TYPE_SECTION_KEY = "converterSection";
+    private final static String  CONVERTER_TYPE_SECTION_KEY = "converterSection"; //$NON-NLS-1$
     private XMLTextSection       _converterTypeSection;
 
     @Override
     protected Map<? extends Object, XMLTextSection> createXMLTextSections(Composite parent)
     {
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
-        _converterTypeSection = new XMLTextSection(getToolkit(), parent, "Converter Type Information");
+        _converterTypeSection = new XMLTextSection(getToolkit(), parent, Messages.ConverterDetailsForm_ConverterInfo);
         sections.put(CONVERTER_TYPE_SECTION_KEY, _converterTypeSection);
         return sections;
     }
@@ -58,13 +59,18 @@ public class ConverterDetailsForm extends AbstractXMLSectionsDetailsForm
 
             if (typeInfo != null)
             {
-                final String formatText = "<form><p><b>Class:</b> %s</p>  <p><b>Converter Id:</b> %s</p></form>";
                 final String className = typeInfo.getClassName();
                 final String converterId = typeInfo.getConverterId();
 
-                _converterTypeSection.setText(String.format(formatText,
-                        className == null ? "" : className,
-                        converterId == null ? "" : converterId), true, false);
+                final String formatText = "<form><p><b>{0}</b> {1}</p>  <p><b>{2}</b> {3}</p></form>"; //$NON-NLS-1$
+                Object[] bindings = new String[4];
+                bindings[0] = Messages.ConverterDetailsForm_Class;
+                bindings[1] = className == null ? "" : className; //$NON-NLS-1$
+                bindings[2] = Messages.ConverterDetailsForm_Converterid;
+                bindings[3] = converterId == null ? "" : converterId; //$NON-NLS-1$
+                String text = NLS.bind(formatText, bindings);
+                _converterTypeSection.setText(text, true, false); 
+                
                 _converterTypeSection.refresh();
             }
         }

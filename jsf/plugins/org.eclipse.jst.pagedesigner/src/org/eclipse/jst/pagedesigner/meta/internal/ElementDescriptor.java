@@ -134,8 +134,8 @@ public class ElementDescriptor implements IElementDescriptor {
 	}
 	
 	public String toString(){
-		StringBuffer buf = new StringBuffer("ElementDescriptor: ");
-		buf.append(this.getTagName()).append("(").append(this.getNamespaceURI()).append(")");
+		StringBuffer buf = new StringBuffer("ElementDescriptor: "); //$NON-NLS-1$
+		buf.append(this.getTagName()).append("(").append(this.getNamespaceURI()).append(")"); //$NON-NLS-1$ //$NON-NLS-2$
 		return buf.toString();
 	}
 }

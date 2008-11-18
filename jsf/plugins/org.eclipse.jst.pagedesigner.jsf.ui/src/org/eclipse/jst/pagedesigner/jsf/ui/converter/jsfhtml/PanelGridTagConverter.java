@@ -67,7 +67,7 @@ public class PanelGridTagConverter extends AbstractTagConverter
         }
 
         // Render the "header" facet, if present, inside of "thead", "tr", and "th" elements, nested in that order.
-        Element facet = JSFDOMUtil.findFacet(panelGridEle, "header");
+        Element facet = JSFDOMUtil.findFacet(panelGridEle, "header"); //$NON-NLS-1$
         if (facet != null)
         {
             // we need render a thead here
@@ -92,7 +92,7 @@ public class PanelGridTagConverter extends AbstractTagConverter
         // Render the "footer" facet if present, using similar logic to the rendering of
         // the "header", but replacing "thead" with "tfoot", "th" with "td", and "headerClass"
         // with "footerClass".
-        facet = JSFDOMUtil.findFacet(panelGridEle, "footer");
+        facet = JSFDOMUtil.findFacet(panelGridEle, "footer"); //$NON-NLS-1$
         if (facet != null)
         {
             // we need render a thead here
@@ -118,7 +118,7 @@ public class PanelGridTagConverter extends AbstractTagConverter
         String rowclassesattr = panelGridEle.getAttribute(IJSFConstants.ATTR_ROWCLASSES);
         if (rowclassesattr != null)
         {
-            StringTokenizer tokenizer = new StringTokenizer(rowclassesattr, ", ");
+            StringTokenizer tokenizer = new StringTokenizer(rowclassesattr, ", "); //$NON-NLS-1$
             while (tokenizer.hasMoreTokens())
             {
                 rowclasses.add(tokenizer.nextToken());
@@ -129,7 +129,7 @@ public class PanelGridTagConverter extends AbstractTagConverter
         String columnclassattr = panelGridEle.getAttribute(IJSFConstants.ATTR_COLUMNCLASSES);
         if (columnclassattr != null)
         {
-            StringTokenizer tokenizer = new StringTokenizer(columnclassattr, ", ");
+            StringTokenizer tokenizer = new StringTokenizer(columnclassattr, ", "); //$NON-NLS-1$
             while (tokenizer.hasMoreTokens())
             {
                 columnclasses.add(tokenizer.nextToken());

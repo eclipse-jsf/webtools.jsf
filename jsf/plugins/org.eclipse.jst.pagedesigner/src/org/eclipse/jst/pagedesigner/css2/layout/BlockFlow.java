@@ -96,7 +96,7 @@ import org.eclipse.draw2d.PositionConstants;
 		if (!(value == PositionConstants.LEFT
 				|| value == PositionConstants.RIGHT || value == PositionConstants.CENTER)) {
 			throw new IllegalArgumentException(
-					"Horizontal Aligment must be one of: LEFT, CENTER, RIGHT");
+					"Horizontal Aligment must be one of: LEFT, CENTER, RIGHT"); //$NON-NLS-1$
 		}
 		this._aligment &= ~PositionConstants.LEFT_CENTER_RIGHT;
 		this._aligment |= value;

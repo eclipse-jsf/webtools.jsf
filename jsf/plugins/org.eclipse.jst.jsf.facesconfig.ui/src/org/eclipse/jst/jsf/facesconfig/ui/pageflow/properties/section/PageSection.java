@@ -63,8 +63,8 @@ public class PageSection extends AbstractEditPartSection {
 									EditorPlugin
 											.getAlerts()
 											.error(
-													"Pageflow.PageflowEditor.Alert.DNDResourceTitle",
-													"Pageflow.PageflowEditor.Alert.ExistingPage",
+													"Pageflow.PageflowEditor.Alert.DNDResourceTitle", //$NON-NLS-1$
+													"Pageflow.PageflowEditor.Alert.ExistingPage", //$NON-NLS-1$
 													jsfNew);
 								} else {
 									PageSection.this

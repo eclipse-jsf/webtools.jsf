@@ -73,10 +73,10 @@ public class ComponentInfo extends ViewObject implements Serializable,
         _data = (ComponentInfoData) super.getData();
         
         final Set propExclude = new HashSet();
-        propExclude.add("attributeNames");
-        propExclude.add("componentTypeInfo");
-        propExclude.add("valueChangeListeners");
-        propExclude.add("visitableChildren");
+        propExclude.add("attributeNames"); //$NON-NLS-1$
+        propExclude.add("componentTypeInfo"); //$NON-NLS-1$
+        propExclude.add("valueChangeListeners"); //$NON-NLS-1$
+        propExclude.add("visitableChildren"); //$NON-NLS-1$
 
         _beanPropertyManager = new BeanPropertyManager(this, propExclude);
     }

@@ -232,7 +232,9 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
 
     static class DataTableResizePolicy extends ElementResizableEditPolicy
     {
-        ElementEditPart _part;
+        private static final String COLUMN_SELECT_IMAGE_FILE = "column_select.gif"; //$NON-NLS-1$
+        
+		ElementEditPart _part;
         Cursor          _columnSelectCursor;
 
         /**
@@ -256,7 +258,7 @@ public class DataTableElementEdit extends DefaultJSFHTMLElementEdit
         {
             if (_columnSelectCursor == null)
             {
-                final Image cursorImage = JSFUIPlugin.getDefault().getImage("column_select.gif");
+                final Image cursorImage = JSFUIPlugin.getDefault().getImage(COLUMN_SELECT_IMAGE_FILE);
                 _columnSelectCursor = new Cursor(null, cursorImage.getImageData(), 2, 5);
             }
             

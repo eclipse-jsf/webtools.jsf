@@ -19,19 +19,19 @@ public class PositionMeta extends CSSPropertyMeta {
 	/**
 	 * static keyword
 	 */
-	public static final String STATIC = "static";
+	public static final String STATIC = "static"; //$NON-NLS-1$
 
 	/**
 	 * absolute keyword
 	 */
-	public static final String ABSOLUTE = "absolute";
+	public static final String ABSOLUTE = "absolute"; //$NON-NLS-1$
 
-	private static final String RELATIVE = "relative";
+	private static final String RELATIVE = "relative"; //$NON-NLS-1$
 
 	/**
 	 * fixed keyword
 	 */
-	public static final String FIXED = "fixed";
+	public static final String FIXED = "fixed"; //$NON-NLS-1$
 
 	private static final String[] _keywords = new String[] { STATIC, ABSOLUTE,
 			RELATIVE, FIXED };

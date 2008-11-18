@@ -26,7 +26,7 @@ public abstract class AbstractLinkCreator implements ILinkCreator,
     /**
      * the link identifier attribute name
      */
-    private static final String LINK_IDENTIFIER = "linkIdentifier";
+    private static final String LINK_IDENTIFIER = "linkIdentifier"; //$NON-NLS-1$
 
 	/*
 	 * (non-Javadoc)

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsPackageImpl.java,v 1.3 2007/04/16 19:53:19 itrimble Exp $
+ * $Id: ConstraintsPackageImpl.java,v 1.4 2008/11/18 22:23:52 gkessler Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -262,16 +262,16 @@ public class ConstraintsPackageImpl extends EPackageImpl implements ConstraintsP
         // Add supertypes to classes
 
         // Initialize classes and features; add operations and parameters
-        initEClass(tagIdEClass, TagId.class, "TagId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getTagId_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, TagId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getTagId_Name(), ecorePackage.getEString(), "name", null, 0, 1, TagId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(tagIdEClass, TagId.class, "TagId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getTagId_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, TagId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getTagId_Name(), ecorePackage.getEString(), "name", null, 0, 1, TagId.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(tagSetEClass, TagSet.class, "TagSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getTagSet_Tags(), this.getTagId(), null, "tags", null, 0, -1, TagSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(tagSetEClass, TagSet.class, "TagSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getTagSet_Tags(), this.getTagId(), null, "tags", null, 0, -1, TagSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-        initEClass(containsTagConstraintEClass, ContainsTagConstraint.class, "ContainsTagConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getContainsTagConstraint_SetGenerator(), theTraitTypesPackage.getSetGenerator(), null, "setGenerator", null, 0, 1, ContainsTagConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getContainsTagConstraint_SatisfiesSet(), this.getTagSet(), null, "satisfiesSet", null, 0, 1, ContainsTagConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEClass(containsTagConstraintEClass, ContainsTagConstraint.class, "ContainsTagConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getContainsTagConstraint_SetGenerator(), theTraitTypesPackage.getSetGenerator(), null, "setGenerator", null, 0, 1, ContainsTagConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getContainsTagConstraint_SatisfiesSet(), this.getTagSet(), null, "satisfiesSet", null, 0, 1, ContainsTagConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
         // Create resource
         createResource(eNS_URI);
@@ -288,41 +288,41 @@ public class ConstraintsPackageImpl extends EPackageImpl implements ConstraintsP
      * @generated
      */
     protected void createExtendedMetaDataAnnotations() {
-        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
         addAnnotation
           (getTagId_Uri(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "uri"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "uri" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagId_Name(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "name"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "name" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getTagSet_Tags(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "tagId"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "tagId" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getContainsTagConstraint_SetGenerator(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "set-generator"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "set-generator" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getContainsTagConstraint_SatisfiesSet(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "satisfies-set"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "satisfies-set" //$NON-NLS-1$ //$NON-NLS-2$
            });
     }
 

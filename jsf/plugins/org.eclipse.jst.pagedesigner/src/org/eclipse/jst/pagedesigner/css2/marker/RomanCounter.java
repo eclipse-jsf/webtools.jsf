@@ -54,68 +54,68 @@ import org.eclipse.jst.pagedesigner.css2.list.CSSHtmlListStyleData;
 		d = ((index / 1) % 10) * 1;
 
 		if (a == 1000)
-			roman.append("M");
+			roman.append("M"); //$NON-NLS-1$
 		else if (a == 2000)
-			roman.append("MM");
+			roman.append("MM"); //$NON-NLS-1$
 		else if (a == 3000)
-			roman.append("MMM");
+			roman.append("MMM"); //$NON-NLS-1$
 
 		if (b == 100)
-			roman.append("C");
+			roman.append("C"); //$NON-NLS-1$
 		else if (b == 200)
-			roman.append("CC");
+			roman.append("CC"); //$NON-NLS-1$
 		else if (b == 300)
-			roman.append("CCC");
+			roman.append("CCC"); //$NON-NLS-1$
 		else if (b == 400)
-			roman.append("CD");
+			roman.append("CD"); //$NON-NLS-1$
 		else if (b == 500)
-			roman.append("D");
+			roman.append("D"); //$NON-NLS-1$
 		else if (b == 600)
-			roman.append("DC");
+			roman.append("DC"); //$NON-NLS-1$
 		else if (b == 700)
-			roman.append("DCC");
+			roman.append("DCC"); //$NON-NLS-1$
 		else if (b == 800)
-			roman.append("DCCC");
+			roman.append("DCCC"); //$NON-NLS-1$
 		else if (b == 900)
-			roman.append("CM");
+			roman.append("CM"); //$NON-NLS-1$
 
 		if (c == 10)
-			roman.append("X");
+			roman.append("X"); //$NON-NLS-1$
 		else if (c == 20)
-			roman.append("XX");
+			roman.append("XX"); //$NON-NLS-1$
 		else if (c == 30)
-			roman.append("XXX");
+			roman.append("XXX"); //$NON-NLS-1$
 		else if (c == 40)
-			roman.append("XL");
+			roman.append("XL"); //$NON-NLS-1$
 		else if (c == 50)
-			roman.append("L");
+			roman.append("L"); //$NON-NLS-1$
 		else if (c == 60)
-			roman.append("LX");
+			roman.append("LX"); //$NON-NLS-1$
 		else if (c == 70)
-			roman.append("LXX");
+			roman.append("LXX"); //$NON-NLS-1$
 		else if (c == 80)
-			roman.append("LXXX");
+			roman.append("LXXX"); //$NON-NLS-1$
 		else if (c == 90)
-			roman.append("XC");
+			roman.append("XC"); //$NON-NLS-1$
 
 		if (d == 1)
-			roman.append("I");
+			roman.append("I"); //$NON-NLS-1$
 		else if (d == 2)
-			roman.append("II");
+			roman.append("II"); //$NON-NLS-1$
 		else if (d == 3)
-			roman.append("III");
+			roman.append("III"); //$NON-NLS-1$
 		else if (d == 4)
-			roman.append("IV");
+			roman.append("IV"); //$NON-NLS-1$
 		else if (d == 5)
-			roman.append("V");
+			roman.append("V"); //$NON-NLS-1$
 		else if (d == 6)
-			roman.append("VI");
+			roman.append("VI"); //$NON-NLS-1$
 		else if (d == 7)
-			roman.append("VII");
+			roman.append("VII"); //$NON-NLS-1$
 		else if (d == 8)
-			roman.append("VIII");
+			roman.append("VIII"); //$NON-NLS-1$
 		else if (d == 9)
-			roman.append("IX");
+			roman.append("IX"); //$NON-NLS-1$
 
 		return roman.toString();
 	}

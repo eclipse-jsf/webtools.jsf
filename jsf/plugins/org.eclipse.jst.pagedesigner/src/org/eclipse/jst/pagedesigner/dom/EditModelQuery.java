@@ -104,10 +104,10 @@ public final class EditModelQuery {
 				IHTMLConstants.TAG_BR);
 		EditModelQuery.CHAR_NODE_MAP.put(new Character(SWT.LF),
 				IHTMLConstants.TAG_BR);
-		EditModelQuery.SPECIAL_EMPTY_CHARS.add(" ");
-		EditModelQuery.SPECIAL_EMPTY_CHARS.add("\t");
-		EditModelQuery.SPECIAL_EMPTY_CHARS.add("\r");
-		EditModelQuery.SPECIAL_EMPTY_CHARS.add("\n");
+		EditModelQuery.SPECIAL_EMPTY_CHARS.add(" "); //$NON-NLS-1$
+		EditModelQuery.SPECIAL_EMPTY_CHARS.add("\t"); //$NON-NLS-1$
+		EditModelQuery.SPECIAL_EMPTY_CHARS.add("\r"); //$NON-NLS-1$
+		EditModelQuery.SPECIAL_EMPTY_CHARS.add("\n"); //$NON-NLS-1$
 		EditModelQuery.HTML_CONSTRAINED_CONTAINERS.add(IHTMLConstants.TAG_TD);
 		EditModelQuery.HTML_CONSTRAINED_CONTAINERS.add(IHTMLConstants.TAG_TR);
 		EditModelQuery.HTML_CONSTRAINED_CONTAINERS
@@ -940,7 +940,7 @@ public final class EditModelQuery {
 			node = node.getParentNode();
             if (oldNode == node)
             {
-                throw new IllegalStateException("Infinite loop discovered in DOM tree");
+                throw new IllegalStateException("Infinite loop discovered in DOM tree"); //$NON-NLS-1$
             }
 		}
 		return false;

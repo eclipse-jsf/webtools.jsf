@@ -63,7 +63,7 @@ public class ColumnTagConverter extends AbstractTagConverter
             List columnClasses = new ArrayList();
             if (columnClassesAttr != null)
             {
-                StringTokenizer tokenizer = new StringTokenizer(columnClassesAttr, ", ");
+                StringTokenizer tokenizer = new StringTokenizer(columnClassesAttr, ", "); //$NON-NLS-1$
                 while (tokenizer.hasMoreTokens())
                 {
                     columnClasses.add(tokenizer.nextToken());
@@ -95,7 +95,7 @@ public class ColumnTagConverter extends AbstractTagConverter
         }
         else
         {
-            Node child = createText(" ");
+            Node child = createText(" "); //$NON-NLS-1$
             resultEle.appendChild(child);
         }
         return resultEle;

@@ -378,7 +378,7 @@ public class TableUtil {
 		if (_fakeCell != null) {
 			return _fakeCell;
 		}
-		_fakeCell = this._table.getOwnerDocument().createElement("fake");
+		_fakeCell = this._table.getOwnerDocument().createElement("fake"); //$NON-NLS-1$
 		return _fakeCell;
 	}
 
@@ -497,7 +497,7 @@ public class TableUtil {
 					List list = lists[j];
 					for (int column = 0; column < list.size(); column++) {
 						cell = (Element) list.get(column);
-						if (cell.getTagName().equalsIgnoreCase("fake")) {
+						if (cell.getTagName().equalsIgnoreCase("fake")) { //$NON-NLS-1$
 							continue;
 						}
 						int rowSpan = DOMUtil.getIntAttributeIgnoreCase(cell,

@@ -124,7 +124,7 @@ public class BlockNodeFinder {
 
 	private String getTagName() {
 		String name = _position.getContainerNode().getNodeName();
-		name = name == null ? "" : name.toLowerCase();
+		name = name == null ? "" : name.toLowerCase(); //$NON-NLS-1$
 		return name;
 	}
 }

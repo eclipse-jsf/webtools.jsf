@@ -109,7 +109,7 @@ public class IdentifierOrderedIteratorPolicy<ITERATORTYPE> implements
                 return next;
             }
             
-            throw new NoSuchElementException("No more elements");
+            throw new NoSuchElementException("No more elements"); //$NON-NLS-1$
         }
 
         public void remove()

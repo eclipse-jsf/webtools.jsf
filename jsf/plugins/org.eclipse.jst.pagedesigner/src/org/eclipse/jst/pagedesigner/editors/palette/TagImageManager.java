@@ -39,6 +39,9 @@ import org.eclipse.swt.graphics.Image;
  * 
  */
 public class TagImageManager {
+	
+	private static final String PALETTE_DEFAULT_IMAGE_FILE = "palette/GENERIC/large/PD_Palette_Default.gif"; //$NON-NLS-1$
+
 	private static TagImageManager INSTANCE = null;
 	
 	private final static ImageDescriptor DEFAULT_SMALL_ICON = JSFUICommonPlugin
@@ -47,11 +50,11 @@ public class TagImageManager {
 
 	private final static ImageDescriptor DEFAULT_LARGE_ICON = PDPlugin
 		.getDefault().getImageDescriptor(
-				"palette/GENERIC/large/PD_Palette_Default.gif");
+				PALETTE_DEFAULT_IMAGE_FILE);
 
-	private static final String TRAIT_ICON_SMALL = "small-icon";
+	private static final String TRAIT_ICON_SMALL = "small-icon"; //$NON-NLS-1$
 
-	private static final String TRAIT_ICON_LARGE = "large-icon";
+	private static final String TRAIT_ICON_LARGE = "large-icon"; //$NON-NLS-1$
 	
 	/**
 	 * @return singleton instance 
@@ -155,7 +158,7 @@ public class TagImageManager {
 		ImageDescriptor icon = null;
 		
 		//use palette infos if available
-		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "paletteInfos");
+		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "paletteInfos"); //$NON-NLS-1$
 		if (trait != null){
 			PaletteInfos tags = (PaletteInfos)trait.getValue();
 			for (Iterator it=tags.getInfos().iterator();it.hasNext();){

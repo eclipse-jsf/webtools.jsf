@@ -448,7 +448,7 @@ public class HTMLSpecialCharHelper {
 		}
 		if (entityRef.length() >= 2 && entityRef.charAt(1) == '#') {
 			String s = entityRef.substring(2);
-			if (s.endsWith(";")) {
+			if (s.endsWith(";")) { //$NON-NLS-1$
 				s = s.substring(0, s.length() - 1);
 			}
 			try {

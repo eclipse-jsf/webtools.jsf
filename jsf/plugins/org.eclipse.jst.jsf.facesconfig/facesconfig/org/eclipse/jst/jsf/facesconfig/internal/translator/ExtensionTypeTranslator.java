@@ -34,7 +34,7 @@ public abstract class ExtensionTypeTranslator extends Translator
         FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
         return new Translator[] {
               new Translator("id", facesPackage.getExtensionType_Id(), DOM_ATTRIBUTE), //$NON-NLS-1$
-              new DynamicElementTranslator("*", facesPackage.getExtensionType_ChildNodes())
+              new DynamicElementTranslator("*", facesPackage.getExtensionType_ChildNodes()) //$NON-NLS-1$
         };
     }
 }

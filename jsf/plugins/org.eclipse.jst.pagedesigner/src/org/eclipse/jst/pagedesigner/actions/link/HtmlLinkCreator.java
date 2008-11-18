@@ -41,7 +41,7 @@ public class HtmlLinkCreator extends AbstractLinkCreator {
 					: (parentNode.getOwnerDocument());
 
 			Element htmlLink = doc.createElement(IHTMLConstants.TAG_A);
-			htmlLink.setAttribute(ICSSPropertyID.ATTR_HREF, "");
+			htmlLink.setAttribute(ICSSPropertyID.ATTR_HREF, ""); //$NON-NLS-1$
 			Text text = doc.createTextNode(middleNode.getNodeValue());
 			htmlLink.appendChild(text);
 			parentNode.replaceChild(htmlLink, middleNode);
@@ -59,9 +59,9 @@ public class HtmlLinkCreator extends AbstractLinkCreator {
 
 			String linkExp = displayData.substring(offsets[0], offsets[1]);
 			StringBuffer sb = new StringBuffer();
-			sb.append("<a href=\"\">");
+			sb.append("<a href=\"\">"); //$NON-NLS-1$
 			sb.append(linkExp);
-			sb.append("</a>");
+			sb.append("</a>"); //$NON-NLS-1$
 			return sb.toString();
 		}
 		return null;

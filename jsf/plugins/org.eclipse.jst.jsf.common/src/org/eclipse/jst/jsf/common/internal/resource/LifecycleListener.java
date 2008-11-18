@@ -220,7 +220,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         if (ENABLE_TEST_TRACKING && _testTracker != null)
         {
             _testTracker.fireEvent(Event.START_TRACKING, seqId,
-                    "trackMethod_resourceChanged");
+                    "trackMethod_resourceChanged"); //$NON-NLS-1$
         }
 
         assert (!isDisposed());
@@ -311,7 +311,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         if (ENABLE_TEST_TRACKING && _testTracker != null)
         {
             _testTracker.fireEvent(Event.STOP_TRACKING, seqId,
-                    "trackMethod_resourceChanged");
+                    "trackMethod_resourceChanged"); //$NON-NLS-1$
         }
     }
 

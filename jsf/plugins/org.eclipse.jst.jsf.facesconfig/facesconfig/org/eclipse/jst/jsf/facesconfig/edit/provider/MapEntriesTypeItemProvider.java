@@ -52,7 +52,7 @@ public class MapEntriesTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -94,8 +94,8 @@ public class MapEntriesTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntriesType_keyClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntriesType_keyClass_feature", "_UI_MapEntriesType_type"),
+                 getString("_UI_MapEntriesType_keyClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntriesType_keyClass_feature", "_UI_MapEntriesType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRIES_TYPE__KEY_CLASS,
                  true,
                  false,
@@ -117,8 +117,8 @@ public class MapEntriesTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntriesType_valueClass_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntriesType_valueClass_feature", "_UI_MapEntriesType_type"),
+                 getString("_UI_MapEntriesType_valueClass_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntriesType_valueClass_feature", "_UI_MapEntriesType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRIES_TYPE__VALUE_CLASS,
                  true,
                  false,
@@ -140,8 +140,8 @@ public class MapEntriesTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_MapEntriesType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntriesType_id_feature", "_UI_MapEntriesType_type"),
+                 getString("_UI_MapEntriesType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_MapEntriesType_id_feature", "_UI_MapEntriesType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.MAP_ENTRIES_TYPE__ID,
                  true,
                  false,
@@ -174,7 +174,7 @@ public class MapEntriesTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/MapEntriesType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/MapEntriesType")); //$NON-NLS-1$
     }
 
     /**
@@ -186,8 +186,8 @@ public class MapEntriesTypeItemProvider
 	public String getText(Object object) {
         String label = ((MapEntriesType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_MapEntriesType_type") :
-            getString("_UI_MapEntriesType_type") + " " + label;
+            getString("_UI_MapEntriesType_type") : //$NON-NLS-1$
+            getString("_UI_MapEntriesType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

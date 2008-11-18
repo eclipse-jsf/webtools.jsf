@@ -22,6 +22,19 @@ import org.eclipse.jst.pagedesigner.actions.range.HTagsInsertGroupAction;
  * @author mengbo
  */
 public class DesignActionBarFactory {
+	
+	private static final String TOOLBAR_PARAGRAPH_IMAGE_FILE = "PD_Toolbar_paragraph.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_LARGEFONT_DISABLED_IMAGE_FILE = "PD_Toolbar_largefont_disabled.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_LARGEFONT_IMAGE_FILE = "PD_Toolbar_largefont.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_SMALLFONT_DISABLED_IMAGE_FILE = "PD_Toolbar_smallfont_disabled.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_SMALLFONT_IMAGE_FILE = "PD_Toolbar_smallfont.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_BOLD_DISABLED_IMAGE_FILE = "PD_Toolbar_bold_disabled.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_BOLD_IMAGE_FILE = "PD_Toolbar_bold.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_ITALIC_DISABLED_IMAGE_FILE = "PD_Toolbar_italic_disabled.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_ITALIC_IMAGE_FILE = "PD_Toolbar_italic.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_UNDERLINE_DISABLED_IMAGE_FILE = "PD_Toolbar_underline_disabled.gif"; //$NON-NLS-1$
+	private static final String TOOLBAR_UNDERLINE_IMAGE_FILE = "PD_Toolbar_underline.gif"; //$NON-NLS-1$
+	
 	private static DesignActionBarFactory _instance;
 
 	private DesignActionBarFactory() {
@@ -47,61 +60,61 @@ public class DesignActionBarFactory {
 
 		if (name.equals(IHTMLConstants.TAG_U)) {
 			action = new ChangeStyleAction(ActionsMessages
-					.getString("DesignActionBarFactory.Underline.Text"), name,
+					.getString("DesignActionBarFactory.Underline.Text"), name, //$NON-NLS-1$
 					PDPlugin.getDefault().getImageDescriptor(
-							"PD_Toolbar_underline.gif"), PDPlugin.getDefault()
+							TOOLBAR_UNDERLINE_IMAGE_FILE), PDPlugin.getDefault()
 							.getImageDescriptor(
-									"PD_Toolbar_underline_disabled.gif"),
+									TOOLBAR_UNDERLINE_DISABLED_IMAGE_FILE),
 					IAction.AS_CHECK_BOX);
 			action.setToolTipText(ActionsMessages
-					.getString("DesignActionBarFactory.Underline"));
+					.getString("DesignActionBarFactory.Underline")); //$NON-NLS-1$
 		} else if (name.equals(IHTMLConstants.TAG_I)) {
 			action = new ChangeStyleAction(ActionsMessages
-					.getString("DesignActionBarFactory.Italic.Text"), name,
+					.getString("DesignActionBarFactory.Italic.Text"), name, //$NON-NLS-1$
 					PDPlugin.getDefault().getImageDescriptor(
-							"PD_Toolbar_italic.gif"), PDPlugin.getDefault()
+							TOOLBAR_ITALIC_IMAGE_FILE), PDPlugin.getDefault()
 							.getImageDescriptor(
-									"PD_Toolbar_italic_disabled.gif"),
+									TOOLBAR_ITALIC_DISABLED_IMAGE_FILE),
 					IAction.AS_CHECK_BOX);
 			action.setToolTipText(ActionsMessages
-					.getString("DesignActionBarFactory.Italic"));
+					.getString("DesignActionBarFactory.Italic")); //$NON-NLS-1$
 		} else if (name.equals(IHTMLConstants.TAG_B)) {
 			action = new ChangeStyleAction(ActionsMessages
-					.getString("DesignActionBarFactory.Bold.Text"), name,
+					.getString("DesignActionBarFactory.Bold.Text"), name, //$NON-NLS-1$
 					PDPlugin.getDefault().getImageDescriptor(
-							"PD_Toolbar_bold.gif"),
+							TOOLBAR_BOLD_IMAGE_FILE),
 					PDPlugin.getDefault().getImageDescriptor(
-							"PD_Toolbar_bold_disabled.gif"),
+							TOOLBAR_BOLD_DISABLED_IMAGE_FILE),
 					IAction.AS_CHECK_BOX);
 			action.setToolTipText(ActionsMessages
-					.getString("DesignActionBarFactory.Bold"));
+					.getString("DesignActionBarFactory.Bold")); //$NON-NLS-1$
 		} else if (name.equals(IHTMLConstants.TAG_SMALL)) {
 			action = new ChangeStyleAction(ActionsMessages
-					.getString("DesignActionBarFactory.Small.Text"), name,
+					.getString("DesignActionBarFactory.Small.Text"), name, //$NON-NLS-1$
 					PDPlugin.getDefault().getImageDescriptor(
-							"PD_Toolbar_smallfont.gif"), PDPlugin.getDefault()
+							TOOLBAR_SMALLFONT_IMAGE_FILE), PDPlugin.getDefault()
 							.getImageDescriptor(
-									"PD_Toolbar_smallfont_disabled.gif"),
+									TOOLBAR_SMALLFONT_DISABLED_IMAGE_FILE),
 					IAction.AS_CHECK_BOX);
 			action.setToolTipText(ActionsMessages
-					.getString("DesignActionBarFactory.Small"));
+					.getString("DesignActionBarFactory.Small")); //$NON-NLS-1$
 		} else if (name.equals(IHTMLConstants.TAG_BIG)) {
 			action = new ChangeStyleAction(ActionsMessages
-					.getString("DesignActionBarFactory.Big.Text"), name,
+					.getString("DesignActionBarFactory.Big.Text"), name, //$NON-NLS-1$
 					PDPlugin.getDefault().getImageDescriptor(
-							"PD_Toolbar_largefont.gif"), PDPlugin.getDefault()
+							TOOLBAR_LARGEFONT_IMAGE_FILE), PDPlugin.getDefault()
 							.getImageDescriptor(
-									"PD_Toolbar_largefont_disabled.gif"),
+									TOOLBAR_LARGEFONT_DISABLED_IMAGE_FILE),
 					IAction.AS_CHECK_BOX);
 			action.setToolTipText(ActionsMessages
-					.getString("DesignActionBarFactory.Big"));
+					.getString("DesignActionBarFactory.Big")); //$NON-NLS-1$
 		} else if (name
 				.equalsIgnoreCase(DesignPageActionContributor.PARAGRAPH_ACTION_ID)) {
 			action = new HTagsInsertGroupAction(PDPlugin.getDefault()
-					.getImageDescriptor("PD_Toolbar_paragraph.gif"),
+					.getImageDescriptor(TOOLBAR_PARAGRAPH_IMAGE_FILE),
 					IAction.AS_DROP_DOWN_MENU);
 			action.setToolTipText(ActionsMessages
-					.getString("DesignActionBarFactory.Paragraph"));
+					.getString("DesignActionBarFactory.Paragraph")); //$NON-NLS-1$
 		}
 
 		return action;

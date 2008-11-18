@@ -118,7 +118,7 @@ public final class CSSTempUtil {
                     // workaround that avoids having the call to getSheet throw an NPE
                     IStyleSheetAdapter sheetAdapter = (IStyleSheetAdapter) adapter;
                     if (sheetAdapter.getElement() != null
-                            && "text/css".equals(sheetAdapter.getElement().getAttribute(HTML40Namespace.ATTR_NAME_TYPE)))
+                            && "text/css".equals(sheetAdapter.getElement().getAttribute(HTML40Namespace.ATTR_NAME_TYPE))) //$NON-NLS-1$
 
                     {
     					StyleSheet sheet = ((IStyleSheetAdapter) adapter)

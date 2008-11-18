@@ -22,13 +22,13 @@ import org.w3c.dom.Text;
  * @version 1.5
  */
 public class TableUtil {
-	static final String TOP = "top";
+	static final String TOP = "top"; //$NON-NLS-1$
 
-	static final String BOTTOM = "bottom";
+	static final String BOTTOM = "bottom"; //$NON-NLS-1$
 
-	static final String LEFT = "left";
+	static final String LEFT = "left"; //$NON-NLS-1$
 
-	static final String RIGHT = "right";
+	static final String RIGHT = "right"; //$NON-NLS-1$
 
 	/**
 	 * @param edge
@@ -36,20 +36,20 @@ public class TableUtil {
 	 * @return true if there is a match
 	 */
 	public static boolean matchFrame(String edge, String frame) {
-		if ("above".equalsIgnoreCase(frame)) {
+		if ("above".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return TOP.equalsIgnoreCase(edge);
-		} else if ("below".equalsIgnoreCase(frame)) {
+		} else if ("below".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return BOTTOM.equalsIgnoreCase(edge);
-		} else if ("hsides".equalsIgnoreCase(frame)) {
+		} else if ("hsides".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return TOP.equalsIgnoreCase(edge) || BOTTOM.equalsIgnoreCase(edge);
-		} else if ("vsides".equalsIgnoreCase(frame)) {
+		} else if ("vsides".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return LEFT.equalsIgnoreCase(edge) || RIGHT.equalsIgnoreCase(edge);
-		} else if ("lhs".equalsIgnoreCase(frame)) {
+		} else if ("lhs".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return LEFT.equalsIgnoreCase(edge);
-		} else if ("rhs".equalsIgnoreCase(frame)) {
+		} else if ("rhs".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return RIGHT.equalsIgnoreCase(edge);
-		} else if ("box".equalsIgnoreCase(frame)
-				|| "border".equalsIgnoreCase(frame)) {
+		} else if ("box".equalsIgnoreCase(frame) //$NON-NLS-1$
+				|| "border".equalsIgnoreCase(frame)) { //$NON-NLS-1$
 			return true;
 		} else {
 			return false;
@@ -64,11 +64,11 @@ public class TableUtil {
 	public static boolean matchRules(String edge, String rules) {
 		// TODO: "groups" not supported.
 
-		if ("rows".equalsIgnoreCase(rules)) {
+		if ("rows".equalsIgnoreCase(rules)) { //$NON-NLS-1$
 			return TOP.equalsIgnoreCase(edge) || BOTTOM.equalsIgnoreCase(edge);
-		} else if ("cols".equalsIgnoreCase(rules)) {
+		} else if ("cols".equalsIgnoreCase(rules)) { //$NON-NLS-1$
 			return LEFT.equalsIgnoreCase(edge) || RIGHT.equalsIgnoreCase(edge);
-		} else if ("all".equalsIgnoreCase(rules)) {
+		} else if ("all".equalsIgnoreCase(rules)) { //$NON-NLS-1$
 			return true;
 		} else {
 			return false;

@@ -46,8 +46,8 @@ public class JSFCommandLinkCreator extends AbstractLinkCreator
             Document doc = (parentNode instanceof Document) ? (Document) parentNode : (parentNode.getOwnerDocument());
 
             IDOMModel model = ((IDOMNode) parentNode).getModel();
-            String prefix = JSPUtil.getOrCreatePrefix(model, ITLDConstants.URI_JSF_HTML, "h");
-            JSPUtil.getOrCreatePrefix(model, ITLDConstants.URI_JSF_CORE, "f");
+            String prefix = JSPUtil.getOrCreatePrefix(model, ITLDConstants.URI_JSF_HTML, "h"); //$NON-NLS-1$
+            JSPUtil.getOrCreatePrefix(model, ITLDConstants.URI_JSF_CORE, "f"); //$NON-NLS-1$
 
             Element commandLink = doc.createElement(IJSFConstants.TAG_COMMANDLINK);
             commandLink.setPrefix(prefix);
@@ -75,7 +75,7 @@ public class JSFCommandLinkCreator extends AbstractLinkCreator
         EditPart part = startPosition.getContainerPart();
         IDOMNode node = (IDOMNode) part.getModel();
         IDOMModel model = node.getModel();
-        return model.getDocument().getElementsByTagNameNS(ITLDConstants.URI_JSF_HTML, "view") != null;
+        return model.getDocument().getElementsByTagNameNS(ITLDConstants.URI_JSF_HTML, "view") != null; //$NON-NLS-1$
 
     }
 
@@ -90,10 +90,10 @@ public class JSFCommandLinkCreator extends AbstractLinkCreator
             String linkExp = displayData.substring(offsets[0], offsets[1]);
 
             StringBuffer sb = new StringBuffer();
-            sb.append("<h:commandLink>\n<h:outputText value=\"");
+            sb.append("<h:commandLink>\n<h:outputText value=\""); //$NON-NLS-1$
             sb.append(linkExp);
-            sb.append("\">");
-            sb.append("</h:outputText>\n</h:commandLink>");
+            sb.append("\">"); //$NON-NLS-1$
+            sb.append("</h:outputText>\n</h:commandLink>"); //$NON-NLS-1$
             return sb.toString();
         }
         return null;

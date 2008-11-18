@@ -229,7 +229,7 @@ public class ElementEditPart extends SubNodeEditPart {
 			appendString = ((IDOMElement) result)
 					.getAttribute(IJSPCoreConstants.ATTR_URI);
 			if (appendString == null) {
-				appendString = "";
+				appendString = ""; //$NON-NLS-1$
 			}
 		}
 		Image image = _tagConverter.getVisualImage();
@@ -427,7 +427,7 @@ public class ElementEditPart extends SubNodeEditPart {
         	// XXX: default implementation, if this element support "style"
         	// attribute,
         	// then we think it support resize.
-        	return decl.getAttributes().getNamedItem("style") != null;
+        	return decl.getAttributes().getNamedItem("style") != null; //$NON-NLS-1$
         }
         return true;
 	}
@@ -502,7 +502,7 @@ public class ElementEditPart extends SubNodeEditPart {
 				}
 			}
 		} else {
-		    _log.error("getChildVisualPosition() return null");
+		    _log.error("getChildVisualPosition() return null"); //$NON-NLS-1$
 		}
 
 		if (!figureAdded) {

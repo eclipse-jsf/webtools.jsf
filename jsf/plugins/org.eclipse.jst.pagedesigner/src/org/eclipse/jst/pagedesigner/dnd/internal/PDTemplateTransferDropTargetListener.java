@@ -102,7 +102,7 @@ public class PDTemplateTransferDropTargetListener extends
             }
             else
             {
-                PDPlugin.getLogger(this.getClass()).error("Unexpected transfer object on palette drag:"+transferObj, new Throwable("Artificial throwable for stack tracing"));
+                PDPlugin.getLogger(this.getClass()).error("Unexpected transfer object on palette drag:"+transferObj, new Throwable("Artificial throwable for stack tracing")); //$NON-NLS-1$ //$NON-NLS-2$
             }
 		}
 	}

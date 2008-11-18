@@ -109,15 +109,15 @@ public class CSSUtil {
 		StringBuffer sb = new StringBuffer();
 		Object object1 = style.getColor();
 		if (object1 instanceof Color) {
-			sb.append("color:");
+			sb.append("color:"); //$NON-NLS-1$
 
-			sb.append("#").append(
+			sb.append("#").append( //$NON-NLS-1$
 					Integer.toHexString(((Color) object1).getRed()));
-			sb.append("#").append(
+			sb.append("#").append( //$NON-NLS-1$
 					Integer.toHexString(((Color) object1).getGreen()));
-			sb.append("#").append(
+			sb.append("#").append( //$NON-NLS-1$
 					Integer.toHexString(((Color) object1).getBlue()));
-			sb.append(";");
+			sb.append(";"); //$NON-NLS-1$
 		}
 		Object object2 = style.getCSSFont();
 		if (object2 instanceof CSSFont) {

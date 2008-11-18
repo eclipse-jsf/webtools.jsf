@@ -47,14 +47,14 @@ public class TagConverterToInlineBlock extends AbstractTagConverter {
 	protected Element doConvertRefresh() {
 		Element result = null;
 		if (displayMode == IConverterFactory.MODE_PREVIEW) {
-			result = createElement("span");
+			result = createElement("span"); //$NON-NLS-1$
 			copyChildren(getHostElement(), result);
 		} else {
-			result = createElement("div");
+			result = createElement("div"); //$NON-NLS-1$
 			result
 					.setAttribute(
-							"style",
-							"display:inline-block; border-width:0; margin:0; min-width:1.2em;min-height:1.2em;");
+							"style", //$NON-NLS-1$
+							"display:inline-block; border-width:0; margin:0; min-width:1.2em;min-height:1.2em;"); //$NON-NLS-1$
 			copyChildren(getHostElement(), result);
 		}
 		return result;

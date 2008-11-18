@@ -46,7 +46,7 @@ public class JSFCorePlugin extends WTPPlugin
     /**
      * The plugin id
      */
-    public static final String             PLUGIN_ID = "org.eclipse.jst.jsf.core"; // org.eclipse.jst.jsf.core.internal.JSFCorePlugin";
+    public static final String             PLUGIN_ID = "org.eclipse.jst.jsf.core"; // org.eclipse.jst.jsf.core.internal.JSFCorePlugin"; //$NON-NLS-1$
     // //$NON-NLS-1$
 
     // The shared instance.
@@ -83,7 +83,7 @@ public class JSFCorePlugin extends WTPPlugin
         }
         else
         {
-            log("Error adding tag resolver delegate", new Throwable());
+            log("Error adding tag resolver delegate", new Throwable()); //$NON-NLS-1$
         }
     }
 

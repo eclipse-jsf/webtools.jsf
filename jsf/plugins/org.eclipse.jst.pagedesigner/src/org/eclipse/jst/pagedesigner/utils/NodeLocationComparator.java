@@ -30,9 +30,9 @@ public class NodeLocationComparator implements Comparator {
 
 	private static NodeLocationComparator _instance = new NodeLocationComparator();
 	static {
-		orders.put("taglib", Integer.valueOf(0));
-		orders.put("directive.taglib", Integer.valueOf(0));
-		orders.put("head", Integer.valueOf(1));
+		orders.put("taglib", Integer.valueOf(0)); //$NON-NLS-1$
+		orders.put("directive.taglib", Integer.valueOf(0)); //$NON-NLS-1$
+		orders.put("head", Integer.valueOf(1)); //$NON-NLS-1$
 	}
 
 	private NodeLocationComparator() {

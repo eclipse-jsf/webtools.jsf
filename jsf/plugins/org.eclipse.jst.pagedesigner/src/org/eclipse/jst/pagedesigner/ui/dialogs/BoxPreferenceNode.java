@@ -80,7 +80,7 @@ public class BoxPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "Box";
+		return "Box"; //$NON-NLS-1$
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class BoxPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("BoxPreferenceNode.LabelText");
+		return DialogsMessages.getString("BoxPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

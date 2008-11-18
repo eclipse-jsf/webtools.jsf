@@ -60,17 +60,17 @@ public class RegistryReader {
 			for (int j = 0; j < dropHandlers.length; j++) {
 				if (dropHandlers[j].getName().equals(
 						IJMTConstants.LOCAL_DROP_HANDLER)) {
-					dropHandlers[j].getAttribute("class");
+					dropHandlers[j].getAttribute("class"); //$NON-NLS-1$
 					Object obj;
 					try {
 						obj = dropHandlers[j]
-								.createExecutableExtension("class");
+								.createExecutableExtension("class"); //$NON-NLS-1$
 
 						if (obj instanceof ILocalDropHandler) {
 							result.add(obj);
 						}
 					} catch (CoreException e) {
-						_log.info("CoreException", e);
+						_log.info("CoreException", e); //$NON-NLS-1$
 					}
 				}
 			}

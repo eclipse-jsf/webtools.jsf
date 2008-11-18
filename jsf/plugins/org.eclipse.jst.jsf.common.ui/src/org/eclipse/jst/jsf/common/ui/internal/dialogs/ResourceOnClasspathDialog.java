@@ -219,7 +219,7 @@ public class ResourceOnClasspathDialog extends TreeViewerSelectionDialog {
 		IPath path = PathUtil.getPathOnClasspath(_javaProject, objects[0]);
 		String result = null;
 		if (path.segmentCount() == 0) {
-			return new Object[] { "" };
+			return new Object[] { "" }; //$NON-NLS-1$
 		}
 		path = path.removeFileExtension();
 		result = path.toOSString();

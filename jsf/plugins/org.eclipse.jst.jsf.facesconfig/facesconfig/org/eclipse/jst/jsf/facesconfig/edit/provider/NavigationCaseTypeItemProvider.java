@@ -51,7 +51,7 @@ public class NavigationCaseTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -94,8 +94,8 @@ public class NavigationCaseTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_NavigationCaseType_fromAction_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_fromAction_feature", "_UI_NavigationCaseType_type"),
+                 getString("_UI_NavigationCaseType_fromAction_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_fromAction_feature", "_UI_NavigationCaseType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.NAVIGATION_CASE_TYPE__FROM_ACTION,
                  true,
                  false,
@@ -117,8 +117,8 @@ public class NavigationCaseTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_NavigationCaseType_fromOutcome_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_fromOutcome_feature", "_UI_NavigationCaseType_type"),
+                 getString("_UI_NavigationCaseType_fromOutcome_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_fromOutcome_feature", "_UI_NavigationCaseType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.NAVIGATION_CASE_TYPE__FROM_OUTCOME,
                  true,
                  false,
@@ -140,8 +140,8 @@ public class NavigationCaseTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_NavigationCaseType_toViewId_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_toViewId_feature", "_UI_NavigationCaseType_type"),
+                 getString("_UI_NavigationCaseType_toViewId_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_toViewId_feature", "_UI_NavigationCaseType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.NAVIGATION_CASE_TYPE__TO_VIEW_ID,
                  true,
                  false,
@@ -163,8 +163,8 @@ public class NavigationCaseTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_NavigationCaseType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_id_feature", "_UI_NavigationCaseType_type"),
+                 getString("_UI_NavigationCaseType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_NavigationCaseType_id_feature", "_UI_NavigationCaseType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.NAVIGATION_CASE_TYPE__ID,
                  true,
                  false,
@@ -212,7 +212,7 @@ public class NavigationCaseTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/NavigationCaseType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/NavigationCaseType")); //$NON-NLS-1$
     }
 
     /**
@@ -224,8 +224,8 @@ public class NavigationCaseTypeItemProvider
 	public String getText(Object object) {
         String label = ((NavigationCaseType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_NavigationCaseType_type") :
-            getString("_UI_NavigationCaseType_type") + " " + label;
+            getString("_UI_NavigationCaseType_type") : //$NON-NLS-1$
+            getString("_UI_NavigationCaseType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -312,14 +312,14 @@ public class NavigationCaseTypeItemProvider
 
 		case 0:
 			return ((NavigationRuleType) navigationcase.eContainer())
-					.getFromViewId() == null ? ""
+					.getFromViewId() == null ? "" //$NON-NLS-1$
 					: ((NavigationRuleType) navigationcase.eContainer())
 							.getFromViewId().getTextContent();
 		case 1:
-			return navigationcase.getFromOutcome() == null ? "" : navigationcase
+			return navigationcase.getFromOutcome() == null ? "" : navigationcase //$NON-NLS-1$
 					.getFromOutcome().getTextContent();
 		case 2:
-			return navigationcase.getToViewId() == null ? "" : navigationcase
+			return navigationcase.getToViewId() == null ? "" : navigationcase //$NON-NLS-1$
 					.getToViewId().getTextContent();
 		}
 		return null;

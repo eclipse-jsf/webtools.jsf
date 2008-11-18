@@ -146,7 +146,7 @@ class TaglibContextResolver implements ITaglibContextResolver
             try
             {
                 smodel = StructuredModelManager.getModelManager().getModelForRead((IStructuredDocument)context.getStructuredDocument());
-                return JSPUtil.isJSPContentType(smodel.getContentTypeIdentifier()); //$NON-NLS-1$
+                return JSPUtil.isJSPContentType(smodel.getContentTypeIdentifier());
             }
             finally
             {

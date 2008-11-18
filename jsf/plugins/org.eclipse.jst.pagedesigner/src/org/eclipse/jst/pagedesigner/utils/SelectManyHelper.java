@@ -158,10 +158,10 @@ public class SelectManyHelper {
 				String jsfcorePrefix = JSPUtil.getPrefix(model,
 						ITLDConstants.URI_JSF_CORE);
 				if (jsfcorePrefix != null) {
-					NodeList nl = node.getElementsByTagName(jsfcorePrefix + ":"
+					NodeList nl = node.getElementsByTagName(jsfcorePrefix + ":" //$NON-NLS-1$
 							+ IJSFConstants.TAG_SELECTITEM);
 					NodeList nl1 = node.getElementsByTagName(jsfcorePrefix
-							+ ":" + IJSFConstants.TAG_SELECTITEMS);
+							+ ":" + IJSFConstants.TAG_SELECTITEMS); //$NON-NLS-1$
 					return nl.getLength() > 0 || nl1.getLength() > 0;
 				}
                 return false;

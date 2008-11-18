@@ -127,7 +127,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			.getLogger(PageflowEditor.class);
 
 	/** pageflow context menu registration ID */
-	private static final String PAGEFLOW_CONTEXTMENU_REG_ID = ".pageflow.editor.contextmenu";
+	private static final String PAGEFLOW_CONTEXTMENU_REG_ID = ".pageflow.editor.contextmenu"; //$NON-NLS-1$
 
 	/** the edit domain */
 	private final DefaultEditDomain domain;
@@ -150,7 +150,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	/**
 	 * The id of the editor page
 	 */
-	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor";
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor"; //$NON-NLS-1$
 
 	/** the list of action ids that are to EditPart actions */
 	private List editPartActionIDs = new ArrayList();
@@ -235,7 +235,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			} catch (CoreException exception) {
 				// Pageflow.PageflowEditor.Error.ResourceChange = Failed in the
 				// resource change.
-				log.error("Pageflow.PageflowEditor.Error.ResourceChange",
+				log.error("Pageflow.PageflowEditor.Error.ResourceChange", //$NON-NLS-1$
 						exception);
 			}
 		}
@@ -351,7 +351,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		// Allows showing property view for the pageflow
 		SelectionAction action = new ShowPropertyViewAction(this);
 		action
-				.setImageDescriptor(getImageDescriptorForView("org.eclipse.ui.views.PropertySheet"));
+				.setImageDescriptor(getImageDescriptorForView("org.eclipse.ui.views.PropertySheet")); //$NON-NLS-1$
 		addEditPartAction(action);
 		// Allows showing property view for the pageflow
 		// addEditPartAction(new ShowPaletteViewAction((IWorkbenchPart) this));
@@ -522,14 +522,14 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			progressMonitor = new NullProgressMonitor();
 		}
 		// Pageflow.Label.Saving = Saving
-		progressMonitor.beginTask(PageflowMessages.Pageflow_Label_Saving + " "
+		progressMonitor.beginTask(PageflowMessages.Pageflow_Label_Saving + " " //$NON-NLS-1$
 				+ file.getFullPath(), 2);
 
 		if (null == getPageflowManager()) {
 			// Pageflow.PageflowEditor.Alert.nullModelManager = No model manager
 			// found for saving the file.
 			EditorPlugin.getAlerts().throwCoreException(
-					"Pageflow.PageflowEditor.Alert.nullModelManager");
+					"Pageflow.PageflowEditor.Alert.nullModelManager"); //$NON-NLS-1$
 		}
 
 		// save pageflow to file
@@ -570,21 +570,21 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			if (null == createPageflow(getPageflowFilePath(fileFacesConfig))) {
 				// Pageflow.PageflowEditor.Error.invalidPageflowFile = The
 				// specified input is not a valid pageflow.
-				log.error("Pageflow.PageflowEditor.Error.invalidPageflowFile");
+				log.error("Pageflow.PageflowEditor.Error.invalidPageflowFile"); //$NON-NLS-1$
 				throw new PartInitException(
 						EditorPlugin
-								.getResourceString("Pageflow.PageflowEditor.Error.invalidPageflowFile"));
+								.getResourceString("Pageflow.PageflowEditor.Error.invalidPageflowFile")); //$NON-NLS-1$
 			}
 
 		} catch (CoreException e) {
 			// Pageflow.PageflowEditor.Error.invalidPageflowFile = The specified
 			// input is not a valid pageflow.
-			log.error("Pageflow.PageflowEditor.Error.invalidPageflowFile", e);
+			log.error("Pageflow.PageflowEditor.Error.invalidPageflowFile", e); //$NON-NLS-1$
 			throw new PartInitException(e.getStatus());
 		} catch (IOException e) {
 			// Pageflow.PageflowEditor.Alert.errorSaveFileInfo = The current
 			// pageflow model could not be saved.
-			log.error("Pageflow.PageflowEditor.Alert.errorSaveFileInfo", e);
+			log.error("Pageflow.PageflowEditor.Alert.errorSaveFileInfo", e); //$NON-NLS-1$
 		}
 
 		// add selection change listener
@@ -666,9 +666,9 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		if (null == pageflow) {
 			// Pageflow.PageflowEditor.Error.invalidPageflowModel = The model in
 			// the pageflow file is not a valid pageflow model.
-			log.error("Pageflow.PageflowEditor.Error.invalidPageflowModel");
+			log.error("Pageflow.PageflowEditor.Error.invalidPageflowModel"); //$NON-NLS-1$
 			EditorPlugin.getAlerts().throwCoreException(
-					"Pageflow.PageflowEditor.Error.invalidPageflowModel");
+					"Pageflow.PageflowEditor.Error.invalidPageflowModel"); //$NON-NLS-1$
 		}
 		return pageflow;
 	}
@@ -807,7 +807,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 		viewer_.setContextMenu(provider);
 		getSite().registerContextMenu(
 				EditorPlugin.getPluginId() + PAGEFLOW_CONTEXTMENU_REG_ID,
-				provider, getSite().getSelectionProvider()); //$NON-NLS-1$
+				provider, getSite().getSelectionProvider());
 
 		// enable viewer as drop target for template transfers
 		viewer_
@@ -1163,7 +1163,7 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 			// get marker's attribute
 			log
 					.error(
-							"Pageflow.PageflowEditor.Error.invalidMarkerAttribute",
+							"Pageflow.PageflowEditor.Error.invalidMarkerAttribute", //$NON-NLS-1$
 							e);
 		}
 		if (id instanceof String) {
@@ -1207,12 +1207,12 @@ public class PageflowEditor extends GraphicalEditorWithFlyoutPalette implements
 	 */
 	private ImageDescriptor getImageDescriptorForView(String viewid) {
 		IConfigurationElement[] elements = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor("org.eclipse.ui.views");
+				.getConfigurationElementsFor("org.eclipse.ui.views"); //$NON-NLS-1$
 		for (int i = 0; i < elements.length; i++) {
 			String name = elements[i].getName();
-			String id = elements[i].getAttribute("id");
-			if ("view".equals(name) && viewid.equals(id)) {
-				String iconPath = elements[i].getAttribute("icon");
+			String id = elements[i].getAttribute("id"); //$NON-NLS-1$
+			if ("view".equals(name) && viewid.equals(id)) { //$NON-NLS-1$
+				String iconPath = elements[i].getAttribute("icon"); //$NON-NLS-1$
 				if (iconPath != null) {
 					return AbstractUIPlugin.imageDescriptorFromPlugin(
 							elements[i].getDeclaringExtension().getContributor().getName(),

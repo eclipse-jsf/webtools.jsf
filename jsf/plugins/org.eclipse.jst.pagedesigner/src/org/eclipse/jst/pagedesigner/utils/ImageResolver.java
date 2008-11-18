@@ -61,8 +61,8 @@ public class ImageResolver {
 			return null;
 		}
 		Image img = null;
-		int colonIndex = url.indexOf(":");
-		int slashIndex = url.indexOf("/");
+		int colonIndex = url.indexOf(":"); //$NON-NLS-1$
+		int slashIndex = url.indexOf("/"); //$NON-NLS-1$
 		if (colonIndex != -1 && (slashIndex != -1 && colonIndex < slashIndex)) {
 			//the url seems to have a protocol, so try to load it as a URL
 			try {

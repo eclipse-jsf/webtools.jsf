@@ -261,12 +261,12 @@ public class PageflowElementPropertySource implements IPropertySource {
 								EditorPlugin
 										.getAlerts()
 										.error(
-												"Pageflow.PageflowEditor.Alert.DNDResourceTitle",
-												"Pageflow.PageflowEditor.Alert.ExistingPage",
+												"Pageflow.PageflowEditor.Alert.DNDResourceTitle", //$NON-NLS-1$
+												"Pageflow.PageflowEditor.Alert.ExistingPage", //$NON-NLS-1$
 												value);
 
 								return EditorPlugin
-										.getResourceString("Pageflow.PageflowEditor.Alert.ExistingPage");
+										.getResourceString("Pageflow.PageflowEditor.Alert.ExistingPage"); //$NON-NLS-1$
 							}
 						}
 						return null;
@@ -363,54 +363,54 @@ public class PageflowElementPropertySource implements IPropertySource {
 	 * @return the string for the key
 	 */
 	protected final String getString(String key) {
-		if ("comment".equals(key)) {
+		if ("comment".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_comment;
 		}
 
-		if ("name".equals(key)) {
+		if ("name".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_name;
 		}
 
-		if ("largeicon".equals(key)) {
+		if ("largeicon".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_largeicon;
 		}
 
-		if ("smallicon".equals(key)) {
+		if ("smallicon".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_smallicon;
 		}
 		
-		if ("source".equals(key)) {
+		if ("source".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_source;
 		}
 		
-		if ("target".equals(key)) {
+		if ("target".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_target;
 		}
 
-		if ("fromaction".equals(key)) {
+		if ("fromaction".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_fromaction;
 		}
 
-		if ("path".equals(key)) {
+		if ("path".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_path;
 		}
-		if ("begin".equals(key)) {
+		if ("begin".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_begin;
 		}
-		if ("end".equals(key)) {
+		if ("end".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_end;
 		}
-		if ("configfile".equals(key)) {
+		if ("configfile".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_configfile;
 		}
-		if ("outcome".equals(key)) {
+		if ("outcome".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_outcome;
 		}
-		if ("redirect".equals(key)) {
+		if ("redirect".equals(key)) { //$NON-NLS-1$
 			return PageflowMessages.Pageflow_Model_Attributes_redirect;
 		}
 
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/*
@@ -432,7 +432,7 @@ public class PageflowElementPropertySource implements IPropertySource {
 			}
 		}
 
-		return result != null ? result : "";
+		return result != null ? result : ""; //$NON-NLS-1$
 	}
 
 	/*

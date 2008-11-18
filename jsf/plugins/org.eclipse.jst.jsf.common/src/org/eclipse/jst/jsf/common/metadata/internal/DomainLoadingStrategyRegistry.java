@@ -38,7 +38,7 @@ public class DomainLoadingStrategyRegistry{
 //	public static final String TAGLIB_DOMAIN_SOURCE_HANDLER_ID = TAGLIB_DOMAIN + "SourceHandler";
 //	public static final String TAGLIB_DOMAIN_TRANSLATOR = "com.foo.translators."+TAGLIB_DOMAIN + "Translator";
 
-	private static final String EXTENSION_POINT_ID = "domainLoadingStrategies";
+	private static final String EXTENSION_POINT_ID = "domainLoadingStrategies"; //$NON-NLS-1$
 
 	private DomainLoadingStrategyRegistry(){
 		init();
@@ -125,9 +125,9 @@ public class DomainLoadingStrategyRegistry{
 		}
 
 		private void init() {
-			domain = element.getAttribute("domainId");
+			domain = element.getAttribute("domainId"); //$NON-NLS-1$
 			bundleId = element.getContributor().getName();
-			loadingStrategyClassName = element.getAttribute("domainLoadingStrategy");			
+			loadingStrategyClassName = element.getAttribute("domainLoadingStrategy");	//$NON-NLS-1$
 		}
 
 		/**
@@ -148,17 +148,17 @@ public class DomainLoadingStrategyRegistry{
 				if (loader instanceof IDomainLoadingStrategy)
 					return (IDomainLoadingStrategy)loader;
 			} catch (InstantiationException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "Unable to instantiate IDomainLoadingStrategy for: "+ domain,e);
+				JSFCommonPlugin.log(IStatus.ERROR, "Unable to instantiate IDomainLoadingStrategy for: "+ domain,e); //$NON-NLS-1$
 			} catch (IllegalAccessException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException during creation of IDomainLoadingStrategy for: "+ domain,e);
+				JSFCommonPlugin.log(IStatus.ERROR, "IllegalAccessException during creation of IDomainLoadingStrategy for: "+ domain,e); //$NON-NLS-1$
 			} catch (IllegalArgumentException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "IllegalArgumentException during creation of IDomainLoadingStrategy for: "+ domain,e);
+				JSFCommonPlugin.log(IStatus.ERROR, "IllegalArgumentException during creation of IDomainLoadingStrategy for: "+ domain,e); //$NON-NLS-1$
 			} catch (SecurityException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "SecurityException during creation of IDomainLoadingStrategy for: "+ domain,e);
+				JSFCommonPlugin.log(IStatus.ERROR, "SecurityException during creation of IDomainLoadingStrategy for: "+ domain,e); //$NON-NLS-1$
 			} catch (InvocationTargetException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "InvocationTargetException during creation of IDomainLoadingStrategy for: "+ domain,e);
+				JSFCommonPlugin.log(IStatus.ERROR, "InvocationTargetException during creation of IDomainLoadingStrategy for: "+ domain,e); //$NON-NLS-1$
 			} catch (NoSuchMethodException e) {
-				JSFCommonPlugin.log(IStatus.ERROR, "NoSuchMethodException during creation of IDomainLoadingStrategy for: "+ domain,e);
+				JSFCommonPlugin.log(IStatus.ERROR, "NoSuchMethodException during creation of IDomainLoadingStrategy for: "+ domain,e); //$NON-NLS-1$
 			}
 			return null;
 		}

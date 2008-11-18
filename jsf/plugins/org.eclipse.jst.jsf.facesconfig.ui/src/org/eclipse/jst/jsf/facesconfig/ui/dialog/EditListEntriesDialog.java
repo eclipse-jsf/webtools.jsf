@@ -97,7 +97,7 @@ public class EditListEntriesDialog extends Dialog {
 	 */
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Editing list-entries");
+		newShell.setText(EditorMessages.EditListEntriesDialog_EditingListEntries);
 	}
 
 	/*
@@ -132,7 +132,7 @@ public class EditListEntriesDialog extends Dialog {
 		valueClassField = new ClassButtonDialogField(getProject());
 
 		valueClassField
-				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);
 		Composite typeSelectionSection = SWTUtils.createComposite(parent,
 				SWT.NONE);
 
@@ -165,7 +165,7 @@ public class EditListEntriesDialog extends Dialog {
 
 		DialogField valuesTitle = new DialogFieldBase();
 		valuesTitle
-				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);//$NON-NLS-1$    
+				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);    
 
 		valuesTitle.doFillIntoGrid(null, mapValueSection, numberOfColumns);
 
@@ -198,7 +198,7 @@ public class EditListEntriesDialog extends Dialog {
 
 		TableColumn keyCol = new TableColumn(mapTable, SWT.NONE);
 		keyCol
-				.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Value);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		keyCol.setResizable(true);
 
@@ -229,7 +229,7 @@ public class EditListEntriesDialog extends Dialog {
 		operationContainer.setLayout(gl);
 
 		Button addButton = SWTUtils.createPushButton(operationContainer,
-				EditorMessages.UI_Button_Add_more); //$NON-NLS-1$
+				EditorMessages.UI_Button_Add_more);
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -255,7 +255,7 @@ public class EditListEntriesDialog extends Dialog {
 
 		});
 		removeButton = SWTUtils.createPushButton(operationContainer,
-				EditorMessages.UI_Button_Remove); //$NON-NLS-1$
+				EditorMessages.UI_Button_Remove);
 
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);

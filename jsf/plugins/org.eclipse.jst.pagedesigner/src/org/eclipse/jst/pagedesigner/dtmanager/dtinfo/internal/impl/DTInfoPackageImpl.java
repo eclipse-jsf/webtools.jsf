@@ -34,7 +34,7 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -468,37 +468,37 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(dtInfoEClass, DTInfo.class, "DTInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDTInfo_TagConvertInfo(), this.getTagConvertInfo(), null, "tagConvertInfo", null, 1, 1, DTInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDTInfo_TagDecorateInfos(), this.getTagDecorateInfo(), null, "tagDecorateInfos", null, 0, -1, DTInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(dtInfoEClass, DTInfo.class, "DTInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getDTInfo_TagConvertInfo(), this.getTagConvertInfo(), null, "tagConvertInfo", null, 1, 1, DTInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getDTInfo_TagDecorateInfos(), this.getTagDecorateInfo(), null, "tagDecorateInfos", null, 0, -1, DTInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(tagConvertInfoEClass, TagConvertInfo.class, "TagConvertInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTagConvertInfo_Operations(), this.getOperation(), null, "operations", null, 0, -1, TagConvertInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tagConvertInfoEClass, TagConvertInfo.class, "TagConvertInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getTagConvertInfo_Operations(), this.getOperation(), null, "operations", null, 0, -1, TagConvertInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOperation_Id(), ecorePackage.getEString(), "id", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_Operations(), this.getOperation(), null, "operations", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getOperation_Id(), ecorePackage.getEString(), "id", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getOperation_Operations(), this.getOperation(), null, "operations", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(tagDecorateInfoEClass, TagDecorateInfo.class, "TagDecorateInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTagDecorateInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_MinHeight(), ecorePackage.getEInt(), "minHeight", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_MinWidth(), ecorePackage.getEInt(), "minWidth", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_MultiLevel(), ecorePackage.getEBoolean(), "multiLevel", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_NeedBorderDecorator(), ecorePackage.getEBoolean(), "needBorderDecorator", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_NeedTableDecorator(), ecorePackage.getEBoolean(), "needTableDecorator", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_NonVisual(), ecorePackage.getEBoolean(), "nonVisual", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_NonVisualImagePath(), ecorePackage.getEString(), "nonVisualImagePath", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_ResolveChildText(), ecorePackage.getEBoolean(), "resolveChildText", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTagDecorateInfo_ResolveAttributeValue(), this.getResolveAttributeValue(), null, "resolveAttributeValue", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_SetNonVisualChildElements(), ecorePackage.getEBoolean(), "setNonVisualChildElements", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTagDecorateInfo_Widget(), ecorePackage.getEBoolean(), "widget", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tagDecorateInfoEClass, TagDecorateInfo.class, "TagDecorateInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getTagDecorateInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTagDecorateInfo_MinHeight(), ecorePackage.getEInt(), "minHeight", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTagDecorateInfo_MinWidth(), ecorePackage.getEInt(), "minWidth", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTagDecorateInfo_MultiLevel(), ecorePackage.getEBoolean(), "multiLevel", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getTagDecorateInfo_NeedBorderDecorator(), ecorePackage.getEBoolean(), "needBorderDecorator", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getTagDecorateInfo_NeedTableDecorator(), ecorePackage.getEBoolean(), "needTableDecorator", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getTagDecorateInfo_NonVisual(), ecorePackage.getEBoolean(), "nonVisual", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getTagDecorateInfo_NonVisualImagePath(), ecorePackage.getEString(), "nonVisualImagePath", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTagDecorateInfo_ResolveChildText(), ecorePackage.getEBoolean(), "resolveChildText", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getTagDecorateInfo_ResolveAttributeValue(), this.getResolveAttributeValue(), null, "resolveAttributeValue", null, 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getTagDecorateInfo_SetNonVisualChildElements(), ecorePackage.getEBoolean(), "setNonVisualChildElements", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEAttribute(getTagDecorateInfo_Widget(), ecorePackage.getEBoolean(), "widget", "false", 0, 1, TagDecorateInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
 
-		initEClass(resolveAttributeValueEClass, ResolveAttributeValue.class, "ResolveAttributeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResolveAttributeValue_AttributeName(), ecorePackage.getEString(), "attributeName", null, 1, 1, ResolveAttributeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(resolveAttributeValueEClass, ResolveAttributeValue.class, "ResolveAttributeValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getResolveAttributeValue_AttributeName(), ecorePackage.getEString(), "attributeName", null, 1, 1, ResolveAttributeValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);
@@ -515,48 +515,48 @@ public class DTInfoPackageImpl extends EPackageImpl implements DTInfoPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
 		addAnnotation
 		  (getDTInfo_TagConvertInfo(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "tag-convert-info"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "tag-convert-info" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getDTInfo_TagDecorateInfos(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "tag-decorate-info"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "tag-decorate-info" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getTagConvertInfo_Operations(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "operation"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "operation" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getOperation_Parameters(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "parameter"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "parameter" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getOperation_Operations(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "operation"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "operation" //$NON-NLS-1$ //$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getTagDecorateInfo_ResolveAttributeValue(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "resolve-attribute-value"
+			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+			 "name", "resolve-attribute-value" //$NON-NLS-1$ //$NON-NLS-2$
 		   });
 	}
 

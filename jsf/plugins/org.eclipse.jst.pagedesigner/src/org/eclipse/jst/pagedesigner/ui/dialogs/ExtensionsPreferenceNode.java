@@ -81,7 +81,7 @@ public class ExtensionsPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "Extensions";
+		return "Extensions"; //$NON-NLS-1$
 	}
 
 	/*
@@ -99,7 +99,7 @@ public class ExtensionsPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("ExtensionsPreferenceNode.LabelText");
+		return DialogsMessages.getString("ExtensionsPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

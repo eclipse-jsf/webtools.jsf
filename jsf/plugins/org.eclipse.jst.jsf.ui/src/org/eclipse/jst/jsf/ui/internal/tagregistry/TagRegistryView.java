@@ -37,7 +37,8 @@ import org.eclipse.ui.part.ViewPart;
 
 public class TagRegistryView extends ViewPart
 {
-    private FormToolkit _toolkit;
+    private static final String LIBRARY_OBJ_IMAGE_FILE = "obj16/library_obj.gif"; //$NON-NLS-1$
+	private FormToolkit _toolkit;
     private Form _form;
     private TagRegistryMasterDetailBlock _masterDetailBlock;
 
@@ -53,7 +54,7 @@ public class TagRegistryView extends ViewPart
     public void init(IViewSite site) throws PartInitException
     {
         super.init(site);
-        setTitleImage(JSFUiPlugin.getDefault().getImage("obj16/library_obj.gif"));
+        setTitleImage(JSFUiPlugin.getDefault().getImage(LIBRARY_OBJ_IMAGE_FILE));
     }
 
     /**

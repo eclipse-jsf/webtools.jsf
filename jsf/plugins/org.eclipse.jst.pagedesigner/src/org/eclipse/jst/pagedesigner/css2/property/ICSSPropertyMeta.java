@@ -47,7 +47,7 @@ public interface ICSSPropertyMeta {
 	/**
 	 * 
 	 */
-	static final Object NOT_SPECIFIED = "NOT_SPECIFIED";
+	static final Object NOT_SPECIFIED = "NOT_SPECIFIED"; //$NON-NLS-1$
 
 	/**
 	 * whether default inherit.

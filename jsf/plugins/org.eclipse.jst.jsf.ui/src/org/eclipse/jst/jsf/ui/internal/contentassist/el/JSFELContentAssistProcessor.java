@@ -82,7 +82,7 @@ public class JSFELContentAssistProcessor implements IContentAssistProcessor
                 }
                 catch (ViewHandlerException e)
                 {
-                    JSFUiPlugin.log(IStatus.ERROR, "During el resolution", e);
+                    JSFUiPlugin.log(IStatus.ERROR, "During el resolution", e); //$NON-NLS-1$
                 }
             }
         }

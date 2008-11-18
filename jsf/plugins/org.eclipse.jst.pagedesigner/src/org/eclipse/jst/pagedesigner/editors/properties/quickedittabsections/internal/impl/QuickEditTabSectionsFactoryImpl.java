@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: QuickEditTabSectionsFactoryImpl.java,v 1.2 2008/01/09 19:40:28 cbateman Exp $
+ * $Id: QuickEditTabSectionsFactoryImpl.java,v 1.3 2008/11/18 22:22:35 gkessler Exp $
  */
 package org.eclipse.jst.pagedesigner.editors.properties.quickedittabsections.internal.impl;
 
@@ -29,7 +29,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * Creates the default factory implementation.
@@ -40,7 +40,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 	 */
 	public static QuickEditTabSectionsFactory init() {
 		try {
-			QuickEditTabSectionsFactory theQuickEditTabSectionsFactory = (QuickEditTabSectionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore"); 
+			QuickEditTabSectionsFactory theQuickEditTabSectionsFactory = (QuickEditTabSectionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore");  //$NON-NLS-1$
 			if (theQuickEditTabSectionsFactory != null) {
 				return theQuickEditTabSectionsFactory;
 			}
@@ -72,7 +72,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 			case QuickEditTabSectionsPackage.QUICK_EDIT_TAB_SECTIONS: return createQuickEditTabSections();
 			case QuickEditTabSectionsPackage.SECTION_INFO: return createSectionInfo();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -87,7 +87,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 			case QuickEditTabSectionsPackage.SECTION_TYPE:
 				return createSECTION_TYPEFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -102,7 +102,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 			case QuickEditTabSectionsPackage.SECTION_TYPE:
 				return convertSECTION_TYPEToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
@@ -136,7 +136,7 @@ public class QuickEditTabSectionsFactoryImpl extends EFactoryImpl implements Qui
 	 */
 	public SECTION_TYPE createSECTION_TYPEFromString(EDataType eDataType, String initialValue) {
 		SECTION_TYPE result = SECTION_TYPE.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		return result;
 	}
 

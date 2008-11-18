@@ -36,7 +36,7 @@ public class LocaleType extends MultiSignatureEnumerationType implements IPossib
 	private List<IPossibleValue> _pvs;
 	@Override
 	protected String[] getReturnTypes() {
-		return new String[]{"java.util.Locale", "java.lang.String"}; //$NON-NLS-1$
+		return new String[]{"java.util.Locale", "java.lang.String"}; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public List getPossibleValues() {

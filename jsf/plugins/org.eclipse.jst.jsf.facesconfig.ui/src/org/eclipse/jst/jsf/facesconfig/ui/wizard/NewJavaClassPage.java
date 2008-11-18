@@ -65,16 +65,16 @@ public class NewJavaClassPage extends org.eclipse.jdt.ui.wizards.NewClassWizardP
 			data
 					.add(new String[] {
 							WizardMessages.NewJavaManagedBeanWizard_Summary_SourceFolder,
-							getPackageFragmentRootText(), }); //$NON-NLS-1$
+							getPackageFragmentRootText(), });
 
 			data
 					.add(new String[] {
-							WizardMessages.NewJavaManagedBeanWizard_Summary_PackageName, //$NON-NLS-1$
+							WizardMessages.NewJavaManagedBeanWizard_Summary_PackageName,
 							getPackageText(), });
 
 			data
 					.add(new String[] {
-							WizardMessages.NewJavaManagedBeanWizard_Summary_TypeName, //$NON-NLS-1$
+							WizardMessages.NewJavaManagedBeanWizard_Summary_TypeName,
 							getTypeName() }); 
 		}
 		return data;

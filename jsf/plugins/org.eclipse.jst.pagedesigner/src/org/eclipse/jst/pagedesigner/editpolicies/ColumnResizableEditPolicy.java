@@ -48,7 +48,7 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
 	 */
 	protected List createSelectionHandles() {
 		String elementName = ((Element) getHost().getModel()).getLocalName();
-		if ("column".equalsIgnoreCase(elementName)) {
+		if ("column".equalsIgnoreCase(elementName)) { //$NON-NLS-1$
 			List list = new ArrayList();
 
 			GraphicalEditPart part = (GraphicalEditPart) getHost();
@@ -189,7 +189,9 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
     
     private static class MyMoveHandle extends SquareHandle
     {
-        /**
+        private static final String MOVE_HANDLE_IMAGE_FILE = "MoveHandle.png"; //$NON-NLS-1$
+
+		/**
          * @param owner
          * @param loc
          */
@@ -218,7 +220,7 @@ public class ColumnResizableEditPolicy extends ElementResizableEditPolicy {
 
         public void paintFigure(Graphics graphics) {
             super.paintFigure(graphics);
-            final  Image moveImage = PDPlugin.getDefault().getImage("MoveHandle.png");
+            final  Image moveImage = PDPlugin.getDefault().getImage(MOVE_HANDLE_IMAGE_FILE);
             Point topLeft = getBounds().getTopLeft().getCopy();
             topLeft.performTranslate(3,3);
             graphics.drawImage(moveImage, topLeft);

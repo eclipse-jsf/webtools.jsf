@@ -126,7 +126,7 @@ public class CMNodeNamedMapAdapter implements
             }
             catch (UnknownAttributeException e)
             {
-                JSFCorePlugin.log(e, "Trying to get attribute for "+name);
+                JSFCorePlugin.log(e, "Trying to get attribute for "+name); //$NON-NLS-1$
             }
         }
         
@@ -147,22 +147,22 @@ public class CMNodeNamedMapAdapter implements
 
     public void clear()
     {
-        throw new UnsupportedOperationException("Cannot modify map");
+        throw new UnsupportedOperationException("Cannot modify map"); //$NON-NLS-1$
     }
 
     public ITagAttributeHandler put(String key, ITagAttributeHandler value)
     {
-        throw new UnsupportedOperationException("Cannot modify map");
+        throw new UnsupportedOperationException("Cannot modify map"); //$NON-NLS-1$
     }
 
     public void putAll(Map<? extends String, ? extends ITagAttributeHandler> t)
     {
-        throw new UnsupportedOperationException("Cannot modify map");
+        throw new UnsupportedOperationException("Cannot modify map"); //$NON-NLS-1$
     }
 
     public ITagAttributeHandler remove(Object key)
     {
-        throw new UnsupportedOperationException("Cannot modify map");
+        throw new UnsupportedOperationException("Cannot modify map"); //$NON-NLS-1$
     }
 
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException

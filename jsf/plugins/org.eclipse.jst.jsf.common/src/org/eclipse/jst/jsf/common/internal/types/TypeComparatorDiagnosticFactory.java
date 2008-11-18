@@ -97,7 +97,7 @@ public final class TypeComparatorDiagnosticFactory
                 NLS
                         .bind(
                                 Messages
-                                        .getString("TypeComparator.Expression.Incompatible_Value"), params)); //$NON-NLS-1$ //$NON-NLS-2$
+                                        .getString("TypeComparator.Expression.Incompatible_Value"), params)); //$NON-NLS-1$
     }
 
     /**
@@ -106,7 +106,7 @@ public final class TypeComparatorDiagnosticFactory
     public Diagnostic create_VALUE_EXPRESSION_EXPECTED()
     {
         return create(VALUE_EXPRESSION_EXPECTED_ID, Messages
-                .getString("TypeComparator.Expression.No_Value"));
+                .getString("TypeComparator.Expression.No_Value")); //$NON-NLS-1$
     }
 
     /**
@@ -116,7 +116,7 @@ public final class TypeComparatorDiagnosticFactory
     public Diagnostic create_INCOMPATIBLE_METHOD_TYPES(final Object[] params)
     {
         return create(INCOMPATIBLE_METHOD_TYPES_ID, NLS.bind(Messages
-                .getString("TypeComparator.Expression.Incompatible_Method"),
+                .getString("TypeComparator.Expression.Incompatible_Method"), //$NON-NLS-1$
                 params));
     }
 

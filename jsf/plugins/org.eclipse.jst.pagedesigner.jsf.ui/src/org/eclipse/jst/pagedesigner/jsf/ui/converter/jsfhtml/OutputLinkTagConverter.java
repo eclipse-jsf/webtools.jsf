@@ -61,7 +61,7 @@ public class OutputLinkTagConverter extends AbstractTagConverter
 
         // value should be mapped to href, but it won't affect visual
         // so use "#"
-        aEle.setAttribute(IHTMLConstants.ATTR_HREF, "#");
+        aEle.setAttribute(IHTMLConstants.ATTR_HREF, "#"); //$NON-NLS-1$
 
         JSFConverterUtil.copyAttribute(hostEle, IJSFConstants.ATTR_VALUE, aEle, IHTMLConstants.ATTR_HREF);
         aEle.removeAttribute(IJSFConstants.ATTR_VALUE);
@@ -70,7 +70,7 @@ public class OutputLinkTagConverter extends AbstractTagConverter
         if (!isPreviewMode())
         {
             String style = aEle.getAttribute(IHTMLConstants.ATTR_STYLE);
-            style = "padding:0.3em;" + style;
+            style = "padding:0.3em;" + style; //$NON-NLS-1$
             aEle.setAttribute(IHTMLConstants.ATTR_STYLE, style);
         }
 

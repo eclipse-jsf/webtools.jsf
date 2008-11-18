@@ -61,11 +61,11 @@ public class Alerts {
 		_rb = rb;
 		if (_rb == null) {
 			throw new NullPointerException(
-					"No resource bundle was provided to the Alerts.");
+					"No resource bundle was provided to the Alerts."); //$NON-NLS-1$
 		}
 		if (plugin == null) {
 			throw new NullPointerException(
-					"No plugin was provided to the Alerts.");
+					"No plugin was provided to the Alerts."); //$NON-NLS-1$
 		}
 		_pluginId = plugin.getBundle().getSymbolicName();
 	}

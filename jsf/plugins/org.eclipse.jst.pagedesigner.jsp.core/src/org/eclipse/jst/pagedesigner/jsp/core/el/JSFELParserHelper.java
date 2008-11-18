@@ -29,12 +29,12 @@ public final class JSFELParserHelper {
 	/**
 	 * an EL left brace
 	 */
-	public static String JSF_EL_LEFT_BRACE = "#{";
+	public static String JSF_EL_LEFT_BRACE = "#{"; //$NON-NLS-1$
 
 	/**
 	 * an EL right brace
 	 */
-	public static String JSF_EL_RIGHT_BRACE = "}";
+	public static String JSF_EL_RIGHT_BRACE = "}"; //$NON-NLS-1$
 
 	private JSFELParserHelper() {
 		// util class, do not instantiate
@@ -118,7 +118,7 @@ public final class JSFELParserHelper {
 							posOpenBrace - 1));
 
 				if (expressionString.charAt(posOpenBrace - 1) == '$') {
-					sb.append("${'${'}");
+					sb.append("${'${'}"); //$NON-NLS-1$
 					remainsPos = posOpenBrace + 1;
 					continue;
 				} else if (expressionString.charAt(posOpenBrace - 1) == '#') {
@@ -133,7 +133,7 @@ public final class JSFELParserHelper {
 					 * (sb.length() - i) / 2); break escapes; } }
 					 * sb.setLength(sb.length() / 2); } sb.append("#{"); } else {
 					 */
-					sb.append("${");
+					sb.append("${"); //$NON-NLS-1$
 					int posCloseBrace = indexOfMatchingClosingBrace(
 							expressionString, posOpenBrace);
 					sb.append(expressionString.substring(posOpenBrace + 1,
@@ -186,8 +186,8 @@ public final class JSFELParserHelper {
 		for (;;) {
 			if (i >= len) {
 				throw new IllegalStateException(
-						"Missing closing brace. Expression: '"
-								+ expressionString + "'");
+						"Missing closing brace. Expression: '" //$NON-NLS-1$
+								+ expressionString + "'"); //$NON-NLS-1$
 			}
 
 			int indexofClosingBrace = expressionString.indexOf('}', i);
@@ -196,8 +196,8 @@ public final class JSFELParserHelper {
 			if (i < 0) {
 				// No delimiter found
 				throw new IllegalStateException(
-						"Missing closing brace. Expression: '"
-								+ expressionString + "'");
+						"Missing closing brace. Expression: '" //$NON-NLS-1$
+								+ expressionString + "'"); //$NON-NLS-1$
 			}
 
 			// 1. If quoted literal, find closing quote
@@ -206,8 +206,8 @@ public final class JSFELParserHelper {
 				if (i == 0) {
 					// Note: if no match, i==0 because -1 + 1 = 0
 					throw new IllegalStateException(
-							"Missing closing quote. Expression: '"
-									+ expressionString + "'");
+							"Missing closing quote. Expression: '" //$NON-NLS-1$
+									+ expressionString + "'"); //$NON-NLS-1$
 				}
 			} else {
 				// Closing brace

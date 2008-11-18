@@ -42,7 +42,7 @@ public class PanelGridOperation extends AbstractTransformOperation {
 	public Element transform(Element srcElement, Element curElement) {
 		Element tableElement = null;
 		//create table element, copy all attributes, rename "styleClass" attribute to "class"
-		tableElement = createElement("table");
+		tableElement = createElement("table"); //$NON-NLS-1$
 		ITransformOperation operation =
 			TransformOperationFactory.getInstance().getTransformOperation(
 					TransformOperationFactory.OP_CopyAllAttributesOperation,
@@ -51,12 +51,12 @@ public class PanelGridOperation extends AbstractTransformOperation {
 		operation =
 			TransformOperationFactory.getInstance().getTransformOperation(
 					TransformOperationFactory.OP_RenameAttributeOperation,
-					new String[]{"styleClass", "class"});
+					new String[]{"styleClass", "class"}); //$NON-NLS-1$ //$NON-NLS-2$
 		operation.transform(srcElement, tableElement);
 		//get value of "columns" attribute
 		int columns;
 		try {
-			columns = Integer.parseInt(srcElement.getAttribute("columns"));
+			columns = Integer.parseInt(srcElement.getAttribute("columns")); //$NON-NLS-1$
 		} catch(NumberFormatException nfe) {
 			columns = 1;
 		}
@@ -64,66 +64,66 @@ public class PanelGridOperation extends AbstractTransformOperation {
 			columns = 1;
 		}
 		//check for "header" facet and render appropriately
-		Element headerFacetElement = getChildFacetByName(srcElement, "header");
+		Element headerFacetElement = getChildFacetByName(srcElement, "header"); //$NON-NLS-1$
 		if (headerFacetElement != null) {
-			Element tHeadElement = appendChildElement("thead", tableElement);
-			Element trElement = appendChildElement("tr", tHeadElement);
-			Element thElement = appendChildElement("th", trElement);
-			String headerClass = srcElement.getAttribute("headerClass");
+			Element tHeadElement = appendChildElement("thead", tableElement); //$NON-NLS-1$
+			Element trElement = appendChildElement("tr", tHeadElement); //$NON-NLS-1$
+			Element thElement = appendChildElement("th", trElement); //$NON-NLS-1$
+			String headerClass = srcElement.getAttribute("headerClass"); //$NON-NLS-1$
 			if (headerClass != null && headerClass.length() > 0) {
 				operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"class", headerClass});
+							new String[]{"class", headerClass}); //$NON-NLS-1$
 				operation.transform(srcElement, thElement);
 			}
 			operation =
 				TransformOperationFactory.getInstance().getTransformOperation(
 						TransformOperationFactory.OP_CreateAttributeOperation,
-						new String[]{"colspan", String.valueOf(columns)});
+						new String[]{"colspan", String.valueOf(columns)}); //$NON-NLS-1$
 			operation.transform(srcElement, thElement);
 			tagConverterContext.addChild(headerFacetElement, new ConvertPosition(thElement, 0));
 		}
 		//check for "footer" facet and render appropriately
-		Element footerFacetElement = getChildFacetByName(srcElement, "footer");
+		Element footerFacetElement = getChildFacetByName(srcElement, "footer"); //$NON-NLS-1$
 		if (footerFacetElement != null) {
-			Element tFootElement = appendChildElement("tfoot", tableElement);
-			Element trElement = appendChildElement("tr", tFootElement);
-			Element tdElement = appendChildElement("td", trElement);
-			String footerClass = srcElement.getAttribute("footerClass");
+			Element tFootElement = appendChildElement("tfoot", tableElement); //$NON-NLS-1$
+			Element trElement = appendChildElement("tr", tFootElement); //$NON-NLS-1$
+			Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
+			String footerClass = srcElement.getAttribute("footerClass"); //$NON-NLS-1$
 			if (footerClass != null && footerClass.length() > 0) {
 				operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"class", footerClass});
+							new String[]{"class", footerClass}); //$NON-NLS-1$
 				operation.transform(srcElement, tdElement);
 			}
 			operation =
 				TransformOperationFactory.getInstance().getTransformOperation(
 						TransformOperationFactory.OP_CreateAttributeOperation,
-						new String[]{"colspan", String.valueOf(columns)});
+						new String[]{"colspan", String.valueOf(columns)}); //$NON-NLS-1$
 			operation.transform(srcElement, tdElement);
 			tagConverterContext.addChild(footerFacetElement, new ConvertPosition(tdElement, 0));
 		}
 		//get rowClasses and columnClasses for subsequent processing
         List rowClasses = new ArrayList();
-        String rowClassesAttribute = srcElement.getAttribute("rowClasses");
+        String rowClassesAttribute = srcElement.getAttribute("rowClasses"); //$NON-NLS-1$
         if (rowClassesAttribute != null && rowClassesAttribute.length() > 0) {
-            StringTokenizer tokenizer = new StringTokenizer(rowClassesAttribute, ", ");
+            StringTokenizer tokenizer = new StringTokenizer(rowClassesAttribute, ", "); //$NON-NLS-1$
             while (tokenizer.hasMoreTokens()) {
                 rowClasses.add(tokenizer.nextToken());
             }
         }
         List columnClasses = new ArrayList();
-        String columnClassAttribute = srcElement.getAttribute("columnClasses");
+        String columnClassAttribute = srcElement.getAttribute("columnClasses"); //$NON-NLS-1$
         if (columnClassAttribute != null) {
-            StringTokenizer tokenizer = new StringTokenizer(columnClassAttribute, ", ");
+            StringTokenizer tokenizer = new StringTokenizer(columnClassAttribute, ", "); //$NON-NLS-1$
             while (tokenizer.hasMoreTokens()) {
                 columnClasses.add(tokenizer.nextToken());
             }
         }
 		//render children using appropriate number of columns and appropriate classes
-        Element tBodyElement = appendChildElement("tbody", tableElement);
+        Element tBodyElement = appendChildElement("tbody", tableElement); //$NON-NLS-1$
         List childElements = getChildElementsSkipFacets(srcElement);
         Element trElement = null;
         int nextRow = 0;
@@ -132,22 +132,22 @@ public class PanelGridOperation extends AbstractTransformOperation {
         while (itChildElements.hasNext()) {
         	int columnIndex = curIndex % columns;
         	if (columnIndex == 0) {
-        		trElement = appendChildElement("tr", tBodyElement);
+        		trElement = appendChildElement("tr", tBodyElement); //$NON-NLS-1$
         		if (!rowClasses.isEmpty()) {
     				operation =
     					TransformOperationFactory.getInstance().getTransformOperation(
     							TransformOperationFactory.OP_CreateAttributeOperation,
-    							new String[]{"class", (String)rowClasses.get(nextRow)});
+    							new String[]{"class", (String)rowClasses.get(nextRow)}); //$NON-NLS-1$
     				operation.transform(srcElement, trElement);
         			nextRow = (nextRow + 1) % rowClasses.size();
         		}
         	}
-        	Element tdElement = appendChildElement("td", trElement);
+        	Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
         	if (columnIndex < columnClasses.size()) {
 				operation =
 					TransformOperationFactory.getInstance().getTransformOperation(
 							TransformOperationFactory.OP_CreateAttributeOperation,
-							new String[]{"class", (String)columnClasses.get(columnIndex)});
+							new String[]{"class", (String)columnClasses.get(columnIndex)}); //$NON-NLS-1$
 				operation.transform(srcElement, tdElement);
         	}
         	tagConverterContext.addChild((Element)itChildElements.next(), new ConvertPosition(tdElement, 0));
@@ -166,11 +166,11 @@ public class PanelGridOperation extends AbstractTransformOperation {
 	 */
 	private Element getChildFacetByName(Element srcElement, String facetName) {
 		Element element = null;
-		List facets = getChildElements(srcElement, "facet");
+		List facets = getChildElements(srcElement, "facet"); //$NON-NLS-1$
 		Iterator itFacets = facets.iterator();
 		while (itFacets.hasNext()) {
 			Element facet = (Element)itFacets.next();
-			String facetAttrName = facet.getAttribute("name");
+			String facetAttrName = facet.getAttribute("name"); //$NON-NLS-1$
 			if (facetAttrName != null && facetAttrName.equals(facetName)) {
 				element = facet;
 				break;
@@ -193,7 +193,7 @@ public class PanelGridOperation extends AbstractTransformOperation {
 		for (int i = 0; i < childNodes.getLength(); i++) {
 			Node childNode = childNodes.item(i);
 			if (childNode.getNodeType() == Node.ELEMENT_NODE) {
-				if (!childNode.getLocalName().equals("facet")) {
+				if (!childNode.getLocalName().equals("facet")) { //$NON-NLS-1$
 					childElementsList.add(childNode);
 				}
 			}

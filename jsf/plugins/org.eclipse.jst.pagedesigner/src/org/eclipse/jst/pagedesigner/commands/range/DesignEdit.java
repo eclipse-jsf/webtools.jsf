@@ -430,7 +430,7 @@ public abstract class DesignEdit {
 		ICSSStyle style = CSSUtil.getCSSStyle(element);
 
 		Node node = EditModelQuery.getDocumentNode(rootNode).createElement(
-				"span");
+				"span"); //$NON-NLS-1$
 		for (int i = 0, n = result.size(); i < n; i++) {
 			node.appendChild((Node) result.elementAt(i));
 		}
@@ -454,7 +454,7 @@ public abstract class DesignEdit {
 					return null;
 				}
 				String name = cur.getNodeName() != null ? cur.getNodeName()
-						.toLowerCase() : "";
+						.toLowerCase() : ""; //$NON-NLS-1$
 				if (EditModelQuery.HTML_STYLE_NODES.contains(name)) {
 					if (prev != null) {
 						Node newone = cur.cloneNode(false);

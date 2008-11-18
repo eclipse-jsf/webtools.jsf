@@ -83,10 +83,10 @@ public class JSPUtil {
 		if (! model.getDocument().isXMLType()){
 			// TODO: should create the taglib inside the IDOMModel
 			Node[] ref = new Node[1];
-			BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib",
+			BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib", //$NON-NLS-1$
 					model.getDocument(), ref);
 			
-			Element ele = model.getDocument().createElement("jsp:directive.taglib");
+			Element ele = model.getDocument().createElement("jsp:directive.taglib"); //$NON-NLS-1$
 			((IDOMElement) ele).setJSPTag(true);
 			ele.setAttribute(ICSSPropertyID.ATTR_URI, uri);
 			ele.setAttribute(ICSSPropertyID.ATTR_PREFIX, prefix);
@@ -112,7 +112,7 @@ public class JSPUtil {
 				}
 				if (!tldRefExists){
 					//create attribute
-					Attr a = model.getDocument().createAttribute("xmlns:"+prefix);
+					Attr a = model.getDocument().createAttribute("xmlns:"+prefix); //$NON-NLS-1$
 					a.setValue(uri);
 					root.setAttributeNode(a);
 					new HTMLFormatProcessorImpl().formatNode(root);
@@ -154,11 +154,11 @@ public class JSPUtil {
 	                    Attr a = (Attr)attrs.item(i);
 	                    //is the taglib uri already declared?
 	                    if (a.getValue().equals(uri)
-	                            && a.getName().startsWith("xmlns:"))
+	                            && a.getName().startsWith("xmlns:")) //$NON-NLS-1$
 	                    {
-	                        String prefix =  a.getNodeName().substring("xmlns:".length());
+	                        String prefix =  a.getNodeName().substring("xmlns:".length()); //$NON-NLS-1$
 	                        
-	                        if ("".equals(prefix))
+	                        if ("".equals(prefix)) //$NON-NLS-1$
 	                        {
 	                            prefix = null;
 	                        }
@@ -195,12 +195,12 @@ public class JSPUtil {
 	public static Element createTaglibDeclaration(IDOMModel model, String uri,
 			String prefix) {
 		Node[] ref = new Node[1];
-		BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib",
+		BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib", //$NON-NLS-1$
 				model.getDocument(), ref);
-		Element ele = model.getDocument().createElement("jsp:directive.taglib");
+		Element ele = model.getDocument().createElement("jsp:directive.taglib"); //$NON-NLS-1$
 		((IDOMElement) ele).setJSPTag(true);
-		ele.setAttribute("uri", uri);
-		ele.setAttribute("prefix", prefix);
+		ele.setAttribute("uri", uri); //$NON-NLS-1$
+		ele.setAttribute("prefix", prefix); //$NON-NLS-1$
 		model.getDocument().insertBefore(ele, ref[0]);
 		return ele;
 	}
@@ -214,7 +214,7 @@ public class JSPUtil {
 	 */
 	public static String findUnusedPrefix(IDOMModel model, String suggestion) {
 		if (suggestion == null) {
-			suggestion = "p";
+			suggestion = "p"; //$NON-NLS-1$
 		}
 		TLDCMDocumentManager m = TaglibController.getTLDCMDocumentManager(model
 				.getStructuredDocument());

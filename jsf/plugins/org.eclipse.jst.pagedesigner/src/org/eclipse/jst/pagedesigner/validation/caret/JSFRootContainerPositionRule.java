@@ -32,7 +32,7 @@ public class JSFRootContainerPositionRule extends DefaultPositionRule {
 	 * TODO: this is not enough because it ignores the uri and keys on only
 	 * the name of the tag.
 	 */
-	/*package*/ static final String[] JSF_ROOT_CONTAINERS = { "view", "subview" };
+	/*package*/ static final String[] JSF_ROOT_CONTAINERS = { "view", "subview" }; //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
 	 * @param actionData

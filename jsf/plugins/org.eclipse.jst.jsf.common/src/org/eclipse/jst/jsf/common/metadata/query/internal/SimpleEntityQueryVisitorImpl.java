@@ -153,7 +153,7 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 				Entity e = (Entity)stack.elementAt(i);
 				if (!(e instanceof EntityGroup)){
 					if (buf.length()>0) 
-						buf.append("/");
+						buf.append("/"); //$NON-NLS-1$
 					buf.append(e.getId());
 				}
 				i++;

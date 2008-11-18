@@ -123,7 +123,7 @@ public final class PathUtil {
 	 * web folder
 	 */
 	public static String convertToWebPath(String projectName, String path) {
-		String name = "";
+		String name = ""; //$NON-NLS-1$
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
 				projectName);
 		String webrootName = WebrootUtil.getWebContentFolder(project).getName();
@@ -149,10 +149,10 @@ public final class PathUtil {
 	 * @return absolute path in file system
 	 */
 	public static String convertToAbsolutePath(String uri, IFile curFile) {
-		if (uri == null || uri.trim().equals("")) {
+		if (uri == null || uri.trim().equals("")) { //$NON-NLS-1$
 			return uri;
 		}
-		String webroot = "";
+		String webroot = ""; //$NON-NLS-1$
 		IFile jsp = curFile;
 		try {
 			if (jsp == null) {
@@ -168,7 +168,7 @@ public final class PathUtil {
 		} catch (NullPointerException e) {
 			return uri;
 		}
-		if (uri.startsWith(IFileFolderConstants.PATH_SEPARATOR)) //$NON-NLS-1$
+		if (uri.startsWith(IFileFolderConstants.PATH_SEPARATOR))
 		{
 			return webroot + uri;
 		}
@@ -231,14 +231,14 @@ public final class PathUtil {
 			Object parent) {
 		IPath result = null;
 		if (javaProject == null || parent == null) {
-			return new Path("");
+			return new Path(""); //$NON-NLS-1$
 		}
 		IClasspathEntry[] entries = javaProject.readRawClasspath();
 		IPath classPath = null;
 		if (parent instanceof IResource) {
 			if (((javaProject != null) && !javaProject
 					.isOnClasspath((IResource) parent))) {
-				return new Path("");
+				return new Path(""); //$NON-NLS-1$
 			}
 			if (parent instanceof IFile) {
 				IPath elementPath = ((IFile) parent).getFullPath();
@@ -297,7 +297,7 @@ public final class PathUtil {
 		if (result != null) {
 			return result;
 		}
-		return new Path("");
+		return new Path(""); //$NON-NLS-1$
 	}
 	
 	private PathUtil()

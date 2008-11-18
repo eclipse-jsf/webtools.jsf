@@ -38,18 +38,18 @@ public class SelectOneListboxTagConverter extends SelectBasedTagConverter
     protected void handleMultipleAndSize(Element hostEle, Element selectEle)
     {
         // always not multiple
-        selectEle.removeAttribute("multiple");
+        selectEle.removeAttribute("multiple"); //$NON-NLS-1$
 
         // If the "size" attribute is specified, render its value as the value of the "size" 
         // attribute. Otherwise use the number of items as the value of the "size" attribute.
-        String sizeattr = hostEle.getAttribute("size");
+        String sizeattr = hostEle.getAttribute("size"); //$NON-NLS-1$
 
         List selectItems = this.getSelectItems(hostEle);
         if (sizeattr == null)
         {
             if (!selectItems.isEmpty())
             {
-                selectEle.setAttribute("size", String.valueOf(selectItems.size()));
+                selectEle.setAttribute("size", String.valueOf(selectItems.size())); //$NON-NLS-1$
             }
         }
     }

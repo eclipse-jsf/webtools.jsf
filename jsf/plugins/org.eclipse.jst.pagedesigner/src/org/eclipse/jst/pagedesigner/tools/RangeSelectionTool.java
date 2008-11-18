@@ -105,32 +105,32 @@ public class RangeSelectionTool extends SelectionTool
 				if (command == null) {
 					// "delete"
 					command = new DeleteCommand(true,
-							(IHTMLGraphicalViewer) this.getCurrentViewer()); //$NON-NLS-1$
+							(IHTMLGraphicalViewer) this.getCurrentViewer());
 				}
 			} else {
 				// "cut"
 				command = new CutCommand((IHTMLGraphicalViewer) this
-						.getCurrentViewer()); //$NON-NLS-1$
+						.getCurrentViewer());
 				e.doit = false;
 			}
 			break;
 		case SWT.BS:
 			// "delete"
 			command = new DeleteCommand(false, (IHTMLGraphicalViewer) this
-					.getCurrentViewer()); //$NON-NLS-1$
+					.getCurrentViewer());
 			e.doit = false;
 			break;
 		case SWT.INSERT:
 			if ((e.stateMask & SWT.SHIFT) != 0) {
 				// "paste"
 				command = new PasteCommand((IHTMLGraphicalViewer) this
-						.getCurrentViewer()); //$NON-NLS-1$
+						.getCurrentViewer());
 				e.doit = false;
 				break;
 			} else if ((e.stateMask & SWT.CONTROL) != 0) {
 				// "copy"
 				command = new CopyCommand((IHTMLGraphicalViewer) this
-						.getCurrentViewer()); //$NON-NLS-1$
+						.getCurrentViewer());
 				e.doit = false;
 				break;
 			}
@@ -147,7 +147,7 @@ public class RangeSelectionTool extends SelectionTool
 			break;
 		default:
 			if (e.keyCode == 'a' && (e.stateMask & SWT.CTRL) != 0) {
-				command = new SelectAllCommand("selectAll",
+				command = new SelectAllCommand("selectAll", //$NON-NLS-1$
 						(IHTMLGraphicalViewer) this.getCurrentViewer());
 				e.doit = false;
 			} else {

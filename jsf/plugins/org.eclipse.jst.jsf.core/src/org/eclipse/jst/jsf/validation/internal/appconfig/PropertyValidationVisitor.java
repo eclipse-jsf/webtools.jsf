@@ -102,7 +102,7 @@ public class PropertyValidationVisitor extends EObjectValidationVisitor
         {
             JSFCorePlugin
                 .log(new Exception(jme), 
-                     "Problem validating on parent: "+parentClassType);
+                     "Problem validating on parent: "+parentClassType); //$NON-NLS-1$
         }
 
         return signatureBeanProperty;

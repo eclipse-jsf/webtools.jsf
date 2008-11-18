@@ -40,7 +40,7 @@ public class OverflowMeta extends CSSPropertyMeta {
 		String display = style.getDisplay();
 		// we only support overflow for "block". Which means we don't support it
 		// for table/inline-block, etc.
-		if (!"block".equalsIgnoreCase(display)) {
+		if (!"block".equalsIgnoreCase(display)) { //$NON-NLS-1$
 			return ICSSPropertyID.VAL_VISIBLE;
 		}
 		return super.calculateCSSValueResult(value, propertyName, style);

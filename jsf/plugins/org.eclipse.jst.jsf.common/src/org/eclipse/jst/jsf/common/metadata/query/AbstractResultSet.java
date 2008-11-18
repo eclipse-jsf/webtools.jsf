@@ -54,7 +54,7 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 	
 	private void initIfNecessary() throws MetaDataException {
 		if (_isClosed)
-			throw new MetaDataException("Attempt to access a closed resultset.");
+			throw new MetaDataException("Attempt to access a closed resultset."); //$NON-NLS-1$
 		
 		if (_results == null) {
 			List checkNullResults = getInternalResults();

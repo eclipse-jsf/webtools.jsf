@@ -125,7 +125,7 @@ public final class JavaUIHelper {
 	static IJavaSearchScope findSearchScope(IProject project,
 			String superType) {
 		if (project != null) {
-			if (superType == null || "".equals(superType)) {
+			if (superType == null || "".equals(superType)) { //$NON-NLS-1$
 				superType = "java.lang.Object";//$NON-NLS-1$
 			}
 			return new JavaSearchScope(project, superType);

@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 
 
@@ -28,14 +29,14 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class NamespaceDetailsForm extends AbstractXMLSectionsDetailsForm
 {
-    private final static String  NAMESPACE_SECTION_KEY = "namespaceSection";
+    private final static String  NAMESPACE_SECTION_KEY = "namespaceSection"; //$NON-NLS-1$
     private XMLTextSection       _namespaceSection;
 
     @Override
     protected Map<? extends Object, XMLTextSection> createXMLTextSections(Composite parent)
     {
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
-        _namespaceSection = new XMLTextSection(getToolkit(), parent, "Namespace");
+        _namespaceSection = new XMLTextSection(getToolkit(), parent, Messages.NamespaceDetailsForm_SectionLabel);
         sections.put(NAMESPACE_SECTION_KEY, _namespaceSection);
         return sections;
     }
@@ -55,14 +56,12 @@ public class NamespaceDetailsForm extends AbstractXMLSectionsDetailsForm
         {
             Namespace namespace = (Namespace) newSelection;
 
-            final String formatText = "<form><p><b>Name:</b> %s</p> <p><b>Uri:</b> %s</p> </form>";
             final String displayName = namespace.getDisplayName();
             final String uri = namespace.getNSUri();
 
-            _namespaceSection.setText(String.format(formatText,
-                    displayName == null ? "" : displayName,
-                    uri == null ? "" : uri
-                    ), true, false);
+            String namespaceSectionText = NLS.bind(Messages.NamespaceDetailsForm_SectionText, displayName == null ? "" : displayName, uri == null ? "" : uri ); //$NON-NLS-1$ //$NON-NLS-2$
+            
+            _namespaceSection.setText(namespaceSectionText, true, false);
             _namespaceSection.refresh();
         }
     }

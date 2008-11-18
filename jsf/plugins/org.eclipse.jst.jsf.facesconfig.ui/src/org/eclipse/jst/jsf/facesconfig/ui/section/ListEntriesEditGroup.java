@@ -163,7 +163,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		valueClassField = new ClassButtonDialogField(getProject());
 
 		valueClassField
-				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);//$NON-NLS-1$
+				.setLabelText(EditorMessages.InitializationSection_MapType_ValueClass);
 		valueClassField
 				.setDialogFieldApplyListener(new IDialogFieldApplyListener() {
 
@@ -233,7 +233,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		listValueSection.setLayout(gl);
 		DialogFieldBase valuesTitle = new DialogFieldBase();
 		valuesTitle
-				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);//$NON-NLS-1$    
+				.setLabelText(EditorMessages.InitializationSection_MapTable_Title);    
 		valuesTitle.doFillIntoGrid(toolkit, listValueSection, numberOfColumns);
 
 		// list's value table
@@ -268,7 +268,7 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		TableColumn valueCol = new TableColumn(listTable, SWT.NONE);
 		layout.addColumnData(new ColumnWeightData(1, true));
 		valueCol
-				.setText(EditorMessages.InitializationSection_MapTable_Value);//$NON-NLS-1$
+				.setText(EditorMessages.InitializationSection_MapTable_Value);
 		valueCol.setResizable(true);
 
 		listTable.addMouseListener(new MouseAdapter() {
@@ -309,11 +309,11 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		Button addButton = null;
 		if (toolkit != null) {
 			addButton = toolkit.createButton(operationContainer,
-					EditorMessages.UI_Button_Add_more, //$NON-NLS-1$
+					EditorMessages.UI_Button_Add_more,
 					SWT.PUSH);
 		} else {
 			addButton = SWTUtils.createPushButton(operationContainer,
-					EditorMessages.UI_Button_Add_more); //$NON-NLS-1$
+					EditorMessages.UI_Button_Add_more);
 		}
 		gd = new GridData(GridData.FILL_HORIZONTAL
 				| GridData.VERTICAL_ALIGN_BEGINNING);
@@ -337,11 +337,11 @@ public class ListEntriesEditGroup extends DialogFieldGroup implements
 		removeButton = null;
 		if (toolkit != null) {
 			removeButton = toolkit.createButton(operationContainer,
-					EditorMessages.UI_Button_Remove, //$NON-NLS-1$
+					EditorMessages.UI_Button_Remove,
 					SWT.PUSH);
 		} else {
 			removeButton = SWTUtils.createPushButton(operationContainer,
-					EditorMessages.UI_Button_Remove); //$NON-NLS-1$
+					EditorMessages.UI_Button_Remove);
 		}
 
 		gd = new GridData(GridData.FILL_HORIZONTAL

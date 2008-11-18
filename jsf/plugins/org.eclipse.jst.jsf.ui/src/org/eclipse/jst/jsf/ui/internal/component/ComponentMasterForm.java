@@ -33,6 +33,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService.ElementData;
 import org.eclipse.jst.jsf.ui.internal.common.MetadataTagImageManager;
 import org.eclipse.jst.jsf.ui.internal.component.ComponentTreeViewProvider.TreePlaceHolder;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -121,10 +122,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
                 _model.update();
             }
         };
-        _refreshAction.setText("Refresh View");
-        _refreshAction.setToolTipText("Refresh View");
+        _refreshAction.setText(Messages.ComponentMasterForm_RefreshView);
+        _refreshAction.setToolTipText(Messages.ComponentMasterForm_RefreshView);
         _refreshAction.setImageDescriptor(JSFUICommonPlugin.getDefault()
-                .getImageDescriptor("refresh_nav_16.gif"));
+                .getImageDescriptor("refresh_nav_16.gif")); //$NON-NLS-1$
     }
 
     @Override
@@ -135,9 +136,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
                 , SWT.READ_ONLY | SWT.SINGLE | SWT.LEFT);
 
         String viewId = _model.getViewId();
-        viewId = viewId == null ? "<unknown>" : viewId;
-        label.setText("View: " + viewId + " (Project: "
-                + _model.getProject().getName() + ")");
+        viewId = viewId == null ? Messages.ComponentMasterForm_Unknown : viewId;        
+        label.setText(NLS.bind(Messages.ComponentMasterForm_HeadAreaText,  viewId,
+                _model.getProject().getName())); 
     }
 
     private static class TreeViewLabelProvider extends LabelProvider
@@ -160,7 +161,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
         {
             if (obj instanceof ComponentInfo)
             {
-                String text = "";
+                String text = ""; //$NON-NLS-1$
                 final ComponentInfo compInfo = (ComponentInfo) obj;
                 String className = compInfo.getComponentTypeInfo()
                         .getClassName();
@@ -175,13 +176,13 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
                 if (id != null)
                 {
-                    text += " (id=" + id + ")";
+                    text += " (id=" + id + ")"; //$NON-NLS-1$ //$NON-NLS-2$
                 }
                 return text;
             }
             else if (obj instanceof TreePlaceHolder)
             {
-                return "Calculating view...";
+                return Messages.ComponentMasterForm_CalculatingView;
             }
             return obj.toString();
         }
@@ -217,7 +218,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
             }
             else if (obj instanceof TreePlaceHolder)
             {
-                return JSFUICommonPlugin.getDefault().getImage("configs.gif");
+                return JSFUICommonPlugin.getDefault().getImage("configs.gif"); //$NON-NLS-1$
             }
             if (image == null)
             {

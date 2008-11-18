@@ -48,15 +48,15 @@ public class StyleDialog extends PreferenceDialog {
 	protected Control createDialogArea(Composite parent) {
 		Control control = super.createDialogArea(parent);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(control,
-				PDPlugin.getResourceString("StyleDialog.help.id"));
+				PDPlugin.getResourceString("StyleDialog.help.id")); //$NON-NLS-1$
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(
 				getTreeViewer().getControl(),
-				PDPlugin.getResourceString("StyleDialog.help.id"));
+				PDPlugin.getResourceString("StyleDialog.help.id")); //$NON-NLS-1$
 		return control;
 	}
 
 	protected void update() {
 		super.update();
-		getShell().setText(DialogsMessages.getString("StyleDialog.Title"));
+		getShell().setText(DialogsMessages.getString("StyleDialog.Title")); //$NON-NLS-1$
 	}
 }

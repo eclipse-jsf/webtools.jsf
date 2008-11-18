@@ -121,8 +121,8 @@ public class LocalSelectionDropTargetListener extends
 			LocalDropEditPolicy.setCheckUpdate(true);
 		} else {
 			Alerts alert = PDPlugin.getAlerts();
-			alert.info("LocalSelectionDropTargetListener.MessageDialog.Title",
-					"LocalSelectionDropTargetListener.MessageDialog.Message");
+			alert.info("LocalSelectionDropTargetListener.MessageDialog.Title", //$NON-NLS-1$
+					"LocalSelectionDropTargetListener.MessageDialog.Message"); //$NON-NLS-1$
 		}
 	}
 }

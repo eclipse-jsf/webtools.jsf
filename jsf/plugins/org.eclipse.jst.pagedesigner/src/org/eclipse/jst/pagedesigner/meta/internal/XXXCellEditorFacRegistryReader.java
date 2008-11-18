@@ -61,7 +61,7 @@ public class XXXCellEditorFacRegistryReader {
 //					facs[j].getAttribute("class");
 					Object obj;
 					try {
-						obj = facs[j].createExecutableExtension("class");
+						obj = facs[j].createExecutableExtension("class"); //$NON-NLS-1$
 
 						if (obj instanceof IAttributeCellEditorFactory) {
 							result.add(obj);

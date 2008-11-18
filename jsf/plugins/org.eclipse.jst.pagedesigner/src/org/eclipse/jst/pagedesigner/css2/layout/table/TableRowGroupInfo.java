@@ -60,7 +60,7 @@ import org.eclipse.jst.pagedesigner.css2.layout.ICSSFigure;
 			if (childfigure instanceof ICSSFigure) {
 				ICSSStyle childstyle = ((ICSSFigure) childfigure).getCSSStyle();
 				if (childstyle != null
-						&& "table-row"
+						&& "table-row" //$NON-NLS-1$
 								.equalsIgnoreCase(childstyle.getDisplay())) {
 					TableRowInfo rowInfo = new TableRowInfo(
 							(ICSSFigure) childfigure);

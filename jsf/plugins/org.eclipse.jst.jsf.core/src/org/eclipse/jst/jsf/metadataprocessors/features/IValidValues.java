@@ -25,28 +25,28 @@ public interface IValidValues extends IMetaDataEnabledFeature{
 	/**
 	 * Trait name for valid-values
 	 */
-	public static final String VALID_VALUES_PROP_NAME = "valid-values";
+	public static final String VALID_VALUES_PROP_NAME = "valid-values"; //$NON-NLS-1$
 	
 	/**
 	 * Trait name for valid-values-code
 	 */
-	public static final String VALID_VALUES_CODE_PROP_NAME = VALID_VALUES_PROP_NAME + "-code";
+	public static final String VALID_VALUES_CODE_PROP_NAME = VALID_VALUES_PROP_NAME + "-code"; //$NON-NLS-1$
 	/**
 	 * Trait name for valid-values-severity
 	 */
-	public static final String VALID_VALUES_SEVERITY_PROP_NAME = VALID_VALUES_PROP_NAME + "-severity";
+	public static final String VALID_VALUES_SEVERITY_PROP_NAME = VALID_VALUES_PROP_NAME + "-severity"; //$NON-NLS-1$
 	/**
 	 * Trait name for valid-values-message
 	 */
-	public static final String VALID_VALUES_MESSAGE_PROP_NAME = VALID_VALUES_PROP_NAME + "-message";
+	public static final String VALID_VALUES_MESSAGE_PROP_NAME = VALID_VALUES_PROP_NAME + "-message"; //$NON-NLS-1$
 	/**
 	 * Trait name for valid-maximum
 	 */
-	public static final String VALID_VALUES_MAX_PROP_NAME = "valid-maximum";
+	public static final String VALID_VALUES_MAX_PROP_NAME = "valid-maximum"; //$NON-NLS-1$
 	/**
 	 * Trait name for valid-minimum
 	 */
-	public static final String VALID_VALUES_MIN_PROP_NAME = "valid-minimum";
+	public static final String VALID_VALUES_MIN_PROP_NAME = "valid-minimum"; //$NON-NLS-1$
 	/**
 	 * @param value fully resolved value as String
 	 * @return true if is valid

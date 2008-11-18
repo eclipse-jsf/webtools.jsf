@@ -197,7 +197,7 @@ public final class WorkspaceUtil {
     		} catch (CoreException e) {
                 // TODO C.B.:pushing this down to a warning because it creates really
                 // spurious output.  Don't know why we are calling refreshLocal at all.
-                JSFUICommonPlugin.getLogger(WorkspaceUtil.class).info("Error.RefreshingLocal", e);
+                JSFUICommonPlugin.getLogger(WorkspaceUtil.class).info("Error.RefreshingLocal", e); //$NON-NLS-1$
     		}
 		}
 		

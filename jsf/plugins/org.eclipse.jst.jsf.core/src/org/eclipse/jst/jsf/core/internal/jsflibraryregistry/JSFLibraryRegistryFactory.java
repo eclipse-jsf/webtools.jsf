@@ -27,7 +27,7 @@ public interface JSFLibraryRegistryFactory extends EFactory{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation";
+	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The singleton instance of the factory.

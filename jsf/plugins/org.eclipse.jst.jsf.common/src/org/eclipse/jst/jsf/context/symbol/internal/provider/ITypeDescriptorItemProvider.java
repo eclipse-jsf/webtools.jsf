@@ -284,8 +284,8 @@ public class ITypeDescriptorItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_ITypeDescriptor_enumType_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_enumType_feature", "_UI_ITypeDescriptor_type"),
+                 getString("_UI_ITypeDescriptor_enumType_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_ITypeDescriptor_enumType_feature", "_UI_ITypeDescriptor_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  SymbolPackage.Literals.ITYPE_DESCRIPTOR__ENUM_TYPE,
                  true,
                  false,

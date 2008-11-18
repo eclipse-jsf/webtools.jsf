@@ -38,7 +38,7 @@ public final class LegacyJSFLibraryProviderUninstallOperation
         throws CoreException
         
     {
-        monitor.beginTask( "", 1 );
+        monitor.beginTask( "", 1 ); //$NON-NLS-1$
         
         try
         {

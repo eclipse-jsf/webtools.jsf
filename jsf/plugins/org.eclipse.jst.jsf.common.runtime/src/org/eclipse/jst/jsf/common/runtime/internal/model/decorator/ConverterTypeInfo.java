@@ -126,20 +126,20 @@ public class ConverterTypeInfo extends ClassTypeInfo
 
     public String toString()
     {
-        String toString = "";
+        String toString = ""; //$NON-NLS-1$
 
         if (_forClasses.length  > 0)
         {
-            toString = "For-Classes: [";
+            toString = "For-Classes: ["; //$NON-NLS-1$
             for (int i = 0; i < _forClasses.length; i++)
             {
                 toString += _forClasses[i];
                 if (i < _forClasses.length-1)
                 {
-                    toString += ", ";
+                    toString += ", "; //$NON-NLS-1$
                 }
             }
-            toString += "], ";
+            toString += "], "; //$NON-NLS-1$
         }
         return toString + "Converter Type Info: type = " + _converterId + ", "+super.toString(); //$NON-NLS-1$ //$NON-NLS-2$
     }

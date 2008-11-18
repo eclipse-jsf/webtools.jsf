@@ -61,7 +61,7 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 	/**
 	 * The id of this page in the faces-config editor.
 	 */
-	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage";
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.ComponentsPage"; //$NON-NLS-1$
 
 	private IContentOutlinePage contentOutlinePage;
 
@@ -72,7 +72,7 @@ public class ComponentsPage extends FacesConfigMasterDetailPage {
 	 *            the facesconfig editor;
 	 */
 	public ComponentsPage(FacesConfigEditor editor) {
-		super(editor, "ComponentsPage",
+		super(editor, "ComponentsPage", //$NON-NLS-1$
 				EditorMessages.FacesConfigEditor_Components_TabName);
 	}
 

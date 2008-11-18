@@ -68,7 +68,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 	public void initialize() {
 		fromViewField = new StringButtonDialogField(new StringButtonAdapter());
 		fromViewField.setLabelText(PropertyMessages.property_fromView);
-		fromViewField.setButtonLabel("...");
+		fromViewField.setButtonLabel(PropertyMessages.property_browseButton);
 		fromViewField.setDialogFieldChangeListener(getDefaultChangeListener());
 
 		largeIconField = new StringDialogField();
@@ -105,7 +105,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 	 * @return the assertion string
 	 */
 	private static String assertString(String value) {
-		return value == null ? "" : value;
+		return value == null ? "" : value; //$NON-NLS-1$
 	}
 	/*
 	 * (non-Javadoc)

@@ -21,7 +21,7 @@ import org.eclipse.osgi.util.NLS;
  */
 /*package*/ final class PreferenceMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.preference.PreferenceMessages";
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.preference.PreferenceMessages"; //$NON-NLS-1$
 
 	private PreferenceMessages() {
 		// Do not instantiate
@@ -201,5 +201,25 @@ import org.eclipse.osgi.util.NLS;
 	 * see PreferenceMessages.properties
 	 */
 	public static String GEMPreferences_description;
+	/**
+	 * see PreferenceMessages.properties
+	 */
+	public static String CompoundNodeFigure_MaximizeLabel;
+	/**
+	 * see PreferenceMessages.properties
+	 */
+	public static String CompoundNodeFigure_MinimizeLabel;
+	/**
+	 * see PreferenceMessages.properties
+	 */
+	public static String CompoundNodeFigure_RestoreLabel;
+	/**
+	 * see PreferenceMessages.properties
+	 */
+	public static String WindowFigure_NoTitleText;
+	/**
+	 * see PreferenceMessages.properties
+	 */
+	public static String WindowFigure_Title;
 
 }

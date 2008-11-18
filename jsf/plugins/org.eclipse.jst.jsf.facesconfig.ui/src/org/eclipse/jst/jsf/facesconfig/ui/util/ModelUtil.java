@@ -20,6 +20,15 @@ import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
  */
 public class ModelUtil {
 
+	private static final String ENTITY_NEWLINE = "&#xA;"; //$NON-NLS-1$
+	private static final String ENTITY_TAB = "&#x9;"; //$NON-NLS-1$
+	private static final String ENTITY_CARRIAGE_RETURN = "&#xD;"; //$NON-NLS-1$
+	private static final String ENTITY_AMPERSAND = "&amp;"; //$NON-NLS-1$
+	private static final String ENTITY_DOUBLE_QUOTE = "&quot;"; //$NON-NLS-1$
+	private static final String ENTITY_SINGLE_QUOTE = "&apos;"; //$NON-NLS-1$
+	private static final String ENTITY_GREATER_THAN = "&gt;"; //$NON-NLS-1$
+	private static final String ENTITY_LESS_THAN = "&lt;"; //$NON-NLS-1$
+
 	/**
 	 * Get the super class's name of certain element. For example, a class for
 	 * <action-listener> should implement interface
@@ -84,7 +93,7 @@ public class ModelUtil {
 	 */
 	public static String escapeEntities(String str) {
 		if (isEmptyString(str)) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		StringBuffer buffer;
@@ -96,28 +105,28 @@ public class ModelUtil {
 			ch = str.charAt(i);
 			switch (ch) {
 			case '<':
-				entity = "&lt;";
+				entity = ENTITY_LESS_THAN;
 				break;
 			case '>':
-				entity = "&gt;";
+				entity = ENTITY_GREATER_THAN;
 				break;
 			case '\'':
-				entity = "&apos;";
+				entity = ENTITY_SINGLE_QUOTE;
 				break;
 			case '\"':
-				entity = "&quot;";
+				entity = ENTITY_DOUBLE_QUOTE;
 				break;
 			case '&':
-				entity = "&amp;";
+				entity = ENTITY_AMPERSAND;
 				break;
 			case '\r':
-				entity = "&#xD;";
+				entity = ENTITY_CARRIAGE_RETURN;
 				break;
 			case '\t':
-				entity = "&#x9;";
+				entity = ENTITY_TAB;
 				break;
 			case '\n':
-				entity = "&#xA;";
+				entity = ENTITY_NEWLINE;
 				break;
 			default:
 				entity = null;
@@ -154,19 +163,19 @@ public class ModelUtil {
 	 */
 	public static String unEscapeEntities(String str) {
 		if (isEmptyString(str)) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		String result = new String(str);
 
-		result = result.replaceAll("&amp;", "&");
-		result = result.replaceAll("&lt;", "<");
-		result = result.replaceAll("&gt;", ">");
-		result = result.replaceAll("&apos;", "\'");
-		result = result.replaceAll("&quot;", "\"");
-		result = result.replaceAll("&#xD;", "\r");
-		result = result.replaceAll("&#x9;", "\t");
-		result = result.replaceAll("&#xA;", "\n");
+		result = result.replaceAll(ENTITY_AMPERSAND, "&"); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_LESS_THAN, "<"); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_GREATER_THAN, ">"); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_SINGLE_QUOTE, "\'"); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_DOUBLE_QUOTE, "\""); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_CARRIAGE_RETURN, "\r"); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_TAB, "\t"); //$NON-NLS-1$
+		result = result.replaceAll(ENTITY_NEWLINE, "\n"); //$NON-NLS-1$
 
 		return result;
 	}

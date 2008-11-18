@@ -184,7 +184,7 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 			parseParameter();
 		}
 		Object value = _parameterMap.get(name);
-		return value == null ? "" : value.toString();
+		return value == null ? "" : value.toString(); //$NON-NLS-1$
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 		if (_typeParameter == null) {
 			return;
 		}
-		StringTokenizer tokenizer = new StringTokenizer(_typeParameter, "||");
+		StringTokenizer tokenizer = new StringTokenizer(_typeParameter, "||"); //$NON-NLS-1$
 		while (tokenizer.hasMoreTokens()) {
 			String parameterEntry = tokenizer.nextToken();
 			int index = parameterEntry.indexOf('=');
@@ -229,7 +229,7 @@ public class AttributeDescriptor implements IAttributeDescriptor {
 	}
 	
 	public String toString(){
-		StringBuffer buf = new StringBuffer("AttributeDescriptor: ");
+		StringBuffer buf = new StringBuffer("AttributeDescriptor: "); //$NON-NLS-1$
 		buf.append(this.getAttributeName());
 		return buf.toString();
 	}

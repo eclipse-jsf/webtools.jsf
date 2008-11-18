@@ -64,7 +64,7 @@ import org.eclipse.jst.pagedesigner.css2.value.Length;
 				ICSSStyle childstyle = ((ICSSFigure) childfigure).getCSSStyle();
 				if (childstyle != null) {
 					String display = childstyle.getDisplay();
-					if ("table-cell".equalsIgnoreCase(display)) {
+					if ("table-cell".equalsIgnoreCase(display)) { //$NON-NLS-1$
 						TableCellInfo cellInfo = new TableCellInfo(
 								(ICSSFigure) childfigure);
 						cellInfo.calculateCellInfo(context);

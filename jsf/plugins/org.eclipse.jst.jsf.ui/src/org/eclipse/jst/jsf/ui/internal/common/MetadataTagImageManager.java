@@ -34,9 +34,9 @@ import org.eclipse.swt.graphics.Image;
  */
 public class MetadataTagImageManager
 {
-    private static final String TRAIT_ICON_SMALL = "small-icon";
+    private static final String TRAIT_ICON_SMALL = "small-icon"; //$NON-NLS-1$
 
-    private static final String TRAIT_ICON_LARGE = "large-icon";
+    private static final String TRAIT_ICON_LARGE = "large-icon"; //$NON-NLS-1$
 
     /**
      * @param project
@@ -117,7 +117,7 @@ public class MetadataTagImageManager
 
         // use palette infos if available
         final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model,
-                "paletteInfos");
+                "paletteInfos"); //$NON-NLS-1$
         if (trait != null)
         {
             final PaletteInfos tags = (PaletteInfos) trait.getValue();

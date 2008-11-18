@@ -205,7 +205,7 @@ final class FacesResourceChangeListener implements IResourceChangeListener,
 			try {
 				file.setPersistentProperty(EDITOR_KEY, FacesConfigPlugin.FACES_CONFIG_EDITOR_ID);
 			} catch (CoreException e) {
-				Logger.log(file, "Failed to set the vcurrent editor to SCFE", e);
+				Logger.log(file, "Failed to set the vcurrent editor to SCFE", e); //$NON-NLS-1$
 			}
 		}
 	}
@@ -217,12 +217,12 @@ final class FacesResourceChangeListener implements IResourceChangeListener,
 		IEditorDescriptor userEditor = registry.getDefaultEditor(file.getFullPath().toString());
 		if ((userEditor == null)
 				|| !FacesConfigPlugin.FACES_CONFIG_EDITOR_ID.equals(userEditor.getId())) {
-			traceFiner(file, "Not unsetting: Default already not Faces config. editor");
+			traceFiner(file, "Not unsetting: Default already not Faces config. editor"); //$NON-NLS-1$
 			return;
 		}
 
 		// Make the Struts config. editor the default.
-		traceFiner(file, "Unsetting.");
+		traceFiner(file, "Unsetting."); //$NON-NLS-1$
 		IEditorDescriptor[] editors = registry.getEditors(file.getFullPath().toString());
 		if (editors.length > 1) {
 			registry.setDefaultEditor(file.getFullPath().toString(), editors[1].getId());
@@ -254,7 +254,7 @@ final class FacesResourceChangeListener implements IResourceChangeListener,
 
 */	private void traceFiner(IFile file, String message) {
 		String fileName = file.getProjectRelativePath().toString();
-		Logger.trace("FacesconfigPlugin", this, fileName + ": " + message);
+		Logger.trace("FacesconfigPlugin", this, fileName + ": " + message); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/** @see ISaveParticipant#doneSaving(ISaveContext) */

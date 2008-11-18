@@ -47,7 +47,7 @@ import org.w3c.dom.Node;
 public abstract class XMLViewDefnAdapter extends
         AbstractViewDefnAdapter<Node, IDocument>
 {
-    private static final String GENERATED_ID = "_generatedId";
+    private static final String GENERATED_ID = "_generatedId"; //$NON-NLS-1$
 
     @Override
     public abstract IDocument getContainer(DTFacesContext context, String viewId);
@@ -58,10 +58,10 @@ public abstract class XMLViewDefnAdapter extends
     {
         if (viewDefnObject instanceof Element)
         {
-            return ((Element) viewDefnObject).getAttribute("id");
+            return ((Element) viewDefnObject).getAttribute("id"); //$NON-NLS-1$
         }
         throw new IllegalArgumentException(
-                "Only Elements can define view object ids");
+                "Only Elements can define view object ids"); //$NON-NLS-1$
     }
 
     @Override

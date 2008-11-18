@@ -61,13 +61,13 @@ public final class StandardMetaDataFileInfo implements IStandardMetaDataSourceIn
 	}
 
 	public String toString(){
-		StringBuffer buf = new StringBuffer("StandardMetaDataFileInfo");
-		buf.append(": ");
+		StringBuffer buf = new StringBuffer("StandardMetaDataFileInfo"); //$NON-NLS-1$
+		buf.append(": "); //$NON-NLS-1$
 		buf.append(bundleId);
-		buf.append("/");
+		buf.append("/"); //$NON-NLS-1$
 		buf.append(fileLocation);
 		if (getLocatorClassname() != null){
-			buf.append(": ");
+			buf.append(": "); //$NON-NLS-1$
 			buf.append(getLocatorClassname());
 		}
 		return buf.toString();

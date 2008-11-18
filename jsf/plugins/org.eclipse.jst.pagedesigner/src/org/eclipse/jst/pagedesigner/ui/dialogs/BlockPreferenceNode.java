@@ -80,7 +80,7 @@ public class BlockPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getId()
 	 */
 	public String getId() {
-		return "Block";
+		return "Block"; //$NON-NLS-1$
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class BlockPreferenceNode implements IPreferenceNode {
 	 * @see org.eclipse.jface.preference.IPreferenceNode#getLabelText()
 	 */
 	public String getLabelText() {
-		return DialogsMessages.getString("BlockPreferenceNode.LabelText");
+		return DialogsMessages.getString("BlockPreferenceNode.LabelText"); //$NON-NLS-1$
 	}
 
 	/*

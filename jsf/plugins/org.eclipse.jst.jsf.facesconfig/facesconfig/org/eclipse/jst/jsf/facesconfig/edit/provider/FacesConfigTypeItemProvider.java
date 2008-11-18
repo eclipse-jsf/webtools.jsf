@@ -53,7 +53,7 @@ public class FacesConfigTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -95,8 +95,8 @@ public class FacesConfigTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacesConfigType_facesConfigExtension_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacesConfigType_facesConfigExtension_feature", "_UI_FacesConfigType_type"),
+                 getString("_UI_FacesConfigType_facesConfigExtension_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacesConfigType_facesConfigExtension_feature", "_UI_FacesConfigType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACES_CONFIG_TYPE__FACES_CONFIG_EXTENSION,
                  true,
                  false,
@@ -118,8 +118,8 @@ public class FacesConfigTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacesConfigType_xmlns_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacesConfigType_xmlns_feature", "_UI_FacesConfigType_type"),
+                 getString("_UI_FacesConfigType_xmlns_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacesConfigType_xmlns_feature", "_UI_FacesConfigType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACES_CONFIG_TYPE__XMLNS,
                  true,
                  false,
@@ -141,8 +141,8 @@ public class FacesConfigTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacesConfigType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacesConfigType_id_feature", "_UI_FacesConfigType_type"),
+                 getString("_UI_FacesConfigType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacesConfigType_id_feature", "_UI_FacesConfigType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACES_CONFIG_TYPE__ID,
                  true,
                  false,
@@ -196,7 +196,7 @@ public class FacesConfigTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacesConfigType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacesConfigType")); //$NON-NLS-1$
     }
 
     /**
@@ -208,8 +208,8 @@ public class FacesConfigTypeItemProvider
 	public String getText(Object object) {
         String label = ((FacesConfigType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_FacesConfigType_type") :
-            getString("_UI_FacesConfigType_type") + " " + label;
+            getString("_UI_FacesConfigType_type") : //$NON-NLS-1$
+            getString("_UI_FacesConfigType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**

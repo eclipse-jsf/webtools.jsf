@@ -26,7 +26,7 @@ public class ComponentTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public ComponentTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);//$NON-NLS-1$
+		super(domNameAndPath, aFeature);
 	}
 
 	/* (non-Javadoc)

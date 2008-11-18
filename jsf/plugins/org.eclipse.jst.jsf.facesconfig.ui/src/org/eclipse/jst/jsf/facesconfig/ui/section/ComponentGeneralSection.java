@@ -39,7 +39,6 @@ import org.eclipse.jst.jsf.facesconfig.ui.util.ModelUtil;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -394,28 +393,12 @@ public class ComponentGeneralSection extends AbstractFacesConfigSection {
 								.getComponentType_DisplayName()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getComponentType_Description()) {
-					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
-						refresh();
-					} else {
-						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-							public void run() {
-								refresh();
-							}
-						});
-					}
+					refresh();
 				} else if (msg.getFeature() == FacesConfigPackage.eINSTANCE
 						.getDisplayNameType_TextContent()
 						|| msg.getFeature() == FacesConfigPackage.eINSTANCE
 								.getDescriptionType_TextContent()) {
-					if (Thread.currentThread() == PlatformUI.getWorkbench().getDisplay().getThread()) {
-						refresh();
-					} else {						
-						PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-							public void run() {
-								refresh();
-							}
-						});
-					}
+					refresh();
 				}
 			}
 		}

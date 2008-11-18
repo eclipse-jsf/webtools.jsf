@@ -106,10 +106,10 @@ public class ConverterFactoryRegistry
                     if (PageDesignerTraceOptions.TRACE_CONVERTERSELECT)
                     {
                         PageDesignerTraceOptions
-                                .log("ConverterFactoryRegistry: first loop, "
+                                .log("ConverterFactoryRegistry: first loop, " //$NON-NLS-1$
                                         + String
                                                 .format(
-                                                        "Selected converter %s for uri=%s, tagname=%s",
+                                                        "Selected converter %s for uri=%s, tagname=%s", //$NON-NLS-1$
                                                         converter.getClass()
                                                                 .getName(),
                                                         uri, ele.getLocalName()));
@@ -131,10 +131,10 @@ public class ConverterFactoryRegistry
                     if (PageDesignerTraceOptions.TRACE_CONVERTERSELECT)
                     {
                         PageDesignerTraceOptions
-                                .log("ConverterFactoryRegistry: second loop, "
+                                .log("ConverterFactoryRegistry: second loop, " //$NON-NLS-1$
                                         + String
                                                 .format(
-                                                        "Selected converter %s for uri=%s, tagname=%s",
+                                                        "Selected converter %s for uri=%s, tagname=%s", //$NON-NLS-1$
                                                         converter.getClass()
                                                                 .getName(),
                                                         uri, ele.getLocalName()));
@@ -151,10 +151,10 @@ public class ConverterFactoryRegistry
             if (PageDesignerTraceOptions.TRACE_CONVERTERSELECT)
             {
                 PageDesignerTraceOptions
-                        .log("ConverterFactoryRegistry: factory not found, "
+                        .log("ConverterFactoryRegistry: factory not found, " //$NON-NLS-1$
                                 + String
                                         .format(
-                                                "Selected DumTagConverter for uri=%s, tagname=%s",
+                                                "Selected DumTagConverter for uri=%s, tagname=%s", //$NON-NLS-1$
                                                 uri, ele.getLocalName()));
             }
 
@@ -167,10 +167,10 @@ public class ConverterFactoryRegistry
             if (PageDesignerTraceOptions.TRACE_CONVERTERSELECT)
             {
                 PageDesignerTraceOptions
-                        .log("ConverterFactoryRegistry: factory and decl not found, "
+                        .log("ConverterFactoryRegistry: factory and decl not found, " //$NON-NLS-1$
                                 + String
                                         .format(
-                                                "Selected DumTagConverter for uri=%s, tagname=%s",
+                                                "Selected DumTagConverter for uri=%s, tagname=%s", //$NON-NLS-1$
                                                 uri, ele.getLocalName()));
             }
             return new DumTagConverter(ele);
@@ -181,10 +181,10 @@ public class ConverterFactoryRegistry
             if (PageDesignerTraceOptions.TRACE_CONVERTERSELECT)
             {
                 PageDesignerTraceOptions
-                        .log("ConverterFactoryRegistry: factory not found, content is EMPTY, "
+                        .log("ConverterFactoryRegistry: factory not found, content is EMPTY, " //$NON-NLS-1$
                                 + String
                                         .format(
-                                                "Selected HiddenTagConverter with UnknownImage for uri=%s, tagname=%s",
+                                                "Selected HiddenTagConverter with UnknownImage for uri=%s, tagname=%s", //$NON-NLS-1$
                                                 uri, ele.getLocalName()));
             }
 
@@ -201,10 +201,10 @@ public class ConverterFactoryRegistry
         if (PageDesignerTraceOptions.TRACE_CONVERTERSELECT)
         {
             PageDesignerTraceOptions
-                    .log("ConverterFactoryRegistry: fall-through to default case, "
+                    .log("ConverterFactoryRegistry: fall-through to default case, " //$NON-NLS-1$
                             + String
                                     .format(
-                                            "Selected DefaultUnknownTagConverter with UnknownImage for uri=%s, tagname=%s",
+                                            "Selected DefaultUnknownTagConverter with UnknownImage for uri=%s, tagname=%s", //$NON-NLS-1$
                                             uri, ele.getLocalName()));
         }
         return new DefaultUnknownTagConverter(ele, mode);

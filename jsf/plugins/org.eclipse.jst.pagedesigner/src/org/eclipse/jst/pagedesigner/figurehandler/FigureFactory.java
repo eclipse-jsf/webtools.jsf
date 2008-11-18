@@ -173,17 +173,17 @@ public final class FigureFactory
 
 	private static IFigureHandler createFigureHandler(Element ele) {
 		String tag = ele.getTagName();
-		if ("input".equalsIgnoreCase(tag)) {
+		if ("input".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return new InputFigureHandler();
-		} else if ("select".equalsIgnoreCase(tag)) {
+		} else if ("select".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return new SelectFigureHandler();
-		} else if ("img".equalsIgnoreCase(tag)) {
+		} else if ("img".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return new ImgFigureHandler();
-		} else if ("object".equalsIgnoreCase(tag)) {
+		} else if ("object".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return new ObjectFigureHandler();
-		} else if ("textarea".equalsIgnoreCase(tag)) {
+		} else if ("textarea".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return new TextareaFigureHandler();
-		} else if ("br".equalsIgnoreCase(tag)) {
+		} else if ("br".equalsIgnoreCase(tag)) { //$NON-NLS-1$
 			return new BRFigureHandler();
 		} else if (!HTMLUtil.isVisualHtmlElement(tag)) {
 			return new HiddenFigureHandler(getSharedHTMLImage(ele));
@@ -203,7 +203,7 @@ public final class FigureFactory
         if (context != null){   
         	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
         	if (wsResolver != null){
-        		image = TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"HTML", element.getLocalName());
+        		image = TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"HTML", element.getLocalName()); //$NON-NLS-1$
         	}
         }
 		return image != null ? image : JSFUICommonPlugin.getDefault().getImage(

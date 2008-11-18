@@ -26,7 +26,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
  */
 public class StyleClassSupport {
 	private final static String DEFAULT = PDPlugin
-			.getResourceString("StyleClassSupport.Default");
+			.getResourceString("StyleClassSupport.Default"); //$NON-NLS-1$
 
 	/**
 	 * @param classmenu
@@ -96,14 +96,14 @@ public class StyleClassSupport {
 		}
 		String taguri = CMUtil.getTagURI(decl);
 		if (taguri == null || ITLDConstants.URI_HTML.equals(taguri)) {
-			if (decl.getAttributes().getNamedItem("class") != null) {
-				return "class";
+			if (decl.getAttributes().getNamedItem("class") != null) { //$NON-NLS-1$
+				return "class"; //$NON-NLS-1$
 			}
             return null;
-		} else if (decl.getAttributes().getNamedItem("styleClass") != null) {
-			return "styleClass";
-		} else if (decl.getAttributes().getNamedItem("class") != null) {
-			return "class";
+		} else if (decl.getAttributes().getNamedItem("styleClass") != null) { //$NON-NLS-1$
+			return "styleClass"; //$NON-NLS-1$
+		} else if (decl.getAttributes().getNamedItem("class") != null) { //$NON-NLS-1$
+			return "class"; //$NON-NLS-1$
 		} else {
 			return null;
 		}

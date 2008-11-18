@@ -27,11 +27,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 public class ELValidationPreferences implements IJSFPreferenceModel
 {
     private final static String KEY_ENABLE_BUILD_VALIDATION = 
-        "org.eclipse.jst.jsf.ui.ValidateJSFELBuild";
+        "org.eclipse.jst.jsf.ui.ValidateJSFELBuild"; //$NON-NLS-1$
     private final static boolean DEFAULT_ENABLE_BUILD_VALIDATION = true;
 
     private final static String KEY_ENABLE_INCREMENTAL_VALIDATION = 
-        "org.eclipse.jst.jsf.ui.ValidateJSFELIncremental";
+        "org.eclipse.jst.jsf.ui.ValidateJSFELIncremental"; //$NON-NLS-1$
     private final static boolean DEFAULT_ENABLE_INCREMENTAL_VALIDATION = false;
     
 
@@ -161,17 +161,17 @@ public class ELValidationPreferences implements IJSFPreferenceModel
         // ignore context for now; will be used when we have project overrides
         if (KEY_ENABLE_BUILD_VALIDATION.equals(key))
         {
-            return Boolean.valueOf(context.getNode("org.eclipse.jst.jsf.ui").getBoolean(key, true));
+            return Boolean.valueOf(context.getNode("org.eclipse.jst.jsf.ui").getBoolean(key, true)); //$NON-NLS-1$
         }
         else if (KEY_ENABLE_INCREMENTAL_VALIDATION.equals(key))
         {
-            return Boolean.valueOf(context.getNode("org.eclipse.jst.jsf.ui").getBoolean(key, false));
+            return Boolean.valueOf(context.getNode("org.eclipse.jst.jsf.ui").getBoolean(key, false)); //$NON-NLS-1$
         }
         else
         {
             try
             {
-                return context.getNode("org.eclipse.jst.jsf.core").get(key, mapDiagToSeverity(getDefaultSeverity(getIdByKey(key))).toString());
+                return context.getNode("org.eclipse.jst.jsf.core").get(key, mapDiagToSeverity(getDefaultSeverity(getIdByKey(key))).toString()); //$NON-NLS-1$
             }
             catch (IllegalArgumentException e)
             {
@@ -306,21 +306,21 @@ public class ELValidationPreferences implements IJSFPreferenceModel
      */
     public static int mapSeverityToDiag(String severity)
     {
-        if ("error".equals(severity))
+        if ("error".equals(severity)) //$NON-NLS-1$
         {
             return Diagnostic.ERROR;
         }
-        else if ("warning".equals(severity))
+        else if ("warning".equals(severity)) //$NON-NLS-1$
         {
             return Diagnostic.WARNING;
         }
-        else if ("ignore".equals(severity))
+        else if ("ignore".equals(severity)) //$NON-NLS-1$
         {
             return Diagnostic.OK;
         }
         else
         {
-            throw new IllegalArgumentException("Invalid enum name: "+severity);
+            throw new IllegalArgumentException("Invalid enum name: "+severity); //$NON-NLS-1$
         }
     }
     
@@ -393,7 +393,7 @@ public class ELValidationPreferences implements IJSFPreferenceModel
             case DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID:
                 return Diagnostic.WARNING;
             default:
-                throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range");
+                throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 
@@ -466,7 +466,7 @@ public class ELValidationPreferences implements IJSFPreferenceModel
             case DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID:
                 return MEMBER_IS_INTERMEDIATE;
             default:
-                throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range");
+                throw new IllegalArgumentException("Diagnostic Id: "+ diagnosticId +" is out of range"); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
     
@@ -598,7 +598,7 @@ public class ELValidationPreferences implements IJSFPreferenceModel
         }
         else
         {
-            throw new IllegalArgumentException("Severity Key: "+ key);
+            throw new IllegalArgumentException("Severity Key: "+ key); //$NON-NLS-1$
         }
     }
     
@@ -610,158 +610,158 @@ public class ELValidationPreferences implements IJSFPreferenceModel
      */
     private static String createQualifiedKeyName(final String baseName)
     {
-        return JSFCorePlugin.PLUGIN_ID + "." + baseName;
+        return JSFCorePlugin.PLUGIN_ID + "." + baseName; //$NON-NLS-1$
     }
     
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_BOTH_OPERANDS_NULL = 
-        createQualifiedKeyName("BINARY_OP_BOTH_OPERANDS_NULL");
+        createQualifiedKeyName("BINARY_OP_BOTH_OPERANDS_NULL"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_POSSIBLE_DIVISION_BY_ZERO = 
-        createQualifiedKeyName("BINARY_OP_POSSIBLE_DIVISION_BY_ZERO");
+        createQualifiedKeyName("BINARY_OP_POSSIBLE_DIVISION_BY_ZERO"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION = 
-        createQualifiedKeyName("BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION");
+        createQualifiedKeyName("BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME = 
-        createQualifiedKeyName("BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME");
+        createQualifiedKeyName("BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME = 
-        createQualifiedKeyName("BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME");
+        createQualifiedKeyName("BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN = 
-        createQualifiedKeyName("BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN");
+        createQualifiedKeyName("BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS = 
-        createQualifiedKeyName("BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS");
+        createQualifiedKeyName("BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME =
-        createQualifiedKeyName("BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME");
+        createQualifiedKeyName("BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_NO_AVAILABLE_TYPE_COERCION = 
-        createQualifiedKeyName("BINARY_OP_NO_AVAILABLE_TYPE_COERCION");
+        createQualifiedKeyName("BINARY_OP_NO_AVAILABLE_TYPE_COERCION"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS = 
-        createQualifiedKeyName("BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS");
+        createQualifiedKeyName("BINARY_OP_COULD_NOT_COERCE_LITERALS_TO_NUMBERS"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME = 
-        createQualifiedKeyName("UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME");
+        createQualifiedKeyName("UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE = 
-        createQualifiedKeyName("UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE");
+        createQualifiedKeyName("UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO = 
-        createQualifiedKeyName("UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO");
+        createQualifiedKeyName("UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION = 
-        createQualifiedKeyName("UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION");
+        createQualifiedKeyName("UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN = 
-        createQualifiedKeyName("UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN");
+        createQualifiedKeyName("UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String TERNARY_OP_CHOICE_IS_ALWAYS_SAME = 
-        createQualifiedKeyName("TERNARY_OP_CHOICE_IS_ALWAYS_SAME");
+        createQualifiedKeyName("TERNARY_OP_CHOICE_IS_ALWAYS_SAME"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN = 
-        createQualifiedKeyName("TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN"); 
+        createQualifiedKeyName("TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN");  //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED = 
-        createQualifiedKeyName("UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED");
+        createQualifiedKeyName("UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING = 
-        createQualifiedKeyName("CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING");
+        createQualifiedKeyName("CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String MEMBER_NOT_FOUND = 
-        createQualifiedKeyName("MEMBER_NOT_FOUND");
+        createQualifiedKeyName("MEMBER_NOT_FOUND"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String VARIABLE_NOT_FOUND = 
-        createQualifiedKeyName("VARIABLE_NOT_FOUND");
+        createQualifiedKeyName("VARIABLE_NOT_FOUND"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String MISSING_CLOSING_EXPR_BRACKET = 
-        createQualifiedKeyName("MISSING_CLOSING_EXPR_BRACKET");
+        createQualifiedKeyName("MISSING_CLOSING_EXPR_BRACKET"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String GENERAL_SYNTAX_ERROR = 
-        createQualifiedKeyName("GENERAL_SYNTAX_ERROR");
+        createQualifiedKeyName("GENERAL_SYNTAX_ERROR"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String EMPTY_EL_EXPRESSION = 
-        createQualifiedKeyName("EMPTY_EL_EXPRESSION");
+        createQualifiedKeyName("EMPTY_EL_EXPRESSION"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_DOT_WITH_VALUEB_NULL = 
-        createQualifiedKeyName("BINARY_OP_DOT_WITH_VALUEB_NULL");
+        createQualifiedKeyName("BINARY_OP_DOT_WITH_VALUEB_NULL"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY = 
-        createQualifiedKeyName("BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY");
+        createQualifiedKeyName("BINARY_OP_DOT_WITH_DOTTED_KEY_SHOULD_USE_ARRAY"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS = 
-        createQualifiedKeyName("POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS");
+        createQualifiedKeyName("POSSIBLE_ARRAY_INDEX_OUT_OF_BOUNDS"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME = 
-        createQualifiedKeyName("BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME");
+        createQualifiedKeyName("BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME"); //$NON-NLS-1$
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE = 
-        createQualifiedKeyName("BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE");
+        createQualifiedKeyName("BINARY_OP_COMPARISON_OF_ENUMS_INCOMPATIBLE"); //$NON-NLS-1$
     
     /**
      * preference key.  Match to DiagnosticFactory constants
      */
     public final static String MEMBER_IS_INTERMEDIATE =
-        createQualifiedKeyName("MEMBER_IS_INTERMEDIATE");
+        createQualifiedKeyName("MEMBER_IS_INTERMEDIATE"); //$NON-NLS-1$
 }

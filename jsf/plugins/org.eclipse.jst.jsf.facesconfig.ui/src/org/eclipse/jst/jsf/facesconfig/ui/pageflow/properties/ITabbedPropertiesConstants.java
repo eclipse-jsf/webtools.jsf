@@ -29,31 +29,31 @@ public interface ITabbedPropertiesConstants {
 	/**
 	 * the general tag id
 	 */
-	public static final String GENERAL_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general";
+	public static final String GENERAL_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.general"; //$NON-NLS-1$
 
 	/**
 	 * the attribute tag id
 	 */
-	public static final String ATTRIBUTE_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute";
+	public static final String ATTRIBUTE_TAB_ID = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.properties.attribute"; //$NON-NLS-1$
 
 	/**
 	 * the link section id
 	 */
-	public static final String LINK_SECTION = "attribute.link"; // 4
+	public static final String LINK_SECTION = "attribute.link"; // 4 //$NON-NLS-1$
 
 	/**
 	 * the page section id
 	 */
-	public static final String PAGE_SECTION = "attribute.page"; // 3
+	public static final String PAGE_SECTION = "attribute.page"; // 3 //$NON-NLS-1$
 
 	/**
 	 * the editor section id
 	 */
-	public static final String EDITOR_SECTION = "attribute.editor"; // 1
+	public static final String EDITOR_SECTION = "attribute.editor"; // 1 //$NON-NLS-1$
 
 	/**
 	 * the top section id
 	 */
-	public static final String TOP_SECTION = "top"; // 0
+	public static final String TOP_SECTION = "top"; // 0 //$NON-NLS-1$
 
 }

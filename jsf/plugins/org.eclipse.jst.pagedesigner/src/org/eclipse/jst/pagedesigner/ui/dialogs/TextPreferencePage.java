@@ -333,7 +333,7 @@ public class TextPreferencePage extends PreferencePage {
 
 		_colorField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_colorField.setLabelText(DialogsMessages
-				.getString("TextPreferencePage.Color"));
+				.getString("TextPreferencePage.Color")); //$NON-NLS-1$
 
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		_colorField.getLabelControl(null, top).setLayoutData(data);

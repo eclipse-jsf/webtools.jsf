@@ -25,7 +25,7 @@ import org.eclipse.core.runtime.content.IContentType;
 final class FacesConfigUtil {
 
 	/** Must match the id specified in plugin.xml. */
-	public static final String FACES_CONFIG_CONTENT_TYPE_ID = "org.eclipse.jst.jsf.facesconfig.facesConfigFile";
+	public static final String FACES_CONFIG_CONTENT_TYPE_ID = "org.eclipse.jst.jsf.facesconfig.facesConfigFile"; //$NON-NLS-1$
 
 	/**
 	 * Returns true iff the specified file seems to be a Faces configuration
@@ -54,7 +54,7 @@ final class FacesConfigUtil {
 	public static boolean isFacesConfigFile(IFile file, boolean ignoreNonFacesProject) {
 		
 		// Bail if it's not a .xml file.
-		if (!"xml".equalsIgnoreCase(file.getFileExtension()))
+		if (!"xml".equalsIgnoreCase(file.getFileExtension())) //$NON-NLS-1$
 			return false;
 
 		// Bail if we can't determine the project. This shouldn't be possible

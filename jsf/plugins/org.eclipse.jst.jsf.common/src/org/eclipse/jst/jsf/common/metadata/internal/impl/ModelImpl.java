@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.6 2008/02/01 20:20:47 gkessler Exp $
+ * $Id: ModelImpl.java,v 1.7 2008/11/18 22:24:39 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -42,7 +42,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getEntityGroups() <em>Entity Groups</em>}' reference list.

@@ -119,7 +119,7 @@ public class CopyEdit extends DesignEdit {
             // DOMException is the only exception that 
             // anything in the try is threatening to throw
             // and even that is Runtime
-        	_log.error("Exception", e);
+        	_log.error("Exception", e); //$NON-NLS-1$
         	return null;
         }
 	}

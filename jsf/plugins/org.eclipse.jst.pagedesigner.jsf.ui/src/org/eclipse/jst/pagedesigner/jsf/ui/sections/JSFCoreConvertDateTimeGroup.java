@@ -254,17 +254,17 @@ public class JSFCoreConvertDateTimeGroup extends AttributeGroup//AttributeGroup
         // update the model
         if (!_dateStyleField.isEnabled() || dateStyle.equalsIgnoreCase(DATESTYLES[5]))
         {
-            dateStyle = "";
+            dateStyle = ""; //$NON-NLS-1$
         }
 
         if (!_timeStyleField.isEnabled() || timeStyle.equalsIgnoreCase(TIMESTYLES[5]))
         {
-            timeStyle = "";
+            timeStyle = ""; //$NON-NLS-1$
         }
 
         if (!_patternField.isEnabled())
         {
-            pattern = "";
+            pattern = ""; //$NON-NLS-1$
 
         }
 
@@ -275,7 +275,7 @@ public class JSFCoreConvertDateTimeGroup extends AttributeGroup//AttributeGroup
         map.put(IJSFConstants.ATTR_PATTERN, pattern);
 
         ChangeAttributeCommand c = new ChangeAttributeCommand(SectionResources
-                .getString("JSFCoreConvertDateTimeSection.ChangeAttribute"), getElement(), map);
+                .getString("JSFCoreConvertDateTimeSection.ChangeAttribute"), getElement(), map); //$NON-NLS-1$
         c.execute();
     }
 }

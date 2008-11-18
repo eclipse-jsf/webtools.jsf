@@ -49,7 +49,7 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 				if (sel != null 
 						&& sel.getFirstElement() instanceof DrawerEditPart
 						&& ((DrawerEditPart)sel.getFirstElement()).getDrawer() instanceof TaglibPaletteDrawer)
-					menu.add(new HideTagLibAction((DrawerEditPart)sel.getFirstElement(), "Hide"));
+					menu.add(new HideTagLibAction((DrawerEditPart)sel.getFirstElement(), Messages.DesignerPaletteViewerProvider_Hide));
 				super.buildContextMenu(menu);
 			}
 		});
@@ -78,7 +78,7 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 				.setHelp(
 						parent,
 						PDPlugin
-								.getResourceString("DesignerPaletteViewerProvider.help.id"));
+								.getResourceString("DesignerPaletteViewerProvider.help.id")); //$NON-NLS-1$
 
 		return pViewer;
 	}

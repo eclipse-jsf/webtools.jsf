@@ -41,7 +41,7 @@ public class DynamicAttributeImpl extends EObjectImpl implements DynamicAttribut
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -216,9 +216,9 @@ public class DynamicAttributeImpl extends EObjectImpl implements DynamicAttribut
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
+        result.append(" (name: "); //$NON-NLS-1$
         result.append(name);
-        result.append(", value: ");
+        result.append(", value: "); //$NON-NLS-1$
         result.append(value);
         result.append(')');
         return result.toString();

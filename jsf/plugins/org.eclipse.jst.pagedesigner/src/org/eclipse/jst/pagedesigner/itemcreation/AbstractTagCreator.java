@@ -101,9 +101,9 @@ public abstract class AbstractTagCreator implements ITagCreator
         // maybe is not the best way. Need check whether SSE have special
         // API for it.
         if (ITLDConstants.URI_JSP.equals(creationData.getUri())
-                && (ele.getLocalName().startsWith("directive.")
-                        || "declaration".equals(ele.getLocalName())
-                        || "expression".equals(ele.getLocalName()) || "scriptlet"
+                && (ele.getLocalName().startsWith("directive.") //$NON-NLS-1$
+                        || "declaration".equals(ele.getLocalName()) //$NON-NLS-1$
+                        || "expression".equals(ele.getLocalName()) || "scriptlet" //$NON-NLS-1$ //$NON-NLS-2$
                         .equals(ele.getLocalName()))) {
             // it is a jsp tag
             ((IDOMElement) ele).setJSPTag(true);

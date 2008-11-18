@@ -117,6 +117,6 @@ public class DOMPosition implements IDOMPosition {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "DOMPosition: (" + _containerNode + " : " + _offset + ")";
+		return "DOMPosition: (" + _containerNode + " : " + _offset + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 }

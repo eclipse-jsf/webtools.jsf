@@ -46,7 +46,7 @@ public class WebrootUtil extends
 
 		IProject project = getProject(model);
 
-		String strProjectPath = "";
+		String strProjectPath = ""; //$NON-NLS-1$
 		if (strPath != null) {
 			IPath path = new Path(strPath);
 			// jsp file

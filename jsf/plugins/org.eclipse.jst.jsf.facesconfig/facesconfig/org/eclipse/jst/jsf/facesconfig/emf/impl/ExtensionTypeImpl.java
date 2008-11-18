@@ -49,7 +49,7 @@ public abstract class ExtensionTypeImpl extends EObjectImpl implements Extension
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+    public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * The cached value of the '{@link #getChildNodes() <em>Child Nodes</em>}' reference list.
@@ -257,9 +257,9 @@ public abstract class ExtensionTypeImpl extends EObjectImpl implements Extension
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (textContent: ");
+        result.append(" (textContent: "); //$NON-NLS-1$
         result.append(textContent);
-        result.append(", id: ");
+        result.append(", id: "); //$NON-NLS-1$
         result.append(id);
         result.append(')');
         return result.toString();

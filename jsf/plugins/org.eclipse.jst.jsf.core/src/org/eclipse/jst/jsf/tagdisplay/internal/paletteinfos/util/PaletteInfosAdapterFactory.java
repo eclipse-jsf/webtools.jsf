@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosAdapterFactory.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
+ * $Id: PaletteInfosAdapterFactory.java,v 1.2 2008/11/18 22:23:51 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.util;
 
@@ -28,7 +28,7 @@ public class PaletteInfosAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached model package.

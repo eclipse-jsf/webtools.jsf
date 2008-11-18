@@ -67,7 +67,7 @@ public class BackgroundPreferencePage extends PreferencePage {
 
 		_backgroundColorField = new ColorButtonDialogField(SWT.BORDER, new ColorUtil());
 		_backgroundColorField.setLabelText(DialogsMessages
-				.getString("BackgroundBoxPreferencePage.BackgroundColor"));
+				.getString("BackgroundBoxPreferencePage.BackgroundColor")); //$NON-NLS-1$
 		data = new GridData(GridData.HORIZONTAL_ALIGN_END);
 		_backgroundColorField.getLabelControl(null, top).setLayoutData(data);
 

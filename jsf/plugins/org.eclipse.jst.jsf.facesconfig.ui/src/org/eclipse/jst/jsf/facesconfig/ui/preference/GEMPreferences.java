@@ -188,20 +188,20 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 			// { GEMPlugin.getResourceString("CanvasPreferences.LABEL.Direct"),
 			// LINE_ROUTING_DIRECT }, //$NON-NLS-1$ //$NON-NLS-2$
 			{
-				PreferenceMessages.CanvasPreferences_LABEL_Manual, LINE_ROUTING_MANUAL }, //$NON-NLS-1$ //$NON-NLS-2$
+				PreferenceMessages.CanvasPreferences_LABEL_Manual, LINE_ROUTING_MANUAL },
 			{
-					PreferenceMessages.CanvasPreferences_LABEL_Manhattan, LINE_ROUTING_MANHATTAN } //$NON-NLS-1$ //$NON-NLS-2$
+					PreferenceMessages.CanvasPreferences_LABEL_Manhattan, LINE_ROUTING_MANHATTAN }
 	};
 
 	private final static String[][] m_labelPlacementLabels = {
 			{
-				PreferenceMessages.CanvasPreferences_LABEL_Top, LABEL_PLACEMENT_TOP }, //$NON-NLS-1$ //$NON-NLS-2$
+				PreferenceMessages.CanvasPreferences_LABEL_Top, LABEL_PLACEMENT_TOP },
 			{
-					PreferenceMessages.CanvasPreferences_LABEL_Bottom, LABEL_PLACEMENT_BOTTOM }, //$NON-NLS-1$ //$NON-NLS-2$
+					PreferenceMessages.CanvasPreferences_LABEL_Bottom, LABEL_PLACEMENT_BOTTOM },
 			{
-						PreferenceMessages.CanvasPreferences_LABEL_Left, LABEL_PLACEMENT_LEFT }, //$NON-NLS-1$ //$NON-NLS-2$
+						PreferenceMessages.CanvasPreferences_LABEL_Left, LABEL_PLACEMENT_LEFT },
 			{
-							PreferenceMessages.CanvasPreferences_LABEL_Right, LABEL_PLACEMENT_RIGHT } //$NON-NLS-1$ //$NON-NLS-2$
+							PreferenceMessages.CanvasPreferences_LABEL_Right, LABEL_PLACEMENT_RIGHT }
 	};
 
 	private Group canvasGroup;
@@ -325,31 +325,31 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		lineGroup = new Group(getFieldEditorParent(), SWT.NULL);
 		iconGroup = new Group(getFieldEditorParent(), SWT.NULL);
 
-		canvasGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_Canvas); //$NON-NLS-1$
+		canvasGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_Canvas);
 		canvasColor = addColorField(
 				CANVAS_COLOR,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_BackgroundColor, canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_BackgroundColor, canvasGroup);
 		addBooleanField(
 				SNAP_TO_GEOMETRY,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGeometry, canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGeometry, canvasGroup);
 		snapToGrid = addBooleanField(
 				SNAP_TO_GRID,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGrid, canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGrid, canvasGroup);
 		gridColor = addColorField(
 				GRID_COLOR,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_GridLineColor, canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_GridLineColor, canvasGroup);
 		gridWidth = addIntegerField(
 				GRID_WIDTH,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_GridWidth, canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_GridWidth, canvasGroup);
 		gridHeight = addIntegerField(
 				GRID_HEIGHT,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_GridHeight, canvasGroup); //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_GridHeight, canvasGroup);
 
-		iconGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_IconGroup); //$NON-NLS-1$
+		iconGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_IconGroup);
 		iconFont = addFontField(
 				FIGURE_LABEL_FONT,
-				PreferenceMessages.CanvasPreferenceTab_LABEL_IconLabelFont, iconGroup); //$NON-NLS-1$
-		addComboField(LABEL_PLACEMENT, PreferenceMessages.CanvasPreferenceTab_LABEL_LabelPlacement, //$NON-NLS-1$
+				PreferenceMessages.CanvasPreferenceTab_LABEL_IconLabelFont, iconGroup);
+		addComboField(LABEL_PLACEMENT, PreferenceMessages.CanvasPreferenceTab_LABEL_LabelPlacement,
 				getLabelPlacementLabels(), iconGroup);
 		// inputPortColor = addColorField(
 		// INPUT_PORT_COLOR,
@@ -362,22 +362,22 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		// .getResourceString("CanvasPreferenceTab.LABEL.OutputPortColor"),
 		// iconGroup); //$NON-NLS-1$
 
-		lineGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_LineGroup); //$NON-NLS-1$
+		lineGroup.setText(PreferenceMessages.CanvasPreferenceTab_LABEL_LineGroup);
 		showLineLabels = addBooleanField(SHOW_LINE_LABELS, PreferenceMessages.CanvasPreferenceTab_LABEL_ShowLineLabels,
 				lineGroup);
 		lineFont = addFontField(
 				LINE_LABEL_FONT,
-				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelFont, lineGroup); //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelFont, lineGroup);
 		lineLabelColor = addColorField(
 				LINE_LABEL_COLOR,
-				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelColor, lineGroup); //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelColor, lineGroup);
 		lineColor = addColorField(
 				LINE_COLOR,
-				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineColor, lineGroup); //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineColor, lineGroup);
 		addIntegerField(
 				LINE_WIDTH,
-				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineWidth, lineGroup); //$NON-NLS-1$
-		addComboField(LINE_ROUTING,  PreferenceMessages.CanvasPreferenceTab_LABEL_LineRouting, //$NON-NLS-1$
+				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineWidth, lineGroup);
+		addComboField(LINE_ROUTING,  PreferenceMessages.CanvasPreferenceTab_LABEL_LineRouting,
 				getLineRoutingLabels(), lineGroup);
 	}
 

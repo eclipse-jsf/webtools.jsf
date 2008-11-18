@@ -94,8 +94,8 @@ public class OpenEditorCommand extends Command {
 				EditorPlugin
 						.getAlerts()
 						.error(
-								"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle",
-								"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFFolderInfo");
+								"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle", //$NON-NLS-1$
+								"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFFolderInfo"); //$NON-NLS-1$
 			}
 		} else
 		// if the fileName is empty, a new jsf file should be created!
@@ -105,8 +105,8 @@ public class OpenEditorCommand extends Command {
 			// Pageflow.PageflowEditor.Alert.confirmCreateNewJSFFile = No jsp
 			// file is related with this page.
 			EditorPlugin.getAlerts().error(
-					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle",
-					"Pageflow.PageflowEditor.Alert.confirmCreateNewJSFFile");// )
+					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle", //$NON-NLS-1$
+					"Pageflow.PageflowEditor.Alert.confirmCreateNewJSFFile");// ) //$NON-NLS-1$
 		}
 	}
 
@@ -135,15 +135,15 @@ public class OpenEditorCommand extends Command {
 						// The jsf file can not be opened in the editor.
 						log
 								.error(
-										"Pageflow.PageflowEditor.Error.canNotOpenEditor4JSF",
+										"Pageflow.PageflowEditor.Error.canNotOpenEditor4JSF", //$NON-NLS-1$
 										e);
 						// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle
 						// = Open JSF File Error
 						EditorPlugin
 								.getAlerts()
 								.error(
-										"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle",
-										"Pageflow.PageflowEditor.Error.CanNotOpenEditor4JSF");
+										"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle", //$NON-NLS-1$
+										"Pageflow.PageflowEditor.Error.CanNotOpenEditor4JSF"); //$NON-NLS-1$
 					}
 				}
 			});
@@ -156,8 +156,8 @@ public class OpenEditorCommand extends Command {
 			// Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFInfo = The JSF
 			// file is not existed.
 			EditorPlugin.getAlerts().error(
-					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle",
-					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFInfo",
+					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFTitle", //$NON-NLS-1$
+					"Pageflow.PageflowEditor.Alert.errorOpenEditor4JSFInfo", //$NON-NLS-1$
 					pagePath);
 		}
 	}

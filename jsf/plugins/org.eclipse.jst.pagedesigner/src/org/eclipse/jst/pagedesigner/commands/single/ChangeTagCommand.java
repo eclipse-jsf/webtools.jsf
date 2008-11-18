@@ -71,7 +71,7 @@ public class ChangeTagCommand extends SingleNodeCommand {
 			if (ITLDConstants.URI_HTML.equals(_uri)) {
 				tag = _localTag;
 			} else if (ITLDConstants.URI_JSP.equals(_uri)) {
-				tag = "jsp:" + _localTag;
+				tag = "jsp:" + _localTag; //$NON-NLS-1$
 			} else {
 				tag = JSPUtil.getOrCreatePrefix(getModel(), _uri, null)
 						+ _localTag;

@@ -76,9 +76,9 @@ public class MetaDataModel {
 	 * Load the model.  Delegates to the strategy.
 	 */
 	public synchronized void load(){
-		StandardModelFactory.debug("> Begin Loading: "+getModelKey(), StandardModelFactory.DEBUG_MD_LOAD);
+		StandardModelFactory.debug("> Begin Loading: "+getModelKey(), StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 		strategy.load(this);
-		StandardModelFactory.debug("> End Loading: "+getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
+		StandardModelFactory.debug("> End Loading: "+getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 	}
 	
 	/**
@@ -117,7 +117,7 @@ public class MetaDataModel {
 	}
 	
 	public String toString() {
-		StringBuffer buf = new StringBuffer("MetaDataModel: ");
+		StringBuffer buf = new StringBuffer("MetaDataModel: "); //$NON-NLS-1$
 		buf.append(getModelKey());
 		return buf.toString();
 	}

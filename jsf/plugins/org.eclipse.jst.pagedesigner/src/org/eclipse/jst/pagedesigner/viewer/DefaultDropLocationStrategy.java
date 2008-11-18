@@ -165,26 +165,26 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
      */
     protected String getDropHintText(DesignPosition position)
     {
-        StringBuffer buffer = new StringBuffer("Place");
+        StringBuffer buffer = new StringBuffer("Place"); //$NON-NLS-1$
         
         EditPart prevPart = position.getSiblingEditPart(false);
         EditPart nextPart = position.getSiblingEditPart(true);
 
         if (nextPart instanceof ElementEditPart)
         {
-            buffer.append(" before ");
+            buffer.append(" before "); //$NON-NLS-1$
             buffer.append(((ElementEditPart)nextPart).getTagConvert().getHostElement().getNodeName());
-            buffer.append(",");
+            buffer.append(","); //$NON-NLS-1$
         }
         
         if (prevPart instanceof ElementEditPart)
         {
-            buffer.append(" after ");
+            buffer.append(" after "); //$NON-NLS-1$
             buffer.append(((ElementEditPart)prevPart).getTagConvert().getHostElement().getNodeName());
-            buffer.append(",");
+            buffer.append(","); //$NON-NLS-1$
         }
         
-        buffer.append(" inside ");
+        buffer.append(" inside "); //$NON-NLS-1$
         buffer.append(position.getContainerNode().getNodeName());
         
         return buffer.toString();

@@ -32,7 +32,7 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * <!-- begin-user-doc -->
@@ -5694,576 +5694,576 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
         renderKitExtensionTypeEClass.getESuperTypes().add(this.getExtensionType());
 
         // Initialize classes and features; add operations and parameters
-        initEClass(actionListenerTypeEClass, ActionListenerType.class, "ActionListenerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getActionListenerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ActionListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getActionListenerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ActionListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(applicationFactoryTypeEClass, ApplicationFactoryType.class, "ApplicationFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getApplicationFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ApplicationFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getApplicationFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ApplicationFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(applicationTypeEClass, ApplicationType.class, "ApplicationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getApplicationType_ActionListener(), this.getActionListenerType(), null, "actionListener", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_DefaultRenderKitId(), this.getDefaultRenderKitIdType(), null, "defaultRenderKitId", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_MessageBundle(), this.getMessageBundleType(), null, "messageBundle", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_NavigationHandler(), this.getNavigationHandlerType(), null, "navigationHandler", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_ViewHandler(), this.getViewHandlerType(), null, "viewHandler", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_StateManager(), this.getStateManagerType(), null, "stateManager", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_PropertyResolver(), this.getPropertyResolverType(), null, "propertyResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_VariableResolver(), this.getVariableResolverType(), null, "variableResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_LocaleConfig(), this.getLocaleConfigType(), null, "localeConfig", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getApplicationType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_ELResolver(), this.getELResolverType(), null, "eLResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_ResourceBundle(), this.getResourceBundleType(), null, "resourceBundle", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getApplicationType_ApplicationExtension(), this.getApplicationExtensionType(), null, "applicationExtension", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(attributeClassTypeEClass, AttributeClassType.class, "AttributeClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getAttributeClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, AttributeClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getAttributeClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, AttributeClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(attributeExtensionTypeEClass, AttributeExtensionType.class, "AttributeExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(attributeNameTypeEClass, AttributeNameType.class, "AttributeNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getAttributeNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, AttributeNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getAttributeNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, AttributeNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(attributeTypeEClass, AttributeType.class, "AttributeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getAttributeType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_Icon(), this.getIconType(), null, "icon", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_AttributeName(), this.getAttributeNameType(), null, "attributeName", null, 1, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_AttributeClass(), this.getAttributeClassType(), null, "attributeClass", null, 1, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_DefaultValue(), this.getDefaultValueType(), null, "defaultValue", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_SuggestedValue(), this.getSuggestedValueType(), null, "suggestedValue", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getAttributeType_AttributeExtension(), this.getAttributeExtensionType(), null, "attributeExtension", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getAttributeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(componentClassTypeEClass, ComponentClassType.class, "ComponentClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getComponentClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ComponentClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getComponentClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(componentExtensionTypeEClass, ComponentExtensionType.class, "ComponentExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(componentFamilyTypeEClass, ComponentFamilyType.class, "ComponentFamilyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getComponentFamilyType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ComponentFamilyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getComponentFamilyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentFamilyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getComponentType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_ComponentType(), this.getComponentTypeType(), null, "componentType", null, 1, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_ComponentClass(), this.getComponentClassType(), null, "componentClass", null, 1, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_Facet(), this.getFacetType(), null, "facet", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getComponentType_ComponentExtension(), this.getComponentExtensionType(), null, "componentExtension", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getComponentType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(componentTypeTypeEClass, ComponentTypeType.class, "ComponentTypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getComponentTypeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ComponentTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getComponentTypeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(converterClassTypeEClass, ConverterClassType.class, "ConverterClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getConverterClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ConverterClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getConverterClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(converterForClassTypeEClass, ConverterForClassType.class, "ConverterForClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getConverterForClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ConverterForClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getConverterForClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterForClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(converterIdTypeEClass, ConverterIdType.class, "ConverterIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getConverterIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ConverterIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getConverterIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(converterTypeEClass, ConverterType.class, "ConverterType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getConverterType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_ConverterId(), this.getConverterIdType(), null, "converterId", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_ConverterForClass(), this.getConverterForClassType(), null, "converterForClass", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_ConverterClass(), this.getConverterClassType(), null, "converterClass", null, 1, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getConverterType_ConverterExtension(), this.getConverterExtensionType(), null, "converterExtension", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getConverterType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(defaultLocaleTypeEClass, DefaultLocaleType.class, "DefaultLocaleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDefaultLocaleType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DefaultLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDefaultLocaleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DefaultLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(defaultRenderKitIdTypeEClass, DefaultRenderKitIdType.class, "DefaultRenderKitIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDefaultRenderKitIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DefaultRenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDefaultRenderKitIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DefaultRenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(defaultValueTypeEClass, DefaultValueType.class, "DefaultValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDefaultValueType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DefaultValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDefaultValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DefaultValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(descriptionTypeEClass, DescriptionType.class, "DescriptionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDescriptionType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DescriptionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDescriptionType_Lang(), theXMLTypePackage.getLanguage(), "lang", null, 0, 1, DescriptionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDescriptionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DescriptionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(displayNameTypeEClass, DisplayNameType.class, "DisplayNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDisplayNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DisplayNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDisplayNameType_Lang(), theXMLTypePackage.getLanguage(), "lang", null, 0, 1, DisplayNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDisplayNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DisplayNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDocumentRoot_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_XMLNSPrefixMap(), ecorePackage.getEStringToStringMapEntry(), null, "xMLNSPrefixMap", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_XSISchemaLocation(), ecorePackage.getEStringToStringMapEntry(), null, "xSISchemaLocation", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ActionListener(), this.getActionListenerType(), null, "actionListener", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Application(), this.getApplicationType(), null, "application", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ApplicationFactory(), this.getApplicationFactoryType(), null, "applicationFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_AttributeClass(), this.getAttributeClassType(), null, "attributeClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_AttributeExtension(), this.getAttributeExtensionType(), null, "attributeExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_AttributeName(), this.getAttributeNameType(), null, "attributeName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Component(), this.getComponentType(), null, "component", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ComponentClass(), this.getComponentClassType(), null, "componentClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ComponentExtension(), this.getComponentExtensionType(), null, "componentExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ComponentFamily(), this.getComponentFamilyType(), null, "componentFamily", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ComponentType(), this.getComponentTypeType(), null, "componentType", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Converter(), this.getConverterType(), null, "converter", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ConverterClass(), this.getConverterClassType(), null, "converterClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ConverterForClass(), this.getConverterForClassType(), null, "converterForClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ConverterId(), this.getConverterIdType(), null, "converterId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_DefaultLocale(), this.getDefaultLocaleType(), null, "defaultLocale", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_DefaultRenderKitId(), this.getDefaultRenderKitIdType(), null, "defaultRenderKitId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_DefaultValue(), this.getDefaultValueType(), null, "defaultValue", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Description(), this.getDescriptionType(), null, "description", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FacesConfig(), this.getFacesConfigType(), null, "facesConfig", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FacesContextFactory(), this.getFacesContextFactoryType(), null, "facesContextFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Facet(), this.getFacetType(), null, "facet", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FacetExtension(), this.getFacetExtensionType(), null, "facetExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FacetName(), this.getFacetNameType(), null, "facetName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Factory(), this.getFactoryType(), null, "factory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FromAction(), this.getFromActionType(), null, "fromAction", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FromOutcome(), this.getFromOutcomeType(), null, "fromOutcome", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_FromViewId(), this.getFromViewIdType(), null, "fromViewId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Icon(), this.getIconType(), null, "icon", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Key(), this.getKeyType(), null, "key", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_KeyClass(), this.getKeyClassType(), null, "keyClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_LargeIcon(), this.getLargeIconType(), null, "largeIcon", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Lifecycle(), this.getLifecycleType(), null, "lifecycle", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_LifecycleFactory(), this.getLifecycleFactoryType(), null, "lifecycleFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_LocaleConfig(), this.getLocaleConfigType(), null, "localeConfig", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ManagedBean(), this.getManagedBeanType(), null, "managedBean", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ManagedBeanClass(), this.getManagedBeanClassType(), null, "managedBeanClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ManagedBeanName(), this.getManagedBeanNameType(), null, "managedBeanName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ManagedBeanScope(), this.getManagedBeanScopeType(), null, "managedBeanScope", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ManagedProperty(), this.getManagedPropertyType(), null, "managedProperty", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_MapEntry(), this.getMapEntryType(), null, "mapEntry", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_MessageBundle(), this.getMessageBundleType(), null, "messageBundle", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_NavigationCase(), this.getNavigationCaseType(), null, "navigationCase", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_NavigationHandler(), this.getNavigationHandlerType(), null, "navigationHandler", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_NavigationRule(), this.getNavigationRuleType(), null, "navigationRule", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_PhaseListener(), this.getPhaseListenerType(), null, "phaseListener", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Property(), this.getPropertyType(), null, "property", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_PropertyClass(), this.getPropertyClassType(), null, "propertyClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_PropertyExtension(), this.getPropertyExtensionType(), null, "propertyExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_PropertyName(), this.getPropertyNameType(), null, "propertyName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_PropertyResolver(), this.getPropertyResolverType(), null, "propertyResolver", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Redirect(), this.getRedirectType(), null, "redirect", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ReferencedBean(), this.getReferencedBeanType(), null, "referencedBean", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ReferencedBeanClass(), this.getReferencedBeanClassType(), null, "referencedBeanClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ReferencedBeanName(), this.getReferencedBeanNameType(), null, "referencedBeanName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Renderer(), this.getRendererType(), null, "renderer", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RendererClass(), this.getRendererClassType(), null, "rendererClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RendererExtension(), this.getRendererExtensionType(), null, "rendererExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RendererType(), this.getRendererTypeType(), null, "rendererType", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RenderKit(), this.getRenderKitType(), null, "renderKit", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RenderKitClass(), this.getRenderKitClassType(), null, "renderKitClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RenderKitFactory(), this.getRenderKitFactoryType(), null, "renderKitFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_RenderKitId(), this.getRenderKitIdType(), null, "renderKitId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_SmallIcon(), this.getSmallIconType(), null, "smallIcon", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_StateManager(), this.getStateManagerType(), null, "stateManager", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_SuggestedValue(), this.getSuggestedValueType(), null, "suggestedValue", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_SupportedLocale(), this.getSupportedLocaleType(), null, "supportedLocale", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ToViewId(), this.getToViewIdType(), null, "toViewId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Validator(), this.getValidatorType(), null, "validator", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ValidatorClass(), this.getValidatorClassType(), null, "validatorClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ValidatorId(), this.getValidatorIdType(), null, "validatorId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_Value(), this.getValueType(), null, "value", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ValueClass(), this.getValueClassType(), null, "valueClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_VariableResolver(), this.getVariableResolverType(), null, "variableResolver", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-        initEReference(getDocumentRoot_ViewHandler(), this.getViewHandlerType(), null, "viewHandler", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-
-        initEClass(dynamicAttributeEClass, DynamicAttribute.class, "DynamicAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getDynamicAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, DynamicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDynamicAttribute_Value(), ecorePackage.getEString(), "value", null, 0, 1, DynamicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(dynamicElementEClass, DynamicElement.class, "DynamicElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getDynamicElement_ChildNodes(), this.getDynamicElement(), null, "childNodes", null, 0, -1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDynamicElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getDynamicElement_Attributes(), this.getDynamicAttribute(), null, "attributes", null, 0, -1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getDynamicElement_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(facesConfigTypeEClass, FacesConfigType.class, "FacesConfigType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getFacesConfigType_Application(), this.getApplicationType(), null, "application", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_Factory(), this.getFactoryType(), null, "factory", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_Component(), this.getComponentType(), null, "component", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_Converter(), this.getConverterType(), null, "converter", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_ManagedBean(), this.getManagedBeanType(), null, "managedBean", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_NavigationRule(), this.getNavigationRuleType(), null, "navigationRule", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_ReferencedBean(), this.getReferencedBeanType(), null, "referencedBean", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_RenderKit(), this.getRenderKitType(), null, "renderKit", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_Lifecycle(), this.getLifecycleType(), null, "lifecycle", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_Validator(), this.getValidatorType(), null, "validator", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacesConfigType_FacesConfigExtension(), this.getFacesConfigExtensionType(), null, "facesConfigExtension", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFacesConfigType_Xmlns(), theXMLTypePackage.getString(), "xmlns", "http://java.sun.com/JSF/Configuration", 0, 1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFacesConfigType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(facesContextFactoryTypeEClass, FacesContextFactoryType.class, "FacesContextFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getFacesContextFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FacesContextFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFacesContextFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacesContextFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(facetExtensionTypeEClass, FacetExtensionType.class, "FacetExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(facetNameTypeEClass, FacetNameType.class, "FacetNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getFacetNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FacetNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFacetNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacetNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(facetTypeEClass, FacetType.class, "FacetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getFacetType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacetType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacetType_Icon(), this.getIconType(), null, "icon", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacetType_FacetName(), this.getFacetNameType(), null, "facetName", null, 1, 1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFacetType_FacetExtension(), this.getFacetExtensionType(), null, "facetExtension", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFacetType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(factoryTypeEClass, FactoryType.class, "FactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getFactoryType_ApplicationFactory(), this.getApplicationFactoryType(), null, "applicationFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFactoryType_FacesContextFactory(), this.getFacesContextFactoryType(), null, "facesContextFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFactoryType_LifecycleFactory(), this.getLifecycleFactoryType(), null, "lifecycleFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFactoryType_RenderKitFactory(), this.getRenderKitFactoryType(), null, "renderKitFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getFactoryType_FactoryExtension(), this.getFactoryExtensionType(), null, "factoryExtension", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(fromActionTypeEClass, FromActionType.class, "FromActionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getFromActionType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FromActionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFromActionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FromActionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(fromOutcomeTypeEClass, FromOutcomeType.class, "FromOutcomeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getFromOutcomeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FromOutcomeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFromOutcomeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FromOutcomeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(fromViewIdTypeEClass, FromViewIdType.class, "FromViewIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getFromViewIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FromViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getFromViewIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FromViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(iconTypeEClass, IconType.class, "IconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getIconType_SmallIcon(), this.getSmallIconType(), null, "smallIcon", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getIconType_LargeIcon(), this.getLargeIconType(), null, "largeIcon", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIconType_Lang(), theXMLTypePackage.getLanguage(), "lang", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getIconType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(keyClassTypeEClass, KeyClassType.class, "KeyClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getKeyClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, KeyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getKeyClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, KeyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(keyTypeEClass, KeyType.class, "KeyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getKeyType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, KeyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getKeyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, KeyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(largeIconTypeEClass, LargeIconType.class, "LargeIconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getLargeIconType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, LargeIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getLargeIconType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LargeIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(lifecycleFactoryTypeEClass, LifecycleFactoryType.class, "LifecycleFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getLifecycleFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, LifecycleFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getLifecycleFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LifecycleFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(lifecycleTypeEClass, LifecycleType.class, "LifecycleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getLifecycleType_PhaseListener(), this.getPhaseListenerType(), null, "phaseListener", null, 0, -1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getLifecycleType_LifecycleExtension(), this.getLifecycleExtensionType(), null, "lifecycleExtension", null, 0, -1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getLifecycleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(listEntriesTypeEClass, ListEntriesType.class, "ListEntriesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getListEntriesType_ValueClass(), this.getValueClassType(), null, "valueClass", null, 0, 1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getListEntriesType_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, -1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getListEntriesType_Value(), this.getValueType(), null, "value", null, 0, -1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getListEntriesType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(localeConfigTypeEClass, LocaleConfigType.class, "LocaleConfigType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getLocaleConfigType_DefaultLocale(), this.getDefaultLocaleType(), null, "defaultLocale", null, 0, 1, LocaleConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getLocaleConfigType_SupportedLocale(), this.getSupportedLocaleType(), null, "supportedLocale", null, 0, -1, LocaleConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getLocaleConfigType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LocaleConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(managedBeanClassTypeEClass, ManagedBeanClassType.class, "ManagedBeanClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getManagedBeanClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ManagedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getManagedBeanClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(managedBeanNameTypeEClass, ManagedBeanNameType.class, "ManagedBeanNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getManagedBeanNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ManagedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getManagedBeanNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(managedBeanScopeTypeEClass, ManagedBeanScopeType.class, "ManagedBeanScopeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getManagedBeanScopeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ManagedBeanScopeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getManagedBeanScopeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanScopeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(managedBeanTypeEClass, ManagedBeanType.class, "ManagedBeanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getManagedBeanType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_ManagedBeanName(), this.getManagedBeanNameType(), null, "managedBeanName", null, 1, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_ManagedBeanClass(), this.getManagedBeanClassType(), null, "managedBeanClass", null, 1, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_ManagedBeanScope(), this.getManagedBeanScopeType(), null, "managedBeanScope", null, 1, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_ManagedProperty(), this.getManagedPropertyType(), null, "managedProperty", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedBeanType_ManagedBeanExtension(), this.getManagedBeanExtensionType(), null, "managedBeanExtension", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getManagedBeanType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(managedPropertyTypeEClass, ManagedPropertyType.class, "ManagedPropertyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getManagedPropertyType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_PropertyName(), this.getPropertyNameType(), null, "propertyName", null, 1, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_PropertyClass(), this.getPropertyClassType(), null, "propertyClass", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_Value(), this.getValueType(), null, "value", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getManagedPropertyType_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getManagedPropertyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(mapEntriesTypeEClass, MapEntriesType.class, "MapEntriesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getMapEntriesType_KeyClass(), this.getKeyClassType(), null, "keyClass", null, 0, 1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getMapEntriesType_ValueClass(), this.getValueClassType(), null, "valueClass", null, 0, 1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getMapEntriesType_MapEntry(), this.getMapEntryType(), null, "mapEntry", null, 0, -1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getMapEntriesType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(mapEntryTypeEClass, MapEntryType.class, "MapEntryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getMapEntryType_Key(), this.getKeyType(), null, "key", null, 1, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getMapEntryType_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getMapEntryType_Value(), this.getValueType(), null, "value", null, 0, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getMapEntryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(messageBundleTypeEClass, MessageBundleType.class, "MessageBundleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getMessageBundleType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, MessageBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getMessageBundleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, MessageBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(navigationCaseTypeEClass, NavigationCaseType.class, "NavigationCaseType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getNavigationCaseType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationCaseType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationCaseType_Icon(), this.getIconType(), null, "icon", null, 0, -1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationCaseType_FromAction(), this.getFromActionType(), null, "fromAction", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationCaseType_FromOutcome(), this.getFromOutcomeType(), null, "fromOutcome", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationCaseType_ToViewId(), this.getToViewIdType(), null, "toViewId", null, 1, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationCaseType_Redirect(), this.getRedirectType(), null, "redirect", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getNavigationCaseType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(navigationHandlerTypeEClass, NavigationHandlerType.class, "NavigationHandlerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getNavigationHandlerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, NavigationHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getNavigationHandlerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(navigationRuleTypeEClass, NavigationRuleType.class, "NavigationRuleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getNavigationRuleType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationRuleType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationRuleType_Icon(), this.getIconType(), null, "icon", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationRuleType_FromViewId(), this.getFromViewIdType(), null, "fromViewId", null, 0, 1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationRuleType_NavigationCase(), this.getNavigationCaseType(), null, "navigationCase", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getNavigationRuleType_NavigationRuleExtension(), this.getNavigationRuleExtensionType(), null, "navigationRuleExtension", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getNavigationRuleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(nullValueTypeEClass, NullValueType.class, "NullValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getNullValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NullValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(phaseListenerTypeEClass, PhaseListenerType.class, "PhaseListenerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getPhaseListenerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PhaseListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getPhaseListenerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PhaseListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(propertyClassTypeEClass, PropertyClassType.class, "PropertyClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getPropertyClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PropertyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getPropertyClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(propertyExtensionTypeEClass, PropertyExtensionType.class, "PropertyExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(propertyNameTypeEClass, PropertyNameType.class, "PropertyNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getPropertyNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PropertyNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getPropertyNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(propertyResolverTypeEClass, PropertyResolverType.class, "PropertyResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getPropertyResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PropertyResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getPropertyResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(propertyTypeEClass, PropertyType.class, "PropertyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getPropertyType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_Icon(), this.getIconType(), null, "icon", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_PropertyName(), this.getPropertyNameType(), null, "propertyName", null, 1, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_PropertyClass(), this.getPropertyClassType(), null, "propertyClass", null, 1, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_DefaultValue(), this.getDefaultValueType(), null, "defaultValue", null, 0, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_SuggestedValue(), this.getSuggestedValueType(), null, "suggestedValue", null, 0, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getPropertyType_PropertyExtension(), this.getPropertyExtensionType(), null, "propertyExtension", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getPropertyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(redirectTypeEClass, RedirectType.class, "RedirectType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRedirectType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RedirectType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(referencedBeanClassTypeEClass, ReferencedBeanClassType.class, "ReferencedBeanClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getReferencedBeanClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ReferencedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getReferencedBeanClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ReferencedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(referencedBeanNameTypeEClass, ReferencedBeanNameType.class, "ReferencedBeanNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getReferencedBeanNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ReferencedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getReferencedBeanNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ReferencedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(referencedBeanTypeEClass, ReferencedBeanType.class, "ReferencedBeanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getReferencedBeanType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getReferencedBeanType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getReferencedBeanType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getReferencedBeanType_ReferencedBeanName(), this.getReferencedBeanNameType(), null, "referencedBeanName", null, 1, 1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getReferencedBeanType_ReferencedBeanClass(), this.getReferencedBeanClassType(), null, "referencedBeanClass", null, 1, 1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getReferencedBeanType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(rendererClassTypeEClass, RendererClassType.class, "RendererClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRendererClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RendererClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRendererClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RendererClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(rendererExtensionTypeEClass, RendererExtensionType.class, "RendererExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(rendererTypeEClass, RendererType.class, "RendererType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getRendererType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_Icon(), this.getIconType(), null, "icon", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_ComponentFamily(), this.getComponentFamilyType(), null, "componentFamily", null, 1, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_RendererType(), this.getRendererTypeType(), null, "rendererType", null, 1, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_RendererClass(), this.getRendererClassType(), null, "rendererClass", null, 1, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_Facet(), this.getFacetType(), null, "facet", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRendererType_RendererExtension(), this.getRendererExtensionType(), null, "rendererExtension", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRendererType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(rendererTypeTypeEClass, RendererTypeType.class, "RendererTypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRendererTypeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RendererTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRendererTypeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RendererTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(renderKitClassTypeEClass, RenderKitClassType.class, "RenderKitClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRenderKitClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RenderKitClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRenderKitClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(renderKitFactoryTypeEClass, RenderKitFactoryType.class, "RenderKitFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRenderKitFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RenderKitFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRenderKitFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(renderKitIdTypeEClass, RenderKitIdType.class, "RenderKitIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRenderKitIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRenderKitIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(renderKitTypeEClass, RenderKitType.class, "RenderKitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getRenderKitType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRenderKitType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRenderKitType_Icon(), this.getIconType(), null, "icon", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRenderKitType_RenderKitId(), this.getRenderKitIdType(), null, "renderKitId", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRenderKitType_RenderKitClass(), this.getRenderKitClassType(), null, "renderKitClass", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRenderKitType_Renderer(), this.getRendererType(), null, "renderer", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRenderKitType_RenderKitExtension(), this.getRenderKitExtensionType(), null, "renderKitExtension", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getRenderKitType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(smallIconTypeEClass, SmallIconType.class, "SmallIconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getSmallIconType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, SmallIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getSmallIconType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, SmallIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(stateManagerTypeEClass, StateManagerType.class, "StateManagerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getStateManagerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, StateManagerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getStateManagerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, StateManagerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(suggestedValueTypeEClass, SuggestedValueType.class, "SuggestedValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getSuggestedValueType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, SuggestedValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getSuggestedValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, SuggestedValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(supportedLocaleTypeEClass, SupportedLocaleType.class, "SupportedLocaleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getSupportedLocaleType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, SupportedLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getSupportedLocaleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, SupportedLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(toViewIdTypeEClass, ToViewIdType.class, "ToViewIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getToViewIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ToViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getToViewIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ToViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(validatorClassTypeEClass, ValidatorClassType.class, "ValidatorClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getValidatorClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValidatorClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getValidatorClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(validatorIdTypeEClass, ValidatorIdType.class, "ValidatorIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getValidatorIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValidatorIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getValidatorIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(validatorTypeEClass, ValidatorType.class, "ValidatorType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getValidatorType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_ValidatorId(), this.getValidatorIdType(), null, "validatorId", null, 1, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_ValidatorClass(), this.getValidatorClassType(), null, "validatorClass", null, 1, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getValidatorType_ValidatorExtension(), this.getValidatorExtensionType(), null, "validatorExtension", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getValidatorType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(valueClassTypeEClass, ValueClassType.class, "ValueClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getValueClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValueClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getValueClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValueClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(valueTypeEClass, ValueType.class, "ValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getValueType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(variableResolverTypeEClass, VariableResolverType.class, "VariableResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getVariableResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, VariableResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getVariableResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, VariableResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(viewHandlerTypeEClass, ViewHandlerType.class, "ViewHandlerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getViewHandlerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ViewHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getViewHandlerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ViewHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(extensionTypeEClass, ExtensionType.class, "ExtensionType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getExtensionType_ChildNodes(), this.getDynamicElement(), null, "childNodes", null, 0, -1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getExtensionType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getExtensionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(applicationExtensionTypeEClass, ApplicationExtensionType.class, "ApplicationExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(converterExtensionTypeEClass, ConverterExtensionType.class, "ConverterExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(elResolverTypeEClass, ELResolverType.class, "ELResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getELResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ELResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getELResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ELResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(facesConfigExtensionTypeEClass, FacesConfigExtensionType.class, "FacesConfigExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(factoryExtensionTypeEClass, FactoryExtensionType.class, "FactoryExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(lifecycleExtensionTypeEClass, LifecycleExtensionType.class, "LifecycleExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(managedBeanExtensionTypeEClass, ManagedBeanExtensionType.class, "ManagedBeanExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(navigationRuleExtensionTypeEClass, NavigationRuleExtensionType.class, "NavigationRuleExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(validatorExtensionTypeEClass, ValidatorExtensionType.class, "ValidatorExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-        initEClass(resourceBundleTypeEClass, ResourceBundleType.class, "ResourceBundleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getResourceBundleType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getResourceBundleType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getResourceBundleType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getResourceBundleType_BaseName(), this.getBaseNameType(), null, "baseName", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getResourceBundleType_Var(), this.getVarType(), null, "var", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getResourceBundleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(baseNameTypeEClass, BaseNameType.class, "BaseNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getBaseNameType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, BaseNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getBaseNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, BaseNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(varTypeEClass, VarType.class, "VarType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getVarType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, VarType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getVarType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, VarType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(renderKitExtensionTypeEClass, RenderKitExtensionType.class, "RenderKitExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEClass(actionListenerTypeEClass, ActionListenerType.class, "ActionListenerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getActionListenerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ActionListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getActionListenerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ActionListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(applicationFactoryTypeEClass, ApplicationFactoryType.class, "ApplicationFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getApplicationFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ApplicationFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getApplicationFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ApplicationFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(applicationTypeEClass, ApplicationType.class, "ApplicationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getApplicationType_ActionListener(), this.getActionListenerType(), null, "actionListener", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_DefaultRenderKitId(), this.getDefaultRenderKitIdType(), null, "defaultRenderKitId", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_MessageBundle(), this.getMessageBundleType(), null, "messageBundle", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_NavigationHandler(), this.getNavigationHandlerType(), null, "navigationHandler", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_ViewHandler(), this.getViewHandlerType(), null, "viewHandler", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_StateManager(), this.getStateManagerType(), null, "stateManager", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_PropertyResolver(), this.getPropertyResolverType(), null, "propertyResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_VariableResolver(), this.getVariableResolverType(), null, "variableResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_LocaleConfig(), this.getLocaleConfigType(), null, "localeConfig", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getApplicationType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_ELResolver(), this.getELResolverType(), null, "eLResolver", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_ResourceBundle(), this.getResourceBundleType(), null, "resourceBundle", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getApplicationType_ApplicationExtension(), this.getApplicationExtensionType(), null, "applicationExtension", null, 0, -1, ApplicationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(attributeClassTypeEClass, AttributeClassType.class, "AttributeClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getAttributeClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, AttributeClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getAttributeClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, AttributeClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(attributeExtensionTypeEClass, AttributeExtensionType.class, "AttributeExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(attributeNameTypeEClass, AttributeNameType.class, "AttributeNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getAttributeNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, AttributeNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getAttributeNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, AttributeNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(attributeTypeEClass, AttributeType.class, "AttributeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getAttributeType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_Icon(), this.getIconType(), null, "icon", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_AttributeName(), this.getAttributeNameType(), null, "attributeName", null, 1, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_AttributeClass(), this.getAttributeClassType(), null, "attributeClass", null, 1, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_DefaultValue(), this.getDefaultValueType(), null, "defaultValue", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_SuggestedValue(), this.getSuggestedValueType(), null, "suggestedValue", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getAttributeType_AttributeExtension(), this.getAttributeExtensionType(), null, "attributeExtension", null, 0, -1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getAttributeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, AttributeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(componentClassTypeEClass, ComponentClassType.class, "ComponentClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getComponentClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ComponentClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getComponentClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(componentExtensionTypeEClass, ComponentExtensionType.class, "ComponentExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(componentFamilyTypeEClass, ComponentFamilyType.class, "ComponentFamilyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getComponentFamilyType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ComponentFamilyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getComponentFamilyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentFamilyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(componentTypeEClass, ComponentType.class, "ComponentType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getComponentType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_ComponentType(), this.getComponentTypeType(), null, "componentType", null, 1, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_ComponentClass(), this.getComponentClassType(), null, "componentClass", null, 1, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_Facet(), this.getFacetType(), null, "facet", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getComponentType_ComponentExtension(), this.getComponentExtensionType(), null, "componentExtension", null, 0, -1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getComponentType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(componentTypeTypeEClass, ComponentTypeType.class, "ComponentTypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getComponentTypeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ComponentTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getComponentTypeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ComponentTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(converterClassTypeEClass, ConverterClassType.class, "ConverterClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getConverterClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ConverterClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getConverterClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(converterForClassTypeEClass, ConverterForClassType.class, "ConverterForClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getConverterForClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ConverterForClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getConverterForClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterForClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(converterIdTypeEClass, ConverterIdType.class, "ConverterIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getConverterIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ConverterIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getConverterIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(converterTypeEClass, ConverterType.class, "ConverterType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getConverterType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_ConverterId(), this.getConverterIdType(), null, "converterId", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_ConverterForClass(), this.getConverterForClassType(), null, "converterForClass", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_ConverterClass(), this.getConverterClassType(), null, "converterClass", null, 1, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getConverterType_ConverterExtension(), this.getConverterExtensionType(), null, "converterExtension", null, 0, -1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getConverterType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ConverterType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(defaultLocaleTypeEClass, DefaultLocaleType.class, "DefaultLocaleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDefaultLocaleType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DefaultLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDefaultLocaleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DefaultLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(defaultRenderKitIdTypeEClass, DefaultRenderKitIdType.class, "DefaultRenderKitIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDefaultRenderKitIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DefaultRenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDefaultRenderKitIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DefaultRenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(defaultValueTypeEClass, DefaultValueType.class, "DefaultValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDefaultValueType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DefaultValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDefaultValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DefaultValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(descriptionTypeEClass, DescriptionType.class, "DescriptionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDescriptionType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DescriptionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDescriptionType_Lang(), theXMLTypePackage.getLanguage(), "lang", null, 0, 1, DescriptionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDescriptionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DescriptionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(displayNameTypeEClass, DisplayNameType.class, "DisplayNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDisplayNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, DisplayNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDisplayNameType_Lang(), theXMLTypePackage.getLanguage(), "lang", null, 0, 1, DisplayNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDisplayNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, DisplayNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDocumentRoot_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_XMLNSPrefixMap(), ecorePackage.getEStringToStringMapEntry(), null, "xMLNSPrefixMap", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_XSISchemaLocation(), ecorePackage.getEStringToStringMapEntry(), null, "xSISchemaLocation", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ActionListener(), this.getActionListenerType(), null, "actionListener", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Application(), this.getApplicationType(), null, "application", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ApplicationFactory(), this.getApplicationFactoryType(), null, "applicationFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_AttributeClass(), this.getAttributeClassType(), null, "attributeClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_AttributeExtension(), this.getAttributeExtensionType(), null, "attributeExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_AttributeName(), this.getAttributeNameType(), null, "attributeName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Component(), this.getComponentType(), null, "component", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ComponentClass(), this.getComponentClassType(), null, "componentClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ComponentExtension(), this.getComponentExtensionType(), null, "componentExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ComponentFamily(), this.getComponentFamilyType(), null, "componentFamily", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ComponentType(), this.getComponentTypeType(), null, "componentType", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Converter(), this.getConverterType(), null, "converter", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ConverterClass(), this.getConverterClassType(), null, "converterClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ConverterForClass(), this.getConverterForClassType(), null, "converterForClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ConverterId(), this.getConverterIdType(), null, "converterId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_DefaultLocale(), this.getDefaultLocaleType(), null, "defaultLocale", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_DefaultRenderKitId(), this.getDefaultRenderKitIdType(), null, "defaultRenderKitId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_DefaultValue(), this.getDefaultValueType(), null, "defaultValue", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Description(), this.getDescriptionType(), null, "description", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FacesConfig(), this.getFacesConfigType(), null, "facesConfig", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FacesContextFactory(), this.getFacesContextFactoryType(), null, "facesContextFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Facet(), this.getFacetType(), null, "facet", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FacetExtension(), this.getFacetExtensionType(), null, "facetExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FacetName(), this.getFacetNameType(), null, "facetName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Factory(), this.getFactoryType(), null, "factory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FromAction(), this.getFromActionType(), null, "fromAction", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FromOutcome(), this.getFromOutcomeType(), null, "fromOutcome", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_FromViewId(), this.getFromViewIdType(), null, "fromViewId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Icon(), this.getIconType(), null, "icon", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Key(), this.getKeyType(), null, "key", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_KeyClass(), this.getKeyClassType(), null, "keyClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_LargeIcon(), this.getLargeIconType(), null, "largeIcon", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Lifecycle(), this.getLifecycleType(), null, "lifecycle", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_LifecycleFactory(), this.getLifecycleFactoryType(), null, "lifecycleFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_LocaleConfig(), this.getLocaleConfigType(), null, "localeConfig", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ManagedBean(), this.getManagedBeanType(), null, "managedBean", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ManagedBeanClass(), this.getManagedBeanClassType(), null, "managedBeanClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ManagedBeanName(), this.getManagedBeanNameType(), null, "managedBeanName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ManagedBeanScope(), this.getManagedBeanScopeType(), null, "managedBeanScope", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ManagedProperty(), this.getManagedPropertyType(), null, "managedProperty", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_MapEntry(), this.getMapEntryType(), null, "mapEntry", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_MessageBundle(), this.getMessageBundleType(), null, "messageBundle", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_NavigationCase(), this.getNavigationCaseType(), null, "navigationCase", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_NavigationHandler(), this.getNavigationHandlerType(), null, "navigationHandler", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_NavigationRule(), this.getNavigationRuleType(), null, "navigationRule", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_PhaseListener(), this.getPhaseListenerType(), null, "phaseListener", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Property(), this.getPropertyType(), null, "property", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_PropertyClass(), this.getPropertyClassType(), null, "propertyClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_PropertyExtension(), this.getPropertyExtensionType(), null, "propertyExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_PropertyName(), this.getPropertyNameType(), null, "propertyName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_PropertyResolver(), this.getPropertyResolverType(), null, "propertyResolver", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Redirect(), this.getRedirectType(), null, "redirect", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ReferencedBean(), this.getReferencedBeanType(), null, "referencedBean", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ReferencedBeanClass(), this.getReferencedBeanClassType(), null, "referencedBeanClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ReferencedBeanName(), this.getReferencedBeanNameType(), null, "referencedBeanName", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Renderer(), this.getRendererType(), null, "renderer", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RendererClass(), this.getRendererClassType(), null, "rendererClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RendererExtension(), this.getRendererExtensionType(), null, "rendererExtension", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RendererType(), this.getRendererTypeType(), null, "rendererType", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RenderKit(), this.getRenderKitType(), null, "renderKit", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RenderKitClass(), this.getRenderKitClassType(), null, "renderKitClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RenderKitFactory(), this.getRenderKitFactoryType(), null, "renderKitFactory", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_RenderKitId(), this.getRenderKitIdType(), null, "renderKitId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_SmallIcon(), this.getSmallIconType(), null, "smallIcon", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_StateManager(), this.getStateManagerType(), null, "stateManager", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_SuggestedValue(), this.getSuggestedValueType(), null, "suggestedValue", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_SupportedLocale(), this.getSupportedLocaleType(), null, "supportedLocale", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ToViewId(), this.getToViewIdType(), null, "toViewId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Validator(), this.getValidatorType(), null, "validator", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ValidatorClass(), this.getValidatorClassType(), null, "validatorClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ValidatorId(), this.getValidatorIdType(), null, "validatorId", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_Value(), this.getValueType(), null, "value", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ValueClass(), this.getValueClassType(), null, "valueClass", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_VariableResolver(), this.getVariableResolverType(), null, "variableResolver", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDocumentRoot_ViewHandler(), this.getViewHandlerType(), null, "viewHandler", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(dynamicAttributeEClass, DynamicAttribute.class, "DynamicAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getDynamicAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, DynamicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDynamicAttribute_Value(), ecorePackage.getEString(), "value", null, 0, 1, DynamicAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(dynamicElementEClass, DynamicElement.class, "DynamicElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getDynamicElement_ChildNodes(), this.getDynamicElement(), null, "childNodes", null, 0, -1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDynamicElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getDynamicElement_Attributes(), this.getDynamicAttribute(), null, "attributes", null, 0, -1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getDynamicElement_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, DynamicElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(facesConfigTypeEClass, FacesConfigType.class, "FacesConfigType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getFacesConfigType_Application(), this.getApplicationType(), null, "application", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_Factory(), this.getFactoryType(), null, "factory", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_Component(), this.getComponentType(), null, "component", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_Converter(), this.getConverterType(), null, "converter", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_ManagedBean(), this.getManagedBeanType(), null, "managedBean", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_NavigationRule(), this.getNavigationRuleType(), null, "navigationRule", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_ReferencedBean(), this.getReferencedBeanType(), null, "referencedBean", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_RenderKit(), this.getRenderKitType(), null, "renderKit", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_Lifecycle(), this.getLifecycleType(), null, "lifecycle", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_Validator(), this.getValidatorType(), null, "validator", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacesConfigType_FacesConfigExtension(), this.getFacesConfigExtensionType(), null, "facesConfigExtension", null, 0, -1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFacesConfigType_Xmlns(), theXMLTypePackage.getString(), "xmlns", "http://java.sun.com/JSF/Configuration", 0, 1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+        initEAttribute(getFacesConfigType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacesConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(facesContextFactoryTypeEClass, FacesContextFactoryType.class, "FacesContextFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getFacesContextFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FacesContextFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFacesContextFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacesContextFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(facetExtensionTypeEClass, FacetExtensionType.class, "FacetExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(facetNameTypeEClass, FacetNameType.class, "FacetNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getFacetNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FacetNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFacetNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacetNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(facetTypeEClass, FacetType.class, "FacetType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getFacetType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacetType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacetType_Icon(), this.getIconType(), null, "icon", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacetType_FacetName(), this.getFacetNameType(), null, "facetName", null, 1, 1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFacetType_FacetExtension(), this.getFacetExtensionType(), null, "facetExtension", null, 0, -1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFacetType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FacetType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(factoryTypeEClass, FactoryType.class, "FactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getFactoryType_ApplicationFactory(), this.getApplicationFactoryType(), null, "applicationFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFactoryType_FacesContextFactory(), this.getFacesContextFactoryType(), null, "facesContextFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFactoryType_LifecycleFactory(), this.getLifecycleFactoryType(), null, "lifecycleFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFactoryType_RenderKitFactory(), this.getRenderKitFactoryType(), null, "renderKitFactory", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getFactoryType_FactoryExtension(), this.getFactoryExtensionType(), null, "factoryExtension", null, 0, -1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(fromActionTypeEClass, FromActionType.class, "FromActionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getFromActionType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FromActionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFromActionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FromActionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(fromOutcomeTypeEClass, FromOutcomeType.class, "FromOutcomeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getFromOutcomeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FromOutcomeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFromOutcomeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FromOutcomeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(fromViewIdTypeEClass, FromViewIdType.class, "FromViewIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getFromViewIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, FromViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getFromViewIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, FromViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(iconTypeEClass, IconType.class, "IconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getIconType_SmallIcon(), this.getSmallIconType(), null, "smallIcon", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getIconType_LargeIcon(), this.getLargeIconType(), null, "largeIcon", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIconType_Lang(), theXMLTypePackage.getLanguage(), "lang", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getIconType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, IconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(keyClassTypeEClass, KeyClassType.class, "KeyClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getKeyClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, KeyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getKeyClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, KeyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(keyTypeEClass, KeyType.class, "KeyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getKeyType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, KeyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getKeyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, KeyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(largeIconTypeEClass, LargeIconType.class, "LargeIconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getLargeIconType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, LargeIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getLargeIconType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LargeIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(lifecycleFactoryTypeEClass, LifecycleFactoryType.class, "LifecycleFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getLifecycleFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, LifecycleFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getLifecycleFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LifecycleFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(lifecycleTypeEClass, LifecycleType.class, "LifecycleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getLifecycleType_PhaseListener(), this.getPhaseListenerType(), null, "phaseListener", null, 0, -1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getLifecycleType_LifecycleExtension(), this.getLifecycleExtensionType(), null, "lifecycleExtension", null, 0, -1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getLifecycleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LifecycleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(listEntriesTypeEClass, ListEntriesType.class, "ListEntriesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getListEntriesType_ValueClass(), this.getValueClassType(), null, "valueClass", null, 0, 1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getListEntriesType_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, -1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getListEntriesType_Value(), this.getValueType(), null, "value", null, 0, -1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getListEntriesType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ListEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(localeConfigTypeEClass, LocaleConfigType.class, "LocaleConfigType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getLocaleConfigType_DefaultLocale(), this.getDefaultLocaleType(), null, "defaultLocale", null, 0, 1, LocaleConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getLocaleConfigType_SupportedLocale(), this.getSupportedLocaleType(), null, "supportedLocale", null, 0, -1, LocaleConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getLocaleConfigType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, LocaleConfigType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(managedBeanClassTypeEClass, ManagedBeanClassType.class, "ManagedBeanClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getManagedBeanClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ManagedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getManagedBeanClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(managedBeanNameTypeEClass, ManagedBeanNameType.class, "ManagedBeanNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getManagedBeanNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ManagedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getManagedBeanNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(managedBeanScopeTypeEClass, ManagedBeanScopeType.class, "ManagedBeanScopeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getManagedBeanScopeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ManagedBeanScopeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getManagedBeanScopeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanScopeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(managedBeanTypeEClass, ManagedBeanType.class, "ManagedBeanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getManagedBeanType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_ManagedBeanName(), this.getManagedBeanNameType(), null, "managedBeanName", null, 1, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_ManagedBeanClass(), this.getManagedBeanClassType(), null, "managedBeanClass", null, 1, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_ManagedBeanScope(), this.getManagedBeanScopeType(), null, "managedBeanScope", null, 1, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_ManagedProperty(), this.getManagedPropertyType(), null, "managedProperty", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedBeanType_ManagedBeanExtension(), this.getManagedBeanExtensionType(), null, "managedBeanExtension", null, 0, -1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getManagedBeanType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(managedPropertyTypeEClass, ManagedPropertyType.class, "ManagedPropertyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_PropertyName(), this.getPropertyNameType(), null, "propertyName", null, 1, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_PropertyClass(), this.getPropertyClassType(), null, "propertyClass", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_MapEntries(), this.getMapEntriesType(), null, "mapEntries", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_Value(), this.getValueType(), null, "value", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getManagedPropertyType_ListEntries(), this.getListEntriesType(), null, "listEntries", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getManagedPropertyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ManagedPropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(mapEntriesTypeEClass, MapEntriesType.class, "MapEntriesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getMapEntriesType_KeyClass(), this.getKeyClassType(), null, "keyClass", null, 0, 1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getMapEntriesType_ValueClass(), this.getValueClassType(), null, "valueClass", null, 0, 1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getMapEntriesType_MapEntry(), this.getMapEntryType(), null, "mapEntry", null, 0, -1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getMapEntriesType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, MapEntriesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(mapEntryTypeEClass, MapEntryType.class, "MapEntryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getMapEntryType_Key(), this.getKeyType(), null, "key", null, 1, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getMapEntryType_NullValue(), this.getNullValueType(), null, "nullValue", null, 0, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getMapEntryType_Value(), this.getValueType(), null, "value", null, 0, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getMapEntryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, MapEntryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(messageBundleTypeEClass, MessageBundleType.class, "MessageBundleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getMessageBundleType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, MessageBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getMessageBundleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, MessageBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(navigationCaseTypeEClass, NavigationCaseType.class, "NavigationCaseType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_Icon(), this.getIconType(), null, "icon", null, 0, -1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_FromAction(), this.getFromActionType(), null, "fromAction", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_FromOutcome(), this.getFromOutcomeType(), null, "fromOutcome", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_ToViewId(), this.getToViewIdType(), null, "toViewId", null, 1, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationCaseType_Redirect(), this.getRedirectType(), null, "redirect", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getNavigationCaseType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationCaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(navigationHandlerTypeEClass, NavigationHandlerType.class, "NavigationHandlerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getNavigationHandlerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, NavigationHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getNavigationHandlerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(navigationRuleTypeEClass, NavigationRuleType.class, "NavigationRuleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getNavigationRuleType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationRuleType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationRuleType_Icon(), this.getIconType(), null, "icon", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationRuleType_FromViewId(), this.getFromViewIdType(), null, "fromViewId", null, 0, 1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationRuleType_NavigationCase(), this.getNavigationCaseType(), null, "navigationCase", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getNavigationRuleType_NavigationRuleExtension(), this.getNavigationRuleExtensionType(), null, "navigationRuleExtension", null, 0, -1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getNavigationRuleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NavigationRuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(nullValueTypeEClass, NullValueType.class, "NullValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getNullValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, NullValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(phaseListenerTypeEClass, PhaseListenerType.class, "PhaseListenerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getPhaseListenerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PhaseListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getPhaseListenerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PhaseListenerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(propertyClassTypeEClass, PropertyClassType.class, "PropertyClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getPropertyClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PropertyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getPropertyClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(propertyExtensionTypeEClass, PropertyExtensionType.class, "PropertyExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(propertyNameTypeEClass, PropertyNameType.class, "PropertyNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getPropertyNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PropertyNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getPropertyNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(propertyResolverTypeEClass, PropertyResolverType.class, "PropertyResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getPropertyResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, PropertyResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getPropertyResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(propertyTypeEClass, PropertyType.class, "PropertyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getPropertyType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_Icon(), this.getIconType(), null, "icon", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_PropertyName(), this.getPropertyNameType(), null, "propertyName", null, 1, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_PropertyClass(), this.getPropertyClassType(), null, "propertyClass", null, 1, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_DefaultValue(), this.getDefaultValueType(), null, "defaultValue", null, 0, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_SuggestedValue(), this.getSuggestedValueType(), null, "suggestedValue", null, 0, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getPropertyType_PropertyExtension(), this.getPropertyExtensionType(), null, "propertyExtension", null, 0, -1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getPropertyType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(redirectTypeEClass, RedirectType.class, "RedirectType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getRedirectType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RedirectType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(referencedBeanClassTypeEClass, ReferencedBeanClassType.class, "ReferencedBeanClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getReferencedBeanClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ReferencedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getReferencedBeanClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ReferencedBeanClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(referencedBeanNameTypeEClass, ReferencedBeanNameType.class, "ReferencedBeanNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getReferencedBeanNameType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ReferencedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getReferencedBeanNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ReferencedBeanNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(referencedBeanTypeEClass, ReferencedBeanType.class, "ReferencedBeanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getReferencedBeanType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getReferencedBeanType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getReferencedBeanType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getReferencedBeanType_ReferencedBeanName(), this.getReferencedBeanNameType(), null, "referencedBeanName", null, 1, 1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getReferencedBeanType_ReferencedBeanClass(), this.getReferencedBeanClassType(), null, "referencedBeanClass", null, 1, 1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getReferencedBeanType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ReferencedBeanType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(rendererClassTypeEClass, RendererClassType.class, "RendererClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getRendererClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RendererClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRendererClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RendererClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(rendererExtensionTypeEClass, RendererExtensionType.class, "RendererExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(rendererTypeEClass, RendererType.class, "RendererType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getRendererType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_Icon(), this.getIconType(), null, "icon", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_ComponentFamily(), this.getComponentFamilyType(), null, "componentFamily", null, 1, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_RendererType(), this.getRendererTypeType(), null, "rendererType", null, 1, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_RendererClass(), this.getRendererClassType(), null, "rendererClass", null, 1, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_Facet(), this.getFacetType(), null, "facet", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRendererType_RendererExtension(), this.getRendererExtensionType(), null, "rendererExtension", null, 0, -1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRendererType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RendererType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(rendererTypeTypeEClass, RendererTypeType.class, "RendererTypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getRendererTypeType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RendererTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRendererTypeType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RendererTypeType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(renderKitClassTypeEClass, RenderKitClassType.class, "RenderKitClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getRenderKitClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RenderKitClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRenderKitClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(renderKitFactoryTypeEClass, RenderKitFactoryType.class, "RenderKitFactoryType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getRenderKitFactoryType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RenderKitFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRenderKitFactoryType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitFactoryType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(renderKitIdTypeEClass, RenderKitIdType.class, "RenderKitIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getRenderKitIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, RenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRenderKitIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(renderKitTypeEClass, RenderKitType.class, "RenderKitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getRenderKitType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRenderKitType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRenderKitType_Icon(), this.getIconType(), null, "icon", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRenderKitType_RenderKitId(), this.getRenderKitIdType(), null, "renderKitId", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRenderKitType_RenderKitClass(), this.getRenderKitClassType(), null, "renderKitClass", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRenderKitType_Renderer(), this.getRendererType(), null, "renderer", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getRenderKitType_RenderKitExtension(), this.getRenderKitExtensionType(), null, "renderKitExtension", null, 0, -1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getRenderKitType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, RenderKitType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(smallIconTypeEClass, SmallIconType.class, "SmallIconType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getSmallIconType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, SmallIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getSmallIconType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, SmallIconType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(stateManagerTypeEClass, StateManagerType.class, "StateManagerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getStateManagerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, StateManagerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getStateManagerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, StateManagerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(suggestedValueTypeEClass, SuggestedValueType.class, "SuggestedValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getSuggestedValueType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, SuggestedValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getSuggestedValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, SuggestedValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(supportedLocaleTypeEClass, SupportedLocaleType.class, "SupportedLocaleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getSupportedLocaleType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, SupportedLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getSupportedLocaleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, SupportedLocaleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(toViewIdTypeEClass, ToViewIdType.class, "ToViewIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getToViewIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ToViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getToViewIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ToViewIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(validatorClassTypeEClass, ValidatorClassType.class, "ValidatorClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getValidatorClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValidatorClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getValidatorClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(validatorIdTypeEClass, ValidatorIdType.class, "ValidatorIdType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getValidatorIdType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValidatorIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getValidatorIdType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorIdType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(validatorTypeEClass, ValidatorType.class, "ValidatorType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getValidatorType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_ValidatorId(), this.getValidatorIdType(), null, "validatorId", null, 1, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_ValidatorClass(), this.getValidatorClassType(), null, "validatorClass", null, 1, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_Attribute(), this.getAttributeType(), null, "attribute", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_Property(), this.getPropertyType(), null, "property", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getValidatorType_ValidatorExtension(), this.getValidatorExtensionType(), null, "validatorExtension", null, 0, -1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getValidatorType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValidatorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(valueClassTypeEClass, ValueClassType.class, "ValueClassType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getValueClassType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValueClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getValueClassType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValueClassType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(valueTypeEClass, ValueType.class, "ValueType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getValueType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getValueType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ValueType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(variableResolverTypeEClass, VariableResolverType.class, "VariableResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getVariableResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, VariableResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getVariableResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, VariableResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(viewHandlerTypeEClass, ViewHandlerType.class, "ViewHandlerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getViewHandlerType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ViewHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getViewHandlerType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ViewHandlerType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(extensionTypeEClass, ExtensionType.class, "ExtensionType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getExtensionType_ChildNodes(), this.getDynamicElement(), null, "childNodes", null, 0, -1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getExtensionType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getExtensionType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ExtensionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(applicationExtensionTypeEClass, ApplicationExtensionType.class, "ApplicationExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(converterExtensionTypeEClass, ConverterExtensionType.class, "ConverterExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(elResolverTypeEClass, ELResolverType.class, "ELResolverType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getELResolverType_TextContent(), theXMLTypePackage.getString(), "textContent", null, 0, 1, ELResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getELResolverType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ELResolverType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(facesConfigExtensionTypeEClass, FacesConfigExtensionType.class, "FacesConfigExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(factoryExtensionTypeEClass, FactoryExtensionType.class, "FactoryExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(lifecycleExtensionTypeEClass, LifecycleExtensionType.class, "LifecycleExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(managedBeanExtensionTypeEClass, ManagedBeanExtensionType.class, "ManagedBeanExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(navigationRuleExtensionTypeEClass, NavigationRuleExtensionType.class, "NavigationRuleExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(validatorExtensionTypeEClass, ValidatorExtensionType.class, "ValidatorExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+
+        initEClass(resourceBundleTypeEClass, ResourceBundleType.class, "ResourceBundleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEReference(getResourceBundleType_Description(), this.getDescriptionType(), null, "description", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getResourceBundleType_DisplayName(), this.getDisplayNameType(), null, "displayName", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getResourceBundleType_Icon(), this.getIconType(), null, "icon", null, 0, -1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getResourceBundleType_BaseName(), this.getBaseNameType(), null, "baseName", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEReference(getResourceBundleType_Var(), this.getVarType(), null, "var", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getResourceBundleType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, ResourceBundleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(baseNameTypeEClass, BaseNameType.class, "BaseNameType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getBaseNameType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, BaseNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getBaseNameType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, BaseNameType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(varTypeEClass, VarType.class, "VarType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+        initEAttribute(getVarType_TextContent(), ecorePackage.getEString(), "textContent", null, 0, 1, VarType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+        initEAttribute(getVarType_Id(), theXMLTypePackage.getID(), "id", null, 0, 1, VarType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+        initEClass(renderKitExtensionTypeEClass, RenderKitExtensionType.class, "RenderKitExtensionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
         // Create resource
         createResource(eNS_URI);
@@ -6280,3558 +6280,3558 @@ public class FacesConfigPackageImpl extends EPackageImpl implements FacesConfigP
      * @generated
      */
 	protected void createExtendedMetaDataAnnotations() {
-        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			
+        String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			 //$NON-NLS-1$
         addAnnotation
           (this, 
            source, 
            new String[] {
-             "qualified", "false"
+             "qualified", "false" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (actionListenerTypeEClass, 
            source, 
            new String[] {
-             "name", "action-listener_._type",
-             "kind", "simple"
+             "name", "action-listener_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getActionListenerType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getActionListenerType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (applicationFactoryTypeEClass, 
            source, 
            new String[] {
-             "name", "application-factory_._type",
-             "kind", "simple"
+             "name", "application-factory_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationFactoryType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationFactoryType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (applicationTypeEClass, 
            source, 
            new String[] {
-             "name", "application_._type",
-             "kind", "elementOnly"
+             "name", "application_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_ActionListener(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "action-listener",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "action-listener", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_DefaultRenderKitId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-render-kit-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-render-kit-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_MessageBundle(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "message-bundle",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "message-bundle", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_NavigationHandler(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-handler",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-handler", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_ViewHandler(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "view-handler",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "view-handler", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_StateManager(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "state-manager",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "state-manager", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_PropertyResolver(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-resolver",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-resolver", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_VariableResolver(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "variable-resolver",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "variable-resolver", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_LocaleConfig(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "locale-config",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "locale-config", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_ELResolver(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "el-resolver",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "el-resolver", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_ResourceBundle(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "resource-bundle",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "resource-bundle", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getApplicationType_ApplicationExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "application-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "application-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (applicationExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "application-extension_._type"
+             "name", "application-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (attributeClassTypeEClass, 
            source, 
            new String[] {
-             "name", "attribute-class_._type",
-             "kind", "simple"
+             "name", "attribute-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (attributeExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "attribute-extension_._type"
+             "name", "attribute-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (attributeNameTypeEClass, 
            source, 
            new String[] {
-             "name", "attribute-name_._type",
-             "kind", "simple"
+             "name", "attribute-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (attributeTypeEClass, 
            source, 
            new String[] {
-             "name", "attribute_._type",
-             "kind", "elementOnly"
+             "name", "attribute_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_AttributeName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_AttributeClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_DefaultValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_SuggestedValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "suggested-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "suggested-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_AttributeExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getAttributeType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (componentClassTypeEClass, 
            source, 
            new String[] {
-             "name", "component-class_._type",
-             "kind", "simple"
+             "name", "component-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (componentExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "component-extension_._type"
+             "name", "component-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (componentFamilyTypeEClass, 
            source, 
            new String[] {
-             "name", "component-family_._type",
-             "kind", "simple"
+             "name", "component-family_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentFamilyType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentFamilyType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (componentTypeEClass, 
            source, 
            new String[] {
-             "name", "component_._type",
-             "kind", "elementOnly"
+             "name", "component_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_ComponentType(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-type",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-type", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_ComponentClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_Facet(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_Attribute(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_Property(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_ComponentExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (componentTypeTypeEClass, 
            source, 
            new String[] {
-             "name", "component-type_._type",
-             "kind", "simple"
+             "name", "component-type_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentTypeType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getComponentTypeType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (converterClassTypeEClass, 
            source, 
            new String[] {
-             "name", "converter-class_._type",
-             "kind", "simple"
+             "name", "converter-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (converterForClassTypeEClass, 
            source, 
            new String[] {
-             "name", "converter-for-class_._type",
-             "kind", "simple"
+             "name", "converter-for-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterForClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterForClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (converterIdTypeEClass, 
            source, 
            new String[] {
-             "name", "converter-id_._type",
-             "kind", "simple"
+             "name", "converter-id_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterIdType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterIdType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (converterTypeEClass, 
            source, 
            new String[] {
-             "name", "converter_._type",
-             "kind", "elementOnly"
+             "name", "converter_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_ConverterId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_ConverterForClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-for-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-for-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_ConverterClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_Attribute(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_Property(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_ConverterExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getConverterType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (converterExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "converter-extension_._type"
+             "name", "converter-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (defaultLocaleTypeEClass, 
            source, 
            new String[] {
-             "name", "default-locale_._type",
-             "kind", "simple"
+             "name", "default-locale_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDefaultLocaleType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDefaultLocaleType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (defaultRenderKitIdTypeEClass, 
            source, 
            new String[] {
-             "name", "default-render-kit-id_._type",
-             "kind", "simple"
+             "name", "default-render-kit-id_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDefaultRenderKitIdType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDefaultRenderKitIdType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (defaultValueTypeEClass, 
            source, 
            new String[] {
-             "name", "default-value_._type",
-             "kind", "simple"
+             "name", "default-value_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDefaultValueType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDefaultValueType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (descriptionTypeEClass, 
            source, 
            new String[] {
-             "name", "description_._type",
-             "kind", "simple"
+             "name", "description_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDescriptionType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDescriptionType_Lang(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "lang",
-             "namespace", "http://www.w3.org/XML/1998/namespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lang", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "http://www.w3.org/XML/1998/namespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDescriptionType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (displayNameTypeEClass, 
            source, 
            new String[] {
-             "name", "display-name_._type",
-             "kind", "simple"
+             "name", "display-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDisplayNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDisplayNameType_Lang(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "lang",
-             "namespace", "http://www.w3.org/XML/1998/namespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lang", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "http://www.w3.org/XML/1998/namespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDisplayNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (documentRootEClass, 
            source, 
            new String[] {
-             "name", "",
-             "kind", "mixed"
+             "name", "", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "mixed" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDocumentRoot_Mixed(), 
            source, 
            new String[] {
-             "kind", "elementWildcard",
-             "name", ":mixed"
+             "kind", "elementWildcard", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", ":mixed" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDocumentRoot_XMLNSPrefixMap(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "xmlns:prefix"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "xmlns:prefix" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getDocumentRoot_XSISchemaLocation(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "xsi:schemaLocation"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "xsi:schemaLocation" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ActionListener(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "action-listener",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "action-listener", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Application(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "application",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "application", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ApplicationFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "application-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "application-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Attribute(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_AttributeClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_AttributeExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_AttributeName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Component(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ComponentClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ComponentExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ComponentFamily(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-family",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-family", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ComponentType(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-type",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-type", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Converter(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ConverterClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ConverterForClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-for-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-for-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ConverterId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_DefaultLocale(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-locale",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-locale", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_DefaultRenderKitId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-render-kit-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-render-kit-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_DefaultValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FacesConfig(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "faces-config",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "faces-config", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FacesContextFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "faces-context-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "faces-context-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Facet(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FacetExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FacetName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Factory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FromAction(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "from-action",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "from-action", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FromOutcome(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "from-outcome",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "from-outcome", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_FromViewId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "from-view-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "from-view-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Key(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "key",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "key", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_KeyClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "key-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "key-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_LargeIcon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "large-icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "large-icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Lifecycle(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "lifecycle",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lifecycle", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_LifecycleFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "lifecycle-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lifecycle-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ListEntries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "list-entries",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "list-entries", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_LocaleConfig(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "locale-config",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "locale-config", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ManagedBean(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ManagedBeanClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ManagedBeanName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ManagedBeanScope(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-scope",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-scope", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ManagedProperty(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-property",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-property", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_MapEntries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "map-entries",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "map-entries", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_MapEntry(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "map-entry",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "map-entry", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_MessageBundle(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "message-bundle",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "message-bundle", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_NavigationCase(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-case",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-case", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_NavigationHandler(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-handler",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-handler", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_NavigationRule(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-rule",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-rule", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_NullValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "null-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "null-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_PhaseListener(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "phase-listener",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "phase-listener", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Property(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_PropertyClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_PropertyExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_PropertyName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_PropertyResolver(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-resolver",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-resolver", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Redirect(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "redirect",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "redirect", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ReferencedBean(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "referenced-bean",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "referenced-bean", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ReferencedBeanClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "referenced-bean-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "referenced-bean-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ReferencedBeanName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "referenced-bean-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "referenced-bean-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Renderer(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RendererClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RendererExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RendererType(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer-type",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer-type", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RenderKit(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RenderKitClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RenderKitFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_RenderKitId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_SmallIcon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "small-icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "small-icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_StateManager(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "state-manager",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "state-manager", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_SuggestedValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "suggested-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "suggested-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_SupportedLocale(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "supported-locale",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "supported-locale", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ToViewId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "to-view-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "to-view-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Validator(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ValidatorClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ValidatorId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_Value(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ValueClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_VariableResolver(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "variable-resolver",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "variable-resolver", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });			
         addAnnotation
           (getDocumentRoot_ViewHandler(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "view-handler",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "view-handler", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (elResolverTypeEClass, 
            source, 
            new String[] {
-             "name", "el-resolver_._type",
-             "kind", "simple"
+             "name", "el-resolver_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getELResolverType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getELResolverType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getExtensionType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getExtensionType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (facesConfigTypeEClass, 
            source, 
            new String[] {
-             "name", "faces-config_._type",
-             "kind", "elementOnly"
+             "name", "faces-config_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Application(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "application",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "application", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Factory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Component(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Converter(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "converter",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "converter", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_ManagedBean(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_NavigationRule(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-rule",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-rule", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_ReferencedBean(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "referenced-bean",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "referenced-bean", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_RenderKit(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Lifecycle(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "lifecycle",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lifecycle", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Validator(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_FacesConfigExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "faces-config-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "faces-config-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Xmlns(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "xmlns",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "xmlns", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesConfigType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (facesConfigExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "faces-config-extension_._type"
+             "name", "faces-config-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (facesContextFactoryTypeEClass, 
            source, 
            new String[] {
-             "name", "faces-context-factory_._type",
-             "kind", "simple"
+             "name", "faces-context-factory_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesContextFactoryType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacesContextFactoryType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (facetExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "facet-extension_._type"
+             "name", "facet-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (facetNameTypeEClass, 
            source, 
            new String[] {
-             "name", "facet-name_._type",
-             "kind", "simple"
+             "name", "facet-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (facetTypeEClass, 
            source, 
            new String[] {
-             "name", "facet_._type",
-             "kind", "elementOnly"
+             "name", "facet_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetType_FacetName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetType_FacetExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFacetType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (factoryTypeEClass, 
            source, 
            new String[] {
-             "name", "factory_._type",
-             "kind", "elementOnly"
+             "name", "factory_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFactoryType_ApplicationFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "application-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "application-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFactoryType_FacesContextFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "faces-context-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "faces-context-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFactoryType_LifecycleFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "lifecycle-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lifecycle-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFactoryType_RenderKitFactory(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-factory",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-factory", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFactoryType_FactoryExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "factory-type",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "factory-type", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFactoryType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (factoryExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "factory-extension_._type"
+             "name", "factory-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (fromActionTypeEClass, 
            source, 
            new String[] {
-             "name", "from-action_._type",
-             "kind", "simple"
+             "name", "from-action_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFromActionType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFromActionType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (fromOutcomeTypeEClass, 
            source, 
            new String[] {
-             "name", "from-outcome_._type",
-             "kind", "simple"
+             "name", "from-outcome_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFromOutcomeType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFromOutcomeType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (fromViewIdTypeEClass, 
            source, 
            new String[] {
-             "name", "from-view-id_._type",
-             "kind", "simple"
+             "name", "from-view-id_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFromViewIdType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getFromViewIdType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (iconTypeEClass, 
            source, 
            new String[] {
-             "name", "icon_._type",
-             "kind", "empty"
+             "name", "icon_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "empty" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getIconType_SmallIcon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "small-icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "small-icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getIconType_LargeIcon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "large-icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "large-icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getIconType_Lang(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "lang",
-             "namespace", "http://www.w3.org/XML/1998/namespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lang", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "http://www.w3.org/XML/1998/namespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getIconType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (keyClassTypeEClass, 
            source, 
            new String[] {
-             "name", "key-class_._type",
-             "kind", "simple"
+             "name", "key-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getKeyClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getKeyClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (keyTypeEClass, 
            source, 
            new String[] {
-             "name", "key_._type",
-             "kind", "simple"
+             "name", "key_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getKeyType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getKeyType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (largeIconTypeEClass, 
            source, 
            new String[] {
-             "name", "large-icon_._type",
-             "kind", "simple"
+             "name", "large-icon_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLargeIconType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLargeIconType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (lifecycleFactoryTypeEClass, 
            source, 
            new String[] {
-             "name", "lifecycle-factory_._type",
-             "kind", "simple"
+             "name", "lifecycle-factory_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLifecycleFactoryType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLifecycleFactoryType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (lifecycleTypeEClass, 
            source, 
            new String[] {
-             "name", "lifecycle_._type",
-             "kind", "elementOnly"
+             "name", "lifecycle_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLifecycleType_PhaseListener(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "phase-listener",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "phase-listener", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLifecycleType_LifecycleExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "lifecycle-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "lifecycle-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLifecycleType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (lifecycleExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "lifecycle-extension_._type"
+             "name", "lifecycle-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (listEntriesTypeEClass, 
            source, 
            new String[] {
-             "name", "list-entries_._type",
-             "kind", "elementOnly"
+             "name", "list-entries_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getListEntriesType_ValueClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getListEntriesType_NullValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "null-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "null-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getListEntriesType_Value(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getListEntriesType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (localeConfigTypeEClass, 
            source, 
            new String[] {
-             "name", "locale-config_._type",
-             "kind", "elementOnly"
+             "name", "locale-config_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLocaleConfigType_DefaultLocale(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-locale",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-locale", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLocaleConfigType_SupportedLocale(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "supported-locale",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "supported-locale", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getLocaleConfigType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (managedBeanClassTypeEClass, 
            source, 
            new String[] {
-             "name", "managed-bean-class_._type",
-             "kind", "simple"
+             "name", "managed-bean-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (managedBeanNameTypeEClass, 
            source, 
            new String[] {
-             "name", "managed-bean-name_._type",
-             "kind", "simple"
+             "name", "managed-bean-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (managedBeanScopeTypeEClass, 
            source, 
            new String[] {
-             "name", "managed-bean-scope_._type",
-             "kind", "simple"
+             "name", "managed-bean-scope_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanScopeType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanScopeType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (managedBeanTypeEClass, 
            source, 
            new String[] {
-             "name", "managed-bean_._type",
-             "kind", "elementOnly"
+             "name", "managed-bean_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_ManagedBeanName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_ManagedBeanClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_ManagedBeanScope(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-scope",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-scope", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_ManagedProperty(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-property",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-property", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_MapEntries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "map-entries",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "map-entries", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_ListEntries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "list-entries",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "list-entries", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_ManagedBeanExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "managed-bean-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "managed-bean-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedBeanType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (managedBeanExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "managed-bean-extension_._type"
+             "name", "managed-bean-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (managedPropertyTypeEClass, 
            source, 
            new String[] {
-             "name", "managed-property_._type",
-             "kind", "elementOnly"
+             "name", "managed-property_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_PropertyName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_PropertyClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_MapEntries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "map-entries",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "map-entries", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_NullValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "null-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "null-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_Value(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_ListEntries(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "list-entries",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "list-entries", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getManagedPropertyType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (mapEntriesTypeEClass, 
            source, 
            new String[] {
-             "name", "map-entries_._type",
-             "kind", "elementOnly"
+             "name", "map-entries_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntriesType_KeyClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "key-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "key-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntriesType_ValueClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntriesType_MapEntry(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "map-entry",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "map-entry", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntriesType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (mapEntryTypeEClass, 
            source, 
            new String[] {
-             "name", "map-entry_._type",
-             "kind", "empty"
+             "name", "map-entry_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "empty" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntryType_Key(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "key",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "key", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntryType_NullValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "null-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "null-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntryType_Value(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMapEntryType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (messageBundleTypeEClass, 
            source, 
            new String[] {
-             "name", "message-bundle_._type",
-             "kind", "simple"
+             "name", "message-bundle_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMessageBundleType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getMessageBundleType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (navigationCaseTypeEClass, 
            source, 
            new String[] {
-             "name", "navigation-case_._type",
-             "kind", "elementOnly"
+             "name", "navigation-case_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_FromAction(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "from-action",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "from-action", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_FromOutcome(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "from-outcome",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "from-outcome", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_ToViewId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "to-view-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "to-view-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_Redirect(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "redirect",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "redirect", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationCaseType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (navigationHandlerTypeEClass, 
            source, 
            new String[] {
-             "name", "navigation-handler_._type",
-             "kind", "simple"
+             "name", "navigation-handler_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationHandlerType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationHandlerType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (navigationRuleTypeEClass, 
            source, 
            new String[] {
-             "name", "navigation-rule_._type",
-             "kind", "elementOnly"
+             "name", "navigation-rule_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_FromViewId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "from-view-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "from-view-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_NavigationCase(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-case",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-case", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_NavigationRuleExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "navigation-rule-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "navigation-rule-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNavigationRuleType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (navigationRuleExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "navigation-rule-extension_._type"
+             "name", "navigation-rule-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (nullValueTypeEClass, 
            source, 
            new String[] {
-             "name", "null-value_._type",
-             "kind", "empty"
+             "name", "null-value_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "empty" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getNullValueType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (phaseListenerTypeEClass, 
            source, 
            new String[] {
-             "name", "phase-listener_._type",
-             "kind", "simple"
+             "name", "phase-listener_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPhaseListenerType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPhaseListenerType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (propertyClassTypeEClass, 
            source, 
            new String[] {
-             "name", "property-class_._type",
-             "kind", "simple"
+             "name", "property-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (propertyExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "property-extension_._type"
+             "name", "property-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (propertyNameTypeEClass, 
            source, 
            new String[] {
-             "name", "property-name_._type",
-             "kind", "simple"
+             "name", "property-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (propertyResolverTypeEClass, 
            source, 
            new String[] {
-             "name", "property-resolver_._type",
-             "kind", "simple"
+             "name", "property-resolver_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyResolverType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyResolverType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (propertyTypeEClass, 
            source, 
            new String[] {
-             "name", "property_._type",
-             "kind", "elementOnly"
+             "name", "property_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_PropertyName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_PropertyClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_DefaultValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "default-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "default-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_SuggestedValue(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "suggested-value",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "suggested-value", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_PropertyExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getPropertyType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (redirectTypeEClass, 
            source, 
            new String[] {
-             "name", "redirect_._type",
-             "kind", "empty"
+             "name", "redirect_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "empty" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRedirectType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (referencedBeanClassTypeEClass, 
            source, 
            new String[] {
-             "name", "referenced-bean-class_._type",
-             "kind", "simple"
+             "name", "referenced-bean-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (referencedBeanNameTypeEClass, 
            source, 
            new String[] {
-             "name", "referenced-bean-name_._type",
-             "kind", "simple"
+             "name", "referenced-bean-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (referencedBeanTypeEClass, 
            source, 
            new String[] {
-             "name", "referenced-bean_._type",
-             "kind", "elementOnly"
+             "name", "referenced-bean_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanType_ReferencedBeanName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "referenced-bean-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "referenced-bean-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanType_ReferencedBeanClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "referenced-bean-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "referenced-bean-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getReferencedBeanType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (rendererClassTypeEClass, 
            source, 
            new String[] {
-             "name", "renderer-class_._type",
-             "kind", "simple"
+             "name", "renderer-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (rendererExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "renderer-extension_._type"
+             "name", "renderer-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (rendererTypeEClass, 
            source, 
            new String[] {
-             "name", "renderer_._type",
-             "kind", "elementOnly"
+             "name", "renderer_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_ComponentFamily(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "component-family",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "component-family", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_RendererType(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer-type",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer-type", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_RendererClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_Facet(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "facet",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "facet", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_Attribute(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_RendererExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (rendererTypeTypeEClass, 
            source, 
            new String[] {
-             "name", "renderer-type_._type",
-             "kind", "simple"
+             "name", "renderer-type_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererTypeType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRendererTypeType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (renderKitClassTypeEClass, 
            source, 
            new String[] {
-             "name", "render-kit-class_._type",
-             "kind", "simple"
+             "name", "render-kit-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (renderKitFactoryTypeEClass, 
            source, 
            new String[] {
-             "name", "render-kit-factory_._type",
-             "kind", "simple"
+             "name", "render-kit-factory_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitFactoryType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitFactoryType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (renderKitIdTypeEClass, 
            source, 
            new String[] {
-             "name", "render-kit-id_._type",
-             "kind", "simple"
+             "name", "render-kit-id_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitIdType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitIdType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (renderKitTypeEClass, 
            source, 
            new String[] {
-             "name", "render-kit_._type",
-             "kind", "elementOnly"
+             "name", "render-kit_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_RenderKitId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_RenderKitClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_Renderer(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "renderer",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "renderer", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_RenderKitExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "render-kit-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "render-kit-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getRenderKitType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (renderKitExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "render-kit-extension_._type"
+             "name", "render-kit-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (smallIconTypeEClass, 
            source, 
            new String[] {
-             "name", "small-icon_._type",
-             "kind", "simple"
+             "name", "small-icon_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSmallIconType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSmallIconType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (stateManagerTypeEClass, 
            source, 
            new String[] {
-             "name", "state-manager_._type",
-             "kind", "simple"
+             "name", "state-manager_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getStateManagerType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getStateManagerType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (suggestedValueTypeEClass, 
            source, 
            new String[] {
-             "name", "suggested-value_._type",
-             "kind", "simple"
+             "name", "suggested-value_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSuggestedValueType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSuggestedValueType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (supportedLocaleTypeEClass, 
            source, 
            new String[] {
-             "name", "supported-locale_._type",
-             "kind", "simple"
+             "name", "supported-locale_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSupportedLocaleType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getSupportedLocaleType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (toViewIdTypeEClass, 
            source, 
            new String[] {
-             "name", "to-view-id_._type",
-             "kind", "simple"
+             "name", "to-view-id_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getToViewIdType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getToViewIdType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (validatorClassTypeEClass, 
            source, 
            new String[] {
-             "name", "validator-class_._type",
-             "kind", "simple"
+             "name", "validator-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (validatorIdTypeEClass, 
            source, 
            new String[] {
-             "name", "validator-id_._type",
-             "kind", "simple"
+             "name", "validator-id_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorIdType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorIdType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (validatorTypeEClass, 
            source, 
            new String[] {
-             "name", "validator_._type",
-             "kind", "elementOnly"
+             "name", "validator_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_ValidatorId(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator-id",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator-id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_ValidatorClass(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator-class",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator-class", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_Attribute(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "attribute",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_Property(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "property",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "property", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_ValidatorExtension(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "validator-extension",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "validator-extension", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValidatorType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (validatorExtensionTypeEClass, 
            source, 
            new String[] {
-             "name", "validator-extension_._type"
+             "name", "validator-extension_._type" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (valueClassTypeEClass, 
            source, 
            new String[] {
-             "name", "value-class_._type",
-             "kind", "simple"
+             "name", "value-class_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValueClassType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValueClassType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (valueTypeEClass, 
            source, 
            new String[] {
-             "name", "value_._type",
-             "kind", "simple"
+             "name", "value_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValueType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getValueType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (variableResolverTypeEClass, 
            source, 
            new String[] {
-             "name", "variable-resolver_._type",
-             "kind", "simple"
+             "name", "variable-resolver_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getVariableResolverType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getVariableResolverType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (viewHandlerTypeEClass, 
            source, 
            new String[] {
-             "name", "view-handler_._type",
-             "kind", "simple"
+             "name", "view-handler_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getViewHandlerType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getViewHandlerType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (resourceBundleTypeEClass, 
            source, 
            new String[] {
-             "name", "resourceBundle_._type",
-             "kind", "elementOnly"
+             "name", "resourceBundle_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "elementOnly" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getResourceBundleType_Description(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "description",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "description", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getResourceBundleType_DisplayName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "display-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "display-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getResourceBundleType_Icon(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "icon",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "icon", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getResourceBundleType_BaseName(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "base-name",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "base-name", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getResourceBundleType_Var(), 
            source, 
            new String[] {
-             "kind", "element",
-             "name", "var",
-             "namespace", "##targetNamespace"
+             "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "var", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getResourceBundleType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (baseNameTypeEClass, 
            source, 
            new String[] {
-             "name", "base-name_._type",
-             "kind", "simple"
+             "name", "base-name_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getBaseNameType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getBaseNameType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (varTypeEClass, 
            source, 
            new String[] {
-             "name", "var_._type",
-             "kind", "simple"
+             "name", "var_._type", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getVarType_TextContent(), 
            source, 
            new String[] {
-             "name", ":0",
-             "kind", "simple"
+             "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
+             "kind", "simple" //$NON-NLS-1$ //$NON-NLS-2$
            });		
         addAnnotation
           (getVarType_Id(), 
            source, 
            new String[] {
-             "kind", "attribute",
-             "name", "id",
-             "namespace", "##targetNamespace"
+             "kind", "attribute", //$NON-NLS-1$ //$NON-NLS-2$
+             "name", "id", //$NON-NLS-1$ //$NON-NLS-2$
+             "namespace", "##targetNamespace" //$NON-NLS-1$ //$NON-NLS-2$
            });
     }
 

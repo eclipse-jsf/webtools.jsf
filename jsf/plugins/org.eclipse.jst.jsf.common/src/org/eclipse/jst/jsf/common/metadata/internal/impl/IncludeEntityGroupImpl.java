@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncludeEntityGroupImpl.java,v 1.2 2007/04/16 19:54:10 itrimble Exp $
+ * $Id: IncludeEntityGroupImpl.java,v 1.3 2008/11/18 22:24:39 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -33,7 +33,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -208,9 +208,9 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
+		result.append(" (id: "); //$NON-NLS-1$
 		result.append(id);
-		result.append(", modelUri: ");
+		result.append(", modelUri: "); //$NON-NLS-1$
 		result.append(modelUri);
 		result.append(')');
 		return result.toString();

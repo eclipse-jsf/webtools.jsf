@@ -85,7 +85,7 @@ class PropertyNameValidationVisitor extends EObjectValidationVisitor
                 {
                     final EStructuralFeature feature =
                         parentClassTypeObject.eClass()
-                            .getEStructuralFeature("textContent");
+                            .getEStructuralFeature("textContent"); //$NON-NLS-1$
                     
                     if (feature != null)
                     {

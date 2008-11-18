@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
 import org.eclipse.jst.jsf.core.internal.TagRegistryFactoryInfo;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TagRegistryInstance;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 
 /**
@@ -30,7 +31,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class TagRegistryDetailsForm extends AbstractXMLSectionsDetailsForm
 {
-    private final static String TAGREGISTRY_SECTION_KEY = "tagRegistrySection";
+    private final static String TAGREGISTRY_SECTION_KEY = "tagRegistrySection"; //$NON-NLS-1$
     private XMLTextSection      _tagRegistrySection;
 
     @Override
@@ -39,7 +40,7 @@ public class TagRegistryDetailsForm extends AbstractXMLSectionsDetailsForm
     {
         final Map<String, XMLTextSection> sections = new HashMap<String, XMLTextSection>();
         _tagRegistrySection = new XMLTextSection(getToolkit(), parent,
-                "Namespace");
+                Messages.TagRegistryDetailsForm_Namespace);
         sections.put(TAGREGISTRY_SECTION_KEY, _tagRegistrySection);
         return sections;
     }
@@ -61,16 +62,15 @@ public class TagRegistryDetailsForm extends AbstractXMLSectionsDetailsForm
 
             if (info != null)
             {
-                final String format = "<form><p><b>Description:</b> %s</p> <p><b>Id:</b> %s</p> <p><b>Content-Types:</b> %s</p></form>";
                 final String description = info.getDescription();
                 final String id = info.getId();
                 final Set<IContentType> contentTypes = info.getContentTypes();
-                String contentTypeLabel = "";
+                String contentTypeLabel = ""; //$NON-NLS-1$
                 final Iterator<IContentType> it = contentTypes.iterator();
                 for (int i = 0; i < contentTypes.size() - 1 && it.hasNext(); i++)
                 {
                     final IContentType ctype = it.next();
-                    contentTypeLabel += ctype.getName() + ",";
+                    contentTypeLabel += ctype.getName() + ","; //$NON-NLS-1$
                 }
 
                 if (it.hasNext())
@@ -78,9 +78,14 @@ public class TagRegistryDetailsForm extends AbstractXMLSectionsDetailsForm
                     final IContentType ctype = it.next();
                     contentTypeLabel += ctype.getName();
                 }
-
-                _tagRegistrySection.setText(String.format(format, description,
-                        id, contentTypeLabel), true, false);
+                
+                String[] bindings = new String[3];
+                bindings[0] = description;
+                bindings[1] = id; 
+                bindings[2] = contentTypeLabel;
+                String text = NLS.bind(Messages.TagRegistryDetailsForm_SectionText, bindings);
+                _tagRegistrySection.setText(text, true, false);
+                
                 _tagRegistrySection.refresh();
             }
         }

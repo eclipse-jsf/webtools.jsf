@@ -73,7 +73,7 @@ public class TraitValueHelper {
 	private static String getTextValueFromFeatureMap(FeatureMap map) {
 		for (Iterator it=map.iterator();it.hasNext();){
 			FeatureMap.Entry entry = (FeatureMap.Entry)it.next();
-			if (entry.getEStructuralFeature().getName().equals("text"))		
+			if (entry.getEStructuralFeature().getName().equals("text"))		 //$NON-NLS-1$
 				return (String)entry.getValue();
 		}
 		return null;
@@ -132,7 +132,7 @@ public class TraitValueHelper {
 	 */
 	public static String getNLSValue(Trait trait, String rawValue) {
 		String result = rawValue;
-		if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){ 
+		if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){  //$NON-NLS-1$ //$NON-NLS-2$
 			String key = rawValue.substring(1);
 			result = getNLSPropertyValue(trait, key);	
 			if (result == null){

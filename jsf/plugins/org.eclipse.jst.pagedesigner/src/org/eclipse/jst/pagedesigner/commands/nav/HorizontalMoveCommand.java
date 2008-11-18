@@ -98,7 +98,7 @@ public class HorizontalMoveCommand extends Command implements
 		DesignRange range = _viewer.getRangeSelection();
 
 		if (range == null || !range.isValid()) {
-			_log.error("invalud range");
+			_log.error("invalid range"); //$NON-NLS-1$
 			return null;
 		}
 

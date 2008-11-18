@@ -93,7 +93,7 @@ public class CaretMoveIterator {
 	public IDOMPosition moveIn(Node node) {
 		IDOMPosition result = null;
 		if (INNER_DEBUG) {
-			_log.info("- Move into: " + node.getLocalName());
+			_log.info("- Move into: " + node.getLocalName()); //$NON-NLS-1$
 		}
 		if (_validator.isEditable(new Target(node))) {
 			int index;

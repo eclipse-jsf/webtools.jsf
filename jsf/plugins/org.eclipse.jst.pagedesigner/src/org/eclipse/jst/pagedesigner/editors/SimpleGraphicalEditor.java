@@ -149,7 +149,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		_viewer = IHTMLGraphicalViewer.Factory.createGraphicalViewer(this);
 		Control control = _viewer.createControl(parent);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(control,
-				PDPlugin.getResourceString("SimpleGraphicalEditor.help.id"));
+				PDPlugin.getResourceString("SimpleGraphicalEditor.help.id")); //$NON-NLS-1$
 		setGraphicalViewer(_viewer);
 		configureGraphicalViewer();
 		hookGraphicalViewer();

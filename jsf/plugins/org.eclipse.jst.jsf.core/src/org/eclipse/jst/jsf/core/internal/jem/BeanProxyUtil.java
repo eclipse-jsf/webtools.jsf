@@ -421,7 +421,7 @@ public final class BeanProxyUtil
                 _checkedType = true;
                 final String typeName = _typeProxy.getTypeName();
                 final IJavaProject javaProject = JavaCore.create(_project);
-                if (typeName != null && typeName.startsWith("L"))
+                if (typeName != null && typeName.startsWith("L")) //$NON-NLS-1$
                 {
                     _type = TypeUtil.resolveType(javaProject, typeName);
                 }
@@ -433,7 +433,7 @@ public final class BeanProxyUtil
                     } 
                     catch (JavaModelException e) 
                     {
-                        JSFCorePlugin.log(e, "While loading type: "+typeName);
+                        JSFCorePlugin.log(e, "While loading type: "+typeName); //$NON-NLS-1$
                     }
                 }
             }

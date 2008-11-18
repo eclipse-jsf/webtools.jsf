@@ -40,7 +40,7 @@ public class DialogFieldFactory
     	Object project = data.getParamMap().get(AttributeData.Project);
     	Entity attrEntity = null;
     	if (project instanceof IProject){
-    		attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(TaglibDomainMetaDataQueryHelper.createMetaDataModelContext((IProject)project, data.getUri()), data.getElementName()+"/"+data.getAttributeName());
+    		attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(TaglibDomainMetaDataQueryHelper.createMetaDataModelContext((IProject)project, data.getUri()), data.getElementName()+"/"+data.getAttributeName()); //$NON-NLS-1$
     	}
 
         if(attrEntity != null)
@@ -125,27 +125,27 @@ public class DialogFieldFactory
     public static String getDialogFieldLabel(AttributeData data)
     {
         String name = data.getAttributeName();
-        int gap = 'a' - 'A';//$NON-NLS-1$ //$NON-NLS-2$
+        int gap = 'a' - 'A';
         if(name != null)
         {
             char[] chars = name.toCharArray();
             char[] newChars = new char[chars.length*2];
             if(chars.length > 0)
             {
-                newChars[0] = chars[0] >= 'a' ? (char)(chars[0] - gap) : chars[0];//$NON-NLS-1$
+                newChars[0] = chars[0] >= 'a' ? (char)(chars[0] - gap) : chars[0];
             }
             int newPos = 1;
             for(int i=1; i<chars.length; i++,newPos++)
             {
-                if(chars[i] >= 'A' && chars[i] <= 'Z')//$NON-NLS-1$ //$NON-NLS-2$
+                if(chars[i] >= 'A' && chars[i] <= 'Z')
                 {
-                    newChars[newPos++] = ' ';//$NON-NLS-1$
+                    newChars[newPos++] = ' ';
                 }
                 newChars[newPos] = chars[i];
             }
             char[] labelChars = new char[newPos + 1];
             System.arraycopy(newChars,0,labelChars,0,newPos);
-            labelChars[newPos] = ':';//$NON-NLS-1$
+            labelChars[newPos] = ':';
             return new String(labelChars);
         }
         return "";//$NON-NLS-1$

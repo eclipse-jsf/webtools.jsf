@@ -27,7 +27,7 @@ public class PreviewResources extends ResourceUtils {
 
 	private static PreviewResources _resource; // singleton
 
-	private static final String BUNDLE = "org.eclipse.jst.pagedesigner.preview.PreviewResources";
+	private static final String BUNDLE = "org.eclipse.jst.pagedesigner.preview.PreviewResources"; //$NON-NLS-1$
 
 	/**
 	 * Empty Constructor.

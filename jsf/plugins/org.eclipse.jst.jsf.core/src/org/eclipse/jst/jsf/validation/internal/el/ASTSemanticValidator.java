@@ -125,7 +125,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
     {
         if (node.jjtGetNumChildren() != 3)
         {
-            throw new AssertionError("Binary operators should always have two sub-expressions");
+            throw new AssertionError("Binary operators should always have two sub-expressions");  //$NON-NLS-1$
         }
 
         // evaluate choice argument
@@ -190,7 +190,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
         // are all terminals (leafs in the tree)
         if (node.jjtGetNumChildren() > 0)
         {
-            throw new AssertionError("Literals should be terminal");
+            throw new AssertionError("Literals should be terminal"); //$NON-NLS-1$
         }
 
         LiteralType type = null;
@@ -224,7 +224,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                 break;
 
             default:
-                JSFCorePlugin.log("Unknown EL literal: " +literalToken.toString(), new Throwable("This throwable simply used to mark a stack trace"));
+                JSFCorePlugin.log("Unknown EL literal: " +literalToken.toString(), new Throwable("This throwable simply used to mark a stack trace")); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         ((EvaluationTracker)data).setType(type);
@@ -233,8 +233,8 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
 
     private String stripQuotes(final String stringLiteral)
     {
-        if (stringLiteral.startsWith("'")
-                || stringLiteral.startsWith("\""))
+        if (stringLiteral.startsWith("'") //$NON-NLS-1$
+                || stringLiteral.startsWith("\"")) //$NON-NLS-1$
 
         {
             if (stringLiteral.length() > 2)
@@ -243,7 +243,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                 return stringLiteral.substring(1, stringLiteral.length()-1);
             }
             // if only two characters, then the empty string
-            return "";
+            return ""; //$NON-NLS-1$
         }
 
         return stringLiteral;
@@ -503,11 +503,11 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
     {
         if (node.jjtGetNumChildren() < 2)
         {
-            throw new AssertionError("Binary operators should always have at least two sub-expressions");
+            throw new AssertionError("Binary operators should always have at least two sub-expressions"); //$NON-NLS-1$
         }
         else if (node.getOperatorTokens().size() != node.jjtGetNumChildren()-1)
         {
-            throw new AssertionError("Binary operators should always have one operator token less than number of sub-expressions");
+            throw new AssertionError("Binary operators should always have one operator token less than number of sub-expressions"); //$NON-NLS-1$
         }
 
         // evaluate left-most argument
@@ -588,7 +588,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
      */
     public static void main(final String[] args) throws IOException, ParseException
     {
-        String elText = "";
+        String elText = ""; //$NON-NLS-1$
         int nextCharacter;
 
         while(((nextCharacter = System.in.read()) != -1))
@@ -599,9 +599,9 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
             {
                 final JSPELParser parser = JSPELParser.createParser(elText);
                 final ASTExpression expr = parser.Expression();
-                expr.dump("");
+                expr.dump(""); //$NON-NLS-1$
 
-                elText = "";
+                elText = ""; //$NON-NLS-1$
             }
             else
             {

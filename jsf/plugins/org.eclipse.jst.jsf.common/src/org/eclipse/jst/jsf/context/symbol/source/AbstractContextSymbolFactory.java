@@ -59,7 +59,7 @@ public abstract class AbstractContextSymbolFactory
         }
         catch (final Exception e)
         {
-            JSFCommonPlugin.log(e, "During execution of context symbol factory: "+this.getClass().getName());
+            JSFCommonPlugin.log(e, "During execution of context symbol factory: "+this.getClass().getName()); //$NON-NLS-1$
             return null;
         }
     }
@@ -93,7 +93,7 @@ public abstract class AbstractContextSymbolFactory
         }
         catch (final Exception e)
         {
-            JSFCommonPlugin.log(e, "During execution of context symbol factory: "+this.getClass().getName());
+            JSFCommonPlugin.log(e, "During execution of context symbol factory: "+this.getClass().getName()); //$NON-NLS-1$
             return null;
         }
     }

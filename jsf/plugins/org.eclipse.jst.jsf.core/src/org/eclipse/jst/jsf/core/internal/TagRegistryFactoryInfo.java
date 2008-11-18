@@ -41,15 +41,15 @@ public final class TagRegistryFactoryInfo
     {
         // do this first since it has highest potential to fail
         _tagRegistry = (TagRegistryFactory) element
-                .createExecutableExtension("class");
+                .createExecutableExtension("class"); //$NON-NLS-1$
 
-        final String localId = element.getAttribute("id");
-        _id = element.getContributor().getName() + "." + localId;
+        final String localId = element.getAttribute("id"); //$NON-NLS-1$
+        _id = element.getContributor().getName() + "." + localId; //$NON-NLS-1$
 
-        _description = element.getAttribute("description");
+        _description = element.getAttribute("description"); //$NON-NLS-1$
 
         final IConfigurationElement[] contentTypes = element
-                .getChildren("content-type");
+                .getChildren("content-type"); //$NON-NLS-1$
 
         final IContentTypeManager typeManager = Platform
                 .getContentTypeManager();
@@ -57,7 +57,7 @@ public final class TagRegistryFactoryInfo
         for (IConfigurationElement contentTypeElement : contentTypes)
         {
             final String contentTypeId = contentTypeElement
-                    .getAttribute("contentTypeId");
+                    .getAttribute("contentTypeId"); //$NON-NLS-1$
 
             final IContentType contentType = typeManager
                     .getContentType(contentTypeId);

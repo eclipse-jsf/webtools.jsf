@@ -32,7 +32,7 @@ public class TextLayoutSupport {
 	private static final String[] DELIMITERS = { "\r\n", //$NON-NLS-1$
 			"\n", //$NON-NLS-1$
 			"\r" //$NON-NLS-1$
-	}; //$NON-NLS-1$
+	};
 
 	static private int delimeterLength;
 

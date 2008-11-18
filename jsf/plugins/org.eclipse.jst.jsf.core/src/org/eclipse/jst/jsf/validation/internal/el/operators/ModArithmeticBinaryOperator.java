@@ -37,7 +37,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ class ModArithmeticBinaryOperator extends ArithmeticBinaryOperator 
 {
-    private static final String MODULO = "modulo";
+    private static final String MODULO = "modulo"; //$NON-NLS-1$
 
     ModArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
         super(diagnosticFactory);

@@ -23,7 +23,7 @@ public class LocalDropRequest extends Request implements DropRequest {
 	/**
 	 * the request name for local drops
 	 */
-	public static final String REQ_LOCAL_DROP = "Local Drop";
+	public static final String REQ_LOCAL_DROP = "Local Drop"; //$NON-NLS-1$
 
 	private Point _location;
 

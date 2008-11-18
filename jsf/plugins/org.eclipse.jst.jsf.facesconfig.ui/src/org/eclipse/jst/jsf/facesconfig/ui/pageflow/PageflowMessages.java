@@ -20,7 +20,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class PageflowMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages";
+	private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowMessages"; //$NON-NLS-1$
 
 	private PageflowMessages() {
 		// Do not instantiate
@@ -373,8 +373,24 @@ public final class PageflowMessages extends NLS {
 	/**
 	 * see PageFlowMessages.properties
 	 */
+	public static String Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTableWithJSP_Title;
+	/**
+	 * see PageFlowMessages.properties
+	 */
 	public static String Pageflow_Property_Action_OutcomeSelectionDialog_ActionListTable_Component;
 
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String PageflowLinkPropertySource_Title;
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String ProjectWebPageSelectionDialog_Description;
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String PageflowLinkPropertySource_Text;
 	/**
 	 * see PageFlowMessages.properties
 	 */
@@ -443,5 +459,25 @@ public final class PageflowMessages extends NLS {
 	/**
 	 * see PageFlowMessages.properties
 	 */
-	public static String ProjectWebPageSelectionDialog_Description;
+	public static String PageflowContainerEditPolicy_OrphanLabel;
+
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String PageflowNode_NoRecursiveContainment;
+
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String PageflowXYLayoutEditPolicy_Add;
+		
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String SetConstraintCommand_Resize;
+	
+	/**
+	 * see PageFlowMessages.properties
+	 */
+	public static String SetConstraintCommand_Location;
 }

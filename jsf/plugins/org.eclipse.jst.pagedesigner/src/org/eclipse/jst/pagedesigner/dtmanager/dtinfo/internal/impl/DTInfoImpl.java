@@ -47,7 +47,7 @@ public class DTInfoImpl extends EObjectImpl implements DTInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getTagConvertInfo() <em>Tag Convert Info</em>}' containment reference.

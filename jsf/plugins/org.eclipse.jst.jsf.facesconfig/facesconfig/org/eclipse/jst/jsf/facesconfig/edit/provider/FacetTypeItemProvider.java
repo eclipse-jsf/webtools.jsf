@@ -58,7 +58,7 @@ public class FacetTypeItemProvider
 	 * <!-- end-user-doc -->
      * @generated
      */
-	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others";
+	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
      * This constructs an instance from a factory and a notifier.
@@ -98,8 +98,8 @@ public class FacetTypeItemProvider
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_FacetType_id_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_FacetType_id_feature", "_UI_FacetType_type"),
+                 getString("_UI_FacetType_id_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_FacetType_id_feature", "_UI_FacetType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  FacesConfigPackage.Literals.FACET_TYPE__ID,
                  true,
                  false,
@@ -148,7 +148,7 @@ public class FacetTypeItemProvider
      * @generated
      */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetType"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/FacetType")); //$NON-NLS-1$
     }
 
     /**
@@ -160,8 +160,8 @@ public class FacetTypeItemProvider
 	public String getText(Object object) {
         String label = ((FacetType)object).getId();
         return label == null || label.length() == 0 ?
-            getString("_UI_FacetType_type") :
-            getString("_UI_FacetType_type") + " " + label;
+            getString("_UI_FacetType_type") : //$NON-NLS-1$
+            getString("_UI_FacetType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     /**
@@ -240,14 +240,14 @@ public class FacetTypeItemProvider
 		switch (columnIndex) {
 
 		case 0:
-			return facet.getFacetName() == null ? "" : facet.getFacetName()
+			return facet.getFacetName() == null ? "" : facet.getFacetName() //$NON-NLS-1$
 					.getTextContent();
 		case 1:
 			return facet.getDisplayName().size() > 0 ? ((DisplayNameType) facet
-					.getDisplayName().get(0)).getTextContent() : "";
+					.getDisplayName().get(0)).getTextContent() : ""; //$NON-NLS-1$
 		case 2:
 			return facet.getDescription().size() > 0 ? ((DescriptionType) facet
-					.getDescription().get(0)).getTextContent() : "";
+					.getDescription().get(0)).getTextContent() : ""; //$NON-NLS-1$
 		}
 		return null;
 	}

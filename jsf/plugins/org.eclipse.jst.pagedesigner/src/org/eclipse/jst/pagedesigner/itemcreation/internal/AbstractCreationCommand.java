@@ -29,7 +29,7 @@ public abstract class AbstractCreationCommand extends AbstractCommand implements
 
     public final void redo() 
     {
-        throw new UnsupportedOperationException("don't use");
+        throw new UnsupportedOperationException("don't use"); //$NON-NLS-1$
     }
 
     @Override
@@ -49,13 +49,13 @@ public abstract class AbstractCreationCommand extends AbstractCommand implements
         {
             return super.chain(command);
         }
-        throw new IllegalArgumentException("command must an ICreationCommand");
+        throw new IllegalArgumentException("command must an ICreationCommand"); //$NON-NLS-1$
     }
 
     @Override
     public final void dispose() 
     {
-        throw new UnsupportedOperationException("don't use");
+        throw new UnsupportedOperationException("don't use"); //$NON-NLS-1$
     }
 
     @Override

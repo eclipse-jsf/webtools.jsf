@@ -93,11 +93,11 @@ public class UIOutputInfo extends ComponentInfo implements IValueHolderInfo {
         {
             return info;
         }
-        Object value = attributes.get("value");
+        Object value = attributes.get("value"); //$NON-NLS-1$
         if (value != null)
         {
-            Object converter = attributes.get("converter");
-            Object localValue = attributes.get("localValue");
+            Object converter = attributes.get("converter"); //$NON-NLS-1$
+            Object localValue = attributes.get("localValue"); //$NON-NLS-1$
             
             return new ValueHolderInfo((ConverterDecorator) converter, localValue, value);
         }

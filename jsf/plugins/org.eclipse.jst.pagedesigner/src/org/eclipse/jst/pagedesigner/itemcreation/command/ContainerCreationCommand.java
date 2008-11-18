@@ -79,7 +79,7 @@ public abstract class ContainerCreationCommand extends AbstractCreationCommand
     {
         if (!(command instanceof ContainerCreationCommand))
         {
-            throw new IllegalArgumentException("Can only chain ContainerCreationCommand's");
+            throw new IllegalArgumentException("Can only chain ContainerCreationCommand's"); //$NON-NLS-1$
         }
         
         if (_nextCommand == null)
@@ -109,7 +109,7 @@ public abstract class ContainerCreationCommand extends AbstractCreationCommand
         else
         {
             // if not in same document, then error
-            throw new IllegalArgumentException("New domPosition must be in same document as old domPosition");
+            throw new IllegalArgumentException("New domPosition must be in same document as old domPosition"); //$NON-NLS-1$
         }
     }
 

@@ -112,7 +112,7 @@ public class TernaryChoiceOperator
                     
                     if (result != null)
                     {
-                        String whichSelected = result.booleanValue() ? "first" : "second";
+                        String whichSelected = result.booleanValue() ? "first" : "second"; //$NON-NLS-1$ //$NON-NLS-2$
                         return _diagnosticFactory.
                             create_TERNARY_OP_CHOICE_IS_ALWAYS_SAME
                                 (result.booleanValue(), whichSelected);

@@ -52,16 +52,16 @@ public abstract class FavoriteSection {
 	public Combo createFavoriteGroup(Composite parent, int horizontalSpan,
 			int comboMinWidth) {
 		Group favGroup = SWTUtils.createGroup(parent, JSFUICommonPlugin
-				.getResourceString("favorites.group.label"), 4, horizontalSpan,
+				.getResourceString("favorites.group.label"), 4, horizontalSpan, //$NON-NLS-1$
 				GridData.BEGINNING | GridData.CENTER);
 
 		// Add favorite text field
 		SWTUtils.createLabel(favGroup, JSFUICommonPlugin
-				.getResourceString("favorites.label"), 1);
+				.getResourceString("favorites.label"), 1); //$NON-NLS-1$
 		_favoriteCombo = SWTUtils.createCombo(favGroup, _favorites
 				.getFavoritesList(), 1, comboMinWidth, true);
 		_favoriteCombo.setToolTipText(JSFUICommonPlugin
-				.getResourceString("favorites.tooltip"));
+				.getResourceString("favorites.tooltip")); //$NON-NLS-1$
 		_favoriteCombo.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				String favName = _favoriteCombo.getText().trim();
@@ -77,15 +77,15 @@ public abstract class FavoriteSection {
 
 		// Add Save button
 		Button saveButton = SWTUtils.createPushButton(favGroup, JSFUICommonPlugin
-				.getResourceString("button.save"));
+				.getResourceString("button.save")); //$NON-NLS-1$
 		saveButton.setToolTipText(JSFUICommonPlugin
-				.getResourceString("favorites.save.tooltip"));
+				.getResourceString("favorites.save.tooltip")); //$NON-NLS-1$
 		saveButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				String favName = _favoriteCombo.getText().trim();
 				if (favName.length() == 0) {
 					favName = JSFUICommonPlugin
-							.getResourceString("favorites.default");
+							.getResourceString("favorites.default"); //$NON-NLS-1$
 				}
 				Properties favProp = new Properties();
 				saveFavorites(favProp);
@@ -103,9 +103,9 @@ public abstract class FavoriteSection {
 
 		// Add Remove button
 		Button removeButton = SWTUtils.createPushButton(favGroup, JSFUICommonPlugin
-				.getResourceString("button.remove"));
+				.getResourceString("button.remove")); //$NON-NLS-1$
 		removeButton.setToolTipText(JSFUICommonPlugin
-				.getResourceString("favorites.remove.tooltip"));
+				.getResourceString("favorites.remove.tooltip")); //$NON-NLS-1$
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				String favName = _favoriteCombo.getText().trim();

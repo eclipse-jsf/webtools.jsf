@@ -101,7 +101,7 @@ public class LoadBundleOperation extends AbstractTransformOperation {
 											}
 										}
 									} catch(IOException ioe) {
-										PDPlugin.getLogger(LoadBundleOperation.class).error("LoadBundleTagConverter.convertRefresh.IOException", ioe);
+										PDPlugin.getLogger(LoadBundleOperation.class).error("LoadBundleTagConverter.convertRefresh.IOException", ioe); //$NON-NLS-1$
 									} finally {
 										ResourceUtils.ensureClosed(inputStream);
 									}

@@ -59,9 +59,9 @@ public class PageflowResourceFactory implements CreationFactory {
         EditorPlugin
         		.getAlerts()
         		.error(
-        				"Pageflow.Error.DNDResourceTitle",
+        				"Pageflow.Error.DNDResourceTitle", //$NON-NLS-1$
         				EditorPlugin
-        						.getResourceString("Pageflow.Error.InvalidResource")
+        						.getResourceString("Pageflow.Error.InvalidResource") //$NON-NLS-1$
         						+ resource.getName());
 
 		return null;

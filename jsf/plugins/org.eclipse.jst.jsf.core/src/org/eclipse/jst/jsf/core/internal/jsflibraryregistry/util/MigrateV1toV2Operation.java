@@ -85,11 +85,11 @@ class MigrateV1toV2Operation extends VersionUpgradeOperation {
 				//delete upgraded v1
 				JSFLibraryRegistryUpgradeUtil.deleteFile(_v1Registry.toFileString());
 				//restore backup to v1 name
-				JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString().concat(".bkp"), _v1Registry.toFileString());
+				JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString().concat(".bkp"), _v1Registry.toFileString()); //$NON-NLS-1$
 				//Alert end user
 				return new UpgradeStatus(IStatus.OK, true, Messages.JSFRegistryMigration05_to_10_customMessage);
 			} catch(IOException e) {
-				JSFCorePlugin.log(IStatus.ERROR, "Error during repository upgrade from v1 to v2", e);
+				JSFCorePlugin.log(IStatus.ERROR, "Error during repository upgrade from v1 to v2", e); //$NON-NLS-1$
 				return new UpgradeStatus(IStatus.ERROR, false, 	
 						Messages.JSFRegistryMigrationCannot05_to_10_customMessage);
 			}
@@ -112,13 +112,13 @@ class MigrateV1toV2Operation extends VersionUpgradeOperation {
 			throws ExecutionException 
 	{
 		//restore backup to v1 name
-		JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString().concat(".bkp"), _v1Registry.toFileString());
+		JSFLibraryRegistryUpgradeUtil.copyFile(_v1Registry.toFileString().concat(".bkp"), _v1Registry.toFileString()); //$NON-NLS-1$
 
 		// delete the new registry 
 		JSFLibraryRegistryUpgradeUtil.deleteFile(_v2Registry.toFileString());
 		
 		//and the backup
-		JSFLibraryRegistryUpgradeUtil.deleteFile(_v1Registry.toFileString().concat(".bkp"));
+		JSFLibraryRegistryUpgradeUtil.deleteFile(_v1Registry.toFileString().concat(".bkp")); //$NON-NLS-1$
 		
 		return Status.OK_STATUS;
 	}

@@ -27,7 +27,7 @@ public class ApplicationTranslator extends Translator {
 	 * @param aFeature
 	 */
 	public ApplicationTranslator(String domNameAndPath, EStructuralFeature aFeature) {
-		super(domNameAndPath, aFeature);//$NON-NLS-1$
+		super(domNameAndPath, aFeature);
 	}
 
 	/* (non-Javadoc)
@@ -46,9 +46,9 @@ public class ApplicationTranslator extends Translator {
 				new PropertyResolverTranslator("property-resolver", facesPackage.getApplicationType_PropertyResolver()), //$NON-NLS-1$
 				new VariableResolverTranslator("variable-resolver", facesPackage.getApplicationType_VariableResolver()), //$NON-NLS-1$
 				new LocaleConfigTranslator("locale-config", facesPackage.getApplicationType_LocaleConfig()), //$NON-NLS-1$
-                new ELResolverTypeTranslator("el-resolver", facesPackage.getApplicationType_ELResolver()),
-                new ResourceBundleTranslator("resource-bundle", facesPackage.getApplicationType_ResourceBundle()),
-                new ApplicationExtensionTranslator("application-extension", facesPackage.getApplicationType_ApplicationExtension()),
+                new ELResolverTypeTranslator("el-resolver", facesPackage.getApplicationType_ELResolver()), //$NON-NLS-1$
+                new ResourceBundleTranslator("resource-bundle", facesPackage.getApplicationType_ResourceBundle()), //$NON-NLS-1$
+                new ApplicationExtensionTranslator("application-extension", facesPackage.getApplicationType_ApplicationExtension()), //$NON-NLS-1$
 				new Translator("id", facesPackage.getApplicationType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

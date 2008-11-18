@@ -51,7 +51,7 @@ import org.osgi.framework.BundleContext;
  * The main plugin class to be used in the desktop.
  */
 public class PDPlugin extends AbstractUIPlugin {
-	private static final String ICONS_LIB_PATH = "icons";
+	private static final String ICONS_LIB_PATH = "icons"; //$NON-NLS-1$
 
 	//private static final boolean ROOT_PLUGIN = false;
 
@@ -91,7 +91,7 @@ public class PDPlugin extends AbstractUIPlugin {
 			// get properties.
 			_properties = new Properties();
 			InputStream input = null;
-			_pluginBase = getBundle().getEntry("/");
+			_pluginBase = getBundle().getEntry("/"); //$NON-NLS-1$
 			try {
 				input = (new URL(_pluginBase, IJMTConstants.DEFAULT_PROPERTIES))
 						.openStream();
@@ -120,8 +120,8 @@ public class PDPlugin extends AbstractUIPlugin {
 			if (_log != null) {
 				_log
 						.error(
-								"log.msg",
-								"Problems starting plug-in Web Application Development Common.",
+								"log.msg", //$NON-NLS-1$
+								"Problems starting plug-in Web Application Development Common.", //$NON-NLS-1$
 								ee);
 			}
 
@@ -130,7 +130,7 @@ public class PDPlugin extends AbstractUIPlugin {
 							IStatus.ERROR,
 							getBundle().getSymbolicName(),
 							IStatus.OK,
-							"Problems starting plug-in Web Application Development Common",
+							"Problems starting plug-in Web Application Development Common", //$NON-NLS-1$
 							ee));
 		}
 	}
@@ -286,7 +286,7 @@ public class PDPlugin extends AbstractUIPlugin {
 			InputStream stream = null;
 			try {//check existance of file
 				URL url = new URL(_pluginBase,
-						ICONS_LIB_PATH + "/" + name);
+						ICONS_LIB_PATH + "/" + name); //$NON-NLS-1$
 				
 				//doing the following to check existance... exception will be caught and null descriptor returned
 				stream = url.openStream();
@@ -295,7 +295,7 @@ public class PDPlugin extends AbstractUIPlugin {
 				id = ImageDescriptor.createFromURL(url);
 				images.put(name, id);
 			} catch (IOException e1) {
-				_log.info("Unable to create ImageDescriptor for: "+name, e1);
+				_log.info("Unable to create ImageDescriptor for: "+name, e1); //$NON-NLS-1$
 				return null;
 			} 
 		}
@@ -332,7 +332,7 @@ public class PDPlugin extends AbstractUIPlugin {
 	 */
 	public static Path getInstallLocation() {
 		try {
-			URL url = getDefault().getBundle().getEntry("/");
+			URL url = getDefault().getBundle().getEntry("/"); //$NON-NLS-1$
 			String s1 = FileLocator.resolve(url).getFile();
 			if (s1.startsWith("/")) //$NON-NLS-1$
 			{

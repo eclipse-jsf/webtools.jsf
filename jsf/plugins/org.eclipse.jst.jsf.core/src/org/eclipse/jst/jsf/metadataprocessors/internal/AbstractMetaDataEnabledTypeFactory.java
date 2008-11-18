@@ -91,7 +91,7 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 		try {
 			Bundle bundle =Platform.getBundle(type.getBundleID());
 			if (bundle == null){
-				JSFCorePlugin.log(IStatus.ERROR, type.getBundleID() + " could not be created to load " + className);
+				JSFCorePlugin.log(IStatus.ERROR, type.getBundleID() + " could not be created to load " + className); //$NON-NLS-1$
 				return null;
 			}
 			Class klass = bundle.loadClass(className);
@@ -101,10 +101,10 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
                 {
 					return klass;
                 }
-                JSFCorePlugin.log(IStatus.INFO, className + " was not found in " + type.getBundleID() +" for " + type.getTypeID());
+                JSFCorePlugin.log(IStatus.INFO, className + " was not found in " + type.getBundleID() +" for " + type.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		} catch (ClassNotFoundException e) {
-			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + type.getBundleID() +" for " + type.getTypeID());
+			JSFCorePlugin.log(IStatus.ERROR, className + " was not found in " + type.getBundleID() +" for " + type.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return null;
 	}
@@ -117,9 +117,9 @@ public abstract class AbstractMetaDataEnabledTypeFactory {
 				return (ITypeDescriptor)klass.newInstance();
  			}
 		} catch (InstantiationException e) {
-			JSFCorePlugin.log(IStatus.ERROR, "InstantiationException: " + className + " in " + type.getBundleID() +" for " + type.getTypeID());
+			JSFCorePlugin.log(IStatus.ERROR, "InstantiationException: " + className + " in " + type.getBundleID() +" for " + type.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} catch (IllegalAccessException e) {
-			JSFCorePlugin.log(IStatus.ERROR,  "IllegalAccessException: " + className + " in " + type.getBundleID() +" for " + type.getTypeID());
+			JSFCorePlugin.log(IStatus.ERROR,  "IllegalAccessException: " + className + " in " + type.getBundleID() +" for " + type.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return null;
 	}
