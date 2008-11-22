@@ -264,7 +264,11 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
-	public static String JSFFacetUninstallDelegate_NonUpdateableWebXML;
+	public static String JSFFacetUninstallDelegate_NonUpdateableWebXML;	
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFLibraryValidator_MISSING_JSF_IMPLEMENTATION_CLASSES;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

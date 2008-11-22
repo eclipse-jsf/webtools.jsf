@@ -373,13 +373,15 @@
   </extension>
   
   <!--
-    *****************************
-    * JSF User Library Provider *
-    *****************************
+    ******************************************
+    * Library Provider Framework Integration *
+    ******************************************
   -->
   
   <extension point="org.eclipse.jst.common.project.facet.core.libraryProviders">
     <provider id="jsf-user-library-provider" extends="wtp-user-library-provider">
+      <param name="validator" value="org.eclipse.jst.jsf.core.internal.project.facet.JSFLibraryValidator"/>
+      <param name="validator.param.0" value="javax.faces.FactoryFinder"/>
       <enablement>
         <with variable="requestingProjectFacet">
           <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf" forcePluginActivation="true"/>
@@ -388,12 +390,18 @@
     </provider>
   </extension>
   
-  <!--
-    ******************************
-    * JSF Legacy Library Support *
-    ******************************
-  -->
-  
+  <extension point="org.eclipse.jst.common.project.facet.core.libraryProviders">
+    <provider id="jsf-no-op-library-provider" extends="no-op-library-provider">
+      <param name="message" value="%noOpLibraryProviderMessage"/>
+      <param name="warning" value="%noOpLibraryProviderWarning"/>
+      <enablement>
+        <with variable="requestingProjectFacet">
+          <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf" forcePluginActivation="true"/>
+        </with>
+      </enablement>
+    </provider>
+  </extension>
+
   <extension point="org.eclipse.jst.common.project.facet.core.libraryProviders">
     <provider id="legacy-jsf-library-provider" extends="legacy-library-provider" hidden="true">
       <action type="UNINSTALL">
