@@ -52,7 +52,7 @@
       <import plugin="org.eclipse.wst.html.ui" version="1.0.100" match="equivalent"/>
       <import plugin="org.eclipse.wst.css.core" version="1.1.0" match="equivalent"/>
       <import plugin="org.eclipse.wst.html.core" version="1.1.0" match="equivalent"/>
-      <import plugin="org.eclipse.wst.xml.ui" version="1.0.100" match="equivalent"/>
+      <import plugin="org.eclipse.wst.xml.ui" version="1.0.100" match="compatible"/>
       <import plugin="org.eclipse.wst.xml.core" version="1.1.0" match="equivalent"/>
       <import plugin="org.eclipse.wst.sse.core" version="1.1.0" match="equivalent"/>
       <import plugin="org.eclipse.jst.jsf.facesconfig" version="1.1.0" match="compatible"/>
