@@ -77,13 +77,15 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 public class OthersPage extends FormPage implements IFacesConfigPage,
 		ISelectionProvider, ISelectionChangedListener, IEditingDomainProvider {
 
-    /**
+    private static final String BANNER_IMAGE_FILE = "form_banner.gif"; //$NON-NLS-1$
+
+	/**
      * The id of this page in the faces-config editor.
      */
-	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage";
+	public static final String PAGE_ID = "org.eclipse.jst.jsf.facesconfig.ui.page.OthersPage"; //$NON-NLS-1$
 
 	private final static Image BANNER_IMAGE = EditorPlugin.getDefault()
-			.getImage("form_banner.gif");
+			.getImage(BANNER_IMAGE_FILE);
 
 	private List leftSections;
 
@@ -108,7 +110,7 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 	 *            the facesconfig editor;
 	 */
 	public OthersPage(FacesConfigEditor editor) {
-		super(editor, "OthersPage",
+		super(editor, "OthersPage", //$NON-NLS-1$
 				EditorMessages.FacesConfigEditor_Others_TabName);
 	}
 
@@ -319,9 +321,9 @@ public class OthersPage extends FormPage implements IFacesConfigPage,
 		}
 	}
 
-	private void removeAdapterFromInput(Object input) {
-		if (_facesConfigOthersAdapter != null && input != null && input instanceof FacesConfigType) {
-			((FacesConfigType)input).eAdapters().remove(_facesConfigOthersAdapter);
+	private void removeAdapterFromInput(Object input_) {
+		if (_facesConfigOthersAdapter != null && input_ != null && input_ instanceof FacesConfigType) {
+			((FacesConfigType)input_).eAdapters().remove(_facesConfigOthersAdapter);
 		}
 	}
 	
