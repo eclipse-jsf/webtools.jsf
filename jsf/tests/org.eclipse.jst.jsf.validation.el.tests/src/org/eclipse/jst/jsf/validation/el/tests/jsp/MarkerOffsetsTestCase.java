@@ -89,8 +89,11 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         list = assertSemanticWarning(915, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_BOTH_OPERANDS_NULL_ID, 915, 11);
 
-        list = assertSemanticWarning(956, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 956, 30);
+        // https://bugs.eclipse.org/bugs/show_bug.cgi?id=235637
+        // can only call comparison null always same if can verify both
+        // sides of the expression are null
+//        list = assertSemanticWarning(956, null, 1);
+//        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 956, 30);
 
         list = assertSemanticWarning(1015, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID, 1015, 31);
@@ -113,9 +116,12 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         list = assertSemanticWarning(1376, null, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID, 1402, 5);
 
-        list = assertSemanticWarning(1438, null, 2);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 1464, 34);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1438, 60);
+//        list = assertSemanticWarning(1438, null, 2);
+        // https://bugs.eclipse.org/bugs/show_bug.cgi?id=235637
+        // can only call comparison null always same if can verify both
+        // sides of the expression are null
+//        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 1464, 34);
+//        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1438, 60);
 
         list = assertSemanticWarning(1569, null, 1);
         assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID, 1569, 8);

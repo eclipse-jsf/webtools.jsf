@@ -114,6 +114,11 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
         assertNoError(1927, Signature.SIG_BOOLEAN);
         assertNoError(1993, Signature.SIG_BOOLEAN);
         assertNoError(2045, Signature.SIG_BOOLEAN);
+        // https://bugs.eclipse.org/bugs/show_bug.cgi?id=235637
+        // can only call comparison null always same if can verify both
+        // sides of the expression are null
+        assertNoError(2452, Signature.SIG_BOOLEAN);
+        assertNoError(2512, Signature.SIG_BOOLEAN);
     }
 
     @Override
@@ -142,12 +147,6 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
 
         list = assertSemanticWarning(2410, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
-
-        list = assertSemanticWarning(2452, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID);
-
-        list = assertSemanticWarning(2512, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2572, Signature.SIG_BOOLEAN, 1);
         assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
