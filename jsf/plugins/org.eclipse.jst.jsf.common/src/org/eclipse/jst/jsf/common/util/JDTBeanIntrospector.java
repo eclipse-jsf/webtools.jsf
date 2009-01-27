@@ -101,7 +101,8 @@ public class JDTBeanIntrospector
 		// to be a bean method, it must not a constructor, must be public
 		// and must not be static
 		if (!method.isConstructor()
-				&& Flags.isPublic(method.getFlags())
+				&& ( Flags.isPublic(method.getFlags())
+				        || _type.isInterface())
 				&& !Flags.isStatic(method.getFlags()))
 		{
 			final String methodName = method.getElementName();
