@@ -176,7 +176,10 @@ public class JSFAddActionGroup {
                 ValidatorType validator = (ValidatorType) it.next();
                 ValidatorIdType validatorId = validator.getValidatorId();
                 if (validatorId != null)
-                    result[i++] = validatorId.getTextContent().trim();
+                {
+                    result[i++] = validatorId.getTextContent() != null ?
+                            validatorId.getTextContent().trim() : "";
+                }
             }
         }
         return result;
@@ -196,15 +199,18 @@ public class JSFAddActionGroup {
         if (appConfigMgr != null)
         {
             final List list = appConfigMgr.getConverters();
-    		result = new String[list.size()];
+            result = new String[list.size()];
             int i = 0;
-    		for (final Iterator it = list.iterator(); it.hasNext();) 
+            for (final Iterator it = list.iterator(); it.hasNext();)
             {
-    			ConverterType converter = (ConverterType) it.next();
-    			ConverterIdType converterId = converter.getConverterId();
-    			if (converterId != null)
-    				result[i++] = converterId.getTextContent().trim();
-    		}
+                ConverterType converter = (ConverterType) it.next();
+                ConverterIdType converterId = converter.getConverterId();
+                if (converterId != null)
+                {
+                    result[i++] = converterId.getTextContent() != null ? 
+                            converterId.getTextContent().trim() : "";
+                }
+            }
         }
 		return result;
 	}

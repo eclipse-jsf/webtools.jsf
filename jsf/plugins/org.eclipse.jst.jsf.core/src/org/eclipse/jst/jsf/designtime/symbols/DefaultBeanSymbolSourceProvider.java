@@ -131,14 +131,17 @@ public class DefaultBeanSymbolSourceProvider
                 {
                     final String name = bean.getManagedBeanName().getTextContent();
                     final String detailedDescription = createAdditionalProposalInfo(bean);
-                    IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
+                    final IBeanInstanceSymbol symbol = SymbolFactory.eINSTANCE.createIBeanInstanceSymbol();
                     symbol.setName(name);
+                    if (detailedDescription.length() > 0)
                     symbol.setDetailedDescription(detailedDescription);
                     symbol.setRuntimeSource(ERuntimeSource.MANAGED_BEAN_SYMBOL_LITERAL);
                     try
                     {
                         IJavaProject javaProject = JavaCore.create(iProject);
-                        IType type = javaProject.findType(bean.getManagedBeanClass().getTextContent());
+                        final String typeName = bean.getManagedBeanClass() != null?
+                            bean.getManagedBeanClass().getTextContent() : "";
+                        final IType type = javaProject.findType(typeName);
 
                         // don't bother setting a type descriptor if we
                         // can't find a type
@@ -164,20 +167,37 @@ public class DefaultBeanSymbolSourceProvider
     
     private String createAdditionalProposalInfo(ManagedBeanType beanType)
     {
-        StringBuffer additionalInfo = new StringBuffer("<p><b>"); //$NON-NLS-1$
-        additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Name")); //$NON-NLS-1$
-        additionalInfo.append(" </b>"); //$NON-NLS-1$
-        additionalInfo.append(beanType.getManagedBeanName().getTextContent());
-        additionalInfo.append("</p><p><b>"); //$NON-NLS-1$
-        additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Type")); //$NON-NLS-1$
-        additionalInfo.append(" </b>"); //$NON-NLS-1$
-        additionalInfo.append(beanType.getManagedBeanClass().getTextContent());
-        additionalInfo.append("</p><p><b>"); //$NON-NLS-1$
-        additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Scope")); //$NON-NLS-1$
-        additionalInfo.append(" </b>"); //$NON-NLS-1$
-        additionalInfo.append(beanType.getManagedBeanScope().getTextContent());
-        additionalInfo.append("</p>"); //$NON-NLS-1$
+        final String beanName = beanType.getManagedBeanName() != null ?
+                                    beanType.getManagedBeanName().getTextContent() : null;
+
+        StringBuffer additionalInfo = new StringBuffer(); //$NON-NLS-1$
+        if (beanName != null)
+        {
+            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Name")); //$NON-NLS-1$
+            additionalInfo.append(" </b>"); //$NON-NLS-1$
+            additionalInfo.append(beanName);
+            additionalInfo.append("</p>"); //$NON-NLS-1$
+        }
+
+        final String beanClass = beanType.getManagedBeanClass() != null ?
+                beanType.getManagedBeanClass().getTextContent() : null;
+        if (beanClass != null)
+        {
+            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Type")); //$NON-NLS-1$
+            additionalInfo.append(" </b>"); //$NON-NLS-1$
+            additionalInfo.append(beanClass);
+            additionalInfo.append("</p>"); //$NON-NLS-1$
+        }
         
+        final String beanScope = beanType.getManagedBeanScope() != null ?
+                beanType.getManagedBeanScope().getTextContent() : null;
+        if (beanScope != null)
+        {
+            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Scope")); //$NON-NLS-1$
+            additionalInfo.append(" </b>"); //$NON-NLS-1$
+            additionalInfo.append(beanScope);
+            additionalInfo.append("</p>"); //$NON-NLS-1$
+        }
         StringBuffer descBuffer = new StringBuffer();
         
         for (final Iterator it = beanType.getDescription().iterator(); it.hasNext();)
