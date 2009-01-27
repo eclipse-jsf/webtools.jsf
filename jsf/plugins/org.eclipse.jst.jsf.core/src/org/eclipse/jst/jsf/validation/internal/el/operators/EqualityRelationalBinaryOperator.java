@@ -55,11 +55,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
      */
     public ValueType performOperation(ValueType firstArg, ValueType secondArg) 
     {
-        // JSP.2.3.5.7 step 2 if either operand is null, then not equal
+        // JSP.2.3.5.7 step 1 if operands are equal, then true for ==, false for !=
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
-                || TypeCoercer.typeIsNull(secondArg.getSignature()))
+                && TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            return BooleanLiteralType.FALSE;
+            // perform the operation on two arguments that are equal.
+            return BooleanLiteralType.valueOf(doRealOperation(Integer.valueOf(4), Integer.valueOf(4)));
         }
         
         String boxedFirstType = TypeTransformer.transformBoxPrimitives(firstArg.getSignature());
@@ -128,7 +129,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         }
         
         // otherwise, an equal compare will be done A.equals(B).  Since 
-        return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);        
+        return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
     }
 
     private ValueType handleEnumComparison(ValueType firstArg,
@@ -195,10 +196,10 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         
         // JSP.2.3.5.7 step 2 if either operand is null, then not equal
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
-                || TypeCoercer.typeIsNull(secondArg.getSignature()))
+                && TypeCoercer.typeIsNull(secondArg.getSignature()))
         {
-            // TODO: this is a strange thing to do...
-            final boolean result = doRealOperation(Integer.valueOf(4), null);
+            // perform the operation on two arguments that are equal.
+            final boolean result = doRealOperation(Integer.valueOf(4), Integer.valueOf(4));
             return _diagnosticFactory.create_BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME(Boolean.toString(result));
         }
 
