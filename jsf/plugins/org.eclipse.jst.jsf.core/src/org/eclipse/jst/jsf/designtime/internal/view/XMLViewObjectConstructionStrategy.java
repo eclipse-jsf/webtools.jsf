@@ -234,8 +234,6 @@ public class XMLViewObjectConstructionStrategy extends
             final Map<String, String> attributeToPropertyMap)
     {
         final ComponentTypeInfo typeInfo = tagElement.getComponent();
-        final Map<String, JDTBeanProperty> properties = DTComponentIntrospector
-                .getBeanProperties(typeInfo, _constructionData.getProject());
         final Map<String, ITagAttributeHandler> attributeHandlers = tagElement
                 .getAttributeHandlers();
 
@@ -243,6 +241,8 @@ public class XMLViewObjectConstructionStrategy extends
 
         if (nodeMap != null && attributeHandlers != null)
         {
+            Map<String, JDTBeanProperty> properties = null;
+
             for (int i = 0; i < nodeMap.getLength(); i++)
             {
                 final Attr attr = (Attr) nodeMap.item(i);
@@ -256,6 +256,10 @@ public class XMLViewObjectConstructionStrategy extends
                                 .get(name);
                         if (attrHandler instanceof IComponentPropertyHandler)
                         {
+                            if (properties == null) 
+                            {
+                                properties = DTComponentIntrospector.getBeanProperties(typeInfo, _constructionData.getProject());
+                            }
                             mapComponentProperty(uri, srcElement, properties,
                                     (IComponentPropertyHandler) attrHandler,
                                     attr, name, initMap, attributeHandlers,
