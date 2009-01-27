@@ -226,9 +226,10 @@ public class ManagedBeanTypeItemProvider
 	public String getText(Object object) {
         String label = null;
         if (((ManagedBeanType) object).getManagedBeanName() != null)
+        {
             label = ((ManagedBeanType) object).getManagedBeanName()
                     .getTextContent();
-
+        }
         if (label == null || label.length() == 0) {
             if (((ManagedBeanType) object).getManagedBeanClass() != null)
                 label = ((ManagedBeanType) object).getManagedBeanClass()
