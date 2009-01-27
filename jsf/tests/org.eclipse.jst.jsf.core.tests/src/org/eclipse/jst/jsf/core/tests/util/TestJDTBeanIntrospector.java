@@ -45,9 +45,11 @@ public class TestJDTBeanIntrospector extends TestCase
     private IType                        _testBean1Type;
     private IType                        _testBeanSubclassType;
     private IType                        _testBeanGenericType;
+    private IType                        _testInterface;
     private Map<String, JDTBeanProperty> _properties;
     private Map<String, JDTBeanProperty> _subClassProperties;
     private Map<String, JDTBeanProperty> _genericTypeProperties;
+    private Map<String, JDTBeanProperty> _interfaceProperties;
 
     private final static String          srcFolderName         = "src";
     private final static String          packageName1          = "com.test";
@@ -57,6 +59,7 @@ public class TestJDTBeanIntrospector extends TestCase
     private final static String          testAnotherBeanName   = "AnotherBean";
     private final static String          testBeanGenericName   =
         "TestBeanGeneric";
+    private final static String          testBeanInterface = "IBeanInterface";
 
     @Override
     protected void setUp() throws Exception
@@ -124,20 +127,33 @@ public class TestJDTBeanIntrospector extends TestCase
                     packageName1 + "." + testBeanGenericName);
         assertNotNull(_testBeanGenericType);
 
+        // load IBeanInterface
+        codeRes = new TestFileResource();
+        codeRes.load(TestsPlugin.getDefault().getBundle(),
+                "/testfiles/IBeanInterface.java.data");
+        code = codeRes.toString();
+        _jdtTestEnvironment.addSourceFile(srcFolderName, packageName1,
+                testBeanInterface, code);
+
+        _testInterface = _jdtTestEnvironment.getJavaProject().findType(
+                packageName1 + "." + testBeanInterface);
+        assertNotNull(_testInterface);
+        assertTrue(_testInterface.exists());
+        
         // introspect after classes loaded to ensure all dependencies
         // are in the project
         JDTBeanIntrospector beanIntrospector =
             new JDTBeanIntrospector(_testBean1Type);
-
         _properties = beanIntrospector.getProperties();
 
         beanIntrospector = new JDTBeanIntrospector(_testBeanSubclassType);
-
         _subClassProperties = beanIntrospector.getProperties();
 
         beanIntrospector = new JDTBeanIntrospector(_testBeanGenericType);
-
         _genericTypeProperties = beanIntrospector.getProperties();
+
+        beanIntrospector = new JDTBeanIntrospector(_testInterface);
+        _interfaceProperties = beanIntrospector.getProperties();
     }
 
     @Override
@@ -639,5 +655,17 @@ public class TestJDTBeanIntrospector extends TestCase
         assertEquals(1, property.getTypeParameterSignatures().size());
         assertEquals("Ljava.lang.Object;", property
                 .getTypeParameterSignatures().get(0));
+    }
+    
+    public void testPropertyInheritedFromInterface() throws Exception
+    {
+        final JDTBeanProperty property = _interfaceProperties.get("inheritedThroughInterface");
+        assertNotNull(property);
+
+        assertTrue(property.isReadable());
+        assertTrue(property.isWritable());
+        assertEquals("Signature must be int", Signature.SIG_INT,
+                property.getTypeSignature());
+        assertNull("IType won't resolve", property.getType());
     }
 }

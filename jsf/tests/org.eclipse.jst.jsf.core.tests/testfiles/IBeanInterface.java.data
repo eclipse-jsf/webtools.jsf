@@ -1,0 +1,7 @@
+package com.test;
+
+public interface IBeanInterface
+{
+   int getInheritedThroughInterface();
+   void setInheritedThroughInterface(int value);
+}
