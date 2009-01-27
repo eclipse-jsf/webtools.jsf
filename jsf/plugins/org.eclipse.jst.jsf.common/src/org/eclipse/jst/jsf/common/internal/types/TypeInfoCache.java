@@ -585,7 +585,10 @@ public class TypeInfoCache implements IElementChangedListener {
                             uncacheTypesWithMissingSupertype(types[i].getElementName());
                         }
                     } catch (JavaModelException e) {
-                        JSFCommonPlugin.log(IStatus.INFO, "Unable to get types for compilation unit " + cu, e); //$NON-NLS-1$
+                        if (!e.isDoesNotExist())
+                        {
+                            JSFCommonPlugin.log(IStatus.INFO, "Unable to get types for compilation unit " + cu, e); //$NON-NLS-1$
+                        }
                         uncacheAllTypes();
                     }
                 } else if (typeRoot instanceof IClassFile) {
