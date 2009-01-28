@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
+import org.eclipse.jst.pagedesigner.PageDesignerTraceOptions;
 
 /**
  * @author mengbo
@@ -42,38 +43,75 @@ public class ConverterFacRegistryReader {
 
 	}
 
-	private static List<IConverterFactory> readAllHandlers() {
-		List result = new ArrayList<IConverterFactory>();
-		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
-				.getExtensionPoint(PDPlugin.getPluginId(),
-						IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
-		IExtension[] extensions = extensionPoint.getExtensions();
+	private static List<IConverterFactory> readAllHandlers()
+    {
+        final List<IConverterFactory> result = new ArrayList<IConverterFactory>();
+        IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
+                .getExtensionPoint(PDPlugin.getPluginId(),
+                        IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
+        IExtension[] extensions = extensionPoint.getExtensions();
 
-		for (int i = 0; i < extensions.length; i++) {
-			IExtension ext = extensions[i];
-			IConfigurationElement[] dropHandlers = ext
-					.getConfigurationElements();
+        for (int i = 0; i < extensions.length; i++)
+        {
+            IExtension ext = extensions[i];
+            IConfigurationElement[] tagConverter = ext
+                    .getConfigurationElements();
 
-			for (int j = 0; j < dropHandlers.length; j++) {
-				if (dropHandlers[j].getName().equals(
-						IJMTConstants.TAG_CONVERTER_FACTORY)) {
-					dropHandlers[j].getAttribute("class");
-					Object obj;
-					try {
-						obj = dropHandlers[j]
-								.createExecutableExtension("class");
+            for (int j = 0; j < tagConverter.length; j++)
+            {
+                final IConfigurationElement element = tagConverter[j];
 
-						if (obj instanceof IConverterFactory) {
-							result.add(obj);
-						}
-					} catch (CoreException e) {
-						// ignore the exception
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		return result;
-	}
+                if (element.getName().equals(
+                        IJMTConstants.TAG_CONVERTER_FACTORY))
+                {
+                    element.getAttribute("class"); //$NON-NLS-1$
+                    Object obj;
+                    try
+                    {
+                        obj = element.createExecutableExtension("class"); //$NON-NLS-1$
+
+                        if (element.getContributor().getName().startsWith(
+                                "org.eclipse.jst")) //$NON-NLS-1$
+                        {
+                            if (PageDesignerTraceOptions.TRACE_CONVERTERLOAD)
+                            {
+                                PageDesignerTraceOptions.log("ConverterFacRegistryReader: Appending to list:"+obj.getClass().getName()); //$NON-NLS-1$
+                            }
+                            // push JSF tools provided ones to the end
+                            result.add((IConverterFactory) obj);
+                        }
+                        // prepend if something outside JSF tools declared it
+                        else
+                        {
+                            if (PageDesignerTraceOptions.TRACE_CONVERTERLOAD)
+                            {
+                                PageDesignerTraceOptions.log("ConverterFacRegistryReader: Prepending to list:"+obj.getClass().getName()); //$NON-NLS-1$
+                            }
+                            // this way, adopters can put their overrides
+                            // of factories with built-in support like
+                            // JSF HTML/CORE will be used first
+                            result.add(0, (IConverterFactory) obj);
+                        }
+
+                    } 
+                    catch (CoreException e)
+                    {
+                        PDPlugin.log("Problem loading tag converter extension for "+element.toString(), e); //$NON-NLS-1$
+                    }
+                }
+            }
+        }
+
+        if (PageDesignerTraceOptions.TRACE_CONVERTERLOAD)
+        {
+            PageDesignerTraceOptions.log("\nFinal converterFactory list in order:"); //$NON-NLS-1$
+            for (final IConverterFactory factory : result)
+            {
+                PageDesignerTraceOptions.log(factory.getClass().getName());
+            }
+            PageDesignerTraceOptions.log("\n"); //$NON-NLS-1$
+        }
+        return result;
+    }
 
 }
