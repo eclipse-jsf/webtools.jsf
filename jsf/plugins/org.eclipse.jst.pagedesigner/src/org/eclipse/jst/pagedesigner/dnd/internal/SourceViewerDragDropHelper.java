@@ -290,7 +290,7 @@ public final class SourceViewerDragDropHelper {
 	 * @param locationOffset
 	 * @return the location offset
 	 */
-	public int getValidLocation(StructuredTextEditor textEditor,
+	/*package*/ int getValidLocation(StructuredTextEditor textEditor,
 			int locationOffset) {
 		Node node = getCaretNode(textEditor, locationOffset);
 		if (node == null) {
@@ -348,7 +348,7 @@ public final class SourceViewerDragDropHelper {
 	 * @param pos
 	 * @return the node
 	 */
-	public Node getCaretNode(StructuredTextEditor textEditor, int pos) {
+	private Node getCaretNode(StructuredTextEditor textEditor, int pos) {
         // TODO: getModel is deprecated
 		IStructuredModel model = textEditor.getModel();
 		// getModel(textEditor);
