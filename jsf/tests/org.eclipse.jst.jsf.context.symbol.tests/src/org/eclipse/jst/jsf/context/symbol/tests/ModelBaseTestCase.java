@@ -50,9 +50,9 @@ public class ModelBaseTestCase extends TestCase
         
         JSFTestUtil.setValidationEnabled(false);
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com", "80");
-        
+
         final WebProjectTestEnvironment  projectTestEnvironment = 
-            new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject");
+            new WebProjectTestEnvironment("TestJDTBeanIntrospectorProject_"+getName());
         projectTestEnvironment.createProject(true);
         
         _jdtTestEnvironment = new JDTTestEnvironment(projectTestEnvironment);

@@ -112,8 +112,8 @@ public abstract class BaseTestCase extends ConfigurableTestCase
     }
 
     protected void setUp() throws Exception    
-	{
-		super.setUp();
+    {
+        super.setUp();
 
         JSFTestUtil.setValidationEnabled(false);
         
