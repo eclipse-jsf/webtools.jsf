@@ -7,7 +7,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
- *    
+ *
  ********************************************************************************/
 
 package org.eclipse.jst.jsf.designtime.internal.jsp;
@@ -32,58 +32,60 @@ import org.eclipse.ui.PlatformUI;
 /**
  * On workbench startup, registers a part listener that triggers when
  * a JSP editor opens.
- * 
+ *
  * @author cbateman
  *
  */
-public class StartupHandler implements IStartup 
+public class StartupHandler implements IStartup
 {
     private final JSPEditorListener    _partListener = new JSPEditorListener();
+    private final static boolean    DISABLE_EDITOR_OPEN_REFRESH = System
+                                                                        .getProperty("org.eclipse.jst.jsf.jspmodelprocessor.disable.editor.open.refresh") != null; //$NON-NLS-1$
 
-    public void earlyStartup() 
+    public void earlyStartup()
     {
         PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
         {
             public void run()
             {
-                IWorkbenchWindow  windows[] = 
+                final IWorkbenchWindow  windows[] =
                     PlatformUI.getWorkbench().getWorkbenchWindows();
-                
-                for (int i = 0; i < windows.length; i++)
+
+                for (final IWorkbenchWindow window : windows)
                 {
-                    IWorkbenchPage pages[] = windows[i].getPages();
-                    for (int j = 0; j < pages.length; j++)
+                    final IWorkbenchPage pages[] = window.getPages();
+                    for (final IWorkbenchPage page : pages)
                     {
-                        IEditorReference[]  editorReferences = 
-                            pages[j].getEditorReferences();
-                        
-                        for (int k = 0; k < editorReferences.length; k++)
+                        final IEditorReference[]  editorReferences =
+                            page.getEditorReferences();
+
+                        for (final IEditorReference editorReference : editorReferences)
                         {
-                            if (_partListener.isValidJSPEditor(editorReferences[k]))
+                            if (_partListener.isValidJSPEditor(editorReference))
                             {
-                                _partListener.setJSPModelListener(editorReferences[k]);
+                                _partListener.setJSPModelListener(editorReference);
                             }
                         }
                     }
-                    windows[i].getPartService().addPartListener(_partListener);
+                    window.getPartService().addPartListener(_partListener);
                 }
 
                 // TODO: register with all windows?
                 PlatformUI.getWorkbench().addWindowListener(new IWindowListener()
                 {
-                    public void windowActivated(IWorkbenchWindow window) {
+                    public void windowActivated(final IWorkbenchWindow window) {
                         // do nothing
                     }
 
-                    public void windowDeactivated(IWorkbenchWindow window) {
+                    public void windowDeactivated(final IWorkbenchWindow window) {
                         // do nothing
                     }
 
-                    public void windowClosed(IWorkbenchWindow window) {
+                    public void windowClosed(final IWorkbenchWindow window) {
                         window.getPartService().removePartListener(_partListener);
                     }
 
-                    public void windowOpened(IWorkbenchWindow window) {
+                    public void windowOpened(final IWorkbenchWindow window) {
                         window.getPartService().addPartListener(_partListener);
                     }
                 });
@@ -95,44 +97,44 @@ public class StartupHandler implements IStartup
     {
         private JSPModelProcessor         _processor;
 
-        public void partActivated(IWorkbenchPartReference partRef) {
+        public void partActivated(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        public void partBroughtToTop(IWorkbenchPartReference partRef) {
+        public void partBroughtToTop(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        public void partClosed(IWorkbenchPartReference partRef) {
+        public void partClosed(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        public void partDeactivated(IWorkbenchPartReference partRef) {
+        public void partDeactivated(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        public void partOpened(IWorkbenchPartReference partRef) {
+        public void partOpened(final IWorkbenchPartReference partRef) {
             if (isValidJSPEditor(partRef))
             {
                 setJSPModelListener((IEditorReference)partRef);
             }
         }
 
-        public void partHidden(IWorkbenchPartReference partRef) {
+        public void partHidden(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        public void partVisible(IWorkbenchPartReference partRef) {
+        public void partVisible(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        public void partInputChanged(IWorkbenchPartReference partRef) {
+        public void partInputChanged(final IWorkbenchPartReference partRef) {
             // do nothing
         }
 
-        private boolean isJSPEditor(IEditorReference editorRef)
+        private boolean isJSPEditor(final IEditorReference editorRef)
         {
-            IFile file = getIFile(editorRef);
+            final IFile file = getIFile(editorRef);
 
             if (file != null)
             {
@@ -147,16 +149,16 @@ public class StartupHandler implements IStartup
          * @return true if the editor is editing the JSP content type and
          * the owning project is a JSF project
          */
-        boolean isValidJSPEditor(IEditorReference editorRef)
+        boolean isValidJSPEditor(final IEditorReference editorRef)
         {
             final IFile file = getIFile(editorRef);
-            
-            return file != null && 
+
+            return file != null &&
                     JSFAppConfigUtils.isValidJSFProject(file.getProject()) &&
                         isJSPEditor(editorRef);
         }
 
-        boolean isValidJSPEditor(IWorkbenchPartReference partRef)
+        boolean isValidJSPEditor(final IWorkbenchPartReference partRef)
         {
             if (partRef instanceof IEditorReference)
             {
@@ -166,38 +168,43 @@ public class StartupHandler implements IStartup
             return false;
         }
 
-        void setJSPModelListener(IEditorReference editorRef)
+        void setJSPModelListener(final IEditorReference editorRef)
         {
-            IFile file = getIFile(editorRef);
-            
+            final IFile file = getIFile(editorRef);
+
             if (file != null)
             {
                 try
                 {
-                    // implicitly creates if not present
-                    _processor = JSPModelProcessor.get(file);
-                    _processor.refresh(false);
-                }
-                catch (Exception e)
+                    if (!DISABLE_EDITOR_OPEN_REFRESH)
+                    {
+                        // implicitly creates if not present
+                        _processor = JSPModelProcessor.get(file);
+                        _processor.refresh(!JSPModelProcessor.FORCE_REFRESH,
+                                JSPModelProcessor.RUN_ON_CURRENT_THREAD);
+                    }
+                } catch (final Exception e)
                 {
-                    JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring model processor",e)); //$NON-NLS-1$
+                    JSFCorePlugin.getDefault().getLog().log(
+                            new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID,
+                                    0, "Error acquiring model processor", e)); //$NON-NLS-1$
                 }
             }
         }
 
-        IFile getIFile(IEditorReference editorRef)
+        IFile getIFile(final IEditorReference editorRef)
         {
             try
             {
-                IEditorInput editorInput = editorRef.getEditorInput();
-                Object adapt = editorInput.getAdapter(IFile.class);
-                
+                final IEditorInput editorInput = editorRef.getEditorInput();
+                final Object adapt = editorInput.getAdapter(IFile.class);
+
                 if (adapt instanceof IFile)
                 {
                     return (IFile) adapt;
                 }
             }
-            catch (PartInitException excp)
+            catch (final PartInitException excp)
             {
                 JSFCorePlugin.getDefault().getLog().log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Error acquiring editor input",excp)); //$NON-NLS-1$
             }

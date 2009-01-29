@@ -7,7 +7,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
- *    
+ *
  ********************************************************************************/
 
 package org.eclipse.jst.jsf.designtime.internal.jsp;
@@ -22,10 +22,19 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.ILock;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
@@ -48,7 +57,7 @@ import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
-import org.eclipse.wst.html.core.internal.document.DOMStyleModelImpl;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -60,28 +69,63 @@ import org.w3c.dom.NodeList;
 
 /**
  * Processes a JSP model to determine information of interest about it such
- * as what tags are currently in use.  Listens to the model and updates it's 
+ * as what tags are currently in use.  Listens to the model and updates it's
  * information when the model changes.
- * 
+ *
  * @author cbateman
  *
  */
 public class JSPModelProcessor
 {
-    private final static Map<IFile, JSPModelProcessor>  RESOURCE_MAP = 
+    /**
+     * Pass to force refresh arguments
+     */
+    public final static boolean FORCE_REFRESH = true;
+
+    /**
+     * Pass to runAfter argument of refresh to indicate there is nothing
+     * to run when the refresh job completes.
+     */
+    public final static Runnable NO_RUN_AFTER = null;
+
+    /**
+     * Pass to runAfter argument of refresh to indicate that the caller
+     * should be blocked until the job completes.
+     */
+    public final static Runnable RUN_ON_CURRENT_THREAD = new Runnable()
+    {
+        public void run()
+        {
+            // do nothing
+        }
+    };
+
+    /**
+     * An init-time setting that is used to stop the model processor from
+     * automatically refreshing when the file it is tracking changes. The can
+     * only be set once at init is permanent for the static life timpe of
+     * JSPModelProcessor.
+     *
+     * Note that it does not turn off listening for file delete events because
+     * the singleton management still needs to know if it can dispose of an
+     * instance.
+     */
+    private final static boolean                         DISABLE_WKSPACE_CHANGE_REFRESH = System
+                                                                                                .getProperty("org.eclipse.jst.jsf.jspmodelprocessor.disable.wkspace.change.refresh") != null; //$NON-NLS-1$
+    private final static Map<IFile, JSPModelProcessor>  RESOURCE_MAP =
         new HashMap<IFile, JSPModelProcessor>();
     private final static java.util.concurrent.locks.Lock CRITICAL_SECTION =
         new  ReentrantLock();
     private static LifecycleListener  LIFECYCLE_LISTENER;
 
     /**
-     * @param file The file to get the model processor for  
+     * @param file The file to get the model processor for
      * @return the processor for a particular model, creating it if it does not
      *         already exist
      * @throws CoreException if an attempt to get the model associated with file
      *         fails due to reasons other than I/O problems
      */
-    public static JSPModelProcessor get(IFile file) throws CoreException
+    public static JSPModelProcessor get(final IFile file) throws CoreException
     {
         CRITICAL_SECTION.lock();
         try
@@ -120,26 +164,26 @@ public class JSPModelProcessor
      * Disposes of the JSPModelProcessor associated with model
      * @param file the model processor to be disposed
      */
-    private static void dispose(IFile file)
+    private static void dispose(final IFile file)
     {
         CRITICAL_SECTION.lock();
         try
         {
-            JSPModelProcessor processor = RESOURCE_MAP.get(file);
+            final JSPModelProcessor processor = RESOURCE_MAP.get(file);
 
             if (processor != null)
             {
                 RESOURCE_MAP.remove(file);
-                
+
                 if (!processor.isDisposed())
                 {
                     processor.dispose();
                     LIFECYCLE_LISTENER.removeResource(file);
                 }
-                
+
             }
 
-            if (RESOURCE_MAP.size() == 0)
+            if (RESOURCE_MAP.isEmpty())
             {
                 // if we no longer have any resources being tracked,
                 // then dispose the lifecycle listener
@@ -156,38 +200,34 @@ public class JSPModelProcessor
     private final IFile             _file;
     private LifecycleListener       _lifecycleListener;
     private IResourceLifecycleListener  _resListener;
-    private boolean                 _isDisposed;
+    private volatile boolean                 _isDisposed;
     private Map<Object, ISymbol>    _requestMap;
     private Map<Object, ISymbol>    _sessionMap;
     private Map<Object, ISymbol>    _applicationMap;
     private Map<Object, ISymbol>    _noneMap;
-    private long                    _lastModificationStamp;
 
     // used to avoid infinite recursion in refresh.  Must never be null
     private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
 
     /**
      * Construct a new JSPModelProcessor for model
-     * 
+     *
      * @param model
      */
     private JSPModelProcessor(final IFile  file, final LifecycleListener lifecycleListener)
     {
-        //_model = getModelForFile(file);
-        //_modelListener = new ModelListener();
-        //_model.addModelLifecycleListener(_modelListener);
         _file = file;
         _lifecycleListener = lifecycleListener;
         _resListener = new IResourceLifecycleListener()
         {
-            public EventResult acceptEvent(ResourceLifecycleEvent event)
+            public EventResult acceptEvent(final ResourceLifecycleEvent event)
             {
                 final EventResult result = EventResult.getDefaultEventResult();
 
                 // not interested
                 if (!_file.equals(event.getAffectedResource()))
                 {
-                    return result; 
+                    return result;
                 }
 
                 if (event.getEventType() == EventType.RESOURCE_INACCESSIBLE)
@@ -198,9 +238,10 @@ public class JSPModelProcessor
                 {
                     // if the file has changed contents on disk, then
                     // invoke an unforced refresh of the JSP file
-                    if (event.getReasonType() == ReasonType.RESOURCE_CHANGED_CONTENTS)
+                    if (event.getReasonType() == ReasonType.RESOURCE_CHANGED_CONTENTS
+                            && !DISABLE_WKSPACE_CHANGE_REFRESH)
                     {
-                        refresh(false);
+                        refresh(! FORCE_REFRESH, NO_RUN_AFTER);
                     }
                 }
 
@@ -209,23 +250,19 @@ public class JSPModelProcessor
         };
 
         lifecycleListener.addListener(_resListener);
-        
-        // a negative value guarantees that refresh(false) will
-        // force a refresh on the first run
-        _lastModificationStamp = -1;
     }
 
-    private DOMStyleModelImpl getModelForFile(final IFile file)
+    private IDOMModel getModelForFile(final IFile file)
             throws CoreException, IOException
     {
-        final IModelManager modelManager = 
+        final IModelManager modelManager =
             StructuredModelManager.getModelManager();
 
-        IStructuredModel model = modelManager.getModelForRead(file);
+        final IStructuredModel model = modelManager.getModelForRead(file);
 
-        if (model instanceof DOMStyleModelImpl)
+        if (model instanceof IDOMModel)
         {
-            return (DOMStyleModelImpl) model;
+            return (IDOMModel) model;
         }
         else if (model != null)
         {
@@ -298,74 +335,145 @@ public class JSPModelProcessor
     public boolean isModelDirty()
     {
         final long currentModificationStamp = _file.getModificationStamp();
-        return _lastModificationStamp != currentModificationStamp;
+        return _lastModificationStampMonitor.hasChanged(currentModificationStamp);
     }
-    
+
+
+
     /**
-     * Updates the internal model
-     * @param forceRefresh -- if true, always refreshes, if false,
-     * then it only refreshes if the file's modification has changed
-     * since the last refresh
-     * @throws IllegalStateException if isDisposed() == true
+     * Refreshes the processor's cache of information from its associated
+     * JSP file.
+     *
+     * @param forceRefresh
+     * @param runAfter
      */
-    public void refresh(final boolean forceRefresh)
+    public void refresh(final boolean forceRefresh, final Runnable runAfter)
     {
         if (isDisposed())
         {
-            throw new IllegalStateException("Processor is disposed for file: "+_file.toString()); //$NON-NLS-1$
+            throw new IllegalStateException(
+                    "Processor is disposed for file: " + _file.toString()); //$NON-NLS-1$
         }
 
-        synchronized(_lastModificationStampMonitor)
+        if (runAfter == RUN_ON_CURRENT_THREAD)
         {
-            if (_lastModificationStampMonitor.isSignalled())
-            {
-                // if this calls succeeds, then this thread has obtained the
-                // lock already and has called through here before.  
-                // return immediately to ensure that we don't recurse infinitely
-                return;
-            }
-
-            DOMStyleModelImpl  model = null;
             try
             {
-                _lastModificationStampMonitor.setSignalled(true);
-                
-
-                // only refresh if forced or if the underlying file has changed
-                // since the last run
-                if (forceRefresh
-                        || isModelDirty())
-                {
-                    model = getModelForFile(_file);
-                    refreshInternal(model);
-                    _lastModificationStamp = _file.getModificationStamp();
-                }
-            }
-            catch (CoreException e) {
-               JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model"); //$NON-NLS-1$
-            } catch (IOException e) {
-                JSFCorePlugin.log(new RuntimeException(e), "Error refreshing internal model"); //$NON-NLS-1$
-            }
-            // make sure that we unsignal the monitor before releasing the
-            // mutex
-            finally
+                runOnCurrentThread(forceRefresh);
+            } 
+            catch (final CoreException e)
             {
-                if (model != null)
+                JSFCorePlugin.log(e, "Running JSP model processor"); //$NON-NLS-1$
+            } 
+            catch (final OperationCanceledException e)
+            {
+                // ignore
+            } 
+        } 
+        else
+        {
+            runOnWorkspaceJob(forceRefresh, runAfter);
+        }
+
+    }
+    private void runOnWorkspaceJob(final boolean forceRefresh, final Runnable runAfter)
+    {
+    	WorkspaceJob refreshJob = new WorkspaceJob(NLS.bind(Messages
+                .getString("JSPModelProcessor.0"), _file)) { //$NON-NLS-1$
+            @Override
+            public IStatus runInWorkspace(IProgressMonitor monitor)
+                    throws CoreException
+            {
+                RefreshRunnable runnable = new RefreshRunnable(forceRefresh);
+                runnable.run(monitor);
+                return Status.OK_STATUS;
+            }
+        };
+        refreshJob.setSystem(true);
+        refreshJob.setRule(ResourcesPlugin.getWorkspace().getRoot());
+        if (runAfter != null)
+        {
+            refreshJob.addJobChangeListener(new JobChangeAdapter()
+            {
+                @Override
+                public void done(final IJobChangeEvent event)
                 {
-                    model.releaseFromRead();
+                    runAfter.run();
                 }
-                _lastModificationStampMonitor.setSignalled(false);
+            });
+        }
+        refreshJob.schedule();
+    }
+
+    private void runOnCurrentThread(final boolean forceRefresh) throws CoreException, OperationCanceledException
+    {
+        ResourcesPlugin.getWorkspace().run(new RefreshRunnable(forceRefresh), _file, 0, null);
+    }
+    
+    private final class RefreshRunnable implements IWorkspaceRunnable
+    {
+        private final boolean _forceRefresh;
+
+        public RefreshRunnable(final boolean forceRefresh)
+        {
+            _forceRefresh = forceRefresh;
+        }
+
+        public void run(final IProgressMonitor monitor)
+                throws CoreException
+        {
+            synchronized (_lastModificationStampMonitor)
+            {
+                if (!_lastModificationStampMonitor.compareAndSetSignalled(false, true))
+                {
+                    // if this calls succeeds, then this thread has obtained the
+                    // lock already and has called through here before.
+                    // return immediately to ensure that we don't recurse
+                    // infinitely
+                    return;
+                }
+                IDOMModel model = null;
+                try
+                {
+                    // only refresh if forced or if the underlying file has
+                    // changed
+                    // since the last run
+                    if (_forceRefresh || isModelDirty())
+                    {
+                        model = getModelForFile(_file);
+                        refreshInternal(model);
+                        _lastModificationStampMonitor.setModificationStamp(_file.getModificationStamp());
+                    }
+                }
+                catch (final IOException e)
+                {
+                    IStatus status = new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID,"Error refreshing internal model", e); //$NON-NLS-1$
+                    final CoreException e2 = new CoreException(status);
+                    throw e2;
+                }
+                // make sure that we unsignal the monitor before releasing the
+                // mutex
+                finally
+                {
+                    _lastModificationStampMonitor.setSignalled(false);
+                    if (model != null)
+                    {
+                        model.releaseFromRead();
+                    }
+                }
             }
         }
     }
-    
-    private void refreshInternal(DOMStyleModelImpl model)
+
+
+
+    private void refreshInternal(final IDOMModel model)
     {
-        final IStructuredDocumentContext context = 
+        final IStructuredDocumentContext context =
             IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), -1);
         final ITaglibContextResolver taglibResolver =
             IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
-        IDOMDocument document = model.getDocument();
+        final IDOMDocument document = model.getDocument();
         getApplicationMap().clear();
         getRequestMap().clear();
         getSessionMap().clear();
@@ -376,20 +484,20 @@ public class JSPModelProcessor
     }
 
     private void recurseChildNodes(final IDOMModel model,
-                                   final NodeList nodes, 
+                                   final NodeList nodes,
                                     final ITaglibContextResolver taglibResolver)
     {
         for (int i = 0; i < nodes.getLength(); i++)
         {
             final Node child = nodes.item(i);
-            
+
             // process attributes at this node before recursing
             processAttributes(model, child, taglibResolver);
             recurseChildNodes(model, child.getChildNodes(), taglibResolver);
         }
     }
 
-    private void processAttributes(final IDOMModel model, final Node node, 
+    private void processAttributes(final IDOMModel model, final Node node,
                                     final ITaglibContextResolver taglibResolver)
     {
         if (taglibResolver.hasTag(node))
@@ -397,7 +505,7 @@ public class JSPModelProcessor
             final String uri =
                 taglibResolver.getTagURIForNodeName(node);
             final String elementName = node.getLocalName();
-            
+
             for (int i = 0; i < node.getAttributes().getLength(); i++)
             {
                 final Node attribute = node.getAttributes().item(i);
@@ -408,39 +516,39 @@ public class JSPModelProcessor
         }
     }
 
-    private void processSymbolContrib(final IDOMModel model, final String uri, final String elementName, Node attribute)
+    private void processSymbolContrib(final IDOMModel model, final String uri, final String elementName, final Node attribute)
     {
         final SymbolContribAggregator  aggregator =
             SymbolContribAggregator.
                create(_file.getProject(), uri, elementName, attribute.getLocalName());
-  
+
         if (aggregator != null)
-        {    
+        {
             final AbstractContextSymbolFactory factory = aggregator.getFactory();
             final String symbolName = attribute.getNodeValue();
 
             if (factory != null)
             {
 //                long curTime = System.currentTimeMillis();
-                final IStructuredDocumentContext context = 
+                final IStructuredDocumentContext context =
                     IStructuredDocumentContextFactory.INSTANCE.
-                        getContext(model.getStructuredDocument(), 
+                        getContext(model.getStructuredDocument(),
                            attribute);
 
                 if (factory.supports(context))
                 {
                     final List problems = new ArrayList();
-                    ISymbol symbol =
-                        factory.create(symbolName, 
+                    final ISymbol symbol =
+                        factory.create(symbolName,
                                       ISymbolConstants.SYMBOL_SCOPE_REQUEST, //TODO:
                                       context,
                                       problems,
                                       // TODO: add meta-data for signature
                                       new AdditionalContextSymbolInfo(aggregator.getStaticType(), aggregator.getValueExpressionAttr()));
-    
+
     //                long netTime = System.currentTimeMillis() - curTime;
     //                System.out.println("Time to process loadBundle: "+netTime);
-    
+
                     if (symbol != null)
                     {
                         updateMap(symbol, aggregator.getScope());
@@ -449,7 +557,7 @@ public class JSPModelProcessor
             }
             else
             {
-                IComponentSymbol componentSymbol = 
+                final IComponentSymbol componentSymbol =
                     SymbolFactory.eINSTANCE.createIComponentSymbol();
                 componentSymbol.setName(symbolName);
 
@@ -485,10 +593,10 @@ public class JSPModelProcessor
      * @return an unmodifable map containing all known symbols for
      * that scope.  If scopeName is not found, returns the empty map.
      */
-    public Map<Object, ISymbol> getMapForScope(String scopeName)
+    public Map<Object, ISymbol> getMapForScope(final String scopeName)
     {
         final Map<Object, ISymbol> map = getMapForScopeInternal(scopeName);
-        
+
         if (map != null)
         {
             return Collections.unmodifiableMap(map);
@@ -497,7 +605,7 @@ public class JSPModelProcessor
         return Collections.EMPTY_MAP;
     }
 
-    private void updateMap(ISymbol symbol, String  scopeName)
+    private void updateMap(final ISymbol symbol, final String  scopeName)
     {
         final Map<Object, ISymbol> map = getMapForScopeInternal(scopeName);
 
@@ -511,7 +619,7 @@ public class JSPModelProcessor
         }
     }
 
-    private Map<Object, ISymbol> getMapForScopeInternal(String scopeName)
+    private Map<Object, ISymbol> getMapForScopeInternal(final String scopeName)
     {
         if (ISymbolConstants.SYMBOL_SCOPE_REQUEST_STRING.equals(scopeName))
         {
@@ -529,67 +637,67 @@ public class JSPModelProcessor
         {
             return getNoneMap();
         }
-        
+
         Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable())); //$NON-NLS-1$
         return null;
-    
+
     }
-    
+
     private Map getRequestMap()
     {
         if (_requestMap == null)
         {
             _requestMap = new HashMap<Object, ISymbol>();
         }
-        
+
         return _requestMap;
     }
-    
+
     private Map<Object, ISymbol> getSessionMap()
     {
         if (_sessionMap == null)
         {
             _sessionMap = new HashMap<Object, ISymbol>();
         }
-        
+
         return _sessionMap;
     }
-    
+
     private Map<Object, ISymbol> getApplicationMap()
     {
         if (_applicationMap == null)
         {
             _applicationMap = new HashMap<Object, ISymbol>();
         }
-        
+
         return _applicationMap;
     }
-    
+
     private Map<Object, ISymbol> getNoneMap()
     {
         if (_noneMap == null)
         {
             _noneMap = new HashMap<Object, ISymbol>();
         }
-        
+
         return _noneMap;
     }
 
     /**
      * Aggregates the sets-locale meta-data
-     * 
+     *
      * @author cbateman
      */
     private static class LocaleSetAggregator
     {
         private final static String SETS_LOCALE = "sets-locale"; //$NON-NLS-1$
-        
-        static LocaleSetAggregator create(IProject project, 
-                                              final String uri, 
+
+        private static LocaleSetAggregator create(final IProject project,
+                                              final String uri,
                                               final String elementName, final String attributeName)
         {
             final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
-            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
+            final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
 
             if (TraitValueHelper.getValueAsBoolean(trait))
             {
@@ -599,43 +707,43 @@ public class JSPModelProcessor
             return null;
         }
     }
-    
+
     /**
      * Aggregates all the symbol contributor meta-data into a single object
-     * 
+     *
      * @author cbateman
      *
      */
     private static class SymbolContribAggregator
     {
-        private final static String CONTRIBUTES_VALUE_BINDING = 
+        private final static String CONTRIBUTES_VALUE_BINDING =
             "contributes-value-binding"; //$NON-NLS-1$
         private final static String VALUE_BINDING_SCOPE = "value-binding-scope"; //$NON-NLS-1$
-        private final static String VALUE_BINDING_SYMBOL_FACTORY = 
+        private final static String VALUE_BINDING_SYMBOL_FACTORY =
             "value-binding-symbol-factory"; //$NON-NLS-1$
         private final static String STATIC_TYPE_KEY = "optional-value-binding-static-type"; //$NON-NLS-1$
         private final static String VALUEEXPRESSION_ATTR_NAME_KEY = "optional-value-binding-valueexpr-attr"; //$NON-NLS-1$
-        
+
         /**
          * @param attributeName
          * @return a new instance only if attributeName is a symbol contributor
          */
-        static SymbolContribAggregator create(final IProject project, 
-                                              final String uri, 
-                                              final String elementName, 
+        private static SymbolContribAggregator create(final IProject project,
+                                              final String uri,
+                                              final String elementName,
                                               final String attributeName)
         {
             final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
             final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
             Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, CONTRIBUTES_VALUE_BINDING);
 
-            boolean contribsValueBindings = TraitValueHelper.getValueAsBoolean(trait);
+            final boolean contribsValueBindings = TraitValueHelper.getValueAsBoolean(trait);
 
             if (contribsValueBindings)
             {
                 String scope = null;
                 String symbolFactory = null;
-                
+
                 trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, entityKey, VALUE_BINDING_SCOPE);
                 scope = TraitValueHelper.getValueAsString(trait);
 
@@ -685,7 +793,7 @@ public class JSPModelProcessor
         {
             return _metadata.get("scope"); //$NON-NLS-1$
         }
-        
+
         /**
          * @return the factory
          */
@@ -693,34 +801,93 @@ public class JSPModelProcessor
         {
             return JSFCommonPlugin.getSymbolFactories().get(_metadata.get("factory")); //$NON-NLS-1$
         }
-        
+
         public String getStaticType()
         {
             return _metadata.get("staticType"); //$NON-NLS-1$
         }
-        
+
         public String getValueExpressionAttr()
         {
             return _metadata.get("valueExprAttr"); //$NON-NLS-1$
         }
     }
 
-    private static class CountingMutex extends Object
+    private final static class CountingMutex extends Object
     {
+        private long                    _lastModificationStamp = -1;
         private boolean _signalled = false;
+        private final ILock _lock = Job.getJobManager().newLock();
 
         /**
-         * @return true if the state of mutex is signalled
+         * Similar to AtomicBoolean.compareAndSet.  If the signalled flag
+         * is the same as expect then update is written to the flag.  Otherwise,
+         * nothing happens.
+         * @param expect the value of _signalled where update occurs
+         * @param update the value written to _signalled if _signalled == expect
+         * 
+         * @return true if the signalled flag was set to update
          */
-        public synchronized boolean isSignalled() {
-            return _signalled;
+        public boolean compareAndSetSignalled(final boolean expect, final boolean update) {
+            final boolean[] value = new boolean[1];
+            safeRun(new Runnable() {
+            public void run()
+            {
+                if (_signalled == expect)
+                {
+                    _signalled = update;
+                    value[0] = true;
+                }
+                else
+                {
+                    value[0] = false;
+                }
+            }});      
+            return value[0];
+        }
+
+        public boolean hasChanged(final long currentModificationStamp)
+        {
+            final boolean[] value = new boolean[1];
+            safeRun(new Runnable() {
+            public void run()
+            {
+                value[0] = (_lastModificationStamp != currentModificationStamp);
+            }});                
+            return value[0];
         }
 
         /**
          * @param signalled
          */
-        public synchronized void setSignalled(boolean signalled) {
-            this._signalled = signalled;
+        public void setSignalled(final boolean signalled) {
+            safeRun(new Runnable() {
+                public void run()
+                {
+                    _signalled = signalled;
+                }});
+        }
+
+        public void setModificationStamp(final long newValue)
+        {
+            safeRun(new Runnable() {
+                public void run()
+                {
+                    _lastModificationStamp = newValue;
+                }});
+        }
+        
+        private void safeRun(final Runnable runnable)
+        {
+            _lock.acquire();
+            try
+            {
+                runnable.run();
+            }
+            finally
+            {
+                _lock.release();
+            }
         }
     }
 }

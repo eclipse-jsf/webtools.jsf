@@ -56,10 +56,10 @@ public class JSPTagVariableSymbolSourceProvider extends
             try
             {
                 modelProcessor = JSPModelProcessor.get(fileContext);
-                
+
                 // ensure internal model is sync'ed with document
                 // but don't force refresh
-                modelProcessor.refresh(false);
+                modelProcessor.refresh(!JSPModelProcessor.FORCE_REFRESH, JSPModelProcessor.RUN_ON_CURRENT_THREAD);
                 final List<ISymbol> symbols = new ArrayList();
                 
                 if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_REQUEST) != 0)
