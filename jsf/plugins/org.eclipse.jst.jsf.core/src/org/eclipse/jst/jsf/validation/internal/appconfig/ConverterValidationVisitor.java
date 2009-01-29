@@ -88,7 +88,13 @@ public class ConverterValidationVisitor extends EObjectValidationVisitor
         
         protected String getFullyQualifiedName(EObject eobj) 
         {
-            return ((ConverterForClassType)eobj).getTextContent();
+            String className = ((ConverterForClassType)eobj).getTextContent();
+            String typeName = AppConfigValidationUtil.getBaseType(className);
+            if (typeName == null)
+            {
+                return className;
+            }
+            return typeName;
         }
 
         protected String getInstanceOf() {

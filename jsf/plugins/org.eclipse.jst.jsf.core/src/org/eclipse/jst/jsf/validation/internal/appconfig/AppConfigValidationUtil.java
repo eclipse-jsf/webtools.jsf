@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.ListEntriesType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
@@ -436,7 +437,33 @@ public final class AppConfigValidationUtil
         }
         return false;
     }
-    
+
+    /**
+     * Takes the form expected by faces-config files for fully qualified class names
+     * @param inputStr java.lang.String format.
+     * @return the fully qualified type signature for the inputStr
+     */
+    public static String getBaseType(final String inputStr)
+    {
+        String checkValue = inputStr.trim();
+        try
+        {
+            // arrays are a special case where the 
+            // [Ljava.lang.String; syntax is valid.
+            if (Signature.getArrayCount(checkValue)>0)
+            {
+                checkValue = Signature.getElementType(checkValue);
+                checkValue = TypeUtil.getFullyQualifiedName(checkValue);
+            }
+        }
+        catch (final IllegalArgumentException e)
+        {
+            // ignore
+        }
+
+        return checkValue;
+    }
+
     private AppConfigValidationUtil()
     {
         // no external construction
