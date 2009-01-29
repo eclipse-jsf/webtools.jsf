@@ -306,7 +306,8 @@ AbstractXMLViewValidationStrategy
                     final ITextRegion vblOpen = regionList.get(1);
 
                     if ((openQuote.getType() == DOMJSPRegionContexts.XML_TAG_ATTRIBUTE_VALUE_DQUOTE || openQuote
-                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE)
+                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE || 
+                            openQuote.getType() == DOMJSPRegionContexts.JSP_TAG_ATTRIBUTE_VALUE_DQUOTE)
                             && vblOpen.getType() == DOMJSPRegionContexts.JSP_VBL_OPEN)
                     {
                         boolean foundClosingQuote = false;
@@ -520,12 +521,26 @@ AbstractXMLViewValidationStrategy
                         String signature = forClass.trim();
                         try
                         {
+                            // arrays are a special case where the 
+                            // [Ljava.lang.String; syntax is valid.
+                            if (Signature.getArrayCount(signature)>0)
+                            {
+                                _conversionTypes.add(signature);
+                            }
+                        }
+                        catch (final IllegalArgumentException e)
+                        {
+                            // ignore
+                        }
+
+                        try
+                        {
                             signature = Signature.createTypeSignature(signature, true);
                             _conversionTypes.add(signature);
                         }
                         catch (final Exception e)
                         {
-                            JSFCorePlugin.log(IStatus.INFO, "Could not use registered converter for-class: "+forClass); //$NON-NLS-1$
+                            // ignore: JSFCorePlugin.log(IStatus.INFO, "Could not use registered converter for-class: "+forClass); //$NON-NLS-1$
                         }
                     }
                 }
