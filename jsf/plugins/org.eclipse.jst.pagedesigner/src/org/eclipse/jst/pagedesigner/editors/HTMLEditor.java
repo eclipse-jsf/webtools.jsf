@@ -21,8 +21,12 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
@@ -36,6 +40,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
+import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceMouseTrackAdapter;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
@@ -144,7 +149,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 
 	private List PREVIEW_FILES_LIST = new ArrayList();
 
-	private WPETabbedPropertySheetPage _tabbedPropSheet;
+	private IPropertySheetPage _tabbedPropSheet;
 
 	private ISelectionChangedListener _selChangedListener;
 
@@ -891,20 +896,76 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 		return getTextEditor().isDirty();
 	}
 
-	private IPropertySheetPage getPropertySheetPage() {
-		if (_tabbedPropSheet == null){
-			_tabbedPropSheet = new org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage(
-					this, this);
-		}
-		return _tabbedPropSheet;
-	}
+	private IPropertySheetPage getPropertySheetPage()
+    {
+        if (_tabbedPropSheet == null)
+        {
+            IPropertySheetPageFactory factory = getPageFactory();
+            if (factory != null)
+            {
+                final IFile file = ((IFileEditorInput)getEditorInput()).getFile();
+                _tabbedPropSheet = factory.createPage(file);
+            }
+            else
+            {
+                _tabbedPropSheet = new WPETabbedPropertySheetPage(this,this);
+            }
+        }
+        return _tabbedPropSheet;
+    }
 
-	private PaletteViewerPage getPaletteViewerPage() {
-		if (null == _paletteViewerPage) {
-			DefaultEditDomain editDomain = getEditDomain();
-			PaletteItemManager manager = PaletteItemManager
-					.getInstance(getCurrentProject(getEditorInput()));
-			manager.reset();
+    private IPropertySheetPageFactory getPageFactory()
+    {
+        //List<IElementEditFactory> result = new ArrayList<IElementEditFactory>();
+        IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
+                .getExtensionPoint(PDPlugin.getPluginId(),
+                        IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
+        IExtension[] extensions = extensionPoint.getExtensions();
+
+        for (int i = 0; i < extensions.length; i++)
+        {
+            IExtension ext = extensions[i];
+            IConfigurationElement[] elementEditElement = ext
+                    .getConfigurationElements();
+
+            for (int j = 0; j < elementEditElement.length; j++)
+            {
+                final IConfigurationElement element = elementEditElement[j];
+                if (element.getName().equals(
+                        IJMTConstants.PROPERTY_PAGE_FACTORY))
+                {
+                    elementEditElement[j].getAttribute("factory"); //$NON-NLS-1$
+                    Object obj;
+                    try
+                    {
+                        obj = elementEditElement[j]
+                                .createExecutableExtension("factory"); //$NON-NLS-1$
+
+                        // TODO: we need a policy based solution here,
+                        // but this will do for now
+                        if (obj instanceof IPropertySheetPageFactory)
+                        {
+                            return (IPropertySheetPageFactory) obj;
+                        }
+                    } 
+                    catch (CoreException e)
+                    {
+                        PDPlugin.log("Problem loading element edit extension for "+element.toString(), e); //$NON-NLS-1$
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private PaletteViewerPage getPaletteViewerPage()
+    {
+        if (null == _paletteViewerPage)
+        {
+            DefaultEditDomain editDomain = getEditDomain();
+            PaletteItemManager manager = PaletteItemManager
+                    .getInstance(getCurrentProject(getEditorInput()));
+            manager.reset();
             PaletteRoot paletteRoot = _designViewer.getPaletteRoot();
             editDomain.setPaletteRoot(paletteRoot);
             

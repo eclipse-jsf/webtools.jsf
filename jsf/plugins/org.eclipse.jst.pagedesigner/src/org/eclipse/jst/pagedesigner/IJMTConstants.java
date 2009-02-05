@@ -95,4 +95,8 @@ public interface IJMTConstants {
 	 */
 	public static final String LINK_CREATOR = "linkCreator"; //$NON-NLS-1$
     
+	/**
+	 * extension for property page factory
+	 */
+	public static final String PROPERTY_PAGE_FACTORY = "propertyPageFactory"; //$NON-NLS-1$
 }
