@@ -26,7 +26,7 @@ public final class DropCustomizationController
     private final String _uri;
     private final String _name;
     private final IDOMDocument  _domDocument;
-//    private final IDOMPosition _domPosition;
+    private final IDOMPosition _domPosition;
 
     /**
      * @param command
@@ -42,7 +42,7 @@ public final class DropCustomizationController
         _uri = uri;
         _name = name;
         _domDocument = domDocument;
-//        _domPosition = domPosition;
+        _domPosition = domPosition;
     }
 
     /**
@@ -65,7 +65,7 @@ public final class DropCustomizationController
                 final IFile file = getFile(_domDocument);
                 if (file != null)
                 {
-                    status = customizer.runCustomizer();
+                    status = customizer.runCustomizer(file, _domPosition);
                 }
                 else 
                 {
