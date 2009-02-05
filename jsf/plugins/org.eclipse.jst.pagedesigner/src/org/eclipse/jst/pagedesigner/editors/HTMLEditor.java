@@ -934,12 +934,12 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
                 if (element.getName().equals(
                         IJMTConstants.PROPERTY_PAGE_FACTORY))
                 {
-                    elementEditElement[j].getAttribute("factory"); //$NON-NLS-1$
+                    elementEditElement[j].getAttribute("class"); //$NON-NLS-1$
                     Object obj;
                     try
                     {
                         obj = elementEditElement[j]
-                                .createExecutableExtension("factory"); //$NON-NLS-1$
+                                .createExecutableExtension("class"); //$NON-NLS-1$
 
                         // TODO: we need a policy based solution here,
                         // but this will do for now
