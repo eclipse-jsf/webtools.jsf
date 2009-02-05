@@ -55,7 +55,7 @@ public abstract class AbstractMetaDataEnabledTypeRegistry {
 		}
 		else {
 			//is there any point in putting this more in the user's face?  this is really an internal error.
-			JSFCorePlugin.log(IStatus.ERROR, "Duplicate RuntimeTypeId being registered from " + ext_pt_id + ": " + atype.getTypeID()); //$NON-NLS-1$ //$NON-NLS-2$
+			JSFCorePlugin.log(IStatus.ERROR, "Duplicate RuntimeTypeId being registered from " + ext_pt_id + ": " + atype.getTypeID());
 		}
 	}
 	
@@ -83,17 +83,17 @@ public abstract class AbstractMetaDataEnabledTypeRegistry {
 				IExtension ext = extensions[i];
 				for (int j=0;j < ext.getConfigurationElements().length;j++){
 					final String bundleId = ext.getConfigurationElements()[j].getContributor().getName();
-					final String id = ext.getConfigurationElements()[j].getAttribute("id"); //$NON-NLS-1$
-					String klass = ext.getConfigurationElements()[j].getAttribute("class"); //$NON-NLS-1$
-					final String runtimeType = ext.getConfigurationElements()[j].getAttribute("runtime-type"); //$NON-NLS-1$
-					if (klass == null || klass.trim().equals("")){ //$NON-NLS-1$
+					final String id = ext.getConfigurationElements()[j].getAttribute("id");
+					String klass = ext.getConfigurationElements()[j].getAttribute("class");
+					final String runtimeType = ext.getConfigurationElements()[j].getAttribute("runtime-type");
+					if (klass == null || klass.trim().equals("")){
 						klass = getDefaultClassName();
 					}
 					registerType(bundleId, id, klass, runtimeType);
 				}
 			}
 		} catch (InvalidRegistryObjectException e) {
-			JSFCorePlugin.log(e, "Unable to read " + JSFCorePlugin.PLUGIN_ID + ext_pt_id + " registry"); //$NON-NLS-1$ //$NON-NLS-2$
+			JSFCorePlugin.log(e, "Unable to read " + JSFCorePlugin.PLUGIN_ID + ext_pt_id + " registry");
 		}
 	}
 	

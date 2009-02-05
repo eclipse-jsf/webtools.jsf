@@ -32,7 +32,7 @@ public class ValueHolderAttributeMapper extends CustomViewMappingAdapter
     {
         final String name = attr.getNodeName();
 
-        if ("converter".equals(name) //$NON-NLS-1$
+        if ("converter".equals(name)
                 && bestComponent.getComponentTypeInfo().isInstanceOf(
                         ComponentFactory.INTERFACE_VALUEHOLDER))
         {
@@ -42,7 +42,7 @@ public class ValueHolderAttributeMapper extends CustomViewMappingAdapter
             {
                 ConverterTypeInfo typeInfo = null;
 
-                if (!value.startsWith("#{")) //$NON-NLS-1$
+                if (!value.startsWith("#{"))
                 {
                     typeInfo = new ConverterTypeInfo(null, value);
 

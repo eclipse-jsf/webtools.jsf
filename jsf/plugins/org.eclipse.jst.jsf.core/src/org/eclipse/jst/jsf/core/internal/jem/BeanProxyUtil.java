@@ -10,12 +10,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal.jem;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jem.internal.proxy.core.IBeanProxy;
 import org.eclipse.jem.internal.proxy.core.IBeanTypeProxy;
 import org.eclipse.jem.internal.proxy.core.IFieldProxy;
@@ -23,8 +17,6 @@ import org.eclipse.jem.internal.proxy.core.IIntegerBeanProxy;
 import org.eclipse.jem.internal.proxy.core.IMethodProxy;
 import org.eclipse.jem.internal.proxy.core.IStringBeanProxy;
 import org.eclipse.jem.internal.proxy.core.ThrowableProxy;
-import org.eclipse.jst.jsf.common.util.TypeUtil;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
  * Convenience methods for using bean proxies
@@ -45,18 +37,15 @@ public final class BeanProxyUtil
         private final static IBeanTypeProxy[] NO_ARG_TYPES = new IBeanTypeProxy[0];
 
         private final IBeanTypeProxy _typeProxy;
-        private final IProject       _project;
         private IBeanProxy _instance;
 
         /**
-         * @param project 
          * @param typeProxy
          */
-        public BeanProxyWrapper(final IProject project, final IBeanTypeProxy typeProxy)
+        public BeanProxyWrapper(final IBeanTypeProxy typeProxy)
         {
             super();
             _typeProxy = typeProxy;
-            _project = project;
         }
 
         /**
@@ -97,6 +86,8 @@ public final class BeanProxyUtil
             _instance = null;
             init();
         }
+        
+        
 
         /**
          * @return the instance proxy
@@ -125,14 +116,12 @@ public final class BeanProxyUtil
         {
             try
             {
-                final IMethodProxy method = getMethodProxy(methodName, argTypes);
-                    /*(argTypes.length == 0) ? _typeProxy
+                final IMethodProxy method = (argTypes.length == 0) ? _typeProxy
                         .getMethodProxy(methodName) : _typeProxy
-                        .getMethodProxy(methodName, argTypes);*/
+                        .getMethodProxy(methodName, argTypes);
 
                 if (method != null)
                 {
-                    method.setAccessible(true);
                     return method.invoke(_instance, args);
                 }
             }
@@ -262,13 +251,6 @@ public final class BeanProxyUtil
         public IBeanProxy getFieldValue(final String fieldName,
                 final IBeanTypeProxy typeProxy) throws ProxyException
         {
-            // avoid having JEM log a warning if we can prove the call to find
-            // the field will fail
-            if (!hasField(fieldName))
-            {
-                return null;
-            }
-
             try
             {
                 final IFieldProxy fieldProxy = typeProxy
@@ -307,7 +289,7 @@ public final class BeanProxyUtil
         {
             IBeanTypeProxy curType = typeProxy;
 
-            PARENT_LOOP: while (curType != null)
+            while (curType != null)
             {
                 final IBeanProxy field = getFieldValue(fieldName, curType);
                 if (field != null)
@@ -317,15 +299,7 @@ public final class BeanProxyUtil
 
                 try
                 {
-                    IBeanTypeProxy oldType = curType;
                     curType = curType.getSuperBeanTypeProxy();
-                    // avoid infinite loop: if the parent of curType can't 
-                    // be resolved, JEM returns the same type, so curType
-                    // never becomes null
-                    if (oldType == curType)
-                    {
-                        break PARENT_LOOP;
-                    }
                 }
                 catch (final NullPointerException npe)
                 {
@@ -346,133 +320,6 @@ public final class BeanProxyUtil
         {
             return _instance;
         }
-
-        private IMethodProxy getMethodProxy(final String methodName, final IBeanTypeProxy[] argTypes)
-        {
-            IBeanTypeProxy curType = _typeProxy;
-
-            PARENT_LOOP: while (curType != null)
-            {
-                final IMethodProxy[] declaredMethods = curType.getDeclaredMethods();
-                final IMethodProxy foundMethod = findMethodInList(methodName, argTypes, declaredMethods);
-                if (foundMethod != null)
-                {
-                    return foundMethod;
-                }
-                // avoid infinite loop: if the parent of curType can't 
-                // be resolved, JEM returns the same type, so curType
-                // never becomes null
-                IBeanTypeProxy oldType = curType;
-                curType = _typeProxy.getSuperBeanTypeProxy();
-                if (oldType == curType)
-                {
-                    break PARENT_LOOP;
-                }
-            }
-            return null;
-        }
-
-        private IMethodProxy findMethodInList(final String methodName, final IBeanTypeProxy[] argTypes,
-                final IMethodProxy[] listOfMethods)
-        {
-            METHODS_LOOP: for (final IMethodProxy methodProxy : listOfMethods)
-            {
-                if (methodName.equals(methodProxy.getName()))
-                {
-                    final IBeanTypeProxy[] parameterTypes = 
-                        methodProxy.getParameterTypes();
-                    if (argTypes.length == parameterTypes.length)
-                    {
-                        for (int i = 0; i < argTypes.length; i++)
-                        {
-                            if (!argTypes[i].getTypeName().equals(parameterTypes[i].getTypeName()))
-                            {
-                                // if we find a parameter type mismatch, then
-                                // skip this method; it's not it
-                                continue METHODS_LOOP;
-                            }
-                        }
-                        // if we get to here, we have a method with right name
-                        // and parameters
-                        return methodProxy;
-                    }
-                }
-            }
-            return null;
-        }
-
-        private boolean hasField(final String fieldName)
-        {
-            final IType type = lazilyCalculateType();
-            if (type != null)
-            {
-                final IField field = type.getField(fieldName);
-                return field.exists();
-            }
-            return false;
-        }
-
-        private IType _type;
-        private boolean _checkedType;
-        private IType lazilyCalculateType()
-        {
-            if (!_checkedType)
-            {
-                _checkedType = true;
-                final String typeName = _typeProxy.getTypeName();
-                final IJavaProject javaProject = JavaCore.create(_project);
-                if (typeName != null && typeName.startsWith("L")) //$NON-NLS-1$
-                {
-                    _type = TypeUtil.resolveType(javaProject, typeName);
-                }
-                else
-                {
-                    try 
-                    {
-                        _type = javaProject.findType(typeName);
-                    } 
-                    catch (JavaModelException e) 
-                    {
-                        JSFCorePlugin.log(e, "While loading type: "+typeName); //$NON-NLS-1$
-                    }
-                }
-            }
-            return _type;
-        }
-
-//        private Map<String, List<IMethod>>   _methods;
-//        
-//        private Map<String, List<IMethod>> lazilyCalculateMethods(final IType type)
-//        {
-//            if (_methods == null)
-//            {
-//                _methods = new HashMap<String, List<IMethod>>();
-//                final JDTBeanIntrospector introspector = new JDTBeanIntrospector(type);
-//                final IMethod[] methods = introspector.getAllMethods();
-//                
-//                for (final IMethod method : methods)
-//                {
-//                    List<IMethod> byName = _methods.get(method.getElementName());
-//                    if (byName == null)
-//                    {
-//                        byName = new ArrayList<IMethod>();
-//                        _methods.put(method.getElementName(), byName);
-//                    }
-//                    
-//                    try {
-//                        if (method.exists()
-//                                && Flags.isPublic(method.getFlags()))
-//                        {
-//                            byName.add(method);
-//                        }
-//                    } catch (JavaModelException e) {
-//                        JSFCorePlugin.log(e, "While getting flags on method: "+method.getElementName());
-//                    }
-//                }
-//            }
-//            return _methods;
-//        }
-        
     }
 
     /**

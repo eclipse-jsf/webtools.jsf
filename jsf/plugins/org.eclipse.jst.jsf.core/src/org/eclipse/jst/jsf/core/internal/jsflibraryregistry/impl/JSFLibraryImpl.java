@@ -46,7 +46,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.adapter.MaintainDefa
  * </p>
  *
  * @generated
- * @deprecated
  */
 public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	/**
@@ -54,7 +53,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The default value of the '{@link #getID() <em>ID</em>}' attribute.
@@ -64,7 +63,7 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = ""; //$NON-NLS-1$
+	protected static final String ID_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getID() <em>ID</em>}' attribute.
@@ -541,15 +540,15 @@ public class JSFLibraryImpl extends EObjectImpl implements JSFLibrary {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (ID: "); //$NON-NLS-1$
+		result.append(" (ID: ");
 		result.append(id);
-		result.append(", Name: "); //$NON-NLS-1$
+		result.append(", Name: ");
 		result.append(name);
-		result.append(", JSFVersion: "); //$NON-NLS-1$
+		result.append(", JSFVersion: ");
 		result.append(jsfVersion);
-		result.append(", Deployed: "); //$NON-NLS-1$
+		result.append(", Deployed: ");
 		result.append(deployed);
-		result.append(", Implementation: "); //$NON-NLS-1$
+		result.append(", Implementation: ");
 		result.append(implementation);
 		result.append(')');
 		return result.toString();

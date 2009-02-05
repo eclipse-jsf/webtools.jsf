@@ -69,7 +69,7 @@ public abstract class AbstractTagRegistry implements ITagRegistry
             catch (final Exception e)
             {
                 JSFCorePlugin.log(new Exception(e),
-                        "During change event notification"); //$NON-NLS-1$
+                        "During change event notification");
             }
         }
     }

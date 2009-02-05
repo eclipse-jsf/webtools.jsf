@@ -58,7 +58,6 @@ import org.osgi.framework.Bundle;
  * </p>
  *
  * @generated
- * @deprecated
  */
 public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	/**
@@ -66,7 +65,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The default value of the '{@link #isRelativeToWorkspace() <em>Relative To Workspace</em>}' attribute.
@@ -277,7 +276,7 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 	public void setJSFLibrary(JSFLibrary newJSFLibrary) {
 		if (newJSFLibrary != eInternalContainer() || (eContainerFeatureID != JSFLibraryRegistryPackage.ARCHIVE_FILE__JSF_LIBRARY && newJSFLibrary != null)) {
 			if (EcoreUtil.isAncestor(this, newJSFLibrary))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
@@ -693,11 +692,11 @@ public class ArchiveFileImpl extends EObjectImpl implements ArchiveFile {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (RelativeToWorkspace: "); //$NON-NLS-1$
+		result.append(" (RelativeToWorkspace: ");
 		result.append(relativeToWorkspace);
-		result.append(", SourceLocation: "); //$NON-NLS-1$
+		result.append(", SourceLocation: ");
 		result.append(sourceLocation);
-		result.append(", RelativeDestLocation: "); //$NON-NLS-1$
+		result.append(", RelativeDestLocation: ");
 		result.append(relativeDestLocation);
 		result.append(')');
 		return result.toString();

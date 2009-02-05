@@ -50,7 +50,7 @@ public class ViewMetadataGenerator
     {
         _root = MetadataFactory.eINSTANCE.createModel();
         _root.setId(uri);
-        _root.setType("tagFile"); //$NON-NLS-1$
+        _root.setType("tagFile");
         _resourceSet = new ResourceSetImpl();
         _mapper = new ViewMetadataMapper();
         _extendedMetadata = new BasicExtendedMetaData(_resourceSet
@@ -102,7 +102,7 @@ public class ViewMetadataGenerator
 
             final Entity entity = MetadataFactory.eINSTANCE.createEntity();
             entity.setId(tagName);
-            entity.setType("tag"); //$NON-NLS-1$
+            entity.setType("tag");
             entity.getTraits().add(trait);
 
             _root.getChildEntities().add(entity);

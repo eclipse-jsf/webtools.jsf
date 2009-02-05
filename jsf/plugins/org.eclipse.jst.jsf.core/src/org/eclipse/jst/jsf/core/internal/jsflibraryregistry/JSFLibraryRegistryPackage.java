@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EReference;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory
  * @model kind="package"
  * @generated
- * @deprecated
  */
 @SuppressWarnings("hiding")
 public interface JSFLibraryRegistryPackage extends EPackage{
@@ -39,7 +38,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The package name.
@@ -47,7 +46,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "jsflibraryregistry"; //$NON-NLS-1$
+	String eNAME = "jsflibraryregistry";
 
 	/**
 	 * The package namespace URI.
@@ -55,7 +54,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"; //$NON-NLS-1$
+	String eNS_URI = "http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd";
 
 	/**
 	 * The package namespace name.
@@ -63,7 +62,7 @@ public interface JSFLibraryRegistryPackage extends EPackage{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "jsflibreg"; //$NON-NLS-1$
+	String eNS_PREFIX = "jsflibreg";
 
 	/**
 	 * The singleton instance of the package.

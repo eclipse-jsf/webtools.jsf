@@ -32,7 +32,6 @@ import org.eclipse.jst.jsf.common.internal.policy.IdentifierOrderedIteratorPolic
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
-import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.model.AbstractTagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.CompositeTagResolvingStrategy;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.DefaultJSPTagResolver;
@@ -65,8 +64,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     private final Job                                                  _changeJob;
     private final PersistedDataTagStrategy                             _persistedTagStrategy;
     private TagIndexListener                                           _tagIndexListener;
-    private final TLDRegistryPreferences                               _prefs;
-    private final MyPropertyListener                                   _myPropertyListener;
+    private TLDRegistryPreferences                                     _prefs;
 
     TLDTagRegistry(final IProject project)
     {
@@ -74,12 +72,13 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         _nsResolved = new HashMap<String, TLDNamespace>();
 
         _prefs = new TLDRegistryPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
-        _myPropertyListener = new MyPropertyListener();
-        _prefs.addListener(_myPropertyListener);
         _prefs.load();
         final IdentifierOrderedIteratorPolicy<String> policy =
             getTagResolvingPolicy();
-
+        // exclude things that are not explicitly listed in the policy.  That
+        // way preference-based disablement will cause those strategies to
+        // be excluded.
+        policy.setExcludeNonExplicitValues(true);
         _resolver = new CompositeTagResolvingStrategy<TLDElementDeclaration>(
                 policy);
 
@@ -107,10 +106,6 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         final IdentifierOrderedIteratorPolicy<String> policy = new IdentifierOrderedIteratorPolicy<String>(
                 strategyOrdering);
-        // exclude things that are not explicitly listed in the policy.  That
-        // way preference-based disablement will cause those strategies to
-        // be excluded.
-        policy.setExcludeNonExplicitValues(true);
         return  policy;
     }
 
@@ -118,7 +113,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
-            JSFCoreTraceOptions.log("TLDTagRegistry: Disposing for project " //$NON-NLS-1$
+            JSFCoreTraceOptions.log("TLDTagRegistry: Disposing for project "
                     + _project.toString());
         }
 
@@ -132,7 +127,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
             JSFCoreTraceOptions
-                    .log("TLDTagRegistry: Done disposing registry for " //$NON-NLS-1$
+                    .log("TLDTagRegistry: Done disposing registry for "
                             + _project.toString());
         }
     }
@@ -151,25 +146,25 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         }
         catch (IOException e)
         {
-           JSFCorePlugin.log(e, "Checkpointing JSP tags failed"); //$NON-NLS-1$
+           JSFCorePlugin.log(e, "Checkpointing JSP tags failed");
         }
         catch (ClassNotFoundException e)
         {
-            JSFCorePlugin.log(e, "Checkpointing JSP tags failed"); //$NON-NLS-1$
+            JSFCorePlugin.log(e, "Checkpointing JSP tags failed");
         }
     }
 
     @Override
     protected Job getRefreshJob(final boolean flushCaches)
     {
-        return new Job(Messages.TLDTagRegistry_RefreshJob + _project.getName())
+        return new Job("Refreshing JSP tag registry for " + _project.getName())
         {
             @Override
             protected IStatus run(final IProgressMonitor monitor)
             {
                 if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
                 {
-                    JSFCoreTraceOptions.log("TLDTagRegistry.refresh: start"); //$NON-NLS-1$
+                    JSFCoreTraceOptions.log("TLDTagRegistry.refresh: start");
                 }
 
                 synchronized (TLDTagRegistry.this)
@@ -177,7 +172,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                     if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
                     {
                         JSFCoreTraceOptions
-                                .log("TLDTagRegistry.refresh: start"); //$NON-NLS-1$
+                                .log("TLDTagRegistry.refresh: start");
                     }
 
                     final List<Namespace> namespaces = new ArrayList(
@@ -205,7 +200,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                     if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
                     {
                         JSFCoreTraceOptions
-                                .log("TLDTagRegistry.refresh: finished"); //$NON-NLS-1$
+                                .log("TLDTagRegistry.refresh: finished");
                     }
                     return Status.OK_STATUS;
                 }
@@ -219,7 +214,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
-            JSFCoreTraceOptions.log("TLDTagRegistry.initialize: start"); //$NON-NLS-1$
+            JSFCoreTraceOptions.log("TLDTagRegistry.initialize: start");
         }
 
         final ITaglibRecord[] tldrecs = TaglibIndex
@@ -244,7 +239,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
             if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
             {
                 JSFCoreTraceOptions
-                        .log("TLDRegistryManager: installing tag index listener due to create instance for " //$NON-NLS-1$
+                        .log("TLDRegistryManager: installing tag index listener due to create instance for "
                                 + _project.toString());
             }
 
@@ -261,7 +256,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
-            JSFCoreTraceOptions.log("TLDTagRegistry.initialize: finished"); //$NON-NLS-1$
+            JSFCoreTraceOptions.log("TLDTagRegistry.initialize: finished");
         }
     }
 
@@ -272,7 +267,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         {
             if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
             {
-                JSFCoreTraceOptions.log("TLDTagRegistry.initialize_TagRecord: Initializing new tld record: "+tagRecord.toString()); //$NON-NLS-1$
+                JSFCoreTraceOptions.log("TLDTagRegistry.initialize_TagRecord: Initializing new tld record: "+tagRecord.toString());
             }
             long startTime = 0;
             
@@ -298,7 +293,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
                 if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
                 {
-                    System.out.printf("Time to update namespace %s was %d\n", //$NON-NLS-1$
+                    System.out.printf("Time to update namespace %s was %d\n",
                             ns.getNSUri(), Long.valueOf(System.nanoTime()
                                     - startTime));
                 }
@@ -309,7 +304,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         {
             if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_CHANGES)
             {
-                JSFCoreTraceOptions.log("TLDTagRegistry.initialize_TagRecord: Skipping tag record for "+tagRecord.toString()); //$NON-NLS-1$
+                JSFCoreTraceOptions.log("TLDTagRegistry.initialize_TagRecord: Skipping tag record for "+tagRecord.toString());
             }
 
         }
@@ -341,7 +336,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
-            JSFCoreTraceOptions.log("TLDTagRegistry.getAllTagLibraries: start"); //$NON-NLS-1$
+            JSFCoreTraceOptions.log("TLDTagRegistry.getAllTagLibraries: start");
         }
         long startTime = 0;
         
@@ -360,12 +355,12 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
         {
-            System.out.println("Time to getAllTagLibraries for JSP: "+(System.nanoTime()-startTime)); //$NON-NLS-1$
+            System.out.println("Time to getAllTagLibraries for JSP: "+(System.nanoTime()-startTime));
         }
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
             JSFCoreTraceOptions
-                    .log("TLDTagRegistry.getAllTagLibraries: finished"); //$NON-NLS-1$
+                    .log("TLDTagRegistry.getAllTagLibraries: finished");
         }
         return allTagLibraries;
     }
@@ -379,7 +374,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
-            JSFCoreTraceOptions.log("TLDTagRegistry.getTagLibrary: start uri=" //$NON-NLS-1$
+            JSFCoreTraceOptions.log("TLDTagRegistry.getTagLibrary: start uri="
                     + uri);
         }
 
@@ -393,7 +388,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
         {
             JSFCoreTraceOptions
-                    .log("TLDTagRegistry.getTagLibrary: finished, result=" //$NON-NLS-1$
+                    .log("TLDTagRegistry.getTagLibrary: finished, result="
                             + ns.toString());
         }
         return ns;
@@ -404,7 +399,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
     {
         return String
                 .format(
-                        "TLDRegistry for project %s, isDisposed=%s, hasBeenInitialized=%s, numberOfNamespace=%d", //$NON-NLS-1$
+                        "TLDRegistry for project %s, isDisposed=%s, hasBeenInitialized=%s, numberOfNamespace=%d",
                         _project.toString(), Boolean.valueOf(isDisposed()),
                         Boolean.valueOf(_hasBeenInitialized), Integer
                                 .valueOf(_nsResolved.size()));
@@ -423,7 +418,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
         public ChangeJob(final String projectName)
         {
-            super(Messages.TLDTagRegistry_UpdateJob + projectName); 
+            super("Update job for project " + projectName);
         }
 
         @Override
@@ -435,7 +430,7 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
 
                 LibraryOperation operation = null;
                 final MultiStatus multiStatus = new MultiStatus(
-                        JSFCorePlugin.PLUGIN_ID, 0, "Result of change job", //$NON-NLS-1$
+                        JSFCorePlugin.PLUGIN_ID, 0, "Result of change job",
                         new Throwable());
                 while ((operation = _changeOperations.poll()) != null)
                 {
@@ -454,21 +449,6 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
                 }
 
                 return multiStatus;
-            }
-        }
-    }
-    
-    private class MyPropertyListener extends TLDRegistryPreferences.PropertyListener
-    {
-        @Override
-        public void strategyOrderChanged()
-        {
-            synchronized(TLDTagRegistry.this)
-            {
-                _prefs.load();
-                final IdentifierOrderedIteratorPolicy<String> policy =
-                    getTagResolvingPolicy();
-                _resolver.setPolicy(policy);
             }
         }
     }

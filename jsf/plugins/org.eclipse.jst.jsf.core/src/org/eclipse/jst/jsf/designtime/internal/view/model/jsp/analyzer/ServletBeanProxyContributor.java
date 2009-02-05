@@ -39,7 +39,7 @@ class ServletBeanProxyContributor extends ConfigurationContributorAdapter
         _jsfVersion = getProjectVersion(project);
         if (_jsfVersion == null)
         {
-            throw new IllegalArgumentException("jsfVersion must not be null"); //$NON-NLS-1$
+            throw new IllegalArgumentException("jsfVersion must not be null");
         }
 
     }
@@ -51,12 +51,12 @@ class ServletBeanProxyContributor extends ConfigurationContributorAdapter
     {
         if (_jsfVersion != JSFVersion.V1_2)
         {
-            final Bundle servletBundle = Platform.getBundle("javax.servlet"); //$NON-NLS-1$
+            final Bundle servletBundle = Platform.getBundle("javax.servlet");
             controller.contributeClasspath(servletBundle, (IPath) null,
                     IConfigurationContributionController.APPEND_USER_CLASSPATH,
                     true);
 
-            final Bundle jspBundle = Platform.getBundle("javax.servlet.jsp"); //$NON-NLS-1$
+            final Bundle jspBundle = Platform.getBundle("javax.servlet.jsp");
             controller.contributeClasspath(jspBundle, (IPath) null,
                     IConfigurationContributionController.APPEND_USER_CLASSPATH,
                     true);
@@ -65,10 +65,10 @@ class ServletBeanProxyContributor extends ConfigurationContributorAdapter
         {
             final Bundle coreBundle = JSFCorePlugin.getDefault().getBundle();
             final IJavaProject javaProject = JavaCore.create(_project);
-            maybeAddJar(controller, "javax.servlet.jsp.tagext.JspIdConsumer", //$NON-NLS-1$
-                    javaProject, coreBundle, "/jars/fake_jsp_21.jar"); //$NON-NLS-1$
-            maybeAddJar(controller, "javax.el.ELException", javaProject, //$NON-NLS-1$
-                    coreBundle, "/jars/fake_el.jar"); //$NON-NLS-1$
+            maybeAddJar(controller, "javax.servlet.jsp.tagext.JspIdConsumer",
+                    javaProject, coreBundle, "/jars/fake_jsp_21.jar");
+            maybeAddJar(controller, "javax.el.ELException", javaProject,
+                    coreBundle, "/jars/fake_el.jar");
         }
     }
 
@@ -103,25 +103,25 @@ class ServletBeanProxyContributor extends ConfigurationContributorAdapter
     {
         try
         {
-            if (FacetedProjectFramework.hasProjectFacet(project, "jst.jsf", //$NON-NLS-1$
-                    "1.0")) //$NON-NLS-1$
+            if (FacetedProjectFramework.hasProjectFacet(project, "jst.jsf",
+                    "1.0"))
             {
                 return JSFVersion.V1_0;
             }
             else if (FacetedProjectFramework.hasProjectFacet(project,
-                    "jst.jsf", "1.1")) //$NON-NLS-1$ //$NON-NLS-2$
+                    "jst.jsf", "1.1"))
             {
                 return JSFVersion.V1_1;
             }
             else if (FacetedProjectFramework.hasProjectFacet(project,
-                    "jst.jsf", "1.2")) //$NON-NLS-1$ //$NON-NLS-2$
+                    "jst.jsf", "1.2"))
             {
                 return JSFVersion.V1_2;
             }
         }
         catch (final CoreException e)
         {
-            JSFCorePlugin.log("checking project version", e); //$NON-NLS-1$
+            JSFCorePlugin.log("checking project version", e);
             // fall-through
         }
 

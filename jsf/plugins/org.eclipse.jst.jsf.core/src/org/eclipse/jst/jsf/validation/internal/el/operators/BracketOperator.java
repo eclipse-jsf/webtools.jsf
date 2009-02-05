@@ -34,7 +34,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 public class BracketOperator extends MemberAccessorOperator
 {
-    private static final String OPERATOR_NAME_ARRAY_ACCESSOR = "array ('[]') accessor"; //$NON-NLS-1$
+    private static final String OPERATOR_NAME_ARRAY_ACCESSOR = "array ('[]') accessor";
 
     /**
      * @param diagnosticFactory 
@@ -160,6 +160,6 @@ public class BracketOperator extends MemberAccessorOperator
     @Override
     protected String getOperatorName()
     {
-        return Messages.getString("BracketOperator.Name"); //$NON-NLS-1$
+        return Messages.getString("BracketOperator.Name");
     }    
 }

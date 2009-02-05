@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util.JSFLibraryRegistryResourceImpl
  * @generated
- * @deprecated
  */
 public class JSFLibraryRegistryResourceFactoryImpl extends ResourceFactoryImpl {
 	/**
@@ -28,7 +27,7 @@ public class JSFLibraryRegistryResourceFactoryImpl extends ResourceFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * Creates an instance of the resource factory.

@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFLibrary()
  * @model
  * @generated
- * @deprecated
  */
 public interface JSFLibrary extends EObject{
 	/**
@@ -41,7 +40,7 @@ public interface JSFLibrary extends EObject{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * Returns the value of the '<em><b>ID</b></em>' attribute.

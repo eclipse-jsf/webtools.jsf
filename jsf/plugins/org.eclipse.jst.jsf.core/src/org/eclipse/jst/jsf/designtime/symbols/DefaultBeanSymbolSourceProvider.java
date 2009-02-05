@@ -140,7 +140,7 @@ public class DefaultBeanSymbolSourceProvider
                     {
                         IJavaProject javaProject = JavaCore.create(iProject);
                         final String typeName = bean.getManagedBeanClass() != null?
-                            bean.getManagedBeanClass().getTextContent() : ""; //$NON-NLS-1$
+                            bean.getManagedBeanClass().getTextContent() : "";
                         final IType type = javaProject.findType(typeName);
 
                         // don't bother setting a type descriptor if we
@@ -170,10 +170,10 @@ public class DefaultBeanSymbolSourceProvider
         final String beanName = beanType.getManagedBeanName() != null ?
                                     beanType.getManagedBeanName().getTextContent() : null;
 
-        StringBuffer additionalInfo = new StringBuffer();
+        StringBuffer additionalInfo = new StringBuffer(); //$NON-NLS-1$
         if (beanName != null)
         {
-            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Name")); //$NON-NLS-1$ //$NON-NLS-2$
+            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Name")); //$NON-NLS-1$
             additionalInfo.append(" </b>"); //$NON-NLS-1$
             additionalInfo.append(beanName);
             additionalInfo.append("</p>"); //$NON-NLS-1$
@@ -183,7 +183,7 @@ public class DefaultBeanSymbolSourceProvider
                 beanType.getManagedBeanClass().getTextContent() : null;
         if (beanClass != null)
         {
-            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Type")); //$NON-NLS-1$ //$NON-NLS-2$
+            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Type")); //$NON-NLS-1$
             additionalInfo.append(" </b>"); //$NON-NLS-1$
             additionalInfo.append(beanClass);
             additionalInfo.append("</p>"); //$NON-NLS-1$
@@ -193,7 +193,7 @@ public class DefaultBeanSymbolSourceProvider
                 beanType.getManagedBeanScope().getTextContent() : null;
         if (beanScope != null)
         {
-            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Scope")); //$NON-NLS-1$ //$NON-NLS-2$
+            additionalInfo.append("<p><b>"+Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Scope")); //$NON-NLS-1$
             additionalInfo.append(" </b>"); //$NON-NLS-1$
             additionalInfo.append(beanScope);
             additionalInfo.append("</p>"); //$NON-NLS-1$

@@ -31,7 +31,6 @@ import org.eclipse.jst.jsf.core.internal.Messages;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFLibraryRegistry()
  * @model
  * @generated
- * @deprecated
  */
 public interface JSFLibraryRegistry extends EObject{
 	/**
@@ -39,7 +38,7 @@ public interface JSFLibraryRegistry extends EObject{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * Returns the value of the '<em><b>Default Implementation ID</b></em>' attribute.

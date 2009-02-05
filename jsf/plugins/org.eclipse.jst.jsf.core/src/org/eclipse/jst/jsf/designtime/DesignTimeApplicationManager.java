@@ -60,8 +60,8 @@ import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
  */
 public final class DesignTimeApplicationManager
 {
-    private static final String SETTINGS_DIR_NAME = ".settings"; //$NON-NLS-1$
-    private static final String ORG_ECLIPSE_JST_JSF_DESIGNTIME_APPMGR_PREFS = "org.eclipse.jst.jsf.designtime.appmgr.prefs"; //$NON-NLS-1$
+    private static final String SETTINGS_DIR_NAME = ".settings";
+    private static final String ORG_ECLIPSE_JST_JSF_DESIGNTIME_APPMGR_PREFS = "org.eclipse.jst.jsf.designtime.appmgr.prefs";
 
     private static final String        PROPERTY_QUALIFIER                               = "org.eclipse.jst.jsf.designtime.internal";                     //$NON-NLS-1$
     private static final String        SESSION_PROPERTY_NAME_PROJECT                    = "DesignTimeApplicationManager";                                //$NON-NLS-1$
@@ -632,9 +632,9 @@ public final class DesignTimeApplicationManager
         {
             JSFCorePlugin
                     .log(
-                            "A call to a disposed DesignTimeApplicationManager was attempted", //$NON-NLS-1$
+                            "A call to a disposed DesignTimeApplicationManager was attempted",
                             new Throwable(
-                                    "This exception is only to record a stack trace")); //$NON-NLS-1$
+                                    "This exception is only to record a stack trace"));
         }
     }
 
@@ -753,9 +753,9 @@ public final class DesignTimeApplicationManager
                                     outstream.toByteArray()), true, true, null);
                         }
                     } catch (final CoreException e) {
-                        JSFCorePlugin.log(e, "Problem storing properties"); //$NON-NLS-1$
+                        JSFCorePlugin.log(e, "Problem storing properties");
                     } catch (final IOException e) {
-                        JSFCorePlugin.log(e, "Problem storing properties"); //$NON-NLS-1$
+                        JSFCorePlugin.log(e, "Problem storing properties");
                     }
                 }
             };
@@ -770,7 +770,7 @@ public final class DesignTimeApplicationManager
                         null);
             } catch (CoreException ce)
             {
-                JSFCorePlugin.log(ce, "Problem storing properties"); //$NON-NLS-1$
+                JSFCorePlugin.log(ce, "Problem storing properties");
             }
         }
 
@@ -801,11 +801,11 @@ public final class DesignTimeApplicationManager
             } 
             catch (final CoreException ce)
             {
-                JSFCorePlugin.log(ce, "Problem loading properties"); //$NON-NLS-1$
+                JSFCorePlugin.log(ce, "Problem loading properties");
             } 
             catch (final IOException ce)
             {
-                JSFCorePlugin.log(ce, "Problem loading properties"); //$NON-NLS-1$
+                JSFCorePlugin.log(ce, "Problem loading properties");
             }
         }
 

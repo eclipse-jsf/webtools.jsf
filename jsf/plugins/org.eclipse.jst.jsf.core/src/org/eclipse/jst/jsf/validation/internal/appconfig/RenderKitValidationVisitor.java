@@ -63,7 +63,7 @@ public class RenderKitValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.render.RenderKit"; //$NON-NLS-1$
+            return "javax.faces.render.RenderKit";
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {

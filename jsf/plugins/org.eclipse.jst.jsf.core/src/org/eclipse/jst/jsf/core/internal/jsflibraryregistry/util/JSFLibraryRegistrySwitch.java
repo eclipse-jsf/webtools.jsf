@@ -33,7 +33,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage
  * @generated
- * @deprecated
  */
 public class JSFLibraryRegistrySwitch {
 	/**
@@ -41,7 +40,7 @@ public class JSFLibraryRegistrySwitch {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The cached model package

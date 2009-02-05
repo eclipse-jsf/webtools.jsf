@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfoImpl.java,v 1.2 2008/11/18 22:24:03 gkessler Exp $
+ * $Id: PaletteInfoImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
@@ -49,7 +49,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -345,7 +345,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 				_tag = findTag(model, tagName);
 			} catch (ClassCastException e) {		
 //			    PDPlugin.getLogger(getClass()).error(e);
-				JSFCorePlugin.log(e, "ClassCastException in getTag() for " + tagName); //$NON-NLS-1$
+				JSFCorePlugin.log(e, "ClassCastException in getTag() for " + tagName);
 				return null;
 			}
 		}
@@ -507,7 +507,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 		}
 		else if (tagCreation == null){
 			//delegate to entity if it exists
-			return (TagCreationInfo)getTagTraitValue(getTag(), "tag-create"); //$NON-NLS-1$
+			return (TagCreationInfo)getTagTraitValue(getTag(), "tag-create");
 		}
 		return tagCreation;
 	}
@@ -541,7 +541,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	 */
 	public boolean isExpert() {
 		if (expert == null){
-			String val = getTagTraitValueAsString(getId(), "expert"); //$NON-NLS-1$
+			String val = getTagTraitValueAsString(getId(), "expert");
 			return Boolean.valueOf(val).booleanValue();			
 		}
 		return expert.booleanValue();
@@ -554,7 +554,7 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 	 */
 	public boolean isHidden() {
 		if (hidden == null){
-			String val = getTagTraitValueAsString(getId(), "hidden"); //$NON-NLS-1$
+			String val = getTagTraitValueAsString(getId(), "hidden");
 			return Boolean.valueOf(val).booleanValue();	
 		}
 		return hidden.booleanValue();
@@ -704,21 +704,21 @@ public class PaletteInfoImpl extends EObjectImpl implements PaletteInfo {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: "); //$NON-NLS-1$
+		result.append(" (id: ");
 		result.append(id);
-		result.append(", tag: "); //$NON-NLS-1$
+		result.append(", tag: ");
 		result.append(tag);
-		result.append(", displayLabel: "); //$NON-NLS-1$
+		result.append(", displayLabel: ");
 		result.append(displayLabel);
-		result.append(", description: "); //$NON-NLS-1$
+		result.append(", description: ");
 		result.append(description);
-		result.append(", expert: "); //$NON-NLS-1$
+		result.append(", expert: ");
 		result.append(expert);
-		result.append(", hidden: "); //$NON-NLS-1$
+		result.append(", hidden: ");
 		result.append(hidden);
-		result.append(", smallIcon: "); //$NON-NLS-1$
+		result.append(", smallIcon: ");
 		result.append(smallIcon);
-		result.append(", largeIcon: "); //$NON-NLS-1$
+		result.append(", largeIcon: ");
 		result.append(largeIcon);
 		result.append(')');
 		return result.toString();

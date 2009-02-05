@@ -34,7 +34,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * </p>
  *
  * @generated
- * @deprecated
  */
 public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements PluginProvidedJSFLibrary {
 	/**
@@ -43,7 +42,7 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 	 * @generated
 	 */
     @SuppressWarnings("hiding")
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The default value of the '{@link #getPluginID() <em>Plugin ID</em>}' attribute.
@@ -261,9 +260,9 @@ public class PluginProvidedJSFLibraryImpl extends JSFLibraryImpl implements Plug
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (pluginID: "); //$NON-NLS-1$
+		result.append(" (pluginID: ");
 		result.append(pluginID);
-		result.append(", Label: "); //$NON-NLS-1$
+		result.append(", Label: ");
 		result.append(label);
 		result.append(')');
 		return result.toString();

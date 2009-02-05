@@ -44,9 +44,9 @@ public enum JSFVersion {
             case V1_2:
                 return IJSFCoreConstants.JSF_VERSION_1_2;
             case UNKNOWN:
-                return "unknown"; //$NON-NLS-1$
+                return "unknown";
             default:
-                throw new IllegalStateException("Missing string conversion: "+this.name()); //$NON-NLS-1$
+                throw new IllegalStateException("Missing string conversion: "+this.name());
         }
     }
 
@@ -68,7 +68,7 @@ public enum JSFVersion {
         {
             return V1_2;
         }
-        else if ("unknown".equals(valueAsString)) //$NON-NLS-1$
+        else if ("unknown".equals(valueAsString))
         {
             return UNKNOWN;
         }

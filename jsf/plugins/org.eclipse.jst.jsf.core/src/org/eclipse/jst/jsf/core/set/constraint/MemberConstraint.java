@@ -60,7 +60,7 @@ public class MemberConstraint extends AbstractSetConstraint
         }
 
         return new BasicDiagnostic(Diagnostic.ERROR, this.getClass().getName(),
-            0, Messages.MemberConstraint_Failure, complement.toArray());
+            0, "Failed membership constraint", complement.toArray());
     }
 
 }

@@ -29,7 +29,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
  * @generated
- * @deprecated
  */
 public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLibraryRegistryFactory {
 	/**
@@ -37,7 +36,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * Creates the default factory implementation.
@@ -48,7 +47,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	 */
 	public static JSFLibraryRegistryFactory init() {
 		try {
-			JSFLibraryRegistryFactory theJSFLibraryRegistryFactory = (JSFLibraryRegistryFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd");  //$NON-NLS-1$
+			JSFLibraryRegistryFactory theJSFLibraryRegistryFactory = (JSFLibraryRegistryFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/webtools/jsf/schema/jsflibraryregistry.xsd"); 
 			if (theJSFLibraryRegistryFactory != null) {
 				return theJSFLibraryRegistryFactory;
 			}
@@ -83,7 +82,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 			case JSFLibraryRegistryPackage.PLUGIN_PROVIDED_JSF_LIBRARY: return createPluginProvidedJSFLibrary();
 			case JSFLibraryRegistryPackage.ARCHIVE_FILE: return createArchiveFile();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -100,7 +99,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 			case JSFLibraryRegistryPackage.JSF_VERSION:
 				return createJSFVersionFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -117,7 +116,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 			case JSFLibraryRegistryPackage.JSF_VERSION:
 				return convertJSFVersionToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -175,7 +174,7 @@ public class JSFLibraryRegistryFactoryImpl extends EFactoryImpl implements JSFLi
 	 */
 	public JSFVersion createJSFVersionFromString(EDataType eDataType, String initialValue) {
 		JSFVersion result = JSFVersion.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
 

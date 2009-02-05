@@ -190,7 +190,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                     }
                     else
                     {
-                        throw new AssertionError("unsupport arithmetic upcast type"); //$NON-NLS-1$
+                        throw new AssertionError("unsupport arithmetic upcast type");
                     }
                     
                     return result;  
@@ -269,7 +269,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
                     }
                     else
                     {
-                        throw new AssertionError("unsupport arithmetic upcast type"); //$NON-NLS-1$
+                        throw new AssertionError("unsupport arithmetic upcast type");
                     }
                     
                     return _diagnosticFactory.

@@ -27,19 +27,11 @@ public class UnresolvedJSPTagResolvingStrategy extends JSPTagResolvingStrategy
     /**
      * the identifier of this strategy
      */
-    public final static String ID = "org.eclipse.jst.jsf.designtime.UnresolvedJSPTagResolvingStrategy"; //$NON-NLS-1$
+    public final static String ID = "org.eclipse.jst.jsf.designtime.UnresolvedJSPTagResolvingStrategy";
     /**
      * the displayable name
      */
-    public final static String DISPLAY_NAME = Messages.UnresolvedJSPTagResolvingStrategy_1;
-
-    /**
-     * @return the descriptor for this resolver strategy
-     */
-    public static StrategyDescriptor createDescriptor()
-    {
-        return new StrategyDescriptor(ID, DISPLAY_NAME);
-    }
+    public final static String DISPLAY_NAME = "Unresolved Tag Resolver";
 
     @Override
     public String getId()

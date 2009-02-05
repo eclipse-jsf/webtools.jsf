@@ -65,6 +65,6 @@ public class DotOperator extends MemberAccessorOperator
     @Override
     protected String getOperatorName()
     {
-        return Messages.getString("DotOperator.Name"); //$NON-NLS-1$
+        return Messages.getString("DotOperator.Name");
     }
 }

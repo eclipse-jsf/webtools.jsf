@@ -63,7 +63,7 @@ class MasterIndex implements Serializable
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
-            JSFCoreTraceOptions.log("MasterIndex.create, version=:" //$NON-NLS-1$
+            JSFCoreTraceOptions.log("MasterIndex.create, version=:"
                     + version.toString());
         }
 
@@ -81,7 +81,7 @@ class MasterIndex implements Serializable
         {
             if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
             {
-                JSFCoreTraceOptions.log("Trying to save master index file: " //$NON-NLS-1$
+                JSFCoreTraceOptions.log("Trying to save master index file: "
                         + file.getAbsolutePath());
             }
 
@@ -92,7 +92,7 @@ class MasterIndex implements Serializable
             if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
             {
                 JSFCoreTraceOptions
-                        .log("Master index file written successfully: " //$NON-NLS-1$
+                        .log("Master index file written successfully: "
                                 + file.getAbsolutePath());
             }
         }
@@ -114,7 +114,7 @@ class MasterIndex implements Serializable
         {
             if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
             {
-                JSFCoreTraceOptions.log("Trying to load master index file: " //$NON-NLS-1$
+                JSFCoreTraceOptions.log("Trying to load master index file: "
                         + _storageFile.getAbsolutePath());
             }
 
@@ -127,9 +127,9 @@ class MasterIndex implements Serializable
             if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
             {
                 JSFCoreTraceOptions
-                        .log("Loaded master index file successfully:" //$NON-NLS-1$
+                        .log("Loaded master index file successfully:"
                                 + _storageFile.getAbsolutePath());
-                JSFCoreTraceOptions.log("Initial contents: "); //$NON-NLS-1$
+                JSFCoreTraceOptions.log("Initial contents: ");
                 System.out.println(index.toString());
             }
         }
@@ -146,11 +146,11 @@ class MasterIndex implements Serializable
     {
         StringBuffer buffer = new StringBuffer();
 
-        buffer.append(String.format("Header: %s\n\n", _header.toString())); //$NON-NLS-1$
+        buffer.append(String.format("Header: %s\n\n", _header.toString()));
 
         for (final ProjectIndex projIndex : _projectIndices)
         {
-            buffer.append(String.format("\t%s\n", projIndex.toString())); //$NON-NLS-1$
+            buffer.append(String.format("\t%s\n", projIndex.toString()));
         }
 
         return buffer.toString();
@@ -176,8 +176,8 @@ class MasterIndex implements Serializable
         catch (IOException ioe)
         {
             JSFCorePlugin.log(ioe,
-                    "Failed to save master index.  Project Index for " //$NON-NLS-1$
-                            + project.toString() + " may not be saved"); //$NON-NLS-1$
+                    "Failed to save master index.  Project Index for "
+                            + project.toString() + " may not be saved");
         }
         return index;
     }
@@ -190,7 +190,7 @@ class MasterIndex implements Serializable
             _projectIndices.remove(index);
             if (!index.remove())
             {
-                throw new IOException("Failed to remove index file"); //$NON-NLS-1$
+                throw new IOException("Failed to remove index file");
             }
         }
     }
@@ -255,7 +255,7 @@ class MasterIndex implements Serializable
 
         public String toString()
         {
-            return "Version: " + _version.toString(); //$NON-NLS-1$
+            return "Version: " + _version.toString();
         }
     }
 
@@ -336,7 +336,7 @@ class MasterIndex implements Serializable
         {
             final long uniqueCode = Math
                     .round((Math.random() * Integer.MAX_VALUE));
-            final String fileName = String.format("Project_%s_%x.idx", //$NON-NLS-1$
+            final String fileName = String.format("Project_%s_%x.idx",
                     _projectName, Long.valueOf(uniqueCode));
             _file = new File(new Path(_relativePath).append(fileName)
                     .toOSString());
@@ -391,9 +391,9 @@ class MasterIndex implements Serializable
 
         public String toString()
         {
-            return "project= " + _projectName + ", relativePath=" //$NON-NLS-1$ //$NON-NLS-2$
-                    + _relativePath + ", lastModified=" //$NON-NLS-1$
-                    + _lastModStampOnProject + ", saveFile=" + _file; //$NON-NLS-1$
+            return "project= " + _projectName + ", relativePath="
+                    + _relativePath + ", lastModified="
+                    + _lastModStampOnProject + ", saveFile=" + _file;
         }
 
         // public synchronized void save()

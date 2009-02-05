@@ -22,227 +22,227 @@ public interface IJSFConstants
 	/**
 	 * actionListener tagname
 	 */
-	final static public String TAG_ACTIONLISTENER = "actionListener"; //$NON-NLS-1$
+	final static public String TAG_ACTIONLISTENER = "actionListener";
 
 	/**
 	 * attribute tagname
 	 */
-	final static public String TAG_ATTRIBUTE = "attribute"; //$NON-NLS-1$
+	final static public String TAG_ATTRIBUTE = "attribute";
 
 	/**
 	 * convertDateTime tagname
 	 */
-	final static public String TAG_CONVERTDATETIME = "convertDateTime"; //$NON-NLS-1$
+	final static public String TAG_CONVERTDATETIME = "convertDateTime";
 
 	/**
 	 * converter tagname
 	 */
-	final static public String TAG_CONVERTER = "converter"; //$NON-NLS-1$
+	final static public String TAG_CONVERTER = "converter";
 
 	/**
 	 * convertNumber tagname
 	 */
-	final static public String TAG_CONVERTNUMBER = "convertNumber"; //$NON-NLS-1$
+	final static public String TAG_CONVERTNUMBER = "convertNumber";
 
 	/**
 	 * facet tagname
 	 */
-	final static public String TAG_FACET = "facet"; //$NON-NLS-1$
+	final static public String TAG_FACET = "facet";
 
 	/**
 	 * loadBundle tagname
 	 */
-	final static public String TAG_LOADBUNDLE = "loadBundle"; //$NON-NLS-1$
+	final static public String TAG_LOADBUNDLE = "loadBundle";
 
 	/**
 	 * param tagname
 	 */
-	final static public String TAG_PARAM = "param"; //$NON-NLS-1$
+	final static public String TAG_PARAM = "param";
 
     /**
      * phaseListener tagname
      */
-	final static public String TAG_PHASELISTENER = "phaseListener"; //$NON-NLS-1$
+	final static public String TAG_PHASELISTENER = "phaseListener";
 	
 	/**
 	 * selectItem tagname
 	 */
-	final static public String TAG_SELECTITEM = "selectItem"; //$NON-NLS-1$
+	final static public String TAG_SELECTITEM = "selectItem";
 
 	/**
 	 * selectItems tagname
 	 */
-	final static public String TAG_SELECTITEMS = "selectItems"; //$NON-NLS-1$
+	final static public String TAG_SELECTITEMS = "selectItems";
 
 	/**
 	 * setPropertyActionListener tagname
 	 */
-	final static public String TAG_SETPROPERTYACTIONLISTENER = "setPropertyActionListener"; //$NON-NLS-1$
+	final static public String TAG_SETPROPERTYACTIONLISTENER = "setPropertyActionListener";
 	
 	/**
 	 * subview tagname
 	 */
-	final static public String TAG_SUBVIEW = "subview"; //$NON-NLS-1$
+	final static public String TAG_SUBVIEW = "subview";
 
 	/**
 	 * validateDoubleRange tagname
 	 */
-	final static public String TAG_VALIDATEDOUBLERANGE = "validateDoubleRange"; //$NON-NLS-1$
+	final static public String TAG_VALIDATEDOUBLERANGE = "validateDoubleRange";
 
 	/**
 	 * validateLength tagname
 	 */
-	final static public String TAG_VALIDATELENGTH = "validateLength"; //$NON-NLS-1$
+	final static public String TAG_VALIDATELENGTH = "validateLength";
 
 	/**
 	 * validateLongRange tagname
 	 */
-	final static public String TAG_VALIDATELONGRANGE = "validateLongRange"; //$NON-NLS-1$
+	final static public String TAG_VALIDATELONGRANGE = "validateLongRange";
 
 	/**
 	 * validator tagname
 	 */
-	final static public String TAG_VALIDATOR = "validator"; //$NON-NLS-1$
+	final static public String TAG_VALIDATOR = "validator";
 
 	/**
 	 * valueChangeListener tagname
 	 */
-	final static public String TAG_VALUECHANGELISTENER = "valueChangeListener"; //$NON-NLS-1$
+	final static public String TAG_VALUECHANGELISTENER = "valueChangeListener";
 
 	/**
 	 * verbatim tagname
 	 */
-	final static public String TAG_VERBATIM = "verbatim"; //$NON-NLS-1$
+	final static public String TAG_VERBATIM = "verbatim";
 
 	/**
 	 * view tagname
 	 */
-	final static public String TAG_VIEW = "view"; //$NON-NLS-1$
+	final static public String TAG_VIEW = "view";
 
 	/**
 	 * column tagname
 	 */
-	final static public String TAG_COLUMN = "column"; //$NON-NLS-1$
+	final static public String TAG_COLUMN = "column";
 
 	/**
 	 * commandButton tagname
 	 */
-	final static public String TAG_COMMANDBUTTON = "commandButton"; //$NON-NLS-1$
+	final static public String TAG_COMMANDBUTTON = "commandButton";
 
 	/**
 	 * commandLink tagname
 	 */
-	final static public String TAG_COMMANDLINK = "commandLink"; //$NON-NLS-1$
+	final static public String TAG_COMMANDLINK = "commandLink";
 
 	/**
 	 * dataTable tagname
 	 */
-	final static public String TAG_DATATABLE = "dataTable"; //$NON-NLS-1$
+	final static public String TAG_DATATABLE = "dataTable";
 
 	/**
 	 * form tagname
 	 */
-	final static public String TAG_FORM = "form"; //$NON-NLS-1$
+	final static public String TAG_FORM = "form";
 
 	/**
 	 * graphicImage tagname
 	 */
-	final static public String TAG_GRAPHICIMAGE = "graphicImage"; //$NON-NLS-1$
+	final static public String TAG_GRAPHICIMAGE = "graphicImage";
 
 	/**
 	 * inputHidden tagname
 	 */
-	final static public String TAG_INPUTHIDDEN = "inputHidden"; //$NON-NLS-1$
+	final static public String TAG_INPUTHIDDEN = "inputHidden";
 
 	/**
 	 * inputSecret tagname
 	 */
-	final static public String TAG_INPUTSECRET = "inputSecret"; //$NON-NLS-1$
+	final static public String TAG_INPUTSECRET = "inputSecret";
 
 	/**
 	 * inputText tagname
 	 */
-	final static public String TAG_INPUTTEXT = "inputText"; //$NON-NLS-1$
+	final static public String TAG_INPUTTEXT = "inputText";
 
 	/**
 	 * inputTextarea tagname
 	 */
-	final static public String TAG_INPUTTEXTAREA = "inputTextarea"; //$NON-NLS-1$
+	final static public String TAG_INPUTTEXTAREA = "inputTextarea";
 
 	/**
 	 * message tagname
 	 */
-	final static public String TAG_MESSAGE = "message"; //$NON-NLS-1$
+	final static public String TAG_MESSAGE = "message";
 
 	/**
 	 * messages tagname
 	 */
-	final static public String TAG_MESSAGES = "messages"; //$NON-NLS-1$
+	final static public String TAG_MESSAGES = "messages";
 
 	/**
 	 * outputFormat tagname
 	 */
-	final static public String TAG_OUTPUTFORMAT = "outputFormat"; //$NON-NLS-1$
+	final static public String TAG_OUTPUTFORMAT = "outputFormat";
 
 	/**
 	 * outputLabel tagname
 	 */
-	final static public String TAG_OUTPUTLABEL = "outputLabel"; //$NON-NLS-1$
+	final static public String TAG_OUTPUTLABEL = "outputLabel";
 
 	/**
 	 * outputLink tagname
 	 */
-	final static public String TAG_OUTPUTLINK = "outputLink"; //$NON-NLS-1$
+	final static public String TAG_OUTPUTLINK = "outputLink";
 
 	/**
 	 * outputText tagname
 	 */
-	final static public String TAG_OUTPUTTEXT = "outputText"; //$NON-NLS-1$
+	final static public String TAG_OUTPUTTEXT = "outputText";
 
 	/**
 	 * panelGrid tagname
 	 */
-	final static public String TAG_PANELGRID = "panelGrid"; //$NON-NLS-1$
+	final static public String TAG_PANELGRID = "panelGrid";
 
 	/**
 	 * panelGroup tagname
 	 */
-	final static public String TAG_PANELGROUP = "panelGroup"; //$NON-NLS-1$
+	final static public String TAG_PANELGROUP = "panelGroup";
 
 	/**
 	 * selectBooleanCheckbox tagname
 	 */
-	final static public String TAG_SELECTBOOLEANCHECKBOX = "selectBooleanCheckbox"; //$NON-NLS-1$
+	final static public String TAG_SELECTBOOLEANCHECKBOX = "selectBooleanCheckbox";
 
 	/**
 	 * selectManyCheckbox tagname
 	 */
-	final static public String TAG_SELECTMANYCHECKBOX = "selectManyCheckbox"; //$NON-NLS-1$
+	final static public String TAG_SELECTMANYCHECKBOX = "selectManyCheckbox";
 
 	/**
 	 * selectManyListbox tagname
 	 */
-	final static public String TAG_SELECTMANYLISTBOX = "selectManyListbox"; //$NON-NLS-1$
+	final static public String TAG_SELECTMANYLISTBOX = "selectManyListbox";
 
 	/**
 	 * selectManyMenu tagname
 	 */
-	final static public String TAG_SELECTMANYMENU = "selectManyMenu"; //$NON-NLS-1$
+	final static public String TAG_SELECTMANYMENU = "selectManyMenu";
 
 	/**
 	 * selectOneListbox tagname
 	 */
-	final static public String TAG_SELECTONELISTBOX = "selectOneListbox"; //$NON-NLS-1$
+	final static public String TAG_SELECTONELISTBOX = "selectOneListbox";
 
 	/**
 	 * selectOneMenu tagname
 	 */
-	final static public String TAG_SELECTONEMENU = "selectOneMenu"; //$NON-NLS-1$
+	final static public String TAG_SELECTONEMENU = "selectOneMenu";
 
 	/**
 	 * selectOneMenu tagname
 	 */
-	final static public String TAG_SELECTONERADIO = "selectOneRadio"; //$NON-NLS-1$
+	final static public String TAG_SELECTONERADIO = "selectOneRadio";
 
     // tag identifiers
     /**
@@ -519,461 +519,461 @@ public interface IJSFConstants
 	/**
 	 * accept tag attribute name
 	 */
-	final static public String ATTR_ACCEPT = "accept"; //$NON-NLS-1$
+	final static public String ATTR_ACCEPT = "accept";
 
 	/**
 	 * acceptcharset tag attribute name
 	 */
-	final static public String ATTR_ACCEPTCHARSET = "acceptcharset"; //$NON-NLS-1$
+	final static public String ATTR_ACCEPTCHARSET = "acceptcharset";
 
 	/**
 	 * accesskey tag attribute name
 	 */
-	final static public String ATTR_ACCESSKEY = "accesskey"; //$NON-NLS-1$
+	final static public String ATTR_ACCESSKEY = "accesskey";
 
 	/**
 	 * action tag attribute name
 	 */
-	final static public String ATTR_ACTION = "action"; //$NON-NLS-1$
+	final static public String ATTR_ACTION = "action";
 
 	/**
 	 * actionListener tag attribute name
 	 */
-	final static public String ATTR_ACTIONLISTENER = "actionListener"; //$NON-NLS-1$
+	final static public String ATTR_ACTIONLISTENER = "actionListener";
 
 	/**
 	 * alt tag attribute name
 	 */
-	final static public String ATTR_ALT = "alt"; //$NON-NLS-1$
+	final static public String ATTR_ALT = "alt";
 
 	/**
 	 * basename tag attribute name
 	 */
-	final static public String ATTR_BASENAME = "basename"; //$NON-NLS-1$
+	final static public String ATTR_BASENAME = "basename";
 
 	/**
 	 * bgcolor tag attribute name
 	 */
-	final static public String ATTR_BGCOLOR = "bgcolor"; //$NON-NLS-1$
+	final static public String ATTR_BGCOLOR = "bgcolor";
 
 	/**
 	 * binding tag attribute name
 	 */
-	final static public String ATTR_BINDING = "binding"; //$NON-NLS-1$
+	final static public String ATTR_BINDING = "binding";
 
 	/**
 	 * border tag attribute name
 	 */
-	final static public String ATTR_BORDER = "border"; //$NON-NLS-1$
+	final static public String ATTR_BORDER = "border";
 
 	/**
 	 * cellpadding tag attribute name
 	 */
-	final static public String ATTR_CELLPADDING = "cellpadding"; //$NON-NLS-1$
+	final static public String ATTR_CELLPADDING = "cellpadding";
 
 	/**
 	 * cellspacing tag attribute name
 	 */
-	final static public String ATTR_CELLSPACING = "cellspacing"; //$NON-NLS-1$
+	final static public String ATTR_CELLSPACING = "cellspacing";
 
 	/**
 	 * charset tag attribute name
 	 */
-	final static public String ATTR_CHARSET = "charset"; //$NON-NLS-1$
+	final static public String ATTR_CHARSET = "charset";
 
 	/**
 	 * cols tag attribute name
 	 */
-	final static public String ATTR_COLS = "cols"; //$NON-NLS-1$
+	final static public String ATTR_COLS = "cols";
 
 	/**
 	 * columnClasses tag attribute name
 	 */
-	final static public String ATTR_COLUMNCLASSES = "columnClasses"; //$NON-NLS-1$
+	final static public String ATTR_COLUMNCLASSES = "columnClasses";
 
 	/**
 	 * columns tag attribute name
 	 */
-	final static public String ATTR_COLUMNS = "columns"; //$NON-NLS-1$
+	final static public String ATTR_COLUMNS = "columns";
 
 	/**
 	 * converterId tag attribute name
 	 */
-	final static public String ATTR_CONVERTERID = "converterId"; //$NON-NLS-1$
+	final static public String ATTR_CONVERTERID = "converterId";
 
 	/**
 	 * coords tag attribute name
 	 */
-	final static public String ATTR_COORDS = "coords"; //$NON-NLS-1$
+	final static public String ATTR_COORDS = "coords";
 
 	/**
 	 * currencyCode tag attribute name
 	 */
-	final static public String ATTR_CURRENCYCODE = "currencyCode"; //$NON-NLS-1$
+	final static public String ATTR_CURRENCYCODE = "currencyCode";
 
 	/**
 	 * currencySymbol tag attribute name
 	 */
-	final static public String ATTR_CURRENCYSYMBOL = "currencySymbol"; //$NON-NLS-1$
+	final static public String ATTR_CURRENCYSYMBOL = "currencySymbol";
 
 	/**
 	 * dateStyle tag attribute name
 	 */
-	final static public String ATTR_DATESTYLE = "dateStyle"; //$NON-NLS-1$
+	final static public String ATTR_DATESTYLE = "dateStyle";
 
 	/**
 	 * dir tag attribute name
 	 */
-	final static public String ATTR_DIR = "dir"; //$NON-NLS-1$
+	final static public String ATTR_DIR = "dir";
 
 	/**
 	 * disabled tag attribute name
 	 */
-	final static public String ATTR_DISABLED = "disabled"; //$NON-NLS-1$
+	final static public String ATTR_DISABLED = "disabled";
 
 	/**
 	 * errorClass tag attribute name
 	 */
-	final static public String ATTR_ERRORCLASS = "errorClass"; //$NON-NLS-1$
+	final static public String ATTR_ERRORCLASS = "errorClass";
 
 	/**
 	 * errorStyle tag attribute name
 	 */
-	final static public String ATTR_ERRORSTYLE = "errorStyle"; //$NON-NLS-1$
+	final static public String ATTR_ERRORSTYLE = "errorStyle";
 
 	/**
 	 * escape tag attribute name
 	 */
-	final static public String ATTR_ESCAPE = "escape"; //$NON-NLS-1$
+	final static public String ATTR_ESCAPE = "escape";
 
 	/**
 	 * fatalClass tag attribute name
 	 */
-	final static public String ATTR_FATALCLASS = "fatalClass"; //$NON-NLS-1$
+	final static public String ATTR_FATALCLASS = "fatalClass";
 
 	/**
 	 * fatalStyle tag attribute name
 	 */
-	final static public String ATTR_FATALSTYLE = "fatalStyle"; //$NON-NLS-1$
+	final static public String ATTR_FATALSTYLE = "fatalStyle";
 
 	/**
 	 * first tag attribute name
 	 */
-	final static public String ATTR_FIRST = "first"; //$NON-NLS-1$
+	final static public String ATTR_FIRST = "first";
 
 	/**
 	 * footerClass tag attribute name
 	 */
-	final static public String ATTR_FOOTERCLASS = "footerClass"; //$NON-NLS-1$
+	final static public String ATTR_FOOTERCLASS = "footerClass";
 
 	/**
 	 * for tag attribute name
 	 */
-	final static public String ATTR_FOR = "for"; //$NON-NLS-1$
+	final static public String ATTR_FOR = "for";
 
 	/**
 	 * frame tag attribute name
 	 */
-	final static public String ATTR_FRAME = "frame"; //$NON-NLS-1$
+	final static public String ATTR_FRAME = "frame";
 
 	/**
 	 * globalOnly tag attribute name
 	 */
-	final static public String ATTR_GLOBEONLY = "globalOnly"; //$NON-NLS-1$
+	final static public String ATTR_GLOBEONLY = "globalOnly";
 
 	/**
 	 * headerClass tag attribute name
 	 */
-	final static public String ATTR_HEADERCLASS = "headerClass"; //$NON-NLS-1$
+	final static public String ATTR_HEADERCLASS = "headerClass";
 
 	/**
 	 * hreflang tag attribute name
 	 */
-	final static public String ATTR_HREFLANG = "hreflang"; //$NON-NLS-1$
+	final static public String ATTR_HREFLANG = "hreflang";
 
 	/**
 	 * id tag attribute name
 	 */
-	final static public String ATTR_ID = "id"; //$NON-NLS-1$
+	final static public String ATTR_ID = "id";
 
 	/**
 	 * image tag attribute name
 	 */
-	final static public String ATTR_IMAGE = "image"; //$NON-NLS-1$
+	final static public String ATTR_IMAGE = "image";
 
 	/**
 	 * immediate tag attribute name
 	 */
-	final static public String ATTR_IMMEDIATE = "immediate"; //$NON-NLS-1$
+	final static public String ATTR_IMMEDIATE = "immediate";
 
 	/**
 	 * infoClass tag attribute name
 	 */
-	final static public String ATTR_INFOCLASS = "infoClass"; //$NON-NLS-1$
+	final static public String ATTR_INFOCLASS = "infoClass";
 
 	/**
 	 * infoStyle tag attribute name
 	 */
-	final static public String ATTR_INFOSTYLE = "infoStyle"; //$NON-NLS-1$
+	final static public String ATTR_INFOSTYLE = "infoStyle";
 
 	/**
 	 * itemDescription tag attribute name
 	 */
-	final static public String ATTR_ITEMDESCRIPTION = "itemDescription"; //$NON-NLS-1$
+	final static public String ATTR_ITEMDESCRIPTION = "itemDescription";
 
 	/**
 	 * itemDisabled tag attribute name
 	 */
-	final static public String ATTR_ITEMDISABLED = "itemDisabled"; //$NON-NLS-1$
+	final static public String ATTR_ITEMDISABLED = "itemDisabled";
 
 	/**
 	 * itemLabel tag attribute name
 	 */
-	final static public String ATTR_ITEMLABEL = "itemLabel"; //$NON-NLS-1$
+	final static public String ATTR_ITEMLABEL = "itemLabel";
 
 	/**
 	 * itemValue tag attribute name
 	 */
-	final static public String ATTR_ITEMVALUE = "itemValue"; //$NON-NLS-1$
+	final static public String ATTR_ITEMVALUE = "itemValue";
 
 	/**
 	 * lang tag attribute name
 	 */
-	final static public String ATTR_LANG = "lang"; //$NON-NLS-1$
+	final static public String ATTR_LANG = "lang";
 
 	/**
 	 * layout tag attribute name
 	 */
-	final static public String ATTR_LAYOUT = "layout"; //$NON-NLS-1$
+	final static public String ATTR_LAYOUT = "layout";
 
 	/**
 	 * locale tag attribute name
 	 */
-	final static public String ATTR_LOCALE = "locale"; //$NON-NLS-1$
+	final static public String ATTR_LOCALE = "locale";
 
 	/**
 	 * maximum tag attribute name
 	 */
-	final static public String ATTR_MAXIMUM = "maximum"; //$NON-NLS-1$
+	final static public String ATTR_MAXIMUM = "maximum";
 
 	/**
 	 * minimum tag attribute name
 	 */
-	final static public String ATTR_MINIMUM = "minimum"; //$NON-NLS-1$
+	final static public String ATTR_MINIMUM = "minimum";
 
 	/**
 	 * name tag attribute name
 	 */
-	final static public String ATTR_NAME = "name"; //$NON-NLS-1$
+	final static public String ATTR_NAME = "name";
 
 	/**
 	 * onblur tag attribute name
 	 */
-	final static public String ATTR_ONBLUR = "onblur"; //$NON-NLS-1$
+	final static public String ATTR_ONBLUR = "onblur";
 
 	/**
 	 * onchange tag attribute name
 	 */
-	final static public String ATTR_ONCHANGE = "onchange"; //$NON-NLS-1$
+	final static public String ATTR_ONCHANGE = "onchange";
 
 	/**
 	 * onclick tag attribute name
 	 */
-	final static public String ATTR_ONCLICK = "onclick"; //$NON-NLS-1$
+	final static public String ATTR_ONCLICK = "onclick";
 
 	/**
 	 * ondblclick tag attribute name
 	 */
-	final static public String ATTR_ONDBLCLICK = "ondblclick"; //$NON-NLS-1$
+	final static public String ATTR_ONDBLCLICK = "ondblclick";
 
 	/**
 	 * onfocus tag attribute name
 	 */
-	final static public String ATTR_ONFOCUS = "onfocus"; //$NON-NLS-1$
+	final static public String ATTR_ONFOCUS = "onfocus";
 
 	/**
 	 * onkeydown tag attribute name
 	 */
-	final static public String ATTR_ONKEYDOWN = "onkeydown"; //$NON-NLS-1$
+	final static public String ATTR_ONKEYDOWN = "onkeydown";
 
 	/**
 	 * onkeypress tag attribute name
 	 */
-	final static public String ATTR_ONKEYPRESS = "onkeypress"; //$NON-NLS-1$
+	final static public String ATTR_ONKEYPRESS = "onkeypress";
 
 	/**
 	 * onkeyup tag attribute name
 	 */
-	final static public String ATTR_ONKEYUP = "onkeyup"; //$NON-NLS-1$
+	final static public String ATTR_ONKEYUP = "onkeyup";
 
 	/**
 	 * onmousedown tag attribute name
 	 */
-	final static public String ATTR_ONMOUSEDOWN = "onmousedown"; //$NON-NLS-1$
+	final static public String ATTR_ONMOUSEDOWN = "onmousedown";
 
 	/**
 	 * onmousemove tag attribute name
 	 */
-	final static public String ATTR_ONMOUSEMOVE = "onmousemove"; //$NON-NLS-1$
+	final static public String ATTR_ONMOUSEMOVE = "onmousemove";
 
 	/**
 	 * onmouseout tag attribute name
 	 */
-	final static public String ATTR_ONMOUSEOUT = "onmouseout"; //$NON-NLS-1$
+	final static public String ATTR_ONMOUSEOUT = "onmouseout";
 
 	/**
 	 * onmouseover tag attribute name
 	 */
-	final static public String ATTR_ONMOUSEOVER = "onmouseover"; //$NON-NLS-1$
+	final static public String ATTR_ONMOUSEOVER = "onmouseover";
 
 	/**
 	 * onmouseup tag attribute name
 	 */
-	final static public String ATTR_ONMOUSEUP = "onmouseup"; //$NON-NLS-1$
+	final static public String ATTR_ONMOUSEUP = "onmouseup";
 
 	/**
 	 * onselect tag attribute name
 	 */
-	final static public String ATTR_ONSELECT = "onselect"; //$NON-NLS-1$
+	final static public String ATTR_ONSELECT = "onselect";
 
 	/**
 	 * pattern tag attribute name
 	 */
-	final static public String ATTR_PATTERN = "pattern"; //$NON-NLS-1$
+	final static public String ATTR_PATTERN = "pattern";
 
 	/**
 	 * readonly tag attribute name
 	 */
-	final static public String ATTR_READONLY = "readonly"; //$NON-NLS-1$
+	final static public String ATTR_READONLY = "readonly";
 
 	/**
 	 * rel tag attribute name
 	 */
-	final static public String ATTR_REL = "rel"; //$NON-NLS-1$
+	final static public String ATTR_REL = "rel";
 
 	/**
 	 * rendered tag attribute name
 	 */
-	final static public String ATTR_RENDERED = "rendered"; //$NON-NLS-1$
+	final static public String ATTR_RENDERED = "rendered";
 
 	/**
 	 * rev tag attribute name
 	 */
-	final static public String ATTR_REV = "rev"; //$NON-NLS-1$
+	final static public String ATTR_REV = "rev";
 
 	/**
 	 * rowClasses tag attribute name
 	 */
-	final static public String ATTR_ROWCLASSES = "rowClasses"; //$NON-NLS-1$
+	final static public String ATTR_ROWCLASSES = "rowClasses";
 
 	/**
 	 * rows tag attribute name
 	 */
-	final static public String ATTR_ROWS = "rows"; //$NON-NLS-1$
+	final static public String ATTR_ROWS = "rows";
 
 	/**
 	 * rules tag attribute name
 	 */
-	final static public String ATTR_RULES = "rules"; //$NON-NLS-1$
+	final static public String ATTR_RULES = "rules";
 
 	/**
 	 * shape tag attribute name
 	 */
-	final static public String ATTR_SHAPE = "shape"; //$NON-NLS-1$
+	final static public String ATTR_SHAPE = "shape";
 
 	/**
 	 *  showDetail tag attribute name
 	 */
-	final static public String ATTR_SHOWDETAIL = "showDetail"; //$NON-NLS-1$
+	final static public String ATTR_SHOWDETAIL = "showDetail";
 
 	/**
 	 * showSummary tag attribute name
 	 */
-	final static public String ATTR_SHOWSUMMARY = "showSummary"; //$NON-NLS-1$
+	final static public String ATTR_SHOWSUMMARY = "showSummary";
 
 	/**
 	 * size tag attribute name
 	 */
-	final static public String ATTR_SIZE = "size"; //$NON-NLS-1$
+	final static public String ATTR_SIZE = "size";
 
 	/**
 	 * style tag attribute name
 	 */
-	final static public String ATTR_STYLE = "style"; //$NON-NLS-1$
+	final static public String ATTR_STYLE = "style";
 
 	/**
 	 * styleClass tag attribute name
 	 */
-	final static public String ATTR_STYLECLASS = "styleClass"; //$NON-NLS-1$
+	final static public String ATTR_STYLECLASS = "styleClass";
 
 	/**
 	 * summary tag attribute name
 	 */
-	final static public String ATTR_SUMMARY = "summary"; //$NON-NLS-1$
+	final static public String ATTR_SUMMARY = "summary";
 
 	/**
 	 * tabindex tag attribute name
 	 */
-	final static public String ATTR_TABINDEX = "tabindex"; //$NON-NLS-1$
+	final static public String ATTR_TABINDEX = "tabindex";
 
 	/**
 	 * target tag attribute name
 	 */
-	final static public String ATTR_TARGET = "target"; //$NON-NLS-1$
+	final static public String ATTR_TARGET = "target";
 
 	/**
 	 * timeStyle tag attribute name
 	 */
-	final static public String ATTR_TIMESTYLE = "timeStyle"; //$NON-NLS-1$
+	final static public String ATTR_TIMESTYLE = "timeStyle";
 
 	/**
 	 * title tag attribute name
 	 */
-	final static public String ATTR_TITLE = "title"; //$NON-NLS-1$
+	final static public String ATTR_TITLE = "title";
 
 	/**
 	 * tooltip tag attribute name
 	 */
-	final static public String ATTR_TOOLTIP = "tooltip"; //$NON-NLS-1$
+	final static public String ATTR_TOOLTIP = "tooltip";
 
 	/**
 	 * type tag attribute name
 	 */
-	final static public String ATTR_TYPE = "type"; //$NON-NLS-1$
+	final static public String ATTR_TYPE = "type";
 
 	/**
 	 * url tag attribute name
 	 */
-	final static public String ATTR_URL = "url"; //$NON-NLS-1$
+	final static public String ATTR_URL = "url";
 
 	/**
 	 * validatorId tag attribute name
 	 */
-	final static public String ATTR_VALIDATORID = "validatorId"; //$NON-NLS-1$
+	final static public String ATTR_VALIDATORID = "validatorId";
 
 	/**
 	 * value tag attribute name
 	 */
-	final static public String ATTR_VALUE = "value"; //$NON-NLS-1$
+	final static public String ATTR_VALUE = "value";
 
 	/**
 	 * var tag attribute name
 	 */
-	final static public String ATTR_VAR = "var"; //$NON-NLS-1$
+	final static public String ATTR_VAR = "var";
 
 	/**
 	 * warnClass tag attribute name
 	 */
-	final static public String ATTR_WARNCLASS = "warnClass"; //$NON-NLS-1$
+	final static public String ATTR_WARNCLASS = "warnClass";
 
 	/**
 	 * warnStyle tag attribute name
 	 */
-	final static public String ATTR_WARNSTYLE = "warnStyle"; //$NON-NLS-1$
+	final static public String ATTR_WARNSTYLE = "warnStyle";
 
 	/**
 	 * width tag attribute name
 	 */
-	final static public String ATTR_WIDTH = "width"; //$NON-NLS-1$
+	final static public String ATTR_WIDTH = "width";
 
 }

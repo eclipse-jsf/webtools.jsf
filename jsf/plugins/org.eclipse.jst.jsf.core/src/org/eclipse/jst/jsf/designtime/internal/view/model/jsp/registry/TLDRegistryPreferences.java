@@ -12,66 +12,44 @@ package org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider;
 import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider.OrderableObject;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.DefaultJSPTagResolver;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TagIntrospectingStrategy;
-import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.JSPTagResolvingStrategy.StrategyDescriptor;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.persistence.PersistedDataTagStrategy;
 
 /**
- * Preferences model for the TLD registry.  This class is not thread-safe and
- * a single instance should only be used by one owner.
+ * Preferences model for the TLD registry
  * 
  * @author cbateman
  * 
  */
 public class TLDRegistryPreferences
 {
-    private final static Map<String, StrategyDescriptor> ALL_KNOWN_STRATEGIES;
-
     private final IPreferenceStore             _prefStore;
-    private final CopyOnWriteArrayList<PropertyListener> _listeners;
-    private final AtomicBoolean                _isDisposed = new AtomicBoolean(false);
 
-    private final static String                KEY_STRATEGY_ID_ORDER = "org.eclipse.jst.jsf.designtime.jsp.registry.StrategyIDOrder"; //$NON-NLS-1$
+    private final static String                KEY_STRATEGY_ID_ORDER = "org.eclipse.jst.jsf.designtime.jsp.registry.StrategyIDOrder";
 
     private final static List<OrderableObject> DEFAULT_STRATEGY_ORDER;
 
     static
     {
         final List<OrderableObject> list = new ArrayList<OrderableObject>();
-
-        // NOTE !!! this ordering is important and effects the default order
-        // in which strategies will be consulted !!!
-        list.add(new OrderableObject(new StrategyIdentifier(PersistedDataTagStrategy.createDescriptor()), true));
-        list.add(new OrderableObject(new StrategyIdentifier(DefaultJSPTagResolver.createDescriptor()), true));
-        list.add(new OrderableObject(new StrategyIdentifier(TagIntrospectingStrategy.createDescriptor()), true));
+        list.add(new OrderableObject(new StrategyIdentifier(PersistedDataTagStrategy.DISPLAY_NAME,
+                PersistedDataTagStrategy.ID), true));
+        list.add(new OrderableObject(new StrategyIdentifier(DefaultJSPTagResolver.DISPLAY_NAME,
+                DefaultJSPTagResolver.ID), true));
+        list.add(new OrderableObject(new StrategyIdentifier(TagIntrospectingStrategy.DISPLAY_NAME,
+                TagIntrospectingStrategy.ID), true));
+        // list.add(UnresolvedJSPTagResolvingStrategy.ID);
         DEFAULT_STRATEGY_ORDER = Collections.unmodifiableList(list);
-        
-
-        final Map<String, StrategyDescriptor> knownDescriptors = new HashMap<String, StrategyDescriptor>();
-        for (final OrderableObject object : DEFAULT_STRATEGY_ORDER)
-        {
-            StrategyIdentifier strategyId = (StrategyIdentifier) object.getObject();
-            knownDescriptors.put(strategyId.getId(), strategyId._descriptor);
-        }
-        ALL_KNOWN_STRATEGIES = Collections.unmodifiableMap(knownDescriptors);
     }
 
     private List<OrderableObject>              _ids;
     private List<OrderableObject>              _originalIds;
-    private IPropertyChangeListener            _propertyListener;
 
     /**
      * Constructor
@@ -82,86 +60,6 @@ public class TLDRegistryPreferences
     {
         _prefStore = prefStore;
         _ids = new ArrayList<OrderableObject>();
-        _listeners = new CopyOnWriteArrayList<PropertyListener>();
-    }
-
-    /**
-     * Dispose of this preferences object
-     */
-    public void dispose()
-    {
-        if (_isDisposed.compareAndSet(false, true))
-        {
-            if (_propertyListener != null)
-            {
-                _prefStore.removePropertyChangeListener(_propertyListener);
-            }
-        }
-    }
-
-    void addListener(final PropertyListener propListener)
-    {
-        if (!assertNotDisposed())
-        {
-            return;
-        }
-
-        if (_propertyListener == null)
-        {
-            _propertyListener = new IPropertyChangeListener()
-            {
-                public void propertyChange(PropertyChangeEvent event)
-                {
-                    if (KEY_STRATEGY_ID_ORDER.equals(event.getProperty()))
-                    {
-                        fireStrategyOrderChanged();
-                    }
-                }
-            };
-            
-            _prefStore.addPropertyChangeListener(_propertyListener);
-        }
-        _listeners.addIfAbsent(propListener);
-    }
-
-    void removeListener(final PropertyListener propListener)
-    {
-        if (!assertNotDisposed())
-        {
-            return;
-        }
-        _listeners.remove(propListener);
-
-        if (_listeners.isEmpty())
-        {
-            _prefStore.removePropertyChangeListener(_propertyListener);
-            _propertyListener = null;
-        }
-    }
-
-    private void fireStrategyOrderChanged()
-    {
-        if (!assertNotDisposed())
-        {
-            return;
-        }
-        for (final PropertyListener listener : _listeners)
-        {
-            listener.strategyOrderChanged();
-        }
-    }
-
-    /**
-     * @return false if the assertion fails
-     */
-    private boolean assertNotDisposed()
-    {
-        if (_isDisposed.get())
-        {
-            JSFCorePlugin.log(new Exception("Stack trace only"), "TLDRegistryPreferences is disposed"); //$NON-NLS-1$ //$NON-NLS-2$
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -249,12 +147,12 @@ public class TLDRegistryPreferences
         for (final OrderableObject id : ids)
         {
             StrategyIdentifier strategyId = (StrategyIdentifier) id.getObject();
-            buffer.append("dummyValue"); //$NON-NLS-1$
-            buffer.append(","); //$NON-NLS-1$
+            buffer.append(strategyId.getDisplayName());
+            buffer.append(",");
             buffer.append(strategyId.getId());
-            buffer.append(","); //$NON-NLS-1$
+            buffer.append(",");
             buffer.append(id.isEnabled());
-            buffer.append(","); //$NON-NLS-1$
+            buffer.append(",");
         }
         return buffer.toString();
     }
@@ -262,36 +160,28 @@ public class TLDRegistryPreferences
     private List<OrderableObject> deserialize(final String serializedList)
     {
         final List<OrderableObject> list = new ArrayList<OrderableObject>();
-        final String[] ids = serializedList.split(","); //$NON-NLS-1$
+        final String[] ids = serializedList.split(",");
         if ((ids.length % 3) != 0)
         {
-            return null;
+            return new ArrayList<OrderableObject>();
         }
 
         for (int i = 0; i < ids.length; i += 3)
         {
-            /// ingore the dummy value: final String displayName = ids[i];
+            final String displayName = ids[i];
             String id = ids[i + 1];
             final String enabled = ids[i + 2];
 
             // fix old id for meta-data resolver
-            if ("org.eclipse.jst.jsf.THISISTEMPORARY".equals(id)) //$NON-NLS-1$
+            if ("org.eclipse.jst.jsf.THISISTEMPORARY".equals(id))
             {
                 id = DefaultJSPTagResolver.ID;
             }
 
-            final StrategyDescriptor desc = ALL_KNOWN_STRATEGIES.get(id);
-            
-            if (desc == null)
-            {
-                JSFCorePlugin.log(new Exception("Stack trace only"), "Error: unknown strategy id: "+id); //$NON-NLS-1$ //$NON-NLS-2$
-            }
-            else
-            {
-                final StrategyIdentifier strategyIdentifier = new StrategyIdentifier(desc);
-                list.add(new OrderableObject(strategyIdentifier
-                        , Boolean.valueOf(enabled).booleanValue()));
-            }
+            final StrategyIdentifier strategyIdentifier = new StrategyIdentifier(
+                    displayName, id);
+            list.add(new OrderableObject(strategyIdentifier
+                    , Boolean.valueOf(enabled).booleanValue()));
         }
         return list;
     }
@@ -305,8 +195,6 @@ public class TLDRegistryPreferences
     {
         prefStore.setValue(KEY_STRATEGY_ID_ORDER,
                 serialize(getStrategyIdOrdering()));
-        // refresh local copy of preferences
-        load();
     }
 
     /**
@@ -335,11 +223,13 @@ public class TLDRegistryPreferences
      */
     public static class StrategyIdentifier
     {
-        private final StrategyDescriptor _descriptor;
+        private final String _id;
+        private final String _displayName;
 
-        StrategyIdentifier(final StrategyDescriptor descriptor)
+        StrategyIdentifier(final String displayName, final String id)
         {
-            _descriptor = descriptor;
+            _displayName = displayName;
+            _id = id;
         }
 
         /**
@@ -347,7 +237,15 @@ public class TLDRegistryPreferences
          */
         public String getId()
         {
-            return _descriptor.getId();
+            return _id;
+        }
+
+        /**
+         * @return the display name for the strategy
+         */
+        public String getDisplayName()
+        {
+            return _displayName;
         }
 
         @Override
@@ -355,7 +253,7 @@ public class TLDRegistryPreferences
         {
             if (obj instanceof StrategyIdentifier)
             {
-                return getId().equals(((StrategyIdentifier)obj).getId());
+                return _id.equals(((StrategyIdentifier)obj)._id);
             }
             return false;
         }
@@ -363,15 +261,7 @@ public class TLDRegistryPreferences
         @Override
         public int hashCode()
         {
-            return getId().hashCode();
-        }
-
-        /**
-         * @return the display name of the strategy
-         */
-        public String getDisplayName()
-        {
-            return _descriptor.getDisplayName();
+            return _id.hashCode();
         }
     }
 
@@ -384,8 +274,4 @@ public class TLDRegistryPreferences
         }
     }
 
-    static abstract class PropertyListener
-    {
-        public abstract void strategyOrderChanged();
-    }
 }

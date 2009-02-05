@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties.IMPLEMENTATION_TYPE;
 
 /**
  * Model for the custom control <b>JSFLibraryConfigControl</b>.
@@ -21,22 +23,59 @@ import org.eclipse.jst.jsf.core.internal.Messages;
  * selected implementation and component libraries when selections are changed.
  * 
  * @author Justin Chen - Oracle
- * @deprecated
  */
 public class JSFLibraryConfigModel {
-	final private JSFLibraryConfigDialogSettingData data;
+	final private JSFLibraryConfiglModelSource data;
 	final private JSFLibraryRegistryUtil jsfLibReg;
+	private List colJSFImplLib;
 	private List colJSFCompLib;	
 	
 	/**
 	 * Private constructor.  
 	 * @param data
 	 */
-	private JSFLibraryConfigModel(JSFLibraryConfigDialogSettingData data) {
+	private JSFLibraryConfigModel(JSFLibraryConfiglModelSource data) {
 		this.data = data;
 		this.jsfLibReg = JSFLibraryRegistryUtil.getInstance();
 	}
 		
+	/**
+	 * @return IMPLEMENTATION_TYPE
+	 */
+	public IMPLEMENTATION_TYPE getImplementationType() {
+		return data.getImplementationType();
+	}
+	/**
+	 * Return JSF implementation libraries.
+	 * 
+	 * This list is initialized from JSF library registry and updated with persistent configuration data.  
+	 * 
+	 * @return List
+	 * see also org.eclipse.jst.jsf.ui.properties.IJSFLibraryDecoratorProvider#getProjectJSFImplementationLibraries()
+	 */
+	public List getJSFImplementationLibraries() {
+		if (colJSFImplLib == null) {
+			/* To initialze an implementation library list from registry 
+			 * and then update the list with saved implementation library.
+			 */
+			colJSFImplLib = jsfLibReg.getJSFImplementationLibraries();	
+//			colJSFImplLib.add(JSFLibraryRegistryUtil.getInstance().getServerSuppliedJSFLibrary());
+			JSFLibraryInternalReference targetLib = data.getJSFImplementationLibrary();
+			if (targetLib == null) {
+				// no saved implementation, get default implementation library
+				targetLib = jsfLibReg.getDefaultJSFImplementationLibrary();
+			}
+			if (targetLib != null) {
+				JSFLibraryInternalReference srcLib = jsfLibReg.getJSFLibraryReferencebyID(targetLib.getID());				
+				if (srcLib != null) {
+					srcLib.setSelected(true);
+					srcLib.setToBeDeployed(targetLib.isCheckedToBeDeployed());				
+				}
+			}
+		} 
+		return colJSFImplLib;
+	}
+
 	/**
 	 * Return JSF component libraries.
 	 * 
@@ -68,6 +107,24 @@ public class JSFLibraryConfigModel {
 	}
 
 	/**
+	 * Return the selected JSF implementation library currently.
+	 * A null is returned if none is selected.
+	 * 
+	 * @return JSFLibraryInternalReference 
+	 */
+	public JSFLibraryInternalReference getCurrentJSFImplementationLibrarySelection() {
+		Iterator it = getJSFImplementationLibraries().iterator();
+		JSFLibraryInternalReference crtItem = null;
+		while (it.hasNext()) {
+			crtItem = (JSFLibraryInternalReference) it.next();
+			if (crtItem.isSelected()) {
+				return crtItem;
+			}
+		}		
+		return null;
+	}
+	
+	/**
 	 * Return the selected JSF component libraries currently.
 	 * An empty list is returned when no component libraries are selected.
 	 * 
@@ -88,6 +145,16 @@ public class JSFLibraryConfigModel {
 	}	
 	
 	/**
+	 * Returned a saved implementation library which was persisted as 
+	 * DialogSettings or as project properties.
+	 * 
+	 * @return JSFLibraryInternalReference
+	 */
+	public JSFLibraryInternalReference getSavedJSFImplementationLibrary() {
+		return data.getJSFImplementationLibrary();
+	}
+
+	/**
 	 * Returned saved component libraries which were persisted as 
 	 * DialogSettings or project persistent properties.
 	 *  
@@ -97,6 +164,30 @@ public class JSFLibraryConfigModel {
 		return data.getJSFComponentLibraries();
 	}
 	
+	/**
+	 * Update the selected JSF implementation library.
+	 * 
+	 * Note: The library parameter won't be not added into the collection 
+	 * if it does not exist already. 
+	 * 
+	 * @param library JSFLibraryInternalReference
+	 */
+	public void setCurrentJSFImplementationLibrarySelection(final JSFLibraryInternalReference library) {
+		if (library != null) {			
+			Iterator it = getJSFImplementationLibraries().iterator();
+			JSFLibraryInternalReference crtjsflib = null;
+			while (it.hasNext()) {
+				crtjsflib = (JSFLibraryInternalReference) it.next();
+				if (crtjsflib.getID().equals(library.getID())) {
+					crtjsflib.setSelected(true);
+					crtjsflib.setToBeDeployed(library.isCheckedToBeDeployed());
+				} else {
+					crtjsflib.setSelected(false);
+				}
+			}				
+		}
+	}
+
 	/**
 	 * Update the JSF library component libraries selection.
 	 * 
@@ -125,6 +216,20 @@ public class JSFLibraryConfigModel {
 	}
 		
 	/**
+	 * To save current configuration of implementation and component libraries 
+	 * as project properties.
+	 * 
+	 * @param project IProject
+	 */
+	public void saveData(final IProject project) {
+		// Instantiate one to make sure it is for a project.
+		JSFLibraryConfigProjectData data_ = new JSFLibraryConfigProjectData(project);
+		List implLibs = new ArrayList();
+		implLibs.add(getCurrentJSFImplementationLibrarySelection());
+		data_.saveData(implLibs, getCurrentJSFComponentLibrarySelection(), getImplementationType());
+	}	
+	
+	/**
 	 * Set selection state to given state to each libray in the collection.
 	 * 
 	 * @param libs List
@@ -150,7 +255,7 @@ public class JSFLibraryConfigModel {
 		 * @param source JSFLibraryConfiglModelSource 
 		 * @return JSFLibraryConfigModel 
 		 */
-		public static JSFLibraryConfigModel createInstance(final JSFLibraryConfigDialogSettingData source) {
+		public static JSFLibraryConfigModel createInstance(final JSFLibraryConfiglModelSource source) {
 			if (source == null) {
 				throw new NullPointerException(Messages.JSFLibraryConfigModel_Null_Data_Source);
 			}

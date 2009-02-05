@@ -15,8 +15,6 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
  * server
  * 
  * <p><b>Provisional API - subject to change</b></p>
- * 
- * @deprecated
  */
 public interface JSFLibraryReferenceServerSupplied extends
 		JSFLibraryReference {
@@ -24,6 +22,6 @@ public interface JSFLibraryReferenceServerSupplied extends
 	/**
 	 * Constant used for server supplied virtual JSF Library referencew
 	 */
-	public static final String ID = "_ServerSupplied_"; //$NON-NLS-1$
+	public static final String ID = "_ServerSupplied_";
 
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ValidatorTypeInfo_Impl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
+ * $Id: ValidatorTypeInfo_Impl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -171,7 +171,7 @@ public class ValidatorTypeInfo_Impl extends ClassTypeInfo_Impl implements Valida
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (validatorId: "); //$NON-NLS-1$
+        result.append(" (validatorId: ");
         result.append(validatorId);
         result.append(')');
         return result.toString();

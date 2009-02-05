@@ -82,7 +82,7 @@ public final class CompositeTagRegistryFactory
                 }
                 catch (TagRegistryFactoryException e)
                 {
-                    JSFCorePlugin.log(e, "While trying to acquire a registry"); //$NON-NLS-1$
+                    JSFCorePlugin.log(e, "While trying to acquire a registry");
                 }
             }
             else

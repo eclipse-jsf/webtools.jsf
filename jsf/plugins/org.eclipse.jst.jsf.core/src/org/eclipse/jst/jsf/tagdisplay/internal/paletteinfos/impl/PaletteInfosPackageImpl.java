@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosPackageImpl.java,v 1.2 2008/11/18 22:24:03 gkessler Exp $
+ * $Id: PaletteInfosPackageImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
@@ -35,7 +35,7 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -407,37 +407,37 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(paletteInfosEClass, PaletteInfos.class, "PaletteInfos", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getPaletteInfos_Infos(), this.getPaletteInfo(), null, "infos", null, 0, -1, PaletteInfos.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(paletteInfosEClass, PaletteInfos.class, "PaletteInfos", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPaletteInfos_Infos(), this.getPaletteInfo(), null, "infos", null, 0, -1, PaletteInfos.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(paletteInfosEClass, this.getPaletteInfo(), "findPaletteInfoById", 0, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEString(), "id", 1, 1); //$NON-NLS-1$
+		EOperation op = addEOperation(paletteInfosEClass, this.getPaletteInfo(), "findPaletteInfoById", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "id", 1, 1);
 
-		initEClass(paletteInfoEClass, PaletteInfo.class, "PaletteInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_Tag(), ecorePackage.getEString(), "tag", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_DisplayLabel(), ecorePackage.getEString(), "displayLabel", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_Description(), ecorePackage.getEString(), "description", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_Expert(), ecorePackage.getEBooleanObject(), "expert", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_Hidden(), ecorePackage.getEBooleanObject(), "hidden", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_SmallIcon(), ecorePackage.getEString(), "smallIcon", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPaletteInfo_LargeIcon(), ecorePackage.getEString(), "largeIcon", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getPaletteInfo_TagCreation(), this.getTagCreationInfo(), null, "tagCreation", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(paletteInfoEClass, PaletteInfo.class, "PaletteInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPaletteInfo_Id(), ecorePackage.getEString(), "id", null, 1, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_Tag(), ecorePackage.getEString(), "tag", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_DisplayLabel(), ecorePackage.getEString(), "displayLabel", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_Description(), ecorePackage.getEString(), "description", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_Expert(), ecorePackage.getEBooleanObject(), "expert", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_Hidden(), ecorePackage.getEBooleanObject(), "hidden", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_SmallIcon(), ecorePackage.getEString(), "smallIcon", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPaletteInfo_LargeIcon(), ecorePackage.getEString(), "largeIcon", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPaletteInfo_TagCreation(), this.getTagCreationInfo(), null, "tagCreation", null, 0, 1, PaletteInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isExpert", 0, 1); //$NON-NLS-1$
+		addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isExpert", 0, 1);
 
-		addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isHidden", 0, 1); //$NON-NLS-1$
+		addEOperation(paletteInfoEClass, ecorePackage.getEBoolean(), "isHidden", 0, 1);
 
-		initEClass(tagCreationInfoEClass, TagCreationInfo.class, "TagCreationInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getTagCreationInfo_Attributes(), this.getTagCreationAttribute(), null, "attributes", null, 0, -1, TagCreationInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getTagCreationInfo_Template(), theXMLTypePackage.getAnySimpleType(), "template", null, 0, 1, TagCreationInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(tagCreationInfoEClass, TagCreationInfo.class, "TagCreationInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTagCreationInfo_Attributes(), this.getTagCreationAttribute(), null, "attributes", null, 0, -1, TagCreationInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTagCreationInfo_Template(), theXMLTypePackage.getAnySimpleType(), "template", null, 0, 1, TagCreationInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(tagCreationTemplateEClass, TagCreationTemplate.class, "TagCreationTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getTagCreationTemplate_Template(), ecorePackage.getEObject(), null, "template", null, 0, 1, TagCreationTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(tagCreationTemplateEClass, TagCreationTemplate.class, "TagCreationTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTagCreationTemplate_Template(), ecorePackage.getEObject(), null, "template", null, 0, 1, TagCreationTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(tagCreationAttributeEClass, TagCreationAttribute.class, "TagCreationAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getTagCreationAttribute_Id(), ecorePackage.getEString(), "id", null, 1, 1, TagCreationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getTagCreationAttribute_Value(), ecorePackage.getEString(), "value", null, 0, 1, TagCreationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(tagCreationAttributeEClass, TagCreationAttribute.class, "TagCreationAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTagCreationAttribute_Id(), ecorePackage.getEString(), "id", null, 1, 1, TagCreationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTagCreationAttribute_Value(), ecorePackage.getEString(), "value", null, 0, 1, TagCreationAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -454,66 +454,66 @@ public class PaletteInfosPackageImpl extends EPackageImpl implements PaletteInfo
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		 //$NON-NLS-1$
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
 		  (getPaletteInfos_Infos(), 
 		   source, 
 		   new String[] {
-			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-			 "name", "item" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element",
+			 "name", "item"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_DisplayLabel(), 
 		   source, 
 		   new String[] {
-			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-			 "name", "display-label" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element",
+			 "name", "display-label"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_Description(), 
 		   source, 
 		   new String[] {
-			 "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_Expert(), 
 		   source, 
 		   new String[] {
-			 "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_Hidden(), 
 		   source, 
 		   new String[] {
-			 "kind", "element" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_SmallIcon(), 
 		   source, 
 		   new String[] {
-			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-			 "name", "small-icon" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element",
+			 "name", "small-icon"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_LargeIcon(), 
 		   source, 
 		   new String[] {
-			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-			 "name", "large-icon" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element",
+			 "name", "large-icon"
 		   });		
 		addAnnotation
 		  (getPaletteInfo_TagCreation(), 
 		   source, 
 		   new String[] {
-			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-			 "name", "tag-create" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element",
+			 "name", "tag-create"
 		   });		
 		addAnnotation
 		  (getTagCreationInfo_Attributes(), 
 		   source, 
 		   new String[] {
-			 "kind", "element", //$NON-NLS-1$ //$NON-NLS-2$
-			 "name", "attribute" //$NON-NLS-1$ //$NON-NLS-2$
+			 "kind", "element",
+			 "name", "attribute"
 		   });
 	}
 

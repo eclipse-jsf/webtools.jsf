@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IStatus;
  * API rules
  * 
  * @author cbateman
- * @deprecated
+ *
  */
 public abstract class VersionUpgradeOperation extends AbstractOperation 
 {
@@ -80,7 +80,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot execute"); //$NON-NLS-1$
+		throw new ExecutionException("Cannot execute");
 	}
 
 	/**
@@ -114,7 +114,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot execute"); //$NON-NLS-1$
+		throw new ExecutionException("Cannot execute");
 	}
 
 	/**
@@ -141,7 +141,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot redo"); //$NON-NLS-1$
+		throw new ExecutionException("Cannot redo");
 	}
 
 	/**
@@ -168,7 +168,7 @@ public abstract class VersionUpgradeOperation extends AbstractOperation
 			}
 			return result;
 		}
-		throw new ExecutionException("Cannot redo"); //$NON-NLS-1$
+		throw new ExecutionException("Cannot redo");
 	}
 
 	/**

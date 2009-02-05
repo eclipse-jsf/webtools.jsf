@@ -24,7 +24,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPa
  * changing of a JSFLibrary instance's implementation property.
  * 
  * @author Ian Trimble - Oracle
- * @deprecated
  */
 public class MaintainDefaultImplementationAdapter extends AdapterImpl {
 

@@ -16,28 +16,24 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFVersion;
 
 /**
  * @author gekessle
- * @deprecated
+ *
  */
 public class JSFLibraryReferenceServerSuppliedImpl 
 	extends AbstractJSFLibraryReferenceImpl 
 	implements JSFLibraryReferenceServerSupplied {
 	
 	/**
-	 * Library display Label 
-	 */
-	public final static String SERVER_SUPPLIED = Messages.JSFLibraryReferenceServerSuppliedImpl_Label; 
-	/**
 	 * Constructor
 	 */
 	public JSFLibraryReferenceServerSuppliedImpl(){
 		//TODO: replace label with constant
-		super(JSFLibraryReferenceServerSupplied.ID, SERVER_SUPPLIED, true); 
+		super(JSFLibraryReferenceServerSupplied.ID, "Server Supplied", true);
 	}
 	
 	public String toString() {
-		StringBuffer buf = new StringBuffer("ServerSupplied: ("); //$NON-NLS-1$
+		StringBuffer buf = new StringBuffer("ServerSupplied: (");
 		buf.append(super.toString());
-		buf.append(")"); //$NON-NLS-1$
+		buf.append(")");
 		
 		return buf.toString();
 	}

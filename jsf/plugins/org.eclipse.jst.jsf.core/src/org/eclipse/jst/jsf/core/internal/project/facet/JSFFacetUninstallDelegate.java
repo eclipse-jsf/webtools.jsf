@@ -10,19 +10,29 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.common.project.facet.core.ClasspathHelper;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.javaee.core.ParamValue;
 import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationHelper;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.project.facet.core.IDelegate;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -58,7 +68,10 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 				}
 				
 				// Remove JSF Libraries
-				( (JSFFacetUninstallConfig) config ).getLibrariesUninstallDelegate().execute( null );
+				removeJSFLibraries(project, fv, monitor);
+				
+				//Remove Runtime contributed JSF classpath entries
+				removeRuntimeContributedJSFClasspathEntries(project, fv, monitor);
 				
 				// remove servlet stuff from web.xml
 				uninstallJSFReferencesFromWebApp(project, monitor);
@@ -72,6 +85,45 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 					monitor.done();
 				}
 			}
+		}
+	}
+
+	/**
+	 * Removes JSF Lib CP Containers from project
+	 * @param project
+	 * @param monitor
+	 */
+	private void removeJSFLibraries(final IProject project, final IProjectFacetVersion fv, final IProgressMonitor monitor) {
+		 final IJavaProject jproj = JavaCore.create(project);
+		 List keptEntries = new ArrayList();
+		 try {
+			IClasspathEntry[] entries = jproj.getRawClasspath();
+			  keptEntries = new ArrayList();
+			 for (int i=0;i<entries.length;i++){
+				 IClasspathEntry entry = entries[i];
+				 if ( !(JSFLibraryConfigurationHelper.isJSFLibraryContainer(entry)))
+					 keptEntries.add(entry);
+			 }
+		} catch (JavaModelException e) {
+			JSFCorePlugin.log(e, "Cannot get classpath entries to remove JSF Libraries for: "+project.getName()); //$NON-NLS-1$
+		}
+		 
+		 if (keptEntries.size() > 0){
+			 try {
+				jproj.setRawClasspath((IClasspathEntry[])keptEntries.toArray(new IClasspathEntry[0]), monitor);
+			} catch (JavaModelException e) {
+				JSFCorePlugin.log(e, "Exception occured while removing JSF Libraries during JSF Facet uninstall"); //$NON-NLS-1$
+			}
+		 }	
+		
+
+	}
+	
+	private void removeRuntimeContributedJSFClasspathEntries(final IProject project, final IProjectFacetVersion fv, final IProgressMonitor monitor) {
+		try {
+			ClasspathHelper.removeClasspathEntries(project, fv);				
+		} catch (CoreException e) {
+			JSFCorePlugin.log(IStatus.ERROR, "Unable to remove server supplied implementation from the classpath.", e);//$NON-NLS-1$
 		}
 	}
 	

@@ -28,15 +28,15 @@ public interface IPossibleValues extends IMetaDataEnabledFeature{
 	/**
 	 * Default name of property in annotation file to use when supplying possible values from meta-data 
 	 */
-	public static final String POSSIBLE_VALUES_PROP_NAME = "valid-values";	 //$NON-NLS-1$
+	public static final String POSSIBLE_VALUES_PROP_NAME = "valid-values";	
 	/**
 	 * Default name of property in annotation file to use when supplying possible displayed values from meta-data 
 	 */
-	public static final String POSSIBLE_VALUES_FOR_DISPLAY_PROP_NAME = "displayed-values";	 //$NON-NLS-1$
+	public static final String POSSIBLE_VALUES_FOR_DISPLAY_PROP_NAME = "displayed-values";	
 	/**
 	 * Default name of property in annotation file to use when supplying icon displayed values from meta-data 
 	 */
-	public static final String POSSIBLE_VALUES_SMALL_ICON_PROP_NAME = "small-icon";	 //$NON-NLS-1$
+	public static final String POSSIBLE_VALUES_SMALL_ICON_PROP_NAME = "small-icon";	
 	/**
 	 * @return List of IPossibleValue instances representing possible values
 	 * Implementer must ensure that an empty rather than null list is returned if no values are posssible.

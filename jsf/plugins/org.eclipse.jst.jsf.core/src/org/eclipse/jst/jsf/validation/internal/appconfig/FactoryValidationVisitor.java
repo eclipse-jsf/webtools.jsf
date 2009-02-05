@@ -63,7 +63,7 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.application.ApplicationFactory"; //$NON-NLS-1$
+            return "javax.faces.application.ApplicationFactory";
         }
 
         @Override
@@ -92,7 +92,7 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.context.FacesContextFactory"; //$NON-NLS-1$
+            return "javax.faces.context.FacesContextFactory";
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {
@@ -123,7 +123,7 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.lifecycle.LifecycleFactory"; //$NON-NLS-1$
+            return "javax.faces.lifecycle.LifecycleFactory";
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {
@@ -153,7 +153,7 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.render.RenderKitFactory"; //$NON-NLS-1$
+            return "javax.faces.render.RenderKitFactory";
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintsPackage.java,v 1.5 2008/11/18 22:24:09 gkessler Exp $
+ * $Id: ConstraintsPackage.java,v 1.4 2008/02/01 21:52:24 gkessler Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints;
 
@@ -34,7 +34,7 @@ public interface ConstraintsPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNAME = "constraints"; //$NON-NLS-1$
+    String eNAME = "constraints";
 
     /**
      * The package namespace URI.
@@ -42,7 +42,7 @@ public interface ConstraintsPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http://org.eclipse.jst.jsf.core/constraints.ecore"; //$NON-NLS-1$
+    String eNS_URI = "http://org.eclipse.jst.jsf.core/constraints.ecore";
 
     /**
      * The package namespace name.
@@ -50,7 +50,7 @@ public interface ConstraintsPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_PREFIX = "cnst"; //$NON-NLS-1$
+    String eNS_PREFIX = "cnst";
 
     /**
      * The singleton instance of the package.

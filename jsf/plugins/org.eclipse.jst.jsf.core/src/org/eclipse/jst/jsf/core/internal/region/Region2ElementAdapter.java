@@ -127,7 +127,7 @@ public class Region2ElementAdapter extends ElementDOMAdapter
                             .getType() != DOMRegionContext.XML_TAG_OPEN)
             {
                 throw new NoElementException(
-                        "Region is not a collection with an open tag"); //$NON-NLS-1$
+                        "Region is not a collection with an open tag");
             }
 
             _region = (ITextRegionCollection) region;
@@ -141,7 +141,7 @@ public class Region2ElementAdapter extends ElementDOMAdapter
             if (_context == null)
             {
                 throw new NoElementException(
-                        "Couldn't acquire structured document context"); //$NON-NLS-1$
+                        "Couldn't acquire structured document context");
             }
 
             final IDOMContextResolver resolver =
@@ -150,14 +150,14 @@ public class Region2ElementAdapter extends ElementDOMAdapter
 
             if (resolver == null)
             {
-                throw new NoElementException("Couldn't acquire dom resolver"); //$NON-NLS-1$
+                throw new NoElementException("Couldn't acquire dom resolver");
             }
 
             _node = resolver.getNode();
 
             if (_node == null)
             {
-                throw new NoElementException("Couldn't get Node from region"); //$NON-NLS-1$
+                throw new NoElementException("Couldn't get Node from region");
             }
         }
 

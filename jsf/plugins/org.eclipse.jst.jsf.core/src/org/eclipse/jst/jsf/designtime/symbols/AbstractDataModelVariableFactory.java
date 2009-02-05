@@ -136,7 +136,7 @@ public abstract class AbstractDataModelVariableFactory
                 || valueType.isInstanceOf(TypeConstants.TYPE_DATA_MODEL))
         {
             return getSymbolFactory().createDefaultSymbol(symbolName, ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL, Messages
-                    .getString("AbstractDataModelVariableFactory.DataModel.Symbol.RowVariable.DetailedDescription")); //$NON-NLS-1$
+                    .getString("AbstractDataModelVariableFactory.DataModel.Symbol.RowVariable.DetailedDescription"));
         }
 
         // in other cases, we assume that the value is an explicit single row
@@ -206,7 +206,7 @@ public abstract class AbstractDataModelVariableFactory
                         symbolName,
                         ERuntimeSource.TAG_INSTANTIATED_SYMBOL_LITERAL,
                         Messages
-                                .getString("AbstractDataModelVariableFactory.DataModel.Symbol.RowVariable.DetailedDescription")); //$NON-NLS-1$
+                                .getString("AbstractDataModelVariableFactory.DataModel.Symbol.RowVariable.DetailedDescription"));
     }
 
     /**

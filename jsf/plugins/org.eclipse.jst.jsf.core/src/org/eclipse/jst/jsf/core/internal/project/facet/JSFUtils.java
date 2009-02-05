@@ -183,7 +183,7 @@ public abstract class JSFUtils {
 	        return false;
 	    }
 	    
-	    return mapping.charAt(0) == '/' && mapping.endsWith("/*"); //$NON-NLS-1$
+	    return mapping.charAt(0) == '/' && mapping.endsWith("/*");
 	}
 	
 	/**
@@ -200,7 +200,7 @@ public abstract class JSFUtils {
 	        return false;
 	    }
 	    
-	    return mapping.startsWith("*."); //$NON-NLS-1$
+	    return mapping.startsWith("*.");
 	}	
 
 	/**
@@ -246,14 +246,14 @@ public abstract class JSFUtils {
 		// and which is guaranteed not to match anything
 		// that pass isExtensionMapping
 		if (prefExtMapping == null) {
-			prefExtMapping = "NOTANEXTENSIONMAPPING"; //$NON-NLS-1$
+			prefExtMapping = "NOTANEXTENSIONMAPPING";
 		}
 
 		// similarly, guarantee that if the caller has no
 		// preferred prefix mapping, that we set a non-null
 		// comp mapping
 		if (prefPrefixMapping == null) {
-			prefPrefixMapping = "NOTAPREFIXMAPPING"; //$NON-NLS-1$
+			prefPrefixMapping = "NOTAPREFIXMAPPING";
 		}
 
 		SEARCH_LOOP: for (String mapping : mappings) {

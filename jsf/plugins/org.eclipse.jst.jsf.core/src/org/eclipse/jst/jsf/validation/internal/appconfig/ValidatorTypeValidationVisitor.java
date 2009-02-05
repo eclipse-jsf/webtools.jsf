@@ -63,7 +63,7 @@ public class ValidatorTypeValidationVisitor extends EObjectValidationVisitor {
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.validator.Validator"; //$NON-NLS-1$
+            return "javax.faces.validator.Validator";
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {

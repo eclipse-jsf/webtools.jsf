@@ -320,7 +320,7 @@ public final class JSFSymbolFactory extends InitializedSymbolFactory
             SymbolFactory.eINSTANCE.createIComponentSymbol();
         symbol.setName(symbolName);
         symbol.setTypeDescriptor(typeDesc);
-        symbol.setDetailedDescription(description);
+        symbol.setDetailedDescription(description); //$NON-NLS-1$
         symbol.setRuntimeSource(source);
         return symbol;
     }
@@ -335,7 +335,7 @@ public final class JSFSymbolFactory extends InitializedSymbolFactory
     public IInstanceSymbol createMessageBundleSymbol(final String symbolName, final String bundleName, IJavaProject project)
     {
         // FUTURE USE
-        throw new UnsupportedOperationException("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=215461"); //$NON-NLS-1$
+        throw new UnsupportedOperationException("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=215461");
     }
 
     /**
@@ -351,7 +351,7 @@ public final class JSFSymbolFactory extends InitializedSymbolFactory
             ERuntimeSource source, final String description, final IJavaProject javaProject)
     {
         // FUTURE USE
-        throw new UnsupportedOperationException("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=215461"); //$NON-NLS-1$
+        throw new UnsupportedOperationException("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=215461");
     }
 
 //    /  /**

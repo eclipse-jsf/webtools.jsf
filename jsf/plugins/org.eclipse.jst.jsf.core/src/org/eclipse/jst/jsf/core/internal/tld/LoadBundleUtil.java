@@ -85,7 +85,7 @@ public class LoadBundleUtil {
 	}
 
 	private static IPath getFilePath(String baseName) {
-		IPath path = new Path(baseName.replace('.', '/'));
+		IPath path = new Path(baseName.replace('.', '/'));//$NON-NLS-1$
 		path = path.addFileExtension("properties");//$NON-NLS-1$
 		return path;
 	}
@@ -130,7 +130,7 @@ public class LoadBundleUtil {
 	}
 
 	private static String getPackageName(String baseName) {
-		int index = baseName.lastIndexOf('.');
+		int index = baseName.lastIndexOf('.');//$NON-NLS-1$
 		if (index == -1) {
 			return "";//$NON-NLS-1$
 		}
@@ -138,9 +138,9 @@ public class LoadBundleUtil {
 	}
 
 	private static String getFileName(String baseName) {
-		int index = baseName.lastIndexOf('.');
+		int index = baseName.lastIndexOf('.');//$NON-NLS-1$
 		if (index == -1) {
-			return baseName + ".properties"; //$NON-NLS-1$
+			return baseName + ".properties";
 		}
         return baseName.substring(index + 1).concat(".properties");//$NON-NLS-1$
 	}
@@ -270,14 +270,14 @@ public class LoadBundleUtil {
                 final String country = _locale.getCountry();
                 final String variant = _locale.getVariant();
 
-                possibleSuffices.add(""); //$NON-NLS-1$
-                possibleSuffices.add("_"+language); //$NON-NLS-1$
+                possibleSuffices.add("");
+                possibleSuffices.add("_"+language);
                 if (country != null)
                 {
-                    possibleSuffices.add(0, "_"+language + "_" + country); //$NON-NLS-1$ //$NON-NLS-2$
+                    possibleSuffices.add(0, "_"+language + "_" + country);
                     if (variant != null)
                     {
-                        possibleSuffices.add(0, "_"+language+"_"+country+"_"+variant); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        possibleSuffices.add(0, "_"+language+"_"+country+"_"+variant);
                     }
                 }
                 _possibleSuffices = Collections.unmodifiableList(possibleSuffices);

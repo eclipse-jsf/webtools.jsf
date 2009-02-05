@@ -42,7 +42,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * </p>
  *
  * @generated
- * @deprecated
  */
 public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryRegistry {
 	/**
@@ -50,7 +49,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The default value of the '{@link #getDefaultImplementationID() <em>Default Implementation ID</em>}' attribute.
@@ -60,7 +59,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEFAULT_IMPLEMENTATION_ID_EDEFAULT = ""; //$NON-NLS-1$
+	protected static final String DEFAULT_IMPLEMENTATION_ID_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getDefaultImplementationID() <em>Default Implementation ID</em>}' attribute.
@@ -424,7 +423,7 @@ public class JSFLibraryRegistryImpl extends EObjectImpl implements JSFLibraryReg
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (DefaultImplementationID: "); //$NON-NLS-1$
+		result.append(" (DefaultImplementationID: ");
 		result.append(defaultImplementationID);
 		result.append(')');
 		return result.toString();

@@ -31,14 +31,14 @@ import org.w3c.dom.Node;
 
 public class DateTimePatternType extends AbstractRootTypeDescriptor implements IPossibleValues{
 	//should we ever validate the patterns, extend EnumerationType
-	final private static String[] DATEPATTERNS = {"M/d/yy", "EEE, M/d/yy", "MM/dd/yyyy", "EEE, MM/dd/yyyy", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+	final private static String[] DATEPATTERNS = {"M/d/yy", "EEE, M/d/yy", "MM/dd/yyyy", "EEE, MM/dd/yyyy", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
         "MMM d, yyyy", "EEE, MMM d, yyyy", "MMMM d, yyyy", "EEEE, MMMM d, yyyy", "MMMM yyyy" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ };
 	};
 	
-	final private static String[] TIMEPATTERNS     = {"hh:mm", "hh:mm z", "HH:mm z", "HH:mm:ss z" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+	final private static String[] TIMEPATTERNS     = {"hh:mm", "hh:mm z", "HH:mm z", "HH:mm:ss z" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 	};
 	  
-	final private static String[] DATETIMEPATTERNS = {"M/d/yy hh:mm", "EEE, M/d/yy hh:mm", "MM/dd/yyyy HH:mm:ss z", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	final private static String[] DATETIMEPATTERNS = {"M/d/yy hh:mm", "EEE, M/d/yy hh:mm", "MM/dd/yyyy HH:mm:ss z", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		"EEE, MM/dd/yyyy HH:mm:ss z", "MMM d, yyyy HH:mm z", "EEE, MMM d, yyyy HH:mm z", "MMMM d, yyyy HH:mm z", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		"EEEE, MMMM d, yyyy HH:mm z" //$NON-NLS-1$
 	};

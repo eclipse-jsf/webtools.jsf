@@ -157,7 +157,7 @@ public class FunctionCompletionStrategy extends ContentAssistStrategy
             // see to do this
             // if it's an array, we must check if we need to replace a
             // preceding '.'
-            if (replacementText.startsWith("[")) //$NON-NLS-1$
+            if (replacementText.startsWith("["))
             {
                 ITextRegionContextResolver textResolver =
                     IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(_context);

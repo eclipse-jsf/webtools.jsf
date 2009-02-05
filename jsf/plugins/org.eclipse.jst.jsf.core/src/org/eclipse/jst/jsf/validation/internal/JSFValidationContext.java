@@ -11,7 +11,9 @@
 package org.eclipse.jst.jsf.validation.internal;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
+import org.eclipse.jst.jsf.designtime.internal.view.IViewRootHandle;
 import org.eclipse.jst.jsf.designtime.resolver.IStructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator.IValidationReporter;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
@@ -32,6 +34,8 @@ public final class JSFValidationContext
     private final IFile                 _file;
     private final IValidationReporter   _reporter;
     private final IStructuredDocumentSymbolResolverFactory _symbolResolverFactory;
+    // defer initializing this until is asked for because it is expensive
+    private IViewRootHandle       _viewRootHandle;
 
     /**
      * @param isIncremental --
@@ -131,6 +135,25 @@ public final class JSFValidationContext
     public IStructuredDocumentSymbolResolverFactory getSymbolResolverFactory()
     {
         return _symbolResolverFactory;
+    }
+
+    /**
+     * This method will be long running on first call, since it has to update
+     * the view root if not initialized.
+     * 
+     * @return the view root handle
+     */
+    public IViewRootHandle getViewRootHandle()
+    {
+        if (_viewRootHandle == null)
+        {
+            _viewRootHandle = DTAppManagerUtil.getViewRootHandle(_file);
+            if (_viewRootHandle.getCachedViewRoot() == null)
+            {
+                _viewRootHandle.updateViewRoot();
+            }
+        }
+        return _viewRootHandle;
     }
 
 }

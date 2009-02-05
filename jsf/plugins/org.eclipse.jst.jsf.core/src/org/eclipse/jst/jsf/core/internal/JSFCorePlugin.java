@@ -46,7 +46,7 @@ public class JSFCorePlugin extends WTPPlugin
     /**
      * The plugin id
      */
-    public static final String             PLUGIN_ID = "org.eclipse.jst.jsf.core"; // org.eclipse.jst.jsf.core.internal.JSFCorePlugin"; //$NON-NLS-1$
+    public static final String             PLUGIN_ID = "org.eclipse.jst.jsf.core"; // org.eclipse.jst.jsf.core.internal.JSFCorePlugin";
     // //$NON-NLS-1$
 
     // The shared instance.
@@ -83,7 +83,7 @@ public class JSFCorePlugin extends WTPPlugin
         }
         else
         {
-            log("Error adding tag resolver delegate", new Throwable()); //$NON-NLS-1$
+            log("Error adding tag resolver delegate", new Throwable());
         }
     }
 
@@ -346,7 +346,7 @@ public class JSFCorePlugin extends WTPPlugin
      * @return the preference store for this bundle TODO: this is copied from
      *         AbstractUIPlugin; need to upgrade to new IPreferencesService
      */
-    public synchronized IPreferenceStore getPreferenceStore()
+    public IPreferenceStore getPreferenceStore()
     {
         // Create the preference store lazily.
         if (this.preferenceStore == null)

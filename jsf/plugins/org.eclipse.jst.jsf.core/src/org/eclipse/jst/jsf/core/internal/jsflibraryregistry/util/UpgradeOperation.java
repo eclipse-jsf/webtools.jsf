@@ -26,7 +26,7 @@ import org.eclipse.core.runtime.Status;
  * Encapsulates a chain of one or more version steps into a full upgrade.
  * 
  * @author cbateman
- * @deprecated
+ *
  */
 public class UpgradeOperation extends AbstractOperation {
 
@@ -82,7 +82,7 @@ public class UpgradeOperation extends AbstractOperation {
 			}
 		}
 
-		return new UpgradeStatus(IStatus.OK, upgraded, Messages.UpgradeOperation_Success); 
+		return new UpgradeStatus(IStatus.OK, upgraded, "Upgrade succeeded");
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class UpgradeOperation extends AbstractOperation {
 			}
 		}
 		
-		return new UpgradeStatus(IStatus.OK, true, Messages.UpgradeOperation_Success); 
+		return new UpgradeStatus(IStatus.OK, true, "Upgrade succeeded");
 	}
 
 	/**

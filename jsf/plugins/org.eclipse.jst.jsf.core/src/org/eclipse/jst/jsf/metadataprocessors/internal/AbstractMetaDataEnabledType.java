@@ -31,7 +31,7 @@ public class AbstractMetaDataEnabledType implements IType{
 	
 	AbstractMetaDataEnabledType(String bundleID, String id, String klass){
 		this.bundleId = bundleID;
-		this.typeId = bundleId + "." + id; //$NON-NLS-1$
+		this.typeId = bundleId + "." + id;
 		this.klass = klass;
 	}
 	

@@ -82,14 +82,14 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		converters.add(createConverter("Number")); //$NON-NLS-1$
 		converters.add(createConverter("Short")); //$NON-NLS-1$
 		// converters by for-class (see spec 3.3.3 -- Standard Converter Implementions
-		converters.add(createForClassConverter("java.lang.Boolean", "javax.faces.convert.BooleanConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Byte", "javax.faces.convert.ByteConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Character", "javax.faces.convert.CharacterConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Double", "javax.faces.convert.DoubleConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Float", "javax.faces.convert.FloatConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Integer", "javax.faces.convert.IntegerConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Long", "javax.faces.convert.LongConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Short", "javax.faces.converter.ShortConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Boolean", "javax.faces.convert.BooleanConverter"));
+        converters.add(createForClassConverter("java.lang.Byte", "javax.faces.convert.ByteConverter"));
+        converters.add(createForClassConverter("java.lang.Character", "javax.faces.convert.CharacterConverter"));
+        converters.add(createForClassConverter("java.lang.Double", "javax.faces.convert.DoubleConverter"));
+        converters.add(createForClassConverter("java.lang.Float", "javax.faces.convert.FloatConverter"));
+        converters.add(createForClassConverter("java.lang.Integer", "javax.faces.convert.IntegerConverter"));
+        converters.add(createForClassConverter("java.lang.Long", "javax.faces.convert.LongConverter"));
+        converters.add(createForClassConverter("java.lang.Short", "javax.faces.converter.ShortConverter"));
 		//create and add validators
 		EList validators = facesConfig.getValidator();
 		validators.add(createValidator("DoubleRange")); //$NON-NLS-1$

@@ -58,7 +58,7 @@ import org.w3c.dom.NamedNodeMap;
 public class XMLViewObjectConstructionStrategy extends
         ViewObjectConstructionStrategy<Element>
 {
-    private static final String               GENERATED_ID = "_generatedId"; //$NON-NLS-1$
+    private static final String               GENERATED_ID = "_generatedId";
     private final ComponentConstructionData   _constructionData;
     private final XMLViewDefnAdapter          _adapter;
     private final XMLViewObjectMappingService _mappingService;
@@ -79,7 +79,7 @@ public class XMLViewObjectConstructionStrategy extends
         if (adapter == null || constructionData == null)
         {
             throw new IllegalArgumentException(
-                    "adapter and constructionData must not be null"); //$NON-NLS-1$
+                    "adapter and constructionData must not be null");
         }
         _constructionData = constructionData;
         _adapter = adapter;
@@ -103,7 +103,7 @@ public class XMLViewObjectConstructionStrategy extends
                 final ComponentTypeInfo typeInfo = ((IComponentTagElement) tagElement)
                         .getComponent();
 
-                if (!"javax.faces.ViewRoot".equals(typeInfo.getComponentType())) //$NON-NLS-1$
+                if (!"javax.faces.ViewRoot".equals(typeInfo.getComponentType()))
                 {
                     id = calculateId(element, _constructionData);
                 }
@@ -145,7 +145,7 @@ public class XMLViewObjectConstructionStrategy extends
         catch (final Exception e)
         {
             // log and ignore if an individual construction fails
-            JSFCorePlugin.log(e, "Error constructing view object"); //$NON-NLS-1$
+            JSFCorePlugin.log(e, "Error constructing view object");
         }
         return null;
     }
@@ -176,10 +176,10 @@ public class XMLViewObjectConstructionStrategy extends
         populateInitMap(uri, initMap, srcElement, tagElement,
                 attributeToPropertyMap);
 
-        if (initMap.get("id") == null) //$NON-NLS-1$
+        if (initMap.get("id") == null)
         {
             // id must be set
-            initMap.put("id", id); //$NON-NLS-1$
+            initMap.put("id", id);
         }
 
         final ComponentTypeInfo typeInfo = tagElement.getComponent();

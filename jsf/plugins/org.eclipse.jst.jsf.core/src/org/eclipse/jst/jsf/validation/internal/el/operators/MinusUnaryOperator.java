@@ -36,7 +36,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/class MinusUnaryOperator extends UnaryOperator 
 {
-    private static final String UNARY_MINUS = "unary minus"; //$NON-NLS-1$
+    private static final String UNARY_MINUS = "unary minus";
 
     MinusUnaryOperator(DiagnosticFactory diagnosticFactory) 
     {

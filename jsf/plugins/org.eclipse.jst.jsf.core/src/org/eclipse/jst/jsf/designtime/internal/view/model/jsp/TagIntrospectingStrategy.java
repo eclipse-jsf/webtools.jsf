@@ -36,14 +36,6 @@ public final class TagIntrospectingStrategy extends JSPTagResolvingStrategy
     private final IProject _project;
 
     /**
-     * @return the descriptor for this resolver strategy
-     */
-    public static StrategyDescriptor createDescriptor()
-    {
-        return new StrategyDescriptor(ID, DISPLAY_NAME);
-    }
-
-    /**
      * @param project
      */
     public TagIntrospectingStrategy(final IProject project)

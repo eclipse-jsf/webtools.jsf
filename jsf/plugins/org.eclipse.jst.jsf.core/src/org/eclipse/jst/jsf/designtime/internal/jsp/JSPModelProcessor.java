@@ -274,9 +274,9 @@ public class JSPModelProcessor
         throw new CoreException
             (new Status(IStatus.ERROR
                         , "org.eclipse.blah" //$NON-NLS-1$
-                        , 0
+                        , 0  //$NON-NLS-1$
                         ,"model not of expected type" //$NON-NLS-1$
-                        , new Throwable()));
+                        , new Throwable())); //$NON-NLS-1$
     }
 
     private void dispose()
@@ -566,7 +566,7 @@ public class JSPModelProcessor
         }
     }
     
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation") //$NON-NLS-1$
     private void processSetsLocale(final String uri, final String elementName, Node attribute)
     {
         LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file.getProject(), uri, elementName, attribute.getLocalName());
@@ -615,7 +615,7 @@ public class JSPModelProcessor
         }
         else
         {
-            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable())); //$NON-NLS-1$
+            Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Exception("Stack Trace Only"))); //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
 

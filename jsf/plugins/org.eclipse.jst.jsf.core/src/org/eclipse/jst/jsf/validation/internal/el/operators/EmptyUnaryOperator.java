@@ -30,7 +30,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
  */
 /*package*/ class EmptyUnaryOperator extends UnaryOperator 
 {
-    private static final String EMPTY = "empty"; //$NON-NLS-1$
+    private static final String EMPTY = "empty";
 
     EmptyUnaryOperator(DiagnosticFactory diagnosticFactory) 
     {
@@ -41,7 +41,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
     {
         if (type instanceof StringLiteralType)
         {
-            if ("".equals(((StringLiteralType)type).getLiteralValue())) //$NON-NLS-1$
+            if ("".equals(((StringLiteralType)type).getLiteralValue()))
             {
                 // if the string is empty, operator always returns true
                 return BooleanLiteralType.TRUE;
@@ -83,13 +83,13 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         {
             String condition;
             
-            if ("".equals(((StringLiteralType)type).getLiteralValue())) //$NON-NLS-1$
+            if ("".equals(((StringLiteralType)type).getLiteralValue()))
             {
-                condition = "true"; //$NON-NLS-1$
+                condition = "true";
             }
             else
             {
-                condition = "false"; //$NON-NLS-1$
+                condition = "false";
             }
 
             return _diagnosticFactory.
@@ -102,7 +102,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         {
             return _diagnosticFactory.
             create_UNARY_OP_CONSTANT_EXPRESSION_EVAL_SAME_ID
-                (EMPTY,"true"); //$NON-NLS-1$
+                (EMPTY,"true");
         }
         
         // if the type is not string, array, Map, or Collection warn that

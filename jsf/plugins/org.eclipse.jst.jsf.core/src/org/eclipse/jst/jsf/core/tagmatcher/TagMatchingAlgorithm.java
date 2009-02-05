@@ -67,7 +67,7 @@ public abstract class TagMatchingAlgorithm
     {
         if (_isInvalid)
         {
-            throw new IllegalStateException("Expression: "+_expression+" has already been determined to be invalid"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new IllegalStateException("Expression: "+_expression+" has already been determined to be invalid");
         }
         
         if (!_isInitialized)

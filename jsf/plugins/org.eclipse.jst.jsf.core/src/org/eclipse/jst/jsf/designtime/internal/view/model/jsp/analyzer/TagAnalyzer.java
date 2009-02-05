@@ -58,17 +58,17 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
  */
 public final class TagAnalyzer
 {
-    private static final String JAVAX_FACES_WEBAPP_CONVERTER_TAG = "javax.faces.webapp.ConverterTag"; //$NON-NLS-1$
-    private static final String JAVAX_FACES_WEBAPP_CONVERTER_ELTAG = "javax.faces.webapp.ConverterELTag"; //$NON-NLS-1$
-    private static final String JAVAX_FACES_WEBAPP_VALIDATOR_TAG = "javax.faces.webapp.ValidatorTag"; //$NON-NLS-1$
-    private static final String JAVAX_FACES_WEBAPP_VALIDATOR_ELTAG = "javax.faces.webapp.ValidatorELTag"; //$NON-NLS-1$
-    private static final String JAVAX_FACES_WEBAPP_FACET_TAG = "javax.faces.webapp.FacetTag"; //$NON-NLS-1$
+    private static final String JAVAX_FACES_WEBAPP_CONVERTER_TAG = "javax.faces.webapp.ConverterTag";
+    private static final String JAVAX_FACES_WEBAPP_CONVERTER_ELTAG = "javax.faces.webapp.ConverterELTag";
+    private static final String JAVAX_FACES_WEBAPP_VALIDATOR_TAG = "javax.faces.webapp.ValidatorTag";
+    private static final String JAVAX_FACES_WEBAPP_VALIDATOR_ELTAG = "javax.faces.webapp.ValidatorELTag";
+    private static final String JAVAX_FACES_WEBAPP_FACET_TAG = "javax.faces.webapp.FacetTag";
 
     // private static final String JAVAX_FACES_WEBAPP_ACTIONLISTENER_TAG =
     // "javax.faces.webapp.ActionListenerTag";
     // private static final String JAVAX_FACES_WEBAPP_VALUECHANGELISTENER_TAG =
     // "javax.faces.webapp.ValueChangeListenerTag";
-    private static final String JAVAX_FACES_WEBAPP_ATTRIBUTE_TAG = "javax.faces.webapp.AttributeTag"; //$NON-NLS-1$
+    private static final String JAVAX_FACES_WEBAPP_ATTRIBUTE_TAG = "javax.faces.webapp.AttributeTag";
 
     private final static Set<String> COMPONENT_TAG_HANDLER_TYPES_JSF11;
     private final static Set<String> COMPONENT_TAG_HANDLER_TYPES_JSF12;
@@ -98,15 +98,15 @@ public final class TagAnalyzer
         // components
         // JSF 1.1
         Set<String> set = new HashSet<String>(8);
-        set.add("javax.faces.webapp.UIComponentTag"); //$NON-NLS-1$
-        set.add("javax.faces.webapp.UIComponentBodyTag"); //$NON-NLS-1$
+        set.add("javax.faces.webapp.UIComponentTag");
+        set.add("javax.faces.webapp.UIComponentBodyTag");
         COMPONENT_TAG_HANDLER_TYPES_JSF11 = Collections.unmodifiableSet(set);
 
         // JSF 1.2
         set = new HashSet<String>(8);
-        set.add("javax.faces.webapp.UIComponentTag"); //$NON-NLS-1$
-        set.add("javax.faces.webapp.UIComponentBodyTag"); //$NON-NLS-1$
-        set.add("javax.faces.webapp.UIComponentELTag"); //$NON-NLS-1$
+        set.add("javax.faces.webapp.UIComponentTag");
+        set.add("javax.faces.webapp.UIComponentBodyTag");
+        set.add("javax.faces.webapp.UIComponentELTag");
         COMPONENT_TAG_HANDLER_TYPES_JSF12 = Collections.unmodifiableSet(set);
 
         // converters
@@ -144,43 +144,32 @@ public final class TagAnalyzer
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
         { new ServletBeanProxyContributor(project) };
+        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
+                contributor, project);
 
-        ProxyFactoryRegistry registry = null;
-        try
+        if (registry != null)
         {
-            registry = getProxyFactoryRegistry(contributor, project);
-    
-            if (registry != null)
-            {
+            final IStandardBeanTypeProxyFactory factory = registry
+                    .getBeanTypeProxyFactory();
+            final IBeanTypeProxy classTypeProxy = factory
+                    .getBeanTypeProxy(className);
+            final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
+                    classTypeProxy);
 
-                final IStandardBeanTypeProxyFactory factory = registry
-                        .getBeanTypeProxyFactory();
-                final IBeanTypeProxy classTypeProxy = factory
-                        .getBeanTypeProxy(className);
-                final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
-                        classTypeProxy);
-    
-                try
+            try
+            {
+                classTypeWrapper.init();
+                return classTypeWrapper.callStringMethod("getComponentType");
+            }
+            catch (final ProxyException tp)
+            {
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
                 {
-                    classTypeWrapper.init();
-                    return classTypeWrapper.callStringMethod("getComponentType"); //$NON-NLS-1$
-                }
-                catch (final ProxyException tp)
-                {
-                    if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
-                    {
-                        JSFCoreTraceOptions.log("TagAnalyzer.findComponentType", tp); //$NON-NLS-1$
-                    }
+                    JSFCoreTraceOptions.log("TagAnalyzer.findComponentType", tp);
                 }
             }
         }
-        finally
-        {
-            if (registry != null)
-            {
-                registry.terminateRegistry(true);
-            }
-        }
+
         return null;
     }
 
@@ -204,82 +193,72 @@ public final class TagAnalyzer
         // based on the doStartTag method. They also don't provide a standard
         // interface for acquiring the id so instead we make some guess on
         // the internal field name.
-        ProxyFactoryRegistry registry = null;
-        try
+        final String className = tldDecl.getTagclass();
+
+        final IConfigurationContributor[] contributor = new IConfigurationContributor[]
+        { new ServletBeanProxyContributor(project) };
+        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
+                contributor, project);
+
+        if (registry != null)
         {
-            final String className = tldDecl.getTagclass();
-    
-            final IConfigurationContributor[] contributor = new IConfigurationContributor[]
-            { new ServletBeanProxyContributor(project) };
-            registry = getProxyFactoryRegistry(
-                    contributor, project);
-    
-            if (registry != null)
+            final IStandardBeanTypeProxyFactory factory = registry
+                    .getBeanTypeProxyFactory();
+            final IBeanTypeProxy classTypeProxy = factory
+                    .getBeanTypeProxy(className);
+
+            try
             {
-                final IStandardBeanTypeProxyFactory factory = registry
-                        .getBeanTypeProxyFactory();
-                final IBeanTypeProxy classTypeProxy = factory
-                        .getBeanTypeProxy(className);
-    
-                try
+                final IType type = JavaCore.create(project).findType(className);
+
+                if (type != null
+                        && DTComponentIntrospector
+                                .isTypeNameInstanceOfClass(
+                                        type,
+                                        Collections
+                                                .singleton(JAVAX_FACES_WEBAPP_CONVERTER_ELTAG)))
                 {
-                    final IType type = JavaCore.create(project).findType(className);
-    
-                    if (type != null
-                            && DTComponentIntrospector
-                                    .isTypeNameInstanceOfClass(
-                                            type,
-                                            Collections
-                                                    .singleton(JAVAX_FACES_WEBAPP_CONVERTER_ELTAG)))
-                    {
-                        return findConverterType_InELTag(factory, classTypeProxy,project);
-                    }
-                    // the assumption is that this is a component tag, so we assume
-                    // it is one.
-                    else if (type != null
-                            && DTComponentIntrospector
-                                    .isTypeNameInstanceOfClass(
-                                            type,
-                                            Collections
-                                                    .singleton(JAVAX_FACES_WEBAPP_CONVERTER_TAG)))
-                    {
-                        return findConverterType_InTag(factory, classTypeProxy, project);
-                    }
+                    return findConverterType_InELTag(factory, classTypeProxy);
                 }
-                catch (final JavaModelException jme)
+                // the assumption is that this is a component tag, so we assume
+                // it is one.
+                else if (type != null
+                        && DTComponentIntrospector
+                                .isTypeNameInstanceOfClass(
+                                        type,
+                                        Collections
+                                                .singleton(JAVAX_FACES_WEBAPP_CONVERTER_TAG)))
                 {
-                    // suppress for now
+                    return findConverterType_InTag(factory, classTypeProxy);
                 }
             }
-        }
-        finally
-        {
-            if (registry != null)
+            catch (final JavaModelException jme)
             {
-                registry.terminateRegistry(true);
+                // suppress for now
             }
         }
+
         return null;
     }
 
     private static String findConverterType_InTag(
             final IStandardBeanTypeProxyFactory factory,
-            final IBeanTypeProxy classTypeProxy, final IProject project)
+            final IBeanTypeProxy classTypeProxy)
     {
         final IBeanTypeProxy nullPageContextType = factory
-                .getBeanTypeProxy("javax.servlet.jsp.PageContext"); //$NON-NLS-1$
-        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
+                .getBeanTypeProxy("javax.servlet.jsp.PageContext");
+        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
                 classTypeProxy);
 
         try
         {
             classTypeWrapper.init();
 
-            callSuppressExceptions(classTypeWrapper, "setPageContext", //$NON-NLS-1$
+            callSuppressExceptions(classTypeWrapper, "setPageContext",
                     new IBeanProxy[]
                     { null }, new IBeanTypeProxy[]
                     { nullPageContextType });
-            callSuppressExceptions(classTypeWrapper, "doStartTag"); //$NON-NLS-1$
+            callSuppressExceptions(classTypeWrapper, "doStartTag");
 
             final IBeanTypeProxy converterProxy = factory
                     .getBeanTypeProxy(JAVAX_FACES_WEBAPP_CONVERTER_TAG);
@@ -288,7 +267,7 @@ public final class TagAnalyzer
             // failed.
             // now try to guess what it's called
             String converterId = getStringField(classTypeWrapper,
-                    converterProxy, "converterId"); //$NON-NLS-1$
+                    converterProxy, "converterId");
 
             if (converterId != null)
             {
@@ -296,7 +275,7 @@ public final class TagAnalyzer
             }
 
             converterId = getStringField(classTypeWrapper, converterProxy,
-                    "_converterId"); //$NON-NLS-1$
+                    "_converterId");
 
             if (converterId != null)
             {
@@ -305,7 +284,7 @@ public final class TagAnalyzer
 
             // no? look for a CONVERTER_ID
             converterId = getStringField(classTypeWrapper, classTypeProxy,
-                    "CONVERTER_ID"); //$NON-NLS-1$
+                    "CONVERTER_ID");
         }
         catch (final ProxyException tp)
         {
@@ -316,12 +295,12 @@ public final class TagAnalyzer
 
     private static String findConverterType_InELTag(
             final IStandardBeanTypeProxyFactory factory,
-            final IBeanTypeProxy classTypeProxy, final IProject project)
+            final IBeanTypeProxy classTypeProxy)
     {
-        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
+        final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
                 classTypeProxy);
         final IBeanTypeProxy elExpressionType = factory
-                .getBeanTypeProxy("javax.el.ValueExpression"); //$NON-NLS-1$
+                .getBeanTypeProxy("javax.el.ValueExpression");
 
         if (elExpressionType == null)
         {
@@ -332,20 +311,20 @@ public final class TagAnalyzer
         {
             classTypeWrapper.init();
 
-            callSuppressExceptions(classTypeWrapper, "doStartTag"); //$NON-NLS-1$
+            callSuppressExceptions(classTypeWrapper, "doStartTag");
 
             // no? look for a CONVERTER_ID
             final IBeanProxy converterId = getFieldInParents(classTypeWrapper,
-                    classTypeProxy, "CONVERTER_ID_EXPR"); //$NON-NLS-1$
+                    classTypeProxy, "CONVERTER_ID_EXPR");
 
             if (converterId != null)
             {
                 converterId.getTypeProxy().isKindOf(elExpressionType);
-                final BeanProxyWrapper elExprValue = new BeanProxyWrapper(project,
+                final BeanProxyWrapper elExprValue = new BeanProxyWrapper(
                         converterId.getTypeProxy());
                 final String value = elExprValue
-                        .callStringMethod("getExpressionString"); //$NON-NLS-1$
-                System.out.println("Expression string:" + value); //$NON-NLS-1$
+                        .callStringMethod("getExpressionString");
+                System.out.println("Expression string:" + value);
             }
 
             //            
@@ -382,71 +361,60 @@ public final class TagAnalyzer
 
         final IConfigurationContributor[] contributor = new IConfigurationContributor[]
         { new ServletBeanProxyContributor(project) };
+        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(
+                contributor, project);
 
-        ProxyFactoryRegistry registry = null;
-
-        try
+        if (registry != null)
         {
-            registry = getProxyFactoryRegistry(contributor, project);
-    
-            if (registry != null)
+            final IStandardBeanTypeProxyFactory factory = registry
+                    .getBeanTypeProxyFactory();
+            final IBeanTypeProxy classTypeProxy = factory
+                    .getBeanTypeProxy(className);
+            final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
+                    classTypeProxy);
+            final IBeanTypeProxy converterProxy = factory
+                    .getBeanTypeProxy(JAVAX_FACES_WEBAPP_VALIDATOR_TAG);
+            try
             {
-                final IStandardBeanTypeProxyFactory factory = registry
-                        .getBeanTypeProxyFactory();
-                final IBeanTypeProxy classTypeProxy = factory
-                        .getBeanTypeProxy(className);
-                final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
-                        classTypeProxy);
-                final IBeanTypeProxy converterProxy = factory
-                        .getBeanTypeProxy(JAVAX_FACES_WEBAPP_VALIDATOR_TAG);
-                try
+                classTypeWrapper.init();
+
+                callSuppressExceptions(classTypeWrapper, "doStartTag");
+                callSuppressExceptions(classTypeWrapper, "createValidator");
+
+                // hopefully doStartTag set the converter field before it
+                // failed.
+                // now try to guess what it's called
+                String validatorId = getStringField(classTypeWrapper,
+                        converterProxy, "validatorId");
+
+                if (validatorId != null)
                 {
-                    classTypeWrapper.init();
-    
-                    callSuppressExceptions(classTypeWrapper, "doStartTag"); //$NON-NLS-1$
-                    callSuppressExceptions(classTypeWrapper, "createValidator"); //$NON-NLS-1$
-    
-                    // hopefully doStartTag set the converter field before it
-                    // failed.
-                    // now try to guess what it's called
-                    String validatorId = getStringField(classTypeWrapper,
-                            converterProxy, "validatorId"); //$NON-NLS-1$
-    
-                    if (validatorId != null)
-                    {
-                        return validatorId;
-                    }
-    
-                    validatorId = getStringField(classTypeWrapper, converterProxy,
-                            "_validatorId"); //$NON-NLS-1$
-    
-                    if (validatorId != null)
-                    {
-                        return validatorId;
-                    }
-    
-                    // no? then see if there's a VALIDATOR_ID field *on the tag*
-                    validatorId = getStringField(classTypeWrapper, classTypeProxy,
-                            "VALIDATOR_ID"); //$NON-NLS-1$
-    
-                    if (validatorId != null)
-                    {
-                        return validatorId;
-                    }
+                    return validatorId;
                 }
-                catch (final ProxyException tp)
+
+                validatorId = getStringField(classTypeWrapper, converterProxy,
+                        "_validatorId");
+
+                if (validatorId != null)
                 {
-                    // fall through
+                    return validatorId;
+                }
+
+                // no? then see if there's a VALIDATOR_ID field *on the tag*
+                validatorId = getStringField(classTypeWrapper, classTypeProxy,
+                        "VALIDATOR_ID");
+
+                if (validatorId != null)
+                {
+                    return validatorId;
                 }
             }
-        }
-        finally
-        {
-            if (registry != null)
+            catch (final ProxyException tp)
             {
-                registry.terminateRegistry(true);
+                // fall through
             }
         }
+
         return null;
 
     }
@@ -534,7 +502,7 @@ public final class TagAnalyzer
         }
         catch (final CoreException e)
         {
-            JSFCorePlugin.log("Error starting vm for project: " //$NON-NLS-1$
+            JSFCorePlugin.log("Error starting vm for project: "
                     + project.getName(), e);
         }
 
@@ -554,7 +522,7 @@ public final class TagAnalyzer
             JSFCoreTraceOptions
                     .log(String
                             .format(
-                                    "TagAnalyzer.createTLDTagElement: Start tld=%s, project=%s", //$NON-NLS-1$
+                                    "TagAnalyzer.createTLDTagElement: Start tld=%s, project=%s",
                                     tldDecl.getNodeName(), project.getName()));
         }
         long startTime = 0;
@@ -574,7 +542,7 @@ public final class TagAnalyzer
                             JavaCore.VERSION_1_3).getSeverity() == IStatus.ERROR)
             {
                 JSFCorePlugin.log(
-                        "Bad tag class name in " + tldDecl.toString(), //$NON-NLS-1$
+                        "Bad tag class name in " + tldDecl.toString(),
                         new Throwable());
                 return null;
             }
@@ -585,7 +553,7 @@ public final class TagAnalyzer
             {
                 if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
                 {
-                    JSFCoreTraceOptions.log("Type not found for: "+typeName); //$NON-NLS-1$
+                    JSFCoreTraceOptions.log("Type not found for: "+typeName);
                 }
                 return null;
             }
@@ -594,7 +562,7 @@ public final class TagAnalyzer
             if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
             {
                 JSFCoreTraceOptions.log(String.format(
-                        "Tag class type=%s\nTag type=%s", type, tagType)); //$NON-NLS-1$
+                        "Tag class type=%s\nTag type=%s", type, tagType));
             }
 
             if (tagType == TagType.COMPONENT)
@@ -604,9 +572,9 @@ public final class TagAnalyzer
                 if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
                 {
                     String name = element != null ? element.toString()
-                            : "<none>"; //$NON-NLS-1$
+                            : "<none>";
                     System.out.printf(
-                            "Time to create component tag element %s was %d\n", //$NON-NLS-1$
+                            "Time to create component tag element %s was %d\n",
                             name, Long.valueOf(System.nanoTime() - startTime));
                 }
                 return element;
@@ -617,9 +585,9 @@ public final class TagAnalyzer
                 if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
                 {
                     String name = element != null ? element.toString()
-                            : "<none>"; //$NON-NLS-1$
+                            : "<none>";
                     System.out.printf(
-                            "Time to create converter tag element %s was %d\n", //$NON-NLS-1$
+                            "Time to create converter tag element %s was %d\n",
                             name, Long.valueOf(System.nanoTime() - startTime));
                 }
                 return element;
@@ -630,9 +598,9 @@ public final class TagAnalyzer
                 if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
                 {
                     String name = element != null ? element.toString()
-                            : "<none>"; //$NON-NLS-1$
+                            : "<none>";
                     System.out.printf(
-                            "Time to create validator tag element %s was %d\n", //$NON-NLS-1$
+                            "Time to create validator tag element %s was %d\n",
                             name, Long.valueOf(System.nanoTime() - startTime));
                 }
                 return element;
@@ -643,9 +611,9 @@ public final class TagAnalyzer
                 if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR_PERF)
                 {
                     String name = element != null ? element.toString()
-                            : "<none>"; //$NON-NLS-1$
+                            : "<none>";
                     System.out.printf(
-                            "Time to create handler tag element %s was %d\n", //$NON-NLS-1$
+                            "Time to create handler tag element %s was %d\n",
                             name, Long.valueOf(System.nanoTime() - startTime));
                 }
                 return element;
@@ -653,7 +621,7 @@ public final class TagAnalyzer
         }
         catch (final JavaModelException jme)
         {
-            JSFCorePlugin.log(jme, "Trying to get type for TLD"); //$NON-NLS-1$
+            JSFCorePlugin.log(jme, "Trying to get type for TLD");
         }
 
         return null;
@@ -674,7 +642,7 @@ public final class TagAnalyzer
             final String componentClass = DTComponentIntrospector
                     .findComponentClass(componentType, project);
 
-            if (componentClass != null && !"".equals(componentClass.trim())) //$NON-NLS-1$
+            if (componentClass != null && !"".equals(componentClass.trim()))
             {
                 final ComponentTypeInfo typeInfo = DTComponentIntrospector
                         .getComponent(componentType, componentClass, project,
@@ -709,7 +677,7 @@ public final class TagAnalyzer
             final String converterClass = DTComponentIntrospector
                     .findConverterClass(converterId, project);
 
-            if (converterClass != null && !"".equals(converterClass.trim())) //$NON-NLS-1$
+            if (converterClass != null && !"".equals(converterClass.trim()))
             {
                 final ConverterTypeInfo typeInfo = DTComponentIntrospector
                         .getConverter(converterId, converterClass);
@@ -739,7 +707,7 @@ public final class TagAnalyzer
             final String validatorClass = DTComponentIntrospector
                     .findValidatorClass(validatorId, project);
 
-            if (validatorClass != null && !"".equals(validatorClass.trim())) //$NON-NLS-1$
+            if (validatorClass != null && !"".equals(validatorClass.trim()))
             {
                 final ValidatorTypeInfo typeInfo = DTComponentIntrospector
                         .getValidator(validatorId, validatorClass);
@@ -798,7 +766,7 @@ public final class TagAnalyzer
             JSFCoreTraceOptions
                     .log(String
                             .format(
-                                    "TagAnalyzer.getJSFComponentTagType: Determining Tag Type for type %s on project %s", //$NON-NLS-1$
+                                    "TagAnalyzer.getJSFComponentTagType: Determining Tag Type for type %s on project %s",
                                     type.getFullyQualifiedName(), project
                                             .toString()));
         }
@@ -852,8 +820,8 @@ public final class TagAnalyzer
         if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
         {
             JSFCoreTraceOptions.log(String.format(
-                    "TagAnalyzer.getJSFComponentTagType: tag type is %s", //$NON-NLS-1$
-                    tagType != null ? tagType.toString() : "null")); //$NON-NLS-1$
+                    "TagAnalyzer.getJSFComponentTagType: tag type is %s",
+                    tagType != null ? tagType.toString() : "null"));
         }
         return tagType;
     }

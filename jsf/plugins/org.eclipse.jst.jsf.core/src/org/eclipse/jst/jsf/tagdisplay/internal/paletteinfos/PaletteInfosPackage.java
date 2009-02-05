@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosPackage.java,v 1.2 2008/11/18 22:23:54 gkessler Exp $
+ * $Id: PaletteInfosPackage.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -32,7 +32,7 @@ public interface PaletteInfosPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**
 	 * The package name.
@@ -40,7 +40,7 @@ public interface PaletteInfosPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNAME = "paletteinfos"; //$NON-NLS-1$
+	String eNAME = "paletteinfos";
 
 	/**
 	 * The package namespace URI.
@@ -48,7 +48,7 @@ public interface PaletteInfosPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"; //$NON-NLS-1$
+	String eNS_URI = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore";
 
 	/**
 	 * The package namespace name.
@@ -56,7 +56,7 @@ public interface PaletteInfosPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_PREFIX = "pi"; //$NON-NLS-1$
+	String eNS_PREFIX = "pi";
 
 	/**
 	 * The singleton instance of the package.

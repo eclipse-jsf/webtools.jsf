@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
  * Communicates the status of the JSF Library Registry
- * @deprecated
+ *
  */
 public class UpgradeStatus extends Status
 {
@@ -29,7 +29,7 @@ public class UpgradeStatus extends Status
 	 * All-is-well UpgradeStatus constructor 
 	 */
 	public UpgradeStatus(){		
-		super(IStatus.OK, JSFCorePlugin.getDefault().getPluginID(), Messages.UpgradeStatus_OK); 
+		super(IStatus.OK, JSFCorePlugin.getDefault().getPluginID(), "OK");
 		this.upgradeOccurred = false;
 	}
 	
@@ -78,7 +78,7 @@ public class UpgradeStatus extends Status
 			}
 			catch (ExecutionException e)
 			{
-				return new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getPluginID(), Messages.UpgradeStatus_Error, e);
+				return new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getPluginID(), "Error committing status", e);
 			}
 		}
 		return Status.OK_STATUS;
@@ -97,7 +97,7 @@ public class UpgradeStatus extends Status
 			}
 			catch (ExecutionException e)
 			{
-				return new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getPluginID(), Messages.UpgradeStatus_Error, e); 
+				return new Status(IStatus.ERROR, JSFCorePlugin.getDefault().getPluginID(), "Error committing status", e);
 			}
 		}
 		return Status.OK_STATUS;

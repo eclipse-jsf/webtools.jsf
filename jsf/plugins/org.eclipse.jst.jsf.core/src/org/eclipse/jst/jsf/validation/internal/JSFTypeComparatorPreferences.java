@@ -126,7 +126,7 @@ public class JSFTypeComparatorPreferences extends TypeComparatorPreferences
     {
         try
         {
-            return context.getNode("org.eclipse.jst.jsf.core").get( //$NON-NLS-1$
+            return context.getNode("org.eclipse.jst.jsf.core").get(
                     key,
                     mapDiagToSeverity(getDefaultSeverity(getIdByKey(key)))
                             .toString());
@@ -218,21 +218,21 @@ public class JSFTypeComparatorPreferences extends TypeComparatorPreferences
      */
     public static int mapSeverityToDiag(String severity)
     {
-        if ("error".equals(severity)) //$NON-NLS-1$
+        if ("error".equals(severity))
         {
             return Diagnostic.ERROR;
         }
-        else if ("warning".equals(severity)) //$NON-NLS-1$
+        else if ("warning".equals(severity))
         {
             return Diagnostic.WARNING;
         }
-        else if ("ignore".equals(severity)) //$NON-NLS-1$
+        else if ("ignore".equals(severity))
         {
             return Diagnostic.OK;
         }
         else
         {
-            throw new IllegalArgumentException("Invalid enum name: " + severity); //$NON-NLS-1$
+            throw new IllegalArgumentException("Invalid enum name: " + severity);
         }
     }
 
@@ -258,8 +258,8 @@ public class JSFTypeComparatorPreferences extends TypeComparatorPreferences
             case TypeComparatorDiagnosticFactory.VALUE_EXPRESSION_EXPECTED_ID:
                 return VALUE_EXPRESSION_EXPECTED;
             default:
-                throw new IllegalArgumentException("Diagnostic Id: " //$NON-NLS-1$
-                        + diagnosticId + " is out of range"); //$NON-NLS-1$
+                throw new IllegalArgumentException("Diagnostic Id: "
+                        + diagnosticId + " is out of range");
         }
     }
 
@@ -296,7 +296,7 @@ public class JSFTypeComparatorPreferences extends TypeComparatorPreferences
         }
         else
         {
-            throw new IllegalArgumentException("Severity Key: " + key); //$NON-NLS-1$
+            throw new IllegalArgumentException("Severity Key: " + key);
         }
     }
 
@@ -309,31 +309,31 @@ public class JSFTypeComparatorPreferences extends TypeComparatorPreferences
      */
     private static String createQualifiedKeyName(final String baseName)
     {
-        return JSFCorePlugin.PLUGIN_ID + "." + baseName; //$NON-NLS-1$
+        return JSFCorePlugin.PLUGIN_ID + "." + baseName;
     }
 
     /**
      * preference key. Match to DiagnosticFactory constants
      */
-    public final static String INCOMPATIBLE_METHOD_TYPES  = createQualifiedKeyName("INCOMPATIBLE_METHOD_TYPES"); //$NON-NLS-1$
+    public final static String INCOMPATIBLE_METHOD_TYPES  = createQualifiedKeyName("INCOMPATIBLE_METHOD_TYPES");
     /**
      * preference key. Match to DiagnosticFactory constants
      */
-    public final static String INCOMPATIBLE_TYPES         = createQualifiedKeyName("INCOMPATIBLE_TYPES"); //$NON-NLS-1$
+    public final static String INCOMPATIBLE_TYPES         = createQualifiedKeyName("INCOMPATIBLE_TYPES");
     /**
      * preference key. Match to DiagnosticFactory constants
      */
-    public final static String METHOD_EXPRESSION_EXPECTED = createQualifiedKeyName("METHOD_EXPRESSION_EXPECTED"); //$NON-NLS-1$
+    public final static String METHOD_EXPRESSION_EXPECTED = createQualifiedKeyName("METHOD_EXPRESSION_EXPECTED");
     /**
      * preference key. Match to DiagnosticFactory constants
      */
-    public final static String PROPERTY_NOT_READABLE      = createQualifiedKeyName("PROPERTY_NOT_READABLE"); //$NON-NLS-1$
+    public final static String PROPERTY_NOT_READABLE      = createQualifiedKeyName("PROPERTY_NOT_READABLE");
     /**
      * preference key. Match to DiagnosticFactory constants
      */
-    public final static String PROPERTY_NOT_WRITABLE      = createQualifiedKeyName("PROPERTY_NOT_WRITABLE"); //$NON-NLS-1$
+    public final static String PROPERTY_NOT_WRITABLE      = createQualifiedKeyName("PROPERTY_NOT_WRITABLE");
     /**
      * preference key. Match to DiagnosticFactory constants
      */
-    public final static String VALUE_EXPRESSION_EXPECTED  = createQualifiedKeyName("VALUE_EXPRESSION_EXPECTED"); //$NON-NLS-1$
+    public final static String VALUE_EXPRESSION_EXPECTED  = createQualifiedKeyName("VALUE_EXPRESSION_EXPECTED");
 }

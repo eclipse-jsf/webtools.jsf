@@ -140,7 +140,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             }
             catch (final ViewHandlerException vhe)
             {
-                JSFCorePlugin.log(vhe, "While acquiring view adapter"); //$NON-NLS-1$
+                JSFCorePlugin.log(vhe, "While acquiring view adapter");
             }
 
             // not found or failed
@@ -176,7 +176,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
                         IStatus.WARNING,
                         String
                         .format(
-                                "Could not get view adapter to construct design time view root for %s", //$NON-NLS-1$
+                                "Could not get view adapter to construct design time view root for %s",
                                 viewId));
             }
             else
@@ -186,13 +186,13 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
                         IStatus.WARNING,
                         String
                         .format(
-                                "Could not get view adapter factory toconstruct design time view root for %s", //$NON-NLS-1$
+                                "Could not get view adapter factory toconstruct design time view root for %s",
                                 viewId));
             }
         }
         catch (final ViewHandlerException e)
         {
-            JSFCorePlugin.log(e, "While acquiring view defn adapter factory"); //$NON-NLS-1$
+            JSFCorePlugin.log(e, "While acquiring view defn adapter factory");
             // fall-through
         }
 

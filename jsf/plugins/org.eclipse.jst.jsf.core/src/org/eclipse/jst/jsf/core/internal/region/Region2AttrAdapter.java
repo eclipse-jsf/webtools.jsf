@@ -128,4 +128,14 @@ public class Region2AttrAdapter extends AttrDOMAdapter
 
         return ((IDOMAttr) attrAsNode);
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("Region2AttrAdapter: attr=%s, owningElement=%s"
+                , _attr.getNodeName(), getOwningElement().getNodeName());
+        
+    }
+    
+    
 }

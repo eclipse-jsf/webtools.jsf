@@ -27,13 +27,12 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.JSFLibraryRefer
  * 
  * <p><b>Provisional API - subject to change</b></p>
  * @since WTP JSF 1.0
- * @deprecated
  */
 public final class JSFLibraryConfigurationHelper {
 	/**
 	 * container id for JSF Library Classpath Containers 
 	 */
-	public static final String JSF_LIBRARY_CP_CONTAINER_ID="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer"; //$NON-NLS-1$
+	public static final String JSF_LIBRARY_CP_CONTAINER_ID="org.eclipse.jst.jsf.core.internal.jsflibrarycontainer";
 
 	/**
 	 * @param project 
@@ -57,7 +56,7 @@ public final class JSFLibraryConfigurationHelper {
 				results.add(JSFLibraryReferenceFacadeFactory.createServerSuppliedJSFLibRef());
 			}
 		} catch (JavaModelException e) {
-			JSFCorePlugin.log(e, "Exception occurred calling getJSFLibraryReferences for "+project.getName()); //$NON-NLS-1$
+			JSFCorePlugin.log(e, "Exception occurred calling getJSFLibraryReferences for "+project.getName());
 		}
 		return results;
 	}

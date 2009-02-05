@@ -74,7 +74,7 @@ public abstract class MemberAccessorOperator
         if (!(firstArg instanceof IObjectSymbolBasedValueType))
         {
             throw new AssertionError(
-            "The first argument of the member operator must always be a symbol resolvable value type"); //$NON-NLS-1$
+            "The first argument of the member operator must always be a symbol resolvable value type");
         }
 
         if (TypeCoercer.typeIsNull(secondArg.getSignature()))
@@ -246,7 +246,7 @@ public abstract class MemberAccessorOperator
             return resolver.getProperty(symbol, name);
         }
 
-        JSFCorePlugin.log("Error acquiring property resolver", new Throwable()); //$NON-NLS-1$
+        JSFCorePlugin.log("Error acquiring property resolver", new Throwable());
         return null;
     }
 
@@ -266,7 +266,7 @@ public abstract class MemberAccessorOperator
             return resolver.getMethod(symbol, name);
         }
 
-        JSFCorePlugin.log("Error acquiring property resolver", new Throwable()); //$NON-NLS-1$
+        JSFCorePlugin.log("Error acquiring property resolver", new Throwable());
         return null;
 
     }

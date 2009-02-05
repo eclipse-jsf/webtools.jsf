@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JSFLibraryRegistryXMLProcessor.java,v 1.4 2008/11/18 22:23:53 gkessler Exp $
+ * $Id: JSFLibraryRegistryXMLProcessor.java,v 1.2 2007/04/04 18:50:17 cbateman Exp $
  */
 package org.eclipse.jst.jsf.core.internal.jsflibraryregistry.util;
 
@@ -17,7 +17,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPa
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
- * @deprecated
  */
 public class JSFLibraryRegistryXMLProcessor extends XMLProcessor {
 	/**
@@ -25,7 +24,7 @@ public class JSFLibraryRegistryXMLProcessor extends XMLProcessor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 
 	/**

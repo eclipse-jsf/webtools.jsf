@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagIdImpl.java,v 1.2 2008/11/18 22:23:52 gkessler Exp $
+ * $Id: TagIdImpl.java,v 1.1 2007/02/28 21:16:02 cbateman Exp $
  */
 package org.eclipse.jst.jsf.validation.internal.constraints.impl;
 
@@ -204,9 +204,9 @@ public class TagIdImpl extends EObjectImpl implements TagId {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (uri: "); //$NON-NLS-1$
+        result.append(" (uri: ");
         result.append(uri);
-        result.append(", name: "); //$NON-NLS-1$
+        result.append(", name: ");
         result.append(name);
         result.append(')');
         return result.toString();

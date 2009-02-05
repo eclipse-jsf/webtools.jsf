@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- end-user-doc -->
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage
  * @generated
- * @deprecated
  */
 public interface JSFLibraryRegistryFactory extends EFactory{
 	/**
@@ -27,7 +26,7 @@ public interface JSFLibraryRegistryFactory extends EFactory{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The singleton instance of the factory.

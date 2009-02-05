@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getArchiveFile()
  * @model
  * @generated
- * @deprecated
  */
 public interface ArchiveFile extends EObject{
 	/**
@@ -38,7 +37,7 @@ public interface ArchiveFile extends EObject{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * Returns the value of the '<em><b>Source Location</b></em>' attribute.

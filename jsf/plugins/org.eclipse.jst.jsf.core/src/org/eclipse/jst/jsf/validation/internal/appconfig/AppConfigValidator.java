@@ -260,11 +260,11 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
             {
                 final Node node = rootNodes.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE
-                        && "faces-config".equals(node.getLocalName())) //$NON-NLS-1$
+                        && "faces-config".equals(node.getLocalName()))
                 {
                     final NamedNodeMap map = node.getAttributes();
                     // the most accurate thing is the version
-                    final Node versionAttrib = map.getNamedItem("version"); //$NON-NLS-1$
+                    final Node versionAttrib = map.getNamedItem("version");
 
                     if (versionAttrib != null)
                     {
@@ -325,7 +325,7 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
         }
         catch (final CoreException ce)
         {
-            JSFCorePlugin.log(ce, "Problem loading faceted project"); //$NON-NLS-1$
+            JSFCorePlugin.log(ce, "Problem loading faceted project");
             // fall-through and return null
         }
         return null;
@@ -334,7 +334,7 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
     private String extractVersionFromPublicId(final DocumentType docType)
     {
         final String publicId = docType.getPublicId();
-        final String publicIdRegex = "-\\/\\/(.*)\\/\\/(.*)\\/\\/.*"; //$NON-NLS-1$
+        final String publicIdRegex = "-\\/\\/(.*)\\/\\/(.*)\\/\\/.*";
 
         if (publicId != null)
         {
@@ -344,11 +344,11 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
             if (matcher.matches())
             {
                 final String classTypeString = matcher.group(2);
-                final String[] classTypes = classTypeString.split("\\s+"); //$NON-NLS-1$
-                
+                final String[] classTypes = classTypeString.split("\\s+");
+
                 // verify that the class type is a DTD
                 if (classTypes.length > 0
-                        && "DTD".equals(classTypes[0])) //$NON-NLS-1$
+                        && "DTD".equals(classTypes[0]))
                 {
                     // either 1.0 or 1.1; be most conservative
                     String appConfigVersion = IJSFCoreConstants.JSF_VERSION_1_0;
@@ -370,7 +370,7 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
     private String extractVersionFromSystemId(final DocumentType docType)
     {
         final String systemId = docType.getSystemId();
-        final String systemIdRegEx = "http:\\/\\/java.sun.com\\/dtd\\/web-facesconfig_(.*)\\.dtd"; //$NON-NLS-1$
+        final String systemIdRegEx = "http:\\/\\/java.sun.com\\/dtd\\/web-facesconfig_(.*)\\.dtd";
         if (systemId != null)
         {
             final Pattern pattern = Pattern.compile(systemIdRegEx);
@@ -379,9 +379,9 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
             if (matcher.matches())
             {
                 final String version = matcher.group(1);
-                if ("1_1".equals(version)||"1_0".equals(version)) //$NON-NLS-1$ //$NON-NLS-2$
+                if ("1_1".equals(version)||"1_0".equals(version))
                 {
-                    return version.replaceAll("_", "."); //$NON-NLS-1$ //$NON-NLS-2$
+                    return version.replaceAll("_", ".");
                 }
             }
         }

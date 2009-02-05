@@ -86,81 +86,70 @@ public final class DTComponentIntrospector
             final String className, final IProject project,
             final IConfigurationContributor[] contributors)
     {
-        ProxyFactoryRegistry registry = null;
-        try
+        final ProxyFactoryRegistry registry = getProxyFactoryRegistry(project,
+                contributors);
+
+        if (registry != null)
         {
-            registry = getProxyFactoryRegistry(project,
-                    contributors);
-    
-            if (registry != null)
+            final IStandardBeanTypeProxyFactory factory = registry
+                    .getBeanTypeProxyFactory();
+            final IBeanTypeProxy classTypeProxy = factory
+                    .getBeanTypeProxy(className);
+            final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(
+                    classTypeProxy);
+
+            String family = null;
+            String renderer = null;
+            try
             {
-                final IStandardBeanTypeProxyFactory factory = registry
-                        .getBeanTypeProxyFactory();
-                final IBeanTypeProxy classTypeProxy = factory
-                        .getBeanTypeProxy(className);
-                final BeanProxyWrapper classTypeWrapper = new BeanProxyWrapper(project,
-                        classTypeProxy);
-    
-                String family = null;
-                String renderer = null;
-                try
-                {
-                    classTypeWrapper.init();
-                    family = classTypeWrapper.callStringMethod("getFamily"); //$NON-NLS-1$
-                    renderer = classTypeWrapper.callStringMethod("getRendererType"); //$NON-NLS-1$
-                }
-                catch (ProxyException e1)
-                {
-                    // fall through
-                    if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
-                    {
-                        JSFCoreTraceOptions.log("DTComponentIntrospector.getComponent:", e1); //$NON-NLS-1$
-                    }
-                }
-    
-                IType type = null;
-    
-                try
-                {
-                    type = JavaCore.create(project).findType(className);
-                }
-                catch (JavaModelException e)
-                {
-                    // fall through;
-                }
-    
-                List<String> interfaces = new ArrayList<String>();
-                List<String> superClasses = new ArrayList<String>();
-    
-                if (type != null)
-                {
-                    TypeInfoCache typeCache = getSharedTypeCache();
-    
-                    IType[] interfaceTypes = typeCache.cacheInterfaceTypesFor(type);
-                    for (IType interfaze : interfaceTypes)
-                    {
-                        interfaces.add(interfaze.getFullyQualifiedName());
-                    }
-    
-                    IType[] superClassTypes = typeCache.cacheSupertypesFor(type);
-    
-                    for (IType superClass : superClassTypes)
-                    {
-                        superClasses.add(superClass.getFullyQualifiedName());
-                    }
-                }
-    
-                return new ComponentTypeInfo(classType, className, superClasses
-                        .toArray(new String[0]), interfaces.toArray(new String[0]),
-                        family, renderer);
+                classTypeWrapper.init();
+                family = classTypeWrapper.callStringMethod("getFamily");
+                renderer = classTypeWrapper.callStringMethod("getRendererType");
             }
-        }
-        finally
-        {
-            if (registry != null)
+            catch (ProxyException e1)
             {
-                registry.terminateRegistry(true);
+                // fall through
+                if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                {
+                    JSFCoreTraceOptions.log("DTComponentIntrospector.getComponent:", e1);
+                }
             }
+
+            IType type = null;
+
+            try
+            {
+                type = JavaCore.create(project).findType(className);
+            }
+            catch (JavaModelException e)
+            {
+                // fall through;
+            }
+
+            List<String> interfaces = new ArrayList<String>();
+            List<String> superClasses = new ArrayList<String>();
+
+            if (type != null)
+            {
+                TypeInfoCache typeCache = getSharedTypeCache();
+
+                IType[] interfaceTypes = typeCache.cacheInterfaceTypesFor(type);
+                for (IType interfaze : interfaceTypes)
+                {
+                    interfaces.add(interfaze.getFullyQualifiedName());
+                }
+
+                IType[] superClassTypes = typeCache.cacheSupertypesFor(type);
+
+                for (IType superClass : superClassTypes)
+                {
+                    superClasses.add(superClass.getFullyQualifiedName());
+                }
+            }
+
+            return new ComponentTypeInfo(classType, className, superClasses
+                    .toArray(new String[0]), interfaces.toArray(new String[0]),
+                    family, renderer);
         }
         return null;
     }
@@ -364,7 +353,7 @@ public final class DTComponentIntrospector
         }
         catch (JavaModelException e)
         {
-            JSFCorePlugin.log("Error finding component type", e); //$NON-NLS-1$
+            JSFCorePlugin.log("Error finding component type", e);
         }
 
         return properties;
@@ -387,7 +376,7 @@ public final class DTComponentIntrospector
         }
         catch (final CoreException e)
         {
-            JSFCorePlugin.log("Error starting vm for project: " //$NON-NLS-1$
+            JSFCorePlugin.log("Error starting vm for project: "
                     + project.getName(), e);
         }
 

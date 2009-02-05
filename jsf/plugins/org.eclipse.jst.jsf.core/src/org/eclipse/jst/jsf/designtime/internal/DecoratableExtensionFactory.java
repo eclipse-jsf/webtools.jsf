@@ -31,7 +31,7 @@ import org.osgi.framework.Bundle;
 public class DecoratableExtensionFactory<EXTENSIONTYPE> extends
         BasicExtensionFactory<EXTENSIONTYPE>
 {
-    private static final String             DECORATOR_ATTRIBUTE_NAME = "forRuntimeClass"; //$NON-NLS-1$
+    private static final String             DECORATOR_ATTRIBUTE_NAME = "forRuntimeClass";
     private final Map<String, List<String>> _forNameToId;
 
     /**
@@ -94,7 +94,7 @@ public class DecoratableExtensionFactory<EXTENSIONTYPE> extends
         final ExtensionData data = super.processExtension(element, alwaysPerProject);
         final String forRuntimeClass = element
                 .getAttribute(DECORATOR_ATTRIBUTE_NAME);
-        if (forRuntimeClass != null && !"".equals(forRuntimeClass.trim())){ //$NON-NLS-1$
+        if (forRuntimeClass != null && !"".equals(forRuntimeClass.trim())){
             addRuntimeClassMapping(data.getId(), forRuntimeClass);
         }
         return data;

@@ -52,7 +52,7 @@ public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainCont
 	 * return "HTML 4.0"
 	 */
 	protected String getURIDisplayLabel() {
-		return Messages.HTMLContentModelMetaDataTranslator_Label;
+		return "HTML 4.0";
 	}
 
 }

@@ -42,12 +42,12 @@ public class JSPContentModelMetaDataTranslator extends AbstractTagLibDomainConte
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDescription()
 	 */
 	protected String getURIDescription() {		
-		return Messages.JSPContentModelMetaDataTranslator_Desc; 
+		return "JSP Tags";
 	}
 
 	@Override
 	protected String getURIDisplayLabel() {		
-		return Messages.JSPContentModelMetaDataTranslator_Label;
+		return "JSP";
 	}
 
 }

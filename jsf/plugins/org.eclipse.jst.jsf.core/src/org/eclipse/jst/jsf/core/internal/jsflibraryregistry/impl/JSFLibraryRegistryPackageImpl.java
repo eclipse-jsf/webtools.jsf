@@ -31,7 +31,6 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
  * An implementation of the model <b>Package</b>.
  * <!-- end-user-doc -->
  * @generated
- * @deprecated
  */
 public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLibraryRegistryPackage {
 	/**
@@ -39,7 +38,7 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -427,83 +426,83 @@ public class JSFLibraryRegistryPackageImpl extends EPackageImpl implements JSFLi
 		pluginProvidedJSFLibraryEClass.getESuperTypes().add(this.getJSFLibrary());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(jsfLibraryRegistryEClass, JSFLibraryRegistry.class, "JSFLibraryRegistry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getJSFLibraryRegistry_DefaultImplementationID(), ecorePackage.getEString(), "DefaultImplementationID", "", 0, 1, JSFLibraryRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEReference(getJSFLibraryRegistry_JSFLibraries(), this.getJSFLibrary(), null, "JSFLibraries", null, 0, -1, JSFLibraryRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getJSFLibraryRegistry_PluginProvidedJSFLibraries(), this.getPluginProvidedJSFLibrary(), null, "PluginProvidedJSFLibraries", null, 0, -1, JSFLibraryRegistry.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(jsfLibraryRegistryEClass, JSFLibraryRegistry.class, "JSFLibraryRegistry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJSFLibraryRegistry_DefaultImplementationID(), ecorePackage.getEString(), "DefaultImplementationID", "", 0, 1, JSFLibraryRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJSFLibraryRegistry_JSFLibraries(), this.getJSFLibrary(), null, "JSFLibraries", null, 0, -1, JSFLibraryRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJSFLibraryRegistry_PluginProvidedJSFLibraries(), this.getPluginProvidedJSFLibrary(), null, "PluginProvidedJSFLibraries", null, 0, -1, JSFLibraryRegistry.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getJSFLibraryByID", 1, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEString(), "ID", 1, 1); //$NON-NLS-1$
+		EOperation op = addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getJSFLibraryByID", 1, 1);
+		addEParameter(op, ecorePackage.getEString(), "ID", 1, 1);
 
-		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getJSFLibrariesByName", 1, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEString(), "name", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getJSFLibrariesByName", 1, 1);
+		addEParameter(op, ecorePackage.getEString(), "name", 1, 1);
 
-		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getImplJSFLibraries", 1, 1); //$NON-NLS-1$
+		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getImplJSFLibraries", 1, 1);
 
-		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getNonImplJSFLibraries", 1, 1); //$NON-NLS-1$
+		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getNonImplJSFLibraries", 1, 1);
 
-		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getAllJSFLibraries", 1, 1); //$NON-NLS-1$
+		addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEEList(), "getAllJSFLibraries", 1, 1);
 
-		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEBoolean(), "addJSFLibrary", 1, 1); //$NON-NLS-1$
-		addEParameter(op, this.getJSFLibrary(), "library", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEBoolean(), "addJSFLibrary", 1, 1);
+		addEParameter(op, this.getJSFLibrary(), "library", 1, 1);
 
-		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEBoolean(), "removeJSFLibrary", 1, 1); //$NON-NLS-1$
-		addEParameter(op, this.getJSFLibrary(), "library", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryRegistryEClass, ecorePackage.getEBoolean(), "removeJSFLibrary", 1, 1);
+		addEParameter(op, this.getJSFLibrary(), "library", 1, 1);
 
-		addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getDefaultImplementation", 1, 1); //$NON-NLS-1$
+		addEOperation(jsfLibraryRegistryEClass, this.getJSFLibrary(), "getDefaultImplementation", 1, 1);
 
-		op = addEOperation(jsfLibraryRegistryEClass, null, "setDefaultImplementation"); //$NON-NLS-1$
-		addEParameter(op, this.getJSFLibrary(), "implementation", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryRegistryEClass, null, "setDefaultImplementation");
+		addEParameter(op, this.getJSFLibrary(), "implementation", 1, 1);
 
-		initEClass(jsfLibraryEClass, JSFLibrary.class, "JSFLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getJSFLibrary_ID(), ecorePackage.getEString(), "ID", "", 0, 1, JSFLibrary.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getJSFLibrary_Name(), ecorePackage.getEString(), "Name", null, 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getJSFLibrary_JSFVersion(), this.getJSFVersion(), "JSFVersion", "UNKNOWN", 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getJSFLibrary_Deployed(), ecorePackage.getEBoolean(), "Deployed", "true", 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getJSFLibrary_Implementation(), ecorePackage.getEBoolean(), "Implementation", "false", 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEReference(getJSFLibrary_ArchiveFiles(), this.getArchiveFile(), this.getArchiveFile_JSFLibrary(), "ArchiveFiles", null, 0, -1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(jsfLibraryEClass, JSFLibrary.class, "JSFLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJSFLibrary_ID(), ecorePackage.getEString(), "ID", "", 0, 1, JSFLibrary.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJSFLibrary_Name(), ecorePackage.getEString(), "Name", null, 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJSFLibrary_JSFVersion(), this.getJSFVersion(), "JSFVersion", "UNKNOWN", 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJSFLibrary_Deployed(), ecorePackage.getEBoolean(), "Deployed", "true", 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJSFLibrary_Implementation(), ecorePackage.getEBoolean(), "Implementation", "false", 1, 1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJSFLibrary_ArchiveFiles(), this.getArchiveFile(), this.getArchiveFile_JSFLibrary(), "ArchiveFiles", null, 0, -1, JSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(jsfLibraryEClass, ecorePackage.getEBoolean(), "containsArchiveFile", 1, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEString(), "fullPath", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryEClass, ecorePackage.getEBoolean(), "containsArchiveFile", 1, 1);
+		addEParameter(op, ecorePackage.getEString(), "fullPath", 1, 1);
 
-		addEOperation(jsfLibraryEClass, this.getJSFLibrary(), "getWorkingCopy", 1, 1); //$NON-NLS-1$
+		addEOperation(jsfLibraryEClass, this.getJSFLibrary(), "getWorkingCopy", 1, 1);
 
-		op = addEOperation(jsfLibraryEClass, null, "updateValues"); //$NON-NLS-1$
-		addEParameter(op, this.getJSFLibrary(), "otherLibrary", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryEClass, null, "updateValues");
+		addEParameter(op, this.getJSFLibrary(), "otherLibrary", 1, 1);
 
-		op = addEOperation(jsfLibraryEClass, ecorePackage.getEBoolean(), "copyTo", 1, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEString(), "baseDestLocation", 1, 1); //$NON-NLS-1$
+		op = addEOperation(jsfLibraryEClass, ecorePackage.getEBoolean(), "copyTo", 1, 1);
+		addEParameter(op, ecorePackage.getEString(), "baseDestLocation", 1, 1);
 
-		addEOperation(jsfLibraryEClass, ecorePackage.getEString(), "getLabel", 1, 1); //$NON-NLS-1$
+		addEOperation(jsfLibraryEClass, ecorePackage.getEString(), "getLabel", 1, 1);
 
-		initEClass(pluginProvidedJSFLibraryEClass, PluginProvidedJSFLibrary.class, "PluginProvidedJSFLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getPluginProvidedJSFLibrary_PluginID(), ecorePackage.getEString(), "pluginID", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getPluginProvidedJSFLibrary_Label(), ecorePackage.getEString(), "Label", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(pluginProvidedJSFLibraryEClass, PluginProvidedJSFLibrary.class, "PluginProvidedJSFLibrary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPluginProvidedJSFLibrary_PluginID(), ecorePackage.getEString(), "pluginID", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPluginProvidedJSFLibrary_Label(), ecorePackage.getEString(), "Label", null, 1, 1, PluginProvidedJSFLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(archiveFileEClass, ArchiveFile.class, "ArchiveFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getArchiveFile_RelativeToWorkspace(), ecorePackage.getEBoolean(), "RelativeToWorkspace", "true", 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-		initEAttribute(getArchiveFile_SourceLocation(), ecorePackage.getEString(), "SourceLocation", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getArchiveFile_RelativeDestLocation(), ecorePackage.getEString(), "RelativeDestLocation", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getArchiveFile_JSFLibrary(), this.getJSFLibrary(), this.getJSFLibrary_ArchiveFiles(), "JSFLibrary", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(archiveFileEClass, ArchiveFile.class, "ArchiveFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArchiveFile_RelativeToWorkspace(), ecorePackage.getEBoolean(), "RelativeToWorkspace", "true", 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArchiveFile_SourceLocation(), ecorePackage.getEString(), "SourceLocation", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArchiveFile_RelativeDestLocation(), ecorePackage.getEString(), "RelativeDestLocation", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArchiveFile_JSFLibrary(), this.getJSFLibrary(), this.getJSFLibrary_ArchiveFiles(), "JSFLibrary", null, 1, 1, ArchiveFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getName", 1, 1); //$NON-NLS-1$
+		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getName", 1, 1);
 
-		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getPath", 1, 1); //$NON-NLS-1$
+		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getPath", 1, 1);
 
-		addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "exists", 1, 1); //$NON-NLS-1$
+		addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "exists", 1, 1);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "equals", 1, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEJavaObject(), "object", 1, 1); //$NON-NLS-1$
+		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "equals", 1, 1);
+		addEParameter(op, ecorePackage.getEJavaObject(), "object", 1, 1);
 
-		addEOperation(archiveFileEClass, ecorePackage.getEInt(), "hashCode", 1, 1); //$NON-NLS-1$
+		addEOperation(archiveFileEClass, ecorePackage.getEInt(), "hashCode", 1, 1);
 
-		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "copyTo", 1, 1); //$NON-NLS-1$
-		addEParameter(op, ecorePackage.getEString(), "baseDestLocation", 1, 1); //$NON-NLS-1$
+		op = addEOperation(archiveFileEClass, ecorePackage.getEBoolean(), "copyTo", 1, 1);
+		addEParameter(op, ecorePackage.getEString(), "baseDestLocation", 1, 1);
 
-		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getResolvedSourceLocation", 1, 1); //$NON-NLS-1$
+		addEOperation(archiveFileEClass, ecorePackage.getEString(), "getResolvedSourceLocation", 1, 1);
 
 		// Initialize enums and add enum literals
-		initEEnum(jsfVersionEEnum, JSFVersion.class, "JSFVersion"); //$NON-NLS-1$
+		initEEnum(jsfVersionEEnum, JSFVersion.class, "JSFVersion");
 		addEEnumLiteral(jsfVersionEEnum, JSFVersion.UNKNOWN_LITERAL);
 		addEEnumLiteral(jsfVersionEEnum, JSFVersion.V1_1_LITERAL);
 		addEEnumLiteral(jsfVersionEEnum, JSFVersion.V1_2_LITERAL);

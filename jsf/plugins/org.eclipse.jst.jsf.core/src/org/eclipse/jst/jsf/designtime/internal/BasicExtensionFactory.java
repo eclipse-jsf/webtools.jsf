@@ -136,7 +136,7 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
             {
                 return true;
             }
-            final String flag = element.getAttribute("instancePerProject"); //$NON-NLS-1$
+            final String flag = element.getAttribute("instancePerProject");
             // must check for null for backward compatibility, since
             // this attribute wasn't part of the original.
             if (flag != null)
@@ -194,7 +194,7 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
                 catch (Exception e)
                 {
                     JSFCorePlugin.log(e,
-                            "Instantiating extension class for id: " + getId()); //$NON-NLS-1$
+                            "Instantiating extension class for id: " + getId());
                 }
             }
             return instance;
@@ -240,7 +240,7 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
                 catch (CoreException e)
                 {
                     JSFCorePlugin.log(e,
-                            "Instantiating extension class for id: " + getId()); //$NON-NLS-1$
+                            "Instantiating extension class for id: " + getId());
                 }
             }
             return _instance;
@@ -303,7 +303,7 @@ public class BasicExtensionFactory<EXTENSIONTYPE>
          */
         protected EXTENSIONTYPE createInstance() throws CoreException
         {
-            return (EXTENSIONTYPE) _element.createExecutableExtension("class"); //$NON-NLS-1$
+            return (EXTENSIONTYPE) _element.createExecutableExtension("class");
         }
     }
 }

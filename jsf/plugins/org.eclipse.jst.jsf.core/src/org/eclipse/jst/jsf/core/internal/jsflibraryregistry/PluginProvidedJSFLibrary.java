@@ -27,19 +27,18 @@ package org.eclipse.jst.jsf.core.internal.jsflibraryregistry;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getPluginProvidedJSFLibrary()
  * @model
  * @generated
- * @deprecated
  */
 public interface PluginProvidedJSFLibrary extends JSFLibrary{
 	/**
 	 * Separator between plugin id and JSF Library name
 	 */
-	public static final String ID_SEPARATOR = "$$"; //$NON-NLS-1$
+	public static final String ID_SEPARATOR = "$$";
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * Returns the value of the '<em><b>Plugin ID</b></em>' attribute.

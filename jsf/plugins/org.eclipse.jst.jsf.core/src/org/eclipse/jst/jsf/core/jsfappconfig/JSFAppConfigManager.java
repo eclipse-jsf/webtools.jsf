@@ -469,7 +469,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
                 if (propClass != null)
                 {
                     propClass = propClass.trim();
-                    if (!"".equals(propClass)) //$NON-NLS-1$
+                    if (!"".equals(propClass))
                     {
                         allPropertyResolvers.add(propClass);
                     }
@@ -516,7 +516,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
                 if (varClass != null)
                 {
                     varClass = varClass.trim();
-                    if (!"".equals(varClass)) //$NON-NLS-1$
+                    if (!"".equals(varClass))
                     {
                         allVariableResolvers.add(varClass);
                     }
@@ -585,8 +585,8 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		IPath pageFilePath = JSFAppConfigUtils.getWebContentFolderRelativePath(pageFile);
 		if (pageFilePath != null) {
 			String pageFileString = pageFilePath.toString();
-			if (!pageFileString.startsWith("/")) { //$NON-NLS-1$
-				pageFileString = "/" + pageFileString; //$NON-NLS-1$
+			if (!pageFileString.startsWith("/")) {
+				pageFileString = "/" + pageFileString;
 			}
 			List navigationRules = getNavigationRules();
 			Iterator itNavigationRules = navigationRules.iterator();

@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @see org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage#getJSFVersion()
  * @model
  * @generated
- * @deprecated
  */
 public final class JSFVersion extends AbstractEnumerator {
 	/**
@@ -32,7 +31,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2005 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2005 Oracle Corporation";
 
 	/**
 	 * The '<em><b>UNKNOWN</b></em>' literal value.
@@ -87,7 +86,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final JSFVersion UNKNOWN_LITERAL = new JSFVersion(UNKNOWN, "UNKNOWN", "UNKNOWN"); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final JSFVersion UNKNOWN_LITERAL = new JSFVersion(UNKNOWN, "UNKNOWN", "UNKNOWN");
 
 	/**
 	 * The '<em><b>V1 1</b></em>' literal object.
@@ -97,7 +96,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final JSFVersion V1_1_LITERAL = new JSFVersion(V1_1, "v1_1", "v1_1"); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final JSFVersion V1_1_LITERAL = new JSFVersion(V1_1, "v1_1", "v1_1");
 
 	/**
 	 * The '<em><b>V1 2</b></em>' literal object.
@@ -107,7 +106,7 @@ public final class JSFVersion extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final JSFVersion V1_2_LITERAL = new JSFVersion(V1_2, "v1_2", "v1_2"); //$NON-NLS-1$ //$NON-NLS-2$
+	public static final JSFVersion V1_2_LITERAL = new JSFVersion(V1_2, "v1_2", "v1_2");
 
 	/**
 	 * An array of all the '<em><b>JSF Version</b></em>' enumerators.

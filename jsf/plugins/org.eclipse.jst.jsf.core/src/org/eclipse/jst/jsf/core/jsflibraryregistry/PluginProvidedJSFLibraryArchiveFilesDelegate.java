@@ -26,7 +26,6 @@ import org.eclipse.jst.jsf.core.jsflibraryregistry.internal.PluginProvidedJSFLib
  *
  * <p><b>Provisional API - subject to change</b></p>
  * 
- * @deprecated
  */
 public abstract class PluginProvidedJSFLibraryArchiveFilesDelegate {
 	private PluginProvidedJSFLibraryCreationHelper2 helper;

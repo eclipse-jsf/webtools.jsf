@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ComponentTypeInfo_Impl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
+ * $Id: ComponentTypeInfo_Impl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -279,11 +279,11 @@ public class ComponentTypeInfo_Impl extends ClassTypeInfo_Impl implements Compon
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (componentType: "); //$NON-NLS-1$
+        result.append(" (componentType: ");
         result.append(componentType);
-        result.append(", componentFamily: "); //$NON-NLS-1$
+        result.append(", componentFamily: ");
         result.append(componentFamily);
-        result.append(", renderType: "); //$NON-NLS-1$
+        result.append(", renderType: ");
         result.append(renderType);
         result.append(')');
         return result.toString();

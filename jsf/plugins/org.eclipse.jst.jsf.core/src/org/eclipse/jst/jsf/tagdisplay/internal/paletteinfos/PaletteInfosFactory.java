@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: PaletteInfosFactory.java,v 1.2 2008/11/18 22:23:54 gkessler Exp $
+ * $Id: PaletteInfosFactory.java,v 1.1 2008/03/25 19:31:30 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos;
 
@@ -21,7 +21,7 @@ public interface PaletteInfosFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
+	String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**
 	 * The singleton instance of the factory.

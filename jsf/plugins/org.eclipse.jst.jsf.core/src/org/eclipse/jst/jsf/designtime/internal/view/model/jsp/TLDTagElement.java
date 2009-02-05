@@ -66,7 +66,7 @@ public class TLDTagElement extends TagElement
     @Override
     public String toString()
     {
-        return String.format("Tag: Tag Handler: name=%s, uri=%s, tagHandlerClassName=%s\n" //$NON-NLS-1$
+        return String.format("Tag: Tag Handler: name=%s, uri=%s, tagHandlerClassName=%s\n"
                 , getName(), getUri(), getTagHandlerClassName())
                 + constructAttributesString();
     }
@@ -76,7 +76,7 @@ public class TLDTagElement extends TagElement
      */
     protected String constructAttributesString()
     {
-        String attributes = ""; //$NON-NLS-1$
+        String attributes = "";
 
         for (final Iterator it = getAttributeHandlers().entrySet().iterator(); it.hasNext();)
         {
@@ -84,7 +84,7 @@ public class TLDTagElement extends TagElement
             final String name = (String) entry.getKey();
             final ITagAttributeHandler handler = (ITagAttributeHandler) entry.getValue();
 
-            attributes += String.format("\t\t\tAttribute: name=%s, customHandler=%s, propertyName=%s, isELAllowed=%b\n",  //$NON-NLS-1$
+            attributes += String.format("\t\t\tAttribute: name=%s, customHandler=%s, propertyName=%s, isELAllowed=%b\n", 
                     name, handler.getCustomHandler(), handler.getName(),
                     Boolean.valueOf(handler.isELAllowed()));
         }

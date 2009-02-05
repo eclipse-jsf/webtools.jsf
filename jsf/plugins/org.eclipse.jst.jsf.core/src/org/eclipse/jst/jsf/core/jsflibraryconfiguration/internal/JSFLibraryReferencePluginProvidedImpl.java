@@ -15,7 +15,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLib
 import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferencePluginProvided;
 
 /**
- * @deprecated
+ *
  */
 public class JSFLibraryReferencePluginProvidedImpl extends AbstractJSFLibraryReferenceImpl implements JSFLibraryReferencePluginProvided {
 
@@ -36,7 +36,7 @@ public class JSFLibraryReferencePluginProvidedImpl extends AbstractJSFLibraryRef
 	}
 
 	public String toString() {
-		StringBuffer buf = new StringBuffer("PluginProvided: ("); //$NON-NLS-1$
+		StringBuffer buf = new StringBuffer("PluginProvided: (");
 		buf.append(super.toString());
 		
 		return buf.toString();

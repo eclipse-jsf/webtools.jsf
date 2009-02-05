@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.metadataprocessors.IType;
  *
  */
 public class MetaDataEnabledFeatureRegistry{
-	private static final String EXTPTID = "MetaDataEnabledFeatures"; //$NON-NLS-1$
+	private static final String EXTPTID = "MetaDataEnabledFeatures";
 	private Map<String, List<IMetaDataEnabledFeatureExtension>> featuresMap;
 	private Map<String, Class> typeCacheMap;
 	private static MetaDataEnabledFeatureRegistry INSTANCE;
@@ -65,13 +65,13 @@ public class MetaDataEnabledFeatureRegistry{
 				IExtension ext = extensions[i];
 				for (int j=0;j < ext.getConfigurationElements().length;j++){
 					final String bundleId = ext.getConfigurationElements()[j].getContributor().getName();
-					final String id = ext.getConfigurationElements()[j].getAttribute("typeid"); //$NON-NLS-1$
-					final String klass = ext.getConfigurationElements()[j].getAttribute("class"); //$NON-NLS-1$
+					final String id = ext.getConfigurationElements()[j].getAttribute("typeid");
+					final String klass = ext.getConfigurationElements()[j].getAttribute("class");
 					registerFeature(bundleId, id, klass);
 				}
 			}
 		} catch (InvalidRegistryObjectException e) {
-			JSFCorePlugin.log(e, "Unable to read " + JSFCorePlugin.PLUGIN_ID + EXTPTID + " registry"); //$NON-NLS-1$ //$NON-NLS-2$
+			JSFCorePlugin.log(e, "Unable to read " + JSFCorePlugin.PLUGIN_ID + EXTPTID + " registry");
 		}
 	}
 	

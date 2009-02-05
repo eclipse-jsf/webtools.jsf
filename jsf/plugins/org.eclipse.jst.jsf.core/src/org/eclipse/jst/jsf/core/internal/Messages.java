@@ -24,6 +24,11 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
+	public static String JSFFacetInstallDataModelProvider_ClientImplValidationMsg;
+
+	/**
+	 * see messages.properties
+	 */
 	public static String JSFFacetInstallDataModelProvider_DupeJarValidation;
 
 	/**
@@ -92,6 +97,10 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFFacetInstallDataModelProvider_ValidateServletName;
+    /**
+     * see messages.properties
+     */
+	public static String JSFFacetInstallDataModelProvider_ValidateJSFImpl;
     /**
      * see messages.properties
      */
@@ -226,16 +235,8 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String RegistryMigrationStartupHandler_Launch_Migration_Doc_On_Confirm;
-	/**
-	 * see messages.properties
-	 */
-    public static String RegistryUpgradeCommitHandler_Text;
-	/**
-	 * see messages.properties
-	 */
-	public static String RegistryUpgradeCommitHandler_Title;
-
-	/**
+	
+    /**
      * see messages.properties
      */
 	public static String JSFFacet11_presetLabel;
@@ -264,11 +265,7 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
-	public static String JSFFacetUninstallDelegate_NonUpdateableWebXML;	
-	/**
-	 * see messages.properties
-	 */
-	public static String JSFLibraryValidator_MISSING_JSF_IMPLEMENTATION_CLASSES;
+	public static String JSFFacetUninstallDelegate_NonUpdateableWebXML;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

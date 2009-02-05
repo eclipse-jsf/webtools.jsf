@@ -36,7 +36,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
     protected String readableOperatorName() 
     {
-        return "logical-AND"; //$NON-NLS-1$
+        return "logical-AND";
     }
 
     protected boolean shortCircuitValue() {

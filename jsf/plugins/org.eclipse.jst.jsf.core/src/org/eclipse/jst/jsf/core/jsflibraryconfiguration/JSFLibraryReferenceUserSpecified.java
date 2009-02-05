@@ -15,8 +15,6 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
  * Represents an reference to a user specified JSF Library
  * 
  * <p><b>Provisional API - subject to change</b></p>
- * 
- * @deprecated
  */
 public interface JSFLibraryReferenceUserSpecified extends JSFLibraryReference {
 	//

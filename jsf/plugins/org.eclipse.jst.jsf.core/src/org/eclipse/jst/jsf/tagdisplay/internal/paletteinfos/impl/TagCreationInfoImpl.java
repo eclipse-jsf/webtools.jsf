@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationInfoImpl.java,v 1.2 2008/11/18 22:24:03 gkessler Exp $
+ * $Id: TagCreationInfoImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
@@ -45,7 +45,7 @@ public class TagCreationInfoImpl extends EObjectImpl implements TagCreationInfo 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -215,7 +215,7 @@ public class TagCreationInfoImpl extends EObjectImpl implements TagCreationInfo 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (template: "); //$NON-NLS-1$
+		result.append(" (template: ");
 		result.append(template);
 		result.append(')');
 		return result.toString();

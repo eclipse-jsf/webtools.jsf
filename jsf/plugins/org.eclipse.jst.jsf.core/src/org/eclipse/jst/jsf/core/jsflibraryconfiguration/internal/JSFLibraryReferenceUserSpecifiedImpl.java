@@ -16,7 +16,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceUserS
 
 /**
  * Implementation of a reference to a user specified JSF Library  
- * @deprecated
+ *
  */
 @SuppressWarnings("deprecation")
 public class JSFLibraryReferenceUserSpecifiedImpl extends AbstractJSFLibraryReferenceImpl implements JSFLibraryReferenceUserSpecified, JSFLibraryReferenceUserDefined{
@@ -34,9 +34,9 @@ public class JSFLibraryReferenceUserSpecifiedImpl extends AbstractJSFLibraryRefe
 	 * @see org.eclipse.jst.jsf.core.jsflibraryconfiguration.internal.AbstractJSFLibraryReferenceImpl#toString()
 	 */
 	public String toString() {
-		StringBuffer buf = new StringBuffer("UserSpecified: ("); //$NON-NLS-1$
+		StringBuffer buf = new StringBuffer("UserSpecified: (");
 		buf.append(super.toString());
-		buf.append(")"); //$NON-NLS-1$
+		buf.append(")");
 		
 		return buf.toString();
 	}

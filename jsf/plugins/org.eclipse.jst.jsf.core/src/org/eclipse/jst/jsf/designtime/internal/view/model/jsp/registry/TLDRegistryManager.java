@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
-import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
 
@@ -50,7 +49,7 @@ public final class TLDRegistryManager extends
                 if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
                 {
                     JSFCoreTraceOptions
-                            .log("TLDRegistryManager: Initializing TLDRegistryManager singleton"); //$NON-NLS-1$
+                            .log("TLDRegistryManager: Initializing TLDRegistryManager singleton");
                 }
                 INSTANCE = new TLDRegistryManager();
             }
@@ -70,7 +69,7 @@ public final class TLDRegistryManager extends
         }
         catch (CoreException e)
         {
-            JSFCorePlugin.log(e, "TLDRegistryManager failed to install save participant"); //$NON-NLS-1$
+            JSFCorePlugin.log(e, "TLDRegistryManager failed to install save participant");
         }
     }
 
@@ -80,7 +79,7 @@ public final class TLDRegistryManager extends
         if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
         {
             JSFCoreTraceOptions
-                    .log("TLDRegistryManager: creating new instance for " //$NON-NLS-1$
+                    .log("TLDRegistryManager: creating new instance for "
                             + project.toString());
         }
 
@@ -93,7 +92,7 @@ public final class TLDRegistryManager extends
         if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
         {
             JSFCoreTraceOptions
-                    .log("TLDRegistryManager: Acquired instance for " //$NON-NLS-1$
+                    .log("TLDRegistryManager: Acquired instance for "
                             + resource.toString());
         }
     }
@@ -103,7 +102,7 @@ public final class TLDRegistryManager extends
     {
         if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
         {
-            JSFCoreTraceOptions.log("TLDRegistryManager: Getting registry for " //$NON-NLS-1$
+            JSFCoreTraceOptions.log("TLDRegistryManager: Getting registry for "
                     + resource.toString());
         }
     }
@@ -130,16 +129,11 @@ public final class TLDRegistryManager extends
             }
         }
 
-        @Override
-        public boolean isInstance(IProject project)
-        {
-           return getGlobalManager().isInstance(project);
-        }
-
         public String getDisplayName()
         {
-            return Messages.TLDRegistryManager_DisplayName;
+            return "JSP Registry Factory";
         }
+
     }
 
     private class MyWorkspaceSaveParticipant implements ISaveParticipant
@@ -148,7 +142,7 @@ public final class TLDRegistryManager extends
         {
             if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
             {
-                JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saving: Kind="+context.getKind()); //$NON-NLS-1$
+                JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saving: Kind="+context.getKind());
             }
             try
             {
@@ -171,7 +165,7 @@ public final class TLDRegistryManager extends
             catch (ManagedObjectException moe)
             {
                 throw new CoreException(new Status(IStatus.ERROR,
-                        JSFCorePlugin.PLUGIN_ID, "Couldn't commit workspace", //$NON-NLS-1$
+                        JSFCorePlugin.PLUGIN_ID, "Couldn't commit workspace",
                         moe));
             }
         }
@@ -181,7 +175,7 @@ public final class TLDRegistryManager extends
         {
             if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
             {
-                JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saveProject: Project="+project.toString()); //$NON-NLS-1$
+                JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saveProject: Project="+project.toString());
             }
 
             // check that there is already instance -- don't do anything if there
@@ -192,7 +186,7 @@ public final class TLDRegistryManager extends
                         .getInstance(project);
                 if (JSFCoreTraceOptions.TRACE_TLDREGISTRYMANAGER)
                 {
-                    JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saveProject: calling checkpoint on registry: "+registry.toString()); //$NON-NLS-1$
+                    JSFCoreTraceOptions.log("MyWorkspaceSaveParticipant.saveProject: calling checkpoint on registry: "+registry.toString());
                 }
 
                 registry.checkpoint();

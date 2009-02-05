@@ -26,7 +26,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         NoDivArithmeticBinaryOperator 
 {
 
-    private static final String SUBTRACTION = "subtraction"; //$NON-NLS-1$
+    private static final String SUBTRACTION = "subtraction";
 
     SubtractArithmeticBinaryOperator(DiagnosticFactory diagnosticFactory) {
         super(diagnosticFactory);

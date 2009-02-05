@@ -45,7 +45,7 @@ public final class MetaDataEnabledProcessingFactory {
 	 * Name of property in annotation file to use when applying a runtime type
 	 * to an attribute value
 	 */
-	public static final String ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME = "attribute-value-runtime-type"; //$NON-NLS-1$
+	public static final String ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME = "attribute-value-runtime-type";
 
 	/**
 	 * @return singleton instance
@@ -95,7 +95,7 @@ public final class MetaDataEnabledProcessingFactory {
 					.getWorkspaceContextResolver(sdContext);
 			_project = resolver != null ? resolver.getProject() : null;
 		}
-		String _elem = elementName + "/" + attributeName; //$NON-NLS-1$
+		String _elem = elementName + "/" + attributeName;
 		String _uri = uri;
 		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
 				.createMetaDataModelContext(_project, _uri);

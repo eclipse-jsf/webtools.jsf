@@ -81,7 +81,7 @@ public class ViewMetadataLoader
         final ITaglibDomainMetaDataModelContext modelContext = createMetadataContext(tagId
                 .getUri());
         final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
-                modelContext, tagId.getTagName()+"/"+name); //$NON-NLS-1$
+                modelContext, tagId.getTagName()+"/"+name);
         if (entity != null)
         {
             final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(

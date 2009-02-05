@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagToViewObjectMappingImpl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
+ * $Id: TagToViewObjectMappingImpl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -54,7 +54,7 @@ public class TagToViewObjectMappingImpl extends EObjectImpl implements TagToView
      * @generated
      * @ordered
      */
-    protected static final String MIN_JSF_VERSION_EDEFAULT = "1.1"; //$NON-NLS-1$
+    protected static final String MIN_JSF_VERSION_EDEFAULT = "1.1";
 
     /**
      * The cached value of the '{@link #getMinJSFVersion() <em>Min JSF Version</em>}' attribute.
@@ -74,7 +74,7 @@ public class TagToViewObjectMappingImpl extends EObjectImpl implements TagToView
      * @generated
      * @ordered
      */
-    protected static final String MIN_LIBRARY_VERSION_EDEFAULT = ""; //$NON-NLS-1$
+    protected static final String MIN_LIBRARY_VERSION_EDEFAULT = "";
 
     /**
      * The cached value of the '{@link #getMinLibraryVersion() <em>Min Library Version</em>}' attribute.
@@ -309,6 +309,6 @@ public class TagToViewObjectMappingImpl extends EObjectImpl implements TagToView
     @Override
     public String toString()
     {
-        return "TagToViewObjectMapping: typeInfo="+getTypeInfo(); //$NON-NLS-1$
+        return "TagToViewObjectMapping: typeInfo="+getTypeInfo();
     }
 } //TagToViewObjectMappingImpl

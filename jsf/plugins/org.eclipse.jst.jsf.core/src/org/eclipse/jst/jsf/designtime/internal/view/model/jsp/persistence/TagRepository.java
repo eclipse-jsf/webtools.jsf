@@ -30,8 +30,8 @@ class TagRepository
 {
     private final static Object       GLOBAL_MASTER_INDEX_LOCK = new Object();
     private static MasterIndex        GLOBAL_MASTER_INDEX;
-    private final static String       PATH_TO_REPOSITORY       = "/.jsptagregistry"; //$NON-NLS-1$
-    private final static String       MASTER_INDEX_FILE_NAME   = "tagRegistryMasterIndex.idx"; //$NON-NLS-1$
+    private final static String       PATH_TO_REPOSITORY       = "/.jsptagregistry";
+    private final static String       MASTER_INDEX_FILE_NAME   = "tagRegistryMasterIndex.idx";
 
     private final IProject            _project;
     //private Map<String, SerializableTLDNamespace> _namespaces;
@@ -46,7 +46,7 @@ class TagRepository
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
-            JSFCoreTraceOptions.log("Loading tag repository for: " //$NON-NLS-1$
+            JSFCoreTraceOptions.log("Loading tag repository for: "
                     + _project.toString());
         }
 
@@ -57,17 +57,17 @@ class TagRepository
 
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
-            JSFCoreTraceOptions.log("Contents of repo for: " //$NON-NLS-1$
+            JSFCoreTraceOptions.log("Contents of repo for: "
                     + _project.toString());
             
             for (final Map.Entry<String, SerializableTLDNamespace> nsEntry : namespaces.entrySet())
             {
-                JSFCoreTraceOptions.log("\tNamespace: "+nsEntry.getKey()); //$NON-NLS-1$
+                JSFCoreTraceOptions.log("\tNamespace: "+nsEntry.getKey());
                 
                 SerializableTLDNamespace ns = nsEntry.getValue();
                 for (final ITagElement element : ns.getViewElements())
                 {
-                    JSFCoreTraceOptions.log("\t\tTag: "+element.toString()); //$NON-NLS-1$
+                    JSFCoreTraceOptions.log("\t\tTag: "+element.toString());
                 }
             }
         }
@@ -103,7 +103,7 @@ class TagRepository
                 if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                 {
                     JSFCoreTraceOptions
-                            .log("GLOBAL_MASTER_INDEX already exists for: " //$NON-NLS-1$
+                            .log("GLOBAL_MASTER_INDEX already exists for: "
                                     + _project.toString());
                 }
                 return GLOBAL_MASTER_INDEX;
@@ -124,12 +124,12 @@ class TagRepository
                 if (!masterIndexFile.createNewFile())
                 {
                     throw new IOException(
-                            "Could not create new master index file: " //$NON-NLS-1$
+                            "Could not create new master index file: "
                                     + masterIndexFile.toString());
                 }
                 if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                 {
-                    JSFCoreTraceOptions.log("Creating master index file for " //$NON-NLS-1$
+                    JSFCoreTraceOptions.log("Creating master index file for "
                             + _project.toString());
                 }
                 index.create(new SerializableVersion(1, 0, 0));
@@ -138,7 +138,7 @@ class TagRepository
             {
                 if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
                 {
-                    JSFCoreTraceOptions.log("Loading master index file for " //$NON-NLS-1$
+                    JSFCoreTraceOptions.log("Loading master index file for "
                             + _project.toString());
                 }
                 index.load(new SerializableVersion(1, 0, 0));
@@ -153,13 +153,13 @@ class TagRepository
     {
         if (JSFCoreTraceOptions.TRACE_JSPTAGPERSISTENCE)
         {
-            JSFCoreTraceOptions.log("Creating repo directory: " //$NON-NLS-1$
+            JSFCoreTraceOptions.log("Creating repo directory: "
                     + repoDir.getAbsolutePath());
         }
 
         if (!repoDir.mkdir())
         {
-            throw new IOException("Failed to create repo directory: " //$NON-NLS-1$
+            throw new IOException("Failed to create repo directory: "
                     + repoDir.getAbsolutePath());
         }
     }

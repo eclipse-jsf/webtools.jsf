@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: TagCreationTemplateImpl.java,v 1.2 2008/11/18 22:24:03 gkessler Exp $
+ * $Id: TagCreationTemplateImpl.java,v 1.1 2008/03/25 19:31:28 gkessler Exp $
  */
 package org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.impl;
 
@@ -37,7 +37,7 @@ public class TagCreationTemplateImpl extends EObjectImpl implements TagCreationT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
+	public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
 
 	/**
 	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' containment reference.

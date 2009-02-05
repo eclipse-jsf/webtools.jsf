@@ -21,7 +21,7 @@ public enum Severity
     ERROR 
     {
         public java.lang.String toString() {
-            return "error"; //$NON-NLS-1$
+            return "error";
         }
     }
     ,
@@ -31,7 +31,7 @@ public enum Severity
     WARNING
     {
         public java.lang.String toString() {
-            return "warning"; //$NON-NLS-1$
+            return "warning";
         }
     }
     , 
@@ -41,7 +41,7 @@ public enum Severity
     IGNORE
     {
         public java.lang.String toString() {
-            return "ignore"; //$NON-NLS-1$
+            return "ignore";
         }
     };
     
@@ -51,11 +51,11 @@ public enum Severity
      */
     public static Severity valueOfString(String value)
     {
-        if ("error".equals(value)) //$NON-NLS-1$
+        if ("error".equals(value))
         {
             return ERROR;
         }
-        else if ("warning".equals(value)) //$NON-NLS-1$
+        else if ("warning".equals(value))
         {
             return WARNING;
         }

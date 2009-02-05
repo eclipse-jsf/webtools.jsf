@@ -14,8 +14,6 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
  * Enumeration of JavaServer Faces Versions
  *
  * <p><b>Provisional API - subject to change</b></p>
- * 
- * @deprecated
  */
 public enum JSFVersion {
 	

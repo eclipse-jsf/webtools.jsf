@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagMappingImpl.java,v 1.2 2008/11/18 22:23:57 gkessler Exp $
+ * $Id: TagMappingImpl.java,v 1.1 2008/05/12 17:42:20 cbateman Exp $
  */
 package org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.impl;
 
@@ -283,9 +283,9 @@ public class TagMappingImpl extends EObjectImpl implements TagMapping
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (customConversionFactoryId: "); //$NON-NLS-1$
+        result.append(" (customConversionFactoryId: ");
         result.append(customConversionFactoryId);
-        result.append(", beanMappedProperties: "); //$NON-NLS-1$
+        result.append(", beanMappedProperties: ");
         result.append(beanMappedProperties);
         result.append(')');
         return result.toString();
