@@ -35,13 +35,14 @@ public class BasicTabbedPropertyPageTests extends BaseTestCase {
 		HTMLEditor ed = null;
 		try {			
 			
-			IFile file = getJSPFile("/testdata/propertypages/testPropertyPage.jsp.data", "/testPropertyPage.jsp");
+			final IFile file = getJSPFile("/testdata/propertypages/testPropertyPage.jsp.data", "/testPropertyPage.jsp");
 			assertNotNull(file);
-			ed = openHTMLEditor(file);	
-			assertNotNull(ed);
+			
 			IViewPart view = showPropertiesView();
 			assertNotNull(view);
-		                
+			ed = openHTMLEditor(file);	
+			assertNotNull(ed);
+					
 			Node node = getNode(file, 425);
             assertTrue(node instanceof Element);
             assertEquals("tagWithQuickEditMD", node.getLocalName()); 
@@ -49,7 +50,7 @@ public class BasicTabbedPropertyPageTests extends BaseTestCase {
             ISelection sel = getSelection(node);
             view.getViewSite().getSelectionProvider().setSelection(sel);
             ISelection selection = view.getViewSite().getSelectionProvider().getSelection();
-            assertEquals(selection, sel);                        
+            assertEquals(sel, selection);                        
             
 		} catch(Exception ex) {
 			ex.printStackTrace();
@@ -59,6 +60,7 @@ public class BasicTabbedPropertyPageTests extends BaseTestCase {
 				closeEditor(ed);
 		}
 	}
+	
 	
 	/**
 	 * A little white-box testing covering basic sanity of the framework 
@@ -311,7 +313,5 @@ public class BasicTabbedPropertyPageTests extends BaseTestCase {
 			}
 		}
 	}
-	
-
 	
 }
