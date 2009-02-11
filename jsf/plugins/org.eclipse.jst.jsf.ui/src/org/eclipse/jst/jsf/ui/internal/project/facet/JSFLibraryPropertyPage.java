@@ -6,6 +6,10 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
+/**
+ * TODO
+ *
+ */
 public final class JSFLibraryPropertyPage
 
     extends FacetLibraryPropertyPage
