@@ -91,7 +91,7 @@ public final class CreationData
     protected static String getPrefix(String uri, IDOMModel model,
             String suggested) {
         // TODO: this shouldn't really add to the document
-        if (ITLDConstants.URI_HTML.equalsIgnoreCase(uri)
+        if (uri==null || ITLDConstants.URI_HTML.equalsIgnoreCase(uri)
                 || ITLDConstants.URI_JSP.equalsIgnoreCase(uri)
                 || CMDocType.JSP11_DOC_TYPE.equalsIgnoreCase(uri)) {
             return null;

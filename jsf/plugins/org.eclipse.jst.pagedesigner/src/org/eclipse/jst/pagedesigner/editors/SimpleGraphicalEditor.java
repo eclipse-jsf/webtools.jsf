@@ -15,7 +15,12 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalViewer;
@@ -28,6 +33,7 @@ import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
+import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -35,6 +41,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.actions.container.ContainerActionGroup;
 import org.eclipse.jst.pagedesigner.actions.menuextension.CustomedContextMenuActionGroup;
@@ -54,6 +61,8 @@ import org.eclipse.jst.pagedesigner.editors.actions.RelatedViewActionGroup;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizer;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRootFactory;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
+import org.eclipse.jst.pagedesigner.editors.palette.IPaletteFactory;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.jsp.core.internal.pagevar.DocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.PageVariableAdapterFactory;
 import org.eclipse.jst.pagedesigner.parts.CSSStyleAdapterFactory;
@@ -91,7 +100,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette implements
 		IDesignViewer, IDocumentSelectionMediator {
 
-    private HTMLEditor _delegate;
+	private HTMLEditor _delegate;
 
 	private IHTMLGraphicalViewer _viewer;
 
@@ -99,6 +108,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 
 	/** Palette component, holding the tools and shapes. */
 	private PaletteRoot _palette;
+	
+	private PaletteViewerPage _paletteViewerPage;
 
 	private SelectionSynchronizer _synchronizer = new SelectionSynchronizer(
 			this);
@@ -135,6 +146,10 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		}
 	};
 
+	private PaletteViewerProvider _paletteViewerProvider;
+
+	protected IPaletteFactory _paletteViewerPageFactory;
+
 	/**
 	 * @param delegate
 	 * @param editdomain
@@ -142,7 +157,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	public SimpleGraphicalEditor(HTMLEditor delegate,
 			DefaultEditDomain editdomain) {
 		_delegate = delegate;
-		this.setEditDomain(editdomain);
+		initPaletteFactory();
+		this.setEditDomain(editdomain);		
 	}
 
 	protected void createGraphicalViewer(Composite parent) {
@@ -199,7 +215,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		_viewer.addDropTargetListener(new PDTemplateTransferDropTargetListener(
 				_viewer));
 		_viewer.addDropTargetListener(new ResouceDropTargetListener(_viewer));
-
+		
 		// add double click support.
 		_viewer.getControl().addMouseListener(new MouseAdapter() {
 			public void mouseDoubleClick(MouseEvent e) {
@@ -456,38 +472,74 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	 */
 	protected PaletteRoot getPaletteRoot() {
 		if (_palette == null) {
-			_palette = DesignerPaletteRootFactory
-					.createPaletteRoot(getCurrentProject(_delegate.getEditorInput()));
+			if (_paletteViewerPageFactory != null) {
+	            _palette = _paletteViewerPageFactory.createPaletteRoot(_delegate.getEditorInput());
+	        } 
+            if (_palette == null) {
+            	_palette = DesignerPaletteRootFactory
+            		.createPaletteRoot(getCurrentProject(_delegate.getEditorInput()));
+            }
 		}
 		return _palette;
 
 	}
 
-	/*
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette#createPaletteViewerProvider()
 	 */
-	protected PaletteViewerProvider createPaletteViewerProvider() {
-		return new DesignerPaletteViewerProvider(getEditDomain()) {
-			protected void configurePaletteViewer(PaletteViewer viewer) {
-				super.configurePaletteViewer(viewer);
-				viewer.setCustomizer(new DesignerPaletteCustomizer());
+    protected PaletteViewerProvider createPaletteViewerProvider() {
+    	if (_paletteViewerProvider == null) {
+    		if (_paletteViewerPageFactory != null) {
+    			_paletteViewerProvider = _paletteViewerPageFactory.createPaletteViewerProvider(getEditDomain());
+    		}
+    		if (_paletteViewerProvider == null) {//if still null
+    			return new DesignerPaletteViewerProvider(getEditDomain()) {
+    				protected void configurePaletteViewer(PaletteViewer viewer) {
+    					super.configurePaletteViewer(viewer);
+    					viewer.setCustomizer(new DesignerPaletteCustomizer());
 
-				// create a drag source listener for this palette viewer
-				// together with an appropriate transfer drop target listener,
-				// this will enable
-				// model element creation by dragging a
-				// CombinatedTemplateCreationEntries
-				// from the palette into the editor
-				// @see ShapesEditor#createTransferDropTargetListener()
-				viewer
-						.addDragSourceListener(new DesignerTemplateTransferDragSourceListener(
-								viewer));
-			}
-		};
-	}
+    					// create a drag source listener for this palette viewer
+    					// together with an appropriate transfer drop target listener,
+    					// this will enable
+    					// model element creation by dragging a
+    					// CombinatedTemplateCreationEntries
+    					// from the palette into the editor
+    					// @see ShapesEditor#createTransferDropTargetListener()
+    					viewer
+    							.addDragSourceListener(new DesignerTemplateTransferDragSourceListener(
+    									viewer));
+    				}
+    			};
+    		}
+    	}
+    	return _paletteViewerProvider;
+    }
 
+    protected PaletteViewerPage createPaletteViewerPage() {
+        if (_paletteViewerPageFactory != null) {
+        	_paletteViewerPage = _paletteViewerPageFactory.createPaletteViewerPage(createPaletteViewerProvider());
+        } 
+        if (_paletteViewerPage == null) {
+            DefaultEditDomain editDomain = getEditDomain();
+            PaletteItemManager manager = PaletteItemManager
+                    .getInstance(getCurrentProject(getEditorInput()));
+            manager.reset();
+            PaletteRoot paletteRoot = getPaletteRoot();
+            editDomain.setPaletteRoot(paletteRoot);
+            
+//            _paletteViewerPage = (PaletteViewerPage) super.getAdapter(PalettePage.class);
+            // if possible, try to use the 
+            if (_paletteViewerPage == null)
+            {
+                PaletteViewerProvider provider = getPaletteViewerProvider2();
+                _paletteViewerPage = new PaletteViewerPage(provider);
+            }
+        }
+    	return _paletteViewerPage;
+    }
+    
     PaletteViewerProvider getPaletteViewerProvider2()
     {
         return getPaletteViewerProvider();
@@ -739,4 +791,69 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
             PageDesignerActionConstants.addStandardSelectActionGroups(selectSubMenu);
         }
     }
+
+    
+    public PaletteViewerPage getPaletteViewerPage() {
+        if (_paletteViewerPage == null) {
+        	_paletteViewerPage = createPaletteViewerPage();
+		}
+		return _paletteViewerPage;
+	}
+
+    protected IPaletteFactory initPaletteFactory()
+    {   	
+    	if (_paletteViewerPageFactory == null) {
+	        //List<IElementEditFactory> result = new ArrayList<IElementEditFactory>();
+	        IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
+	                .getExtensionPoint(PDPlugin.getPluginId(),
+	                        IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
+	        IExtension[] extensions = extensionPoint.getExtensions();
+	
+	        for (int i = 0; i < extensions.length; i++)
+	        {
+	            IExtension ext = extensions[i];
+	            IConfigurationElement[] elementEditElement = ext
+	                    .getConfigurationElements();
+	
+	            for (int j = 0; j < elementEditElement.length; j++)
+	            {
+	                final IConfigurationElement element = elementEditElement[j];
+	                if (element.getName().equals(
+	                        IJMTConstants.PALETTE_FACTORY))
+	                {
+	                    elementEditElement[j].getAttribute("class"); //$NON-NLS-1$
+	                    Object obj;
+	                    try
+	                    {
+	                        obj = elementEditElement[j]
+	                                .createExecutableExtension("class"); //$NON-NLS-1$
+	
+	                        // TODO: we need a policy based solution here,
+	                        // but this will do for now
+	                        if (obj instanceof IPaletteFactory)
+	                        {
+	                        	_paletteViewerPageFactory = (IPaletteFactory) obj;
+	                        }
+	                    } 
+	                    catch (CoreException e)
+	                    {
+	                        PDPlugin.log("Problem loading element edit extension for "+element.toString(), e); //$NON-NLS-1$
+	                    }
+	                }
+	            }
+	        }
+    	}
+        return _paletteViewerPageFactory;
+    }
+//    
+//    @Override
+//	public Object getAdapter(Class type) {
+//    	if (type == PalettePage.class) {
+//    		return getPaletteViewerPage();
+//    	}
+//		return super.getAdapter(type);
+//	}
+
+
+
 }

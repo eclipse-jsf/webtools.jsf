@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -28,8 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.DefaultEditDomain;
-import org.eclipse.gef.palette.PaletteRoot;
-import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
 import org.eclipse.jface.text.IDocument;
@@ -44,7 +41,6 @@ import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceMouseTrackAdapter;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.IDocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
@@ -956,26 +952,18 @@ public final class HTMLEditor extends MultiPageEditorPart implements
         }
         return null;
     }
-
-	private PaletteViewerPage getPaletteViewerPage() {
-		if (null == _paletteViewerPage) {
-			DefaultEditDomain editDomain = getEditDomain();
-			PaletteItemManager manager = PaletteItemManager
-					.getInstance(getCurrentProject(getEditorInput()));
-			manager.reset();
-            PaletteRoot paletteRoot = _designViewer.getPaletteRoot();
-            editDomain.setPaletteRoot(paletteRoot);
-            
-            _paletteViewerPage = (PaletteViewerPage) _designViewer.getAdapter(PalettePage.class);
-            // if possible, try to use the 
-            if (_paletteViewerPage == null)
-            {
-                PaletteViewerProvider provider = _designViewer.getPaletteViewerProvider2();
-                _paletteViewerPage = new PaletteViewerPage(provider);
-            }
-		}
-		return _paletteViewerPage;
-	}
+       
+    /**
+     * @return PaletteViewerPage
+     */
+    private PaletteViewerPage getPaletteViewerPage()
+    {
+        if (_paletteViewerPage == null)
+        {
+            _paletteViewerPage = _designViewer.createPaletteViewerPage();
+        }
+        return _paletteViewerPage;
+    }
 
 	/**
 	 * @return the edit domain
@@ -1071,16 +1059,6 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 */
 	public int getDesignerMode() {
 		return this._mode;
-	}
-
-	private IProject getCurrentProject(IEditorInput input) {
-		IProject curProject = null;
-		IFile inputFile = null;
-		if (input instanceof IFileEditorInput) {
-			inputFile = ((IFileEditorInput) input).getFile();
-			curProject = inputFile.getProject();
-		}
-		return curProject;
 	}
 
 	public IEditorPart getActiveEditor() {

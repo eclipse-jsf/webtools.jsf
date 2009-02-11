@@ -50,7 +50,9 @@ public class TagToolPaletteEntry extends ToolEntry {
 	 * @return default prefix 
 	 */
 	public String getDefaultPrefix(){
-		return ((TaglibPaletteDrawer)getParent()).getDefaultPrefix();
+		if (getParent() instanceof TaglibPaletteDrawer)
+			return ((TaglibPaletteDrawer)getParent()).getDefaultPrefix();
+		return ""; //$NON-NLS-1$
 	}
 
 	/**

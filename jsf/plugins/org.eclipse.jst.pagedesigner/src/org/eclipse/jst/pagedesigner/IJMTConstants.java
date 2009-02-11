@@ -99,4 +99,9 @@ public interface IJMTConstants {
 	 * extension for property page factory
 	 */
 	public static final String PROPERTY_PAGE_FACTORY = "propertyPageFactory"; //$NON-NLS-1$
+	/**
+	 * extension for palette viewer page factory
+	 */
+	public static final String PALETTE_FACTORY = "paletteFactory"; //$NON-NLS-1$
+	
 }

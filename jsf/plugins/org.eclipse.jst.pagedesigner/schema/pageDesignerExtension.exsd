@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.jst.pagedesigner">
+<schema targetNamespace="org.eclipse.jst.pagedesigner" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
          <meta.schema plugin="org.eclipse.jst.pagedesigner" id="pageDesignerExtension" name="Web Page Editor Extension"/>
@@ -11,6 +11,11 @@
    </annotation>
 
    <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
       <complexType>
          <sequence>
             <element ref="localDropHandler" minOccurs="0" maxOccurs="unbounded"/>
@@ -21,6 +26,7 @@
             <element ref="tagAttributeCellEditorFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="tagTransformOperation" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="propertyPageFactory" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="paletteFactory" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -192,9 +198,24 @@ The exception to this rule is that if the reference is not plugin-qualified, the
                <documentation>
                   Provisional API.  If an extension point is found in the system, the Web Page Editor will use the factory implementation to provide its property page.
                </documentation>
-               <appinfo>
+               <appInfo>
                   <meta.attribute kind="java" basedOn="org.eclipse.jst.pagedesigner.editors.AbstractPropertySheetPageFactory:"/>
-               </appinfo>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="paletteFactory">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Provisional API.  If an extension point is found in the system, the Web Page Editor will use the factory implementation to provide its paletteViewerPage
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.pagedesigner.editors.palette.AbstractPaletteFactory:"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
