@@ -18,7 +18,6 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryReferenceUserS
  * Implementation of a reference to a user specified JSF Library  
  * @deprecated
  */
-@SuppressWarnings("deprecation")
 public class JSFLibraryReferenceUserSpecifiedImpl extends AbstractJSFLibraryReferenceImpl implements JSFLibraryReferenceUserSpecified, JSFLibraryReferenceUserDefined{
 	/**
 	 * @param libRef of type {@link JSFLibraryInternalReference}

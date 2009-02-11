@@ -27,6 +27,7 @@ import org.eclipse.wst.common.project.facet.core.events.IPrimaryRuntimeChangedEv
  * 
  * @since JSF 1.0.1
  */
+@SuppressWarnings("deprecation")
 public class JSFFacetPrimaryRuntimeChangedListener implements IFacetedProjectListener {
 
 	/* (non-Javadoc)

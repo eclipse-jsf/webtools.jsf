@@ -66,7 +66,6 @@ import org.eclipse.jst.jsf.core.jsflibraryregistry.internal.PluginProvidedJSFLib
  * @author Justin Chen, etc. - Oracle
  * @deprecated
  */
-@SuppressWarnings("deprecation")
 public class JSFLibraryRegistryUtil {
 	private static JSFLibraryRegistryUtil instance = null;	
 	

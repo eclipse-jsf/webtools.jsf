@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationH
 /**
  * JSF Library classpath container
  */
+@SuppressWarnings("deprecation")
 public class JSFLibraryClasspathContainer implements IClasspathContainer {
 	private static final String NON_IMPL_DESC = Messages.JSFLibraryClasspathContainer_NON_IMPL_LIBRARY;
 	private static final String IMPL_DESC = Messages.JSFLibraryClasspathContainer_IMPL_LIBRARY;

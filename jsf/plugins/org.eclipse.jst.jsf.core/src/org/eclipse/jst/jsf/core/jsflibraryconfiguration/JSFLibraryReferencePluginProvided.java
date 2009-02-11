@@ -17,7 +17,6 @@ package org.eclipse.jst.jsf.core.jsflibraryconfiguration;
  * 
  * @deprecated
  */
-@SuppressWarnings("deprecation")
 public interface JSFLibraryReferencePluginProvided extends JSFLibraryReferenceUserSpecified, JSFLibraryReferenceUserDefined {
 	/**
 	 * @return plugin id.  May return null if plugin id cannot be determined.  

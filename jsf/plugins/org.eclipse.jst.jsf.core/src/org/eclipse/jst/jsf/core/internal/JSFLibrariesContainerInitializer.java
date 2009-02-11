@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.core.jsflibraryconfiguration.JSFLibraryConfigurationH
 /**
  * Initialize JSF Libraries as classpath containers
  */
+@SuppressWarnings("deprecation")
 public class JSFLibrariesContainerInitializer extends
 		ClasspathContainerInitializer {
 

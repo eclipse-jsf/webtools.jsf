@@ -32,6 +32,7 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 /**
  * 
  */
+@SuppressWarnings("deprecation")
 public abstract class JSFUtils {
 	/**
 	 * The default name for the Faces servlet

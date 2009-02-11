@@ -47,6 +47,7 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
  * 
  * @author Gerry Kessler - Oracle
  */
+@SuppressWarnings("deprecation")
 public class JSFFacetInstallDataModelProvider extends
 		FacetInstallDataModelProvider implements
 		IJSFFacetInstallDataModelProperties {
@@ -204,6 +205,7 @@ public class JSFFacetInstallDataModelProvider extends
 
 		return OK_STATUS;
 	}
+	
 	
 	private IStatus validateClasspath(){
 		Set jars = new HashSet();

@@ -27,13 +27,14 @@ import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
  * @author cbateman
  *
  */
+@SuppressWarnings("deprecation")
 public class RegistryUpgradeCommitHandler
 {
 
     /**
      * handle migration
      */
-    public static void commitMigrationIfNecessary()
+	public static void commitMigrationIfNecessary()
     {
         JSFLibraryRegistryUpgradeUtil upgradeUtil =
             JSFLibraryRegistryUpgradeUtil.getInstance();
