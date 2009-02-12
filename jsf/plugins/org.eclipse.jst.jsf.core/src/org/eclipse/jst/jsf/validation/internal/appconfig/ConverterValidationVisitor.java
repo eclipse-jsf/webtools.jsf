@@ -64,7 +64,7 @@ public class ConverterValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.convert.Converter";
+            return "javax.faces.convert.Converter"; //$NON-NLS-1$
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {
