@@ -149,13 +149,25 @@ public class DTAppManagerUtil
         {
             return null;
         }
+        final IResource resource = resolver.getResource();
+        if (resource != null)
+        {
+            return getViewRootHandle(resource);
+        }
+        return null;
+    }
 
+    /**
+     * @param res 
+     * @return the view root handle for the resource
+     */
+    public static IViewRootHandle getViewRootHandle(final IResource res)
+    {
         final DesignTimeApplicationManager manager = DesignTimeApplicationManager
-                .getInstance(project);
+                .getInstance(res.getProject());
 
         if (manager != null)
         {
-            final IResource res = resolver.getResource();
             if (res instanceof IFile)
             {
                 final DTFacesContext facesContext = manager

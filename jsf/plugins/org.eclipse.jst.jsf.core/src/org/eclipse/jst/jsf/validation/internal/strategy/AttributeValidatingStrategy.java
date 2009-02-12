@@ -48,7 +48,6 @@ import org.eclipse.jst.jsf.core.internal.region.Region2ElementAdapter;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
-import org.eclipse.jst.jsf.designtime.internal.view.IViewRootHandle;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
@@ -103,8 +102,7 @@ AbstractXMLViewValidationStrategy
      * 
      * @param validationContext
      */
-    public AttributeValidatingStrategy(
-            final JSFValidationContext validationContext)
+    public AttributeValidatingStrategy(final JSFValidationContext validationContext)
     {
         super(ID, DISPLAY_NAME);
 
@@ -125,6 +123,7 @@ AbstractXMLViewValidationStrategy
     {
         if (domAdapter instanceof AttrDOMAdapter)
         {
+            final long curTime = System.nanoTime();
             final Region2AttrAdapter attrAdapter = (Region2AttrAdapter) domAdapter;
             // check that this is attribute value region - 221722
             if (attrAdapter.getAttributeValueRegion() != null)
@@ -138,6 +137,12 @@ AbstractXMLViewValidationStrategy
                         .getStart());
 
                 validateAttributeValue(context, attrAdapter);
+            }
+            if (DEBUG)
+            {
+                System.out.println(String.format("Validation for attribute: %s took %d" //$NON-NLS-1$
+                    , domAdapter.toString()
+                    , Long.valueOf(System.nanoTime()-curTime)));
             }
         }
     }
@@ -306,8 +311,8 @@ AbstractXMLViewValidationStrategy
                     final ITextRegion vblOpen = regionList.get(1);
 
                     if ((openQuote.getType() == DOMJSPRegionContexts.XML_TAG_ATTRIBUTE_VALUE_DQUOTE || openQuote
-                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE || 
-                            openQuote.getType() == DOMJSPRegionContexts.JSP_TAG_ATTRIBUTE_VALUE_DQUOTE)
+                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE /*|| 
+                            openQuote.getType() == DOMJSPRegionContexts.JSP_TAG_ATTRIBUTE_VALUE_DQUOTE*/)
                             && vblOpen.getType() == DOMJSPRegionContexts.JSP_VBL_OPEN)
                     {
                         boolean foundClosingQuote = false;
@@ -410,11 +415,11 @@ AbstractXMLViewValidationStrategy
      * @return true if alternative type comparison (i.e. post-conversion) passes
      */
     private CompositeType maybeAddAlternativeTypes(
-            final CompositeType expectedType,
-            final CompositeType exprTypes,
+            final CompositeType expectedType, final CompositeType exprTypes,
             final Region2ElementAdapter elementAdapter,
             final Region2AttrAdapter attrAdapter)
     {
+        final long curTime = System.nanoTime();
         if (disableAlternativeTypes())
         {
             return expectedType;
@@ -422,53 +427,57 @@ AbstractXMLViewValidationStrategy
 
         final IStructuredDocumentContext context = elementAdapter
                 .getDocumentContext();
-        final IViewRootHandle viewRootHandle = DTAppManagerUtil
-                .getViewRootHandle(context);
-        if (viewRootHandle != null)
+        final DTUIViewRoot viewRoot = _validationContext.getViewRootHandle().getCachedViewRoot();
+        final IAdaptable serviceAdaptable = viewRoot.getServices();
+        final XMLViewObjectMappingService mappingService = (XMLViewObjectMappingService) serviceAdaptable
+                .getAdapter(XMLViewObjectMappingService.class);
+        if (mappingService != null)
         {
-            // ok to call update view root here since validation not called
-            // on the UI thread.
-            final DTUIViewRoot viewRoot = viewRootHandle.updateViewRoot();
-            final IAdaptable serviceAdaptable = viewRoot.getServices();
-            final XMLViewObjectMappingService mappingService = (XMLViewObjectMappingService) serviceAdaptable
-                    .getAdapter(XMLViewObjectMappingService.class);
-            if (mappingService != null)
+            final ElementData elementData = XMLViewObjectMappingService
+                    .createElementData(elementAdapter.getNamespace(),
+                            elementAdapter.getLocalName(), context,
+                            Collections.EMPTY_MAP);
+            final ViewObject viewObject = mappingService
+                    .findViewObject(elementData);
+            // if the corresponding view object is a valueholder, then
+            // we need to see if you think there a valid conversion
+            // available
+            if (viewObject instanceof ComponentInfo
+                    && ((ComponentInfo) viewObject).getComponentTypeInfo() != null
+                    && ((ComponentInfo) viewObject).getComponentTypeInfo()
+                            .isInstanceOf(
+                                    ComponentFactory.INTERFACE_VALUEHOLDER))
             {
-                final ElementData elementData = XMLViewObjectMappingService
-                        .createElementData(elementAdapter.getNamespace(),
-                                elementAdapter.getLocalName(), context,
-                                Collections.EMPTY_MAP);
-                final ViewObject viewObject = mappingService
-                        .findViewObject(elementData);
-                // if the corresponding view object is a valueholder, then
-                // we need to see if you think there a valid conversion
-                // available
-                if (viewObject instanceof ComponentInfo
-                        && ((ComponentInfo) viewObject).getComponentTypeInfo() != null
-                        && ((ComponentInfo) viewObject).getComponentTypeInfo()
-                                .isInstanceOf(
-                                        ComponentFactory.INTERFACE_VALUEHOLDER))
+                final ComponentInfo component = (ComponentInfo) viewObject;
+                // get the original elementData
+                final ElementData mappedElementData = mappingService
+                        .findElementData(component);
+                final String propName = mappedElementData
+                        .getPropertyName(attrAdapter.getLocalName());
+                if ("value".equals(propName)) //$NON-NLS-1$
                 {
-                    final ComponentInfo component = (ComponentInfo) viewObject;
-                    // get the original elementData
-                    final ElementData mappedElementData = mappingService
-                            .findElementData(component);
-                    final String propName = mappedElementData
-                            .getPropertyName(attrAdapter.getLocalName());
-                    if ("value".equals(propName)) //$NON-NLS-1$
-                    {
-                        // final List converters =
-                        // component.getDecorators(ComponentFactory.CONVERTER);
+                    // final List converters =
+                    // component.getDecorators(ComponentFactory.CONVERTER);
 
-                        // (ConverterDecorator) it.next();
-                        return createCompositeType(
-                                expectedType,
-                                exprTypes,
-                                component
-                                        .getDecorators(ComponentFactory.CONVERTER));
+                    // (ConverterDecorator) it.next();
+                    final CompositeType alternativeTypes = createCompositeType(
+                            expectedType, exprTypes, component
+                                    .getDecorators(ComponentFactory.CONVERTER));
+                    if (DEBUG)
+                    {
+                        System.out.println(String.format(
+                                "maybeAddAlternative took %d", Long.valueOf(System //$NON-NLS-1$
+                                        .nanoTime()
+                                            - curTime)));
                     }
+                    return alternativeTypes;
                 }
             }
+        }
+        if (DEBUG)
+        {
+            System.out.println(String.format("maybeAddAlternative took %d", Long //$NON-NLS-1$
+                .valueOf(System.nanoTime() - curTime)));
         }
         // don't add anything by default
         return expectedType;
