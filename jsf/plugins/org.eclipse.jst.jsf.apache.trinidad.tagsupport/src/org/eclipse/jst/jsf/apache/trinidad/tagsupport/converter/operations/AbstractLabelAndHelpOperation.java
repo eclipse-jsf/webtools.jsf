@@ -19,8 +19,6 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.ITransformOperation;
-import org.eclipse.jst.pagedesigner.dtmanager.converter.operations.TransformOperationFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -37,12 +35,14 @@ import org.w3c.dom.Text;
  */
 public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTransformOperation {
 
-	private static final String STYLE_OUTERELEMENT = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
-	private static final String STYLE_LABELTD = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;text-align:right;color:#000000;padding:0px 8px 0px 0px;font-weight:normal;"; //$NON-NLS-1$
-	private static final String STYLE_REQUIREDSPAN = "color:#669966;font-family:Courier,sans-serif;"; //$NON-NLS-1$
-	protected static final String STYLE_CONTROLELEMENT = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
-	private static final String STYLE_HELPSPAN = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:8pt;font-weight:normal;color:#669966;"; //$NON-NLS-1$
-
+	private static final String STYLECLASS_OUTERELEMENT = "x1u p_AFRequired"; //$NON-NLS-1$
+	private static final String STYLECLASS_LABELTD = "xu"; //$NON-NLS-1$
+	private static final String STYLECLASS_REQUIREDSPAN = "xf"; //$NON-NLS-1$
+	private static final String STYLECLASS_CONTROLTD = "AFContentCell"; //$NON-NLS-1$
+	protected static final String STYLECLASS_CONTROLELEMENT = "x25"; //$NON-NLS-1$
+	private static final String STYLECLASS_HELPTD = "AFComponentMessageCell"; //$NON-NLS-1$
+	private static final String STYLECLASS_HELPSPAN = "x8u"; //$NON-NLS-1$
+	
 	/**
 	 * Subclasses must implement this method to append the desired DOM structure
 	 * that represents the HTML control(s) to parentElement.
@@ -72,13 +72,12 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 		}
 
 		//append common attributes
-		ITransformOperation operation =
-			TransformOperationFactory.getInstance().getTransformOperation(
-					TransformOperationFactory.OP_CopyAttributeWithRenameOperation,
-					new String[]{"styleClass", "class"}); //$NON-NLS-1$  //$NON-NLS-2$
-		operation.transform(srcElement, outerElement);
-		appendAttribute(outerElement, "style", //$NON-NLS-1$
-				calculateStyle(STYLE_OUTERELEMENT, srcElement, "inlineStyle")); //$NON-NLS-1$
+		appendAttribute(outerElement, "class", //$NON-NLS-1$
+				calculateStyleClass(STYLECLASS_OUTERELEMENT, srcElement, "styleClass")); //$NON-NLS-1$
+		String inlineStyle = calculateStyle(null, srcElement, "inlineStyle"); //$NON-NLS-1$
+		if (inlineStyle != null) {
+			appendAttribute(outerElement, "style", inlineStyle); //$NON-NLS-1$
+		}		
 
 		if (Boolean.valueOf(simple)) {
 			//continue building simple variant
@@ -90,14 +89,14 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 			if (isRequired(srcElement) || getLabel(srcElement) != null) {
 				//if either required or has label, build top-left table cell
 				Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
-				appendAttribute(tdElement, "style", STYLE_LABELTD); //$NON-NLS-1$
+				appendAttribute(tdElement, "class", STYLECLASS_LABELTD); //$NON-NLS-1$
 				appendAttribute(tdElement, "valign", "top"); //$NON-NLS-1$ //$NON-NLS-2$
 				appendAttribute(tdElement, "nowrap", ""); //$NON-NLS-1$ //$NON-NLS-2$
 
 				if (isRequired(srcElement)) {
 					Element spanElement = appendChildElement("span", tdElement); //$NON-NLS-1$
 					appendAttribute(spanElement, "title", "Required"); //$NON-NLS-1$ //$NON-NLS-2$
-					appendAttribute(spanElement, "style", STYLE_REQUIREDSPAN); //$NON-NLS-1$
+					appendAttribute(spanElement, "class", STYLECLASS_REQUIREDSPAN); //$NON-NLS-1$
 					appendChildText("* ", spanElement); //$NON-NLS-1$
 				}
 
@@ -109,6 +108,7 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 
 			//build content table cell
 			Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
+			appendAttribute(tdElement, "class", STYLECLASS_CONTROLTD); //$NON-NLS-1$
 			appendAttribute(tdElement, "valign", "top"); //$NON-NLS-1$ //$NON-NLS-2$
 			appendAttribute(tdElement, "nowrap", ""); //$NON-NLS-1$ //$NON-NLS-2$
 			appendControl(srcElement, tdElement);
@@ -121,14 +121,13 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 					tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
 				}
 				tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
+				appendAttribute(tdElement, "class", STYLECLASS_HELPTD); //$NON-NLS-1$
 				Element spanElement = appendChildElement("span", tdElement); //$NON-NLS-1$
-				operation =
-					TransformOperationFactory.getInstance().getTransformOperation(
-							TransformOperationFactory.OP_CopyAttributeWithRenameOperation,
-							new String[]{"styleClass", "class"}); //$NON-NLS-1$  //$NON-NLS-2$
-				operation.transform(srcElement, spanElement);
-				appendAttribute(spanElement, "style", //$NON-NLS-1$
-						calculateStyle(STYLE_HELPSPAN, srcElement, "inlineStyle")); //$NON-NLS-1$
+				appendAttribute(spanElement, "class", //$NON-NLS-1$
+						calculateStyle(STYLECLASS_HELPSPAN, srcElement, "styleClass")); //$NON-NLS-1$
+				if (inlineStyle != null) {
+					appendAttribute(spanElement, "style", inlineStyle); //$NON-NLS-1$
+				}
 				Iterator<Node> itHelpFacetChildNodes = helpFacetChildNodes.iterator();
 				int curPos = 0;
 				while (itHelpFacetChildNodes.hasNext()) {
@@ -169,6 +168,25 @@ public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTran
 			}
 		}
 		return style;
+	}
+
+	protected String calculateStyleClass(
+			String baseStyleClass, Element srcElement, String styleClassAttributeName) {
+		String styleClass = baseStyleClass;
+		if (srcElement != null && styleClassAttributeName != null) {
+			String srcElementStyleClass = srcElement.getAttribute(styleClassAttributeName);
+			if (srcElementStyleClass != null && srcElementStyleClass.length() > 0) {
+				if (styleClass != null) {
+					if (!styleClass.endsWith(",")) { //$NON-NLS-1$
+						styleClass += ","; //$NON-NLS-1$
+					}
+					styleClass += srcElementStyleClass;
+				} else {
+					styleClass = srcElementStyleClass;
+				}
+			}
+		}
+		return styleClass;
 	}
 
 	protected boolean isRequired(Element srcElement) {

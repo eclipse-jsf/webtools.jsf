@@ -37,8 +37,12 @@ public class InputFileOperation extends AbstractLabelAndHelpOperation {
 		if (value != null) {
 			appendAttribute(controlElement, "value", value); //$NON-NLS-1$
 		}
-		appendAttribute(controlElement, "style", //$NON-NLS-1$
-				calculateStyle(STYLE_CONTROLELEMENT, srcElement, "contentStyle")); //$NON-NLS-1$
+		//append common attributes
+		appendAttribute(controlElement, "class", STYLECLASS_CONTROLELEMENT); //$NON-NLS-1$
+		String contentStyle = calculateStyle(null, srcElement, "contentStyle"); //$NON-NLS-1$
+		if (contentStyle != null) {
+			appendAttribute(controlElement, "style", contentStyle); //$NON-NLS-1$
+		}
 	}
 
 }

@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
+import org.eclipse.jst.pagedesigner.dtresourceprovider.DTSkinManager;
+import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTSkin;
 import org.eclipse.wst.css.core.internal.provisional.adapters.IStyleSheetAdapter;
 import org.eclipse.wst.css.core.internal.provisional.adapters.IStyleSheetListAdapter;
 import org.eclipse.wst.html.core.internal.provisional.HTML40Namespace;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.stylesheets.StyleSheet;
@@ -72,6 +75,18 @@ public final class CSSTempUtil {
 			parent = parent.getParentNode();
 		}
 		addStyleSheet(rootEle, styleSheets);
+
+		//add stylesheets from any active IDTSkin instances
+		if (element instanceof IDOMNode) {
+			List<IDTSkin> dtSkins =
+				DTSkinManager.getInstance((IDOMNode)element).getCurrentSkins();
+			for (IDTSkin dtSkin: dtSkins) {
+				if (dtSkin != null) {
+					styleSheets.addAll(dtSkin.getStyleSheets());
+				}
+			}
+		}
+
 		return styleSheets;
 	}
 

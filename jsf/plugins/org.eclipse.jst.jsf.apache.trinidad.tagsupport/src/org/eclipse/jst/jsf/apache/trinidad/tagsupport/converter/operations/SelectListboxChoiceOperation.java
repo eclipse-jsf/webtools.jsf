@@ -83,9 +83,12 @@ public class SelectListboxChoiceOperation extends AbstractLabelAndHelpOperation 
 			}
 			appendChildText(selectItem.getLabel(), optionElement);
 		}
-		//TODO: append option elements
-		appendAttribute(selectElement, "style", //$NON-NLS-1$
-				calculateStyle(STYLE_CONTROLELEMENT, srcElement, "contentStyle")); //$NON-NLS-1$
+		//append common attributes
+		appendAttribute(selectElement, "class", STYLECLASS_CONTROLELEMENT); //$NON-NLS-1$
+		String contentStyle = calculateStyle(null, srcElement, "contentStyle"); //$NON-NLS-1$
+		if (contentStyle != null) {
+			appendAttribute(selectElement, "style", contentStyle); //$NON-NLS-1$
+		}
 	}
 
 }

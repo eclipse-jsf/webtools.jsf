@@ -111,4 +111,9 @@ public class Messages extends NLS {
 	 */
 	public static String SelectShuttleOperation_LinkBottom;
 
+	/**
+	 * See messages.properties.
+	 */
+	public static String TrinidadDTResourceProvider_StyleSheetNotLocated;
+
 }

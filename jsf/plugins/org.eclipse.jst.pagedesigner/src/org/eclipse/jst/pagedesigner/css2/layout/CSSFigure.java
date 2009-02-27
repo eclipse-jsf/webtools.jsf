@@ -28,6 +28,7 @@ import org.eclipse.jst.pagedesigner.css2.style.DefaultStyle;
 import org.eclipse.jst.pagedesigner.css2.style.ITagEditInfo;
 import org.eclipse.jst.pagedesigner.css2.widget.BorderUtil;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 
 /**
@@ -331,6 +332,14 @@ public class CSSFigure extends FlowFigure implements ICSSFigure {
 			rgbColor.dispose();
 		}
 		g.restoreState();
+
+		//handle background-image
+		Object bgImage = getCSSStyle().getStyleProperty(ICSSPropertyID.ATTR_BACKGROUND_IMAGE);
+		if (bgImage instanceof Image) {
+			g.setClip(bounds);
+			g.drawImage((Image)bgImage, bounds.x, bounds.y);
+			g.restoreState();
+		}
 
 		LayoutManager layout = getLayoutManager();
 		if (layout instanceof ICSSPainter) {

@@ -42,6 +42,10 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit.TrinidadCoreElementEditFactory">
       </elementEditFactory>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.CreateClassAttributeOperation"
+            id="CreateClassAttributeOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.CreateStyleAttributeOperation"
             id="CreateStyleAttributeOperation">
       </tagTransformOperation>
@@ -97,6 +101,10 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.ShowDetailItemOperation"
             id="ShowDetailItemOperation">
       </tagTransformOperation>
+      <dtResourceProvider
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.dtresourceprovider.TrinidadDTResourceProvider"
+            id="http://myfaces.apache.org/trinidad">
+      </dtResourceProvider>
    </extension>
    <extension
          point="org.eclipse.jst.jsf.core.variableresolver">

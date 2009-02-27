@@ -352,9 +352,10 @@
 							<parameter value=""/>
 						</operation>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;background-color:#e9e8e8;padding:0px;margin:1px;"/>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+						<parameter value="x77"/>
 					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@textAndAccessKey"/>
 						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">

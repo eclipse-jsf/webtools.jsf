@@ -73,4 +73,21 @@ public class TrinidadTagSupportActivator extends AbstractUIPlugin {
 		log.log(new Status(IStatus.INFO, PLUGIN_ID, message));
 	}
 
+	/**
+	 * Writes an error message to this plug-in's log.
+	 * 
+	 * @param message Error message to be written.
+	 * @param ex Throwable instance.
+	 */
+	public static void logError(String message, Throwable ex) {
+		ILog log = getDefault().getLog();
+		IStatus status;
+		if (ex != null) {
+			status = new Status(IStatus.ERROR, PLUGIN_ID, message, ex);
+		} else {
+			status = new Status(IStatus.ERROR, PLUGIN_ID, message);
+		}
+		log.log(status);
+	}
+
 }

@@ -25,6 +25,7 @@
             <element ref="linkCreator" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="tagAttributeCellEditorFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="tagTransformOperation" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="dtResourceProvider" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="propertyPageFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="paletteFactory" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
@@ -186,6 +187,33 @@ The exception to this rule is that if the reference is not plugin-qualified, the
                <appInfo>
                   <meta.attribute kind="java" basedOn="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation:"/>
                </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="dtResourceProvider">
+      <annotation>
+         <documentation>
+            Defines a Design-Time Resource Provider class for a specific ID.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The ID of the Design-Time Resource Provider class. This is used to map usage of each DT Resource Provider class to a specific page neing edited, and so is typically the NS URI of the tag library for which the class provides resources.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Class extending &lt;code&gt;org.eclipse.jst.pagedesigner.dtresourceprovider.AbstractDTResourceProvider&lt;/code&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.jst.pagedesigner.dtresourceprovider.AbstractDTResourceProvider:"/>
+               </appinfo>
             </annotation>
          </attribute>
       </complexType>

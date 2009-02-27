@@ -183,6 +183,11 @@ public interface ICSSPropertyID {
     /**
      * css style attribute
      */
+	public static final String ATTR_BACKGROUND_IMAGE = "background-image"; //$NON-NLS-1$
+
+    /**
+     * css style attribute
+     */
 	public static final String ATTR_COLOR = "color"; //$NON-NLS-1$
 
     /**

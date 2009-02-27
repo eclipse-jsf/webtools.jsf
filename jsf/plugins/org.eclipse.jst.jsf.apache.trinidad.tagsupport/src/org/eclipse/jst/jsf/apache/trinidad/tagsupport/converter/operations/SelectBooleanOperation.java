@@ -58,8 +58,12 @@ public class SelectBooleanOperation extends AbstractLabelAndHelpOperation {
 				appendChildText(text, labelElement);
 			}
 		}
-		appendAttribute(spanElement, "style", //$NON-NLS-1$
-				calculateStyle(STYLE_CONTROLELEMENT, srcElement, "contentStyle")); //$NON-NLS-1$
+		//append common attributes
+		appendAttribute(inputElement, "class", STYLECLASS_CONTROLELEMENT); //$NON-NLS-1$
+		String contentStyle = calculateStyle(null, srcElement, "contentStyle"); //$NON-NLS-1$
+		if (contentStyle != null) {
+			appendAttribute(inputElement, "style", contentStyle); //$NON-NLS-1$
+		}
 	}
 
 }

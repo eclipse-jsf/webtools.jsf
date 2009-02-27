@@ -54,8 +54,12 @@ public class InputTextWithIconOperation extends AbstractLabelAndHelpOperation {
 		if (value != null) {
 			appendAttribute(inputElement, "value", value); //$NON-NLS-1$
 		}
-		appendAttribute(inputElement, "style", //$NON-NLS-1$
-				calculateStyle(STYLE_CONTROLELEMENT, srcElement, "contentStyle")); //$NON-NLS-1$
+		//append common attributes
+		appendAttribute(inputElement, "class", STYLECLASS_CONTROLELEMENT); //$NON-NLS-1$
+		String contentStyle = calculateStyle(null, srcElement, "contentStyle"); //$NON-NLS-1$
+		if (contentStyle != null) {
+			appendAttribute(inputElement, "style", contentStyle); //$NON-NLS-1$
+		}
 
 		//append anchor with child image
 		Element aElement = appendChildElement("a", parentElement); //$NON-NLS-1$

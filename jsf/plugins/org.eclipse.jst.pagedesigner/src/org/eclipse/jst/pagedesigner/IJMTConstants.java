@@ -59,6 +59,11 @@ public interface IJMTConstants {
 	public static final String EXTENSION_POINT_CMREGISTRY = "cmRegistry"; //$NON-NLS-1$
 
 	/**
+	 * local name of DT resource provider extension
+	 */
+	public static final String DT_RESOURCE_PROVIDER = "dtResourceProvider"; //$NON-NLS-1$
+
+	/**
 	 * local name of local drop handler extension
 	 */
 	public static final String LOCAL_DROP_HANDLER = "localDropHandler"; //$NON-NLS-1$
