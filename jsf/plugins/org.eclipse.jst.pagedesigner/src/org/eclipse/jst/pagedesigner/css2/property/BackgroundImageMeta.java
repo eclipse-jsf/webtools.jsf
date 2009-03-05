@@ -97,16 +97,16 @@ public class BackgroundImageMeta extends CSSPropertyMeta {
 		String output = null;
 		if (input != null) {
 			//strip "url(...)"
-			int startPos = input.indexOf("url(") + 4; //$NON-NLS-1
+			int startPos = input.indexOf("url(") + 4; //$NON-NLS-1$
 			if (startPos > -1 && startPos < input.length() - 1) {
 				int endPos = input.indexOf(')', startPos);
 				if (endPos > startPos) {
 					String insideURL = input.substring(startPos, endPos).trim();
 					//strip double-quotes
-					if (insideURL.startsWith("\"") && insideURL.endsWith("\"")) { //$NON-NLS-1  //$NON-NLS-2
+					if (insideURL.startsWith("\"") && insideURL.endsWith("\"")) { //$NON-NLS-1$ //$NON-NLS-2$
 						output = insideURL.substring(1, insideURL.length() - 1);
 					//strip single-quotes
-					} else if (insideURL.startsWith("'") && insideURL.endsWith("'")) { //$NON-NLS-1  //$NON-NLS-2
+					} else if (insideURL.startsWith("'") && insideURL.endsWith("'")) { //$NON-NLS-1$ //$NON-NLS-2$
 						output = insideURL.substring(1, insideURL.length() - 1);
 					} else {
 						output = insideURL;
