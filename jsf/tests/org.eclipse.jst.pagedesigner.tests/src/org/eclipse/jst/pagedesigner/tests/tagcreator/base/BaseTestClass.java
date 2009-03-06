@@ -48,6 +48,8 @@ import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class BaseTestClass extends TestCase
@@ -313,6 +315,25 @@ public class BaseTestClass extends TestCase
             (element).setEmptyTag(true);
             (element).removeChildNodes();
             final Node copy = (element).cloneNode(false);
+
+            /*
+             * ElementImpl.cloneNode(...) seems to have started creating
+             * attributes that display differently than the cloned Node's
+             * (attr='' rather than attr=""), breaking textual comparisons.
+             * By overwriting the existing attributes after cloning, we get the
+             * expected form (double quotes instead of single quotes).
+             * 
+             *  - Ian Trimble, 20090305
+             */
+            if (element.hasAttributes() && copy instanceof Element) {
+	            NamedNodeMap attrMap = element.getAttributes();
+                for (int i = 0; i < attrMap.getLength(); i++) {
+                    Node attrNode = attrMap.item(i);
+                    ((Element)copy).setAttribute(
+                            attrNode.getNodeName(), attrNode.getNodeValue());
+                }
+            }
+
             element.getParentNode().replaceChild(copy, element);
         }
     }
