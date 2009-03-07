@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.DefaultEditDomain;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
 import org.eclipse.jface.text.IDocument;
@@ -1092,6 +1093,17 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			}
 		}
 		PREVIEW_FILES_LIST.clear();
+	}
+
+	/**
+	 * Refreshes the design page. Allows an external action to force a refresh
+	 * after an external change, such as a DT skin change.
+	 */
+	public void refreshDesignViewer() {
+		EditPart contentEditPart = _designViewer.getGraphicViewer().getRootEditPart().getContents();
+		if (contentEditPart instanceof DocumentEditPart) {
+			((DocumentEditPart)contentEditPart).styleChanged();
+		}
 	}
 
 }
