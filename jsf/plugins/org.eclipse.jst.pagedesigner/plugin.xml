@@ -205,27 +205,27 @@
  <extension
        point="org.eclipse.ui.propertyPages">
     <page
+          adaptable="true"
           class="org.eclipse.jst.pagedesigner.ui.dialogs.WPEPropertyPage"
           id="org.eclipse.jst.pagedesigner.WPEPropertyPage"
           name="%ext-pt.WPEPropPage.name"
           objectClass="org.eclipse.core.resources.IProject">
        <enabledWhen>
           <and>
-             <instanceof
-                   value="org.eclipse.core.resources.IProject">
-             </instanceof>
-             <or>
-                <test
+             <adapt type="org.eclipse.core.resources.IProject">
+                <or>
+                   <test
                       forcePluginActivation="true"
                       property="org.eclipse.wst.common.project.facet.core.projectFacet"
                       value="jst.web">
-                </test>
-                <test
+                   </test>
+                   <test
                       forcePluginActivation="true"
                       property="org.eclipse.wst.common.project.facet.core.projectFacet"
                       value="wst.web">
-                </test>
-             </or>
+                   </test>
+                </or>
+             </adapt>
           </and>
        </enabledWhen>
     </page>
