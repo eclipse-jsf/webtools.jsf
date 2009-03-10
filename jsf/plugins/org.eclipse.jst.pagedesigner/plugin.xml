@@ -202,4 +202,32 @@
        <propertyCategory></propertyCategory>
     </propertyContributor>
  </extension>
+ <extension
+       point="org.eclipse.ui.propertyPages">
+    <page
+          class="org.eclipse.jst.pagedesigner.ui.dialogs.WPEPropertyPage"
+          id="org.eclipse.jst.pagedesigner.WPEPropertyPage"
+          name="%ext-pt.WPEPropPage.name"
+          objectClass="org.eclipse.core.resources.IProject">
+       <enabledWhen>
+          <and>
+             <instanceof
+                   value="org.eclipse.core.resources.IProject">
+             </instanceof>
+             <or>
+                <test
+                      forcePluginActivation="true"
+                      property="org.eclipse.wst.common.project.facet.core.projectFacet"
+                      value="jst.web">
+                </test>
+                <test
+                      forcePluginActivation="true"
+                      property="org.eclipse.wst.common.project.facet.core.projectFacet"
+                      value="wst.web">
+                </test>
+             </or>
+          </and>
+       </enabledWhen>
+    </page>
+ </extension>
 </plugin>
