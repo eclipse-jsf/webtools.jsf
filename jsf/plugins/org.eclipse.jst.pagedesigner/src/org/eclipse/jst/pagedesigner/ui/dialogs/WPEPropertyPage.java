@@ -173,6 +173,7 @@ public class WPEPropertyPage extends PropertyPage {
 			localCurrentSkinMap.put(nsURI, defaultDTSkin);
 		}
 		skinsTable.refresh();
+		updateButtons();
 		super.performDefaults();
 	}
 
@@ -361,6 +362,10 @@ public class WPEPropertyPage extends PropertyPage {
 		public String getName() {
 			return name;
 		}
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
 		public int hashCode() {
 			int nsURIHashCode = 0;
 			if (nsURI != null) {
@@ -423,7 +428,7 @@ public class WPEPropertyPage extends PropertyPage {
 		public Image getImage(Object element) {
 			Image image = null;
 			if (element instanceof IDTSkin) {
-				image = PDPlugin.getDefault().getImage("skin_obj.gif"); //$NON-NLS-1$
+				image = PDPlugin.getDefault().getImage("skin.png"); //$NON-NLS-1$
 			}
 			return image;
 		}

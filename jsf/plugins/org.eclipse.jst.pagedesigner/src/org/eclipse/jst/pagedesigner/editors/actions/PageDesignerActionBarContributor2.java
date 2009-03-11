@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.editors.actions;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
 import org.eclipse.jst.pagedesigner.editors.SimpleGraphicalEditor;
@@ -67,6 +68,8 @@ public class PageDesignerActionBarContributor2 extends
 
 		if (actionBars != null) {
 			initCommonActionBarContributor(actionBars);
+			actionBars.getToolBarManager().add(new ManageSkinsAction());
+			actionBars.getToolBarManager().add(new Separator());
 			initDesignViewerActionBarContributor(actionBars);
 			initSourceViewerActionContributor(actionBars);
 		}
