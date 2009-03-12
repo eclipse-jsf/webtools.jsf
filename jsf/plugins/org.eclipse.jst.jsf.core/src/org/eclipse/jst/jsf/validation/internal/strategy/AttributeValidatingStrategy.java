@@ -311,8 +311,8 @@ AbstractXMLViewValidationStrategy
                     final ITextRegion vblOpen = regionList.get(1);
 
                     if ((openQuote.getType() == DOMJSPRegionContexts.XML_TAG_ATTRIBUTE_VALUE_DQUOTE || openQuote
-                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE /*|| 
-                            openQuote.getType() == DOMJSPRegionContexts.JSP_TAG_ATTRIBUTE_VALUE_DQUOTE*/)
+                            .getType() == DOMJSPRegionContexts.JSP_VBL_DQUOTE || 
+                            openQuote.getType() == DOMJSPRegionContexts.JSP_TAG_ATTRIBUTE_VALUE_DQUOTE)
                             && vblOpen.getType() == DOMJSPRegionContexts.JSP_VBL_OPEN)
                     {
                         boolean foundClosingQuote = false;
