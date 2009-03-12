@@ -6,6 +6,10 @@ import org.eclipse.wst.common.project.facet.core.IActionConfigFactory;
 import org.eclipse.wst.common.project.facet.core.IFacetedProjectWorkingCopy;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
+/**
+ * Configuration for JSF facet uninstall
+ *
+ */
 public class JSFFacetUninstallConfig
 
     extends ActionConfig
@@ -13,6 +17,9 @@ public class JSFFacetUninstallConfig
 {
     private LibraryUninstallDelegate librariesUninstallDelegate = null;
     
+    /**
+     * @return the library uninstall delegate
+     */
     public LibraryUninstallDelegate getLibrariesUninstallDelegate()
     {
         return this.librariesUninstallDelegate;
@@ -43,6 +50,10 @@ public class JSFFacetUninstallConfig
         }
     }
     
+    /**
+     * The action configuration factory for the JSF facet uninstall config
+     *
+     */
     public static final class Factory
         
         implements IActionConfigFactory

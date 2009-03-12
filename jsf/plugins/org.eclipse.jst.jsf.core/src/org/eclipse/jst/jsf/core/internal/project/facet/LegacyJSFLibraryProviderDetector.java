@@ -28,7 +28,7 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
-
+@SuppressWarnings("deprecation")
 public final class LegacyJSFLibraryProviderDetector
 
     extends LegacyLibraryProviderDetector
@@ -61,6 +61,10 @@ public final class LegacyJSFLibraryProviderDetector
         return null;
     }
     
+    /**
+     * @param cpe
+     * @return true if the classpath entry is detected
+     */
     public static boolean detect( final IClasspathEntry cpe )
     {
         if( cpe.getEntryKind() == IClasspathEntry.CPE_CONTAINER )
