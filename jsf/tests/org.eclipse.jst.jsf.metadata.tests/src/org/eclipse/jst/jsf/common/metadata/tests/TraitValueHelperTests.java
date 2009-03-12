@@ -134,7 +134,8 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals(null, TraitValueHelper.getValueAsString(trait));
 	}
 
-	public void testGetValueAsListOfStrings() {
+	@SuppressWarnings("unchecked")
+    public void testGetValueAsListOfStrings() {
 		//multivalStrings
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "multivalStrings");
 		Assert.assertNotNull(trait);
