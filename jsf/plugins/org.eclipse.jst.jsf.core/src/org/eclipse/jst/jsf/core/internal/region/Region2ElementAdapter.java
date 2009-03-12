@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.core.internal.region;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.jst.jsf.common.dom.ElementDOMAdapter;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
@@ -112,8 +111,6 @@ public class Region2ElementAdapter extends ElementDOMAdapter
 
     private class RegionProcessorStrategy
     {
-        private final AtomicBoolean         _isInitialized =
-                                                new AtomicBoolean(false);
         private final ITextRegionCollection _region;
 
         private Map<String, Region2AttrAdapter> _attributes;
@@ -194,10 +191,6 @@ public class Region2ElementAdapter extends ElementDOMAdapter
         {
             mapAttributesOnlyOnce();
             return Collections.unmodifiableMap(_attributes);
-        }
-        public boolean isInitialized()
-        {
-            return _isInitialized.get();
         }
 
         private void mapAttributesOnlyOnce()
