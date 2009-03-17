@@ -27,7 +27,7 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
  */
 public class BindingHandlerDelegate implements IBindingHandler {
 	private static final String BINDING_DISABLED_IMAGE_FILE = "PD_Binding_disabled.gif"; //$NON-NLS-1$
-	private static final String BINDING_IMAGE_FILE = "PD_Binding_disabled.gif"; //$NON-NLS-1$
+	private static final String BINDING_IMAGE_FILE = "PD_Binding.gif"; //$NON-NLS-1$
 
 	/*
 	 * (non-Javadoc)

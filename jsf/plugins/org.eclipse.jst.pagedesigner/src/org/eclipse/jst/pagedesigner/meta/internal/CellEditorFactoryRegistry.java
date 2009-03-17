@@ -156,47 +156,5 @@ public class CellEditorFactoryRegistry {
 		field.setToolTip(attr.getDescription());
 		return field;
 	}
-//	/**
-//	 * This is NOT a product method. It should only be used by testing code.
-//	 * 
-//	 * @return String[] of value types
-//	 */
-//	public String[] getAllValueTypes() {
-//		//FIXME
-//		Set valueTypes = new HashSet();
-//		for (Iterator iter = _factoryMap.values().iterator(); iter.hasNext();) {
-//			ITagAttributeCellEditorFactory fac = (ITagAttributeCellEditorFactory) iter
-//					.next();
-//			String[] supportedTypes = fac.getSupportedValueTypes();
-//
-//			if (supportedTypes != null) {
-//				for (int i = 0; i < supportedTypes.length; i++) {
-//					valueTypes.add(supportedTypes[i]);
-//				}
-//			}
-//		}
-//		// add those default ones.
-//		Field[] fields = OLDIValueType.class.getFields();
-//		for (int i = 0; i < fields.length; i++) {
-//			int modifiers = fields[i].getModifiers();
-//			if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) {
-//				if (fields[i].getType() == String.class) {
-//					try {
-//						valueTypes.add(fields[i].get(null));
-//					} catch (IllegalArgumentException ex) {
-//						// "Error in fields retrieving:"
-//						_log.info("CellEditorFactoryRegistry.Info.2", ex); //$NON-NLS-1$
-//					} catch (IllegalAccessException ex) {
-//						// "Error in fields retrieving:"
-//						_log.info("CellEditorFactoryRegistry.Info.3", ex); //$NON-NLS-1$
-//					}
-//				}
-//			}
-//		}
-//		String[] ret = new String[valueTypes.size()];
-//		valueTypes.toArray(ret);
-//		return ret;
-//	}
-
 
 }

@@ -3,7 +3,6 @@
 	<extension-point id="pageDesignerExtension" name="%extension-point.name.0" schema="schema/pageDesignerExtension.exsd" />
 	<extension-point id="propertyContributor" name="%extension-point.name.1" schema="schema/propertyContributor.exsd" />
 	<extension-point id="popupMenuContributor" name="%extension-point.name.2" schema="schema/popupMenuContributor.exsd"/>
-	<extension-point id="cmRegistry" name="%extension-point.name.3" schema="schema/cmRegistry.exsd"/>
 
 	<extension point="org.eclipse.ui.editors">
 		<editor class="org.eclipse.jst.pagedesigner.editors.HTMLEditor"
