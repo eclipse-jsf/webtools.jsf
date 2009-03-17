@@ -137,7 +137,9 @@ public class BaseTestCase extends TestCase {
 		    IWorkbenchPage workbenchPage = workbenchWindow.getActivePage();	    
 		    try {
 		    	IEditorInput input = new FileEditorInput(file);
-		    	return (HTMLEditor)workbenchPage.openEditor(input, HTML_EDITOR_ID);
+		    	IEditorPart editor = workbenchPage.openEditor(input, HTML_EDITOR_ID);
+		    	assertTrue("An error condition has occurred probably due to an out of an memory exception.", editor instanceof HTMLEditor);
+		    	return (HTMLEditor)editor;
 			} catch (PartInitException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
