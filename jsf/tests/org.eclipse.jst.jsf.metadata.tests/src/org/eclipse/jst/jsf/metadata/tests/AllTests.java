@@ -31,7 +31,6 @@ import org.eclipse.jst.jsf.common.metadata.tests.TraitImplTests;
 import org.eclipse.jst.jsf.common.metadata.tests.TraitValueHelperTests;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
-import org.eclipse.jst.jsf.metadata.tests.annotations.DisableCMAnnotationFilesAPITest;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeExtensionsTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeFactoryTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypesRegistryTests;
@@ -81,10 +80,7 @@ public class AllTests {
 		TestSuite suite = new TestSuite(
 				"Test Suite for org.eclipse.jst.jsf.metadata.tests");
 		//$JUnit-BEGIN$
-		
-		//disablement of CMAnnotationFiles
-		addTestSuite(suite, DisableCMAnnotationFilesAPITest.class);
-		
+			
 		//model 		
 		addTestSuite(suite, TraitImplTests.class);
 		addTestSuite(suite, IncludeEntityGroupImplTests.class);
