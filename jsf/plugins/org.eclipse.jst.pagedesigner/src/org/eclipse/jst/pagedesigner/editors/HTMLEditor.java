@@ -30,6 +30,7 @@ import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
@@ -51,6 +52,8 @@ import org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage;
 import org.eclipse.jst.pagedesigner.tools.RangeSelectionTool;
 import org.eclipse.jst.pagedesigner.ui.common.PartActivationHandler;
 import org.eclipse.jst.pagedesigner.ui.common.sash.SashEditorPart;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
+import org.eclipse.jst.pagedesigner.utils.EditorUtil;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -254,6 +257,10 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			}
 		};
 		int sashIndex = addPage(_sashEditorPart, getEditorInput());
+
+		// Set the sash editor mode from the stored file property
+		// or the default preference
+		initDesignerMode();
 
 		setPageText(sashIndex, PDPlugin.getResourceString("HTMLEditor.Design")); //$NON-NLS-1$
 
@@ -1036,7 +1043,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 * @param mode
 	 */
 	public void setDesignerMode(int mode) {
-		if (_sashEditorPart != null) {
+		if (_sashEditorPart != null && _mode != mode) {
 			switch (mode) {
 			case MODE_SASH_HORIZONTAL:
 				_sashEditorPart.setOrientation(SWT.HORIZONTAL);
@@ -1051,8 +1058,38 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			default:
 				_sashEditorPart.setOrientation(SWT.VERTICAL);
 			}
+			if (getEditorInput() != null) {
+				EditorUtil.setEditorInputDesignModeProperty(getEditorInput(), String.valueOf(mode));
+			}
 		}
 		this._mode = mode;
+	}
+
+	/*
+	 * Set the sash editor mode from the stored file property
+	 * or the default preference.
+	 */
+	private void initDesignerMode() {
+		int preferredMode = MODE_SASH_VERTICAL;
+
+		// If the user has already selected a mode for the file, use it.
+		String prop = null;
+		if (getEditorInput() != null) {
+			prop = EditorUtil.getEditorInputDesignModeProperty(getEditorInput());
+		}
+		if (prop != null) {
+			try {
+				preferredMode = Integer.parseInt(prop);
+			} catch (NumberFormatException e) {
+				// do nothing;
+			}
+		} else {
+			// Otherwise, get the default mode from preferences.
+			IPreferenceStore pStore = PDPlugin.getDefault().getPreferenceStore();
+			preferredMode = pStore.getInt(PDPreferences.SASH_EDITOR_MODE_PREF);
+		}
+
+		setDesignerMode(preferredMode);
 	}
 
 	/**

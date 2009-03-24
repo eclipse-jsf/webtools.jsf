@@ -229,4 +229,10 @@
        </enabledWhen>
     </page>
  </extension>
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences">
+    </initializer>
+ </extension>
 </plugin>
