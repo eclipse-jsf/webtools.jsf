@@ -58,6 +58,7 @@ import org.eclipse.jst.pagedesigner.dnd.internal.ResouceDropTargetListener;
 import org.eclipse.jst.pagedesigner.editors.actions.ActionsMessages;
 import org.eclipse.jst.pagedesigner.editors.actions.DesignerUndoRedoAction;
 import org.eclipse.jst.pagedesigner.editors.actions.RelatedViewActionGroup;
+import org.eclipse.jst.pagedesigner.editors.actions.SkinsMenuItemBuilder;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizer;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRootFactory;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
@@ -728,6 +729,17 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
             customedMenu.setContext(null);
             customedMenu.setParentControl(null);
             customedMenu.setModel(null);
+
+            //add skins menu
+            IEditorInput editorInput = _delegate.getEditorInput();
+			if (editorInput instanceof IFileEditorInput) {
+				IFile file = ((IFileEditorInput)editorInput).getFile();
+				IProject project = file.getProject();
+				if (project != null) {
+					SkinsMenuItemBuilder builder = new SkinsMenuItemBuilder(project);
+					builder.buildMenuManagers(menuMgr1);
+				}
+			}
         }
         
         private void addNavigateSubMenu(IMenuManager menu) {

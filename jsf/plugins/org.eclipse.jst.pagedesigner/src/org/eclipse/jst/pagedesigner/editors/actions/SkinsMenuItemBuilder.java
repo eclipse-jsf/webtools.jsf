@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
@@ -30,6 +34,7 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.internal.Workbench;
 
 /**
@@ -66,8 +71,10 @@ public class SkinsMenuItemBuilder {
 			oldMenu.dispose();
 		}
 		if (menu != null) {
-			new MenuItem(menu, SWT.SEPARATOR);
 			List<TaglibData> taglibDataList = getTaglibDataList();
+			if (taglibDataList.size() > 0) {
+				new MenuItem(menu, SWT.SEPARATOR);
+			}
 			for (TaglibData taglibData: taglibDataList) {
 				String nsURI = taglibData.getNSURI();
 				DTSkinManager dtSkinManager = DTSkinManager.getInstance(project);
@@ -82,6 +89,7 @@ public class SkinsMenuItemBuilder {
 					MenuItem skinMenuItem;
 					if (currentDTSkin == dtSkin) {
 						skinMenuItem = new MenuItem(skinMenu, SWT.CHECK);
+						skinMenuItem.setSelection(true);
 					} else {
 						skinMenuItem = new MenuItem(skinMenu, SWT.PUSH);
 					}
@@ -91,6 +99,29 @@ public class SkinsMenuItemBuilder {
 					skinMenuItem.addSelectionListener(new SkinSelectionListener());
 				}
 			}
+		}
+	}
+
+	/**
+	 * Builds menu managers.
+	 * 
+	 * @param parent Parent menu manager to which to append new menu managers.
+	 */
+	public void buildMenuManagers(IMenuManager parent) {
+		List<TaglibData> taglibDataList = getTaglibDataList();
+		if (taglibDataList.size() > 0) {
+			parent.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS, new Separator());
+		}
+		for (TaglibData taglibData: taglibDataList) {
+			String nsURI = taglibData.getNSURI();
+			MenuManager newMgr = new MenuManager(taglibData.getName());
+			DTSkinManager dtSkinManager = DTSkinManager.getInstance(project);
+			IDTSkin currentDTSkin = dtSkinManager.getCurrentSkin(nsURI);
+			List<IDTSkin> dtSkins = dtSkinManager.getSkins(nsURI);
+			for (IDTSkin dtSkin: dtSkins) {
+				newMgr.add(new ChangeCurrentSkinAction(nsURI, dtSkin, dtSkin == currentDTSkin));
+			}
+			parent.appendToGroup(IWorkbenchActionConstants.MB_ADDITIONS, newMgr);
 		}
 	}
 
@@ -170,6 +201,40 @@ public class SkinsMenuItemBuilder {
 		 */
 		public void widgetDefaultSelected(SelectionEvent event) {
 			widgetSelected(event);
+		}
+	}
+
+
+
+	/**
+	 * Action for changing current skin.
+	 */
+	private class ChangeCurrentSkinAction extends Action {
+		private String nsURI;
+		private IDTSkin dtSkin;
+		/**
+		 * Creates an instance.
+		 * 
+		 * @param nsURI NSURI of taglib.
+		 * @param dtSkin IDTSkin instance.
+		 * @param checked true if IDTSkin instance is current for nsURI.
+		 */
+		public ChangeCurrentSkinAction(String nsURI, IDTSkin dtSkin, boolean checked) {
+			super(dtSkin.getName());
+			this.nsURI = nsURI;
+			this.dtSkin = dtSkin;
+			setChecked(checked);
+		}
+		/*
+		 * (non-Javadoc)
+		 * @see org.eclipse.jface.action.Action#run()
+		 */
+		public void run() {
+			DTSkinManager.getInstance(project).setCurrentSkin(nsURI, dtSkin);
+			IEditorPart editorPart = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			if (editorPart instanceof HTMLEditor) {
+				((HTMLEditor)editorPart).refreshDesignViewer();
+			}
 		}
 	}
 
