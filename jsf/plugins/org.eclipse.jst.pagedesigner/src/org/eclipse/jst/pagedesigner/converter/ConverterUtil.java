@@ -123,7 +123,7 @@ public class ConverterUtil {
 	 *                  list of the grandparent).
 	 * @return a converted element for a table or tag within a table. 
 	 */
-	public static Node findAncestorTableElement(Element srcElem, Element childElem) {
+	static Node findAncestorTableElement(Element srcElem, Element childElem) {
 		Node parent = srcElem.getParentNode();
 		if ((parent == null) || !(parent instanceof Element)) {
 			return null;
