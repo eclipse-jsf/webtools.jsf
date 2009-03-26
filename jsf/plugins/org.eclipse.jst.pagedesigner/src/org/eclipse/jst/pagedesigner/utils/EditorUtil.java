@@ -10,8 +10,14 @@ package org.eclipse.jst.pagedesigner.utils;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.ide.ResourceUtil;
+import org.eclipse.ui.internal.Workbench;
 
 /**
  * Utility class for Editor related information.
@@ -69,4 +75,25 @@ public class EditorUtil {
 			}
 		}
 	}
+
+	/**
+	 * Calls <code>refreshDesignViewer()</code> on all open HTMLEditor
+	 * (Web Page Editor) instances.
+	 */
+	public static void refreshAllWPEDesignViewers() {
+		IWorkbenchWindow window = Workbench.getInstance().getActiveWorkbenchWindow();
+		if (window != null) {
+			IWorkbenchPage page = window.getActivePage();
+			if (page != null) {
+				IEditorReference[] editorRefs = page.getEditorReferences();
+				for (IEditorReference editorRef: editorRefs) {
+					IEditorPart editorPart = editorRef.getEditor(false);
+					if (editorPart instanceof HTMLEditor) {
+						((HTMLEditor)editorPart).refreshDesignViewer();
+					}
+				}
+			}
+		}
+	}
+
 }

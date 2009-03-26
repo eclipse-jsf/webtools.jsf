@@ -34,7 +34,7 @@ import org.eclipse.jst.pagedesigner.dtresourceprovider.DTResourceProviderFactory
 import org.eclipse.jst.pagedesigner.dtresourceprovider.DTSkinManager;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTResourceProvider;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTSkin;
-import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
+import org.eclipse.jst.pagedesigner.utils.EditorUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -46,12 +46,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.dialogs.PropertyPage;
-import org.eclipse.ui.internal.Workbench;
 
 /**
  * Property page for the Web Page Editor.
@@ -188,19 +183,7 @@ public class WPEPropertyPage extends PropertyPage {
 			IDTSkin dtSkin = localCurrentSkinMap.get(nsURI);
 			DTSkinManager.getInstance(project).setCurrentSkin(nsURI, dtSkin);
 		}
-		IWorkbenchWindow window = Workbench.getInstance().getActiveWorkbenchWindow();
-		if (window != null) {
-			IWorkbenchPage page = window.getActivePage();
-			if (page != null) {
-				IEditorReference[] editorRefs = page.getEditorReferences();
-				for (IEditorReference editorRef: editorRefs) {
-					IEditorPart editorPart = editorRef.getEditor(false);
-					if (editorPart instanceof HTMLEditor) {
-						((HTMLEditor)editorPart).refreshDesignViewer();
-					}
-				}
-			}
-		}
+		EditorUtil.refreshAllWPEDesignViewers();
 		return super.performOk();
 	}
 

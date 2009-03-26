@@ -27,15 +27,13 @@ import org.eclipse.jst.pagedesigner.dtresourceprovider.DTResourceProviderFactory
 import org.eclipse.jst.pagedesigner.dtresourceprovider.DTSkinManager;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTResourceProvider;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTSkin;
-import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
+import org.eclipse.jst.pagedesigner.utils.EditorUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.internal.Workbench;
 
 /**
  * Builds menu items for managing skins.
@@ -190,10 +188,7 @@ public class SkinsMenuItemBuilder {
 			String nsURI = (String)event.widget.getData(DATAKEY_NSURI);
 			IDTSkin dtSkin = (IDTSkin)event.widget.getData(DATAKEY_DTSKIN);
 			DTSkinManager.getInstance(project).setCurrentSkin(nsURI, dtSkin);
-			IEditorPart editorPart = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			if (editorPart instanceof HTMLEditor) {
-				((HTMLEditor)editorPart).refreshDesignViewer();
-			}
+			EditorUtil.refreshAllWPEDesignViewers();
 		}
 		/*
 		 * (non-Javadoc)
@@ -231,10 +226,7 @@ public class SkinsMenuItemBuilder {
 		 */
 		public void run() {
 			DTSkinManager.getInstance(project).setCurrentSkin(nsURI, dtSkin);
-			IEditorPart editorPart = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			if (editorPart instanceof HTMLEditor) {
-				((HTMLEditor)editorPart).refreshDesignViewer();
-			}
+			EditorUtil.refreshAllWPEDesignViewers();
 		}
 	}
 
