@@ -4,11 +4,21 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ResolverUtil;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.pagedesigner.PDPlugin;
+import org.eclipse.jst.pagedesigner.dom.DOMPosition;
+import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
-import org.eclipse.jst.pagedesigner.itemcreation.customizer.ChildrenData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -60,11 +70,11 @@ public class UserCustomizedElementCustomizationCommand extends
         if (_creationData.getDropCustomizationData() != null)
         {
             final ICustomizationData data = (ICustomizationData) _creationData.getDropCustomizationData().getAdapter(ICustomizationData.class);
-            ChildrenData childrenData = data.getChildrenData();
             
-            if (childrenData != null)
+            if (data.getChildrenData() != null)
             {
-                for (ICustomizationData child : childrenData.getChildList())
+            	int childCount = 0;
+                CHILDREN_LOOP: for (ICustomizationData child : data.getChildrenData().getChildList())
                 {
                     assert (_element.getOwnerDocument() != null);
                     
@@ -83,6 +93,46 @@ public class UserCustomizedElementCustomizationCommand extends
                     
                     // Attach child node to element
                     _element.appendChild(childNode);
+                    
+                    // Set up other attributes and child tags for this child
+                    IFile fileForDocument = ResolverUtil.getFileForDocument(_model.getStructuredDocument());
+                    if (fileForDocument == null)
+                    {
+                    	PDPlugin.log("File not found for model: "+_model.toString(), new Exception("Stack trace only"));  //$NON-NLS-1$//$NON-NLS-2$
+                    	continue CHILDREN_LOOP;
+                    }
+                    final IProject project = fileForDocument.getProject();
+                    PaletteItemManager paletteManager = PaletteItemManager.getInstance(project);
+                    
+                    if (paletteManager == null)
+                    {
+                    	PDPlugin.log("paletteManager not found for project: "+project.toString(), new Exception("Stack trace only")); //$NON-NLS-1$ //$NON-NLS-2$
+                    	continue CHILDREN_LOOP;
+                    }
+                    
+                    TaglibPaletteDrawer drawer = paletteManager.findCategoryByURI(child.getTagIdentifier().getUri());
+                    
+                    if (drawer == null)
+                    {
+                    	PDPlugin.log("Drawer not found for uri: "+child.getTagIdentifier().getUri(), new Exception("Stack trace only")); //$NON-NLS-1$ //$NON-NLS-2$
+                    	continue CHILDREN_LOOP;
+                    }
+
+                    TagToolPaletteEntry paletteEntry = drawer.getTagPaletteEntryByTagName(child.getTagIdentifier().getTagName());
+                    
+                    if (paletteEntry == null)
+                    {
+                    	PDPlugin.log("Palette entry not found for drawer: "+drawer.toString(), new Exception("Stack trace only")); //$NON-NLS-1$ //$NON-NLS-2$
+                    	continue CHILDREN_LOOP;
+                    }
+                    final ITaglibDomainMetaDataModelContext modelContext = 
+                        TaglibDomainMetaDataQueryHelper
+                            .createMetaDataModelContext(project, child.getTagIdentifier().getUri());
+                    IDOMPosition domPosition = new DOMPosition(_element, childCount++);
+                    CreationData creationData = new CreationData(paletteEntry,_model, domPosition, modelContext, child);
+                    
+                    ElementCustomizationCommand command = new UserCustomizedElementCustomizationCommand(_model, childNode, creationData);
+                    command.execute();
                 }
             }
         }

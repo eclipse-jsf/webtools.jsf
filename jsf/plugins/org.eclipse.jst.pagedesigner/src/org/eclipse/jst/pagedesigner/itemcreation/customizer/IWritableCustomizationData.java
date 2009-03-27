@@ -82,7 +82,7 @@ public interface IWritableCustomizationData extends ICustomizationData
      *            Customization Data for a child
      * 
      */
-    public void addChildrenData (ICustomizationData childrenData);
+    public void addChildData (ICustomizationData childrenData);
 
     
     //------------------------------------------------------------

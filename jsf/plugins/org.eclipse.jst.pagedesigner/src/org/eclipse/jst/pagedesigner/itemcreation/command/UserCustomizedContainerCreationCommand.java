@@ -1,8 +1,12 @@
 package org.eclipse.jst.pagedesigner.itemcreation.command;
 
+import javax.xml.namespace.QName;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
+import org.eclipse.jst.pagedesigner.dom.ValidatorSupport;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 
 /**
  * Tag container creation command for tags dropped on to the WPE by the user
@@ -53,4 +57,20 @@ public class UserCustomizedContainerCreationCommand extends
         return _data;
     }
 
+    
+    @Override
+    protected IDOMPosition doExecute() 
+    {
+        final IDOMPosition domPosition = getDomPosition();
+        final QName  containerQName = getContainerTag().asQName();
+
+        IDOMPosition newPosition = domPosition;
+        newPosition = ValidatorSupport.insertContainer(domPosition, containerQName, getContainerCustomizationData());
+        if (newPosition == null)
+        {
+            newPosition = domPosition;
+        }
+        
+        return newPosition;
+    }
 }

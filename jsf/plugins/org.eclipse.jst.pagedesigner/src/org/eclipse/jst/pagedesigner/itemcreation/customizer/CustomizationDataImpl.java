@@ -1,7 +1,6 @@
 package org.eclipse.jst.pagedesigner.itemcreation.customizer;
 
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 
 
@@ -15,7 +14,7 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
  * 
  */
 
-public class CustomizationDataImpl implements IWritableCustomizationData, IAdaptable
+public class CustomizationDataImpl implements IWritableCustomizationData
 {
     private TagIdentifier tagIdentifier;
     private AttributeData _attrs;
@@ -134,7 +133,7 @@ public class CustomizationDataImpl implements IWritableCustomizationData, IAdapt
     /* (non-Javadoc)
      * @see org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData#addChildrenData(org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData)
      */
-    public void addChildrenData (ICustomizationData childData)
+    public void addChildData (ICustomizationData childData)
     {
         getChildrenData().add(childData);
     }

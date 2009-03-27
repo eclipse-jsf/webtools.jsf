@@ -1,5 +1,6 @@
 package org.eclipse.jst.pagedesigner.itemcreation.customizer;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 
 /**
@@ -13,7 +14,7 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
  * @author Debajit Adhikary
  * 
  */
-public interface ICustomizationData 
+public interface ICustomizationData extends IAdaptable  
 {
     /**
      * Returns the TagIdentifier for the tag whose customization data this is
