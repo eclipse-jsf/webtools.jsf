@@ -18,6 +18,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.gef.EditDomain;
@@ -89,6 +90,13 @@ public class BaseTestClass extends TestCase
                 .getTestProject());
     }
 
+    
+    protected IAdaptable getCustomizationData()
+    {
+    	return null;
+    }
+    
+    
     protected CreationData getCreationData(final String uri,
             final String tagName, final String defaultPrefix, final IFile file,
             final int offset) throws Exception
@@ -109,8 +117,8 @@ public class BaseTestClass extends TestCase
 
         final DOMPosition domPosition = new DOMPosition(node, 0);
 
-        return new CreationData(entry, (IDOMModel) context.getModel(),
-                domPosition, modelContext, null);
+          return new CreationData(entry, (IDOMModel) context.getModel(),
+              domPosition, modelContext, getCustomizationData());
     }
 
     protected TagToolPaletteEntry createPaletteEntry(final String uri,
@@ -191,7 +199,7 @@ public class BaseTestClass extends TestCase
         return JSFTestUtil.loadFromFile(path.toFile()).toString();
     }
 
-    protected final String getExpectedResult(final String tagName,
+    protected String getExpectedResult(final String tagName,
             final String outExt) throws Exception
     {
         final String ext = outExt == null ? "" : "." + outExt;

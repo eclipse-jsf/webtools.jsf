@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.tests.tagcreator;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.base.BaseTagCreatorTestCase;
 
-public class TestDefaultTagCreatorJSP extends BaseTagCreatorTestCase 
+public class TestDefaultTagCreatorJSP extends BaseDefaultTagCreatorTestCase 
 {
     public TestDefaultTagCreatorJSP()
     {

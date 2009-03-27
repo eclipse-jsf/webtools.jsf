@@ -16,6 +16,9 @@
          point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
       <elementEditFactory
             class="org.eclipse.jst.pagedesigner.tests.tagcreatorPlugin.TestCreationFactory"></elementEditFactory>
+      <elementEditFactory
+            class="org.eclipse.jst.pagedesigner.tests.tagcreatorPlugin.UserCustomizedElementEditFactory">
+      </elementEditFactory>
    </extension>
    <extension
          point="org.eclipse.ui.views.properties.tabbed.propertySections">

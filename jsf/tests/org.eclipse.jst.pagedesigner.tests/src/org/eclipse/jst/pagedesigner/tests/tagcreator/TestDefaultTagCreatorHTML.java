@@ -19,7 +19,7 @@ import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
  * @author cbateman
  *
  */
-public class TestDefaultTagCreatorHTML extends BaseTagCreatorTestCase
+public class TestDefaultTagCreatorHTML extends BaseDefaultTagCreatorTestCase
 {
     public TestDefaultTagCreatorHTML()
     {

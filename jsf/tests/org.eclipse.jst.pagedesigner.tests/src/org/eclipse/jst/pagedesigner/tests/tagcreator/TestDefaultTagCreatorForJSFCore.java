@@ -11,9 +11,8 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
-import org.eclipse.jst.pagedesigner.tests.tagcreator.base.BaseTagCreatorTestCase;
 
-public class TestDefaultTagCreatorForJSFCore extends BaseTagCreatorTestCase 
+public class TestDefaultTagCreatorForJSFCore extends BaseDefaultTagCreatorTestCase 
 {
     public TestDefaultTagCreatorForJSFCore()
     {

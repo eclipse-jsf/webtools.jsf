@@ -24,6 +24,10 @@ import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolForJSFC
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolForJSFHTML;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolHTML;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolJSP;
+import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_AttributeCustomization;
+import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization;
+import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization;
+import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_ParentCustomization;
 
 /**
  * All tests suite for Web Page Editor.
@@ -55,6 +59,12 @@ public class AllTests
                 JSFVersion.V1_1);
         addTestRequiringJSFRuntime(suite, TestDefaultTagCreatorJSP.class,
                 JSFVersion.V1_1);
+
+        // Add UserCustomizedTagCreator tests
+        addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_AttributeCustomization.class, JSFVersion.V1_1);
+        addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization.class, JSFVersion.V1_1);
+        addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_ParentCustomization.class, JSFVersion.V1_1);
+        addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization.class, JSFVersion.V1_1);
 
         // TODO: could merge the item creation and default tag creators into a
         // common testsuite

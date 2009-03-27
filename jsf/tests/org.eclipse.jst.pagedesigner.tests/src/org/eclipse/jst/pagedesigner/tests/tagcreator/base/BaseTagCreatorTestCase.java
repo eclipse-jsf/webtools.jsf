@@ -13,15 +13,15 @@ package org.eclipse.jst.pagedesigner.tests.tagcreator.base;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
-import org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreationFactory;
 import org.eclipse.jst.pagedesigner.tests.PageDesignerTestsPlugin;
 import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.w3c.dom.Element;
 
-public class BaseTagCreatorTestCase extends BaseTestClass 
+public abstract class BaseTagCreatorTestCase extends BaseTestClass 
 {
 //    private Map<String, TaglibPaletteDrawer> _drawers = new HashMap<String, TaglibPaletteDrawer>();
     protected final String _defaultPrefix;
+    protected TagIdentifier tagIdentifier;
     
     public BaseTagCreatorTestCase(final String defaultPrefix, final String compareDataSubDir)
     {
@@ -34,8 +34,21 @@ public class BaseTagCreatorTestCase extends BaseTestClass
     protected void tearDown() throws Exception {
         super.tearDown();
     }
+    
+    
+    public final TagIdentifier getTagIdentifier() 
+    {
+		return tagIdentifier;
+	}
 
-    /**
+
+	public final void setTagIdentifier(TagIdentifier tagIdentifier) 
+	{
+		this.tagIdentifier = tagIdentifier;
+	}
+
+
+	/**
      * @param tagId
      * @param inExt
      * @param outExt
@@ -55,10 +68,10 @@ public class BaseTagCreatorTestCase extends BaseTestClass
                 PageDesignerTestsPlugin.getDefault().getBundle(),
                 "/testdata/tagcreator/tagCreator."+inExt+".data", "/tagCreator_"+tagName+"."+inExt);
 
+        setTagIdentifier(tagId);
         
-        ITagCreator tagCreator = TagCreationFactory.getInstance()
-                .createTagCreator(tagId);
-
+        ITagCreator tagCreator = getTagCreator(getTagIdentifier());
+        
         Element element = tagCreator.createTag(getCreationData(uri, tagName,
                 _defaultPrefix, file, offset));
         
@@ -82,4 +95,6 @@ public class BaseTagCreatorTestCase extends BaseTestClass
 
         assertExpectedResult(file, tagName, outExt);
     }
+    
+    protected abstract ITagCreator getTagCreator(TagIdentifier tagId);
 }
