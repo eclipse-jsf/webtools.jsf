@@ -353,7 +353,7 @@
 						</operation>
 					</operation>
 					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
-						<parameter value="x77"/>
+						<parameter value="af_goButton"/>
 					</operation>
 					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">

@@ -35,13 +35,13 @@ import org.w3c.dom.Text;
  */
 public abstract class AbstractLabelAndHelpOperation extends AbstractTrinidadTransformOperation {
 
-	private static final String STYLECLASS_OUTERELEMENT = "x1u p_AFRequired"; //$NON-NLS-1$
-	private static final String STYLECLASS_LABELTD = "xu"; //$NON-NLS-1$
-	private static final String STYLECLASS_REQUIREDSPAN = "xf"; //$NON-NLS-1$
+	private static final String STYLECLASS_OUTERELEMENT = "af_inputText p_AFRequired"; //$NON-NLS-1$
+	private static final String STYLECLASS_LABELTD = "af_inputText_label"; //$NON-NLS-1$
+	private static final String STYLECLASS_REQUIREDSPAN = "AFRequiredIconStyle"; //$NON-NLS-1$
 	private static final String STYLECLASS_CONTROLTD = "AFContentCell"; //$NON-NLS-1$
-	protected static final String STYLECLASS_CONTROLELEMENT = "x25"; //$NON-NLS-1$
+	protected static final String STYLECLASS_CONTROLELEMENT = "af_inputText_content"; //$NON-NLS-1$
 	private static final String STYLECLASS_HELPTD = "AFComponentMessageCell"; //$NON-NLS-1$
-	private static final String STYLECLASS_HELPSPAN = "x8u"; //$NON-NLS-1$
+	private static final String STYLECLASS_HELPSPAN = "OraInlineInfoText"; //$NON-NLS-1$
 	
 	/**
 	 * Subclasses must implement this method to append the desired DOM structure
