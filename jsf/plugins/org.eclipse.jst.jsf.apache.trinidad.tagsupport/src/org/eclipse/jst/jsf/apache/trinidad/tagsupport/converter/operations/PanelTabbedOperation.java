@@ -38,6 +38,13 @@ public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 	private static final int SEP_POS_START = 0;
 	private static final int SEP_POS_END = 1;
 
+	private static final String STYLECLASS_TABLE_ABOVE = "af_panelTabbed_orientation-top"; //$NON-NLS-1$
+	private static final String STYLECLASS_TABLE_BELOW = "af_panelTabbed_orientation-bottom"; //$NON-NLS-1$
+	private static final String STYLECLASS_SEPARATOR_START = "af_panelTabbed_cell-start"; //$NON-NLS-1$
+	private static final String STYLECLASS_SEPARATOR_END = "af_panelTabbed_cell-end"; //$NON-NLS-1$
+	private static final String STYLECLASS_CELL = "af_panelTabbed_tab-selected"; //$NON-NLS-1$
+	private static final String STYLECLASS_CELL_NOTDISCLOSED_OR_DISABLED = "af_panelTabbed_tab"; //$NON-NLS-1$
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
@@ -121,13 +128,13 @@ public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 
 	private void appendTabs(Element srcElement, List<Node> showDetailItems, Element spanElement, boolean above) {
 		Element tableElement = appendChildElement("table", spanElement); //$NON-NLS-1$
-		String tableStyle;
+		String tableStyleClass;
 		if (above) {
-			tableStyle = "background-color:#e9e8e8;border-color:#99cc99;text-align:center;border-style:solid;padding:2px 0px;margin:4px 0px;border-width:1px 0px 0px;"; //$NON-NLS-1$
+			tableStyleClass = STYLECLASS_TABLE_ABOVE;
 		} else {
-			tableStyle = "background-color:#e9e8e8;border-color:#99cc99;text-align:center;border-style:solid;padding:2px 0px;margin:4px 0px;border-width:0px 0px 1px;"; //$NON-NLS-1$
+			tableStyleClass = STYLECLASS_TABLE_BELOW;
 		}
-		appendAttribute(tableElement, "style", tableStyle); //$NON-NLS-1$
+		appendAttribute(tableElement, "class", tableStyleClass); //$NON-NLS-1$
 		appendAttribute(tableElement, "cellpadding", "0"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tableElement, "cellspacing", "0"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tableElement, "border", "0"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -167,9 +174,9 @@ public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 	private void appendSeparatorTD(Element trElement, int sepPosition) {
 		Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
 		if (sepPosition == SEP_POS_START) {
-			appendAttribute(tdElement, "style", "width:0%;"); //$NON-NLS-1$ //$NON-NLS-2$
+			appendAttribute(tdElement, "class", STYLECLASS_SEPARATOR_START); //$NON-NLS-1$
 		} else if (sepPosition == SEP_POS_END) {
-			appendAttribute(tdElement, "style", "width:100%;"); //$NON-NLS-1$ //$NON-NLS-2$
+			appendAttribute(tdElement, "class", STYLECLASS_SEPARATOR_END); //$NON-NLS-1$
 		}
 		Element bElement = appendChildElement("b", tdElement); //$NON-NLS-1$
 		appendAttribute(bElement, "style", "margin-left:0px;"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -188,13 +195,13 @@ public class PanelTabbedOperation extends AbstractTrinidadTransformOperation {
 		Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
 		appendAttribute(tdElement, "height", "1"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tdElement, "nowrap", "nowrap"); //$NON-NLS-1$ //$NON-NLS-2$
-		String tdStyle;
+		String tdStyleClass;
 		if (isDisclosed && !isDisabled) {
-			tdStyle = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:bold;padding:0px 8px;"; //$NON-NLS-1$
+			tdStyleClass = STYLECLASS_CELL;
 		} else {
-			tdStyle = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;padding:0px 8px;"; //$NON-NLS-1$
+			tdStyleClass = STYLECLASS_CELL_NOTDISCLOSED_OR_DISABLED;
 		}
-		appendAttribute(tdElement, "style", tdStyle); //$NON-NLS-1$
+		appendAttribute(tdElement, "class", tdStyleClass); //$NON-NLS-1$
 		Element aElement = appendChildElement("a", tdElement); //$NON-NLS-1$
 		String aStyle;
 		if (isDisabled) {

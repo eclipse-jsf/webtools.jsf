@@ -46,6 +46,10 @@ public class OutputFormattedOperation extends AbstractTrinidadTransformOperation
 	 * This operation is not the cause of the above-mentioned bug.
 	 */
 
+	private static final String STYLECLASS_INSTRUCTION = "AFInstructionText"; //$NON-NLS-1$
+	private static final String STYLECLASS_PAGESTAMP = "OraPageStampText"; //$NON-NLS-1$
+	private static final String STYLECLASS_INCONTEXTBRANDING = "p_InContextBrandingText"; //$NON-NLS-1$
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
 	 */
@@ -56,34 +60,24 @@ public class OutputFormattedOperation extends AbstractTrinidadTransformOperation
 		ITransformOperation operation =
 			TransformOperationFactory.getInstance().getTransformOperation(
 					TransformOperationFactory.OP_CopyAttributeWithRenameOperation,
-					new String[]{"styleClass", "class"}); //$NON-NLS-1$  //$NON-NLS-2$
+					new String[]{"inlineStyle", "style"}); //$NON-NLS-1$  //$NON-NLS-2$
 		operation.transform(srcElement, spanElement);
-		String styleClass = srcElement.getAttribute("styleClass"); //$NON-NLS-1$
 
-		//deal with styleClass, inlineStyle, and styleUsage to mimic runtime
-		String style = null;
+		String styleClass = srcElement.getAttribute("styleClass"); //$NON-NLS-1$
 		if (styleClass == null || styleClass.length() < 1) {
 			String styleUsage = srcElement.getAttribute("styleUsage"); //$NON-NLS-1$
 			if (styleUsage != null && styleUsage.length() > 8) {
 				if (styleUsage.equals("instruction")) { //$NON-NLS-1$
-					style = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
+					styleClass = STYLECLASS_INSTRUCTION;
 				} else if (styleUsage.equals("pageStamp")) { //$NON-NLS-1$
-					style = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#669966;"; //$NON-NLS-1$
+					styleClass = STYLECLASS_PAGESTAMP;
 				} else if (styleUsage.equals("inContextBranding")) { //$NON-NLS-1$
-					style = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#999999;"; //$NON-NLS-1$
+					styleClass = STYLECLASS_INCONTEXTBRANDING;
 				}
 			}
 		}
-		String inlineStyle = srcElement.getAttribute("inlineStyle"); //$NON-NLS-1$
-		if (inlineStyle != null && inlineStyle.length() > 0) {
-			if (style != null) {
-				style += inlineStyle;
-			} else {
-				style = inlineStyle;
-			}
-		}
-		if (style != null) {
-			appendAttribute(spanElement, "style", style); //$NON-NLS-1$
+		if (styleClass != null && styleClass.length() > 0) {
+			appendAttribute(spanElement, "class", styleClass); //$NON-NLS-1$
 		}
 
 		//deal with value

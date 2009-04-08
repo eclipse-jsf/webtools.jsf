@@ -31,12 +31,13 @@ import org.w3c.dom.Element;
  */
 public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 
-	private static final String STYLE_HEADER = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:9pt;color:#669966;font-weight:bold;padding:0px 0px 0px 18px;"; //$NON-NLS-1$
-	private static final String STYLE_REQUIRED = "color:#669966;font-family:Courier,sans-serif;"; //$NON-NLS-1$
-	private static final String STYLE_LISTCOLUMN = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;"; //$NON-NLS-1$
-	private static final String STYLE_SELECT = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
-	private static final String STYLE_DESCRIPTION = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;"; //$NON-NLS-1$
-	private static final String STYLE_LINK = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"; //$NON-NLS-1$
+	private static final String STYLECLASS_OUTERTABLE = "af_selectManyShuttle p_AFRequired"; //$NON-NLS-1$
+	private static final String STYLECLASS_HEADER = "OraShuttleHeader"; //$NON-NLS-1$
+	private static final String STYLECLASS_REQUIRED = "AFRequiredIconStyle"; //$NON-NLS-1$
+	private static final String STYLECLASS_LISTCOLUMN = "af_selectManyShuttle_box-content"; //$NON-NLS-1$
+	private static final String STYLECLASS_SELECT = "af_selectManyListbox_content"; //$NON-NLS-1$
+	private static final String STYLECLASS_DESCRIPTION = "AFInstructionText"; //$NON-NLS-1$
+	private static final String STYLECLASS_LINK = "OraLink"; //$NON-NLS-1$
 	private static final String DEFAULT_SIZE = "10"; //$NON-NLS-1$
 
 	private static final String[] LINKS_MOVE = new String[]{
@@ -79,7 +80,9 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		}
 		String styleClass = srcElement.getAttribute("styleClass"); //$NON-NLS-1$
 		if (styleClass != null && styleClass.length() > 0) {
-			appendAttribute(outerTableElement, "class", styleClass); //$NON-NLS-1$
+			appendAttribute(outerTableElement, "class", styleClass + " " + STYLECLASS_OUTERTABLE); //$NON-NLS-1$ //$NON-NLS-2$
+		} else {
+			appendAttribute(outerTableElement, "class", STYLECLASS_OUTERTABLE); //$NON-NLS-1$
 		}
 
 		//build header row
@@ -87,7 +90,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		Element tdLeadingHeaderElement = appendChildElement("td", trHeaderElement); //$NON-NLS-1$
 		String leadingHeader = srcElement.getAttribute("leadingHeader"); //$NON-NLS-1$
 		if (leadingHeader != null && leadingHeader.length() > 0) {
-			appendAttribute(tdLeadingHeaderElement, "style", STYLE_HEADER); //$NON-NLS-1$
+			appendAttribute(tdLeadingHeaderElement, "class", STYLECLASS_HEADER); //$NON-NLS-1$
 			appendAttribute(tdLeadingHeaderElement, "valign", "bottom"); //$NON-NLS-1$ //$NON-NLS-2$
 			appendChildText(leadingHeader, tdLeadingHeaderElement);
 		}
@@ -96,11 +99,11 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		String required = srcElement.getAttribute("required"); //$NON-NLS-1$
 		String trailingHeader = srcElement.getAttribute("trailingHeader"); //$NON-NLS-1$
 		if ((required != null && Boolean.parseBoolean(required)) || (trailingHeader != null && trailingHeader.length() > 0)) {
-			appendAttribute(tdTrailingHeaderElement, "style", STYLE_HEADER); //$NON-NLS-1$
+			appendAttribute(tdTrailingHeaderElement, "class", STYLECLASS_HEADER); //$NON-NLS-1$
 			appendAttribute(tdTrailingHeaderElement, "valign", "bottom"); //$NON-NLS-1$ //$NON-NLS-2$
 			if (required != null && Boolean.parseBoolean(required)) {
 				Element spanRequiredElement = appendChildElement("span", tdTrailingHeaderElement); //$NON-NLS-1$
-				appendAttribute(spanRequiredElement, "style", STYLE_REQUIRED); //$NON-NLS-1$
+				appendAttribute(spanRequiredElement, "class", STYLECLASS_REQUIRED); //$NON-NLS-1$
 				appendChildText("*", spanRequiredElement); //$NON-NLS-1$
 			}
 			if (trailingHeader != null && trailingHeader.length() > 0) {
@@ -129,7 +132,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		Element trElement0 = appendChildElement("tr", tbodyElement0); //$NON-NLS-1$
 		Element tdElement1 = appendChildElement("td", trElement0); //$NON-NLS-1$
 		Element divElement0 = appendChildElement("div", tdElement1); //$NON-NLS-1$
-		appendAttribute(divElement0, "style", STYLE_LISTCOLUMN); //$NON-NLS-1$
+		appendAttribute(divElement0, "class", STYLECLASS_LISTCOLUMN); //$NON-NLS-1$
 		Element tableElement1 = appendChildElement("table", divElement0); //$NON-NLS-1$
 		appendAttribute(tableElement1, "cellpadding", "0"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tableElement1, "border", "0"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -155,7 +158,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		Element spanSelectElement = appendChildElement("span", tdSelectElement); //$NON-NLS-1$
 		Element selectElement = appendChildElement("select", spanSelectElement); //$NON-NLS-1$
 		appendAttribute(selectElement, "multiple", ""); //$NON-NLS-1$ //$NON-NLS-2$
-		appendAttribute(selectElement, "style", STYLE_SELECT); //$NON-NLS-1$
+		appendAttribute(selectElement, "class", STYLECLASS_SELECT); //$NON-NLS-1$
 		appendAttribute(selectElement, "size", getSizeString(srcElement)); //$NON-NLS-1$
 
 		if (isLeadingColumn) {
@@ -194,7 +197,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 			appendAttribute(tdDescElement, "valign", "middle"); //$NON-NLS-1$ //$NON-NLS-2$
 			appendAttribute(tdDescElement, "colspan", "3"); //$NON-NLS-1$ //$NON-NLS-2$
 			Element spanDescElement = appendChildElement("span", tdDescElement); //$NON-NLS-1$
-			appendAttribute(spanDescElement, "style", STYLE_DESCRIPTION); //$NON-NLS-1$
+			appendAttribute(spanDescElement, "class", STYLECLASS_DESCRIPTION); //$NON-NLS-1$
 			appendChildText(Messages.SelectShuttleOperation_Description, spanDescElement);
 			appendChildElement("div", tdDescElement); //$NON-NLS-1$
 			Element textareaElement = appendChildElement("textarea", tdDescElement); //$NON-NLS-1$
@@ -230,7 +233,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 		for (int i = 0; i < linkText.length; i++) {
 			Element aElement = appendChildElement("a", tdElement); //$NON-NLS-1$
 			appendAttribute(aElement, "href", "#"); //$NON-NLS-1$ //$NON-NLS-2$
-			appendAttribute(aElement, "style", STYLE_LINK); //$NON-NLS-1$
+			appendAttribute(aElement, "class", STYLECLASS_LINK); //$NON-NLS-1$
 			appendChildText(linkText[i], aElement);
 			if (i < linkText.length - 1) {
 				appendChildElement("br", tdElement); //$NON-NLS-1$

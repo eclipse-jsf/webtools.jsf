@@ -31,10 +31,10 @@ import org.w3c.dom.Element;
  */
 public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation {
 
-	private static final String STYLE_REQUIREDSPAN = "color:#669966;font-family:Courier,sans-serif;"; //$NON-NLS-1$
-	private static final String STYLE_GROUPSEPARATOR = "background-color:gray;height:1px;font-size:1px;margin-top:3px;margin-bottom:3px;"; //$NON-NLS-1$
-	private static final String STYLE_LABELCELL = "font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;text-align:right;color:#000000;padding:0px 8px 0px 0px;font-weight:normal;"; //$NON-NLS-1$
-	private static final String STYLE_FIELDCELL = "padding:1px 0px;"; //$NON-NLS-1$
+	private static final String STYLECLASS_REQUIREDSPAN = "AFRequiredIconStyle"; //$NON-NLS-1$
+	private static final String STYLECLASS_GROUPSEPARATOR = "af_panelFormLayout_separator"; //$NON-NLS-1$
+	private static final String STYLECLASS_LABELCELL = "af_inputText_label af_panelFormLayout_label-cell"; //$NON-NLS-1$
+	private static final String STYLECLASS_FIELDCELL = "af_panelFormLayout_content-cell"; //$NON-NLS-1$
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation#transform(org.w3c.dom.Element, org.w3c.dom.Element)
@@ -322,14 +322,14 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 	private void buildControlRow(Element srcElement, Element parentElement, boolean alignLabelsTop) {
 		Element trElement = appendChildElement("tr", parentElement); //$NON-NLS-1$
 		Element tdLabelElement = appendChildElement("td", trElement); //$NON-NLS-1$
-		appendAttribute(tdLabelElement, "style", STYLE_LABELCELL); //$NON-NLS-1$
+		appendAttribute(tdLabelElement, "class", STYLECLASS_LABELCELL); //$NON-NLS-1$
 		if (alignLabelsTop) {
 			appendAttribute(tdLabelElement, "valign", "top"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		appendAttribute(tdLabelElement, "nowrap", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		buildLabel(srcElement, tdLabelElement);
 		Element tdFieldElement = appendChildElement("td", trElement); //$NON-NLS-1$
-		appendAttribute(tdFieldElement, "style", STYLE_FIELDCELL); //$NON-NLS-1$
+		appendAttribute(tdFieldElement, "class", STYLECLASS_FIELDCELL); //$NON-NLS-1$
 		appendAttribute(tdFieldElement, "valign", "top"); //$NON-NLS-1$ //$NON-NLS-2$
 		appendAttribute(tdFieldElement, "nowrap", ""); //$NON-NLS-1$ //$NON-NLS-2$
 		tagConverterContext.addChild(srcElement, new ConvertPosition(tdFieldElement, 0));
@@ -361,7 +361,7 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 			if (Boolean.parseBoolean(required) || Boolean.parseBoolean(showRequired)) {
 				Element spanElement = appendChildElement("span", parentElement); //$NON-NLS-1$
 				appendAttribute(spanElement, "title", "Required"); //$NON-NLS-1$ //$NON-NLS-2$
-				appendAttribute(spanElement, "style", STYLE_REQUIREDSPAN); //$NON-NLS-1$
+				appendAttribute(spanElement, "class", STYLECLASS_REQUIREDSPAN); //$NON-NLS-1$
 				appendChildText("* ", spanElement); //$NON-NLS-1$
 			}
 			String label = srcElement.getAttribute("labelAndAccessKey"); //$NON-NLS-1$
@@ -380,7 +380,7 @@ public class PanelFormLayoutOperation extends AbstractTrinidadTransformOperation
 		Element tdElement = appendChildElement("td", trElement); //$NON-NLS-1$
 		appendAttribute(tdElement, "colspan", "2"); //$NON-NLS-1$ //$NON-NLS-2$
 		Element divElement = appendChildElement("div", tdElement); //$NON-NLS-1$
-		appendAttribute(divElement, "style", STYLE_GROUPSEPARATOR); //$NON-NLS-1$
+		appendAttribute(divElement, "class", STYLECLASS_GROUPSEPARATOR); //$NON-NLS-1$
 	}
 
 	private Element buildFooterStart(
