@@ -37,7 +37,7 @@ public class SelectShuttleOperation extends AbstractTrinidadTransformOperation {
 	private static final String STYLECLASS_LISTCOLUMN = "af_selectManyShuttle_box-content"; //$NON-NLS-1$
 	private static final String STYLECLASS_SELECT = "af_selectManyListbox_content"; //$NON-NLS-1$
 	private static final String STYLECLASS_DESCRIPTION = "AFInstructionText"; //$NON-NLS-1$
-	private static final String STYLECLASS_LINK = "OraLink"; //$NON-NLS-1$
+	private static final String STYLECLASS_LINK = "OraLinkText"; //$NON-NLS-1$
 	private static final String DEFAULT_SIZE = "10"; //$NON-NLS-1$
 
 	private static final String[] LINKS_MOVE = new String[]{

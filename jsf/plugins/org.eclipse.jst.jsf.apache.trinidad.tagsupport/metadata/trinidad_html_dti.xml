@@ -21,16 +21,6 @@
 						<parameter value="inlineStyle"/>
 						<parameter value="style"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-						<parameter value="@styleClass"/>
-						<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
-							<parameter value="@inlineStyle"/>
-							<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-								<parameter value="style"/>
-								<parameter value="background-color:#ffffff;font-family:Arial,Helvetica,Geneva,sans-serif;"/>
-							</operation>
-						</operation>
-					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"

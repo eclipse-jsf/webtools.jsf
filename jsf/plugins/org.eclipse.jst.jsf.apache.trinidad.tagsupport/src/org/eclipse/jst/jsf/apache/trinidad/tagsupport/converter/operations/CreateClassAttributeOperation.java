@@ -35,10 +35,7 @@ public class CreateClassAttributeOperation extends AbstractTrinidadTransformOper
 			if (classValue == null) {
 				classValue = styleClass;
 			} else {
-				if (classValue.length() > 0 && !classValue.endsWith(",")) { //$NON-NLS-1$
-					classValue += ","; //$NON-NLS-1$
-				}
-				classValue += styleClass;
+				classValue = styleClass + " " + classValue; //$NON-NLS-1$
 			}
 		}
 		if (classValue != null && curElement != null) {

@@ -182,14 +182,17 @@
 							<parameter value="disabled"/>
 							<parameter value=""/>
 						</operation>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="af_commandButton p_AFDisabled"/>
+						</operation>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@disabled='true'"/>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="af_commandButton"/>
+						</operation>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;background-color:#e9e8e8;padding:0px;margin:1px;"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@textAndAccessKey"/>
 						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
@@ -237,13 +240,10 @@
 						<parameter value="href"/>
 						<parameter value="#"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+						<parameter value="OraLinkText"/>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@textAndAccessKey"/>
 						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
@@ -293,13 +293,8 @@
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 						<parameter value="body"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
-					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="background-color:#ffffff;font-family:Arial,Helvetica,Geneva,sans-serif;"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation"/>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.MakeParentElementCurrentOperation"/>
 				</tag-convert-info>
@@ -403,13 +398,10 @@
 						<parameter value="href"/>
 						<parameter value="#"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+						<parameter value="OraLinkText"/>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@textAndAccessKey"/>
 						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
@@ -460,12 +452,8 @@
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@name='required' or @name='AFRequiredIcon'"/>
-						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-							<parameter value="styleClass"/>
-							<parameter value="class"/>
-						</operation>
-						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-							<parameter value="color:#669966;font-family:Courier,sans-serif;"/>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="AFRequiredIconStyle"/>
 						</operation>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 							<parameter value="*"/>
@@ -473,12 +461,8 @@
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@name='info' or @name='AFInfoIcon'"/>
-						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-							<parameter value="styleClass"/>
-							<parameter value="class"/>
-						</operation>
-						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-							<parameter value="color:#669966;font-family:monospace;font-weight:bold;"/>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="AFInfoIconStyle"/>
 						</operation>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 							<parameter value="i"/>
@@ -486,12 +470,8 @@
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@name='warning' or @name='AFWarningIcon'"/>
-						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-							<parameter value="styleClass"/>
-							<parameter value="class"/>
-						</operation>
-						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-							<parameter value="color:#669966;font-family:monospace;font-weight:bold;"/>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="AFWarningIconStyle"/>
 						</operation>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 							<parameter value="!"/>
@@ -499,17 +479,14 @@
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@name='error' or @name='AFErrorIcon'"/>
-						<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-							<parameter value="styleClass"/>
-							<parameter value="class"/>
-						</operation>
-						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-							<parameter value="color:#cc0000;font-family:monospace;font-weight:bold;"/>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="AFErrorIconStyle"/>
 						</operation>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 							<parameter value="X"/>
 						</operation>
 					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					widget="true"
@@ -757,13 +734,10 @@
 					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
 						<parameter value="for"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+						<parameter value="af_outputLabel"/>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;text-align:right;color:#000000;padding:0px 8px 0px 0px;font-weight:normal;"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@valueAndAccessKey"/>
 						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
@@ -886,19 +860,16 @@
 					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
 						<parameter value="div"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+						<parameter value="af_panelTip"/>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#669966;"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 						<parameter value="span"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-						<parameter value="style"/>
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:bold;"/>
+						<parameter value="class"/>
+						<parameter value="af_panelTip_label"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 						<parameter value="TIP "/>
@@ -956,10 +927,7 @@
 						<parameter value="align"/>
 						<parameter value="center"/>
 					</operation>
-					<operation id="org.eclipse.jst.pagedesigner.CopyAttributeWithRenameOperation">
-						<parameter value="styleClass"/>
-						<parameter value="class"/>
-					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation"/>
 					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 						<parameter value="tr"/>
@@ -975,8 +943,8 @@
 						<parameter value="div"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-						<parameter value="style"/>
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:bold;color:#669966;border-color:#99cc99;border-style:solid;border-width:1px;"/>
+						<parameter value="class"/>
+						<parameter value="p_OraProcessingStatus"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextOperation">
 						<parameter value="Processing"/>
@@ -1023,10 +991,17 @@
 							<parameter value="disabled"/>
 							<parameter value=""/>
 						</operation>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="af_resetButton p_AFDisabled"/>
+						</operation>
 					</operation>
-					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation">
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;vertical-align:baseline;background-color:#e9e8e8;border-color:#999999;"/>
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@disabled='true'"/>
+						<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateClassAttributeOperation">
+							<parameter value="af_resetButton"/>
+						</operation>
 					</operation>
+					<operation id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.CreateStyleAttributeOperation"/>
 					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
 						<parameter value="@textAndAccessKey"/>
 						<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
@@ -1272,8 +1247,8 @@
 						<parameter value="#"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-						<parameter value="style"/>
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
+						<parameter value="class"/>
+						<parameter value="OraNavBarActiveLink"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 						<parameter value="concat('Previous ',@rows)"/>
@@ -1295,8 +1270,8 @@
 						<parameter value="select"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-						<parameter value="style"/>
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;margin:0px 3px;"/>
+						<parameter value="class"/>
+						<parameter value="AFFieldText"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 						<parameter value="option"/>
@@ -1340,8 +1315,8 @@
 						<parameter value="#"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
-						<parameter value="style"/>
-						<parameter value="font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#003333;"/>
+						<parameter value="class"/>
+						<parameter value="OraNavBarActiveLink"/>
 					</operation>
 					<operation id="org.eclipse.jst.pagedesigner.AppendChildTextFromXPathOperation">
 						<parameter value="concat('Next ',@rows)"/>
