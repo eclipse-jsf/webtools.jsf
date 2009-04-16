@@ -126,6 +126,12 @@ public class JSFFacetInstallDataModelProvider extends
 	    if( propertyName.equals( FACETED_PROJECT_WORKING_COPY ) || propertyName.equals( FACET_VERSION ) )
 	    {
 	        initLibraryInstallDelegate();
+	        
+	        if( this.libraryInstallDelegate != null && propertyName.equals( FACET_VERSION ) )
+	        {
+	            final IProjectFacetVersion fv = (IProjectFacetVersion) getProperty( FACET_VERSION );
+	            this.libraryInstallDelegate.setProjectFacetVersion( fv );
+	        }
 	    }
 
         return super.propertySet( propertyName, propertyValue );
