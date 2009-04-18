@@ -22,7 +22,7 @@
                                     <p:tag2>
                                         <p:tag3>
                                             <p:tag3>
-                                                <h:commandButton attr2="value2" attr1="value1"
+                                                <h:commandButton attr1="value1" attr2="value2"
                                                     attr3="value3">
                                                     <p:tag8></p:tag8>
                                                     <p:tag8></p:tag8>
