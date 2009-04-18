@@ -901,7 +901,8 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 
 	private IPropertySheetPage getPropertySheetPage()
     {
-        if (_tabbedPropSheet == null)
+        if (_tabbedPropSheet == null || _tabbedPropSheet.getControl() == null 
+                || _tabbedPropSheet.getControl().isDisposed())
         {
             IPropertySheetPageFactory factory = getPageFactory();
             if (factory != null)
