@@ -29,6 +29,11 @@ public class Messages extends NLS {
 	/**
 	 * See messages.properties.
 	 */
+	public static String BreadCrumbsOperation_EmptyBreadCrumbsTag;
+
+	/**
+	 * See messages.properties.
+	 */
 	public static String PanelTabbedOperation_EmptyPanelTabbedTag;
 
 	/**

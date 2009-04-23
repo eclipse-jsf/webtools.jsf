@@ -119,4 +119,32 @@ public abstract class AbstractTrinidadTransformOperation extends AbstractTransfo
 		return children;
 	}
 
+	/**
+	 * Calculates required style class value, based on a specified base style
+	 * class and the value of the source Element instance's "styleClass"
+	 * attribute.
+	 * 
+	 * @param baseClass Specified base style class (may be null).
+	 * @param srcElement Source Element instance (may be null).
+	 * @return Required style class value, to be set as "class" attribute (may
+	 * be null).
+	 */
+	protected String calculateStyleClass(String baseClass, Element srcElement) {
+		String styleClass = null;
+		if (baseClass != null) {
+			styleClass = baseClass;
+		}
+		if (srcElement != null) {
+			String srcStyleClass = srcElement.getAttribute("styleClass"); //$NON-NLS-1$
+			if (srcStyleClass != null && srcStyleClass.length() > 0) {
+				if (styleClass.length() > 0) {
+					styleClass += "," + srcStyleClass; //$NON-NLS-1$
+				} else {
+					styleClass = srcStyleClass;
+				}
+			}
+		}
+		return styleClass;
+	}
+
 }

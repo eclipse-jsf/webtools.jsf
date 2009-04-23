@@ -42,6 +42,14 @@
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.elementedit.TrinidadCoreElementEditFactory">
       </elementEditFactory>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.BreadCrumbsOperation"
+            id="BreadCrumbsOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.CommandNavigationItemOperation"
+            id="CommandNavigationItemOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.CreateClassAttributeOperation"
             id="CreateClassAttributeOperation">
       </tagTransformOperation>
