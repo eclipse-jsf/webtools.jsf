@@ -36,8 +36,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization extends
     {
     	IWritableCustomizationData tagDropped = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG1);
         tagDropped.addAttribute("attr1", "value1");
-        tagDropped.addAttribute("attr2", "value2");
-        tagDropped.addAttribute("attr3", "value3");
     	
         
         //---------------------------------------------------------------------
@@ -59,12 +57,10 @@ public class TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization extends
 
         IWritableCustomizationData tag21 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG2);
         tag21.addAttribute("tag21Attr1", "tag21Attr1Value");   
-        tag21.addAttribute("tag21Attr2", "tag21Attr2Value");   
         tagDropped.addParentData(tag21);
 
         IWritableCustomizationData tag22 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG2);
         tag22.addAttribute("tag22Attr1", "tag22Attr1Value");   
-        tag22.addAttribute("tag21Attr2", "tag22Attr2Value");   
         tagDropped.addParentData(tag22);
 
         IWritableCustomizationData tag23 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG2);
@@ -129,8 +125,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization extends
 
         IWritableCustomizationData tag91 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG9);
         tag91.addAttribute("tag91Attr1", "tag91Attr1Value");
-        tag91.addAttribute("tag91Attr2", "tag91Attr2Value");
-        tag91.addAttribute("tag91Attr3", "tag91Attr3Value");
         tagDropped.addChildData(tag91);
 
         IWritableCustomizationData tag92 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG9);
@@ -139,7 +133,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization extends
         IWritableCustomizationData tag71 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG7);
         IWritableCustomizationData tag84 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG8);
         tag84.addAttribute("attr1", "value1");
-        tag84.addAttribute("attr2", "value2");
         IWritableCustomizationData tag73 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG7);
 
         IWritableCustomizationData tag61 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG6);

@@ -36,8 +36,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization extends B
     	// Setup tag
     	IWritableCustomizationData tagDropped = new CustomizationDataImpl(getTagIdentifier());
     	tagDropped.addAttribute("attr1", "value1");
-    	tagDropped.addAttribute("attr2", "value2");
-    	tagDropped.addAttribute("attr3", "value3");
 
         /*
 
@@ -46,13 +44,13 @@ public class TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization extends B
           
           f:view 
           |
-          +----TagDropped  (attr1=value1, att2=value2, attr3=value3)
+          +----TagDropped  (attr1=value1)
                |
                +----TAG1
                |    |
                |    +----TAG1 
                |
-               +----TAG2  (tag2Attr1=tag2Attr1Value, tag2Attr2=tag2Attr2Value) 
+               +----TAG2  (tag2Attr1=tag2Attr1Value) 
                |    |
                |    +----TAG7
                |    |
@@ -77,7 +75,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization extends B
         IWritableCustomizationData tag6 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG6);
         IWritableCustomizationData tag2 = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG2);
         tag2.addAttribute("tag2Attr1", "tag2Attr1Value");
-        tag2.addAttribute("tag2Attr2", "tag2Attr2Value");
         tag2.addChildData(tag7);
         tag2.addChildData(tag6);
         tagDropped.addChildData(tag2);

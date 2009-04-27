@@ -10,11 +10,11 @@
 </head>
 <body>
 <f:view>
-    <h:commandButton attr2="value2" attr1="value1" attr3="value3">
+    <h:commandButton attr1="value1">
         <p:tag1>
             <p:tag1></p:tag1>
         </p:tag1>
-        <p:tag2 tag2Attr2="tag2Attr2Value" tag2Attr1="tag2Attr1Value">
+        <p:tag2 tag2Attr1="tag2Attr1Value">
             <p:tag7></p:tag7>
             <p:tag6></p:tag6>
         </p:tag2>

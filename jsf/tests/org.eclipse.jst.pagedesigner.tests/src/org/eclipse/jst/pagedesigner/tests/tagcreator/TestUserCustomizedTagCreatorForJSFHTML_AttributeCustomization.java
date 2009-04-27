@@ -35,8 +35,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_AttributeCustomization exten
     	// Setup tag
     	IWritableCustomizationData data = new CustomizationDataImpl(getTagIdentifier());
     	data.addAttribute("attr1", "value1");
-    	data.addAttribute("attr2", "value2");
-    	data.addAttribute("attr3", "value3");
 
     	return (IAdaptable) data;
     }

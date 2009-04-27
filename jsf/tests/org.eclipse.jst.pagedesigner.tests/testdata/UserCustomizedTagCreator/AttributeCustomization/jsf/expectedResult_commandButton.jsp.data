@@ -8,6 +8,6 @@
 </head>
 <body>
 
-<h:commandButton attr1="value1" attr2="value2" attr3="value3"></h:commandButton>
+<h:commandButton attr1="value1"></h:commandButton>
 </body>
 </html>
