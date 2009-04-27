@@ -7,6 +7,8 @@
  *
  * Contributors:
  *    Oracle - initial API and implementation
+ *    Debajit Adhikary - Fixes for bug 255097 ("Request to remove input fields 
+ *                       from facet install page")
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
@@ -36,7 +38,9 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
  *  
  */
 public final class JSFFacetUninstallDelegate implements IDelegate {
-	
+
+    private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.wst.common.project.facet.core.IDelegate#execute(org.eclipse.core.resources.IProject, org.eclipse.wst.common.project.facet.core.IProjectFacetVersion, java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -49,20 +53,25 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 			}
 
 			try {
-				//Before we do any de-configuration, verify that web.xml is available for update
-				IModelProvider provider = JSFUtils.getModelProvider(project);
-				if (provider == null ) {				
-					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_ConfigErr, project.getName())); 
-				} else if (!(provider.validateEdit(null, null).isOK())){					
-					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_NonUpdateableWebXML, project.getName())); 
-				}
-				
+			    if (jsfFacetConfigurationEnabled)
+			    {
+    				//Before we do any de-configuration, verify that web.xml is available for update
+    				IModelProvider provider = JSFUtils.getModelProvider(project);
+    				if (provider == null ) {				
+    					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_ConfigErr, project.getName())); 
+    				} else if (!(provider.validateEdit(null, null).isOK())){					
+    					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_NonUpdateableWebXML, project.getName())); 
+    				}
+			    }
+			    
 				// Remove JSF Libraries
 				( (JSFFacetUninstallConfig) config ).getLibrariesUninstallDelegate().execute( null );
 				
-				// remove servlet stuff from web.xml
-				uninstallJSFReferencesFromWebApp(project, monitor);
-
+                if (jsfFacetConfigurationEnabled)
+                {
+    				// remove servlet stuff from web.xml
+    				uninstallJSFReferencesFromWebApp(project, monitor);
+                }
 				if (monitor != null) {
 					monitor.worked(1);
 				}

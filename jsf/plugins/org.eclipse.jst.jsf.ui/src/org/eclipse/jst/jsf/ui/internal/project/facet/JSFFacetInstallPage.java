@@ -7,6 +7,8 @@
  *
  * Contributors:
  *    Gerry Kessler - initial API and implementation
+ *    Debajit Adhikary - Fixes for bug 255097 ("Request to remove input fields 
+ *                       from facet install page")
  *******************************************************************************/
 package org.eclipse.jst.jsf.ui.internal.project.facet;
 
@@ -23,6 +25,7 @@ import org.eclipse.jst.common.project.facet.core.libprov.LibraryInstallDelegate;
 import org.eclipse.jst.common.project.facet.ui.libprov.LibraryProviderFrameworkUi;
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
+import org.eclipse.jst.jsf.core.internal.project.facet.JsfFacetConfigurationUtil;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.swt.SWT;
@@ -53,6 +56,9 @@ import org.eclipse.wst.common.project.facet.ui.IWizardContext;
  */
 public class JSFFacetInstallPage extends DataModelWizardPage implements
 		IJSFFacetInstallDataModelProperties, IFacetWizardPage {
+    
+    private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
+    
 	// UI
 	private Label lblJSFConfig;
 	private Text txtJSFConfig;
@@ -129,97 +135,101 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
         
 		spacer.setLayoutData( gd );
 
-		lblJSFConfig = new Label(composite, SWT.NONE);
-		lblJSFConfig.setText(Messages.JSFFacetInstallPage_JSFConfigLabel);
-		lblJSFConfig.setLayoutData(new GridData(GridData.BEGINNING));
-
-		txtJSFConfig = new Text(composite, SWT.BORDER);
-		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
-		gd1.horizontalSpan = 2;
-		txtJSFConfig.setLayoutData(gd1);
-
-		lblJSFServletName = new Label(composite, SWT.NONE);
-		lblJSFServletName
-				.setText(Messages.JSFFacetInstallPage_JSFServletNameLabel);
-		lblJSFServletName.setLayoutData(new GridData(GridData.BEGINNING));
-
-		txtJSFServletName = new Text(composite, SWT.BORDER);
-		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
-		gd2.horizontalSpan = 2;
-		txtJSFServletName.setLayoutData(gd2);
-
-		lblJSFServletClassName = new Label(composite, SWT.NONE);
-		lblJSFServletClassName
-				.setText(Messages.JSFFacetInstallPage_JSFServletClassNameLabel);
-		lblJSFServletClassName.setLayoutData(new GridData(GridData.BEGINNING));
-
-		txtJSFServletClassName = new Text(composite, SWT.BORDER);
-		GridData gd2c = new GridData(GridData.FILL_HORIZONTAL);
-		gd2c.horizontalSpan = 2;
-		txtJSFServletClassName.setLayoutData(gd2c);
+        if (jsfFacetConfigurationEnabled)
+        {
+    		lblJSFConfig = new Label(composite, SWT.NONE);
+    		lblJSFConfig.setText(Messages.JSFFacetInstallPage_JSFConfigLabel);
+    		lblJSFConfig.setLayoutData(new GridData(GridData.BEGINNING));
+    
+    		txtJSFConfig = new Text(composite, SWT.BORDER);
+    		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
+    		gd1.horizontalSpan = 2;
+    		txtJSFConfig.setLayoutData(gd1);
+    
+    		lblJSFServletName = new Label(composite, SWT.NONE);
+    		lblJSFServletName
+    				.setText(Messages.JSFFacetInstallPage_JSFServletNameLabel);
+    		lblJSFServletName.setLayoutData(new GridData(GridData.BEGINNING));
+    
+    		txtJSFServletName = new Text(composite, SWT.BORDER);
+    		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
+    		gd2.horizontalSpan = 2;
+    		txtJSFServletName.setLayoutData(gd2);
+    
+    		lblJSFServletClassName = new Label(composite, SWT.NONE);
+    		lblJSFServletClassName
+    				.setText(Messages.JSFFacetInstallPage_JSFServletClassNameLabel);
+    		lblJSFServletClassName.setLayoutData(new GridData(GridData.BEGINNING));
+    
+    		txtJSFServletClassName = new Text(composite, SWT.BORDER);
+    		GridData gd2c = new GridData(GridData.FILL_HORIZONTAL);
+    		gd2c.horizontalSpan = 2;
+    		txtJSFServletClassName.setLayoutData(gd2c);
+    		
+    		lblJSFServletURLPatterns = new Label(composite, SWT.NULL);
+    		lblJSFServletURLPatterns
+    				.setText(Messages.JSFFacetInstallPage_JSFURLMappingLabel);
+    		lblJSFServletURLPatterns.setLayoutData(new GridData(GridData.BEGINNING
+    				| GridData.VERTICAL_ALIGN_BEGINNING));
+    		lstJSFServletURLPatterns = new List(composite, SWT.BORDER);
+    		GridData gd3 = new GridData(GridData.FILL_HORIZONTAL);
+    		gd3.heightHint = convertHeightInCharsToPixels(5);
+    		lstJSFServletURLPatterns.setLayoutData(gd3);
+    		lstJSFServletURLPatterns.addSelectionListener(new SelectionAdapter() {
+    			public void widgetSelected(SelectionEvent e) {
+    				btnRemovePattern.setEnabled(lstJSFServletURLPatterns
+    						.getSelectionCount() > 0);
+    			}
+    		});
+    
+    		Composite btnComposite = new Composite(composite, SWT.NONE);
+    		GridLayout gl = new GridLayout(1, false);
+    		// gl.marginBottom = 0;
+    		// gl.marginTop = 0;
+    		// gl.marginRight = 0;
+    		gl.marginLeft = 0;
+    		btnComposite.setLayout(gl);
+    		btnComposite.setLayoutData(new GridData(GridData.END
+    				| GridData.VERTICAL_ALIGN_FILL));
+    
+    		btnAddPattern = new Button(btnComposite, SWT.NONE);
+    		btnAddPattern.setText(Messages.JSFFacetInstallPage_Add2);
+    		btnAddPattern.setLayoutData(new GridData(GridData.FILL_HORIZONTAL
+    				| GridData.VERTICAL_ALIGN_BEGINNING));
+    		btnAddPattern.addSelectionListener(new SelectionAdapter() {
+    			public void widgetSelected(SelectionEvent e) {
+    				InputDialog dialog = new InputDialog(getShell(),
+    						Messages.JSFFacetInstallPage_PatternDialogTitle,
+    						Messages.JSFFacetInstallPage_PatternDialogDesc, null,
+    						new IInputValidator() {
+    
+    							public String isValid(String newText) {
+    								return isValidPattern(newText);
+    							}
+    
+    						});
+    				dialog.open();
+    				if (dialog.getReturnCode() == Window.OK) {
+    					addItemToList(dialog.getValue(), true);
+    				}
+    			}
+    		});
+    
+    		btnRemovePattern = new Button(btnComposite, SWT.NONE);
+    		btnRemovePattern.setText(Messages.JSFFacetInstallPage_Remove);
+    		btnRemovePattern.setLayoutData(new GridData(GridData.FILL_HORIZONTAL
+    				| GridData.VERTICAL_ALIGN_BEGINNING));
+    		btnRemovePattern.setEnabled(false);
+    		btnRemovePattern.addSelectionListener(new SelectionAdapter() {
+    			public void widgetSelected(SelectionEvent e) {
+    				removeItemFromList(lstJSFServletURLPatterns.getSelection());
+    				btnRemovePattern.setEnabled(false);
+    			}
+    		});
+    
+    		addModificationListeners();
+        }
 		
-		lblJSFServletURLPatterns = new Label(composite, SWT.NULL);
-		lblJSFServletURLPatterns
-				.setText(Messages.JSFFacetInstallPage_JSFURLMappingLabel);
-		lblJSFServletURLPatterns.setLayoutData(new GridData(GridData.BEGINNING
-				| GridData.VERTICAL_ALIGN_BEGINNING));
-		lstJSFServletURLPatterns = new List(composite, SWT.BORDER);
-		GridData gd3 = new GridData(GridData.FILL_HORIZONTAL);
-		gd3.heightHint = convertHeightInCharsToPixels(5);
-		lstJSFServletURLPatterns.setLayoutData(gd3);
-		lstJSFServletURLPatterns.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				btnRemovePattern.setEnabled(lstJSFServletURLPatterns
-						.getSelectionCount() > 0);
-			}
-		});
-
-		Composite btnComposite = new Composite(composite, SWT.NONE);
-		GridLayout gl = new GridLayout(1, false);
-		// gl.marginBottom = 0;
-		// gl.marginTop = 0;
-		// gl.marginRight = 0;
-		gl.marginLeft = 0;
-		btnComposite.setLayout(gl);
-		btnComposite.setLayoutData(new GridData(GridData.END
-				| GridData.VERTICAL_ALIGN_FILL));
-
-		btnAddPattern = new Button(btnComposite, SWT.NONE);
-		btnAddPattern.setText(Messages.JSFFacetInstallPage_Add2);
-		btnAddPattern.setLayoutData(new GridData(GridData.FILL_HORIZONTAL
-				| GridData.VERTICAL_ALIGN_BEGINNING));
-		btnAddPattern.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				InputDialog dialog = new InputDialog(getShell(),
-						Messages.JSFFacetInstallPage_PatternDialogTitle,
-						Messages.JSFFacetInstallPage_PatternDialogDesc, null,
-						new IInputValidator() {
-
-							public String isValid(String newText) {
-								return isValidPattern(newText);
-							}
-
-						});
-				dialog.open();
-				if (dialog.getReturnCode() == Window.OK) {
-					addItemToList(dialog.getValue(), true);
-				}
-			}
-		});
-
-		btnRemovePattern = new Button(btnComposite, SWT.NONE);
-		btnRemovePattern.setText(Messages.JSFFacetInstallPage_Remove);
-		btnRemovePattern.setLayoutData(new GridData(GridData.FILL_HORIZONTAL
-				| GridData.VERTICAL_ALIGN_BEGINNING));
-		btnRemovePattern.setEnabled(false);
-		btnRemovePattern.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				removeItemFromList(lstJSFServletURLPatterns.getSelection());
-				btnRemovePattern.setEnabled(false);
-			}
-		});
-
-		addModificationListeners();
 
 		this.getContainer().getShell().pack();
 
@@ -325,8 +335,11 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 * @see org.eclipse.wst.common.project.facet.ui.IFacetWizardPage#transferStateToConfig()
 	 */
 	public void transferStateToConfig() {
-		saveSettings(); // convenient place for this. don't want to save if user
-						// cancelled.
+	    if (jsfFacetConfigurationEnabled)
+	    {
+    		saveSettings(); // convenient place for this. don't want to save if user
+    						// cancelled.
+	    }
 	}
 
 	private void addModificationListeners() {
@@ -391,7 +404,13 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#getValidationPropertyNames()
 	 */
 	protected String[] getValidationPropertyNames() {
-		return new String[] { CONFIG_PATH, SERVLET_NAME, SERVLET_CLASSNAME, COMPONENT_LIBRARIES, LIBRARY_PROVIDER_DELEGATE };
+
+	    if (jsfFacetConfigurationEnabled)
+	    {
+	        return new String[] { CONFIG_PATH, SERVLET_NAME, SERVLET_CLASSNAME, COMPONENT_LIBRARIES, LIBRARY_PROVIDER_DELEGATE };
+	    }
+	    
+        return new String[] { LIBRARY_PROVIDER_DELEGATE };
 	}
 
 	/* (non-Javadoc)
@@ -454,7 +473,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#restoreDefaultSettings()
 	 */
 	protected void restoreDefaultSettings() {
-		initializeValues();
+	    if (jsfFacetConfigurationEnabled)
+	    {
+	        initializeValues();
+	    }
 	}
 	/* (non-Javadoc)
 	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#showValidationErrorsOnEnter()

@@ -7,6 +7,8 @@
  *
  * Contributors:
  *    Gerry Kessler - initial API and implementation
+ *    Debajit Adhikary - Fixes for bug 255097 ("Request to remove input fields 
+ *                       from facet install page")
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
@@ -52,6 +54,8 @@ public class JSFFacetInstallDataModelProvider extends
 		FacetInstallDataModelProvider implements
 		IJSFFacetInstallDataModelProperties {
 
+    private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
+
     private LibraryInstallDelegate libraryInstallDelegate = null;
     
     private void initLibraryInstallDelegate()
@@ -87,15 +91,21 @@ public class JSFFacetInstallDataModelProvider extends
 	
 	public Set getPropertyNames() {
 		Set names = super.getPropertyNames();
-		names.add(CONFIG_PATH);
-		names.add(SERVLET_NAME);
-		names.add(SERVLET_CLASSNAME);
-		names.add(SERVLET_URL_PATTERNS);
-		names.add(WEBCONTENT_DIR);
-		names.add(LIBRARY_PROVIDER_DELEGATE);
-		names.add(COMPONENT_LIBRARIES);
 		
-		return names;
+		if (jsfFacetConfigurationEnabled)
+		{
+    		names.add(CONFIG_PATH);
+    		names.add(SERVLET_NAME);
+    		names.add(SERVLET_CLASSNAME);
+    		names.add(SERVLET_URL_PATTERNS);
+    		names.add(COMPONENT_LIBRARIES);
+    		names.add(WEBCONTENT_DIR);
+    		
+		}
+
+		names.add(LIBRARY_PROVIDER_DELEGATE);
+
+        return names;
 	}
 
 	public Object getDefaultProperty(String propertyName) {
@@ -139,17 +149,24 @@ public class JSFFacetInstallDataModelProvider extends
 
     public IStatus validate(String name) {
 		errorMessage = null;
-		if (name.equals(CONFIG_PATH)) {
-			return validateConfigLocation(getStringProperty(CONFIG_PATH));
-		} else if (name.equals(SERVLET_NAME)) {			
-			return validateServletName(getStringProperty(SERVLET_NAME));
-		}
-		else if (name.equals(LIBRARY_PROVIDER_DELEGATE)) {
-		    return ((LibraryInstallDelegate) getProperty(LIBRARY_PROVIDER_DELEGATE)).validate();
-		}
-		else if (name.equals(COMPONENT_LIBRARIES)) {
-			return validateClasspath();
-		}
+		
+		if (jsfFacetConfigurationEnabled)
+		{
+    		if (name.equals(CONFIG_PATH)) {
+    			return validateConfigLocation(getStringProperty(CONFIG_PATH));
+    		} else if (name.equals(SERVLET_NAME)) {			
+    			return validateServletName(getStringProperty(SERVLET_NAME));
+    		}
+    		else if (name.equals(COMPONENT_LIBRARIES)) {
+    			return validateClasspath();
+    		}
+   		}
+
+		if (name.equals(LIBRARY_PROVIDER_DELEGATE)) 
+		{
+            return ((LibraryInstallDelegate) getProperty(LIBRARY_PROVIDER_DELEGATE)).validate();
+        }
+		
 		return super.validate(name);
 	}
 	

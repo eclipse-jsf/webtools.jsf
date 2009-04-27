@@ -12,6 +12,7 @@
    <extension-point id="tagregistry" name="%extension-point.name.10" schema="schema/tagregistry.exsd"/>
    <extension-point id="viewhandler" name="%extension-point.name.6" schema="schema/viewhandler.exsd"/>
    <extension-point id="customViewMapper" name="%extension-point.name.7" schema="schema/customViewMapper.exsd"/>
+   <extension-point id="jsfFacetConfiguration" name="%extension-point.name.11" schema="schema/jsfFacetConfiguration.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
     	<package 
@@ -413,5 +414,5 @@
   <extension point="org.eclipse.jst.common.project.facet.core.legacyLibraryProviderDetectors">
     <detector class="org.eclipse.jst.jsf.core.internal.project.facet.LegacyJSFLibraryProviderDetector"/>
   </extension>
-  
+
 </plugin>

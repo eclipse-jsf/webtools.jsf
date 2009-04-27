@@ -7,6 +7,8 @@
  *
  * Contributors:
  *    Gerry Kessler - initial API and implementation
+ *    Debajit Adhikary - Fixes for bug 255097 ("Request to remove input fields 
+ *                       from facet install page")
  *******************************************************************************/ 
 
 package org.eclipse.jst.jsf.core.internal.project.facet;
@@ -50,6 +52,9 @@ import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
  */
 public final class JSFFacetInstallDelegate implements IDelegate {
 
+    private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
+    
+    
 	/* (non-Javadoc)
 	 * @see org.eclipse.wst.common.project.facet.core.IDelegate#execute(org.eclipse.core.resources.IProject, org.eclipse.wst.common.project.facet.core.IProjectFacetVersion, java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
 	 */
@@ -73,14 +78,17 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 								Messages.JSFFacetInstallDelegate_InternalErr);
 			}
 
-			//Before we do any configuration, verify that web.xml is available for update
-			IModelProvider provider = JSFUtils.getModelProvider(project);
-			if (provider == null ) {				
-				throw new JSFFacetException( NLS.bind(Messages.JSFFacetInstallDelegate_ConfigErr, project.getName())); 
-			} else if (!(provider.validateEdit(null, null).isOK())){				
-				if (!(provider.validateEdit(null, null).isOK())) {//checks for web.xml file being read-only and allows user to set writeable		
-					throw new JSFFacetException(NLS.bind(Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,  project.getName()));
-				}
+			if (jsfFacetConfigurationEnabled)
+			{
+    			//Before we do any configuration, verify that web.xml is available for update
+    			IModelProvider provider = JSFUtils.getModelProvider(project);
+    			if (provider == null ) {				
+    				throw new JSFFacetException( NLS.bind(Messages.JSFFacetInstallDelegate_ConfigErr, project.getName())); 
+    			} else if (!(provider.validateEdit(null, null).isOK())){				
+    				if (!(provider.validateEdit(null, null).isOK())) {//checks for web.xml file being read-only and allows user to set writeable		
+    					throw new JSFFacetException(NLS.bind(Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,  project.getName()));
+    				}
+    			}
 			}
 			
 //			// Create JSF Libs as classpath containers and set WTP dependencies
@@ -90,12 +98,15 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			//Configure libraries
 			( (LibraryInstallDelegate) config.getProperty( IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE ) ).execute( new NullProgressMonitor() );
 			
-			// Create config file
-			createConfigFile(project, fv, config, monitor);
+            if (jsfFacetConfigurationEnabled)
+            {
+    			// Create config file
+    			createConfigFile(project, fv, config, monitor);
 
-			// Update web model
-			createServletAndModifyWebXML(project, config, monitor);
-
+    			// Update web model
+    			createServletAndModifyWebXML(project, config, monitor);
+            }
+            
 			if (monitor != null) {
 				monitor.worked(1);
 			}
