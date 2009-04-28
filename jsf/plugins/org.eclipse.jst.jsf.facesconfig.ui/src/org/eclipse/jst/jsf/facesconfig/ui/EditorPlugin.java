@@ -263,6 +263,6 @@ public class EditorPlugin extends AbstractUIPlugin {//implements IStartup {
 	}
 
 	protected void initializeDefaultPluginPreferences() {
-		new GEMPreferences();
+		GEMPreferences.initializeDefaults();
 	}
 }

@@ -269,14 +269,13 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		// FIXME: we should be encapsulating what pref store is used for all callers of this class
 		setPreferenceStore(EditorPlugin.getDefault().getPreferenceStore());
 		setDescription(PreferenceMessages.GEMPreferences_description);
-		initializeDefaults();
 	}
 
 	/**
 	 * Sets the default values of the preferences.
 	 */
-	private void initializeDefaults() {
-		IPreferenceStore store = getPreferenceStore();
+	public static void initializeDefaults() {
+		IPreferenceStore store = EditorPlugin.getDefault().getPreferenceStore();
 		Font f = JFaceResources.getFontRegistry().get(
 				JFaceResources.DEFAULT_FONT);
 
@@ -299,6 +298,7 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		store.setDefault(GRID_HEIGHT, 12);
 		PreferenceConverter.setDefault(store, GRID_COLOR,
 				new RGB(230, 230, 230));
+		store.setDefault(LABEL_PLACEMENT, LABEL_PLACEMENT_BOTTOM);
 	}
 
 	/**
