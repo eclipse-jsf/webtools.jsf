@@ -36,8 +36,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_ParentCustomization extends 
     	// Setup tag
     	IWritableCustomizationData data = new CustomizationDataImpl(getTagIdentifier());
     	data.addAttribute("attr1", "value1");
-    	data.addAttribute("attr2", "value2");
-    	data.addAttribute("attr3", "value3");
 
     	//--------------------------------------------
     	// Add parent tags ((outermost parent first)
@@ -59,9 +57,6 @@ public class TestUserCustomizedTagCreatorForJSFHTML_ParentCustomization extends 
     	// Setup grandparent
     	IWritableCustomizationData parent = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG2);
     	parent.addAttribute("parentAttr1", "parentValue1");
-    	parent.addAttribute("parentAttr2", "parentValue2");
-    	parent.addAttribute("parentAttr3", "parentValue3");
-    	parent.addAttribute("parentAttr4", "parentValue4");
     	data.addParentData(parent);
     	
     	// Setup parent

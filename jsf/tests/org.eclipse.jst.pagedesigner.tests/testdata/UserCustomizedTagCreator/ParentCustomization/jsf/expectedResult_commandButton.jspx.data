@@ -8,10 +8,9 @@
     <body>
 	<f:view>
 		<p:tag1 grandParentAttr1="grandParentValue1">
-			<p:tag2 parentAttr2="parentValue2" parentAttr1="parentValue1"
-				parentAttr4="parentValue4" parentAttr3="parentValue3">
+			<p:tag2 parentAttr1="parentValue1">
 				<p:tag3>
-					<h:commandButton attr2="value2" attr1="value1" attr3="value3"></h:commandButton>
+					<h:commandButton attr1="value1"></h:commandButton>
 				</p:tag3>
 			</p:tag2>
 		</p:tag1>
