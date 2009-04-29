@@ -26,7 +26,7 @@
 .af_dialog_container,.af_panelPopup_container {border-color:#336633;border:1px solid;background-color:white}
 .af_dialog_title-bar,.af_panelPopup_title-bar {background-color:#CCCCCC;border-color:#336633;border-bottom:1px solid;padding:2px 2px 2px 2px}
 .af_dialog_title-text,.af_panelPopup_title-text {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:11pt;font-weight:normal;white-space:nowrap;overflow:hidden}
-.af_dialog_close-icon {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:11pt;font-weight:normal;margin-left:5px;background-image:url(/trinidad-demo-1.2.5/adf/images/close.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B);background-position:center;background-repeat:no-repeat;height:13px;width:13px}
+.af_dialog_close-icon {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:11pt;font-weight:normal;margin-left:5px;background-image:url(images/close.gif);background-position:center;background-repeat:no-repeat;height:13px;width:13px}
 .af_dialog_content,.af_panelPopup_content {background-color:#e9e8e8;border:0px}
 .af_inputChoice.p_AFDisabled .af_inputChoice_label,.af_inputNumberSpinbox.p_AFDisabled .af_inputNumberSpinbox_label,.af_inputText.p_AFDisabled .af_inputText_label,.af_selectBooleanCheckbox.p_AFDisabled .af_selectBooleanCheckbox_label,.af_selectBooleanRadio.p_AFDisabled .af_selectBooleanRadio_label,.af_inputColor.p_AFDisabled .af_inputColor_label,.af_inputDate.p_AFDisabled .af_inputDate_label,.af_inputListOfValues.p_AFDisabled .af_inputListOfValues_label,.af_selectManyCheckbox.p_AFDisabled .af_selectManyCheckbox_label,.af_selectManyListbox.p_AFDisabled .af_selectManyListbox_label,.af_selectOneChoice.p_AFDisabled .af_selectOneChoice_label,.af_selectOneListbox.p_AFDisabled .af_selectOneListbox_label,.af_selectOneRadio.p_AFDisabled .af_selectOneRadio_label,.af_navigationPane_bar-inactive-enabled .af_navigationPane_bar-content,.af_navigationPane_bar-active-enabled .af_navigationPane_bar-content a,.af_navigationPane_bar-inactive-enabled .af_navigationPane_bar-content a,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-mid A {color:#000000}
 .af_inputNumberSpinbox_increment-cell,.af_inputNumberSpinbox_decrement-cell {background-color:#e9e8e8;border-color:#999999;border-width:1px;border-style:solid;width:11px;height:8px}
@@ -51,7 +51,7 @@ button {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight
 .af_navigationPane_bar-separator {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;padding-left:6px;padding-right:6px;color:gray}
 .af_navigationPane_buttons-active-enabled .af_navigationPane_buttons-content,.af_navigationPane_list-active-enabled .af_navigationPane_list-content,.af_navigationPane_tabs-active .af_navigationPane_tabs-mid A,.AFLinkAccessKeyStyle,.af_inputDate_selected,.af_chooseDate_selected {font-weight:bold}
 .af_navigationPane_buttons-separator {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;padding-left:6px;padding-right:6px}
-.af_navigationPane_list-bullet {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;width:17px;background-image:url(/trinidad-demo-1.2.5/adf/images/list-bullet.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B);background-position:center;background-repeat:no-repeat}
+.af_navigationPane_list-bullet {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;width:17px;background-image:url(images/list-bullet.gif);background-position:center;background-repeat:no-repeat}
 .af_navigationPane_tabs {height:26px;overflow:hidden}
 .af_navigationPane_tabs-active.p_AFDisabled,.af_navigationPane_tabs-inactive.p_AFDisabled {cursor:default;color:gray}
 .af_navigationPane_tabs-start,.af_navigationPane_tabs-start-join {height:22px;width:26px;background-position:top right}
@@ -65,22 +65,22 @@ button {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight
 .af_navigationPane_tabs-bottom-end-content {height:4px;width:100%;background-repeat:no-repeat}
 .af_navigationPane_tabs-mid A {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight:normal;color:#000000;text-decoration:none}
 .af_navigationPane_tabs-bottom-end-join {background-repeat:repeat-x}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-start {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-start-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-start-join {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-start-join-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-start,.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-mid,.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-end {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-bot-mid-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-start-content {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-bot-start-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-mid {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-mid-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B);font-weight:bold}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-end-join-to-inactive {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-end-join-selected-to-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-end {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-end-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-end-join,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-start,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-mid,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-end,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-end-join {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-bot-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-end-content {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-bot-end-selected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-inactive .af_navigationPane_tabs-start {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-start-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-start {background-image:url(images/tab3-start-selected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-start-join {background-image:url(images/tab3-start-join-selected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-start,.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-mid,.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-end {background-image:url(images/tab3-bot-mid-selected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-start-content {background-image:url(images/tab3-bot-start-selected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-mid {background-image:url(images/tab3-mid-selected.gif);font-weight:bold}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-end-join-to-inactive {background-image:url(images/tab3-end-join-selected-to-deselected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-end {background-image:url(images/tab3-end-selected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-end-join,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-start,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-mid,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-end,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-end-join {background-image:url(images/tab3-bot-deselected.gif)}
+.af_navigationPane_tabs-active .af_navigationPane_tabs-bottom-end-content {background-image:url(images/tab3-bot-end-selected.gif)}
+.af_navigationPane_tabs-inactive .af_navigationPane_tabs-start {background-image:url(images/tab3-start-deselected.gif)}
 .af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-start-content,.af_navigationPane_tabs-inactive .af_navigationPane_tabs-bottom-end-content {background-image:none}
-.af_navigationPane_tabs-inactive .af_navigationPane_tabs-start-join-from-active {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-start-join-selected-to-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-inactive .af_navigationPane_tabs-start-join-from-inactive {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-start-join-deselected-to-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-inactive .af_navigationPane_tabs-mid {color:#000000;background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-mid-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-inactive .af_navigationPane_tabs-end-join-to-inactive {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-end-join-deselected-to-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
-.af_navigationPane_tabs-inactive .af_navigationPane_tabs-end {background-image:url(/trinidad-demo-1.2.5/adf/images/tab3-end-deselected.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
+.af_navigationPane_tabs-inactive .af_navigationPane_tabs-start-join-from-active {background-image:url(images/tab3-start-join-selected-to-deselected.gif)}
+.af_navigationPane_tabs-inactive .af_navigationPane_tabs-start-join-from-inactive {background-image:url(images/tab3-start-join-deselected-to-deselected.gif)}
+.af_navigationPane_tabs-inactive .af_navigationPane_tabs-mid {color:#000000;background-image:url(images/tab3-mid-deselected.gif)}
+.af_navigationPane_tabs-inactive .af_navigationPane_tabs-end-join-to-inactive {background-image:url(images/tab3-end-join-deselected-to-deselected.gif)}
+.af_navigationPane_tabs-inactive .af_navigationPane_tabs-end {background-image:url(images/tab3-end-deselected.gif)}
 .af_panelFormLayout_column,.p_OraTreeIcon {vertical-align:top}
 .af_panelFormLayout_separator {background-color:gray;height:1px;font-size:1px;margin-top:3px;margin-bottom:3px}
 .af_panelFormLayout_cell,.af_panelFormLayout_content-cell,.af_panelFormLayout_message-cell {padding:1px 0px}
@@ -231,7 +231,7 @@ button {font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;font-weight
 .p_OraOnePixelLine {background-color:#CCCCCC;font-size:0pt;overflow:hidden;height:1px;width:100%}
 .p_OraDisplayBlock {display:block}
 .p_OraHideSkipNaviText {font-size:0pt;margin-top:0px;margin-left:-999px}
-.AFLogo {width:103px;height:13px;background-repeat:no-repeat;background-position:center;vertical-align:middle;background-image:url(/trinidad-demo-1.2.5/images/logo-dark.gif;jsessionid=8D9ED4C643CCB5A9EEECE4F3C32A2D6B)}
+.AFLogo {width:103px;height:13px;background-repeat:no-repeat;background-position:center;vertical-align:middle;background-image:url(images/logo-dark.gif)}
 .af_panelBox_content-dark {border-color:#669966}
 .af_train_stop.p_AFVisited {border-color:#999999}
 .af_panelHeader,.af_showDetailHeader {border-color:#CCCCCC;border-width:0px 0px 1px 0px;border-style:solid;vertical-align:bottom;margin-bottom:3px;padding:0px 3px}

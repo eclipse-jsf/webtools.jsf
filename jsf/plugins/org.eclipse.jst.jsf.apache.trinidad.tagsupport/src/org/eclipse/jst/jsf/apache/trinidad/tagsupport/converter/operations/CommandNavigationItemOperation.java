@@ -129,7 +129,13 @@ public class CommandNavigationItemOperation extends AbstractTrinidadTransformOpe
 		return ancestor;
 	}
 
-	private String getText(Element srcElement) {
+	/**
+	 * Gets display text from a commandNavigationItem Element.
+	 * 
+	 * @param srcElement A commmandNavigationItem Element instance.
+	 * @return Display text from a commandNavigationItem Element.
+	 */
+	public static String getText(Element srcElement) {
 		String text = "commandNavigationItem"; //$NON-NLS-1$
 		if (srcElement != null) {
 			String newText = srcElement.getAttribute(ITrinidadConstants.ATTR_TEXTANDACCESSKEY);
@@ -155,7 +161,7 @@ public class CommandNavigationItemOperation extends AbstractTrinidadTransformOpe
 		return text;
 	}
 
-	private boolean isDisabled(Element srcElement) {
+	public static boolean isDisabled(Element srcElement) {
 		String disabledAttr = srcElement.getAttribute(ITrinidadConstants.ATTR_DISABLED);
 		return Boolean.TRUE.toString().equalsIgnoreCase(disabledAttr);
 	}
@@ -183,7 +189,7 @@ public class CommandNavigationItemOperation extends AbstractTrinidadTransformOpe
 		return ret;
 	}
 
-	private boolean isSelected(Element srcElement) {
+	public static boolean isSelected(Element srcElement) {
 		String selectedAttr = srcElement.getAttribute(ITrinidadConstants.ATTR_SELECTED);
 		return Boolean.TRUE.toString().equalsIgnoreCase(selectedAttr);
 	}

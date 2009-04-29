@@ -70,6 +70,10 @@
             id="InputTextWithIconOperation">
       </tagTransformOperation>
       <tagTransformOperation
+            class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.NavigationPaneOperation"
+            id="NavigationPaneOperation">
+      </tagTransformOperation>
+      <tagTransformOperation
             class="org.eclipse.jst.jsf.apache.trinidad.tagsupport.converter.operations.OutputFormattedOperation"
             id="OutputFormattedOperation">
       </tagTransformOperation>
