@@ -268,15 +268,15 @@ public abstract class XMLViewDefnAdapter extends
     {
         // TODO: need to make meta-data type driven and validate bad conversion
 
-        final boolean mapByBeanName = true; // TODO: getMetadata for mapping
+//        final boolean mapByBeanName = true; // TODO: getMetadata for mapping
         // instead
 
-        if (mapByBeanName)
-        {
+//        if (mapByBeanName)
+//        {
             return element.getAttributeNode(componentAttrName);
-        }
+//        }
 
-        return null;
+//        return null;
     }
 
     /**
