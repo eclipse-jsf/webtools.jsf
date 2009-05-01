@@ -35,7 +35,7 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
 public class LifecycleListener extends ImmutableLifecycleListener implements
         IResourceChangeListener
 {
-    private final static boolean                           ENABLE_TEST_TRACKING = false;
+    private static boolean                           ENABLE_TEST_TRACKING = false;
     private static long                                    _seqId;
 
     private final CopyOnWriteArrayList<IResource>          _resources;
@@ -91,6 +91,13 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         _testTracker = testTracker;
     }
 
+    /**
+     * @param newValue
+     */
+    protected final void setEnableTracing(final boolean newValue)
+    {
+        ENABLE_TEST_TRACKING = newValue;
+    }
     /**
      * Adds listener to the list of objects registered to receive lifecycle
      * events for this resource. Only adds the listener if it is not already in
@@ -217,7 +224,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
     {
         final long seqId = _seqId++;
 
-        if (ENABLE_TEST_TRACKING && _testTracker != null)
+        if (_testTracker != null && ENABLE_TEST_TRACKING)
         {
             _testTracker.fireEvent(Event.START_TRACKING, seqId,
                     "trackMethod_resourceChanged"); //$NON-NLS-1$
