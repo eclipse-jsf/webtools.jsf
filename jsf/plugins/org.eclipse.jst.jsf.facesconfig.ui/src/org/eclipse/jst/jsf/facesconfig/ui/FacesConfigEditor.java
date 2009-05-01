@@ -786,12 +786,12 @@ public class FacesConfigEditor extends FormEditor implements
 		 * Flushes every observed command stack and resets the save location to
 		 * zero.
 		 */
-		public void flush() {
-			for (Iterator stacks = commandStacks.iterator(); stacks.hasNext();) {
-				CommandStack stack = (CommandStack) stacks.next();
-				stack.flush();
-			}
-		}
+//		public void flush() {
+//			for (Iterator stacks = commandStacks.iterator(); stacks.hasNext();) {
+//				CommandStack stack = (CommandStack) stacks.next();
+//				stack.flush();
+//			}
+//		}
 	}
 
 	/** the <code>CommandStackListener</code> */

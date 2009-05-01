@@ -263,18 +263,18 @@ public class MetaDataModelManager implements IResourceChangeListener{
             }
         }
 
-        /**
-         * @param model
-         *            from the map
-         */
-        public void remove(final MetaDataModel model) {
-            assert !_isDisposed.get();
-            final String key = calculateKey(model);
-            synchronized(this)
-            {
-                map.remove(key);
-            }
-        }
+//        /**
+//         * @param model
+//         *            from the map
+//         */
+//        public void remove(final MetaDataModel model) {
+//            assert !_isDisposed.get();
+//            final String key = calculateKey(model);
+//            synchronized(this)
+//            {
+//                map.remove(key);
+//            }
+//        }
 
         public void dispose() {
             if (_isDisposed.compareAndSet(false, true)) {

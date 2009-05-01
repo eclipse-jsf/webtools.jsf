@@ -230,28 +230,28 @@ class MasterIndex implements Serializable
         private static final long         serialVersionUID = 40851054201507727L;
 
         private final SerializableVersion _version;
-        private long                      _lastModifiedStamp;
+//        private long                      _lastModifiedStamp;
 
         public IndexHeader(final SerializableVersion version)
         {
             _version = version;
-            _lastModifiedStamp = 0;
+//            _lastModifiedStamp = 0;
         }
 
-        protected final Version getVersion()
-        {
-            return _version.getVersion();
-        }
-
-        protected final synchronized long modified()
-        {
-            return _lastModifiedStamp++;
-        }
-
-        protected final synchronized long getLastModifiedStamp()
-        {
-            return _lastModifiedStamp;
-        }
+//        protected final Version getVersion()
+//        {
+//            return _version.getVersion();
+//        }
+//
+//        protected final synchronized long modified()
+//        {
+//            return _lastModifiedStamp++;
+//        }
+//
+//        protected final synchronized long getLastModifiedStamp()
+//        {
+//            return _lastModifiedStamp;
+//        }
 
         public String toString()
         {

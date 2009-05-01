@@ -88,9 +88,10 @@ import org.eclipse.swt.widgets.Composite;
 	private static int defaultLineRoutingStyle = LINE_ROUTING_MANUAL;
 
 	private class MyGridLayer extends GridLayer {
-		Point getOrigin() {
-			return origin.getCopy();
-		}
+	    
+//		public Point getOrigin() {
+//			return origin.getCopy();
+//		}
 	}
 
 	private class MyFeedbackLayer extends FreeformLayer {

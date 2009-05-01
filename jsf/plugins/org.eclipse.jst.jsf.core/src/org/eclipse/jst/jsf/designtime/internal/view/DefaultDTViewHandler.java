@@ -572,7 +572,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     private static class ViewInfo
     {
         private final CopyOnWriteArrayList<StalenessListener> _listeners;
-        private final String                  _viewId;
+//        private final String                  _viewId;
 
         /**
          * @param listeners
@@ -582,7 +582,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         {
             super();
             _listeners = new CopyOnWriteArrayList<StalenessListener>();
-            _viewId = viewId;
+//            _viewId = viewId;
         }
 
         protected final CopyOnWriteArrayList<StalenessListener> getListeners()
@@ -590,9 +590,9 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
             return _listeners;
         }
 
-        protected final String getViewId()
-        {
-            return _viewId;
-        }
+//        protected final String getViewId()
+//        {
+//            return _viewId;
+//        }
     }
 }
