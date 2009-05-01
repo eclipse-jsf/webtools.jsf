@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.PDPlugin;
@@ -112,7 +113,14 @@ public class DefaultDTSkin extends AbstractDTSkin {
 		List<String> locations = new ArrayList<String>();
 		if (styleSheetURLs != null) {
 			for (URL currentURL: styleSheetURLs) {
-				locations.add(currentURL.toExternalForm());
+				URL fileURL;
+				try {
+					fileURL = FileLocator.toFileURL(currentURL);
+				} catch(IOException ioe) {
+					//attempt to convert to a file protocol URI failed, revert to original form
+					fileURL = currentURL;
+				}
+				locations.add(fileURL.toExternalForm());
 			}
 		}
 		return Collections.unmodifiableList(locations);

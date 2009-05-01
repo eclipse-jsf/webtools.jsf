@@ -14,6 +14,9 @@ package org.eclipse.jst.pagedesigner.preview;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.pagedesigner.IHTMLConstants;
+import org.eclipse.jst.pagedesigner.dtresourceprovider.DTSkinManager;
+import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTSkin;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.IDocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.parts.DocumentEditPart;
@@ -26,8 +29,12 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.xml.core.internal.document.XMLGeneratorImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.eclipse.wst.xml.core.internal.provisional.document.ISourceGenerator;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * @author mengbo
@@ -98,6 +105,8 @@ public class PreviewHandlerNew {
 
 				PreviewUtil.previewNode(node);
 
+				appendSkinStyleSheetLinks(node, subpart.getIDOMNode());
+
 				if (node != null) {
 					result.append(generator.generateSource(node));
 				}
@@ -107,6 +116,49 @@ public class PreviewHandlerNew {
 		} finally {
 			PageExpressionContext.reset();
 		}
+	}
+
+	private static void appendSkinStyleSheetLinks(Node previewNode, IDOMNode domNode) {
+		if (previewNode != null && domNode != null) {
+			Element head = locateHeadElement(previewNode);
+			if (head != null) {
+				Document document = head.getOwnerDocument();
+				if (document != null) {
+					DTSkinManager skinManager = DTSkinManager.getInstance(domNode);
+					if (skinManager != null) {
+						List<IDTSkin> currentSkins = skinManager.getCurrentSkins();
+						for (IDTSkin currentSkin: currentSkins) {
+							List<String> styleSheetLocations = currentSkin.getStyleSheetLocations();
+							for (String styleSheetLocation: styleSheetLocations) {
+								Element link = document.createElement(IHTMLConstants.TAG_LINK);
+								link.setAttribute(IHTMLConstants.ATTR_REL, "stylesheet"); //$NON-NLS-1$
+								link.setAttribute(IHTMLConstants.ATTR_TYPE, "text/css"); //$NON-NLS-1$
+								link.setAttribute(IHTMLConstants.ATTR_HREF, styleSheetLocation);
+								head.appendChild(link);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private static Element locateHeadElement(Node node) {
+		Element head = null;
+		if (node != null && node instanceof Element) {
+			if (node.getLocalName().equalsIgnoreCase(IHTMLConstants.TAG_HEAD)) {
+				head = (Element)node;
+			} else {
+				NodeList childNodes = node.getChildNodes();
+				for (int i = 0, len = childNodes.getLength(); i < len; i++) {
+					head = locateHeadElement(childNodes.item(i));
+					if (head != null) {
+						break;
+					}
+				}
+			}
+		}
+		return head;
 	}
 
 }
