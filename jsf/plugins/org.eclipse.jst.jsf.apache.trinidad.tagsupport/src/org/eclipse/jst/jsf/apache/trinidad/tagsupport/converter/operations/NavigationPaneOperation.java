@@ -58,7 +58,6 @@ public class NavigationPaneOperation extends AbstractTrinidadTransformOperation 
 	private static final String STYLECLASS_LIST_TD_BULLET = "af_navigationPane_list-bullet"; //$NON-NLS-1$
 	private static final String STYLECLASS_LIST_DIV_CONTENT = "af_navigationPane_list-content"; //$NON-NLS-1$
 
-	private static final String STYLECLASS_TABS_OUTERDIV = "af_navigationPane_tabs"; //$NON-NLS-1$
 	private static final String STYLECLASS_TABS_TABLE_INACTIVE_ENABLED = "af_navigationPane_tabs-inactive"; //$NON-NLS-1$
 	private static final String STYLECLASS_TABS_TABLE_ACTIVE_ENABLED = "af_navigationPane_tabs-active"; //$NON-NLS-1$
 	private static final String STYLECLASS_TABS_TABLE_INACTIVE_DISABLED = "af_navigationPane_tabs-inactive p_AFDisabled"; //$NON-NLS-1$
@@ -237,7 +236,7 @@ public class NavigationPaneOperation extends AbstractTrinidadTransformOperation 
 	private Element transformAsTabs(Element srcElement) {
 		Element div = null;
 		div = createElement("div"); //$NON-NLS-1$
-		setClassAndStyleAttributes(srcElement, STYLECLASS_TABS_OUTERDIV, div);
+		setClassAndStyleAttributes(srcElement, STYLECLASS_OUTERDIV, div);
 		List<Element> childCmdNavItems = getChildCmdNavItems(srcElement);
 		int index = 0;
 		int numChildCmdNavItems = childCmdNavItems.size();
