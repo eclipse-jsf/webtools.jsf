@@ -13,6 +13,7 @@
    <extension-point id="viewhandler" name="%extension-point.name.6" schema="schema/viewhandler.exsd"/>
    <extension-point id="customViewMapper" name="%extension-point.name.7" schema="schema/customViewMapper.exsd"/>
    <extension-point id="jsfFacetConfiguration" name="%extension-point.name.11" schema="schema/jsfFacetConfiguration.exsd"/>
+   <extension-point id="symbolContextResolverFactory" name="%extension-point.name.12" schema="schema/symbolContextResolverFactory.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
     	<package 
