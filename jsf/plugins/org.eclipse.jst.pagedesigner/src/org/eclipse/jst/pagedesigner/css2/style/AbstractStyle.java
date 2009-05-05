@@ -11,11 +11,13 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.style;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
+import org.eclipse.jst.pagedesigner.converter.ITagConverter;
 import org.eclipse.jst.pagedesigner.css2.CSSUtil;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.font.CSSFontManager;
@@ -387,10 +389,17 @@ public class AbstractStyle implements ICSSStyle
 	 */
 	public Insets getPaddingInsets() {
 		if (_paddingInsets == null) {
-			int top = getInsetProperty(ICSSPropertyID.ATTR_PADDING_TOP)+ARTIFICIAL_BORDER_OFFSET;
-			int left = getInsetProperty(ICSSPropertyID.ATTR_PADDING_LEFT)+ARTIFICIAL_BORDER_OFFSET;
-			int bottom = getInsetProperty(ICSSPropertyID.ATTR_PADDING_BOTTOM)+ARTIFICIAL_BORDER_OFFSET;
-			int right = getInsetProperty(ICSSPropertyID.ATTR_PADDING_RIGHT)+ARTIFICIAL_BORDER_OFFSET;
+			int top = getInsetProperty(ICSSPropertyID.ATTR_PADDING_TOP);
+			int left = getInsetProperty(ICSSPropertyID.ATTR_PADDING_LEFT);
+			int bottom = getInsetProperty(ICSSPropertyID.ATTR_PADDING_BOTTOM);
+			int right = getInsetProperty(ICSSPropertyID.ATTR_PADDING_RIGHT);
+			//add extra padding only for the top element of a source tag's rendering
+			if (elementIsTagConverted()) {
+				top += ARTIFICIAL_BORDER_OFFSET;
+				left += ARTIFICIAL_BORDER_OFFSET;
+				bottom += ARTIFICIAL_BORDER_OFFSET;
+				right += ARTIFICIAL_BORDER_OFFSET;
+			}
 			_paddingInsets = new Insets(top, left, bottom, right);
 		}
 		return _paddingInsets;
@@ -682,5 +691,19 @@ public class AbstractStyle implements ICSSStyle
 	public void processCounters() {
 		this._counters = null;
 		CounterHelper.processCounterIncrement(this);
+	}
+
+	private boolean elementIsTagConverted() {
+		boolean isTagConverted = false;
+		if (_element instanceof INodeNotifier) {
+			Collection nodeAdapters = ((INodeNotifier)_element).getAdapters();
+			for (Object nodeAdapter: nodeAdapters) {
+				if (nodeAdapter instanceof ITagConverter) {
+					isTagConverted = true;
+					break;
+				}
+			}
+		}
+		return isTagConverted;
 	}
 }
