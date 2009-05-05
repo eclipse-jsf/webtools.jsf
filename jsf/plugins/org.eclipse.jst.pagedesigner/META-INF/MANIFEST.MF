@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: org.eclipse.jst.pagedesigner;singleton:=true
 Bundle-Name: %pluginName
-Bundle-Version: 1.1.1.qualifier
+Bundle-Version: 1.1.2.qualifier
 Bundle-Activator: org.eclipse.jst.pagedesigner.PDPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -116,6 +116,7 @@ Export-Package: org.eclipse.jst.pagedesigner;x-internal:=true,
  org.eclipse.jst.pagedesigner.ui.common.sash;x-internal:=true,
  org.eclipse.jst.pagedesigner.ui.dialogfields;x-internal:=true,
  org.eclipse.jst.pagedesigner.ui.dialogs;x-internal:=true,
+ org.eclipse.jst.pagedesigner.ui.preferences;x-internal:=true,
  org.eclipse.jst.pagedesigner.utils;x-internal:=true,
  org.eclipse.jst.pagedesigner.validation.caret;x-internal:=true,
  org.eclipse.jst.pagedesigner.viewer;x-internal:=true

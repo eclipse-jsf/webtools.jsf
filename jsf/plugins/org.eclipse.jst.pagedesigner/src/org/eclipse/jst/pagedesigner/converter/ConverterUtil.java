@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
+import org.eclipse.jst.pagedesigner.dtmanager.DTManager;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
 import org.w3c.dom.Attr;
@@ -86,14 +87,14 @@ public class ConverterUtil {
 	/**
 	 * @param document
 	 * @param text
-	 * @return the descripton element in the document containing text
+	 * @return the description element in the document containing text
 	 */
 	public static Element createDescriptionElement(IDOMDocument document,
 			String text) {
 		if (document == null) {
 			return null;
 		}
-		Element span = document.createElement(IHTMLConstants.TAG_SPAN); //$NON-NLS-1$
+		Element span = document.createElement(IHTMLConstants.TAG_SPAN);
 		span.setAttribute(
 				"style", "color:gray;font-style:italic;font-size:normal;"); //$NON-NLS-1$ //$NON-NLS-2$
 		if (text == null) {
@@ -103,5 +104,69 @@ public class ConverterUtil {
 			span.appendChild(document.createTextNode(text));
 		}
 		return span;
+	}
+
+	/**
+	 * Method to find the resulting converted tag containing a given
+	 * source element. The converted element that will be
+	 * the parent tag is returned so the caller can then determine
+	 * if the parent is part of a table, header, body, footer, row,
+	 * cell, or some other element. 
+	 * 
+	 * @param srcElem the source element to test.
+	 * @param childElem a child of the source element (used by a
+	 *                  recursive call to handle special case where
+	 *                  it was moved up a level to the child model
+	 *                  list of the grandparent).
+	 * @return a converted element of the type that will contain the
+	 *         source element. 
+	 */
+	static Node findConvertedParentElement(Element srcElem, Element childElem) {
+		Node parent = srcElem.getParentNode();
+		if ((parent == null) || !(parent instanceof Element)) {
+			return null;
+		}
+
+		String name = parent.getNodeName();
+		if (IHTMLConstants.TAG_HTML.equalsIgnoreCase(name)
+				|| IHTMLConstants.TAG_BODY.equalsIgnoreCase(name)) {
+			return null;
+		}
+
+		ITagConverter converter = createTagConverter((Element) parent);
+		if (!converter.isVisualByHTML()) {
+			return null;
+		}
+
+		converter.convertRefresh(null);
+		ConvertPosition position = null;
+		if (childElem != null) {
+			// If a child node (grand child of current parent) was
+			// passed in, check for its position. It may have been
+			// moved up a level to child model list of the current
+			// parent. In JSF this is done with a header or
+			// footer facet tag in a column tag for a dataTable.
+			position = converter.getChildVisualPosition(childElem);
+		}
+		if (position == null) {
+			position = converter.getChildVisualPosition(srcElem);
+		}
+		if (position != null) {
+			// return the node that will contain the visual
+			// child and then the caller can check to see if this
+			// element is table mark-up.
+			return position.getParentNode();
+		}
+
+		// The current source element is not in the child model
+		// list for the converted parent so recurse to next
+		// ancestor and pass source element to see if it has been
+		// moved up a level as child model of the grandparent.
+		return findConvertedParentElement((Element) parent, srcElem);
+	}
+
+	private static ITagConverter createTagConverter(Element ele) {
+		return DTManager.getInstance().getTagConverter(ele,
+				IConverterFactory.MODE_DESIGNER, null);
 	}
 }

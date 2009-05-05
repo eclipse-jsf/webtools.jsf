@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
@@ -50,6 +51,8 @@ import org.eclipse.jst.pagedesigner.properties.WPETabbedPropertySheetPage;
 import org.eclipse.jst.pagedesigner.tools.RangeSelectionTool;
 import org.eclipse.jst.pagedesigner.ui.common.PartActivationHandler;
 import org.eclipse.jst.pagedesigner.ui.common.sash.SashEditorPart;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
+import org.eclipse.jst.pagedesigner.utils.EditorUtil;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -255,7 +258,11 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 		};
 		int sashIndex = addPage(_sashEditorPart, getEditorInput());
 
-		setPageText(sashIndex, PDPlugin.getResourceString("HTMLEditor.Design"));
+		// Set the sash editor mode from the stored file property
+		// or the default preference
+		initDesignerMode();
+
+		setPageText(sashIndex, PDPlugin.getResourceString("HTMLEditor.Design")); //$NON-NLS-1$
 
 		// the update's critical, to get viewer selection manager and
 		// highlighting to work
@@ -296,12 +303,12 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 		// // IEditorPart, page switches will indicate
 		// // a "null" active editor when the design page is made active
 		setPageText(designPageIndex, PDPlugin
-				.getResourceString("HTMLEditor.Design"));
+				.getResourceString("HTMLEditor.Design")); //$NON-NLS-1$
 
 		// add source page
 		int sourcePageIndex = addPage(_textEditor, getEditorInput());
 		setPageText(sourcePageIndex, PDPlugin
-				.getResourceString("HTMLEditor.Source"));
+				.getResourceString("HTMLEditor.Source")); //$NON-NLS-1$
 		// the update's critical, to get viewer selection manager and
 		// highlighting to work
 		_textEditor.update();
@@ -540,10 +547,10 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 							_log.error("Error.HTMLEditor.0", ce); //$NON-NLS-1$
 						}
 					}
-					throw new PartInitException("Resource " + input.getName()
-							+ " does not exist.");
+					throw new PartInitException("Resource " + input.getName() //$NON-NLS-1$
+							+ " does not exist."); //$NON-NLS-1$
 				}
-                throw new PartInitException("Editor could not be open on "
+                throw new PartInitException("Editor could not be open on " //$NON-NLS-1$
                 		+ input.getName());
 			}
 		} else if (input instanceof IStorageEditorInput) {
@@ -552,7 +559,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 				contents = ((IStorageEditorInput) input).getStorage()
 						.getContents();
 				if (contents == null) {
-					throw new PartInitException("Editor could not be open on "
+					throw new PartInitException("Editor could not be open on " //$NON-NLS-1$
 							+ input.getName());
 				}
 			} catch (CoreException noStorageExc) {
@@ -745,7 +752,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 			// enable our editor context
 			IContextService contextService = (IContextService) getSite()
 			  .getService(IContextService.class);
-			contextService.activateContext("org.eclipse.jst.pagedesigner.editorContext");
+			contextService.activateContext("org.eclipse.jst.pagedesigner.editorContext"); //$NON-NLS-1$
 
 		} catch (Exception e) {
 			// Error in editor initialization
@@ -1037,7 +1044,7 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 	 * @param mode
 	 */
 	public void setDesignerMode(int mode) {
-		if (_sashEditorPart != null) {
+		if (_sashEditorPart != null && _mode != mode) {
 			switch (mode) {
 			case MODE_SASH_HORIZONTAL:
 				_sashEditorPart.setOrientation(SWT.HORIZONTAL);
@@ -1052,8 +1059,38 @@ public final class HTMLEditor extends PostSelectionMultiPageEditorPart implement
 			default:
 				_sashEditorPart.setOrientation(SWT.VERTICAL);
 			}
+			if (getEditorInput() != null) {
+				EditorUtil.setEditorInputDesignModeProperty(getEditorInput(), String.valueOf(mode));
+			}
 		}
 		this._mode = mode;
+	}
+
+	/*
+	 * Set the sash editor mode from the stored file property
+	 * or the default preference.
+	 */
+	private void initDesignerMode() {
+		int preferredMode = MODE_SASH_VERTICAL;
+
+		// If the user has already selected a mode for the file, use it.
+		String prop = null;
+		if (getEditorInput() != null) {
+			prop = EditorUtil.getEditorInputDesignModeProperty(getEditorInput());
+		}
+		if (prop != null) {
+			try {
+				preferredMode = Integer.parseInt(prop);
+			} catch (NumberFormatException e) {
+				// do nothing;
+			}
+		} else {
+			// Otherwise, get the default mode from preferences.
+			IPreferenceStore pStore = PDPlugin.getDefault().getPreferenceStore();
+			preferredMode = pStore.getInt(PDPreferences.SASH_EDITOR_MODE_PREF);
+		}
+
+		setDesignerMode(preferredMode);
 	}
 
 	/**
