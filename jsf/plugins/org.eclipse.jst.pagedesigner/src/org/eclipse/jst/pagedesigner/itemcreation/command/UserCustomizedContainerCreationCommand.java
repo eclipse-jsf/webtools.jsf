@@ -6,7 +6,11 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.dom.ValidatorSupport;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 
 /**
  * Tag container creation command for tags dropped on to the WPE by the user
@@ -57,20 +61,26 @@ public class UserCustomizedContainerCreationCommand extends
         return _data;
     }
 
-    
     @Override
-    protected IDOMPosition doExecute() 
+    protected IDOMPosition doExecute()
     {
         final IDOMPosition domPosition = getDomPosition();
-        final QName  containerQName = getContainerTag().asQName();
+        final QName containerQName = getContainerTag().asQName();
 
         IDOMPosition newPosition = domPosition;
-        newPosition = ValidatorSupport.insertContainer(domPosition, containerQName, getContainerCustomizationData());
+        final IDOMModel model = ((IDOMNode) domPosition.getContainerNode())
+                .getModel();
+
+        final ITagDropSourceData creationProvider = TagToolCreationAdapter
+                .findProviderForContainer(containerQName);
+
+        newPosition = ValidatorSupport.insertContainer(domPosition,
+                model, creationProvider, getContainerCustomizationData());
         if (newPosition == null)
         {
             newPosition = domPosition;
         }
-        
+
         return newPosition;
     }
 }

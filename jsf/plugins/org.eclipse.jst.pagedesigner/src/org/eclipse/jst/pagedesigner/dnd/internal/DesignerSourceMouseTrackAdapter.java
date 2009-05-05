@@ -16,7 +16,7 @@ import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jst.pagedesigner.commands.PaletteDropInsertCommand;
 import org.eclipse.jst.pagedesigner.commands.SourceViewerCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceDataProvider;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
@@ -54,6 +54,7 @@ public class DesignerSourceMouseTrackAdapter extends
 	 * @see org.eclipse.swt.events.MouseMoveListener#mouseMove(org.eclipse.swt.events.MouseEvent)
 	 */
 	public void mouseMove(MouseEvent event) {
+		//Feedback is handled by DesignerSourceDropTargetListener - commenting out below
 		Object object = getPaletteObject();
 		StyledText text = null;
 		if (_textEditor.getTextViewer() != null) {
@@ -102,11 +103,11 @@ public class DesignerSourceMouseTrackAdapter extends
 	 * @see org.eclipse.gef.palette.PaletteListener#activeToolChanged(org.eclipse.gef.ui.palette.PaletteViewer,
 	 *      org.eclipse.gef.palette.ToolEntry)
 	 */
-	private Object getPaletteObject() {
+	private IDropSourceDataProvider getPaletteObject() {
 		if (_domain.getPaletteViewer() != null) {
 			Object tool = _domain.getPaletteViewer().getActiveTool();
-			if (tool instanceof TagToolPaletteEntry) {
-				return tool;
+			if (tool instanceof IDropSourceDataProvider) {
+				return (IDropSourceDataProvider) tool;
 			}
 		}
 		return null;
@@ -131,17 +132,16 @@ public class DesignerSourceMouseTrackAdapter extends
 	}
 
 	private PaletteDropInsertCommand getCommand(MouseEvent event) {
-		Object data = getPaletteObject();
+	    IDropSourceDataProvider data = getPaletteObject();
 		PaletteDropInsertCommand command = null;
-		if (data instanceof TagToolPaletteEntry) {
-			TagToolPaletteEntry descriptor = (TagToolPaletteEntry) data;
+		if (data != null) {
 			// "Create new item"
 			command = new PaletteDropInsertCommand(
 					PageDesignerResources
 							.getInstance()
 							.getString(
 									"DesignerSourceDropTargetListener.InserCommandLabel"), //$NON-NLS-1$
-					_textEditor, descriptor, _location);
+					_textEditor, data.getDropSourceData(), _location);
 		}
 		return command;
 	}

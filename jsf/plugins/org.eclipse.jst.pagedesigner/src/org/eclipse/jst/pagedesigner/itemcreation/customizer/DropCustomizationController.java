@@ -9,6 +9,8 @@ import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.ICustomizableCommand;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
@@ -23,24 +25,21 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
 public final class DropCustomizationController
 {
     private final ICustomizableCommand _command;
-    private final String _uri;
-    private final String _name;
+    private final IDropSourceData  _dropSourceData;
     private final IDOMDocument  _domDocument;
     private final IDOMPosition _domPosition;
 
     /**
      * @param command
-     * @param uri
-     * @param name
+     * @param dropSourceData 
      * @param domDocument 
      * @param domPosition 
      */
     public DropCustomizationController(final ICustomizableCommand command,
-            final String uri, final String name, final IDOMDocument domDocument, final IDOMPosition domPosition)
+            final IDropSourceData dropSourceData, final IDOMDocument domDocument, final IDOMPosition domPosition)
     {
         _command = command;
-        _uri = uri;
-        _name = name;
+        _dropSourceData = dropSourceData;
         _domDocument = domDocument;
         _domPosition = domPosition;
     }
@@ -50,15 +49,20 @@ public final class DropCustomizationController
      */
     public IStatus performCustomization()
     {
+        String tagName = _dropSourceData.getId();
+        if (_dropSourceData instanceof ITagDropSourceData)
+        {
+            tagName = ((ITagDropSourceData)_dropSourceData).getTagName();
+        }
         final TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(
-                _uri, _name);
+                _dropSourceData.getNamespace(), tagName);
         final IElementEdit elementEdit = ElementEditFactoryRegistry.getInstance()
                 .createElementEdit(tagId);
 
         IStatus status = Status.OK_STATUS;
         if (elementEdit != null)
         {
-            final IDropCustomizer customizer = elementEdit.getDropCustomizer(tagId);
+            final IDropCustomizer customizer = elementEdit.getDropCustomizer(_dropSourceData);
 
             if (customizer != null)
             {

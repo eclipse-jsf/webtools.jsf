@@ -14,7 +14,8 @@ package org.eclipse.jst.pagedesigner.itemcreation;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.DropRequest;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 
 /**
  * Tag tool item creation request class
@@ -29,7 +30,7 @@ public class ItemCreationRequest extends Request implements DropRequest {
 	/**
 	 * Constant used for tag tool item
 	 */
-	public static final String TAG_TOOL_PALETTE_ENTRY = "TagToolPaletteEntry"; //$NON-NLS-1$
+	private static final String DROP_SOURCE_DATA = "TagToolPaletteEntry"; //$NON-NLS-1$
 	/**
 	 * Constant used for location during creation request
 	 */
@@ -41,14 +42,6 @@ public class ItemCreationRequest extends Request implements DropRequest {
 	 */
 	public ItemCreationRequest() {
 		super(REQ_ITEM_CREATION);
-	}
-
-	/**
-	 * Constructor
-	 * @param type
-	 */
-	public ItemCreationRequest(Object type) {
-		super(type);
 	}
 
 	/*
@@ -73,18 +66,18 @@ public class ItemCreationRequest extends Request implements DropRequest {
 
 	/**
 	 * Set the tag tool item for creation request
-	 * @param tagToolPaletteEntryItem
+	 * @param creationProvider
 	 */
-	public void setTagToolPaletteEntry(TagToolPaletteEntry tagToolPaletteEntryItem) {
-		getExtendedData().remove(TAG_TOOL_PALETTE_ENTRY);
-		getExtendedData().put(TAG_TOOL_PALETTE_ENTRY, tagToolPaletteEntryItem);
+	public void setTagCreationProvider(final IDropSourceData creationProvider) {
+		getExtendedData().remove(DROP_SOURCE_DATA);
+		getExtendedData().put(DROP_SOURCE_DATA, creationProvider);
 	}
 
 	/**
-	 * @return {@link TagToolPaletteEntry} requesting creation
+	 * @return {@link ITagDropSourceData} requesting creation
 	 */
-	public TagToolPaletteEntry getTagToolPaletteEntry() {
-		return (TagToolPaletteEntry)getExtendedData().get(TAG_TOOL_PALETTE_ENTRY);
+	public IDropSourceData getTagCreationProvider() {
+		return (IDropSourceData)getExtendedData().get(DROP_SOURCE_DATA);
 	}
 
 }

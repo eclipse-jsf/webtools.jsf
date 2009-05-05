@@ -15,6 +15,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.IDropCustomizer;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
@@ -112,8 +113,15 @@ public interface IElementEdit
      * Returning null and returning a IDropCustomizer whose runCustomizer always returns
      * OK and getDropCustomizationData always returns null will be considered
      * equivalent by the framework.
+     * @deprecated use getDropCustomizer(IDropSourceData) instead
      */
     public IDropCustomizer getDropCustomizer(TagIdentifier tagId);
+
+    /**
+     * @param dropSourceData
+     * @return the drop customizer for the drop source data or null if none.
+     */
+    public IDropCustomizer getDropCustomizer(final IDropSourceData dropSourceData);
 
     /**
      * @param tagId

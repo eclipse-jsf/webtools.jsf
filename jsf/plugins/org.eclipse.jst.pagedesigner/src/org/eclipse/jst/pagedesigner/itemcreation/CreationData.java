@@ -20,11 +20,8 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
-import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
-import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
-import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -39,12 +36,12 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
  */
 public final class CreationData
 {
-    private final TagToolPaletteEntry   _tagEntry;
+    private final ITagDropSourceData  _creationProvider;
     private final String                _prefix; 
     private final IDOMPosition          _domPosition;
     private final IDOMModel             _model;
     private final IAdaptable            _customizationData;
-    
+
     private TagIdentifier               _tagId; // = null; lazy init on creation 
     
     /**
@@ -63,16 +60,19 @@ public final class CreationData
 
     
     /**
-     * @param tagEntry  TODO: remove this direct dependence on the palette
+     * @param creationProvider 
      * @param model 
      * @param domPosition 
      * @param taglibMetaDataContext 
      * @param customizationData 
      */
-    public CreationData(final TagToolPaletteEntry tagEntry, final IDOMModel model, final IDOMPosition domPosition, final ITaglibDomainMetaDataModelContext taglibMetaDataContext, final IAdaptable customizationData) 
+    public CreationData(final ITagDropSourceData creationProvider,
+            final IDOMModel model, final IDOMPosition domPosition,
+            final ITaglibDomainMetaDataModelContext taglibMetaDataContext,
+            final IAdaptable customizationData)
     {
         super();
-        this._tagEntry = tagEntry;
+        this._creationProvider = creationProvider;
         this._prefix = getPrefix(getUri(), model, getDefaultPrefix());
         this._taglibMetaDataContext = taglibMetaDataContext;
         this._domPosition = domPosition;
@@ -105,14 +105,14 @@ public final class CreationData
      * @return the tag identifier uri
      */
     public String getUri() {
-        return _tagEntry.getURI();
+        return _creationProvider.getNamespace();
     }
 
     /**
      * @return the default prefix
      */
     public String getDefaultPrefix() {
-        return _tagEntry.getDefaultPrefix();
+        return _creationProvider.getDefaultPrefix();
     }
 
     /**
@@ -126,50 +126,17 @@ public final class CreationData
      * @return the tag name
      */
     public String getTagName() {
-        return _tagEntry.getTagName();
+        return _creationProvider.getTagName();
     }
 
     /**
-     * @return the id
+     * @return the creation provider
      */
-    private String getItemId() {
-        return _tagEntry.getId();
+    public ITagDropSourceData getTagCreationProvider()
+    {
+        return _creationProvider;
     }
 
-    /**
-     * @return the palette entry that this creation info is based on
-     */
-    public TagToolPaletteEntry getTagEntry() {
-        return _tagEntry;
-    }
-    
-    /**
-     * @return {@link TagCreationInfo} for the tag entity
-     */
-    public TagCreationInfo getTagCreationInfo(){
-        Model model = TaglibDomainMetaDataQueryHelper.getModel(_taglibMetaDataContext);
-        if (model != null){
-            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, PaletteInfos.TRAIT_ID);
-            if (trait != null){
-                PaletteInfos pis = (PaletteInfos)trait.getValue();
-                PaletteInfo pi = pis.findPaletteInfoById(getItemId());
-                if (pi != null){
-                    return pi.getTagCreation();                 
-                }
-            }
-            //tag-creation trait on entity directly?
-            Entity tag = getTagEntity();
-            if (tag != null){//metadata exists
-                trait = TaglibDomainMetaDataQueryHelper.getTrait(tag, "tag-create"); //$NON-NLS-1$
-                if (trait != null && trait.getValue() != null){
-                    return (TagCreationInfo)trait.getValue();                   
-                }
-            }
-        }
-        return null;
-    }
-
-    
     /**
      * @return the {@link Entity} for this tag element being created
      */

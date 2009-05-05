@@ -19,7 +19,7 @@ import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.dnd.TemplateTransfer;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.DropCustomizationController;
 import org.eclipse.swt.dnd.DND;
@@ -92,12 +92,9 @@ public class PDTemplateTransferDropTargetListener extends
 			ItemCreationRequest request = (ItemCreationRequest) getCreateRequest();
             Object transferObj = TemplateTransfer.getInstance().getObject();
             
-            if (transferObj instanceof TagToolPaletteEntry)
+            if (transferObj instanceof IDropSourceData)
             {
-            	TagToolPaletteEntry tagItem = 
-                    (TagToolPaletteEntry) transferObj;
-
-                request.setTagToolPaletteEntry(tagItem);
+                request.setTagCreationProvider((IDropSourceData) transferObj);
                 request.setLocation(getDropLocation());
             }
             else
@@ -140,11 +137,9 @@ public class PDTemplateTransferDropTargetListener extends
         if (command instanceof CreateItemCommand)
         {
             final ItemCreationRequest request = (ItemCreationRequest) getCreateRequest();
-            final String name = request.getTagToolPaletteEntry().getTagName();
-            final String uri = request.getTagToolPaletteEntry().getURI();
             final CreateItemCommand createCommand = (CreateItemCommand) command;
             final IStatus status  = 
-                new DropCustomizationController(createCommand, uri, name, createCommand.getDocument(), createCommand.getPosition())
+                new DropCustomizationController(createCommand, request.getTagCreationProvider(), createCommand.getDocument(), createCommand.getPosition())
                     .performCustomization();
             
             return status.getSeverity() == IStatus.OK;

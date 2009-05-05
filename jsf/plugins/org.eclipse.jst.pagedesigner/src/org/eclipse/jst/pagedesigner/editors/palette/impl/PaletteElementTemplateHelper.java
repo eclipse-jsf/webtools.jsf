@@ -21,9 +21,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.MetadataTagDropSourceData;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMText;
@@ -54,16 +53,15 @@ public class PaletteElementTemplateHelper {
 	 * 
 	 * @param model
 	 * @param element
-	 * @param tagItem
-	 * @param tagCreationInfo 
+	 * @param creationProvider 
 	 */
 	public static void applyTemplate(IDOMModel model, Element element,
-			TagToolPaletteEntry tagItem, TagCreationInfo tagCreationInfo) {
+	        MetadataTagDropSourceData creationProvider) {
 		if (element == null || element.getLocalName() == null) {
 			return;
 		}
 		
-		Node[] templateNodes = getTemplateNodes(model,  tagCreationInfo);
+		Node[] templateNodes = getTemplateNodes(model,  creationProvider);
 		if (templateNodes != null) {
 			for (int i=0;i<templateNodes.length;i++){
 				Node anode = templateNodes[i];
@@ -73,12 +71,12 @@ public class PaletteElementTemplateHelper {
 	}
 
 	private static Node[] getTemplateNodes(IDOMModel model,
-			TagCreationInfo tagCreationInfo) {
+	        MetadataTagDropSourceData creationProvider) {
 
-		if (tagCreationInfo == null)
+		if (creationProvider == null)
 			return null;
 		
-		String template = (String)tagCreationInfo.getTemplate();
+		String template = creationProvider.getTemplate();
 		if (template != null){
 			
 			final String nodeStr = prepareNode(template);//(String)template.getTemplate();
@@ -91,7 +89,7 @@ public class PaletteElementTemplateHelper {
 				Document doc = builder.parse(new ByteArrayInputStream( nodeStr.getBytes()));
 				Node beginNode = doc.getFirstChild();
 				Node templateNode = beginNode.cloneNode(true);//model.getDocument().importNode(beginNode, true);
-				Node[] templateNodes = applyPrefixes(model, tagCreationInfo, templateNode.getChildNodes(), model.getDocument());
+				Node[] templateNodes = applyPrefixes(model, templateNode.getChildNodes(), model.getDocument());
 				return templateNodes;
 			} catch (ParserConfigurationException e) {
 			    logger.error(e);
@@ -121,13 +119,12 @@ public class PaletteElementTemplateHelper {
 	 * Use the actrual prefixs of jsf html and jsf core to set the prefix of
 	 * each node declared in template.
 	 * @param model 
-	 * @param info 
 	 * @param templateNodes 
 	 * @param document 
 	 * @return Node[]
 	 * 
 	 */
-	public static Node[] applyPrefixes(IDOMModel model, TagCreationInfo info,
+	public static Node[] applyPrefixes(IDOMModel model, 
 			NodeList templateNodes, Document document) {
 		List result = new ArrayList();
 		for (int i = 0, n = templateNodes.getLength(); i < n; i++) {

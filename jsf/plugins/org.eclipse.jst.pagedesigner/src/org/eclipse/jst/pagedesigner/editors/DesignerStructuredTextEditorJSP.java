@@ -14,32 +14,67 @@ package org.eclipse.jst.pagedesigner.editors;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceDropTargetListener;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.DropTarget;
 import org.eclipse.ui.texteditor.ITextEditorDropTargetListener;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
  * @author mengbo
  */
-public class DesignerStructuredTextEditorJSP extends StructuredTextEditor {
-	protected void initializeDrop(ITextViewer textViewer) {
-		// It seems if we don't skip this method, our drag drop listener will
-		// can't be enabled.
-	}
+public class DesignerStructuredTextEditorJSP extends StructuredTextEditor
+{
+    private ITextEditorDropTargetListener _dropTargetListener;
+    private DropTarget _dropTarget;
 
-	public IAction getAction(String actionID) {
-		try {
-			return super.getAction(actionID);
-		} catch (Exception e) {
-			return null;
-		}
-	}
+    @Override
+    protected void initializeDrop(final ITextViewer viewer)
+    {
+        int operations = DND.DROP_COPY | DND.DROP_MOVE;
+        _dropTarget = new DropTarget(viewer.getTextWidget(), operations);
+        _dropTargetListener = 
+            new DesignerSourceDropTargetListener(this);
+        _dropTarget.setTransfer(_dropTargetListener.getTransfers());
+        _dropTarget.addDropListener(_dropTargetListener);
+    }
 
-	public Object getAdapter(Class required) {
-		if (ITextEditorDropTargetListener.class.equals(required)) {
-			DesignerSourceDropTargetListener listener = new DesignerSourceDropTargetListener(
-					this);
-			return listener;
-		}
+    @Override
+    public IAction getAction(final String actionID)
+    {
+        try
+        {
+            return super.getAction(actionID);
+        } catch (final Exception e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public Object getAdapter(final Class required)
+    {
+        if (ITextEditorDropTargetListener.class.equals(required))
+        {
+            final DesignerSourceDropTargetListener listener = new DesignerSourceDropTargetListener(
+                    this);
+            return listener;
+        }
         return super.getAdapter(required);
-	}
+    }
+
+    @Override
+    public void dispose()
+    {
+        if (_dropTargetListener != null)
+        {
+            _dropTargetListener = null;
+        }
+        if (_dropTarget != null)
+        {
+            _dropTarget.dispose();
+            _dropTarget = null;
+        }
+        
+        super.dispose();
+    }
 }

@@ -16,6 +16,10 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.dom.ValidatorSupport;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 
 /**
  * @author cbateman
@@ -45,9 +49,15 @@ public class TagContainerCreationCommand extends ContainerCreationCommand {
         final QName  containerQName = getContainerTag().asQName();
         boolean hasform = ValidatorSupport.checkContainer(domPosition, containerQName);
         IDOMPosition newPosition = domPosition;
-        if (!hasform) {
+        if (!hasform)
+        {
+            final IDOMModel model = ((IDOMNode) domPosition.getContainerNode())
+                .getModel();
+
+            final ITagDropSourceData creationProvider =
+                TagToolCreationAdapter.findProviderForContainer(containerQName);
             newPosition = ValidatorSupport
-                    .insertContainer(domPosition, containerQName, getContainerCustomizationData());
+                    .insertContainer(domPosition, model, creationProvider, getContainerCustomizationData());
             if (newPosition == null) {
                 newPosition = domPosition;
             }

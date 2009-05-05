@@ -14,7 +14,7 @@ package org.eclipse.jst.pagedesigner.commands;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
@@ -24,56 +24,57 @@ import org.w3c.dom.Element;
  */
 public class CreateItemCommand extends DesignerCommand implements ICustomizableCommand 
 {
-	private final IDOMPosition _position;
+    private final IDOMPosition _position;
+    private final IDropSourceData _creationProvider;
+    private Element _ele;
+    private IAdaptable _customizationData;
 
-	private final TagToolPaletteEntry _tagItem;
-	private Element _ele;
-	private IAdaptable _customizationData;
+    /**
+     * @param label
+     * @param model
+     * @param position
+     * @param creationProvider
+     */
+    public CreateItemCommand(String label, IDOMModel model,
+            IDOMPosition position, IDropSourceData creationProvider) {
+        super(label, model.getDocument());
+        this._position = position;
+        this._creationProvider = creationProvider;
+    }
 
-	/**
-	 * @param label
-	 * @param model 
-	 * @param position 
-	 * @param tagItem 
-	 */
-	public CreateItemCommand(String label, IDOMModel model,
-			IDOMPosition position, TagToolPaletteEntry tagItem) {
-		super(label, model.getDocument());
-		this._position = position;
-		this._tagItem = tagItem;
-	}
-
-	
-	/**
-	 * @return the dom position for the drop
-	 */
-	public IDOMPosition getPosition()
+    /**
+     * @return the dom position for the drop
+     */
+    public IDOMPosition getPosition()
     {
         return _position;
     }
 
 
     /*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()
-	 */
-	protected void doExecute() {
-		Element element = CommandUtil.excuteInsertion(this._tagItem,
-				getModel(), this._position, this._customizationData);
-		if (element != null) {
-			formatNode(element);
-		}
-		this._ele = element;
-	}
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()
+     */
+    protected void doExecute() 
+    {
+        Element element = CommandUtil.executeInsertion(
+                _creationProvider,
+                getModel(), this._position, this._customizationData);
+        if (element != null) 
+        {
+            formatNode(element);
+        }
+        this._ele = element;
+    }
 
-	@Override
+    @Override
     protected void postPostExecute() 
-	{
+    {
         // during JUnit testing, we may not have viewer.
         // this will cause us not to have undo support,
         // but should not effect testing for this command
-	    if (getViewer() != null)
+        if (getViewer() != null)
         {
             super.postPostExecute();
         }
@@ -94,13 +95,14 @@ public class CreateItemCommand extends DesignerCommand implements ICustomizableC
     }
 
     /*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#getAfterCommandDesignerSelection()
-	 */
-	protected ISelection getAfterCommandDesignerSelection() {
-		return toDesignSelection(_ele);
-	}
+     * (non-Javadoc)
+     * 
+     * @seeorg.eclipse.jst.pagedesigner.commands.DesignerCommand#
+     * getAfterCommandDesignerSelection()
+     */
+    protected ISelection getAfterCommandDesignerSelection() {
+        return toDesignSelection(_ele);
+    }
 
     /**
      * @param customizationData

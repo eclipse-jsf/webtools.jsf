@@ -72,12 +72,12 @@ public class UserCustomizedTagCreationAdvisor extends DefaultTagCreationAdvisor 
                 
                 if (isFirstParent) 
                 {
-                    command = new UserCustomizedContainerCreationCommand(position, parentTagIdentifier, _creationData.getTagId(), (IAdaptable) parentCustomizationData);
+                    command = new UserCustomizedContainerCreationCommand(position, parentTagIdentifier, _creationData.getTagId(), parentCustomizationData);
                     isFirstParent = false;
                 }
                 else
                 {
-                    command.chain(new UserCustomizedContainerCreationCommand(position, parentTagIdentifier, _creationData.getTagId(), (IAdaptable) parentCustomizationData));
+                    command.chain(new UserCustomizedContainerCreationCommand(position, parentTagIdentifier, _creationData.getTagId(), parentCustomizationData));
                 }
             }
             return command;

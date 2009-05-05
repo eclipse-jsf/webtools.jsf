@@ -11,63 +11,100 @@
 package org.eclipse.jst.pagedesigner.editors.palette;
 
 import org.eclipse.gef.Tool;
-import org.eclipse.gef.palette.ToolEntry;
+import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
+import org.eclipse.gef.requests.CreationFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationTool;
 
 /**
  * Represents a tag palette item entry in the web page designer palette
- *
+ * 
  */
-public class TagToolPaletteEntry extends ToolEntry {
+public class TagToolPaletteEntry extends CombinedTemplateCreationEntry
+        implements IDropSourceDataProvider
+{
 
-	private String tagName;
-	
-	/**
-	 * Constructor
-	 * @param tagName
-	 * @param label
-	 * @param shortDescription
-	 * @param iconSmall
-	 * @param iconLarge
-	 */
-	public TagToolPaletteEntry(String tagName, String label, String shortDescription,
-			ImageDescriptor iconSmall, ImageDescriptor iconLarge) {
-		super(label, shortDescription, iconSmall, iconLarge);
-		this.tagName = tagName;
-	}
+    /**
+     * Constructor
+     * 
+     * @param template
+     *            the template item for the drop
+     * @param label
+     * @param shortDescription
+     * @param iconSmall
+     * @param iconLarge
+     */
+    public TagToolPaletteEntry(final ITagDropSourceData template,
+            final String label, final String shortDescription,
+            final ImageDescriptor iconSmall, final ImageDescriptor iconLarge)
+    {
+        super(label, shortDescription, template, NOOP_FACTORY, iconSmall,
+                iconLarge);
+    }
 
-	/**
-	 * @return tagName
-	 */
-	public String getTagName(){
-		return tagName;
-	}
-	
-	/**
-	 * Convenience method returning the tag libraries default prefix, if applicable
-	 * @return default prefix 
-	 */
-	public String getDefaultPrefix(){
-		if (getParent() instanceof TaglibPaletteDrawer)
-			return ((TaglibPaletteDrawer)getParent()).getDefaultPrefix();
-		return ""; //$NON-NLS-1$
-	}
+    /**
+     * @return tagName
+     */
+    public String getTagName()
+    {
+        return getTemplate().getTagName();
+    }
 
-	/**
-	 * @return uri of the tag's library
-	 */
-	public String getURI(){
-		return ((TaglibPaletteDrawer)getParent()).getURI();
-	}
+    /**
+     * Convenience method returning the tag libraries default prefix, if
+     * applicable
+     * 
+     * @return default prefix
+     */
+    public String getDefaultPrefix()
+    {
+        return getTemplate().getDefaultPrefix();
+    }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.gef.palette.ToolEntry#createTool()
-	 */
-	public Tool createTool() {
-		return new ItemCreationTool(this);
-	}
-	
+    /**
+     * @return uri of the tag's library
+     */
+    public String getURI()
+    {
+        return getTemplate().getNamespace();
+    }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.gef.palette.ToolEntry#createTool()
+     */
+    @Override
+    public Tool createTool()
+    {
+        return new ItemCreationTool(getTemplate());
+    }
+
+    private final static CreationFactory NOOP_FACTORY = new CreationFactory()
+    {
+        public Object getNewObject()
+        {
+            // should never get called
+            throw new UnsupportedOperationException(
+                    "createTool should be overriden, so this should never be called"); //$NON-NLS-1$
+        }
+
+        public Object getObjectType()
+        {
+            // should never get called
+            throw new UnsupportedOperationException(
+                    "createTool should be overriden, so this should never be called"); //$NON-NLS-1$
+        }
+    };
+
+    @Override
+    public ITagDropSourceData getTemplate()
+    {
+        return (ITagDropSourceData) super.getTemplate();
+    }
+
+    public IDropSourceData getDropSourceData()
+    {
+        return getTemplate();
+    }
 }

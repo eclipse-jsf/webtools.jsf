@@ -53,10 +53,11 @@ public class ItemCreationEditPolicy extends DropEditPolicy
 			if (domposition == null) {
 				return null;
 			}
+//			TagToolCreationAdapter tagToolCreationAdapter = new TagToolCreationAdapter(r.getTagToolPaletteEntry(), getViewer(getHost()).getModel());
 			return new CreateItemCommand(
 					PDPlugin
 							.getResourceString("ItemCreationEditPolicy.CommandLabel.CreateItem"),//$NON-NLS-1$
-					getViewer(getHost()).getModel(), domposition, r.getTagToolPaletteEntry());
+					getViewer(getHost()).getModel(), domposition, r.getTagCreationProvider());
 		}
 		return null;
 	}

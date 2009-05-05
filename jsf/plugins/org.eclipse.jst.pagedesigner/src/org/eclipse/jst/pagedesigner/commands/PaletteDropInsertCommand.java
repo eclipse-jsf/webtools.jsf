@@ -19,7 +19,7 @@ import org.eclipse.jst.pagedesigner.dnd.internal.SourceViewerDragDropHelper;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.DropCustomizationController;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
@@ -38,7 +38,7 @@ public class PaletteDropInsertCommand extends SourceViewerCommand implements ICu
 	private final Logger _log = PDPlugin
 			.getLogger(PaletteDropInsertCommand.class);
 
-	private TagToolPaletteEntry _tagItem;
+	private IDropSourceData _creationProvider;
 
 	private int _location;
 
@@ -49,13 +49,13 @@ public class PaletteDropInsertCommand extends SourceViewerCommand implements ICu
 	/**
 	 * @param label
 	 * @param editor
-	 * @param tagItem
+	 * @param creationProvider
 	 * @param location
 	 */
 	public PaletteDropInsertCommand(String label, StructuredTextEditor editor,
-			TagToolPaletteEntry tagItem, int location) {
+			IDropSourceData creationProvider, int location) {
 		super(label, editor);
-		_tagItem = tagItem;
+		_creationProvider = creationProvider;
 		_location = location;
 	}
 
@@ -84,20 +84,24 @@ public class PaletteDropInsertCommand extends SourceViewerCommand implements ICu
 			}
 		}
 
-		//essentially copied from ItemCreationTool so that DesignView drop and SourceViewDrop are same.
-		// Note that SourceView does NO drop validation checking.   This is handled by ItemCreationPolicy in DesignView
-		final IStatus status = 
-		    performCustomization(getModel().getDocument(), position);
+        // essentially copied from ItemCreationTool so that DesignView drop and
+        // SourceViewDrop are same.
+        // Note that SourceView does NO drop validation checking. This is
+        // handled by ItemCreationPolicy in DesignView
+        final IStatus status = performCustomization(getModel().getDocument(),
+                position);
 
-		if (status.getSeverity() == IStatus.OK) {
-			Element element = CommandUtil.excuteInsertion(this._tagItem,
-					getModel(), position, getCustomizationData());
-			if (element != null) {				
-				formatNode(element);
-			}
-			this._element = element;
-		}
-	}
+        if (status.isOK()) 
+        {
+            final Element element = CommandUtil.executeInsertion(
+                    _creationProvider, getModel()
+                    , position, getCustomizationData());
+            if (element != null) {
+                formatNode(element);
+            }
+            this._element = element;
+        }
+    }
 
 	/**
      * @param domDoc 
@@ -105,9 +109,7 @@ public class PaletteDropInsertCommand extends SourceViewerCommand implements ICu
      * @return status
 	 */
 	protected IStatus performCustomization(final IDOMDocument domDoc, final IDOMPosition position) {
-		final String  uri = _tagItem.getURI();
-		final String name = _tagItem.getTagName();
-		return new DropCustomizationController(this, uri, name, domDoc, position).performCustomization();
+		return new DropCustomizationController(this, _creationProvider, domDoc, position).performCustomization();
 	}
 
     /**

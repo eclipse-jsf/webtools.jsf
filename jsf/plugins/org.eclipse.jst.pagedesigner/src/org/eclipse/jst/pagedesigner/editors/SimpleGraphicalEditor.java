@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -51,7 +52,6 @@ import org.eclipse.jst.pagedesigner.commands.CopyAction;
 import org.eclipse.jst.pagedesigner.commands.CutAction;
 import org.eclipse.jst.pagedesigner.commands.DeleteAction;
 import org.eclipse.jst.pagedesigner.commands.PasteAction;
-import org.eclipse.jst.pagedesigner.dnd.internal.DesignerTemplateTransferDragSourceListener;
 import org.eclipse.jst.pagedesigner.dnd.internal.LocalSelectionDropTargetListener;
 import org.eclipse.jst.pagedesigner.dnd.internal.PDTemplateTransferDropTargetListener;
 import org.eclipse.jst.pagedesigner.dnd.internal.ResouceDropTargetListener;
@@ -149,6 +149,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 
 	private PaletteViewerProvider _paletteViewerProvider;
 
+	/**
+	 * TODO: why isn't this private?
+	 */
 	protected IPaletteFactory _paletteViewerPageFactory;
 
 	/**
@@ -509,7 +512,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
     					// from the palette into the editor
     					// @see ShapesEditor#createTransferDropTargetListener()
     					viewer
-    							.addDragSourceListener(new DesignerTemplateTransferDragSourceListener(
+    							.addDragSourceListener(new TemplateTransferDragSourceListener(
     									viewer));
     				}
     			};
@@ -518,6 +521,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
     	return _paletteViewerProvider;
     }
 
+    /**
+     * @return the palette viewer page
+     */
     protected PaletteViewerPage createPaletteViewerPage() {
         if (_paletteViewerPageFactory != null) {
         	_paletteViewerPage = _paletteViewerPageFactory.createPaletteViewerPage(createPaletteViewerProvider());
@@ -738,7 +744,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				if (project != null) {
 					SkinsMenuItemBuilder builder = new SkinsMenuItemBuilder(project);
 					builder.buildMenuManagers(menuMgr1);
-				}
+        }
 			}
         }
         
@@ -805,6 +811,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
     }
 
     
+    /**
+     * @return the palette viewer page
+     */
     public PaletteViewerPage getPaletteViewerPage() {
         if (_paletteViewerPage == null) {
         	_paletteViewerPage = createPaletteViewerPage();
@@ -812,6 +821,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		return _paletteViewerPage;
 	}
 
+    /**
+     * @return the palette factory
+     */
     protected IPaletteFactory initPaletteFactory()
     {   	
     	if (_paletteViewerPageFactory == null) {

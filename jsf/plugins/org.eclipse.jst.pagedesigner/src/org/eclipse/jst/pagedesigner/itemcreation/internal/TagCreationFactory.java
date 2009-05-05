@@ -19,9 +19,7 @@ import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 
 /**
  * Creates instances of
- * {@link org.eclipse.jst.pagedesigner.itemcreation.ITagCreator}s for a the
- * given
- * {@link org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry}
+ * {@link org.eclipse.jst.pagedesigner.itemcreation.ITagCreator}s 
  * (Eventually) Will use TagCreavtorFactories registered using
  * org.eclipse.jst.jsf.pagedesigner.tagcreationfactories ext-pt. Currently only
  * using DefaultTagCreator.

@@ -15,7 +15,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.dnd.TemplateTransfer;
 import org.eclipse.jst.pagedesigner.commands.PaletteDropInsertCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -125,14 +125,15 @@ public class DesignerSourceDropTargetListener extends
 				event.currentDataType)) {
 			Object data = event.data;
 			PaletteDropInsertCommand command = null;
-			if (data instanceof TagToolPaletteEntry) {
-				TagToolPaletteEntry tagItem = (TagToolPaletteEntry) data;
+			if (data instanceof IDropSourceData) {
+			    final IDropSourceData dropSourceData = (IDropSourceData) data;
+
 				// "Create new item"
 				command = new PaletteDropInsertCommand(
 						PageDesignerResources
 								.getInstance()
 								.getString(
-										"DesignerSourceDropTargetListener.InserCommandLabel"), _textEditor, tagItem, _location); //$NON-NLS-1$
+										"DesignerSourceDropTargetListener.InserCommandLabel"), _textEditor, dropSourceData, _location); //$NON-NLS-1$
 			}
 			return command;
 		}

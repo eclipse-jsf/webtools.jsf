@@ -22,7 +22,8 @@ import org.eclipse.gef.requests.DropRequest;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.elementedit.ElementEditFactoryRegistry;
 import org.eclipse.jst.pagedesigner.elementedit.IElementEdit;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationRequest;
@@ -116,10 +117,17 @@ public abstract class DropEditPolicy extends GraphicalEditPolicy
         }
         else if (request instanceof ItemCreationRequest)
         {
-        	TagToolPaletteEntry desc = ((ItemCreationRequest)request).getTagToolPaletteEntry();
+            IDropSourceData creationProvider = 
+                ((ItemCreationRequest)request).getTagCreationProvider();
+            String tagName = creationProvider.getId();
+            if (creationProvider instanceof ITagDropSourceData)
+            {
+                tagName = ((ITagDropSourceData)creationProvider).getTagName();
+            }
             TagIdentifier tagId = 
                 TagIdentifierFactory.
-                    createJSPTagWrapper(desc.getURI(), desc.getTagName());
+                    createJSPTagWrapper(creationProvider.getNamespace(),
+                            tagName);
             List tagIds = new ArrayList();
             tagIds.add(tagId);
             return new DropData(tagIds);

@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.editors.palette;
 
 import org.eclipse.gef.EditDomain;
+import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.internal.ui.palette.editparts.DrawerEditPart;
 import org.eclipse.gef.ui.palette.PaletteContextMenuProvider;
 import org.eclipse.gef.ui.palette.PaletteViewer;
@@ -20,7 +21,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.dnd.internal.DesignerTemplateTransferDragSourceListener;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PlatformUI;
@@ -56,7 +56,7 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 
 		// XXX: should only use the following when we use Template
 		viewer
-				.addDragSourceListener(new DesignerTemplateTransferDragSourceListener(
+				.addDragSourceListener(new TemplateTransferDragSourceListener(
 						viewer));
 	}
 

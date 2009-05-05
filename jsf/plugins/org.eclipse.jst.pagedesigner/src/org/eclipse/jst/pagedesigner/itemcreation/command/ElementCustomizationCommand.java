@@ -13,12 +13,14 @@ package org.eclipse.jst.pagedesigner.itemcreation.command;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
-import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.MetadataTagDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteElementTemplateHelper;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.itemcreation.internal.AbstractCreationCommand;
@@ -97,11 +99,14 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
      */
     protected void applyChildElementCustomization()
     {
-        final TagCreationInfo tagCreationInfo = _creationData.getTagCreationInfo();
-        if (tagCreationInfo != null)
+        final ITagDropSourceData tagDropSourceData = 
+            _creationData.getTagCreationProvider();
+        if (tagDropSourceData != null)
         {
+            MetadataTagDropSourceData provider =
+                TagToolCreationAdapter.createMdTagCreationProvider(tagDropSourceData, _model);
             PaletteElementTemplateHelper.applyTemplate(_model, _element,
-                    _creationData.getTagEntry(), tagCreationInfo);
+                    provider);
         }
     }
 
@@ -117,6 +122,7 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
      * @param element
      * @param creationData
      */
+    @SuppressWarnings("deprecation")
     protected final void ensureRequiredAttrs(final Element element,
             final CreationData creationData)
     {
@@ -150,16 +156,16 @@ public class ElementCustomizationCommand extends AbstractCreationCommand
      */
     protected void applyAttributeCustomization()
     {
-        final TagCreationInfo info = _creationData.getTagCreationInfo();
+        final ITagDropSourceData info = _creationData.getTagCreationProvider();
         if (info != null)
         {
-            final EList list = info.getAttributes();
+            final MetadataTagDropSourceData provider =
+                TagToolCreationAdapter.createMdTagCreationProvider(info, _model);
+            final List<TagCreationAttribute> list = provider.getAttributes();
             if (list != null)
             {
-                for (final Iterator it = list.iterator(); it.hasNext();)
+                for (final TagCreationAttribute attr : list)
                 {
-                    final TagCreationAttribute attr = (TagCreationAttribute) it
-                            .next();
                     _element.setAttribute(attr.getId(),
                             (attr.getValue() == null ? "" : attr.getValue())); //$NON-NLS-1$
                 }

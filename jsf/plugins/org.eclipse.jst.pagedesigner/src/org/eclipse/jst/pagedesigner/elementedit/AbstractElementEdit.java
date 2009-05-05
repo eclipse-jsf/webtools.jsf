@@ -16,6 +16,9 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
+import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.AbstractDropCustomizer;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.IDropCustomizer;
@@ -105,8 +108,24 @@ public class AbstractElementEdit implements IElementEdit {
     private final static IDropCustomizer   DEFAULT_DROP_CUSTOMIZER = 
         new AbstractDropCustomizer(){/* do nothing; use defaults */};
     
+    /** (non-Javadoc)
+     * @see org.eclipse.jst.pagedesigner.elementedit.IElementEdit#getDropCustomizer(org.eclipse.jst.jsf.common.dom.TagIdentifier)
+     * @deprecated use getDropCustomizer(IDropSourceData) instead.
+     */
     public IDropCustomizer getDropCustomizer(TagIdentifier tagId) 
     {
+        return DEFAULT_DROP_CUSTOMIZER;
+    }
+
+    public IDropCustomizer getDropCustomizer(IDropSourceData dropSourceData)
+    {
+        if (dropSourceData instanceof ITagDropSourceData)
+        {
+            final String uri = ((ITagDropSourceData)dropSourceData).getNamespace();
+            final String tagName = ((ITagDropSourceData)dropSourceData).getTagName();
+            final TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(uri, tagName);
+            return getDropCustomizer(tagId);
+        }
         return DEFAULT_DROP_CUSTOMIZER;
     }
 

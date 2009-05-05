@@ -18,7 +18,7 @@ import org.eclipse.gef.SharedCursors;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.tools.TargetingTool;
 import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.DropCustomizationController;
 import org.eclipse.swt.graphics.Cursor;
 
@@ -32,17 +32,17 @@ import org.eclipse.swt.graphics.Cursor;
  * @author mengbo
  */
 public class ItemCreationTool extends TargetingTool {
-	TagToolPaletteEntry _tagPaletteItem; //can we get rid of this?
+    private final ITagDropSourceData _tagDropSourceData; //can we get rid of this?
 
 	/**
 	 * Default constructor. Sets the default and disabled cursors.
-	 * @param tagToolPaletteEntryItem 
+	 * @param tagDropSourceData 
 	 */
-	public ItemCreationTool(TagToolPaletteEntry tagToolPaletteEntryItem) {
+	public ItemCreationTool(ITagDropSourceData tagDropSourceData) {
 		setDefaultCursor(SharedCursors.CURSOR_TREE_ADD);
 		setDisabledCursor(SharedCursors.NO);
 
-		this._tagPaletteItem = tagToolPaletteEntryItem;  
+		this._tagDropSourceData = tagDropSourceData;  
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ItemCreationTool extends TargetingTool {
 	 */
 	protected Request createTargetRequest() {
 		ItemCreationRequest request = new ItemCreationRequest();
-		request.setTagToolPaletteEntry(_tagPaletteItem);
+		request.setTagCreationProvider(_tagDropSourceData);
 		return request;
 	}
 
@@ -168,7 +168,7 @@ public class ItemCreationTool extends TargetingTool {
         if (command instanceof CreateItemCommand)
         {
             status = new DropCustomizationController((CreateItemCommand) command,
-                    _tagPaletteItem.getURI(), _tagPaletteItem.getTagName(), 
+                    _tagDropSourceData, 
                     ((CreateItemCommand)command).getDocument(),
                     ((CreateItemCommand)command).getPosition()).
                 performCustomization();

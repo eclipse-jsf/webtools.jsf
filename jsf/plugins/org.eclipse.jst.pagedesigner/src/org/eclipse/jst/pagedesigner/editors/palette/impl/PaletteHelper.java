@@ -38,6 +38,8 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElement
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemManager;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
 import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
@@ -304,7 +306,8 @@ public class PaletteHelper {
 	}
 
 	private static TagToolPaletteEntry internalCreateTagEntry(TaglibPaletteDrawer category, String id, String tagName, String label, String desc, ImageDescriptor smallIcon, ImageDescriptor largeIcon, boolean expert){
-		TagToolPaletteEntry item = new TagToolPaletteEntry(tagName, label, desc, smallIcon, largeIcon);
+	    final ITagDropSourceData  data = new TagToolCreationAdapter(category.getURI(), tagName, category.getDefaultPrefix(), id);
+		final TagToolPaletteEntry item = new TagToolPaletteEntry(data, label, desc, smallIcon, largeIcon);
 		item.setId(id);
 		
 		item.setVisible(!expert);

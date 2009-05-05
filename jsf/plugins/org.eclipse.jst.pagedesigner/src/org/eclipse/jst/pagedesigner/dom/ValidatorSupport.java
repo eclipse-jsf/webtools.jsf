@@ -17,12 +17,9 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.adapters.IBodyInfo;
 import org.eclipse.jst.pagedesigner.adapters.internal.BodyInfo;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
-import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -89,32 +86,27 @@ public class ValidatorSupport
 		return false;
 	}
 
-	/**
-	 * @param position
-	 * @param container
-	 * @param customizationData 
-	 * @return the new dom position for the inserted container or null if could
-	 * not insert
-	 */
-	public static IDOMPosition insertContainer(IDOMPosition position,
-			QName container, IAdaptable customizationData) {
-		final TaglibPaletteDrawer category = 
-		    PaletteItemManager.getCurrentInstance().findCategoryByURI
-		        (container.getNamespaceURI());
-		if (category != null){
-			final TagToolPaletteEntry tagItem = 
-			    category.getTagPaletteEntryByTagName(container.getLocalPart());
-			final IDOMModel model = 
-			    ((IDOMNode) position.getContainerNode()).getModel();
-			final Element form = CommandUtil.excuteInsertion
-			    (tagItem, model, position, customizationData);
-			if (form != null) {
-				DOMPosition pos = new DOMPosition(form, 0);
-				return pos;
-			}
-		}
+    /**
+     * @param position
+     * @param model 
+     * @param creationProvider 
+     * @param customizationData
+     * @return the new dom position for the inserted container or null if could
+     *         not insert
+     */
+    public static IDOMPosition insertContainer(final IDOMPosition position,
+            final IDOMModel model,
+            final ITagDropSourceData creationProvider, final IAdaptable customizationData)
+    {
+        final Element newContainer = CommandUtil.executeInsertion(
+                creationProvider, model, position, customizationData);
+        if (newContainer != null)
+        {
+            DOMPosition pos = new DOMPosition(newContainer, 0);
+            return pos;
+        }
         return null;
-	}
+    }
 
 	/**
 	 * @return the body info
