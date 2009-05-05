@@ -1,6 +1,8 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
@@ -63,20 +65,26 @@ public class BaseUserCustomizedTagCreatorTestCase extends BaseTagCreatorTestCase
 		return new UserCustomizedTagCreator();
 	}
 
-	
-	/**
-	 * Adds a tag to a section in the tool palette.
-	 * 
-	 * @param tagId
-	 *            TagIdentifier of tag to add
-	 * @param category
-	 *            Category in the tool palette
-	 * 
-	 */
-	private final void addTagToPaletteCategory(final TagIdentifier tagId, final TaglibPaletteDrawer category)
-	{
-		final TagToolPaletteEntry paletteItem = new TagToolPaletteEntry(tagId.getTagName(), TAG_LABEL, TAG_DESCRIPTION_SHORT, null, null);
-		category.getChildren().add(paletteItem);
-		paletteItem.setParent(category);
-	}
+
+    /**
+     * Adds a tag to a section in the tool palette.
+     * 
+     * @param tagId
+     *            TagIdentifier of tag to add
+     * @param category
+     *            Category in the tool palette
+     * 
+     */
+    @SuppressWarnings("unchecked")
+    private final void addTagToPaletteCategory(final TagIdentifier tagId,
+            final TaglibPaletteDrawer category)
+    {
+        final ITagDropSourceData tagDropSourceData = new TagToolCreationAdapter(
+                tagId.getUri(), tagId.getTagName(),
+                category.getDefaultPrefix(), tagId.getTagName());
+        final TagToolPaletteEntry paletteItem = new TagToolPaletteEntry(
+                tagDropSourceData, TAG_LABEL, TAG_DESCRIPTION_SHORT, null, null);
+        category.getChildren().add(paletteItem);
+        paletteItem.setParent(category);
+    }
 }

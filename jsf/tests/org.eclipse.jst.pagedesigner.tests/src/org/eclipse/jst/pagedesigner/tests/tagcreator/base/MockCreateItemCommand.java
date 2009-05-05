@@ -16,7 +16,7 @@ package org.eclipse.jst.pagedesigner.tests.tagcreator.base;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,8 +24,8 @@ import org.w3c.dom.Node;
 public class MockCreateItemCommand extends CreateItemCommand
 {
     public MockCreateItemCommand(String label, IDOMModel model,
-            IDOMPosition position, TagToolPaletteEntry tagItem) {
-        super(label, model, position, tagItem);
+            IDOMPosition position, ITagDropSourceData tagDropSourceData) {
+        super(label, model, position, tagDropSourceData);
     }
 
     @Override

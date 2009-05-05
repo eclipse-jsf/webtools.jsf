@@ -1,8 +1,8 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.CustomizationDataImpl;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData;
 import org.eclipse.jst.pagedesigner.tests.tagcreatorPlugin.UserCustomizedElementEditFactory;
 
@@ -25,14 +25,13 @@ public class TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization extends
 	
 	public void testGeneralCustomization() throws Exception
     {
-        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jsp", "jsp", 358, false);
-        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jspx", "jspx", 495, false);
-        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "xhtml", "xhtml", 350, false);
+        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jsp", "jsp", 358, false, getCustomizationData());
+        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jspx", "jspx", 495, false, getCustomizationData());
+        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "xhtml", "xhtml", 350, false, getCustomizationData());
     }
 	
 
-    @Override
-    protected IAdaptable getCustomizationData()
+    protected ICustomizationData getCustomizationData()
     {
     	IWritableCustomizationData tagDropped = new CustomizationDataImpl(UserCustomizedElementEditFactory.TAG1);
         tagDropped.addAttribute("attr1", "value1");

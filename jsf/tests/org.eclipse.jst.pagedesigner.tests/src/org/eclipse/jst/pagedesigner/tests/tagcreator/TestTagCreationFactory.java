@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
@@ -38,14 +38,14 @@ import org.w3c.dom.Element;
  * @author cbateman
  *
  */
-public class TestTagCreationFactory extends BaseTestClass 
+public class TestTagCreationFactory extends BaseTestClass
 {
     public TestTagCreationFactory() {
         super("jsf");
     }
 
     @Override
-    protected void setUp() throws Exception 
+    protected void setUp() throws Exception
     {
         super.setUp();
 
@@ -58,7 +58,7 @@ public class TestTagCreationFactory extends BaseTestClass
     }
 
     @Override
-    protected void tearDown() throws Exception 
+    protected void tearDown() throws Exception
     {
         super.tearDown();
     }
@@ -72,8 +72,8 @@ public class TestTagCreationFactory extends BaseTestClass
 
         CreationData creationData =
             getCreationData(TestCreationFactory.TAGCREATOR_URI_1
-                   , "tagWithRequiredAttr", "test", jspFile, 501);
-        Element element = CommandUtil.excuteInsertion(creationData.getTagEntry()
+                   , "tagWithRequiredAttr", "test", jspFile, 501, null);
+        Element element = CommandUtil.executeInsertion(creationData.getTagCreationProvider()
                                     , creationData.getModel()
                                     , creationData.getDomPosition()
                                     , creationData.getDropCustomizationData());
@@ -96,18 +96,18 @@ public class TestTagCreationFactory extends BaseTestClass
                 ,"/testEnsureRequiredAttributes2.jsp");
         creationData =
             getCreationData(TestCreationFactory.TAGCREATOR_URI_1
-                   , "tagWithRequiredAttr2", "test", jspFile, 501);
-        element = CommandUtil.excuteInsertion(creationData.getTagEntry()
+                   , "tagWithRequiredAttr2", "test", jspFile, 501, null);
+        element = CommandUtil.executeInsertion(creationData.getTagCreationProvider()
                                     , creationData.getModel()
                                     , creationData.getDomPosition()
                                     , creationData.getDropCustomizationData());
-        
+
         // on this tag, the first required attr is set by metadata
         assertEquals("foobar", element.getAttribute(TestCreationFactory.REQUIRED_ATTR_1));
         // the second one is not set by meta-data, but is required and ensure is called
         // by the custom advisor, so it should be set to empty
         assertEquals("", element.getAttribute(TestCreationFactory.REQUIRED_ATTR_2));
-        
+
         // the optional attribute is not set by meta-data and since it's not required,
         // the ensure method should not touch it either.
         assertNull(element.getAttribute("notRequiredAttr1"));
@@ -115,15 +115,16 @@ public class TestTagCreationFactory extends BaseTestClass
 
     public void testTagCreationMetadata() throws Exception
     {
-        IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
+        final IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
                 PageDesignerTestsPlugin.getDefault().getBundle()
                 ,"/testdata/tagcreator/testTagCreation.jsp.data"
                 ,"/testTagCreationMetadata.jsp");
 
-        CreationData creationData =
+        final CreationData creationData =
             getCreationData(TestCreationFactory.TAGCREATOR_URI_1
-                   , "tagWithMetadata", "test", jspFile, 501);
-        Element element = CommandUtil.excuteInsertion(creationData.getTagEntry()
+                   , "tagWithMetadata", "test", jspFile, 501, null);
+        final Element element = CommandUtil.executeInsertion(
+                creationData.getTagCreationProvider()
                                     , creationData.getModel()
                                     , creationData.getDomPosition()
                                     , creationData.getDropCustomizationData());
@@ -155,26 +156,26 @@ public class TestTagCreationFactory extends BaseTestClass
      */
     public void testBug197042() throws Exception
     {
-        IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
+        final IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
                 PageDesignerTestsPlugin.getDefault().getBundle()
                 ,"/testdata/tagcreator/tagCreator.jspx.data"
                 ,"/testTagCreationMetadata.jsp");
 
-        final String uri = 
+        final String uri =
             IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON.getUri();
-        final String tagName = 
+        final String tagName =
             IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON.getTagName();
-        CreationData creationData =
-            getCreationData(uri,tagName,"h", jspFile, 495);
+        final CreationData creationData =
+            getCreationData(uri,tagName,"h", jspFile, 495, null);
 
-        ITagCreator tagCreator = TagCreationFactory.getInstance()
+        final ITagCreator tagCreator = TagCreationFactory.getInstance()
             .createTagCreator(creationData.getTagId());
 
-        Element element = tagCreator.createTag(creationData);
+        final Element element = tagCreator.createTag(creationData);
 
         System.out.println(element.toString());
 
-        ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
         getDocumentContext(0, jspFile).getModel().save(resultStream);
 
         final IPath expectedPath = JSFTestUtil.getAbsolutePath(
@@ -188,14 +189,14 @@ public class TestTagCreationFactory extends BaseTestClass
 
     public void testDropCustomizerThatCancels() throws Exception
     {
-        IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
+        final IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
                 PageDesignerTestsPlugin.getDefault().getBundle()
                 ,"/testdata/tagcreator/tagCreator.jsp.data"
                 ,"/testCustomizerCancel.jsp");
 
         TestCreationFactory.setTestParametersForDropCustomer(Status.CANCEL_STATUS, null);
 
-        MockItemCreationTool tool = 
+        final MockItemCreationTool tool =
             createMockItemCreationTool(jspFile, 358, TestCreationFactory.TAG_WITH_REQUIRED_ATTR, IStatus.CANCEL);
 
         tool.customizeDropAndMaybeExecute(0);
@@ -206,17 +207,17 @@ public class TestTagCreationFactory extends BaseTestClass
     @SuppressWarnings("unchecked")
     public void testDropCustomizationDataAcquistion() throws Exception
     {
-        IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
+        final IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
                 PageDesignerTestsPlugin.getDefault().getBundle()
                 ,"/testdata/tagcreator/tagCreator.jsp.data"
                 ,"/testCustomizerCancel.jsp");
 
-        IAdaptable adaptable = new IAdaptable()
+        final IAdaptable adaptable = new IAdaptable()
         {
-            public Object getAdapter(Class adapter) {
+            public Object getAdapter(final Class adapter) {
                 if (Map.class == adapter)
                 {
-                    HashMap<String, String> map = new HashMap<String, String>();
+                    final HashMap<String, String> map = new HashMap<String, String>();
                     map.put("color", "red");
                     return map;
                 }
@@ -226,27 +227,27 @@ public class TestTagCreationFactory extends BaseTestClass
 
         TestCreationFactory.setTestParametersForDropCustomer(Status.OK_STATUS, adaptable);
 
-        MockItemCreationTool tool = 
+        final MockItemCreationTool tool =
             createMockItemCreationTool(jspFile, 358, TestCreationFactory.TAG_WITH_REQUIRED_ATTR, IStatus.CANCEL);
 
         tool.customizeDropAndMaybeExecute(0);
-        Object[] commands = tool.getDomain().getCommandStack().getCommands();
+        final Object[] commands = tool.getDomain().getCommandStack().getCommands();
         assertEquals(1, commands.length);
         assertTrue(commands[0] instanceof MockCreateItemCommand);
-        
-        IAdaptable value = ((MockCreateItemCommand)commands[0]).getCustomizationDataTesting();
+
+        final IAdaptable value = ((MockCreateItemCommand)commands[0]).getCustomizationDataTesting();
         assertEquals(adaptable, value);
-        Map map = (Map) value.getAdapter(Map.class);
+        final Map map = (Map) value.getAdapter(Map.class);
         assertNotNull(map);
         assertEquals("red", map.get("color"));
     }
-    
-    private void assertExpectedResult(IFile file, String outExt) throws Exception
+
+    private void assertExpectedResult(final IFile file, final String outExt) throws Exception
     {
         final ByteArrayOutputStream resultStream = new ByteArrayOutputStream();
         getDocumentContext(0, file).getModel().save(resultStream);
 
-        final String expected = 
+        final String expected =
             getExpectedResult("/testdata/tagcreator/tagCreator."+outExt+".data").trim();
         final String result = resultStream.toString("ISO-8859-1").trim();
 

@@ -18,7 +18,6 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.gef.EditDomain;
@@ -41,6 +40,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
+import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.tests.PageDesignerTestsPlugin;
 import org.eclipse.wst.html.core.internal.document.DOMStyleModelImpl;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
@@ -49,8 +49,6 @@ import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class BaseTestClass extends TestCase
@@ -90,16 +88,9 @@ public class BaseTestClass extends TestCase
                 .getTestProject());
     }
 
-    
-    protected IAdaptable getCustomizationData()
-    {
-    	return null;
-    }
-    
-    
     protected CreationData getCreationData(final String uri,
             final String tagName, final String defaultPrefix, final IFile file,
-            final int offset) throws Exception
+            final int offset, final ICustomizationData customizationData) throws Exception
     {
         final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
                 .createMetaDataModelContext(
@@ -116,12 +107,12 @@ public class BaseTestClass extends TestCase
         assertEquals(Node.TEXT_NODE, node.getNodeType());
 
         final DOMPosition domPosition = new DOMPosition(node, 0);
-
-          return new CreationData(entry, (IDOMModel) context.getModel(),
-              domPosition, modelContext, getCustomizationData());
+        final IDOMModel model =(IDOMModel) context.getModel();
+        return new CreationData(entry.getTemplate(), model,
+                domPosition, modelContext, customizationData);
     }
 
-    protected TagToolPaletteEntry createPaletteEntry(final String uri,
+    private TagToolPaletteEntry createPaletteEntry(final String uri,
             final String tagName)
     {
         final TaglibPaletteDrawer drawer = _manager
@@ -140,7 +131,7 @@ public class BaseTestClass extends TestCase
         return entry;
     }
 
-    protected TagToolPaletteEntry createNonNullPaletteEntry(final String uri,
+    private TagToolPaletteEntry createNonNullPaletteEntry(final String uri,
             final String tagName)
     {
         final TagToolPaletteEntry entry = createPaletteEntry(uri, tagName);
@@ -284,10 +275,10 @@ public class BaseTestClass extends TestCase
             final int offset, final TagIdentifier tagId,
             final int expectedResult) throws Exception
     {
+
         final TagToolPaletteEntry toolEntry = createNonNullPaletteEntry(tagId
                 .getUri(), tagId.getTagName());
-
-        final MockItemCreationTool tool = new MockItemCreationTool(toolEntry);
+        final MockItemCreationTool tool = new MockItemCreationTool(toolEntry.getTemplate());
 
         final ContextWrapper wrapper = getDocumentContext(offset, file);
         final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
@@ -297,7 +288,7 @@ public class BaseTestClass extends TestCase
         final DOMPosition domPosition = new DOMPosition(resolver.getNode(), 0);
 
         final MockCreateItemCommand command = new MockCreateItemCommand(
-                "Test Command", (IDOMModel) model, domPosition, toolEntry);
+                "Test Command", (IDOMModel) model, domPosition, toolEntry.getTemplate());
 
         tool.setEditDomain(new EditDomain());
         tool.setCurrentCommand(command);
@@ -323,25 +314,6 @@ public class BaseTestClass extends TestCase
             (element).setEmptyTag(true);
             (element).removeChildNodes();
             final Node copy = (element).cloneNode(false);
-
-            /*
-             * ElementImpl.cloneNode(...) seems to have started creating
-             * attributes that display differently than the cloned Node's
-             * (attr='' rather than attr=""), breaking textual comparisons.
-             * By overwriting the existing attributes after cloning, we get the
-             * expected form (double quotes instead of single quotes).
-             * 
-             *  - Ian Trimble, 20090305
-             */
-            if (element.hasAttributes() && copy instanceof Element) {
-	            NamedNodeMap attrMap = element.getAttributes();
-                for (int i = 0; i < attrMap.getLength(); i++) {
-                    Node attrNode = attrMap.item(i);
-                    ((Element)copy).setAttribute(
-                            attrNode.getNodeName(), attrNode.getNodeValue());
-                }
-            }
-
             element.getParentNode().replaceChild(copy, element);
         }
     }

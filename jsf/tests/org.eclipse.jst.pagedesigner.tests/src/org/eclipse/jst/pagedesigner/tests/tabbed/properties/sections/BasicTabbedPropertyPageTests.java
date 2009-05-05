@@ -50,7 +50,7 @@ public class BasicTabbedPropertyPageTests extends BaseTestCase {
             ISelection sel = getSelection(node);
             view.getViewSite().getSelectionProvider().setSelection(sel);
             ISelection selection = view.getViewSite().getSelectionProvider().getSelection();
-            assertEquals(sel, selection);                        
+            assertEquals(sel, selection);
             
 		} catch(Exception ex) {
 			ex.printStackTrace();

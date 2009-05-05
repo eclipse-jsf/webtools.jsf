@@ -16,15 +16,15 @@ package org.eclipse.jst.pagedesigner.tests.tagcreator.base;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.pagedesigner.commands.CreateItemCommand;
-import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.ItemCreationTool;
 
 public class MockItemCreationTool extends ItemCreationTool
 {
     private Command     _cached = null;
 
-    public MockItemCreationTool(TagToolPaletteEntry tagToolPaletteEntryItem) {
-        super(tagToolPaletteEntryItem);
+    public MockItemCreationTool(ITagDropSourceData tagDropSourceData) {
+        super(tagDropSourceData);
     }
 
     @Override
