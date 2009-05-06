@@ -107,23 +107,21 @@ public class ConverterUtil {
 	}
 
 	/**
-	 * Method to check if the resulting converted tag of a source
-	 * element is contained within a table. Recursively walks up
-	 * the source element's ancestry to get a result element from
-	 * tag conversion that indicates that the element will be
-	 * rendered in a table. The converted element that will be
+	 * Method to find the resulting converted tag containing a given
+	 * source element. The converted element that will be
 	 * the parent tag is returned so the caller can then determine
-	 * if the parent is a table, header, body, footer, row, or cell
-	 * element. 
+	 * if the parent is part of a table, header, body, footer, row,
+	 * cell, or some other element. 
 	 * 
 	 * @param srcElem the source element to test.
 	 * @param childElem a child of the source element (used by a
 	 *                  recursive call to handle special case where
 	 *                  it was moved up a level to the child model
 	 *                  list of the grandparent).
-	 * @return a converted element for a table or tag within a table. 
+	 * @return a converted element of the type that will contain the
+	 *         source element. 
 	 */
-	static Node findAncestorTableElement(Element srcElem, Element childElem) {
+	static Node findConvertedParentElement(Element srcElem, Element childElem) {
 		Node parent = srcElem.getParentNode();
 		if ((parent == null) || !(parent instanceof Element)) {
 			return null;
@@ -143,7 +141,7 @@ public class ConverterUtil {
 		converter.convertRefresh(null);
 		ConvertPosition position = null;
 		if (childElem != null) {
-			// If a child elem (grand child of current parent) was
+			// If a child node (grand child of current parent) was
 			// passed in, check for its position. It may have been
 			// moved up a level to child model list of the current
 			// parent. In JSF this is done with a header or
@@ -154,63 +152,21 @@ public class ConverterUtil {
 			position = converter.getChildVisualPosition(srcElem);
 		}
 		if (position != null) {
-			// check the converted ancestor to see if this element
-			// is contained in a table.
-			Node node = position.getParentNode();
-			Node tableItem = findTableElemContainingNode(node);
-			if (tableItem != null) {
-				// return the node that will contain the visual
-				// child, not the actual table element found.
-				return node;
-			}
-
-			Node resultFromParent = findAncestorTableElement((Element) parent, null);
-			if (resultFromParent != null) {
-				// return the node that will contain the visual
-				// child, not the result from the parent.
-				return node;
-			}
-		}
-		if (position == null) {
-			// The current src element is not in the child model
-			// list for the converted parent so recurse to next
-			// ancestor and pass src element to see if it has been
-			// moved up a level as child model of the grandparent.
-			return findAncestorTableElement((Element) parent, srcElem);
+			// return the node that will contain the visual
+			// child and then the caller can check to see if this
+			// element is table mark-up.
+			return position.getParentNode();
 		}
 
-		return null;
+		// The current source element is not in the child model
+		// list for the converted parent so recurse to next
+		// ancestor and pass source element to see if it has been
+		// moved up a level as child model of the grandparent.
+		return findConvertedParentElement((Element) parent, srcElem);
 	}
 
 	private static ITagConverter createTagConverter(Element ele) {
 		return DTManager.getInstance().getTagConverter(ele,
 				IConverterFactory.MODE_DESIGNER, null);
-	}
-
-	private static Node findTableElemContainingNode(Node elem) {
-		if ((elem == null) || !(elem instanceof Element)) {
-			return null;
-		}
-
-		if (isTableElem(elem)) {
-			return elem;
-		}
-
-		return findTableElemContainingNode(elem.getParentNode());
-	}
-
-	private static boolean isTableElem(Node elem) {
-		if (elem instanceof Element) {
-			if (IHTMLConstants.TAG_TABLE.equalsIgnoreCase(elem.getNodeName())
-					|| IHTMLConstants.TAG_TR.equalsIgnoreCase(elem.getNodeName())
-					|| IHTMLConstants.TAG_TH.equalsIgnoreCase(elem.getNodeName())
-					|| IHTMLConstants.TAG_TD.equalsIgnoreCase(elem.getNodeName())
-					|| IHTMLConstants.TAG_TBODY.equalsIgnoreCase(elem.getNodeName())
-					|| IHTMLConstants.TAG_THEAD.equalsIgnoreCase(elem.getNodeName())
-					|| IHTMLConstants.TAG_TFOOT.equalsIgnoreCase(elem.getNodeName())) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

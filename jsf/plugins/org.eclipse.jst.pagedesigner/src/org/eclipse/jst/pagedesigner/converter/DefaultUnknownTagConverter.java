@@ -56,7 +56,7 @@ public class DefaultUnknownTagConverter extends AbstractTagConverter {
 		// HTML. If the table layout code gets updated to handle
 		// invalid HTML tables, then this code can be removed.
 		// See https://bugs.eclipse.org/bugs/show_bug.cgi?id=253974
-		Node containingElement = ConverterUtil.findAncestorTableElement(hostEle, null);
+		Node containingElement = ConverterUtil.findConvertedParentElement(hostEle, null);
 		String name = null;
 		if (containingElement != null) {
 			name = containingElement.getNodeName(); 
