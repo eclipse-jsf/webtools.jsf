@@ -11,10 +11,12 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.core.metadata.internal;
 
+import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataTranslator;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDAttributeDeclaration;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
@@ -47,6 +49,19 @@ public class TaglibMetaDataTLDTranslator extends AbstractTagLibDomainContentMode
 		}
 	}
 
+	@Override
+	protected void createTagfileTraits(CMDocument doc) {		
+		super.createTagfileTraits(doc);
+		TLDDocument tldDoc = (TLDDocument)doc;
+		//add special model trait if this comes from a TagDir
+		if (CMUtil.isTagDirDocument(tldDoc, _assistant.getMergedModel().getModelKey().getProject())){ 
+			Model model = getMergedModel();
+			createSimpleBooleanObjectEntityTraitIfNecessary(model, "isTagDir", true); //$NON-NLS-1$
+		}
+	}
+
+
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.AbstractTagLibDomainContentModelMetaDataTranslator#getURIDefaultPrefix()
 	 */

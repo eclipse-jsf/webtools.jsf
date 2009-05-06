@@ -250,6 +250,11 @@ public interface IJSPCoreConstants
     /**
      * JSP tag attribute name
      */
+	final static public String ATTR_TAGDIR = "tagdir";
+	
+    /**
+     * JSP tag attribute name
+     */
 	final static public String ATTR_VALUE = "value";
 
     /**

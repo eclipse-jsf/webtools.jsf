@@ -18,6 +18,14 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
+import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsp.core.internal.contentmodel.TaglibController;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
@@ -26,6 +34,7 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocumen
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
+import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -82,13 +91,19 @@ public class JSPUtil {
 		//need proper API to determine xml type... this may need to change in future
 		if (! model.getDocument().isXMLType()){
 			// TODO: should create the taglib inside the IDOMModel
+			//this is virtually the same as createTaglibDeclaration... fix me
 			Node[] ref = new Node[1];
-			BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib",
+			BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib", //$NON-NLS-1$
 					model.getDocument(), ref);
 			
-			Element ele = model.getDocument().createElement("jsp:directive.taglib");
+			Element ele = model.getDocument().createElement("jsp:directive.taglib"); //$NON-NLS-1$
 			((IDOMElement) ele).setJSPTag(true);
-			ele.setAttribute(ICSSPropertyID.ATTR_URI, uri);
+			if (isTagDir(uri, model)) {
+				ele.setAttribute(IJSPCoreConstants.ATTR_TAGDIR, uri);
+			}
+			else {
+				ele.setAttribute(IJSPCoreConstants.ATTR_URI, uri);
+			}
 			ele.setAttribute(ICSSPropertyID.ATTR_PREFIX, prefix);
 			if (nodes != null && nodes.length > 0) {
 				nodes[0] = ele;
@@ -195,16 +210,34 @@ public class JSPUtil {
 	public static Element createTaglibDeclaration(IDOMModel model, String uri,
 			String prefix) {
 		Node[] ref = new Node[1];
-		BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib",
+		BodyHelper.findHeaderInsertPosition(ITLDConstants.URI_JSP, "taglib", //$NON-NLS-1$
 				model.getDocument(), ref);
-		Element ele = model.getDocument().createElement("jsp:directive.taglib");
+		Element ele = model.getDocument().createElement("jsp:directive.taglib"); //$NON-NLS-1$
 		((IDOMElement) ele).setJSPTag(true);
-		ele.setAttribute("uri", uri);
-		ele.setAttribute("prefix", prefix);
+		if (isTagDir(uri, model)) {
+			ele.setAttribute(IJSPCoreConstants.ATTR_TAGDIR, uri);
+		}
+		else {
+			ele.setAttribute(IJSPCoreConstants.ATTR_URI, uri);
+		}
+		ele.setAttribute("prefix", prefix); //$NON-NLS-1$
 		model.getDocument().insertBefore(ele, ref[0]);
 		return ele;
 	}
 
+	private static boolean isTagDir(String uri, IDOMModel model) {
+		IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), 0);
+		if (context != null) {
+			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+			if (resolver != null) {
+				ITaglibDomainMetaDataModelContext tldContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(resolver.getProject(), uri);
+				Trait t = TaglibDomainMetaDataQueryHelper.getTrait(tldContext, "", "isTagDir"); //$NON-NLS-1$ //$NON-NLS-2$		
+				return TraitValueHelper.getValueAsBoolean(t);
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Return prefix to use based upon the suggestion.   
 	 * Appends an integer until unique, if suggestion was used.

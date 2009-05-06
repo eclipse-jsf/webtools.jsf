@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.AbstractMetaDataLocator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.IPathSensitiveMetaDataLocator;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
@@ -32,8 +33,10 @@ import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
  */
 public class TaglibMetaDataLocator extends AbstractMetaDataLocator implements IPathSensitiveMetaDataLocator{
 	//project must be set to the current project context during locate only...  should not be used when noifying observers
-	private IProject project;
-	private TaglibMetaDataSource source;
+	private IProject _project;
+	private TaglibMetaDataSource _source;
+	
+//	private boolean _notificationEventOccuring;
 	
 	/**
 	 * Constructor
@@ -61,17 +64,17 @@ public class TaglibMetaDataLocator extends AbstractMetaDataLocator implements IP
 		else if (uri.equalsIgnoreCase(CMDocType.JSP20_DOC_TYPE)){
 			doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.JSP20_DOC_TYPE);
 		}
-		else if (project != null ){//TLD
+		else if (_project != null ){//TLD
 			CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
-			ITaglibRecord[] tldRecs = TaglibIndex.getAvailableTaglibRecords(project.getFullPath());
+			ITaglibRecord[] tldRecs = TaglibIndex.getAvailableTaglibRecords(_project.getFullPath());
 			ITaglibRecord tldRec = findTLD(tldRecs, uri);
 			if (tldRec != null)
 				doc = factory.createCMDocument(tldRec);
 		}
 		
 		if (doc != null){
-			source = new TaglibMetaDataSource(doc);
-			ret.add(source);
+			_source = new TaglibMetaDataSource(doc);
+			ret.add(_source);
 		}
 				
 		return ret;
@@ -79,10 +82,12 @@ public class TaglibMetaDataLocator extends AbstractMetaDataLocator implements IP
 
 	private ITaglibRecord findTLD(ITaglibRecord[] tldRecs, String uri) {
 		for (int i=0;i<tldRecs.length;i++){
-			ITaglibRecord tld = tldRecs[i];
-			if (uri.equals(tld.getDescriptor().getURI()))
-				return tld;
+			ITaglibRecord tldRec = tldRecs[i];
+			String tldRecURI = CMUtil.getURIFromTaglibRecord(tldRec, _project);
+			if (uri.equals(tldRecURI))
+				return tldRec;
 		}
+		
 		return null;
 	}
 
@@ -94,29 +99,40 @@ public class TaglibMetaDataLocator extends AbstractMetaDataLocator implements IP
 	}
 	
 	//not currently listening, so will not be called
-//	public void indexChanged(ITaglibDescriptor event) {
-//		if (event.getURI() != null && event.getURI().equals(uri)){
-//			if (!_notificationEventOccuring){
-//				_notificationEventOccuring = true;
-//				int type = adaptTagLibEvent(event);
-//				IMetaDataChangeNotificationEvent mdEvent = new MetaDataChangeNotificationEvent(this, uri, type);
-//				fireEvent(mdEvent);						
-//				_notificationEventOccuring = false;
+//	public void indexChanged(ITaglibIndexDelta delta) {
+////		System.out.println("-----------------------"); //$NON-NLS-1$
+//		if (delta.getProject() == _project) {
+//			for (ITaglibIndexDelta d : delta.getAffectedChildren()) {
+//				System.out.println(">>delta: "+d.getTaglibRecord()+"\n"+d.getKind()); //$NON-NLS-1$ //$NON-NLS-2$
+//				String eventURI = CMUtil.createURIFromTaglibRecord(d.getTaglibRecord(), _project);
+//				if (eventURI != null){
+////					System.out.println(">>>eventURI: "+eventURI); //$NON-NLS-1$
+//					if (!_notificationEventOccuring){
+//						try {
+//							_notificationEventOccuring = true;
+//							int type = adaptTagLibEvent(delta);
+//							IMetaDataChangeNotificationEvent mdEvent = new MetaDataChangeNotificationEvent(this, eventURI, type);
+//							fireEvent(mdEvent);
+//						} finally {
+//							_notificationEventOccuring = false;
+//						}
+//					}
+//				}
 //			}
 //		}
 //	}
-
-//	private int adaptTagLibEvent(ITaglibRecordEvent event) {
-//		switch (event.getType()){
-//		case ITaglibRecordEvent.ADDED:
+	
+//	private int adaptTagLibEvent(ITaglibIndexDelta event) {
+//		switch (event.getKind()){
+//		case ITaglibIndexDelta.ADDED:
 //			return IMetaDataChangeNotificationEvent.ADDED;
-//		case ITaglibRecordEvent.REMOVED:
+//		case ITaglibIndexDelta.REMOVED:
 //			return IMetaDataChangeNotificationEvent.REMOVED;
 //		default:
 //			return IMetaDataChangeNotificationEvent.CHANGED;
 //		}		
 //	}
-
+//
 //	private void fireEvent(final IMetaDataChangeNotificationEvent event) {
 //		SafeRunnable.run(new ISafeRunnable(){
 //
@@ -137,7 +153,7 @@ public class TaglibMetaDataLocator extends AbstractMetaDataLocator implements IP
 //	}
 
 	public void setProjectContext(IProject project) {
-		this.project = project;		
+		this._project = project;		
 	}
 	
 	private class TaglibMetaDataSource implements IMetaDataSourceModelProvider{
