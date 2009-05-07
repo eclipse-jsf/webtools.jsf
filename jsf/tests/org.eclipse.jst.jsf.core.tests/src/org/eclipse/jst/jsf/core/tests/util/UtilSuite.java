@@ -31,6 +31,8 @@ public class UtilSuite {
         suite.addTestSuite(TestJDTBeanPropertyWorkingCopy.class);
         suite.addTestSuite(TestJDTBeanIntrospector.class);
 
+        suite.addTestSuite(TestCMUtil.class);
+        
         //$JUnit-END$
         return suite;
     }
