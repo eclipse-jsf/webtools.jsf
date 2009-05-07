@@ -31,22 +31,22 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
+import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
+import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocument;
-import org.eclipse.wst.html.core.internal.contentmodel.JSPCMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
-import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
 /**
  * Helper class.
@@ -91,26 +91,28 @@ public class PaletteHelper {
 	 * Creates a TaglibPaletteDrawer with TagTool palette entries for each tag from the CMDocument
 	 * @param manager
 	 * @param project
-	 * @param doc
+	 * @param tldRec 
 	 * @return TaglibPaletteDrawer
 	 */
 	public static TaglibPaletteDrawer configPaletteItemsByTLD(IPaletteItemManager manager, IProject project,
-			CMDocument doc) {
-		//bit of a hack... could be greatly improved		
-		String tldURI = null;
-		if (doc instanceof TLDDocument){
-			tldURI = ((TLDDocument)doc).getUri();
-		}
-		else if (doc instanceof HTMLCMDocument){
-			tldURI = CMDocType.HTML_DOC_TYPE;
-		}
-		else if (doc instanceof JSPCMDocument){
-			tldURI = CMDocType.JSP11_DOC_TYPE;
-		}
+			ITaglibRecord tldRec) {
+
+		String tldURI = CMUtil.getURIFromTaglibRecord(tldRec, project);	
 		
-		if (tldURI == null) 
-			return null;
-			
+		CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
+		TLDDocument doc = (TLDDocument)factory.createCMDocument(tldRec);
+		
+		return getOrCreateTaglibPaletteDrawer(manager, doc, tldURI, project);
+	}
+
+	/**
+	 * @param manager
+	 * @param doc
+	 * @param tldURI
+	 * @param project
+	 * @return TaglibPaletteDrawer
+	 */
+	public static TaglibPaletteDrawer getOrCreateTaglibPaletteDrawer(IPaletteItemManager manager, CMDocument doc, String tldURI, IProject project) {
 		TaglibPaletteDrawer category = findCategory(manager, tldURI);
 		if (category != null) 
 			return category;

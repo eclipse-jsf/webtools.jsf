@@ -13,12 +13,23 @@ package org.eclipse.jst.jsf.core.internal.tld;
 
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsp.core.internal.contentmodel.TaglibController;
+import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TLDCMDocumentManager;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.TaglibTracker;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
+import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
+import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLElementDeclaration;
 import org.eclipse.wst.html.core.internal.provisional.HTMLCMProperties;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -50,12 +61,154 @@ public final class CMUtil {
 		if (decl instanceof TLDElementDeclaration) {
 			CMDocument doc = ((TLDElementDeclaration) decl).getOwnerDocument();
 			if (doc instanceof TLDDocument) {
-				return ((TLDDocument) doc).getUri();
+				TLDDocument tldDoc = (TLDDocument)doc;
+				return getURIFromDoc(tldDoc , null);
 			}
 		}
 		return null;
 	}
+ 
+	/**
+	 * @param doc
+	 * @param project - may be null in which case it is calculated as necessary from the doc baseLocation
+	 * @return valid string to use for the uri when given a TLD doc
+	 * 			Must <ul>not</ul> be called with HTML or JSP documents.
+	 * 			As there is no API on the doc for standalone or tagDir doc, it is possible that this could return an invalid string.  
+	 * 				However, if the code is consistent in it's usage, all should be well.
+	 */
+	public static String  getURIFromDoc(final TLDDocument doc, final IProject project) {		
+		String uri = doc.getUri();
+		IProject proj = project;
+		if (uri == null) {//
+			Path baseLoc = new Path(doc.getBaseLocation());
+			if (proj == null) {
+				proj = getProjectFor(baseLoc);
+				if (proj == null) {//log error
+					return null;
+				}
+			}
+			
+			if (isTagDirDocument(doc, proj)) {
+				uri = getTagDirURI(doc, proj);
+			} else {
+				uri = getStandaloneTLDURI(doc, proj);
+			}
+		}
+		return uri;
+	}
 
+	/**
+	 * @param tldRec
+	 * @param project
+	 * @return valid string to use for the uri when given a ITaglibRecord
+	 */
+	public static String getURIFromTaglibRecord(ITaglibRecord tldRec, IProject project) {		
+		//similar code in PaletteHelper and above		
+		String uri = tldRec.getDescriptor().getURI();
+		if (uri == null || uri.trim().equals("")) {		 //$NON-NLS-1$
+			//need to construct valid string representing taglib identifier
+			CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
+			TLDDocument doc = (TLDDocument)factory.createCMDocument(tldRec);
+			if (tldRec.getRecordType() == ITaglibRecord.TLD) {		
+				uri = getStandaloneTLDURI(doc, project);			
+			}
+			else if (tldRec.getRecordType() == ITaglibRecord.TAGDIR) {	
+				uri =  getTagDirURI(doc, project);				
+			}
+			
+		}
+		return uri;
+	}
+	
+	private static String getStandaloneTLDURI(TLDDocument doc, IProject project) {
+		Path p = new Path(doc.getBaseLocation());
+		IPath webContentPath = ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getLocation();
+		return getURIFromPath(p.makeAbsolute().makeRelativeTo(webContentPath.makeAbsolute()));		
+	}
+	
+	private static String getTagDirURI(TLDDocument doc, IProject project) {
+		Path p = new Path(doc.getBaseLocation());
+		IPath webContentPath = ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getFullPath();
+		return getURIFromPath(p.makeRelativeTo(webContentPath));
+	}
+	
+	private static String getURIFromPath(IPath uriPath)
+	{
+		if (uriPath != null)
+			return "/"+uriPath.toString(); //$NON-NLS-1$ - do not remove "/" since is necessary for tagdir attr on taglib directive
+		
+		return null;
+	}
+
+	/**
+	 * @param tldDoc - must not be null
+	 * @param project - must not be null
+	 * @return true if this is a tag dir tldDocument
+	 */
+	public static boolean isTagDirDocument(final TLDDocument tldDoc, final IProject project) {
+		if (tldDoc.getUri() == null || tldDoc.getUri().equals("")) { //$NON-NLS-1$
+			IPath p = new Path(tldDoc.getBaseLocation());
+			IPath webContentPath = ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getFullPath();
+			if (p.matchingFirstSegments(webContentPath) == webContentPath.segmentCount()) {
+				p = p.removeFirstSegments(webContentPath.segmentCount());
+				if (p.matchingFirstSegments(new Path("WEB-INF/tags")) == 2) { //$NON-NLS-1$)  {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	//Code taken from jsf.common.ui.WorkspaceUtil
+	private static IProject getProjectFor(IPath path) {
+		String[] segs = path.segments();
+		String projectPath = new String();
+		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot()
+				.getProjects();
+		IProject project = null;
+		for (int p = 0; p < projects.length; p++) {
+			if (projects[p].isOpen()) {
+				for (int s = 0; s < segs.length; s++) {
+					if (segs[s].equalsIgnoreCase(projects[p].getName())) {
+						// Once we have a match on the project name, then
+						// the remainder of the segments equals the project path
+						for (int s2 = s + 1; s2 < segs.length; s2++) {
+							projectPath = projectPath
+									+ "/" //$NON-NLS-1$
+									+ segs[s2];
+						}
+						project = projects[p];
+						break;
+					}
+				}
+			}
+		}
+		if (project == null) {
+			return null;
+		}
+
+		// TODO: still don't understand why this refreshLocal is necessary
+		// for now, going to only allow it if this method is called 
+		// when the tree isn't locked.  This shouldn't cause a regression, since
+		// when the call fails currently things keep on going due to the catch
+		if (!project.getWorkspace().isTreeLocked())
+		{
+    		try {
+    			project.refreshLocal(IResource.DEPTH_INFINITE, null);
+    		} catch (CoreException e) {
+//                 TODO C.B.:pushing this down to a warning because it creates really
+//                 spurious output.  Don't know why we are calling refreshLocal at all.
+                JSFCorePlugin.log(Status.WARNING, "Error.RefreshingLocal", e); //$NON-NLS-1$
+    		}
+		}
+		
+		IResource res = project.findMember(new Path(projectPath));
+		if ((res != null) && (res.exists())) {
+			return project;
+		}
+		return null;
+	}
+	
 	/**
 	 * Test whether this is the JSP core tag.
 	 * 
@@ -201,4 +354,5 @@ public final class CMUtil {
     {
         // util class, no external instantiation
     }
+
 }

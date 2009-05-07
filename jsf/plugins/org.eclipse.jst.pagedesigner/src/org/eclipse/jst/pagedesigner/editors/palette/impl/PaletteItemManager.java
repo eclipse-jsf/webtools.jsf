@@ -22,8 +22,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.gef.palette.PaletteEntry;
-import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
-import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizationsHelper;
@@ -31,6 +29,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.IEntryChangeListener;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteConstants;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteItemManager;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocumentFactory;
+import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
 /**
@@ -58,29 +57,32 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * @param project
 	 * @return PaletteItemManager
 	 */
-	public static synchronized PaletteItemManager getInstance(IProject project) {
+	public static PaletteItemManager getInstance(final IProject project) {
 		if (project == null) {
 			// sometimes when the editor is editing a file in jar file, may not
 			// be able to
 			// get the project.
 			return getDefaultPaletteItemManager();
 		}
-		PaletteItemManager manager = (PaletteItemManager) _managers
-				.get(project);
-		if (manager == null) {
-			manager = new PaletteItemManager(project);
-			_managers.put(project, manager);
-		}
-		_currentInstance = manager;
 		
-		return manager;
+		synchronized (_managers) {
+			PaletteItemManager manager = (PaletteItemManager) _managers
+					.get(project);
+			if (manager == null) {
+				manager = new PaletteItemManager(project);
+				_managers.put(project, manager);
+			}
+			_currentInstance = manager;
+			return manager;
+		}
+
 	}
 	
 	/**
 	 * @return current PaletteItemManager instance.  May return null
 	 */
 	public static synchronized PaletteItemManager getCurrentInstance(){
-		return _currentInstance != null ? _currentInstance : null;
+		return _currentInstance;
 	}
 
 	private IProject getCurProject() {
@@ -91,24 +93,27 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * Removes an intstance of a paletteItemManager from the system
 	 * @param manager
 	 */
-	public static synchronized void removePaletteItemManager(
-			PaletteItemManager manager) {
-		// FIXME: does nothing? manager.dispose();
-		_managers.remove(manager.getCurProject());
+	public static void removePaletteItemManager(
+			final PaletteItemManager manager) {
+		synchronized(_managers) {
+			_managers.remove(manager.getCurProject());
+		}
 	}
 
 
 	/**
 	 * 
 	 */
-	public static synchronized void clearPaletteItemManager() {
-		_managers.clear();
+	public static void clearPaletteItemManager() {
+		synchronized(_managers) {
+			_managers.clear();
+		}
 	}
 
 	/**
-	 * @return
+	 * @return PaletteItemManager for when no project case
 	 */
-	private static PaletteItemManager getDefaultPaletteItemManager() {
+	private synchronized static PaletteItemManager getDefaultPaletteItemManager() {
 		if (_defaultManager == null) {
 			_defaultManager = new PaletteItemManager(null);
 			
@@ -119,7 +124,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	/**
 	 * 
 	 */
-	private PaletteItemManager(IProject project) {
+	private PaletteItemManager(final IProject project) {
 		_curProject = project;
 
 		init();
@@ -130,10 +135,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#getAllCategories()
 	 */
-	public List getAllCategories() {
-		if (_categories == null) {
-			_categories = new ArrayList();
-		}
+	public synchronized List getAllCategories() {
 		return _categories;
 	}
 
@@ -173,20 +175,20 @@ public class PaletteItemManager implements IPaletteItemManager,
 		fireModelChanged(null, null);
 	}
 
-	private void initFromProject(IProject project) {
+	private void initFromProject(final IProject project) {
 		registerHTMLCategory();
 		registerJSPCategory();
 		registerTldFromClasspath(project);
 	}
 
 	private void registerHTMLCategory() {
-		PaletteHelper.configPaletteItemsByTLD(this, getCurProject(), HTMLCMDocumentFactory
-				.getCMDocument(CMDocType.HTML_DOC_TYPE));
+		CMDocument doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.HTML_DOC_TYPE);
+		PaletteHelper.getOrCreateTaglibPaletteDrawer(this, doc, CMDocType.HTML_DOC_TYPE, getCurProject());
 	}
 
 	private void registerJSPCategory() {
-		PaletteHelper.configPaletteItemsByTLD(this, getCurProject(), HTMLCMDocumentFactory
-				.getCMDocument(CMDocType.JSP11_DOC_TYPE));		
+		CMDocument doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.JSP11_DOC_TYPE);
+		PaletteHelper.getOrCreateTaglibPaletteDrawer(this, doc, CMDocType.JSP11_DOC_TYPE, getCurProject());
 	}
 
 	/**
@@ -196,13 +198,11 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @param project
 	 */
-	private void registerTldFromClasspath(IProject project) {
+	private void registerTldFromClasspath(final IProject project) {
 		if (project != null) {
 			ITaglibRecord[] tldrecs = TaglibIndex.getAvailableTaglibRecords(project.getFullPath());
-			CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
-			for (int i=0;i<tldrecs.length;i++){
-				TLDDocument doc = (TLDDocument)factory.createCMDocument(tldrecs[i]);
-				PaletteHelper.configPaletteItemsByTLD(this, getCurProject(), doc);			
+			for (int i=0;i<tldrecs.length;i++){				
+				PaletteHelper.configPaletteItemsByTLD(this, getCurProject(), tldrecs[i]);			
 			}
 		}			
 	}
@@ -212,7 +212,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * @param label 
 	 * @return TaglibPaletteDrawer
 	 */
-	public TaglibPaletteDrawer findOrCreateCategory(String id, String label) {
+	public TaglibPaletteDrawer findOrCreateCategory(final String id, final String label) {
 		TaglibPaletteDrawer category;
 		for (Iterator iter = getAllCategories().iterator(); iter.hasNext();) {
 			category = (TaglibPaletteDrawer) iter.next();
@@ -228,7 +228,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * @param uri
 	 * @return TaglibPaletteDrawer
 	 */
-	public TaglibPaletteDrawer findCategoryByURI(String uri) {
+	public TaglibPaletteDrawer findCategoryByURI(final String uri) {
 		TaglibPaletteDrawer category;
 		for (Iterator iter = getAllCategories().iterator(); iter.hasNext();) {
 			category = (TaglibPaletteDrawer) iter.next();
@@ -244,7 +244,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#createCategory(java.lang.String)
 	 */
-	public TaglibPaletteDrawer createTaglibPaletteDrawer(String uri, String label) {
+	public TaglibPaletteDrawer createTaglibPaletteDrawer(final String uri, final String label) {
 		TaglibPaletteDrawer r = new TaglibPaletteDrawer(uri, label);
 		getAllCategories().add(r);
 		return r;
@@ -255,7 +255,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#getCategoryByURI(java.lang.String)
 	 */
-	public TaglibPaletteDrawer getTaglibPalletteDrawer(String uri) {
+	public TaglibPaletteDrawer getTaglibPalletteDrawer(final String uri) {
 		for (Iterator iter = getAllCategories().iterator(); iter.hasNext();) {
 			TaglibPaletteDrawer cat = (TaglibPaletteDrawer) iter.next();
 			if (uri.equals(cat.getId())) {
@@ -270,7 +270,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#addEntryChangeListener(com.sybase.stf.jmt.pagedesigner.editors.palette.IEntryChangeListener)
 	 */
-	public void addEntryChangeListener(IEntryChangeListener listener) {
+	public void addEntryChangeListener(final IEntryChangeListener listener) {
 
 		if (_listeners == null) {
 			_listeners = new IEntryChangeListener[] { listener };
@@ -287,7 +287,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#removeEntryChangeListener(com.sybase.stf.jmt.pagedesigner.editors.palette.IEntryChangeListener)
 	 */
-	public void removeEntryChangeListener(IEntryChangeListener listener) {
+	public void removeEntryChangeListener(final IEntryChangeListener listener) {
 		if (_listeners == null) {
 			return;
 		}
@@ -310,12 +310,14 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * @param oldDefinitions
 	 * @param newDefinitions
 	 */
-	private void fireModelChanged(List oldDefinitions, List newDefinitions) {
+	private void fireModelChanged(final List oldDefinitions, final List newDefinitions) {
 		if (_listeners == null) {
 			return;
 		}
-		for (int i = 0; i < _listeners.length; i++) {
-			_listeners[i].modelChanged(oldDefinitions, newDefinitions);
+		synchronized (_listeners) {
+			for (int i = 0; i < _listeners.length; i++) {
+				_listeners[i].modelChanged(oldDefinitions, newDefinitions);
+			}
 		}
 	}
 
@@ -331,11 +333,13 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * All palette viewer roots will be notifed of possible updates
 	 * @param notifyingManager 
 	 */
-	public static void notifyPaletteItemManagersOfCustomizationsUpdate(IPaletteItemManager notifyingManager){
-		for (Iterator it=_managers.values().iterator();it.hasNext();){
-			PaletteItemManager mgr = (PaletteItemManager)it.next();
-			if (mgr != null && notifyingManager != mgr)
-				mgr.reset();
+	public static void notifyPaletteItemManagersOfCustomizationsUpdate(final IPaletteItemManager notifyingManager){
+		synchronized (_managers) {
+			for (Iterator it=_managers.values().iterator();it.hasNext();){
+				PaletteItemManager mgr = (PaletteItemManager)it.next();
+				if (mgr != null && notifyingManager != mgr)
+					mgr.reset();
+			}
 		}
 	}
 }

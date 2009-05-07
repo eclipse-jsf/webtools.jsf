@@ -250,6 +250,10 @@ public interface IJSPCoreConstants
     /**
      * JSP tag attribute name
      */
+	final public static String ATTR_TAGDIR = "tagdir"; //$NON-NLS-1$
+    /**
+     * JSP tag attribute name
+     */
 	final static public String ATTR_VALUE = "value"; //$NON-NLS-1$
 
     /**
@@ -276,4 +280,5 @@ public interface IJSPCoreConstants
      * JSP tag attribute name
      */
 	final static public String ATTR_XMLNSTAGLIBPREFIX = "xmlns:taglibPrefix"; //$NON-NLS-1$
+
 }

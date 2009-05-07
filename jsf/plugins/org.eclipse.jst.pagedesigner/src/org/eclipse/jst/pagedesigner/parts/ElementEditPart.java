@@ -229,7 +229,10 @@ public class ElementEditPart extends SubNodeEditPart {
 			appendString = ((IDOMElement) result)
 					.getAttribute(IJSPCoreConstants.ATTR_URI);
 			if (appendString == null) {
-				appendString = ""; //$NON-NLS-1$
+				appendString = ((IDOMElement) result)
+					.getAttribute(IJSPCoreConstants.ATTR_TAGDIR);
+				if (appendString == null)
+					appendString = ""; //$NON-NLS-1$
 			}
 		}
 		Image image = _tagConverter.getVisualImage();
