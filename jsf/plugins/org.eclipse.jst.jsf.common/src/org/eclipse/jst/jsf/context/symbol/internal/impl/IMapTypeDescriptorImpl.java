@@ -11,10 +11,12 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
@@ -86,6 +88,8 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
      * @ordered
      */
     protected static final boolean IMMUTABLE_EDEFAULT = true;
+
+    private static final Object MAP_TYPE_DESCRIPTOR_PROP_KEY = new Object();
 
     /**
      * The cached value of the '{@link #isImmutable() <em>Immutable</em>}' attribute.
@@ -190,16 +194,32 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
     /**
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getProperties()
      */
-    public EList getProperties() 
+    public EList getProperties()
     {
-        final BasicEList  list = new BasicEList();
+        final BasicEList list = new BasicEList();
         final Map source = getMapSource();
-        final Set keys = source.keySet();
-        final Map segmentMap = processSegments(keys, source);
+        if (source instanceof IMapSourceInfo)
+        {
+            if (!((IMapSourceInfo) source).hasChanged(MAP_TYPE_DESCRIPTOR_PROP_KEY))
+            {
+                EList cachedList = (EList) ((IMapSourceInfo)source).getCachedValue(MAP_TYPE_DESCRIPTOR_PROP_KEY);
+
+                if (cachedList != null)
+                {
+                    return cachedList;
+                }
+            }
+        }
+        final Map segmentMap = processSegments(source);
         list.addAll(segmentMap.values());
+
+        if (source instanceof IMapSourceInfo)
+        {
+            ((IMapSourceInfo)source).putCachedValue(MAP_TYPE_DESCRIPTOR_PROP_KEY, list);
+        }
         return list;
     }
-    
+
     public EList getMethods() 
     {
         // TODO: should this return the methods on  a Map?
@@ -207,99 +227,149 @@ public class IMapTypeDescriptorImpl extends ITypeDescriptorImpl implements IMapT
     }
     
     /**
-     * @generated  NOT
+     * @generated NOT
      */
-    public IObjectSymbol getArrayElement() {
-		return null;
-	}
+    public IObjectSymbol getArrayElement()
+    {
+        return null;
+    }
 
     /**
-     * @generated  NOT
+     * @generated NOT
      */
-	public boolean isArray() {
-		// a map is never an array
-		return false;
-	}
+    public boolean isArray()
+    {
+        // a map is never an array
+        return false;
+    }
 
-	private Map processSegments(final Set  keys, final Map source)
+    private Map processSegments(final Map source)
     {
         final Map segmentMap = new HashMap();
-        
-        for (final Iterator it = keys.iterator(); it.hasNext();)
+        final Set<Map.Entry<String, Object>> entrySet = source.entrySet();
+        for (final Map.Entry<String, Object> entry : entrySet)
         {
-            final String key = (String) it.next();
-            final String segments[] = key.split("\\."); //$NON-NLS-1$
-            
-            IPropertySymbol  property = 
-                (IPropertySymbol) segmentMap.get(segments[0]);
-            
+
+            final String key = entry.getKey();
+            final String segments[] = fastTokenSplit(key);
+            if (segments.length == 0)
+            {
+                continue;
+            }
+            IPropertySymbol property = (IPropertySymbol) segmentMap
+                    .get(segments[0]);
+
             if (property == null)
             {
-                final Object propValue = source.get(key);
+                final Object propValue = entry.getValue();
                 property = SymbolFactory.eINSTANCE.createIPropertySymbol();
                 property.setName(segments[0]);
                 ITypeDescriptor typeDesc = null;
-                
+
                 // TODO: need wrapper object to rationalize
                 if (propValue != null)
                 {
                     if (propValue instanceof IType)
                     {
-                        typeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
-                        ((IJavaTypeDescriptor2)typeDesc).setType((IType)propValue);
-                    }
-                    else if (propValue instanceof IInstanceSymbol)
+                        typeDesc = SymbolFactory.eINSTANCE
+                                .createIJavaTypeDescriptor2();
+                        ((IJavaTypeDescriptor2) typeDesc)
+                                .setType((IType) propValue);
+                    } else if (propValue instanceof IInstanceSymbol)
                     {
-                        typeDesc = ((IInstanceSymbol)propValue).getTypeDescriptor();
-                    }
-                    else if (propValue instanceof IPropertySymbol)
+                        typeDesc = ((IInstanceSymbol) propValue)
+                                .getTypeDescriptor();
+                    } else if (propValue instanceof IPropertySymbol)
                     {
-                        typeDesc = ((IPropertySymbol)propValue).getTypeDescriptor();
-                    }
-                    else
+                        typeDesc = ((IPropertySymbol) propValue)
+                                .getTypeDescriptor();
+                    } else
                     {
-                        String className = propValue.getClass().getName();
-                        String typeSignature = Signature.createTypeSignature(className, true);
-                        typeDesc = SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
-                        ((IMapTypeDescriptor)typeDesc).setMapSource(new HashMap());
-                        ((IMapTypeDescriptor)typeDesc).setTypeSignatureDelegate(typeSignature);
+                        final String className = propValue.getClass().getName();
+                        final String typeSignature = Signature
+                                .createTypeSignature(className, true);
+                        typeDesc = SymbolFactory.eINSTANCE
+                                .createIMapTypeDescriptor();
+                        ((IMapTypeDescriptor) typeDesc)
+                                .setMapSource(new HashMap());
+                        ((IMapTypeDescriptor) typeDesc)
+                                .setTypeSignatureDelegate(typeSignature);
                         // inherit this descriptor's mutability
-                        ((IMapTypeDescriptor)typeDesc).setImmutable(isImmutable());
-                        property.setIntermediate(true);  // set the property as intermediate until we find out different
+                        ((IMapTypeDescriptor) typeDesc)
+                                .setImmutable(isImmutable());
+                        property.setIntermediate(true); // set the property as
+                        // intermediate until we
+                        // find out different
                     }
-                    
+
                     property.setTypeDescriptor(typeDesc);
                     property.setReadable(true);
                     // is only writable if map is not immutable
                     property.setWritable(!isImmutable());
                 }
-                
+
                 segmentMap.put(segments[0], property);
             }
-            
-            final ITypeDescriptor typeDesc = property.getTypeDescriptor();            
-            
+
+            final ITypeDescriptor typeDesc = property.getTypeDescriptor();
+
             if (typeDesc instanceof IMapTypeDescriptor)
             {
                 if (segments.length == 1)
                 {
-                    // TODO: not always allowed ((IMapTypeDescriptor)typeDesc).getMapSource().put(null, source.get(key));
+                    // TODO: not always allowed
+                    // ((IMapTypeDescriptor)typeDesc).getMapSource().put(null,
+                    // source.get(key));
                     // property is more than simply intermediate
                     property.setIntermediate(false);
-                }
-                else
+                } else
                 {
-                    ((IMapTypeDescriptor)typeDesc).getMapSource().
-                        put(key.substring(key.indexOf('.')+1), source.get(key));
+                    ((IMapTypeDescriptor) typeDesc).getMapSource().put(
+                            key.substring(key.indexOf('.') + 1),
+                            entry.getValue());
                 }
             }
         }
-        
+
         return segmentMap;
     }
 
-    
-    
+    /**
+     * Based on measurements, this beats Pattern.split by 15-30% even with
+     * a pre-compiled pattern.
+     * 
+     * @param splitValue
+     * @return the array of strings split by the '.' token
+     */
+    private static String[] fastTokenSplit(final String splitValue)
+    {
+        if (splitValue == null || splitValue.length() == 0)
+        {
+            return new String[0];
+        }
+        if (splitValue.indexOf('.') > -1)
+        {
+            return tokenizerSplit(splitValue);
+        }
+        return new String[] {splitValue};
+    }
+
+    private static String[] tokenizerSplit(final String splitValue)
+    {
+        StringTokenizer stringTokenizer = new StringTokenizer(splitValue, ".");
+        // initialize to a large size, since we're just going to truncate
+        // it once at the end and want to reduce the chance of resize during
+        // the loop.
+        final List<String> splitValues = new ArrayList<String>(32);
+
+        while (stringTokenizer.hasMoreTokens())
+        {
+            splitValues.add(stringTokenizer.nextToken());
+        }
+
+        return splitValues.toArray(new String[0]);
+    }
+
     /**
      * <!-- begin-user-doc -->
      * @param featureID 
