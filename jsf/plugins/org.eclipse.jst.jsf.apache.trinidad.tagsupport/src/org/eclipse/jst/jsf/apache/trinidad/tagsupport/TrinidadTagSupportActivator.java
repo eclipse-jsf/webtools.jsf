@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.apache.trinidad.tagsupport;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jst.jsf.apache.trinidad.tagsupport.dtresourceprovider.TrinidadDTResourceProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -43,6 +44,7 @@ public class TrinidadTagSupportActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		TrinidadDTResourceProvider.init();
 	}
 
 	/*
