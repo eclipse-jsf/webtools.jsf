@@ -16,8 +16,6 @@ import java.util.List;
  * Defines the interface for a Design-Time (DT) "Resource Provider", which
  * offers such services as might be expected to be provided at runtime by, for
  * example, a resource servlet.
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */

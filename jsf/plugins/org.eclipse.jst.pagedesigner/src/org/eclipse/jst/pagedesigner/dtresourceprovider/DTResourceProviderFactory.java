@@ -37,8 +37,6 @@ import org.osgi.framework.Bundle;
  * Factory responsible for producing {@link IDTResourceProvider} instances from
  * <code>org.eclipse.jst.pagedesigner.pageDesignerExtension.dtResourceProvider</code>
  * extensions. 
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */

@@ -16,8 +16,6 @@ import org.w3c.dom.stylesheets.StyleSheet;
 
 /**
  * Interface that a design-time (DT) "skin" must implement.
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */

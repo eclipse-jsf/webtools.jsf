@@ -16,8 +16,6 @@ import java.util.List;
 
 /**
  * Concrete implementation of IDTResourceProvider.
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */

@@ -23,8 +23,6 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 
 /**
  * Manages IDTSkin instances and provides skin-related services.
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */

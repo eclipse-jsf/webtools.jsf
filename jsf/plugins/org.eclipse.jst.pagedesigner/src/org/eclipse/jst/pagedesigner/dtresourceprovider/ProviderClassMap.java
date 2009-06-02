@@ -21,8 +21,6 @@ import org.eclipse.jst.pagedesigner.PDPlugin;
 
 /**
  * Used to Map a String ID to a List of Classes and provide convenient access.
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */

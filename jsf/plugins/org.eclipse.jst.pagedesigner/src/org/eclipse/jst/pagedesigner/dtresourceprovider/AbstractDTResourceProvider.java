@@ -13,8 +13,6 @@ package org.eclipse.jst.pagedesigner.dtresourceprovider;
 /**
  * Abstract implementation of IDTResourceProvider that is intended for client
  * extension.
- * <br>
- * <p><b>Provisional API - subject to change</b></p>
  * 
  * @author Ian Trimble - Oracle
  */
