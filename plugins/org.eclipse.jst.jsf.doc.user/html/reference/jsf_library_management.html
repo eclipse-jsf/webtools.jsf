@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>JSF Library Management</title>
+</head>
+<body>
+
+<h1>JSF Library Management</h1>
+<br>
+The JSF Tools project helps users manage the JAR files for a Dynamic Web
+Project using the JDT User Library feature. This enables a user to add
+the JSF implementation JAR files, custom JSF-JSP Tag libraries and
+supporting JAR files to the classpath of the project. The user can
+optionally deploy the JAR files to the WEB-INF/lib directory at publish
+time using the J2EE Module Dependencies.
+<br>
+<br>
+<img src="./images/jsf_library_configuration.png"
+	alt="Configure JSF Libraries">
+<br>
+<h2>Validation</h2>
+The tool validates that the project has the JSF implementation JAR files
+on the classpath.
+<br>
+<br>
+<img src="./images/jsf_validate_library.png" alt="Validate JSF Library">
+<br>
+<h2>Download Library</h2>
+This feature allows user to download the JSF implementation JAR files.
+<br>
+<br>
+<img src="./images/jsf_download_library.png" alt="Download Library">
+<br>
+<a id="projectrefs"></a>
+<h2>Library Provided By Target Runtime</h2>
+<br>
+If the user has chosen a runtime adapter that is capable of supplying
+the JSF implementation libraries, the library configuration can be
+disabled by selecting the option, "Disable Library Configuration" . This
+replaces the "Server Supplied" option of previous releases.
+<br>
+<br>
+<img src="./images/jsf_disable_library_configuration.png"
+	alt="Disable Library Configuration">
+<br>
+<a id="projectrefs"></a>
+<h2>Project References</h2>
+<br>
+<p>When a JDT User Library is referenced by a project, either at JSF
+Facet install time, or at a later time by adding it using projects Java
+Build Path property page, the library is placed on the project's build
+classpath as a classpath container. In order for the jars in the library
+to be deployed with the application, the library must <b>also</b> be
+selected in the Java EE Module Dependencies page. This handles placing
+each jar in the library into the WEB-INF/lib directory of the deployed
+application.</p>
+<br>
+<img src="./images/jsf_library_jeemodule.png"
+	alt="Set Java EE Module dependencies">
+<br>
+<a id="legacysupport"></a>
+<h2>Legacy Library Configuration</h2>
+<br>
+<p>Existing JSF applications that use the JSF Library feature from
+earlier releases (WTP 3.1 and earlier), will continue to work in this
+release. The tool will detect an older workspace and configure the
+existing JSF application to use a 'Legacy Library Configuration' as the
+library type. Users are encouraged to switch to the 'Use Library' type.</p>
+<br>
+<img src="./images/jsf_library_legacy.png"
+	alt="Support for Legacy Library configuration">
+<br>
+<br>
+<p><img src="../../images/ngrelc.png" alt="Related concepts"
+	border="0"><br>
+<a href="../concepts/jsf_facets.html">JSF Facets</a><br>
+</p>
+
+<p><img src="../../images/ngrelr.png" alt="Related reference"
+	border="0"><br>
+<a
+	href="../../../org.eclipse.jdt.doc.user/reference/preferences/java/buildpath/ref-preferences-user-libraries.htm">JDT
+User Library</a></p>
+
+<p><img src="../../images/ngrelt.png" alt="Related tasks" border="0">
+<br>
+<a href="../tasks/jsf_library_migration.html">Migrating a project
+using JSF Library to use JDT User Library</a><br>
+<a href="../tasks/create_jsf_app.html">Create JSF Project</a><br>
+</p>
+
+
+</body>
+</html>

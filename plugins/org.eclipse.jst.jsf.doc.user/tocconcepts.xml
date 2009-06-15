@@ -16,8 +16,6 @@
 <!--
 		<topic label="Snippets" href="html/concepts/jsf_source_editing.html#snippets" />
 -->
-		<topic href="html/concepts/jsf_source_editing.html#futures" label="Future Features">
-  </topic> 
 	</topic> 
 	<topic label="JSF Application Configuration" href="html/concepts/jsf_app_config_mgr.html" />
  <topic href="html/concepts/jsf_tag_registry.html" label="JSF Tag Registry">

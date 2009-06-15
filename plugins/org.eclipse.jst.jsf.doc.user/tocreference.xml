@@ -6,10 +6,12 @@
 		<topic label="JSF Core" href="html/reference/jsf-c.html" /> 
 		<topic label="JSF HTML" href="html/reference/jsf-h.html" />
 	</topic>
-	<topic label="JSF Libraries" href="html/reference/jsf_libraries.html" >
+	<topic label="JSF Library Management" href="html/reference/jsf_library_management.html" >
 		<topic label="Implementations vs. Component Libraries" href="html/reference/jsf_libraries.html#ImplVsComponents" />
 		<topic label="Plugin-Provided Libraries" href="html/reference/jsf_libraries.html#pluginprovided" />
 		<topic label="Missing Jars" href="html/reference/jsf_libraries.html#missingjars" />
 		<topic label="Project References" href="html/reference/jsf_libraries.html#projectrefs" />				
-	</topic> 
+	</topic>
+ <topic href="html/reference/jsf_design_time_skinning.html" label="JSF Design-Time Skinning Support">
+ </topic> 
 </toc>

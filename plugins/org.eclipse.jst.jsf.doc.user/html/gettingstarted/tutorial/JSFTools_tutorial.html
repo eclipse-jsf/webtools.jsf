@@ -47,7 +47,7 @@ application, and highlight the features contributed by the JSF Tools
 Project.
 <p><b> By Raghu Srinivasan, Oracle Corporation.</b> <br>
 
-<font size="-1">June 18, 2007</font></p>
+<font size="-1">June 15, 2009</font></p>
 
 </blockquote>
 
@@ -70,11 +70,11 @@ not.<a id="setup"></a></p>
 <h3>Setup</h3>
 <p></p>
 <ul>
-	<li><a href="http://java.sun.com/javase/downloads/index_jdk5.jsp">The
-	Java SE 5 Development Kit (JDK)</a></li>
-	<li><a href="http://eclipse.org/downloads/">Eclipse 3.3 </a></li>
+	<li><a href="http://java.sun.com/javase/downloads/index.jsp">The
+	Java SE 6 Development Kit (JDK)</a></li>
+	<li><a href="http://eclipse.org/downloads/">Eclipse 3.5 </a></li>
 	<li><a href="http://download.eclipse.org/webtools/downloads/">Eclipse
-	Web Tools Platform Project(WTP) 2.0</a></li>
+	Web Tools Platform Project(WTP) 3.1</a></li>
 
 	<li><a href="http://tomcat.apache.org/">Apache Tomcat 6.0</a></li>
 	<li><a
@@ -85,40 +85,17 @@ not.<a id="setup"></a></p>
 <p><a id="reglibs"></a></p>
 <h3>Make the Web Page Editor the default editor for JSP pages</h3>
 
-The JSF Tools Project-contributed Web Page Editor (WPE) is NOT registered as
-the default editor for JSP files. You can make the WPE the default
-editor for JSP files by following these steps:
+The JSF Tools Project-contributed Web Page Editor (WPE) is NOT
+registered as the default editor for JSP files. You can make the WPE the
+default editor for JSP files by following these steps:
 <ul>
-	<li>Navigate to "Window" -&gt; "Preferences..." -&gt; "General" -&gt;
-	"Editors" -&gt; "File Associations"</li>
+	<li>Navigate to "Window" -&gt; "Preferences..." -&gt; "General"
+	-&gt; "Editors" -&gt; "File Associations"</li>
 	<li>In the "File types" section, select "*.jsp"</li>
 	<li>In the "Associated editors" section, select "Web Page Editor"</li>
 	<li>Select the "Default" button</li>
 </ul>
 
-<h3>Register JSF libraries</h3>
-<p>This feature allows for a named sets of jars to be created for
-use with JSF Applications. We will be creating a library containing the
-Sun JSF RI<br>
-
-Select Windows-&gt;Preferences-&gt;Web and XML-&gt;-&gt;JavaServer Faces
-Tools-&gt;Libraries. Click on the New.. button to add a new library.
-Create the JSF Libraries as shown in the following figures. Check the <b>is
-JSF Implementation</b> check box when adding the Sun JSF RI library.</p>
-<br>
-<img alt="JSF Libraries-add" src="images/jsf-library-new.png"
-	height="538" width="626">
-
-
-<br>
-<br>
-Create another JSF Library called <b>JSTL</b> that has the JavaServer Pages Standard Tag Library jar as shown below.
-<br>
-<br>
-<img alt="JSF Libraries" src="images/jsf-libraries.png"
-	height="241" width="729">
-
-<br>
 <p><a id="newproject"></a></p>
 <h3>Create a JavaServer Faces Project</h3>
 
@@ -134,26 +111,43 @@ page.<br>
 
 <br>
 
-<p>On the JSF Capabilities page, select the radio button adjacent to
-the JSF Library <b>JSF-RI-1.2</b>. Add the <b>JSTL</b> library.
-<br>
+<p>On the JSF Capabilities page, from the drop-down for the Type of
+the JSF Library, select <b>User Library</b>. <br>
 <br>
 
 <img alt="JSF Capabilities page"
-	src="images/jsf-capabilities-library.png" height="268" width="616"></p>
+	src="images/jsf-capabilities-library.png"></p>
 
 
 <br>
-<p><img src="images/note.gif" height="13" width="62">If you
-deploy the JSF web application to a server runtime that includes the JSF
-1.2 reference implementation, then you should select the <b>Server
-Supplied JSF implementation</b> option.<br>
-<br>
-Click on the <b>Finish</b> button to create the JavaServer Faces
-Application. You may be prompted to accept the license for the Web App
-DTD from Sun. You may also be asked to choose the J2EE perspective upon
-completion. In both cases accept. <br>
+<p>Click on the <b>Download library</b> icon.
+The Download Library dialog is displayed with the list of providers for
+the JSF implementation JAR files. Select the library from Sun
+Microsystem. Click <b>Next</b>. Accept the license and hit <b>Finish</b> <br><br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-download-library.png"></p>
 
+
+<br>
+
+The tool downloads the JAR files, creates a JDT User Library and adds it to the current project. Select the checkbox for the new library if it is not selected. Next, select the <b>Manage libraries</b> icon.<br>
+<br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-capabilities-library-2.png"></p>
+<br>
+<br>
+
+Create a JDT User Library to hold the JSTL jar file. Seelct <b>OK.</b>
+<br><br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-new-library.png"></p>
+<br>
+<br>
+The JSTL library is displayed in the JSF Capabilities dialog. Select the libray and hit <b>Finish</b>
+<br><br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-add-jstl-library.png"></p>
+<br>
 <br>
 <p>Your JSF application has been created. Note that the web.xml file
 has been updated with the Faces Servlet and servlet-mapping, a stub JSF
@@ -177,47 +171,69 @@ Facets…</b></p>
 <p>Use the JSP Page wizard to create a page called <b>login.jsp</b>
 in the Web Content folder of the new application. In the Select
 Templates page of the wizard, select the <b>New JSP(html)</b> template.
-Click Finish. The page will be opened in the Web Page Editor as shown below<br>
+Click Finish. The page will be opened in the Web Page Editor as shown
+below<br>
 <br>
 <br>
 <img alt="Web Page Editor" src="images/web-page-editor.png" height="589"
 	width="957"></p>
 
 <br>
-Open the Properties View. Right-mouse click on the designer canvas and from the context menu, select Show-&gt;Properties. Wait for the "Reading Properties" dialog to disappear.
+Open the Properties View. Right-mouse click on the designer canvas and
+from the context menu, select Show-&gt;Properties. Wait for the "Reading
+Properties" dialog to disappear.
 <br>
 <br>
-<h5>Add a CommandButton to the canvas.</h5> <ul><li>In the <b>Palette View</b>, click on the section <b>JSF HTML</b>  to display the list of components.</li><li> Drag-and-drop the  CommandButton to the canvas.
-Note that the editor wraps the CommandButton with <b>&lt;f:view&gt;</b> and <b>&lt;h:form&gt;</b> tag.</li>
-<li>In the properties view, click on <b>Quick Edit</b>. </li><li>Set the <b>Value</b> attribute to <b>Login</b>.</li><li>Set the  <b>Action</b>  attribute to <b>login</b></li>
+<h5>Add a CommandButton to the canvas.</h5>
+<ul>
+	<li>In the <b>Palette View</b>, click on the section <b>JSF
+	HTML</b> to display the list of components.</li>
+	<li>Drag-and-drop the CommandButton to the canvas. Note that the
+	editor wraps the CommandButton with <b>&lt;f:view&gt;</b> and <b>&lt;h:form&gt;</b>
+	tag.</li>
+	<li>In the properties view, click on <b>Quick Edit</b>.</li>
+	<li>Set the <b>Value</b> attribute to <b>Login</b>.</li>
+	<li>Set the <b>Action</b> attribute to <b>login</b></li>
 </ul>
 <br>
 <br>
-<img alt="WPE-Add CommandButton" src="images/wpe-add-cmd.png" height="447"
-	width="854"></p>
+<img alt="WPE-Add CommandButton" src="images/wpe-add-cmd.png"
+	height="447" width="854">
+</p>
 
 <br>
 <h5>Add a PanelGrid</h5>
 <ul>
-<li>From the Palette View, Drag-and-drop  the PanelGrid to the canvas. Notice the feedback on the drop target.</li>
-<li>Drop the Panel Grid before the Command Button, but inside the Form tag. The Panel Grid is created with a predefined set of OutputText components.</li>
+	<li>From the Palette View, Drag-and-drop the PanelGrid to the
+	canvas. Notice the feedback on the drop target.</li>
+	<li>Drop the Panel Grid before the Command Button, but inside the
+	Form tag. The Panel Grid is created with a predefined set of OutputText
+	components.</li>
 </ul>
-<h5>Modify the components inside the Panel Grid </h5>
+<h5>Modify the components inside the Panel Grid</h5>
 <ul>
-<li>Click on the OutputText <b>Item2</b> and hit Delete</li> 
-<li>Add a InputText (Text Input in the Palette view) tag after <b>Item1</b> and before <b>Item3</b></li>
-<li>Delete the OutputText, <b>Item 4</b></li>
-<li>Add a InputSecret (Secret Input in the Palette view) tag after <b>Item3</b></li>
-<li>Click on the OutputText, <b>Item1</b>. Change its value in the Source View to <b>Name</b></li>
-<li>Click on the OutputText, <b>Item3</b>. Change its value in the Source View to <b>Password</b></li>
-<li>Click on the <b>Preview</b> tab to see the page rendered in a browser</li>
-<li>Click on the InputText tag next to <b>Name</b>. In the Property View, set the value attribute to <b>#{loginBean.name}</b>.</li>
-<li>Save the page. The editor will flag a warning indicating that the variable, <b>loginBean</b> cannot be resolved. </li>
+	<li>Click on the OutputText <b>Item2</b> and hit Delete</li>
+	<li>Add a InputText (Text Input in the Palette view) tag after <b>Item1</b>
+	and before <b>Item3</b></li>
+	<li>Delete the OutputText, <b>Item 4</b></li>
+	<li>Add a InputSecret (Secret Input in the Palette view) tag after
+	<b>Item3</b></li>
+	<li>Click on the OutputText, <b>Item1</b>. Change its value in the
+	Source View to <b>Name</b></li>
+	<li>Click on the OutputText, <b>Item3</b>. Change its value in the
+	Source View to <b>Password</b></li>
+	<li>Click on the <b>Preview</b> tab to see the page rendered in a
+	browser</li>
+	<li>Click on the InputText tag next to <b>Name</b>. In the
+	Property View, set the value attribute to <b>#{loginBean.name}</b>.</li>
+	<li>Save the page. The editor will flag a warning indicating that
+	the variable, <b>loginBean</b> cannot be resolved.</li>
 </ul>
 <br>
 <br>
 <img alt="WPE-Add PanelGrid" src="images/wpe-add-panel.png" height="438"
-	width="892"></p>
+	width="892">
+</p>
 
 <br>
 
@@ -238,38 +254,45 @@ tab.
 Click on the
 <b>Add</b>
 button. This will launch the New Managed Bean wizard. Select the option,
-<b>Create a new Java class</b>. In the next wizard panel, enter the package as,
-<b>com.tutorial</b> and the Name of the class as  <b>LoginBean</b>
-. Click the Finish button. 
+<b>Create a new Java class</b>
+. In the next wizard panel, enter the package as,
+<b>com.tutorial</b>
+and the Name of the class as
+<b>LoginBean</b>
+. Click the Finish button.
 <br>
 <br>
 <img alt="New Managed Bean" src="images/new-managedbean.png"
 	height="234" width="495">
 <br>
 <br>
-This
-will create the Java class and register it as a managed bean. Save the Faces Configuration editor.To edit the Java class, click on the hyperlink, <b>ManagedBean class</b> in the Managed bean page as shown in the figure below. This will launch the Java editor.
+This will create the Java class and register it as a managed bean. Save
+the Faces Configuration editor.To edit the Java class, click on the
+hyperlink,
+<b>ManagedBean class</b>
+in the Managed bean page as shown in the figure below. This will launch
+the Java editor.
 <br>
 <br>
-<img alt="Faces Configuration Editor - Managed Bean tab" src="images/fce-managedbean-class.png"
-	height="181" width="599">
+<img alt="Faces Configuration Editor - Managed Bean tab"
+	src="images/fce-managedbean-class.png" height="181" width="599">
 <br>
 <br>
 
 <p><a id="createbean"></a></p>
 <br>
-Edit the  Java class,
-<b>com.tutorial.LoginBean</b>.
-Add the following code and save.
+Edit the Java class,
+<b>com.tutorial.LoginBean</b>
+. Add the following code and save.
 <br>
 <br>
 <img alt="LoginBean" src="images/loginbean.png" height="491" width="405">
 
 <br>
 <a id='el-validate-bean'></a>
-In the Project Explorer view, right-mouse click on the  
-JSP page, <b>login.jsp</b> and from the context menu,
-select the
+In the Project Explorer view, right-mouse click on the JSP page,
+<b>login.jsp</b>
+and from the context menu, select the
 <b>Validate</b>
 option. Note that the page should now be valid.
 <br>
@@ -385,7 +408,9 @@ in the folder
 <br>
 Add the JSF tag,
 <b>loadBundle</b>
-as shown below. You can drag-and-drop the tag from the <b>JSF Core</b> section of the Palette View.
+as shown below. You can drag-and-drop the tag from the
+<b>JSF Core</b>
+section of the Palette View.
 <br>
 <br>
 <img alt="Content assist for resource bundle"
