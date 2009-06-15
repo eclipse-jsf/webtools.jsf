@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>jsfFacetConfiguration</title>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1 style="text-align:center">jsfFacetConfiguration</H1>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.jst.jsf.core.jsfFacetConfiguration<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Since: </h6>Galileo M7
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>This extension point is for adopter products wishing to disable the default configuration options on the JSF facet install page.   The extender becomes responsible for all configuration of the JSF facet.
+<p>
+When this extension is present and disabled is set:
+<ol>
+    <li>No configuration will occur:</li>
+<ul>
+    <li>faces configuration file will not be created or modified</li>
+    <li>web application (web.xml) will not be updated</li>
+</ul>
+<li> The JSF Facet installation page will NOT display UI for, and the underlying data model will not contain: </li>
+<ul>
+    <li>JSF Configuration File</li>
+    <li>JSF Servlet Name</li>
+    <li>JSF Servlet Classname</li>
+    <li>URL Mapping Patterns</li>   
+</ul>
+</ol>
+<p>
+<b>Important:</b> It will be necessary for any adopter using this mechanism to handle all faces-config creation/modification and web.xml updates for the JSF facet using a facet install listener.<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.jsfFacetConfiguration">jsfFacetConfiguration</a>)?&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.jsfFacetConfiguration">jsfFacetConfiguration</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST jsfFacetConfiguration</p>
+<p class="code SchemaDtdAttlist">disabled&nbsp;(true | false) </p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>disabled</b> - if set true, the JSF Facet configuration UI will not display, and the configuration will not execute for either INSTALL or UNINSTALL operations.   This does not affect the library provider in any way.</li>
+</ul>
+<br><h6 class="CaptionFigColumn SchemaHeader">API Information: </h6><b>Provisional API</b>
+<p></p>
+
+<br>
+<p class="note SchemaCopyright">
+/*******************************************************************************
+ * Copyright (c) 2009 Oracle. All rights reserved.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0, which accompanies this distribution
+ * and is available at http://www.eclipse.org/legal/epl-v10.html.
+ *
+ * Contributors:
+ *     Oracle - initial API and implementation
+ ******************************************************************************/
+
+</p>
+</BODY>
+</HTML>

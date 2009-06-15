@@ -5,5 +5,5 @@
 	<topic label="Supplying Tag Library Metadata for Apache MyFaces Tomahawk - Part One" href="html/tutorials/supplying_tag_library_metadata_for_apache_myfaces_tomahawk.html"/>
 	<topic label="Implementing a New Tag-Based EL Variable Contributor for JSP" href="html/tutorials/implementing_a_new_tag_based_el_variable_contributor_for_jsp.html"/>
 	<topic label="Providing Design-Time Tag Metadata" href="html/tutorials/Providing_Design-Time_Tag_Metadata.html"/>
-	<topic href="http://wiki.eclipse.org/index.php/JSF_Tools_Project" label="WTP JSF Home Page"/>
+	<topic href="http://www.eclipse.org/webtools/jsf/" label="WTP JSF Home Page"/>
 </toc>

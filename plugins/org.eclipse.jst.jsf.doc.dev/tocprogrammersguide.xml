@@ -2,7 +2,6 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Programmer's Guide" link_to="toc.xml#jsf_dev_programmersguide">
-	<topic label="Creating Plugin-Provided JSF Libraries" href="html/programmersguide/creating_plugin_provided_jsf_libraries.html"/>
 	<topic label="Contributing JSP Source Page Editing Services for a Tag Library" href="html/programmersguide/contributing_jsp_source_page_editing_services_for_a_tag_library.html" >
 		<topic label="Design-time Meta-data Framework" href="html/programmersguide/metadata_framework.html"/>
 		<topic label="Using Meta-Data for Providing Source Editing Services" href="html/programmersguide/metadata_processing_framework.html"/>		
@@ -14,6 +13,6 @@
 	</topic>
 	<topic href="html/programmersguide/design-time_tag_metadata_operations.html" label="Design-Time Tag Metadata Operations">
  </topic>
- <topic href="http://wiki.eclipse.org/index.php/JSF_Tools_Project" label="WTP JSF Home Page">
+ <topic href="http://www.eclipse.org/webtools/jsf/" label="WTP JSF Home Page">
  </topic>>
 </toc>

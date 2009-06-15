@@ -19,13 +19,13 @@
 <p></p>
 <p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.standardMetaDataFile">standardMetaDataFile</a>+)&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST extension</p>
-<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.standardMetaDataFile">standardMetaDataFile</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST standardMetaDataFile</p>
-<p class="code SchemaDtdAttlist">uri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">location&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">locator&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">uri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">location&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">locator&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <p class="ConfigMarkupElementDesc">
 Mapping of a namespace URI to an XML file loadable by a standard metadata EMF model defined by <code>http://org.eclipse.jst.jsf.common.metadata/metadata.ecore</code>.     See <code>org.eclipse.jst.jsf.standard.tagsupport</code> plugin and the /metadata/jsf_core.xml file.</p>
@@ -36,13 +36,13 @@ Mapping of a namespace URI to an XML file loadable by a standard metadata EMF mo
 eg. /metadata/jsf_core.xml</li>
 <li><b>locator</b> - Class extending <code>org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataSourceFileLocator</code> that will be used to locate the standard metadata file.</li>
 </ul>
-<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6>&lt;extension
+<br><h6 class="CaptionFigColumn SchemaHeader">Examples: </h6><extension
          point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
-      &lt;standardMetaDataFile
+      <standardMetaDataFile
             location="/metadata/JSF_HTML.xml"
             uri="http://java.sun.com/jsf/html">
-      &lt;/standardMetaDataFile>
-   &lt;/extension>
+      </standardMetaDataFile>
+   </extension>
 <p></p>
 
 <br>

@@ -25,12 +25,10 @@ org.eclipse.jst.jsf.designtime.context
 org.eclipse.jst.jsf.designtime.el
 org.eclipse.jst.jsf.designtime.resolver
 org.eclipse.jst.jsf.designtime.symbols
-org.eclipse.jst.jsf.facesconfig
 org.eclipse.jst.jsf.facesconfig.edit.provider
 org.eclipse.jst.jsf.facesconfig.emf
 org.eclipse.jst.jsf.facesconfig.emf.impl
 org.eclipse.jst.jsf.facesconfig.emf.util
-org.eclipse.jst.jsf.facesconfig.util
 org.eclipse.jst.jsf.metadataprocessors
 org.eclipse.jst.jsf.metadataprocessors.features
 org.eclipse.jst.jsf.taglibprocessing.attributevalues

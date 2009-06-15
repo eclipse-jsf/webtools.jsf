@@ -15,22 +15,22 @@
 <h6 class="CaptionFigColumn SchemaHeader">Description: </h6><p><b>This extension point is provisional and subject to change</b></p><p></p>
 <h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
 <p></p>
-<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.localDropHandler">localDropHandler</a>* , <a href="#e.attributeCellEditorFactory">attributeCellEditorFactory</a>* , <a href="#e.tagConverterFactory">tagConverterFactory</a>* , <a href="#e.elementEditFactory">elementEditFactory</a>* , <a href="#e.linkCreator">linkCreator</a>* , <a href="#e.tagAttributeCellEditorFactory">tagAttributeCellEditorFactory</a>* , <a href="#e.tagTransformOperation">tagTransformOperation</a>*)&gt;</p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.localDropHandler">localDropHandler</a>* , <a href="#e.attributeCellEditorFactory">attributeCellEditorFactory</a>* , <a href="#e.tagConverterFactory">tagConverterFactory</a>* , <a href="#e.elementEditFactory">elementEditFactory</a>* , <a href="#e.linkCreator">linkCreator</a>* , <a href="#e.tagAttributeCellEditorFactory">tagAttributeCellEditorFactory</a>* , <a href="#e.tagTransformOperation">tagTransformOperation</a>* , <a href="#e.dtResourceProvider">dtResourceProvider</a>* , <a href="#e.propertyPageFactory">propertyPageFactory</a>* , <a href="#e.paletteFactory">paletteFactory</a>*)&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST extension</p>
-<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.localDropHandler">localDropHandler</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST localDropHandler</p>
-<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 <li><b>class</b> - </li>
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.attributeCellEditorFactory">attributeCellEditorFactory</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST attributeCellEditorFactory</p>
-<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <p class="ConfigMarkupElementDesc">
 deprecated - use tagAttributeCellEditorFactory</p>
@@ -40,7 +40,7 @@ deprecated - use tagAttributeCellEditorFactory</p>
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.tagAttributeCellEditorFactory">tagAttributeCellEditorFactory</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST tagAttributeCellEditorFactory</p>
-<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <p class="ConfigMarkupElementDesc">
 provides ability for 3rd parties to supply their own cell and dialog field editors for MD enabled tag library attributes in the WPE tabbed property sheets</p>
@@ -50,21 +50,21 @@ provides ability for 3rd parties to supply their own cell and dialog field edito
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.tagConverterFactory">tagConverterFactory</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST tagConverterFactory</p>
-<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 <li><b>class</b> - </li>
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.elementEditFactory">elementEditFactory</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST elementEditFactory</p>
-<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 <li><b>class</b> - </li>
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.linkCreator">linkCreator</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST linkCreator</p>
-<p class="code SchemaDtdAttlist">class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">linkIdentifier&nbsp;CDATA #REQUIRED&gt;</p>
+<p class="code SchemaDtdAttlist">class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">linkIdentifier&nbsp;CDATA #REQUIRED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 <li><b>class</b> - </li>
@@ -72,7 +72,7 @@ provides ability for 3rd parties to supply their own cell and dialog field edito
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.tagTransformOperation">tagTransformOperation</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST tagTransformOperation</p>
-<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">class&nbsp;CDATA #REQUIRED&gt;</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">class&nbsp;CDATA #REQUIRED</p>&gt;</p>
 <p></p>
 <p class="ConfigMarkupElementDesc">
 define a tag transformation operation class</p>
@@ -85,6 +85,31 @@ define a tag transformation operation class</p>
  
 The exception to this rule is that if the reference is not plugin-qualified, then the reference is assumed to be a <i>core</i> transformation and uses the <code>org.eclipse.jst.pagedesigner</code> prefix.</li>
 <li><b>class</b> - class extending the <code>org.eclipse.jst.pagedesigner.dtmanager.converter.operations.AbstractTransformOperation</code></li>
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.dtResourceProvider">dtResourceProvider</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST dtResourceProvider</p>
+<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">class&nbsp;CDATA #REQUIRED</p>&gt;</p>
+<p></p>
+<p class="ConfigMarkupElementDesc">
+Defines a Design-Time Resource Provider class for a specific ID.</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>id</b> - The ID of the Design-Time Resource Provider class. This is used to map usage of each DT Resource Provider class to a specific page neing edited, and so is typically the NS URI of the tag library for which the class provides resources.</li>
+<li><b>class</b> - Class extending <code>org.eclipse.jst.pagedesigner.dtresourceprovider.AbstractDTResourceProvider</code>.</li>
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.propertyPageFactory">propertyPageFactory</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST propertyPageFactory</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #REQUIRED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>class</b> - Provisional API.  If an extension point is found in the system, the Web Page Editor will use the factory implementation to provide its property page.</li>
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.paletteFactory">paletteFactory</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST paletteFactory</p>
+<p class="code SchemaDtdAttlist">class&nbsp;CDATA #REQUIRED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>class</b> - Provisional API.  If an extension point is found in the system, the Web Page Editor will use the factory implementation to provide its paletteViewerPage</li>
 </ul>
 <br><br>
 <p class="note SchemaCopyright">

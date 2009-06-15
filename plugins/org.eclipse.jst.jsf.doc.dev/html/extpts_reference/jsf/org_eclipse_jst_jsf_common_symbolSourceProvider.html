@@ -21,13 +21,13 @@ A list of registered symbol providers may be found by calling JSFCommonPlugin.ge
 <p></p>
 <p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.symbolSourceId">symbolSourceId</a>)&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST extension</p>
-<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED<p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED<p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED&gt;</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 </ul>
 <br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.symbolSourceId">symbolSourceId</a> EMPTY&gt;</p>
 <p class="code SchemaDtd">&lt;!ATTLIST symbolSourceId</p>
-<p class="code SchemaDtdAttlist">factory&nbsp;CDATA #REQUIRED&gt;</p>
+<p class="code SchemaDtdAttlist">factory&nbsp;CDATA #REQUIRED</p>&gt;</p>
 <p></p>
 <ul class="ConfigMarkupAttlistDesc">
 <li><b>factory</b> - An instance of the factory interface that will be invoked to create an instance of this symbol source provider.  Factory must have a zero-arg default constructor.</li>
