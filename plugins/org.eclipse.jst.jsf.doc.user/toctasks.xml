@@ -4,8 +4,6 @@
 <toc label="Tasks" link_to="toc.xml#jsf_tasks"> 
 	<topic label="Creating New JSF Projects"  href="html/tasks/create_jsf_app.html" /> 
 	<topic label="Adding JSF Facet to Existing projects" href="html/tasks/add_jsf_facet.html" /> 
-	<topic label="Creating and Updating JSF Libraries" href="html/tasks/jsf_libs.html" /> 
-	<topic label="Adding and Removing JSF Library References from a Project" href="html/tasks/jsf_libs_refs.html" /> 
 	<topic label="Creating JSF JSP Pages" href="html/tasks/create_jsf_jsp_page.html" /> 
 	<topic label="Creating Managed Beans" href="html/tasks/create_managedbean.html" /> 
 	<topic label="Creating Navigation Rules" href="html/tasks/define_navigations.html" >
@@ -36,5 +34,7 @@
     <topic href="html/tasks/jsf_elvalidation_prefs.html" label="Changing EL Validation Preferences">
     </topic>
  </topic> 
-	<topic label="Executing JSF Pages" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#testpage" /> 
+	<topic label="Executing JSF Pages" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#testpage" />
+ <topic href="html/tasks/jsf_library_migration.html" label="Migrating JSF Libraries">
+ </topic> 
 </toc>
