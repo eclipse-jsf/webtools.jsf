@@ -135,25 +135,23 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 		List/*<IMetaDataSourceModelProvider>*/ sources = new ArrayList/*<IMetaDataSourceModelProvider>*/();		
 		for (Iterator/*<IDomainSourceModelType>*/ it = sourceTypes.iterator();it.hasNext();){
 			IDomainSourceModelType sourceType = (IDomainSourceModelType)it.next();
-			IMetaDataLocator locator = sourceType.getLocator();
-			//We MUST set the sourceType here to associate the handler with locator to use for the source models
-			locator.setDomainSourceModelType(sourceType);
-			
-			//set project context in locator for those that care
-			if (locator instanceof IPathSensitiveMetaDataLocator)
-				((IPathSensitiveMetaDataLocator)locator).setProjectContext(model.getModelKey().getProject());
-			
-			List/*<IMetaDataSourceModelProvider>*/ providers = sourceType.getLocator().locateMetaDataModelProviders(model.getModelKey().getUri());
-			if (providers != null && !providers.isEmpty()){
-				for (Iterator mdProviders =providers.iterator();mdProviders.hasNext();){
-					IMetaDataSourceModelProvider provider = (IMetaDataSourceModelProvider)mdProviders.next();
-					//We MUST set the sourceType here to associate the translators to use for the source models
-					provider.setLocator(sourceType.getLocator());
-					sources.add(provider);
+			IMetaDataLocator locator = sourceType.getLocator(model.getModelKey().getProject());
+			if (locator != null) {
+				//We MUST set the sourceType here to associate the handler with locator to use for the source models
+				locator.setDomainSourceModelType(sourceType);
+								
+				List/*<IMetaDataSourceModelProvider>*/ providers = locator.locateMetaDataModelProviders(model.getModelKey().getUri());
+				if (providers != null && !providers.isEmpty()){
+					for (Iterator mdProviders =providers.iterator();mdProviders.hasNext();){
+						IMetaDataSourceModelProvider provider = (IMetaDataSourceModelProvider)mdProviders.next();
+						//We MUST set the sourceType here to associate the translators to use for the source models
+						provider.setLocator(locator);
+						sources.add(provider);
+					}
 				}
+				//listen for changes
+				locator.addObserver(this);
 			}
-			//listen for changes
-			sourceType.getLocator().addObserver(this);
 		}
 		return sources;
 	}

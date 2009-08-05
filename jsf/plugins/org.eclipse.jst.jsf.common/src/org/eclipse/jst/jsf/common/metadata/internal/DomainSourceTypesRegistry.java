@@ -33,7 +33,6 @@ public class DomainSourceTypesRegistry{
 	private static final String EXTENSION_POINT_ID = "domainSourceModelTypes"; //$NON-NLS-1$
 	private static DomainSourceTypesRegistry INSTANCE;
 	private Map/*<String, List/*<DomainSourceModelTypeDescriptor>>*/ domainSourceTypeDescriptors;
-	private Map/*<String, List/*<IDomainSourceModelType>*/ domainSourceTypes;
 	
 	private DomainSourceTypesRegistry(){
 		init();
@@ -53,10 +52,7 @@ public class DomainSourceTypesRegistry{
 	 * @param domain identifier
 	 * @return list of <code>IDomainSourceModelType</code> sorted in descending order by ordinal
 	 */
-	public List/*<IDomainSourceModelType>*/ getDomainSourceTypes(String domain){
-		if (getDomainSourceTypes().containsKey(domain))
-			return (List)getDomainSourceTypes().get(domain);
-		
+	public List/*<IDomainSourceModelType>*/ getDomainSourceTypes(String domain){		
 		List/*<DomainSourceModelTypeDescriptor>*/ list = getDomainSourceModelDescriptors(domain);
 		List/*<IDomainSourceModelType>*/ types = new ArrayList/*<IDomainSourceModelType>*/();
 		for(Iterator/*<DomainSourceModelTypeDescriptor>*/ it=list.iterator();it.hasNext();){
@@ -78,7 +74,6 @@ public class DomainSourceTypesRegistry{
 			
 		});
 		
-		getDomainSourceTypes().put(domain, types);
 		return types;
 	}
 	
@@ -134,11 +129,11 @@ public class DomainSourceTypesRegistry{
 		return domainSourceTypeDescriptors;
 	}
 	
-	private Map/*<String, List/*<IDomainSourceModelType>>*/ getDomainSourceTypes() {
-		if (domainSourceTypes == null){
-			domainSourceTypes = new HashMap/*<String, List/*<IDomainSourceModelType>>*/();
-		}
-		return domainSourceTypes;
-	}
+//	private Map/*<String, List/*<IDomainSourceModelType>>*/ getDomainSourceTypes() {
+//		if (domainSourceTypes == null){
+//			domainSourceTypes = new HashMap/*<String, List/*<IDomainSourceModelType>>*/();
+//		}
+//		return domainSourceTypes;
+//	}
 
 }

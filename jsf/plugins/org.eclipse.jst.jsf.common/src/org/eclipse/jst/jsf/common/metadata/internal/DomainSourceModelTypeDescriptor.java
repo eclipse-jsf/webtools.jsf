@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -36,7 +37,6 @@ public class DomainSourceModelTypeDescriptor {
 	private Set translatorDescriptors;
 	private String bundleId = JSFCommonPlugin.PLUGIN_ID;
 	private int ordinal;
-	private IDomainSourceModelType _instance;
 	
 	/**
 	 * Constructor
@@ -98,19 +98,9 @@ public class DomainSourceModelTypeDescriptor {
 	}
 	 
 	/**
-	 * @return singleton instance of the {@link IDomainSourceModelType}
+	 * @return new instance of the {@link IDomainSourceModelType}
 	 */
 	public IDomainSourceModelType getInstance(){
-		if (_instance == null){
-			_instance = newInstance();
-		}
-		return _instance;
-	}
-	/**
-	 * @return new instance of {@link IDomainSourceModelType} 
-	 */
-	private IDomainSourceModelType newInstance(){		
-
 		return new DomainSourceModelTypeImpl();
 	}
 	
@@ -143,9 +133,9 @@ public class DomainSourceModelTypeDescriptor {
 		/* (non-Javadoc)
 		 * @see org.eclipse.jst.jsf.common.metadata.internal.IDomainSourceModelType#getLocator()
 		 */
-		public IMetaDataLocator getLocator() {
+		public IMetaDataLocator getLocator(IProject project) {
 			if (locator == null){
-				locator = MetaDataLocatorFactory.getInstance().getLocator(locatorClassName, bundleId);
+				locator = MetaDataLocatorFactory.getInstance().getLocator(locatorClassName, bundleId, project);
 			}
 								
 			return locator;
@@ -169,7 +159,7 @@ public class DomainSourceModelTypeDescriptor {
 			buf.append("(domain = "); //$NON-NLS-1$
 			buf.append(getDomain());
 			buf.append(", locator = "); //$NON-NLS-1$
-			buf.append(getLocator());
+			buf.append(locator != null ? locator.toString() : "null"); //$NON-NLS-1$
 			buf.append(")"); //$NON-NLS-1$
 			return buf.toString();
 		}

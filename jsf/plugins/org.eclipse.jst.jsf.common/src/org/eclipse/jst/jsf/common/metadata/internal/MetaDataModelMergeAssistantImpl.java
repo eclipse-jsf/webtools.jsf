@@ -43,7 +43,6 @@ public class MetaDataModelMergeAssistantImpl implements
 		IMetaDataModelMergeAssistant {
 	
 	private MetaDataModel mergedModel;
-	private Copier copier;
 	private SimpleEntityQueryVisitorImpl entityVisitor;
 	private SimpleTraitQueryVisitorImpl traitVisitor;
 	private IMetaDataSourceModelProvider provider;
@@ -54,7 +53,6 @@ public class MetaDataModelMergeAssistantImpl implements
 	 */
 	public MetaDataModelMergeAssistantImpl(MetaDataModel model) {
 		this.mergedModel = model;
-		copier = new Copier();
 		entityVisitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, 
 			HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		traitVisitor = new SimpleTraitQueryVisitorImpl(new SearchControl(1));
@@ -175,6 +173,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	private /*synchronized*/ Entity addEntityInternal(final Entity parent, final Entity entity) {
+		Copier copier = new Copier();
 		Entity mmEntity =(Entity)copier.copy(entity);
 		copier.copyReferences();
 		parent.getChildEntities().add(mmEntity);
@@ -226,7 +225,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param trait
 	 * @return merged Trait
 	 */
-	private Trait addTraitInternal(final Entity parent, final Trait trait) {		
+	private Trait addTraitInternal(final Entity parent, final Trait trait) {
+		Copier copier = new Copier();
 		Trait mmTrait =(Trait)copier.copy(trait);
 		copier.copyReferences();
 		parent.getTraits().add(mmTrait);
