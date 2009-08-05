@@ -46,7 +46,6 @@ public class TraitImplTests extends AbstractBaseMetaDataTestCase {
 	public void testGetSourceModel() {
 		assertNotNull(trait.getSourceModelProvider());
 		assertTrue(trait.getSourceModelProvider().getSourceModel() instanceof Model);
-		assertEquals(model, trait.getSourceModelProvider().getSourceModel());
 	}
 
 	public void testSetSourceModel() {
