@@ -1,0 +1,146 @@
+/*******************************************************************************
+ * Copyright (c) 2001, 2008 Oracle Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Oracle Corporation - initial API and implementation
+ *******************************************************************************/
+
+
+package org.eclipse.jst.jsf.core.tests.facet;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.jar.JarFile;
+
+import junit.framework.TestCase;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Plugin;
+import org.eclipse.jst.jsf.core.tests.TestsPlugin;
+import org.osgi.framework.Bundle;
+
+
+/**
+ * @author Debajit Adhikary
+ *
+ */
+public abstract class LibraryValidatorTest extends TestCase
+{
+    private String classNameIdentifyingJarToUse;
+    private String jarPath;
+    private String jarPathWithoutImplementationVersionEntry;
+    private String expectedLibraryVersion;
+    private UserLibraryVersionValidatorProxy validator;
+
+
+    /**
+     * @param name
+     */
+    public LibraryValidatorTest (final String name)
+    {
+        super(name);
+    }
+
+
+    public LibraryValidatorTest (final String name,
+                                 final String classNameIdentifyingJarToUse,
+                                 final String jarPath,
+                                 final String jarPathWithoutImplementationVersionEntry,
+                                 final String expectedLibraryVersion)
+    {
+        super(name);
+
+        this.classNameIdentifyingJarToUse = classNameIdentifyingJarToUse;
+        this.jarPath = jarPath;
+        this.jarPathWithoutImplementationVersionEntry = jarPathWithoutImplementationVersionEntry;
+        this.expectedLibraryVersion = expectedLibraryVersion;
+
+        this.validator = new UserLibraryVersionValidatorProxy(this.classNameIdentifyingJarToUse);
+    }
+
+
+    public void testVersionStringSuffixMatch ()
+    {
+        assertNotNull(validator);
+
+        final IStatus status = validator.validateVersionStrings("1.2", "1.1.2");
+        assertEquals(IStatus.ERROR, status.getSeverity());
+    }
+
+
+    public void testVersionStringPrefixMatch ()
+    {
+        assertNotNull(validator);
+
+        final IStatus status = validator.validateVersionStrings("1.2", "1.2.11");
+        assertEquals(IStatus.OK, status.getSeverity());
+    }
+
+
+    public void testNullLibraryVersionString ()
+    {
+        assertNotNull(validator);
+
+        final IStatus status = validator.validateVersionStrings("1.2", null);
+        assertEquals(IStatus.WARNING, status.getSeverity());
+    }
+
+
+    public void testNullFacetVersionString ()
+    {
+        assertNotNull(validator);
+
+        try
+        {
+            validator.validateVersionStrings(null, "1.0.1.2.11"); // Fails
+        }
+        catch (final IllegalArgumentException e)
+        {
+            assertEquals("Cannot read facet version", e.getLocalizedMessage());
+            return;
+        }
+
+        fail();
+    }
+
+
+    protected File getFileFromPlugin (final String relativePathToFile,
+                                      final Plugin plugin)
+    throws IOException, URISyntaxException
+    {
+        final Bundle bundle = TestsPlugin.getDefault().getBundle();
+
+        final URL bundleUrl = bundle.getEntry(relativePathToFile);
+        assertNotNull(bundleUrl);
+
+        final URL fileUrl = FileLocator.toFileURL(bundleUrl);
+        final File file = new File(fileUrl.getPath());
+        assertTrue(file.exists());
+        return file;
+    }
+
+
+    public void testReadLibraryVersionFromJarWithManifestEntry ()
+    throws IOException, URISyntaxException
+    {
+        final JarFile jarFile = new JarFile(getFileFromPlugin(jarPath, TestsPlugin.getDefault()));
+        assertEquals(expectedLibraryVersion, validator.getLibraryVersion(jarFile)); 
+    }
+
+
+    public void testReadLibraryVersionFromJarWithoutManifestEntry ()
+    throws IOException, URISyntaxException
+    {
+        final JarFile jarFile = new JarFile(getFileFromPlugin(jarPathWithoutImplementationVersionEntry, TestsPlugin.getDefault()));
+        assertNull("Was expecting library-version string to be null", validator.getLibraryVersion(jarFile)); //$NON-NLS-1$
+    }
+}
