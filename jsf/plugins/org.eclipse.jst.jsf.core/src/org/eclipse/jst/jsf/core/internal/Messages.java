@@ -245,7 +245,11 @@ public class Messages extends NLS {
      */
 	public static String JSFFacet11_presetDescription;
 	
-	/**
+	public static String JSFFacetInstallDelegate_AllowJavascriptDescription;
+
+    public static String JSFFacetInstallDelegate_AutoScrollDescription;
+
+    /**
 	 * see messages.properties
 	 */
 	public static String JSFFacetInstallDelegate_InternalErr;
@@ -253,10 +257,16 @@ public class Messages extends NLS {
 	 * see messages.properties
 	 */
 	public static String JSFFacetInstallDelegate_ConfigErr;
+
+    public static String JSFFacetInstallDelegate_MaxFileSizeDescription;
 	/**
 	 * see messages.properties
 	 */
 	public static String JSFFacetInstallDelegate_NonUpdateableWebXML;
+
+    public static String JSFFacetInstallDelegate_PrettyHtmlDescription;
+
+    public static String JSFFacetInstallDelegate_StateSavingMethod;
 	/**
 	 * see messages.properties
 	 */

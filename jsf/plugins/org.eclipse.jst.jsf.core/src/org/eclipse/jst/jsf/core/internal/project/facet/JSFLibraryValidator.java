@@ -1,27 +1,31 @@
+/*******************************************************************************
+ * Copyright (c) 2001, 2009 Oracle Corporation and others. All rights reserved.
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: Oracle Corporation - initial API and implementation
+ *******************************************************************************/
+
+
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
-import static org.eclipse.jst.common.project.facet.core.internal.FacetedProjectFrameworkJavaPlugin.PLUGIN_ID;
+import org.eclipse.jst.jsf.common.facet.libraryprovider.UserLibraryVersionValidator;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.jst.common.project.facet.core.libprov.user.KeyClassesValidator;
-import org.eclipse.jst.common.project.facet.core.libprov.user.UserLibraryProviderInstallOperationConfig;
-import org.eclipse.jst.jsf.core.internal.Messages;
 
 /**
- * Return custom message for JSF Libraries when KeyClassesValidator returns an error status
+ * Checks that the JSF user library is version-compatible with the JSF facet.
+ * 
+ * @author Debajit Adhikary
+ * 
  */
-public class JSFLibraryValidator extends KeyClassesValidator {
+public class JSFLibraryValidator extends UserLibraryVersionValidator
+{
+    private static final String CLASS_NAME_IDENTIFYING_IMPLEMENTATION_JAR = "javax/faces/render/RenderKit.class"; //$NON-NLS-1$
 
-	@Override
-	public IStatus validate(UserLibraryProviderInstallOperationConfig config) {
-		IStatus status = super.validate(config);
-		if (status.getSeverity() == IStatus.OK)
-			return status;
-		
-		String message = Messages.JSFLibraryValidator_MISSING_JSF_IMPLEMENTATION_CLASSES;
-		return new Status( IStatus.ERROR, PLUGIN_ID, message );
 
-	}
-
+    public JSFLibraryValidator ()
+    {
+        super(CLASS_NAME_IDENTIFYING_IMPLEMENTATION_JAR);
+    }
 }

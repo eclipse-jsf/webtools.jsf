@@ -25,7 +25,7 @@ public final class JSFFacetDefaultVersionProvider implements IDefaultVersionProv
 	 * @see org.eclipse.wst.common.project.facet.core.IDefaultVersionProvider#getDefaultVersion()
 	 */
 	public IProjectFacetVersion getDefaultVersion() {		
-		return ProjectFacetsManager.getProjectFacet(IJSFCoreConstants.JSF_CORE_FACET_ID).getVersion(IJSFCoreConstants.FACET_VERSION_1_1);
+		return ProjectFacetsManager.getProjectFacet(IJSFCoreConstants.JSF_CORE_FACET_ID).getVersion(IJSFCoreConstants.FACET_VERSION_1_2);
 	}
 
 }

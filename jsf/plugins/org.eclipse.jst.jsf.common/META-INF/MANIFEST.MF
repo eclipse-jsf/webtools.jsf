@@ -7,6 +7,9 @@ Bundle-Activator: org.eclipse.jst.jsf.common.JSFCommonPlugin$Implementation
 Bundle-Localization: plugin
 Export-Package: org.eclipse.jst.jsf.common;x-internal:=true,
  org.eclipse.jst.jsf.common.dom,
+ org.eclipse.jst.jsf.common.facet;x-internal:=true,
+ org.eclipse.jst.jsf.common.facet.libraryprovider,
+ org.eclipse.jst.jsf.common.facet.libraryprovider.jsf,
  org.eclipse.jst.jsf.common.internal;x-friends:="org.eclipse.jst.jsf.core",
  org.eclipse.jst.jsf.common.internal.managedobject;x-internal:=true,
  org.eclipse.jst.jsf.common.internal.policy;x-internal:=true,
@@ -31,6 +34,9 @@ Export-Package: org.eclipse.jst.jsf.common;x-internal:=true,
  org.eclipse.jst.jsf.common.sets.constraint,
  org.eclipse.jst.jsf.common.sets.mapping,
  org.eclipse.jst.jsf.common.util,
+ org.eclipse.jst.jsf.common.webxml;x-internal:=true,
+ org.eclipse.jst.jsf.common.webxml.internal;x-internal:=true,
+ org.eclipse.jst.jsf.common.webxml.internal.operations;x-internal:=true,
  org.eclipse.jst.jsf.context,
  org.eclipse.jst.jsf.context.resolver,
  org.eclipse.jst.jsf.context.resolver.structureddocument,
@@ -55,7 +61,13 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jdt.core;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.emf.edit.ui;bundle-version="[2.2.0,3.0.0)",
  org.eclipse.emf.ecore.xmi;bundle-version="[2.2.0,3.0.0)",
- org.eclipse.jdt.ui;bundle-version="[3.2.0,4.0.0)"
+ org.eclipse.jdt.ui;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.jst.common.project.facet.core,
+ org.eclipse.wst.common.project.facet.core,
+ org.eclipse.jst.j2ee,
+ org.eclipse.jst.j2ee.web,
+ org.eclipse.jst.j2ee.core
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %plugin.provider
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.jst.javaee.web.internal.impl
