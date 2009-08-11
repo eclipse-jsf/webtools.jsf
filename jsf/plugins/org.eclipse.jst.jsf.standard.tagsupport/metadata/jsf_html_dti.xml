@@ -60,8 +60,9 @@
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
 					widget="true"
-					setNonVisualChildElements="true"
-				/>
+					setNonVisualChildElements="true">
+				    <resolve-attribute-value attributeName="value"/>
+				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
 				</tag-decorate-info>
@@ -215,6 +216,10 @@
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
 				</tag-decorate-info>
+				
+				<tag-decorate-info id="vpd-decorate-design">
+                    <resolve-attribute-value attributeName="value"/>
+                </tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -244,6 +249,10 @@
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
 				</tag-decorate-info>
+				
+				<tag-decorate-info id="vpd-decorate-design">
+                    <resolve-attribute-value attributeName="value"/>
+                </tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -268,10 +277,14 @@
 					multiLevel="true"
 					widget="true"
 					setNonVisualChildElements="true"
-				/>
+				>
+				    <resolve-attribute-value attributeName="value"/>
+				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview"
 					resolveChildText="true"
-				/>
+				>
+				    <resolve-attribute-value attributeName="value"/>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -355,11 +368,14 @@
 					needBorderDecorator="true"
 					multiLevel="true"
 					widget="true"
-					setNonVisualChildElements="true"
-				/>
+					setNonVisualChildElements="true">
+                    <resolve-attribute-value attributeName="./text()/"/>
+				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview"
 					resolveChildText="true"
-				/>
+				>
+				    <resolve-attribute-value attributeName="./text()/"/>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -415,10 +431,14 @@
 					multiLevel="true"
 					widget="true"
 					setNonVisualChildElements="true"
-				/>
+				>
+				    <resolve-attribute-value attributeName="./text()/"/>
+				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview"
 					resolveChildText="true"
-				/>
+				>
+				    <resolve-attribute-value attributeName="./text()/"/>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>

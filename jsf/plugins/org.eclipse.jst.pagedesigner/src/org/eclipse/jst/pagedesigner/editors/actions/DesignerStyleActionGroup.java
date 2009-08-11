@@ -197,9 +197,12 @@ public class DesignerStyleActionGroup extends ActionGroup
     {
         final IHandlerService service = (IHandlerService) _htmlEditor.getSite()
                 .getService(IHandlerService.class);
-        for (final IHandlerActivation activation : _handlers)
+        if (service != null)
         {
-            service.deactivateHandler(activation);
+            for (final IHandlerActivation activation : _handlers)
+            {
+                service.deactivateHandler(activation);
+            }
         }
         _handlers.clear();
     }

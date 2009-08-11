@@ -81,6 +81,25 @@ public class DocumentEditPart extends NodeEditPart implements StyleListener,
 		refresh();
 	}
 
+    /**
+     * @param recursive
+     */
+    public void refresh(final boolean recursive)
+    {
+        if (!recursive)
+        {
+            refresh();
+        }
+        else
+        {
+            refreshVisuals();
+            refreshChildren(recursive);
+            refreshSourceConnections();
+            refreshTargetConnections();
+
+        }
+    }
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -104,12 +123,29 @@ public class DocumentEditPart extends NodeEditPart implements StyleListener,
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#refreshChildren()
 	 */
 	protected void refreshChildren() {
-		super.refreshChildren();
-		List children1 = getChildren();
-		for (int i = 0, size = children1.size(); i < size; i++) {
-			((EditPart) children1.get(i)).refresh();
-		}
+	    refreshChildren(false);
 	}
+
+    /**
+     * @param recursive
+     */
+    protected void refreshChildren(final boolean recursive)
+    {
+        super.refreshChildren();
+        List children1 = getChildren();
+        for (int i = 0, size = children1.size(); i < size; i++)
+        {
+            final EditPart editPart = (EditPart) children1.get(i);
+            if (editPart instanceof ElementEditPart)
+            {
+                ((ElementEditPart)editPart).refresh(recursive);
+            }
+            else
+            {
+                editPart.refresh();
+            }
+        }
+    }
 
 	// protected void removeChildVisual(EditPart childEditPart)
 	// {
