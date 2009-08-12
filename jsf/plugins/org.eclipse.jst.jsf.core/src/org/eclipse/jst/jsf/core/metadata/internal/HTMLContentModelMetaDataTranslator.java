@@ -45,7 +45,7 @@ public class HTMLContentModelMetaDataTranslator extends AbstractTagLibDomainCont
 	 *  @return getURIDisplayLabel()
 	 */
 	protected String getURIDescription() {
-		return getURIDisplayLabel();
+		return Messages.HTMLContentModelMetaDataTranslator_Desc;
 	}
 
 	/**

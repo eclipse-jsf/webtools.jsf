@@ -27,6 +27,10 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
+	public static String HTMLContentModelMetaDataTranslator_Desc;
+	/**
+	 * see messages.properties
+	 */
 	public static String JSPContentModelMetaDataTranslator_Desc;
 	/**
 	 * see messages.properties
