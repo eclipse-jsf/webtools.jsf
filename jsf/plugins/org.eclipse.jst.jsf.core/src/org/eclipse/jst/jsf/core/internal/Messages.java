@@ -31,6 +31,11 @@ public class Messages extends NLS {
 	 */
 	public static String JSFFacetInstallDataModelProvider_INITIAL_VALIDATION_IMPL_TYPE;
 
+    /**
+     * see messages.properties
+     */
+    public static String JSFFacetInstallDataModelProvider_INVALID_JSF_CONFIG_FILE_NAME;
+
 
 	/**
 	 * see messages.properties
@@ -245,8 +250,14 @@ public class Messages extends NLS {
      */
 	public static String JSFFacet11_presetDescription;
 	
+	/**
+	 * see messages.properties
+	 */
 	public static String JSFFacetInstallDelegate_AllowJavascriptDescription;
 
+    /**
+     * see messages.properties
+     */
     public static String JSFFacetInstallDelegate_AutoScrollDescription;
 
     /**
@@ -258,14 +269,23 @@ public class Messages extends NLS {
 	 */
 	public static String JSFFacetInstallDelegate_ConfigErr;
 
+    /**
+     * see messages.properties
+     */
     public static String JSFFacetInstallDelegate_MaxFileSizeDescription;
 	/**
 	 * see messages.properties
 	 */
 	public static String JSFFacetInstallDelegate_NonUpdateableWebXML;
 
+    /**
+     * see messages.properties
+     */
     public static String JSFFacetInstallDelegate_PrettyHtmlDescription;
 
+    /**
+     * see messages.properties
+     */
     public static String JSFFacetInstallDelegate_StateSavingMethod;
 	/**
 	 * see messages.properties

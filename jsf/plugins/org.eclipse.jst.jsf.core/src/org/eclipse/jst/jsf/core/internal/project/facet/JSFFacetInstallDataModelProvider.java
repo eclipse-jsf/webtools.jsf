@@ -15,6 +15,7 @@ package org.eclipse.jst.jsf.core.internal.project.facet;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -54,6 +55,9 @@ public class JSFFacetInstallDataModelProvider extends
 		FacetInstallDataModelProvider implements
 		IJSFFacetInstallDataModelProperties {
 
+    private static final String REGEX_FOR_VALID_CONFIG_FILE_NAME = "^(?!.*/{2,}.*$)[-\\w/.]+$"; //$NON-NLS-1$
+    private static final Pattern PATTERN_FOR_VALID_CONFIG_FILE_NAME = Pattern.compile(REGEX_FOR_VALID_CONFIG_FILE_NAME);
+
     private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
 
     private LibraryInstallDelegate libraryInstallDelegate = null;
@@ -88,6 +92,7 @@ public class JSFFacetInstallDataModelProvider extends
     }
     
 	private String 	errorMessage;
+
 	
 	public Set getPropertyNames() {
 		Set names = super.getPropertyNames();
@@ -206,17 +211,23 @@ public class JSFFacetInstallDataModelProvider extends
 			return createErrorStatus(errorMessage);
 		}
 		
+		// Configuration path must not contain backslashes.
+		// Must use forward slashes instead.
 		if (text.lastIndexOf("\\") >= 0){ //$NON-NLS-1$
 			errorMessage = Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileSlashes;
 			return createErrorStatus(errorMessage);
 		} 
 
+		// Configuration file must NOT be absolute path.
+		// It must be specified relative to project.
 		if (passedPath.getDevice() != null) {
 			errorMessage = NLS.bind(
 					Messages.JSFFacetInstallDataModelProvider_ValidateConfigFileRelative1,
 					getWebContentFolderName());
 			return createErrorStatus(errorMessage);
 		}
+
+		// Configuration file must be located in the project's folder
 		IPath webContentFolder = getWebContentFolder();
 		IPath setPath = webContentFolder.append(passedPath);
 		if (!getWebContentFolder().isPrefixOf(setPath)) {
@@ -226,10 +237,30 @@ public class JSFFacetInstallDataModelProvider extends
 			return createErrorStatus(errorMessage);
 		}
 
+        // Check for other general invalid characters
+        if (!isValidConfigFileName(text))
+        {
+            errorMessage = Messages.JSFFacetInstallDataModelProvider_INVALID_JSF_CONFIG_FILE_NAME;
+            return createErrorStatus(errorMessage);
+        }
+
 		return OK_STATUS;
 	}
-	
-	
+
+
+    /**
+     * (This method had been made protected to enable JUnit testing.)
+     * 
+     * @param configFileName
+     * @return True if the argument config file name does not have any invalid
+     *         characters.
+     */
+    public static boolean isValidConfigFileName (final String configFileName)
+    {
+        return PATTERN_FOR_VALID_CONFIG_FILE_NAME.matcher(configFileName).matches(); 
+    }
+
+
 	private IStatus validateClasspath(){
 		Set jars = new HashSet();
 		if (doesProjectExist()){
