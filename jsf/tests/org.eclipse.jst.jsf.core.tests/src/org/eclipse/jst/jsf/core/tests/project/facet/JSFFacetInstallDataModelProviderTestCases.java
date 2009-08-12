@@ -16,21 +16,19 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryInternalReference;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
-import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.wst.common.frameworks.datamodel.DataModelFactory;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 
+@SuppressWarnings("deprecation")
 public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 	private static final String PROJ_2_3_NAME = "_TEST_2_3_PROJECT";
 	//private static final String PROJ_2_4_NAME = "_TEST_2_4_PROJECT";
 	
 	private JSFFacetInstallDataModelProvider dm;
-	private JSFLibrary jsfLib;
 	
 	protected void setUp() throws Exception {		
 		//seed JSFLib registry if not present
@@ -38,7 +36,7 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 		//create a project, if one doesn't exist in the current workspace
 		IProject project = JSFCoreUtilHelper.createWebProject(PROJ_2_3_NAME);
 		//create lib
-		jsfLib = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
+		JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry().getDefaultImplementation();
 		
 		dm = new JSFFacetInstallDataModelProvider();
 		IDataModel model = DataModelFactory.createDataModel(dm);	
@@ -125,4 +123,30 @@ public class JSFFacetInstallDataModelProviderTestCases extends TestCase {
 
 	}
 	 */
+
+
+    /*
+     * Test method for: 
+     *     org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider.isValidConfigFileName()
+     *     org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider.validateConfigLocation()
+     */
+    public void testConfigFileNameValidation ()
+    {
+        assertTrue(JSFFacetInstallDataModelProvider.isValidConfigFileName("faces-config.xml"));
+        assertTrue(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml"));
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces config.xml")); // Invalid
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config//faces-config.xml")); // Invalid
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config///faces-config.xml")); // Invalid 
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml,/WEB-INF/config/faces-config2.xml")); // Invalid 
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml, /WEB-INF/config/faces-config2.xml")); // Invalid 
+        
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml, ")); // Invalid 
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml. ")); // Invalid 
+
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml%")); // Invalid 
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml.&65")); // Invalid 
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/faces-config.xml*")); // Invalid 
+
+        assertFalse(JSFFacetInstallDataModelProvider.isValidConfigFileName("/WEB-INF/config/face*s-config.xml*")); // Invalid 
+    }
 }
