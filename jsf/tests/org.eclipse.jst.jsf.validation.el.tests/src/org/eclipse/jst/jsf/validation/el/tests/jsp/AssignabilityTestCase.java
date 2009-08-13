@@ -14,6 +14,7 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 
 /**
@@ -37,12 +38,12 @@ public class AssignabilityTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("myBean.integerProperty + 3", getELText(_structuredDocument,880));
-        assertEquals("myBean.writableStringProperty", getELText(_structuredDocument,938));
-        assertEquals("myBean.stringProperty", getELText(_structuredDocument,997));
-        assertEquals("bundle.bundleProp2", getELText(_structuredDocument,1047));
-        assertEquals("requestScope.myBeanSubClass", getELText(_structuredDocument,1097));
-        assertEquals("myBean.validate", getELText(_structuredDocument,1156));
+        assertEquals("myBean.integerProperty + 3", ELAssert.getELText(_structuredDocument,880));
+        assertEquals("myBean.writableStringProperty", ELAssert.getELText(_structuredDocument,938));
+        assertEquals("myBean.stringProperty", ELAssert.getELText(_structuredDocument,997));
+        assertEquals("bundle.bundleProp2", ELAssert.getELText(_structuredDocument,1047));
+        assertEquals("requestScope.myBeanSubClass", ELAssert.getELText(_structuredDocument,1097));
+        assertEquals("myBean.validate", ELAssert.getELText(_structuredDocument,1156));
     }
 
     @Override

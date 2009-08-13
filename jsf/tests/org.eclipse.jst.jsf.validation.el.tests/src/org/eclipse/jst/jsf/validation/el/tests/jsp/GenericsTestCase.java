@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.validation.el.tests.jsp;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 
 public class GenericsTestCase extends SingleJSPTestCase
@@ -29,18 +30,18 @@ public class GenericsTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("beanWithMapProperties.integerProperty", getELText(_structuredDocument,880));
-        assertEquals("bundle.bundleProp1", getELText(_structuredDocument,955));
-        assertEquals("bundle.x.y", getELText(_structuredDocument,1006));
-        assertEquals("beanWithMapProperties.treeMap.foo", getELText(_structuredDocument,1049));
-        assertEquals("beanWithMapProperties.treeMap.foo.x", getELText(_structuredDocument,1115));
-        assertEquals("beanWithMapProperties.mapProperty.foo", getELText(_structuredDocument,1183));
-        assertEquals("beanWithMapProperties.mapProperty.foo.x", getELText(_structuredDocument,1253));
-        assertEquals("mapBean.foo", getELText(_structuredDocument,1325));
-        assertEquals("mapBean.foo.x", getELText(_structuredDocument,1369));
-        assertEquals("mapBean.getIgnoredIntProperty", getELText(_structuredDocument,1415));
-        assertEquals("bundle.y", getELText(_structuredDocument,1478));
-        assertEquals("bundle.bundleProp1.z", getELText(_structuredDocument,1519));
+        assertEquals("beanWithMapProperties.integerProperty", ELAssert.getELText(_structuredDocument,880));
+        assertEquals("bundle.bundleProp1", ELAssert.getELText(_structuredDocument,955));
+        assertEquals("bundle.x.y", ELAssert.getELText(_structuredDocument,1006));
+        assertEquals("beanWithMapProperties.treeMap.foo", ELAssert.getELText(_structuredDocument,1049));
+        assertEquals("beanWithMapProperties.treeMap.foo.x", ELAssert.getELText(_structuredDocument,1115));
+        assertEquals("beanWithMapProperties.mapProperty.foo", ELAssert.getELText(_structuredDocument,1183));
+        assertEquals("beanWithMapProperties.mapProperty.foo.x", ELAssert.getELText(_structuredDocument,1253));
+        assertEquals("mapBean.foo", ELAssert.getELText(_structuredDocument,1325));
+        assertEquals("mapBean.foo.x", ELAssert.getELText(_structuredDocument,1369));
+        assertEquals("mapBean.getIgnoredIntProperty", ELAssert.getELText(_structuredDocument,1415));
+        assertEquals("bundle.y", ELAssert.getELText(_structuredDocument,1478));
+        assertEquals("bundle.bundleProp1.z", ELAssert.getELText(_structuredDocument,1519));
     }
 
     @Override

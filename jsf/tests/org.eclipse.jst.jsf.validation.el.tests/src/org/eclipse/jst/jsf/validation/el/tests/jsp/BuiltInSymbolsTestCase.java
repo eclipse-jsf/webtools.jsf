@@ -16,6 +16,7 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -41,66 +42,66 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("applicationScope", getELText(_structuredDocument,975));
-        assertEquals("sessionScope", getELText(_structuredDocument,1024));
-        assertEquals("requestScope", getELText(_structuredDocument,1069));
-        assertEquals("cookie", getELText(_structuredDocument,1114));
-        assertEquals("facesContext", getELText(_structuredDocument,1153));
-        assertEquals("header", getELText(_structuredDocument,1198));
-        assertEquals("headerValues", getELText(_structuredDocument,1237));
-        assertEquals("initParam", getELText(_structuredDocument,1282));
-        assertEquals("param", getELText(_structuredDocument,1324));
-        assertEquals("paramValues", getELText(_structuredDocument,1362));
-        assertEquals("view", getELText(_structuredDocument,1406));
-        assertEquals("applicationScope.mapBean", getELText(_structuredDocument,1492));
-        assertEquals("sessionScope.myBean", getELText(_structuredDocument,1596));
-        assertEquals("sessionScope.mapBean1", getELText(_structuredDocument,1645));
-        assertEquals("sessionScope.myBeanSettable", getELText(_structuredDocument,1696));
-        assertEquals("requestScope.myBeanSubClass", getELText(_structuredDocument,1803));
-        assertEquals("requestScope.hiddenBean", getELText(_structuredDocument,1860));
-        assertEquals("requestScope.bundle", getELText(_structuredDocument,1913));
-        assertEquals("requestScope.bundle2", getELText(_structuredDocument,1962));
-        assertEquals("empty cookie", getELText(_structuredDocument,2096));
-        assertEquals("empty header", getELText(_structuredDocument,2138));
-        assertEquals("empty headerValues", getELText(_structuredDocument,2180));
-        assertEquals("empty param", getELText(_structuredDocument,2228));
-        assertEquals("empty paramValues", getELText(_structuredDocument,2269));
-        assertEquals("facesContext.application", getELText(_structuredDocument,2367));
-        assertEquals("facesContext.clientIdsWithMessages", getELText(_structuredDocument,2421));
-        assertEquals("facesContext.externalContext", getELText(_structuredDocument,2485));
-        assertEquals("facesContext.maximumSeverity", getELText(_structuredDocument,2543));
-        assertEquals("facesContext.messages", getELText(_structuredDocument,2601));
-        assertEquals("facesContext.renderKit", getELText(_structuredDocument,2652));
-        assertEquals("facesContext.renderResponse", getELText(_structuredDocument,2704));
-        assertEquals("facesContext.responseComplete", getELText(_structuredDocument,2761));
-        assertEquals("facesContext.responseStream", getELText(_structuredDocument,2820));
-        assertEquals("facesContext.responseWriter", getELText(_structuredDocument,2877));
-        assertEquals("facesContext.viewRoot", getELText(_structuredDocument,2934));
-        assertEquals("view.viewId", getELText(_structuredDocument,3030));
-        assertEquals("view.family", getELText(_structuredDocument,3071));
-        assertEquals("view.locale", getELText(_structuredDocument,3112));
-        assertEquals("view.renderKitId", getELText(_structuredDocument,3153));
-        assertEquals("view.viewId", getELText(_structuredDocument,3199));
-        assertEquals("sessionScope.myBean.integerProperty", getELText(_structuredDocument,3295));
-        assertEquals("requestScope.bundle.bundleProp2", getELText(_structuredDocument,3363));
-        assertEquals("3 + sessionScope.myBean.integerProperty", getELText(_structuredDocument,3478));
+        assertEquals("applicationScope", ELAssert.getELText(_structuredDocument,975));
+        assertEquals("sessionScope", ELAssert.getELText(_structuredDocument,1024));
+        assertEquals("requestScope", ELAssert.getELText(_structuredDocument,1069));
+        assertEquals("cookie", ELAssert.getELText(_structuredDocument,1114));
+        assertEquals("facesContext", ELAssert.getELText(_structuredDocument,1153));
+        assertEquals("header", ELAssert.getELText(_structuredDocument,1198));
+        assertEquals("headerValues", ELAssert.getELText(_structuredDocument,1237));
+        assertEquals("initParam", ELAssert.getELText(_structuredDocument,1282));
+        assertEquals("param", ELAssert.getELText(_structuredDocument,1324));
+        assertEquals("paramValues", ELAssert.getELText(_structuredDocument,1362));
+        assertEquals("view", ELAssert.getELText(_structuredDocument,1406));
+        assertEquals("applicationScope.mapBean", ELAssert.getELText(_structuredDocument,1492));
+        assertEquals("sessionScope.myBean", ELAssert.getELText(_structuredDocument,1596));
+        assertEquals("sessionScope.mapBean1", ELAssert.getELText(_structuredDocument,1645));
+        assertEquals("sessionScope.myBeanSettable", ELAssert.getELText(_structuredDocument,1696));
+        assertEquals("requestScope.myBeanSubClass", ELAssert.getELText(_structuredDocument,1803));
+        assertEquals("requestScope.hiddenBean", ELAssert.getELText(_structuredDocument,1860));
+        assertEquals("requestScope.bundle", ELAssert.getELText(_structuredDocument,1913));
+        assertEquals("requestScope.bundle2", ELAssert.getELText(_structuredDocument,1962));
+        assertEquals("empty cookie", ELAssert.getELText(_structuredDocument,2096));
+        assertEquals("empty header", ELAssert.getELText(_structuredDocument,2138));
+        assertEquals("empty headerValues", ELAssert.getELText(_structuredDocument,2180));
+        assertEquals("empty param", ELAssert.getELText(_structuredDocument,2228));
+        assertEquals("empty paramValues", ELAssert.getELText(_structuredDocument,2269));
+        assertEquals("facesContext.application", ELAssert.getELText(_structuredDocument,2367));
+        assertEquals("facesContext.clientIdsWithMessages", ELAssert.getELText(_structuredDocument,2421));
+        assertEquals("facesContext.externalContext", ELAssert.getELText(_structuredDocument,2485));
+        assertEquals("facesContext.maximumSeverity", ELAssert.getELText(_structuredDocument,2543));
+        assertEquals("facesContext.messages", ELAssert.getELText(_structuredDocument,2601));
+        assertEquals("facesContext.renderKit", ELAssert.getELText(_structuredDocument,2652));
+        assertEquals("facesContext.renderResponse", ELAssert.getELText(_structuredDocument,2704));
+        assertEquals("facesContext.responseComplete", ELAssert.getELText(_structuredDocument,2761));
+        assertEquals("facesContext.responseStream", ELAssert.getELText(_structuredDocument,2820));
+        assertEquals("facesContext.responseWriter", ELAssert.getELText(_structuredDocument,2877));
+        assertEquals("facesContext.viewRoot", ELAssert.getELText(_structuredDocument,2934));
+        assertEquals("view.viewId", ELAssert.getELText(_structuredDocument,3030));
+        assertEquals("view.family", ELAssert.getELText(_structuredDocument,3071));
+        assertEquals("view.locale", ELAssert.getELText(_structuredDocument,3112));
+        assertEquals("view.renderKitId", ELAssert.getELText(_structuredDocument,3153));
+        assertEquals("view.viewId", ELAssert.getELText(_structuredDocument,3199));
+        assertEquals("sessionScope.myBean.integerProperty", ELAssert.getELText(_structuredDocument,3295));
+        assertEquals("requestScope.bundle.bundleProp2", ELAssert.getELText(_structuredDocument,3363));
+        assertEquals("3 + sessionScope.myBean.integerProperty", ELAssert.getELText(_structuredDocument,3478));
 
-        assertEquals("applicationScope.notAMember", getELText(_structuredDocument,3572));
-        assertEquals("sessionScope.notAMember", getELText(_structuredDocument,3632));
-        assertEquals("requestScope.notAMember", getELText(_structuredDocument,3688));
-        assertEquals("cookie.notAMember", getELText(_structuredDocument,3744));
-        assertEquals("facesContext.notAMember", getELText(_structuredDocument,3794));
-        assertEquals("header.notAMember", getELText(_structuredDocument,3850));
-        assertEquals("headerValues.notAMember", getELText(_structuredDocument,3900));
-        assertEquals("initParam.notAMember", getELText(_structuredDocument,3956));
-        assertEquals("param.notAMember", getELText(_structuredDocument,4009));
-        assertEquals("paramValues.notAMember", getELText(_structuredDocument,4058));
-        assertEquals("view.notAMember", getELText(_structuredDocument,4113));
-        assertEquals("applicationScope.myBean_none", getELText(_structuredDocument,4209));
-        assertEquals("sessionScope.myBean_none", getELText(_structuredDocument,4270));
-        assertEquals("requestScope.myBean_none", getELText(_structuredDocument,4327));
+        assertEquals("applicationScope.notAMember", ELAssert.getELText(_structuredDocument,3572));
+        assertEquals("sessionScope.notAMember", ELAssert.getELText(_structuredDocument,3632));
+        assertEquals("requestScope.notAMember", ELAssert.getELText(_structuredDocument,3688));
+        assertEquals("cookie.notAMember", ELAssert.getELText(_structuredDocument,3744));
+        assertEquals("facesContext.notAMember", ELAssert.getELText(_structuredDocument,3794));
+        assertEquals("header.notAMember", ELAssert.getELText(_structuredDocument,3850));
+        assertEquals("headerValues.notAMember", ELAssert.getELText(_structuredDocument,3900));
+        assertEquals("initParam.notAMember", ELAssert.getELText(_structuredDocument,3956));
+        assertEquals("param.notAMember", ELAssert.getELText(_structuredDocument,4009));
+        assertEquals("paramValues.notAMember", ELAssert.getELText(_structuredDocument,4058));
+        assertEquals("view.notAMember", ELAssert.getELText(_structuredDocument,4113));
+        assertEquals("applicationScope.myBean_none", ELAssert.getELText(_structuredDocument,4209));
+        assertEquals("sessionScope.myBean_none", ELAssert.getELText(_structuredDocument,4270));
+        assertEquals("requestScope.myBean_none", ELAssert.getELText(_structuredDocument,4327));
 
-        assertEquals("!initParam", getELText(_structuredDocument,4400));
+        assertEquals("!initParam", ELAssert.getELText(_structuredDocument,4400));
     }
 
     @Override
@@ -185,6 +186,6 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
     public void testErrorExprs()
     {
         final List<ReportedProblem> list = assertSemanticError(4400,null,1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
     }
 }

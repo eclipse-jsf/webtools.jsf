@@ -28,6 +28,7 @@ import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 import org.w3c.dom.Attr;
@@ -61,21 +62,21 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("bundle.bundleProp2", getELText(_structuredDocument,1003));
-        assertEquals("noPackageBundle.bundleProp2", getELText(_structuredDocument,1051));
-        assertEquals("bundle.bundleProp1 && myBean.stringProperty", getELText(_structuredDocument,1111));
-        assertEquals("empty bundle", getELText(_structuredDocument,1187));
-        assertEquals("empty bundle.bundleProp2", getELText(_structuredDocument,1232));
-        assertEquals("bundle.bundleProp2 + 5", getELText(_structuredDocument,1289));
-        assertEquals("bundleProp2", getELText(_structuredDocument,1341));
-        assertEquals("bundle.x.y", getELText(_structuredDocument,1382));
-        assertEquals("noPackageBundle.x.y", getELText(_structuredDocument,1422));
+        assertEquals("bundle.bundleProp2", ELAssert.getELText(_structuredDocument,1003));
+        assertEquals("noPackageBundle.bundleProp2", ELAssert.getELText(_structuredDocument,1051));
+        assertEquals("bundle.bundleProp1 && myBean.stringProperty", ELAssert.getELText(_structuredDocument,1111));
+        assertEquals("empty bundle", ELAssert.getELText(_structuredDocument,1187));
+        assertEquals("empty bundle.bundleProp2", ELAssert.getELText(_structuredDocument,1232));
+        assertEquals("bundle.bundleProp2 + 5", ELAssert.getELText(_structuredDocument,1289));
+        assertEquals("bundleProp2", ELAssert.getELText(_structuredDocument,1341));
+        assertEquals("bundle.x.y", ELAssert.getELText(_structuredDocument,1382));
+        assertEquals("noPackageBundle.x.y", ELAssert.getELText(_structuredDocument,1422));
 
-        assertEquals("-bundle.bundleProp1", getELText(_structuredDocument,1496));
-        assertEquals("bundle.bundleProp3", getELText(_structuredDocument,1548));
-        assertEquals("msg", getELText(_structuredDocument,1599));
-        assertEquals("bundle.x", getELText(_structuredDocument,1635));
-        assertEquals("noPackageBundle.notAProperty", getELText(_structuredDocument,1673));
+        assertEquals("-bundle.bundleProp1", ELAssert.getELText(_structuredDocument,1496));
+        assertEquals("bundle.bundleProp3", ELAssert.getELText(_structuredDocument,1548));
+        assertEquals("msg", ELAssert.getELText(_structuredDocument,1599));
+        assertEquals("bundle.x", ELAssert.getELText(_structuredDocument,1635));
+        assertEquals("noPackageBundle.notAProperty", ELAssert.getELText(_structuredDocument,1673));
     }
 
     @Override
@@ -97,10 +98,10 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
     public void testWarningExprs()
     {
         List<ReportedProblem> list = assertSemanticWarning(1496, Signature.SIG_LONG, 1);
-        assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         list = assertSemanticWarning(1548, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         // ensure that we are validating that the basename for the missing bundle
         // is being validated since the related variable will not be flagged
@@ -112,10 +113,10 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         ensureMissingBundleValidation();
 
         list = assertSemanticWarning(1635, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
 
         list = assertSemanticWarning(1673, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
 
     @Override

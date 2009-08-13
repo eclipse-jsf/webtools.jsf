@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -38,16 +39,16 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("myBean", getELText(_structuredDocument,523));
-        assertEquals("myBeanSubClass", getELText(_structuredDocument,562));
-        assertEquals("mapBean", getELText(_structuredDocument,609));
-        assertEquals("mapBean1", getELText(_structuredDocument,649));
-        assertEquals("hiddenBean", getELText(_structuredDocument,690));
-        assertEquals("myBean_none", getELText(_structuredDocument,733));
-        assertEquals("myBeanSettable", getELText(_structuredDocument,777));
+        assertEquals("myBean", ELAssert.getELText(_structuredDocument,523));
+        assertEquals("myBeanSubClass", ELAssert.getELText(_structuredDocument,562));
+        assertEquals("mapBean", ELAssert.getELText(_structuredDocument,609));
+        assertEquals("mapBean1", ELAssert.getELText(_structuredDocument,649));
+        assertEquals("hiddenBean", ELAssert.getELText(_structuredDocument,690));
+        assertEquals("myBean_none", ELAssert.getELText(_structuredDocument,733));
+        assertEquals("myBeanSettable", ELAssert.getELText(_structuredDocument,777));
 
-        assertEquals("myBean1", getELText(_structuredDocument,851));
-        assertEquals("someOtherBeanName", getELText(_structuredDocument,891));
+        assertEquals("myBean1", ELAssert.getELText(_structuredDocument,851));
+        assertEquals("someOtherBeanName", ELAssert.getELText(_structuredDocument,891));
     }
 
     @Override
@@ -66,10 +67,10 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
     public void testWarningExprs()
     {
         List<ReportedProblem> list = assertSemanticWarning(851, null, 1);
-        assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
         list = assertSemanticWarning(891, null, 1);
-        assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
     }
 
     @Override

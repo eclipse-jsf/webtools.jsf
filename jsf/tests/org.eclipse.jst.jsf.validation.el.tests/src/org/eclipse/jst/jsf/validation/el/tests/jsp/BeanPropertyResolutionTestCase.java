@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -51,58 +52,58 @@ public class BeanPropertyResolutionTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("myBean.stringProperty", getELText(_structuredDocument,523));
-        assertEquals("myBean.integerProperty", getELText(_structuredDocument,577));
-        assertEquals("myBean.booleanProperty", getELText(_structuredDocument,632));
-        assertEquals("myBean.doubleProperty", getELText(_structuredDocument,687));
-        assertEquals("myBean.mapProperty", getELText(_structuredDocument,741));
-        assertEquals("myBean.stringArrayProperty", getELText(_structuredDocument,792));
-        assertEquals("myBean.collectionProperty", getELText(_structuredDocument,851));
-        assertEquals("myBean.listProperty", getELText(_structuredDocument,909));
-        assertEquals("myBean.comparableProperty", getELText(_structuredDocument,961));
-        assertEquals("myBean.bigIntegerProperty", getELText(_structuredDocument,1019));
-        assertEquals("myBean.bigDoubleProperty", getELText(_structuredDocument,1077));
-        assertEquals("myBean.writableStringProperty", getELText(_structuredDocument,1134));
-        assertEquals("myBean.isStyleBooleanProperty", getELText(_structuredDocument,1196));
-        assertEquals("myBean.colors", getELText(_structuredDocument,1258));
-        assertEquals("myBean.coins", getELText(_structuredDocument,1304));
+        assertEquals("myBean.stringProperty", ELAssert.getELText(_structuredDocument,523));
+        assertEquals("myBean.integerProperty", ELAssert.getELText(_structuredDocument,577));
+        assertEquals("myBean.booleanProperty", ELAssert.getELText(_structuredDocument,632));
+        assertEquals("myBean.doubleProperty", ELAssert.getELText(_structuredDocument,687));
+        assertEquals("myBean.mapProperty", ELAssert.getELText(_structuredDocument,741));
+        assertEquals("myBean.stringArrayProperty", ELAssert.getELText(_structuredDocument,792));
+        assertEquals("myBean.collectionProperty", ELAssert.getELText(_structuredDocument,851));
+        assertEquals("myBean.listProperty", ELAssert.getELText(_structuredDocument,909));
+        assertEquals("myBean.comparableProperty", ELAssert.getELText(_structuredDocument,961));
+        assertEquals("myBean.bigIntegerProperty", ELAssert.getELText(_structuredDocument,1019));
+        assertEquals("myBean.bigDoubleProperty", ELAssert.getELText(_structuredDocument,1077));
+        assertEquals("myBean.writableStringProperty", ELAssert.getELText(_structuredDocument,1134));
+        assertEquals("myBean.isStyleBooleanProperty", ELAssert.getELText(_structuredDocument,1196));
+        assertEquals("myBean.colors", ELAssert.getELText(_structuredDocument,1258));
+        assertEquals("myBean.coins", ELAssert.getELText(_structuredDocument,1304));
 
-        assertEquals("myBeanSubClass.stringProperty", getELText(_structuredDocument,1382));
-        assertEquals("myBeanSubClass.integerProperty", getELText(_structuredDocument,1444));
-        assertEquals("myBeanSubClass.booleanProperty", getELText(_structuredDocument,1507));
-        assertEquals("myBeanSubClass.doubleProperty", getELText(_structuredDocument,1570));
-        assertEquals("myBeanSubClass.mapProperty", getELText(_structuredDocument,1632));
-        assertEquals("myBeanSubClass.stringArrayProperty", getELText(_structuredDocument,1691));
-        assertEquals("myBeanSubClass.collectionProperty", getELText(_structuredDocument,1758));
-        assertEquals("myBeanSubClass.listProperty", getELText(_structuredDocument,1824));
-        assertEquals("myBeanSubClass.comparableProperty", getELText(_structuredDocument,1884));
-        assertEquals("myBeanSubClass.bigIntegerProperty", getELText(_structuredDocument,1950));
-        assertEquals("myBeanSubClass.bigDoubleProperty", getELText(_structuredDocument,2016));
-        assertEquals("myBeanSubClass.writableStringProperty", getELText(_structuredDocument,2081));
-        assertEquals("myBeanSubClass.isStyleBooleanProperty", getELText(_structuredDocument,2151));
-        assertEquals("myBeanSubClass.subClassStringProperty", getELText(_structuredDocument,2221));
-        assertEquals("myBeanSubClass.colors", getELText(_structuredDocument,2291));
-        assertEquals("myBeanSubClass.coins", getELText(_structuredDocument,2345));
+        assertEquals("myBeanSubClass.stringProperty", ELAssert.getELText(_structuredDocument,1382));
+        assertEquals("myBeanSubClass.integerProperty", ELAssert.getELText(_structuredDocument,1444));
+        assertEquals("myBeanSubClass.booleanProperty", ELAssert.getELText(_structuredDocument,1507));
+        assertEquals("myBeanSubClass.doubleProperty", ELAssert.getELText(_structuredDocument,1570));
+        assertEquals("myBeanSubClass.mapProperty", ELAssert.getELText(_structuredDocument,1632));
+        assertEquals("myBeanSubClass.stringArrayProperty", ELAssert.getELText(_structuredDocument,1691));
+        assertEquals("myBeanSubClass.collectionProperty", ELAssert.getELText(_structuredDocument,1758));
+        assertEquals("myBeanSubClass.listProperty", ELAssert.getELText(_structuredDocument,1824));
+        assertEquals("myBeanSubClass.comparableProperty", ELAssert.getELText(_structuredDocument,1884));
+        assertEquals("myBeanSubClass.bigIntegerProperty", ELAssert.getELText(_structuredDocument,1950));
+        assertEquals("myBeanSubClass.bigDoubleProperty", ELAssert.getELText(_structuredDocument,2016));
+        assertEquals("myBeanSubClass.writableStringProperty", ELAssert.getELText(_structuredDocument,2081));
+        assertEquals("myBeanSubClass.isStyleBooleanProperty", ELAssert.getELText(_structuredDocument,2151));
+        assertEquals("myBeanSubClass.subClassStringProperty", ELAssert.getELText(_structuredDocument,2221));
+        assertEquals("myBeanSubClass.colors", ELAssert.getELText(_structuredDocument,2291));
+        assertEquals("myBeanSubClass.coins", ELAssert.getELText(_structuredDocument,2345));
 
-        assertEquals("myBeanSubClass.stringProperty", getELText(_structuredDocument,2425));
-        assertEquals("myBeanSettable.integerProperty", getELText(_structuredDocument,2487));
-        assertEquals("myBeanSettable.booleanProperty", getELText(_structuredDocument,2550));
-        assertEquals("myBeanSettable.doubleProperty", getELText(_structuredDocument,2613));
-        assertEquals("myBeanSettable.mapProperty", getELText(_structuredDocument,2675));
-        assertEquals("myBeanSettable.stringArrayProperty", getELText(_structuredDocument,2734));
-        assertEquals("myBeanSettable.collectionProperty", getELText(_structuredDocument,2801));
-        assertEquals("myBeanSettable.listProperty", getELText(_structuredDocument,2867));
-        assertEquals("myBeanSettable.comparableProperty", getELText(_structuredDocument,2927));
-        assertEquals("myBeanSettable.bigIntegerProperty", getELText(_structuredDocument,2993));
-        assertEquals("myBeanSettable.bigDoubleProperty", getELText(_structuredDocument,3059));
-        assertEquals("myBeanSettable.writableStringProperty", getELText(_structuredDocument,3124));
-        assertEquals("myBeanSettable.isStyleBooleanProperty", getELText(_structuredDocument,3194));
-        assertEquals("myBeanSettable.colors", getELText(_structuredDocument,3264));
-        assertEquals("myBeanSettable.coins", getELText(_structuredDocument,3318));
+        assertEquals("myBeanSubClass.stringProperty", ELAssert.getELText(_structuredDocument,2425));
+        assertEquals("myBeanSettable.integerProperty", ELAssert.getELText(_structuredDocument,2487));
+        assertEquals("myBeanSettable.booleanProperty", ELAssert.getELText(_structuredDocument,2550));
+        assertEquals("myBeanSettable.doubleProperty", ELAssert.getELText(_structuredDocument,2613));
+        assertEquals("myBeanSettable.mapProperty", ELAssert.getELText(_structuredDocument,2675));
+        assertEquals("myBeanSettable.stringArrayProperty", ELAssert.getELText(_structuredDocument,2734));
+        assertEquals("myBeanSettable.collectionProperty", ELAssert.getELText(_structuredDocument,2801));
+        assertEquals("myBeanSettable.listProperty", ELAssert.getELText(_structuredDocument,2867));
+        assertEquals("myBeanSettable.comparableProperty", ELAssert.getELText(_structuredDocument,2927));
+        assertEquals("myBeanSettable.bigIntegerProperty", ELAssert.getELText(_structuredDocument,2993));
+        assertEquals("myBeanSettable.bigDoubleProperty", ELAssert.getELText(_structuredDocument,3059));
+        assertEquals("myBeanSettable.writableStringProperty", ELAssert.getELText(_structuredDocument,3124));
+        assertEquals("myBeanSettable.isStyleBooleanProperty", ELAssert.getELText(_structuredDocument,3194));
+        assertEquals("myBeanSettable.colors", ELAssert.getELText(_structuredDocument,3264));
+        assertEquals("myBeanSettable.coins", ELAssert.getELText(_structuredDocument,3318));
 
-        assertEquals("myBean.subClassStringProperty", getELText(_structuredDocument,3398));
-        assertEquals("myBeanSubClass.notAMember", getELText(_structuredDocument,3460));
-        assertEquals("myBeanSettable.alsoNotAMember", getELText(_structuredDocument,3518));
+        assertEquals("myBean.subClassStringProperty", ELAssert.getELText(_structuredDocument,3398));
+        assertEquals("myBeanSubClass.notAMember", ELAssert.getELText(_structuredDocument,3460));
+        assertEquals("myBeanSettable.alsoNotAMember", ELAssert.getELText(_structuredDocument,3518));
     }
 
     @Override
@@ -162,13 +163,13 @@ public class BeanPropertyResolutionTestCase extends SingleJSPTestCase
     public void testWarningExprs()
     {
         List<ReportedProblem> list = assertSemanticWarning(3398,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3460,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         list = assertSemanticWarning(3518,null,1);
-        assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
 
     @Override

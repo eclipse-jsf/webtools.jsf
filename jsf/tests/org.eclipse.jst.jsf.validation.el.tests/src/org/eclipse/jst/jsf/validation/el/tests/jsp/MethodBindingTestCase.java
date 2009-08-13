@@ -16,6 +16,7 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -40,46 +41,46 @@ public class MethodBindingTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("myBean.getStringProperty", getELText(_structuredDocument,825));
-        assertEquals("myBean.getIntegerProperty", getELText(_structuredDocument,885));
-        assertEquals("myBean.getBooleanProperty", getELText(_structuredDocument,946));
-        assertEquals("myBean.getDoubleProperty", getELText(_structuredDocument,1007));
-        assertEquals("myBean.getMapProperty", getELText(_structuredDocument,1067));
-        assertEquals("myBean.getStringArrayProperty", getELText(_structuredDocument,1124));
-        assertEquals("myBean.getCollectionProperty", getELText(_structuredDocument,1189));
-        assertEquals("myBean.getListProperty", getELText(_structuredDocument,1253));
-        assertEquals("myBean.getComparableProperty", getELText(_structuredDocument,1311));
-        assertEquals("myBean.getBigIntegerProperty", getELText(_structuredDocument,1375));
-        assertEquals("myBean.getBigDoubleProperty", getELText(_structuredDocument,1439));
-        assertEquals("myBean.recursiveCall", getELText(_structuredDocument,1502));
-        assertEquals("myBean.getWritableStringProperty", getELText(_structuredDocument,1558));
-        assertEquals("myBean.setWritableStringProperty", getELText(_structuredDocument,1626));
-        assertEquals("myBean.validate", getELText(_structuredDocument,1694));
-        assertEquals("myBean.validate2", getELText(_structuredDocument,1745));
-        assertEquals("myBean.getSelf", getELText(_structuredDocument,1797));
-        assertEquals("myBean.isIsStyleBooleanProperty", getELText(_structuredDocument,1847));
-        assertEquals("myBeanSubClass.getStringProperty", getELText(_structuredDocument,1915));
-        assertEquals("myBeanSubClass.getIntegerProperty", getELText(_structuredDocument,1983));
-        assertEquals("myBeanSubClass.getBooleanProperty", getELText(_structuredDocument,2052));
-        assertEquals("myBeanSubClass.getDoubleProperty", getELText(_structuredDocument,2121));
-        assertEquals("myBeanSubClass.getMapProperty", getELText(_structuredDocument,2189));
-        assertEquals("myBeanSubClass.getStringArrayProperty", getELText(_structuredDocument,2254));
-        assertEquals("myBeanSubClass.getCollectionProperty", getELText(_structuredDocument,2327));
-        assertEquals("myBeanSubClass.getListProperty", getELText(_structuredDocument,2399));
-        assertEquals("myBeanSubClass.getComparableProperty", getELText(_structuredDocument,2465));
-        assertEquals("myBeanSubClass.getBigIntegerProperty", getELText(_structuredDocument,2537));
-        assertEquals("myBeanSubClass.getBigDoubleProperty", getELText(_structuredDocument,2609));
-        assertEquals("myBeanSubClass.recursiveCall", getELText(_structuredDocument,2680));
-        assertEquals("myBeanSubClass.getWritableStringProperty", getELText(_structuredDocument,2744));
-        assertEquals("myBeanSubClass.setWritableStringProperty", getELText(_structuredDocument,2820));
-        assertEquals("myBeanSubClass.validate", getELText(_structuredDocument,2896));
-        assertEquals("myBeanSubClass.validate2", getELText(_structuredDocument,2955));
-        assertEquals("myBeanSubClass.getSelf", getELText(_structuredDocument,3015));
-        assertEquals("myBeanSubClass.isIsStyleBooleanProperty", getELText(_structuredDocument,3073));
-        assertEquals("myBeanSubClass.getSubClassStringProperty", getELText(_structuredDocument,3148));
+        assertEquals("myBean.getStringProperty", ELAssert.getELText(_structuredDocument,825));
+        assertEquals("myBean.getIntegerProperty", ELAssert.getELText(_structuredDocument,885));
+        assertEquals("myBean.getBooleanProperty", ELAssert.getELText(_structuredDocument,946));
+        assertEquals("myBean.getDoubleProperty", ELAssert.getELText(_structuredDocument,1007));
+        assertEquals("myBean.getMapProperty", ELAssert.getELText(_structuredDocument,1067));
+        assertEquals("myBean.getStringArrayProperty", ELAssert.getELText(_structuredDocument,1124));
+        assertEquals("myBean.getCollectionProperty", ELAssert.getELText(_structuredDocument,1189));
+        assertEquals("myBean.getListProperty", ELAssert.getELText(_structuredDocument,1253));
+        assertEquals("myBean.getComparableProperty", ELAssert.getELText(_structuredDocument,1311));
+        assertEquals("myBean.getBigIntegerProperty", ELAssert.getELText(_structuredDocument,1375));
+        assertEquals("myBean.getBigDoubleProperty", ELAssert.getELText(_structuredDocument,1439));
+        assertEquals("myBean.recursiveCall", ELAssert.getELText(_structuredDocument,1502));
+        assertEquals("myBean.getWritableStringProperty", ELAssert.getELText(_structuredDocument,1558));
+        assertEquals("myBean.setWritableStringProperty", ELAssert.getELText(_structuredDocument,1626));
+        assertEquals("myBean.validate", ELAssert.getELText(_structuredDocument,1694));
+        assertEquals("myBean.validate2", ELAssert.getELText(_structuredDocument,1745));
+        assertEquals("myBean.getSelf", ELAssert.getELText(_structuredDocument,1797));
+        assertEquals("myBean.isIsStyleBooleanProperty", ELAssert.getELText(_structuredDocument,1847));
+        assertEquals("myBeanSubClass.getStringProperty", ELAssert.getELText(_structuredDocument,1915));
+        assertEquals("myBeanSubClass.getIntegerProperty", ELAssert.getELText(_structuredDocument,1983));
+        assertEquals("myBeanSubClass.getBooleanProperty", ELAssert.getELText(_structuredDocument,2052));
+        assertEquals("myBeanSubClass.getDoubleProperty", ELAssert.getELText(_structuredDocument,2121));
+        assertEquals("myBeanSubClass.getMapProperty", ELAssert.getELText(_structuredDocument,2189));
+        assertEquals("myBeanSubClass.getStringArrayProperty", ELAssert.getELText(_structuredDocument,2254));
+        assertEquals("myBeanSubClass.getCollectionProperty", ELAssert.getELText(_structuredDocument,2327));
+        assertEquals("myBeanSubClass.getListProperty", ELAssert.getELText(_structuredDocument,2399));
+        assertEquals("myBeanSubClass.getComparableProperty", ELAssert.getELText(_structuredDocument,2465));
+        assertEquals("myBeanSubClass.getBigIntegerProperty", ELAssert.getELText(_structuredDocument,2537));
+        assertEquals("myBeanSubClass.getBigDoubleProperty", ELAssert.getELText(_structuredDocument,2609));
+        assertEquals("myBeanSubClass.recursiveCall", ELAssert.getELText(_structuredDocument,2680));
+        assertEquals("myBeanSubClass.getWritableStringProperty", ELAssert.getELText(_structuredDocument,2744));
+        assertEquals("myBeanSubClass.setWritableStringProperty", ELAssert.getELText(_structuredDocument,2820));
+        assertEquals("myBeanSubClass.validate", ELAssert.getELText(_structuredDocument,2896));
+        assertEquals("myBeanSubClass.validate2", ELAssert.getELText(_structuredDocument,2955));
+        assertEquals("myBeanSubClass.getSelf", ELAssert.getELText(_structuredDocument,3015));
+        assertEquals("myBeanSubClass.isIsStyleBooleanProperty", ELAssert.getELText(_structuredDocument,3073));
+        assertEquals("myBeanSubClass.getSubClassStringProperty", ELAssert.getELText(_structuredDocument,3148));
 
-        assertEquals("-myBean.validate", getELText(_structuredDocument,3272));
-        assertEquals("myBean.getIntegerProperty + myBean.getDoubleProperty", getELText(_structuredDocument,3320));
+        assertEquals("-myBean.validate", ELAssert.getELText(_structuredDocument,3272));
+        assertEquals("myBean.getIntegerProperty + myBean.getDoubleProperty", ELAssert.getELText(_structuredDocument,3320));
     }
 
     @Override
@@ -135,10 +136,10 @@ public class MethodBindingTestCase extends SingleJSPTestCase
     public void testErrorExprs()
     {
         List<ReportedProblem> list = assertSemanticError(3272, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID);
 
         list = assertSemanticError(3320, null, 2);
-        assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID);
     }
 
 }

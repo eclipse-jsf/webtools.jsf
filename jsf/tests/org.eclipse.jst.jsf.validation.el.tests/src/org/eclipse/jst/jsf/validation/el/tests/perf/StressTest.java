@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.test.util.PerfTracker;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.base.MockELValidationReporter;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
@@ -126,7 +127,7 @@ public class StressTest extends JSPTestCase
     {
         final int      numTimes = 1000;
         final int      elOffset = 795;
-        assertEquals("myBean.stringProperty", getELText(_structuredDocument,elOffset));
+        assertEquals("myBean.stringProperty", ELAssert.getELText(_structuredDocument,elOffset));
 
         final PerfTracker perfTracker = 
             new PerfTracker("Stress Simple Bean Property Validation", numTimes);
@@ -137,7 +138,8 @@ public class StressTest extends JSPTestCase
             final MockELValidationReporter reporter =
                 new MockELValidationReporter();
             final ELExpressionValidator validator = 
-                createELValidator(_structuredDocument, elOffset, _testJSP, reporter);
+                ELAssert.createELValidator(_structuredDocument, elOffset, _testJSP, reporter, 
+                        _symbolResolverFactory);
 
             final long startTime = System.nanoTime();
             

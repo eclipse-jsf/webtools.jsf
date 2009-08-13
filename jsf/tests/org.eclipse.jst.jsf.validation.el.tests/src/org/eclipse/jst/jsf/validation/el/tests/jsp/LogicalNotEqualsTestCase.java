@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -39,55 +40,55 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("myBean.stringProperty != '3'", getELText(_structuredDocument,828));
-        assertEquals("myBean.stringProperty ne '3'", getELText(_structuredDocument,889));
-        assertEquals("myBean.integerProperty != 3", getELText(_structuredDocument,950));
-        assertEquals("myBean.integerProperty ne 3", getELText(_structuredDocument,1010));
-        assertEquals("myBean.booleanProperty != true", getELText(_structuredDocument,1070));
-        assertEquals("myBean.booleanProperty ne true", getELText(_structuredDocument,1133));
-        assertEquals("myBean.integerProperty != '4' ", getELText(_structuredDocument,1196));
-        assertEquals("myBean.integerProperty ne '4' ", getELText(_structuredDocument,1259));
-        assertEquals("myBean.bigDoubleProperty != 4.5", getELText(_structuredDocument,1322));
-        assertEquals("myBean.doubleProperty ne 67", getELText(_structuredDocument,1386));
-        assertEquals("myBean.bigIntegerProperty != 500", getELText(_structuredDocument,1446));
-        assertEquals("myBean.stringArrayProperty != '3'", getELText(_structuredDocument,1511));
-        assertEquals("myBean.stringArrayProperty ne myBean.listProperty", getELText(_structuredDocument,1577));
-        assertEquals("myBean.coins != 'dime'", getELText(_structuredDocument,1655));
-        assertEquals("myBean.coins ne 'dime'", getELText(_structuredDocument,1707));
-        assertEquals("myBean.colors != 'red'", getELText(_structuredDocument,1759));
-        assertEquals("myBean.colors ne 'red'", getELText(_structuredDocument,1810));
-        assertEquals("myBean.coins != myBean.stringProperty", getELText(_structuredDocument,1861));
-        assertEquals("myBean.coins ne myBean.stringProperty", getELText(_structuredDocument,1927));
-        assertEquals("myBean.rawEnum != 'red'", getELText(_structuredDocument,1993));
-        assertEquals("myBean.coinEnum ne myBean.coins", getELText(_structuredDocument,2045));
+        assertEquals("myBean.stringProperty != '3'", ELAssert.getELText(_structuredDocument,828));
+        assertEquals("myBean.stringProperty ne '3'", ELAssert.getELText(_structuredDocument,889));
+        assertEquals("myBean.integerProperty != 3", ELAssert.getELText(_structuredDocument,950));
+        assertEquals("myBean.integerProperty ne 3", ELAssert.getELText(_structuredDocument,1010));
+        assertEquals("myBean.booleanProperty != true", ELAssert.getELText(_structuredDocument,1070));
+        assertEquals("myBean.booleanProperty ne true", ELAssert.getELText(_structuredDocument,1133));
+        assertEquals("myBean.integerProperty != '4' ", ELAssert.getELText(_structuredDocument,1196));
+        assertEquals("myBean.integerProperty ne '4' ", ELAssert.getELText(_structuredDocument,1259));
+        assertEquals("myBean.bigDoubleProperty != 4.5", ELAssert.getELText(_structuredDocument,1322));
+        assertEquals("myBean.doubleProperty ne 67", ELAssert.getELText(_structuredDocument,1386));
+        assertEquals("myBean.bigIntegerProperty != 500", ELAssert.getELText(_structuredDocument,1446));
+        assertEquals("myBean.stringArrayProperty != '3'", ELAssert.getELText(_structuredDocument,1511));
+        assertEquals("myBean.stringArrayProperty ne myBean.listProperty", ELAssert.getELText(_structuredDocument,1577));
+        assertEquals("myBean.coins != 'dime'", ELAssert.getELText(_structuredDocument,1655));
+        assertEquals("myBean.coins ne 'dime'", ELAssert.getELText(_structuredDocument,1707));
+        assertEquals("myBean.colors != 'red'", ELAssert.getELText(_structuredDocument,1759));
+        assertEquals("myBean.colors ne 'red'", ELAssert.getELText(_structuredDocument,1810));
+        assertEquals("myBean.coins != myBean.stringProperty", ELAssert.getELText(_structuredDocument,1861));
+        assertEquals("myBean.coins ne myBean.stringProperty", ELAssert.getELText(_structuredDocument,1927));
+        assertEquals("myBean.rawEnum != 'red'", ELAssert.getELText(_structuredDocument,1993));
+        assertEquals("myBean.coinEnum ne myBean.coins", ELAssert.getELText(_structuredDocument,2045));
 
-        assertEquals("5 != 3", getELText(_structuredDocument,2128));
-        assertEquals("5 ne 3", getELText(_structuredDocument,2164));
-        assertEquals("true != false", getELText(_structuredDocument,2200));
-        assertEquals("true ne false", getELText(_structuredDocument,2243));
-        assertEquals("'4' != '34'", getELText(_structuredDocument,2286));
-        assertEquals("'4' ne '34'", getELText(_structuredDocument,2327));
-        assertEquals("'34' != '34'", getELText(_structuredDocument,2368));
-        assertEquals("'34' ne '34'", getELText(_structuredDocument,2410));
-        assertEquals("myBean.integerProperty != null", getELText(_structuredDocument,2452));
-        assertEquals("null ne myBean.integerProperty", getELText(_structuredDocument,2512));
-        assertEquals("5.4 != 4.3", getELText(_structuredDocument,2572));
-        assertEquals("true != true", getELText(_structuredDocument,2612));
-        assertEquals("myBean.coins != 'notAValue'", getELText(_structuredDocument,2654));
-        assertEquals("myBean.coins ne 'notAValue'", getELText(_structuredDocument,2711));
-        assertEquals("myBean.coins != 'notAValue' || myBean.coins != 'dime'", getELText(_structuredDocument,2768));
-        assertEquals("myBean.coins ne 'notAValue' || myBean.coins ne 'dime'", getELText(_structuredDocument,2851));
-        assertEquals("myBean.coins != myBean.colors", getELText(_structuredDocument,2934));
+        assertEquals("5 != 3", ELAssert.getELText(_structuredDocument,2128));
+        assertEquals("5 ne 3", ELAssert.getELText(_structuredDocument,2164));
+        assertEquals("true != false", ELAssert.getELText(_structuredDocument,2200));
+        assertEquals("true ne false", ELAssert.getELText(_structuredDocument,2243));
+        assertEquals("'4' != '34'", ELAssert.getELText(_structuredDocument,2286));
+        assertEquals("'4' ne '34'", ELAssert.getELText(_structuredDocument,2327));
+        assertEquals("'34' != '34'", ELAssert.getELText(_structuredDocument,2368));
+        assertEquals("'34' ne '34'", ELAssert.getELText(_structuredDocument,2410));
+        assertEquals("myBean.integerProperty != null", ELAssert.getELText(_structuredDocument,2452));
+        assertEquals("null ne myBean.integerProperty", ELAssert.getELText(_structuredDocument,2512));
+        assertEquals("5.4 != 4.3", ELAssert.getELText(_structuredDocument,2572));
+        assertEquals("true != true", ELAssert.getELText(_structuredDocument,2612));
+        assertEquals("myBean.coins != 'notAValue'", ELAssert.getELText(_structuredDocument,2654));
+        assertEquals("myBean.coins ne 'notAValue'", ELAssert.getELText(_structuredDocument,2711));
+        assertEquals("myBean.coins != 'notAValue' || myBean.coins != 'dime'", ELAssert.getELText(_structuredDocument,2768));
+        assertEquals("myBean.coins ne 'notAValue' || myBean.coins ne 'dime'", ELAssert.getELText(_structuredDocument,2851));
+        assertEquals("myBean.coins != myBean.colors", ELAssert.getELText(_structuredDocument,2934));
 
-        assertEquals("5 != true", getELText(_structuredDocument,3012));
-        assertEquals("5 ne true", getELText(_structuredDocument,3051));
-        assertEquals("myBean.integerProperty != myBean.booleanProperty", getELText(_structuredDocument,3090));
-        assertEquals("myBean.integerProperty ne myBean.booleanProperty", getELText(_structuredDocument,3168));
-        assertEquals("myBean.stringArrayProperty != myBean.booleanProperty", getELText(_structuredDocument,3246));
-        assertEquals("myBean.booleanProperty ne myBean.stringArrayProperty", getELText(_structuredDocument,3328));
-        assertEquals("myBean.integerProperty != true ", getELText(_structuredDocument,3413));
-        assertEquals("myBean.integerProperty ne true ", getELText(_structuredDocument,3477));
-        assertEquals("false != myBean.integerProperty", getELText(_structuredDocument,3541));
+        assertEquals("5 != true", ELAssert.getELText(_structuredDocument,3012));
+        assertEquals("5 ne true", ELAssert.getELText(_structuredDocument,3051));
+        assertEquals("myBean.integerProperty != myBean.booleanProperty", ELAssert.getELText(_structuredDocument,3090));
+        assertEquals("myBean.integerProperty ne myBean.booleanProperty", ELAssert.getELText(_structuredDocument,3168));
+        assertEquals("myBean.stringArrayProperty != myBean.booleanProperty", ELAssert.getELText(_structuredDocument,3246));
+        assertEquals("myBean.booleanProperty ne myBean.stringArrayProperty", ELAssert.getELText(_structuredDocument,3328));
+        assertEquals("myBean.integerProperty != true ", ELAssert.getELText(_structuredDocument,3413));
+        assertEquals("myBean.integerProperty ne true ", ELAssert.getELText(_structuredDocument,3477));
+        assertEquals("false != myBean.integerProperty", ELAssert.getELText(_structuredDocument,3541));
     }
 
     @Override
@@ -125,81 +126,81 @@ public class LogicalNotEqualsTestCase extends SingleJSPTestCase
     public void testWarningExprs()
     {
         List<ReportedProblem> list = assertSemanticWarning(2128, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2164, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2200, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2243, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2286, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2327, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2368, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2410, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2572, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2612, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CONSTANT_EXPRESSION_ALWAYS_EVAL_SAME_ID);
 
         list = assertSemanticWarning(2654, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
 
         list = assertSemanticWarning(2711, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
 
         list = assertSemanticWarning(2768, Signature.SIG_BOOLEAN, 2);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID);
 
         list = assertSemanticWarning(2851, Signature.SIG_BOOLEAN, 2);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_FIRST_ARGUMENT_SHORT_CIRCUITS_ID);
 
         list = assertSemanticWarning(2934, Signature.SIG_BOOLEAN, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_COMPARISON_WITH_ENUM_ALWAYS_SAME_ID);
     }
 
     @Override
     public void testErrorExprs()
     {
         List<ReportedProblem> list = assertSemanticError(3012, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3051, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3090, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3168, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3246, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
         list = assertSemanticError(3328, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
         list = assertSemanticError(3413, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3477, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
 
         list = assertSemanticError(3541, null, 1);
-        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
+        ELAssert.assertContainsProblem(list, DiagnosticFactory.BINARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID);
     }
 }

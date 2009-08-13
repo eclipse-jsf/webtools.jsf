@@ -101,7 +101,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @param expectedSignature
      */
     protected void assertNoError(int docPos, String expectedSignature) {
-        super.assertNoError(_structuredDocument, docPos, _testJSP, expectedSignature);
+        ELAssert.assertNoError(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, expectedSignature);
     }
     
     /**
@@ -114,7 +114,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      */
     protected void assertNoError(int docPos, String expectedSignature, int assignability)
     {
-        super.assertNoError(_structuredDocument, docPos, _testJSP, expectedSignature, assignability);
+        ELAssert.assertNoError(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, expectedSignature, assignability);
         
     }
 
@@ -128,7 +128,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      */
     protected List<ReportedProblem> assertSyntaxError(int docPos, int expectedProblems)
     {
-        return super.assertSyntaxError(_structuredDocument, docPos, _testJSP, 
+        return ELAssert.assertSyntaxError(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, 
                 expectedProblems);
     }
 
@@ -142,7 +142,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      */
     protected List<ReportedProblem> assertSyntaxWarning(int docPos, int expectedProblems)
     {
-        return super.assertSyntaxWarning(_structuredDocument, docPos, _testJSP, 
+        return ELAssert.assertSyntaxWarning(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, 
                 expectedProblems);
     }
     
@@ -156,7 +156,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @return the list of errors found
      */
     protected List<ReportedProblem> assertSemanticError(int docPos, String expectedSignature, int expectedProblems) {
-        return super.assertSemanticError(_structuredDocument, docPos, _testJSP, expectedSignature,
+        return ELAssert.assertSemanticError(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, expectedSignature,
                 expectedProblems);
     }
 
@@ -170,7 +170,7 @@ public abstract class SingleJSPTestCase extends JSPTestCase
      * @return the list of errors found
      */
     protected List<ReportedProblem> assertSemanticWarning(int docPos, String expectedSignature, int expectedProblems) {
-        return super.assertSemanticWarning(_structuredDocument, docPos, _testJSP, expectedSignature,
+        return ELAssert.assertSemanticWarning(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, expectedSignature,
                 expectedProblems);
     }
 }

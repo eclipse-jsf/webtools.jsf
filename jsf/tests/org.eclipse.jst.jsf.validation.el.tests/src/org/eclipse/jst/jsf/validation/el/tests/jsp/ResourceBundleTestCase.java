@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.validation.el.tests.ELValidationTestPlugin;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
@@ -69,25 +70,25 @@ public class ResourceBundleTestCase extends SingleJSPTestCase {
     @Override
     public void testSanity()
     {
-        assertEquals("resBundleProp1.bundleProp2", getELText(_structuredDocument,887));
-        assertEquals("noPackageBundle.bundleProp2", getELText(_structuredDocument,943));
-        assertEquals("resBundleProp1.bundleProp1 && myBean.stringProperty", getELText(_structuredDocument,1003));
-        assertEquals("empty resBundleProp1", getELText(_structuredDocument,1087));
-        assertEquals("empty resBundleProp1.bundleProp2", getELText(_structuredDocument,1140));
-        assertEquals("resBundleProp1.bundleProp2 + 5", getELText(_structuredDocument,1205));
-        assertEquals("bundleProp2", getELText(_structuredDocument,1265));
-        assertEquals("resBundleProp1.x.y", getELText(_structuredDocument,1306));
-        assertEquals("noPackageBundle.x.y", getELText(_structuredDocument,1354));
-        assertEquals("resBundleProp2.name", getELText(_structuredDocument,1406));
-        assertEquals("resBundleProp2.movie", getELText(_structuredDocument,1455));
+        assertEquals("resBundleProp1.bundleProp2", ELAssert.getELText(_structuredDocument,887));
+        assertEquals("noPackageBundle.bundleProp2", ELAssert.getELText(_structuredDocument,943));
+        assertEquals("resBundleProp1.bundleProp1 && myBean.stringProperty", ELAssert.getELText(_structuredDocument,1003));
+        assertEquals("empty resBundleProp1", ELAssert.getELText(_structuredDocument,1087));
+        assertEquals("empty resBundleProp1.bundleProp2", ELAssert.getELText(_structuredDocument,1140));
+        assertEquals("resBundleProp1.bundleProp2 + 5", ELAssert.getELText(_structuredDocument,1205));
+        assertEquals("bundleProp2", ELAssert.getELText(_structuredDocument,1265));
+        assertEquals("resBundleProp1.x.y", ELAssert.getELText(_structuredDocument,1306));
+        assertEquals("noPackageBundle.x.y", ELAssert.getELText(_structuredDocument,1354));
+        assertEquals("resBundleProp2.name", ELAssert.getELText(_structuredDocument,1406));
+        assertEquals("resBundleProp2.movie", ELAssert.getELText(_structuredDocument,1455));
 
-        assertEquals("-resBundleProp1.bundleProp1", getELText(_structuredDocument,1530));
-        assertEquals("resBundleProp1.bundleProp3", getELText(_structuredDocument,1590));
-        assertEquals("msg", getELText(_structuredDocument,1649));
-        assertEquals("resBundleProp1.x", getELText(_structuredDocument,1685));
-        assertEquals("noPackageBundle.notAProperty", getELText(_structuredDocument,1731));
-        assertEquals("resBundleProp2.bundleProp2", getELText(_structuredDocument,1792));
-        assertEquals("resBundleProp2.notAPropAtAll", getELText(_structuredDocument,1848));
+        assertEquals("-resBundleProp1.bundleProp1", ELAssert.getELText(_structuredDocument,1530));
+        assertEquals("resBundleProp1.bundleProp3", ELAssert.getELText(_structuredDocument,1590));
+        assertEquals("msg", ELAssert.getELText(_structuredDocument,1649));
+        assertEquals("resBundleProp1.x", ELAssert.getELText(_structuredDocument,1685));
+        assertEquals("noPackageBundle.notAProperty", ELAssert.getELText(_structuredDocument,1731));
+        assertEquals("resBundleProp2.bundleProp2", ELAssert.getELText(_structuredDocument,1792));
+        assertEquals("resBundleProp2.notAPropAtAll", ELAssert.getELText(_structuredDocument,1848));
     }
 
     @Override
@@ -110,25 +111,25 @@ public class ResourceBundleTestCase extends SingleJSPTestCase {
     public void testWarningExprs()
     {
         List<ReportedProblem> problems = assertSemanticWarning(1530, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID);
 
         problems = assertSemanticWarning(1590, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1649, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1685, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.MEMBER_IS_INTERMEDIATE_ID);
 
         problems = assertSemanticWarning(1731, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1792, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1848, null, 1);
-        assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
+        ELAssert.assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
     }
 
     @Override

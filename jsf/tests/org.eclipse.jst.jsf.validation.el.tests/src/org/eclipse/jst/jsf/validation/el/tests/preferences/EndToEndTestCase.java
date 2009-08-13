@@ -20,6 +20,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
+import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.JSPTestCase;
 import org.eclipse.jst.jsf.validation.el.tests.base.MockELValidationReporter;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
@@ -79,22 +80,22 @@ public class EndToEndTestCase extends JSPTestCase
     @Override
     public void testSanity()
     {
-        assertEquals("5+3", getELText(_structuredDocument,799));
-        assertEquals("null+null", getELText(_structuredDocument,831));
-        assertEquals("5 + true", getELText(_structuredDocument,876));
-        assertEquals("'a' + 'b'", getELText(_structuredDocument,920));
-        assertEquals("5 / 0", getELText(_structuredDocument,958));
-        assertEquals("myBean.subClassStringProperty", getELText(_structuredDocument,1028));
-        assertEquals("myBean1", getELText(_structuredDocument,1093));
-        assertEquals("listBean[-1]", getELText(_structuredDocument,1129));
-        assertEquals("myBean.stringArrayProperty > myBean.booleanProperty", getELText(_structuredDocument,1177));
-        assertEquals("myBean.coins > myBean.colors", getELText(_structuredDocument,1264));
-        assertEquals("false && myBean.booleanProperty", getELText(_structuredDocument,1328));
-        assertEquals("myBean.booleanProperty && false", getELText(_structuredDocument,1395));
-        assertEquals("5 == true", getELText(_structuredDocument,1462));
-        assertEquals("!false", getELText(_structuredDocument,1507));
-        assertEquals("!5", getELText(_structuredDocument,1549));
-        assertEquals("myBean.doubleProperty + myBean.getIntegerProperty", getELText(_structuredDocument,1587));
+        assertEquals("5+3", ELAssert.getELText(_structuredDocument,799));
+        assertEquals("null+null", ELAssert.getELText(_structuredDocument,831));
+        assertEquals("5 + true", ELAssert.getELText(_structuredDocument,876));
+        assertEquals("'a' + 'b'", ELAssert.getELText(_structuredDocument,920));
+        assertEquals("5 / 0", ELAssert.getELText(_structuredDocument,958));
+        assertEquals("myBean.subClassStringProperty", ELAssert.getELText(_structuredDocument,1028));
+        assertEquals("myBean1", ELAssert.getELText(_structuredDocument,1093));
+        assertEquals("listBean[-1]", ELAssert.getELText(_structuredDocument,1129));
+        assertEquals("myBean.stringArrayProperty > myBean.booleanProperty", ELAssert.getELText(_structuredDocument,1177));
+        assertEquals("myBean.coins > myBean.colors", ELAssert.getELText(_structuredDocument,1264));
+        assertEquals("false && myBean.booleanProperty", ELAssert.getELText(_structuredDocument,1328));
+        assertEquals("myBean.booleanProperty && false", ELAssert.getELText(_structuredDocument,1395));
+        assertEquals("5 == true", ELAssert.getELText(_structuredDocument,1462));
+        assertEquals("!false", ELAssert.getELText(_structuredDocument,1507));
+        assertEquals("!5", ELAssert.getELText(_structuredDocument,1549));
+        assertEquals("myBean.doubleProperty + myBean.getIntegerProperty", ELAssert.getELText(_structuredDocument,1587));
 
     }
 
@@ -149,7 +150,7 @@ public class EndToEndTestCase extends JSPTestCase
     {
         final MyMockValidationReporter reporter = new MyMockValidationReporter();
         final ELExpressionValidator validator = 
-            createELValidator(_structuredDocument, docPos, _testJSP, reporter);
+            ELAssert.createELValidator(_structuredDocument, docPos, _testJSP, reporter, _symbolResolverFactory);
         validator.validateXMLNode();
         final List<ReportedProblem> syntaxProblems = reporter.getSyntaxProblems();
 
