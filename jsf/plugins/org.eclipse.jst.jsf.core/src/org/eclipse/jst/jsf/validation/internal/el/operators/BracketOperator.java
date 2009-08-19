@@ -23,7 +23,9 @@ import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
+import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
+import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
@@ -39,10 +41,11 @@ public class BracketOperator extends MemberAccessorOperator
     /**
      * @param diagnosticFactory 
      * @param file 
+     * @param resolver 
      */
-    public BracketOperator(final DiagnosticFactory diagnosticFactory, final IFile file)
+    public BracketOperator(final DiagnosticFactory diagnosticFactory, final IFile file, final ISymbolContextResolver resolver)
     {
-        super(file, diagnosticFactory);
+        super(file, diagnosticFactory, resolver);
     }
 
 	protected SignatureBasedType handlePerformObjectSymbolValue(
@@ -161,5 +164,21 @@ public class BracketOperator extends MemberAccessorOperator
     protected String getOperatorName()
     {
         return Messages.getString("BracketOperator.Name"); //$NON-NLS-1$
-    }    
+    }
+
+    /**
+     * @return the property resolver for the current source file
+     */
+    private AbstractDTPropertyResolver getPropertyResolver()
+    {
+        final DesignTimeApplicationManager manager =
+            DesignTimeApplicationManager.getInstance(_file.getProject());
+
+        if (manager != null)
+        {
+            return manager.getPropertyResolver();
+        }
+
+        return null;
+    }
 }

@@ -24,10 +24,7 @@ import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IMethodSymbolBasedType;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
-import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
-import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
+import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
@@ -50,18 +47,25 @@ public abstract class MemberAccessorOperator
      */
     protected final DiagnosticFactory _diagnosticFactory;
 
+    /**
+     * Used to resolve variables and properties.
+     */
+    protected final ISymbolContextResolver  _contextResolver;
+
     // TODO: need to reconcile with BinaryOperator? performOperation must return
     // SignatureBasedType since it may return a method. This can't happen
     // with other operators (besides eqiv [])
     /**
      * @param file
      * @param diagnosticFactory
+     * @param contextResolver 
      */
     protected MemberAccessorOperator(final IFile file,
-            final DiagnosticFactory diagnosticFactory)
+            final DiagnosticFactory diagnosticFactory, final ISymbolContextResolver contextResolver)
     {
         _file = file;
         _diagnosticFactory = diagnosticFactory;
+        _contextResolver = contextResolver;
     }
 
     /**
@@ -239,15 +243,7 @@ public abstract class MemberAccessorOperator
     protected final ISymbol getPropertySymbol(final ISymbol symbol,
             final Object name)
     {
-        final AbstractDTPropertyResolver resolver = getPropertyResolver();
-
-        if (resolver != null)
-        {
-            return resolver.getProperty(symbol, name);
-        }
-
-        JSFCorePlugin.log("Error acquiring property resolver", new Throwable()); //$NON-NLS-1$
-        return null;
+        return _contextResolver.getProperty(symbol, name);
     }
 
     /**
@@ -259,48 +255,9 @@ public abstract class MemberAccessorOperator
     protected final IMethodSymbol getMethodSymbol(final IObjectSymbol symbol,
             final Object name)
     {
-        final AbstractDTMethodResolver resolver = getMethodResolver();
-
-        if (resolver != null)
-        {
-            return resolver.getMethod(symbol, name);
-        }
-
-        JSFCorePlugin.log("Error acquiring property resolver", new Throwable()); //$NON-NLS-1$
-        return null;
-
+        return _contextResolver.getMethod(symbol, name);
     }
 
-    /**
-     * @return the property resolver for the current source file
-     */
-    protected final AbstractDTPropertyResolver getPropertyResolver()
-    {
-        final DesignTimeApplicationManager manager =
-            DesignTimeApplicationManager.getInstance(_file.getProject());
-
-        if (manager != null)
-        {
-            return manager.getPropertyResolver();
-        }
-
-        return null;
-    }
-
-    /**
-     * @return the method resolver for the current source file
-     */
-    protected final AbstractDTMethodResolver getMethodResolver()
-    {
-        final DesignTimeApplicationManager manager =
-            DesignTimeApplicationManager.getInstance(_file.getProject());
-
-        if (manager != null)
-        {
-            return manager.getMethodResolver();
-        }
-        return null;
-    }
 
     /**
      * @return a user-readable name of the operator (i.e. dot or bracket)

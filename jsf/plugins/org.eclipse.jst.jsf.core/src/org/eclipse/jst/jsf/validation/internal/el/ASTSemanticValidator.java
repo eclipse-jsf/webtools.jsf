@@ -398,7 +398,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                     _context.getDocumentPosition() + dotId.beginColumn - 1;
                 final int length = dotId.endColumn - dotId.beginColumn + 1;
 
-                final DotOperator dotOp = new DotOperator(_diagnosticFactory, _targetFile);
+                final DotOperator dotOp = new DotOperator(_diagnosticFactory, _targetFile, _symbolResolver);
 
                 final StringLiteralType  suffixLiteral = new StringLiteralType(dotId.image);
                 final Diagnostic diagnostic =
@@ -448,7 +448,7 @@ class ASTSemanticValidator implements JSPELParserVisitor, IExpressionSemanticVal
                         _context.getDocumentPosition() + firstToken.beginColumn - 1;
                     final int length = lastToken.endColumn - firstToken.beginColumn + 1;
 
-                    final BracketOperator  bracketOperator = new BracketOperator(_diagnosticFactory, _targetFile);
+                    final BracketOperator  bracketOperator = new BracketOperator(_diagnosticFactory, _targetFile, _symbolResolver);
 
                     final Diagnostic diagnostic =
                         bracketOperator.validate(symbolType,

@@ -38,6 +38,7 @@ import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 public final class CachingSymbolContextResolver extends AbstractSymbolContextResolver
 {
     private final static ISymbol SYMBOL_NOT_FOUND = SymbolFactory.eINSTANCE.createIComponentSymbol();
+    private final static ISymbol PROPERTY_NOT_FOUND = SymbolFactory.eINSTANCE.createIPropertySymbol();
     private final static IMethodSymbol METHOD_SYMBOL_NOT_FOUND =
         SymbolFactory.eINSTANCE.createIMethodSymbol();
     
@@ -99,7 +100,7 @@ public final class CachingSymbolContextResolver extends AbstractSymbolContextRes
 
         IMethodSymbol method = methods.get(methodName);
 
-        if (method == SYMBOL_NOT_FOUND)
+        if (method == METHOD_SYMBOL_NOT_FOUND)
         {
             method = null;
         }
@@ -157,7 +158,7 @@ public final class CachingSymbolContextResolver extends AbstractSymbolContextRes
 
         ISymbol property = properties.get(propertyName);
 
-        if (property == SYMBOL_NOT_FOUND)
+        if (property == PROPERTY_NOT_FOUND)
         {
             property = null;
         }
@@ -171,7 +172,7 @@ public final class CachingSymbolContextResolver extends AbstractSymbolContextRes
                 {
                     // if the delegate couldn't find the property,
                     // then mark this in case it is requested again
-                    properties.put(propertyName, SYMBOL_NOT_FOUND);
+                    properties.put(propertyName, PROPERTY_NOT_FOUND);
                 }
                 else
                 {

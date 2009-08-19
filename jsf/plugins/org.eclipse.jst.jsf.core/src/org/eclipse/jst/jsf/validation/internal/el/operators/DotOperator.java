@@ -16,6 +16,7 @@ import org.eclipse.jst.jsf.common.internal.types.LiteralType;
 import org.eclipse.jst.jsf.common.internal.types.SignatureBasedType;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.internal.util.IObjectSymbolBasedValueType;
+import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
 /**
@@ -29,10 +30,11 @@ public class DotOperator extends MemberAccessorOperator
     /**
      * @param diagnosticFactory 
      * @param file
+     * @param resolver 
      */
-    public DotOperator(final DiagnosticFactory diagnosticFactory, final IFile file) 
+    public DotOperator(final DiagnosticFactory diagnosticFactory, final IFile file, final ISymbolContextResolver resolver) 
     {
-        super(file, diagnosticFactory);
+        super(file, diagnosticFactory, resolver);
     }
 
 	protected SignatureBasedType handlePerformObjectSymbolValue(
