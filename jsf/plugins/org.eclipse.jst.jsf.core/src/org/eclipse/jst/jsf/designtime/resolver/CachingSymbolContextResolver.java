@@ -41,7 +41,7 @@ public final class CachingSymbolContextResolver extends AbstractSymbolContextRes
     private final static IMethodSymbol METHOD_SYMBOL_NOT_FOUND =
         SymbolFactory.eINSTANCE.createIMethodSymbol();
     
-    private final SymbolContextResolver     _delegate;
+    private final ISymbolContextResolver     _delegate;
 
     private final Map<String, ISymbol>  _variablesByName = new HashMap<String, ISymbol>();
     private ISymbol[]                   _allVariables;
@@ -60,6 +60,14 @@ public final class CachingSymbolContextResolver extends AbstractSymbolContextRes
     public CachingSymbolContextResolver(final IStructuredDocumentContext context)
     {
         _delegate = new SymbolContextResolver(context);
+    }
+
+    /**
+     * @param delegate
+     */
+    public CachingSymbolContextResolver(final ISymbolContextResolver delegate)
+    {
+        _delegate = delegate;
     }
 
     @Override
