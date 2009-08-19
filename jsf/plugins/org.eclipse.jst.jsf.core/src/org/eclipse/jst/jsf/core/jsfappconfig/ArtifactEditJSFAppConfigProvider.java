@@ -80,9 +80,13 @@ public class ArtifactEditJSFAppConfigProvider extends AbstractJSFAppConfigProvid
 	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider#releaseFacesConfigModel()
 	 */
 	public void releaseFacesConfigModel() {
-		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
+	    if (jsfAppConfigLocater != null)
+	    {
+	        jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
+	    }
 		if (facesConfigArtifactEdit != null) {
 			facesConfigArtifactEdit.dispose();
+			facesConfigArtifactEdit = null;
 		}
 	}
 
