@@ -32,14 +32,26 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  */
 public class JsfLibraryUtil
 {
+    /**
+     * JSF library vendor type
+     */
     public static enum JsfLibraryVendorType
     {
+        /** Unknown JSF library type */
         UNKNOWN,
+        
+        /** Apache MyFaces JSF library */
         MYFACES,
+        
+        /** Sun-RI JSF library */
         SUN_RI
     }
 
 
+    /**
+     * @param libConfig UserLibraryProviderInstallOperationConfig
+     * @return JsfLibraryVendorType
+     */
     public static JsfLibraryVendorType getJsfLibraryVendorType (final UserLibraryProviderInstallOperationConfig libConfig)
     {
         final String MYFACES_IDENTIFYING_CLASS = "org/apache/myfaces/el/VariableResolverImpl.class"; //$NON-NLS-1$
@@ -100,6 +112,10 @@ public class JsfLibraryUtil
     }
 
 
+    /**
+     * @param cpe
+     * @return True if the classpath entry is a library.
+     */
     public static boolean isLibrary (final IClasspathEntry cpe)
     {
         return cpe.getEntryKind() == IClasspathEntry.CPE_LIBRARY;

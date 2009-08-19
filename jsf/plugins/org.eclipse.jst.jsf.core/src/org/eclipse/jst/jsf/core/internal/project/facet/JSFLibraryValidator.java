@@ -24,6 +24,9 @@ public class JSFLibraryValidator extends UserLibraryVersionValidator
     private static final String CLASS_NAME_IDENTIFYING_IMPLEMENTATION_JAR = "javax/faces/render/RenderKit.class"; //$NON-NLS-1$
 
 
+    /**
+     * Construct a validator for the JSF facet.
+     */
     public JSFLibraryValidator ()
     {
         super(CLASS_NAME_IDENTIFYING_IMPLEMENTATION_JAR);

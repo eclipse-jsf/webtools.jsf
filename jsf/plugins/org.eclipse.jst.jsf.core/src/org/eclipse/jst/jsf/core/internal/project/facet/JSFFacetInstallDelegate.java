@@ -26,8 +26,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.common.project.facet.core.libprov.LibraryInstallDelegate;
+import org.eclipse.jst.common.project.facet.core.libprov.LibraryProviderOperationConfig;
+import org.eclipse.jst.common.project.facet.core.libprov.user.UserLibraryProviderInstallOperationConfig;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
-import org.eclipse.jst.j2ee.internal.common.classpath.WtpUserLibraryProviderInstallOperationConfig;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.javaee.web.Servlet;
@@ -103,6 +104,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			( (LibraryInstallDelegate) config.getProperty( IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE ) ).execute( new NullProgressMonitor() );
 
 	        final LibraryInstallDelegate libDelegate = (LibraryInstallDelegate) (config.getProperty( IJSFFacetInstallDataModelProperties.LIBRARY_PROVIDER_DELEGATE));
+	        final LibraryProviderOperationConfig libConfig = libDelegate.getLibraryProviderOperationConfig();
 
 			if (jsfFacetConfigurationEnabled)
             {
@@ -111,7 +113,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 
     			// Update web model
     			createServletAndModifyWebXML(project, config, monitor);
-                updateWebXmlByJsfVendor(libDelegate, project, monitor);
+                updateWebXmlByJsfVendor(libConfig, project, monitor);
             }
             
 			if (monitor != null) {
@@ -126,14 +128,28 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 	}
 
 
-	
-    private void updateWebXmlByJsfVendor (final LibraryInstallDelegate libDelegate, 
+    /**
+     * Configures web.xml for MyFaces or Sun-RI when a user-library is used.
+     * Does no special configuration when a third party library provider is used
+     * (e.g. WebLogic shared library)
+     * 
+     * @param libConfig
+     *            Library install delegate
+     * @param project
+     *            IProject to update
+     * @param monitor
+     *            IProgressMonitor
+     */
+    private void updateWebXmlByJsfVendor (final LibraryProviderOperationConfig libConfig, 
                                           final IProject project, 
                                           final IProgressMonitor monitor)
     {
-        final WtpUserLibraryProviderInstallOperationConfig libConfig = (WtpUserLibraryProviderInstallOperationConfig) libDelegate.getLibraryProviderOperationConfig();
+        final UserLibraryProviderInstallOperationConfig userLibConfig = getUserLibConfig(libConfig);
+        if (userLibConfig == null) // Not a user lib provider (e.g. shared lib provider)
+            return;  // Any special configuration will be done by third party lib provider.
 
-        switch (JsfLibraryUtil.getJsfLibraryVendorType(libConfig))
+
+        switch (JsfLibraryUtil.getJsfLibraryVendorType(userLibConfig))
         {
         case MYFACES:
             updateWebXmlForMyfaces(project, monitor);
@@ -146,9 +162,40 @@ public final class JSFFacetInstallDelegate implements IDelegate {
         }
     }
 
-    
-    private void updateWebXmlForMyfaces (final IProject project, 
-                                         final IProgressMonitor monitor)
+
+    /**
+     * (Refactored into a protected method for JUnit testing)
+     * 
+     * @param libConfig LibraryProviderOperationConfig object
+     * 
+     * @return WtpUserLibraryProviderInstallOperationConfig object if the
+     *         argument object has the same runtime type. Returns null
+     *         otherwise e.g. if the libConfig is of the runtime type 
+     *         SharedLibraryProviderInstallOperationConfig.
+     */
+    public static UserLibraryProviderInstallOperationConfig getUserLibConfig (final LibraryProviderOperationConfig libConfig)
+    {
+        if (!(libConfig instanceof UserLibraryProviderInstallOperationConfig)) // Third-party shared library providers etc.
+            return null;
+
+        return (UserLibraryProviderInstallOperationConfig) libConfig;
+    }
+
+
+    /**
+     * Updates web.xml for the given project with MyFaces-specific parameters.
+     * (This method is public static so that it may be called by other third
+     * party library providers for consistent MyFaces configuration across
+     * different JSF library providers)
+     * 
+     * @param project
+     *            IProject whose web.xml is to be updated.
+     * 
+     * @param monitor
+     *            IProgressMonitor
+     */
+    public static void updateWebXmlForMyfaces (final IProject project, 
+                                               final IProgressMonitor monitor)
     {
         final WebXmlUpdater updater = new WebXmlUpdater(project, monitor);
         
@@ -175,10 +222,22 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 //            updater.getProvider().modify(new UpdateWebXmlForMyfacesJ2EE(project, monitor), WebXmlUtils.WEB_XML_PATH);
 //        }
     }
-    
-    
-    private void updateWebXmlForSunRi (final IProject project,
-                                       final IProgressMonitor monitor)
+
+
+    /**
+     * Updates web.xml for the given project with SunRI-specific parameters.
+     * (This method is public static so that it may be called by other third
+     * party library providers for consistent Sun-RI configuration across
+     * different JSF library providers)
+     *
+     * @param project
+     *            IProject whose web.xml is to be updated.
+     *
+     * @param monitor
+     *            IProgressMonitor
+     */
+    public static void updateWebXmlForSunRi (final IProject project,
+                                             final IProgressMonitor monitor)
     {
         final WebXmlUpdater updater = new WebXmlUpdater(project, monitor);
         
