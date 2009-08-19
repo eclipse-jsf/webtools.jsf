@@ -30,6 +30,8 @@ import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocumen
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDElementDeclaration;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
 import org.eclipse.wst.common.componentcore.ComponentCore;
+import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLElementDeclaration;
 import org.eclipse.wst.html.core.internal.provisional.HTMLCMProperties;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -75,8 +77,9 @@ public final class CMUtil {
 	 * 			Must <ul>not</ul> be called with HTML or JSP documents.
 	 * 			As there is no API on the doc for standalone or tagDir doc, it is possible that this could return an invalid string.  
 	 * 				However, if the code is consistent in it's usage, all should be well.
+	 *         or null if not found.
 	 */
-	public static String  getURIFromDoc(final TLDDocument doc, final IProject project) {		
+	public static String  getURIFromDoc(final TLDDocument doc, final IProject project) {
 		String uri = doc.getUri();
 		IProject proj = project;
 		if (uri == null) {//
@@ -101,6 +104,7 @@ public final class CMUtil {
 	 * @param tldRec
 	 * @param project
 	 * @return valid string to use for the uri when given a ITaglibRecord
+	 * or null.
 	 */
 	public static String getURIFromTaglibRecord(ITaglibRecord tldRec, IProject project) {		
 		//similar code in PaletteHelper and above		
@@ -125,13 +129,25 @@ public final class CMUtil {
 		IPath webContentPath = ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getLocation();
 		return getURIFromPath(p.makeAbsolute().makeRelativeTo(webContentPath.makeAbsolute()));		
 	}
-	
+
 	private static String getTagDirURI(TLDDocument doc, IProject project) {
 		Path p = new Path(doc.getBaseLocation());
-		IPath webContentPath = ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getFullPath();
-		return getURIFromPath(p.makeRelativeTo(webContentPath));
+		IVirtualComponent projectComp = ComponentCore.createComponent(project);
+		
+		if (projectComp != null)
+		{
+		    IVirtualFolder rootFolder = projectComp.getRootFolder();
+		    
+		    if (rootFolder != null)
+		    {
+		        IPath webContentPath = 
+		            rootFolder.getUnderlyingFolder().getFullPath();
+		        return getURIFromPath(p.makeRelativeTo(webContentPath));
+		    }
+		}
+		return null;
 	}
-	
+
 	private static String getURIFromPath(IPath uriPath)
 	{
 		if (uriPath != null)
