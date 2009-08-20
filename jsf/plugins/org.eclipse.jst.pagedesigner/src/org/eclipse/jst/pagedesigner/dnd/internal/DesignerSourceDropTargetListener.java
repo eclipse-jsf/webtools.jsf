@@ -16,6 +16,7 @@ import org.eclipse.gef.dnd.TemplateTransfer;
 import org.eclipse.jst.pagedesigner.commands.PaletteDropInsertCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -75,18 +76,19 @@ public class DesignerSourceDropTargetListener extends
 			if (TemplateTransfer.getInstance().isSupportedType(
 					event.currentDataType)) {
 				if (_textEditor.getTextViewer() != null) {
-					Point p = new Point(event.x, event.y);
-					SourceViewerDragDropHelper.getInstance().updateCaret(
-							_textEditor, p);
-					_location = text.getCaretOffset();
-					if (TemplateTransfer.getInstance().isSupportedType(
-							event.currentDataType)) {
-						_location = SourceViewerDragDropHelper.getInstance()
-								.getValidLocation(_textEditor, _location);
-					}
-					SourceViewerDragDropHelper.getInstance().showCaret(
-							_textEditor, _location);
-				}
+						Point p = new Point(event.x, event.y);
+						SourceViewerDragDropHelper.getInstance().updateCaret(
+								_textEditor, p);
+						_location = text.getCaretOffset();
+						if (TemplateTransfer.getInstance().isSupportedType(
+								event.currentDataType)) {
+							_location = SourceViewerDragDropHelper.getInstance()
+									.getValidLocation(_textEditor, _location);
+						}
+						SourceViewerDragDropHelper.getInstance().showCaret(
+								_textEditor, _location);
+				    }
+		
 			} else if (TextTransfer.getInstance().isSupportedType(
 					event.currentDataType)) {
 				super.dragOver(event);
@@ -127,16 +129,27 @@ public class DesignerSourceDropTargetListener extends
 			PaletteDropInsertCommand command = null;
 			if (data instanceof IDropSourceData) {
 			    final IDropSourceData dropSourceData = (IDropSourceData) data;
-
-				// "Create new item"
-				command = new PaletteDropInsertCommand(
-						PageDesignerResources
-								.getInstance()
-								.getString(
-										"DesignerSourceDropTargetListener.InserCommandLabel"), _textEditor, dropSourceData, _location); //$NON-NLS-1$
+			    if (!(hasIllegalCharacters(dropSourceData))) {
+					// "Create new item"
+					command = new PaletteDropInsertCommand(
+							PageDesignerResources
+									.getInstance()
+									.getString(
+											"DesignerSourceDropTargetListener.InserCommandLabel"), _textEditor, dropSourceData, _location); //$NON-NLS-1$
+			    }
 			}
 			return command;
 		}
 		return null;
+	}
+
+	private boolean hasIllegalCharacters(final IDropSourceData data) {
+		//temporary fix for adopter product where palette item has illegal characters in identifier
+		//has effect of disabling drop into source view
+		if (data instanceof ITagDropSourceData) {
+			final ITagDropSourceData tag = (ITagDropSourceData)data;
+			return tag.getTagName().indexOf("##") > 0; //$NON-NLS-1$
+		}
+		return false;
 	}
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jst.jsp.ui.views.contentoutline.JSPContentOutlineConfiguration;
@@ -39,9 +40,13 @@ public class OutlineConfiguration extends JSPContentOutlineConfiguration {
 						_selections));
 			}
 		}
+		else if (selection instanceof IStructuredSelection)
+		{
+		    return super.getSelection(viewer, selection);
+		}
 		return super.getSelection(viewer, new StructuredSelection(_selections));
 	}
-
+	
 	private Object[] getSelectedObjects(IStructuredModel model,
 			ITextSelection selection) {
 		Object[] selectedStructures = null;
