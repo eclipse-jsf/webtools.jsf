@@ -73,12 +73,12 @@ public final class CreationData
     {
         super();
         this._creationProvider = creationProvider;
-        this._prefix = getPrefix(getUri(), model, getDefaultPrefix());
         this._taglibMetaDataContext = taglibMetaDataContext;
         this._domPosition = domPosition;
         this._adjustedPosition = _domPosition;
         this._model = model;
         this._customizationData = customizationData; 
+        this._prefix = getPrefix(getUri(), model, getDefaultPrefix());
     }
 
     /**
@@ -105,6 +105,10 @@ public final class CreationData
      * @return the tag identifier uri
      */
     public String getUri() {
+       	ITagDropOverrider overrider = getTagDropOverrider();
+    	if (overrider != null && overrider.getUriOverride() != null)
+    		 return overrider.getUriOverride();
+    	
         return _creationProvider.getNamespace();
     }
 
@@ -112,9 +116,23 @@ public final class CreationData
      * @return the default prefix
      */
     public String getDefaultPrefix() {
+    	ITagDropOverrider overrider = getTagDropOverrider();
+    	if (overrider != null && overrider.getDefaultPrefixOverride() != null)
+    		 return overrider.getDefaultPrefixOverride();
+    	    	
         return _creationProvider.getDefaultPrefix();
     }
 
+    private ITagDropOverrider getTagDropOverrider() {
+    	if (getDropCustomizationData() != null
+    			&& getDropCustomizationData()
+    				.getAdapter(ITagDropOverrider.class) != null) {
+    		
+    		 return (ITagDropOverrider)getDropCustomizationData()
+    		 		.getAdapter(ITagDropOverrider.class);
+    	}
+    	return null;
+    }
     /**
      * @return the local prefix for the  tag
      */
@@ -126,6 +144,10 @@ public final class CreationData
      * @return the tag name
      */
     public String getTagName() {
+    	ITagDropOverrider overrider = getTagDropOverrider();
+    	if (overrider != null && overrider.getTagNameOverride() != null)
+    		 return overrider.getTagNameOverride();
+    	
         return _creationProvider.getTagName();
     }
 
