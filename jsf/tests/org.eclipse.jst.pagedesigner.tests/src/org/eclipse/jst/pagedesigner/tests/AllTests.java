@@ -24,6 +24,7 @@ import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolForJSFC
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolForJSFHTML;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolHTML;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestItemCreationToolJSP;
+import org.eclipse.jst.pagedesigner.tests.tagcreator.TestOverrideableCreationData;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_AttributeCustomization;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization;
@@ -65,7 +66,8 @@ public class AllTests
         addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_ChildCustomization.class, JSFVersion.V1_1);
         addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_ParentCustomization.class, JSFVersion.V1_1);
         addTestRequiringJSFRuntime(suite, TestUserCustomizedTagCreatorForJSFHTML_GeneralCustomization.class, JSFVersion.V1_1);
-
+        addTestRequiringJSFRuntime(suite, TestOverrideableCreationData.class, JSFVersion.V1_1);
+        
         // TODO: could merge the item creation and default tag creators into a
         // common testsuite
         addTestRequiringJSFRuntime(suite, TestItemCreationToolForJSFCore.class,
