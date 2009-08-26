@@ -515,22 +515,22 @@ public class FacesConfigEditor extends FormEditor implements
                             if (GEMPreferences.getShowIntroEditor())
                             {
                                 IntroductionPage page1 = new IntroductionPage(FacesConfigEditor.this);
-                                addPage(page1, null);
+                                addPage(page1, FacesConfigEditor.this.getEditorInput());
                             }
                             
                             IFormPage overviewPage = new OverviewPage(FacesConfigEditor.this);
-                            addPage(overviewPage, null);
+                            addPage(overviewPage, FacesConfigEditor.this.getEditorInput());
         
                             // Page flow
                             createAndAddPageflowPage();
         
                             // pages
                             IFormPage managedBeanPage = new ManagedBeanPage(FacesConfigEditor.this);
-                            managedBeanPageID = addPage(managedBeanPage, null);
+                            managedBeanPageID = addPage(managedBeanPage, FacesConfigEditor.this.getEditorInput());
                             IFormPage componentsPage = new ComponentsPage(FacesConfigEditor.this);
-                            componentsPageID = addPage(componentsPage, null);
+                            componentsPageID = addPage(componentsPage, FacesConfigEditor.this.getEditorInput());
                             IFormPage othersPage = new OthersPage(FacesConfigEditor.this);
-                            othersPageID = addPage(othersPage, null);
+                            othersPageID = addPage(othersPage, FacesConfigEditor.this.getEditorInput());
                         }
         
                         sourcePage = new StructuredTextEditor();

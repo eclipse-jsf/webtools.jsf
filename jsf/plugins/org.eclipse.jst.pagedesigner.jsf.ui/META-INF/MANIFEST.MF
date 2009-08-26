@@ -8,7 +8,7 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.jst.jsf.facesconfig;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.pagedesigner;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.pagedesigner.jsp.core;bundle-version="[1.1.0,2.0.0)",
- org.eclipse.wst.common.modulecore;bundle-version="[1.1.0,1.2.0)",
+ org.eclipse.wst.common.modulecore;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.common.ui;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.common;bundle-version="[1.1.0,2.0.0)",
