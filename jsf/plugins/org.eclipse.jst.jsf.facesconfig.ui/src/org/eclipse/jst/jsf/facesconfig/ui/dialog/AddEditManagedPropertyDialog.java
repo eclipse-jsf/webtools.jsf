@@ -316,7 +316,8 @@ public class AddEditManagedPropertyDialog extends Dialog {
 			valueField.getTextControl(null, parent).setEditable(false);
 			valueField.setEnabled(true);
 		} else {
-			valueObject = ""; //$NON-NLS-1$
+			
+			valueObject = valueField.getText(); //Bug 173831
 			valueField.getTextControl(null, parent).setEditable(true);
 			valueField.setEnabled(true);
 		}

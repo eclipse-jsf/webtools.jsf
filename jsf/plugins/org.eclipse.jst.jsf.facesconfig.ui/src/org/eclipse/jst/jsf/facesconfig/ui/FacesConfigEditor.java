@@ -55,6 +55,7 @@ import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.EditorPartAction;
 import org.eclipse.gef.ui.actions.SaveAction;
 import org.eclipse.gef.ui.actions.UpdateAction;
+import org.eclipse.gef.ui.views.palette.PaletteView;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.IDocument;
@@ -1145,6 +1146,10 @@ public class FacesConfigEditor extends FormEditor implements
 				&& contributor instanceof FacesConfigActionBarContributor) {
 			((FacesConfigActionBarContributor) contributor)
 					.setActivePage(activeEditor);
+			PaletteView paletteView = (PaletteView) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(PaletteView.ID);
+			if(paletteView != null) {
+				paletteView.partActivated(activeEditor);
+			}
 		}
 	}
 
