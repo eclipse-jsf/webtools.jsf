@@ -822,9 +822,13 @@ public class FacesConfigEditor extends FormEditor implements
 					if (isWebProject &&
 					        _modelLoader.getEdit() != null) {
 						// modelResource.save(Collections.EMPTY_MAP);
-						_modelLoader.getEdit()
-								.getDeploymentDescriptorResource().save(
-										Collections.EMPTY_MAP);
+						Resource deploymentDescriptorResource = _modelLoader.getEdit()
+                                      .getDeploymentDescriptorResource();
+                        if (deploymentDescriptorResource != null)
+                        {
+                            deploymentDescriptorResource.save(
+                                   Collections.EMPTY_MAP);
+						}
 						IFile file = ((IFileEditorInput) getEditorInput())
 								.getFile();
 						pageflowPage.doSave(file, monitor_);

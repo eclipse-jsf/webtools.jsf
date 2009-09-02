@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.wst.common.componentcore.ArtifactEdit;
+import org.eclipse.wst.common.componentcore.internal.ArtifactEditModel;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
 import org.eclipse.wst.xml.core.internal.emf2xml.EMF2DOMSSERenderer;
@@ -142,21 +143,29 @@ public final class FacesConfigArtifactEdit extends ArtifactEdit {
 		return facesConfigURI;
 	}
 
-	/**
-	 * @return the model root
-	 */
-	public EObject getDeploymentDescriptorRoot() {
-		List contents = getDeploymentDescriptorResource().getContents();
-		if (contents.size() > 0)
-			return (EObject) contents.get(0);
-		return null;
-		// TODO: XN 
-		//addFacesConfigIfNecessary((IFacesConfigResource)getDeploymentDescriptorResource());
-		//return (EObject) contents.get(0);
-	}
+    /**
+     * @return the model root
+     */
+    public EObject getDeploymentDescriptorRoot()
+    {
+        Resource deploymentDescriptorResource = getDeploymentDescriptorResource();
+        if (deploymentDescriptorResource != null)
+        {
+            List contents = deploymentDescriptorResource.getContents();
+            if (contents.size() > 0)
+            {
+                return (EObject) contents.get(0);
+            }
+        }
+        return null;
+        // TODO: XN
+        // addFacesConfigIfNecessary((IFacesConfigResource)getDeploymentDescriptorResource());
+        // return (EObject) contents.get(0);
+    }
 
 	/**
-	 * @return the EMF resource retrieved for this artifact's uri
+	 * @return the EMF resource retrieved for this artifact's uri or null if
+	 * this descriptor has not resource.
 	 */
 	public Resource getDeploymentDescriptorResource() {
 		if (sFileName != null) {
@@ -164,7 +173,12 @@ public final class FacesConfigArtifactEdit extends ArtifactEdit {
 		} else {// default is "WEB-INF/faces-config.xml"
 			facesConfigURI = URI.createURI(IFacesConfigConstants.FACES_CONFIG_URI);
 		}
-		return getArtifactEditModel().getResource(facesConfigURI);
+		final ArtifactEditModel artifactEditModel = getArtifactEditModel();
+		if (artifactEditModel != null)
+		{
+		    return artifactEditModel.getResource(facesConfigURI);
+		}
+		return null;
 	}
 
 	/**
@@ -210,9 +224,10 @@ public final class FacesConfigArtifactEdit extends ArtifactEdit {
 		// TODO - XN This is a little hackish because it depends on the resource's
 		// renderer being an EMF2DOMSedRenderer (which it is, but that could
 		// change).
-		IFacesConfigResource resource = (IFacesConfigResource)getDeploymentDescriptorResource();
-		if (resource != null) {
-			EMF2DOMSSERenderer renderer = (EMF2DOMSSERenderer) resource.getRenderer();
+		Resource resource = getDeploymentDescriptorResource();
+		if (resource instanceof IFacesConfigResource) {
+			EMF2DOMSSERenderer renderer = (EMF2DOMSSERenderer) 
+			    ((IFacesConfigResource)resource).getRenderer();
 			return renderer.getXMLModel();
 		}
 		return null;
