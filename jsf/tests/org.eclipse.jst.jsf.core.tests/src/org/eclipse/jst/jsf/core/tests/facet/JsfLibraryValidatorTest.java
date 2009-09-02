@@ -20,8 +20,9 @@ package org.eclipse.jst.jsf.core.tests.facet;
 public class JsfLibraryValidatorTest extends LibraryValidatorTest
 {
     private static final String CLASS_NAME_IDENTIFYING_IMPLEMENTATION_JAR = "javax/faces/render/RenderKit.class"; //$NON-NLS-1$
-    private static final String JARFILE = "testdata/facet/jars/myfaces-api-1.1.3.jar";  //$NON-NLS-1$
-    private static final String JARFILE_WITHOUT_IMPLEMENTATION_VERSION_ENTRY = "testdata/facet/jars/no-version-entry/myfaces-api-1.1.3.jar"; //$NON-NLS-1$
+    private static final String JARFILE = "testfiles/facet/jsflibrary-api-1.1.3.jar";  //$NON-NLS-1$
+    private static final String JARFILE_WITHOUT_IMPLEMENTATION_VERSION_ENTRY = "testfiles/facet/no-version-entry/jsflibrary-api-1.1.3.jar"; //$NON-NLS-1$
+    private static final String JARFILE_WITH_NONSTANDARD_IMPLEMENTATION_VERSION_ENTRY = "testfiles/facet/nonstandard_implementation_version/jsflibrary-api-1.1.3.jar"; //$NON-NLS-1$
     private static final String EXPECTED_LIBRARY_VERSION = "1.1.3"; //$NON-NLS-1$
 
 
@@ -34,6 +35,7 @@ public class JsfLibraryValidatorTest extends LibraryValidatorTest
               CLASS_NAME_IDENTIFYING_IMPLEMENTATION_JAR,
               JARFILE,
               JARFILE_WITHOUT_IMPLEMENTATION_VERSION_ENTRY,
+              JARFILE_WITH_NONSTANDARD_IMPLEMENTATION_VERSION_ENTRY,
               EXPECTED_LIBRARY_VERSION);
     }
 }

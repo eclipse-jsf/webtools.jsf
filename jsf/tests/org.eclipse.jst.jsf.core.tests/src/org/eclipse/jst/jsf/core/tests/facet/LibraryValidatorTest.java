@@ -14,10 +14,8 @@ package org.eclipse.jst.jsf.core.tests.facet;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.jar.JarFile;
 
 import junit.framework.TestCase;
@@ -38,6 +36,7 @@ public abstract class LibraryValidatorTest extends TestCase
     private String classNameIdentifyingJarToUse;
     private String jarPath;
     private String jarPathWithoutImplementationVersionEntry;
+    private String jarPathWithNonstandardImplementationVersionEntry;
     private String expectedLibraryVersion;
     private UserLibraryVersionValidatorProxy validator;
 
@@ -55,6 +54,7 @@ public abstract class LibraryValidatorTest extends TestCase
                                  final String classNameIdentifyingJarToUse,
                                  final String jarPath,
                                  final String jarPathWithoutImplementationVersionEntry,
+                                 final String jarPathWithNonstandardImplementationVersionEntry,
                                  final String expectedLibraryVersion)
     {
         super(name);
@@ -62,6 +62,7 @@ public abstract class LibraryValidatorTest extends TestCase
         this.classNameIdentifyingJarToUse = classNameIdentifyingJarToUse;
         this.jarPath = jarPath;
         this.jarPathWithoutImplementationVersionEntry = jarPathWithoutImplementationVersionEntry;
+        this.jarPathWithNonstandardImplementationVersionEntry = jarPathWithNonstandardImplementationVersionEntry;
         this.expectedLibraryVersion = expectedLibraryVersion;
 
         this.validator = new UserLibraryVersionValidatorProxy(this.classNameIdentifyingJarToUse);
@@ -142,5 +143,24 @@ public abstract class LibraryValidatorTest extends TestCase
     {
         final JarFile jarFile = new JarFile(getFileFromPlugin(jarPathWithoutImplementationVersionEntry, TestsPlugin.getDefault()));
         assertNull("Was expecting library-version string to be null", validator.getLibraryVersion(jarFile)); //$NON-NLS-1$
+    }
+
+
+    /**
+     * Regression test-case. This would fail earlier without the patch in
+     *
+     * "JSF Facet version validator fails to validate some non-standard jars"
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=286351 
+     *
+     * @throws IOException
+     * @throws URISyntaxException
+     *
+     */
+    public void testReadLibraryVersionFromJarWithNonstandardImplementationVersion()
+    throws IOException, URISyntaxException
+    {
+        final JarFile jarFile = new JarFile(getFileFromPlugin(jarPathWithNonstandardImplementationVersionEntry, TestsPlugin.getDefault()));
+        assertNotNull("Was expecting library-version string to be non-null", validator.getLibraryVersion(jarFile)); //$NON-NLS-1$
+        assertEquals(expectedLibraryVersion, validator.getLibraryVersion(jarFile));
     }
 }

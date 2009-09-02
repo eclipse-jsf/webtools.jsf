@@ -15,6 +15,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.jst.jsf.core.tests.appconfig.validation.AppConfigValidationUtilTestCase;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryProviderTests;
+import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryValidatorTest;
 import org.eclipse.jst.jsf.core.tests.facet.VendorSpecificWebXmlConfigurationForJ2EETest;
 import org.eclipse.jst.jsf.core.tests.facet.VendorSpecificWebXmlConfigurationForJavaEETest;
 import org.eclipse.jst.jsf.core.tests.jsflibraryconfig.JSFLibraryRegistryUtilTestCases;
@@ -79,6 +80,7 @@ public class AllTests
 		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
 //		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
+		suite.addTestSuite(JsfLibraryValidatorTest.class);
 
 		suite.addTestSuite(TestJSPSemanticsValidator_Containment.class);
         suite.addTestSuite(TestJSPSemanticsValidator_AttributeValues.class);
