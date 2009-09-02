@@ -15,6 +15,7 @@ package org.eclipse.jst.jsf.common.facet.libraryprovider;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
@@ -38,6 +39,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public abstract class UserLibraryVersionValidator extends KeyClassesValidator
 {
+    private static final String MANIFEST_SPECIFICATION_VERSION = "Specification-Version"; //$NON-NLS-1$
     private static final String MANIFEST_IMPLEMENTATION_VERSION = "Implementation-Version"; //$NON-NLS-1$
 
     private final String classNameIdentifyingImplementationJar;
@@ -182,14 +184,13 @@ public abstract class UserLibraryVersionValidator extends KeyClassesValidator
 
 
     /**
-     * Reads the Implementation-Version attribute of a library jar manifest, and
-     * returns its value.
-     *
      * @param jarFile
      *            Library jar file to read
-     *
-     * @return Value of Implementation-Version attribute in manifest.
-     *
+     * 
+     * @return Version of the specified Jar. Uses the manifest
+     *         Specification-Version entry. If that is not available, then uses
+     *         the Implementation-Version entry.
+     * 
      * @throws IOException
      */
     protected String getLibraryVersion (final JarFile jarFile)
@@ -197,9 +198,16 @@ public abstract class UserLibraryVersionValidator extends KeyClassesValidator
     {
         final Manifest manifest = jarFile.getManifest();
 
-        if (manifest != null)
-            return manifest.getMainAttributes().getValue(MANIFEST_IMPLEMENTATION_VERSION);
+        if (manifest == null)
+            return null;
 
-        return null;
+        final Attributes attributes = manifest.getMainAttributes();
+
+        final String specificationVersion = attributes.getValue(MANIFEST_SPECIFICATION_VERSION);
+        if (specificationVersion != null)
+            return specificationVersion;
+
+        final String implementationVersion = manifest.getMainAttributes().getValue(MANIFEST_IMPLEMENTATION_VERSION);
+        return implementationVersion;
     }
 }
