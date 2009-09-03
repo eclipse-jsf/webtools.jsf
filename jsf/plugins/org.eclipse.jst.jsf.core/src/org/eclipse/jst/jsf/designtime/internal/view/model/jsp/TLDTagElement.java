@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -143,6 +145,13 @@ public class TLDTagElement extends TagElement
                     , _adapter);
         }
 
+        @SuppressWarnings("unused")
+        private void readObject(java.io.ObjectInputStream in)
+                        throws IOException, ClassNotFoundException
+        {
+            throw new UnsupportedOperationException("This object should be serialized; writeReplace"); //$NON-NLS-1$
+        }
+
         @Override
         public Map<String, ? extends ITagAttributeHandler> getAttributes()
         {
@@ -179,7 +188,8 @@ public class TLDTagElement extends TagElement
             _name = name;
             _tagHandlerClassName = tagHandlerClassName;
             _uri = uri;
-            _tagAttributes = tagAttributes;
+            // copy the map, because we don't if it is simply delta
+            _tagAttributes = new HashMap(tagAttributes);
         }
 
         @Override

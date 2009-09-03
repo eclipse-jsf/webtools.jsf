@@ -10,10 +10,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,7 +32,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
  * 
  */
 public class CMNodeNamedMapAdapter implements
-        Map<String, ITagAttributeHandler>, Serializable
+        Map<String, ITagAttributeHandler>
 {
     /**
      * serializable id
@@ -44,7 +40,7 @@ public class CMNodeNamedMapAdapter implements
     private static final long                       serialVersionUID = -4188412823197830484L;
     private transient final TLDElementDeclaration   _tldElement;
     private transient final IAttributeAdvisor       _advisor;
-    private transient AtomicBoolean           _isInitialized = new AtomicBoolean(false);
+    private transient final AtomicBoolean           _isInitialized = new AtomicBoolean(false);
     private final Map<String, ITagAttributeHandler> _cache;
 
     /**
@@ -163,17 +159,5 @@ public class CMNodeNamedMapAdapter implements
     public ITagAttributeHandler remove(Object key)
     {
         throw new UnsupportedOperationException("Cannot modify map"); //$NON-NLS-1$
-    }
-
-    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException
-    {
-        in.defaultReadObject();
-        _isInitialized = new AtomicBoolean(true);
-    }
-
-    private void writeObject(final ObjectOutputStream out) throws IOException
-    {
-        ensureAllAttributes();
-        out.defaultWriteObject();
     }
 }
