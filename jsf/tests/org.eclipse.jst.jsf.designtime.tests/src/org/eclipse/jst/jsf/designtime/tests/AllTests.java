@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.designtime.tests;
 
 import org.eclipse.jst.jsf.designtime.tests.views.TestJSPViewDefnAdapter;
+import org.eclipse.jst.jsf.designtime.tests.views.persistence.TestSerializableTLDTagElement;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -74,7 +75,7 @@ public class AllTests {
         suite.addTestSuite(TestStartupHandler.class);
         suite.addTestSuite(TestDesignTimeApplicationManager.class);
         suite.addTestSuite(TestJSPViewDefnAdapter.class);
-
+        suite.addTestSuite(TestSerializableTLDTagElement.class);
         //addTestSuite(suite, JSPViewSuite.class);
 
         // $JUnit-END$
