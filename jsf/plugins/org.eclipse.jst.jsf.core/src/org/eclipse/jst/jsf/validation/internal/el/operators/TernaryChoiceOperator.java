@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.LiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercer;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercionException;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
@@ -99,6 +100,10 @@ public class TernaryChoiceOperator
      */
     public Diagnostic validate(ValueType choiceArg)
     {
+    	if (TypeConstants.TYPE_JAVAOBJECT.equals(choiceArg.getSignature())) {
+    		return Diagnostic.OK_INSTANCE;
+    	}
+
         final boolean isChoiceBoolean = 
             TypeCoercer.canCoerceToBoolean(TypeTransformer.transformBoxPrimitives(choiceArg.getSignature()));
         

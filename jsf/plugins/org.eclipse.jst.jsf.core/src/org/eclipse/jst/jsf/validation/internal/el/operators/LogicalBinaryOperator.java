@@ -93,6 +93,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
     public Diagnostic validate(ValueType firstArg, ValueType secondArg) 
     {
+    	if (TypeConstants.TYPE_JAVAOBJECT.equals(firstArg.getSignature()) ||
+    			TypeConstants.TYPE_JAVAOBJECT.equals(secondArg.getSignature())) {
+    		return Diagnostic.OK_INSTANCE;
+    	}
+
         final boolean canCoerceFirstArg = 
             TypeCoercer.canCoerceToBoolean(TypeTransformer.transformBoxPrimitives(firstArg.getSignature()));
         final boolean canCoerceSecondArg = 
