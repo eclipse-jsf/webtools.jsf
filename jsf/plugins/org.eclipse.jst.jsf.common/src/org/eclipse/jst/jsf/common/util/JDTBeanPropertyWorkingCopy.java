@@ -11,8 +11,10 @@
 package org.eclipse.jst.jsf.common.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
@@ -35,7 +37,19 @@ public class JDTBeanPropertyWorkingCopy extends JDTBeanProperty
 	 * the IMethod for the boolean "is" accessor method
 	 */
 	private IMethod        _isGetter;
+
+	private final Map<String, String> _resolvedSignatureMap;
 	
+	/**
+	 * @param type
+	 * @param resolvedSignatureMap
+	 */
+	public JDTBeanPropertyWorkingCopy(IType type, Map<String, String> resolvedSignatureMap)
+	{
+		super(type);
+		_setters = new ArrayList();
+		_resolvedSignatureMap = resolvedSignatureMap;
+	}
 	/**
 	 * Constructor
 	 * @param type 
@@ -44,6 +58,7 @@ public class JDTBeanPropertyWorkingCopy extends JDTBeanProperty
 	{
         super(type);
 		_setters = new ArrayList();
+		_resolvedSignatureMap = new HashMap<String, String>();
 	}
 	
 	/**
@@ -80,36 +95,39 @@ public class JDTBeanPropertyWorkingCopy extends JDTBeanProperty
 		beanProp.setGetter(getter);
 		beanProp.setSetter(matchedSetter);
 		return beanProp;
+		
 	}
 	
 	private IMethod determineMatchedSetter(IMethod getter)
 	{
 		IMethod matchedSetter = null;
 		
+		// if there are no setters, there is no point in proceeding
+		if (_setters.size() < 1)
+		{
+			return null;
+		}
+
 		try
 		{
-			final String getterSig = 
-				TypeUtil.resolveTypeSignature(_type, getter.getReturnType());
-
+			final String getterSig = getResolvedSignature(_type, getter.getReturnType());
 			FIND_MATCHING_SETTER:for 
 				(final Iterator it = _setters.iterator(); it.hasNext();)
 			{
 				final IMethod  setter = (IMethod) it.next();
-				if (setter.getNumberOfParameters() == 1)
+				assert (setter.getNumberOfParameters() == 1);
+				final String paramSig = 
+					getResolvedSignature
+						(_type,setter.getParameterTypes()[0]);
+				
+				if (paramSig.equals(getterSig))
 				{
-					final String paramSig = 
-						TypeUtil.resolveTypeSignature
-							(_type,setter.getParameterTypes()[0]);
-					
-					if (paramSig.equals(getterSig))
-					{
-						// we've found our match since only one
-						// setter with the same name as the getter
-						// can have the same matching type for a
-						// single arg method
-						matchedSetter = setter;
-						break FIND_MATCHING_SETTER;
-					}
+					// we've found our match since only one
+					// setter with the same name as the getter
+					// can have the same matching type for a
+					// single arg method
+					matchedSetter = setter;
+					break FIND_MATCHING_SETTER;
 				}
 			}
 		}
@@ -159,5 +177,17 @@ public class JDTBeanPropertyWorkingCopy extends JDTBeanProperty
 	 */
 	public IMethod getIsGetter() {
 		return _isGetter;
+	}
+	
+	private String getResolvedSignature(final IType type, final String unresolved)
+	{
+		String resolved = _resolvedSignatureMap.get(unresolved);
+		
+		if (resolved == null)
+		{
+			resolved = TypeUtil.resolveTypeSignature(_type, unresolved);
+			_resolvedSignatureMap.put(unresolved, resolved);
+		}
+		return resolved;
 	}
 }

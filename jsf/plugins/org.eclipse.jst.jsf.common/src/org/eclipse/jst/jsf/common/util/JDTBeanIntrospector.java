@@ -49,6 +49,7 @@ public class JDTBeanIntrospector
 	private final static String IS_PREFIX = "is"; //$NON-NLS-1$
 	
 	private final IType 	_type;
+	private final HashMap<String, String> _resolvedSignatures;
 
 	/**
 	 * @param type
@@ -56,6 +57,7 @@ public class JDTBeanIntrospector
 	public JDTBeanIntrospector(IType type)
 	{
 		_type = type;
+		_resolvedSignatures = new HashMap<String, String>();
 	}
 	
 	/**
@@ -65,6 +67,8 @@ public class JDTBeanIntrospector
 	 */
 	public Map<String, JDTBeanProperty> getProperties()
 	{
+		_resolvedSignatures.clear();
+
 		final Map<String, JDTBeanProperty>   propertiesWorkingCopy = 
 		    new HashMap<String, JDTBeanProperty>();
 		final IMethod[] methods = getAllMethods();
@@ -138,7 +142,7 @@ public class JDTBeanIntrospector
 
 				if (workingCopy == null)
 				{
-					workingCopy = new JDTBeanPropertyWorkingCopy(_type);
+					workingCopy = new JDTBeanPropertyWorkingCopy(_type, _resolvedSignatures);
 					properties.put(propertyName, workingCopy);
 				}
 
