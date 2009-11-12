@@ -43,6 +43,7 @@ public class MetaDataModelMergeAssistantImpl implements
 		IMetaDataModelMergeAssistant {
 	
 	private MetaDataModel mergedModel;
+	private Copier copier;
 	private SimpleEntityQueryVisitorImpl entityVisitor;
 	private SimpleTraitQueryVisitorImpl traitVisitor;
 	private IMetaDataSourceModelProvider provider;
@@ -53,6 +54,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	 */
 	public MetaDataModelMergeAssistantImpl(MetaDataModel model) {
 		this.mergedModel = model;
+		copier = new Copier();
 		entityVisitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, 
 			HierarchicalSearchControl.SCOPE_ALL_LEVELS));
 		traitVisitor = new SimpleTraitQueryVisitorImpl(new SearchControl(1));
@@ -108,7 +110,7 @@ public class MetaDataModelMergeAssistantImpl implements
 				ret = (Entity)rs.getResults().get(0);				
 			rs.close();
 		} catch (MetaDataException e) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e);
 		}
 		return ret;
 	}
@@ -173,7 +175,6 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	private /*synchronized*/ Entity addEntityInternal(final Entity parent, final Entity entity) {
-		Copier copier = new Copier();
 		Entity mmEntity =(Entity)copier.copy(entity);
 		copier.copyReferences();
 		parent.getChildEntities().add(mmEntity);
@@ -208,11 +209,11 @@ public class MetaDataModelMergeAssistantImpl implements
 	public void setMergeComplete() {
 		Model model = (Model)getMergedModel().getRoot();
 		if (model != null){
-			StandardModelFactory.debug(">> Begin processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+			StandardModelFactory.debug(">> Begin processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
 			
 			processIncludeGroups(model);			
 			
-			StandardModelFactory.debug(">> End processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+			StandardModelFactory.debug(">> End processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD);
 		}		
 	}
 	
@@ -225,8 +226,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param trait
 	 * @return merged Trait
 	 */
-	private Trait addTraitInternal(final Entity parent, final Trait trait) {
-		Copier copier = new Copier();
+	private Trait addTraitInternal(final Entity parent, final Trait trait) {		
 		Trait mmTrait =(Trait)copier.copy(trait);
 		copier.copyReferences();
 		parent.getTraits().add(mmTrait);
@@ -254,7 +254,7 @@ public class MetaDataModelMergeAssistantImpl implements
 				ret = (Entity)rs.getResults().get(0);				
 			rs.close();
 		} catch (MetaDataException e) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedEntity()", e);
 		}
 		return ret;
 	}
@@ -265,7 +265,7 @@ public class MetaDataModelMergeAssistantImpl implements
 		while (e.eContainer() != null){
 			buf.insert(0, e.getId());
 			if (e.eContainer()!=null && e.eContainer().eContainer() != null)
-				buf.insert(0,"/"); //$NON-NLS-1$
+				buf.insert(0,"/");
 			e = (Entity)e.eContainer();
 		}
 		return buf.toString();
@@ -287,7 +287,7 @@ public class MetaDataModelMergeAssistantImpl implements
 				ret = (Trait)rs.getResults().get(0);				
 			rs.close();
 		} catch (MetaDataException e) {
-			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedTrait()", e); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR, "Error in getMergedTrait()", e);
 		}
 		return ret;
 	}
@@ -337,8 +337,8 @@ public class MetaDataModelMergeAssistantImpl implements
 			addIncludeRefs(entity, entityGroup);
 		}
 		else {
-			JSFCommonPlugin.log(IStatus.ERROR, "Unable to load external metadata model refs for "+modelContext.getURI() //$NON-NLS-1$
-					+ " into "+ entity.getModel().getCurrentModelContext().getUri()); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR, "Unable to load external metadata model refs for "+modelContext.getURI()
+					+ " into "+ entity.getModel().getCurrentModelContext().getUri());
 		}
 	}
 

@@ -15,15 +15,16 @@ package org.eclipse.jst.jsf.common.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IField;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.ITypeHierarchy;
 import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.common.internal.types.TypeInfoCache;
 
 /**
  * Utility for handling IType's and type signatures
@@ -358,13 +359,11 @@ public final class TypeUtil
                                 throws JavaModelException
     {
         IType resolvedType = null;
-
-        final TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
-        IType[] superTypes = typeInfoCache.getCachedSupertypes(childType);
-        if (superTypes == null) {
-        	superTypes = typeInfoCache.cacheSupertypesFor(childType);
-        }
         
+        // not resolved? try the supertypes
+        final ITypeHierarchy typeHierarchy =
+            childType.newSupertypeHierarchy(new NullProgressMonitor());
+        IType[] superTypes = typeHierarchy.getAllSupertypes(childType);
         String[][]   resolved;
         
         LOOP_UNTIL_FIRST_MATCH:
@@ -395,8 +394,9 @@ public final class TypeUtil
      */
     public static IType resolveType(final IJavaProject javaProject, final String fullyResolvedTypeSignature)
     {
-        String fullyQualifiedName = getFullyQualifiedName(fullyResolvedTypeSignature);
-        fullyQualifiedName = Signature.getTypeErasure(fullyQualifiedName);
+        final String fullyQualifiedName =
+            getFullyQualifiedName(fullyResolvedTypeSignature);
+        
         try {
             return javaProject.findType(fullyQualifiedName);
         } catch (JavaModelException e) {

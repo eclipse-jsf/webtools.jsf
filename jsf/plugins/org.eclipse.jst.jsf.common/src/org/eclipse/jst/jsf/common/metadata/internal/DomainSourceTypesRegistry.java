@@ -30,9 +30,10 @@ import org.eclipse.jst.jsf.common.metadata.internal.DomainSourceModelTypeDescrip
  * Registry of Domain Source Types loaded from domainSourceModelTypes ext-pt.
  */
 public class DomainSourceTypesRegistry{
-	private static final String EXTENSION_POINT_ID = "domainSourceModelTypes"; //$NON-NLS-1$
+	private static final String EXTENSION_POINT_ID = "domainSourceModelTypes";
 	private static DomainSourceTypesRegistry INSTANCE;
 	private Map/*<String, List/*<DomainSourceModelTypeDescriptor>>*/ domainSourceTypeDescriptors;
+	private Map/*<String, List/*<IDomainSourceModelType>*/ domainSourceTypes;
 	
 	private DomainSourceTypesRegistry(){
 		init();
@@ -52,7 +53,10 @@ public class DomainSourceTypesRegistry{
 	 * @param domain identifier
 	 * @return list of <code>IDomainSourceModelType</code> sorted in descending order by ordinal
 	 */
-	public List/*<IDomainSourceModelType>*/ getDomainSourceTypes(String domain){		
+	public List/*<IDomainSourceModelType>*/ getDomainSourceTypes(String domain){
+		if (getDomainSourceTypes().containsKey(domain))
+			return (List)getDomainSourceTypes().get(domain);
+		
 		List/*<DomainSourceModelTypeDescriptor>*/ list = getDomainSourceModelDescriptors(domain);
 		List/*<IDomainSourceModelType>*/ types = new ArrayList/*<IDomainSourceModelType>*/();
 		for(Iterator/*<DomainSourceModelTypeDescriptor>*/ it=list.iterator();it.hasNext();){
@@ -74,6 +78,7 @@ public class DomainSourceTypesRegistry{
 			
 		});
 		
+		getDomainSourceTypes().put(domain, types);
 		return types;
 	}
 	
@@ -105,12 +110,12 @@ public class DomainSourceTypesRegistry{
 	}
 
 	private void addDomainSourceTypeDescriptor(IConfigurationElement element) {
-		String domainId = element.getAttribute("domainId"); //$NON-NLS-1$
-		String srcHdlrId = element.getAttribute("domainSourceModelTypeId"); //$NON-NLS-1$
-		String locator = element.getAttribute("locator"); //$NON-NLS-1$
-		String ordinalStr = element.getAttribute("ordinal"); //$NON-NLS-1$
+		String domainId = element.getAttribute("domainId");
+		String srcHdlrId = element.getAttribute("domainSourceModelTypeId");
+		String locator = element.getAttribute("locator");
+		String ordinalStr = element.getAttribute("ordinal");
 		int ordinal = 1;
-		if (ordinalStr!=null && !ordinalStr.equals("")){ //$NON-NLS-1$
+		if (ordinalStr!=null && !ordinalStr.equals("")){
 			ordinal = Integer.parseInt(ordinalStr);
 		}
 		DomainSourceModelTypeDescriptor d = new DomainSourceModelTypeDescriptor(domainId, srcHdlrId, locator, element.getContributor().getName(), ordinal);
@@ -129,11 +134,11 @@ public class DomainSourceTypesRegistry{
 		return domainSourceTypeDescriptors;
 	}
 	
-//	private Map/*<String, List/*<IDomainSourceModelType>>*/ getDomainSourceTypes() {
-//		if (domainSourceTypes == null){
-//			domainSourceTypes = new HashMap/*<String, List/*<IDomainSourceModelType>>*/();
-//		}
-//		return domainSourceTypes;
-//	}
+	private Map/*<String, List/*<IDomainSourceModelType>>*/ getDomainSourceTypes() {
+		if (domainSourceTypes == null){
+			domainSourceTypes = new HashMap/*<String, List/*<IDomainSourceModelType>>*/();
+		}
+		return domainSourceTypes;
+	}
 
 }
