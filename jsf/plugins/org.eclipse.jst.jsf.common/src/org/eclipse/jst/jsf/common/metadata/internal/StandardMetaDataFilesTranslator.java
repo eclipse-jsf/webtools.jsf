@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
@@ -42,16 +43,20 @@ public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 		//assert assistant.getSourceModel() instanceof ModelKeyDescriptor;
 		
 		MetaDataModel mm = assistant.getMergedModel();
-		if (mm.getRoot() == null)
-			mm.setRoot(assistant.getSourceModelProvider().getSourceModel());
-		
+		Model mk = (Model)assistant.getSourceModelProvider().getSourceModel();
+		if (mm.getRoot() == null) {
+			//create copy, otherwise source model becomes merged model because of reference
+			Copier copier = new Copier();		
+			Model newModel = (Model)copier.copy(mk.getModel());
+			copier.copyReferences();
+			mm.setRoot(newModel);
+		}
 		else {
-			//for each entity and trait call "add".   assistant will handle merge.
-			Model mk = (Model)assistant.getSourceModelProvider().getSourceModel();
+			//for each entity and trait call "add".   assistant will handle merge.			
 			if (mk != null) {//possible that model was not loaded 
 				traverseAndAdd(assistant, mk);
 			} else if (StandardModelFactory.DEBUG_MD_LOAD) {
-				JSFCommonPlugin.log(IStatus.ERROR,"Unable to load source model: "+assistant.getSourceModelProvider());
+				JSFCommonPlugin.log(IStatus.ERROR,"Unable to load source model: "+assistant.getSourceModelProvider()); //$NON-NLS-1$
 			}
 		}			
 	}
