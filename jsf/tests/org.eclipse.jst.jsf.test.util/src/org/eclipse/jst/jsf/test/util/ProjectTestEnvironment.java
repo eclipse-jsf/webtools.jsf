@@ -182,6 +182,39 @@ public class ProjectTestEnvironment
     }
 
     /**
+     * Creates the new project from the specified zip file.  createProject
+     * is first called to create and open the empty project.  The projectZip
+     * is then used to populate the contents of the project.
+     * 
+     * Differs from createFromZip in that it passes the project path (relative
+     * to workspace) to ImportOperation and so projectZip should contain only
+     * intended contents of the project with no top-level "project" folder in
+     * the zip file. This is to workaround bug 296496.
+     * 
+     * @param projectZip
+     * @param ignoreProjectExists
+     * @throws InvocationTargetException
+     * @throws InterruptedException
+     */
+    public final void createFromZip2(
+    		final ZipFile projectZip,
+            final boolean ignoreProjectExists)
+    throws InvocationTargetException, InterruptedException {
+    	// TODO: assert that the faceting in the zip matches what was set in the constructor.
+        createProject(ignoreProjectExists);
+        ZipFileStructureProvider zipFileStructureProvider =
+        	new ZipFileStructureProvider(projectZip);
+        final ImportOperation op =
+        	new ImportOperation(
+        			_project.getFullPath(),
+        			zipFileStructureProvider.getRoot(),
+        			zipFileStructureProvider,
+        			OVERWRITE_ALL_QUERY);
+        op.setCreateContainerStructure(true);
+        op.run(null);
+    }
+
+    /**
      * Delete project
      */
     public void deleteProject()

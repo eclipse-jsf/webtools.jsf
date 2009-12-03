@@ -41,11 +41,21 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         JSFTestUtil.setValidationEnabled(false);
         JSFTestUtil.setInternetProxyPreferences(true, "www-proxy.uk.oracle.com", "80");
 
+        /* https://bugs.eclipse.org/bugs/show_bug.cgi?id=296496
         final ZipFile zipFile = JSFTestUtil.createZipFile(TestsPlugin.getDefault().getBundle()
                 , "/testfiles/testzips/ValidationTestProject1.zip");
 
         _webProject = new WebProjectTestEnvironment(this, JavaFacetUtils.JAVA_50, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
         _webProject.createFromZip(zipFile, true);
+        */
+        final ZipFile zipFile = JSFTestUtil.createZipFile(
+        		TestsPlugin.getDefault().getBundle(),
+        		"/testfiles/testzips/ValidationTestProject2.zip");
+        _webProject = new WebProjectTestEnvironment(
+        		this,
+        		JavaFacetUtils.JAVA_50,
+        		ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
+        _webProject.createFromZip2(zipFile, true);
     }
 
     public void testSanity() throws Exception

@@ -34,6 +34,7 @@ public class TestSerializableTLDTagElement extends TestCase
     protected void setUp() throws Exception
     {
         super.setUp();
+        /* https://bugs.eclipse.org/bugs/show_bug.cgi?id=296496
         final ZipFile zipFile = JSFTestUtil.createZipFile(TestsPlugin
                 .getDefault().getBundle(), "/testfiles/testzips/TLDTests.zip");
 
@@ -41,6 +42,16 @@ public class TestSerializableTLDTagElement extends TestCase
                 JavaFacetUtils.JAVA_50, ProjectFacetsManager.getProjectFacet(
                         "jst.web").getVersion("2.4"));
         _webProject.createFromZip(zipFile, true);
+        */
+        final ZipFile zipFile = JSFTestUtil.createZipFile(
+        		TestsPlugin.getDefault().getBundle(),
+        		"/testfiles/testzips/TLDTests2.zip");
+        _webProject = new WebProjectTestEnvironment(
+        		this,
+        		JavaFacetUtils.JAVA_50,
+        		ProjectFacetsManager.getProjectFacet("jst.web").getVersion("2.4"));
+        _webProject.createFromZip2(zipFile, true);
+
         assertNotNull(_webProject);
 
         _sampleTldElementDeclaration = findElementDeclaration(_webProject
