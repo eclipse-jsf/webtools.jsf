@@ -121,7 +121,10 @@ public class JDTBeanProperty
      */
     public int getArrayCount()
     {
-        return Signature.getArrayCount(getTypeSignature());
+    	final String sig = getTypeSignature();
+    	if (sig == null)
+    		return 0;
+        return Signature.getArrayCount(sig);
     }
     
     /**
