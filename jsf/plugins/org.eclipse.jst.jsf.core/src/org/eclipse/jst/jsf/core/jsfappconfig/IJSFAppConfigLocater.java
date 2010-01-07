@@ -50,6 +50,11 @@ public interface IJSFAppConfigLocater {
 	public void stopLocating();
 
 	/**
+	 * Disposes of the instance.
+	 */
+    public void dispose();
+
+	/**
 	 * Gets the set of {@link IJSFAppConfigProvider} instances that this
 	 * locater has located.
 	 * 

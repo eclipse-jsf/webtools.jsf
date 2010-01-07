@@ -28,12 +28,14 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
@@ -205,7 +207,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		setAsSessionProperty();
 		//add resource change listener
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		workspace.addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
+		workspace.addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE | IResourceChangeEvent.PRE_CLOSE | IResourceChangeEvent.PRE_DELETE);
 	}
 
 	/**
@@ -252,6 +254,7 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		while (itConfigLocaters.hasNext()) {
 			IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
 			configLocater.stopLocating();
+			configLocater.dispose();
 		}
 	}
 
@@ -260,8 +263,28 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 	 * @see org.eclipse.core.resources.IResourceChangeListener#resourceChanged(org.eclipse.core.resources.IResourceChangeEvent)
 	 */
 	public void resourceChanged(IResourceChangeEvent event) {
-		IResourceDelta delta = event.getDelta();
-		if (delta.getKind() == IResourceDelta.CHANGED) {
+        if (event.getType() == IResourceChangeEvent.PRE_CLOSE
+                || event.getType() == IResourceChangeEvent.PRE_DELETE) {
+            // a project is closing - release and cleanup
+            final IProject aProject = (IProject) event.getResource();
+            if (aProject != null && aProject.equals(this.project)) {
+                SafeRunnable.run(new ISafeRunnable() {
+
+                    public void handleException(Throwable exception) {
+                        JSFCorePlugin.log("Unexpected Program Error: disposing resources", exception); //$NON-NLS-1$
+                    }
+
+                    public void run() throws Exception {
+                        dispose();
+                    }
+                });
+
+                return;
+            }
+        }
+
+	    IResourceDelta delta = event.getDelta();
+		if (delta != null && delta.getKind() == IResourceDelta.CHANGED) {
 			IResourceDelta[] removedDeltas = delta.getAffectedChildren(IResourceDelta.REMOVED);
 			if (removedDeltas.length == 1) {
 				IResourceDelta removedDelta = removedDeltas[0];
@@ -414,23 +437,30 @@ public class JSFAppConfigManager implements IResourceChangeListener {
 		return facesConfigModels;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#finalize()
-	 */
-	protected void finalize() {
-		//remove resource change listener
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		workspace.removeResourceChangeListener(this);
-		//remove session property from project
-		unsetAsSessionProperty();
-		//instruct locaters to stop locating
-		stopConfigLocaters();
-		//clear collections
-		configLocaters.clear();
-		configProvidersChangeListeners.clear();
-		facesConfigChangeListeners.clear();
-	}
+    /**
+     * Disposes of resources by:
+     * <ul>
+     *  <li>removing a resource change listener to the workspace</li>
+     *  <li>removing instance as a session property of the IProject instance</li>
+     *  <li>invoking the stopLocating() method on all configLocaters</li>
+     *  <li>clearing the configLocaters collection</li>
+     *  <li>clearing the configProvidersChangeListeners collection</li>
+     *  <li>clearing the facesConfigChangeListeners collection</li>
+     * </ul>
+     */
+    protected void dispose() {
+        //remove resource change listener
+        IWorkspace workspace = ResourcesPlugin.getWorkspace();
+        workspace.removeResourceChangeListener(this);
+        //remove session property from project
+        unsetAsSessionProperty();
+        //instruct locaters to stop locating
+        stopConfigLocaters();
+        //clear collections
+        configLocaters.clear();
+        configProvidersChangeListeners.clear();
+        facesConfigChangeListeners.clear();
+    }
 
 	/**
 	 * Gets list of all ManagedBeanType instances from all known faces-config

@@ -163,10 +163,9 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 
 	/*
 	 * (non-Javadoc)
-	 * @see java.lang.Object#finalize()
+	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#dispose()
 	 */
-	protected void finalize() {
-		removeAllConfigProviders();
-	}
-
+    public void dispose() {
+        removeAllConfigProviders();
+    }
 }
