@@ -157,10 +157,18 @@ class ResourceBundleMapSource extends AbstractMap implements IMapSourceInfo
                             {
                                 try
                                 {
-                                    final Map<String, BundleFileCacheInfo> bundleCache =
-                                        (Map<String, BundleFileCacheInfo>) project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
-                                    bundleCache.clear();
-                                    project.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, null);
+                                	//Bug 283764: this listener may be called more than once - check project not already inaccessible
+                                	if (project.isAccessible())
+                                	{
+	                                    final Map<String, BundleFileCacheInfo> bundleCache =
+	                                        (Map<String, BundleFileCacheInfo>) project.getSessionProperty(SESSION_PROPERTY_KEY_PROJECT);
+	                                    //This listener may be called more than once - check session property not already nulled
+	                                    if (bundleCache != null)
+	                                    {
+	                                    	bundleCache.clear();
+	                                        project.setSessionProperty(SESSION_PROPERTY_KEY_PROJECT, null);
+	                                    }
+                                	}
                                 }
                                 catch (final CoreException ce)
                                 {
