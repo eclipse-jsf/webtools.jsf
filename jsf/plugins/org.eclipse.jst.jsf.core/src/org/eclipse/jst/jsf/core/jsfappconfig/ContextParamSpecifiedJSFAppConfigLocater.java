@@ -58,8 +58,12 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 	}
 
 	private Object getModelObject() {
+		Object modelObject = null;
 		IModelProvider provider = ModelProviderManager.getModelProvider(getJSFAppConfigManager().getProject());
-		return provider.getModelObject();
+		if (provider != null) {
+			modelObject = provider.getModelObject();
+		}
+		return modelObject;
 	}
 
 	/*
@@ -100,10 +104,9 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 			}
 		}
 	}
-	
-	private void startLocatingJEEConfigs(org.eclipse.jst.javaee.web.WebApp webApp){
-		((EObject)webApp).eAdapters().add(contextParamAdapter);		
-//		System.out.println(((EObject)webApp).eDeliver());
+
+	private void startLocatingJEEConfigs(org.eclipse.jst.javaee.web.WebApp webApp) {
+		((EObject)webApp).eAdapters().add(contextParamAdapter);
 		List params = webApp.getContextParams();
 		if (params != null) {
 			Iterator itContexts = params.iterator();
@@ -113,7 +116,6 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 			}
 		}
 	}
-	
 
 	private void stopLocatingJ2EEConfigs(WebApp webApp) {
 		webApp.eAdapters().remove(contextParamAdapter);
