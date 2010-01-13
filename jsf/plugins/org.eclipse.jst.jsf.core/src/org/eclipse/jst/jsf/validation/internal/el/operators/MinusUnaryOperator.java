@@ -45,6 +45,9 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
 
     public Diagnostic validate(ValueType type)
     {
+    	if (TypeConstants.TYPE_JAVAOBJECT.equals(type.getSignature())) {
+    		return Diagnostic.OK_INSTANCE;
+    	}
         // must coerce to numeric type
         try
         {

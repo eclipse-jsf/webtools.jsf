@@ -83,6 +83,11 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
     }
 
     public Diagnostic validate(ValueType firstArg, ValueType secondArg) {
+    	if (TypeConstants.TYPE_JAVAOBJECT.equals(firstArg.getSignature()) ||
+    			TypeConstants.TYPE_JAVAOBJECT.equals(secondArg.getSignature())) {
+    		return Diagnostic.OK_INSTANCE;
+    	}
+    	
         // JSP.2.3.5.3, step 1 if both null, then return zero
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
                 && TypeCoercer.typeIsNull(secondArg.getSignature()))

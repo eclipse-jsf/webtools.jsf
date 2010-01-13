@@ -75,6 +75,9 @@ public abstract class MemberAccessorOperator
      */
     public Diagnostic validate(final ValueType firstArg, final ValueType secondArg)
     {
+    	if (TypeConstants.TYPE_JAVAOBJECT.equals(firstArg.getSignature())) {
+    		return Diagnostic.OK_INSTANCE;
+    	}
         if (!(firstArg instanceof IObjectSymbolBasedValueType))
         {
             throw new AssertionError(

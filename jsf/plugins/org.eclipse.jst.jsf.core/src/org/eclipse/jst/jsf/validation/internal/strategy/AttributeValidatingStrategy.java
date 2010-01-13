@@ -35,6 +35,8 @@ import org.eclipse.jst.jsf.common.dom.DOMAdapter;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
+import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.common.internal.types.TypeTransformer;
 import org.eclipse.jst.jsf.common.runtime.internal.model.ViewObject;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentFactory;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
@@ -362,6 +364,31 @@ AbstractXMLViewValidationStrategy
         final CompositeType exprType = elValidator.getExpressionType();
         if (exprType != null)
         {
+        	// Ignore the expression whose last two segments are of types Object.
+        	final CompositeType boxedType = TypeTransformer
+            	.transformBoxPrimitives(exprType);
+        	final String[] testSignatures = boxedType.getSignatures();
+        	if (testSignatures.length > 0 && TypeConstants.TYPE_JAVAOBJECT.equals(testSignatures[0])) 
+        	{
+        		if (elText.indexOf('.') != -1) 
+        		{
+        			String elText2 = elText.substring(0, elText.lastIndexOf('.'));
+                    final ELExpressionValidator elValidator2 = new ELExpressionValidator(
+                            elContext, elText2, _validationContext
+                                    .getSymbolResolverFactory(), _validationContext
+                                    .getReporter());
+                    elValidator2.validateXMLNode();
+
+                    final CompositeType exprType2 = elValidator.getExpressionType();
+                	final CompositeType boxedType2 = TypeTransformer.transformBoxPrimitives(exprType2);
+                	final String[] testSignatures2 = boxedType2.getSignatures();
+                	if (testSignatures2.length > 0 && TypeConstants.TYPE_JAVAOBJECT.equals(testSignatures2[0])) 
+                	{
+                		return;
+                	}
+        		}
+        	}
+        	
             for (final Iterator it = elVals.iterator(); it.hasNext();)
             {
                 final IValidELValues elval = (IValidELValues) it.next();
