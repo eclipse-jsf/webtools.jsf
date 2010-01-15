@@ -75,7 +75,12 @@ public class ColumnOperation extends AbstractTransformOperation {
         	int index = 0;
         	while (childNode != null) {
         		if (!(childNode instanceof Element) || !JSFDOMUtil.isFacet((Element)childNode)) {
-        			tagConverterContext.addChild(childNode, new ConvertPosition(tdElement, index++));
+        			//Bug 251378 - only add element, text, and CDATA child nodes (as we do everywhere else)
+        			if (childNode.getNodeType() == Node.ELEMENT_NODE ||
+        					childNode.getNodeType() == Node.TEXT_NODE ||
+        					childNode.getNodeType() == Node.CDATA_SECTION_NODE) {
+        				tagConverterContext.addChild(childNode, new ConvertPosition(tdElement, index++));
+        			}
         		}
         		childNode = childNode.getNextSibling();
         	}
