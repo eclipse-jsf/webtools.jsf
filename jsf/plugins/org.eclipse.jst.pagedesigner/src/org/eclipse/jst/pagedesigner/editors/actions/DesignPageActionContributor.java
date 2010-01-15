@@ -23,6 +23,7 @@ import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.actions.range.DesignerToolBarAction;
 import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
+import org.eclipse.jst.pagedesigner.editors.IDesignViewer;
 import org.eclipse.jst.pagedesigner.editors.SimpleGraphicalEditor;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.ui.IActionBars;
@@ -191,13 +192,15 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 
 		// temp code.
 		if (targetEditor instanceof SimpleGraphicalEditor) {
-			IHTMLGraphicalViewer viewer = ((SimpleGraphicalEditor) targetEditor)
-					.getGraphicViewer();
-			setViewerOnActions(viewer);
+			IHTMLGraphicalViewer graphicalViewer = ((SimpleGraphicalEditor) targetEditor).getGraphicViewer();
+			setViewerOnActions(graphicalViewer);
 		} else if (targetEditor instanceof HTMLEditor) {
-			IHTMLGraphicalViewer viewer = ((HTMLEditor) targetEditor)
-					.getDesignViewer().getGraphicViewer();
-			setViewerOnActions(viewer);
+			//Bug 264080 - getDesignViewer may return null
+			IDesignViewer designViewer = ((HTMLEditor) targetEditor).getDesignViewer();
+			if (designViewer != null) {
+				IHTMLGraphicalViewer graphicalViewer = designViewer.getGraphicViewer();
+				setViewerOnActions(graphicalViewer);
+			}
 		} else {
 			setViewerOnActions(null);
 		}
