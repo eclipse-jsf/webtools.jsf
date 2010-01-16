@@ -42,6 +42,7 @@ import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.validation.AbstractValidator;
 import org.eclipse.wst.validation.ValidationResult;
 import org.eclipse.wst.validation.ValidationState;
+import org.eclipse.wst.validation.internal.core.Message;
 import org.eclipse.wst.validation.internal.core.ValidationException;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IReporter;
@@ -163,27 +164,34 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
 
     private void validateFile(final IFile file, final IReporter reporter)
     {
-        FacesConfigArtifactEdit  facesConfigEdit = null;
-
-        try
+        FacesConfigArtifactEdit facesConfigEdit = null;
+        //Bug 290962 - NPE if faces-config.xml is in wrong folder
+        final IPath path = JSFAppConfigUtils.getWebContentFolderRelativePath(file);
+        if (path == null)
         {
-            final IPath path = JSFAppConfigUtils.getWebContentFolderRelativePath(file);
-            facesConfigEdit = FacesConfigArtifactEdit.
-                getFacesConfigArtifactEditForRead(file.getProject(), path.toString());
-
-            if (facesConfigEdit != null
-                    && facesConfigEdit.getFacesConfig()!=null)
-            {
-                final String version = validateVersioning(file, facesConfigEdit, reporter);
-                validateModel(file, facesConfigEdit,reporter, version);
-            }
+        	reporter.addMessage(this, new Message(JSFCorePlugin.getDefault().getBundle().getSymbolicName(), IMessage.NORMAL_SEVERITY, Messages.CONFIG_FILE_NOT_UNDER_WEBCONTENT_FOLDER));
         }
-        finally
+        else
         {
-            if (facesConfigEdit != null)
-            {
-                facesConfigEdit.dispose();
-            }
+	        try
+	        {
+	            facesConfigEdit = FacesConfigArtifactEdit.
+	                getFacesConfigArtifactEditForRead(file.getProject(), path.toString());
+	
+	            if (facesConfigEdit != null
+	                    && facesConfigEdit.getFacesConfig()!=null)
+	            {
+	                final String version = validateVersioning(file, facesConfigEdit, reporter);
+	                validateModel(file, facesConfigEdit,reporter, version);
+	            }
+	        }
+	        finally
+	        {
+	            if (facesConfigEdit != null)
+	            {
+	                facesConfigEdit.dispose();
+	            }
+	        }
         }
     }
 

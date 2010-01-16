@@ -107,4 +107,9 @@ class Messages extends NLS {
      * see messages.properties
      */
     public static String LOCALE_FORMAT_NOT_VALID_ID;
+
+    /**
+     * see messages.properties
+     */
+    public static String CONFIG_FILE_NOT_UNDER_WEBCONTENT_FOLDER;
 }
