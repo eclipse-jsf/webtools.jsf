@@ -15,7 +15,7 @@ package org.eclipse.jst.jsf.common.metadata.query;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 
 /**
- * Abstract class implmenting {@link IEntityQueryVisitor} that concrete subclasses should provide implementations
+ * Abstract class implementing {@link IEntityQueryVisitor} that concrete subclasses should provide implementations
  * <p><b>Provisional API - subject to change</b></p>
  */
 public abstract class AbstractEntityQueryVisitor extends AbstractEntityVisitor

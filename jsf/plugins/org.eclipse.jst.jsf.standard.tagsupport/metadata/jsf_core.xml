@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
-	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
-	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
 	xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore" 
-	xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore"
-	id="http://java.sun.com/jsf/core"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="http://java.sun.com/jsf/core" 
 	type="tagFile">
 
 	<entity id="actionListener" type="tag">
@@ -17,12 +18,12 @@
 		</trait>
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.JavaClassType
 				</value>
 			</trait>
 			<trait id="valid-interfaces">
-				<value>javax.faces.event.ActionListener</value>
+				<value xsi:type="mdt:StringValue">javax.faces.event.ActionListener</value>
 			</trait>		
 		</entity>
 	</entity>
@@ -44,7 +45,7 @@
 		</trait>	
 		<entity id="dateStyle">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
 			</trait>
@@ -58,12 +59,12 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>default</value>
+				<value xsi:type="mdt:StringValue">default</value>
 			</trait>
 		</entity>
 		<entity id="timeStyle">			
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
 			</trait>
@@ -77,12 +78,12 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>default</value>
+				<value xsi:type="mdt:StringValue">default</value>
 			</trait>
 		</entity>
 		<entity id="type">			
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
 			</trait>
@@ -94,19 +95,19 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>both</value>
+				<value xsi:type="mdt:StringValue">both</value>
 			</trait>
 		</entity>
 		<entity id="pattern">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.DateTimePatternType
 				</value>
 			</trait>
 		</entity>
 		<entity id="locale">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.LocaleType
 				</value>
 			</trait>
@@ -121,59 +122,59 @@
 		</trait>		
 		<entity id="groupingUsed">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>
 		<entity id="integerOnly">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>false</value>
+				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>
 		</entity>
 		<entity id="maxFractionDigits">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 		</entity>
 		<entity id="maxIntegerDigits">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 		</entity>
 		<entity id="minFractionDigits">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 		</entity>
 		<entity id="minIntegerDigits">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 		</entity>
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.StringType
 				</value>
 			</trait>
@@ -185,26 +186,26 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>number</value>
+				<value xsi:type="mdt:StringValue">number</value>
 			</trait>
 		</entity>
 		<entity id="locale">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.LocaleType
 				</value>
 			</trait>
 		</entity>
 		<entity id="pattern">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.NumberPatternType
 				</value>
 			</trait>
 		</entity>	
 		<entity id="currencyCode">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.CurrencyCodeType
 				</value>
 			</trait>
@@ -219,12 +220,12 @@
 		</trait>		
 		<entity id="converterId">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType
 				</value>
 			</trait>
 			<trait id="config-type">
-				<value>javax.faces.convert.Converter</value>
+				<value xsi:type="mdt:StringValue">javax.faces.convert.Converter</value>
 			</trait>
 		</entity>
 	</entity>
@@ -258,18 +259,18 @@
 		</trait>
 		<entity id="var">
 			<trait id="contributes-value-binding">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 			<trait id="value-binding-scope">
-				<value>request</value>
+				<value xsi:type="mdt:StringValue">request</value>
 			</trait>
 			<trait id="value-binding-symbol-factory">
-				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.designtime.core.loadBundle</value>
 			</trait>
 		</entity>
 		<entity id="basename">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.ResourceBundleType
 				</value>
 			</trait>
@@ -297,22 +298,22 @@
 		</trait>		
 		<entity id="itemDisabled">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>false</value>
+				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>
 		</entity>		
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
 				</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>javax.faces.model.SelectItem</value>
+				<value xsi:type="mdt:StringValue">javax.faces.model.SelectItem</value>
 			</trait>				
 		</entity>
 	</entity>
@@ -335,7 +336,7 @@
 		</trait>			
 		<entity id="rendered">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
 			</trait>
@@ -351,14 +352,14 @@
 		</trait>			
 		<entity id="maximum">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.DoubleType
 				</value>
 			</trait>
 		</entity>
 		<entity id="minimum">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.DoubleType
 				</value>
 			</trait>
@@ -374,19 +375,19 @@
 		</trait>			
 		<entity id="maximum">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>			
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>			
 		</entity>
 		<entity id="minimum">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>	
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>	
 		</entity>
 	</entity>
 	<entity id="validateLongRange" type="tag">
@@ -399,14 +400,14 @@
 		</trait>		
 		<entity id="maximum">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
 			</trait>
 		</entity>
 		<entity id="minimum">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.LongType
 				</value>
 			</trait>
@@ -421,12 +422,12 @@
 		</trait>		
 		<entity id="validatorId">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.FacesConfigValidatorIDType
 				</value>
 			</trait>
 			<trait id="config-type">
-				<value>javax.faces.validator.Validator</value>
+				<value xsi:type="mdt:StringValue">javax.faces.validator.Validator</value>
 			</trait>
 		</entity>
 	</entity>
@@ -439,12 +440,12 @@
 		</trait>		
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.JavaClassType
 				</value>
 			</trait>
 			<trait id="valid-interfaces">
-				<value>javax.faces.event.ValueChangeListener</value>
+				<value xsi:type="mdt:StringValue">javax.faces.event.ValueChangeListener</value>
 			</trait>			
 		</entity>
 	</entity>
@@ -457,12 +458,12 @@
 		</trait>		
 		<entity id="escape">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.BooleanType
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>false</value>
+				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>
 		</entity>
 	</entity>
@@ -475,7 +476,7 @@
 		</trait>		
 		<entity id="locale">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LocaleType	</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LocaleType	</value>
 			</trait>
 		</entity>	
 	</entity>
@@ -483,24 +484,24 @@
 	<entityGroup id="common-core-attributes" type="tag">
 		<entity id="binding">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType
 				</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>javax.faces.component.UIComponent</value>
+				<value xsi:type="mdt:StringValue">javax.faces.component.UIComponent</value>
 			</trait>				
 		</entity>			
 		<entity id="id">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.ComponentIDType
 				</value>
 			</trait>
 		</entity>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>
+				<value xsi:type="mdt:StringValue">
 					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
 				</value>
 			</trait>

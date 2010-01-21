@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesSwitch.java,v 1.7 2008/11/18 22:24:43 gkessler Exp $
+ * $Id: TraitTypesSwitch.java,v 1.8 2010/01/21 00:01:44 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -28,134 +28,173 @@ import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.*;
  */
 public class TraitTypesSwitch {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
-     * The cached model package
-     * <!-- begin-user-doc -->
+	 * The cached model package
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected static TraitTypesPackage modelPackage;
 
     /**
-     * Creates an instance of the switch.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the switch.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TraitTypesSwitch() {
-        if (modelPackage == null) {
-            modelPackage = TraitTypesPackage.eINSTANCE;
-        }
-    }
+		if (modelPackage == null) {
+			modelPackage = TraitTypesPackage.eINSTANCE;
+		}
+	}
 
     /**
-     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-     * <!-- begin-user-doc -->
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param theEObject 
-     * @return the first non-null result returned by a <code>caseXXX</code> call.
-     * @generated
-     */
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
     public Object doSwitch(EObject theEObject) {
-        return doSwitch(theEObject.eClass(), theEObject);
-    }
+		return doSwitch(theEObject.eClass(), theEObject);
+	}
 
     /**
-     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-     * <!-- begin-user-doc -->
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param theEClass 
-     * @param theEObject 
-     * @return the first non-null result returned by a <code>caseXXX</code> call.
-     * @generated
-     */
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
     protected Object doSwitch(EClass theEClass, EObject theEObject) {
-        if (theEClass.eContainer() == modelPackage) {
-            return doSwitch(theEClass.getClassifierID(), theEObject);
-        }
-		List eSuperTypes = theEClass.getESuperTypes();
-		return
-		    eSuperTypes.isEmpty() ?
-		        defaultCase(theEObject) :
-		        doSwitch((EClass)eSuperTypes.get(0), theEObject);
-    }
+		if (theEClass.eContainer() == modelPackage) {
+			return doSwitch(theEClass.getClassifierID(), theEObject);
+		}
+		else {
+			List eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch((EClass)eSuperTypes.get(0), theEObject);
+		}
+	}
 
     /**
-     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-     * <!-- begin-user-doc -->
+	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param classifierID 
-     * @param theEObject 
-     * @return the first non-null result returned by a <code>caseXXX</code> call.
-     * @generated
-     */
+	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @generated
+	 */
     protected Object doSwitch(int classifierID, EObject theEObject) {
-        switch (classifierID) {
-            case TraitTypesPackage.LIST_OF_VALUES: {
-                ListOfValues listOfValues = (ListOfValues)theEObject;
-                Object result = caseListOfValues(listOfValues);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case TraitTypesPackage.SET_GENERATOR: {
-                SetGenerator setGenerator = (SetGenerator)theEObject;
-                Object result = caseSetGenerator(setGenerator);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            default: return defaultCase(theEObject);
-        }
-    }
+		switch (classifierID) {
+			case TraitTypesPackage.LIST_OF_VALUES: {
+				ListOfValues listOfValues = (ListOfValues)theEObject;
+				Object result = caseListOfValues(listOfValues);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TraitTypesPackage.SET_GENERATOR: {
+				SetGenerator setGenerator = (SetGenerator)theEObject;
+				Object result = caseSetGenerator(setGenerator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TraitTypesPackage.STRING_VALUE: {
+				StringValue stringValue = (StringValue)theEObject;
+				Object result = caseStringValue(stringValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TraitTypesPackage.BOOLEAN_VALUE: {
+				BooleanValue booleanValue = (BooleanValue)theEObject;
+				Object result = caseBooleanValue(booleanValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			default: return defaultCase(theEObject);
+		}
+	}
 
     /**
-     * Returns the result of interpretting the object as an instance of '<em>List Of Values</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>List Of Values</em>'.
+	 * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpretting the object as an instance of '<em>List Of Values</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>List Of Values</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
     public Object caseListOfValues(ListOfValues object) {
-        return null;
-    }
+		return null;
+	}
 
     /**
-     * Returns the result of interpretting the object as an instance of '<em>Set Generator</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>Set Generator</em>'.
+	 * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpretting the object as an instance of '<em>Set Generator</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set Generator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
     public Object caseSetGenerator(SetGenerator object) {
-        return null;
-    }
+		return null;
+	}
 
     /**
-     * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>String Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseStringValue(StringValue object) {
+		return null;
+	}
+
+				/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseBooleanValue(BooleanValue object) {
+		return null;
+	}
+
+				/**
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch, but this is the last case anyway.
      * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-     * @generated
-     */
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+	 * @generated
+	 */
     public Object defaultCase(EObject object) {
-        return null;
-    }
+		return null;
+	}
 
 } //TraitTypesSwitch

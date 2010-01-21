@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<md:metadatamodel
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
+	xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore" 
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
-	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
-	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"
-	xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore"  
-	xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore"
-	id="http://java.sun.com/jsf/html"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="http://java.sun.com/jsf/html" 
 	type="tagFile">
 	
 	<entity id="column" type="tag">
@@ -54,7 +54,7 @@
 		</trait>
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>		
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -64,18 +64,18 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>submit</value>
+				<value xsi:type="mdt:StringValue">submit</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="image">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
 			</trait>		
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 	</entity>
@@ -136,23 +136,23 @@
 		</trait>
 		<entity id="bgcolor">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ColorType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ColorType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="var">
 			<trait id="contributes-value-binding">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 			<trait id="value-binding-scope">
-				<value>request</value>
+				<value xsi:type="mdt:StringValue">request</value>
 			</trait>
 			<trait id="value-binding-symbol-factory">
-				<value>org.eclipse.jst.jsf.designtime.core.loadBundle</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.designtime.core.loadBundle</value>
 			</trait>
-			<trait id="category"><value>%property.category.jsf</value></trait>			
+			<trait id="category"><value xsi:type="mdt:StringValue">%property.category.jsf</value></trait>			
 		</entity>
 	</entity>
 	<entity id="form" type="tag">
@@ -215,10 +215,10 @@
 		</trait>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>			
 		</entity>
 	</entity>
@@ -240,10 +240,10 @@
 		</trait>		
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>	
 	</entity>
@@ -279,10 +279,10 @@
 		</trait>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>	
 	</entity>
@@ -304,10 +304,10 @@
 		</trait>		
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>	
 	</entity>
@@ -340,7 +340,7 @@
 		</trait>		
 		<entity id="layout">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -355,7 +355,7 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>list</value>
+				<value xsi:type="mdt:StringValue">list</value>
 			</trait>				
 		</entity>	
 	</entity>
@@ -480,10 +480,10 @@
 		</trait>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>
 	</entity>
@@ -519,7 +519,7 @@
 		</trait>
 		<entity id="layout">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -534,15 +534,15 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>lineDirection</value>
+				<value xsi:type="mdt:StringValue">lineDirection</value>
 			</trait>
 		</entity>
 		<entity id="value">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
             </trait>
             <trait id="runtime-type-setter-required">
-                <value>true</value>
+                <value xsi:type="mdt:BooleanValue">true</value>
             </trait>
         </entity>
     </entity>
@@ -578,10 +578,10 @@
 		</trait>
 	    <entity id="value">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
             </trait>
             <trait id="runtime-type-setter-required">
-                <value>true</value>
+                <value xsi:type="mdt:BooleanValue">true</value>
             </trait>
         </entity>
 	</entity>
@@ -616,10 +616,10 @@
 		</trait>
 		<entity id="value">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
             </trait>
             <trait id="runtime-type-setter-required">
-                <value>true</value>
+                <value xsi:type="mdt:BooleanValue">true</value>
             </trait>
         </entity>
 	</entity>
@@ -655,10 +655,10 @@
 		</trait>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>
 	</entity>
@@ -693,10 +693,10 @@
 		</trait>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>
 	</entity>
@@ -732,16 +732,16 @@
 		</trait>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
 		</entity>	
 		<entity id="layout">
 			<include-entity-group>common-attributes</include-entity-group>
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -756,96 +756,96 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>lineDirection</value>
+				<value xsi:type="mdt:StringValue">lineDirection</value>
 			</trait>				
 		</entity>			
 	</entity>
 	<entityGroup id="basic-jsf-html-attributes">
 		<entity id="id">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>
 		<entity id="binding">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>javax.faces.component.UIComponent</value>
+				<value xsi:type="mdt:StringValue">javax.faces.component.UIComponent</value>
 			</trait>	
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>					
 		</entity>	
 		<entity id="converter">			
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType</value>
 			</trait>			
 			<trait id="config-type">
-				<value>javax.faces.convert.Converter</value>
+				<value xsi:type="mdt:StringValue">javax.faces.convert.Converter</value>
 			</trait>	
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>		
 		<entity id="rendered">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>				
 		</entity>	
 		<entity id="required">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>		
 		<entity id="styleClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>				
 		</entity>
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>java.lang.String</value>
+				<value xsi:type="mdt:StringValue">java.lang.String</value>
 			</trait>			
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>	
 		</entity>
 		<entity id="valueChangeListener">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>void</value>
+				<value xsi:type="mdt:StringValue">void</value>
 			</trait>			
 			<trait id="runtime-param-types">
-				<value>javax.faces.event.ValueChangeEvent</value>
+				<value xsi:type="mdt:StringValue">javax.faces.event.ValueChangeEvent</value>
 			</trait>	
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>	
 		</entity>	
 		<entity id="validator">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
 			</trait>	
 			<trait id="runtime-return-type">
-				<value>void</value>
+				<value xsi:type="mdt:StringValue">void</value>
 			</trait>			
 			<trait id="runtime-param-types">
 				<value xsi:type="mdt:ListOfValues">
@@ -855,7 +855,7 @@
 				</value>						
 			</trait>	
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>	
 	</entityGroup>
@@ -863,102 +863,102 @@
 		<!-- This group will be refactored -->
 		<entity id="action">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ActionType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ActionType</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>java.lang.String</value>
+				<value xsi:type="mdt:StringValue">java.lang.String</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>							
 		</entity>
 		<entity id="actionListener">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
 			</trait>
 			<trait id="runtime-return-type">
-				<value>void</value>
+				<value xsi:type="mdt:StringValue">void</value>
 			</trait>			
 			<trait id="runtime-param-types">
-				<value>javax.faces.event.ActionEvent</value>
+				<value xsi:type="mdt:StringValue">javax.faces.event.ActionEvent</value>
 			</trait>	
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="cols">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>
 		<entity id="escape">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="default-value">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>			
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>
 		<entity id="globalOnly">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="default-value">
-				<value>false</value>
+				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>		
 		<entity id="immediate">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>				
 		</entity>	
 		<entity id="readonly">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="default-value">
-				<value>false</value>
+				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>			
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>		
 		<entity id="redisplay">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>				
 		</entity>
 
 		<entity id="showDetail">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="default-value">
-				<value>true</value>
+				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>		
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>
 		<entity id="dalign">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -969,12 +969,12 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>	
 		<entity id="ialign">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -986,12 +986,12 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>			
 		<entity id="linktype">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -1014,12 +1014,12 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="media">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -1035,12 +1035,12 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>	
 		<entity id="scope">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -1051,87 +1051,87 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>	
 	</entityGroup>
 	<entityGroup id="jsf-table-attributes">
 		<entity id="bgcolor">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>	
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>		
 		</entity>	
 		<entity id="border">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="cellpadding">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="cellspacing">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="columns">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
 			<trait id="valid-minimum">
-				<value>0</value>
+				<value xsi:type="mdt:StringValue">0</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="columnClasses">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>		
 		<entity id="first">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
 			<trait id="valid-minimum">
-				<value>0</value>
+				<value xsi:type="mdt:StringValue">0</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="footerClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>	
 		<entity id="frame">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -1160,31 +1160,31 @@
 				</value>	
 			</trait>
 			<trait id="default-value">
-				<value>none</value>
+				<value xsi:type="mdt:StringValue">none</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>			
 		</entity>			
 		<entity id="headerClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="rowClasses">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="rules">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -1205,39 +1205,39 @@
 				</value>	
 			</trait>
 			<trait id="default-value">
-				<value>none</value>
+				<value xsi:type="mdt:StringValue">none</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>							
 		</entity>
 		<entity id="showSummary">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="default-value">
-				<value>false</value>
+				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 		<entity id="summary">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 	</entityGroup>
 	<entityGroup id="for-entity">
 		<entity id="for">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.jsf</value>
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
 	</entityGroup>

@@ -12,14 +12,14 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
-import org.eclipse.emf.ecore.xml.type.XMLTypeFactory;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.StringValue;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesFactory;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
@@ -65,8 +65,7 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 		if (t == null){
 			t = internalCreateTrait(entity, key);
 
-			SimpleAnyType val = XMLTypeFactory.eINSTANCE.createSimpleAnyType();
-			val.setInstanceType(EcorePackage.eINSTANCE.getEString());
+			StringValue val = TraitTypesFactory.eINSTANCE.createStringValue();			
 			val.setValue(value);
 			
 			t.setValue(val);
@@ -85,9 +84,8 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 		if (t == null){
 			t = internalCreateTrait(entity, key);
 
-			SimpleAnyType val = XMLTypeFactory.eINSTANCE.createSimpleAnyType();
-			val.setInstanceType(EcorePackage.eINSTANCE.getEBoolean());
-			val.setRawValue(value == true ? "true" : "false"); //$NON-NLS-1$ //$NON-NLS-2$
+			BooleanValue val = TraitTypesFactory.eINSTANCE.createBooleanValue();		
+			val.setTrue(value);
 			
 			t.setValue(val);
 		}

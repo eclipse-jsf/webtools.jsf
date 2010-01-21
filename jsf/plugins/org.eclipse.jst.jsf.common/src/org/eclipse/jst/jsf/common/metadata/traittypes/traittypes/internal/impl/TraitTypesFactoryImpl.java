@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesFactoryImpl.java,v 1.6 2008/11/18 22:24:38 gkessler Exp $
+ * $Id: TraitTypesFactoryImpl.java,v 1.7 2010/01/21 00:01:44 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -24,94 +24,114 @@ import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.*;
  */
 public class TraitTypesFactoryImpl extends EFactoryImpl implements TraitTypesFactory {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
-     * Creates the default factory implementation.
-     * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return TraitTypesFactory
-     * @generated
-     */
+	 * @generated NOT
+	 */
     public static TraitTypesFactory init() {
-        try {
-            TraitTypesFactory theTraitTypesFactory = (TraitTypesFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore");  //$NON-NLS-1$
-            if (theTraitTypesFactory != null) {
-                return theTraitTypesFactory;
-            }
-        }
-        catch (Exception exception) {
-            EcorePlugin.INSTANCE.log(exception);
-        }
-        return new TraitTypesFactoryImpl();
-    }
+		try {
+			TraitTypesFactory theTraitTypesFactory = (TraitTypesFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore");  //$NON-NLS-1$
+			if (theTraitTypesFactory != null) {
+				return theTraitTypesFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new TraitTypesFactoryImpl();
+	}
 
     /**
-     * Creates an instance of the factory.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TraitTypesFactoryImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EObject create(EClass eClass) {
-        switch (eClass.getClassifierID()) {
-            case TraitTypesPackage.LIST_OF_VALUES: return createListOfValues();
-            case TraitTypesPackage.SET_GENERATOR: return createSetGenerator();
-            default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-    }
+		switch (eClass.getClassifierID()) {
+			case TraitTypesPackage.LIST_OF_VALUES: return createListOfValues();
+			case TraitTypesPackage.SET_GENERATOR: return createSetGenerator();
+			case TraitTypesPackage.STRING_VALUE: return createStringValue();
+			case TraitTypesPackage.BOOLEAN_VALUE: return createBooleanValue();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ListOfValues createListOfValues() {
-        ListOfValuesImpl listOfValues = new ListOfValuesImpl();
-        return listOfValues;
-    }
+		ListOfValuesImpl listOfValues = new ListOfValuesImpl();
+		return listOfValues;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public SetGenerator createSetGenerator() {
-        SetGeneratorImpl setGenerator = new SetGeneratorImpl();
-        return setGenerator;
-    }
+		SetGeneratorImpl setGenerator = new SetGeneratorImpl();
+		return setGenerator;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringValue createStringValue() {
+		StringValueImpl stringValue = new StringValueImpl();
+		return stringValue;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BooleanValue createBooleanValue() {
+		BooleanValueImpl booleanValue = new BooleanValueImpl();
+		return booleanValue;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TraitTypesPackage getTraitTypesPackage() {
-        return (TraitTypesPackage)getEPackage();
-    }
+		return (TraitTypesPackage)getEPackage();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return TraitTypesPackage
-     * @deprecated
-     * @generated
-     */
+	 * @deprecated
+	 * @generated
+	 */
     public static TraitTypesPackage getPackage() {
-        return TraitTypesPackage.eINSTANCE;
-    }
+		return TraitTypesPackage.eINSTANCE;
+	}
 
 } //TraitTypesFactoryImpl

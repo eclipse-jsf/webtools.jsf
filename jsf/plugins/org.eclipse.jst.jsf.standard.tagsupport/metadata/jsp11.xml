@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
-	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
-	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
-	id="jsp11"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="JSP11" 
 	type="tagFile">
 	
 	<trait id="paletteInfos">
@@ -29,254 +31,254 @@
 	</trait>
 
 	<trait id="images-base-path">
-		<value>$nl$/icons/palette/JSP</value>
+		<value xsi:type="mdt:StringValue">$nl$/icons/palette/JSP</value>
 	</trait>
 
 	<trait id="display-label">
-		<value>JSP</value>
+		<value xsi:type="mdt:StringValue">JSP</value>
 	</trait>
 	
 	<entity id="jsp:directive.include">
 		<trait id="display-label">
-			<value>%directive.include.display-label</value>
+			<value xsi:type="mdt:StringValue">%directive.include.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%directive.include.description</value>
+			<value xsi:type="mdt:StringValue">%directive.include.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_DIRECTIVE.INCLUDE.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_DIRECTIVE.INCLUDE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_DIRECTIVE.INCLUDE.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_DIRECTIVE.INCLUDE.gif</value>
 		</trait>
 	</entity>
 	<entity id="jsp:directive.page">
 		<trait id="display-label">
-			<value>%directive.page.display-label</value>
+			<value xsi:type="mdt:StringValue">%directive.page.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%directive.page.description</value>
+			<value xsi:type="mdt:StringValue">%directive.page.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_DIRECTIVE.PAGE.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_DIRECTIVE.PAGE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_DIRECTIVE.PAGE.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_DIRECTIVE.PAGE.gif</value>
 		</trait>
 	</entity>	
 
 	<entity id="jsp:directive.taglib">
 		<trait id="display-label">
-			<value>%directive.taglib.display-label</value>
+			<value xsi:type="mdt:StringValue">%directive.taglib.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%directive.taglib.description</value>
+			<value xsi:type="mdt:StringValue">%directive.taglib.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_DIRECTIVE.TAGLIB.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_DIRECTIVE.TAGLIB.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_DIRECTIVE.TAGLIB.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_DIRECTIVE.TAGLIB.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:expression">
 		<trait id="display-label">
-			<value>%expression.display-label</value>
+			<value xsi:type="mdt:StringValue">%expression.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%expression.description</value>
+			<value xsi:type="mdt:StringValue">%expression.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_EXPRESSION.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_EXPRESSION.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_EXPRESSION.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_EXPRESSION.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:declaration">
 		<trait id="display-label">
-			<value>%declaration.display-label</value>
+			<value xsi:type="mdt:StringValue">%declaration.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%declaration.description</value>
+			<value xsi:type="mdt:StringValue">%declaration.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_DECLARATION.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_DECLARATION.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_DECLARATION.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_DECLARATION.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:useBean">
 		<trait id="display-label">
-			<value>%useBean.display-label</value>
+			<value xsi:type="mdt:StringValue">%useBean.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%useBean.description</value>
+			<value xsi:type="mdt:StringValue">%useBean.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_USEBEAN.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_USEBEAN.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_USEBEAN.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_USEBEAN.gif</value>
 		</trait>
 	</entity>	
 		
 	<entity id="jsp:getProperty">
 		<trait id="display-label">
-			<value>%getProperty.display-label</value>
+			<value xsi:type="mdt:StringValue">%getProperty.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%getProperty.description</value>
+			<value xsi:type="mdt:StringValue">%getProperty.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_GETPROPERTY.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_GETPROPERTY.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_GETPROPERTY.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_GETPROPERTY.gif</value>
 		</trait>
 	</entity>	
 
 	<entity id="jsp:setProperty">
 		<trait id="display-label">
-			<value>%setProperty.display-label</value>
+			<value xsi:type="mdt:StringValue">%setProperty.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%setProperty.description</value>
+			<value xsi:type="mdt:StringValue">%setProperty.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_SETPROPERTY.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_SETPROPERTY.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_SETPROPERTY.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_SETPROPERTY.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:include">
 		<trait id="display-label">
-			<value>%include.display-label</value>
+			<value xsi:type="mdt:StringValue">%include.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%include.description</value>
+			<value xsi:type="mdt:StringValue">%include.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_INCLUDE.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_INCLUDE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_INCLUDE.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_INCLUDE.gif</value>
 		</trait>
 	</entity>	
 	
 	<entity id="jsp:text">
 		<trait id="display-label">
-			<value>%text.display-label</value>
+			<value xsi:type="mdt:StringValue">%text.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%text.description</value>
+			<value xsi:type="mdt:StringValue">%text.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_TEXT.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_TEXT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_TEXT.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_TEXT.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:root">
 		<trait id="display-label">
-			<value>%root.display-label</value>
+			<value xsi:type="mdt:StringValue">%root.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%root.description</value>
+			<value xsi:type="mdt:StringValue">%root.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_ROOT.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_ROOT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_ROOT.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_ROOT.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:forward">
 		<trait id="display-label">
-			<value>%forward.display-label</value>
+			<value xsi:type="mdt:StringValue">%forward.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%forward.description</value>
+			<value xsi:type="mdt:StringValue">%forward.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_FORWARD.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_FORWARD.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_FORWARD.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_FORWARD.gif</value>
 		</trait>
 	</entity>	
 	
 	<entity id="jsp:param">
 		<trait id="display-label">
-			<value>%param.display-label</value>
+			<value xsi:type="mdt:StringValue">%param.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%param.description</value>
+			<value xsi:type="mdt:StringValue">%param.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_PARAM.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_PARAM.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_PARAM.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_PARAM.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:params">
 		<trait id="display-label">
-			<value>%params.display-label</value>
+			<value xsi:type="mdt:StringValue">%params.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%params.description</value>
+			<value xsi:type="mdt:StringValue">%params.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_PARAMS.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_PARAMS.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_PARAMS.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_PARAMS.gif</value>
 		</trait>
 	</entity>		
 	<entity id="jsp:plugin">
 		<trait id="display-label">
-			<value>%plugin.display-label</value>
+			<value xsi:type="mdt:StringValue">%plugin.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%plugin.description</value>
+			<value xsi:type="mdt:StringValue">%plugin.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_PLUGIN.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_PLUGIN.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_PLUGIN.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_PLUGIN.gif</value>
 		</trait>
 	</entity>	
 	<entity id="jsp:fallback">
 		<trait id="display-label">
-			<value>%fallback.display-label</value>
+			<value xsi:type="mdt:StringValue">%fallback.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%fallback.description</value>
+			<value xsi:type="mdt:StringValue">%fallback.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_FALLBACK.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_FALLBACK.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_FALLBACK.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_FALLBACK.gif</value>
 		</trait>
 	</entity>
 	<entity id="jsp:scriptlet">
 		<trait id="display-label">
-			<value>%scriptlet.display-label</value>
+			<value xsi:type="mdt:StringValue">%scriptlet.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%scriptlet.description</value>
+			<value xsi:type="mdt:StringValue">%scriptlet.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/JSP_SCRIPTLET.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSP_SCRIPTLET.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSP_SCRIPTLET.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSP_SCRIPTLET.gif</value>
 		</trait>
 	</entity>	
 </md:metadatamodel>

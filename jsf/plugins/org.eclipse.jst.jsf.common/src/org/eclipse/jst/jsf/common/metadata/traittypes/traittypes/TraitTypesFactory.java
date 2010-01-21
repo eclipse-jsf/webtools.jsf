@@ -44,15 +44,33 @@ public interface TraitTypesFactory extends EFactory {
 	ListOfValues createListOfValues();
 
 	/**
-     * Returns a new object of class '<em>Set Generator</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Set Generator</em>'.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return a new object of class '<em>Set Generator</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>Set Generator</em>'.
+	 * @generated
+	 */
     SetGenerator createSetGenerator();
 
     /**
+	 * Returns a new object of class '<em>String Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Value</em>'.
+	 * @generated
+	 */
+	StringValue createStringValue();
+
+	/**
+	 * Returns a new object of class '<em>Boolean Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Value</em>'.
+	 * @generated
+	 */
+	BooleanValue createBooleanValue();
+
+				/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
