@@ -7,6 +7,19 @@
 	id="http://org.eclipse.jsf/traithelpertest"
 	type="tagFile">
 	
+	<trait id="TraitId">
+		<value xsi:type="mdt:StringValue">TraitValue</value>
+	</trait>
+	
+    <trait id="TraitId2">
+		<value xsi:type="mdt:BooleanValue">true</value>
+	</trait>
+	
+	<trait id="TraitId3">
+		<value xsi:type="mdt:BooleanValue">false</value>
+	</trait>
+	
+		
 	<entity id="tag">
 		
 		<entity type="attribute" id="attr1">

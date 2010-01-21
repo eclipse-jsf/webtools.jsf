@@ -35,6 +35,7 @@ import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRunti
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeFactoryTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypesRegistryTests;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataProcessorsFactoryTests;
+import org.eclipse.jst.jsf.metadata.tests.pagedesigner.PaletteTests;
 import org.eclipse.jst.jsf.metadata.tests.pagedesigner.PropertyDescriptorTests;
 import org.eclipse.jst.jsf.metadata.tests.pagedesigner.QuickEditSectionsTests;
 import org.eclipse.jst.jsf.metadata.tests.taglibprocessing.ActionTypeTests;
@@ -153,7 +154,7 @@ public class AllTests {
 		
 		addTestSuite(suite, JSFHTMLTestCase.class);
 //		addTestSuite(suite, JSFCoreTestCase.class);
-		
+		addTestSuite(suite, PaletteTests.class);
 		
 		//$JUnit-END$
 		return suite;

@@ -18,6 +18,7 @@ import junit.framework.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
@@ -198,6 +199,44 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertNotNull(trait);
 		Assert.assertNotNull(trait.getValue());
 		Assert.assertEquals(false, TraitValueHelper.getValueAsBoolean(trait));
+	}
+	
+	public void testStringValueType() {
+		final ITaglibDomainMetaDataModelContext context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(null, uri);
+		final Model m =  TaglibDomainMetaDataQueryHelper.getModel(context);
+		assertNotNull(m);
+
+		final Trait t = TaglibDomainMetaDataQueryHelper.getTrait( m, "TraitId");
+		assertNotNull(t);
+		
+		final EObject obj = (EObject)t.getValue();
+		assertEquals("StringValue", obj.eClass().getName());
+		assertEquals("TraitValue", TraitValueHelper.getValueAsString(t));
+	
+	}
+	
+	public void testBooleanValueType() {
+		final ITaglibDomainMetaDataModelContext context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(null, uri);
+		final Model m =  TaglibDomainMetaDataQueryHelper.getModel(context);
+		assertNotNull(m);
+		
+		//true
+		final Trait t2 = TaglibDomainMetaDataQueryHelper.getTrait( m, "TraitId2");
+		assertNotNull(t2);
+		
+		final EObject obj2 = (EObject)t2.getValue();
+		assertEquals("BooleanValue", obj2.eClass().getName());
+		assertEquals(true, TraitValueHelper.getValueAsBoolean(t2));
+		assertEquals("true", TraitValueHelper.getValueAsString(t2));
+		
+		//false
+		final Trait t3 = TaglibDomainMetaDataQueryHelper.getTrait( m, "TraitId3");
+		assertNotNull(t3);
+		
+		final EObject obj3 = (EObject)t3.getValue();
+		assertEquals("BooleanValue", obj3.eClass().getName());
+		assertEquals(false, TraitValueHelper.getValueAsBoolean(t3));
+	
 	}
 	
 //	@SuppressWarnings("restriction")
