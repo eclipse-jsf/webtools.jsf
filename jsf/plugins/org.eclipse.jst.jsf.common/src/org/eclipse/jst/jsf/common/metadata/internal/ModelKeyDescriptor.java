@@ -44,7 +44,7 @@ public class ModelKeyDescriptor {
 	
 	//this is a workaround for issue where jsp "uri" may upper or lower cased
 	private String fixJSPURIIfNecessary(final String tempuri) {
-		if (tempuri.equals("jsp11")) //$NON-NLS-1$
+		if (tempuri != null && tempuri.equals("jsp11")) //$NON-NLS-1$
 			return tempuri.toUpperCase();
 		return tempuri;
 	}
