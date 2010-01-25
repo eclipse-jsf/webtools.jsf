@@ -11,21 +11,11 @@
 package org.eclipse.jst.jsf.validation.internal.appconfig;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
-import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.jst.jsf.facesconfig.emf.PropertyNameType;
 
 /**
  * Validates property's
@@ -73,38 +63,5 @@ public class PropertyValidationVisitor extends EObjectValidationVisitor
         };
     }
 
-    static String validateProperty(PropertyNameType object, IProject project, String parentClassType)
-    {
-        String signatureBeanProperty = null;
-        try
-        {
-           IJavaProject javaProject = JavaCore.create(project);
-           IType type = javaProject.findType(parentClassType);
-           
-           if (type != null)
-           {
-               final JDTBeanIntrospector introspector =
-                   new JDTBeanIntrospector(type);
-               
-               final Map properties = introspector.getProperties();
 
-               final String propertyName = object.getTextContent(); 
-               if (properties.containsKey(propertyName))
-               {
-                   final JDTBeanProperty beanProperty = 
-                       (JDTBeanProperty) properties.get(propertyName);
-                   signatureBeanProperty = 
-                       beanProperty.getTypeSignature();
-               }
-           }
-        }
-        catch(JavaModelException jme)
-        {
-            JSFCorePlugin
-                .log(new Exception(jme), 
-                     "Problem validating on parent: "+parentClassType); //$NON-NLS-1$
-        }
-
-        return signatureBeanProperty;
-    }
 }
