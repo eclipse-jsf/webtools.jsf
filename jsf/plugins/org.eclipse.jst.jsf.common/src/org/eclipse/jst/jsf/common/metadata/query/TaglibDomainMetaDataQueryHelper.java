@@ -192,8 +192,11 @@ public final class TaglibDomainMetaDataQueryHelper{
 			mgr = MetaDataModelManager.getInstance(modelContext.getProject());
 		else //temp(?)
 			mgr = MetaDataModelManager.getSharedInstance();	
-
-		return mgr.getModel(modelContext);
+		
+		if (mgr != null)
+			return mgr.getModel(modelContext);
+		
+		return null;
 	}
 
 	/**

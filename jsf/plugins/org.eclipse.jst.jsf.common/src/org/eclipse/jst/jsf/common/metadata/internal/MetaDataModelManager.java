@@ -68,10 +68,15 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	 */
 	public synchronized static MetaDataModelManager getInstance(final IProject project){
 		MetaDataModelManager repo = null;
-		repo = getFromSessionProperty(project);
-		if (repo == null) {
-			repo = new MetaDataModelManager(project);		
-			ResourcesPlugin.getWorkspace().addResourceChangeListener(repo, IResourceChangeEvent.PRE_CLOSE);
+		if (project != null && project.isAccessible()) {
+			repo = getFromSessionProperty(project);
+			if (repo == null) {
+				repo = new MetaDataModelManager(project);		
+				ResourcesPlugin.getWorkspace().addResourceChangeListener(
+						repo, 
+						(IResourceChangeEvent.PRE_CLOSE 
+						| IResourceChangeEvent.PRE_DELETE));
+			}
 		}
 		return repo;
 	}
@@ -94,7 +99,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 			}
 		} catch(CoreException ce) {
 			JSFCommonPlugin.log(IStatus.ERROR, "Internal Error: Unable to recover MetaDataModelManager for: "+project.getName(), ce); //$NON-NLS-1$
-		}
+		}	
 		return repo;
 	}
 
@@ -103,7 +108,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	 * IProject instance.
 	 */
 	private void setAsSessionProperty() {
-		if (project != null) {//&& project.isAccessible()) {
+		if (project != null && project.isAccessible()) {
 			try {
 				project.setSessionProperty(KEY_SESSIONPROPERTY, this);
 			} catch(CoreException ce) {
@@ -116,7 +121,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
 	 * Releases a project's MetaDataModelManager instance by removing from project session property
 	 * @param aProject
 	 */
-	private void removeAsSessionProperty(IProject aProject){
+	private void removeAsSessionProperty(final IProject aProject){
 		try {
 			ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 			aProject.setSessionProperty(KEY_SESSIONPROPERTY, null);
@@ -169,7 +174,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
      * org.eclipse.core.resources.IResourceChangeListener#resourceChanged(org
      * .eclipse.core.resources.IResourceChangeEvent)
      */
-    public void resourceChanged(IResourceChangeEvent event) {
+    public void resourceChanged(final IResourceChangeEvent event) {
         if (event.getType() == IResourceChangeEvent.PRE_CLOSE
                 || event.getType() == IResourceChangeEvent.PRE_DELETE) {
             // a project is closing - release and cleanup
@@ -190,7 +195,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
         }
     }
 
-	private MetaDataModel loadMetadata(ModelKeyDescriptor modelKeyDescriptor) {
+	private MetaDataModel loadMetadata(final ModelKeyDescriptor modelKeyDescriptor) {
         if (!Thread.holdsLock(GLOBAL_INSTANCE_LOCK)) {
             JSFCommonPlugin
                     .log(IStatus.ERROR,
@@ -198,7 +203,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
             return null;
         }
 
-        IDomainLoadingStrategy strategy = DomainLoadingStrategyRegistry
+        final IDomainLoadingStrategy strategy = DomainLoadingStrategyRegistry
                 .getInstance().getLoadingStrategy(
                         modelKeyDescriptor.getDomain());
         ;
@@ -209,7 +214,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
                             "Internal Error: Unable to locate metadata loading strategy for: " + modelKeyDescriptor.toString()); //$NON-NLS-1$
             return null;
         }
-        MetaDataModel model = StandardModelFactory.getInstance().createModel(
+        final MetaDataModel model = StandardModelFactory.getInstance().createModel(
                 modelKeyDescriptor, strategy);// new MetaDataModel(modelKey,
                                               // strategy);
         model.load();
@@ -218,7 +223,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
         return model;
     }
 
-    private void addModel(MetaDataModel model) {
+    private void addModel(final MetaDataModel model) {
         if (model != null)
             models.put(model);
     }
