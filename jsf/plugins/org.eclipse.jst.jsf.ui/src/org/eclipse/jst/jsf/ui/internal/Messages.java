@@ -327,5 +327,24 @@ public class Messages extends NLS {
      * see messages.properties
      */
     public static String JSFPreferences_RootPage_Description;
-    
+
+    /**
+     * see messages.properties
+     */
+    public static String Hyperlink_Open_JavaType;
+
+    /**
+     * see messages.properties
+     */
+    public static String Hyperlink_Open_JavaMethod;
+
+    /**
+     * see messages.properties
+     */
+    public static String Hyperlink_Open_JavaFile;
+
+    /**
+     * see messages.properties
+     */
+    public static String Hyperlink_Open_JavaElement;
 }

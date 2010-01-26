@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.ui.internal.jspeditor;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.ui.JavaUI;
@@ -22,6 +23,8 @@ import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.internal.impl.JavaUtil;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
+import org.eclipse.jst.jsf.ui.internal.Messages;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IEditorPart;
 
 /**
@@ -67,7 +70,16 @@ class BeanSuffixHyperlink implements IHyperlink,ITestHyperlink {
 	 * @see org.eclipse.jface.text.hyperlink.IHyperlink#getHyperlinkText()
 	 */
 	public String getHyperlinkText() {
-		return null;
+		//Bug 254452 - JSF hyperlink provider shows "unknown hyperlink" when in list
+	    final IJavaElement element = determineJavaElement();
+	    if (element != null) {
+	    	final ICompilationUnit compilationUnit = (ICompilationUnit)element.getAncestor(IJavaElement.COMPILATION_UNIT);
+	    	if (compilationUnit != null) {
+    			return NLS.bind(Messages.Hyperlink_Open_JavaMethod, compilationUnit.getElementName(), element.getElementName());
+	    	}
+	    	return Messages.Hyperlink_Open_JavaFile;
+	    }
+		return Messages.Hyperlink_Open_JavaElement;
 	}
 
 	/*
