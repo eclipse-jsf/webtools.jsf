@@ -246,5 +246,22 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 			//pass
 		}
 	}
+	
+	public void testGetEntityBeyondMDDepth() {
+		Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(baseContext, "loaded/does_not_exist/nor_this");
+		assertNull(entity);
+	}
+	
+	public void testGetEntityBadEntityKey() {
+		Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(baseContext, "");
+		assertNull(entity);
+
+		entity = TaglibDomainMetaDataQueryHelper.getEntity(baseContext, null);
+		assertNull(entity);
+		
+		entity = TaglibDomainMetaDataQueryHelper.getEntity(baseContext, "/");
+		assertNull(entity);
+
+	}
 
 }

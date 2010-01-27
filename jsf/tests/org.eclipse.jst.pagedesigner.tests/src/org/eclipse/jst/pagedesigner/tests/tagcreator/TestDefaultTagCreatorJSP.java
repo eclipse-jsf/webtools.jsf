@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
 public class TestDefaultTagCreatorJSP extends BaseDefaultTagCreatorTestCase 
 {
@@ -33,7 +34,7 @@ public class TestDefaultTagCreatorJSP extends BaseDefaultTagCreatorTestCase
 
     public void testIncludeDirective() throws Exception
     {
-        doCreateTest(TagIdentifierFactory.createJSPTagWrapper("jsp11", "jsp:directive.include"), "jsp", "jsp", 349,false, null);
-        doCreateTest(TagIdentifierFactory.createJSPTagWrapper("jsp11", "jsp:directive.include"), "jspx", "jspx", 492,false, null);
+        doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.JSP11_DOC_TYPE, "jsp:directive.include"), "jsp", "jsp", 349,false, null);
+        doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.JSP11_DOC_TYPE, "jsp:directive.include"), "jspx", "jspx", 492,false, null);
     }
 }
