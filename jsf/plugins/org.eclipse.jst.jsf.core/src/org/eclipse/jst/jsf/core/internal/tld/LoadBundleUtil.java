@@ -24,6 +24,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClasspathContainer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
@@ -71,17 +72,49 @@ public class LoadBundleUtil {
 		IClasspathEntry[] classpathEntries = javaProject.getRawClasspath();
 		for (int i = 0; i < classpathEntries.length; i++) {
 			if (classpathEntries[i].getEntryKind() == IClasspathEntry.CPE_SOURCE) {
-				IPath path = classpathEntries[i].getPath().append(
-						getFilePath(baseName)).removeFirstSegments(1);
-				path = javaProject.getProject().getFullPath().append(path);
-				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
-						path);
+				final IFile file = getFile(javaProject, baseName,
+						classpathEntries, i);
 				if (file.exists()) {
 					return file;
+				}
+			} else if (classpathEntries[i].getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+				IProject project = ResourcesPlugin.getWorkspace().getRoot()
+						.getProject(classpathEntries[i].getPath().toString());
+				IJavaProject javaProject3 = JavaCore.create(project);
+				final IFile file = getSourceFile(javaProject3, baseName);
+				if (file != null && file.exists()) {
+					return file;
+				}
+			}
+			else if (classpathEntries[i].getEntryKind() == IClasspathEntry.CPE_CONTAINER && classpathEntries[i].getPath().equals(new Path("org.eclipse.jst.j2ee.internal.module.container")))  //$NON-NLS-1$
+			{ 
+				IClasspathContainer container = JavaCore.getClasspathContainer(classpathEntries[i].getPath(), javaProject);
+				IClasspathEntry[] classpathEntries2 = container.getClasspathEntries();
+				for (int j = 0; j < classpathEntries2.length; j++) 
+				{
+					if (classpathEntries2[j].getEntryKind() == IClasspathEntry.CPE_PROJECT) 
+					{
+						IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(classpathEntries2[j].getPath().toString());
+						IJavaProject javaProject3 = JavaCore.create(project);
+						final IFile file = getSourceFile(javaProject3, baseName);
+						if (file != null && file.exists())
+						{
+							return file;
+						}
+					}
 				}
 			}
 		}
 		return null;
+	}
+
+
+	private static IFile getFile(IJavaProject javaProject, String baseName,
+			IClasspathEntry[] classpathEntries, int i) {
+		IPath path = classpathEntries[i].getPath()
+				.append(getFilePath(baseName)).removeFirstSegments(1);
+		path = javaProject.getProject().getFullPath().append(path);
+		return ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 	}
 
 	private static IPath getFilePath(String baseName) {
@@ -93,34 +126,63 @@ public class LoadBundleUtil {
 	private static IStorage getJarFile(IJavaProject javaProject, String baseName)
 			throws JavaModelException {
 		IClasspathEntry[] roots = javaProject.getRawClasspath();
+		return getJarFile(javaProject, baseName, roots);
+	}
+
+	private static IStorage getJarFile(IJavaProject javaProject, String baseName,
+			IClasspathEntry[] roots) throws JavaModelException
+	{
 		for (int i = 0; i < roots.length; i++) {
-			if (roots[i].getEntryKind() != IClasspathEntry.CPE_LIBRARY) {
-				continue;
+			if (roots[i].getEntryKind() == IClasspathEntry.CPE_LIBRARY ||
+					roots[i].getEntryKind() == IClasspathEntry.CPE_CONTAINER)
+			{
+				IStorage storage = getResourceFromLibrary(
+						javaProject, baseName, roots[i]);
+				if (storage != null)
+				{
+					return storage;
+				}
+			}
+//			else if ( roots[i].getEntryKind() == IClasspathEntry.CPE_CONTAINER) 
+//			{
+//				IClasspathContainer classpathContainer = JavaCore.getClasspathContainer(roots[i].getPath(), javaProject);
+//				final IClasspathEntry[] classpathEntries = 
+//					classpathContainer.getClasspathEntries();
+//				IStorage storage = getJarFile(javaProject, baseName, classpathEntries);
+//				if (storage != null)
+//				{
+//					return storage;
+//				}
+//			}
+		}
+		return null;
+	}
+
+	private static IStorage getResourceFromLibrary(
+			IJavaProject javaProject, String baseName, IClasspathEntry entry) throws JavaModelException 
+	{
+		IPackageFragmentRoot[] packageFragmentRoots = javaProject
+				.findPackageFragmentRoots(entry);
+		for (int j = 0; j < packageFragmentRoots.length; j++) {
+			String packageName = getPackageName(baseName);
+			Object[] resources = null;
+			if (packageName.length() == 0) {
+				resources = packageFragmentRoots[j].getNonJavaResources();
+			} else {
+				IPackageFragment fragment = packageFragmentRoots[j]
+						.getPackageFragment(getPackageName(baseName));
+				if (fragment != null && fragment.exists()) {
+					resources = fragment.getNonJavaResources();
+				}
 			}
 
-			IPackageFragmentRoot[] packageFragmentRoots = javaProject
-					.findPackageFragmentRoots(roots[i]);
-			for (int j = 0; j < packageFragmentRoots.length; j++) {
-				String packageName = getPackageName(baseName);
-				Object[] resources = null;
-				if (packageName.length() == 0) {
-					resources = packageFragmentRoots[j].getNonJavaResources();
-				} else {
-					IPackageFragment fragment = packageFragmentRoots[j]
-							.getPackageFragment(getPackageName(baseName));
-					if (fragment != null && fragment.exists()) {
-						resources = fragment.getNonJavaResources();
-					}
-				}
-
-				if (resources != null && resources.length > 0) {
-					for (int k = 0; k < resources.length; k++) {
-						if (resources[k] instanceof IStorage) {
-							IStorage storage = (IStorage) resources[k];
-							if (getFileName(baseName).equalsIgnoreCase(
-									storage.getName())) {
-								return storage;
-							}
+			if (resources != null && resources.length > 0) {
+				for (int k = 0; k < resources.length; k++) {
+					if (resources[k] instanceof IStorage) {
+						IStorage storage = (IStorage) resources[k];
+						if (getFileName(baseName).equalsIgnoreCase(
+								storage.getName())) {
+							return storage;
 						}
 					}
 				}
