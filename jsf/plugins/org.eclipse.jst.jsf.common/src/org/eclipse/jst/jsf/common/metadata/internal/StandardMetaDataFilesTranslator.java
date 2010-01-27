@@ -29,25 +29,25 @@ import org.eclipse.jst.jsf.common.metadata.internal.StandardMetaDataFileRegistry
  */
 public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 
-	public boolean canTranslate(IMetaDataSourceModelProvider modelProvider) {
+	public boolean canTranslate(final IMetaDataSourceModelProvider modelProvider) {
 		if (modelProvider instanceof StandardMetaDataFilesProvider)
 			return true;
 		return false;
 	}
 	
-	public void translate(IMetaDataModelMergeAssistant assistant) {//TODO: throw proper errors
+	public void translate(final IMetaDataModelMergeAssistant assistant) {//TODO: throw proper errors
 		//null translate - sourceModel object are already Entities and traits
 		//traverse the tree and add to model
 		
 		//temp - throw proper errors 
 		//assert assistant.getSourceModel() instanceof ModelKeyDescriptor;
 		
-		MetaDataModel mm = assistant.getMergedModel();
-		Model mk = (Model)assistant.getSourceModelProvider().getSourceModel();
+		final MetaDataModel mm = assistant.getMergedModel();
+		final Model mk = (Model)assistant.getSourceModelProvider().getSourceModel();
 		if (mm.getRoot() == null) {
 			//create copy, otherwise source model becomes merged model because of reference
-			Copier copier = new Copier();		
-			Model newModel = (Model)copier.copy(mk.getModel());
+			final Copier copier = new Copier();		
+			final Model newModel = (Model)copier.copy(mk.getModel());
 			copier.copyReferences();
 			mm.setRoot(newModel);
 		}
@@ -66,23 +66,23 @@ public class StandardMetaDataFilesTranslator implements IMetaDataTranslator {
 	 * @param assistant
 	 * @param entity
 	 */
-	protected void traverseAndAdd(IMetaDataModelMergeAssistant assistant, final Entity entity){
-		assistant.addEntity(entity);
+	protected void traverseAndAdd(final IMetaDataModelMergeAssistant assistant, final Entity entity){
+		final Entity mmEntity = assistant.addEntity(entity);
 		
 		if (entity instanceof Model){
-			Model model = (Model)entity;
+			final Model model = (Model)entity;
 			for (final Iterator/*EntityGroup*/ it=model.getEntityGroups().iterator();it.hasNext();){
 				assistant.addEntityGroup((EntityGroup)it.next());
 			}
 		}
 		
 		for (final Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
-			Trait trait = (Trait)it.next();
-			assistant.addTrait(entity, trait);
+			final Trait trait = (Trait)it.next();
+			assistant.addTrait(mmEntity, trait);
 		}
 		
 		for (final Iterator/*<EntityKey>*/ it=entity.getChildEntities().iterator();it.hasNext();){
-			Entity e = (Entity)it.next();
+			final Entity e = (Entity)it.next();
 			traverseAndAdd(assistant, e);
 		}
 		

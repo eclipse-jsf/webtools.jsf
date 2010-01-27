@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.7 2008/11/18 22:24:39 gkessler Exp $
+ * $Id: EntityImpl.java,v 1.8 2010/01/27 23:54:32 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -26,6 +26,7 @@ import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor;
+import org.eclipse.jst.jsf.common.metadata.query.internal.IHierarchicalEntityVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -231,36 +232,52 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void accept(IEntityVisitor visitor) {
-		if (visitor.stopVisiting())
-			return;
-		visitor.visit(this);
-		
+	private boolean accept(final IHierarchicalEntityVisitor visitor) {		
+		if (visitor.visitEnter( this )) {
+			acceptChildren(visitor);
+		}			
+		return visitor.visitLeave(this);
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void accept(final IEntityVisitor visitor) {
+		if (visitor instanceof IHierarchicalEntityVisitor) {			
+			accept((IHierarchicalEntityVisitor)visitor);
+		}
+		else {
+			if (visitor.stopVisiting())
+				return;
+			
+			visitor.visit(this);
+			if (visitor.stopVisiting())
+				return;
+			
+			acceptChildren(visitor);
+			
+			visitor.visitCompleted(this);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	private void acceptChildren(final IEntityVisitor visitor) {
 		if (!getChildEntities().isEmpty()){
-			for (Iterator/*<Entity>*/ it = getChildEntities().iterator(); it.hasNext();){
-				Entity k = (Entity)it.next();
+			for (final Iterator/*<Entity>*/ it = getChildEntities().iterator(); it.hasNext();){
+				final Entity k = (Entity)it.next();
 				k.accept(visitor);
 				if (visitor.stopVisiting())
 					return;
 			}
 		}
-//		if (!getIncludeGroups().isEmpty()){
-//			for (Iterator/*<IncludeEntityGroup>*/ it = getIncludeGroups().iterator(); it.hasNext();){
-//				IncludeEntityGroup entityGroup = (IncludeEntityGroup)it.next();
-//				Model m = getModel(entityGroup);
-//				if (m != null){
-//					Entity k = m.findIncludeGroup(entityGroup.getId());
-//					if (k != null){
-//						k.accept(visitor);
-//						if (visitor.stopVisiting())
-//							return;
-//					}
-//				}
-//			}
-//		}
-		visitor.visitCompleted(this);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

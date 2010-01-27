@@ -51,7 +51,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * Constructor.   Queries with search control limited to first found.
 	 * @param model
 	 */
-	public MetaDataModelMergeAssistantImpl(MetaDataModel model) {
+	public MetaDataModelMergeAssistantImpl(final MetaDataModel model) {
 		this.mergedModel = model;
 		entityVisitor = new SimpleEntityQueryVisitorImpl(new HierarchicalSearchControl(1, 
 			HierarchicalSearchControl.SCOPE_ALL_LEVELS));
@@ -72,7 +72,7 @@ public class MetaDataModelMergeAssistantImpl implements
 		return provider;
 	}
 
-	public void setSourceModelProvider(IMetaDataSourceModelProvider provider) {
+	public void setSourceModelProvider(final IMetaDataSourceModelProvider provider) {
 		this.provider = provider;
 	}
 
@@ -80,8 +80,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addEntityGroup(org.eclipse.jst.jsf.common.metadata.EntityGroup)
 	 */
-	public void addEntityGroup(EntityGroup entityGroup) {
-		Model model = (Model)getMergedModel().getRoot();
+	public void addEntityGroup(final EntityGroup entityGroup) {
+		final Model model = (Model)getMergedModel().getRoot();
 		if (!isExistingEntityGroup(model, entityGroup)){
 			model.getEntityGroups().add(entityGroup);
 		}
@@ -90,17 +90,17 @@ public class MetaDataModelMergeAssistantImpl implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addEntity(org.eclipse.jst.jsf.common.metadata.Entity)
 	 */
-	public boolean addEntity(final Entity entity) {
+	public Entity addEntity(final Entity entity) {
 		Entity mmEntity = getMergedEntity(entity);
 		if (mmEntity == null){
-			addEntityAsNecessary((Entity)entity.eContainer(), entity);
-			return true;
+			mmEntity = addEntityAsNecessary((Entity)entity.eContainer(), entity);
+			return mmEntity;
 		}
 		addIncludeGroupsAsNecessary(mmEntity, entity);
-		return false;
+		return mmEntity;
 	}
 
-	public Entity getMergedEntity(Entity queryRoot, String entityKey){		
+	public Entity getMergedEntity(final Entity queryRoot, final String entityKey){		
 		Entity ret = null;
 		SimpleResultSet rs = (SimpleResultSet)entityVisitor.findEntities(queryRoot, entityKey);
 		try {
@@ -113,11 +113,11 @@ public class MetaDataModelMergeAssistantImpl implements
 		return ret;
 	}
 	private void addIncludeGroupsAsNecessary(final Entity mmEntity, final Entity entity) {
-		for (Iterator it=entity.getIncludeGroups().iterator();it.hasNext();){
-			IncludeEntityGroup grp = (IncludeEntityGroup)it.next();
+		for (final Iterator it=entity.getIncludeGroups().iterator();it.hasNext();){
+			final IncludeEntityGroup grp = (IncludeEntityGroup)it.next();
 			boolean found = false;
 			for (Iterator it2=mmEntity.getIncludeGroups().iterator();it2.hasNext();){
-				IncludeEntityGroup grp2 = (IncludeEntityGroup)it2.next();
+				final IncludeEntityGroup grp2 = (IncludeEntityGroup)it2.next();
 				if (grp2.equals(grp)){
 					found = true;
 					break;
@@ -154,9 +154,9 @@ public class MetaDataModelMergeAssistantImpl implements
 		return mmEntity;
 	}
 	
-	private boolean isExistingEntityGroup(Model model, EntityGroup entityGroup) {
+	private boolean isExistingEntityGroup(final Model model, final EntityGroup entityGroup) {
 		boolean found = false;
-		for(Iterator it=model.getEntityGroups().iterator();it.hasNext();){
+		for(final Iterator it=model.getEntityGroups().iterator();it.hasNext();){
 			if (entityGroup.getId().equals(((EntityGroup)it.next()).getId()))
 				return true;			
 		}
@@ -164,8 +164,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	private Entity getExistingChildEntity(final Entity parent, final Entity entity) {
-		for(Iterator it=parent.getChildEntities().iterator();it.hasNext();){
-			Entity foundEntity = (Entity)it.next();
+		for(final Iterator it=parent.getChildEntities().iterator();it.hasNext();){
+			final Entity foundEntity = (Entity)it.next();
 			if (entity.getId().equals(foundEntity.getId()))
 				return foundEntity;			
 		}
@@ -173,8 +173,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 
 	private /*synchronized*/ Entity addEntityInternal(final Entity parent, final Entity entity) {
-		Copier copier = new Copier();
-		Entity mmEntity =(Entity)copier.copy(entity);
+		final Copier copier = new Copier();
+		final Entity mmEntity =(Entity)copier.copy(entity);
 		copier.copyReferences();
 		parent.getChildEntities().add(mmEntity);
 		return mmEntity;
@@ -183,8 +183,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#addTrait(org.eclipse.jst.jsf.common.metadata.Entity, org.eclipse.jst.jsf.common.metadata.Trait)
 	 */
-	public boolean addTrait(Entity entity, Trait trait) {
-		Entity returnedEntity = getMergedEntity(entity);
+	public boolean addTrait(final Entity entity, final Trait trait) {
+		final Entity returnedEntity = getMergedEntity(entity);
 		if (returnedEntity != null){
 			return addTraitAsNecessary(returnedEntity, trait);
 		}
@@ -193,7 +193,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	
 
 	private boolean addTraitAsNecessary(Entity mergedEntity, Trait trait) {
-		Trait mmTrait = getMergedTrait(mergedEntity, trait);
+		final Trait mmTrait = getMergedTrait(mergedEntity, trait);
 		if (mmTrait == null){			
 			addTraitInternal(mergedEntity, trait);
 			return true;
@@ -206,7 +206,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelMergeAssistant#setMergeComplete()
 	 */
 	public void setMergeComplete() {
-		Model model = (Model)getMergedModel().getRoot();
+		final Model model = (Model)getMergedModel().getRoot();
 		if (model != null){
 			StandardModelFactory.debug(">> Begin processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 			
@@ -226,8 +226,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @return merged Trait
 	 */
 	private Trait addTraitInternal(final Entity parent, final Trait trait) {
-		Copier copier = new Copier();
-		Trait mmTrait =(Trait)copier.copy(trait);
+		final Copier copier = new Copier();
+		final Trait mmTrait =(Trait)copier.copy(trait);
 		copier.copyReferences();
 		parent.getTraits().add(mmTrait);
 		//set the model key to know from where the trait came
@@ -242,13 +242,13 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param entity
 	 * @return merged entity
 	 */
-	private Entity getMergedEntity(Entity entity){
+	private Entity getMergedEntity(final Entity entity){
 		if (entity instanceof Model)
 			return (Entity)mergedModel.getRoot();
 		
 		Entity ret = null;
-		String entityKey = getIdRelativeToRoot(entity);
-		SimpleResultSet rs = (SimpleResultSet)entityVisitor.findEntities((Entity)mergedModel.getRoot(), entityKey);
+		final String entityKey = getIdRelativeToRoot(entity);
+		final SimpleResultSet rs = (SimpleResultSet)entityVisitor.findEntities((Entity)mergedModel.getRoot(), entityKey);
 		try {
 			if (! rs.getResults().isEmpty()) 
 				ret = (Entity)rs.getResults().get(0);				
@@ -261,7 +261,7 @@ public class MetaDataModelMergeAssistantImpl implements
 	
 	private String getIdRelativeToRoot(final Entity entity) {
 		Entity e = entity;
-		StringBuffer buf = new StringBuffer();
+		final StringBuffer buf = new StringBuffer();
 		while (e.eContainer() != null){
 			buf.insert(0, e.getId());
 			if (e.eContainer()!=null && e.eContainer().eContainer() != null)
@@ -279,8 +279,8 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param trait
 	 * @return merged Trait
 	 */
-	public Trait getMergedTrait(Entity entity, Trait trait){
-		SimpleResultSet rs = (SimpleResultSet)traitVisitor.findTraits(entity, trait.getId());
+	public Trait getMergedTrait(final Entity entity, final Trait trait){
+		final SimpleResultSet rs = (SimpleResultSet)traitVisitor.findTraits(entity, trait.getId());
 		Trait ret = null;
 		try {
 			if (! rs.getResults().isEmpty()) 
@@ -305,14 +305,14 @@ public class MetaDataModelMergeAssistantImpl implements
 
 	private void doIncludes(final Entity entity){
 		for (int j=0, groupsSize=entity.getIncludeGroups().size();j<groupsSize; j++){				
-			IncludeEntityGroup include = (IncludeEntityGroup)entity.getIncludeGroups().get(j);				
+			final IncludeEntityGroup include = (IncludeEntityGroup)entity.getIncludeGroups().get(j);				
 			if (include.getId() != null){
 				//is this a local merge?
 				if (include.getModelUri() == null||
 						(include.getModelUri()
 							.equals(getMergedModel()
 								.getModelKey().getUri())) ){
-					EntityGroup eg = ((Model)getMergedModel().getRoot()).findIncludeGroup(include.getId());
+					final EntityGroup eg = ((Model)getMergedModel().getRoot()).findIncludeGroup(include.getId());
 					addIncludeRefs(entity, eg);
 				} else //external model include
 					addIncludeRefs(entity, include);
@@ -325,15 +325,15 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param include
 	 */
 	private void addIncludeRefs(final Entity entity, final IncludeEntityGroup include) {
-		ITaglibDomainMetaDataModelContext modelContext = new TaglibDomainMetaDataModelContextImpl(				
+		final ITaglibDomainMetaDataModelContext modelContext = new TaglibDomainMetaDataModelContextImpl(				
 				getMergedModel().getModelKey().getDomain(), 
 				getMergedModel().getModelKey().getProject(), 
 				include.getModelUri()
 		);
 		
-		Model externalModel = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+		final Model externalModel = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
 		if (externalModel != null){
-			EntityGroup entityGroup = externalModel.findIncludeGroup(include.getId());		
+			final EntityGroup entityGroup = externalModel.findIncludeGroup(include.getId());		
 			addIncludeRefs(entity, entityGroup);
 		}
 		else {
@@ -362,15 +362,15 @@ public class MetaDataModelMergeAssistantImpl implements
 	}
 	
 	private void traverseAndAddIncludes(final Entity parent, final Entity entity){
-		Entity mergedEntity = addIncludedEntityAsNecessary(parent, entity);
+		final Entity mergedEntity = addIncludedEntityAsNecessary(parent, entity);
 		
 		for (final Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
-			Trait trait = (Trait)it.next();
+			final Trait trait = (Trait)it.next();
 			addTraitAsNecessary(mergedEntity, trait);
 		}
 		
 		for (final Iterator/*<EntityKey>*/ it=entity.getChildEntities().iterator();it.hasNext();){
-			Entity e = (Entity)it.next();
+			final Entity e = (Entity)it.next();
 			traverseAndAddIncludes(mergedEntity, e);//add as normal
 		}
 		

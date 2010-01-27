@@ -30,10 +30,10 @@ public interface IMetaDataModelMergeAssistant {
 	 * Method that will first check to see if an entity with the same id exists in the merged model. 
 	 * If not, it will add it.   The entities includeGroups are then also merged.
 	 * @param entity
-	 * @return flag indicating whether or not the entity was new and therefore added to the merged model
+	 * @return the merged model entity
 	 *  
 	 */
-	public boolean addEntity(Entity entity);
+	public Entity addEntity(Entity entity);
 	/**
 	 * Method will add an entity if not already existing in the merged model, and then check for an existing trait by id on the merged model's entity.
 	 * @param entity

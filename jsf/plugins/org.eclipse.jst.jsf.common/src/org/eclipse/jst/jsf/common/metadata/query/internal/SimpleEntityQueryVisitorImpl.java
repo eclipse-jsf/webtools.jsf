@@ -13,27 +13,28 @@ package org.eclipse.jst.jsf.common.metadata.query.internal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
+import java.util.StringTokenizer;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
-import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
 
 
 /**
- * A simple metadata query visitor implementing {@link org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor} and {@link org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor}.
- * - simple find entity and traits by id only 	
- * - Does not allow for wild card searchs
- * 
+ * A simple metadata query visitor implementing {@link org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor} and {@link org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor}.<p>
+ * - simple find entity and traits by id only <br>	
+ * - does not allow for wild card searchs<br>
+ * <p>
  * 	TODO - fix for case-sensitivity   https://bugs.eclipse.org/bugs/show_bug.cgi?id=212794
+ * 
  */
-public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
+public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor implements IHierarchicalEntityVisitor {
 	private HierarchicalSearchControl control;
 	private boolean _stop;
 
-	private EntityQueryComparator entityComparator;
+	private EntityQueryFilterVisitor entityQuery;
 	private List/*<Entity>*/ _entityResults;
+	private Entity initialEntityContext;
 
 	/**
 	 * Constructor that also creates a default SearchControl
@@ -47,7 +48,7 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 	 * Constructor
 	 * @param control
 	 */
-	public SimpleEntityQueryVisitorImpl(HierarchicalSearchControl control) {
+	public SimpleEntityQueryVisitorImpl(final HierarchicalSearchControl control) {
 		super();
 		this.control = control;
 	}
@@ -55,14 +56,15 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor#findEntities(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
 	 */
-	public IResultSet/*<Entity>*/ findEntities(Entity initialEntityContext,
-			String entityKey) {
+	public IResultSet/*<Entity>*/ findEntities(final Entity initialEntity,
+			final String entityKey) {
 		
 		resetQuery();
 		
-		if (initialEntityContext != null){
-			entityComparator = new EntityQueryComparator(entityKey);			
-			initialEntityContext.accept(this);			
+		if (initialEntity != null){
+			this.initialEntityContext = initialEntity;
+			entityQuery = new EntityQueryFilterVisitor(initialEntity.getId(), entityKey);			
+			initialEntity.accept(this);			
 		}
 		
 		return new SimpleResultSet(getInternalEntityResults());
@@ -80,25 +82,31 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 		return _entityResults;
 	}
 
+
+	public boolean visitEnter(final Entity entity) {
+		
+		if (entity == initialEntityContext)
+			return true;
+		
+		entityQuery.pushLevel();
+		if (entityQuery.canVisit(entity)) 
+			return entityQuery.visit(entity);
+		
+		return false;
+	}
+
+	public boolean visitLeave(Entity entity) {
+		checkShouldStopVisitingEntities();
+		if (entity != initialEntityContext)
+			entityQuery.popLevel();
+		return true;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visit(org.eclipse.jst.jsf.common.metadata.Entity)
 	 */
-	public void visit(Entity key) {		
-		switch (entityComparator.compareTo(key)){
-			case 0:
-				getInternalEntityResults().add(key);
-				break;
-			default:
-				break;
-
-		}
-		checkShouldStopVisitingEntities();
-	}
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor#visitCompleted(Entity entity)
-	 */
-	public void visitCompleted(Entity entity) {
-		entityComparator.popContext();
+	public void visit(final Entity key) {
+		//do nothing... all work now done in visitEnter/visitLeave
 	}
 	
 	/* (non-Javadoc)
@@ -110,72 +118,87 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor  {
 
 	private void checkShouldStopVisitingEntities(){
 		//implement how to set stop to signal to the entity accept() to skip visiting
-		if (control.getCountLimit()== getInternalEntityResults().size() && control.getCountLimit() != SearchControl.COUNT_LIMIT_NONE )
+		if (_stop == false
+				&& control.getCountLimit()== getInternalEntityResults().size() 
+				&& control.getCountLimit() != SearchControl.COUNT_LIMIT_NONE )
+			
 			_stop = true;
 	}
 
 	/**
-	 * Simple comparator that compares that an entity's id for with another.
-	 * Case-insensitive compare
-	 *
+	 * Visitor that filters and acts upon hierarchical data that compares that an entity's id for with another with case-insensitive compare
 	 */
-	private class EntityQueryComparator implements Comparable/*<Entity>*/{
+	private class EntityQueryFilterVisitor {
 
-		private String entityKey;
-		private EntityStack stack;
-
+		private String entityId;
+		private List<String> entityQueue;
+		private int curLevel = 0;
+		
 		/**
 		 * Constructor
-		 * @param entityKey
+		 * @param initialContextId - Entity id from which the query is rooted
+		 * @param queryKey - query key which may be compound ("A/B/C")
 		 */
-		public EntityQueryComparator(String entityKey){
-			this.entityKey = entityKey.toUpperCase();		
-			stack = new EntityStack();
+		public EntityQueryFilterVisitor(final String initialContextId, final String queryKey){			
+			init(initialContextId, queryKey);			
 		}
 		
-		public int compareTo(Object entity) {			
-			stack.push(entity);
-			return entityKey.compareTo(getRelativeId().toUpperCase());			
-		}
-		
-		/**
-		 * Pop stack
-		 */
-		public void popContext(){
-			stack.pop();
-		}
-		
-		private String getRelativeId(){
-			int size = stack.size();
-			int i = 1;
-			StringBuffer buf = new StringBuffer();
-			while(i < size){
-				Entity e = (Entity)stack.elementAt(i);
-				if (!(e instanceof EntityGroup)){
-					if (buf.length()>0) 
-						buf.append("/"); //$NON-NLS-1$
-					buf.append(e.getId());
-				}
-				i++;
+		private void init(final String initialContextId, final String key) {
+			entityQueue = new ArrayList<String>(3);
+			addLevel(initialContextId);
+			if (key == null || key.trim().equals("") || key.trim().equals("/")){  //$NON-NLS-1$ //$NON-NLS-2$
+				addLevel(""); //$NON-NLS-1$
 			}
-			return buf.toString();
+			else {
+				final StringTokenizer st = new StringTokenizer(key, "/"); //$NON-NLS-1$
+				String partialKey = st.nextToken();
+				addLevel(partialKey);
+				while (st.hasMoreElements()){
+					partialKey = st.nextToken();
+					addLevel(partialKey);
+				}
+			}
 		}
-	}
-	
-	/**
-	 * Stack used for determining relative key of an entity from the initial context.
-	 */
-	private class EntityStack extends Stack/*<Entity>*/ {
-		/**
-         * 
-         */
-        private static final long serialVersionUID = -6010267544968175003L;
 
-        /**
-         * Constructor
-         */
-        public EntityStack(){
-			super();
+		/**
+		 * @param entity
+		 * @return flag indicating that filter was passed and children may be visited
+		 */
+		public boolean canVisit(final Entity entity) {
+			// only one filter rule... does this entity id match the current level's entity id (case-insensitive) 
+			return entityId.compareTo(entity.getId().toUpperCase()) == 0;
+		}
+
+		/**
+		 * Operates on passed entity and determines if it should be part of the query results
+		 * @param entity
+		 * @return true if children of entity should be visited
+		 */
+		public boolean visit(final Entity entity) {
+			//one operation... if we have found the leaf-most entity in the query, add it to the results and go no deeper
+			if (curLevel == entityQueue.size() - 1) {
+				getInternalEntityResults().add(entity);
+				return false;
+			}
+			return true;
+		}
+
+		private void addLevel(final String key) {
+			entityQueue.add(key.toUpperCase());
+		}
+		
+		/**
+		 * Move up one level in the query 
+		 */
+		public void popLevel(){
+			entityId = entityQueue.get(--curLevel);
+		}
+		
+		/**
+		 * Move down one level in the query
+		 */
+		public void pushLevel() {
+			entityId = entityQueue.get(++curLevel);						
 		}
 	}
 

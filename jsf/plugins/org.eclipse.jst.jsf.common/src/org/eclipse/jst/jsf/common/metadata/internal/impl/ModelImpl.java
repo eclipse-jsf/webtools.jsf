@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.7 2008/11/18 22:24:39 gkessler Exp $
+ * $Id: ModelImpl.java,v 1.8 2010/01/27 23:54:32 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -12,7 +12,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -221,26 +220,15 @@ public class ModelImpl extends EntityImpl implements Model {
 	}
 	/**
 	 * <!-- begin-user-doc -->
+	 * Due to a mistake in the EMF model, Model is not inheriting accept method from Entity.   This should be fixed.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 
 	public void accept(IEntityVisitor visitor) {
-		if (visitor.stopVisiting())
-			return;
-		visitor.visit(this);
-		
-		if (!getChildEntities().isEmpty()){
-			for (Iterator/*<Entity>*/ it = getChildEntities().iterator(); it.hasNext();){
-				Entity k = (Entity)it.next();
-				k.accept(visitor);
-				if (visitor.stopVisiting())
-					return;
-			}
-		}
-
-		visitor.visitCompleted(this);
+		super.accept(visitor);
 	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
