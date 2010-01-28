@@ -128,7 +128,7 @@ public class TestELHyperlinkDetector extends TestCase {
 
 		// as a reminder if add optional values
 		assertNull(link.getTypeLabel());
-		assertNull(link.getHyperlinkText());
+		assertNotNull(link.getHyperlinkText());
 
 		{
 			final ITestHyperlink testHyperlink = (ITestHyperlink) link;
