@@ -202,15 +202,24 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	}
 	
 	private void disconnectSashPage() {
-		ISelectionProvider selectionProvider = _sashEditorPart.getSite()
-				.getSelectionProvider();
-		if (selectionProvider instanceof IPostSelectionProvider) {
-			((IPostSelectionProvider) selectionProvider)
-					.removePostSelectionChangedListener(getSelectionChangedListener(selectionProvider));
-		} else {
-			selectionProvider
-					.removeSelectionChangedListener(getSelectionChangedListener(selectionProvider));
-		}
+		//attempted fix for bug 283569... was not able to repro, but should protect against NPE
+		if (_sashEditorPart != null 
+				&& _sashEditorPart.getSite() != null 
+				&& _sashEditorPart.getSite().getSelectionProvider() != null
+				&& _selChangedListener != null) {
+			
+			final ISelectionProvider selectionProvider = _sashEditorPart.getSite()
+					.getSelectionProvider();
+			if (selectionProvider != null) {
+				if (selectionProvider instanceof IPostSelectionProvider) {
+					((IPostSelectionProvider) selectionProvider)
+							.removePostSelectionChangedListener(getSelectionChangedListener(selectionProvider));
+				} else {
+					selectionProvider
+							.removeSelectionChangedListener(getSelectionChangedListener(selectionProvider));
+				}
+			}
+		}		
 	}
 
 	private ISelectionChangedListener getSelectionChangedListener(ISelectionProvider selectionProvider) {
@@ -470,9 +479,9 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	public void dispose() {
 		//System.out.println("dispose of HTML Editor");
 		deletePreviewFiles();
-
-		disconnectDesignPage();
+		
 		disconnectSashPage();
+		disconnectDesignPage();
 		
 		IWorkbenchWindow window = getSite().getWorkbenchWindow();
 		window.getPartService().removePartListener(_partListener);
