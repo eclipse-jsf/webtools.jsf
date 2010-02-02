@@ -34,6 +34,7 @@ import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
@@ -69,41 +70,50 @@ public class LoadBundleOperation extends AbstractTransformOperation {
 						if (project != null) {
 							//attempt to locate properties file in "/{WebRoot}/WEB-INF/classes"
 							IVirtualComponent component = ComponentCore.createComponent(project);
-							IPath webRootPath = component.getRootFolder().getProjectRelativePath();
-							StringBuffer sb = new StringBuffer(webRootPath.toString());
-							sb.append(IFileFolderConstants.PATH_SEPARATOR);
-							sb.append(IFileFolderConstants.FOLDER_WEBINF);
-							sb.append(IFileFolderConstants.PATH_SEPARATOR);
-							sb.append(IFileFolderConstants.FOLDER_CLASS);
-							sb.append(IFileFolderConstants.PATH_SEPARATOR);
-							sb.append(basePath);
-							IResource resource = project.findMember(sb.toString());
-							if (resource == null) {
-								resource = findFileInSrcFolder(project, basePath);
-								if (resource != null) {
-									//load properties file and configure PreviewUtil
-									InputStream inputStream = null;
-									try {
-										File file = new File(resource.getLocation().toString());
-										inputStream = new FileInputStream(file);
-										if (inputStream != null) {
-											inputStream = new BufferedInputStream(inputStream);
-											PropertyResourceBundle bundle = new PropertyResourceBundle(inputStream);
-											if (bundle != null) {
-												if (PreviewUtil.getBUNDLE_MAP() == null) {
-													PreviewUtil.setBUNDLE_MAP(new HashMap());
-												} else {
-													PreviewUtil.getBUNDLE_MAP().clear();
+							if (component != null) {
+								IVirtualFolder rootFolder = component.getRootFolder();
+								if (rootFolder != null) {
+									IPath webRootPath = rootFolder.getProjectRelativePath();
+									if (webRootPath != null) {
+										StringBuffer sb = new StringBuffer(webRootPath.toString());
+										if (!IFileFolderConstants.PATH_SEPARATOR.equals(webRootPath.toString())) {
+											sb.append(IFileFolderConstants.PATH_SEPARATOR);
+										}
+										sb.append(IFileFolderConstants.FOLDER_WEBINF);
+										sb.append(IFileFolderConstants.PATH_SEPARATOR);
+										sb.append(IFileFolderConstants.FOLDER_CLASS);
+										sb.append(IFileFolderConstants.PATH_SEPARATOR);
+										sb.append(basePath);
+										IResource resource = project.findMember(sb.toString());
+										if (resource == null) {
+											resource = findFileInSrcFolder(project, basePath);
+											if (resource != null) {
+												//load properties file and configure PreviewUtil
+												InputStream inputStream = null;
+												try {
+													File file = new File(resource.getLocation().toString());
+													inputStream = new FileInputStream(file);
+													if (inputStream != null) {
+														inputStream = new BufferedInputStream(inputStream);
+														PropertyResourceBundle bundle = new PropertyResourceBundle(inputStream);
+														if (bundle != null) {
+															if (PreviewUtil.getBUNDLE_MAP() == null) {
+																PreviewUtil.setBUNDLE_MAP(new HashMap());
+															} else {
+																PreviewUtil.getBUNDLE_MAP().clear();
+															}
+															PreviewUtil.getBUNDLE_MAP().put(var, bundle);
+															PreviewUtil.setBUNDLE(bundle);
+															PreviewUtil.setVAR(var);
+														}
+													}
+												} catch(IOException ioe) {
+													PDPlugin.getLogger(LoadBundleOperation.class).error("LoadBundleTagConverter.convertRefresh.IOException", ioe); //$NON-NLS-1$
+												} finally {
+													ResourceUtils.ensureClosed(inputStream);
 												}
-												PreviewUtil.getBUNDLE_MAP().put(var, bundle);
-												PreviewUtil.setBUNDLE(bundle);
-												PreviewUtil.setVAR(var);
 											}
 										}
-									} catch(IOException ioe) {
-										PDPlugin.getLogger(LoadBundleOperation.class).error("LoadBundleTagConverter.convertRefresh.IOException", ioe); //$NON-NLS-1$
-									} finally {
-										ResourceUtils.ensureClosed(inputStream);
 									}
 								}
 							}
