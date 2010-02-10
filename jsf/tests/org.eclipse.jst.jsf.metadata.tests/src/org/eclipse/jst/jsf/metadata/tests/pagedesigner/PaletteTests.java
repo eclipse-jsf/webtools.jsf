@@ -36,8 +36,8 @@ public class PaletteTests extends JSPTestCase implements IJSFRuntimeRequiredV11 
 	private static String HTML_A_DESC = "This element allows the user to navigate the content of the document";
 	private static String HTML_A_SMALL_ICON = "HTML_A.gif";
 		
-	private static String JSP_ID = "JSP11";
-	private static String JSP_URI = "JSP11";
+	private static String JSP_ID = "jsp11";
+	private static String JSP_URI = "jsp11";
 	private static String JSP_LABEL = "JSP";
 	private static String JSP_DESC = "JSP Tags";
 	private static String JSP_DIR_INCLUDE_ID = "jsp:directive.include";
