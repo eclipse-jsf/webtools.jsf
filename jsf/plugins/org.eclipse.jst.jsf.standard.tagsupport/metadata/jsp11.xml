@@ -5,7 +5,7 @@
 	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
 	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	id="JSP11" 
+	id="jsp11" 
 	type="tagFile">
 	
 	<trait id="paletteInfos">

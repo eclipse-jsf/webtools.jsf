@@ -75,7 +75,7 @@ public class ElementEditFactoryRegistry
         {
             final IElementEditFactory fac = (IElementEditFactory) _factories.get(i);
             final String facuri = fac.getSupportedURI();
-            if (facuri != null && facuri.equals(uri))
+            if (facuri != null && facuri.equalsIgnoreCase(uri))
             {
                 final IElementEdit elementEdit = fac.createElementEdit(tagIdentifier);
                 if (elementEdit != null)
