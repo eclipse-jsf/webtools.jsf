@@ -145,7 +145,7 @@ public class MetaDataModelManager implements IResourceChangeListener{
             StandardModelFactory.debug(">START getModel: "+modelKeyDescriptor, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
 
             MetaDataModel model = models.get(modelKeyDescriptor);
-            if (model == null || project == null) { //<---  why is the project == null test here?!?!
+            if (model == null) {
                 // long in = System.currentTimeMillis();
                 model = loadMetadata(modelKeyDescriptor);
                 //System.out.println("Time to load "+modelContext.getURI()+": "+
