@@ -184,7 +184,7 @@ public final class CompositeTagRegistryFactory
 
     private static class TagRegistrySelectionStrategy
             extends
-            IteratorPolicyBasedStrategyComposite<IProject, ITagRegistry, String, IIdentifiableStrategy<IProject, ITagRegistry, String>>
+            IteratorPolicyBasedStrategyComposite<IProject, ITagRegistry, ITagRegistry, String, IIdentifiableStrategy<IProject, ITagRegistry, String>>
     {
         private static final ITagRegistry NO_RESULT = null;
 

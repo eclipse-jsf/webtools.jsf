@@ -65,7 +65,7 @@ public final class TLDRegistryManager extends
         
         try
         {
-            ResourcesPlugin.getWorkspace().addSaveParticipant(JSFCorePlugin.getDefault()
+            ResourcesPlugin.getWorkspace().addSaveParticipant(JSFCorePlugin.getDefault().getPluginID()
                     , participant);
         }
         catch (CoreException e)

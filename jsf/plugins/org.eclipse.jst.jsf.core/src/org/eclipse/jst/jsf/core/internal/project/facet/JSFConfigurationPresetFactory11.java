@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.j2ee.web.project.facet.WebFacetUtils;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.Messages;
@@ -64,15 +64,15 @@ public final class JSFConfigurationPresetFactory11
             
             if( webFacetVersion == WebFacetUtils.WEB_23 )
             {
-                facets.add( JavaFacetUtils.JAVA_13 );
+                facets.add( JavaFacet.VERSION_1_3 );
             }
             else if( webFacetVersion == WebFacetUtils.WEB_24 )
             {
-                facets.add( JavaFacetUtils.JAVA_14 );
+                facets.add( JavaFacet.VERSION_1_4 );
             }
             else
             {
-                facets.add( JavaFacetUtils.JAVA_50 );
+                facets.add( JavaFacet.VERSION_1_5 );
             }
             
             return new PresetDefinition( Messages.JSFFacet11_presetLabel, Messages.JSFFacet11_presetDescription, facets );

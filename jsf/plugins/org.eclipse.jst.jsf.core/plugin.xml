@@ -59,6 +59,14 @@
       </constraint>
     </project-facet-version> 
 
+    <project-facet-version facet="jst.jsf" version="2.0">
+       <constraint>
+        <and>
+          <requires facet="jst.web" version="[2.5"/>
+        </and>
+      </constraint>
+    </project-facet-version> 
+
     <action id="jst.jsf.v11.install" facet="jst.jsf" type="INSTALL" version="1.1">
       	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
         <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
@@ -69,12 +77,22 @@
 	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
  	</action>
 	
- 	<action id="jst.jsf.v12.install" facet="jst.jsf" type="INSTALL" version="[1.2">
+ 	<action id="jst.jsf.v12.install" facet="jst.jsf" type="INSTALL" version="1.2">
       	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
         <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
     </action>  
       
-    <action id="jst.jsf.v12.uninstall" facet="jst.jsf" version="[1.2" type="UNINSTALL">
+    <action id="jst.jsf.v12.uninstall" facet="jst.jsf" version="1.2" type="UNINSTALL">
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallConfig$Factory"/>
+	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+ 	</action>  
+
+ 	<action id="jst.jsf.v20.install" facet="jst.jsf" type="INSTALL" version="2.0">
+      	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+    </action>  
+      
+    <action id="jst.jsf.v20.uninstall" facet="jst.jsf" version="2.0" type="UNINSTALL">
         <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallConfig$Factory"/>
 	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
  	</action>  
@@ -109,7 +127,7 @@
   <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
     <supported>
 		<runtime-component any="true"/>
-        	<facet id="jst.jsf" version="1.1,1.2"/> 
+        	<facet id="jst.jsf" version="1.1,1.2,2.0"/> 
     </supported>
   </extension>
     

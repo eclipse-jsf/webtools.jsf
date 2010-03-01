@@ -26,15 +26,22 @@ import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
  * to perform a particular calculation and which any number for those N ways
  * may be applicable to any particular situation given the policy in place.
  * 
+ * By default, the first such strategy in policy order to provide the calculation 
+ * wins and it's result is returned.  You can modify the way the result is composed
+ * by providing your own composition strategy using the two-arg constructor.
+ * 
+ *
+ * 
  * @author cbateman
  * 
  * @param <INPUT>
  * @param <OUTPUT>
+ * @param <RESULTTYPE> 
  * @param <IDTYPE>
  * @param <STRATEGYTYPE>
  */
-public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE, STRATEGYTYPE extends IIdentifiableStrategy<INPUT, OUTPUT, IDTYPE>>
-        extends StrategyComposite<INPUT, OUTPUT, IDTYPE, STRATEGYTYPE>
+public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, RESULTTYPE, IDTYPE, STRATEGYTYPE extends IIdentifiableStrategy<INPUT, OUTPUT, IDTYPE>>
+        extends StrategyComposite<INPUT, OUTPUT, RESULTTYPE, IDTYPE, STRATEGYTYPE>
 {
     private final Map<IDTYPE, STRATEGYTYPE> _strategies;
     private IIteratorPolicy<IDTYPE>         _policy;
@@ -45,6 +52,18 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
      */
     protected IteratorPolicyBasedStrategyComposite(final IIteratorPolicy<IDTYPE> policy)
     {
+        super();
+        _policy = policy;
+        _strategies = new HashMap<IDTYPE, STRATEGYTYPE>();
+    }
+
+    /**
+     * @param policy
+     * @param compositionStrategy
+     */
+    protected IteratorPolicyBasedStrategyComposite(final IIteratorPolicy<IDTYPE> policy, AbstractCompositionStrategy<INPUT, OUTPUT, RESULTTYPE, STRATEGYTYPE> compositionStrategy)
+    {
+        super(compositionStrategy);
         _policy = policy;
         _strategies = new HashMap<IDTYPE, STRATEGYTYPE>();
     }
@@ -114,7 +133,7 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, IDTYPE
     }
 
     @Override
-    public abstract OUTPUT getNoResult();
+    public abstract RESULTTYPE getNoResult();
 
     private static class StrategyIterator<IDTYPE, STRATEGYTYPE> implements
             Iterator<STRATEGYTYPE>

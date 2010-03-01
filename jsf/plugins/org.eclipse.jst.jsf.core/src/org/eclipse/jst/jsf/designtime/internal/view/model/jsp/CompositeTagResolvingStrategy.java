@@ -23,7 +23,7 @@ import org.eclipse.jst.jsf.designtime.internal.Messages;
  */
 public class CompositeTagResolvingStrategy<TLDELEMENT>
         extends
-        IteratorPolicyBasedStrategyComposite<TLDELEMENT, ITagElement, String, ITagResolvingStrategy<TLDELEMENT, String>>
+        IteratorPolicyBasedStrategyComposite<TLDELEMENT, ITagElement, ITagElement, String, ITagResolvingStrategy<TLDELEMENT, String>>
         implements IIdentifiable<String>,
         ITagResolvingStrategy<TLDELEMENT, String>
 {
