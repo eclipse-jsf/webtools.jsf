@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.7 2010/01/21 00:01:44 gkessler Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.8 2010/03/01 18:10:07 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -96,6 +96,7 @@ public class TraitTypesPackageImpl extends EPackageImpl implements TraitTypesPac
 	 * <p>This method is used to initialize {@link TraitTypesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
+     * @return the package
      * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()

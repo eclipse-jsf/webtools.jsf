@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesSwitch.java,v 1.8 2010/01/21 00:01:44 gkessler Exp $
+ * $Id: TraitTypesSwitch.java,v 1.9 2010/03/01 18:10:08 cbateman Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -57,6 +57,7 @@ public class TraitTypesSwitch {
     /**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEObject 
      * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
@@ -68,6 +69,8 @@ public class TraitTypesSwitch {
     /**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param theEClass 
+     * @param theEObject 
      * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
@@ -76,18 +79,18 @@ public class TraitTypesSwitch {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
-			List eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch((EClass)eSuperTypes.get(0), theEObject);
-		}
+        List eSuperTypes = theEClass.getESuperTypes();
+        return
+        	eSuperTypes.isEmpty() ?
+        		defaultCase(theEObject) :
+        		doSwitch((EClass)eSuperTypes.get(0), theEObject);
 	}
 
     /**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
+     * @param classifierID 
+     * @param theEObject 
      * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
