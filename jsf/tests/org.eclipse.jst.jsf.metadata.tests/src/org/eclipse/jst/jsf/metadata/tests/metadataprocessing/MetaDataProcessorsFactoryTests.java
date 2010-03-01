@@ -30,10 +30,9 @@ public class MetaDataProcessorsFactoryTests extends AbstractBaseMetaDataTestCase
 	 * 'org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessorsFactory.getAttributeValueRuntimeTypeProcessors(Class,
 	 * String, String, String)'
 	 */
-	@SuppressWarnings("unchecked")
 	public void testGetAttributeValueRuntimeTypeProcessors() {
 		
-		List possibleValueProcessors = MetaDataEnabledProcessingFactory.getInstance().
+		List<?> possibleValueProcessors = MetaDataEnabledProcessingFactory.getInstance().
 			getAttributeValueRuntimeTypeFeatureProcessors(IPossibleValues.class, docContext, uri1, 
 					"MyTag", "MyBooleanAttr");
 		Assert.assertNotNull(possibleValueProcessors);
@@ -85,7 +84,7 @@ public class MetaDataProcessorsFactoryTests extends AbstractBaseMetaDataTestCase
 		Assert.assertTrue(possibleValueProcessors.isEmpty());
 		
 		//get extended feature - Bark Processors	
-		List barkProcessors	= MetaDataEnabledProcessingFactory.getInstance().
+		List<?> barkProcessors	= MetaDataEnabledProcessingFactory.getInstance().
 		getAttributeValueRuntimeTypeFeatureProcessors(IBarker.class, docContext, uri1, 
 				"MyTag", "BooleanAttr");  //invalid 
 		
@@ -94,7 +93,7 @@ public class MetaDataProcessorsFactoryTests extends AbstractBaseMetaDataTestCase
 		Assert.assertTrue(barkProcessors.size() == 1);
 		
 		IBarker barker = (IBarker)barkProcessors.get(0);
-		Iterator it = barker.getBarks().iterator();
+		Iterator<?> it = barker.getBarks().iterator();
 		while (it.hasNext()){
 			System.out.println((String)it.next());
 		}

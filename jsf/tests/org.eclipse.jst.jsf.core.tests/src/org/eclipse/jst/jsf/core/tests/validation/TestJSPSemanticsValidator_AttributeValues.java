@@ -17,7 +17,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -53,7 +53,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         		"/testfiles/testzips/ValidationTestProject2.zip");
         _webProject = new WebProjectTestEnvironment(
         		this,
-        		JavaFacetUtils.JAVA_50,
+        		JavaFacet.VERSION_1_5,
         		ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
         _webProject.createFromZip2(zipFile, true);
     }

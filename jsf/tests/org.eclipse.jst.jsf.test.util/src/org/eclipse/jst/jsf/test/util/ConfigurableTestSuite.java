@@ -10,11 +10,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.test.util;
 
-import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;
-
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
+
+import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;
 
 public class ConfigurableTestSuite extends TestSuite 
 {
@@ -26,7 +27,7 @@ public class ConfigurableTestSuite extends TestSuite
      * @param theClass
      * @param name
      */
-    public ConfigurableTestSuite(Class<?> theClass, String name) {
+    public ConfigurableTestSuite(Class<? extends TestCase> theClass, String name) {
         super(theClass, name);
     }
 

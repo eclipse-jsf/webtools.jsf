@@ -204,7 +204,6 @@ public class TestTagCreationFactory extends BaseTestClass
         assertExpectedResult(jspFile, "jsp");
     }
 
-    @SuppressWarnings("unchecked")
     public void testDropCustomizationDataAcquistion() throws Exception
     {
         final IFile jspFile = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
@@ -214,6 +213,7 @@ public class TestTagCreationFactory extends BaseTestClass
 
         final IAdaptable adaptable = new IAdaptable()
         {
+            @SuppressWarnings("rawtypes")
             public Object getAdapter(final Class adapter) {
                 if (Map.class == adapter)
                 {
@@ -237,7 +237,7 @@ public class TestTagCreationFactory extends BaseTestClass
 
         final IAdaptable value = ((MockCreateItemCommand)commands[0]).getCustomizationDataTesting();
         assertEquals(adaptable, value);
-        final Map map = (Map) value.getAdapter(Map.class);
+        final Map<?, ?> map = (Map<?, ?>) value.getAdapter(Map.class);
         assertNotNull(map);
         assertEquals("red", map.get("color"));
     }

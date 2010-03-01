@@ -17,7 +17,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
@@ -49,7 +49,7 @@ public class TestJSPSemanticValidation_AttrValueConverter extends TestCase
                 "/testfiles/testzips/valueHolderTest11.zip");
 
         _webProject = new WebProjectTestEnvironment(this,
-                JavaFacetUtils.JAVA_50, ProjectFacetsManager.getProjectFacet(
+                JavaFacet.VERSION_1_5, ProjectFacetsManager.getProjectFacet(
                         "jst.web").getVersion("2.4"));
         _webProject.createFromZip(zipFile, true);
 

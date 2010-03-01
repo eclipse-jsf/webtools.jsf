@@ -135,12 +135,11 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		Assert.assertEquals(null, TraitValueHelper.getValueAsString(trait));
 	}
 
-	@SuppressWarnings("unchecked")
-    public void testGetValueAsListOfStrings() {
+	public void testGetValueAsListOfStrings() {
 		//multivalStrings
 		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "multivalStrings");
 		Assert.assertNotNull(trait);
-		Assert.assertTrue(TraitValueHelper.getValueAsListOfStrings(trait) instanceof List);
+		Assert.assertTrue(TraitValueHelper.getValueAsListOfStrings(trait) instanceof List<?>);
 		List<?> vals = TraitValueHelper.getValueAsListOfStrings(trait);
 		Assert.assertEquals(3, vals.size());
 		Assert.assertTrue(vals.get(0) instanceof String);
@@ -151,7 +150,7 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 		//multivalIntegers
 		trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, "multivalIntegers");
 		Assert.assertNotNull(trait);
-		Assert.assertTrue(TraitValueHelper.getValueAsListOfStrings(trait) instanceof List);
+		Assert.assertTrue(TraitValueHelper.getValueAsListOfStrings(trait) instanceof List<?>);
 		vals = TraitValueHelper.getValueAsListOfStrings(trait);
 		Assert.assertEquals(3, vals.size());
 		Assert.assertTrue(vals.get(0) instanceof String);

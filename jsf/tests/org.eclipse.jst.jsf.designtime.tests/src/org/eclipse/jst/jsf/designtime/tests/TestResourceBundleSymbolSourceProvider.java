@@ -19,7 +19,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
@@ -50,7 +50,7 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
         _projectTestEnvironment = 
             new WebProjectTestEnvironment(
                     "TestResourceBundleSymbolSourceProvider_"+getName()
-                    , JavaFacetUtils.JAVA_50
+                    , JavaFacet.VERSION_1_5
                     , ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.5")
                     );
         _projectTestEnvironment.createProject(false);
@@ -90,11 +90,10 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
         //_structuredDocument = _structuredModel.getStructuredDocument();
 	}
 
-	@SuppressWarnings("unchecked")
-    public void testSanity()
+	public void testSanity()
 	{
         final JSFAppConfigManager appconfigMgr = JSFAppConfigManager.getInstance(_projectTestEnvironment.getTestProject());
-        final List resourceBundles = appconfigMgr.getResourceBundles();
+        final List<?> resourceBundles = appconfigMgr.getResourceBundles();
         assertEquals(2, resourceBundles.size());
 	}
 	

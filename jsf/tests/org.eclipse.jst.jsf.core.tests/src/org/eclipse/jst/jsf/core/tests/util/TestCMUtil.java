@@ -5,7 +5,7 @@ import java.util.zip.ZipFile;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
@@ -32,7 +32,7 @@ public class TestCMUtil extends TestCase {
         final ZipFile zipFile = JSFTestUtil.createZipFile(TestsPlugin.getDefault().getBundle()
                 , "/testfiles/testzips/TLDTests.zip");
 
-        _webProject = new WebProjectTestEnvironment(this, JavaFacetUtils.JAVA_50, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
+        _webProject = new WebProjectTestEnvironment(this, JavaFacet.VERSION_1_5, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
         _webProject.createFromZip(zipFile, true);
         assertNotNull(_webProject);
         

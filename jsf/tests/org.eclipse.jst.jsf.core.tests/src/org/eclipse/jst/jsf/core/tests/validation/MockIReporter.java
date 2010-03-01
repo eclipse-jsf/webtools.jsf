@@ -53,8 +53,7 @@ class MockIReporter implements IReporter
         return messages;
     }
 
-    @SuppressWarnings("unchecked")
-    public List getMessages() {
+    public List<IMessage> getMessages() {
         return _messages;
     }
 

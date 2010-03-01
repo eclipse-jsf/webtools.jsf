@@ -35,7 +35,6 @@ public class TestXPathTagMatcher extends BaseTagMatcherTestCase {
         super.setUp();
     }
 
-    @SuppressWarnings("unchecked")
     public void testSimpleMatches()
     {
         // get the view tag
@@ -71,7 +70,7 @@ public class TestXPathTagMatcher extends BaseTagMatcherTestCase {
 
         set = new ElementToTagIdentifierMapping().map(set);
 
-        for (final Iterator it = set.iterator(); it.hasNext();)
+        for (final Iterator<?> it = set.iterator(); it.hasNext();)
         {
         	TagIdentifier tagId = (TagIdentifier) it.next();
         	System.out.println(tagId.getUri());

@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.tests;
 
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.eclipse.jst.jsf.core.JSFVersion;
@@ -91,7 +92,7 @@ public class AllTests
     }
 
     private static void addTestRequiringJSFRuntime(TestSuite suite,
-            Class<?> testClass, JSFVersion jsfVersion)
+            Class<? extends TestCase> testClass, JSFVersion jsfVersion)
     {
         if (JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryValid(jsfVersion))
         {

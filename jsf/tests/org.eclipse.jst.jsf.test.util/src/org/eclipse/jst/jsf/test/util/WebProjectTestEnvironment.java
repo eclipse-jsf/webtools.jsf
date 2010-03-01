@@ -26,8 +26,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jem.util.emf.workbench.ProjectUtilities;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
 import org.eclipse.jst.common.project.facet.JavaProjectFacetCreationDataModelProvider;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetProjectCreationDataModelProperties;
@@ -55,7 +55,7 @@ public class WebProjectTestEnvironment extends ProjectTestEnvironment {
      * @param projectName
      */
     public WebProjectTestEnvironment(String projectName) {
-        this(projectName, JavaFacetUtils.JAVA_50, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
+        this(projectName, JavaFacet.VERSION_1_5, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
     }
 
     /**

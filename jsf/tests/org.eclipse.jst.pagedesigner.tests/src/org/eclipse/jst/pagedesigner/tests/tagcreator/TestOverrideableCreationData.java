@@ -133,7 +133,8 @@ public class TestOverrideableCreationData extends
 		IWritableCustomizationData data = new CustomizationDataImpl(
 				getTagIdentifier()) {
 
-			@Override
+			@SuppressWarnings("rawtypes")
+            @Override
 			public Object getAdapter(Class adapter) {
 				if (ITagDropOverrider.class == adapter) {
 					return getCustomizationAdapter();

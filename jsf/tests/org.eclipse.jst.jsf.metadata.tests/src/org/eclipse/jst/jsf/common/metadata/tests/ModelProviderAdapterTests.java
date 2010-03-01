@@ -81,12 +81,12 @@ public class ModelProviderAdapterTests extends TestCase {
 		assertEquals("This is externalized text", bundle.getString("NLS"));		
 	}
 	
-	@SuppressWarnings({"unchecked" })
+	@SuppressWarnings({ })
 	public void testClassloaderProvider() {
 		
 		IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)_trait.getSourceModelProvider().getAdapter(IClassLoaderProvider.class);
 		assertNotNull(classLoaderProvider);
-		Class klass = classLoaderProvider.loadClass("java.lang.String");
+		Class<?> klass = classLoaderProvider.loadClass("java.lang.String");
 		assertNotNull(klass);
 		
 		// when all MD was moved from WPE to tagsupport plugin, there was no longer a plugin specific class to load here.    FIX ME later.

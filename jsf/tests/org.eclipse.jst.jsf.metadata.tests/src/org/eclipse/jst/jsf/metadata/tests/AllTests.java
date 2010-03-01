@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.metadata.tests;
 
 import junit.framework.Test;
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.eclipse.jst.jsf.common.metadata.tests.AbstractEntityQueryVisitorTest;
@@ -160,7 +161,7 @@ public class AllTests {
 		return suite;
 	}
 
-	private static void addTestSuite(TestSuite suite, Class<?> klass) {
+	private static void addTestSuite(TestSuite suite, Class<? extends TestCase> klass) {
 		if (!_inited) {
 			_jsfRuntimePresentV11 = JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_1);
 			_jsfRuntimePresentV12 = JSFCoreUtilHelper.isJSFRuntimeJarsDirectoryPropertySet(JSFVersion.V1_2);

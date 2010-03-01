@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.metadata.tests.MetadataTestsPlugin;
@@ -102,7 +102,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         
         _testEnv = new WebProjectTestEnvironment
             ("MetaDataTest_"+this.getClass().getName()+"_"+getName()+"_"+_configuration.getJsfVersion()
-                    , JavaFacetUtils.JAVA_50
+                    , JavaFacet.VERSION_1_5
                     , ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion(webProjVersion));
         _testEnv.createProject(false);
         assertNotNull(_testEnv);       

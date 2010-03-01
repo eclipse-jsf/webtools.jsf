@@ -51,7 +51,6 @@ public class JSFUITestHelper {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static PreferenceDialog getPreferenceDialog(String id) {
 		PreferenceDialogWrapper dialog = null;
 		PreferenceManager manager = WorkbenchPlugin.getDefault().getPreferenceManager();
@@ -59,7 +58,7 @@ public class JSFUITestHelper {
 			dialog = new PreferenceDialogWrapper(getShell(), manager);
 			dialog.create();	
 
-			for (Iterator iterator = manager.getElements(PreferenceManager.PRE_ORDER).iterator();
+			for (Iterator<?> iterator = manager.getElements(PreferenceManager.PRE_ORDER).iterator();
 			     iterator.hasNext();)
 			{
 				IPreferenceNode node = (IPreferenceNode)iterator.next();
@@ -72,7 +71,6 @@ public class JSFUITestHelper {
 		return dialog;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static PropertyDialog getPropertyDialog(String id, IAdaptable element) {
 		PropertyDialogWrapper dialog = null;
 
@@ -90,7 +88,7 @@ public class JSFUITestHelper {
 		}
 		
 		// testing if there are pages in the manager
-		Iterator pages = manager.getElements(PreferenceManager.PRE_ORDER).iterator();		
+		Iterator<?> pages = manager.getElements(PreferenceManager.PRE_ORDER).iterator();		
 		if (!pages.hasNext())
 			return null;
 		
@@ -98,7 +96,7 @@ public class JSFUITestHelper {
 		dialog = new PropertyDialogWrapper(getShell(), manager, new StructuredSelection(element)); 
 		dialog.create();
 		dialog.getShell().setText(title);
-		for (Iterator iterator = manager.getElements(PreferenceManager.PRE_ORDER).iterator();
+		for (Iterator<?> iterator = manager.getElements(PreferenceManager.PRE_ORDER).iterator();
 		     iterator.hasNext();) {
 			IPreferenceNode node = (IPreferenceNode)iterator.next();
 			if ( node.getId().equals(id) ) {

@@ -51,12 +51,11 @@ public class TestViewObject extends TestCase
         super.tearDown();
     }
 
-    @SuppressWarnings("unchecked")
     public void testGetAllDecorators()
     {
         // we have not added anything so we should get an empty
         // immutable list
-        List allDecorators = _viewObject1.getAllDecorators();
+        List<?> allDecorators = _viewObject1.getAllDecorators();
         assertSizeAndImmutable(allDecorators, 0);
 
         // add the decorators; use different keys
@@ -71,12 +70,11 @@ public class TestViewObject extends TestCase
         assertTrue(allDecorators.contains(_decorator2));
     }
 
-    @SuppressWarnings("unchecked")
     public void testGetAllAdapters()
     {
         // we have not added anything so we should get an empty
         // immutable list
-        Map allAdapters = _viewObject1.getAllAdapters();
+        Map<?, ?> allAdapters = _viewObject1.getAllAdapters();
         assertSizeAndImmutable(allAdapters, 0);
 
         // add the decorators; use different keys
@@ -104,7 +102,7 @@ public class TestViewObject extends TestCase
         _viewObject1.addDecorator(_decorator1);
         _viewObject1.addDecorator(_decorator2);
 
-        List decorators = _viewObject1.getDecorators(_decorator1.getClass());
+        List<Decorator> decorators = _viewObject1.getDecorators(_decorator1.getClass());
         assertSizeAndImmutable(decorators, 2);
         assertTrue(decorators.contains(_decorator1));
         assertTrue(decorators.contains(_decorator2));
@@ -272,7 +270,6 @@ public class TestViewObject extends TestCase
         assertTrue(assertionOk);
     }
 
-    @SuppressWarnings("unchecked")
     public void testDefaultAdapterBehaviour()
     {
         // by default, the view object will return its "this" object
@@ -281,7 +278,7 @@ public class TestViewObject extends TestCase
         final ViewObject viewObject1 = new MockViewObject();
         final ViewObject listViewObject1 = new MockViewObjectImplementsList();
 
-        final List listAdapter = new ArrayList();
+        final List<?> listAdapter = new ArrayList<Object>();
 
         // with the non-list, get adapter will return something only if it is
         // added
@@ -310,24 +307,22 @@ public class TestViewObject extends TestCase
         assertEquals(listViewObject1, listViewObject1.getAdapter(List.class));
     }
 
-    @SuppressWarnings("unchecked")
     public void testGetDecoratorMap()
     {
         // check contract: getDecoratorMap should never return null
         // and should always return the same map
-        final Map map = ((MockViewObject) _viewObject1).getDecoratorMap();
+        final Map<?, ?> map = ((MockViewObject) _viewObject1).getDecoratorMap();
         assertNotNull(map);
         assertEquals(map, ((MockViewObject) _viewObject1).getDecoratorMap());
         assertEquals(map, ((MockViewObject) _viewObject1).getDecoratorMap());
         assertEquals(map, ((MockViewObject) _viewObject1).getDecoratorMap());
     }
 
-    @SuppressWarnings("unchecked")
     public void testGetAdapterMap()
     {
         // check contract: getAdapterMap should never return null
         // and should always return the same map
-        final Map map = ((MockViewObject) _viewObject1).getAdapterMap();
+        final Map<?, ?> map = ((MockViewObject) _viewObject1).getAdapterMap();
         assertNotNull(map);
         assertEquals(map, ((MockViewObject) _viewObject1).getAdapterMap());
         assertEquals(map, ((MockViewObject) _viewObject1).getAdapterMap());
@@ -347,7 +342,7 @@ public class TestViewObject extends TestCase
         RuntimeTestUtil.verifySame(_viewObject1, deserialized);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private void assertSizeAndImmutable(final List list, final int size)
     {
         assertEquals(size, list.size());
@@ -368,7 +363,7 @@ public class TestViewObject extends TestCase
         assertEquals(size, list.size());
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private void assertSizeAndImmutable(final Map map, final int size)
     {
         assertEquals(size, map.size());
@@ -396,24 +391,21 @@ public class TestViewObject extends TestCase
          */
         private static final long serialVersionUID = 5839704536769825171L;
 
-        @SuppressWarnings("unchecked")
         @Override
-        public Map getAdapterMap()
+        public Map<?,?> getAdapterMap()
         {
             return super.getAdapterMap();
         }
 
-        @SuppressWarnings("unchecked")
         @Override
-        public Map getDecoratorMap()
+        public Map<?, ?> getDecoratorMap()
         {
             return super.getDecoratorMap();
         }
     }
 
-    @SuppressWarnings("unchecked")
     public static class MockViewObjectImplementsList extends ViewObject
-    implements List
+    implements List<Object>
     {
         /**
          * 
@@ -430,12 +422,12 @@ public class TestViewObject extends TestCase
 
         }
 
-        public boolean addAll(final Collection c)
+        public boolean addAll(final Collection<?> c)
         {
             return false;
         }
 
-        public boolean addAll(final int index, final Collection c)
+        public boolean addAll(final int index, final Collection<?> c)
         {
             return false;
         }
@@ -450,7 +442,7 @@ public class TestViewObject extends TestCase
             return false;
         }
 
-        public boolean containsAll(final Collection c)
+        public boolean containsAll(final Collection<?> c)
         {
             return false;
         }
@@ -470,6 +462,7 @@ public class TestViewObject extends TestCase
             return false;
         }
 
+        @SuppressWarnings({ "rawtypes", "unchecked" })
         public Iterator iterator()
         {
             return null;
@@ -480,11 +473,13 @@ public class TestViewObject extends TestCase
             return 0;
         }
 
+        @SuppressWarnings({ "rawtypes", "unchecked" })
         public ListIterator listIterator()
         {
             return null;
         }
 
+        @SuppressWarnings({ "rawtypes", "unchecked" })
         public ListIterator listIterator(final int index)
         {
             return null;
@@ -500,12 +495,12 @@ public class TestViewObject extends TestCase
             return null;
         }
 
-        public boolean removeAll(final Collection c)
+        public boolean removeAll(final Collection<?> c)
         {
             return false;
         }
 
-        public boolean retainAll(final Collection c)
+        public boolean retainAll(final Collection<?> c)
         {
             return false;
         }
@@ -520,6 +515,7 @@ public class TestViewObject extends TestCase
             return 0;
         }
 
+        @SuppressWarnings({ "rawtypes", "unchecked" })
         public List subList(final int fromIndex, final int toIndex)
         {
             return null;
@@ -530,6 +526,7 @@ public class TestViewObject extends TestCase
             return null;
         }
 
+        @SuppressWarnings("unchecked")
         public Object[] toArray(final Object[] a)
         {
             return null;
@@ -556,8 +553,7 @@ public class TestViewObject extends TestCase
         private static final long serialVersionUID = 424297135847238931L;
     }
 
-    @SuppressWarnings("unchecked")
-    public static class MockAdapterImplementsList extends AbstractList
+    public static class MockAdapterImplementsList extends AbstractList<Object>
     {
 
         @Override

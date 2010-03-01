@@ -10,7 +10,7 @@ import java.util.zip.ZipFile;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.CMNodeNamedMapAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagElement;
@@ -48,7 +48,7 @@ public class TestSerializableTLDTagElement extends TestCase
         		"/testfiles/testzips/TLDTests2.zip");
         _webProject = new WebProjectTestEnvironment(
         		this,
-        		JavaFacetUtils.JAVA_50,
+        		JavaFacet.VERSION_1_5,
         		ProjectFacetsManager.getProjectFacet("jst.web").getVersion("2.4"));
         _webProject.createFromZip2(zipFile, true);
 
@@ -77,13 +77,12 @@ public class TestSerializableTLDTagElement extends TestCase
          assertFalse(((TLDTagElement)readObject).getAttributeHandlers() instanceof CMNodeNamedMapAdapter);
     }
 
-    @SuppressWarnings("unchecked")
     private void verifyUseBean(final TLDTagElement tldTagElement)
     {
         assertEquals("useBean", tldTagElement.getName());
         assertEquals("uri-supplied", tldTagElement.getUri());
         assertEquals("sample.http.taglib.UseBeanTag", tldTagElement.getTagHandlerClassName());
-        Map attributeHandlers = tldTagElement.getAttributeHandlers();
+        Map<?, ?> attributeHandlers = tldTagElement.getAttributeHandlers();
         assertTrue(attributeHandlers.containsKey("id"));
         assertTrue(attributeHandlers.containsKey("cls"));
         assertTrue(attributeHandlers.containsKey("type"));

@@ -417,9 +417,8 @@ public final class RuntimeTestUtil extends Assert
         return (COMPONENT_T) inStream.readObject();
     }
 
-    @SuppressWarnings("unchecked")
     public static void verifyImplicitAdapter(final ViewObject check,
-            final Class adapterType, final Object explicitAdapter)
+            final Class<?> adapterType, final Object explicitAdapter)
     {
         assertEquals(check, check.getAdapter(adapterType));
         // cannot add explicit adapter if check is already that type
@@ -528,7 +527,6 @@ public final class RuntimeTestUtil extends Assert
                 .keySet());
     }
 
-    @SuppressWarnings("unchecked")
     public static void verifySame(final ComponentInfo truth,
             final ComponentInfo check)
     {
@@ -562,8 +560,8 @@ public final class RuntimeTestUtil extends Assert
             verifySame((ComponentInfo) truth.getChildren().get(i), checkChild);
         }
 
-        final List truthGetAllDecorators = truth.getAllDecorators();
-        final List checkGetAllDecorators = check.getAllDecorators();
+        final List<?> truthGetAllDecorators = truth.getAllDecorators();
+        final List<?> checkGetAllDecorators = check.getAllDecorators();
 
         for (int i = 0; i < checkGetAllDecorators.size(); i++)
         {

@@ -777,10 +777,9 @@ public class TestDefaultPropertyResolver extends TestCase
         // TODO: should add coverage for dotted, non-bundles...
     }
 
-    @SuppressWarnings("unchecked")
     private void checkDottedBundleNames() throws Exception
     {
-        final Map map =
+        final Map<?, ?> map =
             ResourceBundleMapSourceFactory.getResourceBundleMapSource(
                     _jdtTestEnvironment.getProjectEnvironment()
                     .getTestProject(), "bundles.bundle1");

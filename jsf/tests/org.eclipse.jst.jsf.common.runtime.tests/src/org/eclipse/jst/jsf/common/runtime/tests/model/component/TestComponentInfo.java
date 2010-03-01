@@ -72,7 +72,6 @@ public class TestComponentInfo extends ComponentTestCase {
                 (ComponentInfo) getComponentInfo().getChildren().get(0));
     }
 
-    @SuppressWarnings("unchecked")
     public void testFacet() {
         assertTrue(getComponentInfo().getChildren().isEmpty());
         final ComponentInfo componentInfo = ComponentFactory
@@ -85,10 +84,10 @@ public class TestComponentInfo extends ComponentTestCase {
         assertEquals("header", getComponentInfo().getFacetName(componentInfo));
         assertEquals(componentInfo, getComponentInfo().getFacet("header"));
         
-        final List facetDecorators = getComponentInfo().getDecorators(
+        final List<?> facetDecorators = getComponentInfo().getDecorators(
                 ComponentFactory.FACET);
         boolean hasFacet = false;
-        for (final Iterator it = facetDecorators.iterator(); it.hasNext();) {
+        for (final Iterator<?> it = facetDecorators.iterator(); it.hasNext();) {
             final FacetDecorator decorator = (FacetDecorator) it.next();
 
             if ("header".equals(decorator.getName())) {
@@ -100,7 +99,7 @@ public class TestComponentInfo extends ComponentTestCase {
         }
         assertTrue(hasFacet);
 
-        final List useGetFacets = getComponentInfo().getFacets();
+        final List<?> useGetFacets = getComponentInfo().getFacets();
         assertEquals(facetDecorators, useGetFacets);
     }
 

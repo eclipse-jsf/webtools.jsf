@@ -109,10 +109,9 @@ public class TestResourceBundleMapSource extends TestCase
      * Basic sanity check that properties files can be loaded and contain what's
      * expected
      */
-    @SuppressWarnings("unchecked")
     public void testSanity() throws Exception
     {
-        Map map =
+        Map<?, ?> map =
             ResourceBundleMapSourceFactory.getResourceBundleMapSource(
                     _project1, "bundles.bundle1");
         assertNotNull(map);
@@ -137,10 +136,9 @@ public class TestResourceBundleMapSource extends TestCase
     /**
      * Verify the expected contents of bundle1 in project1
      */
-    @SuppressWarnings("unchecked")
     public void testContentsProject1Bundle1() throws Exception
     {
-        final Map map =
+        final Map<?, ?> map =
             ResourceBundleMapSourceFactory.getResourceBundleMapSource(
                     _project1, "bundles.bundle1");
         assertTrue(map.containsKey("prop1"));
@@ -154,10 +152,9 @@ public class TestResourceBundleMapSource extends TestCase
     /**
      * Verify the expected contents of bundle1 in project2
      */
-    @SuppressWarnings("unchecked")
     public void testContentsProject2Bundle1() throws Exception
     {
-        final Map map =
+        final Map<?, ?> map =
             ResourceBundleMapSourceFactory.getResourceBundleMapSource(
                     _project2, "bundles.bundle1");
         assertTrue(map.containsKey("x_prop1"));
@@ -178,12 +175,11 @@ public class TestResourceBundleMapSource extends TestCase
      * @throws IOException
      * @throws JavaModelException
      */
-    @SuppressWarnings("unchecked")
     public void testBundleDelete() throws JavaModelException, IOException,
     CoreException
     {
         // test the initial state, before outside meddling
-        final Map map =
+        final Map<?, ?> map =
             ResourceBundleMapSourceFactory.getResourceBundleMapSource(
                     _project1, "bundles.bundle1");
         assertTrue(map.containsKey("prop1"));
@@ -220,78 +216,10 @@ public class TestResourceBundleMapSource extends TestCase
      * @throws IOException
      * @throws JavaModelException
      */
-    // TODO: can't get the file to become out of sync
-    // @SuppressWarnings("unchecked")
-    // public void testBundleSync() throws JavaModelException, IOException,
-    // CoreException
-    // {
-    // // test the initial state, before outside meddling
-    // Map map =
-    // ResourceBundleMapSourceFactory.getResourceBundleMapSource(_project1,
-    // "bundles.bundle1");
-    // assertTrue(map.containsKey("prop1"));
-    // assertEquals("blah", map.get("prop1"));
-    // assertTrue(map.containsKey("one.dot"));
-    // assertEquals("blah1", map.get("one.dot"));
-    // assertTrue(map.containsKey("two.dot.property"));
-    // assertEquals("blah3", map.get("two.dot.property"));
-    //
-    // // turn off automatic builds so the file we trying to
-    // // de-sync doesn't get auto-sync'd
-    // final boolean autoBuild =
-    // _project1.getWorkspace().getDescription().isAutoBuilding();
-    // IWorkspaceDescription desc =
-    // _project1.getWorkspace().getDescription();
-    // desc.setAutoBuilding(false);
-    // //desc.set
-    // _project1.getWorkspace().setDescription(desc);
-    //
-    // // now fiddle with the file
-    // File bundleFile = _bundle1.getLocation().toFile();
-    //
-    // FileOutputStream outStream = null;
-    //
-    // try
-    // {
-    // outStream = new FileOutputStream(bundleFile,true);
-    // outStream.write("\r\nfiddleExternal=blah5".getBytes());
-    // outStream.flush();
-    // }
-    // finally
-    // {
-    // if (outStream != null)
-    // {
-    // outStream.close();
-    // }
-    // }
-    //
-    // // the condition we are testing for is that the file is now out
-    // // of sync with the workspace but is still accessible
-    // assertFalse(_bundle1.isSynchronized(IResource.DEPTH_ZERO));
-    // assertTrue(_bundle1.isAccessible());
-    //
-    // // the map should now be updated to include the new key
-    // assertTrue(map.containsKey("fiddleExternal"));
-    // assertEquals("blah5", map.get("fiddleExternal"));
-    //
-    // // as well as the original ones (we appended to the file)
-    // assertTrue(map.containsKey("prop1"));
-    // assertEquals("blah", map.get("prop1"));
-    // assertTrue(map.containsKey("one.dot"));
-    // assertEquals("blah1", map.get("one.dot"));
-    // assertTrue(map.containsKey("two.dot.property"));
-    // assertEquals("blah3", map.get("two.dot.property"));
-    //
-    // // set auto-build back to it's initial state
-    // desc = _project1.getWorkspace().getDescription();
-    // desc.setAutoBuilding(autoBuild);
-    // _project1.getWorkspace().setDescription(desc);
-    // }
-    @SuppressWarnings("unchecked")
     public void testProjectCloseCleanup() throws Exception
     {
         // test the initial state, before outside meddling
-        Map map =
+        Map<?, ?> map =
             ResourceBundleMapSourceFactory.getResourceBundleMapSource(
                     _project3, "bundles.bundle1");
         assertTrue(map.containsKey("prop1"));

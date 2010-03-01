@@ -25,7 +25,7 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.core.JSFVersion;
@@ -121,7 +121,7 @@ public abstract class BaseTestCase extends ConfigurableTestCase
         
         _testEnv = new WebProjectTestEnvironment
             ("ELValidationTest_"+this.getClass().getName()+"_"+getName()+"_"+_configuration.getJsfVersion()
-                    , JavaFacetUtils.JAVA_50
+                    , JavaFacet.VERSION_1_5
                     , ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion(webProjVersion));
         _testEnv.createProject(false);
         assertNotNull(_testEnv);       

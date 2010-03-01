@@ -8,7 +8,7 @@ Bundle-Localization: plugin
 Bundle-ClassPath: jsfcontentassisttests.jar
 Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
- org.junit;bundle-version="[3.8.1,4.0.0)",
+ org.junit;bundle-version="3.8.1",
  org.eclipse.jst.jsf.test.util;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.wst.sse.core;bundle-version="[1.1.0,1.2.0)",

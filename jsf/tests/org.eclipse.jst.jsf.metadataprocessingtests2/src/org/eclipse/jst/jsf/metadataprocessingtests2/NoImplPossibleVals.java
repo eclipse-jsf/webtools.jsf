@@ -25,13 +25,11 @@ public class NoImplPossibleVals extends AbstractMetaDataEnabledFeature implement
 		super();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List getPossibleValues() {
+	public List<?> getPossibleValues() {
 		return getPossibleVals();
 	}
 
-	@SuppressWarnings("unchecked")
-	private List getPossibleVals() {
+	private List<?> getPossibleVals() {
 		return getTraitValueAsListOfStrings(IPossibleValues.POSSIBLE_VALUES_PROP_NAME);
 //		return CMAnnotationHelper.getCMAttributePropertyValues(getCMAnnotationContext().getBundleId(), getCMAnnotationContext().getUri(),
 //				getCMAnnotationContext().getElementName(), getCMAnnotationContext().getAttributeName(),

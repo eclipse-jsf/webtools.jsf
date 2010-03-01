@@ -16,7 +16,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.j2ee.common.Description;
 import org.eclipse.jst.j2ee.common.Listener;
 import org.eclipse.jst.j2ee.common.ParamValue;
@@ -45,7 +45,7 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
 {
     private static final IProjectFacetVersion WEB_MODULE_VERSION = ProjectFacetsManager.getProjectFacet("jst.web").getVersion("2.4");
 
-    private static final IProjectFacetVersion JAVA_VERSION = JavaFacetUtils.JAVA_50;
+    private static final IProjectFacetVersion JAVA_VERSION = JavaFacet.VERSION_1_5;
 
     private static final String PROJECT_NAME_PREFIX = "_TEST_PROJECT_NAME_FOR_J2EE";
     private static final String SERVLET_NAME = "_TEST_SERVLET_NAME";

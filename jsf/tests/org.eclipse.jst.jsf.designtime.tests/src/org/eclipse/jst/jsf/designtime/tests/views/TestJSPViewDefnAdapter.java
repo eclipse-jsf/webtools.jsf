@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.designtime.tests.views;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -99,7 +99,7 @@ public class TestJSPViewDefnAdapter extends TestCase
 
         _webProjectTestEnv =
                 new WebProjectTestEnvironment(getClass().getName() + "_"
-                        + getName(), JavaFacetUtils.JAVA_50,
+                        + getName(), JavaFacet.VERSION_1_5,
                         ProjectFacetsManager.getProjectFacet("jst.web")
                                 .getVersion(jst_web_version));
 

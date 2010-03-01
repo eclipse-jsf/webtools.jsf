@@ -7,7 +7,7 @@ Bundle-Activator: org.eclipse.jst.jsf.common.runtime.tests.RuntimeTestPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.jst.jsf.common.runtime;bundle-version="[1.0.0,2.0.0)",
- org.junit
+ org.junit;bundle-version="3.8.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.jst.jsf.common.runtime.tests.model

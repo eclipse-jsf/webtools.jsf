@@ -15,7 +15,7 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jst.common.project.facet.JavaFacetUtils;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
@@ -69,7 +69,7 @@ abstract class BaseTestClass extends TestCase
         final String jst_jsf_version = _jsfVersion.toString();
 
         _webProjectTestEnv = new WebProjectTestEnvironment(getClass().getName()
-                + "_" + getName(), JavaFacetUtils.JAVA_50, ProjectFacetsManager
+                + "_" + getName(), JavaFacet.VERSION_1_5, ProjectFacetsManager
                 .getProjectFacet("jst.web").getVersion(jst_web_version));
 
         _webProjectTestEnv.createProject(false);

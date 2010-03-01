@@ -48,12 +48,11 @@ public class PropertyFileStressTest extends JSPTestCase
         super.tearDown();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void testSanity() throws RuntimeException
     {
         super.testSanity();
-        Map resourceBundleMapSource;
+        Map<?,?> resourceBundleMapSource;
         try
         {
             resourceBundleMapSource = ResourceBundleMapSourceFactory
@@ -72,7 +71,6 @@ public class PropertyFileStressTest extends JSPTestCase
         assertEquals(8687, resourceBundleMapSource.size());
     }
 
-    @SuppressWarnings("unchecked")
     public void testMapDescriptor_GetProperties() throws JavaModelException,
             IOException, CoreException
     {
@@ -82,7 +80,7 @@ public class PropertyFileStressTest extends JSPTestCase
 
         for (int i = 0; i < NUM_RESOURCE_TESTS; i++)
         {
-            final Map mapSource = ResourceBundleMapSourceFactory
+            final Map<?,?> mapSource = ResourceBundleMapSourceFactory
                     .getResourceBundleMapSource(_testEnv.getTestProject(),
                             "res.stress1");
             final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE
@@ -95,7 +93,6 @@ public class PropertyFileStressTest extends JSPTestCase
         perfTracker.printReport(System.out);
     }
 
-    @SuppressWarnings("unchecked")
     public void testResourceMapSourceFactory() throws JavaModelException,
             IOException, CoreException
     {
@@ -107,7 +104,7 @@ public class PropertyFileStressTest extends JSPTestCase
         {
             final long startTime = System.nanoTime();
             @SuppressWarnings("unused")
-            Map resourceBundleMapSource = ResourceBundleMapSourceFactory
+            Map<?,?> resourceBundleMapSource = ResourceBundleMapSourceFactory
                     .getResourceBundleMapSource(_testEnv.getTestProject(),
                             "res.stress1");
             perfTracker.recordTime(System.nanoTime() - startTime);
@@ -115,7 +112,6 @@ public class PropertyFileStressTest extends JSPTestCase
         perfTracker.printReport(System.out);
     }
 
-    @SuppressWarnings("unchecked")
     public void testResourceMapSource_GetEntrySet() throws JavaModelException,
             IOException, CoreException
     {
@@ -125,7 +121,7 @@ public class PropertyFileStressTest extends JSPTestCase
 
         for (int i = 0; i < NUM_RESOURCE_TESTS; i++)
         {
-            Map resourceBundleMapSource = ResourceBundleMapSourceFactory
+            Map<?,?> resourceBundleMapSource = ResourceBundleMapSourceFactory
                     .getResourceBundleMapSource(_testEnv.getTestProject(),
                             "res.stress1");
             final long startTime = System.nanoTime();

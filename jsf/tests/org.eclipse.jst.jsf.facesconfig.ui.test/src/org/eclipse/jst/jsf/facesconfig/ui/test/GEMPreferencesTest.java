@@ -46,7 +46,6 @@ public class GEMPreferencesTest extends FacesConfigEditorTest {
 	 * Test method for
 	 * {@link org.eclipse.jst.jsf.facesconfig.ui.preference.GEMPreferences#GEMPreferences()}.
 	 */
-	@SuppressWarnings("unchecked")
 	public void testGEMPreferences() {
 
 		PreferenceDialog dialog = null;
@@ -55,7 +54,7 @@ public class GEMPreferencesTest extends FacesConfigEditorTest {
 		dialog = new PreferenceDialogWrapper(getShell(), manager);
 		dialog.create();
 
-		for (Iterator iterator = manager.getElements(
+		for (Iterator<?> iterator = manager.getElements(
 				PreferenceManager.PRE_ORDER).iterator(); iterator.hasNext();) {
 			IPreferenceNode node = (IPreferenceNode) iterator.next();
 			if (node.getId().equals(GEM_PREFERENCE_ID)) {

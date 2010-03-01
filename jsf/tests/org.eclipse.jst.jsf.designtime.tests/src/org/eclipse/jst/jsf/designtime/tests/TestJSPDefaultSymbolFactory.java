@@ -96,8 +96,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 		assertTrue(factory.supports(context));
 	}
 
-	@SuppressWarnings("unchecked")
-    public void testCreate()
+	public void testCreate()
 	{
 		final JSPDefaultSymbolFactory factory = new JSPDefaultSymbolFactory();
 
@@ -107,13 +106,13 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 
 		ISymbol var =
 			factory.create("notAVariable"
-				, ISymbolConstants.SYMBOL_SCOPE_REQUEST, context, new ArrayList(), null);
+				, ISymbolConstants.SYMBOL_SCOPE_REQUEST, context, new ArrayList<Object>(), null);
 		assertNull(var);
 
 		var = factory.create("bundle"
 			, ISymbolConstants.SYMBOL_SCOPE_REQUEST
 			, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 552)
-			, new ArrayList(), null);
+			, new ArrayList<Object>(), null);
 		
 		// load bundle introduces a variable
 		assertNotNull(var);
@@ -123,7 +122,7 @@ public class TestJSPDefaultSymbolFactory extends TestCase
 		var = factory.create("row"
 				, ISymbolConstants.SYMBOL_SCOPE_REQUEST
 				, IStructuredDocumentContextFactory.INSTANCE.getContext(_structuredDocument, 1361)
-				, new ArrayList(), null);
+				, new ArrayList<Object>(), null);
 		
 		// data table introduces a variable
 		assertNotNull(var);

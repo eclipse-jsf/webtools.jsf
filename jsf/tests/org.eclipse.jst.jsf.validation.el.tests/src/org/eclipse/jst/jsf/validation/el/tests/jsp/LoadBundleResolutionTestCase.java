@@ -126,7 +126,6 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
     }
 
 
-    @SuppressWarnings("unchecked")
     private void ensureMissingBundleValidation()
     {
         final IStructuredDocumentContext context =
@@ -141,7 +140,7 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         assertEquals(IJSFConstants.ATTR_BASENAME, attr.getLocalName());
 
         // verify that attribute value validation is picking up on missing bundles
-        final List vv =
+        final List<?> vv =
             MetaDataEnabledProcessingFactory.getInstance()
             .getAttributeValueRuntimeTypeFeatureProcessors
             (IValidValues.class, context, ITLDConstants.URI_JSF_CORE
@@ -149,7 +148,7 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
 
         boolean validatesMissingBundle = false;
 
-        for (final Iterator it = vv.iterator();it.hasNext();)
+        for (final Iterator<?> it = vv.iterator();it.hasNext();)
         {
             final IValidValues v = (IValidValues)it.next();
             if (attributeVal == null)
