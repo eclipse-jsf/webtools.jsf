@@ -263,5 +263,12 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 		assertNull(entity);
 
 	}
+	
+	public void testNullProject() {		
+		Model model = TaglibDomainMetaDataQueryHelper.getModel(nullProjectContext);
+		assertNotNull(model);
+		Model model1 = TaglibDomainMetaDataQueryHelper.getModel(nullProjectContext);
+		assertEquals(model, model1);		
+	}
 
 }
