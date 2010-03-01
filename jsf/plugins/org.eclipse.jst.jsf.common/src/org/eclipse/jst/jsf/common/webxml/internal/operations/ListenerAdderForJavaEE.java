@@ -30,6 +30,10 @@ public class ListenerAdderForJavaEE implements Runnable
     private final String listenerClass;
 
 
+    /**
+     * @param project
+     * @param listenerClass
+     */
     public ListenerAdderForJavaEE (final IProject project,
                                    final String listenerClass)
     {

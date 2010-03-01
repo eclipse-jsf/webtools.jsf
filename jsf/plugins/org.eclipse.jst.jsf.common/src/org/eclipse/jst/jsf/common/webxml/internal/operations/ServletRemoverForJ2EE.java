@@ -34,6 +34,10 @@ public class ServletRemoverForJ2EE implements Runnable
     private final String servletClassName;
 
 
+    /**
+     * @param project
+     * @param servletClassName
+     */
     public ServletRemoverForJ2EE (final IProject project,
                                   final String servletClassName)
     {

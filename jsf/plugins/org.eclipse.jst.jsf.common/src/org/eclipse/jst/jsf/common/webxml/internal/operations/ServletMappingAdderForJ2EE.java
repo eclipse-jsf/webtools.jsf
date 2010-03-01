@@ -32,6 +32,12 @@ public class ServletMappingAdderForJ2EE implements Runnable
     private final String urlPatternString;
 
 
+    /**
+     * @param project
+     * @param servletName
+     * @param servletClass
+     * @param urlPatternString
+     */
     public ServletMappingAdderForJ2EE (final IProject project,
                                        final String servletName,
                                        final String servletClass,

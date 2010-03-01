@@ -35,6 +35,10 @@ public class FilterRemoverForJavaEE implements Runnable
     private final String filterClassName;
 
 
+    /**
+     * @param project
+     * @param filterClassName
+     */
     public FilterRemoverForJavaEE (final IProject project,
                                    final String filterClassName)
     {

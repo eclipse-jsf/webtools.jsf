@@ -39,6 +39,12 @@ public class WebXmlUpdaterForJ2EE extends AbstractWebXmlUpdater
     private final WebApp webApp;
 
 
+    /**
+     * @param webAppObj
+     * @param project
+     * @param provider
+     * @param monitor
+     */
     public WebXmlUpdaterForJ2EE (final Object webAppObj,
                                  final IProject project,
                                  final IModelProvider provider,

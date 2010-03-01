@@ -81,6 +81,11 @@ public class WebXmlUpdater
     }
 
 
+    /**
+     * @param servletName
+     * @param servletClass
+     * @param loadOnStartup
+     */
     public void addServlet (final String servletName,
                             final String servletClass,
                             final String loadOnStartup)
@@ -98,6 +103,11 @@ public class WebXmlUpdater
     }
 
 
+    /**
+     * @param servletName
+     * @param servletClass
+     * @param urlPattern
+     */
     public void addServletMapping (final String servletName,
                                    final String servletClass,
                                    final String urlPattern)
@@ -106,6 +116,10 @@ public class WebXmlUpdater
     }
 
 
+    /**
+     * @param filterName
+     * @param filterClass
+     */
     public void addFilter (final String filterName,
                            final String filterClass)
     {
@@ -122,6 +136,11 @@ public class WebXmlUpdater
     }
 
 
+    /**
+     * @param filterName
+     * @param filterClass
+     * @param servletName
+     */
     public void addFilterMapping (final String filterName,
                                   final String filterClass,
                                   final String servletName)
@@ -130,6 +149,11 @@ public class WebXmlUpdater
     }
 
 
+    /**
+     * @param paramName
+     * @param paramValue
+     * @param description
+     */
     public void addContextParam (final String paramName,
                                  final String paramValue,
                                  final String description)
@@ -138,6 +162,9 @@ public class WebXmlUpdater
     }
 
 
+    /**
+     * @param listenerClass
+     */
     public void addListener (final String listenerClass)
     {
         updater.addListener(listenerClass);

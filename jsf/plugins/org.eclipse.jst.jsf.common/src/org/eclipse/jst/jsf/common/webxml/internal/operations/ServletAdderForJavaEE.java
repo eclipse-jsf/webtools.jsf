@@ -32,6 +32,12 @@ public class ServletAdderForJavaEE implements Runnable
     private final String loadOnStartup;
 
 
+    /**
+     * @param project
+     * @param servletName
+     * @param servletClass
+     * @param loadOnStartup
+     */
     public ServletAdderForJavaEE (final IProject project,
                                   final String servletName,
                                   final String servletClass,

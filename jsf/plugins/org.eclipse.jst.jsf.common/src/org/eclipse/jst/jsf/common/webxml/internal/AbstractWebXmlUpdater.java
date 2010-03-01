@@ -27,12 +27,30 @@ import org.eclipse.jst.j2ee.model.IModelProvider;
  */
 public abstract class AbstractWebXmlUpdater
 {
+    /**
+     * the web app object.  JavaEE has own type and J2EE has another.  They are not object compatible.
+     */
     protected final Object webAppObj;
+    /**
+     * the project
+     */
     protected final IProject project;
+    /**
+     * the model provider used to modify the model
+     */
     protected final IModelProvider provider;
+    /**
+     * the progress monitor
+     */
     protected final IProgressMonitor monitor;
 
 
+    /**
+     * @param webAppObj
+     * @param project
+     * @param provider
+     * @param monitor
+     */
     public AbstractWebXmlUpdater (final Object webAppObj,
                                   final IProject project,
                                   final IModelProvider provider,
@@ -45,11 +63,21 @@ public abstract class AbstractWebXmlUpdater
     }
 
 
+    /**
+     * @param servletName
+     * @param servletClass
+     * @param loadOnStartup
+     */
     public abstract void addServlet (final String servletName,
                                      final String servletClass,
                                      final String loadOnStartup);
 
 
+    /**
+     * @param servletName
+     * @param servletClass
+     * @param urlPattern
+     */
     public abstract void addServletMapping (final String servletName,
                                             final String servletClass,
                                             final String urlPattern);
@@ -64,6 +92,10 @@ public abstract class AbstractWebXmlUpdater
     public abstract void removeServlet (final String servletClassName);
 
 
+    /**
+     * @param filterName
+     * @param filterClass
+     */
     public abstract void addFilter (final String filterName,
                                     final String filterClass);
 
@@ -76,15 +108,28 @@ public abstract class AbstractWebXmlUpdater
     public abstract void removeFilter (final String filterName);
 
 
+    /**
+     * @param filterName
+     * @param filterClass
+     * @param servletName
+     */
     public abstract void addFilterMapping (final String filterName,
                                            final String filterClass,
                                            final String servletName);
 
 
+    /**
+     * @param paramName
+     * @param paramValue
+     * @param description
+     */
     public abstract void addContextParam (final String paramName,
                                           final String paramValue,
                                           final String description);
 
 
+    /**
+     * @param listenerClass
+     */
     public abstract void addListener (final String listenerClass);
 }

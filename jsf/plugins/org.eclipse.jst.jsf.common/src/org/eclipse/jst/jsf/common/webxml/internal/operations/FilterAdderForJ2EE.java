@@ -31,6 +31,11 @@ public class FilterAdderForJ2EE implements Runnable
     private final String filterClass;
 
 
+    /**
+     * @param project
+     * @param filterName
+     * @param filterClass
+     */
     public FilterAdderForJ2EE (final IProject project,
                                final String filterName,
                                final String filterClass)

@@ -32,6 +32,12 @@ public class ContextParamAdderForJavaEE implements Runnable
     private final String description;
 
 
+    /**
+     * @param project
+     * @param paramName
+     * @param paramValue
+     * @param description
+     */
     public ContextParamAdderForJavaEE (final IProject project,
                                        final String paramName,
                                        final String paramValue,

@@ -31,8 +31,26 @@ import org.eclipse.jst.javaee.web.WebFactory;
  * @author Debajit Adhikary
  *
  */
+/**
+ * @author cbateman
+ *
+ */
+/**
+ * @author cbateman
+ *
+ */
+/**
+ * @author cbateman
+ *
+ */
 public class WebXmlUtilsForJavaEE
 {
+    /**
+     * @param webapp
+     * @param servletName
+     * @param servletClass
+     * @param loadOnStartup
+     */
     public static void addServlet (final WebApp webapp,
                                    final String servletName,
                                    final String servletClass,
@@ -51,6 +69,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param servletName
+     * @param servletClass
+     * @return true if the servlet exists.
+     */
     public static boolean existsServlet (final WebApp webapp,
                                          final String servletName,
                                          final String servletClass)
@@ -59,6 +83,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param servletName
+     * @param servletClass
+     * @return the servlet or null if not found.
+     */
     public static Servlet findServlet (final WebApp webapp,
                                        final String servletName,
                                        final String servletClass)
@@ -76,6 +106,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param servletName
+     * @param webApp
+     * @return the servlet or null if not found.
+     */
     public static Servlet findServlet (final String servletName,
                                        final WebApp webApp)
     {
@@ -89,6 +124,10 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param servlet
+     */
     public static void removeServlet (final WebApp webApp,
                                       final Servlet servlet)
     {
@@ -96,6 +135,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param servletName
+     * @param servletClass
+     * @param urlPatternString
+     */
     public static void addServletMapping (final WebApp webApp,
                                           final String servletName,
                                           final String servletClass,
@@ -113,6 +158,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param servletName
+     * @param urlPatternString
+     * @return true if the servlet mapping exists.
+     */
     public static boolean existsServletMapping (final WebApp webApp,
                                                 final String servletName,
                                                 final String urlPatternString)
@@ -121,6 +172,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param servletName
+     * @param urlPatternString
+     * @return the servlet mapping or null if doesn't exist.
+     */
     public static ServletMapping findServletMapping (final WebApp webApp,
                                                      final String servletName,
                                                      final String urlPatternString)
@@ -140,7 +197,10 @@ public class WebXmlUtilsForJavaEE
         return null;
     }
 
-
+    /**
+     * @param webApp
+     * @param servlet
+     */
     public static void removeServletMappings (final WebApp webApp,
                                               final Servlet servlet)
     {
@@ -162,6 +222,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param filterName
+     * @param filterClass
+     */
     public static void addFilter (final WebApp webapp,
                                   final String filterName,
                                   final String filterClass)
@@ -173,6 +238,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param filterName
+     * @param filterClass
+     * @return the filter or null if it doesn't exist.
+     */
     public static Filter createFilter (final String filterName,
                                        final String filterClass)
     {
@@ -183,6 +253,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param filterName
+     * @param filterClass
+     * @return true if the filter exists.
+     */
     public static boolean existsFilter (final WebApp webapp,
                                         final String filterName,
                                         final String filterClass)
@@ -191,6 +267,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param filterName
+     * @param filterClass
+     * @return the filter or null if not found.
+     */
     public static Filter findFilter (final WebApp webapp,
                                      final String filterName,
                                      final String filterClass)
@@ -208,6 +290,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param filterClassName
+     * @return the filter or null if not found.
+     */
     public static Filter findFilter (final WebApp webApp,
                                      final String filterClassName)
     {
@@ -221,6 +308,10 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param filter
+     */
     public static void removeFilter (final WebApp webApp,
                                      final Filter filter)
     {
@@ -228,6 +319,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param filterName
+     * @param servletName
+     */
     public static void addFilterMapping (final WebApp webapp,
                                          final String filterName,
                                          final String servletName)
@@ -239,6 +335,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param filterName
+     * @param servletName
+     * @return the filter mapping or null if not found.
+     */
     public static FilterMapping createFilterMapping (final String filterName,
                                                      final String servletName)
     {
@@ -250,6 +351,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param filterName
+     * @param servletName
+     * @return true if the filter mapping exists.
+     */
     public static boolean existsFilterMapping (final WebApp webapp,
                                                final String filterName,
                                                final String servletName)
@@ -258,6 +365,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param filterName
+     * @param servletName
+     * @return the filter mapping or null.
+     */
     public static FilterMapping findFilterMapping (final WebApp webapp,
                                                    final String filterName,
                                                    final String servletName)
@@ -276,6 +389,10 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param filter
+     */
     public static void removeFilterMappings (final WebApp webApp,
                                              final Filter filter)
     {
@@ -297,6 +414,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param paramName
+     * @param paramValue
+     * @param description
+     */
     public static void addContextParam (final WebApp webApp,
                                         final String paramName,
                                         final String paramValue,
@@ -309,6 +432,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param paramName
+     * @param paramValue
+     * @param descriptionString
+     * @return the param value or null if not found.
+     */
     public static ParamValue createContextParam (final String paramName,
                                                  final String paramValue,
                                                  final String descriptionString)
@@ -329,6 +458,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param paramName
+     * @param paramValue
+     * @return true if the context param exists.
+     */
     public static boolean existsContextParam (final WebApp webApp,
                                               final String paramName,
                                               final String paramValue)
@@ -337,6 +472,12 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webApp
+     * @param paramName
+     * @param paramValue
+     * @return the param value or null if not found.
+     */
     public static ParamValue findContextParam (final WebApp webApp,
                                                final String paramName,
                                                final String paramValue)
@@ -352,6 +493,10 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param listenerClass
+     */
     public static void addListener (final WebApp webapp,
             final String listenerClass)
     {
@@ -366,6 +511,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param listenerClass
+     * @return true if the listener exists.
+     */
     public static boolean existsListener (final WebApp webapp,
                                           final String listenerClass)
     {
@@ -373,6 +523,11 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param webapp
+     * @param listenerClass
+     * @return the listener or null if not found.
+     */
     public static Listener findListener (final WebApp webapp,
                                          final String listenerClass)
     {
@@ -384,6 +539,10 @@ public class WebXmlUtilsForJavaEE
     }
 
 
+    /**
+     * @param urlPatternString
+     * @return the UrlPattern or null.
+     */
     public static UrlPatternType createUrlPattern (final String urlPatternString)
     {
         final UrlPatternType urlPattern = JavaeeFactory.eINSTANCE.createUrlPatternType();

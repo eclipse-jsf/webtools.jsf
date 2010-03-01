@@ -33,6 +33,12 @@ public class FilterMapperAdderForJ2EE implements Runnable
     private final String servletName;
 
 
+    /**
+     * @param project
+     * @param filterName
+     * @param filterClass
+     * @param servletName
+     */
     public FilterMapperAdderForJ2EE (final IProject project,
                                final String filterName,
                                final String filterClass,
