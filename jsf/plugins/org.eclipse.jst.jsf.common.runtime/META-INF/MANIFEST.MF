@@ -6,7 +6,7 @@ Bundle-Version: 1.0.201.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.common.runtime.internal.JSFCommonRuntimePlugin
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.jst.jsf.common.runtime.internal;x-internal:=true,
  org.eclipse.jst.jsf.common.runtime.internal.debug;x-friends:="org.eclipse.jst.jsf.common.runtime.tests",
  org.eclipse.jst.jsf.common.runtime.internal.model;x-friends:="org.eclipse.jst.jsf.common.runtime.tests",
