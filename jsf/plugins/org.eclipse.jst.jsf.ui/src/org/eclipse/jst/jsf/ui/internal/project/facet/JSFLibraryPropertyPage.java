@@ -10,6 +10,7 @@ import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
  * TODO
  *
  */
+@SuppressWarnings("deprecation")
 public final class JSFLibraryPropertyPage
 
     extends FacetLibraryPropertyPage

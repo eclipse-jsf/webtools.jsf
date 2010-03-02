@@ -363,7 +363,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 		else if (isNew || managedProperty.getMapEntries() == null) {
 			mapEntries = FacesConfigFactory.eINSTANCE.createMapEntriesType();
 		} else {
-			mapEntries = (MapEntriesType) EcoreUtil.copy(managedProperty
+			mapEntries = EcoreUtil.copy(managedProperty
 					.getMapEntries());
 		}
 
@@ -389,7 +389,7 @@ public class AddEditManagedPropertyDialog extends Dialog {
 		else if (isNew || managedProperty.getListEntries() == null) {
 			listEntries = FacesConfigFactory.eINSTANCE.createListEntriesType();
 		} else {
-			listEntries = (ListEntriesType) EcoreUtil.copy(managedProperty
+			listEntries = EcoreUtil.copy(managedProperty
 					.getListEntries());
 		}
 
