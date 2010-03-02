@@ -47,6 +47,7 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action.Type;
  * @author cbateman
  * 
  */
+@SuppressWarnings("deprecation")
 public class JSFFacetedTestEnvironment
 {
     private final WebProjectTestEnvironment _projectTestEnvironment;

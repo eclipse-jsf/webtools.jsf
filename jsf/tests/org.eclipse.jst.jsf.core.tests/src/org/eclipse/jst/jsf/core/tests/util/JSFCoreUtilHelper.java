@@ -47,6 +47,7 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Node;
 
+@SuppressWarnings("deprecation")
 public final class JSFCoreUtilHelper
 {
     private static final String JSFRUNTIMEJARSDIR = "jsfRuntimeJarsDirectoryV";
