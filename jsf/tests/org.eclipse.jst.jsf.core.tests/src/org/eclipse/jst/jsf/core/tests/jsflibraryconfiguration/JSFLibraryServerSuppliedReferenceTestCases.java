@@ -33,6 +33,7 @@ import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.wst.common.componentcore.internal.util.IModuleConstants;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryServerSuppliedReferenceTestCases extends TestCase {
 	WebProjectTestEnvironment projectTestEnvironment;
 	JDTTestEnvironment jdtTestEnv;

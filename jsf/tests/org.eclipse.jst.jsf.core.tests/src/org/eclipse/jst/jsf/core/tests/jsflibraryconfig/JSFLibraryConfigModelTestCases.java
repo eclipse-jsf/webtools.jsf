@@ -12,19 +12,19 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryConfigModelTestCases extends TestCase {
-	final static private String QUALIFIEDNAME = "org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData";	
-	private static final String PROJ_NAME = "_TEST_CFGLIBRARYMODEL_PROJECT";
-	private static final String PROJ_NAME2 = "_TEST_CFGLIBRARYMODEL_PROJECT2";
+//	final static private String QUALIFIEDNAME = "org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigProjectData";	
+//	private static final String PROJ_NAME = "_TEST_CFGLIBRARYMODEL_PROJECT";
+//	private static final String PROJ_NAME2 = "_TEST_CFGLIBRARYMODEL_PROJECT2";
 //	private JSFLibraryConfiglModelSource modelSrc = null;
 //	private JSFLibraryConfiglModelSource modelSrcWithServerSupplied = null;
-	private IProject project;
-	private int numCompLibs;	
+//	private IProject project;
+//	private int numCompLibs;	
 	
 
 	protected void setUp() throws Exception {
@@ -36,7 +36,7 @@ public class JSFLibraryConfigModelTestCases extends TestCase {
 		/* number of components is changed in workspace when running the whole test suite.
 		 * Recording the number from registry for testing.
 		 */  
-		numCompLibs = libReg.getNonImplJSFLibraries().size();
+		/*numCompLibs = */libReg.getNonImplJSFLibraries().size();
 			
 		String[] compLibs = new String[1];
 		JSFLibrary lib = (JSFLibrary)libReg.getNonImplJSFLibraries().get(0);

@@ -19,6 +19,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 
+@SuppressWarnings("deprecation")
 public class JSFProjectLibraryReferenceTestCases extends TestCase {
 	private String JSF_NAME = "MockJSFLib";
 //	private String JSF_ID = "123456789";

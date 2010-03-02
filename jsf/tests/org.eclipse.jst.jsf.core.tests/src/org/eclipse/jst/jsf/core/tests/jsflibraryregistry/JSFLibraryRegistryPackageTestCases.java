@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryPackage;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryRegistryPackageImpl;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryRegistryPackageTestCases extends TestCase {
 
 	public JSFLibraryRegistryPackageTestCases(String name) {

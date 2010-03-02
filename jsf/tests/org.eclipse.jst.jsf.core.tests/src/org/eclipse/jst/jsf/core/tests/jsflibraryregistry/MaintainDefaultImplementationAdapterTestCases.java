@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
+@SuppressWarnings("deprecation")
 public class MaintainDefaultImplementationAdapterTestCases extends TestCase {
 
 	public MaintainDefaultImplementationAdapterTestCases(String name) {

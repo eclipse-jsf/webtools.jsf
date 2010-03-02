@@ -25,6 +25,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 
+@SuppressWarnings("deprecation")
 public class ArchiveFileTestCases extends TestCase { 
 	private String path4TestFiles;
 	

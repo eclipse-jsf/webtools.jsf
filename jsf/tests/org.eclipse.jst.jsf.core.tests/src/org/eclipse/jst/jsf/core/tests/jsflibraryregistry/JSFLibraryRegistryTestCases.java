@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.PluginProvidedJSFLibrary;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryRegistryTestCases extends TestCase {
 	
 	public JSFLibraryRegistryTestCases(String name) {
@@ -216,11 +217,10 @@ public class JSFLibraryRegistryTestCases extends TestCase {
 		Assert.assertEquals(0, jsfLibRegistry.getJSFLibraries().size());
 	}
 
-	@SuppressWarnings("unchecked")
     public void testPluginProvidedJSFLibCreationFromExtPt() {
 		//2 jar lib
  		JSFLibraryRegistry jsfLibRegistry = JSFLibraryRegistryUtil.getInstance().getJSFLibraryRegistry();
-		List libs = jsfLibRegistry.getJSFLibrariesByName("TEST_PP_LIB_2");
+		List<?> libs = jsfLibRegistry.getJSFLibrariesByName("TEST_PP_LIB_2");
 		Assert.assertNotNull(libs);
 		Assert.assertEquals(1, libs.size());
 		JSFLibrary lib = (JSFLibrary)libs.get(0);

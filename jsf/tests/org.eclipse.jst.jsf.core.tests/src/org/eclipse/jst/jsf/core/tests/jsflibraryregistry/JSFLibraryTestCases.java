@@ -21,6 +21,7 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryTestCases extends TestCase {
 	private JSFLibrary jsfLib = null;
 	
@@ -57,12 +58,11 @@ public class JSFLibraryTestCases extends TestCase {
 	 * Test method for 'org.eclipse.jst.jsf.core.internal.jsflibraryregistry.impl.JSFLibraryImpl.getArchiveFiles()'
 	 * Probably not needed...
 	 */
-	@SuppressWarnings("unchecked")
     public void testgetArchiveFiles() {
-		EList el = jsfLib.getArchiveFiles();		
+		EList<?> el = jsfLib.getArchiveFiles();		
 		Assert.assertNotNull(el);
 		Assert.assertEquals(archivefiles.length, el.size());		
-		Iterator it = el.iterator();
+		Iterator<?> it = el.iterator();
 		int i = 0;
 		while(it.hasNext()) {
 			Assert.assertEquals(archivefiles[i], ((ArchiveFile)it.next()).getName());

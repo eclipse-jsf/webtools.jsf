@@ -10,17 +10,16 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.tests.jsflibraryconfig;
 
-import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryConfigDialogSettingData;
+import junit.framework.TestCase;
+
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
+@SuppressWarnings("deprecation")
 public class JSFLibraryConfigDialogSettingDataTestCases extends TestCase {
 	private JSFLibraryRegistry libReg = null;
-	private boolean bDeployImplLib = false;
+//	private boolean bDeployImplLib = false;
 	private String[] compLibs = null;
 	
 	protected void setUp() throws Exception {

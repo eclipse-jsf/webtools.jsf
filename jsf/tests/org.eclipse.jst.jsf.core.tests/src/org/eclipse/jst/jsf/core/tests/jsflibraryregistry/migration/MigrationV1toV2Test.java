@@ -33,6 +33,7 @@ import org.osgi.framework.Bundle;
  * @author cbateman
  *
  */
+@SuppressWarnings("deprecation")
 public class MigrationV1toV2Test extends TestCase 
 {
     private ByteArrayOutputStream       _v1RegistryFile;

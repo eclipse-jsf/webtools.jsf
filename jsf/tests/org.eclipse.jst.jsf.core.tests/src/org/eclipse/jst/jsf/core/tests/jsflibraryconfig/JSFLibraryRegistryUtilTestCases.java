@@ -20,8 +20,9 @@ import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 
+@SuppressWarnings("deprecation")
 public class JSFLibraryRegistryUtilTestCases extends TestCase {
-	private JSFLibraryRegistry libReg = null;
+    private JSFLibraryRegistry libReg = null;
 	private  JSFLibraryRegistryUtil libUtilInstance = null;
 	private int numCompLibs;
 	

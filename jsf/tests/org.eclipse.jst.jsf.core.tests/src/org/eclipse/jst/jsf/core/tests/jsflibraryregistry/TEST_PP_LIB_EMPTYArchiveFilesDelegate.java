@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.core.tests.jsflibraryregistry;
 
 import org.eclipse.jst.jsf.core.jsflibraryregistry.PluginProvidedJSFLibraryArchiveFilesDelegate;
 
+@SuppressWarnings("deprecation")
 public class TEST_PP_LIB_EMPTYArchiveFilesDelegate extends
 		PluginProvidedJSFLibraryArchiveFilesDelegate {
 
