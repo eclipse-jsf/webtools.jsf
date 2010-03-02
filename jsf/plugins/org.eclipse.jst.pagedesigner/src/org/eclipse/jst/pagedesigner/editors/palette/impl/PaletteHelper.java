@@ -151,11 +151,6 @@ public class PaletteHelper {
 				
 				if (label2 == null)
 				{
-				    // if both null then equal
-				    if (label1 == null)
-				    {
-				        return 0;
-				    }
 				    // if label1 not null, then sort it first
 				    return -1;
 				}

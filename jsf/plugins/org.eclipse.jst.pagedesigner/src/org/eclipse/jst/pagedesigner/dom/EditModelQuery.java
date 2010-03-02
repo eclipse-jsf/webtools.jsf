@@ -988,9 +988,6 @@ public final class EditModelQuery {
 			return true;
 		}
 		while (node != null && !isDocument(ancestor)) {
-			if (node == null) {
-				break;
-			}
 			if (node == ancestor) {
 				return true;
 			}

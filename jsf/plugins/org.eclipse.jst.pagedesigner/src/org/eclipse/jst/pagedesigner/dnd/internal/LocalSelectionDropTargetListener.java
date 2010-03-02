@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
+import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jst.jsf.common.ui.internal.guiutils.Alerts;
@@ -27,7 +28,7 @@ import org.eclipse.jst.pagedesigner.dnd.LocalDropRequest;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetEvent;
-import org.eclipse.ui.views.navigator.LocalSelectionTransfer;
+
 
 /**
  * @author mengbo
@@ -38,7 +39,7 @@ public class LocalSelectionDropTargetListener extends
 	 * @param viewer
 	 */
 	public LocalSelectionDropTargetListener(EditPartViewer viewer) {
-		super(viewer, LocalSelectionTransfer.getInstance());
+		super(viewer, LocalSelectionTransfer.getTransfer());
 	}
 
 	/*
@@ -57,7 +58,7 @@ public class LocalSelectionDropTargetListener extends
 	 * @return the current local object
 	 */
 	private Object getCurrentLocalObject() {
-		ISelection sel = LocalSelectionTransfer.getInstance().getSelection();
+		ISelection sel = LocalSelectionTransfer.getTransfer().getSelection();
 		if (sel instanceof IStructuredSelection) {
 			return ((IStructuredSelection) sel).getFirstElement();
 		}
