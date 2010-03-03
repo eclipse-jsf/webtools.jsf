@@ -19,6 +19,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.dnd.AbstractTransferDropTargetListener;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gef.requests.CreationFactory;
+import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jst.jsf.facesconfig.ui.util.WebrootUtil;
@@ -28,7 +29,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ResourceTransfer;
-import org.eclipse.ui.views.navigator.LocalSelectionTransfer;
+
 
 /**
  * This is the listener for resource drag and drop operations
@@ -103,7 +104,7 @@ public abstract class ResourceTransferDropTargetListener extends
 	 * @return
 	 */
 	private Object getCurrentLocalObject() {
-		ISelection sel = LocalSelectionTransfer.getInstance().getSelection();
+		ISelection sel = LocalSelectionTransfer.getTransfer().getSelection();
 		if (sel instanceof IStructuredSelection) {
 			return ((IStructuredSelection) sel).getFirstElement();
 		}

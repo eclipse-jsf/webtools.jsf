@@ -88,7 +88,7 @@ final class FacesResourceChangeListener implements IResourceChangeListener,
 			return;
 
 		// Deregister as save participant.
-		ResourcesPlugin.getWorkspace().removeSaveParticipant(FacesConfigPlugin.getPlugin());
+		ResourcesPlugin.getWorkspace().removeSaveParticipant(FacesConfigPlugin.getPlugin().getBundle().getSymbolicName());
 
 		// Deregister as resource change listener.
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(listener);
