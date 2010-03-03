@@ -15,7 +15,6 @@ package org.eclipse.jst.jsf.core.tests.facet;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.j2ee.common.Description;
 import org.eclipse.jst.j2ee.common.Listener;
@@ -47,7 +46,6 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
 
     private static final IProjectFacetVersion JAVA_VERSION = JavaFacet.VERSION_1_5;
 
-    private static final String PROJECT_NAME_PREFIX = "_TEST_PROJECT_NAME_FOR_J2EE";
     private static final String SERVLET_NAME = "_TEST_SERVLET_NAME";
     private static final String SERVLET_CLASS_NAME = "_TEST_SERVLET_CLASS_NAME";
     private static final String SERVLET_LOAD_ON_STARTUP = "1";
@@ -57,39 +55,46 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
     private static final String CONTEXT_PARAM_DESCRIPTION = "_TEST_CONTEXT_PARAM_DESCRIPTION";
     private static final String LISTENER_CLASS = "_TEST_LISTENER_CLASS";
 
-    private final IProject project;
-    private final WebXmlUpdater updater;
-    private final WebApp webapp;
-
-
-    /**
-     * @param name
-     * @throws Exception
-     */
-    public VendorSpecificWebXmlConfigurationForJ2EETest (final String name)
-    throws Exception
-    {
-        super(name);
-
-        this.project = createProject(PROJECT_NAME_PREFIX);
-        this.updater = new WebXmlUpdater(project, null);
-        this.webapp = (WebApp) updater.getProvider().getModelObject();
-    }
-
+    private IProject project;
+    private WebXmlUpdater updater;
+    private WebApp webapp;
 
     private IProject createProject (final String projectName)
     throws Exception
     {
         final WebProjectTestEnvironment testEnv = new WebProjectTestEnvironment(projectName, JAVA_VERSION, WEB_MODULE_VERSION);
-        testEnv.createProject(true);
+        assertTrue(testEnv.createProject(true));
         return testEnv.getTestProject();
+    }
+
+
+    @Override
+    protected void setUp() throws Exception
+    {
+        super.setUp();
+        this.project = createProject(this.getClass().getName() + "_" + getName());
+        this.updater = new WebXmlUpdater(project, null);
+        this.webapp = (WebApp) updater.getProvider().getModelObject();
+
+    }
+
+
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        System.out.println(JSFTestUtil.safeDelete(project, 3, 500));
     }
 
 
     public void testAddServlet () throws Exception
     {
-        final IProject project = createProject(PROJECT_NAME_PREFIX + this.getClass().getName() + getName());
+        setupServlet();
+    }
 
+
+    private void setupServlet()
+    {
         // Write servlet to web.xml
         assertFalse(WebXmlUtilsForJ2EE.existsServlet(webapp, SERVLET_NAME, SERVLET_CLASS_NAME));
         updater.addServlet(SERVLET_NAME, SERVLET_CLASS_NAME, SERVLET_LOAD_ON_STARTUP);
@@ -99,16 +104,11 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
         assertEquals(SERVLET_NAME, servlet.getServletName());
         assertEquals(SERVLET_CLASS_NAME, ((ServletTypeImpl) servlet.getWebType()).getClassName());
         assertEquals(Integer.parseInt(SERVLET_LOAD_ON_STARTUP), servlet.getLoadOnStartup().intValue());
-
-        //project.delete(true, new NullProgressMonitor());
-        System.out.println(JSFTestUtil.safeDelete(project, 3, 500));
     }
 
 
     public void testAddContextParam () throws Exception
     {
-        final IProject project = createProject(PROJECT_NAME_PREFIX + this.getClass().getName() + getName());
-
         // Write param to web.xml
         assertFalse(WebXmlUtilsForJ2EE.existsContextParam(webapp, CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE));
         updater.addContextParam(CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE, CONTEXT_PARAM_DESCRIPTION);
@@ -118,15 +118,12 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
         assertEquals(CONTEXT_PARAM_NAME, param.getName());
         assertEquals(CONTEXT_PARAM_VALUE, param.getValue());
         assertEquals(CONTEXT_PARAM_DESCRIPTION, ((Description) param.getDescriptions().get(0)).getValue());
-
-        project.delete(true, new NullProgressMonitor());
     }
 
 
     public void testAddServletMapping () throws Exception
     {
-        final IProject project = createProject(PROJECT_NAME_PREFIX + this.getClass().getName() + getName());
-
+        setupServlet();
         // Write servlet-mapping to web.xml
         assertFalse(WebXmlUtilsForJ2EE.existsServletMapping(webapp, SERVLET_NAME, SERVLET_URL_PATTERN));
         updater.addServletMapping(SERVLET_NAME, SERVLET_CLASS_NAME, SERVLET_URL_PATTERN);
@@ -135,15 +132,11 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
         final ServletMapping mapping = WebXmlUtilsForJ2EE.findServletMapping(webapp, SERVLET_NAME, SERVLET_URL_PATTERN);
         assertEquals(SERVLET_NAME, mapping.getName());
         assertEquals(SERVLET_URL_PATTERN, mapping.getUrlPattern());
-
-        project.delete(true, new NullProgressMonitor());
     }
 
 
     public void testAddListener () throws Exception
     {
-        final IProject project = createProject(PROJECT_NAME_PREFIX + this.getClass().getName() + getName());
-
         // Write to web.xml
         assertFalse(WebXmlUtilsForJ2EE.existsListener(webapp, LISTENER_CLASS));
         updater.addListener(LISTENER_CLASS);
@@ -151,7 +144,5 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
         // Read from web.xml
         final Listener listener = WebXmlUtilsForJ2EE.findListener(webapp, LISTENER_CLASS);
         assertEquals(LISTENER_CLASS, listener.getListenerClassName());
-
-        project.delete(true, new NullProgressMonitor());
     }
 }
