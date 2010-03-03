@@ -12,8 +12,6 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -21,8 +19,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
-import org.eclipse.jst.javaee.core.ParamValue;
-import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.osgi.util.NLS;
@@ -52,11 +48,19 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 				monitor.beginTask("", 1); //$NON-NLS-1$
 			}
 
-			try {
+			try 
+			{
+	            final JSFUtils jsfUtil = new JSFUtilFactory().create(fv, ModelProviderManager.getModelProvider(project));
+	            if (jsfUtil == null)
+	            {
+	                throw new JSFFacetException(NLS.bind(
+	                        Messages.Could_Not_GetJSFVersion, fv.toString()));
+	            }
+
 			    if (jsfFacetConfigurationEnabled)
 			    {
     				//Before we do any de-configuration, verify that web.xml is available for update
-    				IModelProvider provider = JSFUtils.getModelProvider(project);
+    				IModelProvider provider = jsfUtil.getModelProvider();
     				if (provider == null ) {				
     					throw new JSFFacetException(NLS.bind(Messages.JSFFacetUninstallDelegate_ConfigErr, project.getName())); 
     				} else if (!(provider.validateEdit(null, null).isOK())){					
@@ -70,7 +74,7 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
                 if (jsfFacetConfigurationEnabled)
                 {
     				// remove servlet stuff from web.xml
-    				uninstallJSFReferencesFromWebApp(project, monitor);
+    				uninstallJSFReferencesFromWebApp(project, monitor, jsfUtil);
                 }
 				if (monitor != null) {
 					monitor.worked(1);
@@ -85,28 +89,23 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 	}
 	
 	private void uninstallJSFReferencesFromWebApp(final IProject project,
-			final IProgressMonitor monitor) {
+			final IProgressMonitor monitor, final JSFUtils jsfUtil) {
 		
-		IModelProvider provider = JSFUtils.getModelProvider(project);
+		IModelProvider provider = jsfUtil.getModelProvider();
 		Object webAppObj = provider.getModelObject();
-		if (webAppObj != null) {
-			IPath ddPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
-			if (isJavaEEWebApp(webAppObj)){		
-				WebApp webApp = (WebApp)webAppObj;
-				Servlet servlet = JSFUtils12.findJSFServlet(webApp);
-				if (servlet == null)
-					return;
-
-				provider.modify(new RemoveJSFFromJavaEEWebAppOperation(project), ddPath);
-			} else {//2.3 or 2.4 web app
-				org.eclipse.jst.j2ee.webapplication.WebApp webApp = (org.eclipse.jst.j2ee.webapplication.WebApp)webAppObj;
-				org.eclipse.jst.j2ee.webapplication.Servlet servlet = JSFUtils11.findJSFServlet(webApp);
-				if (servlet == null)
-					return;
-
-				provider.modify(new RemoveJSFFromJ2EEWebAppOperation(project), ddPath);			
-			}
-		}
+        if (webAppObj != null)
+        {
+            IPath ddPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
+            if (isJavaEEWebApp(webAppObj))
+            {
+                provider.modify(new RemoveJSFFromJavaEEWebAppOperation(project,
+                        jsfUtil), ddPath);
+            } else
+            {// 2.3 or 2.4 web app
+                provider.modify(new RemoveJSFFromJ2EEWebAppOperation(project,
+                        jsfUtil), ddPath);
+            }
+        }
 	}
 
 	private boolean isJavaEEWebApp(final Object webAppObj) {
@@ -119,74 +118,35 @@ public final class JSFFacetUninstallDelegate implements IDelegate {
 
 	static class RemoveJSFFromJavaEEWebAppOperation implements Runnable {
 		private IProject _project;
+        private JSFUtils _jsfUtil;
 		
-		RemoveJSFFromJavaEEWebAppOperation(final IProject project){
-			this._project = project;			
+		RemoveJSFFromJavaEEWebAppOperation(final IProject project, JSFUtils jsfUtil){
+			this._project = project;
+			this._jsfUtil = jsfUtil;
 		}
 		
-		public void run() {
-			WebApp webApp = (WebApp) ModelProviderManager.getModelProvider(_project).getModelObject();
-			Servlet servlet = JSFUtils12.findJSFServlet(webApp);
-			
-			// remove faces url mappings
-			JSFUtils12.removeURLMappings(webApp, servlet);
-			// remove context params
-			removeJSFContextParams(webApp, servlet);
-			// remove servlet
-			removeJSFServlet(webApp, servlet);
-			
-		}
-		private void removeJSFContextParams(final WebApp webApp, final Servlet servlet) {
-			Iterator it = webApp.getContextParams().iterator();
-			while (it.hasNext()) {
-				ParamValue cp = (ParamValue) it.next();
-				if (cp.getParamName().equals(JSFUtils.JSF_CONFIG_CONTEXT_PARAM)) {
-					webApp.getContextParams().remove(cp);
-					break;
-				}
-			}
-		}
-
-		private void removeJSFServlet(final WebApp webApp, final Servlet servlet) {		
-			webApp.getServlets().remove(servlet);
-		}
+        public void run()
+        {
+            WebApp webApp = (WebApp) ModelProviderManager.getModelProvider(
+                    _project).getModelObject();
+            _jsfUtil.rollbackWebApp(webApp);
+        }
 		
 	}
 	
 	static class RemoveJSFFromJ2EEWebAppOperation implements Runnable {
-		private IProject _project;		
+		private IProject _project;
+        private JSFUtils _jsfUtil;		
 		
-		RemoveJSFFromJ2EEWebAppOperation(final IProject project){
+		RemoveJSFFromJ2EEWebAppOperation(final IProject project, JSFUtils jsfUtil){
 			this._project = project;
+			this._jsfUtil = jsfUtil;
 		}
 		
 		public void run() {
 			org.eclipse.jst.j2ee.webapplication.WebApp webApp = (org.eclipse.jst.j2ee.webapplication.WebApp) ModelProviderManager.getModelProvider(_project).getModelObject();
-			org.eclipse.jst.j2ee.webapplication.Servlet servlet = JSFUtils11.findJSFServlet(webApp);
-
-			// remove faces url mappings
-			JSFUtils11.removeURLMappings(webApp, servlet);
-			// remove context params
-			removeJSFContextParams(webApp, servlet);
-			// remove servlet
-			removeJSFServlet(webApp, servlet);
-			
+			_jsfUtil.rollbackWebApp(webApp);
 		}
-		private void removeJSFContextParams(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final org.eclipse.jst.j2ee.webapplication.Servlet servlet) {
-			Iterator it = webApp.getContextParams().iterator();
-			while (it.hasNext()) {
-				org.eclipse.jst.j2ee.common.ParamValue cp = (org.eclipse.jst.j2ee.common.ParamValue) it.next();
-				if (cp.getName().equals(JSFUtils.JSF_CONFIG_CONTEXT_PARAM)) {
-					webApp.getContextParams().remove(cp);
-					break;
-				}
-			}
-		}
-
-		private void removeJSFServlet(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final org.eclipse.jst.j2ee.webapplication.Servlet servlet) {
-			webApp.getServlets().remove(servlet);
-		}
-		
 	}
 
 }

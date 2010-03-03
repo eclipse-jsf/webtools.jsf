@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core;
 
+import org.eclipse.wst.common.project.facet.core.IProjectFacet;
+
 /**
  * JSF Core framework constants
  * 
@@ -52,7 +54,25 @@ public final class IJSFCoreConstants
      * The constant id for a JSF 1.2 project
      */
     public final static String                  JSF_VERSION_1_2 = FACET_VERSION_1_2;
+
+    /**
+     * The facet version for a JSF 2.0 project
+     */
+    public static final String                  FACET_VERSION_2_0 = "2.0"; //$NON-NLS-1$
+    /**
+     * The version string for a JSF 2.0 project
+     */
+    public static final String JSF_VERSION_2_0 = FACET_VERSION_2_0;
     
+    /**
+     * @param facet
+     * @return true if the facet is a jsf facet.
+     * 
+     */
+    public static boolean isJSFFacet(final IProjectFacet facet)
+    {
+        return JSF_CORE_FACET_ID.equals(facet.getId());
+    }
     private IJSFCoreConstants()
     {
         // no instantiation

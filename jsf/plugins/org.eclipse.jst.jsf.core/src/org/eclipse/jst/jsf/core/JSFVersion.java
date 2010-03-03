@@ -10,6 +10,13 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
+
 /**
  * @author gekessle
  *
@@ -31,7 +38,11 @@ public enum JSFVersion {
 	/**
 	 * Supports JSF Version 1.1
 	 */
-	V1_2;
+	V1_2,
+	/**
+	 * Supports JSF Version 2.0
+	 */
+	V2_0;
 	
     @Override
     public String toString() {
@@ -43,6 +54,8 @@ public enum JSFVersion {
                 return IJSFCoreConstants.JSF_VERSION_1_1;
             case V1_2:
                 return IJSFCoreConstants.JSF_VERSION_1_2;
+            case V2_0:
+                return IJSFCoreConstants.JSF_VERSION_2_0;
             case UNKNOWN:
                 return "unknown"; //$NON-NLS-1$
             default:
@@ -68,6 +81,10 @@ public enum JSFVersion {
         {
             return V1_2;
         }
+        else if (IJSFCoreConstants.FACET_VERSION_2_0.equals(valueAsString))
+        {
+            return V2_0;
+        }
         else if ("unknown".equals(valueAsString)) //$NON-NLS-1$
         {
             return UNKNOWN;
@@ -77,4 +94,55 @@ public enum JSFVersion {
             return null;
         }
     }
+    
+    /**
+     * @param facetVersion
+     * @return the jsf version for the facet version
+     * @throw IllegalArgumentException if the underlying facet is not a JSF facet.
+     */
+    public static JSFVersion valueOfFacetVersion(final IProjectFacetVersion facetVersion)
+    {
+        if (!IJSFCoreConstants.isJSFFacet(facetVersion.getProjectFacet()))
+        {
+            throw new IllegalArgumentException("Not a JSF facet: "+facetVersion.getProjectFacet().toString()); //$NON-NLS-1$
+        }
+        
+        String versionString = facetVersion.getVersionString();
+        if (versionString != null)
+        {
+            return valueOfString(versionString);
+        }
+        return null;
+    }
+    
+    /**
+     * @param project
+     * @return the project version of the project.
+     */
+    public static JSFVersion valueOfProject(final IProject project)
+    {
+        try
+        {
+            if (project != null && FacetedProjectFramework.isFacetedProject(project))
+            {
+                IFacetedProject fProj = ProjectFacetsManager.create(project);
+                if (fProj != null)
+                {
+                    IProjectFacetVersion projectFacetVersion = fProj.getProjectFacetVersion(
+                            ProjectFacetsManager.getProjectFacet(IJSFCoreConstants.JSF_CORE_FACET_ID));
+                    if (projectFacetVersion != null)
+                    {
+                        return valueOfFacetVersion(projectFacetVersion);
+                    }
+                }
+            }
+        }
+        catch(final CoreException ce)
+        {
+            // ignore and fall-through
+            // TODO: is this worth logging?
+        }
+        return null;
+    }
+
 }

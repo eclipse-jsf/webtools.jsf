@@ -122,6 +122,27 @@
         %JSFv12PresetDesc
      </description>
      </static-preset>
+     <static-preset
+           id="preset.jst.jsf.v2_0">
+        <label>
+           %JSFv20Project
+        </label>
+        <facet
+              id="jst.java"
+              version="5.0">
+        </facet>
+        <facet
+              id="jst.web"
+              version="2.5">
+        </facet>
+        <facet
+              id="jst.jsf"
+              version="2.0">
+        </facet>
+        <description>
+           %JSFv20PresetDesc
+        </description>
+     </static-preset>
   </extension>
 
   <extension point="org.eclipse.wst.common.project.facet.core.runtimes">

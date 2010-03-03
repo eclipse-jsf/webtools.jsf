@@ -14,9 +14,6 @@
 
 package org.eclipse.jst.jsf.core.internal.project.facet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -28,14 +25,11 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.common.project.facet.core.libprov.LibraryInstallDelegate;
 import org.eclipse.jst.common.project.facet.core.libprov.LibraryProviderOperationConfig;
 import org.eclipse.jst.common.project.facet.core.libprov.user.UserLibraryProviderInstallOperationConfig;
-import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
-import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.common.facet.libraryprovider.jsf.JsfLibraryUtil;
 import org.eclipse.jst.jsf.common.webxml.WebXmlUpdater;
-import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.osgi.util.NLS;
@@ -83,18 +77,36 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 								Messages.JSFFacetInstallDelegate_InternalErr);
 			}
 
-			if (jsfFacetConfigurationEnabled)
-			{
-    			//Before we do any configuration, verify that web.xml is available for update
-    			final IModelProvider provider = JSFUtils.getModelProvider(project);
-    			if (provider == null ) {				
-    				throw new JSFFacetException( NLS.bind(Messages.JSFFacetInstallDelegate_ConfigErr, project.getName())); 
-    			} else if (!(provider.validateEdit(null, null).isOK())){				
-    				if (!(provider.validateEdit(null, null).isOK())) {//checks for web.xml file being read-only and allows user to set writeable		
-    					throw new JSFFacetException(NLS.bind(Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,  project.getName()));
-    				}
-    			}
-			}
+            final JSFUtils jsfUtil = new JSFUtilFactory().create(fv, ModelProviderManager.getModelProvider(project));
+            if (jsfUtil == null)
+            {
+                throw new JSFFacetException(NLS.bind(
+                        Messages.Could_Not_GetJSFVersion, fv.toString()));
+            }
+
+            if (jsfFacetConfigurationEnabled)
+            {
+                // Before we do any configuration, verify that web.xml is                    // available for update
+                final IModelProvider provider = jsfUtil
+                        .getModelProvider();
+                if (provider == null)
+                {
+                    throw new JSFFacetException(NLS.bind(
+                            Messages.JSFFacetInstallDelegate_ConfigErr,
+                            project.getName()));
+                } 
+                else if (!(provider.validateEdit(null, null).isOK()))
+                {
+                    if (!(provider.validateEdit(null, null).isOK()))
+                    {// checks for web.xml file being read-only and allows
+                     // user to set writeable
+                        throw new JSFFacetException(
+                                NLS.bind(
+                                        Messages.JSFFacetInstallDelegate_NonUpdateableWebXML,
+                                        project.getName()));
+                    }
+                }
+            }
 			
 //			// Create JSF Libs as classpath containers and set WTP dependencies
 //			// as required
@@ -109,10 +121,10 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			if (jsfFacetConfigurationEnabled)
             {
     			// Create config file
-    			createConfigFile(project, fv, config, monitor);
+    			createConfigFile(project, fv, config, monitor, jsfUtil);
 
     			// Update web model
-    			createServletAndModifyWebXML(project, config, monitor);
+    			createServletAndModifyWebXML(project, config, monitor, jsfUtil);
                 updateWebXmlByJsfVendor(libConfig, project, monitor);
             }
             
@@ -272,21 +284,6 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 //	}		
 
 
-    /**
-	 * @param config
-	 * @return list of URL patterns from the datamodel
-	 */
-	private List getServletMappings(final IDataModel config) {
-		final List mappings = new ArrayList();
-		final String[] patterns = (String[])config.getProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS);
-		for (final String pattern : patterns)
-        {
-			mappings.add(pattern);
-		}
-
-		return mappings;
-	}
-
 	/**
 	 * @param project
 	 * @param jsfConfigPath
@@ -308,7 +305,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 	 */
 	private void createConfigFile(final IProject project,
 			final IProjectFacetVersion fv, final IDataModel config,
-			final IProgressMonitor monitor) {
+			final IProgressMonitor monitor, final JSFUtils jsfUtil) {
 
 
 		final IPath configPath = resolveConfigPath(project, config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH));
@@ -316,23 +313,9 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			// do not overwrite if the file exists
 			if (!configPath.toFile().exists()) {
 				final IWorkspaceRunnable op = new IWorkspaceRunnable(){
-					public void run(final IProgressMonitor monitor_inner) throws CoreException{ 
-						if (shouldUseJ2EEConfig(fv)){
-							JSFUtils11.createConfigFile(fv.getVersionString(),
-									configPath);
-						} else {
-							JSFUtils12.createConfigFile(fv.getVersionString(),
-									configPath);
-						}
+					public void run(final IProgressMonitor monitor_inner) throws CoreException{
+						    jsfUtil.createConfigFile(configPath);
 						project.refreshLocal(IResource.DEPTH_INFINITE, monitor_inner);
-					}
-
-					private boolean shouldUseJ2EEConfig(final IProjectFacetVersion facetVersion) {
-						if (IJSFCoreConstants.FACET_VERSION_1_1.equals(facetVersion.getVersionString()))
-						{
-							return true;
-						}
-						return false;
 					}
 				};
 				op.run(monitor);
@@ -342,29 +325,34 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 		}
 
 	}
-	
-	/**
-	 * Create servlet and URL mappings and update the webapp
-	 * @param project
-	 * @param config
-	 * @param monitor
-	 */
-	private void createServletAndModifyWebXML(final IProject project,
-			final IDataModel config, final IProgressMonitor monitor) {
-		
-		final IModelProvider provider = JSFUtils.getModelProvider(project);
-		final IPath webXMLPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
-		if (JSFUtils12.isWebApp25(provider.getModelObject())) {			
-			provider.modify(new UpdateWebXMLForJavaEE(project, config), doesDDFileExist(project, webXMLPath) ? webXMLPath : IModelProvider.FORCESAVE); 
-		}
-		else {//must be 2.3 or 2.4			
-			provider.modify(new UpdateWebXMLForJ2EE(project, config), webXMLPath);
-		}
 
-		
-		// Check if runtime is MyFaces or Sun-RI
-		
-	}
+    /**
+     * Create servlet and URL mappings and update the webapp
+     * 
+     * @param project
+     * @param config
+     * @param monitor
+     */
+    private void createServletAndModifyWebXML(final IProject project,
+            final IDataModel config, final IProgressMonitor monitor,
+            final JSFUtils jsfUtil)
+    {
+
+        final IModelProvider provider = jsfUtil.getModelProvider();
+        final IPath webXMLPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
+        if (jsfUtil.isJavaEE(provider.getModelObject()))
+        {
+            provider.modify(new UpdateWebXMLForJavaEE(project, config, jsfUtil),
+                    doesDDFileExist(project, webXMLPath) ? webXMLPath
+                            : IModelProvider.FORCESAVE);
+        } else
+        {// must be 2.3 or 2.4
+            provider.modify(new UpdateWebXMLForJ2EE(project, config, jsfUtil),
+                    webXMLPath);
+        }
+        // TODO: is the MyFaces check a todo?
+        // Check if runtime is MyFaces or Sun-RI
+    }
 
 	private boolean doesDDFileExist(final IProject project, final IPath webXMLPath) {
 		return project.getProjectRelativePath().append(webXMLPath).toFile().exists();		
@@ -373,74 +361,36 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 	private class UpdateWebXMLForJavaEE implements Runnable {
 		private final IProject project;
 		private final IDataModel config;
+        private final JSFUtils jsfUtil;
 		
-		UpdateWebXMLForJavaEE(final IProject project, final IDataModel config){
+		UpdateWebXMLForJavaEE(final IProject project, final IDataModel config, final JSFUtils jsfUtil){
 			this.project = project;
 			this.config = config;
+			this.jsfUtil = jsfUtil;
 		}
 		
 		public void run() {
 			final WebApp webApp = (WebApp) ModelProviderManager.getModelProvider(project).getModelObject();
-			// create or update servlet ref
-			Servlet servlet = JSFUtils12.findJSFServlet(webApp);// check to see
-																// if already
-// No longer removing any old mappings on install - see 194919 															// present
-//			if (servlet != null) {
-//				// remove old mappings
-//				JSFUtils12.removeURLMappings(webApp, servlet);
-//			}
-			
-			servlet = JSFUtils12
-					.createOrUpdateServletRef(webApp, config, servlet);
-	
-			// init mappings
-			final List listOfMappings = getServletMappings(config);
-			JSFUtils12.setUpURLMappings(webApp, listOfMappings, servlet);
-	
-			// setup context params
-			JSFUtils12.setupConfigFileContextParamForV2_5(webApp, config);
+			jsfUtil.updateWebApp(webApp, config);
 		}
 	}
 	
 	private class UpdateWebXMLForJ2EE implements Runnable {		
 		private final IProject project;
 		private final IDataModel config;
+        private final JSFUtils jsfUtil;
 		
-		UpdateWebXMLForJ2EE(final IProject project, final IDataModel config){
+		UpdateWebXMLForJ2EE(final IProject project, final IDataModel config, final JSFUtils jsfUtil){
 			this.project = project ;
 			this.config = config;
+			this.jsfUtil = jsfUtil;
 		}
 		
 		public void run() {
 			final org.eclipse.jst.j2ee.webapplication.WebApp webApp = (org.eclipse.jst.j2ee.webapplication.WebApp)ModelProviderManager.getModelProvider(project).getModelObject();
-			// create or update servlet ref
-			org.eclipse.jst.j2ee.webapplication.Servlet servlet = JSFUtils11.findJSFServlet(webApp);// check to see
-																// if already
-																// present
-			
-// No longer removing any old mappings on install - see 194919 
-//			if (servlet != null) {
-//				// remove old mappings
-//				JSFUtils11.removeURLMappings(webApp, servlet);
-//			}
-			
-			servlet = JSFUtils11
-					.createOrUpdateServletRef(webApp, config, servlet);
-	
-			// init mappings
-			final List listOfMappings = getServletMappings(config);
-			JSFUtils11.setUpURLMappings(webApp, listOfMappings, servlet);
-	
-			// setup context params
-			setupContextParams(webApp, config);
+			jsfUtil.updateWebApp(webApp, config);
 		}
 		
-		private void setupContextParams(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final IDataModel config) {
-			if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID)//shouldn't have to do it this way, but that's the way it goes 119442
-				JSFUtils11.setupConfigFileContextParamForV2_3(webApp, config);
-			else 
-				JSFUtils11.setupConfigFileContextParamForV2_4(webApp, config);
-		}
 	}
 
 

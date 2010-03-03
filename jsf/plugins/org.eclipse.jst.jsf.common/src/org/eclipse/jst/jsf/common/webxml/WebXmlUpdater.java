@@ -17,7 +17,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
-import org.eclipse.jst.javaee.web.internal.impl.WebAppImpl;
+import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.common.webxml.internal.AbstractWebXmlUpdater;
 import org.eclipse.jst.jsf.common.webxml.internal.WebXmlUpdaterForJ2EE;
 import org.eclipse.jst.jsf.common.webxml.internal.WebXmlUpdaterForJavaEE;
@@ -177,9 +177,9 @@ public class WebXmlUpdater
 
         if (webAppObj != null)
         {
-            if (webAppObj instanceof WebAppImpl) // Java EE
+            if (webAppObj instanceof WebApp) // Java EE
                 return new WebXmlUpdaterForJavaEE(webAppObj, project, getProvider(), monitor);
-            else if (webAppObj instanceof org.eclipse.jst.j2ee.webapplication.internal.impl.WebAppImpl) // J2EE
+            else if (webAppObj instanceof org.eclipse.jst.j2ee.webapplication.WebApp) // J2EE
                 return new WebXmlUpdaterForJ2EE(webAppObj, project, getProvider(), monitor);
         }
 
