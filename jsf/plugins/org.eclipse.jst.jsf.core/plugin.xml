@@ -109,13 +109,18 @@
   
   <extension
         point="org.eclipse.wst.common.project.facet.core.presets">
-     <dynamic-preset id="preset.jst.jsf.v1_1">
-       <factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFConfigurationPresetFactory11"/>
-     </dynamic-preset>
+     <static-preset
+           id="preset.jst.jsf.v1_1">
+        <label>%JSFv11Project</label>
+        <facet id="jst.java" version="1.4" />
+        <facet id="jst.web" version="2.4"/>
+        <facet id="jst.jsf" version="1.1" />
+        <description>%JSFv11PresetDesc</description>
+     </static-preset>
      <static-preset
            id="preset.jst.jsf.v1_2">
 	    <label>%JSFv12Project</label>
-	    <facet id="jst.java" version="5.0" />
+	    <facet id="jst.java" version="1.5" />
 	    <facet id="jst.web" version="2.5"/>
 	    <facet id="jst.jsf" version="1.2" />
      <description>
@@ -129,11 +134,11 @@
         </label>
         <facet
               id="jst.java"
-              version="5.0">
+              version="1.6">
         </facet>
         <facet
               id="jst.web"
-              version="2.5">
+              version="3.0">
         </facet>
         <facet
               id="jst.jsf"
@@ -158,15 +163,6 @@
      <fileURL id="jsfPage"><run class="org.eclipse.jst.jsf.core.internal.launch.JSFFileURL"/></fileURL>
   </extension>
   
-  <extension
-         point="org.eclipse.ui.startup">
-      <startup class="org.eclipse.jst.jsf.designtime.internal.jsp.StartupHandler"/>
-      <!--
-      <startup
-            class="org.eclipse.jst.jsf.core.internal.RegistryMigrationStartupHandler">
-      </startup>
-      --> 
-   </extension>
       <extension
          point="org.eclipse.jst.jsf.common.symbolSourceProvider">
       <symbolSourceId factory="org.eclipse.jst.jsf.designtime.internal.symbols.JSPTagVariableSymbolSourceProvider"/>
@@ -480,4 +476,31 @@
     </extension>
 
 
+   <!-- <extension point="org.eclipse.core.contenttype.contentTypes">
+        <content-type
+              base-type="org.eclipse.wst.html.core.htmlsource"
+              default-charset="UTF-8"
+              describer="org.eclipse.jst.jsf.core.internal.contenttype.XMLDocumentElementAttributeContentDescriber"
+              file-extensions="xhtml"
+              id="jsf.facelet"
+              name="%Facelet.name"
+              priority="high">
+            <describer class="org.eclipse.jst.jsf.core.internal.contenttype.XMLDocumentElementAttributeContentDescriber">
+                <parameter name="xmlns:.*" value=".*jsf.*" />
+                <parameter name="xmlns:.*" value=".*faces.*" />
+            </describer>
+        </content-type>
+        <content-type
+              base-type="jsf.facelet"
+              default-charset="UTF-8"
+              describer="org.eclipse.jst.jsf.core.internal.contenttype.XMLDocumentElementAttributeContentDescriber"
+              file-extensions="xhtml"
+              id="jsf.facelet.composite"
+              name="%FaceletComposite.name"
+              priority="high">
+            <describer class="org.eclipse.jst.jsf.core.internal.contenttype.XMLDocumentElementAttributeContentDescriber">
+                <parameter name="xmlns:.*" value="http://java.sun.com/jsf/composite" />
+            </describer>
+        </content-type>
+    </extension> -->
 </plugin>
