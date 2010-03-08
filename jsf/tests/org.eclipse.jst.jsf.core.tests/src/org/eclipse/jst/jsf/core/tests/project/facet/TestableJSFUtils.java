@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.core.tests.project.facet;
 
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -43,16 +44,21 @@ public class TestableJSFUtils extends JSFUtils
     {
         return super.isJSFPage(resource);
     }
-    
+
     public boolean isValidKnownExtension_testable(String fileExtension)
     {
-       return super.isValidKnownExtension(fileExtension);
+        return super.isValidKnownExtension(fileExtension);
+    }
+
+    public void printConfigFile_testable(final OutputStream os)
+    {
+        super.printConfigFile(os);
     }
 
     @Override
-    protected void doVersionSpecificConfigFile(PrintWriter pw)
+    public void doVersionSpecificConfigFile(PrintWriter pw)
     {
-        throw new UnsupportedOperationException();
+        _delegate.doVersionSpecificConfigFile(pw);
     }
 
     @Override
@@ -73,5 +79,4 @@ public class TestableJSFUtils extends JSFUtils
     {
         return _delegate.getFileUrlPath(webAppObj, resource, existingURL);
     }
-
 }

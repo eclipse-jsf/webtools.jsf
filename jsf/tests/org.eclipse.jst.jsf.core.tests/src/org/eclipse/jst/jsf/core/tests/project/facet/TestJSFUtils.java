@@ -10,12 +10,25 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.tests.project.facet;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertSame;
+import static junit.framework.Assert.assertTrue;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.javaee.web.WebAppVersionType;
 import org.eclipse.jst.javaee.web.WebFactory;
@@ -23,29 +36,337 @@ import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtilFactory;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
+import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
+import org.eclipse.jst.jsf.test.util.mock.MockBundle;
 import org.eclipse.jst.jsf.test.util.mock.MockDataModel;
 import org.eclipse.jst.jsf.test.util.mock.MockModelProvider;
+import org.eclipse.jst.jsf.test.util.mock.MockResource;
 import org.eclipse.jst.jsf.test.util.mock.MockDataModel.MockPropertyHolder;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 @Category(NoPluginEnvironment.class)
-public class TestJSFUtils extends TestCase
+public abstract class TestJSFUtils
 {
+    private static final String PATTERN_SLASH_FACES_SLASH_ALL = "/faces/*";
     // private WebProjectTestEnvironment _webProjectTestEnv;
-    private TestableJSFUtils _jsfUtils;
-    private Object _modelObject;
+    protected TestableJSFUtils _jsfUtils;
+    protected Object _modelObject;
+    private WebAppAccessor _webAppAccessor;
 
-    @Override
+    @Before
     protected void setUp() throws Exception
     {
-        super.setUp();
         // for these tests, it doesn't matter which version is created.
         _modelObject = new Object();
-        _jsfUtils = new TestableJSFUtils(new JSFUtilFactory()
-            .create(JSFVersion.V2_0, null), new MockModelProvider(_modelObject));
+        _jsfUtils = new TestableJSFUtils(new JSFUtilFactory().create(
+                getVersionToTestIn(), null),
+                new MockModelProvider(_modelObject));
+        assertEquals(getVersionToTestIn(), _jsfUtils.getVersion());
+        _webAppAccessor = createWebAccessor();
     }
 
+    protected void testRollbackWebApp(final String version)
+    {
+        // safe on an empty web app
+        final Object webApp = _webAppAccessor.createWebApp(version);
+        _jsfUtils.rollbackWebApp(webApp);
+
+        // Add servlet
+        final Object servlet = _webAppAccessor.createServlet("Foobar",
+                JSFUtils.JSF_SERVLET_CLASS);
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+        _jsfUtils.rollbackWebApp(webApp);
+        // servlet should be gone
+        assertEquals(0, _webAppAccessor.getServlets(webApp).size());
+        assertTrue(_webAppAccessor.getServlet(webApp, "Foobar") == null);
+
+        // Add servlet and servlet mapping and context param
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+        Object mapping = _webAppAccessor.createServletMapping();
+        _webAppAccessor.setMappingData(webApp, Collections
+                .singletonList(".xhtml"), servlet, mapping);
+        _webAppAccessor.addMappingToWebApp(webApp, mapping);
+        Object contextParam = _webAppAccessor.createContextParam(JSFUtils.JSF_CONFIG_CONTEXT_PARAM, "/WEB-INF/faces-config.xml", version);
+        _webAppAccessor.setContextParam(webApp, contextParam, version);
+        assertEquals(1, _webAppAccessor.getServlets(webApp).size());
+        assertTrue(_webAppAccessor.getServlet(webApp, "Foobar") == servlet);
+        assertEquals(1, _webAppAccessor.getServletMappings_WebApp(webApp)
+                .size());
+        assertEquals(1, _webAppAccessor.getContextParams(webApp, version).size());
+        _jsfUtils.rollbackWebApp(webApp);
+        // servlet should be gone
+        assertEquals(0, _webAppAccessor.getServlets(webApp).size());
+        assertTrue(_webAppAccessor.getServlet(webApp, "Foobar") == null);
+        // servlet mapping should be gone.
+        assertEquals(0, _webAppAccessor.getServletMappings_WebApp(webApp)
+                .size());
+        // context param should be gone
+        assertEquals(0, _webAppAccessor.getContextParams(webApp, version).size());
+
+        // add two servlet and servlet mappings and verify it only removes
+        // the JSF one
+        // Add servlet and servlet mapping
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+        Object servlet2 = _webAppAccessor.createServlet("DonotRemove",
+                "com.foo.SomeClass");
+        _webAppAccessor.addServletToWebApp(webApp, servlet2);
+        _webAppAccessor.addMappingToWebApp(webApp, mapping);
+        Object mapping2 = _webAppAccessor.createServletMapping();
+        _webAppAccessor.setMappingData(webApp, Collections
+                .singletonList("blah"), servlet2, mapping2);
+        _webAppAccessor.addMappingToWebApp(webApp, mapping2);
+        assertEquals(2, _webAppAccessor.getServlets(webApp).size());
+        assertTrue(_webAppAccessor.getServlet(webApp, "Foobar") == servlet);
+        assertTrue(_webAppAccessor.getServlet(webApp, "DonotRemove") == servlet2);
+        // servlet mapping should be gone.
+        assertEquals(2, _webAppAccessor.getServletMappings_WebApp(webApp)
+                .size());
+        _jsfUtils.rollbackWebApp(webApp);
+        // servlet should be gone, but servlet2 is still here
+        assertEquals(1, _webAppAccessor.getServlets(webApp).size());
+        assertSame(servlet2, _webAppAccessor.getServlet(webApp, "DonotRemove"));
+        // servlet mapping1 should be gone, but mapping 2 still there.
+        assertEquals(1, _webAppAccessor.getServletMappings_WebApp(webApp)
+                .size());
+    }
+
+    protected void testUpdateWebApp_NewServlet(final String version)
+    {
+        Object webApp = _webAppAccessor.createWebApp(version);
+
+        final Map<String, MockPropertyHolder> configProps = new HashMap<String, MockPropertyHolder>();
+        configProps.put(
+                IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS,
+                new MockPropertyHolder(new String[]
+                { PATTERN_SLASH_FACES_SLASH_ALL }, null));
+        configProps.put(IJSFFacetInstallDataModelProperties.CONFIG_PATH,
+                new MockPropertyHolder("/WEB-INF/faces-config.xml", null));
+        final MockDataModel config = new MockDataModel("testModel", configProps);
+        _jsfUtils.updateWebApp(webApp, config);
+        verifyServlet(webApp);
+
+        // cover the cases where the CONFIG_PATH is not the default
+        // case one: the config param is not already present
+        webApp = _webAppAccessor.createWebApp(version);
+        configProps.put(IJSFFacetInstallDataModelProperties.CONFIG_PATH,
+                new MockPropertyHolder("/WEB-INF/app-config.xml", null));
+        _jsfUtils.updateWebApp(webApp, config);
+        verifyServlet(webApp);
+        assertEquals(1, _webAppAccessor.getContextParams(webApp, version).size());
+        assertEquals("/WEB-INF/app-config.xml", _webAppAccessor.getContextParamValue(_webAppAccessor.getContextParams(webApp, version).get(0),version));
+        
+        // case two: the config param is already present
+        webApp = _webAppAccessor.createWebApp(version);
+        configProps.put(IJSFFacetInstallDataModelProperties.CONFIG_PATH,
+                new MockPropertyHolder("/WEB-INF/app-config.xml", null));
+        Object param = _webAppAccessor.createContextParam(JSFUtils.JSF_CONFIG_CONTEXT_PARAM, "SomeOtherValue", version);
+        _webAppAccessor.setContextParam(webApp, param, version);
+        _jsfUtils.updateWebApp(webApp, config);
+        verifyServlet(webApp);
+        assertEquals(1, _webAppAccessor.getContextParams(webApp, version).size());
+        
+    }
+
+    @SuppressWarnings("rawtypes")
+    protected void verifyServlet(final Object webApp)
+    {
+        final Object defaultServlet = _webAppAccessor.getServlet(webApp,
+                JSFUtils.JSF_DEFAULT_SERVLET_NAME);
+        assertNotNull(defaultServlet);
+        _webAppAccessor.verifyServlet(defaultServlet,
+                JSFUtils.JSF_SERVLET_CLASS);
+        _webAppAccessor.verifyLoadOnStartup(defaultServlet, Integer.valueOf(1));
+        List mappings = _webAppAccessor.getServletMappings_Servlet(webApp,
+                defaultServlet);
+        assertEquals(1, mappings.size());
+        Object mapping = mappings.get(0);
+        assertNotNull(mapping);
+        _webAppAccessor.verifyMapping(mapping,
+                JSFUtils.JSF_DEFAULT_SERVLET_NAME,
+                PATTERN_SLASH_FACES_SLASH_ALL);
+    }
+
+    protected void testUpdateWebApp_ExistingServlet(final String version)
+    {
+        final Object webApp = _webAppAccessor.createWebApp(version);
+        final Object servlet = _webAppAccessor.createServlet("Foobar",
+                JSFUtils.JSF_SERVLET_CLASS);
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+        final Map<String, MockPropertyHolder> configProps = new HashMap<String, MockPropertyHolder>();
+        final MockDataModel config = new MockDataModel("testModel", configProps);
+
+        _jsfUtils.updateWebApp(webApp, config);
+        Object defaultServlet = _webAppAccessor.getServlet(webApp,
+                JSFUtils.JSF_DEFAULT_SERVLET_NAME);
+        assertNotNull(defaultServlet);
+        _webAppAccessor.verifyServlet(defaultServlet,
+                JSFUtils.JSF_SERVLET_CLASS);
+        _webAppAccessor.verifyLoadOnStartup(defaultServlet, Integer.valueOf(1));
+
+        // do again, but this time have an existing servlet mapping that matches
+        // Foobar
+        final Object mapping = _webAppAccessor.createServletMapping();
+        _webAppAccessor.setMappingData(webApp, Collections
+                .singletonList("/faces"), servlet, mapping);
+        _webAppAccessor.addMappingToWebApp(webApp, mapping);
+        configProps.put(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS,
+                new MockPropertyHolder(new String[]{"/faces"}, null));
+        _jsfUtils.updateWebApp(webApp, config);
+        defaultServlet = _webAppAccessor.getServlet(webApp,
+                JSFUtils.JSF_DEFAULT_SERVLET_NAME);
+        _webAppAccessor.verifyServlet(defaultServlet,
+                JSFUtils.JSF_SERVLET_CLASS);
+        _webAppAccessor.verifyMapping(mapping,
+                JSFUtils.JSF_DEFAULT_SERVLET_NAME, "/faces");
+        _webAppAccessor.verifyLoadOnStartup(defaultServlet, Integer.valueOf(1));
+
+    }
+
+    protected void testGetFileUrlPath_NonNullCases(final String version)
+    {
+        // a web app with valid servlet and extension mapping
+        final Object webApp = _webAppAccessor.createWebApp(version);
+        final Object servlet = _webAppAccessor.createServlet("JSF Servlet",
+                JSFUtils.JSF_SERVLET_CLASS);
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+        final Object mapping = _webAppAccessor.createServletMapping();
+        _webAppAccessor.setMappingData(webApp, Collections
+                .singletonList(".faces"), servlet, mapping);
+        _webAppAccessor.addMappingToWebApp(webApp, mapping);
+
+        IPath fileUrlPath = _jsfUtils.getFileUrlPath(webApp, new MockResource(
+                IResource.FILE, new Path("/WebContent/test.jsp")), new Path(
+                "/test.jsp"));
+        assertEquals("/test.faces", fileUrlPath.toString());
+
+        // web app with valid servlet and non-default extension mapping
+        fileUrlPath = _jsfUtils.getFileUrlPath(webApp, new MockResource(
+                IResource.FILE, new Path("/WebContent/test.xhtml")), new Path(
+                "/test.xhtml"));
+        assertEquals("/test.faces", fileUrlPath.toString());
+
+        // web app with valid servlet and path-based mapping
+        _webAppAccessor.setUrlPattern(mapping, Collections
+                .singletonList("/faces"));
+        fileUrlPath = _jsfUtils.getFileUrlPath(webApp, new MockResource(
+                IResource.FILE, new Path("/WebContent/test.jsp")), new Path(
+                "/test.jsp"));
+        assertEquals("/faces/test.jsp", fileUrlPath.toString());
+
+        // web app with valid servlet and path-based mapping match *
+        _webAppAccessor.setUrlPattern(mapping, Collections
+                .singletonList(PATTERN_SLASH_FACES_SLASH_ALL));
+        fileUrlPath = _jsfUtils.getFileUrlPath(webApp, new MockResource(
+                IResource.FILE, new Path("/WebContent/test.jsp")), new Path(
+                "/test.jsp"));
+        assertEquals("/faces/test.jsp", fileUrlPath.toString());
+
+        // web app with valid servlet and extension mapping based on a
+        // non-default, default extension
+        _webAppAccessor.setUrlPattern(mapping, Collections
+                .singletonList(".jspx"));
+        final Object param = _webAppAccessor.createContextParam(
+                JSFUtils.JSF_DEFAULT_SUFFIX_CONTEXT_PARAM, ".xhtml", version);
+        _webAppAccessor.setContextParam(webApp, param,version);
+        fileUrlPath = _jsfUtils.getFileUrlPath(webApp, new MockResource(
+                IResource.FILE, new Path("/WebContent/test.xhtml")), new Path(
+                "/test.xhtml"));
+        assertEquals("/test.jspx", fileUrlPath.toString());
+    }
+
+    protected void testGetFileUrlPath_NullCases(final String version)
+    {
+        // a null webApp object produces a null path
+        final Path existingURL = new Path("foobar");
+        verifyNull(existingURL, null);
+
+        // a non-null value that is not instanceof WebApp returns a null path
+        verifyNull(existingURL, new Object());
+        // a web app with no servlet produces a null path
+
+        final Object webApp = _webAppAccessor.createWebApp("2.4");
+        verifyNull(existingURL, webApp);
+
+        // a web app with no meaningful servlet returns null
+        Object servlet = _webAppAccessor.createServlet(null, null);
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+        verifyNull(existingURL, webApp);
+
+        doPre25SpecificOrNoop(existingURL, webApp, servlet);
+
+        // wrong servlet class name
+        _webAppAccessor.setServletClass(servlet, "com.wrong.Servlet");
+        verifyNull(existingURL, webApp);
+
+        // multiple wrong class names
+        servlet = _webAppAccessor.createServlet("JSF Servlet",
+                "com.AnotherWrong.Servlet");
+        _webAppAccessor.addServletToWebApp(webApp, servlet);
+
+        assertEquals(2, _webAppAccessor.getServlets(webApp).size());
+        verifyNull(existingURL, webApp);
+
+        // valid servlet class, but no mappings
+        _webAppAccessor.setServletClass(servlet, JSFUtils.JSF_SERVLET_CLASS);
+        verifyNull(existingURL, webApp, new MockResource(IResource.FILE,
+                new Path("/somepath")));
+        verifyNull(existingURL, webApp, new MockResource(IResource.FILE,
+                new Path("/somepath.xhtml")));
+
+        final Object mapping = _webAppAccessor.createServletMapping();
+        _webAppAccessor.addMappingToWebApp(webApp, mapping);
+        assertEquals(1, _webAppAccessor.getServletMappings_WebApp(webApp)
+                .size());
+        assertEquals(0, _webAppAccessor.getServletMappings_Servlet(webApp,
+                servlet).size());
+        verifyNull(existingURL, webApp, new MockResource(IResource.FILE,
+                new Path("/somepath.xhtml")));
+
+        // empty mapping that matches to servlet
+        _webAppAccessor.setServletOnMapping(mapping, servlet);
+        assertEquals(1, _webAppAccessor.getServletMappings_WebApp(webApp)
+                .size());
+        // mapping should be matched
+        assertEquals(1, _webAppAccessor.getServletMappings_Servlet(webApp,
+                servlet).size());
+        assertTrue(_webAppAccessor.getServletMappings_Servlet(webApp, servlet)
+                .contains(mapping));
+        verifyNull(existingURL, webApp, new MockResource(IResource.FILE,
+                new Path("/somepath.xhtml")));
+    }
+
+    protected void doPre25SpecificOrNoop(final Path existingURL,
+            final Object webApp, final Object servlet)
+    {
+        // this is a noop unless explicitly overridden
+    }
+
+    @Test
+    public void testFacesConfigCreation() throws IOException
+    {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        _jsfUtils.printConfigFile_testable(os);
+        assertEquals(getExpectedDefaultConfigFile().toString("ISO-8859-1")
+                .replaceAll("\\r", ""), os.toString("ISO-8859-1"));
+    }
+
+    protected TestFileResource getExpectedDefaultConfigFile()
+            throws IOException
+    {
+        String replaceAll = getVersionToTestIn().toString().replaceAll("\\.",
+                "_");
+        final String defaultFileName = String.format(
+                "/testfiles/facet/expected-faces-config-%s.xml", replaceAll);
+        TestFileResource testFileResource = new TestFileResource();
+        testFileResource.load(new MockBundle(new File(".").getCanonicalPath()),
+                defaultFileName);
+        return testFileResource;
+    }
+
+    @Test
     public void testIsJavaEE()
     {
         final org.eclipse.jst.javaee.web.WebApp javaEEWebApp = WebFactory.eINSTANCE
@@ -59,86 +380,113 @@ public class TestJSFUtils extends TestCase
                 .createWebApp();
         assertFalse(_jsfUtils.isJavaEE(J2EEWebApp));
     }
-    
+
+    @Test
     public void testGetModelProvider()
     {
-        IModelProvider modelProvider = _jsfUtils.getModelProvider();
+        final IModelProvider modelProvider = _jsfUtils.getModelProvider();
         assertNotNull(modelProvider);
         assertEquals(_modelObject, modelProvider.getModelObject());
-        
-        _jsfUtils = new TestableJSFUtils(new JSFUtilFactory()
-        .create(JSFVersion.V2_0, null), new MockModelProvider(null));
+
+        _jsfUtils = new TestableJSFUtils(new JSFUtilFactory().create(
+                JSFVersion.V2_0, null), new MockModelProvider(null));
         // returns null when the model provider has a null model object.
         assertNull(_jsfUtils.getModelProvider());
     }
-    
+
+    @Test
     public void testGetDisplayName()
     {
-        Map<String, MockPropertyHolder>  propsMap = new HashMap<String, MockPropertyHolder>();
-        MockDataModel model = new MockDataModel("TestID", propsMap);
+        final Map<String, MockPropertyHolder> propsMap = new HashMap<String, MockPropertyHolder>();
+        final MockDataModel model = new MockDataModel("TestID", propsMap);
         // when the property is not present, use the default.
-        assertEquals(JSFUtils.JSF_DEFAULT_SERVLET_NAME, _jsfUtils.getDisplayName_testable(model));
-        
+        assertEquals(JSFUtils.JSF_DEFAULT_SERVLET_NAME, _jsfUtils
+                .getDisplayName_testable(model));
+
         // if property is present but empty or only whitespace, we also use
         // the default.
         model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME, "");
-        assertEquals(JSFUtils.JSF_DEFAULT_SERVLET_NAME, _jsfUtils.getDisplayName_testable(model));
+        assertEquals(JSFUtils.JSF_DEFAULT_SERVLET_NAME, _jsfUtils
+                .getDisplayName_testable(model));
         model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME, "");
-        assertEquals(JSFUtils.JSF_DEFAULT_SERVLET_NAME, _jsfUtils.getDisplayName_testable(model));
+        assertEquals(JSFUtils.JSF_DEFAULT_SERVLET_NAME, _jsfUtils
+                .getDisplayName_testable(model));
 
         // otherwise, we should get back the value
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME, "foobar");
+        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_NAME,
+                "foobar");
         assertEquals("foobar", _jsfUtils.getDisplayName_testable(model));
     }
 
+    @Test
     public void testGetServletClassName()
     {
-        Map<String, MockPropertyHolder>  propsMap = new HashMap<String, MockPropertyHolder>();
-        MockDataModel model = new MockDataModel("TestID", propsMap);
+        final Map<String, MockPropertyHolder> propsMap = new HashMap<String, MockPropertyHolder>();
+        final MockDataModel model = new MockDataModel("TestID", propsMap);
         // when the property is not present, use the default.
-        assertEquals(JSFUtils.JSF_SERVLET_CLASS, _jsfUtils.getServletClassname_testable(model));
-        
+        assertEquals(JSFUtils.JSF_SERVLET_CLASS, _jsfUtils
+                .getServletClassname_testable(model));
+
         // if property is present but empty or only whitespace, we also use
         // the default.
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME, "");
-        assertEquals(JSFUtils.JSF_SERVLET_CLASS, _jsfUtils.getServletClassname_testable(model));
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME, "");
-        assertEquals(JSFUtils.JSF_SERVLET_CLASS, _jsfUtils.getServletClassname_testable(model));
+        model.setProperty(
+                IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME, "");
+        assertEquals(JSFUtils.JSF_SERVLET_CLASS, _jsfUtils
+                .getServletClassname_testable(model));
+        model.setProperty(
+                IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME, "");
+        assertEquals(JSFUtils.JSF_SERVLET_CLASS, _jsfUtils
+                .getServletClassname_testable(model));
 
         // otherwise, we should get back the value
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME, "foobar");
+        model.setProperty(
+                IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME, "foobar");
         assertEquals("foobar", _jsfUtils.getServletClassname_testable(model));
     }
-    
+
+    @Test
     public void testGetServletMappings()
     {
-        Map<String, MockPropertyHolder>  propsMap = new HashMap<String, MockPropertyHolder>();
-        MockDataModel model = new MockDataModel("TestID", propsMap);
+        final Map<String, MockPropertyHolder> propsMap = new HashMap<String, MockPropertyHolder>();
+        final MockDataModel model = new MockDataModel("TestID", propsMap);
 
         // empty array should beget empty list
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, new String[]{});
+        model.setProperty(
+                IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS,
+                new String[]
+                {});
         assertTrue(_jsfUtils.getServletMappings_testable(model).isEmpty());
-        
+
         // non-empty list should beget the same list back
-        String[]  values1 = new String[] {"foo"};
-        String[]  valuesMany = new String[] {"foo", "bar", "foobar"};
-        
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, values1);
-        assertEquals(Arrays.asList(values1), _jsfUtils.getServletMappings_testable(model));
-        
-        model.setProperty(IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS, valuesMany);
-        assertEquals(Arrays.asList(valuesMany), _jsfUtils.getServletMappings_testable(model));
+        final String[] values1 = new String[]
+        { "foo" };
+        final String[] valuesMany = new String[]
+        { "foo", "bar", "foobar" };
+
+        model.setProperty(
+                IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS,
+                values1);
+        assertEquals(Arrays.asList(values1), _jsfUtils
+                .getServletMappings_testable(model));
+
+        model.setProperty(
+                IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS,
+                valuesMany);
+        assertEquals(Arrays.asList(valuesMany), _jsfUtils
+                .getServletMappings_testable(model));
     }
-    
+
+    @Test
     public void testIsJSFPage()
     {
         assertTrue(_jsfUtils.isJSFPage_testable(null));
     }
-    
+
+    @Test
     public void testIsValidKnownExtension()
     {
         assertTrue(_jsfUtils.isValidKnownExtension_testable("jsp"));
-        assertTrue(_jsfUtils.isValidKnownExtension_testable("jspx"));  //$NON-NLS-1$
+        assertTrue(_jsfUtils.isValidKnownExtension_testable("jspx")); //$NON-NLS-1$
         assertTrue(_jsfUtils.isValidKnownExtension_testable("jsf")); //$NON-NLS-1$
         assertTrue(_jsfUtils.isValidKnownExtension_testable("xhtml")); //$NON-NLS-1$
 
@@ -146,11 +494,98 @@ public class TestJSFUtils extends TestCase
         assertFalse(_jsfUtils.isValidKnownExtension_testable("dtd")); //$NON-NLS-1$)
         assertFalse(_jsfUtils.isValidKnownExtension_testable("jspf")); //$NON-NLS-1$)
         assertFalse(_jsfUtils.isValidKnownExtension_testable("php")); //$NON-NLS-1$)
-        
-        
+
         assertFalse(_jsfUtils.isValidKnownExtension_testable("")); //$NON-NLS-1$)
-        assertFalse(_jsfUtils.isValidKnownExtension_testable(null)); //$NON-NLS-1$)
+        assertFalse(_jsfUtils.isValidKnownExtension_testable(null)); // )
     }
+
+    protected final void verifyNull(final Path existingURL,
+            final Object webApp, final IResource res)
+    {
+        assertNull(_jsfUtils.getFileUrlPath(webApp, res, null));
+        assertNull(_jsfUtils.getFileUrlPath(webApp, res, existingURL));
+    }
+
+    protected final void verifyNull(final Path existingURL, final Object webApp)
+    {
+        verifyNull(existingURL, webApp, null);
+    }
+
+    protected abstract JSFVersion getVersionToTestIn();
+
+    protected abstract WebAppAccessor createWebAccessor();
+
+    /**
+     * Concrete implementations are used to abstract test cases away from
+     * whether they are using the J2EE or JavaEE version of the WebApp objects.
+     * 
+     * @author cbateman
+     * 
+     */
+    @SuppressWarnings("rawtypes")
+    public static abstract class WebAppAccessor
+    {
+        protected abstract Object createWebApp(final String version);
+
+        protected abstract String getContextParamValue(Object param, String version);
+
+        protected abstract List getContextParams(Object webApp, String version);
+
+        protected abstract void verifyMapping(Object mapping,
+                String servletName, String servletClass);
+
+        protected abstract Object createServlet(final String servletName,
+                final String servletClass);
+
+        protected abstract Object createServletMapping();
+
+        protected abstract void setServletClass(Object servlet, String name);
+
+        protected abstract List getServlets(final Object webApp);
+
+        protected abstract void addMappingToWebApp(final Object webApp,
+                final Object mapping);
+
+        protected abstract void addServletToWebApp(final Object webApp,
+                final Object servlet);
+
+        protected abstract List getServletMappings_WebApp(final Object webApp);
+
+        protected abstract List getServletMappings_Servlet(final Object webApp,
+                final Object servlet);
+
+        protected abstract void setMappingData(final Object webApp,
+                final List<String> urlPatterns, final Object servlet,
+                final Object mapping);
+
+        /**
+         * Clears any existing patterns and replaces them with patterns
+         * 
+         * @param mapping
+         * @param patterns
+         */
+        protected abstract void setUrlPattern(final Object mapping,
+                final List<String> patterns);
+
+        protected abstract Object createContextParam(final String name,
+                final String value, final String version);
+
+        protected abstract void setContextParam(final Object webApp,
+                final Object param, final String version);
+
+        protected abstract Object getServlet(final Object webApp,
+                final String servletName);
+
+        protected abstract void verifyServlet(final Object defaultServlet,
+                final String className);
+
+        protected abstract void verifyLoadOnStartup(
+                final Object defaultServlet, final Integer expectedValue);
+
+        protected abstract void setServletOnMapping(Object mapping,
+                Object servlet);
+    }
+
     // @Override
     // protected void tearDown() throws Exception {
     // super.tearDown();
