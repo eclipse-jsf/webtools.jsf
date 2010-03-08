@@ -90,7 +90,7 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
      * path
      */
     @Override
-    protected void doVersionSpecificConfigFile(final PrintWriter pw)
+    public void doVersionSpecificConfigFile(final PrintWriter pw)
     {
         final String QUOTE = new String(new char[]
         { '"' });
@@ -209,9 +209,12 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 		
 		List mappings = webApp.getServletMappings();
 		String servletName = servlet.getServletName();
-		if (servletName != null) {
-			for (int i=mappings.size()-1;i>=0;--i){
-				ServletMapping mapping = (ServletMapping)mappings.get(i);
+		if (servletName != null) 
+		{
+		    final Iterator it = mappings.iterator();
+			while(it.hasNext())
+			{
+				ServletMapping mapping = (ServletMapping) it.next();
 				if (mapping != null && 
 						mapping.getServlet() != null && 
 						mapping.getServlet().getServletName() != null &&
@@ -344,16 +347,37 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
     private String getDefaultSuffix(final WebApp webApp)
     {
         String defaultSuffix = getDefaultDefaultSuffix();
-        for (Iterator it = webApp.getContexts().iterator(); it.hasNext();)
+        if ("2.3".equals(webApp.getVersion())) //$NON-NLS-1$
         {
-            ContextParam cp = (ContextParam) it.next();
-            if (cp != null)
+            for (Iterator it = webApp.getContexts().iterator(); it.hasNext();)
             {
-                final String paramName = cp.getParamName();
-                final String suffix = calculateSuffix(paramName, cp.getParamValue());
-                if (suffix != null)
+                ContextParam cp = (ContextParam) it.next();
+                if (cp != null)
                 {
-                    return suffix;
+                    final String paramName = cp.getParamName();
+                    final String suffix = calculateSuffix(paramName, cp
+                            .getParamValue());
+                    if (suffix != null)
+                    {
+                        return suffix;
+                    }
+                }
+            }
+        }
+        else if ("2.4".equals(webApp.getVersion())) //$NON-NLS-1$
+        {
+            for (Iterator it = webApp.getContextParams().iterator(); it.hasNext();)
+            {
+                ParamValue cp = (ParamValue) it.next();
+                if (cp != null)
+                {
+                    final String paramName = cp.getName();
+                    final String suffix = calculateSuffix(paramName, cp
+                            .getValue());
+                    if (suffix != null)
+                    {
+                        return suffix;
+                    }
                 }
             }
         }
@@ -463,14 +487,32 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
     }
 
     private void removeJSFContextParams(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final org.eclipse.jst.j2ee.webapplication.Servlet servlet) {
-        Iterator it = webApp.getContextParams().iterator();
-        while (it.hasNext()) {
-            org.eclipse.jst.j2ee.common.ParamValue cp = (org.eclipse.jst.j2ee.common.ParamValue) it.next();
-            if (cp.getName().equals(JSFUtils.JSF_CONFIG_CONTEXT_PARAM)) {
-                webApp.getContextParams().remove(cp);
-                break;
+        if ("2.3".equals(webApp.getVersion())) //$NON-NLS-1$
+        {
+            Iterator it = webApp.getContexts().iterator();
+            while (it.hasNext()) 
+            {
+                final ContextParam cp = (ContextParam) it.next();
+                if (JSFUtils.JSF_CONFIG_CONTEXT_PARAM.equals(cp.getParamName())) 
+                {
+                    webApp.getContexts().remove(cp);
+                    break;
+                }
             }
         }
+        else if ("2.4".equals(webApp.getVersion())) //$NON-NLS-1$
+        {
+            Iterator it = webApp.getContextParams().iterator();
+            while (it.hasNext()) 
+            {
+                ParamValue cp = (ParamValue) it.next();
+                if (cp.getName().equals(JSFUtils.JSF_CONFIG_CONTEXT_PARAM)) {
+                    webApp.getContextParams().remove(cp);
+                    break;
+                }
+            }
+        }
+        // otherwise do nothing
     }
 
     private void removeJSFServlet(final org.eclipse.jst.j2ee.webapplication.WebApp webApp, final org.eclipse.jst.j2ee.webapplication.Servlet servlet) {

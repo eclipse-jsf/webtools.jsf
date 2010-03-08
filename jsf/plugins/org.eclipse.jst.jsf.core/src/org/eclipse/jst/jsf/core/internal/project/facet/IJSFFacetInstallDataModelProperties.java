@@ -21,7 +21,8 @@ public interface IJSFFacetInstallDataModelProperties extends
         IFacetInstallDataModelProperties {
 	
     /**
-     * TODO:
+     * Refers to the path where the faces config file will be created.
+     * Expects a string that can be interpreted as a web root relative path.
      */
     public static final String CONFIG_PATH = "IJSFFacetInstallDataModelProperties.CONFIG_PATH"; //$NON-NLS-1$
 
@@ -36,7 +37,8 @@ public interface IJSFFacetInstallDataModelProperties extends
     public static final String SERVLET_CLASSNAME = "IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME"; //$NON-NLS-1$
 
     /**
-     * TODO:
+     * Refers to configuration information about servlet url patterns to add on install
+     * The model value must be a String[].
      */
     public static final String SERVLET_URL_PATTERNS = "IJSFFacetInstallDataModelProperties.SERVLET_URL_PATTERNS"; //$NON-NLS-1$
 

@@ -192,7 +192,7 @@ public abstract class JSFUtils {
     /**
      * @param pw
      */
-    protected abstract void doVersionSpecificConfigFile(final PrintWriter pw);
+    public abstract void doVersionSpecificConfigFile(final PrintWriter pw);
     
     
     /**

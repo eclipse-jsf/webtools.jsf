@@ -87,14 +87,12 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
         return null;
     }
 
-	/**
-	 * Creates a stubbed JSF v1.2 configuration file for specified JSF version and path
-	 */
-	@Override
-    public void doVersionSpecificConfigFile(final PrintWriter pw)
+    @Override
+    public void doVersionSpecificConfigFile(PrintWriter pw)
     {
         final String QUOTE = new String(new char[]
         { '"' });
+        final String schemaVersionString = getVersion().toString().replaceAll("\\.", "_");  //$NON-NLS-1$//$NON-NLS-2$
         pw.write("<?xml version=" + QUOTE + "1.0" + QUOTE + " encoding=" //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 + QUOTE + "UTF-8" + QUOTE + "?>\n\n"); //$NON-NLS-1$ //$NON-NLS-2$
         pw.write("<faces-config\n"); //$NON-NLS-1$
@@ -106,9 +104,9 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
         pw.write("    " //$NON-NLS-1$
                 + "xsi:schemaLocation=" //$NON-NLS-1$
                 + QUOTE
-                + "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd" //$NON-NLS-1$
+                + String.format("http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_%s.xsd", schemaVersionString) //$NON-NLS-1$
                 + QUOTE + "\n"); //$NON-NLS-1$
-        pw.write("    " + "version=" + QUOTE + "1.2" + QUOTE + ">\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+        pw.write("    " + "version=" + QUOTE + getVersion().toString() + QUOTE + ">\n\n"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         pw.write("</faces-config>\n"); //$NON-NLS-1$
     }
 
@@ -264,7 +262,9 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 		ParamValue foundCP = null;
 		ParamValue cp = null;
 		boolean found = false;
-		if (!config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH).equals(JSF_DEFAULT_CONFIG_PATH)) {
+		String stringProperty = config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH);
+        if (stringProperty != null &&
+                !stringProperty.equals(JSF_DEFAULT_CONFIG_PATH)) {
 			// check to see if present
 			Iterator it = webApp.getContextParams().iterator();
 			while (it.hasNext()) {
@@ -279,13 +279,13 @@ import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
 			if (!found) {
 				ParamValue pv = JavaeeFactory.eINSTANCE.createParamValue();
 				pv.setParamName(JSF_CONFIG_CONTEXT_PARAM);
-				pv.setParamValue(config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH));
+				pv.setParamValue(stringProperty);
 				webApp.getContextParams().add(pv);
 			} else {
 				cp = foundCP;
-				if (cp.getParamValue().indexOf(config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH)) < 0) {
+				if (cp.getParamValue().indexOf(stringProperty) < 0) {
 					String curVal = cp.getParamValue();
-					String val = config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH);
+					String val = stringProperty;
 					if (curVal != null && !"".equals(curVal.trim())) { //$NON-NLS-1$
 						val = curVal + ",\n" + val; //$NON-NLS-1$
 					}
