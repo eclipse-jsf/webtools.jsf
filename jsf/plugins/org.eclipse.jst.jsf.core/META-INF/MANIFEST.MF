@@ -44,7 +44,6 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.core.internal;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.core.internal.contentassist.el;x-friends:="org.eclipse.jst.jsf.contentassist.tests",
- org.eclipse.jst.jsf.core.internal.contenttype;x-internal:=true,
  org.eclipse.jst.jsf.core.internal.jem;x-internal:=true,
  org.eclipse.jst.jsf.core.internal.jsflibraryconfig;x-friends:="org.eclipse.jst.jsf.core.tests,org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.pagedesigner.tests",
  org.eclipse.jst.jsf.core.internal.jsflibraryregistry;
