@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.test.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
 
 
 
@@ -33,6 +34,11 @@ public class TestFileResource extends LoadableResource
         return _buffer.toString();
     }
 
+    public String toString(final String encoding) throws UnsupportedEncodingException
+    {
+        return _buffer.toString(encoding);
+
+    }
     /**
      * @return the contents as a byte array
      */

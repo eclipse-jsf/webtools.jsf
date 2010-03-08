@@ -228,6 +228,10 @@ public class MockDataModel implements IDataModel
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * @author cbateman
+     *
+     */
     public static class MockPropertyHolder
     {
         private Object    _value;
@@ -247,10 +251,17 @@ public class MockDataModel implements IDataModel
             this(null, null);
         }
 
+        /**
+         * @return the property value to be used by the data model.
+         */
         public Object getValue()
         {
             return _value;
         }
+        
+        /**
+         * @return the default value to be used by the data model
+         */
         public Object getDefaultValue()
         {
             return _defaultValue;
