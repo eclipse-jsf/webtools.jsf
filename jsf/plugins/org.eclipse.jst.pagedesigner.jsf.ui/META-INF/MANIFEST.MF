@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.jst.jsf.facesconfig;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jdt.core;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.views.properties.tabbed;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)"
+ org.eclipse.emf.ecore;bundle-version="[2.5.0,3.0.0)",
+ org.eclipse.jface.text;bundle-version="[3.5.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-ManifestVersion: 2
 Export-Package: org.eclipse.jst.pagedesigner.jsf.core.dom;x-internal:=true,
