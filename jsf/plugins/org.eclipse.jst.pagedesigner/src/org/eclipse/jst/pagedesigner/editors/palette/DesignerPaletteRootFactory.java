@@ -11,12 +11,11 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.editors.palette;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 
 /**
  * Factory for creating DesignerPaletteRoots
@@ -84,19 +83,32 @@ public class DesignerPaletteRootFactory {
 		return PDPlugin.getDefault().getPreferenceStore();
 	}
 
+//	/**
+//	 * Creates the PaletteRoot and adds all palette elements. Use this factory
+//	 * method to create a new palette for your graphical editor.
+//	 * <p>
+//	 * <i>Note: cannot support facelets</i>
+//	 * @param project 
+//	 * @return a new PaletteRoot
+//	 * @deprecated - use createPaletteRoot(IFile file)
+//	 */
+//	public static PaletteRoot createPaletteRoot(IProject project) {
+//		PaletteItemManager manager = PaletteItemManager.getInstance(project);
+//		if (manager == null) {
+//			return null;
+//		}
+//		manager.reset();
+//		PaletteRoot palette = new DesignerPaletteRoot(manager);
+//		return palette;
+//	}
+	
 	/**
 	 * Creates the PaletteRoot and adds all palette elements. Use this factory
 	 * method to create a new palette for your graphical editor.
-	 * @param project 
+	 * @param file 
 	 * @return a new PaletteRoot
 	 */
-	public static PaletteRoot createPaletteRoot(IProject project) {
-		PaletteItemManager manager = PaletteItemManager.getInstance(project);
-		if (manager == null) {
-			return null;
-		}
-		manager.reset();
-		PaletteRoot palette = new DesignerPaletteRoot(manager);
-		return palette;
+	public static PaletteRoot createPaletteRoot(final IFile file) {
+		return new DesignerPaletteRoot(file);
 	}
 }

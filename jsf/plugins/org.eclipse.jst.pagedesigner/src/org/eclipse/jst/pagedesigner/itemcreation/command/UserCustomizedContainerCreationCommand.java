@@ -2,12 +2,15 @@ package org.eclipse.jst.pagedesigner.itemcreation.command;
 
 import javax.xml.namespace.QName;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ResolverUtil;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.dom.ValidatorSupport;
 import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
@@ -71,8 +74,9 @@ public class UserCustomizedContainerCreationCommand extends
         final IDOMModel model = ((IDOMNode) domPosition.getContainerNode())
                 .getModel();
 
+        final IFile fileForDocument = ResolverUtil.getFileForDocument(model.getStructuredDocument());    
         final ITagDropSourceData creationProvider = TagToolCreationAdapter
-                .findProviderForContainer(containerQName);
+                .findProviderForContainer(containerQName, PaletteItemManager.createPaletteContext(fileForDocument));
 
         newPosition = ValidatorSupport.insertContainer(domPosition,
                 model, creationProvider, getContainerCustomizationData());

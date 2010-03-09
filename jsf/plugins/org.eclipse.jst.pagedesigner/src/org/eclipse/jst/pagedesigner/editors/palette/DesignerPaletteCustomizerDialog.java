@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.gef.palette.PaletteEntry;
-import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteCustomizer;
 import org.eclipse.gef.ui.palette.customize.PaletteCustomizationAction;
 import org.eclipse.gef.ui.palette.customize.PaletteCustomizerDialog;
@@ -53,7 +52,7 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 	 * @param root
 	 */
 	public DesignerPaletteCustomizerDialog(Shell shell,
-			PaletteCustomizer customizer, PaletteRoot root) {
+			PaletteCustomizer customizer, DesignerPaletteRoot root) {
 		super(shell, customizer, root);
 
 	}
@@ -159,8 +158,9 @@ public class DesignerPaletteCustomizerDialog extends PaletteCustomizerDialog {
 				if (!filename.endsWith(DEFAULTEXTENSION)) {
 					filename = filename + DEFAULTEXTENSION;
 				}
+				final IPaletteContext context = PaletteItemManager.createPaletteContext(((DesignerPaletteRoot)getPaletteRoot()).getFile());
 				DesignerPaletteCustomizationsHelper
-					.exportCustomizations(PaletteItemManager.getCurrentInstance(), filename);
+					.exportCustomizations(PaletteItemManager.getInstance(context), filename);
 
 
 				updateActions();

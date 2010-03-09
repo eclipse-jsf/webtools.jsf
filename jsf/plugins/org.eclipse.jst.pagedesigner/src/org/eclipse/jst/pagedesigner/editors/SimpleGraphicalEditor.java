@@ -63,7 +63,6 @@ import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteCustomizer;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteRootFactory;
 import org.eclipse.jst.pagedesigner.editors.palette.DesignerPaletteViewerProvider;
 import org.eclipse.jst.pagedesigner.editors.palette.IPaletteFactory;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.jsp.core.internal.pagevar.DocumentPageVariableAdapter;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.PageVariableAdapterFactory;
 import org.eclipse.jst.pagedesigner.parts.CSSStyleAdapterFactory;
@@ -481,7 +480,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	        } 
             if (_palette == null) {
             	_palette = DesignerPaletteRootFactory
-            		.createPaletteRoot(getCurrentProject(_delegate.getEditorInput()));
+            		.createPaletteRoot(getCurrentFile(_delegate.getEditorInput()));
             }
 		}
 		return _palette;
@@ -530,9 +529,9 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
         } 
         if (_paletteViewerPage == null) {
             DefaultEditDomain editDomain = getEditDomain();
-            PaletteItemManager manager = PaletteItemManager
-                    .getInstance(getCurrentProject(getEditorInput()));
-            manager.reset();
+//            PaletteItemManager manager = PaletteItemManager
+//                    .getInstance(getCurrentFile(getEditorInput()));
+//            manager.reset();
             PaletteRoot paletteRoot = getPaletteRoot();
             editDomain.setPaletteRoot(paletteRoot);
             
@@ -568,16 +567,23 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		return _delegate;
 	}
 
-	private IProject getCurrentProject(IEditorInput input) {
-		IProject curProject = null;
+//	private IProject getCurrentProject(IEditorInput input) {
+//		IProject curProject = null;
+//		IFile inputFile = null;
+//		if (input instanceof IFileEditorInput) {
+//			inputFile = ((IFileEditorInput) input).getFile();
+//			curProject = inputFile.getProject();
+//		}
+//		return curProject;
+//	}
+
+	private IFile getCurrentFile(IEditorInput input) {
 		IFile inputFile = null;
 		if (input instanceof IFileEditorInput) {
 			inputFile = ((IFileEditorInput) input).getFile();
-			curProject = inputFile.getProject();
 		}
-		return curProject;
+		return inputFile;
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -33,7 +33,7 @@ public final class TagToolCreationAdapter implements ITagDropSourceData
         _uri = uri;
         _tagName = tagName;
         _defaultPrefix = defaultPrefix;
-        _id = id;
+        _id = id;        
     }
 
     public String getDefaultPrefix()
@@ -70,34 +70,39 @@ public final class TagToolCreationAdapter implements ITagDropSourceData
 
     /**
      * @param container
+     * @param paletteContext 
      * @return the tag creation provider
      */
     public static ITagDropSourceData findProviderForContainer(
-            final QName container)
+            final QName container, final IPaletteContext paletteContext)
     {
+    	
         return findProviderForContainer(container.getNamespaceURI(), container
-                .getLocalPart(), PaletteItemManager.getCurrentInstance());
+                .getLocalPart(), paletteContext);
     }
 
     /**
      * @param uri
      * @param tagName
-     * @param itemManager
+     * @param paletteContext
      * @return the tag creation provider
      */
     public static ITagDropSourceData findProviderForContainer(
             final String uri, final String tagName,
-            final PaletteItemManager itemManager)
+            final IPaletteContext paletteContext)
     {
-        final TaglibPaletteDrawer category = itemManager.findCategoryByURI(uri);
-        if (category != null)
-        {
-            final TagToolPaletteEntry tagItem = category
-                    .getTagPaletteEntryByTagName(tagName);
-            if (tagItem != null)
-            {
-                return tagItem.getTemplate();
-            }
+    	final PaletteItemManager itemManager = PaletteItemManager.getInstance(paletteContext);
+        if (itemManager != null) {
+	    	final TaglibPaletteDrawer category = itemManager.findCategoryByURI(uri);
+	        if (category != null)
+	        {
+	            final TagToolPaletteEntry tagItem = category
+	                    .getTagPaletteEntryByTagName(tagName);
+	            if (tagItem != null)
+	            {
+	                return tagItem.getTemplate();
+	            }
+	        }
         }
         return null;
     }

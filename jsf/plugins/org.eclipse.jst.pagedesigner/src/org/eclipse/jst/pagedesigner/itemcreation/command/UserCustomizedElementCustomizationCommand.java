@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ResolverUtil;
@@ -22,6 +21,7 @@ import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * Added extra functionality to use the customization data to set tag attributes
@@ -69,8 +69,12 @@ public class UserCustomizedElementCustomizationCommand extends
         if (_creationData.getDropCustomizationData() != null)
         {
             final ICustomizationData data = (ICustomizationData) _creationData.getDropCustomizationData().getAdapter(ICustomizationData.class);
-
-            if (data.getChildrenData() != null)
+            
+            if (data.getTextNodeData() != null) {
+            	final Node textNode = _element.getOwnerDocument().createTextNode(data.getTextNodeData());
+            	_element.appendChild(textNode);
+            } 
+            else if (data.getChildrenData() != null)
             {
                 int childCount = 0;
                 CHILDREN_LOOP: for (ICustomizationData child : data.getChildrenData().getChildList())
@@ -97,25 +101,28 @@ public class UserCustomizedElementCustomizationCommand extends
                     IFile fileForDocument = ResolverUtil.getFileForDocument(_model.getStructuredDocument());
                     if (fileForDocument == null)
                     {
-                        PDPlugin.log("File not found for model: "+_model.toString(), new Exception("Stack trace only"));  //$NON-NLS-1$//$NON-NLS-2$
+                        PDPlugin.log("File not found for model: "+_model.toString(), new Exception("Stack trace only"));  //$NON-NLS-1$ //$NON-NLS-2$
                         continue CHILDREN_LOOP;
                     }
-                    final IProject project = fileForDocument.getProject();
-                    PaletteItemManager itemManager = PaletteItemManager.getInstance(project);
-
-                    if (itemManager == null)
-                    {
-                        PDPlugin.log("paletteManager not found for project: "+project.toString(), new Exception("Stack trace only")); //$NON-NLS-1$ //$NON-NLS-2$
-                        continue CHILDREN_LOOP;
-                    }
+//                    final IProject project = fileForDocument.getProject();
+//                    PaletteItemManager itemManager = PaletteItemManager.getInstance(project);
+//                    PaletteItemManager itemManager = PaletteItemManager.getInstance(fileForDocument);
+//
+//                    if (itemManager == null)
+//                    {
+//                    	PDPlugin.log("paletteManager not found for file: "+fileForDocument.toString(), new Exception("Stack trace only")); //$NON-NLS-1$ //$NON-NLS-2$
+////                        PDPlugin.log("paletteManager not found for project: "+project.toString(), new Exception("Stack trace only")); //$NON-NLS-1$ //$NON-NLS-2$
+//                        continue CHILDREN_LOOP;
+//                    }
 
                     final String uri = child.getTagIdentifier().getUri();
                     final String tagName = child.getTagIdentifier().getTagName();
                     final ITagDropSourceData creationProvider =
-                        TagToolCreationAdapter.findProviderForContainer(uri, tagName, itemManager);
+                        TagToolCreationAdapter.findProviderForContainer(uri, tagName, PaletteItemManager.createPaletteContext(fileForDocument));
                     final ITaglibDomainMetaDataModelContext modelContext = 
                         TaglibDomainMetaDataQueryHelper
-                            .createMetaDataModelContext(project, child.getTagIdentifier().getUri());
+                            .createMetaDataModelContext(fileForDocument.getProject(), child.getTagIdentifier().getUri());
+//                    		.createMetaDataModelContext(project, child.getTagIdentifier().getUri());
                     IDOMPosition domPosition = new DOMPosition(_element, childCount++);
                     CreationData creationData = new CreationData(creationProvider,_model, domPosition, modelContext, child);
 

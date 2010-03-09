@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.editors.palette;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.gef.Tool;
 import org.eclipse.gef.palette.MarqueeToolEntry;
 import org.eclipse.gef.palette.PaletteEntry;
@@ -22,6 +23,7 @@ import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.palette.SelectionToolEntry;
 import org.eclipse.gef.palette.ToolEntry;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
+import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.tools.RangeSelectionTool;
 
 /**
@@ -29,16 +31,20 @@ import org.eclipse.jst.pagedesigner.tools.RangeSelectionTool;
  */
 public class DesignerPaletteRoot extends PaletteRoot {
 	private IPaletteItemManager _manager;
+	private IFile _file;
+	private IPaletteContext _paletteContext;
     
 	/**
 	 * Creates a new DesignerPaletteRoot instance.
-	 * @param manager 
+	 * @param file 
 	 */
-	public DesignerPaletteRoot(IPaletteItemManager manager) {
+	public DesignerPaletteRoot(final IFile file) {
 		// create root
 		super();
-
-		this._manager = manager;
+		
+		this._paletteContext = PaletteItemManager.createPaletteContext(file);
+		this._manager = PaletteItemManager.getInstance(_paletteContext);
+		
 		setupBasicItems();
 		loadItems();
 
@@ -46,6 +52,19 @@ public class DesignerPaletteRoot extends PaletteRoot {
 
 	}
 
+	/**
+	 * @return the paletteContext 
+	 */
+	public IPaletteContext getPaletteContext() {
+		return _paletteContext;
+	}
+	
+	/**
+	 * @return the paletteContext 
+	 */
+	public IFile getFile() {
+		return _file;
+	}
 	/**
 	 * @return IPaletteItemManager instance for this root
 	 */
@@ -83,9 +102,10 @@ public class DesignerPaletteRoot extends PaletteRoot {
 		// PDPlugin.getDefault().getPluginPreferences().getBoolean(IJMTConstants.PREF_PALETTE_SHOW_ALL);
 		// remove other things first.
 		removeItems();
-
-		List categories = _manager.getAllCategories();
-		this.addAll(categories);
+		
+		if (_manager != null) {
+			this.addAll(_manager.getAllCategories());
+		};
 	}
 
 	/**

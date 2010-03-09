@@ -13,13 +13,10 @@ package org.eclipse.jst.pagedesigner.editors.palette;
 
 import java.util.List;
 
-import org.eclipse.core.runtime.Preferences;
-import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteCustomizer;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.customize.PaletteCustomizerDialog;
-import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -47,18 +44,18 @@ public class DesignerPaletteViewer extends PaletteViewer {
 		this.enableVerticalScrollbar(true);
 	}
 
-	Preferences.IPropertyChangeListener listener = new Preferences.IPropertyChangeListener() {
-		public void propertyChange(PropertyChangeEvent event) {
-			PaletteRoot root = getPaletteRoot();
-			if (root instanceof DesignerPaletteRoot) {
-//				((DesignerPaletteRoot) root).refresh();
-				// XXX: setActiveTool to null to workaround GEF bug of NPE
-				// setActiveTool(null);
-			}
-		}
-	};
+//	Preferences.IPropertyChangeListener listener = new Preferences.IPropertyChangeListener() {
+//		public void propertyChange(PropertyChangeEvent event) {
+//			PaletteRoot root = getPaletteRoot();
+//			if (root instanceof DesignerPaletteRoot) {
+////				((DesignerPaletteRoot) root).refresh();
+//				// XXX: setActiveTool to null to workaround GEF bug of NPE
+//				// setActiveTool(null);
+//			}
+//		}
+//	};
 	
-	IEntryChangeListener _paletteModelListener = new IEntryChangeListener() {
+	final IEntryChangeListener _paletteModelListener = new IEntryChangeListener() {
 
 		public void modelChanged(List oldDefinitions, List newDefinitions) {
 			final PaletteRoot root = getPaletteRoot();
@@ -86,47 +83,6 @@ public class DesignerPaletteViewer extends PaletteViewer {
 
 	};
 
-//
-//	IResourceChangeListener _resourceChangeListener = new IResourceChangeListener() {
-//
-//		public void resourceChanged(IResourceChangeEvent event) {
-//			IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
-//				public boolean visit(IResourceDelta delta) throws CoreException {
-//					IResource resource = delta.getResource();
-//					// FIXME need make performance better
-//					if (resource.getType() == IResource.FILE
-//							&& (delta.getFlags() & IResourceDelta.CONTENT) != 0) {
-//						String ext = ((IFile) resource).getFileExtension();
-//						// resource.getFullPath().
-//						if (ext != null
-//								&& ("tld".equalsIgnoreCase(ext) || "jar"
-//										.equalsIgnoreCase(ext))) {
-//							PaletteRoot root = getPaletteRoot();
-//							if (root instanceof DesignerPaletteRoot) {
-//								IPaletteItemManager imanager = ((DesignerPaletteRoot) root)
-//										.getPaletteManager();
-//								if (imanager instanceof PaletteItemManager) {
-//									PaletteItemManager manager = (PaletteItemManager) imanager;
-//									manager.reset();
-//								}
-//
-//							}
-//						}
-//					}
-//					return true;
-//				}
-//			};
-//			try {
-//				IResourceDelta delta = event.getDelta();
-//				if (delta != null) {
-//					delta.accept(visitor);
-//				}
-//			} catch (CoreException e) {
-//				// ignore
-//			}
-//		}
-//
-//	};
 
 	/*
 	 * (non-Javadoc)
@@ -135,8 +91,8 @@ public class DesignerPaletteViewer extends PaletteViewer {
 	 */
 	protected void hookControl() {
 		super.hookControl();
-		PDPlugin.getDefault().getPluginPreferences().addPropertyChangeListener(
-				listener);
+//		PDPlugin.getDefault().getPluginPreferences().addPropertyChangeListener(
+//				listener);
 	}
 
 	/*
@@ -145,8 +101,8 @@ public class DesignerPaletteViewer extends PaletteViewer {
 	 * @see org.eclipse.gef.ui.palette.PaletteViewer#unhookControl()
 	 */
 	protected void unhookControl() {
-		PDPlugin.getDefault().getPluginPreferences()
-				.removePropertyChangeListener(listener);
+//		PDPlugin.getDefault().getPluginPreferences()
+//				.removePropertyChangeListener(listener);
 		// remove palette model change listener
 		PaletteRoot root = getPaletteRoot();
 		if (root instanceof DesignerPaletteRoot) {
@@ -159,8 +115,9 @@ public class DesignerPaletteViewer extends PaletteViewer {
 				PaletteItemManager manager = (PaletteItemManager) imanager;
 //				ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 //						_resourceChangeListener);
-				manager.removeEntryChangeListener(_paletteModelListener);
-				PaletteItemManager.clearPaletteItemManager();
+				manager.removeEntryChangeListener(_paletteModelListener);				
+//				PaletteItemManager.clearPaletteItemManager();
+				manager.release(((DesignerPaletteRoot)root).getPaletteContext());
 			}
 		}
 		super.unhookControl();
@@ -188,8 +145,6 @@ public class DesignerPaletteViewer extends PaletteViewer {
 		if (root instanceof DesignerPaletteRoot) {
 			((DesignerPaletteRoot) root).getPaletteManager()
 					.addEntryChangeListener(_paletteModelListener);
-//			ResourcesPlugin.getWorkspace().addResourceChangeListener(
-//					_resourceChangeListener);
 		}
 
 	}

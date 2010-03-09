@@ -13,7 +13,7 @@ package org.eclipse.jst.pagedesigner.editors.palette;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory.TagRegistryIdentifier;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 
 /**
@@ -27,7 +27,7 @@ public interface IPaletteItemManager {
 	/**
 	 * @return IProject
 	 */
-	public IProject getProject();
+	public TagRegistryIdentifier getTagRegistryIdentifier();
 	
 	/**
 	 * @return list of {@link TaglibPaletteDrawer}s being managed for this project 

@@ -57,7 +57,7 @@ public final class DesignerPaletteCustomizationsHelper {
 	 */
 	public static PaletteCustomizerDialog getNewCustomizerDialog(PaletteViewer paletteViewer, PaletteCustomizer paletteCustomizer){
 		return new DesignerPaletteCustomizerDialog(
-				paletteViewer.getControl().getShell(), paletteCustomizer, paletteViewer.getPaletteRoot());
+				paletteViewer.getControl().getShell(), paletteCustomizer, (DesignerPaletteRoot)paletteViewer.getPaletteRoot());
 
 	}
 	
