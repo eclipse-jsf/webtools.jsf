@@ -170,14 +170,36 @@ public final class CompositeTagRegistryFactory
             _contentType = contentType;
         }
 
-        IProject getProject()
+        /**
+         * @return project
+         */
+        public IProject getProject()
         {
             return _project;
         }
 
-        IContentType getContentType()
+        /**
+         * @return content type
+         */
+        public IContentType getContentType()
         {
             return _contentType;
+        }
+        
+        public boolean equals(final Object o) {
+        	if (o instanceof TagRegistryIdentifier) {        	
+	        	final TagRegistryIdentifier other = (TagRegistryIdentifier)o;
+	        	final int otherProjectHash = other.getProject() != null ? other.getProject().hashCode() : 0;
+	        	final int thisProjectHash = getProject() != null ? getProject().hashCode() : 0;
+	        	if (otherProjectHash == thisProjectHash &&
+	        			other.getContentType().equals(this.getContentType()))
+	        		return true;
+        	}
+        	return false;
+        }
+        
+        public int hashCode() {
+        	return (getProject() != null ? getProject().hashCode() : 0) + 7*_contentType.hashCode();
         }
 
     }
