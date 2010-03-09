@@ -16,7 +16,7 @@
 				<display-label>%INPUT.BUTTON.display-label</display-label>
 				<description>%INPUT.BUTTON.description</description>
 				<small-icon>small/HTML_INPUT_BUTTON.gif</small-icon>
-				<large-icon>small/HTML_INPUT_BUTTON.gif</large-icon>
+				<large-icon>large/HTML_INPUT_BUTTON.gif</large-icon>
 				<tag-create>
 					<attribute id="type" value="submit"/>
 				</tag-create>
@@ -25,7 +25,7 @@
 				<display-label>%INPUT.CHECKBOX.display-label</display-label>
 				<description>%INPUT.CHECKBOX.description</description>
 				<small-icon>small/HTML_INPUT_CHECKBOX.gif</small-icon>
-				<large-icon>small/HTML_INPUT_CHECKBOX.gif</large-icon>
+				<large-icon>large/HTML_INPUT_CHECKBOX.gif</large-icon>
 				<tag-create>
 					<attribute id="type" value="checkbox"/>
 				</tag-create>				
@@ -35,7 +35,7 @@
 				<display-label>%INPUT.HIDDEN.display-label</display-label>
 				<description>%INPUT.HIDDEN.description</description>
 				<small-icon>small/HTML_INPUT_HIDDEN.gif</small-icon>
-				<large-icon>small/HTML_INPUT_HIDDEN.gif</large-icon>
+				<large-icon>large/HTML_INPUT_HIDDEN.gif</large-icon>
 				<tag-create>
 					<attribute id="type" value="hidden"/>
 				</tag-create>	
@@ -46,7 +46,7 @@
 				<display-label>%INPUT.IMAGE.display-label</display-label>
 				<description>%INPUT.IMAGE.description</description>
 				<small-icon>small/HTML_INPUT_IMAGE.gif</small-icon>
-				<large-icon>small/HTML_INPUT_IMAGE.gif</large-icon>
+				<large-icon>large/HTML_INPUT_IMAGE.gif</large-icon>
 				<tag-create>
 					<attribute id="type" value="image"/>
 				</tag-create>					
@@ -56,7 +56,7 @@
 				<display-label>%INPUT.PASSWORD.display-label</display-label>
 				<description>%INPUT.PASSWORD.description</description>
 				<small-icon>small/HTML_INPUT_PASSWORD.gif</small-icon>
-				<large-icon>small/HTML_INPUT_PASSWORD.gif</large-icon>
+				<large-icon>large/HTML_INPUT_PASSWORD.gif</large-icon>
 				<tag-create>
 					<attribute id="type" value="password"/>
 				</tag-create>					
@@ -65,7 +65,7 @@
 				<display-label>%INPUT.RADIO.display-label</display-label>
 				<description>%INPUT.RADIO.description</description>
 				<small-icon>small/HTML_INPUT_RADIO.gif</small-icon>
-				<large-icon>small/HTML_INPUT_RADIO.gif</large-icon>
+				<large-icon>large/HTML_INPUT_RADIO.gif</large-icon>
 				<tag-create>
 					<attribute id="type" value="radio"/>
 				</tag-create>					
@@ -73,6 +73,7 @@
 			<item id="SELECT"/>
 			<item id="TABLE"/>
 			<item id="TEXTAREA"/>
+			<item id="DIV"/>
 		</value>
 	</trait>
 
@@ -287,6 +288,40 @@
 	<entity id="TITLE">
 		<include-entity-group id="common-language-attributes"/>
 	</entity>		
+	<entity id="DIV">
+		<include-entity-group id="common-core-attributes"/>
+		<include-entity-group id="common-language-attributes"/>
+		<include-entity-group id="common-event-attributes"/>
+		<entity id="align">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>right</item>
+					<item>char</item>
+					<item>left</item>
+					<item>center</item>
+					<item>justify</item>					
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
+			</trait>
+		</entity>
+		<trait id="display-label">
+			<value xsi:type="mdt:StringValue">%DIV.display-label</value>
+		</trait>
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%DIV.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/HTML_DIV.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/HTML_DIV.gif</value>
+		</trait>		
+	</entity>	
 	<entityGroup id="common-html-attributes">
 		<entity id="align">
 			<trait id="attribute-value-runtime-type">
