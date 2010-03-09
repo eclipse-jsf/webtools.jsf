@@ -6,6 +6,75 @@
 	id="http://java.sun.com/jsf/html"
 	type="tagFile">
 
+	<entity id="body" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					needBorderDecorator="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+	<entity id="button" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="input"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<!-- if image attribute exists -->
+					<operation id="org.eclipse.jst.pagedesigner.IfOperation">
+						<parameter value="@image"/>
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+							<parameter value="type"/>
+							<parameter value="image"/>
+						</operation>
+						<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
+							<parameter value="image"/>
+							<parameter value="src"/>
+						</operation>
+					</operation>
+					<!-- if image attribute does not exist -->
+					<operation id="org.eclipse.jst.pagedesigner.IfNotOperation">
+						<parameter value="@image"/>
+						<!-- create default type attribute (submit) -->
+						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+							<parameter value="type"/>
+							<parameter value="submit"/>
+						</operation>
+						<!-- override default if type attribute is set (e.g. reset) -->
+						<!--
+							<operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
+								<parameter value="type"/>
+							</operation>
+						-->
+					</operation>
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					widget="true"
+					setNonVisualChildElements="true">
+				    <resolve-attribute-value attributeName="value"/>
+				    <resolve-attribute-value attributeName="image"/>
+				</tag-decorate-info>
+				<tag-decorate-info id="vpd-decorate-preview">
+					<resolve-attribute-value attributeName="value"/>
+					<resolve-attribute-value attributeName="image"/>
+				</tag-decorate-info>
+			</value>
+		</trait>
+	</entity>
 	<entity id="column" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -62,9 +131,11 @@
 					widget="true"
 					setNonVisualChildElements="true">
 				    <resolve-attribute-value attributeName="value"/>
+				    <resolve-attribute-value attributeName="image"/>
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
+					<resolve-attribute-value attributeName="image"/>
 				</tag-decorate-info>
 			</value>
 		</trait>
@@ -93,11 +164,13 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
-					needBorderDecorator="true"
-				/>
+					needBorderDecorator="true">
+					<resolve-attribute-value attributeName="value"/>
+				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview"
-					resolveChildText="true"
-				/>
+					resolveChildText="true">
+					<resolve-attribute-value attributeName="value"/>
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
@@ -165,17 +238,33 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
-					widget="true"
-				>
+					widget="true">
 					<resolve-attribute-value attributeName="src"/>
+					<resolve-attribute-value attributeName="value"/>
+					<resolve-attribute-value attributeName="url"/>
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="src"/>
+					<resolve-attribute-value attributeName="value"/>
+					<resolve-attribute-value attributeName="url"/>
 				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>
-
+	<entity id="head" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_HEAD.gif"
+					widget="true"					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
 	<entity id="inputHidden" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -288,7 +377,41 @@
 			</value>
 		</trait>
 	</entity>
-
+	
+	<entity id="link" type="tag">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="a"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyAllAttributesOperation"/>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
+						<parameter value="styleClass"/>
+						<parameter value="class"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CreateAttributeOperation">
+						<parameter value="href"/>
+						<parameter value="#"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
+						<parameter value="outcome"/>
+						<parameter value="href"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.ConvertAttributeToTextOperation">
+						<parameter value="value"/>
+						<parameter value="true"/>
+					</operation>					
+				</tag-convert-info>
+				<tag-decorate-info id="vpd-decorate-design"
+					multiLevel="true"
+					needBorderDecorator="true">
+					<resolve-attribute-value attributeName="value"/> 	
+				</tag-decorate-info>
+			</value>
+		</trait>
+	</entity>
+	
 	<entity id="message" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -339,11 +462,14 @@
 					needBorderDecorator="true"
 					multiLevel="true"
 					widget="true"
-					setNonVisualChildElements="true"
-				/>
+					setNonVisualChildElements="true">
+					<resolve-attribute-value attributeName="value"/> 
+				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview"
-					resolveChildText="true"
-				/>
+					resolveChildText="true">
+					<resolve-attribute-value attributeName="value"/> 	
+				</tag-decorate-info>
+				
 			</value>
 		</trait>
 	</entity>
@@ -372,8 +498,7 @@
                     <resolve-attribute-value attributeName="./text()/"/>
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview"
-					resolveChildText="true"
-				>
+					resolveChildText="true">
 				    <resolve-attribute-value attributeName="./text()/"/>
 				</tag-decorate-info>
 			</value>
@@ -404,8 +529,9 @@
 				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
 					multiLevel="true"
-					needBorderDecorator="true"
-				/>
+					needBorderDecorator="true">
+					<resolve-attribute-value attributeName="value"/> 
+				</tag-decorate-info>
 			</value>
 		</trait>
 	</entity>

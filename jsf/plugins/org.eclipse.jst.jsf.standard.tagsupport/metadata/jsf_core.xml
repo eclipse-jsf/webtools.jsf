@@ -27,6 +27,61 @@
 			</trait>		
 		</entity>
 	</entity>
+	<entity id="ajax" type="tag">
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>
+		<entity id="event">
+	
+		</entity>
+		<entity id="execute">
+		
+		</entity>
+		<entity id="immediate">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>				
+		</entity>
+		<entity id="listener">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">void</value>
+			</trait>			
+			<trait id="runtime-param-types">
+				<value xsi:type="mdt:StringValue">javax.faces.event.AjaxBehaviorEvent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="onevent">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>	
+		</entity>
+		<entity id="onerror">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>			
+		</entity>
+		<entity id="render">
+		
+		</entity>
+		
+	</entity>	
 	<entity id="attribute" type="tag">
 		<include-entity-group id="common-core-attributes"/>
 				<trait id="quick-edit-tab">
@@ -229,6 +284,36 @@
 			</trait>
 		</entity>
 	</entity>
+	<entity id="event" type="tag">
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="name"/>
+				<section id="listener"/>
+			</value>
+		</trait>
+		<entity id="name">
+			<trait id="required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>
+		<entity id="listener">
+			<trait id="required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">void</value>
+			</trait>			
+			<trait id="runtime-param-types">
+				<value xsi:type="mdt:StringValue">javax.faces.event.ComponentSystemEvent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>		
+		</entity>
+	</entity>
 	<entity id="facet" type="tag">
 		<trait id="quick-edit-tab">
 			<value xsi:type="qe:QuickEditTabSections">
@@ -276,6 +361,22 @@
 			</trait>
 		</entity>
 	</entity>
+	<entity id="metadata" type="tag">
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>head</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>	
+	</entity>
 	<entity id="param" type="tag">
 		<include-entity-group id="common-core-attributes"/>
 		<trait id="quick-edit-tab">
@@ -295,7 +396,14 @@
 				<section id="itemLabel"/>
 				<section id="itemValue"/>
 			</value>
-		</trait>		
+		</trait>
+		<entity id="itemDescription">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+		</entity>		
 		<entity id="itemDisabled">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">
@@ -305,7 +413,34 @@
 			<trait id="default-value">
 				<value xsi:type="mdt:BooleanValue">false</value>
 			</trait>
-		</entity>		
+		</entity>
+		<entity id="itemLabel">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+		</entity>
+		<entity id="escape">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>			
+		</entity>
+		<entity id="itemValue">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>				
+		</entity>				
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">
@@ -316,6 +451,16 @@
 				<value xsi:type="mdt:StringValue">javax.faces.model.SelectItem</value>
 			</trait>				
 		</entity>
+		<entity id="noSelectionOption">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">false</value>
+			</trait>				
+		</entity>		
 	</entity>
 	<entity id="selectItems" type="tag">	
 		<include-entity-group id="common-core-attributes"/>
@@ -325,7 +470,44 @@
 				<section id="value"/>
 				<section id="binding"/>
 			</value>
-		</trait>			
+		</trait>	
+		<entity id="var">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="itemValue">
+		</entity>
+		<entity id="itemLabel">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>		
+		</entity>	
+		<entity id="itemDescription">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>		
+		</entity>	
+		<entity id="itemDisabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>		
+		</entity>	
+		<entity id="itemLabelEscaped">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>		
+		</entity>			
 	</entity>
 	<entity id="subview" type="tag">
 		<include-entity-group id="common-core-attributes"/>
@@ -341,6 +523,31 @@
 				</value>
 			</trait>
 		</entity>
+	</entity>
+	<entity id="validateBean" type="tag">
+		<entity id="validationGroups">
+
+		</entity>
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.BeanValidator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>					
 	</entity>
 	<entity id="validateDoubleRange" type="tag">
 		<include-entity-group id="common-core-attributes"/>
@@ -364,6 +571,26 @@
 				</value>
 			</trait>
 		</entity>
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.DoubleRangeValidator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>			
 	</entity>
 	<entity id="validateLength" type="tag">
 		<include-entity-group id="common-core-attributes"/>
@@ -376,7 +603,7 @@
 		<entity id="maximum">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">
-					org.eclipse.jst.jsf.core.attributevalues.LongType
+					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
 			</trait>
 			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>			
@@ -384,11 +611,31 @@
 		<entity id="minimum">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">
-					org.eclipse.jst.jsf.core.attributevalues.LongType
+					org.eclipse.jst.jsf.core.attributevalues.IntegerType
 				</value>
 			</trait>
 			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>	
 		</entity>
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.LengthValidator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>				
 	</entity>
 	<entity id="validateLongRange" type="tag">
 		<include-entity-group id="common-core-attributes"/>
@@ -412,7 +659,79 @@
 				</value>
 			</trait>
 		</entity>
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.LongRangeValidator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>		
 	</entity>
+	<entity id="validateRegex" type="tag">
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">				
+				<section id="pattern"/>
+			</value>
+		</trait>
+		<entity id="pattern">
+
+		</entity>
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.RegexValidator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>					
+	</entity>	
+	<entity id="validateRequired" type="tag">
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.RequiredValidator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>					
+	</entity>		
 	<entity id="validator" type="tag">
 		<include-entity-group id="common-core-attributes"/>
 		<trait id="quick-edit-tab">
@@ -430,6 +749,26 @@
 				<value xsi:type="mdt:StringValue">javax.faces.validator.Validator</value>
 			</trait>
 		</entity>
+		<entity id="disabled">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.validator.Validator</value>
+			</trait>				
+		</entity>
+		<entity id="for">
+
+		</entity>		
 	</entity>
 	<entity id="valueChangeListener" type="tag">
 		<include-entity-group id="common-core-attributes"/>
@@ -480,7 +819,119 @@
 			</trait>
 		</entity>	
 	</entity>
-
+	<entity id="viewParam" type="tag">
+		<include-entity-group id="common-core-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="for"/>
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>metadata</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="converter">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType
+				</value>
+			</trait>
+			<trait id="config-type">
+				<value xsi:type="mdt:StringValue">javax.faces.convert.Converter</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="converterMessage">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>		
+		</entity>
+		<entity id="required">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>				
+		</entity>
+		<entity id="requiredMessage">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="validator">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.FacesConfigValidatorIDType
+				</value>
+			</trait>
+			<trait id="config-type">
+				<value xsi:type="mdt:StringValue">javax.faces.convert.Validator</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>		
+		</entity>
+		<entity id="validatorMessage">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">
+					org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="valueChangeListener">					
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">void</value>
+			</trait>			
+			<trait id="runtime-param-types">
+				<value xsi:type="mdt:StringValue">javax.faces.event.ValueChangeEvent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="maxLength">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>	
+		</entity>	
+		<entity id="for">
+		
+		</entity>	
+	</entity>
 	<entityGroup id="common-core-attributes" type="tag">
 		<entity id="binding">
 			<trait id="attribute-value-runtime-type">

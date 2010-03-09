@@ -13,7 +13,7 @@
 	</trait>
 	
 	<trait id="paletteInfos">
-		<value xsi:type="pi:PaletteInfos">
+		<value xsi:type="pi:PaletteInfos">						
 			<item id="view"/>
 			<item id="validator"/>
 			<item id="valueChangeListener"/>			
@@ -32,6 +32,13 @@
 			<item id="validateLength"/>
 			<item id="validateLongRange"/>
 			<item id="verbatim"/>			
+			<item id="ajax"/>
+			<item id="event"/>
+			<item id="metadata"/>
+			<item id="validateBean"/>
+			<item id="validateRegex"/>
+			<item id="validateRequired"/>
+			<item id="viewParam"/>
 		</value>
 	</trait>
 
@@ -49,6 +56,14 @@
 		</trait>
 		<trait id="large-icon">
 			<value xsi:type="mdt:StringValue">large/JSF_ACTIONLISTENER.gif</value>
+		</trait>
+	</entity>
+	<entity id="ajax" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_AJAX.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_AJAX.gif</value>
 		</trait>
 	</entity>
 	<entity id="attribute" type="tag">
@@ -83,6 +98,14 @@
 			<value xsi:type="mdt:StringValue">large/JSF_CONVERTER.gif</value>
 		</trait>
 	</entity>
+	<entity id="event" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_EVENT.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_EVENT.gif</value>
+		</trait>
+	</entity>	
 	<entity id="facet" type="tag">
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_FACET.gif</value>
@@ -99,6 +122,14 @@
 			<value xsi:type="mdt:StringValue">large/JSF_LOADBUNDLE.gif</value>
 		</trait>
 	</entity>
+	<entity id="metadata" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_METADATA.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_METADAT.gif</value>
+		</trait>
+	</entity>	
 	<entity id="param" type="tag">
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_PARAM.gif</value>
@@ -131,6 +162,14 @@
 			<value xsi:type="mdt:StringValue">large/JSF_SUBVIEW.gif</value>
 		</trait>
 	</entity>
+	<entity id="validateBean" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEBEAN.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEBEAN.gif</value>
+		</trait>
+	</entity>	
 	<entity id="validateDoubleRange" type="tag">
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEDOUBLERANGE.gif</value>
@@ -153,6 +192,22 @@
 		</trait>
 		<trait id="large-icon">
 			<value xsi:type="mdt:StringValue">large/JSF_VALIDATELONGRANGE.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateRegex" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEREGEX.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEREGEX.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateRequired" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEREQUIRED.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEREQUIRED.gif</value>
 		</trait>
 	</entity>
 	<entity id="validator" type="tag">
@@ -185,6 +240,14 @@
 		</trait>
 		<trait id="large-icon">
 			<value xsi:type="mdt:StringValue">large/JSF_VIEW.gif</value>
+		</trait>	
+	</entity>
+	<entity id="viewParam" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VIEWPARAM.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VIEWPARAM.gif</value>
 		</trait>	
 	</entity>
 </md:metadatamodel>

@@ -17,6 +17,18 @@
       </md:value>
     </trait>
   </entity>
+  <entity id="validateBean" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>javax.faces.validator.BeanValidator</className>
+            <validatorId>javax.faces.Bean</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
   <entity id="validateDoubleRange" type="tag">
     <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
@@ -29,6 +41,42 @@
       </md:value>
     </trait>
   </entity>
+  <entity id="validateLongRange" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>javax.faces.validator.LongRangeValidator</className>
+            <validatorId>javax.faces.LongRange</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="validateRegex" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>javax.faces.validator.RegexValidator</className>
+            <validatorId>javax.faces.RegularExpression</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity> 
+  <entity id="validateRequired" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ValidatorTypeInfo_">
+            <className>javax.faces.validator.RequiredValidator</className>
+            <validatorId>javax.faces.Required</validatorId>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>     
   <entity id="subview" type="tag">
     <trait id="viewElementMapping">
       <md:value xsi:type="viewMap:TagMapping">
