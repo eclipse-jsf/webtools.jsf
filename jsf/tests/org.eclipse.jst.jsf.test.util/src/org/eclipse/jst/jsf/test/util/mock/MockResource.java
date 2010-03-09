@@ -469,4 +469,8 @@ public class MockResource implements IResource
 
     }
 
+    public boolean isFiltered()
+    {
+        throw new UnsupportedOperationException();
+    }
 }
