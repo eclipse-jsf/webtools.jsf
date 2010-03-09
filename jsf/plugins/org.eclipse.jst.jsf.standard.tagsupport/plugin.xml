@@ -39,9 +39,13 @@
             uri="http://java.sun.com/jsf/html">
       </standardMetaDataFile>
       <standardMetaDataFile
+            location="$nl$/metadata/facelet_composite.xml"
+            uri="http://java.sun.com/jsf/composite">
+      </standardMetaDataFile>
+      <standardMetaDataFile
             location="$nl$/metadata/facelet_ui.xml"
             uri="http://java.sun.com/jsf/facelets">
-      </standardMetaDataFile>
+      </standardMetaDataFile>            
    </extension>
    <!--    <extension point="org.eclipse.emf.ecore.generated_package">
         <package 
