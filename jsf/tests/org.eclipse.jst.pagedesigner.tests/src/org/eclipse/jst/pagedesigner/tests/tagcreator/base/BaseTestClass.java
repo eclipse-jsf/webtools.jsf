@@ -18,10 +18,17 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.WorkspaceJob;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider;
+import org.eclipse.jst.jsf.common.internal.policy.OrderedListProvider.OrderableObject;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
@@ -30,12 +37,16 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryPreferences;
+import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.registry.TLDRegistryPreferences.StrategyIdentifier;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
+import org.eclipse.jst.pagedesigner.editors.palette.IPaletteContext;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
@@ -51,11 +62,18 @@ import org.eclipse.wst.xml.core.internal.document.ElementImpl;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Node;
 
+/**
+ * 
+ * 3/9/2010 - Now attempts to close the project on tearDown.   Needs to be made more robust.
+ *
+ */
 public class BaseTestClass extends TestCase
 {
     protected WebProjectTestEnvironment _webProjectTestEnv;
     protected PaletteItemManager _manager;
     protected final String _compareDataSubDir;
+	private IFile _file;
+	private IPaletteContext _context;
 
     public BaseTestClass(final String compareDataSubDir)
     {
@@ -83,11 +101,56 @@ public class BaseTestClass extends TestCase
         assertTrue(JSFCoreUtilHelper.addJSFRuntimeJarsToClasspath(
                 JSFVersion.V1_1, jsfFacetedTestEnv));
 
-        // ensure this gets called so that the getCurrentInstance
-        _manager = PaletteItemManager.getInstance(_webProjectTestEnv
-                .getTestProject());
-    }
 
+        _file = _webProjectTestEnv.getTestProject().getFile("xxx.jsp");
+        
+        
+        disableTagIntrospectingStrategy();
+        // ensure this gets called so that the getCurrentInstance
+		_context = PaletteItemManager.createPaletteContext(_file);
+        _manager = PaletteItemManager.getInstance(_context);
+    
+    }
+    
+    private void disableTagIntrospectingStrategy() {
+    	final TLDRegistryPreferences prefs = new TLDRegistryPreferences(JSFCorePlugin.getDefault().getPreferenceStore());
+    	prefs.load();
+    	final OrderedListProvider provider = prefs.getOrderedListProvider();
+		for (final OrderableObject resolver : provider.getOrderedObjects()) {
+			if (resolver.getObject() instanceof StrategyIdentifier) {
+				StrategyIdentifier strategy = (StrategyIdentifier)resolver.getObject();
+//				System.out.println(strategy.getId());
+				if (strategy.getId().equals("org.eclipse.jst.jsf.designtime.TagIntrospectingStrategy")) {
+					resolver.setEnabled(false);
+					break;
+				}
+			}
+		}
+		prefs.commit(JSFCorePlugin.getDefault().getPreferenceStore());
+	}
+
+	protected void tearDown() throws Exception {
+    	PaletteItemManager.clearPaletteItemManager();    	
+    	Job[] jobs = Job.getJobManager().find(null);
+    	for (final Job j : jobs) {
+    		if (j.getClass().getName().equals("org.eclipse.jst.jsp.core.internal.java.search.JSPIndexManager$ProcessFilesJob"))
+    			j.cancel();
+//    		System.out.println(j);
+    	}
+    	Job closeJob = new WorkspaceJob("close test project") {
+			
+			@Override
+			public IStatus runInWorkspace(IProgressMonitor monitor)
+					throws CoreException {
+				_webProjectTestEnv.getTestProject().close(monitor);
+				return Status.OK_STATUS;
+			}
+		};
+    	closeJob.schedule();
+    	closeJob.join();
+
+    }
+    
     protected CreationData getCreationData(final String uri,
             final String tagName, final String defaultPrefix, final IFile file,
             final int offset, final ICustomizationData customizationData) throws Exception

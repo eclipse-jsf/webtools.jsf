@@ -1,6 +1,7 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
+import org.eclipse.jst.pagedesigner.editors.palette.IPaletteContext;
 import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
@@ -44,9 +45,22 @@ public class BaseUserCustomizedTagCreatorTestCase extends BaseTagCreatorTestCase
 		// category, and adding the tag(s) to the tool palette. Only then can the
 		// tag be inserted.
 		
-		TaglibPaletteDrawer category = PaletteItemManager.getInstance(_webProjectTestEnv.getTestProject()).findOrCreateCategory(UserCustomizedElementEditFactory.TAGCREATOR_URI_1, CATEGORY_LABEL);
+		//note jsp does not need to exist
+		final IPaletteContext context = PaletteItemManager.createPaletteContext(_webProjectTestEnv.getTestProject().getFile("xxx.jsp"));
+		final TaglibPaletteDrawer category = PaletteItemManager.getInstance(context)
+			.findOrCreateCategory(UserCustomizedElementEditFactory.TAGCREATOR_URI_1, CATEGORY_LABEL);
 		assertNotNull(category);
+		addItemsToCategory(category);
 		
+		final IPaletteContext context2 = PaletteItemManager.createPaletteContext(_webProjectTestEnv.getTestProject().getFile("xxx.html"));
+		final TaglibPaletteDrawer category2 = PaletteItemManager.getInstance(context2)
+			.findOrCreateCategory(UserCustomizedElementEditFactory.TAGCREATOR_URI_1, CATEGORY_LABEL);
+		assertNotNull(category2);
+		addItemsToCategory(category2);
+		
+	}
+
+	private void addItemsToCategory(TaglibPaletteDrawer category) {
 		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG1, category);
 		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG2, category);
 		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG3, category);
@@ -57,7 +71,6 @@ public class BaseUserCustomizedTagCreatorTestCase extends BaseTagCreatorTestCase
 		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG8, category);
 		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG9, category);
 	}
-
 
 	@Override
 	protected ITagCreator getTagCreator(TagIdentifier tagId) 

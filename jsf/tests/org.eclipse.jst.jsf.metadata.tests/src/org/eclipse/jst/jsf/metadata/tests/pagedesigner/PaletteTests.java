@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.metadata.tests.pagedesigner;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.core.JSFVersion;
@@ -8,8 +9,8 @@ import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
 import org.eclipse.jst.jsf.metadata.tests.util.JSPTestCase;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
 import org.eclipse.jst.jsp.core.taglib.TaglibIndex;
+import org.eclipse.jst.pagedesigner.editors.palette.IPaletteContext;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
-import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteHelper;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.wst.html.core.internal.contentmodel.HTMLCMDocumentFactory;
@@ -93,15 +94,17 @@ public class PaletteTests extends JSPTestCase implements IJSFRuntimeRequiredV11 
 	}
 	
 	public void testPalletteDrawers() {
-		final PaletteItemManager mgr = PaletteItemManager.getInstance(_testEnv.getTestProject());
+		final IFile file = _testEnv.getTestProject().getFile("xxx.jsp");//note jsp does not need to exist
+		final IPaletteContext context = PaletteItemManager.createPaletteContext(file);
+		final PaletteItemManager mgr = PaletteItemManager.getInstance(context);
 		assertNotNull(mgr);
 		
 		CMDocument doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.HTML_DOC_TYPE);
-		TaglibPaletteDrawer drawer = PaletteHelper.getOrCreateTaglibPaletteDrawer(mgr, doc, CMDocType.HTML_DOC_TYPE, _testEnv.getTestProject());
+		TaglibPaletteDrawer drawer = mgr.getPaletteHelper().getOrCreateTaglibPaletteDrawer(mgr, doc, CMDocType.HTML_DOC_TYPE);
 		verifyHTMLDrawer(drawer);
 		
 		doc = HTMLCMDocumentFactory.getCMDocument(CMDocType.JSP11_DOC_TYPE);
-		drawer = PaletteHelper.getOrCreateTaglibPaletteDrawer(mgr, doc, CMDocType.JSP11_DOC_TYPE, _testEnv.getTestProject());
+		drawer = mgr.getPaletteHelper().getOrCreateTaglibPaletteDrawer(mgr, doc, CMDocType.JSP11_DOC_TYPE);
 		verifyJSPDrawer(drawer);
 			
 		drawer = getTaglibPaletteDrawer(mgr, ITLDConstants.URI_JSF_HTML);
@@ -116,13 +119,14 @@ public class PaletteTests extends JSPTestCase implements IJSFRuntimeRequiredV11 
 		if (drawer != null)
 			verifyJSTLCoreDrawer(drawer);
 		
+		mgr.release(context);
 	}
 
 	private TaglibPaletteDrawer getTaglibPaletteDrawer(final PaletteItemManager mgr, final String uri) {
 		ITaglibRecord[] tldrecs = TaglibIndex.getAvailableTaglibRecords(_testEnv.getTestProject().getFullPath());
 		for (int i=0;i<tldrecs.length;i++){	
 			if (uri.equals(tldrecs[i].getDescriptor().getURI())) {
-				return PaletteHelper.configPaletteItemsByTLD(mgr, _testEnv.getTestProject(), tldrecs[i]);
+				return mgr.getPaletteHelper().configPaletteItemsByTLD(mgr, tldrecs[i]);
 			}
 		}
 		return null;
@@ -233,5 +237,18 @@ public class PaletteTests extends JSPTestCase implements IJSFRuntimeRequiredV11 
 		final String actualSmallIcon = tagTool.getSmallIcon().toString();
 		final String frag = actualSmallIcon.substring(actualSmallIcon.length() - iconName.length() - 1);
 		assertTrue(tagTool.getId()+": bad image", frag.indexOf(iconName) == 0);
+	}
+	
+	public void testNullProjectPalette() {
+		final IFile file = null;
+		final IPaletteContext context = PaletteItemManager.createPaletteContext(file);
+		final PaletteItemManager mgr = PaletteItemManager.getInstance(context);
+		assertNotNull(mgr);
+		
+		//should have JSP tag categories - HTML and JSP only
+		assertTrue(mgr.getTagRegistryIdentifier().getContentType().isAssociatedWith("xxx.jsp"));
+		assertTrue(mgr.getAllCategories().size() == 2);
+		assertNotNull(mgr.getTaglibPalletteDrawer(CMDocType.HTML_DOC_TYPE));
+		assertNotNull(mgr.getTaglibPalletteDrawer(CMDocType.JSP11_DOC_TYPE));
 	}
 }
