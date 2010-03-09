@@ -20,6 +20,7 @@ import org.eclipse.jst.pagedesigner.css2.font.ICSSFont;
 import org.eclipse.jst.pagedesigner.css2.list.ICounterValueGenerator;
 import org.eclipse.jst.pagedesigner.css2.property.CSSMetaRegistry;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyMeta;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 
 /**
@@ -30,7 +31,19 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 public class DefaultStyle implements ICSSStyle {
 
 	private static final Insets EMPTY_INSETS = new Insets();
+	/**
+	 * A default preferences object.
+	 */
+	protected static final PDPreferences PREFS = new PDPreferences();
+    private final PDPreferences _prefs;
 
+	/**
+	 * @param prefs
+	 */
+	public DefaultStyle(final PDPreferences prefs)
+	{
+	    _prefs = prefs;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -78,7 +91,8 @@ public class DefaultStyle implements ICSSStyle {
 	 * @see org.eclipse.jst.pagedesigner.css2.ICSSStyle#getPaddingInsets()
 	 */
 	public Insets getPaddingInsets() {
-        return new Insets(ARTIFICIAL_BORDER_OFFSET, ARTIFICIAL_BORDER_OFFSET, ARTIFICIAL_BORDER_OFFSET, ARTIFICIAL_BORDER_OFFSET);
+	    int offset = _prefs.getCssArtificialCellPadding();
+        return new Insets(offset, offset, offset, offset);
 	}
 
 	/*
@@ -135,7 +149,7 @@ public class DefaultStyle implements ICSSStyle {
 	 */
 	public static ICSSStyle getInstance() {
 		if (_instance == null) {
-			_instance = new DefaultStyle();
+			_instance = new DefaultStyle(PREFS);
 		}
 		return _instance;
 	}

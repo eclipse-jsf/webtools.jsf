@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -367,7 +368,11 @@ public class ProjectResolver implements URIResolver {
 		if (columnIndex != -1 && (slashIndex == -1 || columnIndex < slashIndex)) {
 			return uri;
 		}
-
+		try {
+			uri = URLDecoder.decode(uri, "UTF-8");  //$NON-NLS-1$
+		} catch (UnsupportedEncodingException e) {
+			// suppress this.  the user's data may be invalid.
+		}
 		String result = getLocationFromWEBXML(uri, baseReference);
 		if (result != null && !result.equals(uri)) {
 			return result;

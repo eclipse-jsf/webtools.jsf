@@ -30,6 +30,7 @@ import org.eclipse.jst.pagedesigner.css2.property.CSSMetaRegistry;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyMeta;
 import org.eclipse.jst.pagedesigner.css2.value.Length;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.w3c.dom.Element;
@@ -62,6 +63,8 @@ public class AbstractStyle implements ICSSStyle
 
 	private HashMap _counters = null;
 
+    private final PDPreferences _prefs;
+
 	/**
 	 * @return the element this style if for
 	 */
@@ -71,9 +74,11 @@ public class AbstractStyle implements ICSSStyle
 
 	/**
 	 * @param element
+	 * @param prefs 
 	 */
-	public AbstractStyle(Element element) {
+	public AbstractStyle(Element element, PDPreferences prefs) {
 		_element = element;
+		_prefs = prefs;
 	}
 
 	/**
@@ -395,10 +400,11 @@ public class AbstractStyle implements ICSSStyle
 			int right = getInsetProperty(ICSSPropertyID.ATTR_PADDING_RIGHT);
 			//add extra padding only for the top element of a source tag's rendering
 			if (elementIsTagConverted()) {
-				top += ARTIFICIAL_BORDER_OFFSET;
-				left += ARTIFICIAL_BORDER_OFFSET;
-				bottom += ARTIFICIAL_BORDER_OFFSET;
-				right += ARTIFICIAL_BORDER_OFFSET;
+			    final int borderOffset = _prefs.getCssArtificialCellPadding();
+				top += borderOffset;
+				left += borderOffset;
+				bottom += borderOffset;
+				right += borderOffset;
 			}
 			_paddingInsets = new Insets(top, left, bottom, right);
 		}

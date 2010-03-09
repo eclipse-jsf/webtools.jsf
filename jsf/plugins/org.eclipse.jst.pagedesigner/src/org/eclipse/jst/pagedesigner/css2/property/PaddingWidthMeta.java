@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.css2.property;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.value.Length;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,13 +24,16 @@ import org.w3c.dom.Node;
  */
 public class PaddingWidthMeta extends LengthMeta {
     
-    private static int MIN_PADDING_THRESHOLD = 4;
+	private final PDPreferences _prefs;
 
-	/**
+    /**
 	 * Default constructor
+     * @param prefs 
 	 */
-	public PaddingWidthMeta() {
+	public PaddingWidthMeta(final PDPreferences prefs) 
+	{
 		super(false, ICSSPropertyID.VAL_AUTO);
+		_prefs = prefs;
 	}
 
 	/*
@@ -53,20 +57,20 @@ public class PaddingWidthMeta extends LengthMeta {
 					break;
 				}
 			}
-			if (tableEle != null) {
+			if (tableEle != null) 
+			{
+			    int artificialCellPadding = _prefs.getCssArtificialCellPadding(); 
 				//TODO:  Why is only cellpadding being checked?  Why does this class even exist?  What is difference with BorderWidthMeta?   
 				String padding = DOMUtil.getAttributeIgnoreCase(tableEle,
 						"cellpadding");//$NON-NLS-1$
 				if (padding != null && padding.trim().length() > 0) {//fix for 200592						
 					Object length = LengthMeta.toLength(padding, style, this
 								.getPercentageType(), getBaseFont(style));
-                    if (length instanceof Length && ((Length)length).getValue() >= MIN_PADDING_THRESHOLD)                    
+                    if (length instanceof Length && ((Length)length).getValue() >= artificialCellPadding)                    
                         return length;
                     
 				}
-                // TODO should not be hardcoded value.  Either should change to a pref
-                // or a per-component customization.
-                return new Length(MIN_PADDING_THRESHOLD, false);
+                return new Length(artificialCellPadding, false);
 			}
 		}
 		return super.calculateHTMLAttributeOverride(element, htmltag,

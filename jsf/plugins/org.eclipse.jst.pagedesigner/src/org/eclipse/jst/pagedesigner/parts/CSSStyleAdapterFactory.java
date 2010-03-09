@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.parts;
 
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.style.AbstractStyle;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.wst.sse.core.internal.provisional.AbstractAdapterFactory;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
@@ -24,11 +25,11 @@ import org.w3c.dom.Element;
  */
 public class CSSStyleAdapterFactory extends AbstractAdapterFactory {
 	static Class ADAPTERKEY = ICSSStyle.class;
-
-	// TODO: dead? private static CSSStyleAdapterFactory _instance = new CSSStyleAdapterFactory();
+    private final PDPreferences _prefs;
 
 	private CSSStyleAdapterFactory() {
 		super(ADAPTERKEY, true);
+		_prefs = new PDPreferences();
 	}
 
 	/*
@@ -37,7 +38,7 @@ public class CSSStyleAdapterFactory extends AbstractAdapterFactory {
 	 */
 	protected INodeAdapter createAdapter(INodeNotifier target) {
 		if (target instanceof Element) {
-			return new AbstractStyle((Element) target);
+			return new AbstractStyle((Element) target, _prefs);
 		}
         return null;
 	}

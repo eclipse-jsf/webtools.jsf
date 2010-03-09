@@ -17,6 +17,7 @@ import org.eclipse.jst.pagedesigner.css2.provider.DimensionInfo;
 import org.eclipse.jst.pagedesigner.css2.style.HiddenElementStyle;
 import org.eclipse.jst.pagedesigner.parts.EditProxyAdapter;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
@@ -41,7 +42,7 @@ public class HiddenProvider extends ImageWidgetProvider {
 	 * @param convertedElement 
 	 */
 	public HiddenProvider(Image image, Element convertedElement) {
-		super(image, new HiddenElementStyle(convertedElement));
+		super(image, new HiddenElementStyle(convertedElement, new PDPreferences()));
 	}
 
 	/**
@@ -49,7 +50,7 @@ public class HiddenProvider extends ImageWidgetProvider {
 	 * @param editPart
 	 */
 	public HiddenProvider(Image image, ElementEditPart editPart) {
-		super(image, new HiddenElementStyle(new EditProxyAdapter(editPart)));
+		super(image, new HiddenElementStyle(new EditProxyAdapter(editPart), new PDPreferences()));
 	}
 
 	// public HiddenProvider(Image image, String label)

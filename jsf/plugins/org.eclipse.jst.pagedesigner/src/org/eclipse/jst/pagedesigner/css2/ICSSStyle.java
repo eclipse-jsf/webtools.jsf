@@ -24,21 +24,8 @@ import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
  * 
  * @author mengbo
  */
-public interface ICSSStyle extends INodeAdapter, IAdaptable {
-
-    // the number of extra pixels to add to top, bottom, left and right padding insets
-    // in the rendering so that separation between contained components is more
-    // apparent at design time.  These extra pixels are design mode only
-    // Note: margin padding would be preferred but it doesn't seem to affect
-    // bottom padding the way border insets do.
-    // TODO:  this should be set to a preference and probably also use an
-    // algorithm to determine if the the current box style already has a large
-    // enough separation offset (perhaps a threshold instead of an additive value)
-    /**
-     * the border offset
-     */
-    public static final int ARTIFICIAL_BORDER_OFFSET = 4;
-    
+public interface ICSSStyle extends INodeAdapter, IAdaptable 
+{
     /**
      * 
      */

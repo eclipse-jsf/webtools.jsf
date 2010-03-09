@@ -14,6 +14,8 @@ package org.eclipse.jst.pagedesigner.css2.property;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
+
 /**
  * @author mengbo
  */
@@ -29,7 +31,9 @@ public class CSSMetaRegistry {
 	/**
 	 * class initializer
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
+	    final PDPreferences prefs = new PDPreferences();
 		_map.put(ICSSPropertyID.ATTR_DISPLAY, new DisplayMeta());
 		_map.put(ICSSPropertyID.ATTR_TEXTALIGN, new TextAlignMeta());
 		_map.put(ICSSPropertyID.ATTR_HORIZONTAL_ALIGN, new HorizontalAlignMeta());
@@ -55,10 +59,10 @@ public class CSSMetaRegistry {
 		_map.put(ICSSPropertyID.ATTR_BORDER_BOTTOM_COLOR, new BorderColorMeta());
 		_map.put(ICSSPropertyID.ATTR_BORDER_TOP_COLOR, new BorderColorMeta());
 
-		_map.put(ICSSPropertyID.ATTR_PADDING_LEFT, new PaddingWidthMeta());
-		_map.put(ICSSPropertyID.ATTR_PADDING_RIGHT, new PaddingWidthMeta());
-		_map.put(ICSSPropertyID.ATTR_PADDING_BOTTOM, new PaddingWidthMeta());
-		_map.put(ICSSPropertyID.ATTR_PADDING_TOP, new PaddingWidthMeta());
+		_map.put(ICSSPropertyID.ATTR_PADDING_LEFT, new PaddingWidthMeta(prefs));
+		_map.put(ICSSPropertyID.ATTR_PADDING_RIGHT, new PaddingWidthMeta(prefs));
+		_map.put(ICSSPropertyID.ATTR_PADDING_BOTTOM, new PaddingWidthMeta(prefs));
+		_map.put(ICSSPropertyID.ATTR_PADDING_TOP, new PaddingWidthMeta(prefs));
 
 		_map.put(ICSSPropertyID.ATTR_MARGIN_LEFT, new MarginWidthMeta());
 		_map.put(ICSSPropertyID.ATTR_MARGIN_RIGHT, new MarginWidthMeta());

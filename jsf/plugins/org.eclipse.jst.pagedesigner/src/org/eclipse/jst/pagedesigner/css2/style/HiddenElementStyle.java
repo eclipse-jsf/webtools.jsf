@@ -12,6 +12,7 @@
 package org.eclipse.jst.pagedesigner.css2.style;
 
 import org.eclipse.jst.pagedesigner.parts.EditProxyAdapter;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.w3c.dom.Element;
 
@@ -49,15 +50,21 @@ public class HiddenElementStyle extends DefaultStyle {
 
 	/**
 	 * @param adapter
+	 * @param prefs 
 	 */
-	public HiddenElementStyle(EditProxyAdapter adapter) {
+	public HiddenElementStyle(EditProxyAdapter adapter, PDPreferences prefs) 
+	{
+	    super(prefs);
 		this._editProxyAdapter = adapter;
 	}
 
 	/**
 	 * @param convertedElement
+	 * @param prefs 
 	 */
-	public HiddenElementStyle(Element convertedElement) {
+	public HiddenElementStyle(Element convertedElement, PDPreferences prefs) 
+	{
+        super(prefs);
 		this._convertedElement = convertedElement;
 	}
 

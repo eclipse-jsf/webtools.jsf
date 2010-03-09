@@ -230,6 +230,14 @@
     </page>
  </extension>
  <extension
+        point="org.eclipse.ui.preferencePages">
+     <page
+           category="org.eclipse.jst.jsf.ui.JSFRootPage"
+           class="org.eclipse.jst.pagedesigner.ui.preferences.PDPreferencePage"
+           id="org.eclipse.jst.jsf.pagedesigner.ui.preferences.PDPreferences"
+           name="%preferencepage.webPageEditor.name"/>
+  </extension>
+ <extension
        point="org.eclipse.core.runtime.preferences">
     <initializer
           class="org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences">

@@ -22,6 +22,7 @@ import org.eclipse.jst.pagedesigner.css2.property.ICSSPropertyID;
 import org.eclipse.jst.pagedesigner.css2.property.PositionMeta;
 import org.eclipse.jst.pagedesigner.css2.property.VerticalAlignMeta;
 import org.eclipse.jst.pagedesigner.css2.value.Length;
+import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 
 /**
  * CSSLayout is the base layout manager for different CSS layouts, such as block
@@ -147,8 +148,10 @@ public abstract class CSSLayout extends FlowFigureLayout implements FlowContext 
 		if (style != null) {
 			Object obj = style.getStyleProperty(ICSSPropertyID.ATTR_POSITION);
 			if (PositionMeta.ABSOLUTE.equals(obj)
-					|| PositionMeta.FIXED.equals(obj)) {
-				return supportAbsolutePosition();
+					|| PositionMeta.FIXED.equals(obj)) 
+			{
+			    PDPreferences prefs = new PDPreferences();
+			    return prefs.isCssAbsolutePositioningEnabled();
 			}
 		}
 		return false;
