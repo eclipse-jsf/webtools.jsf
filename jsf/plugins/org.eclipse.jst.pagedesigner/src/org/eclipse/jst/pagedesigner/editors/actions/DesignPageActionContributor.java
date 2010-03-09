@@ -29,11 +29,11 @@ import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.part.EditorActionBarContributor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
-import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
 
 /**
  * sub action contributor for the designer page.
@@ -143,28 +143,28 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 				// see comments in DesignerUndoRedoAction
 				actionBars.setGlobalActionHandler(
 						ITextEditorActionConstants.UNDO, graphicalEditor
-								.getAction(IWorkbenchActionDefinitionIds.UNDO));
+								.getAction(IWorkbenchCommandConstants.EDIT_UNDO));
 				actionBars.setGlobalActionHandler(
 						ITextEditorActionConstants.REDO, graphicalEditor
-								.getAction(IWorkbenchActionDefinitionIds.REDO));
+								.getAction(IWorkbenchCommandConstants.EDIT_REDO));
 
 				// cut/copy/paste is delegated to design actions
 				actionBars
 						.setGlobalActionHandler(
 								ITextEditorActionConstants.DELETE,
 								graphicalEditor
-										.getAction(IWorkbenchActionDefinitionIds.DELETE));
+										.getAction(IWorkbenchCommandConstants.EDIT_DELETE));
 				actionBars.setGlobalActionHandler(
 						ITextEditorActionConstants.CUT, graphicalEditor
-								.getAction(IWorkbenchActionDefinitionIds.CUT));
+								.getAction(IWorkbenchCommandConstants.EDIT_CUT));
 				actionBars.setGlobalActionHandler(
 						ITextEditorActionConstants.COPY, graphicalEditor
-								.getAction(IWorkbenchActionDefinitionIds.COPY));
+								.getAction(IWorkbenchCommandConstants.EDIT_COPY));
 				actionBars
 						.setGlobalActionHandler(
 								ITextEditorActionConstants.PASTE,
 								graphicalEditor
-										.getAction(IWorkbenchActionDefinitionIds.PASTE));
+										.getAction(IWorkbenchCommandConstants.EDIT_PASTE));
 			} else {
 				actionBars.setGlobalActionHandler(
 						ITextEditorActionConstants.UNDO, null);

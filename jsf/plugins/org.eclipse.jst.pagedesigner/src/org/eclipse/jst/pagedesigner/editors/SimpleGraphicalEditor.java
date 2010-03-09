@@ -29,9 +29,9 @@ import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.UpdateAction;
+import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
-import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
@@ -81,11 +81,11 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionContext;
-import org.eclipse.ui.texteditor.IWorkbenchActionDefinitionIds;
 import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.IModelStateListener;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
@@ -250,10 +250,10 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 
 	private void updateActionsWhenModelChange() {
 		// update undo/redo action
-		IAction action = this.getAction(IWorkbenchActionDefinitionIds.UNDO);
+		IAction action = this.getAction(IWorkbenchCommandConstants.EDIT_UNDO);
 		((UpdateAction) action).update();
 
-		action = this.getAction(IWorkbenchActionDefinitionIds.REDO);
+		action = this.getAction(IWorkbenchCommandConstants.EDIT_REDO);
 		((UpdateAction) action).update();
 	}
 
@@ -275,8 +275,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_UNDO));
 		action.setDisabledImageDescriptor(sharedImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_UNDO_DISABLED));
-		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.UNDO);
-		action.setId(IWorkbenchActionDefinitionIds.UNDO);
+		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_UNDO);
+		action.setId(IWorkbenchCommandConstants.EDIT_UNDO);
 		getSite().getKeyBindingService().registerAction(action);
 		registry.registerAction(action);
 
@@ -285,8 +285,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_REDO));
 		action.setDisabledImageDescriptor(sharedImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_REDO_DISABLED));
-		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.REDO);
-		action.setId(IWorkbenchActionDefinitionIds.REDO);
+		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_REDO);
+		action.setId(IWorkbenchCommandConstants.EDIT_REDO);
 		getSite().getKeyBindingService().registerAction(action);
 		registry.registerAction(action);
 
@@ -295,8 +295,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
 		action.setDisabledImageDescriptor(sharedImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
-		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.DELETE);
-		action.setId(IWorkbenchActionDefinitionIds.DELETE);
+		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_DELETE);
+		action.setId(IWorkbenchCommandConstants.EDIT_DELETE);
 		getSite().getKeyBindingService().registerAction(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
@@ -306,8 +306,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
 		action.setDisabledImageDescriptor(sharedImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED));
-		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.COPY);
-		action.setId(IWorkbenchActionDefinitionIds.COPY);
+		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_COPY);
+		action.setId(IWorkbenchCommandConstants.EDIT_COPY);
 		getSite().getKeyBindingService().registerAction(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
@@ -317,8 +317,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_CUT));
 		action.setDisabledImageDescriptor(sharedImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_CUT_DISABLED));
-		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.CUT);
-		action.setId(IWorkbenchActionDefinitionIds.CUT);
+		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_CUT);
+		action.setId(IWorkbenchCommandConstants.EDIT_CUT);
 		getSite().getKeyBindingService().registerAction(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
@@ -328,8 +328,8 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE));
 		action.setDisabledImageDescriptor(sharedImages
 				.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED));
-		action.setActionDefinitionId(IWorkbenchActionDefinitionIds.PASTE);
-		action.setId(IWorkbenchActionDefinitionIds.PASTE);
+		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_PASTE);
+		action.setId(IWorkbenchCommandConstants.EDIT_PASTE);
 		getSite().getKeyBindingService().registerAction(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
@@ -769,18 +769,18 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
             // otherwise don't have validate() called after the source
             // change.
             editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
-                    getAction(IWorkbenchActionDefinitionIds.UNDO));
+                    getAction(IWorkbenchCommandConstants.EDIT_UNDO));
             editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_UNDO,
-                    getAction(IWorkbenchActionDefinitionIds.REDO));
+                    getAction(IWorkbenchCommandConstants.EDIT_REDO));
 
             editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-                    getAction(IWorkbenchActionDefinitionIds.CUT));
+                    getAction(IWorkbenchCommandConstants.EDIT_CUT));
             editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-                    getAction(IWorkbenchActionDefinitionIds.COPY));
+                    getAction(IWorkbenchCommandConstants.EDIT_COPY));
             editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-                    getAction(IWorkbenchActionDefinitionIds.PASTE));
+                    getAction(IWorkbenchCommandConstants.EDIT_PASTE));
             editSubmenu.appendToGroup(PageDesignerActionConstants.GROUP_EDIT,
-                    getAction(IWorkbenchActionDefinitionIds.DELETE));
+                    getAction(IWorkbenchCommandConstants.EDIT_DELETE));
 
         }
         
