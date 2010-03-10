@@ -12,7 +12,6 @@
 package org.eclipse.jst.pagedesigner.editors.palette.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
@@ -72,7 +72,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	private Set<IFile> _files = new HashSet<IFile>();
 	private TagRegistryIdentifier _tagRegId;
 	private List<PaletteDrawer> _paletteCategories = new ArrayList<PaletteDrawer>();
-	private IEntryChangeListener[] _listeners;
+	private CopyOnWriteArrayList<IEntryChangeListener> _listeners = new CopyOnWriteArrayList<IEntryChangeListener>();
 	private AtomicBoolean IS_DISPOSED = new AtomicBoolean();
 
 	private PaletteHelper _paletteHelper;
@@ -413,15 +413,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#addEntryChangeListener(com.sybase.stf.jmt.pagedesigner.editors.palette.IEntryChangeListener)
 	 */
 	public void addEntryChangeListener(final IEntryChangeListener listener) {
-
-		if (_listeners == null) {
-			_listeners = new IEntryChangeListener[] { listener };
-		} else {
-			final IEntryChangeListener[] newListeners = new IEntryChangeListener[_listeners.length + 1];
-			newListeners[0] = listener;
-			System.arraycopy(_listeners, 0, newListeners, 1, _listeners.length);
-			_listeners = newListeners;
-		}
+		_listeners.addIfAbsent(listener);
 	}
 
 	/*
@@ -429,21 +421,8 @@ public class PaletteItemManager implements IPaletteItemManager,
 	 * 
 	 * @see com.sybase.stf.jmt.pagedesigner.editors.palette.IPaletteItemManager#removeEntryChangeListener(com.sybase.stf.jmt.pagedesigner.editors.palette.IEntryChangeListener)
 	 */
-	public void removeEntryChangeListener(final IEntryChangeListener listener) {
-		if (_listeners == null) {
-			return;
-		}
-		if (_listeners.length == 1) {
-			_listeners = null;
-		} else {
-			final List newListenersList = new ArrayList(Arrays.asList(_listeners));
-			newListenersList.remove(listener);
-			IEntryChangeListener[] newListeners = new IEntryChangeListener[newListenersList
-					.size() - 1];
-			newListeners = (IEntryChangeListener[]) newListenersList
-					.toArray(newListeners);
-			_listeners = newListeners;
-		}
+	public void removeEntryChangeListener(final IEntryChangeListener listener) {		
+		_listeners.remove(listener);
 	}
 
 	/**
@@ -456,11 +435,10 @@ public class PaletteItemManager implements IPaletteItemManager,
 		if (_listeners == null) {
 			return;
 		}
-		synchronized (_listeners) {
-			for (int i = 0; i < _listeners.length; i++) {
-				_listeners[i].modelChanged(oldDefinitions, newDefinitions);
-			}
-		}
+		for (final Iterator<IEntryChangeListener> it= _listeners.iterator();it.hasNext();){
+			final IEntryChangeListener listener = it.next();
+			listener.modelChanged(oldDefinitions, newDefinitions);
+		}	
 	}
 	
 	/**
