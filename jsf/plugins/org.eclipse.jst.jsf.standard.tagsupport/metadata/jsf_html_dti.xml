@@ -254,13 +254,14 @@
 	<entity id="head" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
-					nonVisual="true"
-					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_HEAD.gif"
-					widget="true"					
-				/>
-				<tag-decorate-info id="vpd-decorate-preview"
-					nonVisual="true"
+					needBorderDecorator="true"
 				/>
 			</value>
 		</trait>
@@ -535,7 +536,34 @@
 			</value>
 		</trait>
 	</entity>
-
+	<entity id="outputScript">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_OUTPUTSCRIPT.gif"
+					widget="true"					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
+	<entity id="outputStylesheet">
+		<trait id="dt-info">
+			<value xsi:type="dti:DTInfo">
+				<tag-decorate-info id="vpd-decorate-design"
+					nonVisual="true"
+					nonVisualImagePath="icons/palette/JSFHTML/small/JSF_OUTPUTSTYLESHEET.gif"
+					widget="true"					
+				/>
+				<tag-decorate-info id="vpd-decorate-preview"
+					nonVisual="true"
+				/>
+			</value>
+		</trait>
+	</entity>
 	<entity id="outputText" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
