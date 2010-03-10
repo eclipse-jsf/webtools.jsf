@@ -183,13 +183,15 @@ public class QuickEditTabManager {
 		if (ed == null)
 			return null;
 		
-		FileEditorInput input = (FileEditorInput)ed.getEditorInput();
-		IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(ed.getDocument(), node);
-		if (context != null){
-			ITaglibContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
-			if (resolver != null){
-				ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(input.getFile().getProject(),resolver.getTagURIForNodeName(node));
-				return TaglibDomainMetaDataQueryHelper.getEntity(mdContext, node.getLocalName());
+		if (ed.getEditorInput() instanceof FileEditorInput) {
+			FileEditorInput input = (FileEditorInput)ed.getEditorInput();
+			IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(ed.getDocument(), node);
+			if (context != null){
+				ITaglibContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
+				if (resolver != null){
+					ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(input.getFile().getProject(),resolver.getTagURIForNodeName(node));
+					return TaglibDomainMetaDataQueryHelper.getEntity(mdContext, node.getLocalName());
+				}
 			}
 		}
 		return null;		
