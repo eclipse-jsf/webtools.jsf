@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.tests;
 
+import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -55,56 +56,56 @@ public class AllTests
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.core.tests");
 		//$JUnit-BEGIN$
-        suite.addTestSuite(TestJDTBeanPropertyWorkingCopy.class);
-        suite.addTestSuite(TestJDTBeanIntrospector.class);
-        suite.addTestSuite(TestTypeUtil.class);
+        suite.addTest(new JUnit4TestAdapter(TestJDTBeanPropertyWorkingCopy.class));
+        suite.addTest(new JUnit4TestAdapter(TestJDTBeanIntrospector.class));
+        suite.addTest(new JUnit4TestAdapter(TestTypeUtil.class));
 
-		suite.addTestSuite(TypeComparatorTests.class);
-		suite.addTestSuite(TypeTransformerTests.class);
+		suite.addTest(new JUnit4TestAdapter(TypeComparatorTests.class));
+		suite.addTest(new JUnit4TestAdapter(TypeTransformerTests.class));
 
-		suite.addTestSuite(JSFLibraryRegistryTestCases.class);
-		suite.addTestSuite(JSFLibraryTestCases.class);
-		suite.addTestSuite(ArchiveFileTestCases.class);
-		suite.addTestSuite(MaintainDefaultImplementationAdapterTestCases.class);
-		suite.addTestSuite(JSFLibraryRegistryPackageTestCases.class);
+		suite.addTest(new JUnit4TestAdapter(JSFLibraryRegistryTestCases.class));
+		suite.addTest(new JUnit4TestAdapter(JSFLibraryTestCases.class));
+		suite.addTest(new JUnit4TestAdapter(ArchiveFileTestCases.class));
+		suite.addTest(new JUnit4TestAdapter(MaintainDefaultImplementationAdapterTestCases.class));
+		suite.addTest(new JUnit4TestAdapter(JSFLibraryRegistryPackageTestCases.class));
 
 		// comment out temporarily.  See https://bugs.eclipse.org/bugs/show_bug.cgi?id=214417
-		//suite.addTestSuite(TestLifecycleListener.class);
+		//suite.addTest(new JUnit4TestAdapter(TestLifecycleListener.class));
 
-		suite.addTestSuite(JSFFacetInstallDataModelProviderTestCases.class);
+		suite.addTest(new JUnit4TestAdapter(JSFFacetInstallDataModelProviderTestCases.class));
 
 		// test the jar file appconfig provider
-		// TODO C.B: add this back suite.addTestSuite(TestJARFileJSFAppConfigProvider.class);
+		// TODO C.B: add this back suite.addTest(TestJARFileJSFAppConfigProvider.class);
 		
-//		suite.addTestSuite(JSFLibraryConfigDialogSettingDataTestCases.class);
-		suite.addTestSuite(JSFProjectLibraryReferenceTestCases.class);
-//		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
-		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
-		suite.addTestSuite(JsfLibraryValidatorTest.class);
+//		suite.addTest(JSFLibraryConfigDialogSettingDataTestCases.class);
+		suite.addTest(new JUnit4TestAdapter(JSFProjectLibraryReferenceTestCases.class));
+//		suite.addTest(JSFLibraryConfigModelTestCases.class);
+		suite.addTest(new JUnit4TestAdapter(JSFLibraryRegistryUtilTestCases.class));
+		suite.addTest(new JUnit4TestAdapter(JsfLibraryValidatorTest.class));
 
-		suite.addTestSuite(TestJSPSemanticsValidator_Containment.class);
-        suite.addTestSuite(TestJSPSemanticsValidator_AttributeValues.class);
-		suite.addTestSuite(AppConfigValidationUtilTestCase.class);
-		suite.addTestSuite(TestMemberConstraint.class);
-		suite.addTestSuite(TestXPathValidation.class);
-		suite.addTestSuite(TestXPathTagMatcher.class);
-		suite.addTestSuite(ConcreteAxiomaticSetTest.class);
-		suite.addTestSuite(NodeSetTest.class);
+		suite.addTest(new JUnit4TestAdapter(TestJSPSemanticsValidator_Containment.class));
+        suite.addTest(new JUnit4TestAdapter(TestJSPSemanticsValidator_AttributeValues.class));
+		suite.addTest(new JUnit4TestAdapter(AppConfigValidationUtilTestCase.class));
+		suite.addTest(new JUnit4TestAdapter(TestMemberConstraint.class));
+		suite.addTest(new JUnit4TestAdapter(TestXPathValidation.class));
+		suite.addTest(new JUnit4TestAdapter(TestXPathTagMatcher.class));
+		suite.addTest(new JUnit4TestAdapter(ConcreteAxiomaticSetTest.class));
+		suite.addTest(new JUnit4TestAdapter(NodeSetTest.class));
 		
         // NOTE: migration tests affect workspace meta-data files, but they
         // should play nice with others
 		// BUT, to be on the safe side, always run them LAST.
-        suite.addTestSuite(MigrationV1toV2Test.class);
+        suite.addTest(new JUnit4TestAdapter(MigrationV1toV2Test.class));
 
-        suite.addTestSuite(JSFLibraryReferenceTestCases.class);
-        suite.addTestSuite(JSFLibraryServerSuppliedReferenceTestCases.class);
+        suite.addTest(new JUnit4TestAdapter(JSFLibraryReferenceTestCases.class));
+        suite.addTest(new JUnit4TestAdapter(JSFLibraryServerSuppliedReferenceTestCases.class));
         
         // Vendor-specific web.xml configuration tests
-        suite.addTestSuite(VendorSpecificWebXmlConfigurationForJavaEETest.class);
-        suite.addTestSuite(VendorSpecificWebXmlConfigurationForJ2EETest.class);
+        suite.addTest(new JUnit4TestAdapter(VendorSpecificWebXmlConfigurationForJavaEETest.class));
+        suite.addTest(new JUnit4TestAdapter(VendorSpecificWebXmlConfigurationForJ2EETest.class));
 
         // Jsf library provider tests
-        suite.addTestSuite(JsfLibraryProviderTests.class);
+        suite.addTest(new JUnit4TestAdapter(JsfLibraryProviderTests.class));
 
 		//$JUnit-END$
 		return suite;
