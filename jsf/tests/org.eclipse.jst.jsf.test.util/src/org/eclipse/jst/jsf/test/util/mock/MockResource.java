@@ -10,6 +10,7 @@ import junit.framework.Assert;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IPathVariableManager;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
@@ -470,6 +471,11 @@ public class MockResource implements IResource
     }
 
     public boolean isFiltered()
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public IPathVariableManager getPathVariableManager()
     {
         throw new UnsupportedOperationException();
     }
