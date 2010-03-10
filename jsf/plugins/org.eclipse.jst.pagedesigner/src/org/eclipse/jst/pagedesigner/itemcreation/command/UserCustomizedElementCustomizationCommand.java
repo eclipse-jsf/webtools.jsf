@@ -21,7 +21,6 @@ import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * Added extra functionality to use the customization data to set tag attributes
@@ -69,12 +68,13 @@ public class UserCustomizedElementCustomizationCommand extends
         if (_creationData.getDropCustomizationData() != null)
         {
             final ICustomizationData data = (ICustomizationData) _creationData.getDropCustomizationData().getAdapter(ICustomizationData.class);
-            
-            if (data.getTextNodeData() != null) {
-            	final Node textNode = _element.getOwnerDocument().createTextNode(data.getTextNodeData());
-            	_element.appendChild(textNode);
-            } 
-            else if (data.getChildrenData() != null)
+//            
+//            if (data.getTextNodeData() != null) {
+//            	final Node textNode = _element.getOwnerDocument().createTextNode(data.getTextNodeData());
+//            	_element.appendChild(textNode);
+//            } 
+//            else 
+            if (data.getChildrenData() != null)
             {
                 int childCount = 0;
                 CHILDREN_LOOP: for (ICustomizationData child : data.getChildrenData().getChildList())
