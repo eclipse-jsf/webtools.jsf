@@ -1,8 +1,5 @@
 package org.eclipse.jst.jsf.core.tests.project.facet;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +12,11 @@ import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.javaee.web.WebAppVersionType;
 import org.eclipse.jst.javaee.web.WebFactory;
 import org.eclipse.jst.jsf.core.JSFVersion;
-import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
-@Category(NoPluginEnvironment.class)
+//@Category(NoPluginEnvironment.class)
 public class TestJSFUtils12 extends TestJSFUtils
 {
-    @Before
+//    @Before
     public void setUp() throws Exception
     {
         super.setUp();
@@ -42,31 +35,31 @@ public class TestJSFUtils12 extends TestJSFUtils
         return new WebAppTestAccessor();
     }
 
-    @Test
+    //@Test
     public void testUpdateWebApp_ExistingServlet_2_5()
     {
         testUpdateWebApp_ExistingServlet("2.5");
     }
 
-    @Test
+    //@Test
     public void testUpdateWebApp_NewServlet_2_5()
     {
         testUpdateWebApp_NewServlet("2.5");
     }
 
-    @Test
+    //@Test
     public void testRollbackWebApp_2_5()
     {
         super.testRollbackWebApp("2.5");
     }
 
-    @Test
+    //@Test
     public void testGetFileUrlPath_NonNullCases_2_5()
     {
         super.testGetFileUrlPath_NonNullCases("2.5");
     }
 
-    @Test
+    //@Test
     public void testGetFileUrlPath_NullCases_2_5()
     {
         super.testGetFileUrlPath_NullCases("2.5");
@@ -252,7 +245,7 @@ public class TestJSFUtils12 extends TestJSFUtils
         
     }
     //
-    // @Test
+    // //@Test
     // public void testGetFileUrlPath_NonNullCases()
     // {
     // // a web app with valid servlet and extension mapping
@@ -305,7 +298,7 @@ public class TestJSFUtils12 extends TestJSFUtils
     // assertEquals("/test.jspx", fileUrlPath.toString());
     // }
     //
-    // @Test
+    // //@Test
     // public void testGetFileUrlPath_NullCases()
     // {
     // // a null webApp object produces a null path

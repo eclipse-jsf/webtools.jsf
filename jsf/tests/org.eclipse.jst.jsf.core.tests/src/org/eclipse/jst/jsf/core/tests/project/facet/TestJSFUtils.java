@@ -10,13 +10,6 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.tests.project.facet;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertSame;
-import static junit.framework.Assert.assertTrue;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +18,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -37,18 +32,14 @@ import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModel
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtilFactory;
 import org.eclipse.jst.jsf.core.internal.project.facet.JSFUtils;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
-import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
 import org.eclipse.jst.jsf.test.util.mock.MockBundle;
 import org.eclipse.jst.jsf.test.util.mock.MockDataModel;
+import org.eclipse.jst.jsf.test.util.mock.MockDataModel.MockPropertyHolder;
 import org.eclipse.jst.jsf.test.util.mock.MockModelProvider;
 import org.eclipse.jst.jsf.test.util.mock.MockResource;
-import org.eclipse.jst.jsf.test.util.mock.MockDataModel.MockPropertyHolder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
-@Category(NoPluginEnvironment.class)
-public abstract class TestJSFUtils
+//@Category(NoPluginEnvironment.class)
+public abstract class TestJSFUtils extends TestCase
 {
     private static final String PATTERN_SLASH_FACES_SLASH_ALL = "/faces/*";
     // private WebProjectTestEnvironment _webProjectTestEnv;
@@ -56,7 +47,7 @@ public abstract class TestJSFUtils
     protected Object _modelObject;
     private WebAppAccessor _webAppAccessor;
 
-    @Before
+//    @Before
     protected void setUp() throws Exception
     {
         // for these tests, it doesn't matter which version is created.
@@ -344,7 +335,7 @@ public abstract class TestJSFUtils
         // this is a noop unless explicitly overridden
     }
 
-    @Test
+//    @Test
     public void testFacesConfigCreation() throws IOException
     {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -366,7 +357,7 @@ public abstract class TestJSFUtils
         return testFileResource;
     }
 
-    @Test
+//    @Test
     public void testIsJavaEE()
     {
         final org.eclipse.jst.javaee.web.WebApp javaEEWebApp = WebFactory.eINSTANCE
@@ -381,7 +372,7 @@ public abstract class TestJSFUtils
         assertFalse(_jsfUtils.isJavaEE(J2EEWebApp));
     }
 
-    @Test
+//    @Test
     public void testGetModelProvider()
     {
         final IModelProvider modelProvider = _jsfUtils.getModelProvider();
@@ -394,7 +385,7 @@ public abstract class TestJSFUtils
         assertNull(_jsfUtils.getModelProvider());
     }
 
-    @Test
+//    @Test
     public void testGetDisplayName()
     {
         final Map<String, MockPropertyHolder> propsMap = new HashMap<String, MockPropertyHolder>();
@@ -418,7 +409,7 @@ public abstract class TestJSFUtils
         assertEquals("foobar", _jsfUtils.getDisplayName_testable(model));
     }
 
-    @Test
+//    @Test
     public void testGetServletClassName()
     {
         final Map<String, MockPropertyHolder> propsMap = new HashMap<String, MockPropertyHolder>();
@@ -444,7 +435,7 @@ public abstract class TestJSFUtils
         assertEquals("foobar", _jsfUtils.getServletClassname_testable(model));
     }
 
-    @Test
+//    @Test
     public void testGetServletMappings()
     {
         final Map<String, MockPropertyHolder> propsMap = new HashMap<String, MockPropertyHolder>();
@@ -476,13 +467,13 @@ public abstract class TestJSFUtils
                 .getServletMappings_testable(model));
     }
 
-    @Test
+//    @Test
     public void testIsJSFPage()
     {
         assertTrue(_jsfUtils.isJSFPage_testable(null));
     }
 
-    @Test
+//    @Test
     public void testIsValidKnownExtension()
     {
         assertTrue(_jsfUtils.isValidKnownExtension_testable("jsp"));

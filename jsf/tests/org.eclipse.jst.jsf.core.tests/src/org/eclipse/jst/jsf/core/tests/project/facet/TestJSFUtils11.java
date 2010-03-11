@@ -1,8 +1,5 @@
 package org.eclipse.jst.jsf.core.tests.project.facet;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-
 import java.util.List;
 
 import org.eclipse.core.runtime.Path;
@@ -17,16 +14,12 @@ import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.j2ee.webapplication.WebType;
 import org.eclipse.jst.j2ee.webapplication.WebapplicationFactory;
 import org.eclipse.jst.jsf.core.JSFVersion;
-import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
-@Category(NoPluginEnvironment.class)
+//@Category(NoPluginEnvironment.class)
 public class TestJSFUtils11 extends TestJSFUtils
 {
     @Override
-    @Before
+//    @Before
     public void setUp() throws Exception
     {
         super.setUp();
@@ -39,61 +32,61 @@ public class TestJSFUtils11 extends TestJSFUtils
         return new WebAppTestAccessor(factory);
     }
 
-    @Test
+    //@Test
     public void testUpdateWebApp_ExistingServlet_2_3()
     {
         testUpdateWebApp_ExistingServlet("2.3");
     }
 
-    @Test
+    //@Test
     public void testUpdateWebApp_ExistingServlet_2_4()
     {
         testUpdateWebApp_ExistingServlet("2.4");
     }
 
-    @Test
+    //@Test
     public void testUpdateWebApp_NewServlet_2_3()
     {
         testUpdateWebApp_NewServlet("2.3");
     }
 
-    @Test
+    //@Test
     public void testUpdateWebApp_NewServlet_2_4()
     {
         testUpdateWebApp_NewServlet("2.4");
     }
 
-    @Test
+    //@Test
     public void testRollbackWebApp_2_3()
     {
         super.testRollbackWebApp("2.3");
     }
 
-    @Test
+    //@Test
     public void testRollbackWebApp_2_4()
     {
         super.testRollbackWebApp("2.4");
     }
 
-    @Test
+    //@Test
     public void testGetFileUrlPath_NonNullCases_2_3()
     {
         super.testGetFileUrlPath_NonNullCases("2.3");
     }
 
-    @Test
+    //@Test
     public void testGetFileUrlPath_NonNullCases_2_4()
     {
         super.testGetFileUrlPath_NonNullCases("2.4");
     }
 
-    @Test
+    //@Test
     public void testGetFileUrlPath_NullCases_2_3()
     {
         super.testGetFileUrlPath_NullCases("2.3");
     }
 
-    @Test
+    //@Test
     public void testGetFileUrlPath_NullCases_2_4()
     {
         super.testGetFileUrlPath_NullCases("2.4");
