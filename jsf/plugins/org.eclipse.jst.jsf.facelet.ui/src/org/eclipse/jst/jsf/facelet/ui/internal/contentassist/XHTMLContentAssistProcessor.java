@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
@@ -19,7 +20,6 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.FaceletDocumentFactory;
-import org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacet;
 import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil;
 import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil.PrefixEntry;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
@@ -46,7 +46,7 @@ import org.w3c.dom.Node;
  */
 public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
 {
-    private IProject _project;
+    private IFile _file;
     private FaceletDocumentFactory      _factory;
 
     private final static ICompletionProposal[] NO_PROPOSALS = new ICompletionProposal[0];
@@ -56,11 +56,11 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
             final ITextViewer textViewer, final int documentPosition)
     {
         ICompletionProposal[] proposals = null;
-        _project = getProject(textViewer, documentPosition);
+        _file = getFile(textViewer, documentPosition);
 
-        if (_project != null && shouldContribute(_project))
+        if (_file != null && shouldContribute(_file))
         {
-            _factory = new FaceletDocumentFactory(_project);
+            _factory = new FaceletDocumentFactory(_file.getProject());
             proposals =  super.computeCompletionProposals(textViewer,
                     documentPosition);
         }
@@ -91,7 +91,7 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
                 }
             }
         }
-       
+
         return availableChildElements;
     }
 
@@ -103,10 +103,10 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
 
         if (textRegion != null)
         {
-            final IDOMNode node = ((IDOMNode) contentAssistRequest.getNode());
+            final IDOMNode node = (IDOMNode) contentAssistRequest.getNode();
             final NamedNodeMap attributes = node.getAttributes();
             final String attrName = node.getFirstStructuredDocumentRegion()
-                    .getText(textRegion);
+            .getText(textRegion);
             if (attrName != null)
             {
                 final int colonPos = attrName.indexOf(':');
@@ -118,16 +118,16 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
 
                     if ("xmlns".equals(prefix))
                     {
-                        final ITagRegistry tagRegistry = ViewUtil.getHtmlTagRegistry(_project);
+                        final ITagRegistry tagRegistry = ViewUtil.getHtmlTagRegistry(_file.getProject());
                         if (tagRegistry != null)
                         {
                             final Set<Attr> alreadyUsed = ViewUtil.getDeclaredNamespaces(attributes);
                             final Collection<? extends Namespace> namespaces = tagRegistry
-                                    .getAllTagLibraries();
+                            .getAllTagLibraries();
                             NAMESPACE_LOOP: for (final Namespace ns : namespaces)
                             {
                                 final String possibleValue = ns.getNSUri();
-                               
+
                                 if (ViewUtil.hasAttributeValue(alreadyUsed, possibleValue))
                                 {
                                     continue NAMESPACE_LOOP;
@@ -139,9 +139,9 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
                                 // for all of the known namespaces.
                                 final String rString = "\"" + possibleValue + "\""; //$NON-NLS-2$//$NON-NLS-1$
                                 final int rOffset = contentAssistRequest
-                                        .getReplacementBeginPosition();
+                                .getReplacementBeginPosition();
                                 final int rLength = contentAssistRequest
-                                        .getReplacementLength();
+                                .getReplacementLength();
                                 final int cursorAfter = possibleValue.length() + 1;
                                 final String displayString = "\"" + possibleValue + "\""; //$NON-NLS-2$//$NON-NLS-1$
 
@@ -179,7 +179,7 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
             // Find the attribute region and name for which this position should
             // have a value proposed
             final IStructuredDocumentRegion open = node
-                    .getFirstStructuredDocumentRegion();
+            .getFirstStructuredDocumentRegion();
             final ITextRegionList openRegions = open.getRegions();
             int i = openRegions.indexOf(contentAssistRequest.getRegion());
             if (i < 0)
@@ -203,15 +203,15 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
     @SuppressWarnings("unchecked")
     private Map<String, PrefixEntry> getDocumentNamespaces(
             final FaceletDocumentFactory factory, final int offset)
-    {
+            {
         final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-                .getContext(fTextViewer, offset);
+        .getContext(fTextViewer, offset);
 
         Document doc = null;
         if (context != null)
         {
             final IDOMContextResolver domContextResolver = IStructuredDocumentContextResolverFactory.INSTANCE
-                    .getDOMContextResolver(context);
+            .getDOMContextResolver(context);
 
             doc = domContextResolver.getDOMDocument();
 
@@ -221,7 +221,7 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
             }
         }
         return ViewUtil.getDocumentNamespaces(doc);
-    }
+            }
 
     @Override
     protected CMElementDeclaration getCMElementDeclaration(final Node node)
@@ -233,7 +233,7 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
                 final Element element = (Element) node;
 
                 final CMElementDeclaration elementDecl = _factory
-                        .createCMElementDeclaration(element);
+                .createCMElementDeclaration(element);
 
                 if (elementDecl != null)
                 {
@@ -246,25 +246,30 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
         // return super.getCMElementDeclaration(node);
     }
 
-    private boolean shouldContribute(final IProject project)
+    private boolean shouldContribute(final IFile file)
     {
-        return FaceletFacet.hasFacet(project);
+        return ViewUtil.isFaceletVDLFile(file);
     }
 
-    private IProject getProject(final ITextViewer textViewer,
+    private IFile getFile(final ITextViewer textViewer,
             final int documentPosition)
     {
         final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-                .getContext(textViewer, documentPosition);
+        .getContext(textViewer, documentPosition);
 
         if (context != null)
         {
             final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
-                    .getWorkspaceContextResolver(context);
+            .getWorkspaceContextResolver(context);
 
             if (resolver != null)
             {
-                return resolver.getProject();
+                final IResource resource = resolver.getResource();
+                if (resource != null &&
+                        resource.getType() == IResource.FILE)
+                {
+                    return (IFile) resource;
+                }
             }
         }
         return null;

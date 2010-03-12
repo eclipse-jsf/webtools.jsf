@@ -10,15 +10,16 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
+import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
+import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.VersionStamp;
 import org.eclipse.jst.jsf.designtime.internal.view.DefaultDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.IViewDefnAdapterFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLComponentTreeConstructionStrategy;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
-import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.VersionStamp;
-import org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacet;
 
 /**
  * The Facelet design time view handler implementation.
@@ -118,9 +119,11 @@ public class DTFaceletViewHandler extends DefaultDTViewHandler
     }
 
     @Override
-    public boolean supportsViewDefinition(IFile file)
+    public boolean supportsViewDefinition(final IFile file)
     {
-        return FaceletFacet.hasFacet(file.getProject()) && isHTMLContent(file);
+        // XXX: cover case where we are in a JSF 1.2 project and the file is facelet.
+        return JSFAppConfigUtils.isValidJSFProject(file.getProject(), "2.0") && //$NON-NLS-1$
+            (JSPUtil.isJSPContentType(file) || isHTMLContent(file));
     }
 
     boolean isHTMLContent(final IFile file)

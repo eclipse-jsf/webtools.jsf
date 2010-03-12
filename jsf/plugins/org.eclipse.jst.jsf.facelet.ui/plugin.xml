@@ -51,8 +51,10 @@
                 <and>
                     <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.java"/>
                     <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.web"/>
-                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf"/>
-                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jsf.facelet"/>
+                    <test
+                          args="2.0"
+                          property="org.eclipse.wst.common.project.facet.core.projectFacet"
+                          value="jst.jsf"/>
                 </and>
             </enablement> 
             

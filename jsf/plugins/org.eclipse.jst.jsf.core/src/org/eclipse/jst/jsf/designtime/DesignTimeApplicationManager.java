@@ -37,6 +37,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.designtime.context.AbstractDTExternalContextFactory;
@@ -48,6 +49,7 @@ import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory.ExtensionData;
 import org.eclipse.jst.jsf.designtime.internal.view.AbstractDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
+import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
 /**
  * Per-web-application manager that manages design time information for a
@@ -99,7 +101,8 @@ public final class DesignTimeApplicationManager
 
     private static final String        DEFAULT_METHOD_RESOLVER_ID                       = "org.eclipse.jst.jsf.core.methodresolver.default";             //$NON-NLS-1$
 
-    private static final String        DEFAULT_VIEW_HANDLER_ID                          = "org.eclipse.jst.jsf.designtime.view.jspviewhandler";          //$NON-NLS-1$
+    private static final String        PRE_20_DEFAULT_VIEW_HANDLER_ID                          = "org.eclipse.jst.jsf.designtime.view.jspviewhandler";          //$NON-NLS-1$
+    private static final String        JSF_20_DEFAULT_VIEW_HANDLER_ID = "org.eclipse.jst.jsf.facelet.core.html.viewhandler"; //$NON-NLS-1$
 
     private static final Object        GET_INSTANCE_LOCK = new Object();
 
@@ -649,9 +652,7 @@ public final class DesignTimeApplicationManager
 
         public synchronized void removeViewHandler(final IProject project)
         {
-            final String viewHandlerId = _propertyFileManager
-                    .getProperty(PERSIST_PROPERTY_NAME_VIEW_HANDLER,
-                            DEFAULT_VIEW_HANDLER_ID);
+            final String viewHandlerId = getHandlerId(project);
 
             if (viewHandlerId != null)
             {
@@ -669,12 +670,37 @@ public final class DesignTimeApplicationManager
             }
         }
 
+        protected String getHandlerId(final IProject project)
+        {
+            IProjectFacetVersion projectFacet = JSFAppConfigUtils.getProjectFacet(project);
+            if (projectFacet != null)
+            {
+                JSFVersion projectVersion = JSFVersion.valueOfFacetVersion(projectFacet);
+                
+                String defaultHandler = PRE_20_DEFAULT_VIEW_HANDLER_ID;
+                
+                // starting with JSF 2.0 a new view handler that first
+                // processes as Facelet and then delegates to JSP is
+                // used by default
+                // TODO: check the web.xml flag that reverts things to 1.2 defaults
+                if (projectVersion.compareTo(JSFVersion.V2_0) >= 0)
+                {
+                    defaultHandler = JSF_20_DEFAULT_VIEW_HANDLER_ID;
+                }
+                final String viewHandlerId = _propertyFileManager
+                        .getProperty(PERSIST_PROPERTY_NAME_VIEW_HANDLER,
+                               defaultHandler);
+                return viewHandlerId;
+            }
+            return null;
+        }
+        
+
         public synchronized IDTViewHandler getViewHandler(
                 final IProject project, final LifecycleListener listener)
         {
-            final String viewHandlerId = _propertyFileManager
-                    .getProperty(PERSIST_PROPERTY_NAME_VIEW_HANDLER,
-                            DEFAULT_VIEW_HANDLER_ID);
+            
+            final String viewHandlerId = getHandlerId(project);
 
             if (viewHandlerId != null)
             {
@@ -683,7 +709,7 @@ public final class DesignTimeApplicationManager
                 if (viewHandlers == null)
                 {
                     viewHandlers = JSFCorePlugin
-                            .getViewHandlers(DEFAULT_VIEW_HANDLER_ID);
+                            .getViewHandlers(PRE_20_DEFAULT_VIEW_HANDLER_ID);
                 }
 
                 final AbstractDTViewHandler viewHandler = viewHandlers

@@ -5,11 +5,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory;
 import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory.TagRegistryIdentifier;
+import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
+import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
@@ -141,6 +144,24 @@ public final class ViewUtil
             }
         }
         return namespaces;
+    }
+
+    /**
+     * @param file
+     * @return true if the file is a Facelet VDL file
+     */
+    public static boolean isFaceletVDLFile(final IFile file)
+    {
+        final DesignTimeApplicationManager instance = DesignTimeApplicationManager.getInstance(file.getProject());
+        if (instance != null)
+        {
+            final IDTViewHandler viewHandler = instance.getViewHandler();
+            if (viewHandler != null)
+            {
+                return viewHandler.supportsViewDefinition(file);
+            }
+        }
+        return false;
     }
 
     /**

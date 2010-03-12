@@ -26,10 +26,10 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
-import org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacet;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.TagModelParser;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil;
 import org.eclipse.jst.jsp.core.internal.Logger;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.validation.internal.core.ValidationException;
@@ -106,7 +106,7 @@ public class TaglibValidator implements IValidatorJob
             .getWebContentFolder(currentFile.getProject());
         final IPath filePath = currentFile.getProjectRelativePath();
         final IPath webFolderPath = folder.getUnderlyingFolder().getProjectRelativePath();
-        boolean isInValidPath =  FaceletFacet.hasFacet(currentFile.getProject())
+        boolean isInValidPath =  ViewUtil.isFaceletVDLFile(currentFile)
             && webFolderPath.isPrefixOf(filePath);
         
         if (isInValidPath)

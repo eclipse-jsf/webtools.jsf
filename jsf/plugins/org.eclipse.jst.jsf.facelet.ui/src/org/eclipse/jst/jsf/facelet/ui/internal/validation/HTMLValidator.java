@@ -25,7 +25,6 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
-import org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacet;
 import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil;
 import org.eclipse.jst.jsf.facelet.ui.internal.FaceletUiPlugin;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator;
@@ -220,6 +219,6 @@ public class HTMLValidator implements IValidatorJob
         final IContentType contentType = manager
                 .getContentType("org.eclipse.wst.html.core.htmlsource");
         return (contentType.isAssociatedWith(model.getName()))
-                && FaceletFacet.hasFacet(model.getProject());
+                && ViewUtil.isFaceletVDLFile(model);
     }
 }
