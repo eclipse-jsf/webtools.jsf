@@ -49,11 +49,13 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
     private IProject _project;
     private FaceletDocumentFactory      _factory;
 
+    private final static ICompletionProposal[] NO_PROPOSALS = new ICompletionProposal[0];
+    
     @Override
     public ICompletionProposal[] computeCompletionProposals(
             final ITextViewer textViewer, final int documentPosition)
     {
-        ICompletionProposal[] proposals = new ICompletionProposal[0];
+        ICompletionProposal[] proposals = null;
         _project = getProject(textViewer, documentPosition);
 
         if (_project != null && shouldContribute(_project))
@@ -62,7 +64,7 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
             proposals =  super.computeCompletionProposals(textViewer,
                     documentPosition);
         }
-        return proposals;
+        return proposals != null ? proposals : NO_PROPOSALS;
     }
 
     @SuppressWarnings("unchecked")
