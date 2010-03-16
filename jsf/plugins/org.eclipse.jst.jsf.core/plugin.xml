@@ -16,19 +16,19 @@
    <extension-point id="symbolContextResolverFactory" name="%extension-point.name.12" schema="schema/symbolContextResolverFactory.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-    	<package 
-      	 	uri = "http://org.eclipse.jst.jsf.core/constraints.ecore" 
-       		class = "org.eclipse.jst.jsf.validation.internal.constraints.ConstraintsPackage"
-       		genModel = "model/constraints.genmodel" /> 
-	     <package 
-	       uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
-	       class = "org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage"
-	       genModel = "model/paletteInfos.genmodel" />
+        <package 
+            uri = "http://org.eclipse.jst.jsf.core/constraints.ecore" 
+            class = "org.eclipse.jst.jsf.validation.internal.constraints.ConstraintsPackage"
+            genModel = "model/constraints.genmodel" /> 
+         <package 
+           uri = "http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+           class = "org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfosPackage"
+           genModel = "model/paletteInfos.genmodel" />
          <package 
            uri = "http://org.eclipse.jst.jsf.core/componentMapping.ecore" 
            class = "org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.ComponentMappingPackage"
            genModel = "model/componentMapping.genmodel" />
-   </extension>   
+   </extension> 
   <!-- JSF Project Facets -->
 	<extension
        id="org.eclipse.jst.jsf.project.facet"
@@ -451,6 +451,16 @@
     <detector class="org.eclipse.jst.jsf.core.internal.project.facet.LegacyJSFLibraryProviderDetector"/>
   </extension>
 
+    <!-- JSF 2.0 Downloadable library provider -->
+    <extension point="org.eclipse.jst.common.project.facet.core.downloadableLibraries">
+        <import-definitions url="http://www.eclipse.org/webtools/jsf/jsf-library/jsf-2.0-downloadable-libraries.xml">
+            <enablement>
+                <with variable="requestingProjectFacet">
+                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf:2.0" forcePluginActivation="true"/>
+                </with>
+            </enablement>
+        </import-definitions>
+    </extension>
 
     <!-- JSF 1.2 Downloadable library provider -->
     <extension point="org.eclipse.jst.common.project.facet.core.downloadableLibraries">
@@ -462,7 +472,6 @@
             </enablement>
         </import-definitions>
     </extension>
-
 
     <!-- JSF 1.1 Downloadable library provider -->
     <extension point="org.eclipse.jst.common.project.facet.core.downloadableLibraries">
