@@ -38,9 +38,6 @@
     <project-facet id="jst.jsf">
       <label>JavaServer Faces</label>
       <description>%plugin.facet.description</description>
-      <default-version
-            provider="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetDefaultVersionProvider">
-      </default-version>
     </project-facet>
 
     <project-facet-version facet="jst.jsf" version="1.1">
