@@ -29,6 +29,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
@@ -141,17 +142,40 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/RenderKitType"));
 	}
 
-    /**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc
+	/**
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((RenderKitType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_RenderKitType_type") :
-			getString("_UI_RenderKitType_type") + " " + label;
+
+		String label = null;
+		
+		if (((RenderKitType) object).getDisplayName() != null
+				&& ((RenderKitType) object).getDisplayName().size() > 0) {
+			label = ((DisplayNameType) ((RenderKitType) object)
+					.getDisplayName().get(0)).getTextContent();
+		}
+
+		if ((label == null || label.length() == 0) && ((RenderKitType) object).getRenderKitId() != null
+				&& ((RenderKitType) object).getRenderKitId().getTextContent() != null) {
+			label = ((RenderKitType) object).getRenderKitId().getTextContent();
+		}
+
+		if (label == null || label.length() == 0) {
+			if (((RenderKitType) object).getRenderKitClass() != null)
+				label = ((RenderKitType) object).getRenderKitClass()
+						.getTextContent();
+		}
+		
+		if (label == null || label.length() == 0) {
+			label = ((RenderKitType) object).getId();
+		}
+
+		return label == null || label.length() == 0 ? getString("_UI_RenderKitType_type")
+				: label;
+//				: getString("_UI_RenderKitType_type") + " " + label;
 	}
 
     /**
@@ -257,13 +281,21 @@ public class RenderKitTypeItemProvider extends ItemProviderAdapter implements
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnText(java.lang.Object, int)
 	 */
 	public String getColumnText(Object object, int columnIndex) {
-		RenderKitType renderkit = (RenderKitType) object;
+//		RenderKitType renderkit = (RenderKitType) object;
+//		switch (columnIndex) {
+//		case 0:
+//			return getText(object);
+//		case 1:
+//			return renderkit.getRenderKitClass() == null ? "" : renderkit //$NON-NLS-1$
+//					.getRenderKitClass().getTextContent();
+//		}
+//		return null;
+//		RenderKitType renderkit = (RenderKitType) object;
 		switch (columnIndex) {
 		case 0:
 			return getText(object);
 		case 1:
-			return renderkit.getRenderKitClass() == null ? "" : renderkit //$NON-NLS-1$
-					.getRenderKitClass().getTextContent();
+			return getString("_UI_RenderKitType_type"); //$NON-NLS-1$
 		}
 		return null;
 	}

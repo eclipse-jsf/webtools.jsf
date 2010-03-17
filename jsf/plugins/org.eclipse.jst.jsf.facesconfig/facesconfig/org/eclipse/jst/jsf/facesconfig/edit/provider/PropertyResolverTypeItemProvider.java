@@ -134,13 +134,12 @@ public class PropertyResolverTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((PropertyResolverType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PropertyResolverType_type") :
-			getString("_UI_PropertyResolverType_type") + " " + label;
+		String label = ((PropertyResolverType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_PropertyResolverType_type")
+				: label;
 	}
 
     /**

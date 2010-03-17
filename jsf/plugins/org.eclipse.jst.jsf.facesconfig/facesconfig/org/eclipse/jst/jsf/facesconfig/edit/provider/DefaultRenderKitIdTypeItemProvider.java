@@ -134,13 +134,12 @@ public class DefaultRenderKitIdTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((DefaultRenderKitIdType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DefaultRenderKitIdType_type") :
-			getString("_UI_DefaultRenderKitIdType_type") + " " + label;
+		String label = ((DefaultRenderKitIdType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_DefaultRenderKitIdType_type")
+				: label;
 	}
 
     /**

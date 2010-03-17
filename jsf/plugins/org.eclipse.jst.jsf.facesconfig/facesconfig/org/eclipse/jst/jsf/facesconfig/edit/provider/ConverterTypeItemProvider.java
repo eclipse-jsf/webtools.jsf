@@ -30,6 +30,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
@@ -142,17 +143,37 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/ConverterType"));
 	}
 
-    /**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc
+	/**
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((ConverterType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ConverterType_type") :
-			getString("_UI_ConverterType_type") + " " + label;
+		String label = null;
+		
+		if (((ConverterType) object).getDisplayName() != null
+				&& ((ConverterType) object).getDisplayName().size() > 0) {
+			label = ((DisplayNameType) ((ConverterType) object)
+					.getDisplayName().get(0)).getTextContent();
+		}
+		
+		if (label == null && ((ConverterType) object).getConverterId() != null) {
+			label = ((ConverterType) object).getConverterId().getTextContent();
+		}
+
+		if (label == null || label.length() == 0) {
+			if (((ConverterType) object).getConverterClass() != null)
+				label = ((ConverterType) object).getConverterClass()
+						.getTextContent();
+		}
+		if (label == null || label.length() ==0) {
+			label = ((ConverterType) object).getId();
+		}
+
+		return label == null || label.length() == 0 ? getString("_UI_ConverterType_type") 
+				: label;
+//				: getString("_UI_ConverterType_type") + " " + label;
 	}
 
     /**
@@ -263,13 +284,12 @@ public class ConverterTypeItemProvider extends ItemProviderAdapter implements
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnText(java.lang.Object, int)
 	 */
 	public String getColumnText(Object object, int columnIndex) {
-		ConverterType converter = (ConverterType) object;
 		switch (columnIndex) {
+
 		case 0:
 			return getText(object);
 		case 1:
-			return converter.getConverterClass() == null ? "" : converter //$NON-NLS-1$
-					.getConverterClass().getTextContent();
+			return getString("_UI_ConverterType_type"); //$NON-NLS-1$
 		}
 		return null;
 	}

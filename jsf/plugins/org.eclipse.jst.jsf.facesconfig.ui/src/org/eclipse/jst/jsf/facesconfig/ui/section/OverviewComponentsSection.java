@@ -93,13 +93,13 @@ public class OverviewComponentsSection extends AbstractOverviewSection {
 		TableColumn typecol = new TableColumn(table, SWT.LEFT);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		typecol
-				.setText(EditorMessages.OverviewPage_ComponentsSection_table_typecol);
+				.setText(EditorMessages.OverviewPage_ComponentsSection_table_namecol);
 		typecol.setResizable(true);
 
 		TableColumn namecol = new TableColumn(table, SWT.LEFT);
 		tablelayout.addColumnData(new ColumnWeightData(1, true));
 		namecol
-				.setText(EditorMessages.OverviewPage_ComponentsSection_table_namecol);
+				.setText(EditorMessages.OverviewPage_ComponentsSection_table_typecol);
 		namecol.setResizable(true);
 
 		return table;

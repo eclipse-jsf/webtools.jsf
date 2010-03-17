@@ -136,13 +136,12 @@ public class ActionListenerTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((ActionListenerType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ActionListenerType_type") :
-			getString("_UI_ActionListenerType_type") + " " + label;
+		String label = ((ActionListenerType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_ActionListenerType_type")
+				: label;
 	}
 
     /**

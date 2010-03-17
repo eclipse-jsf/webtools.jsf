@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -34,6 +35,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.PartialViewContextFactoryType;
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.PartialViewContextFactoryType} object.
  * <!-- begin-user-doc -->
+ * @extends ITableItemLabelProvider
  * <!-- end-user-doc -->
  * @generated
  */
@@ -45,7 +47,8 @@ public class PartialViewContextFactoryTypeItemProvider
 		IStructuredItemContentProvider,
 		ITreeItemContentProvider,
 		IItemLabelProvider,
-		IItemPropertySource {
+		IItemPropertySource,
+		ITableItemLabelProvider{
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -140,13 +143,12 @@ public class PartialViewContextFactoryTypeItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((PartialViewContextFactoryType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PartialViewContextFactoryType_type") :
-			getString("_UI_PartialViewContextFactoryType_type") + " " + label;
+		String label = ((PartialViewContextFactoryType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_PartialViewContextFactoryType_type")
+				: label;
 	}
 
 	/**
@@ -188,5 +190,27 @@ public class PartialViewContextFactoryTypeItemProvider
 	public ResourceLocator getResourceLocator() {
 		return FacesConfigPlugin.INSTANCE;
 	}
+	/* (non-Javadoc)
+	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnImage(java.lang.Object, int)
+	 */
+	public Object getColumnImage(Object object, int columnIndex) {
+		// TODO Auto-generated method stub
+		if(columnIndex ==0)
+			return getImage(object);
+		return null;
+	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnText(java.lang.Object, int)
+	 */
+	public String getColumnText(Object object, int columnIndex) {
+		switch (columnIndex) {
+
+		case 0:
+			return getText(object);
+		case 1:
+			return getString("_UI_PartialViewContextFactoryType_type"); //$NON-NLS-1$
+		}
+		return null;
+	}
 }

@@ -29,6 +29,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
@@ -141,17 +142,37 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/ValidatorType"));
 	}
 
-    /**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc
+	/**
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((ValidatorType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ValidatorType_type") :
-			getString("_UI_ValidatorType_type") + " " + label;
+		String label = null;
+
+		if (((ValidatorType) object).getDisplayName() != null
+				&& ((ValidatorType) object).getDisplayName().size() > 0) {
+			label = ((DisplayNameType) ((ValidatorType) object)
+					.getDisplayName().get(0)).getTextContent();
+		}
+		
+		if ((label == null || label.length() == 0) && ((ValidatorType) object).getValidatorId() != null
+				&& ((ValidatorType) object).getValidatorId().getTextContent() != null) {
+			label = ((ValidatorType) object).getValidatorId().getTextContent();
+		}
+
+		if (label == null || label.length() == 0) {
+			if (((ValidatorType) object).getValidatorClass() != null)
+				label = ((ValidatorType) object).getValidatorClass()
+						.getTextContent();
+		}
+		if (label == null || label.length() == 0) {
+			label = ((ValidatorType) object).getId();
+		}
+		return label == null || label.length() == 0 ? getString("_UI_ValidatorType_type")
+				: label;
+//				: getString("_UI_ValidatorType_type") + " " + label;
 	}
 
     /**
@@ -257,13 +278,12 @@ public class ValidatorTypeItemProvider extends ItemProviderAdapter implements
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnText(java.lang.Object, int)
 	 */
 	public String getColumnText(Object object, int columnIndex) {
-		ValidatorType validator = (ValidatorType) object;
 		switch (columnIndex) {
+
 		case 0:
 			return getText(object);
 		case 1:
-			return validator.getValidatorClass() == null ? "" : validator //$NON-NLS-1$
-					.getValidatorClass().getTextContent();
+			return getString("_UI_ValidatorType_type"); //$NON-NLS-1$
 		}
 		return null;
 	}

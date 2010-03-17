@@ -134,13 +134,12 @@ public class NavigationHandlerTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((NavigationHandlerType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_NavigationHandlerType_type") :
-			getString("_UI_NavigationHandlerType_type") + " " + label;
+		String label = ((NavigationHandlerType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_NavigationHandlerType_type")
+				: label;
 	}
 
     /**

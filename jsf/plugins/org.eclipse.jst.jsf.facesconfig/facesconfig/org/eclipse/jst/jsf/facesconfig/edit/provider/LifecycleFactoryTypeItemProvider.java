@@ -134,13 +134,12 @@ public class LifecycleFactoryTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((LifecycleFactoryType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_LifecycleFactoryType_type") :
-			getString("_UI_LifecycleFactoryType_type") + " " + label;
+		String label = ((LifecycleFactoryType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_LifecycleFactoryType_type")
+				: label;
 	}
 
     /**

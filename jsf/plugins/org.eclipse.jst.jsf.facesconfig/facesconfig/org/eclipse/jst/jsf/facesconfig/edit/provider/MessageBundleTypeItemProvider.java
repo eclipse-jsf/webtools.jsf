@@ -134,13 +134,12 @@ public class MessageBundleTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((MessageBundleType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_MessageBundleType_type") :
-			getString("_UI_MessageBundleType_type") + " " + label;
+		String label = ((MessageBundleType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_MessageBundleType_type")
+				: label;
 	}
 
     /**

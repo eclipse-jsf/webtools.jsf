@@ -30,6 +30,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
+import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 
@@ -176,16 +177,16 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 	/**
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
+	 * @generated NOT
 	 * 
 	 */
 	public String getText(Object object) {
 		String label = null;
-		// if (((ComponentType) object).getDisplayName() != null
-		// && ((ComponentType) object).getDisplayName().size() > 0) {
-		// label = ((DisplayNameType) ((ComponentType) object)
-		// .getDisplayName().get(0)).getTextContent();
-		//		}
+		if (((ComponentType) object).getDisplayName() != null
+				&& ((ComponentType) object).getDisplayName().size() > 0) {
+			label = ((DisplayNameType) ((ComponentType) object)
+					.getDisplayName().get(0)).getTextContent();
+		}
 
 		if (label == null || label.length() == 0) {
 			if (((ComponentType) object).getComponentClass() != null) {
@@ -195,7 +196,8 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 		}
 		
 		return label == null || label.length() == 0 ? getString("_UI_ComponentType_type") //$NON-NLS-1$
-				: getString("_UI_ComponentType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+				: label;
+//				: getString("_UI_ComponentType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
     /**
@@ -307,13 +309,12 @@ public class ComponentTypeItemProvider extends ItemProviderAdapter implements
 	 * @see org.eclipse.emf.edit.provider.ITableItemLabelProvider#getColumnText(java.lang.Object, int)
 	 */
 	public String getColumnText(Object object, int columnIndex) {
-		ComponentType component = (ComponentType) object;
 		switch (columnIndex) {
+
 		case 0:
 			return getText(object);
 		case 1:
-			return component.getComponentClass() == null ? "" : component //$NON-NLS-1$
-					.getComponentClass().getTextContent();
+			return getString("_UI_ComponentType_type"); //$NON-NLS-1$
 		}
 		return null;
 	}

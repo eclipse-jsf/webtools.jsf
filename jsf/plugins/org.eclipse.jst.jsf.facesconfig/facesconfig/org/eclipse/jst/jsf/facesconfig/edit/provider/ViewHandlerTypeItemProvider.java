@@ -134,13 +134,12 @@ public class ViewHandlerTypeItemProvider extends ItemProviderAdapter implements
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((ViewHandlerType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ViewHandlerType_type") :
-			getString("_UI_ViewHandlerType_type") + " " + label;
+		String label = ((ViewHandlerType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_ViewHandlerType_type")
+				: label;
 	}
 
     /**

@@ -134,13 +134,12 @@ public class VariableResolverTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((VariableResolverType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_VariableResolverType_type") :
-			getString("_UI_VariableResolverType_type") + " " + label;
+		String label = ((VariableResolverType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_VariableResolverType_type")
+				: label;
 	}
 
     /**

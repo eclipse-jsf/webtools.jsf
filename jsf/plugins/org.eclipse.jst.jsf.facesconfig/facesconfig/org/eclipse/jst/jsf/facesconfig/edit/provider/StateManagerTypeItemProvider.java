@@ -134,13 +134,12 @@ public class StateManagerTypeItemProvider extends ItemProviderAdapter implements
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((StateManagerType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_StateManagerType_type") :
-			getString("_UI_StateManagerType_type") + " " + label;
+		String label = ((StateManagerType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_StateManagerType_type")
+				: label;
 	}
 
     /**

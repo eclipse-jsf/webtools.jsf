@@ -134,13 +134,12 @@ public class PhaseListenerTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((PhaseListenerType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PhaseListenerType_type") :
-			getString("_UI_PhaseListenerType_type") + " " + label;
+		String label = ((PhaseListenerType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_PhaseListenerType_type")
+				: label;
 	}
 
     /**

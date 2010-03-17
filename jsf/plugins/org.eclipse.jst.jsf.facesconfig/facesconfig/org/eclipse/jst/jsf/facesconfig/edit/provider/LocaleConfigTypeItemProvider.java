@@ -33,6 +33,7 @@ import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType;
 
 /**
  * This is the item provider adapter for a {@link org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType} object.
@@ -147,10 +148,29 @@ public class LocaleConfigTypeItemProvider
 	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((LocaleConfigType)object).getId();
+		String label = null;
+		
+		final StringBuffer buf = new StringBuffer();
+		final LocaleConfigType l = (LocaleConfigType)object;
+		
+		if (l.getDefaultLocale() != null)
+			buf.append(l.getDefaultLocale().getTextContent());
+
+		for (final Object locObj : l.getSupportedLocale()) {
+			final SupportedLocaleType loc = (SupportedLocaleType)locObj;
+			if (loc.getTextContent() != null) {
+				if (buf.toString() != null) {
+					buf.append(',');
+				}
+				buf.append(loc.getTextContent());
+			}
+		}
+		label = buf.toString();
+		
 		return label == null || label.length() == 0 ?
-			getString("_UI_LocaleConfigType_type") : //$NON-NLS-1$
-			getString("_UI_LocaleConfigType_type") + " " + label;  //$NON-NLS-1$//$NON-NLS-2$
+				getString("_UI_LocaleConfigType_type")  //$NON-NLS-1$
+				: label;
+
 	}
 
     /**

@@ -134,13 +134,12 @@ public class RenderKitFactoryTypeItemProvider extends ItemProviderAdapter
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((RenderKitFactoryType)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_RenderKitFactoryType_type") :
-			getString("_UI_RenderKitFactoryType_type") + " " + label;
+		String label = ((RenderKitFactoryType) object).getTextContent();
+		return label == null || label.length() == 0 ? getString("_UI_RenderKitFactoryType_type")
+				: label;
 	}
 
     /**
