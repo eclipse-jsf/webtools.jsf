@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
+ * Copyright (c) 2001, 2010 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,57 +14,53 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jst.jsf.facesconfig.emf.ClientBehaviorRendererClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-import org.eclipse.jst.jsf.facesconfig.emf.RenderKitClassType;
 
 /**
- * Validates the renderkit
+ * ClientBehaviorRenderer validation
+ *
  */
-public class RenderKitValidationVisitor extends EObjectValidationVisitor 
-{
+public class ClientBehaviorRendererValidationVisitor extends EObjectValidationVisitor {
 
     /**
      * @param version
      */
-    public RenderKitValidationVisitor(String version) 
+    public ClientBehaviorRendererValidationVisitor(String version)
     {
-        super(FacesConfigPackage.eINSTANCE.getFacesConfigType_RenderKit()
-                ,version);
+        super(FacesConfigPackage.eINSTANCE.getRenderKitType_ClientBehaviorRenderer(),
+                version);
     }
 
-    protected void doValidate(EObject object, List messages, IFile file) 
-    {
-        // nothing to do 
+    protected void doValidate(EObject object, List messages, IFile file) {
+        // nothing to do
     }
 
-    protected EObjectValidationVisitor[] getChildNodeValidators()
-    {
+    protected EObjectValidationVisitor[] getChildNodeValidators() {
         return new EObjectValidationVisitor[]
         {
-            new RenderKitClassValidationVisitor(getVersion()),
-            new RendererValidationVisitor(getVersion()),
-            new ClientBehaviorRendererValidationVisitor(getVersion())
+            new ClientBehaviorRendererClassValidationVisitor(getVersion())
         };
     }
 
-    private static class RenderKitClassValidationVisitor extends ClassNameEObjectValidationVisitor
+    private static class ClientBehaviorRendererClassValidationVisitor extends ClassNameEObjectValidationVisitor
     {
         /**
          * @param version
          */
-        public RenderKitClassValidationVisitor(String version) 
+        public ClientBehaviorRendererClassValidationVisitor(String version) 
         {
-            super(FacesConfigPackage.eINSTANCE.getRenderKitType_RenderKitClass()
+            super(FacesConfigPackage.eINSTANCE.getClientBehaviorRendererType_ClientBehaviorRendererClass()
                     , version);
         }
 
         protected String getFullyQualifiedName(EObject eobj) 
         {
-            return ((RenderKitClassType)eobj).getTextContent();
+            return ((ClientBehaviorRendererClassType)eobj).getTextContent();
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.render.RenderKit"; //$NON-NLS-1$
+            return "javax.faces.render.ClientBehaviorRenderer"; //$NON-NLS-1$
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {

@@ -47,6 +47,7 @@ public class FacesConfigValidator extends EObjectValidationVisitor
             , new ConverterValidationVisitor(getVersion())
             , new ManagedBeanValidationVisitor(getVersion())
             , new RenderKitValidationVisitor(getVersion())
+            , new BehaviorValidationVisitor(getVersion())
         };
     }
 

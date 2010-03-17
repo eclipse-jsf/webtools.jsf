@@ -57,7 +57,11 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             new PropertyResolverValidationVisitor(getVersion()),
             new VariableResolverValidationVisitor(getVersion()),
             new ELResolverValidationVisitor(getVersion()),
-            new LocaleConfigValidationVisitor(getVersion())
+            new LocaleConfigValidationVisitor(getVersion()),
+//            new PartialTraversalValidationVisitor(getVersion()),
+            new ResourceHandlerValidationVisitor(getVersion()),
+            new SystemEventListenerTypeValidationVisitor(getVersion()),
+            new DefaultValidatorsValidationVisitor(getVersion())
         };
     }
     
@@ -295,5 +299,100 @@ public class ApplicationValidationVisitor extends EObjectValidationVisitor
             return _instanceOf;
         }
     }
+    
+//    private static class PartialTraversalValidationVisitor extends ApplicationClassNameBasedValidationVisitor
+//    {
+//    	PartialTraversalValidationVisitor(final String version)
+//        {
+//            super(FacesConfigPackage.eINSTANCE.getApplicationType_PartialTraversal(),
+//                    version,"javax.faces.application.PartialTraversal", true); //$NON-NLS-1$
+//        }
+//    }
+    
+  private static class ResourceHandlerValidationVisitor extends ApplicationClassNameBasedValidationVisitor
+  {
+	  ResourceHandlerValidationVisitor(final String version)
+      {
+          super(FacesConfigPackage.eINSTANCE.getApplicationType_ResourceHandler(),
+                  version,"javax.faces.application.ResourceHandler", true); //$NON-NLS-1$
+      }
+  }
+    
+//  private static class PartialTraversalValidationVisitor extends ApplicationClassNameBasedValidationVisitor
+//  {
+//  	PartialTraversalValidationVisitor(final String version)
+//      {
+//          super(FacesConfigPackage.eINSTANCE.getApplicationType_PartialTraversal(),
+//                  version,"javax.faces.application.PartialTraversal", true); //$NON-NLS-1$
+//      }
+//  }
+    
+  private static class SystemEventListenerTypeValidationVisitor extends EObjectValidationVisitor
+  {
+	  SystemEventListenerTypeValidationVisitor(final String version)
+      {
+          super(FacesConfigPackage.eINSTANCE.getApplicationType_SystemEventListener(),
+                  version);
+      }
 
+	@Override
+	protected void doValidate(final EObject eObject, final List messages, final IFile file) {
+		//validation takes place with childNodeValidators
+	}
+
+	@Override
+	protected EObjectValidationVisitor[] getChildNodeValidators() {		 
+        return new EObjectValidationVisitor[]{
+    		new SystemEventListenerValidationVisitor(getVersion()),
+    		new SystemEventListenerClassValidationVisitor(getVersion()),
+    		new SystemEventListenerSourceClassValidationVisitor(getVersion())
+        };
+	}
+  }
+  private static class DefaultValidatorsValidationVisitor extends EObjectValidationVisitor
+  {
+	  DefaultValidatorsValidationVisitor(final String version)
+      {
+          super(FacesConfigPackage.eINSTANCE.getApplicationType_DefaultValidators(),
+                  version);
+      }
+
+	@Override
+	protected void doValidate(final EObject eObject, final List messages, final IFile file) {
+		//do nothing here... we should validate the ValidateIDType below 		
+	}
+
+	@Override
+	protected EObjectValidationVisitor[] getChildNodeValidators() {
+        //TODO - validate the ValidateIDTypes
+		return NO_CHILDREN;
+	}
+  }
+  
+  private static class SystemEventListenerValidationVisitor extends ApplicationClassNameBasedValidationVisitor {
+
+	  SystemEventListenerValidationVisitor(final String version)
+      {
+          super(FacesConfigPackage.eINSTANCE.getSystemEventListenerType_SystemEventListenerClass(),
+                  version,"javax.faces.event.SystemEventListener", true); //$NON-NLS-1$
+      }	  
+  }
+  
+  private static class SystemEventListenerClassValidationVisitor extends ApplicationClassNameBasedValidationVisitor {
+
+	  SystemEventListenerClassValidationVisitor(final String version)
+      {
+          super(FacesConfigPackage.eINSTANCE.getSystemEventListenerType_SystemEventClass(),
+                  version,"javax.faces.event.SystemEvent", true); //$NON-NLS-1$
+      }	  
+  }
+  
+  private static class SystemEventListenerSourceClassValidationVisitor extends ApplicationClassNameBasedValidationVisitor {
+
+	  SystemEventListenerSourceClassValidationVisitor(final String version)
+      {
+          super(FacesConfigPackage.eINSTANCE.getSystemEventListenerType_SourceClass(),
+                  version,"java.lang.Object", true); //$NON-NLS-1$
+      }	  
+  }
 }
