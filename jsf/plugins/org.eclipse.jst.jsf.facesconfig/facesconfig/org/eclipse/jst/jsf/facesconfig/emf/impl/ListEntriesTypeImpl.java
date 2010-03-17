@@ -47,287 +47,287 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValueType;
  */
 public class ListEntriesTypeImpl extends EObjectImpl implements ListEntriesType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * The cached value of the '{@link #getValueClass() <em>Value Class</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValueClass() <em>Value Class</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getValueClass()
-     * @generated
-     * @ordered
-     */
-	protected ValueClassType valueClass = null;
+	 * @see #getValueClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected ValueClassType valueClass;
 
     /**
-     * The cached value of the '{@link #getNullValue() <em>Null Value</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNullValue() <em>Null Value</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getNullValue()
-     * @generated
-     * @ordered
-     */
-	protected EList nullValue = null;
+	 * @see #getNullValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList nullValue;
 
     /**
-     * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getValue()
-     * @generated
-     * @ordered
-     */
-	protected EList value = null;
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList value;
 
     /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String ID_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
 	protected String id = ID_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected ListEntriesTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.LIST_ENTRIES_TYPE;
-    }
+		return FacesConfigPackage.Literals.LIST_ENTRIES_TYPE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ValueClassType getValueClass() {
-        return valueClass;
-    }
+		return valueClass;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * @param newValueClass 
      * @param msgs 
      * @return the notification chain 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetValueClass(ValueClassType newValueClass, NotificationChain msgs) {
-        ValueClassType oldValueClass = valueClass;
-        valueClass = newValueClass;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, oldValueClass, newValueClass);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		ValueClassType oldValueClass = valueClass;
+		valueClass = newValueClass;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, oldValueClass, newValueClass);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setValueClass(ValueClassType newValueClass) {
-        if (newValueClass != valueClass) {
-            NotificationChain msgs = null;
-            if (valueClass != null)
-                msgs = ((InternalEObject)valueClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
-            if (newValueClass != null)
-                msgs = ((InternalEObject)newValueClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
-            msgs = basicSetValueClass(newValueClass, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, newValueClass, newValueClass));
-    }
+		if (newValueClass != valueClass) {
+			NotificationChain msgs = null;
+			if (valueClass != null)
+				msgs = ((InternalEObject)valueClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
+			if (newValueClass != null)
+				msgs = ((InternalEObject)newValueClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, null, msgs);
+			msgs = basicSetValueClass(newValueClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS, newValueClass, newValueClass));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getNullValue() {
-        if (nullValue == null) {
-            nullValue = new EObjectContainmentEList(NullValueType.class, this, FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE);
-        }
-        return nullValue;
-    }
+		if (nullValue == null) {
+			nullValue = new EObjectContainmentEList(NullValueType.class, this, FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE);
+		}
+		return nullValue;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getValue() {
-        if (value == null) {
-            value = new EObjectContainmentEList(ValueType.class, this, FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE);
-        }
-        return value;
-    }
+		if (value == null) {
+			value = new EObjectContainmentEList(ValueType.class, this, FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE);
+		}
+		return value;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getId() {
-        return id;
-    }
+		return id;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setId(String newId) {
-        String oldId = id;
-        id = newId;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.LIST_ENTRIES_TYPE__ID, oldId, id));
-    }
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.LIST_ENTRIES_TYPE__ID, oldId, id));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
-                return basicSetValueClass(null, msgs);
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
-                return ((InternalEList)getNullValue()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
-                return ((InternalEList)getValue()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
+				return basicSetValueClass(null, msgs);
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
+				return ((InternalEList)getNullValue()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
+				return ((InternalEList)getValue()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
-                return getValueClass();
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
-                return getNullValue();
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
-                return getValue();
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
-                return getId();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
+				return getValueClass();
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
+				return getNullValue();
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
+				return getValue();
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
+				return getId();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
-                setValueClass((ValueClassType)newValue);
-                return;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
-                getNullValue().clear();
-                getNullValue().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
-                getValue().clear();
-                getValue().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
-                setId((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
+				setValueClass((ValueClassType)newValue);
+				return;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
+				getNullValue().clear();
+				getNullValue().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
+				getValue().clear();
+				getValue().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
+				setId((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
-                setValueClass((ValueClassType)null);
-                return;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
-                getNullValue().clear();
-                return;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
-                getValue().clear();
-                return;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
-                setId(ID_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
+				setValueClass((ValueClassType)null);
+				return;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
+				getNullValue().clear();
+				return;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
+				getValue().clear();
+				return;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
+				setId(ID_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
-                return valueClass != null;
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
-                return nullValue != null && !nullValue.isEmpty();
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
-                return value != null && !value.isEmpty();
-            case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE_CLASS:
+				return valueClass != null;
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__NULL_VALUE:
+				return nullValue != null && !nullValue.isEmpty();
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__VALUE:
+				return value != null && !value.isEmpty();
+			case FacesConfigPackage.LIST_ENTRIES_TYPE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
 	public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (id: "); //$NON-NLS-1$
-        result.append(id);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (id: "); //$NON-NLS-1$
+		result.append(id);
+		result.append(')');
+		return result.toString();
+	}
 
 } //ListEntriesTypeImpl

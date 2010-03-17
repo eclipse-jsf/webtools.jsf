@@ -13,8 +13,6 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**
@@ -48,6 +46,7 @@ public class ManagedBeanTranslator extends Translator {
 			new MapEntriesTranslator("map-entries", facesPackage.getManagedBeanType_MapEntries()), //$NON-NLS-1$
 			new ListEntriesTranslator("list-entries", facesPackage.getManagedBeanType_ListEntries()), //$NON-NLS-1$
             new ManagedBeanExtensionTranslator("managed-bean-extension", facesPackage.getManagedBeanType_ManagedBeanExtension()), //$NON-NLS-1$
+			new Translator("eager", facesPackage.getManagedBeanType_Eager(), DOM_ATTRIBUTE), //$NON-NLS-1$
 			new Translator("id", facesPackage.getManagedBeanType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

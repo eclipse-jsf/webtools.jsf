@@ -13,8 +13,6 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**
@@ -44,6 +42,7 @@ public class RenderKitTranslator extends Translator {
 				new RenderKitIdTranslator("render-kit-id", facesPackage.getRenderKitType_RenderKitId()), //$NON-NLS-1$
 				new RenderKitClassTranslator("render-kit-class", facesPackage.getRenderKitType_RenderKitClass()), //$NON-NLS-1$
 				new RendererTranslator("renderer", facesPackage.getRenderKitType_Renderer()), //$NON-NLS-1$
+				new ClientBehaviorRendererTranslator("client-behavior-renderer", facesPackage.getRenderKitType_ClientBehaviorRenderer()), //$NON-NLS-1$
                 new RenderKitExtensionTranslator("render-kit-extension", facesPackage.getRenderKitType_RenderKitExtension()), //$NON-NLS-1$
 				new Translator("id", facesPackage.getRenderKitType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};

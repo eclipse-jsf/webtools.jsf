@@ -30,7 +30,6 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
-
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
@@ -53,279 +52,207 @@ public class PropertyTypeItemProvider
 		IItemPropertySource, 
 		ITableItemLabelProvider{
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * This constructs an instance from a factory and a notifier.
-     * <!-- begin-user-doc -->
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
      * @param adapterFactory 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public PropertyTypeItemProvider(AdapterFactory adapterFactory) {
-        super(adapterFactory);
-    }
+		super(adapterFactory);
+	}
 
     /**
-     * This returns the property descriptors for the adapted class.
-     * <!-- begin-user-doc -->
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public List getPropertyDescriptors(Object object) {
-        if (itemPropertyDescriptors == null) {
-            super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-            addPropertyNamePropertyDescriptor(object);
-            addPropertyClassPropertyDescriptor(object);
-            addDefaultValuePropertyDescriptor(object);
-            addSuggestedValuePropertyDescriptor(object);
-            addIdPropertyDescriptor(object);
-        }
-        return itemPropertyDescriptors;
-    }
+			addIdPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
     /**
-     * This adds a property descriptor for the Property Name feature.
-     * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
-	protected void addPropertyNamePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_PropertyType_propertyName_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_propertyName_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_NAME,
-                 true,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Property Class feature.
-     * <!-- begin-user-doc -->
-     * @param object 
-	 * <!-- end-user-doc -->
-     * @generated
-     */
-	protected void addPropertyClassPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_PropertyType_propertyClass_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_propertyClass_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_CLASS,
-                 true,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Default Value feature.
-     * <!-- begin-user-doc -->
-     * @param object 
-	 * <!-- end-user-doc -->
-     * @generated
-     */
-	protected void addDefaultValuePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_PropertyType_defaultValue_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_defaultValue_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.PROPERTY_TYPE__DEFAULT_VALUE,
-                 true,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Suggested Value feature.
-     * <!-- begin-user-doc -->
-     * @param object 
-	 * <!-- end-user-doc -->
-     * @generated
-     */
-	protected void addSuggestedValuePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_PropertyType_suggestedValue_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_suggestedValue_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.PROPERTY_TYPE__SUGGESTED_VALUE,
-                 true,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc -->
-     * @param object 
-	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
 	protected void addIdPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_PropertyType_id_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_id_feature", "_UI_PropertyType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.PROPERTY_TYPE__ID,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyType_id_feature"), //$NON-NLS-1$
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyType_id_feature", "_UI_PropertyType_type"),  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+				 FacesConfigPackage.Literals.PROPERTY_TYPE__ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
     /**
-     * This specifies how to implement {@link #getChildren(Object)} and is used to deduce an appropriate feature for an
-     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand(Object, org.eclipse.emf.edit.domain.EditingDomain, Class, org.eclipse.emf.edit.command.CommandParameter)}.
-     * <!-- begin-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Collection getChildrenFeatures(Object object) {
-        if (childrenFeatures == null) {
-            super.getChildrenFeatures(object);
-            childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__DESCRIPTION);
-            childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__DISPLAY_NAME);
-            childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__ICON);
-            childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_EXTENSION);
-        }
-        return childrenFeatures;
-    }
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__DESCRIPTION);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__DISPLAY_NAME);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__ICON);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_NAME);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_CLASS);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__DEFAULT_VALUE);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__SUGGESTED_VALUE);
+			childrenFeatures.add(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_EXTENSION);
+		}
+		return childrenFeatures;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-        // Check the type of the specified child object and return the proper feature to use for
-        // adding (see {@link AddCommand}) it as a child.
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-        return super.getChildFeature(object, child);
-    }
+		return super.getChildFeature(object, child);
+	}
 
     /**
-     * This returns PropertyType.gif.
-     * <!-- begin-user-doc -->
+	 * This returns PropertyType.gif.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyType")); //$NON-NLS-1$
-    }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyType")); //$NON-NLS-1$
+	}
 
     /**
-     * This returns the label text for the adapted class.
-     * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
 	public String getText(Object object) {
-        String label = ((PropertyType)object).getId();
-        return label == null || label.length() == 0 ?
-            getString("_UI_PropertyType_type") : //$NON-NLS-1$
-            getString("_UI_PropertyType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		String label = ((PropertyType)object).getId();
+		return label == null || label.length() == 0 ?
+			getString("_UI_PropertyType_type") : //$NON-NLS-1$
+			getString("_UI_PropertyType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+	}
 
     /**
-     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
-     * <!-- begin-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void notifyChanged(Notification notification) {
-        updateChildren(notification);
+		updateChildren(notification);
 
-        switch (notification.getFeatureID(PropertyType.class)) {
-            case FacesConfigPackage.PROPERTY_TYPE__PROPERTY_NAME:
-            case FacesConfigPackage.PROPERTY_TYPE__PROPERTY_CLASS:
-            case FacesConfigPackage.PROPERTY_TYPE__DEFAULT_VALUE:
-            case FacesConfigPackage.PROPERTY_TYPE__SUGGESTED_VALUE:
-            case FacesConfigPackage.PROPERTY_TYPE__ID:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-                return;
-            case FacesConfigPackage.PROPERTY_TYPE__DESCRIPTION:
-            case FacesConfigPackage.PROPERTY_TYPE__DISPLAY_NAME:
-            case FacesConfigPackage.PROPERTY_TYPE__ICON:
-            case FacesConfigPackage.PROPERTY_TYPE__PROPERTY_EXTENSION:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-                return;
-        }
-        super.notifyChanged(notification);
-    }
+		switch (notification.getFeatureID(PropertyType.class)) {
+			case FacesConfigPackage.PROPERTY_TYPE__ID:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case FacesConfigPackage.PROPERTY_TYPE__DESCRIPTION:
+			case FacesConfigPackage.PROPERTY_TYPE__DISPLAY_NAME:
+			case FacesConfigPackage.PROPERTY_TYPE__ICON:
+			case FacesConfigPackage.PROPERTY_TYPE__PROPERTY_NAME:
+			case FacesConfigPackage.PROPERTY_TYPE__PROPERTY_CLASS:
+			case FacesConfigPackage.PROPERTY_TYPE__DEFAULT_VALUE:
+			case FacesConfigPackage.PROPERTY_TYPE__SUGGESTED_VALUE:
+			case FacesConfigPackage.PROPERTY_TYPE__PROPERTY_EXTENSION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
+		super.notifyChanged(notification);
+	}
 
     /**
-     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing all of the children that can be created under this object.
-     * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
-        super.collectNewChildDescriptors(newChildDescriptors, object);
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-        newChildDescriptors.add
-            (createChildParameter
-                (FacesConfigPackage.Literals.PROPERTY_TYPE__DESCRIPTION,
-                 FacesConfigFactory.eINSTANCE.createDescriptionType()));
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__DESCRIPTION,
+				 FacesConfigFactory.eINSTANCE.createDescriptionType()));
 
-        newChildDescriptors.add
-            (createChildParameter
-                (FacesConfigPackage.Literals.PROPERTY_TYPE__DISPLAY_NAME,
-                 FacesConfigFactory.eINSTANCE.createDisplayNameType()));
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__DISPLAY_NAME,
+				 FacesConfigFactory.eINSTANCE.createDisplayNameType()));
 
-        newChildDescriptors.add
-            (createChildParameter
-                (FacesConfigPackage.Literals.PROPERTY_TYPE__ICON,
-                 FacesConfigFactory.eINSTANCE.createIconType()));
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__ICON,
+				 FacesConfigFactory.eINSTANCE.createIconType()));
 
-        newChildDescriptors.add
-            (createChildParameter
-                (FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_EXTENSION,
-                 FacesConfigFactory.eINSTANCE.createPropertyExtensionType()));
-    }
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_NAME,
+				 FacesConfigFactory.eINSTANCE.createPropertyNameType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_CLASS,
+				 FacesConfigFactory.eINSTANCE.createPropertyClassType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__DEFAULT_VALUE,
+				 FacesConfigFactory.eINSTANCE.createDefaultValueType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__SUGGESTED_VALUE,
+				 FacesConfigFactory.eINSTANCE.createSuggestedValueType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.PROPERTY_TYPE__PROPERTY_EXTENSION,
+				 FacesConfigFactory.eINSTANCE.createPropertyExtensionType()));
+	}
 
     /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ResourceLocator getResourceLocator() {
-        return FacesConfigPlugin.INSTANCE;
-    }
+		return FacesConfigPlugin.INSTANCE;
+	}
 
 	public String getColumnText(Object object, int columnIndex) {
 		PropertyType property = (PropertyType) object;

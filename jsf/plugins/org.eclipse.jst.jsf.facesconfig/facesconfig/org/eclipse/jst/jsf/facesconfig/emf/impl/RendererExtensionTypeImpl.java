@@ -27,29 +27,29 @@ import org.eclipse.jst.jsf.facesconfig.emf.RendererExtensionType;
  */
 public class RendererExtensionTypeImpl extends ExtensionTypeImpl implements RendererExtensionType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected RendererExtensionTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.RENDERER_EXTENSION_TYPE;
-    }
+		return FacesConfigPackage.Literals.RENDERER_EXTENSION_TYPE;
+	}
 
 } //RendererExtensionTypeImpl

@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.emf;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -36,94 +35,94 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DynamicElement extends EObject {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * Returns the value of the '<em><b>Child Nodes</b></em>' containment reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Child Nodes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Child Nodes</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Child Nodes</em>' containment reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_ChildNodes()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DynamicElement" containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Child Nodes</em>' containment reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_ChildNodes()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DynamicElement" containment="true"
+	 * @generated
+	 */
     EList getChildNodes();
 
     /**
-     * Returns the value of the '<em><b>Attributes</b></em>' reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Attributes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Attributes</em>' attribute list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Attributes</em>' reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_Attributes()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute"
-     * @generated
-     */
+	 * @return the value of the '<em>Attributes</em>' reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_Attributes()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DynamicAttribute"
+	 * @generated
+	 */
     EList getAttributes();
 
     /**
-     * Returns the value of the '<em><b>Text Content</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Text Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Text Content</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Text Content</em>' attribute.
-     * @see #setTextContent(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_TextContent()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Text Content</em>' attribute.
+	 * @see #setTextContent(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_TextContent()
+	 * @model
+	 * @generated
+	 */
     String getTextContent();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement#getTextContent <em>Text Content</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement#getTextContent <em>Text Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Text Content</em>' attribute.
-     * @see #getTextContent()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Text Content</em>' attribute.
+	 * @see #getTextContent()
+	 * @generated
+	 */
     void setTextContent(String value);
 
     /**
-     * Returns the value of the '<em><b>Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Name</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Name</em>' attribute.
-     * @see #setName(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_Name()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDynamicElement_Name()
+	 * @model
+	 * @generated
+	 */
     String getName();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement#getName <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Name</em>' attribute.
-     * @see #getName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
     void setName(String value);
 
 } // DynamicElement

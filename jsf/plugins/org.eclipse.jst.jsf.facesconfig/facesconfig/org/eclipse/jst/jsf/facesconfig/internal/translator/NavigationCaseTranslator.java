@@ -13,8 +13,6 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**
@@ -43,6 +41,7 @@ public class NavigationCaseTranslator extends Translator {
 			new IconTranslator("icon", facesPackage.getNavigationCaseType_Icon()), //$NON-NLS-1$
 			new FromActionTranslator("from-action", facesPackage.getNavigationCaseType_FromAction()), //$NON-NLS-1$
 			new FromOutcomeTranslator("from-outcome", facesPackage.getNavigationCaseType_FromOutcome()), //$NON-NLS-1$
+			new IfTranslator("if", facesPackage.getNavigationCaseType_If()), //$NON-NLS-1$
 			new ToViewIdTranslator("to-view-id", facesPackage.getNavigationCaseType_ToViewId()), //$NON-NLS-1$
 			new RedirectTranslator("redirect", facesPackage.getNavigationCaseType_Redirect()), //$NON-NLS-1$
 			new Translator("id", facesPackage.getNavigationCaseType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$

@@ -45,270 +45,270 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
  */
 public class DynamicElementImpl extends EObjectImpl implements DynamicElement {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * The cached value of the '{@link #getChildNodes() <em>Child Nodes</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getChildNodes() <em>Child Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getChildNodes()
-     * @generated
-     * @ordered
-     */
-    protected EList childNodes = null;
+	 * @see #getChildNodes()
+	 * @generated
+	 * @ordered
+	 */
+    protected EList childNodes;
 
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
     protected String name = NAME_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getAttributes()
-     * @generated
-     * @ordered
-     */
-    protected EList attributes = null;
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+    protected EList attributes;
 
     /**
-     * The default value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTextContent()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTextContent()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String TEXT_CONTENT_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTextContent() <em>Text Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTextContent()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTextContent()
+	 * @generated
+	 * @ordered
+	 */
     protected String textContent = TEXT_CONTENT_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected DynamicElementImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.DYNAMIC_ELEMENT;
-    }
+		return FacesConfigPackage.Literals.DYNAMIC_ELEMENT;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList getChildNodes() {
-        if (childNodes == null) {
-            childNodes = new EObjectContainmentEList(DynamicElement.class, this, FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES);
-        }
-        return childNodes;
-    }
+		if (childNodes == null) {
+			childNodes = new EObjectContainmentEList(DynamicElement.class, this, FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES);
+		}
+		return childNodes;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList getAttributes() {
-        if (attributes == null) {
-            attributes = new EObjectResolvingEList(DynamicAttribute.class, this, FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES);
-        }
-        return attributes;
-    }
+		if (attributes == null) {
+			attributes = new EObjectResolvingEList(DynamicAttribute.class, this, FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES);
+		}
+		return attributes;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getTextContent() {
-        return textContent;
-    }
+		return textContent;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setTextContent(String newTextContent) {
-        String oldTextContent = textContent;
-        textContent = newTextContent;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT, oldTextContent, textContent));
-    }
+		String oldTextContent = textContent;
+		textContent = newTextContent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT, oldTextContent, textContent));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getName() {
-        return name;
-    }
+		return name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setName(String newName) {
-        String oldName = name;
-        name = newName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.DYNAMIC_ELEMENT__NAME, oldName, name));
-    }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.DYNAMIC_ELEMENT__NAME, oldName, name));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
-                return ((InternalEList)getChildNodes()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
+				return ((InternalEList)getChildNodes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
-                return getChildNodes();
-            case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
-                return getName();
-            case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
-                return getAttributes();
-            case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
-                return getTextContent();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
+				return getChildNodes();
+			case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
+				return getName();
+			case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
+				return getAttributes();
+			case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
+				return getTextContent();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
-                getChildNodes().clear();
-                getChildNodes().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
-                setName((String)newValue);
-                return;
-            case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
-                getAttributes().clear();
-                getAttributes().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
-                setTextContent((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
+				getChildNodes().clear();
+				getChildNodes().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
+				setName((String)newValue);
+				return;
+			case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
+				setTextContent((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
-                getChildNodes().clear();
-                return;
-            case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
-                setName(NAME_EDEFAULT);
-                return;
-            case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
-                getAttributes().clear();
-                return;
-            case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
-                setTextContent(TEXT_CONTENT_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
+				getChildNodes().clear();
+				return;
+			case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
+				getAttributes().clear();
+				return;
+			case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
+				setTextContent(TEXT_CONTENT_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
-                return childNodes != null && !childNodes.isEmpty();
-            case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
-                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
-                return attributes != null && !attributes.isEmpty();
-            case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
-                return TEXT_CONTENT_EDEFAULT == null ? textContent != null : !TEXT_CONTENT_EDEFAULT.equals(textContent);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.DYNAMIC_ELEMENT__CHILD_NODES:
+				return childNodes != null && !childNodes.isEmpty();
+			case FacesConfigPackage.DYNAMIC_ELEMENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case FacesConfigPackage.DYNAMIC_ELEMENT__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
+			case FacesConfigPackage.DYNAMIC_ELEMENT__TEXT_CONTENT:
+				return TEXT_CONTENT_EDEFAULT == null ? textContent != null : !TEXT_CONTENT_EDEFAULT.equals(textContent);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: "); //$NON-NLS-1$
-        result.append(name);
-        result.append(", textContent: "); //$NON-NLS-1$
-        result.append(textContent);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");//$NON-NLS-1$
+		result.append(name);
+		result.append(", textContent: ");//$NON-NLS-1$
+		result.append(textContent);
+		result.append(')');
+		return result.toString();
+	}
 
 } //DynamicElementImpl

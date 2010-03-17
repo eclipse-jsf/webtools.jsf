@@ -27,29 +27,29 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacetExtensionType;
  */
 public class FacetExtensionTypeImpl extends ExtensionTypeImpl implements FacetExtensionType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected FacetExtensionTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.FACET_EXTENSION_TYPE;
-    }
+		return FacesConfigPackage.Literals.FACET_EXTENSION_TYPE;
+	}
 
 } //FacetExtensionTypeImpl

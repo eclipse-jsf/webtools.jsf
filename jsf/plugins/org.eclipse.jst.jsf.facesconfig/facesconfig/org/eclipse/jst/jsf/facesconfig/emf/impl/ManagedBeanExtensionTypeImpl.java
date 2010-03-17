@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.emf.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType;
 
@@ -27,29 +26,29 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType;
  */
 public class ManagedBeanExtensionTypeImpl extends ExtensionTypeImpl implements ManagedBeanExtensionType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected ManagedBeanExtensionTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.MANAGED_BEAN_EXTENSION_TYPE;
-    }
+		return FacesConfigPackage.Literals.MANAGED_BEAN_EXTENSION_TYPE;
+	}
 
 } //ManagedBeanExtensionTypeImpl

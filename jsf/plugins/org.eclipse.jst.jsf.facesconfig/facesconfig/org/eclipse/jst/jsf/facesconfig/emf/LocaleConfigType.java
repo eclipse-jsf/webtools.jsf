@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.emf;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -35,81 +34,81 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface LocaleConfigType extends EObject {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * Returns the value of the '<em><b>Default Locale</b></em>' containment reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Default Locale</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Default Locale</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Default Locale</em>' containment reference.
-     * @see #setDefaultLocale(DefaultLocaleType)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getLocaleConfigType_DefaultLocale()
-     * @model containment="true"
-     *        extendedMetaData="kind='element' name='default-locale' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Default Locale</em>' containment reference.
+	 * @see #setDefaultLocale(DefaultLocaleType)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getLocaleConfigType_DefaultLocale()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element' name='default-locale' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	DefaultLocaleType getDefaultLocale();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType#getDefaultLocale <em>Default Locale</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType#getDefaultLocale <em>Default Locale</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Default Locale</em>' containment reference.
-     * @see #getDefaultLocale()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Default Locale</em>' containment reference.
+	 * @see #getDefaultLocale()
+	 * @generated
+	 */
 	void setDefaultLocale(DefaultLocaleType value);
 
     /**
-     * Returns the value of the '<em><b>Supported Locale</b></em>' containment reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Supported Locale</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Supported Locale</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Supported Locale</em>' containment reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getLocaleConfigType_SupportedLocale()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType" containment="true"
-     *        extendedMetaData="kind='element' name='supported-locale' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Supported Locale</em>' containment reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getLocaleConfigType_SupportedLocale()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.SupportedLocaleType" containment="true"
+	 *        extendedMetaData="kind='element' name='supported-locale' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	EList getSupportedLocale();
 
     /**
-     * Returns the value of the '<em><b>Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getLocaleConfigType_Id()
-     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getLocaleConfigType_Id()
+	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	String getId();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType#getId <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.LocaleConfigType#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
 	void setId(String value);
 
 } // LocaleConfigType

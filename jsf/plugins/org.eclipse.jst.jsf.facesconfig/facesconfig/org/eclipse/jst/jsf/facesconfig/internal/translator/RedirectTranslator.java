@@ -40,6 +40,8 @@ public class RedirectTranslator extends Translator {
 		
 		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
 		return new Translator[] {
+			new RedirectViewParamTranslator("view-param", facesPackage.getRedirectType_ViewParam()), //$NON-NLS-1$
+			new Translator("include-view-params", facesPackage.getRedirectType_IncludeViewParams(), DOM_ATTRIBUTE), //$NON-NLS-1$
 			new Translator("id", facesPackage.getRedirectType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};
 	}

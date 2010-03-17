@@ -12,8 +12,6 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**

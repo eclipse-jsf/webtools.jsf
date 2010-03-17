@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.emf;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -35,79 +34,79 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ExtensionType extends EObject {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * Returns the value of the '<em><b>Child Nodes</b></em>' reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Child Nodes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DynamicElement}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Child Nodes</em>' reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Child Nodes</em>' reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getExtensionType_ChildNodes()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DynamicElement"
-     * @generated
-     */
+	 * @return the value of the '<em>Child Nodes</em>' reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getExtensionType_ChildNodes()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DynamicElement"
+	 * @generated
+	 */
     EList getChildNodes();
 
     /**
-     * Returns the value of the '<em><b>Text Content</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Text Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Text Content</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Text Content</em>' attribute.
-     * @see #setTextContent(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getExtensionType_TextContent()
-     * @model extendedMetaData="name=':0' kind='simple'"
-     * @generated
-     */
+	 * @return the value of the '<em>Text Content</em>' attribute.
+	 * @see #setTextContent(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getExtensionType_TextContent()
+	 * @model extendedMetaData="name=':0' kind='simple'"
+	 * @generated
+	 */
     String getTextContent();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ExtensionType#getTextContent <em>Text Content</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ExtensionType#getTextContent <em>Text Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Text Content</em>' attribute.
-     * @see #getTextContent()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Text Content</em>' attribute.
+	 * @see #getTextContent()
+	 * @generated
+	 */
     void setTextContent(String value);
 
     /**
-     * Returns the value of the '<em><b>Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Id</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getExtensionType_Id()
-     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getExtensionType_Id()
+	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+	 * @generated
+	 */
     String getId();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ExtensionType#getId <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ExtensionType#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
     void setId(String value);
 
 } // ExtensionType

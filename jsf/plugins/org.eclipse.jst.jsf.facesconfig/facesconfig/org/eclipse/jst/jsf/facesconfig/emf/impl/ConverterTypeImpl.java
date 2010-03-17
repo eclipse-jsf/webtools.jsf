@@ -59,563 +59,563 @@ import org.eclipse.jst.jsf.facesconfig.emf.PropertyType;
  */
 public class ConverterTypeImpl extends EObjectImpl implements ConverterType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getDescription()
-     * @generated
-     * @ordered
-     */
-	protected EList description = null;
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList description;
 
     /**
-     * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getDisplayName()
-     * @generated
-     * @ordered
-     */
-	protected EList displayName = null;
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList displayName;
 
     /**
-     * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getIcon()
-     * @generated
-     * @ordered
-     */
-	protected EList icon = null;
+	 * @see #getIcon()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList icon;
 
     /**
-     * The cached value of the '{@link #getConverterId() <em>Converter Id</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getConverterId() <em>Converter Id</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getConverterId()
-     * @generated
-     * @ordered
-     */
-	protected ConverterIdType converterId = null;
+	 * @see #getConverterId()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConverterIdType converterId;
 
     /**
-     * The cached value of the '{@link #getConverterForClass() <em>Converter For Class</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getConverterForClass() <em>Converter For Class</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getConverterForClass()
-     * @generated
-     * @ordered
-     */
-	protected ConverterForClassType converterForClass = null;
+	 * @see #getConverterForClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConverterForClassType converterForClass;
 
     /**
-     * The cached value of the '{@link #getConverterClass() <em>Converter Class</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getConverterClass() <em>Converter Class</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getConverterClass()
-     * @generated
-     * @ordered
-     */
-	protected ConverterClassType converterClass = null;
+	 * @see #getConverterClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConverterClassType converterClass;
 
     /**
-     * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getAttribute()
-     * @generated
-     * @ordered
-     */
-	protected EList attribute = null;
+	 * @see #getAttribute()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList attribute;
 
     /**
-     * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getProperty()
-     * @generated
-     * @ordered
-     */
-	protected EList property = null;
+	 * @see #getProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList property;
 
     /**
-     * The cached value of the '{@link #getConverterExtension() <em>Converter Extension</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getConverterExtension() <em>Converter Extension</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getConverterExtension()
-     * @generated
-     * @ordered
-     */
-    protected EList converterExtension = null;
+	 * @see #getConverterExtension()
+	 * @generated
+	 * @ordered
+	 */
+    protected EList converterExtension;
 
     /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String ID_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
 	protected String id = ID_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected ConverterTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.CONVERTER_TYPE;
-    }
+		return FacesConfigPackage.Literals.CONVERTER_TYPE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getDescription() {
-        if (description == null) {
-            description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION);
-        }
-        return description;
-    }
+		if (description == null) {
+			description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION);
+		}
+		return description;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getDisplayName() {
-        if (displayName == null) {
-            displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME);
-        }
-        return displayName;
-    }
+		if (displayName == null) {
+			displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME);
+		}
+		return displayName;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getIcon() {
-        if (icon == null) {
-            icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.CONVERTER_TYPE__ICON);
-        }
-        return icon;
-    }
+		if (icon == null) {
+			icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.CONVERTER_TYPE__ICON);
+		}
+		return icon;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ConverterIdType getConverterId() {
-        return converterId;
-    }
+		return converterId;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * @param newConverterId 
      * @param msgs 
      * @return the notification chain 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetConverterId(ConverterIdType newConverterId, NotificationChain msgs) {
-        ConverterIdType oldConverterId = converterId;
-        converterId = newConverterId;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, oldConverterId, newConverterId);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		ConverterIdType oldConverterId = converterId;
+		converterId = newConverterId;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, oldConverterId, newConverterId);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setConverterId(ConverterIdType newConverterId) {
-        if (newConverterId != converterId) {
-            NotificationChain msgs = null;
-            if (converterId != null)
-                msgs = ((InternalEObject)converterId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, null, msgs);
-            if (newConverterId != null)
-                msgs = ((InternalEObject)newConverterId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, null, msgs);
-            msgs = basicSetConverterId(newConverterId, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, newConverterId, newConverterId));
-    }
+		if (newConverterId != converterId) {
+			NotificationChain msgs = null;
+			if (converterId != null)
+				msgs = ((InternalEObject)converterId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, null, msgs);
+			if (newConverterId != null)
+				msgs = ((InternalEObject)newConverterId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, null, msgs);
+			msgs = basicSetConverterId(newConverterId, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID, newConverterId, newConverterId));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ConverterForClassType getConverterForClass() {
-        return converterForClass;
-    }
+		return converterForClass;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * @param newConverterForClass 
      * @param msgs 
      * @return the notification chain 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetConverterForClass(ConverterForClassType newConverterForClass, NotificationChain msgs) {
-        ConverterForClassType oldConverterForClass = converterForClass;
-        converterForClass = newConverterForClass;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, oldConverterForClass, newConverterForClass);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		ConverterForClassType oldConverterForClass = converterForClass;
+		converterForClass = newConverterForClass;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, oldConverterForClass, newConverterForClass);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setConverterForClass(ConverterForClassType newConverterForClass) {
-        if (newConverterForClass != converterForClass) {
-            NotificationChain msgs = null;
-            if (converterForClass != null)
-                msgs = ((InternalEObject)converterForClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, null, msgs);
-            if (newConverterForClass != null)
-                msgs = ((InternalEObject)newConverterForClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, null, msgs);
-            msgs = basicSetConverterForClass(newConverterForClass, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, newConverterForClass, newConverterForClass));
-    }
+		if (newConverterForClass != converterForClass) {
+			NotificationChain msgs = null;
+			if (converterForClass != null)
+				msgs = ((InternalEObject)converterForClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, null, msgs);
+			if (newConverterForClass != null)
+				msgs = ((InternalEObject)newConverterForClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, null, msgs);
+			msgs = basicSetConverterForClass(newConverterForClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS, newConverterForClass, newConverterForClass));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ConverterClassType getConverterClass() {
-        return converterClass;
-    }
+		return converterClass;
+	}
 
     /**
-     * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
      * @param newConverterClass 
      * @param msgs 
-     * @return the notification chain 
-     * @generated
-     */
+     * @return  
+     * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain basicSetConverterClass(ConverterClassType newConverterClass, NotificationChain msgs) {
-        ConverterClassType oldConverterClass = converterClass;
-        converterClass = newConverterClass;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, oldConverterClass, newConverterClass);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		ConverterClassType oldConverterClass = converterClass;
+		converterClass = newConverterClass;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, oldConverterClass, newConverterClass);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setConverterClass(ConverterClassType newConverterClass) {
-        if (newConverterClass != converterClass) {
-            NotificationChain msgs = null;
-            if (converterClass != null)
-                msgs = ((InternalEObject)converterClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, null, msgs);
-            if (newConverterClass != null)
-                msgs = ((InternalEObject)newConverterClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, null, msgs);
-            msgs = basicSetConverterClass(newConverterClass, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, newConverterClass, newConverterClass));
-    }
+		if (newConverterClass != converterClass) {
+			NotificationChain msgs = null;
+			if (converterClass != null)
+				msgs = ((InternalEObject)converterClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, null, msgs);
+			if (newConverterClass != null)
+				msgs = ((InternalEObject)newConverterClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, null, msgs);
+			msgs = basicSetConverterClass(newConverterClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS, newConverterClass, newConverterClass));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getAttribute() {
-        if (attribute == null) {
-            attribute = new EObjectContainmentEList(AttributeType.class, this, FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE);
-        }
-        return attribute;
-    }
+		if (attribute == null) {
+			attribute = new EObjectContainmentEList(AttributeType.class, this, FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE);
+		}
+		return attribute;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getProperty() {
-        if (property == null) {
-            property = new EObjectContainmentEList(PropertyType.class, this, FacesConfigPackage.CONVERTER_TYPE__PROPERTY);
-        }
-        return property;
-    }
+		if (property == null) {
+			property = new EObjectContainmentEList(PropertyType.class, this, FacesConfigPackage.CONVERTER_TYPE__PROPERTY);
+		}
+		return property;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList getConverterExtension() {
-        if (converterExtension == null) {
-            converterExtension = new EObjectContainmentEList(ConverterExtensionType.class, this, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION);
-        }
-        return converterExtension;
-    }
+		if (converterExtension == null) {
+			converterExtension = new EObjectContainmentEList(ConverterExtensionType.class, this, FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION);
+		}
+		return converterExtension;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getId() {
-        return id;
-    }
+		return id;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setId(String newId) {
-        String oldId = id;
-        id = newId;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__ID, oldId, id));
-    }
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.CONVERTER_TYPE__ID, oldId, id));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
-                return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
-                return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__ICON:
-                return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
-                return basicSetConverterId(null, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
-                return basicSetConverterForClass(null, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
-                return basicSetConverterClass(null, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
-                return ((InternalEList)getAttribute()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
-                return ((InternalEList)getProperty()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
-                return ((InternalEList)getConverterExtension()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
+				return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
+				return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__ICON:
+				return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
+				return basicSetConverterId(null, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
+				return basicSetConverterForClass(null, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
+				return basicSetConverterClass(null, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
+				return ((InternalEList)getAttribute()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
+				return ((InternalEList)getProperty()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
+				return ((InternalEList)getConverterExtension()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
-                return getDescription();
-            case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
-                return getDisplayName();
-            case FacesConfigPackage.CONVERTER_TYPE__ICON:
-                return getIcon();
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
-                return getConverterId();
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
-                return getConverterForClass();
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
-                return getConverterClass();
-            case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
-                return getAttribute();
-            case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
-                return getProperty();
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
-                return getConverterExtension();
-            case FacesConfigPackage.CONVERTER_TYPE__ID:
-                return getId();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
+				return getDescription();
+			case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
+				return getDisplayName();
+			case FacesConfigPackage.CONVERTER_TYPE__ICON:
+				return getIcon();
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
+				return getConverterId();
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
+				return getConverterForClass();
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
+				return getConverterClass();
+			case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
+				return getAttribute();
+			case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
+				return getProperty();
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
+				return getConverterExtension();
+			case FacesConfigPackage.CONVERTER_TYPE__ID:
+				return getId();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
-                getDescription().clear();
-                getDescription().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
-                getDisplayName().clear();
-                getDisplayName().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__ICON:
-                getIcon().clear();
-                getIcon().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
-                setConverterId((ConverterIdType)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
-                setConverterForClass((ConverterForClassType)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
-                setConverterClass((ConverterClassType)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
-                getAttribute().clear();
-                getAttribute().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
-                getProperty().clear();
-                getProperty().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
-                getConverterExtension().clear();
-                getConverterExtension().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__ID:
-                setId((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
+				getDescription().clear();
+				getDescription().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
+				getDisplayName().clear();
+				getDisplayName().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__ICON:
+				getIcon().clear();
+				getIcon().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
+				setConverterId((ConverterIdType)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
+				setConverterForClass((ConverterForClassType)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
+				setConverterClass((ConverterClassType)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
+				getAttribute().clear();
+				getAttribute().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
+				getProperty().clear();
+				getProperty().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
+				getConverterExtension().clear();
+				getConverterExtension().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__ID:
+				setId((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
-                getDescription().clear();
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
-                getDisplayName().clear();
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__ICON:
-                getIcon().clear();
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
-                setConverterId((ConverterIdType)null);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
-                setConverterForClass((ConverterForClassType)null);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
-                setConverterClass((ConverterClassType)null);
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
-                getAttribute().clear();
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
-                getProperty().clear();
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
-                getConverterExtension().clear();
-                return;
-            case FacesConfigPackage.CONVERTER_TYPE__ID:
-                setId(ID_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
+				getDescription().clear();
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
+				getDisplayName().clear();
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__ICON:
+				getIcon().clear();
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
+				setConverterId((ConverterIdType)null);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
+				setConverterForClass((ConverterForClassType)null);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
+				setConverterClass((ConverterClassType)null);
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
+				getAttribute().clear();
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
+				getProperty().clear();
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
+				getConverterExtension().clear();
+				return;
+			case FacesConfigPackage.CONVERTER_TYPE__ID:
+				setId(ID_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
-                return description != null && !description.isEmpty();
-            case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
-                return displayName != null && !displayName.isEmpty();
-            case FacesConfigPackage.CONVERTER_TYPE__ICON:
-                return icon != null && !icon.isEmpty();
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
-                return converterId != null;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
-                return converterForClass != null;
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
-                return converterClass != null;
-            case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
-                return attribute != null && !attribute.isEmpty();
-            case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
-                return property != null && !property.isEmpty();
-            case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
-                return converterExtension != null && !converterExtension.isEmpty();
-            case FacesConfigPackage.CONVERTER_TYPE__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.CONVERTER_TYPE__DESCRIPTION:
+				return description != null && !description.isEmpty();
+			case FacesConfigPackage.CONVERTER_TYPE__DISPLAY_NAME:
+				return displayName != null && !displayName.isEmpty();
+			case FacesConfigPackage.CONVERTER_TYPE__ICON:
+				return icon != null && !icon.isEmpty();
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_ID:
+				return converterId != null;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_FOR_CLASS:
+				return converterForClass != null;
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_CLASS:
+				return converterClass != null;
+			case FacesConfigPackage.CONVERTER_TYPE__ATTRIBUTE:
+				return attribute != null && !attribute.isEmpty();
+			case FacesConfigPackage.CONVERTER_TYPE__PROPERTY:
+				return property != null && !property.isEmpty();
+			case FacesConfigPackage.CONVERTER_TYPE__CONVERTER_EXTENSION:
+				return converterExtension != null && !converterExtension.isEmpty();
+			case FacesConfigPackage.CONVERTER_TYPE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
 	public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (id: "); //$NON-NLS-1$
-        result.append(id);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (id: ");//$NON-NLS-1$
+		result.append(id);
+		result.append(')');
+		return result.toString();
+	}
 
 } //ConverterTypeImpl

@@ -33,91 +33,91 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DescriptionType extends EObject {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * Returns the value of the '<em><b>Text Content</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Text Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Text Content</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Text Content</em>' attribute.
-     * @see #setTextContent(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDescriptionType_TextContent()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.String"
-     *        extendedMetaData="name=':0' kind='simple'"
-     * @generated
-     */
+	 * @return the value of the '<em>Text Content</em>' attribute.
+	 * @see #setTextContent(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDescriptionType_TextContent()
+	 * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="name=':0' kind='simple'"
+	 * @generated
+	 */
 	String getTextContent();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType#getTextContent <em>Text Content</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType#getTextContent <em>Text Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Text Content</em>' attribute.
-     * @see #getTextContent()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Text Content</em>' attribute.
+	 * @see #getTextContent()
+	 * @generated
+	 */
 	void setTextContent(String value);
 
     /**
-     * Returns the value of the '<em><b>Lang</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Lang</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lang</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Lang</em>' attribute.
-     * @see #setLang(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDescriptionType_Lang()
-     * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.Language"
-     *        extendedMetaData="kind='attribute' name='lang' namespace='http://www.w3.org/XML/1998/namespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Lang</em>' attribute.
+	 * @see #setLang(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDescriptionType_Lang()
+	 * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.Language"
+	 *        extendedMetaData="kind='attribute' name='lang' namespace='http://www.w3.org/XML/1998/namespace'"
+	 * @generated
+	 */
 	String getLang();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType#getLang <em>Lang</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType#getLang <em>Lang</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Lang</em>' attribute.
-     * @see #getLang()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Lang</em>' attribute.
+	 * @see #getLang()
+	 * @generated
+	 */
 	void setLang(String value);
 
     /**
-     * Returns the value of the '<em><b>Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDescriptionType_Id()
-     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getDescriptionType_Id()
+	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	String getId();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType#getId <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
 	void setId(String value);
 
 } // DescriptionType

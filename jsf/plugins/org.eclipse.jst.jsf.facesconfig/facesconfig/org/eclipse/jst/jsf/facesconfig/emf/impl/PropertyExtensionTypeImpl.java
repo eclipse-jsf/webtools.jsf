@@ -27,29 +27,29 @@ import org.eclipse.jst.jsf.facesconfig.emf.PropertyExtensionType;
  */
 public class PropertyExtensionTypeImpl extends ExtensionTypeImpl implements PropertyExtensionType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("hiding")
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected PropertyExtensionTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.PROPERTY_EXTENSION_TYPE;
-    }
+		return FacesConfigPackage.Literals.PROPERTY_EXTENSION_TYPE;
+	}
 
 } //PropertyExtensionTypeImpl

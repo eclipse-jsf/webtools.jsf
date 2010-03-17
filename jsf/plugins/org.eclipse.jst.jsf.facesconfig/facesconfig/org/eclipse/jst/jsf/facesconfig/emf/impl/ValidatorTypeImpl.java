@@ -57,495 +57,495 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
  */
 public class ValidatorTypeImpl extends EObjectImpl implements ValidatorType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getDescription()
-     * @generated
-     * @ordered
-     */
-	protected EList description = null;
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList description;
 
     /**
-     * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getDisplayName()
-     * @generated
-     * @ordered
-     */
-	protected EList displayName = null;
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList displayName;
 
     /**
-     * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getIcon()
-     * @generated
-     * @ordered
-     */
-	protected EList icon = null;
+	 * @see #getIcon()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList icon;
 
     /**
-     * The cached value of the '{@link #getValidatorId() <em>Validator Id</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValidatorId() <em>Validator Id</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getValidatorId()
-     * @generated
-     * @ordered
-     */
-	protected ValidatorIdType validatorId = null;
+	 * @see #getValidatorId()
+	 * @generated
+	 * @ordered
+	 */
+	protected ValidatorIdType validatorId;
 
     /**
-     * The cached value of the '{@link #getValidatorClass() <em>Validator Class</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValidatorClass() <em>Validator Class</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getValidatorClass()
-     * @generated
-     * @ordered
-     */
-	protected ValidatorClassType validatorClass = null;
+	 * @see #getValidatorClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected ValidatorClassType validatorClass;
 
     /**
-     * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getAttribute()
-     * @generated
-     * @ordered
-     */
-	protected EList attribute = null;
+	 * @see #getAttribute()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList attribute;
 
     /**
-     * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getProperty()
-     * @generated
-     * @ordered
-     */
-	protected EList property = null;
+	 * @see #getProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList property;
 
     /**
-     * The cached value of the '{@link #getValidatorExtension() <em>Validator Extension</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValidatorExtension() <em>Validator Extension</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getValidatorExtension()
-     * @generated
-     * @ordered
-     */
-    protected EList validatorExtension = null;
+	 * @see #getValidatorExtension()
+	 * @generated
+	 * @ordered
+	 */
+    protected EList validatorExtension;
 
     /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final String ID_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getId()
-     * @generated
-     * @ordered
-     */
+	 * @see #getId()
+	 * @generated
+	 * @ordered
+	 */
 	protected String id = ID_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected ValidatorTypeImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected EClass eStaticClass() {
-        return FacesConfigPackage.Literals.VALIDATOR_TYPE;
-    }
+		return FacesConfigPackage.Literals.VALIDATOR_TYPE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getDescription() {
-        if (description == null) {
-            description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION);
-        }
-        return description;
-    }
+		if (description == null) {
+			description = new EObjectContainmentEList(DescriptionType.class, this, FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION);
+		}
+		return description;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getDisplayName() {
-        if (displayName == null) {
-            displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME);
-        }
-        return displayName;
-    }
+		if (displayName == null) {
+			displayName = new EObjectContainmentEList(DisplayNameType.class, this, FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME);
+		}
+		return displayName;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getIcon() {
-        if (icon == null) {
-            icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.VALIDATOR_TYPE__ICON);
-        }
-        return icon;
-    }
+		if (icon == null) {
+			icon = new EObjectContainmentEList(IconType.class, this, FacesConfigPackage.VALIDATOR_TYPE__ICON);
+		}
+		return icon;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ValidatorIdType getValidatorId() {
-        return validatorId;
-    }
+		return validatorId;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * @param newValidatorId 
      * @param msgs 
      * @return the notification chain 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetValidatorId(ValidatorIdType newValidatorId, NotificationChain msgs) {
-        ValidatorIdType oldValidatorId = validatorId;
-        validatorId = newValidatorId;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, oldValidatorId, newValidatorId);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		ValidatorIdType oldValidatorId = validatorId;
+		validatorId = newValidatorId;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, oldValidatorId, newValidatorId);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setValidatorId(ValidatorIdType newValidatorId) {
-        if (newValidatorId != validatorId) {
-            NotificationChain msgs = null;
-            if (validatorId != null)
-                msgs = ((InternalEObject)validatorId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, null, msgs);
-            if (newValidatorId != null)
-                msgs = ((InternalEObject)newValidatorId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, null, msgs);
-            msgs = basicSetValidatorId(newValidatorId, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, newValidatorId, newValidatorId));
-    }
+		if (newValidatorId != validatorId) {
+			NotificationChain msgs = null;
+			if (validatorId != null)
+				msgs = ((InternalEObject)validatorId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, null, msgs);
+			if (newValidatorId != null)
+				msgs = ((InternalEObject)newValidatorId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, null, msgs);
+			msgs = basicSetValidatorId(newValidatorId, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID, newValidatorId, newValidatorId));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ValidatorClassType getValidatorClass() {
-        return validatorClass;
-    }
+		return validatorClass;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * @param newValidatorClass 
      * @param msgs 
      * @return the notification chain 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetValidatorClass(ValidatorClassType newValidatorClass, NotificationChain msgs) {
-        ValidatorClassType oldValidatorClass = validatorClass;
-        validatorClass = newValidatorClass;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, oldValidatorClass, newValidatorClass);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		ValidatorClassType oldValidatorClass = validatorClass;
+		validatorClass = newValidatorClass;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, oldValidatorClass, newValidatorClass);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setValidatorClass(ValidatorClassType newValidatorClass) {
-        if (newValidatorClass != validatorClass) {
-            NotificationChain msgs = null;
-            if (validatorClass != null)
-                msgs = ((InternalEObject)validatorClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, null, msgs);
-            if (newValidatorClass != null)
-                msgs = ((InternalEObject)newValidatorClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, null, msgs);
-            msgs = basicSetValidatorClass(newValidatorClass, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, newValidatorClass, newValidatorClass));
-    }
+		if (newValidatorClass != validatorClass) {
+			NotificationChain msgs = null;
+			if (validatorClass != null)
+				msgs = ((InternalEObject)validatorClass).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, null, msgs);
+			if (newValidatorClass != null)
+				msgs = ((InternalEObject)newValidatorClass).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, null, msgs);
+			msgs = basicSetValidatorClass(newValidatorClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS, newValidatorClass, newValidatorClass));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getAttribute() {
-        if (attribute == null) {
-            attribute = new EObjectContainmentEList(AttributeType.class, this, FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE);
-        }
-        return attribute;
-    }
+		if (attribute == null) {
+			attribute = new EObjectContainmentEList(AttributeType.class, this, FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE);
+		}
+		return attribute;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList getProperty() {
-        if (property == null) {
-            property = new EObjectContainmentEList(PropertyType.class, this, FacesConfigPackage.VALIDATOR_TYPE__PROPERTY);
-        }
-        return property;
-    }
+		if (property == null) {
+			property = new EObjectContainmentEList(PropertyType.class, this, FacesConfigPackage.VALIDATOR_TYPE__PROPERTY);
+		}
+		return property;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList getValidatorExtension() {
-        if (validatorExtension == null) {
-            validatorExtension = new EObjectContainmentEList(ValidatorExtensionType.class, this, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION);
-        }
-        return validatorExtension;
-    }
+		if (validatorExtension == null) {
+			validatorExtension = new EObjectContainmentEList(ValidatorExtensionType.class, this, FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION);
+		}
+		return validatorExtension;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getId() {
-        return id;
-    }
+		return id;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setId(String newId) {
-        String oldId = id;
-        id = newId;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__ID, oldId, id));
-    }
+		String oldId = id;
+		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FacesConfigPackage.VALIDATOR_TYPE__ID, oldId, id));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
-                return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
-                return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__ICON:
-                return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
-                return basicSetValidatorId(null, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
-                return basicSetValidatorClass(null, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
-                return ((InternalEList)getAttribute()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
-                return ((InternalEList)getProperty()).basicRemove(otherEnd, msgs);
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
-                return ((InternalEList)getValidatorExtension()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
+				return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
+				return ((InternalEList)getDisplayName()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__ICON:
+				return ((InternalEList)getIcon()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
+				return basicSetValidatorId(null, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
+				return basicSetValidatorClass(null, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
+				return ((InternalEList)getAttribute()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
+				return ((InternalEList)getProperty()).basicRemove(otherEnd, msgs);
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
+				return ((InternalEList)getValidatorExtension()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
-                return getDescription();
-            case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
-                return getDisplayName();
-            case FacesConfigPackage.VALIDATOR_TYPE__ICON:
-                return getIcon();
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
-                return getValidatorId();
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
-                return getValidatorClass();
-            case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
-                return getAttribute();
-            case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
-                return getProperty();
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
-                return getValidatorExtension();
-            case FacesConfigPackage.VALIDATOR_TYPE__ID:
-                return getId();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
+				return getDescription();
+			case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
+				return getDisplayName();
+			case FacesConfigPackage.VALIDATOR_TYPE__ICON:
+				return getIcon();
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
+				return getValidatorId();
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
+				return getValidatorClass();
+			case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
+				return getAttribute();
+			case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
+				return getProperty();
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
+				return getValidatorExtension();
+			case FacesConfigPackage.VALIDATOR_TYPE__ID:
+				return getId();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
-                getDescription().clear();
-                getDescription().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
-                getDisplayName().clear();
-                getDisplayName().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__ICON:
-                getIcon().clear();
-                getIcon().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
-                setValidatorId((ValidatorIdType)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
-                setValidatorClass((ValidatorClassType)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
-                getAttribute().clear();
-                getAttribute().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
-                getProperty().clear();
-                getProperty().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
-                getValidatorExtension().clear();
-                getValidatorExtension().addAll((Collection)newValue);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__ID:
-                setId((String)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
+				getDescription().clear();
+				getDescription().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
+				getDisplayName().clear();
+				getDisplayName().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__ICON:
+				getIcon().clear();
+				getIcon().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
+				setValidatorId((ValidatorIdType)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
+				setValidatorClass((ValidatorClassType)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
+				getAttribute().clear();
+				getAttribute().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
+				getProperty().clear();
+				getProperty().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
+				getValidatorExtension().clear();
+				getValidatorExtension().addAll((Collection)newValue);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__ID:
+				setId((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
-                getDescription().clear();
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
-                getDisplayName().clear();
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__ICON:
-                getIcon().clear();
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
-                setValidatorId((ValidatorIdType)null);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
-                setValidatorClass((ValidatorClassType)null);
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
-                getAttribute().clear();
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
-                getProperty().clear();
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
-                getValidatorExtension().clear();
-                return;
-            case FacesConfigPackage.VALIDATOR_TYPE__ID:
-                setId(ID_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
+				getDescription().clear();
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
+				getDisplayName().clear();
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__ICON:
+				getIcon().clear();
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
+				setValidatorId((ValidatorIdType)null);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
+				setValidatorClass((ValidatorClassType)null);
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
+				getAttribute().clear();
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
+				getProperty().clear();
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
+				getValidatorExtension().clear();
+				return;
+			case FacesConfigPackage.VALIDATOR_TYPE__ID:
+				setId(ID_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
-                return description != null && !description.isEmpty();
-            case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
-                return displayName != null && !displayName.isEmpty();
-            case FacesConfigPackage.VALIDATOR_TYPE__ICON:
-                return icon != null && !icon.isEmpty();
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
-                return validatorId != null;
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
-                return validatorClass != null;
-            case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
-                return attribute != null && !attribute.isEmpty();
-            case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
-                return property != null && !property.isEmpty();
-            case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
-                return validatorExtension != null && !validatorExtension.isEmpty();
-            case FacesConfigPackage.VALIDATOR_TYPE__ID:
-                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case FacesConfigPackage.VALIDATOR_TYPE__DESCRIPTION:
+				return description != null && !description.isEmpty();
+			case FacesConfigPackage.VALIDATOR_TYPE__DISPLAY_NAME:
+				return displayName != null && !displayName.isEmpty();
+			case FacesConfigPackage.VALIDATOR_TYPE__ICON:
+				return icon != null && !icon.isEmpty();
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_ID:
+				return validatorId != null;
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_CLASS:
+				return validatorClass != null;
+			case FacesConfigPackage.VALIDATOR_TYPE__ATTRIBUTE:
+				return attribute != null && !attribute.isEmpty();
+			case FacesConfigPackage.VALIDATOR_TYPE__PROPERTY:
+				return property != null && !property.isEmpty();
+			case FacesConfigPackage.VALIDATOR_TYPE__VALIDATOR_EXTENSION:
+				return validatorExtension != null && !validatorExtension.isEmpty();
+			case FacesConfigPackage.VALIDATOR_TYPE__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated NOT
+	 */
 	public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (id: "); //$NON-NLS-1$
-        result.append(id);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (id: "); //$NON-NLS-1$
+		result.append(id);
+		result.append(')');
+		return result.toString();
+	}
 
 } //ValidatorTypeImpl

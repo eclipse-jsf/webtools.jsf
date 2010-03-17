@@ -13,8 +13,6 @@ package org.eclipse.jst.jsf.facesconfig.internal.translator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
-
-
 import org.eclipse.wst.common.internal.emf.resource.Translator;
 
 /**
@@ -38,9 +36,15 @@ public class FactoryTranslator extends Translator {
 		FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
 		return new Translator[] {
 			new ApplicationFactoryTranslator("application-factory", facesPackage.getFactoryType_ApplicationFactory()), //$NON-NLS-1$
+			new ExceptionHandlerFactoryTranslator("exception-handler-factory", facesPackage.getFactoryType_ExceptionHandlerFactory()), //$NON-NLS-1$
+			new ExternalContextFactoryTranslator("external-context-factory", facesPackage.getFactoryType_ExternalContextFactory()), //$NON-NLS-1$
 			new FacesContextFactoryTranslator("faces-context-factory", facesPackage.getFactoryType_FacesContextFactory()), //$NON-NLS-1$
+			new PartialViewContextFactoryTranslator("partial-view-context-factory", facesPackage.getFactoryType_PartialViewContextFactory()), //$NON-NLS-1$
 			new LifecycleFactoryTranslator("lifecycle-factory", facesPackage.getFactoryType_LifecycleFactory()), //$NON-NLS-1$
+			new ViewDeclarationLanguageFactoryTranslator("view-declaration-language-factory", facesPackage.getFactoryType_ViewDeclarationLanguageFactory()), //$NON-NLS-1$
+			new TagHandlerDelegateFactoryTranslator("tag-handler-delegate-factory", facesPackage.getFactoryType_TagHandlerDelegateFactory()), //$NON-NLS-1$
 			new RenderKitFactoryTranslator("render-kit-factory", facesPackage.getFactoryType_RenderKitFactory()), //$NON-NLS-1$
+			new VisitContextFactoryTranslator("visit-context-factory", facesPackage.getFactoryType_VisitContextFactory()), //$NON-NLS-1$
             new FactoryExtensionTranslator("factory-extension", facesPackage.getFactoryType_FactoryExtension()), //$NON-NLS-1$
 			new Translator("id", facesPackage.getFactoryType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
 		};

@@ -24,10 +24,10 @@ package org.eclipse.jst.jsf.facesconfig.emf;
  */
 public interface FactoryExtensionType extends ExtensionType {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
 } // FactoryExtensionType

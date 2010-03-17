@@ -12,7 +12,6 @@
 package org.eclipse.jst.jsf.facesconfig.emf;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -38,142 +37,142 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ReferencedBeanType extends EObject {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * Returns the value of the '<em><b>Description</b></em>' containment reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Description</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DescriptionType}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Description</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Description</em>' containment reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_Description()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DescriptionType" containment="true"
-     *        extendedMetaData="kind='element' name='description' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Description</em>' containment reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_Description()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DescriptionType" containment="true"
+	 *        extendedMetaData="kind='element' name='description' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	EList getDescription();
 
     /**
-     * Returns the value of the '<em><b>Display Name</b></em>' containment reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Display Name</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Display Name</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Display Name</em>' containment reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_DisplayName()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType" containment="true"
-     *        extendedMetaData="kind='element' name='display-name' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Display Name</em>' containment reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_DisplayName()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType" containment="true"
+	 *        extendedMetaData="kind='element' name='display-name' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	EList getDisplayName();
 
     /**
-     * Returns the value of the '<em><b>Icon</b></em>' containment reference list.
-     * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.IconType}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Icon</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.jst.jsf.facesconfig.emf.IconType}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Icon</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Icon</em>' containment reference list.
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_Icon()
-     * @model type="org.eclipse.jst.jsf.facesconfig.emf.IconType" containment="true"
-     *        extendedMetaData="kind='element' name='icon' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Icon</em>' containment reference list.
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_Icon()
+	 * @model type="org.eclipse.jst.jsf.facesconfig.emf.IconType" containment="true"
+	 *        extendedMetaData="kind='element' name='icon' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	EList getIcon();
 
     /**
-     * Returns the value of the '<em><b>Referenced Bean Name</b></em>' containment reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Referenced Bean Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referenced Bean Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Referenced Bean Name</em>' containment reference.
-     * @see #setReferencedBeanName(ReferencedBeanNameType)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_ReferencedBeanName()
-     * @model containment="true" required="true"
-     *        extendedMetaData="kind='element' name='referenced-bean-name' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Referenced Bean Name</em>' containment reference.
+	 * @see #setReferencedBeanName(ReferencedBeanNameType)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_ReferencedBeanName()
+	 * @model containment="true" required="true"
+	 *        extendedMetaData="kind='element' name='referenced-bean-name' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	ReferencedBeanNameType getReferencedBeanName();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType#getReferencedBeanName <em>Referenced Bean Name</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType#getReferencedBeanName <em>Referenced Bean Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Referenced Bean Name</em>' containment reference.
-     * @see #getReferencedBeanName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Referenced Bean Name</em>' containment reference.
+	 * @see #getReferencedBeanName()
+	 * @generated
+	 */
 	void setReferencedBeanName(ReferencedBeanNameType value);
 
     /**
-     * Returns the value of the '<em><b>Referenced Bean Class</b></em>' containment reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Referenced Bean Class</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Referenced Bean Class</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Referenced Bean Class</em>' containment reference.
-     * @see #setReferencedBeanClass(ReferencedBeanClassType)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_ReferencedBeanClass()
-     * @model containment="true" required="true"
-     *        extendedMetaData="kind='element' name='referenced-bean-class' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Referenced Bean Class</em>' containment reference.
+	 * @see #setReferencedBeanClass(ReferencedBeanClassType)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_ReferencedBeanClass()
+	 * @model containment="true" required="true"
+	 *        extendedMetaData="kind='element' name='referenced-bean-class' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	ReferencedBeanClassType getReferencedBeanClass();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType#getReferencedBeanClass <em>Referenced Bean Class</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType#getReferencedBeanClass <em>Referenced Bean Class</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Referenced Bean Class</em>' containment reference.
-     * @see #getReferencedBeanClass()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Referenced Bean Class</em>' containment reference.
+	 * @see #getReferencedBeanClass()
+	 * @generated
+	 */
 	void setReferencedBeanClass(ReferencedBeanClassType value);
 
     /**
-     * Returns the value of the '<em><b>Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
-     * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_Id()
-     * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
-     *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
-     * @generated
-     */
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage#getReferencedBeanType_Id()
+	 * @model unique="false" id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
+	 *        extendedMetaData="kind='attribute' name='id' namespace='##targetNamespace'"
+	 * @generated
+	 */
 	String getId();
 
     /**
-     * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType#getId <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
 	void setId(String value);
 
 } // ReferencedBeanType

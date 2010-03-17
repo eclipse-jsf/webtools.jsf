@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -28,7 +29,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
-
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigPackage;
 import org.eclipse.jst.jsf.facesconfig.emf.IconType;
 
@@ -38,6 +39,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.IconType;
  * <!-- end-user-doc -->
  * @generated
  */
+@SuppressWarnings("nls")
 public class IconTypeItemProvider
 	extends ItemProviderAdapter
 	implements	
@@ -47,196 +49,189 @@ public class IconTypeItemProvider
 		IItemLabelProvider,	
 		IItemPropertySource {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final String copyright = "Copyright (c) 2005, 2006 IBM Corporation and others"; //$NON-NLS-1$
 
     /**
-     * This constructs an instance from a factory and a notifier.
-     * <!-- begin-user-doc -->
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
      * @param adapterFactory 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public IconTypeItemProvider(AdapterFactory adapterFactory) {
-        super(adapterFactory);
-    }
+		super(adapterFactory);
+	}
 
     /**
-     * This returns the property descriptors for the adapted class.
-     * <!-- begin-user-doc -->
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public List getPropertyDescriptors(Object object) {
-        if (itemPropertyDescriptors == null) {
-            super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-            addSmallIconPropertyDescriptor(object);
-            addLargeIconPropertyDescriptor(object);
-            addLangPropertyDescriptor(object);
-            addIdPropertyDescriptor(object);
-        }
-        return itemPropertyDescriptors;
-    }
+			addLangPropertyDescriptor(object);
+			addIdPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
     /**
-     * This adds a property descriptor for the Small Icon feature.
-     * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Lang feature.
+	 * <!-- begin-user-doc -->
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
-	protected void addSmallIconPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IconType_smallIcon_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_smallIcon_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.ICON_TYPE__SMALL_ICON,
-                 true,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Large Icon feature.
-     * <!-- begin-user-doc -->
-     * @param object 
-	 * <!-- end-user-doc -->
-     * @generated
-     */
-	protected void addLargeIconPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IconType_largeIcon_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_largeIcon_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.ICON_TYPE__LARGE_ICON,
-                 true,
-                 false,
-                 false,
-                 null,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Lang feature.
-     * <!-- begin-user-doc -->
-     * @param object 
-	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void addLangPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IconType_lang_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_lang_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.ICON_TYPE__LANG,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IconType_lang_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IconType_lang_feature", "_UI_IconType_type"),
+				 FacesConfigPackage.Literals.ICON_TYPE__LANG,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
     /**
-     * This adds a property descriptor for the Id feature.
-     * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Id feature.
+	 * <!-- begin-user-doc -->
      * @param object 
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void addIdPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_IconType_id_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_IconType_id_feature", "_UI_IconType_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 FacesConfigPackage.Literals.ICON_TYPE__ID,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_IconType_id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_IconType_id_feature", "_UI_IconType_type"),
+				 FacesConfigPackage.Literals.ICON_TYPE__ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
     /**
-     * This returns IconType.gif.
-     * <!-- begin-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
+	public Collection getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(FacesConfigPackage.Literals.ICON_TYPE__SMALL_ICON);
+			childrenFeatures.add(FacesConfigPackage.Literals.ICON_TYPE__LARGE_ICON);
+		}
+		return childrenFeatures;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+				/**
+	 * This returns IconType.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/IconType")); //$NON-NLS-1$
-    }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IconType"));
+	}
 
     /**
-     * This returns the label text for the adapted class.
-     * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getText(Object object) {
-        String label = ((IconType)object).getId();
-        return label == null || label.length() == 0 ?
-            getString("_UI_IconType_type") : //$NON-NLS-1$
-            getString("_UI_IconType_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
-    }
+		String label = ((IconType)object).getId();
+		return label == null || label.length() == 0 ?
+			getString("_UI_IconType_type") :
+			getString("_UI_IconType_type") + " " + label;
+	}
 
     /**
-     * This handles model notifications by calling {@link #updateChildren(Notification)} to update any cached
-     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged(Notification)}.
-     * <!-- begin-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void notifyChanged(Notification notification) {
-        updateChildren(notification);
+		updateChildren(notification);
 
-        switch (notification.getFeatureID(IconType.class)) {
-            case FacesConfigPackage.ICON_TYPE__SMALL_ICON:
-            case FacesConfigPackage.ICON_TYPE__LARGE_ICON:
-            case FacesConfigPackage.ICON_TYPE__LANG:
-            case FacesConfigPackage.ICON_TYPE__ID:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-                return;
-        }
-        super.notifyChanged(notification);
-    }
+		switch (notification.getFeatureID(IconType.class)) {
+			case FacesConfigPackage.ICON_TYPE__LANG:
+			case FacesConfigPackage.ICON_TYPE__ID:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case FacesConfigPackage.ICON_TYPE__SMALL_ICON:
+			case FacesConfigPackage.ICON_TYPE__LARGE_ICON:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
+		super.notifyChanged(notification);
+	}
 
     /**
-     * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-     * describing all of the children that can be created under this object.
-     * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
-        super.collectNewChildDescriptors(newChildDescriptors, object);
-    }
+		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.ICON_TYPE__SMALL_ICON,
+				 FacesConfigFactory.eINSTANCE.createSmallIconType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(FacesConfigPackage.Literals.ICON_TYPE__LARGE_ICON,
+				 FacesConfigFactory.eINSTANCE.createLargeIconType()));
+	}
 
     /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ResourceLocator getResourceLocator() {
-        return FacesConfigPlugin.INSTANCE;
-    }
+		return FacesConfigPlugin.INSTANCE;
+	}
 
 }
