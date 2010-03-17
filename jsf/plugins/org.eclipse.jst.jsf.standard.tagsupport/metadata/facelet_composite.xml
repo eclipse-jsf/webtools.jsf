@@ -372,7 +372,7 @@
 				<attribute>
 					<name>targets</name>
 					<usage>OPTIONAL</usage>
-					<description>%actionSource_targets.description</description>
+					<description>%targets.description</description>
 				</attribute>
 			</value>
 		</trait>
