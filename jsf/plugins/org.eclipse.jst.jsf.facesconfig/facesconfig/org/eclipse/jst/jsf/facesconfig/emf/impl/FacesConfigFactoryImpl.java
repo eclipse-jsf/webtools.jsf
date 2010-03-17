@@ -25,6 +25,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.*;
  * <!-- end-user-doc -->
  * @generated
  */
+@SuppressWarnings("nls")
 public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigFactory {
     /**
 	 * <!-- begin-user-doc -->
@@ -193,7 +194,7 @@ public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigF
 			case FacesConfigPackage.VIEW_DECLARATION_LANGUAGE_FACTORY_TYPE: return createViewDeclarationLanguageFactoryType();
 			case FacesConfigPackage.VISIT_CONTEXT_FACTORY_TYPE: return createVisitContextFactoryType();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
