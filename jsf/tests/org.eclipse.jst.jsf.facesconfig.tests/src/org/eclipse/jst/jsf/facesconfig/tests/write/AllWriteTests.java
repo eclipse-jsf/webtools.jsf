@@ -32,6 +32,27 @@ public class AllWriteTests {
         TestSuite suite = new TestSuite("FacesConfig Model Write/Read Translation");
         suite.addTest(Faces_1_1_suite());
         suite.addTest(Faces_1_2_suite());
+        suite.addTest(Faces_2_0_suite());
+        return suite;
+    }
+    
+    private static Test Faces_2_0_suite()
+    {
+        TestConfiguration testConfiguration = new TestConfiguration();
+        testConfiguration.put(BaseWriteTestCase.CONFIG_FILE_KEY, "WEB-INF/faces-config3.xml");
+        testConfiguration.put(BaseWriteTestCase.FACES_VERSION_KEY, IJSFCoreConstants.JSF_VERSION_2_0);
+
+        TestSuite suite = 
+            new ConfigurableTestSuite(testConfiguration, "Faces 2.0 Model Tests");
+        suite.addTest(new ConfigurableTestSuite(WriteFacesConfigTestCase_2_0.class, "Write Facesconfig Test"));
+        suite.addTest(new ConfigurableTestSuite(WriteApplicationTestCase_2_0.class, "Write Application Test"));
+        suite.addTest(new ConfigurableTestSuite(WriteFactoryTestCase_2_0.class, "Write Factory Test"));
+        suite.addTest(new ConfigurableTestSuite(WriteManagedBeanTestCase_2_0.class, "Write Managed-bean Test"));
+        suite.addTest(new ConfigurableTestSuite(WriteNavigationRuleTestCase_2_0.class, "Write Navigation Rule Test"));
+        suite.addTest(new ConfigurableTestSuite(WriteRenderKitTestCase_2_0.class, "Write Render-kit Test"));
+        
+        Faces_common_suite(suite, testConfiguration);
+
         return suite;
     }
     
@@ -66,12 +87,13 @@ public class AllWriteTests {
                 "Write Render-kit Test"));
         suite.addTest(new ConfigurableTestSuite(
                 WriteValidatorTestCase_1_2.class,
-                "Write Validator Test"));
-        Faces_common_suite(suite, testConfiguration);
-        
+                "Write Validator Test"));        
         suite.addTest(new ConfigurableTestSuite(
                 FacesConfigExtensionTestCase.class,
                 "Write Facesconfig Extension Test"));
+        
+
+        Faces_common_suite(suite, testConfiguration);
         
         return suite;
     }

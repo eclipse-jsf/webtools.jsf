@@ -213,14 +213,12 @@ public class ReadManagedBeanTestCase extends BaseReadTestCase {
             assertEquals("listBeanListPropertyClass",
                     listEntries.getValueClass().getTextContent());
             assertEquals(1, listEntries.getValue().size());
-            assertEquals(1, listEntries.getNullValue().size());
+            assertEquals(1, listEntries.getNullValue().size());            
             
-            ValueType valueType = 
-                (ValueType) FacesConfigModelUtil
-                    .findEObjectElementById(listEntries.getValue()
-                                    , "listBeanListProperty_value");
+            ValueType valueType = (ValueType)listEntries.getValue().get(0);                                   
             assertNotNull(valueType);
             assertEquals("listBeanListPropertyValue", valueType.getTextContent().trim());
+            
         } finally {
             if (edit != null) {
                 edit.dispose();

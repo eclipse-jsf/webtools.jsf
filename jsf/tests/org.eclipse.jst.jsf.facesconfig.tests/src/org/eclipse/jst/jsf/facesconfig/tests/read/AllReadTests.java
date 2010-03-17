@@ -20,6 +20,7 @@ import org.eclipse.jst.jsf.test.util.ConfigurableTestCase.TestConfiguration;
 /**
  * Wrapper suite for all the tests against the .util package.
  * 
+ * @author xjiang
  * @author spaxton
  * @author le-ake m. G kristos
  */
@@ -30,6 +31,26 @@ public class AllReadTests {
         TestSuite suite = new TestSuite("FacesConfig Model Read Translation");
         suite.addTest(Faces_1_1_suite());
         suite.addTest(Faces_1_2_suite());
+        suite.addTest(Faces_2_0_suite());
+        return suite;
+    }
+    
+    private static Test Faces_2_0_suite()
+    {
+        TestConfiguration testConfiguration = new TestConfiguration();
+        testConfiguration.put(BaseReadTestCase.CONFIG_FILE_KEY, "WEB-INF/faces-config_2_0.xml");
+        testConfiguration.put(BaseReadTestCase.FACES_VERSION_KEY, IJSFCoreConstants.JSF_VERSION_2_0);
+
+        TestSuite suite = 
+            new ConfigurableTestSuite(testConfiguration, "Faces 2.0 Model Tests");
+        suite.addTest(new ConfigurableTestSuite(ReadFacesConfigElementsTestCase_2_0.class, "Faces-config - Each Element"));
+        suite.addTest(new ConfigurableTestSuite(ReadApplicationTestCase_2_0.class, "Application Test"));
+        suite.addTest(new ConfigurableTestSuite(ReadFactoryTestCase_2_0.class, "Factory Test"));
+        suite.addTest(new ConfigurableTestSuite(ReadNavigationRuleTestCase_2_0.class, "Navigation Rule Test"));
+        suite.addTest(new ConfigurableTestSuite(ReadManagedBeanTestCase_2_0.class, "Managed-Bean Test"));
+        suite.addTest(new ConfigurableTestSuite(ReadRenderKitTestCase_2_0.class, "Render-kit Test"));
+
+        Faces_base_suite(suite, testConfiguration);
         return suite;
     }
     

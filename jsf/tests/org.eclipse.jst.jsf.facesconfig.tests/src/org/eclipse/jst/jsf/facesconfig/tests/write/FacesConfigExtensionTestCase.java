@@ -37,9 +37,9 @@ public class FacesConfigExtensionTestCase extends BaseWriteTestCase {
     {
         super.setUp();
         // test should not be used with 1.1
-        assertEquals(IJSFCoreConstants.JSF_VERSION_1_2, _facesVersion);
+        assertNotSame(IJSFCoreConstants.JSF_VERSION_1_1, _facesVersion);
     }
-
+    
     public void testFacesConfigExtension() {
         FacesConfigArtifactEdit edit = null;
 

@@ -255,10 +255,7 @@ public class ReadManagedBeanManagedPropertyTestCase extends
             assertEquals(1, listEntries.getValue().size());
             assertEquals(1, listEntries.getNullValue().size());
 
-            ValueType valueType =
-                (ValueType) FacesConfigModelUtil
-                    .findEObjectElementById(listEntries.getValue()
-                                          , "managedBeanListProperty_value");
+            ValueType valueType = (ValueType) listEntries.getValue().get(0);
             
             assertEquals("managedBeanListPropertyValue",
                     valueType.getTextContent());

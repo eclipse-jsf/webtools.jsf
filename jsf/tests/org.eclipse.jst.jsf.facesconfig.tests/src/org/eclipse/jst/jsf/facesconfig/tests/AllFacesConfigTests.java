@@ -10,12 +10,12 @@
  **************************************************************************************************/
 package org.eclipse.jst.jsf.facesconfig.tests;
 
-import org.eclipse.jst.jsf.facesconfig.tests.read.AllReadTests;
-import org.eclipse.jst.jsf.facesconfig.tests.write.AllWriteTests;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+
+import org.eclipse.jst.jsf.facesconfig.tests.read.AllReadTests;
+import org.eclipse.jst.jsf.facesconfig.tests.write.AllWriteTests;
 
 
 /**

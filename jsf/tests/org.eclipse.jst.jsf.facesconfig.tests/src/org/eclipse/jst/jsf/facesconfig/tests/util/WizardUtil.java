@@ -131,10 +131,12 @@ public class WizardUtil extends Assert {
 		IFile facesConfigFile  = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config.xml"))); //$NON-NLS-1$
 		IFile facesConfigFile1  = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config1.xml"))); //$NON-NLS-1$
 		IFile facesConfigFile2  = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config2.xml"))); //$NON-NLS-1$
+		IFile facesConfigFile3  = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config3.xml"))); //$NON-NLS-1$
 		IFile facesConfigFileExtData = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config-ext-data1.xml"))); //$NON-NLS-1$
         
 
         IFile facesConfig_1_2File = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config_1_2.xml"))); //$NON-NLS-1$ 
+        IFile facesConfig_2_0File = ResourcesPlugin.getWorkspace().getRoot().getFile(container.getFullPath().append(new Path("faces-config_2_0.xml"))); //$NON-NLS-1$ 
 
         if(facesConfigFile.exists()) {
 			return;
@@ -143,8 +145,10 @@ public class WizardUtil extends Assert {
         final IPath facesConfigPath = new Path("/template/faces-config.xml");
         final IPath facesConfig1Path = new Path("/template/faces-config1.xml");
         final IPath facesConfig2Path = new Path("/template/faces-config2.xml");
+        final IPath facesConfig3Path = new Path("/template/faces-config3.xml");
         final IPath facesConfigExtData1Path = new Path("/template/faces-config-ext-data1.xml");
         final IPath facesConfig_1_2_Path = new Path("/template/faces-config_1_2.xml");
+        final IPath facesConfig_2_0_Path = new Path("/template/faces-config_2_0.xml");
         
         final Bundle  myBundle = Platform.getBundle("org.eclipse.jst.jsf.facesconfig.tests");
         // there is no faces-config, so add our starting template
@@ -171,6 +175,13 @@ public class WizardUtil extends Assert {
             	facesConfigFile2.create(sourceStream2, true, null);
             	sourceStream2.close();
             }
+            {
+            	final String sourcePath3 = FileLocator.toFileURL(FileLocator.find(myBundle, facesConfig3Path,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$	
+            	final File f3 = new File(sourcePath3);
+            	final FileInputStream sourceStream3 = new FileInputStream(f3);
+            	facesConfigFile3.create(sourceStream3, true, null);
+            	sourceStream3.close();
+            }
 
             {
                 final String sourcePathExtData1 = FileLocator.toFileURL(FileLocator.find(myBundle, facesConfigExtData1Path,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$   
@@ -187,6 +198,15 @@ public class WizardUtil extends Assert {
                 final FileInputStream sourceStreamExt1 = new FileInputStream(fext);
                 facesConfig_1_2File.create(sourceStreamExt1, true, null);
                 sourceStreamExt1.close();
+            }
+            
+            {
+                final String sourcePathFacesConfig_2_0 = 
+                    FileLocator.toFileURL(FileLocator.find(myBundle, facesConfig_2_0_Path,null)).getPath().toString(); //$NON-NLS-1$ //$NON-NLS-2$   
+                final File fext = new File(sourcePathFacesConfig_2_0);
+                final FileInputStream sourceStreamExt2 = new FileInputStream(fext);
+                facesConfig_2_0File.create(sourceStreamExt2, true, null);
+                sourceStreamExt2.close();
             }
             
         } catch (IOException ioe) {

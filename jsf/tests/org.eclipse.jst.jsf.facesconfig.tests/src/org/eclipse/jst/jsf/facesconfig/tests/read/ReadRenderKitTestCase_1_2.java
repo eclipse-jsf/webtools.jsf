@@ -34,7 +34,7 @@ public class ReadRenderKitTestCase_1_2 extends ReadRenderKitTestCase {
         }
     }
 
-    public void testValidatorExtension() {
+    public void testRenderKitExtension() {
 
         FacesConfigArtifactEdit edit = null;
         try 
