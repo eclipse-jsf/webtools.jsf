@@ -12,7 +12,6 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.TagElement;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
-import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.TLDTagHandlerElement;
 
 public class MockJSPTagRegistry implements ITagRegistry
 {
@@ -130,6 +129,10 @@ public class MockJSPTagRegistry implements ITagRegistry
     
     private static class MyTagElement extends TagElement
     {
+        /**
+         * 
+         */
+        private static final long serialVersionUID = 1L;
         private final String    _name;
         private final String    _uri;
         
@@ -164,6 +167,7 @@ public class MockJSPTagRegistry implements ITagRegistry
             return null;
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public Map getAttributeHandlers()
         {
