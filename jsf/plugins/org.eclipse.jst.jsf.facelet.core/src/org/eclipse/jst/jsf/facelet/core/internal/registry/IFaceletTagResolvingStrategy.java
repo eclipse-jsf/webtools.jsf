@@ -11,7 +11,7 @@
 package org.eclipse.jst.jsf.facelet.core.internal.registry;
 
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.ITagResolvingStrategy;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
 
 /**
  * @author cbateman
@@ -30,13 +30,13 @@ public interface IFaceletTagResolvingStrategy extends
     public static class TLDWrapper
     {
         private final String  _uri;
-        private final TagDefn _tagDefn;
+        private final FaceletTaglibTag _tagDefn;
 
         /**
          * @param tagDefn
          * @param uri
          */
-        public TLDWrapper(TagDefn tagDefn, String uri)
+        public TLDWrapper(FaceletTaglibTag tagDefn, String uri)
         {
             super();
             _tagDefn = tagDefn;
@@ -54,7 +54,7 @@ public interface IFaceletTagResolvingStrategy extends
         /**
          * @return the tag definition information
          */
-        public final TagDefn getTagDefn()
+        public final FaceletTaglibTag getTagDefn()
         {
             return _tagDefn;
         }

@@ -14,6 +14,8 @@ import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory.TagRegistry
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.FaceletRegistryManager.MyRegistryFactory;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.CMDocumentFactoryTLD;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.jst.jsp.core.taglib.ITaglibRecord;
@@ -164,6 +166,25 @@ public final class ViewUtil
         return false;
     }
 
+    /**
+     * @param project
+     * @return the facelet tag registry for the project or null if none.
+     */
+    public static ITagRegistry getTagRegistry(final IProject project)
+    {
+        final MyRegistryFactory factory = new MyRegistryFactory();
+
+        ITagRegistry registry = null;
+        try
+        {
+            registry = factory.createTagRegistry(project);
+        }
+        catch (final TagRegistryFactoryException e)
+        {
+            // fall-through
+        }
+        return registry;
+    }
     /**
      * Encapsulates a single namespace/prefix use declaration in an XML document
      * @author cbateman

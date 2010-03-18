@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FaceletTaglibSwitch.java,v 1.1 2010/03/08 18:49:43 cbateman Exp $
+ * $Id: FaceletTaglibSwitch.java,v 1.2 2010/03/18 06:24:41 cbateman Exp $
  */
 package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.util;
 
@@ -10,8 +10,33 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.*;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Description;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DisplayName;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DocumentRoot;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibCanonicalName;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibFunction;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibPackage;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagAttribute;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehavior;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehaviorExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponent;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponentExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverter;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverterExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidator;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidatorExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FullyQualifiedClass;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.GenericBoolean;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Icon;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableLangStringValue;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableStringValue;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.JavaIdentifier;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Path;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.UserVisibleTaglibObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,83 +124,202 @@ public class FaceletTaglibSwitch<T>
     {
         switch (classifierID)
         {
-            case FaceletTaglibPackage.FACELET_LIBRARY_CLASS_TAG_LIB:
+            case FaceletTaglibPackage.DESCRIPTION:
             {
-                FaceletLibraryClassTagLib faceletLibraryClassTagLib = (FaceletLibraryClassTagLib)theEObject;
-                T result = caseFaceletLibraryClassTagLib(faceletLibraryClassTagLib);
-                if (result == null) result = caseFaceletTaglibDefn(faceletLibraryClassTagLib);
+                Description description = (Description)theEObject;
+                T result = caseDescription(description);
+                if (result == null) result = caseIdentifiableLangStringValue(description);
+                if (result == null) result = caseIdentifiableStringValue(description);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.FACELET_XML_DEFN_TAGLIB:
+            case FaceletTaglibPackage.DISPLAY_NAME:
             {
-                FaceletXMLDefnTaglib faceletXMLDefnTaglib = (FaceletXMLDefnTaglib)theEObject;
-                T result = caseFaceletXMLDefnTaglib(faceletXMLDefnTaglib);
-                if (result == null) result = caseFaceletTaglibDefn(faceletXMLDefnTaglib);
+                DisplayName displayName = (DisplayName)theEObject;
+                T result = caseDisplayName(displayName);
+                if (result == null) result = caseIdentifiableLangStringValue(displayName);
+                if (result == null) result = caseIdentifiableStringValue(displayName);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.FACELET_TAGLIB_DEFN:
+            case FaceletTaglibPackage.DOCUMENT_ROOT:
             {
-                FaceletTaglibDefn faceletTaglibDefn = (FaceletTaglibDefn)theEObject;
-                T result = caseFaceletTaglibDefn(faceletTaglibDefn);
+                DocumentRoot documentRoot = (DocumentRoot)theEObject;
+                T result = caseDocumentRoot(documentRoot);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.COMPONENT_TAG_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_CANONICAL_NAME:
             {
-                ComponentTagDefn componentTagDefn = (ComponentTagDefn)theEObject;
-                T result = caseComponentTagDefn(componentTagDefn);
-                if (result == null) result = caseHandlerTagDefn(componentTagDefn);
-                if (result == null) result = caseTagDefn(componentTagDefn);
+                FaceletTaglibCanonicalName faceletTaglibCanonicalName = (FaceletTaglibCanonicalName)theEObject;
+                T result = caseFaceletTaglibCanonicalName(faceletTaglibCanonicalName);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.VALIDATOR_TAG_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_EXTENSION:
             {
-                ValidatorTagDefn validatorTagDefn = (ValidatorTagDefn)theEObject;
-                T result = caseValidatorTagDefn(validatorTagDefn);
-                if (result == null) result = caseHandlerTagDefn(validatorTagDefn);
-                if (result == null) result = caseTagDefn(validatorTagDefn);
+                FaceletTaglibExtension faceletTaglibExtension = (FaceletTaglibExtension)theEObject;
+                T result = caseFaceletTaglibExtension(faceletTaglibExtension);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.CONVERTER_TAG_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_FUNCTION:
             {
-                ConverterTagDefn converterTagDefn = (ConverterTagDefn)theEObject;
-                T result = caseConverterTagDefn(converterTagDefn);
-                if (result == null) result = caseHandlerTagDefn(converterTagDefn);
-                if (result == null) result = caseTagDefn(converterTagDefn);
+                FaceletTaglibFunction faceletTaglibFunction = (FaceletTaglibFunction)theEObject;
+                T result = caseFaceletTaglibFunction(faceletTaglibFunction);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibFunction);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.HANDLER_TAG_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_ATTRIBUTE:
             {
-                HandlerTagDefn handlerTagDefn = (HandlerTagDefn)theEObject;
-                T result = caseHandlerTagDefn(handlerTagDefn);
-                if (result == null) result = caseTagDefn(handlerTagDefn);
+                FaceletTaglibTagAttribute faceletTaglibTagAttribute = (FaceletTaglibTagAttribute)theEObject;
+                T result = caseFaceletTaglibTagAttribute(faceletTaglibTagAttribute);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibTagAttribute);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.SOURCE_TAG_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_BEHAVIOR_EXTENSION:
             {
-                SourceTagDefn sourceTagDefn = (SourceTagDefn)theEObject;
-                T result = caseSourceTagDefn(sourceTagDefn);
-                if (result == null) result = caseTagDefn(sourceTagDefn);
+                FaceletTaglibTagBehaviorExtension faceletTaglibTagBehaviorExtension = (FaceletTaglibTagBehaviorExtension)theEObject;
+                T result = caseFaceletTaglibTagBehaviorExtension(faceletTaglibTagBehaviorExtension);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.TAG_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_BEHAVIOR:
             {
-                TagDefn tagDefn = (TagDefn)theEObject;
-                T result = caseTagDefn(tagDefn);
+                FaceletTaglibTagBehavior faceletTaglibTagBehavior = (FaceletTaglibTagBehavior)theEObject;
+                T result = caseFaceletTaglibTagBehavior(faceletTaglibTagBehavior);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibTagBehavior);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
-            case FaceletTaglibPackage.FUNCTION_DEFN:
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_COMPONENT_EXTENSION:
             {
-                FunctionDefn functionDefn = (FunctionDefn)theEObject;
-                T result = caseFunctionDefn(functionDefn);
+                FaceletTaglibTagComponentExtension faceletTaglibTagComponentExtension = (FaceletTaglibTagComponentExtension)theEObject;
+                T result = caseFaceletTaglibTagComponentExtension(faceletTaglibTagComponentExtension);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_COMPONENT:
+            {
+                FaceletTaglibTagComponent faceletTaglibTagComponent = (FaceletTaglibTagComponent)theEObject;
+                T result = caseFaceletTaglibTagComponent(faceletTaglibTagComponent);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibTagComponent);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_CONVERTER_EXTENSION:
+            {
+                FaceletTaglibTagConverterExtension faceletTaglibTagConverterExtension = (FaceletTaglibTagConverterExtension)theEObject;
+                T result = caseFaceletTaglibTagConverterExtension(faceletTaglibTagConverterExtension);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_CONVERTER:
+            {
+                FaceletTaglibTagConverter faceletTaglibTagConverter = (FaceletTaglibTagConverter)theEObject;
+                T result = caseFaceletTaglibTagConverter(faceletTaglibTagConverter);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibTagConverter);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_EXTENSION:
+            {
+                FaceletTaglibTagExtension faceletTaglibTagExtension = (FaceletTaglibTagExtension)theEObject;
+                T result = caseFaceletTaglibTagExtension(faceletTaglibTagExtension);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG:
+            {
+                FaceletTaglibTag faceletTaglibTag = (FaceletTaglibTag)theEObject;
+                T result = caseFaceletTaglibTag(faceletTaglibTag);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibTag);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_VALIDATOR_EXTENSION:
+            {
+                FaceletTaglibTagValidatorExtension faceletTaglibTagValidatorExtension = (FaceletTaglibTagValidatorExtension)theEObject;
+                T result = caseFaceletTaglibTagValidatorExtension(faceletTaglibTagValidatorExtension);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB_TAG_VALIDATOR:
+            {
+                FaceletTaglibTagValidator faceletTaglibTagValidator = (FaceletTaglibTagValidator)theEObject;
+                T result = caseFaceletTaglibTagValidator(faceletTaglibTagValidator);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglibTagValidator);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FACELET_TAGLIB:
+            {
+                FaceletTaglib faceletTaglib = (FaceletTaglib)theEObject;
+                T result = caseFaceletTaglib(faceletTaglib);
+                if (result == null) result = caseUserVisibleTaglibObject(faceletTaglib);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.FULLY_QUALIFIED_CLASS:
+            {
+                FullyQualifiedClass fullyQualifiedClass = (FullyQualifiedClass)theEObject;
+                T result = caseFullyQualifiedClass(fullyQualifiedClass);
+                if (result == null) result = caseIdentifiableStringValue(fullyQualifiedClass);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.GENERIC_BOOLEAN:
+            {
+                GenericBoolean genericBoolean = (GenericBoolean)theEObject;
+                T result = caseGenericBoolean(genericBoolean);
+                if (result == null) result = caseIdentifiableStringValue(genericBoolean);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.ICON:
+            {
+                Icon icon = (Icon)theEObject;
+                T result = caseIcon(icon);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.JAVA_IDENTIFIER:
+            {
+                JavaIdentifier javaIdentifier = (JavaIdentifier)theEObject;
+                T result = caseJavaIdentifier(javaIdentifier);
+                if (result == null) result = caseIdentifiableStringValue(javaIdentifier);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.PATH:
+            {
+                Path path = (Path)theEObject;
+                T result = casePath(path);
+                if (result == null) result = caseIdentifiableStringValue(path);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.IDENTIFIABLE_STRING_VALUE:
+            {
+                IdentifiableStringValue identifiableStringValue = (IdentifiableStringValue)theEObject;
+                T result = caseIdentifiableStringValue(identifiableStringValue);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.IDENTIFIABLE_LANG_STRING_VALUE:
+            {
+                IdentifiableLangStringValue identifiableLangStringValue = (IdentifiableLangStringValue)theEObject;
+                T result = caseIdentifiableLangStringValue(identifiableLangStringValue);
+                if (result == null) result = caseIdentifiableStringValue(identifiableLangStringValue);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT:
+            {
+                UserVisibleTaglibObject userVisibleTaglibObject = (UserVisibleTaglibObject)theEObject;
+                T result = caseUserVisibleTaglibObject(userVisibleTaglibObject);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -184,161 +328,417 @@ public class FaceletTaglibSwitch<T>
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Facelet Library Class Tag Lib</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Description</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Facelet Library Class Tag Lib</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Description</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseFaceletLibraryClassTagLib(FaceletLibraryClassTagLib object)
+    public T caseDescription(Description object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Facelet XML Defn Taglib</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Display Name</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Facelet XML Defn Taglib</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Display Name</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseFaceletXMLDefnTaglib(FaceletXMLDefnTaglib object)
+    public T caseDisplayName(DisplayName object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Document Root</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Document Root</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseFaceletTaglibDefn(FaceletTaglibDefn object)
+    public T caseDocumentRoot(DocumentRoot object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Component Tag Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Canonical Name</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Component Tag Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Canonical Name</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseComponentTagDefn(ComponentTagDefn object)
+    public T caseFaceletTaglibCanonicalName(FaceletTaglibCanonicalName object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Validator Tag Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Extension</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Validator Tag Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Extension</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseValidatorTagDefn(ValidatorTagDefn object)
+    public T caseFaceletTaglibExtension(FaceletTaglibExtension object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Converter Tag Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Function</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Converter Tag Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Function</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseConverterTagDefn(ConverterTagDefn object)
+    public T caseFaceletTaglibFunction(FaceletTaglibFunction object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Handler Tag Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Tag Attribute</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Handler Tag Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Tag Attribute</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseHandlerTagDefn(HandlerTagDefn object)
+    public T caseFaceletTaglibTagAttribute(FaceletTaglibTagAttribute object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Source Tag Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Tag Behavior Extension</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Source Tag Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Tag Behavior Extension</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseSourceTagDefn(SourceTagDefn object)
+    public T caseFaceletTaglibTagBehaviorExtension(FaceletTaglibTagBehaviorExtension object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Tag Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Tag Behavior</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Tag Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Tag Behavior</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseTagDefn(TagDefn object)
+    public T caseFaceletTaglibTagBehavior(FaceletTaglibTagBehavior object)
     {
         return null;
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>Function Defn</em>'.
+     * Returns the result of interpreting the object as an instance of '<em>Tag Component Extension</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
      * returning a non-null result will terminate the switch.
      * <!-- end-user-doc -->
      * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Function Defn</em>'.
+     * @return the result of interpreting the object as an instance of '<em>Tag Component Extension</em>'.
      * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
      * @generated
      */
-    public T caseFunctionDefn(FunctionDefn object)
+    public T caseFaceletTaglibTagComponentExtension(FaceletTaglibTagComponentExtension object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag Component</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag Component</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTagComponent(FaceletTaglibTagComponent object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag Converter Extension</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag Converter Extension</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTagConverterExtension(FaceletTaglibTagConverterExtension object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag Converter</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag Converter</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTagConverter(FaceletTaglibTagConverter object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag Extension</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag Extension</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTagExtension(FaceletTaglibTagExtension object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTag(FaceletTaglibTag object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag Validator Extension</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag Validator Extension</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTagValidatorExtension(FaceletTaglibTagValidatorExtension object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Tag Validator</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Tag Validator</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglibTagValidator(FaceletTaglibTagValidator object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Facelet Taglib</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Facelet Taglib</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFaceletTaglib(FaceletTaglib object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Fully Qualified Class</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Fully Qualified Class</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseFullyQualifiedClass(FullyQualifiedClass object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Generic Boolean</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Generic Boolean</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseGenericBoolean(GenericBoolean object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Icon</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Icon</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseIcon(Icon object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Java Identifier</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Java Identifier</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseJavaIdentifier(JavaIdentifier object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Path</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Path</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T casePath(Path object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Identifiable String Value</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Identifiable String Value</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseIdentifiableStringValue(IdentifiableStringValue object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Identifiable Lang String Value</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Identifiable Lang String Value</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseIdentifiableLangStringValue(IdentifiableLangStringValue object)
+    {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>User Visible Taglib Object</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>User Visible Taglib Object</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseUserVisibleTaglibObject(UserVisibleTaglibObject object)
     {
         return null;
     }

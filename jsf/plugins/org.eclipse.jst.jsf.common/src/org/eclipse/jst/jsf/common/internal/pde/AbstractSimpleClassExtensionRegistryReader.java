@@ -22,7 +22,11 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
         AbstractRegistryReader<T>
 {
-
+    /**
+     * Indicates no sorting of extension.
+     */
+    protected final static Comparator NO_SORT = null;
+    
     private final String _attributeName;
     private final String _configElementName;
     private final Comparator<SortableExecutableExtension<T>> _comparator;
@@ -88,7 +92,7 @@ public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
 
         if (result.size() > 0)
         {
-            if (_comparator != null)
+            if (_comparator != NO_SORT)
             {
                 Collections.sort(result, _comparator);
             }

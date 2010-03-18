@@ -10,6 +10,10 @@
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.designtime.internal.view.model.jsp;
 
+import java.util.Collections;
+import java.util.Map;
+
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttributeHandler;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.TagAttributeHandler;
 
@@ -28,6 +32,11 @@ public interface IAttributeAdvisor
     ITagAttributeHandler createAttributeHandler(String name) throws UnknownAttributeException;
 
     /**
+     * @return a map of attributes indexed by local name
+     */
+    Map<String, ? extends ITagAttribute> getAttributes();
+
+    /**
      * @author cbateman
      *
      */
@@ -37,6 +46,11 @@ public interface IAttributeAdvisor
                 throws UnknownAttributeException
         {
             return new TagAttributeHandler(null, name, false);
+        }
+
+        public Map<String, ? extends ITagAttribute> getAttributes()
+        {
+            return Collections.emptyMap();
         }
     }
 

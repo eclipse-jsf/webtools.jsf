@@ -22,6 +22,9 @@ import org.eclipse.osgi.util.NLS;
     private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.facelet.core.internal.cm.strategy.messages"; //$NON-NLS-1$
 
 
+    public static String FaceletExternalMetadataStrategy_0;
+
+
     public static String JSPExternalMetadataStrategy_DisplayName;
 
 

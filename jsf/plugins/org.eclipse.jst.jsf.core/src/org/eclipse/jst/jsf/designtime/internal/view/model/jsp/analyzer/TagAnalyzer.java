@@ -819,11 +819,15 @@ public final class TagAnalyzer
         // v1.2(9.2.2): JSF component tags must sub-class UIComponentELTag
         // the original two are included because we must be backward
         // compatible
-        else if (jsfVersion == JSFVersion.V1_2)
+        else if (jsfVersion == JSFVersion.V1_2 || jsfVersion == JSFVersion.V2_0)
         {
             componentTags = COMPONENT_TAG_HANDLER_TYPES_JSF12;
             converterTags = CONVERTER_TAG_HANDLER_TYPES_JSF12;
             validatorTags = VALIDATOR_TAG_HANDLER_TYPES_JSF12;
+        }
+        else 
+        {
+            throw new IllegalArgumentException();
         }
 
         TagType tagType = null;

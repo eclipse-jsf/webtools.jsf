@@ -306,6 +306,10 @@ public final class DTComponentIntrospector
     public static boolean isTypeNameInstanceOfClass(final IType type,
             final Set<String> checkInstanceOf)
     {
+        if (checkInstanceOf == null)
+        {
+            throw new AssertionError();
+        }
         if (type != null)
         {
             // first and foremost, are these exactly droids you're

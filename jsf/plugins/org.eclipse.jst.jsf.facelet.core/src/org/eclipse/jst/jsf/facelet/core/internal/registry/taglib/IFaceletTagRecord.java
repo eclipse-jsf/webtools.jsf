@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.EventObject;
 
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
 
 /**
  * @author cbateman
@@ -40,13 +40,13 @@ public interface IFaceletTagRecord extends Serializable
     /**
      * @return the tag definitions
      */
-    Collection<? extends TagDefn> getTags();
+    Collection<? extends FaceletTaglibTag> getTags();
 
     /**
      * @param name
      * @return the tag definition for name or null.
      */
-    TagDefn getTag(final String name);
+    FaceletTaglibTag getTag(final String name);
 
     /**
      * @param listener

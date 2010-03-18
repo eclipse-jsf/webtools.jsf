@@ -10,11 +10,8 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facelet.core.internal.cm.strategy;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -29,15 +26,16 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManag
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.AttributeCMAdapter;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd.AddTagMDPackage;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd.AttributeData;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd.AttributeUsage;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd.ElementData;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd.provider.IResourceProvider;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.strategy.InternalNamedNodeMap.NullInternalNamedNodeMap;
 import org.eclipse.jst.jsf.facelet.core.internal.util.TagMetadataLoader;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
-import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
 
 /**
  * An external meta-data strategy that uses the JSF meta-data framework.
@@ -127,7 +125,7 @@ public class MDExternalMetadataStrategy extends
      * #perform(org.eclipse.jst.jsf.common.dom.TagIdentifier)
      */
     @Override
-    public ExternalTagInfo perform(final TagIdentifier input) throws Exception
+    public TagInfo perform(final TagIdentifier input) throws Exception
     {
         MDExternalTagInfo tagInfo = _cached.get(input.getUri());
 
@@ -233,84 +231,9 @@ public class MDExternalMetadataStrategy extends
         }
     }
 
-    private static class InternalNamedNodeMap implements CMNamedNodeMap
-    {
-        private final List<CMNode> _nodes = new ArrayList<CMNode>();
-
-        public void add(final CMNode node)
-        {
-            _nodes.add(node);
-        }
-
-        public int getLength()
-        {
-            return _nodes.size();
-        }
-
-        public CMNode getNamedItem(final String name)
-        {
-            for (final CMNode foundNode : _nodes)
-            {
-                if (name.equals(foundNode.getNodeName()))
-                {
-                    return foundNode;
-                }
-            }
-            return null;
-        }
-
-        public CMNode item(final int index)
-        {
-            if (index < _nodes.size())
-            {
-                return _nodes.get(index);
-            }
-            return null;
-        }
-
-        public Iterator<?> iterator()
-        {
-            return Collections.unmodifiableList(_nodes).iterator();
-        }
-    }
-
     private final static NullInternalNamedNodeMap NULL_INSTANCE = new NullInternalNamedNodeMap();
 
-    private static class NullInternalNamedNodeMap extends InternalNamedNodeMap
-    {
 
-        @Override
-        public void add(final CMNode node)
-        {
-            // do nothing
-        }
-
-        @Override
-        public int getLength()
-        {
-            // always empty
-            return 0;
-        }
-
-        @Override
-        public CMNode getNamedItem(final String name)
-        {
-            return null;
-        }
-
-        @Override
-        public CMNode item(final int index)
-        {
-            return null;
-        }
-
-        @Override
-        public Iterator<?> iterator()
-        {
-            return Collections.EMPTY_LIST.iterator();
-        }
-
-    }
 
     // temporary: transfer out to metadata
     final static Map<String, InternalNamedNodeMap> _faceletData;

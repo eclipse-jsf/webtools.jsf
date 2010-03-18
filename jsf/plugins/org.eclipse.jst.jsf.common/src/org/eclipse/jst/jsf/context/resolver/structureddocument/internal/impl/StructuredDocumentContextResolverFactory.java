@@ -242,11 +242,7 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     private ITaglibContextResolver internalGetTaglibContextResolver(
             final IStructuredDocumentContext context)
     {
-        if (context.getStructuredDocument() instanceof IStructuredDocument)
-        {
-            return new TaglibContextResolver(context);
-        }
-
+        // always delegate.  No defaults.
         return null;
     }
 
@@ -295,7 +291,7 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     {
         if (context.getStructuredDocument() instanceof IStructuredDocument)
         {
-            return new MetadataContextResolver(context);
+            return new MetadataContextResolver(this, context);
         }
 
         return null;

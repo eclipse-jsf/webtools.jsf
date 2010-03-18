@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.facelet.core.internal.registry;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
@@ -19,8 +20,8 @@ import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentType
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ConverterTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.decorator.ValidatorTypeInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.types.TypeInfo;
-import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IHandlerTagElement.TagHandlerType;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.mapping.ViewMetadataLoader;
@@ -30,6 +31,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.TagToVie
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.AbstractTagResolvingStrategy;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.DefaultTagTypeInfo;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.FaceletDocumentFactory;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagAttribute;
 import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.ComponentTag;
 import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.ConverterTag;
 import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.HandlerTag;
@@ -78,18 +80,10 @@ public class FaceletMetaResolvingStrategy
     public ITagElement resolve(
             final IFaceletTagResolvingStrategy.TLDWrapper elementDecl)
     {
-        // final IProjectFacetVersion version = JSFAppConfigUtils
-        // .getProjectFacet(_project);
-        // final String versionAsString = version.getVersionString();
-        // final JSFVersion jsfVersion =
-        // JSFVersion.valueOfString(versionAsString);
-
         final String uri = elementDecl.getUri();
-        final String tagName = elementDecl.getTagDefn().getName();
+        final String tagName = elementDecl.getTagDefn().getTagName();
         final TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(
                 uri, tagName);
-        // final DefaultTagTypeInfo defaultTagTypeInfo = new
-        // DefaultTagTypeInfo();
         final TagMapping mapping = _loader.getTagToViewMapping(tagId);
 
         TypeInfo elementType = null;
@@ -97,35 +91,36 @@ public class FaceletMetaResolvingStrategy
         {
             elementType = findTypeInfo(mapping, "1.1", null); //$NON-NLS-1$
         }
-
+        final List<FaceletTaglibTagAttribute>  attributes = 
+            elementDecl.getTagDefn().getAttribute();
         if (elementType instanceof ComponentTypeInfo)
         {
             return new ComponentTag(uri, tagName,
                     (ComponentTypeInfo) elementType, null, _factory,
-                    new MetadataAttributeAdvisor(tagId, _loader));
+                    new MetadataAttributeAdvisor(tagId, _loader, attributes));
         }
         else if (elementType instanceof ConverterTypeInfo)
         {
             return new ConverterTag(uri, tagName,
                     (ConverterTypeInfo) elementType, null, _factory,
-                    new MetadataAttributeAdvisor(tagId, _loader));
+                    new MetadataAttributeAdvisor(tagId, _loader, attributes));
         }
         else if (elementType instanceof ValidatorTypeInfo)
         {
             return new ValidatorTag(uri, tagName,
                     (ValidatorTypeInfo) elementType, null, _factory,
-                    new MetadataAttributeAdvisor(tagId, _loader));
+                    new MetadataAttributeAdvisor(tagId, _loader, attributes));
         }
         else if (elementType instanceof TagHandlerType)
         {
             return new HandlerTag(uri, tagName,
                     (TagHandlerType) elementType, null, _factory,
                     new MetadataAttributeAdvisor(
-                            tagId, _loader));
+                            tagId, _loader, attributes));
         }
         else if (DefaultTagTypeInfo.isDefaultLib(tagId.getUri()))
         {
-            return new NoArchetypeFaceletTag(uri, tagName, _factory, new MetadataAttributeAdvisor(tagId, _loader));
+            return new NoArchetypeFaceletTag(uri, tagName, _factory, new MetadataAttributeAdvisor(tagId, _loader, attributes));
         }
 
         // not found

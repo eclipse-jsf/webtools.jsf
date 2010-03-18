@@ -16,9 +16,9 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
 class ElementCMAdapter implements CMElementDeclaration, CMNamedNodeMap
 {
     private final ITagElement  _tagElement;
-    private final ExternalTagInfo _tLDTagInfo;
+    private final TagInfo _tLDTagInfo;
 
-    ElementCMAdapter(final ITagElement tagElement, final ExternalTagInfo tldTagInfo)
+    ElementCMAdapter(final ITagElement tagElement, final TagInfo tldTagInfo)
     {
         _tagElement = tagElement;
         _tLDTagInfo = tldTagInfo;

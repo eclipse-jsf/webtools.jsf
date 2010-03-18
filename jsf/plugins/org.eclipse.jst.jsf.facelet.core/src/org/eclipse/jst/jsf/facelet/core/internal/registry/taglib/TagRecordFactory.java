@@ -15,9 +15,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jem.internal.proxy.core.ICallbackRegistry;
 import org.eclipse.jem.internal.proxy.core.ProxyFactoryRegistry;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletLibraryClassTagLib;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletXMLDefnTaglib;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.FaceletLibraryClassTagLib;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.FaceletXMLDefnTaglib;
 
 /*package*/class TagRecordFactory
 {
@@ -31,7 +31,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
         _project = project;
     }
 
-    public IFaceletTagRecord createRecords(final  FaceletTaglibDefn taglibDefn)
+    public IFaceletTagRecord createRecords(final FaceletTaglib taglibDefn)
     {
         IFaceletTagRecord  retValue = null;
 
@@ -54,9 +54,15 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
         }
         else if (taglibDefn instanceof FaceletXMLDefnTaglib)
         {
-            final XMLBasedTagRecord record = new XMLBasedTagRecord(
-                    (FaceletXMLDefnTaglib) taglibDefn);
-            retValue = record;
+            throw new UnsupportedOperationException();
+//            final XMLBasedTagRecord record = new XMLBasedTagRecord(
+//                    (FaceletXMLDefnTaglib) taglibDefn);
+//            retValue = record;
+        }
+        else
+        {
+            final XMLBasedTagRecord record = new XMLBasedTagRecord(taglibDefn);
+          retValue = record;
         }
         return retValue;
     }

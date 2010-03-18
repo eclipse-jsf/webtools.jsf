@@ -25,7 +25,6 @@ import org.eclipse.jem.internal.proxy.core.ConfigurationContributorAdapter;
 import org.eclipse.jem.internal.proxy.core.IConfigurationContributionController;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
 import org.osgi.framework.Bundle;
 
 class ServletBeanProxyContributor extends ConfigurationContributorAdapter
@@ -101,31 +100,7 @@ class ServletBeanProxyContributor extends ConfigurationContributorAdapter
 
     static JSFVersion getProjectVersion(final IProject project)
     {
-        try
-        {
-            if (FacetedProjectFramework.hasProjectFacet(project, "jst.jsf", //$NON-NLS-1$
-                    "1.0")) //$NON-NLS-1$
-            {
-                return JSFVersion.V1_0;
-            }
-            else if (FacetedProjectFramework.hasProjectFacet(project,
-                    "jst.jsf", "1.1")) //$NON-NLS-1$ //$NON-NLS-2$
-            {
-                return JSFVersion.V1_1;
-            }
-            else if (FacetedProjectFramework.hasProjectFacet(project,
-                    "jst.jsf", "1.2")) //$NON-NLS-1$ //$NON-NLS-2$
-            {
-                return JSFVersion.V1_2;
-            }
-        }
-        catch (final CoreException e)
-        {
-            JSFCorePlugin.log("checking project version", e); //$NON-NLS-1$
-            // fall-through
-        }
-
-        return null;
+        return JSFVersion.valueOfProject(project);
     }
 
 }

@@ -49,6 +49,11 @@ public class JSFCorePlugin extends WTPPlugin
     public static final String             PLUGIN_ID = "org.eclipse.jst.jsf.core"; // org.eclipse.jst.jsf.core.internal.JSFCorePlugin"; //$NON-NLS-1$
     // //$NON-NLS-1$
 
+    /**
+     * The extension point id (plugin relative) for the tag registry factory provider.
+     */
+    public static final String             TAG_REGISTRY_FACTORY_PROVIDER_ID = "tagRegistryFactory"; //$NON-NLS-1$
+
     // The shared instance.
     private static JSFCorePlugin           plugin;
 

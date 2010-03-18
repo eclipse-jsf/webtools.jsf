@@ -9,7 +9,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.ITagResolvingStrategy;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.IFaceletTagResolvingStrategy.TLDWrapper;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.IFaceletTagRecord;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
 
 /**
  * A description about a facelet tag library descriptor (facelet-taglib_1_0.dtd)
@@ -109,9 +109,9 @@ public class FaceletNamespace extends
         {
             if (!isInitialized())
             {
-                for (final TagDefn tagDefn : _record.getTags())
+                for (final FaceletTaglibTag tagDefn : _record.getTags())
                 {
-                    getViewElement(tagDefn.getName());
+                    getViewElement(tagDefn.getTagName());
                 }
             }
             return _tags;
@@ -120,7 +120,7 @@ public class FaceletNamespace extends
         @Override
         public synchronized ITagElement getViewElement(final String name)
         {
-            final TagDefn tagDefn = _record.getTag(name);
+            final FaceletTaglibTag tagDefn = _record.getTag(name);
             if (tagDefn != null)
             {
                 return getAndInitIfMissing(tagDefn);
@@ -128,14 +128,14 @@ public class FaceletNamespace extends
             return null;
         }
 
-        private ITagElement getAndInitIfMissing(final TagDefn tagDefn)
+        private ITagElement getAndInitIfMissing(final FaceletTaglibTag tagDefn)
         {
-            ITagElement tagElement = _tags.get(tagDefn.getName());
+            ITagElement tagElement = _tags.get(tagDefn.getTagName());
             if (tagElement == null)
             {
                 tagElement = _resolver
                         .resolve(new TLDWrapper(tagDefn, getUri()));
-                _tags.put(tagDefn.getName(), tagElement);
+                _tags.put(tagDefn.getTagName(), tagElement);
             }
             return tagElement;
         }

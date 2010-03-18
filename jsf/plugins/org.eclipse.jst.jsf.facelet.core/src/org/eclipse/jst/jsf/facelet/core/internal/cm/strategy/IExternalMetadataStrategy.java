@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.facelet.core.internal.cm.strategy;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.internal.strategy.IIdentifiableStrategy;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 
 /**
  * A strategy whose algorithm loads the tag CM data for a tag.
@@ -21,7 +22,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
  * 
  */
 public interface IExternalMetadataStrategy extends
-        IIdentifiableStrategy<TagIdentifier, ExternalTagInfo, String>
+        IIdentifiableStrategy<TagIdentifier, TagInfo, String>
 {
     
     /**
@@ -32,12 +33,12 @@ public interface IExternalMetadataStrategy extends
     static class NullExternalMetadataStrategy implements IExternalMetadataStrategy
     {
 
-        public ExternalTagInfo getNoResult()
+        public TagInfo getNoResult()
         {
             return ExternalTagInfo.NULL_INSTANCE;
         }
 
-        public ExternalTagInfo perform(TagIdentifier input) throws Exception
+        public TagInfo perform(TagIdentifier input) throws Exception
         {
             return getNoResult();
         }

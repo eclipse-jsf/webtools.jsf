@@ -23,7 +23,6 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextRes
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
@@ -201,10 +200,6 @@ IStructuredDocumentContextResolverFactory, IAdaptable
                 return adapter.mapToTagElement(element, _context
                         .getStructuredDocument());
             }
-            // shouldn't happen since the constuctor throws an exceptino
-            // if can't get the adapter
-            JSFCorePlugin.log("Unexpected case", //$NON-NLS-1$
-                    new Throwable(_file.toString()));
             return null;
         }
     }

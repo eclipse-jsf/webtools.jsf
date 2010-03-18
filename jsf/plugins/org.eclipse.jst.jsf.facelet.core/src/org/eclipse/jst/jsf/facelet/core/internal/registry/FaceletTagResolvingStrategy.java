@@ -13,12 +13,12 @@ import org.eclipse.jst.jsf.designtime.internal.view.mapping.ViewMetadataLoader;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.AbstractTagResolvingStrategy;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.FaceletDocumentFactory;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ComponentTagDefn;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ConverterTagDefn;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.HandlerTagDefn;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.SourceTagDefn;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ValidatorTagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.ComponentTagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.ConverterTagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.HandlerTagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.SourceTagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.ValidatorTagDefn;
 import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.ComponentTag;
 import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.ConverterTag;
 import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.FaceletTag;
@@ -62,14 +62,14 @@ import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.ValidatorTag;
         return Messages.FaceletTagResolvingStrategy_FACELET_TAG_RESOLVER_DISPLAY_NAME;
     }
 
-    private FaceletTag createFaceletTag(final String uri, final TagDefn tagDefn)
+    private FaceletTag createFaceletTag(final String uri, final FaceletTaglibTag tagDefn)
     {
-        final String tagName = tagDefn.getName();
+        final String tagName = tagDefn.getTagName();
         final TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(
                 uri, tagName);
 
         final IAttributeAdvisor advisor = new MetadataAttributeAdvisor(tagId,
-                _viewLoader);
+                _viewLoader, tagDefn.getAttribute());
 
         if (tagDefn instanceof ComponentTagDefn)
         {

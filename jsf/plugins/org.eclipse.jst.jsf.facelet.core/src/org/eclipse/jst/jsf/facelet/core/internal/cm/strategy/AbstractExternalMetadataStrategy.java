@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.facelet.core.internal.cm.strategy;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 
 /**
  * Super class of all external meta-data strategy.
@@ -32,13 +33,13 @@ IExternalMetadataStrategy
         _displayName = displayName;
     }
 
-    public final ExternalTagInfo getNoResult()
+    public final TagInfo getNoResult()
     {
         // this value must be "==" comparable
         return ExternalTagInfo.NULL_INSTANCE;
     }
 
-    public abstract ExternalTagInfo perform(TagIdentifier input) throws Exception;
+    public abstract TagInfo perform(TagIdentifier input) throws Exception;
 
     public final String getDisplayName()
     {

@@ -90,22 +90,26 @@ public class DefaultJSPTagResolver extends JSPTagResolvingStrategy
         if (elementType instanceof ComponentTypeInfo)
         {
             return new TLDComponentTagElement(elementDecl,
-                    (ComponentTypeInfo) elementType, new MetadataAttributeAdvisor(tagId, _loader));
+                    (ComponentTypeInfo) elementType, 
+                    new MetadataAttributeAdvisor(tagId, _loader, elementDecl));
         }
         else if (elementType instanceof ConverterTypeInfo)
         {
             return new TLDConverterTagElement(elementDecl,
-                    (ConverterTypeInfo) elementType, new MetadataAttributeAdvisor(tagId, _loader));
+                    (ConverterTypeInfo) elementType, 
+                    new MetadataAttributeAdvisor(tagId, _loader, elementDecl));
         }
         else if (elementType instanceof ValidatorTypeInfo)
         {
             return new TLDValidatorTagElement(elementDecl,
-                    (ValidatorTypeInfo) elementType, new MetadataAttributeAdvisor(tagId, _loader));
+                    (ValidatorTypeInfo) elementType, 
+                    new MetadataAttributeAdvisor(tagId, _loader, elementDecl));
         }
         else if (elementType instanceof TagHandlerType)
         {
             return new TLDTagHandlerElement(elementDecl,
-                    (TagHandlerType) elementType, new MetadataAttributeAdvisor(tagId, _loader));
+                    (TagHandlerType) elementType, 
+                    new MetadataAttributeAdvisor(tagId, _loader, elementDecl));
         }
         else if (DefaultTagTypeInfo.isDefaultLib(tagId.getUri()))
         {

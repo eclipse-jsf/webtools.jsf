@@ -34,7 +34,8 @@ import org.w3c.dom.NodeList;
  * Default taglib context resolver
  * 
  * @author cbateman
- *
+ * @deprecated Use ViewBasedTaglibResolver instead.  This impl will be removed
+ * post-Helios.
  */
 class TaglibContextResolver implements ITaglibContextResolver 
 {

@@ -3,10 +3,11 @@ package org.eclipse.jst.jsf.facelet.core.internal.tagmodel;
 import java.util.Map;
 
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IJSFTagElement;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.TagElement;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor;
-import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.FaceletDocumentFactory;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 
 /**
  * A description of the a facelet tag
@@ -25,6 +26,7 @@ public abstract class FaceletTag extends TagElement implements IJSFTagElement
     private final TagType                        _type;
     private final String                         _tagHandlerClass;
     private final AttributeHandlerMapAdapter     _attributeHandlerMapAdapter;
+    private final IAttributeAdvisor              _advisor;
 
     /**
      * @param uri
@@ -43,8 +45,9 @@ public abstract class FaceletTag extends TagElement implements IJSFTagElement
         _name = name;
         _type = type;
         _tagHandlerClass = tagHandlerClassName;
-        final ExternalTagInfo tagInfo = docFactory.getOrCreateExtraTagInfo(uri);
+        final TagInfo tagInfo = docFactory.getOrCreateExtraTagInfo(uri);
         _attributeHandlerMapAdapter = new AttributeHandlerMapAdapter(tagInfo, advisor, name);
+        _advisor = advisor;
     }
 
     /**
@@ -83,6 +86,11 @@ public abstract class FaceletTag extends TagElement implements IJSFTagElement
     public Map<?, ?> getAttributeHandlers()
     {
         return _attributeHandlerMapAdapter;
+    }
+
+    public Map<String, ? extends ITagAttribute> getAttributes()
+    {
+        return _advisor.getAttributes();
     }
 
 }

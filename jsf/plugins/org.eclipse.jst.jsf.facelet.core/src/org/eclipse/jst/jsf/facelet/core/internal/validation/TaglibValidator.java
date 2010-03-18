@@ -28,7 +28,7 @@ import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.TagModelParser;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.FaceletTaglibDefn;
 import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil;
 import org.eclipse.jst.jsp.core.internal.Logger;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;

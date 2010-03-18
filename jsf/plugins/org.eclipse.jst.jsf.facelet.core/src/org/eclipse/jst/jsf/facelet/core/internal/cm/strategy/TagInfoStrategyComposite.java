@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.internal.policy.IdentifierOrderedIteratorPolicy;
 import org.eclipse.jst.jsf.common.internal.strategy.IteratorPolicyBasedStrategyComposite;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 
 /**
  * A composite of strategies for deriving external tag metadata.
@@ -26,7 +27,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
  */
 public class TagInfoStrategyComposite
         extends
-        IteratorPolicyBasedStrategyComposite<TagIdentifier, ExternalTagInfo, ExternalTagInfo, String, IExternalMetadataStrategy>
+        IteratorPolicyBasedStrategyComposite<TagIdentifier, TagInfo, TagInfo, String, IExternalMetadataStrategy>
 {
     private final Iterable<String> _policyOrder;
 
@@ -40,7 +41,7 @@ public class TagInfoStrategyComposite
     }
 
     @Override
-    public ExternalTagInfo getNoResult()
+    public TagInfo getNoResult()
     {
         return ExternalTagInfo.NULL_INSTANCE;
     }

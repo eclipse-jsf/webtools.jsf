@@ -56,7 +56,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
             final ITagElement tagElement = _ns.getViewElement(localname);
             if (tagElement != null)
             {
-                ExternalTagInfo tagInfo = _factory.getOrCreateExtraTagInfo(_ns.getNSUri());
+                TagInfo tagInfo = _factory.getOrCreateExtraTagInfo(_ns.getNSUri());
                 element = new ElementCMAdapter(tagElement, tagInfo);
                 _elements.put(localname, element);
             }

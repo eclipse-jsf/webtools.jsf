@@ -373,7 +373,7 @@ public class ELValidationPreferences implements IJSFPreferenceModel
             case DiagnosticFactory.MEMBER_NOT_FOUND_ID:
                 return Diagnostic.WARNING;
             case DiagnosticFactory.VARIABLE_NOT_FOUND_ID:
-                return Diagnostic.WARNING;
+                return Diagnostic.INFO;
             case DiagnosticFactory.MISSING_CLOSING_EXPR_BRACKET_ID:
                 return Diagnostic.ERROR;
             case DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID:

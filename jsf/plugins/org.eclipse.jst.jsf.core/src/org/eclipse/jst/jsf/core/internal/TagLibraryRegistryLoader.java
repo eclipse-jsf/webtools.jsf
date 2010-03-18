@@ -30,13 +30,13 @@ import org.eclipse.core.runtime.IExtensionPoint;
     private final static String              EXTENSION_ID = "tagregistry"; //$NON-NLS-1$
     private final static String              ELEMENT_NAME = "tagRegistry"; //$NON-NLS-1$
 
-    private static Set<TagRegistryFactoryInfo> _extensions;
+    private static Set<ITagRegistryFactoryInfo> _extensions;
 
     /**
      * @return the list of handlers. The list is not modifiable and will throw
      *         exceptions if it is attempted.
      */
-    public static synchronized Set<TagRegistryFactoryInfo> getAllHandlers()
+    public static synchronized Set<ITagRegistryFactoryInfo> getAllHandlers()
     {
         if (_extensions == null)
         {
@@ -46,9 +46,9 @@ import org.eclipse.core.runtime.IExtensionPoint;
 
     }
 
-    private static Set<TagRegistryFactoryInfo> readAllHandlers()
+    private static Set<ITagRegistryFactoryInfo> readAllHandlers()
     {
-        Set<TagRegistryFactoryInfo> result = new HashSet<TagRegistryFactoryInfo>();
+        Set<ITagRegistryFactoryInfo> result = new HashSet<ITagRegistryFactoryInfo>();
         IExtensionPoint extensionPoint = JSFCorePlugin.getDefault()
                 .getExtension(EXTENSION_ID);
         IExtension[] extensions = extensionPoint.getExtensions();

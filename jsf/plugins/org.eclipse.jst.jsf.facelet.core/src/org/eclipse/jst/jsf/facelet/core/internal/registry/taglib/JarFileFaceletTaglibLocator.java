@@ -22,8 +22,6 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -34,8 +32,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.common.internal.strategy.SimpleStrategyComposite;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn;
-import org.xml.sax.SAXException;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
 
 /**
  * A locator that finds Facelet taglibs in jars on the classpath
@@ -105,8 +102,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
         final IClasspathEntry[] entries = javaProject
                 .getResolvedClasspath(true);
 
-        final List<FaceletTaglibDefn> tagLibsFound = new ArrayList<FaceletTaglibDefn>();
-
+        final List<FaceletTaglib> tagLibsFound = new ArrayList<FaceletTaglib>();
         for (final IClasspathEntry entry : entries)
         {
 
@@ -149,7 +145,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             }
         }
 
-        for (final FaceletTaglibDefn tag : tagLibsFound)
+        for (final FaceletTaglib tag : tagLibsFound)
         {
             IFaceletTagRecord record = _factory.createRecords(tag);
             if (record != null)
@@ -196,10 +192,10 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      * @param entry
      * @param defaultDtdStream
      */
-    private List<FaceletTaglibDefn> processJar(final IClasspathEntry entry)
+    private List<FaceletTaglib> processJar(final IClasspathEntry entry)
     {
         JarFile jarFile = null;
-        final List<FaceletTaglibDefn> tagLibsFound = new ArrayList<FaceletTaglibDefn>();
+        final List<FaceletTaglib> tagLibsFound = new ArrayList<FaceletTaglib>();
 
         try
         {
@@ -225,33 +221,22 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                             try
                             {
                                 is = jarFile.getInputStream(jarEntry);
-
-                                FaceletTaglibDefn tagLib = TagModelParser
-                                        .loadFromInputStream(is, null);
+                                TagModelLoader loader = new TagModelLoader(jarEntry.getName());
+                                loader.loadFromInputStream(is);
+                                FaceletTaglib tagLib = loader.getTaglib();
 
                                 if (tagLib != null)
                                 {
                                     tagLibsFound.add(tagLib);
                                 }
-                            } catch (final ParserConfigurationException e)
+                            } catch (final Exception e)
                             {
                                 FaceletCorePlugin
                                         .log(
                                                 "Error initializing facelet registry entry", //$NON-NLS-1$
                                                 e);
-                            } catch (final IOException ioe)
-                            {
-                                FaceletCorePlugin
-                                        .log(
-                                                "Error initializing facelet registry entry", //$NON-NLS-1$
-                                                ioe);
-                            } catch (final SAXException ioe)
-                            {
-                                FaceletCorePlugin
-                                        .log(
-                                                "Error initializing facelet registry entry", //$NON-NLS-1$
-                                                ioe);
-                            } finally
+                            }
+                            finally
                             {
                                 if (is != null)
                                 {

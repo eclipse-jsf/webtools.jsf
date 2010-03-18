@@ -22,6 +22,8 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
@@ -36,12 +38,16 @@ import org.w3c.dom.Node;
 class MetadataContextResolver implements IMetadataContextResolver 
 {
     private final IStructuredDocumentContext        _context;
+    private final IStructuredDocumentContextResolverFactory2 _factory;
     
     /**
+     * @param factory 
      * @param context
      */
-    public MetadataContextResolver(IStructuredDocumentContext context)
+    public MetadataContextResolver(final IStructuredDocumentContextResolverFactory2 factory,
+            final IStructuredDocumentContext context)
     {
+        _factory = factory;
         _context = context;
     }
     
@@ -49,9 +55,8 @@ class MetadataContextResolver implements IMetadataContextResolver
     {
         final DOMContextResolver domResolver = new DOMContextResolver(_context);
         final WorkspaceContextResolver wsResolver = new WorkspaceContextResolver(_context);
-        final TaglibContextResolver  tagResolver =
-            new TaglibContextResolver(_context);
-        
+        final ITaglibContextResolver  tagResolver =
+            _factory.getTaglibContextResolverFromDelegates(_context);
         final Node curNode = domResolver.getNode();
         
         if (curNode instanceof Attr)

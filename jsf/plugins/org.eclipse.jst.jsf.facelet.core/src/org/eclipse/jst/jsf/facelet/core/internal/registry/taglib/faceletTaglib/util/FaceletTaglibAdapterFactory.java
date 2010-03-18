@@ -2,18 +2,41 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FaceletTaglibAdapterFactory.java,v 1.1 2010/03/08 18:49:43 cbateman Exp $
+ * $Id: FaceletTaglibAdapterFactory.java,v 1.2 2010/03/18 06:24:40 cbateman Exp $
  */
 package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.*;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Description;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DisplayName;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DocumentRoot;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibCanonicalName;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibFunction;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibPackage;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagAttribute;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehavior;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehaviorExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponent;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponentExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverter;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverterExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidator;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidatorExtension;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FullyQualifiedClass;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.GenericBoolean;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Icon;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableLangStringValue;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableStringValue;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.JavaIdentifier;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Path;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.UserVisibleTaglibObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,54 +102,134 @@ public class FaceletTaglibAdapterFactory extends AdapterFactoryImpl
         new FaceletTaglibSwitch<Adapter>()
         {
             @Override
-            public Adapter caseFaceletLibraryClassTagLib(FaceletLibraryClassTagLib object)
+            public Adapter caseDescription(Description object)
             {
-                return createFaceletLibraryClassTagLibAdapter();
+                return createDescriptionAdapter();
             }
             @Override
-            public Adapter caseFaceletXMLDefnTaglib(FaceletXMLDefnTaglib object)
+            public Adapter caseDisplayName(DisplayName object)
             {
-                return createFaceletXMLDefnTaglibAdapter();
+                return createDisplayNameAdapter();
             }
             @Override
-            public Adapter caseFaceletTaglibDefn(FaceletTaglibDefn object)
+            public Adapter caseDocumentRoot(DocumentRoot object)
             {
-                return createFaceletTaglibDefnAdapter();
+                return createDocumentRootAdapter();
             }
             @Override
-            public Adapter caseComponentTagDefn(ComponentTagDefn object)
+            public Adapter caseFaceletTaglibCanonicalName(FaceletTaglibCanonicalName object)
             {
-                return createComponentTagDefnAdapter();
+                return createFaceletTaglibCanonicalNameAdapter();
             }
             @Override
-            public Adapter caseValidatorTagDefn(ValidatorTagDefn object)
+            public Adapter caseFaceletTaglibExtension(FaceletTaglibExtension object)
             {
-                return createValidatorTagDefnAdapter();
+                return createFaceletTaglibExtensionAdapter();
             }
             @Override
-            public Adapter caseConverterTagDefn(ConverterTagDefn object)
+            public Adapter caseFaceletTaglibFunction(FaceletTaglibFunction object)
             {
-                return createConverterTagDefnAdapter();
+                return createFaceletTaglibFunctionAdapter();
             }
             @Override
-            public Adapter caseHandlerTagDefn(HandlerTagDefn object)
+            public Adapter caseFaceletTaglibTagAttribute(FaceletTaglibTagAttribute object)
             {
-                return createHandlerTagDefnAdapter();
+                return createFaceletTaglibTagAttributeAdapter();
             }
             @Override
-            public Adapter caseSourceTagDefn(SourceTagDefn object)
+            public Adapter caseFaceletTaglibTagBehaviorExtension(FaceletTaglibTagBehaviorExtension object)
             {
-                return createSourceTagDefnAdapter();
+                return createFaceletTaglibTagBehaviorExtensionAdapter();
             }
             @Override
-            public Adapter caseTagDefn(TagDefn object)
+            public Adapter caseFaceletTaglibTagBehavior(FaceletTaglibTagBehavior object)
             {
-                return createTagDefnAdapter();
+                return createFaceletTaglibTagBehaviorAdapter();
             }
             @Override
-            public Adapter caseFunctionDefn(FunctionDefn object)
+            public Adapter caseFaceletTaglibTagComponentExtension(FaceletTaglibTagComponentExtension object)
             {
-                return createFunctionDefnAdapter();
+                return createFaceletTaglibTagComponentExtensionAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTagComponent(FaceletTaglibTagComponent object)
+            {
+                return createFaceletTaglibTagComponentAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTagConverterExtension(FaceletTaglibTagConverterExtension object)
+            {
+                return createFaceletTaglibTagConverterExtensionAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTagConverter(FaceletTaglibTagConverter object)
+            {
+                return createFaceletTaglibTagConverterAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTagExtension(FaceletTaglibTagExtension object)
+            {
+                return createFaceletTaglibTagExtensionAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTag(FaceletTaglibTag object)
+            {
+                return createFaceletTaglibTagAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTagValidatorExtension(FaceletTaglibTagValidatorExtension object)
+            {
+                return createFaceletTaglibTagValidatorExtensionAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglibTagValidator(FaceletTaglibTagValidator object)
+            {
+                return createFaceletTaglibTagValidatorAdapter();
+            }
+            @Override
+            public Adapter caseFaceletTaglib(FaceletTaglib object)
+            {
+                return createFaceletTaglibAdapter();
+            }
+            @Override
+            public Adapter caseFullyQualifiedClass(FullyQualifiedClass object)
+            {
+                return createFullyQualifiedClassAdapter();
+            }
+            @Override
+            public Adapter caseGenericBoolean(GenericBoolean object)
+            {
+                return createGenericBooleanAdapter();
+            }
+            @Override
+            public Adapter caseIcon(Icon object)
+            {
+                return createIconAdapter();
+            }
+            @Override
+            public Adapter caseJavaIdentifier(JavaIdentifier object)
+            {
+                return createJavaIdentifierAdapter();
+            }
+            @Override
+            public Adapter casePath(Path object)
+            {
+                return createPathAdapter();
+            }
+            @Override
+            public Adapter caseIdentifiableStringValue(IdentifiableStringValue object)
+            {
+                return createIdentifiableStringValueAdapter();
+            }
+            @Override
+            public Adapter caseIdentifiableLangStringValue(IdentifiableLangStringValue object)
+            {
+                return createIdentifiableLangStringValueAdapter();
+            }
+            @Override
+            public Adapter caseUserVisibleTaglibObject(UserVisibleTaglibObject object)
+            {
+                return createUserVisibleTaglibObjectAdapter();
             }
             @Override
             public Adapter defaultCase(EObject object)
@@ -151,151 +254,391 @@ public class FaceletTaglibAdapterFactory extends AdapterFactoryImpl
 
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletLibraryClassTagLib <em>Facelet Library Class Tag Lib</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Description <em>Description</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletLibraryClassTagLib
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Description
      * @generated
      */
-    public Adapter createFaceletLibraryClassTagLibAdapter()
+    public Adapter createDescriptionAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletXMLDefnTaglib <em>Facelet XML Defn Taglib</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DisplayName <em>Display Name</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletXMLDefnTaglib
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DisplayName
      * @generated
      */
-    public Adapter createFaceletXMLDefnTaglibAdapter()
+    public Adapter createDisplayNameAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn <em>Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DocumentRoot <em>Document Root</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.DocumentRoot
      * @generated
      */
-    public Adapter createFaceletTaglibDefnAdapter()
+    public Adapter createDocumentRootAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ComponentTagDefn <em>Component Tag Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibCanonicalName <em>Canonical Name</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ComponentTagDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibCanonicalName
      * @generated
      */
-    public Adapter createComponentTagDefnAdapter()
+    public Adapter createFaceletTaglibCanonicalNameAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ValidatorTagDefn <em>Validator Tag Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibExtension <em>Extension</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ValidatorTagDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibExtension
      * @generated
      */
-    public Adapter createValidatorTagDefnAdapter()
+    public Adapter createFaceletTaglibExtensionAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ConverterTagDefn <em>Converter Tag Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibFunction <em>Function</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.ConverterTagDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibFunction
      * @generated
      */
-    public Adapter createConverterTagDefnAdapter()
+    public Adapter createFaceletTaglibFunctionAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.HandlerTagDefn <em>Handler Tag Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagAttribute <em>Tag Attribute</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.HandlerTagDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagAttribute
      * @generated
      */
-    public Adapter createHandlerTagDefnAdapter()
+    public Adapter createFaceletTaglibTagAttributeAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.SourceTagDefn <em>Source Tag Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehaviorExtension <em>Tag Behavior Extension</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.SourceTagDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehaviorExtension
      * @generated
      */
-    public Adapter createSourceTagDefnAdapter()
+    public Adapter createFaceletTaglibTagBehaviorExtensionAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn <em>Tag Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehavior <em>Tag Behavior</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagBehavior
      * @generated
      */
-    public Adapter createTagDefnAdapter()
+    public Adapter createFaceletTaglibTagBehaviorAdapter()
     {
         return null;
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FunctionDefn <em>Function Defn</em>}'.
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponentExtension <em>Tag Component Extension</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FunctionDefn
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponentExtension
      * @generated
      */
-    public Adapter createFunctionDefnAdapter()
+    public Adapter createFaceletTaglibTagComponentExtensionAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponent <em>Tag Component</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagComponent
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagComponentAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverterExtension <em>Tag Converter Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverterExtension
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagConverterExtensionAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverter <em>Tag Converter</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagConverter
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagConverterAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagExtension <em>Tag Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagExtension
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagExtensionAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag <em>Tag</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidatorExtension <em>Tag Validator Extension</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidatorExtension
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagValidatorExtensionAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidator <em>Tag Validator</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTagValidator
+     * @generated
+     */
+    public Adapter createFaceletTaglibTagValidatorAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib <em>Facelet Taglib</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib
+     * @generated
+     */
+    public Adapter createFaceletTaglibAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FullyQualifiedClass <em>Fully Qualified Class</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FullyQualifiedClass
+     * @generated
+     */
+    public Adapter createFullyQualifiedClassAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.GenericBoolean <em>Generic Boolean</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.GenericBoolean
+     * @generated
+     */
+    public Adapter createGenericBooleanAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Icon <em>Icon</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Icon
+     * @generated
+     */
+    public Adapter createIconAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.JavaIdentifier <em>Java Identifier</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.JavaIdentifier
+     * @generated
+     */
+    public Adapter createJavaIdentifierAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Path <em>Path</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Path
+     * @generated
+     */
+    public Adapter createPathAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableStringValue <em>Identifiable String Value</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableStringValue
+     * @generated
+     */
+    public Adapter createIdentifiableStringValueAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableLangStringValue <em>Identifiable Lang String Value</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableLangStringValue
+     * @generated
+     */
+    public Adapter createIdentifiableLangStringValueAdapter()
+    {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.UserVisibleTaglibObject <em>User Visible Taglib Object</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.UserVisibleTaglibObject
+     * @generated
+     */
+    public Adapter createUserVisibleTaglibObjectAdapter()
     {
         return null;
     }

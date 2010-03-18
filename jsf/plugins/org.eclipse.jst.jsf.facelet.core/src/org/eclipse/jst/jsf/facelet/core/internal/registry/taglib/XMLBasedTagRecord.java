@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletXMLDefnTaglib;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
 
 /**
  * A tag record based on an xml tag defined Facelet taglib.xml
@@ -29,13 +29,13 @@ public class XMLBasedTagRecord extends FaceletTagRecord
      * 
      */
     private static final long serialVersionUID = 1411551451386954263L;
-    private final FaceletXMLDefnTaglib _taglibDefn;
-    private Map<String, TagDefn>       _tagIndexByName;
+    private final FaceletTaglib _taglibDefn;
+    private Map<String, FaceletTaglibTag>       _tagIndexByName;
 
     /**
      * @param taglibDefn
      */
-    public XMLBasedTagRecord(final FaceletXMLDefnTaglib taglibDefn)
+    public XMLBasedTagRecord(final FaceletTaglib taglibDefn)
     {
         _taglibDefn = taglibDefn;
     }
@@ -43,30 +43,30 @@ public class XMLBasedTagRecord extends FaceletTagRecord
     @Override
     public String getURI()
     {
-        return _taglibDefn.getNamespace();
+        return _taglibDefn.getNamespaceUri();
     }
 
 
     @Override
-    public TagDefn getTag(final String name)
+    public FaceletTaglibTag getTag(final String name)
     {
         return getAndIndexElementDeclaration(name);
     }
 
-    private synchronized TagDefn getAndIndexElementDeclaration(final String name)
+    private synchronized FaceletTaglibTag getAndIndexElementDeclaration(final String name)
     {
-        TagDefn tagDefn = null;
+        FaceletTaglibTag tagDefn = null;
 
         if (_tagIndexByName == null)
         {
-            _tagIndexByName = new HashMap<String, TagDefn>();
+            _tagIndexByName = new HashMap<String, FaceletTaglibTag>();
         }
         else
         {
             tagDefn = _tagIndexByName.get(name);
         }
 
-        if (tagDefn == null && _tagIndexByName.size() < _taglibDefn.getTags().size())
+        if (tagDefn == null && _tagIndexByName.size() < _taglibDefn.getTag().size())
         {
             tagDefn = findTag(name);
         }
@@ -74,11 +74,11 @@ public class XMLBasedTagRecord extends FaceletTagRecord
         return tagDefn;
     }
 
-    private TagDefn findTag(final String name)
+    private FaceletTaglibTag findTag(final String name)
     {
-        for (final TagDefn tag : _taglibDefn.getTags())
+        for (final FaceletTaglibTag tag : _taglibDefn.getTag())
         {
-            if (name.equals(tag.getName()))
+            if (name.equals(tag.getTagName()))
             {
                 return tag;
             }
@@ -87,13 +87,13 @@ public class XMLBasedTagRecord extends FaceletTagRecord
     }
 
     @Override
-    public List<TagDefn> getTags()
+    public List<FaceletTaglibTag> getTags()
     {
-        return Collections.unmodifiableList(_taglibDefn.getTags());
+        return Collections.unmodifiableList(_taglibDefn.getTag());
     }
 
     public int getNumTags()
     {
-        return _taglibDefn.getTags().size();
+        return _taglibDefn.getTag().size();
     }
 }

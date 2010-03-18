@@ -25,7 +25,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
  * Encapsulates information about tag registry extensions
  * 
  */
-public final class TagRegistryFactoryInfo
+public final class TagRegistryFactoryInfo implements ITagRegistryFactoryInfo
 {
     private final String             _description;
     private final String             _id;

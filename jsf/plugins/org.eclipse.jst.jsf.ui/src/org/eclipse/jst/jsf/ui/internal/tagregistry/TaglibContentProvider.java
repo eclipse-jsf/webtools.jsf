@@ -28,13 +28,15 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory;
-import org.eclipse.jst.jsf.core.internal.TagRegistryFactoryInfo;
+import org.eclipse.jst.jsf.core.internal.ITagRegistryFactoryInfo;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
-import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry.TagRegistryChangeEvent;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry.TagRegistryChangeEvent.EventType;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
 import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
 import org.eclipse.swt.graphics.Image;
@@ -94,12 +96,12 @@ public class TaglibContentProvider implements IStructuredContentProvider,
         {
             _curInput = (IProject) newInput;
 
-            final Set<TagRegistryFactoryInfo> factories = CompositeTagRegistryFactory
+            final Set<ITagRegistryFactoryInfo> factories = CompositeTagRegistryFactory
                     .getInstance().getAllTagRegistryFactories();
 
             _curTagRegistries.clear();
 
-            for (TagRegistryFactoryInfo factoryInfo : factories)
+            for (ITagRegistryFactoryInfo factoryInfo : factories)
             {
                 TagRegistryFactory factory = factoryInfo
                         .getTagRegistryFactory();
@@ -198,12 +200,14 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             return new Object[]
             { new TreePlaceholder(Messages.TaglibContentProvider_TagCalculatingWaitMessage, null) };
         }
-//        else if (parentElement instanceof IJSFTagElement)
-//        {
-//            return new Object[]
-//            { ((IJSFTagElement) parentElement).toString() };
-//        }
-
+        else if (parentElement instanceof ITagElement)
+        {
+            final Map<String, ? extends ITagAttribute> attributes = ((ITagElement)parentElement).getAttributes();
+            if (attributes != null)
+            {
+                return attributes.values().toArray();
+            }
+        }
         return NO_CHILDREN;
     }
 
@@ -376,12 +380,12 @@ public class TaglibContentProvider implements IStructuredContentProvider,
 
     static class TagRegistryInstance
     {
-        private final TagRegistryFactoryInfo        _info;
+        private final ITagRegistryFactoryInfo        _info;
         private final ITagRegistry                  _registry;
         private final Map<String, Namespace>        _namespaces;
         private boolean                             _isUpToDate;
 
-        public TagRegistryInstance(final TagRegistryFactoryInfo info,
+        public TagRegistryInstance(final ITagRegistryFactoryInfo info,
                 ITagRegistry registry)
         {
             _info = info;
@@ -389,7 +393,7 @@ public class TaglibContentProvider implements IStructuredContentProvider,
             _namespaces = new ConcurrentHashMap<String, Namespace>();
         }
 
-        public TagRegistryFactoryInfo getInfo()
+        public ITagRegistryFactoryInfo getInfo()
         {
             return _info;
         }

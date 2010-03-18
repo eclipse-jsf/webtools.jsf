@@ -33,6 +33,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IComponentTagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IConverterTagElement;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.IValidatorTagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
@@ -437,6 +438,10 @@ public class TagRegistryMasterForm extends AbstractMasterForm
             else if (obj instanceof ITagElement)
             {
                 return ((ITagElement) obj).getName();
+            }
+            else if (obj instanceof ITagAttribute)
+            {
+                return ((ITagAttribute)obj).getName();
             }
             else if (obj instanceof TreePlaceholder)
             {

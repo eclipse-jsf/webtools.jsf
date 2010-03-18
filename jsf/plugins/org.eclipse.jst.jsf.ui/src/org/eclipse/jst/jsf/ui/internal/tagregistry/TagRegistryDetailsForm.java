@@ -18,7 +18,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractXMLSectionsDetailsForm;
-import org.eclipse.jst.jsf.core.internal.TagRegistryFactoryInfo;
+import org.eclipse.jst.jsf.core.internal.ITagRegistryFactoryInfo;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.TaglibContentProvider.TagRegistryInstance;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
@@ -58,7 +58,7 @@ public class TagRegistryDetailsForm extends AbstractXMLSectionsDetailsForm
         if (newSelection instanceof TagRegistryInstance)
         {
             final TagRegistryInstance tagRegistry = (TagRegistryInstance) newSelection;
-            final TagRegistryFactoryInfo info = tagRegistry.getInfo();
+            final ITagRegistryFactoryInfo info = tagRegistry.getInfo();
 
             if (info != null)
             {

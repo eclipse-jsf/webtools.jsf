@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.FaceletRegistryManager.MyRegistryFactory;
@@ -31,7 +32,7 @@ public class FaceletDocumentFactory
 {
     private final IProject                        _project;
     private final Map<String, NamespaceCMAdapter> _cmDocuments;
-    private final Map<String, ExternalTagInfo>    _externalTagInfo;
+    private final Map<String, TagInfo>    _externalTagInfo;
 
     /**
      * @param project
@@ -40,7 +41,7 @@ public class FaceletDocumentFactory
     {
         _project = project;
         _cmDocuments = new HashMap<String, NamespaceCMAdapter>(8);
-        _externalTagInfo = new HashMap<String, ExternalTagInfo>(8);
+        _externalTagInfo = new HashMap<String, TagInfo>(8);
     }
 
     /**
@@ -92,9 +93,9 @@ public class FaceletDocumentFactory
      * @return the externa tag info the namespace.  May return a previously
      * cached value. If there is no cached value, then creates it.
      */
-    public ExternalTagInfo getOrCreateExtraTagInfo(final String ns)
+    public TagInfo getOrCreateExtraTagInfo(final String ns)
     {
-        ExternalTagInfo tagInfo = _externalTagInfo.get(ns);
+        TagInfo tagInfo = _externalTagInfo.get(ns);
 
         if (tagInfo == null)
         {
@@ -107,20 +108,35 @@ public class FaceletDocumentFactory
     /**
      * @return a new external tag info for this namespace
      */
-    private ExternalTagInfo createExternalTagInfo(final String uri)
+    private TagInfo createExternalTagInfo(final String uri)
     {
-        ExternalTagInfo tldTagInfo = new MetadataTagInfo(_project, uri);
-        final ITaglibRecord[] tldrecs = TaglibIndex
-                .getAvailableTaglibRecords(_project.getFullPath());
-        FIND_TLDRECORD: for (final ITaglibRecord rec : tldrecs)
+        final JSFVersion jsfVersion = JSFVersion.valueOfProject(_project);
+        TagInfo tldTagInfo = null;
+        if (jsfVersion != null)
         {
-            final String matchUri = rec.getDescriptor().getURI();
-            if (uri.equals(matchUri))
+            if (jsfVersion.compareTo(JSFVersion.V2_0) >= 0)
             {
-                final CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
-                tldTagInfo = new MetadataTagInfo(_project, (TLDDocument) factory
-                        .createCMDocument(rec));
-                break FIND_TLDRECORD;
+                tldTagInfo = new FaceletTagInfo(_project, uri);
+            } else
+            {
+                final ITaglibRecord[] tldrecs = TaglibIndex
+                        .getAvailableTaglibRecords(_project.getFullPath());
+                FIND_TLDRECORD: for (final ITaglibRecord rec : tldrecs)
+                {
+                    final String matchUri = rec.getDescriptor().getURI();
+                    if (uri.equals(matchUri))
+                    {
+                        final CMDocumentFactoryTLD factory = new CMDocumentFactoryTLD();
+                        tldTagInfo = new MetadataTagInfo(_project,
+                                (TLDDocument) factory.createCMDocument(rec));
+                        break FIND_TLDRECORD;
+                    }
+                }
+
+                if (tldTagInfo == null)
+                {
+                    tldTagInfo = new MetadataTagInfo(_project, uri);
+                }
             }
         }
         return tldTagInfo;

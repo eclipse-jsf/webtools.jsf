@@ -26,7 +26,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribu
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor;
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor.UnknownAttributeException;
-import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
 
@@ -49,7 +49,7 @@ public class AttributeHandlerMapAdapter implements
     private transient final IAttributeAdvisor       _advisor;
     private transient AtomicBoolean                 _isInitialized   = new AtomicBoolean(
                                                                              false);
-    private final transient ExternalTagInfo         _tagInfo;
+    private final transient TagInfo         _tagInfo;
     private final Map<String, ITagAttributeHandler> _cache;
     private final String                            _tagName;
 
@@ -58,7 +58,7 @@ public class AttributeHandlerMapAdapter implements
      * @param advisor
      * @param tagName
      */
-    public AttributeHandlerMapAdapter(final ExternalTagInfo tagInfo,
+    public AttributeHandlerMapAdapter(final TagInfo tagInfo,
             final IAttributeAdvisor advisor, final String tagName)
     {
         _tagInfo = tagInfo;

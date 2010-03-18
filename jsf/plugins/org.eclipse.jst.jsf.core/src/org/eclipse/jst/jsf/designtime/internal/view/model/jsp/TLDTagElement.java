@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttributeHandler;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.TagElement;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
@@ -96,9 +97,14 @@ public class TLDTagElement extends TagElement
     @Override
     public Map getAttributeHandlers()
     {
-        return _tldData.getAttributes();
+        return _tldData.getAttributeHandlers();
     }
 
+    public Map<String, ? extends ITagAttribute> getAttributes()
+    {
+        return _tldData.getAttributes();
+    }
+    
     private static class DocumentElementData extends TLDElementData
     {
         /**
@@ -107,12 +113,14 @@ public class TLDTagElement extends TagElement
         private static final long serialVersionUID = -6160324802818766058L;
         private final TLDElementDeclaration _tldDoc;
         private final CMNodeNamedMapAdapter _adapter;
+        private Map<String, ? extends ITagAttribute> _tldAttributes;
 
         public DocumentElementData(final TLDElementDeclaration tldDoc,
                 final IAttributeAdvisor advisor)
         {
             _tldDoc = tldDoc;
             _adapter = new CMNodeNamedMapAdapter(tldDoc, advisor);
+            _tldAttributes = advisor.getAttributes();
         }
 
         @Override
@@ -142,7 +150,7 @@ public class TLDTagElement extends TagElement
         private Object writeReplace()
         {
             return new SerializedTLDElementData(getName(), getTagHandlerClassName(), getUri()
-                    , _adapter);
+                    , _adapter, _tldAttributes);
         }
 
         @SuppressWarnings("unused")
@@ -153,9 +161,15 @@ public class TLDTagElement extends TagElement
         }
 
         @Override
-        public Map<String, ? extends ITagAttributeHandler> getAttributes()
+        public Map<String, ? extends ITagAttributeHandler> getAttributeHandlers()
         {
             return _adapter;
+        }
+
+        @Override
+        public Map<String, ? extends ITagAttribute> getAttributes()
+        {
+            return _tldAttributes;
         }
     }
 
@@ -173,6 +187,7 @@ public class TLDTagElement extends TagElement
         private final String        _uri;
         private final String        _tagHandlerClassName;
         private final Map<String, ? extends ITagAttributeHandler>  _tagAttributes;
+        private final Map<String, ? extends ITagAttribute> _actualTagAttributes;
 
         /**
          * @param name
@@ -182,7 +197,8 @@ public class TLDTagElement extends TagElement
          */
         private SerializedTLDElementData(final String name,
                 final String tagHandlerClassName, final String uri,
-                final Map<String, ? extends ITagAttributeHandler> tagAttributes)
+                final Map<String, ? extends ITagAttributeHandler> tagAttributes,
+                final Map<String, ? extends ITagAttribute> actualTagAttributes)
         {
             super();
             _name = name;
@@ -190,6 +206,7 @@ public class TLDTagElement extends TagElement
             _uri = uri;
             // copy the map, because we don't if it is simply delta
             _tagAttributes = new HashMap(tagAttributes);
+            _actualTagAttributes = new HashMap(actualTagAttributes);
         }
 
         @Override
@@ -211,9 +228,15 @@ public class TLDTagElement extends TagElement
         }
 
         @Override
-        public Map<String, ? extends ITagAttributeHandler> getAttributes()
+        public Map<String, ? extends ITagAttributeHandler> getAttributeHandlers()
         {
             return _tagAttributes;
+        }
+
+        @Override
+        public Map<String, ? extends ITagAttribute> getAttributes()
+        {
+            return _actualTagAttributes;
         }
     }
 
@@ -226,6 +249,10 @@ public class TLDTagElement extends TagElement
         public abstract String getTagHandlerClassName();
         public abstract String getName();
         public abstract String getUri();
-        public abstract Map<String, ? extends ITagAttributeHandler>  getAttributes();
+        public abstract Map<String, ? extends ITagAttributeHandler>  getAttributeHandlers();
+        public abstract Map<String, ? extends ITagAttribute>         getAttributes();
+        
     }
+
+
 }

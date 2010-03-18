@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.common.dom.TagIdentifier;
-import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
-import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.strategy.IExternalMetadataStrategy;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.strategy.JSPExternalMetadataStrategy;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.strategy.MDExternalMetadataStrategy;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.strategy.TagInfoStrategyComposite;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
-import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
 
 /**
  * An external tag info that checks first the meta-data repository and second in
@@ -21,27 +17,12 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
  * @author cbateman
  * 
  */
-/* package */class MetadataTagInfo extends ExternalTagInfo
+/* package */class MetadataTagInfo extends CompositeTagInfo
 {
-    private final String                      _uri;
-//    private final MDExternalMetadataStrategy  _mdStrategy;
-//    private final JSPExternalMetadataStrategy _jspStrategy;
-    private final TagInfoStrategyComposite    _compositeStrategy;
-
     private MetadataTagInfo(final IProject project, final TLDDocument doc,
             final String uri)
     {
-        _uri = uri;
-        IExternalMetadataStrategy mdStrategy = MDExternalMetadataStrategy.create(project);
-        JSPExternalMetadataStrategy jspStrategy = new JSPExternalMetadataStrategy(doc);
-
-        final List<String> ids = new ArrayList<String>();
-        ids.add(MDExternalMetadataStrategy.STRATEGY_ID);
-        ids.add(JSPExternalMetadataStrategy.STRATEGY_ID);
-
-        _compositeStrategy = new TagInfoStrategyComposite(ids);
-        _compositeStrategy.addStrategy(mdStrategy);
-        _compositeStrategy.addStrategy(jspStrategy);
+        super(uri, createStrategy(project,doc));
     }
 
     public MetadataTagInfo(final IProject project, final String uri)
@@ -58,80 +39,18 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
         this(project, doc, doc.getUri());
     }
 
-    @Override
-    public Object getTagProperty(final String tagName, final String key)
+    private static TagInfoStrategyComposite createStrategy(final IProject project, final TLDDocument doc)
     {
-        final TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(
-                _uri, tagName);
-        _compositeStrategy.resetIterator();
+        IExternalMetadataStrategy mdStrategy = MDExternalMetadataStrategy.create(project);
+        JSPExternalMetadataStrategy jspStrategy = new JSPExternalMetadataStrategy(doc);
 
-        for (ExternalTagInfo tagInfo = getNextExternalInfo(tagId); tagInfo != _compositeStrategy
-                .getNoResult(); tagInfo = getNextExternalInfo(tagId))
-        {
-            try
-            {
-                if (tagInfo != _compositeStrategy.getNoResult())
-                {
-                    final Object value = tagInfo.getTagProperty(tagName, key);
+        final List<String> ids = new ArrayList<String>();
+        ids.add(MDExternalMetadataStrategy.STRATEGY_ID);
+        ids.add(JSPExternalMetadataStrategy.STRATEGY_ID);
 
-                    if (value != null)
-                    {
-                        return value;
-                    }
-                }
-
-                // fall-through
-            }
-            catch (final Exception e)
-            {
-                FaceletCorePlugin.log("During meta-data strategy", e); //$NON-NLS-1$
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * @param tagName
-     * @return a named node map of known attributes for the tag, or null if not
-     *         found
-     */
-    @Override
-    public CMNamedNodeMap getAttributes(final String tagName)
-    {
-        final TagIdentifier tagId = TagIdentifierFactory.createJSPTagWrapper(
-                _uri, tagName);
-        _compositeStrategy.resetIterator();
-
-        for (ExternalTagInfo tagInfo = getNextExternalInfo(tagId); tagInfo != _compositeStrategy
-                .getNoResult(); tagInfo = getNextExternalInfo(tagId))
-        {
-            try
-            {
-                if (tagInfo != _compositeStrategy.getNoResult())
-                {
-                    final CMNamedNodeMap nodeMap = tagInfo
-                            .getAttributes(tagName);
-
-                    if (nodeMap != null)
-                    {
-                        return nodeMap;
-                    }
-                }
-
-                // fall-through
-            }
-            catch (final Exception e)
-            {
-                FaceletCorePlugin.log("During meta-data strategy", e); //$NON-NLS-1$
-            }
-        }
-
-        return null;
-    }
-
-    private ExternalTagInfo getNextExternalInfo(final TagIdentifier input)
-    {
-        return _compositeStrategy.perform(input);
+        TagInfoStrategyComposite strategyComposite = new TagInfoStrategyComposite(ids);
+        strategyComposite.addStrategy(mdStrategy);
+        strategyComposite.addStrategy(jspStrategy);
+        return strategyComposite;
     }
 }

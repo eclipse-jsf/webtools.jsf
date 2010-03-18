@@ -18,27 +18,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.common.internal.managedobject.AbstractManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration.WebappListener;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibDefn;
-import org.xml.sax.SAXException;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
 
 /**
  * Attempts to locate Facelet taglib's specified as xml files in project
@@ -142,31 +138,15 @@ import org.xml.sax.SAXException;
         try
         {
             is = file.getContents();
-            FaceletTaglibDefn taglib = TagModelParser.loadFromInputStream(is, null);
+            final TagModelLoader loader = new TagModelLoader(file.getFullPath().toFile().getCanonicalPath());
+            loader.loadFromInputStream(is);
+            FaceletTaglib taglib = loader.getTaglib();
             if (taglib != null)
             {
                 return _factory.createRecords(taglib);
             }
         }
-        catch (final CoreException e)
-        {
-            FaceletCorePlugin
-                    .log(
-                            "Loading web root taglibs for project: " + _project.getName(), e); //$NON-NLS-1$
-        }
-        catch (final IOException e)
-        {
-            FaceletCorePlugin
-                    .log(
-                            "Loading web root taglibs for project: " + _project.getName(), e); //$NON-NLS-1$
-        }
-        catch (final ParserConfigurationException e)
-        {
-            FaceletCorePlugin
-                    .log(
-                            "Loading web root taglibs for project: " + _project.getName(), e); //$NON-NLS-1$
-        }
-        catch (final SAXException e)
+        catch (final Exception e)
         {
             FaceletCorePlugin
                     .log(

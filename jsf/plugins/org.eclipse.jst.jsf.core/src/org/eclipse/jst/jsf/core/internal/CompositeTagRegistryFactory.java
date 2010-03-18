@@ -10,10 +10,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,6 +23,8 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.jst.jsf.common.internal.policy.CanonicallyOrderedIteratorPolicy;
 import org.eclipse.jst.jsf.common.internal.policy.IIteratorPolicy;
+import org.eclipse.jst.jsf.common.internal.policy.IdentifierOrderedIteratorPolicy;
+import org.eclipse.jst.jsf.common.internal.strategy.AbstractIdentifiableStrategy;
 import org.eclipse.jst.jsf.common.internal.strategy.IIdentifiableStrategy;
 import org.eclipse.jst.jsf.common.internal.strategy.IteratorPolicyBasedStrategyComposite;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
@@ -37,6 +41,18 @@ public final class CompositeTagRegistryFactory
 {
     private static CompositeTagRegistryFactory INSTANCE;
 
+    private static ITagRegistryFactoryProvider   TEST_PROVIDER;
+    /**
+     * For JUNIT TEST ONLY!!!!!
+     * @param factoryProvider
+     */
+    public synchronized void setTestInjectedProvider(final ITagRegistryFactoryProvider factoryProvider)
+    {
+        TEST_PROVIDER = factoryProvider;
+        // TODO: this is risky
+        _cachedExtensionsByType.clear();
+    }
+
     /**
      * @return the single instance of the registry factory
      */
@@ -49,8 +65,8 @@ public final class CompositeTagRegistryFactory
         return INSTANCE;
     }
 
-    private final Map<IContentType, Set<TagRegistryFactoryInfo>> _cachedExtensionsByType =
-        new HashMap<IContentType, Set<TagRegistryFactoryInfo>>(4);
+    private final Map<IContentType, Set<ITagRegistryFactoryInfo>> _cachedExtensionsByType =
+        new HashMap<IContentType, Set<ITagRegistryFactoryInfo>>(4);
 
     private CompositeTagRegistryFactory()
     {
@@ -64,10 +80,9 @@ public final class CompositeTagRegistryFactory
      */
     public final ITagRegistry getRegistry(final TagRegistryIdentifier id)
     {
-        final Set<TagRegistryFactoryInfo> handlers = TagLibraryRegistryLoader
-                .getAllHandlers();
+        final Set<ITagRegistryFactoryInfo> handlers = getAllTagRegistryFactories();
 
-        final Set<TagRegistryFactoryInfo> matchingHandlers = findMatchingExtensions(
+        final Set<ITagRegistryFactoryInfo> matchingHandlers = findMatchingExtensions(
                 id, handlers);
 
         if (matchingHandlers.size() > 0)
@@ -93,7 +108,7 @@ public final class CompositeTagRegistryFactory
                 final TagRegistrySelectionStrategy selectionStrategy = new TagRegistrySelectionStrategy(
                         new CanonicallyOrderedIteratorPolicy<String>());
 
-                for (final Iterator<TagRegistryFactoryInfo> it = matchingHandlers
+                for (final Iterator<ITagRegistryFactoryInfo> it = matchingHandlers
                         .iterator(); it.hasNext();)
                 {
                     selectionStrategy.addStrategy(it.next().getTagRegistryFactory());
@@ -108,22 +123,82 @@ public final class CompositeTagRegistryFactory
     /**
      * @return get all tag registry factories
      */
-    public Set<TagRegistryFactoryInfo> getAllTagRegistryFactories()
+    public Set<ITagRegistryFactoryInfo> getAllTagRegistryFactories()
     {
-        return TagLibraryRegistryLoader.getAllHandlers();
+        List<String>  selectionOrder = new ArrayList<String>();
+        selectionOrder.add("testInjection"); //$NON-NLS-1$
+        selectionOrder.add("extensionPointInjection"); //$NON-NLS-1$
+        selectionOrder.add("platformDefault"); //$NON-NLS-1$
+
+        IdentifierOrderedIteratorPolicy<String> policy = new IdentifierOrderedIteratorPolicy<String>(selectionOrder);
+        // ignore iterator values that don't exist in the list of possible selections.
+        policy.setExcludeNonExplicitValues(true);
+        final TagRegistryFactoryProviderSelectionStrategy providerSelector
+            = new TagRegistryFactoryProviderSelectionStrategy(policy);
+        providerSelector.addStrategy(
+          new AbstractIdentifiableStrategy<IProject, ITagRegistryFactoryProvider, String>("testInjection", "FIXME: not for display", null) //$NON-NLS-1$ //$NON-NLS-2$
+        {
+            @Override
+            public ITagRegistryFactoryProvider perform(IProject input)
+                    throws Exception
+            {
+                ITagRegistryFactoryProvider injectedProvider = null;
+                synchronized(CompositeTagRegistryFactory.class)
+                {
+                     injectedProvider = TEST_PROVIDER;
+                }
+                if (injectedProvider != null)
+                {
+                    final ITagRegistryFactoryProvider useMe = injectedProvider;
+                    return new AbstractTagRegistryFactoryProvider()
+                    {
+                        @Override
+                        public Set<ITagRegistryFactoryInfo> getTagRegistryFactories()
+                        {
+                            return useMe.getTagRegistryFactories();
+                        }
+                    };
+                }
+                return null;
+            }
+            });
+        providerSelector.addStrategy(
+                new AbstractIdentifiableStrategy<IProject, ITagRegistryFactoryProvider, String>("platformDefault", "FIXME: not for display", null) //$NON-NLS-1$ //$NON-NLS-2$
+              {
+                  @Override
+                  public ITagRegistryFactoryProvider perform(IProject input)
+                          throws Exception
+                  {
+                      return new AbstractTagRegistryFactoryProvider()
+                      {
+                          @Override
+                          public Set<ITagRegistryFactoryInfo> getTagRegistryFactories()
+                          {
+                              return TagLibraryRegistryLoader.getAllHandlers();
+                          }
+                      };
+                  }
+              });
+
+        ITagRegistryFactoryProvider provider = providerSelector.perform(null);
+        if (provider != null)
+        {
+            return provider.getTagRegistryFactories();
+        }
+        return Collections.emptySet();
     }
 
-    private Set<TagRegistryFactoryInfo> findMatchingExtensions(
-            TagRegistryIdentifier id, Set<TagRegistryFactoryInfo> handlers)
+    private Set<ITagRegistryFactoryInfo> findMatchingExtensions(
+            TagRegistryIdentifier id, Set<ITagRegistryFactoryInfo> handlers)
     {
-        Set<TagRegistryFactoryInfo> matching = _cachedExtensionsByType.get(id
+        Set<ITagRegistryFactoryInfo> matching = _cachedExtensionsByType.get(id
                 .getContentType());
 
         if (matching == null)
         {
-            matching = new HashSet<TagRegistryFactoryInfo>(4);
+            matching = new HashSet<ITagRegistryFactoryInfo>(4);
 
-            for (final TagRegistryFactoryInfo handler : handlers)
+            for (final ITagRegistryFactoryInfo handler : handlers)
             {
                 if (handler.getContentTypes().contains(id.getContentType()))
                 {
@@ -217,6 +292,25 @@ public final class CompositeTagRegistryFactory
 
         @Override
         public ITagRegistry getNoResult()
+        {
+            return NO_RESULT;
+        }
+    }
+    
+    private static class TagRegistryFactoryProviderSelectionStrategy
+            extends
+            IteratorPolicyBasedStrategyComposite<IProject, ITagRegistryFactoryProvider, ITagRegistryFactoryProvider, String, IIdentifiableStrategy<IProject, ITagRegistryFactoryProvider, String>>
+    {
+        protected TagRegistryFactoryProviderSelectionStrategy(
+                IIteratorPolicy<String> policy)
+        {
+            super(policy);
+        }
+
+        private static final ITagRegistryFactoryProvider NO_RESULT = null;
+
+        @Override
+        public ITagRegistryFactoryProvider getNoResult()
         {
             return NO_RESULT;
         }

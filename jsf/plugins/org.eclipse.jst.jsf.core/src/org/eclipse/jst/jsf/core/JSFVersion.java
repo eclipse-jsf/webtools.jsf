@@ -17,7 +17,7 @@ import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
-/**
+/** 
  * @author gekessle
  *
  */
@@ -44,6 +44,8 @@ public enum JSFVersion {
 	 */
 	V2_0;
 	
+	// WARNING: you MUST add newer versions to the end; the ordinal value of
+	// of the version is used in compareTo.
     @Override
     public String toString() {
         switch(this)
@@ -144,5 +146,4 @@ public enum JSFVersion {
         }
         return null;
     }
-
 }

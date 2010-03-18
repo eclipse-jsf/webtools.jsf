@@ -46,6 +46,10 @@ public interface ITagElement extends Serializable
     public abstract Map    getAttributeHandlers();
 
     /**
+     * @return the attributes for the tag.
+     */
+    public abstract Map<String, ? extends ITagAttribute> getAttributes();
+    /**
      * Signals that the tag element should  make any mutable data immutable
      * and throw exceptions if attempts are made to implement.  Flag must
      * latch and become irrevocable.

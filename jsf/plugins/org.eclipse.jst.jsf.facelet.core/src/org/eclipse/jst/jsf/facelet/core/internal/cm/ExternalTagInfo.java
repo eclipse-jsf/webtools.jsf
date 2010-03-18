@@ -13,25 +13,17 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
  * @author cbateman
  * 
  */
-public abstract class ExternalTagInfo
+public abstract class ExternalTagInfo extends TagInfo
 {
     /**
      * Single instance of the null external tag info
      */
-    public static ExternalTagInfo  NULL_INSTANCE = new NullExternalTagInfo();
+    public static TagInfo  NULL_INSTANCE = new NullExternalTagInfo();
 
-    /**
-     * @param tagName
-     * @return the node map of attributes for the tag called tagName
-     */
+    @Override
     public abstract CMNamedNodeMap getAttributes(final String tagName);
 
-    /**
-     * @param tagName
-     * @param key
-     * @return the tag property in the CM model for tagName at key or null if
-     *         not found.
-     */
+    @Override
     public abstract Object getTagProperty(final String tagName, final String key);
 
     /**

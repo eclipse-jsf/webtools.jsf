@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.TagDefn;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
 
 abstract class FaceletTagRecord implements IFaceletTagRecord
 {
@@ -49,7 +49,7 @@ abstract class FaceletTagRecord implements IFaceletTagRecord
 
     public abstract String getURI();
 
-    public abstract TagDefn getTag(final String name);
+    public abstract FaceletTaglibTag getTag(final String name);
 
-    public abstract Collection<? extends TagDefn> getTags();
+    public abstract Collection<? extends FaceletTaglibTag> getTags();
 }

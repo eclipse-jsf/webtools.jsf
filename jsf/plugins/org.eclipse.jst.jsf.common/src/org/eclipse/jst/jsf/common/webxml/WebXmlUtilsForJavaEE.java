@@ -31,18 +31,6 @@ import org.eclipse.jst.javaee.web.WebFactory;
  * @author Debajit Adhikary
  *
  */
-/**
- * @author cbateman
- *
- */
-/**
- * @author cbateman
- *
- */
-/**
- * @author cbateman
- *
- */
 public class WebXmlUtilsForJavaEE
 {
     /**

@@ -12,6 +12,7 @@ package org.eclipse.jst.jsf.facelet.core.internal.cm.strategy;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.ExternalTagInfo;
+import org.eclipse.jst.jsf.facelet.core.internal.cm.TagInfo;
 import org.eclipse.jst.jsp.core.internal.contentmodel.tld.provisional.TLDDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMNamedNodeMap;
@@ -41,7 +42,7 @@ public class JSPExternalMetadataStrategy extends
     }
 
     @Override
-    public ExternalTagInfo perform(final TagIdentifier input) throws Exception
+    public TagInfo perform(final TagIdentifier input) throws Exception
     {
         if (_doc != null)
         {
