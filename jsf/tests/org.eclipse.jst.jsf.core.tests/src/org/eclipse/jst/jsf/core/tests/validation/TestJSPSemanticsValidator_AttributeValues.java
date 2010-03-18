@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.internal.XMLViewDefnValidator;
@@ -57,6 +58,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         		JavaFacet.VERSION_1_5,
         		ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.4"));
         _webProject.createFromZip2(zipFile, true);
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
         Job.getJobManager().beginRule(_webProject.getTestProject(), null);
     }
 
@@ -65,6 +67,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
     {
         super.tearDown();
         Job.getJobManager().endRule(_webProject.getTestProject());
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
 
     public void testSanity() throws Exception
@@ -135,7 +138,8 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
 
         mockReporter.assertExpectedMessage(603, 2, IMessage.NORMAL_SEVERITY);
         mockReporter.assertExpectedMessage(648, 4, IMessage.NORMAL_SEVERITY);
-        mockReporter.assertExpectedMessage(696, 5, IMessage.NORMAL_SEVERITY);
+        // the default severity for no var messages is now low.
+        mockReporter.assertExpectedMessage(696, 5, IMessage.LOW_SEVERITY);
         mockReporter.assertExpectedMessage(753, 6, IMessage.NORMAL_SEVERITY);
         mockReporter.assertExpectedMessage(802, 4, IMessage.HIGH_SEVERITY);
 
@@ -147,6 +151,4 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
 
         mockReporter.assertExpectedMessage(1015, 40, IMessage.HIGH_SEVERITY);
     }
-
-    
 }
