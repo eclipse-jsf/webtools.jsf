@@ -26,6 +26,7 @@ import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.el.DefaultDTVariableResolver;
@@ -121,13 +122,15 @@ public class TestDefaultDTVariableResolver extends TestCase
                     "/testdata/TestBean1.java.data", TESTBEAN1_NAME, SRC_FOLDER_NAME, PACKAGE_NAME, _jdtTestEnvironment);
         _testBean1Type = _jdtTestEnvironment.getJavaProject().findType(PACKAGE_NAME+"."+TESTBEAN1_NAME);
         assertNotNull(_testBean1Type);
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
 	}
 
-	@Override
-    protected void tearDown() throws Exception 
-	{
-		super.tearDown();
-	}
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
+    }
 
 	public void testResolveVariable() 
 	{

@@ -173,4 +173,11 @@ public abstract class SingleJSPTestCase extends JSPTestCase
         return ELAssert.assertSemanticWarning(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, expectedSignature,
                 expectedProblems);
     }
+    
+    protected List<ReportedProblem> assertSemanticInfo(int docPos, String expectedSignature, int expectedProblems)
+    {
+        return ELAssert.assertSemanticInfo(_structuredDocument, _symbolResolverFactory, docPos, _testJSP, expectedSignature,
+                expectedProblems);
+    }
+    
 }

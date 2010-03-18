@@ -116,7 +116,7 @@ public class ResourceBundleTestCase extends SingleJSPTestCase {
         problems = assertSemanticWarning(1590, null, 1);
         ELAssert.assertContainsProblem(problems, DiagnosticFactory.MEMBER_NOT_FOUND_ID);
 
-        problems = assertSemanticWarning(1649, null, 1);
+        problems = assertSemanticInfo(1649, null, 1);
         ELAssert.assertContainsProblem(problems, DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
         problems = assertSemanticWarning(1685, null, 1);

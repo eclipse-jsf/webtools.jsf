@@ -26,7 +26,7 @@ final class PrefTestUtil extends Assert
         final Severity sev = prefs.getSeverity(key);
         final int diagnosticSeverity = 
             ELValidationPreferences.mapSeverityToDiag(sev.toString());
-        assertEquals(diagnosticSeverity, value);
+        assertEquals(value, diagnosticSeverity);
     }
 
     static void setByKey(Severity severity, ELValidationPreferences prefs)
@@ -116,7 +116,8 @@ final class PrefTestUtil extends Assert
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID,Diagnostic.WARNING);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID,Diagnostic.ERROR);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.MEMBER_NOT_FOUND_ID,Diagnostic.WARNING);
-        PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.VARIABLE_NOT_FOUND_ID,Diagnostic.WARNING);
+        // everything below warning is mapped to ok for Severity enum
+        PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.VARIABLE_NOT_FOUND_ID,Diagnostic.OK);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.MISSING_CLOSING_EXPR_BRACKET_ID,Diagnostic.ERROR);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.GENERAL_SYNTAX_ERROR_ID,Diagnostic.WARNING);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.EMPTY_EL_EXPRESSION_ID,Diagnostic.WARNING);

@@ -259,6 +259,36 @@ public class ELAssert extends Assert
     }
 
     /**
+     * Asserts that the provided expression generates one or more problem 
+     * diagnostics of which the most severe is of INFO (LOW) severity and that
+     * the total number expected is returned .
+     * Asserts also that no syntax errors are present.
+     * 
+     * @param document
+     * @param docPos
+     * @param file
+     * @param expectedSignature
+     * @param expectedProblems 
+     * @return the list of semantic warnings
+     */
+    public static List<ReportedProblem> assertSemanticInfo(
+            IStructuredDocument document,
+            IStructuredDocumentSymbolResolverFactory factory,
+            int docPos, IFile file, String expectedSignature,
+            int expectedProblems)
+    {
+        return assertSemanticProblems(document, factory, docPos, file,
+                expectedSignature, expectedProblems, IMessage.LOW_SEVERITY/*
+                                                                              * "low"
+                                                                              * is
+                                                                              * Warning
+                                                                              * for
+                                                                              * some
+                                                                              * reason
+                                                                              */);
+    }
+
+    /**
      * @param document
      * @param docPos
      * @param file
@@ -359,5 +389,4 @@ public class ELAssert extends Assert
             return Math.min(sev1, sev2);
         }
     }
-
 }

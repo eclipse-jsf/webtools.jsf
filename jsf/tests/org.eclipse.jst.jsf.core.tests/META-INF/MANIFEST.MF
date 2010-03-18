@@ -32,7 +32,8 @@ Require-Bundle: org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.common.project.facet.core,
  org.eclipse.jst.j2ee.core,
  org.eclipse.jem;bundle-version="2.0.400",
- org.junit;bundle-version="3.8.1"
+ org.junit;bundle-version="3.8.1",
+ org.eclipse.jst.jsf.common.runtime;bundle-version="1.1.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.ui.tests,org.eclipse.jst.jsf.context.symbol.tests,org.eclipse.jst.jsf.designtime.tests",
  org.eclipse.jst.jsf.core.tests.appconfig.provider;x-internal:=true,

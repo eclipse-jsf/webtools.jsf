@@ -14,6 +14,7 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
 
@@ -33,6 +34,14 @@ public class AssignabilityTestCase extends SingleJSPTestCase
     protected void setUp() throws Exception
     {
         super.setUp();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
+    }
+
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
     }
 
     @Override

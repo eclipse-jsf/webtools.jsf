@@ -25,6 +25,7 @@ import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.DTJSPExternalContext;
@@ -65,13 +66,15 @@ public class TestDTJSPExternalContext extends TestCase
         _testJSP1 = (IFile) res;
 
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(projectTestEnvironment);
-        _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);	
+        _jsfFactedTestEnvironment.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
     }
 
 	@Override
     protected void tearDown() throws Exception 
 	{
 		super.tearDown();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
 	}
 
 	public void testDefaultDoGetMapForScopeInt() 

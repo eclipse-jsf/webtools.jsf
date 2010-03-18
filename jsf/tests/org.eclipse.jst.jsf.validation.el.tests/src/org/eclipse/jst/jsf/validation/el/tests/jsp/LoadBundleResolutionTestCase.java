@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
@@ -56,7 +57,15 @@ public class LoadBundleResolutionTestCase extends SingleJSPTestCase
         "/testdata/classes/Bundle.properties.data");
         _jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()),
                 "", "Bundle.properties");
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
 
+    }
+
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
 
     @Override

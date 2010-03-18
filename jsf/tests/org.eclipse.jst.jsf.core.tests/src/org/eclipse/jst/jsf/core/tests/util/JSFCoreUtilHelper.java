@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import junit.framework.Assert;
 
@@ -22,6 +24,9 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.jst.j2ee.internal.web.archive.operations.WebFacetProjectCreationDataModelProvider;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
@@ -29,12 +34,19 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.internal.AbstractTagRegistryFactoryProvider;
+import org.eclipse.jst.jsf.core.internal.CompositeTagRegistryFactory;
+import org.eclipse.jst.jsf.core.internal.ITagRegistryFactoryInfo;
+import org.eclipse.jst.jsf.core.internal.ITagRegistryFactoryProvider;
 import org.eclipse.jst.jsf.core.internal.jsflibraryconfig.JSFLibraryRegistryUtil;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.ArchiveFile;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibrary;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistry;
 import org.eclipse.jst.jsf.core.internal.jsflibraryregistry.JSFLibraryRegistryFactory;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
+import org.eclipse.jst.jsf.core.tests.mock.MockJSPTagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
 import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
@@ -484,4 +496,105 @@ public final class JSFCoreUtilHelper
 			_model.releaseFromRead();
 		}
 	}
+
+    public static void injectTestTagRegistryFactoryProvider(
+            ITagRegistryFactoryProvider abstractTagRegistryFactoryProvider)
+    {
+        CompositeTagRegistryFactory.getInstance().setTestInjectedProvider(abstractTagRegistryFactoryProvider);
+    }
+    
+    public static ITagRegistryFactoryProvider createSimpleRegistryFactory()
+    {
+        return new JSPTagRegistryFactoryProvider();
+    }
+    
+    private static class JSPTagRegistryFactoryProvider extends AbstractTagRegistryFactoryProvider
+    {
+        @Override
+        public Set<ITagRegistryFactoryInfo> getTagRegistryFactories()
+        {
+            Set<IContentType> contentTypes = new HashSet<IContentType>();
+            final IContentTypeManager typeManager = Platform.getContentTypeManager();
+            IContentType jspContentType = 
+                typeManager.getContentType("org.eclipse.jst.jsp.core.jspsource");
+            contentTypes.add(jspContentType);
+            Set<ITagRegistryFactoryInfo>  infos = new HashSet<ITagRegistryFactoryInfo>();
+            infos.add(new MyTagRegistryFactoryInfo(contentTypes, new MyTagRegistryFactory(), "JSP Test Factory", "Test ONLY!!! USER SHOULD NEVER SEE THIS"));
+            return infos;
+        }
+    }
+
+    private static class MyTagRegistryFactory extends TagRegistryFactory
+    {
+        private final String _displayName;
+
+        MyTagRegistryFactory()
+        {
+            _displayName = "TEST ONLY!!! YOU SHOULD NOT SEE THIS!!";
+        }
+
+        public String getDisplayName()
+        {
+            return _displayName;
+        }
+
+        @Override
+        public ITagRegistry createTagRegistry(IProject project)
+                throws TagRegistryFactoryException
+        {
+            return new MockJSPTagRegistry();
+        }
+
+        @Override
+        public boolean isInstance(IProject project)
+        {
+            // always create a new one.
+            return false;
+        }
+        
+    }
+
+    private static class MyTagRegistryFactoryInfo implements ITagRegistryFactoryInfo
+    {
+        private final Set<IContentType> _contentTypes;
+        private final TagRegistryFactory _factory;
+        private final String _id;
+        private final String _description;
+
+        /**
+         * @param contentTypes
+         * @param factory
+         * @param id
+         * @param description
+         */
+        public MyTagRegistryFactoryInfo(final Set<IContentType> contentTypes,
+                TagRegistryFactory factory, String id, String description)
+        {
+            _contentTypes = contentTypes;
+            _factory = factory;
+            _id = id;
+            _description = description;
+        }
+        
+        public Set<IContentType> getContentTypes()
+        {
+            return _contentTypes;
+        }
+
+        public TagRegistryFactory getTagRegistryFactory()
+        {
+            return _factory;
+        }
+
+        public String getId()
+        {
+            return _id;
+        }
+
+        public String getDescription()
+        {
+            return _description;
+        }
+        
+    }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.core.tests.validation.MockValidationReporter.ReportedProblem;
 import org.eclipse.jst.jsf.validation.el.tests.base.ELAssert;
 import org.eclipse.jst.jsf.validation.el.tests.base.SingleJSPTestCase;
@@ -37,6 +38,15 @@ public class BuiltInSymbolsTestCase extends SingleJSPTestCase
     protected void setUp() throws Exception
     {
         super.setUp();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
+    }
+
+    
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
 
     @Override

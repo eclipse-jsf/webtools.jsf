@@ -124,7 +124,7 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
 //        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_EQUALITY_COMP_WITH_NULL_ALWAYS_EVAL_SAME_ID, 1464, 34);
 //        assertContainsProblem(list, DiagnosticFactory.BINARY_OP_SECOND_ARGUMENT_ALWAYS_EVAL_SAME_ID, 1438, 60);
 
-        list = assertSemanticWarning(1569, null, 1);
+        list = assertSemanticInfo(1569, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.VARIABLE_NOT_FOUND_ID, 1569, 8);
 
         list = assertSemanticWarning(1622, null, 1);

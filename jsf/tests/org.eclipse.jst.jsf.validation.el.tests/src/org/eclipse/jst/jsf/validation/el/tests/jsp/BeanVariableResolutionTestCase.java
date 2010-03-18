@@ -66,10 +66,10 @@ public class BeanVariableResolutionTestCase extends SingleJSPTestCase
     @Override
     public void testWarningExprs()
     {
-        List<ReportedProblem> list = assertSemanticWarning(851, null, 1);
+        List<ReportedProblem> list = assertSemanticInfo(851, null, 1);
         ELAssert.assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
 
-        list = assertSemanticWarning(891, null, 1);
+        list = assertSemanticInfo(891, null, 1);
         ELAssert.assertContainsProblem(list,DiagnosticFactory.VARIABLE_NOT_FOUND_ID);
     }
 

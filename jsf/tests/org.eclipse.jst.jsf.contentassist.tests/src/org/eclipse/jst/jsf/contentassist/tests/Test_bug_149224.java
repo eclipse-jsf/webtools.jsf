@@ -17,8 +17,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
-import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper.ContextWrapper;
+import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
@@ -70,6 +70,15 @@ public class Test_bug_149224 extends BaseTestClass
                       "/testdata/bug_149224.properties.data");
         jdtTestEnv.addResourceFile("src", new ByteArrayInputStream(resource.toBytes()),
                                    "bundles", "bundle1.properties");
+        
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
+    }
+
+    @Override
+    protected void tearDown() throws Exception
+    {
+        super.tearDown();
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
 
     /**
@@ -81,9 +90,9 @@ public class Test_bug_149224 extends BaseTestClass
 
         try
         {
-        	JSFCoreUtilHelper.assertELSanity(_jspFile, 589, "value", "#{bundle1.}");
-        	JSFCoreUtilHelper.assertELSanity(_jspFile, 630, "value", "#{bundle1.x}");
-        	JSFCoreUtilHelper.assertELVariableSanity(_jspFile, "bundle1");
+            JSFCoreUtilHelper.assertELSanity(_jspFile, 589, "value", "#{bundle1.}");
+            JSFCoreUtilHelper.assertELSanity(_jspFile, 630, "value", "#{bundle1.x}");
+            JSFCoreUtilHelper.assertELVariableSanity(_jspFile, "bundle1");
         }
         finally
         {
