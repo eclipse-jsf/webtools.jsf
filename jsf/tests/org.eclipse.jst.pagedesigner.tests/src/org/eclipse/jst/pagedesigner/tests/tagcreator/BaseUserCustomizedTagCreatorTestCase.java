@@ -1,7 +1,6 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteContext;
 import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
@@ -39,37 +38,37 @@ public class BaseUserCustomizedTagCreatorTestCase extends BaseTagCreatorTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+	}
+
+	
+	@Override
+	protected void initializePaletteItemManager(PaletteItemManager pim) {
 		
 		// Setup mock (user-customized) tags.
 		// In the current implementation, this requires setting up a tool palette
 		// category, and adding the tag(s) to the tool palette. Only then can the
 		// tag be inserted.
 		
-		//note jsp does not need to exist
-		final IPaletteContext context = PaletteItemManager.createPaletteContext(_webProjectTestEnv.getTestProject().getFile("xxx.jsp"));
-		final TaglibPaletteDrawer category = PaletteItemManager.getInstance(context)
+		final TaglibPaletteDrawer category = pim
 			.findOrCreateCategory(UserCustomizedElementEditFactory.TAGCREATOR_URI_1, CATEGORY_LABEL);
 		assertNotNull(category);
 		addItemsToCategory(category);
 		
-		final IPaletteContext context2 = PaletteItemManager.createPaletteContext(_webProjectTestEnv.getTestProject().getFile("xxx.html"));
-		final TaglibPaletteDrawer category2 = PaletteItemManager.getInstance(context2)
-			.findOrCreateCategory(UserCustomizedElementEditFactory.TAGCREATOR_URI_1, CATEGORY_LABEL);
-		assertNotNull(category2);
-		addItemsToCategory(category2);
-		
 	}
 
+
 	private void addItemsToCategory(TaglibPaletteDrawer category) {
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG1, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG2, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG3, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG4, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG5, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG6, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG7, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG8, category);
-		addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG9, category);
+		if (category.getChildren().size() == 0) {
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG1, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG2, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG3, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG4, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG5, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG6, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG7, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG8, category);
+			addTagToPaletteCategory(UserCustomizedElementEditFactory.TAG9, category);
+		}
 	}
 
 	@Override

@@ -69,7 +69,7 @@ public abstract class BaseTagCreatorTestCase extends BaseTestClass
         IFile file = (IFile) _webProjectTestEnv.loadResourceInWebRoot(
                 PageDesignerTestsPlugin.getDefault().getBundle(),
                 "/testdata/tagcreator/tagCreator."+inExt+".data", "/tagCreator_"+tagName+"."+inExt);
-
+        
         setTagIdentifier(tagId);
 
         ITagCreator tagCreator = getTagCreator(getTagIdentifier());
@@ -92,11 +92,12 @@ public abstract class BaseTagCreatorTestCase extends BaseTestClass
             forceTagEmpty((ElementImpl) element);
         }
 
-
         System.out.println(element.toString());
 
         assertExpectedResult(file, tagName, outExt);
+    
     }
+
     
     protected abstract ITagCreator getTagCreator(TagIdentifier tagId);
 }

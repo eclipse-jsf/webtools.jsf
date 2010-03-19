@@ -29,24 +29,49 @@ public class MockJSPTagRegistry implements ITagRegistry
 
     public void addListener(ITagRegistryListener listener)
     {
-        throw new UnsupportedOperationException();
+        //no-op
     }
 
     public void removeListener(ITagRegistryListener listener)
     {
-        throw new UnsupportedOperationException();
+    	//no-op
     }
 
     public Collection<? extends Namespace> getAllTagLibraries()
     {
         List<Namespace>  all = new ArrayList<Namespace>();
-        MyNamespace ns = new MyNamespace(ITLDConstants.URI_JSF_CORE);
-        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_CORE, "loadBundle"));
-        all.add(ns);
-        ns = new MyNamespace(ITLDConstants.URI_JSF_HTML);
+        MyNamespace ns_core = new MyNamespace(ITLDConstants.URI_JSF_CORE);
+        ns_core.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_CORE, "view"));
+        all.add(ns_core);
+        
+        //jsf html
+        MyNamespace ns = new MyNamespace(ITLDConstants.URI_JSF_HTML);
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "form"));  
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "commandButton"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "commandLink"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "panelGrid"));
         ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "dataTable"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "graphicImage"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "inputHidden"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "message"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "messages"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "outputFormat"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "outputLabel"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "outputText"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "panelGroup"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "inputText"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "inputSecret"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectBooleanCheckbox"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectManyCheckbox"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectManyListbox"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectManyMenu"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectOneListbox"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectOneMenu"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectOneRadio"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "inputTextarea"));
+        ns.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_HTML, "selectBooleanCheckbox"));        
         all.add(ns);
-        return all;
+        return all;        
     }
 
     public Namespace getTagLibrary(String uri)

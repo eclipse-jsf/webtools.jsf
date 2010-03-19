@@ -22,18 +22,29 @@
   </target>
 
   <!-- This target defines the tests that need to be run. -->
-  <target name="suite">
+  <target name="suite_pt1">
     <property name="jsf-folder" value="${eclipse-home}/jsf_folder"/>
     <delete dir="${jsf-folder}" quiet="true"/>
     <ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
       <property name="data-dir" value="${jsf-folder}"/>
       <property name="plugin-name" value="${plugin-name}"/>
-      <property name="classname" value="org.eclipse.jst.pagedesigner.tests.AllTests" />
+      <property name="classname" value="org.eclipse.jst.pagedesigner.tests.AllTests_Part1" />
    	<property name="plugin-path" value="${eclipse-home}/plugins/${plugin-name}"/>
     <property name="extraVMargs" value="${extraVMargs}"/>
     </ant>
   </target>
 
+  <target name="suite_pt2">
+    <property name="jsf-folder" value="${eclipse-home}/jsf_folder"/>
+    <delete dir="${jsf-folder}" quiet="true"/>
+    <ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
+      <property name="data-dir" value="${jsf-folder}"/>
+      <property name="plugin-name" value="${plugin-name}"/>
+      <property name="classname" value="org.eclipse.jst.pagedesigner.tests.AllTests_Part2" />
+   	<property name="plugin-path" value="${eclipse-home}/plugins/${plugin-name}"/>
+    <property name="extraVMargs" value="${extraVMargs}"/>
+    </ant>
+  </target>
   <!-- This target holds code to cleanup the testing environment after -->
   <!-- after all of the tests have been run. You can use this target to -->
   <!-- delete temporary files that have been created. -->
@@ -42,7 +53,7 @@
 
   <!-- This target runs the test suite. Any actions that need to happen -->
   <!-- after all the tests have been run should go here. -->
-  <target name="run" depends="init,suite,cleanup">
+  <target name="run" depends="init,suite_pt1, suite_pt2, cleanup">
     <ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
       <property name="includes" value="org.eclipse.jst.pagedesigner.tests.*xml"/>
       <property name="output-file" value="${plugin-name}.xml"/>

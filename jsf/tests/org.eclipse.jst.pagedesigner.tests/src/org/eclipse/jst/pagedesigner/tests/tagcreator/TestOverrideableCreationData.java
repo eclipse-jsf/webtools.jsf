@@ -3,6 +3,7 @@ package org.eclipse.jst.pagedesigner.tests.tagcreator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagDropOverrider;
@@ -35,8 +36,11 @@ public class TestOverrideableCreationData extends
 				"jsp", "jsp", 358, false, getCustomizationData(), v);
 		doCreateTestOverridden(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON,
 				"jspx", "jspx", 495, false, getCustomizationData(), v);
+		
+		JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
 		doCreateTestOverridden(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON,
 				"xhtml", "xhtml", 350, false, getCustomizationData(), v);
+		JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
 
 	}
 	
@@ -73,8 +77,10 @@ public class TestOverrideableCreationData extends
 				OVERRIDDEN_TAGURI, "h",
 				OVERRIDDEN_TAGNAME, "h");
 		
+		JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
 		doCreateTestOverridden(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON,
 				"xhtml", "xhtml", 350, false, getCustomizationData(), v);
+		JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
 	}
 	
 	private void reset() {

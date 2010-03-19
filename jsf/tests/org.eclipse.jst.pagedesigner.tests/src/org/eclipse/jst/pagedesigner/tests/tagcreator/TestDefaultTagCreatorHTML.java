@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 
 /**
@@ -40,6 +41,9 @@ public class TestDefaultTagCreatorHTML extends BaseDefaultTagCreatorTestCase
     public void testCreateButton() throws Exception
     {
         doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, "INPUT.BUTTON"), "html", "html", 358,false, null);
+        
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
         doCreateTest(TagIdentifierFactory.createJSPTagWrapper(CMDocType.HTML_DOC_TYPE, "INPUT.BUTTON"), "xhtml", "xhtml", 350,false, null);
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
 }

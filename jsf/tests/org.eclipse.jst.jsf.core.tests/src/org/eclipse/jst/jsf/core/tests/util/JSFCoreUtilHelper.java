@@ -65,6 +65,7 @@ public final class JSFCoreUtilHelper
     private static final String JSFRUNTIMEJARSDIR = "jsfRuntimeJarsDirectoryV";
     private static String JSF11Path = "";
     private static String JSF12Path = "";
+    private static String JSF20Path = "";
 
 	/**
 	 * Constructs jsfLib using this plugin's install path and "testfiles" subdirectory
@@ -258,7 +259,11 @@ public final class JSFCoreUtilHelper
               System.out.printf("Using jsf runtime path %s for propertyName %s\n", res, propertyName);
               JSF12Path = res;
         }
-
+        else if (jsfVersion == JSFVersion.V2_0
+        		&& JSF20Path != res) {
+            System.out.printf("Using jsf runtime path %s for propertyName %s\n", res, propertyName);
+            JSF20Path = res;        	
+        }
         return res;
     }
 
@@ -505,21 +510,29 @@ public final class JSFCoreUtilHelper
     
     public static ITagRegistryFactoryProvider createSimpleRegistryFactory()
     {
-        return new JSPTagRegistryFactoryProvider();
+        return new JSPandFaceletTagRegistryFactoryProvider();
     }
-    
-    private static class JSPTagRegistryFactoryProvider extends AbstractTagRegistryFactoryProvider
+        
+    private static class JSPandFaceletTagRegistryFactoryProvider extends AbstractTagRegistryFactoryProvider
     {
         @Override
         public Set<ITagRegistryFactoryInfo> getTagRegistryFactories()
         {
             Set<IContentType> contentTypes = new HashSet<IContentType>();
             final IContentTypeManager typeManager = Platform.getContentTypeManager();
+            
             IContentType jspContentType = 
                 typeManager.getContentType("org.eclipse.jst.jsp.core.jspsource");
             contentTypes.add(jspContentType);
             Set<ITagRegistryFactoryInfo>  infos = new HashSet<ITagRegistryFactoryInfo>();
             infos.add(new MyTagRegistryFactoryInfo(contentTypes, new MyTagRegistryFactory(), "JSP Test Factory", "Test ONLY!!! USER SHOULD NEVER SEE THIS"));
+            
+            IContentType htmlContentType = 
+                typeManager.getContentType("org.eclipse.wst.html.core.htmlsource");
+            contentTypes.add(htmlContentType);            
+            infos.add(new MyTagRegistryFactoryInfo(contentTypes, new MyTagRegistryFactory(), "Facelet Test Factory", "Test ONLY!!! USER SHOULD NEVER SEE THIS"));
+
+
             return infos;
         }
     }

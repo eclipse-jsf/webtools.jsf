@@ -22,6 +22,9 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolv
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
+import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
@@ -67,11 +70,20 @@ public class BaseTestCase extends TestCase {
 	                , "/testdata/propertypages/testPropPages.tld.data"
 	                , "/META-INF/testPropPages.tld");
 	        
-	       
-	        	        
+	        final JSFFacetedTestEnvironment jsfFacetedTestEnv = new JSFFacetedTestEnvironment(
+	                _webProjectTestEnv);
+	        jsfFacetedTestEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
+	        
+	        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
 	    }
 	   
-	   protected IFile getJSPFile(String srcFileName, String destFileName) throws IOException, CoreException {
+	   @Override
+	protected void tearDown() throws Exception {
+		JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
+		super.tearDown();
+	}
+
+	protected IFile getJSPFile(String srcFileName, String destFileName) throws IOException, CoreException {
 	       return  getJSPFile(srcFileName, destFileName, _webProjectTestEnv);
 	   }
 	   

@@ -46,7 +46,6 @@ import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.jst.pagedesigner.dom.DOMPosition;
-import org.eclipse.jst.pagedesigner.editors.palette.IPaletteContext;
 import org.eclipse.jst.pagedesigner.editors.palette.TagToolPaletteEntry;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
@@ -72,8 +71,6 @@ public class BaseTestClass extends TestCase
     protected WebProjectTestEnvironment _webProjectTestEnv;
     protected PaletteItemManager _manager;
     protected final String _compareDataSubDir;
-	private IFile _file;
-	private IPaletteContext _context;
 
     public BaseTestClass(final String compareDataSubDir)
     {
@@ -100,16 +97,9 @@ public class BaseTestClass extends TestCase
 
         assertTrue(JSFCoreUtilHelper.addJSFRuntimeJarsToClasspath(
                 JSFVersion.V1_1, jsfFacetedTestEnv));
-
-
-        _file = _webProjectTestEnv.getTestProject().getFile("xxx.jsp");
-        
         
         disableTagIntrospectingStrategy();
-        // ensure this gets called so that the getCurrentInstance
-		_context = PaletteItemManager.createPaletteContext(_file);
-        _manager = PaletteItemManager.getInstance(_context);
-    
+
     }
     
     private void disableTagIntrospectingStrategy() {
@@ -128,7 +118,17 @@ public class BaseTestClass extends TestCase
 		}
 		prefs.commit(JSFCorePlugin.getDefault().getPreferenceStore());
 	}
+    
+    protected PaletteItemManager getPaletteItemManager(final IFile file) {
+    	PaletteItemManager pim = PaletteItemManager.getInstance(PaletteItemManager.createPaletteContext(file));
+    	initializePaletteItemManager(pim);
+    	return pim;
+    }
 
+    protected void initializePaletteItemManager(PaletteItemManager pim) {
+    	//do nothing
+    }
+    
 	protected void tearDown() throws Exception {
     	PaletteItemManager.clearPaletteItemManager();    	
     	Job[] jobs = Job.getJobManager().find(null);
@@ -160,7 +160,7 @@ public class BaseTestClass extends TestCase
                         _webProjectTestEnv.getTestProject(), uri);
 
         final TagToolPaletteEntry entry = createNonNullPaletteEntry(uri,
-                tagName);
+                tagName, file);
 
         final ContextWrapper context = getDocumentContext(offset, file);
         final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
@@ -176,9 +176,9 @@ public class BaseTestClass extends TestCase
     }
 
     private TagToolPaletteEntry createPaletteEntry(final String uri,
-            final String tagName)
+            final String tagName, final IFile file)
     {
-        final TaglibPaletteDrawer drawer = _manager
+        final TaglibPaletteDrawer drawer = getPaletteItemManager(file)
                 .getTaglibPalletteDrawer(uri);
         assertNotNull(String.format("Uri: %s, tagName: %s", uri, tagName),
                 drawer);
@@ -195,9 +195,9 @@ public class BaseTestClass extends TestCase
     }
 
     private TagToolPaletteEntry createNonNullPaletteEntry(final String uri,
-            final String tagName)
+            final String tagName, IFile file)
     {
-        final TagToolPaletteEntry entry = createPaletteEntry(uri, tagName);
+        final TagToolPaletteEntry entry = createPaletteEntry(uri, tagName, file);
         assertNotNull(entry);
         return entry;
     }
@@ -340,7 +340,7 @@ public class BaseTestClass extends TestCase
     {
 
         final TagToolPaletteEntry toolEntry = createNonNullPaletteEntry(tagId
-                .getUri(), tagId.getTagName());
+                .getUri(), tagId.getTagName(), file);
         final MockItemCreationTool tool = new MockItemCreationTool(toolEntry.getTemplate());
 
         final ContextWrapper wrapper = getDocumentContext(offset, file);

@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.pagedesigner.tests.tagcreator.base.BaseItemCreationToolTestCase;
 
 public class TestItemCreationToolForJSFHTML extends BaseItemCreationToolTestCase
@@ -36,8 +37,10 @@ public class TestItemCreationToolForJSFHTML extends BaseItemCreationToolTestCase
     {
         doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jsp", "jsp", 358,false);
         doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jspx", "jspx", 495,false);
-        // TODO: fix this case.
-//        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "xhtml", "xhtml", 350,false);
+        
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
+        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "xhtml", "xhtml", 350,false);
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
 
     public void testCreateCommandLink() throws Exception

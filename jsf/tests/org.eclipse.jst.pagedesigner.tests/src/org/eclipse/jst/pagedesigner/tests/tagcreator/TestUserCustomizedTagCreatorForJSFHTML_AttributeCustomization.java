@@ -1,6 +1,7 @@
 package org.eclipse.jst.pagedesigner.tests.tagcreator;
 
 import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
+import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.CustomizationDataImpl;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.IWritableCustomizationData;
@@ -26,9 +27,11 @@ public class TestUserCustomizedTagCreatorForJSFHTML_AttributeCustomization exten
         doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jsp", "jsp", 358, false, getCustomizationData());
         doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "jspx", "jspx", 495, false, getCustomizationData());
         
-        //commented out until we add facelet jars to test project. need jsf core.
-        //doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "xhtml", "xhtml", 350, false, getCustomizationData());
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
+        doCreateTest(IJSFConstants.TAG_IDENTIFIER_COMMANDBUTTON, "xhtml", "xhtml", 350, false, getCustomizationData());
+        JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(null);
     }
+	
 	
 
     protected ICustomizationData getCustomizationData()
