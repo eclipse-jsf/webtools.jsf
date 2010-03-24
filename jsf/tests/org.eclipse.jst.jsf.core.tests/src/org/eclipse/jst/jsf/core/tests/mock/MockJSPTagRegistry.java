@@ -42,6 +42,7 @@ public class MockJSPTagRegistry implements ITagRegistry
         List<Namespace>  all = new ArrayList<Namespace>();
         MyNamespace ns_core = new MyNamespace(ITLDConstants.URI_JSF_CORE);
         ns_core.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_CORE, "view"));
+        ns_core.addViewElement(new MyTagElement(ITLDConstants.URI_JSF_CORE, "loadBundle"));
         all.add(ns_core);
         
         //jsf html
