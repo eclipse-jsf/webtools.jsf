@@ -33,6 +33,9 @@ import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
  * This class maybe refactored to a different package in the future.
  */
 public final class FacesConfigArtifactEdit extends ArtifactEdit {
+
+	private static final String EDIT_MODEL_ID = "jsf.facesconfig"; //$NON-NLS-1$
+
 	private String sFileName = null;
 	private FacesConfigType facesConfig = null;
 	private URI facesConfigURI = URI.createURI(IFacesConfigConstants.FACES_CONFIG_URI);
@@ -44,7 +47,7 @@ public final class FacesConfigArtifactEdit extends ArtifactEdit {
 	 * @throws IllegalArgumentException
 	 */
 	public FacesConfigArtifactEdit(IProject aProject, boolean toAccessAsReadOnly) throws IllegalArgumentException {
-		super(aProject, toAccessAsReadOnly);
+		super(aProject, toAccessAsReadOnly, false, EDIT_MODEL_ID);
 	}
 
 	/**
@@ -188,6 +191,9 @@ public final class FacesConfigArtifactEdit extends ArtifactEdit {
 	 */
 	public void setFilename(String filename) {
 		sFileName = filename;
+		if (filename != null && filename.length() > 0) {
+			facesConfigURI = URI.createURI(filename);
+		}
 	}
 
 	// TODO: appears to be dead
