@@ -144,16 +144,17 @@ public class DefaultDropLocationStrategy extends AbstractDropLocationStrategy
         //TODO: need to handle viewport clipping and adjust label location appropriately
         Dimension hintSize = dropHintLabel.getPreferredSize();
         Point hintLocation = new Point(mousePosition.x, mousePosition.y+DROP_HINT_VERTICAL_OFFSET);
-        
         Rectangle hintRect = new Rectangle(hintLocation, hintSize);
 
+        //Bug 303524 - [WPE] design view flickers on dnd of jsf html column
+        //    (translateToRelative BEFORE intersect, so intersection happens on final display bounds)
+        dropHintLabel.translateToRelative(hintRect);
         // we need to intersect the rectangle with the feedback pane, otherwise, when the mouse
         // is dragged near the edge of the viewport with the drop hint active, the canvas will expand
         // away from the mouse.  In future a more ideal solution will be to relocate the tooltip
         // so that is is completely inside the viewport.
         hintRect = hintRect.intersect(getFeedbackLayer().getBounds());
-        
-        dropHintLabel.translateToRelative(hintRect);
+
         dropHintLabel.setBounds(hintRect);
         
         return dropHintLabel;
