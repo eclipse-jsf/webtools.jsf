@@ -10,11 +10,9 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.validation.internal.strategy;
 
-import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.dom.DOMAdapter;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
@@ -30,6 +28,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocume
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.region.Region2ElementAdapter;
+import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.jsf.core.set.constraint.MemberConstraint;
 import org.eclipse.jst.jsf.core.set.mapping.ElementToTagIdentifierMapping;
@@ -191,38 +190,36 @@ public class ContainmentValidatingStrategy extends
                         final TagIdentifier missingParent = (TagIdentifier) it
                                 .next();
 
-                        reportContainmentProblem(context, node.getNodeName(),
-                                Diagnostic.WARNING, 
-                                missingParent.getTagName(), missingParent
-                                        .getUri());
+                        reportContainmentProblem(context, node, missingParent);
                     }
                 }
             }
         }
     }
 
-    private static final String MESSAGE_PATTERN = 
-        "Tag {0} is missing required parent tag \"{1}\" ({2})"; //$NON-NLS-1$
-
-    // TODO: need a diagnostic factory
     private void reportContainmentProblem(
             final IStructuredDocumentContext context,
-            final String nodeName, final int severity, 
-             final String tagName, final String uri)
+            final Node node,
+            final TagIdentifier missingParent)
     {
 
-        final String msg = MessageFormat.format(
-                MESSAGE_PATTERN, new Object[]
-                                           {nodeName, tagName, uri});
+    	Diagnostic diagnostic = null;
+    	if (missingParent.equals(IJSFConstants.TAG_IDENTIFIER_VIEW)) {
+    		diagnostic = DiagnosticFactory.create_CONTAINMENT_ERROR_MISSING_VIEW(node.getNodeName());
+    	}
+    	else if (missingParent.equals(IJSFConstants.TAG_IDENTIFIER_FORM)) {
+    		diagnostic = DiagnosticFactory.create_CONTAINMENT_ERROR_MISSING_FORM(node.getNodeName());
+    	}
+    	else {
+    		diagnostic = DiagnosticFactory.create_CONTAINMENT_ERROR_MISSING_ANCESTOR(node.getNodeName(), missingParent);
+    	} 
 
-        final Diagnostic problem = 
-            new BasicDiagnostic(severity, "", -1, msg, null); //$NON-NLS-1$
         // add one so that the start offset is at the node name, rather
         // than the opening brace.
         final int start = context.getDocumentPosition()+1;
-        final int length = nodeName.length();
+        final int length = node.getNodeName().length();
 
-       _jsfValidationContext.getReporter().report(problem, start, length);
+       _jsfValidationContext.getReporter().report(diagnostic, start, length);
     }
-
+    
 }

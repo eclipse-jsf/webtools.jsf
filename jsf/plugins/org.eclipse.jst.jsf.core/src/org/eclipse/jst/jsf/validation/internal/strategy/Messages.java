@@ -22,10 +22,26 @@ public class Messages extends NLS {
 	 * see messages.properties
 	 */
 	public static String AttributeValidatingStrategy_DisplayName;
+	
 	/**
 	 * see messages.properties
 	 */
 	public static String ContainmentValidatingStrategy_DisplayName;
+	
+    /**
+     * see messages.properties
+     */
+    public static String CONTAINMENT_ERROR_MISSING_VIEW;
+    
+    /**
+     * see messages.properties
+     */
+    public static String CONTAINMENT_ERROR_MISSING_FORM;
+
+    /**
+     * see messages.properties
+     */
+    public static String CONTAINMENT_ERROR_MISSING_ANCESTOR;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
