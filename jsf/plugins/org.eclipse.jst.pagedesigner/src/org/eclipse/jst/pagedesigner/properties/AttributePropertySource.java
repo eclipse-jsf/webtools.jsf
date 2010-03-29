@@ -18,11 +18,15 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
+import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
+import org.eclipse.jst.jsf.designtime.internal.resolver.ITagElementResolver;
 import org.eclipse.jst.jsf.metadataprocessors.MetaDataEnabledProcessingFactory;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeAttributeCommand;
@@ -30,6 +34,7 @@ import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
+import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 import org.w3c.dom.Element;
 
@@ -157,36 +162,64 @@ public class AttributePropertySource implements IPropertySource {
 	}
 
 	/**
-	 * the major job of this wrapper is to provide
+	 * the major job of this wrapper is to provide tag attribute property descriptors 
 	 */
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		if (_descriptors == null) {
-			List result = new ArrayList();
-	
-				IPropertyDescriptor[] descs = _innerSource.getPropertyDescriptors();
-				if (descs != null) {
-					for (int i = 0; i < descs.length; i++) {
-						IPropertyDescriptor pd = getAttrPropertyDescriptor((String)descs[i].getId());
+			final List result = new ArrayList();
+			
+			final ITagElementResolver tagregResolver = IStructuredDocumentContextResolverFactory2.INSTANCE
+					.getResolver(_context, ITagElementResolver.class);
+			
+			if (tagregResolver != null) { //relies on getTagEntity() having been called to have setup the _element
+				final ITagElement tag = tagregResolver.getTagElement(_element);
+				if (tag != null) {
+					for (final ITagAttribute attr : tag.getAttributes().values()) {
+						final IPropertyDescriptor pd = getAttrPropertyDescriptor(attr
+								.getName());
 						if (pd != null)
-							result.add(new PropertyDescriptorWrapper(
-									_element,
-									pd));//, 
-									//getStatusLineManager()));
+							result.add(new PropertyDescriptorWrapper(_element,
+									pd));// ,
+							// getStatusLineManager()));
 						else {
-							if (descs[i] instanceof PropertyDescriptor)
-								((PropertyDescriptor)descs[i]).setCategory(ITabbedPropertiesConstants.OTHER_CATEGORY);
-							result.add(new PropertyDescriptorWrapper(
-									_element, 
-									descs[i]));//, 
-									//getStatusLineManager()));
+							final PropertyDescriptor pd1 = new TextPropertyDescriptor(
+									attr.getName(), attr.getName());
+							pd1.setDescription(attr.getDescription());
+							pd1.setCategory(ITabbedPropertiesConstants.OTHER_CATEGORY);
+							result.add(new PropertyDescriptorWrapper(_element,
+									pd1));// ,
+							// getStatusLineManager()));
 						}
-							
+
 					}
 				}
-	
+			}
+			
+			if (result.size() == 0) {// for JSP and HTML cases
+														// this is still
+														// necessary
+				final IPropertyDescriptor[] descs = _innerSource.getPropertyDescriptors();
+				for (int i = 0; i < descs.length; i++) {
+					final IPropertyDescriptor pd = getAttrPropertyDescriptor((String) descs[i]
+							.getId());
+					if (pd != null)
+						result.add(new PropertyDescriptorWrapper(_element, pd));// ,
+					// getStatusLineManager()));
+					else {
+						if (descs[i] instanceof PropertyDescriptor)
+							((PropertyDescriptor) descs[i])
+									.setCategory(ITabbedPropertiesConstants.OTHER_CATEGORY);
+						result.add(new PropertyDescriptorWrapper(_element,
+								descs[i]));// ,
+						// getStatusLineManager()));
+					}
+
+				}
+			}
+
 			_descriptors = new IPropertyDescriptor[result.size()];
 			result.toArray(_descriptors);
-			
+
 		}
 		return _descriptors;
 	}
