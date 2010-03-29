@@ -102,10 +102,9 @@ public final class TagAnalyzer
         set.add("javax.faces.webapp.UIComponentBodyTag"); //$NON-NLS-1$
         COMPONENT_TAG_HANDLER_TYPES_JSF11 = Collections.unmodifiableSet(set);
 
-        // JSF 1.2
+        // JSF 1.2+
         set = new HashSet<String>(8);
-        set.add("javax.faces.webapp.UIComponentTag"); //$NON-NLS-1$
-        set.add("javax.faces.webapp.UIComponentBodyTag"); //$NON-NLS-1$
+        set.addAll(COMPONENT_TAG_HANDLER_TYPES_JSF11);
         set.add("javax.faces.webapp.UIComponentELTag"); //$NON-NLS-1$
         COMPONENT_TAG_HANDLER_TYPES_JSF12 = Collections.unmodifiableSet(set);
 
@@ -809,8 +808,11 @@ public final class TagAnalyzer
 
         final JSFVersion jsfVersion = ServletBeanProxyContributor.getProjectVersion(project);
 
+        if (jsfVersion == null){
+        	return null;
+        }
         // v1.1(9.2.2): JSF component tags must sub-class one of these
-        if (jsfVersion == JSFVersion.V1_0 || jsfVersion == JSFVersion.V1_1)
+        else if (jsfVersion == JSFVersion.V1_0 || jsfVersion == JSFVersion.V1_1)
         {
             componentTags = COMPONENT_TAG_HANDLER_TYPES_JSF11;
             converterTags = CONVERTER_TAG_HANDLER_TYPES_JSF11;
