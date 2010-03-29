@@ -25,8 +25,10 @@ import org.eclipse.jst.pagedesigner.css2.provider.ICSSTextProvider;
 import org.eclipse.jst.pagedesigner.css2.style.DefaultStyle;
 import org.eclipse.jst.pagedesigner.css2.style.StyleUtil;
 import org.eclipse.jst.pagedesigner.viewer.CaretPositionResolver;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * @author mengbo
@@ -168,13 +170,14 @@ public class CSSTextFigure extends FlowFigure implements ICSSFigure {
 					.getStyleProperty(ICSSPropertyID.ATTR_TEXTDECORATION))
 					.intValue());
 		} else {
+			//Bug 191539 - [WPE] non-standard selection color in Web Page Editor
 			TextLayoutSupport.paintTextFigureWithSelection(g, _fragments,
 					_provider.getTextData(), getCSSStyle().getCSSFont()
 							.getSwtFont(), color, ((Integer) getCSSStyle()
 							.getStyleProperty(
 									ICSSPropertyID.ATTR_TEXTDECORATION))
 							.intValue(), range[0], range[1],
-					ColorConstants.white, ColorConstants.blue);
+					ColorConstants.white, Display.getDefault().getSystemColor(SWT.COLOR_LIST_SELECTION));
 		}
 		if (color != result && color != null) {
 			color.dispose();
