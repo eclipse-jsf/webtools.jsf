@@ -18,6 +18,9 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
@@ -51,6 +54,11 @@ import org.w3c.dom.Node;
  * @author mengbo
  */
 public class JSPUtil {
+	
+	/**
+	 * JSP source contenttype
+	 */
+	public static final IContentType JSP_CONTENTTYPE = Platform.getContentTypeManager().getContentType("org.eclipse.jst.jsp.core.jspsource"); //$NON-NLS-1$
 	/**
 	 * find out whether the specified taglib has been defined in the IDOMModel.
 	 * If found, then return the prefix. If can't find, then will try to add a
@@ -319,5 +327,20 @@ public class JSPUtil {
 			return TaglibIndex.resolve(location.toString(), uri, false) != null;
 		}
 		return false;
+	}
+
+	/**
+	 * @param model
+	 * @return true if model is a JSP contenttype
+	 */
+	public static boolean isJSPModel(IDOMModel model) {		
+		final IContentTypeManager typeManager = Platform.getContentTypeManager();
+		final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), 0);
+		final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+		final IFile file = (IFile)resolver.getResource();
+        final IContentType contentType = 
+            typeManager.findContentTypeFor(file.getName());
+        
+		return contentType.isKindOf(JSP_CONTENTTYPE);
 	}
 }

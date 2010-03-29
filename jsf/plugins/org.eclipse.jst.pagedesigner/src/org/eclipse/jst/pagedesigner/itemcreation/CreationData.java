@@ -193,6 +193,13 @@ public final class CreationData
         return false;
     }
 
+	/**
+	 * @return flag indicating that jsf view container ancestor is required
+	 */
+	public boolean isJSFViewTagRequired() {
+		return JSPUtil.isJSPModel(_model);		
+	}
+	
     /**
      * @return the metadata context for the tag
      */

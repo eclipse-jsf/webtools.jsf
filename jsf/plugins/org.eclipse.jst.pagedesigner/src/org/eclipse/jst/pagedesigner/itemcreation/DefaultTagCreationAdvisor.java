@@ -52,27 +52,33 @@ public class DefaultTagCreationAdvisor extends AbstractTagCreationAdvisor
      * @return position after creating required containers
      */
     protected ContainerCreationCommand getContainerCreationCommand(final IDOMPosition position) {
-        if (_creationData.isJSFComponent()) {
+    	if (_creationData.isJSFComponent()) {
             return getJSFContainerCommand(position);
         }
-        else if (_creationData.isHTMLFormRequired()){
+        else if (!(_creationData.isJSFComponent()) && _creationData.isHTMLFormRequired()){
             return getHtmlFormCommand(position);
-        }
+        }        
         return null;
     }
-    
-    /**
+
+	/**
      * @param position
      * @return the default container creation command for a JSF tag
      */
     protected ContainerCreationCommand getJSFContainerCommand(final IDOMPosition position)
     {
-        ContainerCreationCommand command = 
-            new SingletonContainerCreationCommand(position, IJSFConstants.TAG_IDENTIFIER_VIEW, _creationData.getTagId());
+        ContainerCreationCommand command = null; 
+        	
+        if (_creationData.isJSFViewTagRequired())
+            command = new SingletonContainerCreationCommand(position, IJSFConstants.TAG_IDENTIFIER_VIEW, _creationData.getTagId());
         
         if (_creationData.isHTMLFormRequired())
         {
-            command.chain(new TagContainerCreationCommand(position, IJSFConstants.TAG_IDENTIFIER_FORM, _creationData.getTagId()));
+        	final ContainerCreationCommand htmlFormCommand = new TagContainerCreationCommand(position, IJSFConstants.TAG_IDENTIFIER_FORM, _creationData.getTagId());
+        	if (command != null)
+        		command.chain(htmlFormCommand);
+        	else
+        		command = htmlFormCommand;
         }
         
         return command;

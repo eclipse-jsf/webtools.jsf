@@ -63,7 +63,6 @@ public class PaletteItemManager implements IPaletteItemManager,
 	
 	private static final boolean DEBUG = false;
 
-	private static final IContentType JSP_CONTENTTYPE = Platform.getContentTypeManager().getContentType("org.eclipse.jst.jsp.core.jspsource"); //$NON-NLS-1$
 	
 	private static Map<TagRegistryIdentifier, PaletteItemManager> _managers = new HashMap<TagRegistryIdentifier, PaletteItemManager>();
 	private static ReentrantLock MANAGER_LOCK = new ReentrantLock();
@@ -145,7 +144,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 	        return null;
 		}
 		//to support legacy null projects.   Allows HTML and JSP tag libs to be displayed.
-	    return new TagRegistryIdentifier(null, JSP_CONTENTTYPE);
+	    return new TagRegistryIdentifier(null, org.eclipse.jst.pagedesigner.utils.JSPUtil.JSP_CONTENTTYPE);
 
 	}
 
@@ -164,7 +163,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 			}
 		};
 	}
-	private void addFile(IFile file) {
+	private void addFile(final IFile file) {
 		synchronized (_files) {
 			_files.add(file);
 		}
