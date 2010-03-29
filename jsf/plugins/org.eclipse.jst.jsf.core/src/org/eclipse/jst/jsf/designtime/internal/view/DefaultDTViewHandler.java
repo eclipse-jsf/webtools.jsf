@@ -89,8 +89,23 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     @Override
     public IViewDefnAdapterFactory getViewMetadataAdapterFactory(
             final DTFacesContext context) throws ViewHandlerException
-            {
-        final IResource res = context.adaptContextObject();
+    {
+    	return internalGetViewMetadataAdapterFactory(context);
+    }
+    
+    /**
+     * @param context
+     * @return the DefaultViewDefnAdapterFactory
+     * 			
+     */
+    protected IViewDefnAdapterFactory getDefaultViewMetadataAdapterFactory(
+    		final DTFacesContext context) 
+    {
+    	return internalGetViewMetadataAdapterFactory(context);
+    }
+
+    private IViewDefnAdapterFactory internalGetViewMetadataAdapterFactory (final DTFacesContext context) {
+    	final IResource res = context.adaptContextObject();
 
         if (res instanceof IFile)
         {
@@ -98,8 +113,8 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
         }
 
         return null;
-            }
-
+    }
+    
     @Override
     protected VersionStamp createVersionStamp(
             final DTFacesContext facesContext, final String viewId)

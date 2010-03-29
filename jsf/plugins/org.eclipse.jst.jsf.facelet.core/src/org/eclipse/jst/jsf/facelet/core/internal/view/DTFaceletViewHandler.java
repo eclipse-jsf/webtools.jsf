@@ -73,7 +73,7 @@ public class DTFaceletViewHandler extends DefaultDTViewHandler
 
         if (res instanceof IFile)
         {
-            return new ViewDefnAdapterFactory(this);
+            return new ViewDefnAdapterFactory(this, getDefaultViewMetadataAdapterFactory(context));
         }
 
         return null;

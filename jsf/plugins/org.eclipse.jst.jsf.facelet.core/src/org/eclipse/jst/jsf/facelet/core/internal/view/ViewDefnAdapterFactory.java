@@ -6,16 +6,19 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.AbstractViewDefnAdapterFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.IViewDefnAdapter;
+import org.eclipse.jst.jsf.designtime.internal.view.IViewDefnAdapterFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 
 class ViewDefnAdapterFactory extends AbstractViewDefnAdapterFactory
 {
     private final DTFaceletViewHandler _myViewHandler;
+	private final IViewDefnAdapterFactory _defaultViewDefnAdapterFactory;
 
-    ViewDefnAdapterFactory(final DTFaceletViewHandler viewHandler)
+    ViewDefnAdapterFactory(final DTFaceletViewHandler viewHandler, final IViewDefnAdapterFactory defaultViewDefnAdapterFactory) 
     {
         _myViewHandler = viewHandler;
+        _defaultViewDefnAdapterFactory = defaultViewDefnAdapterFactory;
     }
 
     @Override
@@ -30,11 +33,14 @@ class ViewDefnAdapterFactory extends AbstractViewDefnAdapterFactory
             {
                 final IFile srcFile = (IFile) res;
                 final ITagRegistry registry = findTagRegistry(srcFile);
-                if (_myViewHandler.isHTMLContent(srcFile) && registry != null)
-                {
+                if (registry != null) {
+	                if (_myViewHandler.isHTMLContent(srcFile))
+	                {
+	                    return new FaceletViewDefnAdapter(registry);
+	                }
                     // if we have a jsp file, then return the default
                     // adapter
-                    return new FaceletViewDefnAdapter(registry);
+	                return _defaultViewDefnAdapterFactory.createAdapter(context, viewId);	                
                 }
             }
         }
