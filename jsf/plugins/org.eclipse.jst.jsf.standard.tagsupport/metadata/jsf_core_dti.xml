@@ -21,6 +21,7 @@
 			</value>
 		</trait>
 	</entity>
+
 	<entity id="ajax" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -36,6 +37,7 @@
 			</value>
 		</trait>	
 	</entity>
+
 	<entity id="attribute" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -99,6 +101,7 @@
 			</value>
 		</trait>
 	</entity>
+
 	<entity id="event" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -113,6 +116,7 @@
 			</value>
 		</trait>	
 	</entity>
+
 	<entity id="facet" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -218,18 +222,19 @@
 	<entity id="subview" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
+				<tag-convert-info>
+					<operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+						<parameter value="div"/>
+					</operation>
+					<operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+				</tag-convert-info>
 				<tag-decorate-info id="vpd-decorate-design"
-					nonVisual="true"
-					nonVisualImagePath="icons/palette/JSFCORE/small/JSF_SUBVIEW.gif"
-					widget="true"
-					
-				/>
-				<tag-decorate-info id="vpd-decorate-preview"
-					nonVisual="true"
+					needBorderDecorator="true"
 				/>
 			</value>
 		</trait>
 	</entity>
+
 	<entity id="validateBean" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -245,6 +250,7 @@
 			</value>
 		</trait>	
 	</entity>
+
 	<entity id="validateDoubleRange" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -292,6 +298,7 @@
 			</value>
 		</trait>
 	</entity>
+
 	<entity id="validateRegex" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -307,6 +314,7 @@
 			</value>
 		</trait>	
 	</entity>
+
 	<entity id="validateRequired" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -322,6 +330,7 @@
 			</value>
 		</trait>	
 	</entity>
+
 	<entity id="validator" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -388,6 +397,7 @@
 			</value>
 		</trait>
 	</entity>
+
 	<entity id="viewParam" type="tag">
 		<trait id="dt-info">
 			<value xsi:type="dti:DTInfo">
@@ -403,4 +413,5 @@
 			</value>
 		</trait>	
 	</entity>
+
 </md:metadatamodel>
