@@ -131,6 +131,14 @@
 				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
 			</trait>
 		</entity>
+		<entity id="label">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
 	</entity>
 	<entity id="commandLink" type="tag">		
 		<include-entity-group id="basic-jsf-html-attributes"/>
