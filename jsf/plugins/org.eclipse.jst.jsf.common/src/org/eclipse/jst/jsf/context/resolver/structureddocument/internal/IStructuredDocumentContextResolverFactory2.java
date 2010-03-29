@@ -38,4 +38,11 @@ public interface IStructuredDocumentContextResolverFactory2 extends
      */
     ITaglibContextResolver getTaglibContextResolverFromDelegates(IStructuredDocumentContext context);
 
+    /**
+     * @param <T> resolver type
+     * @param context
+     * @param clazz
+     * @return resolver of type T
+     */
+    <T> T getResolver(IStructuredDocumentContext context, Class<T> clazz);
 }

@@ -18,9 +18,9 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
@@ -38,7 +38,7 @@ import org.w3c.dom.NodeList;
  * 
  */
 public class ViewBasedTaglibResolverFactory implements
-IStructuredDocumentContextResolverFactory, IAdaptable
+IStructuredDocumentContextResolverFactory2, IAdaptable
 {
     public IDOMContextResolver getDOMContextResolver(
             final IStructuredDocumentContext context)
@@ -88,7 +88,19 @@ IStructuredDocumentContextResolverFactory, IAdaptable
 
         return null;
     }
+    
+	public ITaglibContextResolver getTaglibContextResolverFromDelegates(
+			IStructuredDocumentContext context) {
+		throw new UnsupportedOperationException();
+	}
 
+	public <T> T getResolver(final IStructuredDocumentContext context, final Class<T> clazz) {
+		if (clazz.equals(ITagElementResolver.class) ||
+				clazz.equals(ITaglibContextResolver.class)) {
+			return (T)getTaglibContextResolver(context);
+		}
+		return null;
+	}
     /**
      * A taglib resolver that goes through the design time view handler to
      * resolve tags. This allows us to abstract the definition format (XML) from
@@ -96,7 +108,7 @@ IStructuredDocumentContextResolverFactory, IAdaptable
      * 
      */
     private static class ViewBasedTaglibResolver implements
-    ITaglibContextResolver
+    ITaglibContextResolver, ITagElementResolver
     {
         private final IProject                   _project;
         private final IFile                      _file;
@@ -158,7 +170,7 @@ IStructuredDocumentContextResolverFactory, IAdaptable
         {
             // it is sufficient to check that the view adapter will give us
             // a non-null tag element
-            return getTagElement(node) != null;
+            return _getTagElement(node) != null;
         }
 
         public boolean canResolveContext(final IModelContext modelContext)
@@ -188,7 +200,7 @@ IStructuredDocumentContextResolverFactory, IAdaptable
             return checkNode;
         }
 
-        private ITagElement getTagElement(final Node node)
+        private ITagElement _getTagElement(final Node node)
         {
             final Element element = getElement(node);
 
@@ -202,6 +214,11 @@ IStructuredDocumentContextResolverFactory, IAdaptable
             }
             return null;
         }
+        
+		public ITagElement getTagElement(final Node node) {			
+			return _getTagElement(node);
+		}
+
     }
 
 
@@ -227,4 +244,5 @@ IStructuredDocumentContextResolverFactory, IAdaptable
         }
         return null;
     }
+
 }

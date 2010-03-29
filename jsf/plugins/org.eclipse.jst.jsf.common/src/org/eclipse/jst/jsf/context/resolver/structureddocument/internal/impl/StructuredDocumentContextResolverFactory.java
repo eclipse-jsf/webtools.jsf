@@ -318,4 +318,32 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
             return null;
         }
     }
+
+	public <T> T getResolver(final IStructuredDocumentContext context, final Class<T> clazz) {
+
+	    {
+	        synchronized (_delegates)
+	        {
+	            for (final IAdaptable adapter : _delegates)
+	            {
+	                final IStructuredDocumentContextResolverFactory delegateFactory =
+	                    (IStructuredDocumentContextResolverFactory) adapter
+	                    .getAdapter(IStructuredDocumentContextResolverFactory.class);
+
+	                if (delegateFactory != null 
+	                		&& delegateFactory instanceof IStructuredDocumentContextResolverFactory2)
+	                {
+	                    final IStructuredDocumentContextResolverFactory2 contextResolverFactory = (IStructuredDocumentContextResolverFactory2)delegateFactory;                            
+	                    final T contextResolver = contextResolverFactory.getResolver(context, clazz);
+	                    if (contextResolver != null)
+	                    {
+	                        return contextResolver;
+	                    }
+	                }
+	            }
+
+	            return null;
+	        }
+	    }
+	}
 }
