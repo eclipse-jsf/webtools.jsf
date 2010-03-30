@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -199,18 +200,20 @@ public class JSFAddActionGroup {
         if (appConfigMgr != null)
         {
             final List list = appConfigMgr.getConverters();
-            result = new String[list.size()];
-            int i = 0;
+            //prune out converters for classes, they're not valid here
+            final List converterIdList = new ArrayList();
             for (final Iterator it = list.iterator(); it.hasNext();)
             {
                 ConverterType converter = (ConverterType) it.next();
                 ConverterIdType converterId = converter.getConverterId();
                 if (converterId != null)
                 {
-                    result[i++] = converterId.getTextContent() != null ? 
-                            converterId.getTextContent().trim() : ""; //$NON-NLS-1$
+                    converterIdList.add(converterId.getTextContent() != null ? 
+                            converterId.getTextContent().trim() : ""); //$NON-NLS-1$
                 }
             }
+            result = new String[converterIdList.size()];
+            result = (String[]) converterIdList.toArray(result);
         }
 		return result;
 	}
