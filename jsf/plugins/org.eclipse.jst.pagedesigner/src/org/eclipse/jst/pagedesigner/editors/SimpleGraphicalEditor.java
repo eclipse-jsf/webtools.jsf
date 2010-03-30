@@ -686,7 +686,11 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
             addEditSubMenu(menuMgr1);
             addSelectSubMenu(menuMgr1);
             addInsertSubMenu(menuMgr1);
+            /*
+             * Bug 172959 - [WPE] WPE context menu Navigate->Java->Value doesn't work..
+             * 
             addNavigateSubMenu(menuMgr1);
+            */
             addStyleSubMenu(menuMgr1);
             
             // add separators that mark standard append locations in the main
@@ -753,7 +757,10 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
         }
 			}
         }
-        
+
+        /*
+         * Bug 172959 - [WPE] WPE context menu Navigate->Java->Value doesn't work..
+         * 
         private void addNavigateSubMenu(IMenuManager menu) {
             final IMenuManager  navigateSubmenu = 
                 new MenuManager(ActionsMessages.getString("Navigate.Menu")  //$NON-NLS-1$
@@ -761,6 +768,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
             menu.add(navigateSubmenu);
             PageDesignerActionConstants.addStandardNavigateActionGroups(navigateSubmenu);
         }
+         */
 
         private void addEditSubMenu(IMenuManager menu)
         {
