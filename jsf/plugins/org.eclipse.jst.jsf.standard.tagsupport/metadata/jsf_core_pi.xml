@@ -127,7 +127,7 @@
 			<value xsi:type="mdt:StringValue">small/JSF_METADATA.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value xsi:type="mdt:StringValue">large/JSF_METADAT.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_METADATA.gif</value>
 		</trait>
 	</entity>	
 	<entity id="param" type="tag">
