@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -27,6 +28,8 @@ import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.jst.jsf.common.ui.IFileFolderConstants;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.wst.common.componentcore.ComponentCore;
+import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacet;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -81,7 +84,16 @@ public class WebrootUtil {
 	 */
 	public static IPath getWebContentPath(IProject project) {
 		if (project != null) {
-			return ComponentCore.createComponent(project).getRootFolder().getUnderlyingFolder().getFullPath();
+			IVirtualComponent component = ComponentCore.createComponent(project);
+			if (component != null) {
+				IVirtualFolder rootFolder = component.getRootFolder();
+				if (rootFolder != null) {
+					IContainer underlyingFolder = rootFolder.getUnderlyingFolder();
+					if (underlyingFolder != null) {
+						return underlyingFolder.getFullPath();
+					}
+				}
+			}
 		}
 		return null;
 	}
