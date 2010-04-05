@@ -23,6 +23,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
@@ -134,7 +135,7 @@ public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLo
 			if (defConfigPath == null) {
 				IProject project = manager.getProject();
 				if (project != null) {
-					IVirtualFolder webContentFolder = JSFAppConfigUtils.getWebContentFolder(project);
+					IVirtualFolder webContentFolder = new DefaultVirtualComponentQuery().getWebContentFolder(project);
 					if (webContentFolder != null) {
 						IVirtualResource defConfigFile = webContentFolder.findMember(DEF_APPCONFIGRESOURCE_FILENAME);
 						if (defConfigFile != null) {

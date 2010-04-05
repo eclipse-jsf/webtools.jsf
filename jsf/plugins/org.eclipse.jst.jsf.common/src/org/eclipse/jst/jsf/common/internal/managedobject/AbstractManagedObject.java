@@ -10,24 +10,64 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.internal.managedobject;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
+
 /**
  * Sub-class for managed objects.
+ * 
+ */
+/**
+ * @author cbateman
  *
  */
-public abstract class AbstractManagedObject implements IManagedObject 
+public abstract class AbstractManagedObject implements IManagedObject
 {
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#dispose()
+    /**
+     * Flag for checking disposal.
+     */
+    protected final AtomicBoolean _isDisposed = new AtomicBoolean(false);
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#dispose
+     * ()
      */
     public abstract void dispose();
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#checkpoint()
+    public boolean isDisposed()
+    {
+        return _isDisposed.get();
+    }
+
+    /**
+     * Checks if this object is disposed and throws IllegalStateException if it
+     * is.
+     */
+    protected final void assertNotDisposed()
+    {
+        if (isDisposed())
+        {
+            throw new IllegalStateException(this.toString() + " is disposed"); //$NON-NLS-1$
+        }
+    }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#checkpoint
+     * ()
      */
     public abstract void checkpoint();
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#destroy()
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#destroy
+     * ()
      */
     public abstract void destroy();
 

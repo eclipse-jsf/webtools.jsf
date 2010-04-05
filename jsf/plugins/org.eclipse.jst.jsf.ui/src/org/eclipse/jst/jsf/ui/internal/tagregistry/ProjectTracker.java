@@ -17,6 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
@@ -43,7 +44,7 @@ class ProjectTracker
     public ProjectTracker(final IWorkspaceRoot root, final ProjectAdvisor projectAdvisor)
     {
         _root = root;
-        _lifecycleListener = new LifecycleListener();
+        _lifecycleListener = new LifecycleListener(ResourcesPlugin.getWorkspace());
         _resourceChangeListener = new ResourceChangeListener();
         _myListeners = new CopyOnWriteArrayList<ProjectTrackingListener>();
         if (projectAdvisor != null)

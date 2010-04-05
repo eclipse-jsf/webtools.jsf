@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jst.j2ee.model.IModelProvider;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.common.internal.managedobject.AbstractManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
@@ -44,7 +49,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
  * 
  *         TODO:merge back with common code in JSFAppConfig framework
  */
-/* package */class ContextParamSpecifiedFaceletTaglibLocator extends
+public class ContextParamSpecifiedFaceletTaglibLocator extends
         AbstractFaceletTaglibLocator
 {
     private static final String ID = ContextParamSpecifiedFaceletTaglibLocator.class.getCanonicalName();
@@ -54,15 +59,22 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
     private final TagRecordFactory               _factory;
     private final TaglibFileManager              _fileManager;
 
+    /**
+     * @param project
+     * @param factory
+     * @param webAppProvider
+     * @param vcQuery
+     */
     public ContextParamSpecifiedFaceletTaglibLocator(final IProject project,
-            final TagRecordFactory factory)
+            final TagRecordFactory factory, final IModelProvider webAppProvider,
+            final AbstractVirtualComponentQuery vcQuery)
     {
         super(ID, DISPLAYNAME);
         _project = project;
         _records = new HashMap<String, IFaceletTagRecord>();
         _factory = factory;
         _fileManager = new TaglibFileManager(project,
-                new LibraryChangeHandler());
+                new LibraryChangeHandler(), webAppProvider, vcQuery);
     }
 
     /*
@@ -88,16 +100,12 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
     public void stop()
     {
         _fileManager.dispose();
+        super.stop();
     }
 
 
     @Override
-    protected Map<String, ? extends IFaceletTagRecord> doLocate(IProject context)
-    {
-        return findInWebRoot();
-    }
-
-    private Map<String, ? extends IFaceletTagRecord> findInWebRoot()
+    protected Map<String, ? extends IFaceletTagRecord> doLocate(final IProject context)
     {
         final List<IFile> files = _fileManager.getFiles();
 
@@ -140,7 +148,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
             is = file.getContents();
             final TagModelLoader loader = new TagModelLoader(file.getFullPath().toFile().getCanonicalPath());
             loader.loadFromInputStream(is);
-            FaceletTaglib taglib = loader.getTaglib();
+            final FaceletTaglib taglib = loader.getTaglib();
             if (taglib != null)
             {
                 return _factory.createRecords(taglib);
@@ -177,10 +185,12 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
         private final IResourceChangeListener _newFileListener;
 
         public TaglibFileManager(final IProject project,
-                final LibraryChangeHandler handler)
+                final LibraryChangeHandler handler, final IModelProvider webAppProvider,
+                final AbstractVirtualComponentQuery vcQuery)
         {
+            super(project.getWorkspace());
             _handler = handler;
-            _webAppConfiguration = new WebappConfiguration(project);
+            _webAppConfiguration = new WebappConfiguration(project, webAppProvider, vcQuery);
             // TODO: fold into LifecycleListener
             _newFileListener = new IResourceChangeListener()
             {
@@ -192,24 +202,35 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
                             && event.getDelta().findMember(
                                     project.getFullPath()) != null)
                     {
-                        for (final IFile file : _webAppConfiguration.getFiles())
+                        new WorkspaceJob("Context param update") //$NON-NLS-1$
                         {
-                            final IResourceDelta delta = event.getDelta()
-                                    .findMember(file.getFullPath());
-
-                            if (delta != null)
+                            
+                            @Override
+                            public IStatus runInWorkspace(IProgressMonitor monitor)
+                                    throws CoreException
                             {
-                                if (delta.getKind() == IResourceDelta.ADDED)
+                                for (final IFile file : _webAppConfiguration.getFiles())
                                 {
-                                    _handler.added(file);
+                                    final IResourceDelta delta = event.getDelta()
+                                            .findMember(file.getFullPath());
+
+                                    if (delta != null)
+                                    {
+                                        if (delta.getKind() == IResourceDelta.ADDED)
+                                        {
+                                            
+                                            _handler.added(file);
+                                        }
+                                    }
                                 }
+                                return Status.OK_STATUS;
                             }
-                        }
+                        }.schedule();
                     }
                 }
             };
 
-            ResourcesPlugin.getWorkspace().addResourceChangeListener(
+            getWorkspace().addResourceChangeListener(
                     _newFileListener);
         }
 
@@ -224,7 +245,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
             _webAppConfiguration.addListener(new WebappListener()
             {
                 @Override
-                public void webappChanged(WebappChangeEvent event)
+                public void webappChanged(final WebappChangeEvent event)
                 {
                     for (final IFile file : event.getRemoved())
                     {
@@ -234,7 +255,7 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
                             tracker = getInstance(file);
                             _handler.removed(tracker._uri, file);
                         }
-                        catch (ManagedObjectException e)
+                        catch (final ManagedObjectException e)
                         {
                             FaceletCorePlugin.log("While removing for webapp change", e); //$NON-NLS-1$
                         }
@@ -264,19 +285,16 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
             super.removeLifecycleEventListener(listener);
         }
 
+        /* (non-Javadoc)
+         * @see org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager#dispose()
+         */
+        @Override
         public void dispose()
         {
-            ResourcesPlugin.getWorkspace().removeResourceChangeListener(
-                    _newFileListener);
-
-            final Collection<IFile> managedResources = getManagedResources();
-
-            for (final IFile file : managedResources)
-            {
-                unmanageResource(file);
-            }
-            
             _webAppConfiguration.dispose();
+            getWorkspace().removeResourceChangeListener(
+                    _newFileListener);
+            super.dispose();
         }
     }
 

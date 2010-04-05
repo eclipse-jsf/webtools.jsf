@@ -130,7 +130,7 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
                             + _project));
         }
 
-        final FaceletTagIndex index = FaceletTagIndex.getInstance();
+        final FaceletTagIndex index = FaceletTagIndex.getInstance(_project.getWorkspace());
 
         IProjectTaglibDescriptor tagDesc;
         try
@@ -237,7 +237,7 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
 
                     if (flushCaches)
                     {
-                        FaceletTagIndex.getInstance().flush(_project);
+                        FaceletTagIndex.getInstance(_project.getWorkspace()).flush(_project);
                     }
                     // if we aren't flushing caches, then check point the
                     // current namespace data, so it isn't lost when we clear
@@ -351,7 +351,7 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
     {
         if (_listener != null)
         {
-            FaceletTagIndex index = FaceletTagIndex.getInstance();
+            FaceletTagIndex index = FaceletTagIndex.getInstance(_project.getWorkspace());
             try
             {
                 IProjectTaglibDescriptor instance = index.getInstance(_project);

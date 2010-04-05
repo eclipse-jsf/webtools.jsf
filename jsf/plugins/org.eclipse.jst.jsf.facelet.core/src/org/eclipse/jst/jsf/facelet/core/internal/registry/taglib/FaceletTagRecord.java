@@ -15,10 +15,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
 
-abstract class FaceletTagRecord implements IFaceletTagRecord
+/**
+ * Super of all facelet tag records.
+ * 
+ * @author cbateman
+ *
+ */
+public abstract class FaceletTagRecord implements IFaceletTagRecord
 {
     private final CopyOnWriteArrayList<ITagRecordChangeListener> _listeners;
 
+    /**
+     * 
+     */
     public FaceletTagRecord()
     {
         _listeners = new CopyOnWriteArrayList<ITagRecordChangeListener>();
@@ -34,6 +43,9 @@ abstract class FaceletTagRecord implements IFaceletTagRecord
         _listeners.remove(listener);
     }
 
+    /**
+     * @param event
+     */
     protected void fireEvent(final TagRecordChangeEvent event)
     {
         for (final ITagRecordChangeListener listener : _listeners)

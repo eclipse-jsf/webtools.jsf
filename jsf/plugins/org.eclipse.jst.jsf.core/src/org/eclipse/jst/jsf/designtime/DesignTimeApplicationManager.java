@@ -232,7 +232,7 @@ public final class DesignTimeApplicationManager
         _project = project;
         _locator = new MyExternalContextFactoryLocator();
         _isDisposed = new AtomicBoolean();
-        _lifecycleListener = new LifecycleListener(_project);
+        _lifecycleListener = new LifecycleListener(_project, ResourcesPlugin.getWorkspace());
         _lifecycleListener.addListener(new IResourceLifecycleListener()
         {
             public EventResult acceptEvent(final ResourceLifecycleEvent event)

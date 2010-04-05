@@ -41,12 +41,11 @@ import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
 import org.eclipse.osgi.util.NLS;
-import org.eclipse.wst.common.componentcore.ComponentCore;
-import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -170,14 +169,10 @@ public class JSFAppConfigUtils {
 	 * @param project IProject instance for which to get the folder.
 	 * @return IVirtualFolder instance which represents the root context's
 	 * web content folder.
+	 * @deprecated Call DefaultVirtualComponentQuery.getWebContentFolder instead
 	 */
 	public static IVirtualFolder getWebContentFolder(IProject project) {
-		IVirtualFolder folder = null;
-		IVirtualComponent component = ComponentCore.createComponent(project);
-		if (component != null) {
-			folder = component.getRootFolder();
-		}
-		return folder;
+		return new DefaultVirtualComponentQuery().getWebContentFolder(project);
 	}
 
 	/**

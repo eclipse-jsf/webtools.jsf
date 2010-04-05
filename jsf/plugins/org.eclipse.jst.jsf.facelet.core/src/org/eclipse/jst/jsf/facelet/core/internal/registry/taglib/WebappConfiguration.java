@@ -19,7 +19,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -28,12 +27,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jst.j2ee.common.ParamValue;
 import org.eclipse.jst.j2ee.internal.J2EEVersionConstants;
 import org.eclipse.jst.j2ee.model.IModelProvider;
-import org.eclipse.jst.j2ee.model.ModelProviderManager;
-import org.eclipse.jst.j2ee.web.componentcore.util.WebArtifactEdit;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
-import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration.WebappListener.WebappChangeEvent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
@@ -48,22 +44,36 @@ import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 public class WebappConfiguration
 {
     // TODO: move these to jsf core.
-    private static final String FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME = "facelets.LIBRARIES"; //$NON-NLS-1$
-    private static final String JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME = "javax.faces.FACELETS_LIBRARIES"; //$NON-NLS-1$
-    private final IProject      _project;
+    /**
+     * The param key for Facelet 1.x libraries declared in web.xml
+     */
+    public static final String FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME = "facelets.LIBRARIES"; //$NON-NLS-1$
+    /**
+     * The param key for Facelet 2.0 libraries declared in web.xml
+     */
+    public static final String JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME = "javax.faces.FACELETS_LIBRARIES"; //$NON-NLS-1$
+    private final IProject _project;
     /**
      * Cached instance of ContextParamAdapter.
      */
     private final ContextParamAdapter _contextParamAdapter;
-    private List<IFile>         _cachedFiles;
+    private List<IFile> _cachedFiles;
+    private IModelProvider _modelProvider;
+    private AbstractVirtualComponentQuery _vcQuery;
 
     /**
      * @param project
+     * @param modelProvider
+     * @param vcQuery
      */
-    /*package*/ WebappConfiguration(final IProject project)
+    public WebappConfiguration(final IProject project,
+            final IModelProvider modelProvider,
+            final AbstractVirtualComponentQuery vcQuery)
     {
         _project = project;
         _contextParamAdapter = new ContextParamAdapter();
+        _modelProvider = modelProvider;
+        _vcQuery = vcQuery;
     }
 
     /**
@@ -73,7 +83,7 @@ public class WebappConfiguration
     {
         _contextParamAdapter.addListener(listener);
     }
-    
+
     /**
      * @param listener
      */
@@ -83,19 +93,19 @@ public class WebappConfiguration
     }
 
     /**
-     * @return the list of IFile's 
+     * @return the list of IFile's
      */
     public List<IFile> getFiles()
     {
-        final IVirtualFolder folder = JSFAppConfigUtils
-                .getWebContentFolder(_project);
+        final IVirtualFolder folder = _vcQuery.getWebContentFolder(_project);
 
         if (folder == null)
         {
             return Collections.emptyList();
         }
 
-        final List<String> filenames = getConfigFilesFromContextParam(_project);
+        final List<String> filenames = getConfigFilesFromContextParam(_project,
+                _modelProvider);
         final List<IFile> files = new ArrayList<IFile>();
 
         for (final String filename : filenames)
@@ -112,9 +122,7 @@ public class WebappConfiguration
 
     private Object getModelObject()
     {
-        final IModelProvider provider = ModelProviderManager
-                .getModelProvider(_project);
-        return provider.getModelObject();
+        return _modelProvider.getModelObject();
     }
 
     /**
@@ -128,13 +136,11 @@ public class WebappConfiguration
             if (webAppObj instanceof WebApp)
             {
                 startLocatingJ2EEConfigs((WebApp) webAppObj);
-            }
-            else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
+            } else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
             {
                 startLocatingJEEConfigs((org.eclipse.jst.javaee.web.WebApp) webAppObj);
             }
-        }
-        else
+        } else
         {
             FaceletCorePlugin
                     .log(
@@ -155,20 +161,17 @@ public class WebappConfiguration
                 if (webAppObj instanceof WebApp)
                 {
                     stopLocatingJ2EEConfigs((WebApp) webAppObj);
-                }
-                else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
+                } else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
                 {
                     stopLocatingJEEConfigs((org.eclipse.jst.javaee.web.WebApp) webAppObj);
                 }
-            }
-            else
+            } else
             {
                 FaceletCorePlugin
                         .log(
                                 "Failed stopping locator for project: " + _project.getName() //$NON-NLS-1$
                                 , new Exception());
             }
-            //_contextParamAdapter.dispose();
         }
     }
 
@@ -269,26 +272,24 @@ public class WebappConfiguration
      * @param project
      *            IProject instance for which to get the context parameter's
      *            value.
+     * @param provider
      * @return List of application configuration file names as listed in the JSF
      *         CONFIG_FILES context parameter ("javax.faces.CONFIG_FILES"); list
      *         may be empty.
      */
     public static List<String> getConfigFilesFromContextParam(
-            final IProject project)
+            final IProject project, IModelProvider provider)
     {
         List<String> filesList = Collections.EMPTY_LIST;
-        if (JSFAppConfigUtils.isValidJSFProject(project))
+        // if (JSFAppConfigUtils.isValidJSFProject(project))
         {
-            final IModelProvider provider = ModelProviderManager
-                    .getModelProvider(project);
             final Object webAppObj = provider.getModelObject();
             if (webAppObj != null)
             {
                 if (webAppObj instanceof WebApp)
                 {
-                    filesList = getConfigFilesForJ2EEApp(project);
-                }
-                else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
+                    filesList = getConfigFilesForJ2EEApp((WebApp) webAppObj);
+                } else if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
                 {
                     filesList = getConfigFilesForJEEApp((org.eclipse.jst.javaee.web.WebApp) webAppObj);
                 }
@@ -309,8 +310,8 @@ public class WebappConfiguration
             final org.eclipse.jst.javaee.core.ParamValue paramValue = (org.eclipse.jst.javaee.core.ParamValue) itContextParams
                     .next();
             if (paramValue.getParamName().equals(
-                    FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)||
-                    paramValue.getParamName().equals(
+                    FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)
+                    || paramValue.getParamName().equals(
                             JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
             {
                 filesString = paramValue.getParamValue();
@@ -320,89 +321,63 @@ public class WebappConfiguration
         return parseFilesString(filesString);
     }
 
-    private static List<String> getConfigFilesForJ2EEApp(final IProject project)
+    private static List<String> getConfigFilesForJ2EEApp(final WebApp webApp)
     {
-        List filesList = new ArrayList();
-        final WebArtifactEdit webArtifactEdit = WebArtifactEdit
-                .getWebArtifactEditForRead(project);
-        if (webArtifactEdit != null)
+        List<String> filesList = new ArrayList<String>();
+
+        if (webApp != null)
         {
-            try
+            String filesString = null;
+            // need to branch here due to model version differences
+            // (BugZilla #119442)
+            if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID)
             {
-                WebApp webApp = null;
-                try
+                final EList contexts = webApp.getContexts();
+                final Iterator itContexts = contexts.iterator();
+                while (itContexts.hasNext())
                 {
-                    webApp = webArtifactEdit.getWebApp();
-                }
-                catch (final ClassCastException cce)
-                {
-                    // occasionally thrown from WTP code in RC3 and possibly
-                    // later
-                    JSFCorePlugin.log(IStatus.ERROR, cce.getLocalizedMessage(),
-                            cce);
-                    return filesList;
-                }
-                if (webApp != null)
-                {
-                    String filesString = null;
-                    // need to branch here due to model version differences
-                    // (BugZilla #119442)
-                    if (webApp.getVersionID() == J2EEVersionConstants.WEB_2_3_ID)
+                    final ContextParam contextParam = (ContextParam) itContexts
+                            .next();
+                    if (contextParam.getParamName().equals(
+                            FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)
+                            || contextParam.getParamName().equals(
+                                    JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
+                    // if (contextParam.getParamName().equals(
+                    // FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
                     {
-                        final EList contexts = webApp.getContexts();
-                        final Iterator itContexts = contexts.iterator();
-                        while (itContexts.hasNext())
-                        {
-                            final ContextParam contextParam = (ContextParam) itContexts
-                                    .next();
-                            if (contextParam.getParamName().equals(
-                                    FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)||
-                                    contextParam.getParamName().equals(
-                                            JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
-                           // 	if (contextParam.getParamName().equals(
-                           //        FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
-                            {
-                                filesString = contextParam.getParamValue();
-                                break;
-                            }
-                        }
+                        filesString = contextParam.getParamValue();
+                        break;
                     }
-                    else
+                }
+            } else
+            {
+                final EList contextParams = webApp.getContextParams();
+                final Iterator itContextParams = contextParams.iterator();
+                while (itContextParams.hasNext())
+                {
+                    final ParamValue paramValue = (ParamValue) itContextParams
+                            .next();
+                    if (paramValue.getName().equals(
+                            FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)
+                            || paramValue.getName().equals(
+                                    JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
+                    // if (paramValue.getName().equals(
+                    // FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
                     {
-                        final EList contextParams = webApp.getContextParams();
-                        final Iterator itContextParams = contextParams
-                                .iterator();
-                        while (itContextParams.hasNext())
-                        {
-                            final ParamValue paramValue = (ParamValue) itContextParams
-                                    .next();
-                            if (paramValue.getName().equals(
-                                    FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)||
-                                    paramValue.getName().equals(
-                                            JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
-                       //    if (paramValue.getName().equals(
-                       //             FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
-                            {
-                                filesString = paramValue.getValue();
-                                break;
-                            }
-                        }
+                        filesString = paramValue.getValue();
+                        break;
                     }
-                    filesList = parseFilesString(filesString);
                 }
             }
-            finally
-            {
-                webArtifactEdit.dispose();
-            }
+            filesList = parseFilesString(filesString);
         }
 
         return filesList;
     }
 
-    private static List parseFilesString(final String filesString)
+    private static List<String> parseFilesString(final String filesString)
     {
-        final List filesList = new ArrayList();
+        final List<String> filesList = new ArrayList<String>();
         if (filesString != null && filesString.trim().length() > 0)
         {
             final StringTokenizer stFilesString = new StringTokenizer(
@@ -463,29 +438,27 @@ public class WebappConfiguration
                 final int eventType = notification.getEventType();
                 switch (eventType)
                 {
-                    case Notification.ADD:
-                        final Object objNewValue = notification.getNewValue();
-                        if (objNewValue instanceof ContextParam
-                                || objNewValue instanceof org.eclipse.jst.javaee.core.ParamValue)
-                        {
-                            contextParamAdded((EObject) objNewValue);
-                        }
-                        else if (objNewValue instanceof ParamValue)
-                        {
-                            paramValueAdded((EObject) objNewValue);
-                        }
+                case Notification.ADD:
+                    final Object objNewValue = notification.getNewValue();
+                    if (objNewValue instanceof ContextParam
+                            || objNewValue instanceof org.eclipse.jst.javaee.core.ParamValue)
+                    {
+                        contextParamAdded((EObject) objNewValue);
+                    } else if (objNewValue instanceof ParamValue)
+                    {
+                        paramValueAdded((EObject) objNewValue);
+                    }
                     break;
-                    case Notification.REMOVE:
-                        final Object objOldValue = notification.getOldValue();
-                        if (objOldValue instanceof ContextParam
-                                || objOldValue instanceof org.eclipse.jst.javaee.core.ParamValue)
-                        {
-                            contextParamRemoved((EObject) objOldValue);
-                        }
-                        else if (objOldValue instanceof ParamValue)
-                        {
-                            paramValueRemoved((EObject) objOldValue);
-                        }
+                case Notification.REMOVE:
+                    final Object objOldValue = notification.getOldValue();
+                    if (objOldValue instanceof ContextParam
+                            || objOldValue instanceof org.eclipse.jst.javaee.core.ParamValue)
+                    {
+                        contextParamRemoved((EObject) objOldValue);
+                    } else if (objOldValue instanceof ParamValue)
+                    {
+                        paramValueRemoved((EObject) objOldValue);
+                    }
                     break;
                 }
             }
@@ -525,7 +498,8 @@ public class WebappConfiguration
 
         private void checkAndFireFileChanges()
         {
-            final List<IFile> oldFiles = _cachedFiles;
+            final List<IFile> oldFiles = _cachedFiles == null ? Collections.EMPTY_LIST
+                    : _cachedFiles;
             final List<IFile> newFiles = getFiles();
 
             final List<IFile> filesAdded = new ArrayList<IFile>();
@@ -616,15 +590,15 @@ public class WebappConfiguration
                 if (contextParam instanceof ContextParam)
                 {
                     name = ((ContextParam) contextParam).getParamName();
-                }
-                else if (contextParam instanceof org.eclipse.jst.javaee.core.ParamValue)
+                } else if (contextParam instanceof org.eclipse.jst.javaee.core.ParamValue)
                 {
                     name = ((org.eclipse.jst.javaee.core.ParamValue) contextParam)
                             .getParamName();
                 }
 
-                if (FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME.equals(name)||
-                        JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME.equals(name))
+                if (FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME.equals(name)
+                        || JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME
+                                .equals(name))
                 {
                     isConfigFiles = true;
                 }
@@ -650,15 +624,15 @@ public class WebappConfiguration
                 if (paramVal instanceof ParamValue)
                 {
                     name = ((ParamValue) paramVal).getName();
-                }
-                else if (paramVal instanceof org.eclipse.jst.javaee.core.ParamValue)
+                } else if (paramVal instanceof org.eclipse.jst.javaee.core.ParamValue)
                 {
                     name = ((org.eclipse.jst.javaee.core.ParamValue) paramVal)
                             .getParamName();
                 }
 
-                if (FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME.equals(name)||
-                        JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME.equals(name))
+                if (FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME.equals(name)
+                        || JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME
+                                .equals(name))
                 {
                     isConfigFiles = true;
                 }

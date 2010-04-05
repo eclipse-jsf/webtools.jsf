@@ -11,12 +11,13 @@
 package org.eclipse.jst.jsf.common.internal.resource;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
@@ -38,20 +39,42 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
 {
     // lazily initialized
     private LifecycleListener                          _lifecycleListener;
-    private final Map<RESOURCE, ManagedResourceObject> _perResourceObjects;
+    final Map<RESOURCE, ManagedResourceObject<MANAGEDOBJECT>> _perResourceObjects;
+    private final IWorkspace _workspace;
 
     /**
      * Default constructor
+     * @param workspace 
      */
-    protected ResourceSingletonObjectManager()
+    protected ResourceSingletonObjectManager(final IWorkspace workspace)
     {
-        _perResourceObjects = new HashMap<RESOURCE, ManagedResourceObject>();
+        _workspace = workspace;
+        _perResourceObjects = new HashMap<RESOURCE, ManagedResourceObject<MANAGEDOBJECT>>();
+    }
+
+    /**
+     * @return the workspace
+     */
+    protected final IWorkspace getWorkspace()
+    {
+        return _workspace;
+    }
+
+
+    /**
+     * @return an unmodifiable view on the map of currently managed objects keyed
+     * by the resource they are mapped to.
+     */
+    protected final Map<RESOURCE, ManagedResourceObject<MANAGEDOBJECT>> getPerResourceObjects()
+    {
+        return Collections.unmodifiableMap(_perResourceObjects);
     }
 
     @Override
     public final MANAGEDOBJECT getInstance(final RESOURCE key)
     throws ManagedObjectException
     {
+        assertNotDisposed();
         synchronized(this)
         {
             runBeforeGetInstance(key);
@@ -70,7 +93,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
             }
 
             runAfterGetInstance(key);
-            return managedResObject.getManagedObject();
+            return (MANAGEDOBJECT) managedResObject.getManagedObject();
         }
     }
 
@@ -105,6 +128,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
      */
     public synchronized boolean isInstance(RESOURCE resource)
     {
+        assertNotDisposed();
         return _perResourceObjects.containsKey(resource);
     }
 
@@ -115,8 +139,8 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
      */
     public synchronized Collection<RESOURCE> getManagedResources()
     {
-        final Set resources = new HashSet(_perResourceObjects.keySet());
-        return resources;
+        assertNotDisposed();
+        return new HashSet(_perResourceObjects.keySet());
     }
     /**
      * Should be called by concrete classes to indicate they have created a new
@@ -131,11 +155,12 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
     {
         final LifecycleListener listener = lazilyGetLifecycleListener();
         listener.addResource(resource);
-        final MyLifecycleEventListener eventListener = new MyLifecycleEventListener(
-                managedObject, resource);
+        final MyLifecycleEventListener<RESOURCE, MANAGEDOBJECT> eventListener = 
+            new MyLifecycleEventListener<RESOURCE, MANAGEDOBJECT>(
+                this, managedObject, resource);
         listener.addListener(eventListener);
 
-        final ManagedResourceObject managedResourceObject = new ManagedResourceObject(
+        final ManagedResourceObject<MANAGEDOBJECT> managedResourceObject = new ManagedResourceObject<MANAGEDOBJECT>(
                 managedObject, eventListener);
         _perResourceObjects.put(resource, managedResourceObject);
         return managedResourceObject;
@@ -147,8 +172,10 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
      * manageResource is called).
      * 
      * @param resource
+     * @return the managed object that has just be disassociated from the resource.
+     * The object is not disposed, destroyed or checkpointed before being returned.
      */
-    protected final synchronized void unmanageResource(final RESOURCE resource)
+    protected final synchronized MANAGEDOBJECT unmanageResource(final RESOURCE resource)
     {
         final ManagedResourceObject managedResourceObject =
             _perResourceObjects.remove(resource);
@@ -160,6 +187,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
         }
 
         listener.removeResource(resource);
+        return (MANAGEDOBJECT) managedResourceObject.getManagedObject();
     }
 
     /**
@@ -170,6 +198,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
     protected final void addLifecycleEventListener(
             final IResourceLifecycleListener listener)
     {
+        assertNotDisposed();
         final LifecycleListener lifecycleListener = lazilyGetLifecycleListener();
         lifecycleListener.addListener(listener);
     }
@@ -190,12 +219,12 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
     {
         if (_lifecycleListener == null)
         {
-            _lifecycleListener = new LifecycleListener();
+            _lifecycleListener = new LifecycleListener(_workspace);
         }
         return _lifecycleListener;
     }
 
-    private class ManagedResourceObject
+    /*package*/ static class ManagedResourceObject<MANAGEDOBJECT extends IManagedObject>
     {
         private final MANAGEDOBJECT            _managedObject;
         private final MyLifecycleEventListener _eventListener;
@@ -218,17 +247,20 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
         }
     }
 
-    private class MyLifecycleEventListener implements
+    private static  class MyLifecycleEventListener<RESOURCE extends IResource, MANAGEDOBJECT extends IManagedObject> implements
     IResourceLifecycleListener
     {
         private final RESOURCE      _resource;
         private final MANAGEDOBJECT _managedObject;
+        private final ResourceSingletonObjectManager<MANAGEDOBJECT, RESOURCE>  _target;
 
-        private MyLifecycleEventListener(final MANAGEDOBJECT managedObject,
+        private MyLifecycleEventListener(final ResourceSingletonObjectManager<MANAGEDOBJECT, RESOURCE> target,
+                final MANAGEDOBJECT managedObject,
                 final RESOURCE resource)
         {
             _resource = resource;
             _managedObject = managedObject;
+            _target = target;
         }
 
         public EventResult acceptEvent(final ResourceLifecycleEvent event)
@@ -259,10 +291,57 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
                 // unmanage gets called if it blows up.
                 finally
                 {
-                    unmanageResource(_resource);
+                    _target.unmanageResource(_resource);
                 }
             }
             return result;
         }
+    }
+
+    
+    /** 
+     * Unmanages all resources and calls checkpoint and dispose on all managed
+     * objects.  After this call, other methods my throw exception is called.
+     * 
+     * Sub-class may override, but should always call dispose after disposing 
+     * their own specialized state.
+     */
+    @Override
+    public void dispose()
+    {
+        if (_isDisposed.compareAndSet(false, true))
+        {
+            // TODO: implement a better lock strategy on resource manager
+            synchronized (this)
+            {
+                Map<RESOURCE, ManagedResourceObject<MANAGEDOBJECT>> copy = new HashMap<RESOURCE, ManagedResourceObject<MANAGEDOBJECT>>(
+                        getPerResourceObjects());
+    
+                for (Map.Entry<RESOURCE, ManagedResourceObject<MANAGEDOBJECT>> entry : copy.entrySet())
+                {
+                    RESOURCE res = entry.getKey();
+                    MANAGEDOBJECT unmanagedResource = unmanageResource(res);
+                    unmanagedResource.checkpoint();
+                    unmanagedResource.dispose();
+                }
+                _perResourceObjects.clear();
+                if (_lifecycleListener != null)
+                {
+                    _lifecycleListener.dispose();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void destroy()
+    {
+        // do nothing by default
+    }
+
+    @Override
+    public void checkpoint()
+    {
+        // do nothing by default
     }
 }

@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.jface.util.SafeRunnable;
@@ -394,6 +395,11 @@ public class MDExternalMetadataStrategy extends
             ResourceSingletonObjectManager<MDExternalMetadataStrategy, IProject>
     {
 
+        protected MySingletonManager()
+        {
+            super(ResourcesPlugin.getWorkspace());
+        }
+
         @Override
         protected MDExternalMetadataStrategy createNewInstance(
                 final IProject resource)
@@ -401,5 +407,10 @@ public class MDExternalMetadataStrategy extends
             return new MDExternalMetadataStrategy(resource);
         }
 
+    }
+
+    public boolean isDisposed()
+    {
+        return _isDisposed.get();
     }
 }

@@ -4,6 +4,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -74,6 +75,7 @@ public class FaceletCorePlugin extends EMFPlugin
      */
     public static class Implementation extends EclipsePlugin
     {
+        private BundleContext context = null;
         /**
          * Creates an instance.
          * <!-- begin-user-doc -->
@@ -88,6 +90,21 @@ public class FaceletCorePlugin extends EMFPlugin
             //
             plugin = this;
         }
+
+        @Override
+        public void start(BundleContext bundleContext) throws Exception
+        {
+            super.start(bundleContext);
+            this.context = bundleContext;
+        }
+        
+        /**
+         * @return the bundle context.
+         */
+        public BundleContext getBundleContext()
+        {
+            return this.context;
+        }
     }
 
     
@@ -98,6 +115,10 @@ public class FaceletCorePlugin extends EMFPlugin
      */
     public static Implementation getDefault()
     {
+        if (plugin == null)
+        {
+            return new Implementation();
+        }
         return plugin;
     }
 

@@ -69,6 +69,10 @@ public class XMLBasedTagRecord extends FaceletTagRecord
         if (tagDefn == null && _tagIndexByName.size() < _taglibDefn.getTag().size())
         {
             tagDefn = findTag(name);
+            if (tagDefn != null)
+            {
+                _tagIndexByName.put(name, tagDefn);
+            }
         }
 
         return tagDefn;

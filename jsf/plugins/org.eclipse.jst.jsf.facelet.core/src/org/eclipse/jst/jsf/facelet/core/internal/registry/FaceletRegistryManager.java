@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.facelet.core.internal.registry;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
@@ -21,7 +22,7 @@ public final class FaceletRegistryManager extends
     /**
      * @return the singleton instance
      */
-    private static FaceletRegistryManager getGlobalManager()
+    private static FaceletRegistryManager getGlobalManager(final IWorkspace workspace)
     {
         if (FaceletCoreTraceOptions.TRACE_REGISTRYMANAGER)
         {
@@ -33,16 +34,16 @@ public final class FaceletRegistryManager extends
         {
             if (INSTANCE == null)
             {
-                INSTANCE = new FaceletRegistryManager();
+                INSTANCE = new FaceletRegistryManager(workspace);
             }
             
             return INSTANCE;
         }
     }
 
-    private FaceletRegistryManager()
+    private FaceletRegistryManager(final IWorkspace workspace)
     {
-        // do nothing
+        super(workspace);
     }
 
     @Override
@@ -90,7 +91,7 @@ public final class FaceletRegistryManager extends
         {
             try
             {
-                return getGlobalManager().getInstance(project);
+                return getGlobalManager(project.getWorkspace()).getInstance(project);
             }
             catch (ManagedObjectException e)
             {
@@ -101,7 +102,7 @@ public final class FaceletRegistryManager extends
         @Override
         public boolean isInstance(IProject project)
         {
-            return getGlobalManager().isInstance(project);
+            return getGlobalManager(project.getWorkspace()).isInstance(project);
         }
 
         public String getDisplayName()

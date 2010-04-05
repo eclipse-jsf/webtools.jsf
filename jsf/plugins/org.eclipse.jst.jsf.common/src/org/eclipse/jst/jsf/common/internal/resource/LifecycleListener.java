@@ -19,7 +19,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.jst.jsf.common.internal.ITestTracker;
 import org.eclipse.jst.jsf.common.internal.ITestTracker.Event;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener.EventResult;
@@ -43,6 +43,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
     private AtomicBoolean                                  _isDisposed          = new AtomicBoolean(
                                                                                         false);
     private ITestTracker                                   _testTracker;                       // ==
+    private final IWorkspace _workspace;
                                                                                                 // null;
                                                                                                 // initialized
                                                                                                 // by
@@ -54,33 +55,37 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * be installed by this constructor. The object created using this
      * constructor will not fire any events until addResource is called at least
      * once to add a target resource
+     * @param workspace the workspace to listen to for changes.
      */
-    public LifecycleListener()
+    public LifecycleListener(final IWorkspace workspace)
     {
         _resources = new CopyOnWriteArrayList<IResource>();
         _listeners = new CopyOnWriteArrayList<IResourceLifecycleListener>();
+        _workspace = workspace;
     }
 
     /**
      * Create a new lifecycle listener for the res
      * 
      * @param res
+     * @param workspace the workspace to listen to for changes.
      */
-    public LifecycleListener(final IResource res)
+    public LifecycleListener(final IResource res, final IWorkspace workspace)
     {
-        this();
+        this(workspace);
         _resources.add(res);
-        ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+        workspace.addResourceChangeListener(this);
     }
 
     /**
      * @param resources
+     * @param workspace the workspace to listen to for changes.
      */
-    public LifecycleListener(final List<IResource> resources)
+    public LifecycleListener(final List<IResource> resources, final IWorkspace workspace)
     {
-        this();
+        this(workspace);
         _resources.addAll(resources);
-        ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+        workspace.addResourceChangeListener(this);
     }
 
     /**
@@ -160,7 +165,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             // and is now greater, make sure the listener is added
             if (preSize == 0 && _resources.size() > 0)
             {
-                ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+                _workspace.addResourceChangeListener(this);
             }
         }
     }
@@ -186,7 +191,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             // remove the workspace listener
             if (_resources.size() == 0)
             {
-                ResourcesPlugin.getWorkspace().removeResourceChangeListener(
+                _workspace.removeResourceChangeListener(
                         this);
             }
         }
@@ -205,7 +210,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             {
                 // remove first to minimize the chance that the listener will
                 // be triggered during the remainder of dispose
-                ResourcesPlugin.getWorkspace().removeResourceChangeListener(
+                _workspace.removeResourceChangeListener(
                         this);
                 _resources.clear();
             }

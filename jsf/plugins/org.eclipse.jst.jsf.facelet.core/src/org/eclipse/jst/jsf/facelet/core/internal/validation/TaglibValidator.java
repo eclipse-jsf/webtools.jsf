@@ -16,6 +16,7 @@ import java.io.InputStream;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -24,7 +25,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.j2ee.model.ModelProviderManager;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.TagModelParser;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration;
@@ -102,8 +104,8 @@ public class TaglibValidator implements IValidatorJob
 
     private boolean shouldValidate(IFile currentFile)
     {
-        final IVirtualFolder folder = JSFAppConfigUtils
-            .getWebContentFolder(currentFile.getProject());
+        final IProject project = currentFile.getProject();
+        final IVirtualFolder folder = new DefaultVirtualComponentQuery().getWebContentFolder(project);
         final IPath filePath = currentFile.getProjectRelativePath();
         final IPath webFolderPath = folder.getUnderlyingFolder().getProjectRelativePath();
         boolean isInValidPath =  ViewUtil.isFaceletVDLFile(currentFile)
@@ -111,7 +113,7 @@ public class TaglibValidator implements IValidatorJob
         
         if (isInValidPath)
         {
-            for (final String configuredPath : WebappConfiguration.getConfigFilesFromContextParam(currentFile.getProject()))
+            for (final String configuredPath : WebappConfiguration.getConfigFilesFromContextParam(project, ModelProviderManager.getModelProvider(project)))
             {
                 final IPath path = webFolderPath.append(configuredPath);
                 if (path.equals(filePath))

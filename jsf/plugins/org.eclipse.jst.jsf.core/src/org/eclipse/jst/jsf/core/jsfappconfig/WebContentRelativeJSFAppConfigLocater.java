@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.componentcore.resources.IVirtualResource;
 
@@ -40,7 +41,7 @@ public abstract class WebContentRelativeJSFAppConfigLocater extends AbstractJSFA
 	 */
 	public void locateProviders() {
 		IProject project = manager.getProject();
-		IVirtualFolder webContentFolder = JSFAppConfigUtils.getWebContentFolder(project);
+		IVirtualFolder webContentFolder = new DefaultVirtualComponentQuery().getWebContentFolder(project);
 		if (webContentFolder != null) {
 			List filenames = getFilenames();
 			Iterator itFilenames = filenames.iterator();

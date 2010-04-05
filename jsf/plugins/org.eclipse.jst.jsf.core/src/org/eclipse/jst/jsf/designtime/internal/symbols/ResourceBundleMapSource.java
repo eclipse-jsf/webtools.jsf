@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jdt.core.JavaModelException;
@@ -146,7 +147,7 @@ class ResourceBundleMapSource extends AbstractMap implements IMapSourceInfo
                 if (bundleFileCache == null)
                 {
                     bundleFileCache = new HashMap<String, BundleFileCacheInfo>();
-                    final LifecycleListener listener = new LifecycleListener(project);
+                    final LifecycleListener listener = new LifecycleListener(project, ResourcesPlugin.getWorkspace());
                     listener.addListener(new IResourceLifecycleListener()
                     {
                         public EventResult acceptEvent(final ResourceLifecycleEvent event)
@@ -208,7 +209,7 @@ class ResourceBundleMapSource extends AbstractMap implements IMapSourceInfo
         {
             bundleRes = (IFile) storage.getAdapter(IFile.class);
             // if file is removed, clear the bundle from the store.
-            final LifecycleListener listener = new LifecycleListener(bundleRes);
+            final LifecycleListener listener = new LifecycleListener(bundleRes, ResourcesPlugin.getWorkspace());
             listener.addListener(new IResourceLifecycleListener()
             {
                 public EventResult acceptEvent(final ResourceLifecycleEvent event)

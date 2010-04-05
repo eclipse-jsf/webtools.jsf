@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject;
@@ -19,6 +20,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
     private final Namespace                     _ns;
     private final Map<String, ElementCMAdapter> _elements;
     private final FaceletDocumentFactory        _factory;
+    private final AtomicBoolean                 _isDisposed = new AtomicBoolean(false);
 
     public NamespaceCMAdapter(final Namespace ns, final IProject project)
     {
@@ -204,7 +206,10 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
     }
     public void dispose()
     {
-        _elements.clear();
+        if (_isDisposed.compareAndSet(false, true))
+        {
+            _elements.clear();
+        }
     }
 
     public void checkpoint()
@@ -217,6 +222,11 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
     {
         // TODO: ??
         
+    }
+
+    public boolean isDisposed()
+    {
+        return _isDisposed.get();
     }
 
 }

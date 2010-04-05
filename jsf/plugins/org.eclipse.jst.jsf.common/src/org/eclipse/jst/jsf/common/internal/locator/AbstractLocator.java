@@ -93,7 +93,7 @@ public abstract class AbstractLocator<LOCATORTYPE, CONTEXTTYPE, IDTYPE>
         {
             return doLocate(context);
         }
-        throw new IllegalArgumentException("Locator not started"); //$NON-NLS-1$
+        throw new IllegalStateException("Locator not started"); //$NON-NLS-1$
     }
     
 

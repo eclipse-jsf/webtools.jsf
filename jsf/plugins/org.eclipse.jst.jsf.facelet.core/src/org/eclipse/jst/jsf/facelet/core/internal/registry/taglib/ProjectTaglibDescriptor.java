@@ -10,72 +10,51 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ISafeRunnable;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SafeRunner;
-import org.eclipse.jem.internal.proxy.core.IConfigurationContributor;
-import org.eclipse.jem.internal.proxy.core.ProxyFactoryRegistry;
-import org.eclipse.jem.internal.proxy.ide.IDERegistration;
-import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.common.internal.locator.ILocatorProvider;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.ELProxyContributor;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.ServletBeanProxyContributor;
 
-class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
+/**
+ * Taglib descriptor for a project.
+ * 
+ * @author cbateman
+ *
+ */
+public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
 {
 
-    private ProxyFactoryRegistry                     _registry;
     private final AtomicInteger                      _isInitialized = new AtomicInteger(
                                                                             0);
     private final IProject                           _project;
-    private final List<AbstractFaceletTaglibLocator> _locators;
+    private final ILocatorProvider<AbstractFaceletTaglibLocator>      _locatorProvider;
     private final MyChangeListener                   _libChangeListener;
     private final Map<String, IFaceletTagRecord>     _tagRecords;
+    private final TagRecordFactory _factory;
+    private final AtomicBoolean     _isDisposed = new AtomicBoolean(false);
 
-    public ProjectTaglibDescriptor(final IProject project)
+    /**
+     * @param project
+     * @param factory 
+     * @param locatorProvider 
+     */
+    public ProjectTaglibDescriptor(final IProject project, final TagRecordFactory factory, 
+            final ILocatorProvider<AbstractFaceletTaglibLocator> locatorProvider)
     {
         _project = project;
-        _locators = new ArrayList<AbstractFaceletTaglibLocator>();
         _tagRecords = new HashMap<String, IFaceletTagRecord>();
-
-        try
-        {
-            _registry = createProxyRegistry(_project);
-        }
-        catch (final CoreException e)
-        {
-            FaceletCorePlugin.log("While creatinng proxy", e); //$NON-NLS-1$
-        }
-
-        final TagRecordFactory factory = new TagRecordFactory(project,
-                _registry);
-        _locators.add(new JarFileFaceletTaglibLocator(factory));
-        _locators.add(new ContextParamSpecifiedFaceletTaglibLocator(_project,
-                factory));
-
+        _locatorProvider = locatorProvider;
+        _locatorProvider.initialize();
+        _factory = factory; 
         _libChangeListener = new MyChangeListener();
-    }
-
-    private static ProxyFactoryRegistry createProxyRegistry(
-            final IProject project) throws CoreException
-    {
-        final IConfigurationContributor[] contributor = new IConfigurationContributor[]
-        { new ServletBeanProxyContributor(JSFVersion.V1_1),
-                new ELProxyContributor(project) };
-
-        return IDERegistration.startAnImplementation(contributor, false,
-                project, project.getName(), FaceletCorePlugin.PLUGIN_ID,
-                new NullProgressMonitor());
     }
 
     private void initialize()
@@ -84,8 +63,7 @@ class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
         {
             synchronized (this)
             {
-
-                for (final AbstractFaceletTaglibLocator locator : _locators)
+                for (final AbstractFaceletTaglibLocator locator : _locatorProvider.getLocators())
                 {
                     SafeRunner.run(new ISafeRunnable()
                     {
@@ -95,7 +73,6 @@ class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
                                     .log(
                                             "While locating facelet libraries on project: " + _project.getName(), new Exception(exception)); //$NON-NLS-1$
                         }
-
                         public void run() throws Exception
                         {
                             locator.addListener(_libChangeListener);
@@ -130,7 +107,7 @@ class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
 
     public void addListener(final Listener listener)
     {
-        for (final AbstractFaceletTaglibLocator locator : _locators)
+        for (final AbstractFaceletTaglibLocator locator : _locatorProvider.getLocators())
         {
             locator.addListener(listener);
         }
@@ -138,7 +115,7 @@ class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
 
     public void removeListener(final Listener listener)
     {
-        for (final AbstractFaceletTaglibLocator locator : _locators)
+        for (final AbstractFaceletTaglibLocator locator : _locatorProvider.getLocators())
         {
             locator.removeListener(listener);
         }
@@ -146,25 +123,29 @@ class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
 
     public void checkpoint()
     {
-        // TODO Auto-generated method stub
+        // do nothing
     }
 
     public void destroy()
     {
-        // TODO Auto-generated method stub
+        // do nothing
     }
 
     public void dispose()
     {
-        if (_registry != null)
+        if (_isDisposed.compareAndSet(false, true))
         {
-            _registry.terminateRegistry(false);
-
-            for (final AbstractFaceletTaglibLocator locator : _locators)
+            for (final AbstractFaceletTaglibLocator locator : _locatorProvider.getLocators())
             {
                 locator.stop();
             }
+            _factory.dispose();
         }
+    }
+
+    public boolean isDisposed()
+    {
+        return _isDisposed.get();
     }
 
     private class MyChangeListener extends Listener

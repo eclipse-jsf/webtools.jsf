@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -57,13 +58,24 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
     private static final String ID = JarFileFaceletTaglibLocator.class
             .getCanonicalName();
     private final TagRecordFactory _factory;
-    private Map<String, IFaceletTagRecord> _records;
+    private final Map<String, IFaceletTagRecord> _records;
     private final SimpleStrategyComposite<JarEntry, JarEntry, JarEntry, String, TaglibFinder<JarEntry, JarEntry>> _finder;
+    private final IJarProvider _provider;
 
     /**
      * @param factory
      */
     public JarFileFaceletTaglibLocator(final TagRecordFactory factory)
+    {
+        this(factory, new DefaultJarProvider());
+    }
+
+    /**
+     * @param factory
+     * @param jarProvider
+     */
+    public JarFileFaceletTaglibLocator(final TagRecordFactory factory,
+            IJarProvider jarProvider)
     {
         super(ID, DISPLAYNAME);
         _factory = factory;
@@ -75,74 +87,20 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
 
         _finder = new SimpleStrategyComposite<JarEntry, JarEntry, JarEntry, String, TaglibFinder<JarEntry, JarEntry>>(
                 finders);
-
+        _provider = jarProvider;
     }
 
     @Override
     public Map<String, ? extends IFaceletTagRecord> doLocate(
             final IProject project)
     {
-        try
-        {
-            return findInJars(project);
-        } catch (JavaModelException e)
-        {
-            FaceletCorePlugin
-                    .log(
-                            "Couldn't locate jar file taglibs: " + project.getProject(), e); //$NON-NLS-1$
-        }
-        return Collections.EMPTY_MAP;
-    }
-
-    private Map<String, ? extends IFaceletTagRecord> findInJars(
-            final IProject project) throws JavaModelException
-    {
-        final IJavaProject javaProject = JavaCore.create(project);
-
-        final IClasspathEntry[] entries = javaProject
-                .getResolvedClasspath(true);
-
         final List<FaceletTaglib> tagLibsFound = new ArrayList<FaceletTaglib>();
-        for (final IClasspathEntry entry : entries)
+
+        final Collection<JarFile> jars = _provider.getJars(project);
+
+        for (final JarFile jarFile : jars)
         {
-
-            switch (entry.getEntryKind())
-            {
-            // this entry describes a source root in its project
-            case IClasspathEntry.CPE_SOURCE:
-
-                break;
-            // - this entry describes a folder or JAR containing
-            // binaries
-            case IClasspathEntry.CPE_LIBRARY:
-            {
-                tagLibsFound.addAll(processJar(entry));
-            }
-                break;
-            // - this entry describes another project
-            case IClasspathEntry.CPE_PROJECT:
-                // {
-                // final IPath pathToProject = entry.getPath();
-                // IWorkspace wkspace = ResourcesPlugin.getWorkspace();
-                // IResource res =
-                // wkspace.getRoot().findMember(pathToProject);
-                // if (res instanceof IProject)
-                // {
-                // tagLibsFound.addAll();
-                // }
-                // }
-                break;
-            // - this entry describes a project or library indirectly
-            // via a
-            // classpath variable in the first segment of the path *
-            case IClasspathEntry.CPE_VARIABLE:
-                break;
-            // - this entry describes set of entries referenced
-            // indirectly
-            // via a classpath container
-            case IClasspathEntry.CPE_CONTAINER:
-                break;
-            }
+            tagLibsFound.addAll(processJar(jarFile));
         }
 
         for (final FaceletTaglib tag : tagLibsFound)
@@ -157,50 +115,17 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
         return _records;
     }
 
-    /**
-     * TODO: Merge into JSFAppConfigUtils.
-     * 
-     * @param entry
-     * @return
-     */
-    private static JarFile getJarFileFromCPE(final IClasspathEntry entry)
-            throws IOException
-    {
-        if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY)
-        {
-            IPath libraryPath = entry.getPath();
-            if (libraryPath.getFileExtension() != null
-                    && libraryPath.getFileExtension().length() > 0)
-            {
-                final IWorkspaceRoot workspaceRoot = ResourcesPlugin
-                        .getWorkspace().getRoot();
-                if (libraryPath.getDevice() == null
-                        && workspaceRoot.getProject(libraryPath.segment(0))
-                                .exists())
-                {
-                    libraryPath = workspaceRoot.getFile(libraryPath)
-                            .getLocation();
-                }
-                final String libraryPathString = libraryPath.toString();
-                return new JarFile(libraryPathString);
-            }
-        }
-        return null;
-    }
 
     /**
      * @param entry
      * @param defaultDtdStream
      */
-    private List<FaceletTaglib> processJar(final IClasspathEntry entry)
+    private List<FaceletTaglib> processJar(final JarFile jarFile)
     {
-        JarFile jarFile = null;
         final List<FaceletTaglib> tagLibsFound = new ArrayList<FaceletTaglib>();
 
         try
         {
-            jarFile = getJarFileFromCPE(entry);
-
             if (jarFile != null)
             {
                 final Enumeration<JarEntry> jarEntries = jarFile.entries();
@@ -221,7 +146,8 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                             try
                             {
                                 is = jarFile.getInputStream(jarEntry);
-                                TagModelLoader loader = new TagModelLoader(jarEntry.getName());
+                                TagModelLoader loader = new TagModelLoader(
+                                        jarEntry.getName());
                                 loader.loadFromInputStream(is);
                                 FaceletTaglib tagLib = loader.getTaglib();
 
@@ -235,8 +161,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                                         .log(
                                                 "Error initializing facelet registry entry", //$NON-NLS-1$
                                                 e);
-                            }
-                            finally
+                            } finally
                             {
                                 if (is != null)
                                 {
@@ -247,10 +172,6 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                     }
                 }
             }
-        } catch (final IOException e)
-        {
-            FaceletCorePlugin.log(
-                    "Error opening classpath jar file: " + entry, e); //$NON-NLS-1$
         } finally
         {
             if (jarFile != null)
@@ -265,5 +186,127 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             }
         }
         return tagLibsFound;
+    }
+
+    /**
+     * Provider of jars for use by the locator. Exists to abstract the locator
+     * from JDT for test purposes.
+     * 
+     */
+    public interface IJarProvider
+    {
+        /**
+         * @param project 
+         * @return a list of valid jar files.
+         */
+        Collection<JarFile> getJars(final IProject project);
+    }
+
+    private static class DefaultJarProvider implements IJarProvider
+    {
+        public Collection<JarFile> getJars(final IProject project)
+        {
+            final IJavaProject javaProject = JavaCore.create(project);
+
+            IClasspathEntry[] entries = null;
+            try
+            {
+                entries = javaProject.getResolvedClasspath(true);
+            } catch (JavaModelException e1)
+            {
+                FaceletCorePlugin.log("Getting resolved classpath entries", e1); //$NON-NLS-1$
+            }
+
+            if (entries == null || entries.length == 0)
+            {
+                return Collections.EMPTY_LIST;
+            }
+            final List<JarFile> jars = new ArrayList<JarFile>();
+            for (final IClasspathEntry entry : entries)
+            {
+
+                switch (entry.getEntryKind())
+                {
+                // this entry describes a source root in its project
+                case IClasspathEntry.CPE_SOURCE:
+
+                    break;
+                // - this entry describes a folder or JAR containing
+                // binaries
+                case IClasspathEntry.CPE_LIBRARY:
+                {
+                    JarFile jarFileFromCPE;
+                    try
+                    {
+                        jarFileFromCPE = getJarFileFromCPE(entry);
+                        if (jarFileFromCPE != null)
+                        {
+                            jars.add(jarFileFromCPE);
+                        }
+                    } catch (IOException e)
+                    {
+                        FaceletCorePlugin.log("Getting jar from CPE", e); //$NON-NLS-1$
+                    }
+                }
+                    break;
+                // - this entry describes another project
+                case IClasspathEntry.CPE_PROJECT:
+                    // {
+                    // final IPath pathToProject = entry.getPath();
+                    // IWorkspace wkspace = ResourcesPlugin.getWorkspace();
+                    // IResource res =
+                    // wkspace.getRoot().findMember(pathToProject);
+                    // if (res instanceof IProject)
+                    // {
+                    // tagLibsFound.addAll();
+                    // }
+                    // }
+                    break;
+                // - this entry describes a project or library indirectly
+                // via a
+                // classpath variable in the first segment of the path *
+                case IClasspathEntry.CPE_VARIABLE:
+                    break;
+                // - this entry describes set of entries referenced
+                // indirectly
+                // via a classpath container
+                case IClasspathEntry.CPE_CONTAINER:
+                    break;
+                }
+            }
+            return jars;
+        }
+
+        /**
+         * TODO: Merge into JSFAppConfigUtils.
+         * 
+         * @param entry
+         * @return
+         */
+        private static JarFile getJarFileFromCPE(final IClasspathEntry entry)
+                throws IOException
+        {
+            if (entry.getEntryKind() == IClasspathEntry.CPE_LIBRARY)
+            {
+                IPath libraryPath = entry.getPath();
+                if (libraryPath.getFileExtension() != null
+                        && libraryPath.getFileExtension().length() > 0)
+                {
+                    final IWorkspaceRoot workspaceRoot = ResourcesPlugin
+                            .getWorkspace().getRoot();
+                    if (libraryPath.getDevice() == null
+                            && workspaceRoot.getProject(libraryPath.segment(0))
+                                    .exists())
+                    {
+                        libraryPath = workspaceRoot.getFile(libraryPath)
+                                .getLocation();
+                    }
+                    final String libraryPathString = libraryPath.toString();
+                    return new JarFile(libraryPathString);
+                }
+            }
+            return null;
+        }
+
     }
 }

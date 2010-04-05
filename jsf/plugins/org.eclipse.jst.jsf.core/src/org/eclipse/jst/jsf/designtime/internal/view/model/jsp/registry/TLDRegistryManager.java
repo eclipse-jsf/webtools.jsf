@@ -61,6 +61,7 @@ public final class TLDRegistryManager extends
 
     private TLDRegistryManager()
     {
+        super(ResourcesPlugin.getWorkspace());
         final ISaveParticipant participant = new MyWorkspaceSaveParticipant();
         
         try

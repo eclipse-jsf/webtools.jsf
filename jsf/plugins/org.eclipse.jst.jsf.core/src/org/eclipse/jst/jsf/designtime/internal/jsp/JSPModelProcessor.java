@@ -141,7 +141,7 @@ public class JSPModelProcessor
             {
                 if (LIFECYCLE_LISTENER == null)
                 {
-                    LIFECYCLE_LISTENER = new LifecycleListener(file);
+                    LIFECYCLE_LISTENER = new LifecycleListener(file, ResourcesPlugin.getWorkspace());
                 }
                 else
                 {

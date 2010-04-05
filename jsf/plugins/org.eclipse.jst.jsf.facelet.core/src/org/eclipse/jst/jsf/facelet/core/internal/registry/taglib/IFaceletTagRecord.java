@@ -61,14 +61,17 @@ public interface IFaceletTagRecord extends Serializable
     /**
      * Indicates that a tag record has changed
      */
-    static class TagRecordChangeEvent extends EventObject
+    public static class TagRecordChangeEvent extends EventObject
     {
         /**
          * 
          */
         private static final long serialVersionUID = 5655356157624922019L;
 
-        TagRecordChangeEvent(IFaceletTagRecord source)
+        /**
+         * @param source
+         */
+        public TagRecordChangeEvent(IFaceletTagRecord source)
         {
             super(source);
         }
@@ -78,8 +81,11 @@ public interface IFaceletTagRecord extends Serializable
      * A listener for tag record change events.
      *
      */
-    interface ITagRecordChangeListener
+    public interface ITagRecordChangeListener
     {
+        /**
+         * @param event
+         */
         public void changed(final TagRecordChangeEvent event);
     }
 }
