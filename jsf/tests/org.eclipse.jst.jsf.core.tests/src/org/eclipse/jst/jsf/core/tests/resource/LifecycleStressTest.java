@@ -48,7 +48,7 @@ public class LifecycleStressTest extends TestCase
         JSFTestUtil.setValidationEnabled(false);
 
         _resources = new HashMap<IProject, List<IFile>>();
-        _listener = new LifecycleListener();
+        _listener = new LifecycleListener(ResourcesPlugin.getWorkspace());
 
         for (int i = 0; i < NUM_PROJECTS; i++)
         {

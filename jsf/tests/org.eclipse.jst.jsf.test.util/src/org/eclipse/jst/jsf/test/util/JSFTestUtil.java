@@ -196,6 +196,12 @@ public final class JSFTestUtil
 
     }
 
+    public static void saveToFileSystem(final InputStream inStream, final URI absPath) throws IOException
+    {
+        ByteArrayOutputStream loadFromInputStream = loadFromInputStream(inStream);
+        saveToFileSystem(loadFromInputStream.toByteArray(), absPath);
+    }
+    
     /**
      * @param testFile
      * @param absPath

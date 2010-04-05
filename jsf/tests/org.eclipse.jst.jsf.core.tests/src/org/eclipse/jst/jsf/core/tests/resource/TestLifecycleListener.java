@@ -16,6 +16,7 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
@@ -56,7 +57,7 @@ public class TestLifecycleListener extends TestCase
     {
         assertTrue(res.isAccessible());
 
-        LifecycleListener testListener = new LifecycleListener(res);
+        LifecycleListener testListener = new LifecycleListener(res, ResourcesPlugin.getWorkspace());
         MockListener mockListener = new MockListener();
         testListener.addListener(mockListener);
 
@@ -78,7 +79,7 @@ public class TestLifecycleListener extends TestCase
             assertTrue(res.isAccessible());
         }
 
-        LifecycleListener testListener = new LifecycleListener(resources);
+        LifecycleListener testListener = new LifecycleListener(resources, ResourcesPlugin.getWorkspace());
         MockListener mockListener = new MockListener();
         testListener.addListener(mockListener);
 
@@ -238,7 +239,7 @@ public class TestLifecycleListener extends TestCase
         assertTrue(_res1.isAccessible());
         assertTrue(_res2.isAccessible());
 
-        LifecycleListener testListener = new LifecycleListener(_res1);
+        LifecycleListener testListener = new LifecycleListener(_res1, ResourcesPlugin.getWorkspace());
         MockListener mockListener = new MockListener();
         testListener.addListener(mockListener);
         testListener.addResource(_res2);
@@ -259,7 +260,7 @@ public class TestLifecycleListener extends TestCase
         assertTrue(_res1.isAccessible());
         assertTrue(_res2.isAccessible());
 
-        LifecycleListener testListener = new LifecycleListener(_res1);
+        LifecycleListener testListener = new LifecycleListener(_res1, ResourcesPlugin.getWorkspace());
         MockListener mockListener = new MockListener();
         testListener.addListener(mockListener);
         testListener.addResource(_res2);
@@ -282,7 +283,7 @@ public class TestLifecycleListener extends TestCase
         assertTrue(_res1.isAccessible());
         assertTrue(_res2.isAccessible());
 
-        LifecycleListener testListener = new LifecycleListener(_res1);
+        LifecycleListener testListener = new LifecycleListener(_res1, ResourcesPlugin.getWorkspace());
         testListener.addResource(_res2);
         MockListener mockListener = new MockListener();
         MockListener mockListener2 = new MockListener();
@@ -317,7 +318,7 @@ public class TestLifecycleListener extends TestCase
         assertTrue(_res1.isAccessible());
         assertTrue(_res2.isAccessible());
 
-        LifecycleListener testListener = new LifecycleListener(_res1);
+        LifecycleListener testListener = new LifecycleListener(_res1, ResourcesPlugin.getWorkspace());
         testListener.addResource(_res2);
         MockListener mockListener = new MockListener();
         testListener.addListener(mockListener);
@@ -333,7 +334,7 @@ public class TestLifecycleListener extends TestCase
     
     public void testDisposeAfterEvent() throws Exception
     {
-        LifecycleListener testListener = new LifecycleListener(_res1);
+        LifecycleListener testListener = new LifecycleListener(_res1, ResourcesPlugin.getWorkspace());
         MockListenerThatDoesDispose mockListener = new MockListenerThatDoesDispose();
         testListener.addListener(mockListener);
 

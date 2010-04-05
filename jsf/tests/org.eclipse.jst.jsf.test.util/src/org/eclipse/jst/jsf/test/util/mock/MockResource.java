@@ -17,11 +17,11 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceProxy;
 import org.eclipse.core.resources.IResourceProxyVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
@@ -29,6 +29,10 @@ public class MockResource implements IResource
 {
     private final int _type;
     private final IPath _path;
+    private boolean _exists = true; // always exist by default
+    private MockWorkspace _workspace;
+    private IProject _project;
+    private long _modificationStamp;
     public final static List<Integer> VALID_TYPES;
 
     static
@@ -71,8 +75,8 @@ public class MockResource implements IResource
 
     }
 
-    public void accept(final IResourceProxyVisitor visitor, final int memberFlags)
-    throws CoreException
+    public void accept(final IResourceProxyVisitor visitor,
+            final int memberFlags) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -80,29 +84,42 @@ public class MockResource implements IResource
 
     public void accept(final IResourceVisitor visitor) throws CoreException
     {
-        throw new UnsupportedOperationException();
+        accept(visitor, IResource.DEPTH_INFINITE, IResource.NONE);
     }
 
     public void accept(final IResourceVisitor visitor, final int depth,
             final boolean includePhantoms) throws CoreException
-            {
-        throw new UnsupportedOperationException();
-            }
-
-    public void accept(final IResourceVisitor visitor, final int depth, final int memberFlags)
-    throws CoreException
     {
-        throw new UnsupportedOperationException();
+        accept(visitor, depth, includePhantoms ? IContainer.INCLUDE_PHANTOMS
+                : IResource.NONE);
     }
 
-    public void clearHistory(final IProgressMonitor monitor) throws CoreException
+    public void accept(final IResourceVisitor visitor, final int depth,
+            final int memberFlags) throws CoreException
+    {
+        boolean visit = visitor.visit(this);
+
+        if (visit)
+        {
+            visitMembers(visitor, depth, memberFlags);
+        }
+    }
+
+    protected void visitMembers(IResourceVisitor visitor, int depth,
+            int memberFlags) throws CoreException
+    {
+        // do nothing by default. Container must to override to visit members.
+    }
+
+    public void clearHistory(final IProgressMonitor monitor)
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
     }
 
-    public void copy(final IPath destination, final boolean force, final IProgressMonitor monitor)
-    throws CoreException
+    public void copy(final IPath destination, final boolean force,
+            final IProgressMonitor monitor) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -110,24 +127,26 @@ public class MockResource implements IResource
 
     public void copy(final IPath destination, final int updateFlags,
             final IProgressMonitor monitor) throws CoreException
-            {
+    {
         throw new UnsupportedOperationException();
 
-            }
+    }
 
-    public void copy(final IProjectDescription description, final boolean force,
-            final IProgressMonitor monitor) throws CoreException
-            {
+    public void copy(final IProjectDescription description,
+            final boolean force, final IProgressMonitor monitor)
+            throws CoreException
+    {
         throw new UnsupportedOperationException();
 
-            }
+    }
 
-    public void copy(final IProjectDescription description, final int updateFlags,
-            final IProgressMonitor monitor) throws CoreException
-            {
+    public void copy(final IProjectDescription description,
+            final int updateFlags, final IProgressMonitor monitor)
+            throws CoreException
+    {
         throw new UnsupportedOperationException();
 
-            }
+    }
 
     public IMarker createMarker(final String type) throws CoreException
     {
@@ -140,21 +159,21 @@ public class MockResource implements IResource
     }
 
     public void delete(final boolean force, final IProgressMonitor monitor)
-    throws CoreException
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
     }
 
     public void delete(final int updateFlags, final IProgressMonitor monitor)
-    throws CoreException
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
     }
 
-    public void deleteMarkers(final String type, final boolean includeSubtypes, final int depth)
-    throws CoreException
+    public void deleteMarkers(final String type, final boolean includeSubtypes,
+            final int depth) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -162,7 +181,12 @@ public class MockResource implements IResource
 
     public boolean exists()
     {
-        throw new UnsupportedOperationException();
+        return _exists;
+    }
+
+    public void setExists(final boolean exists)
+    {
+        _exists = exists;
     }
 
     public IMarker findMarker(final long id) throws CoreException
@@ -170,17 +194,19 @@ public class MockResource implements IResource
         throw new UnsupportedOperationException();
     }
 
-    public IMarker[] findMarkers(final String type, final boolean includeSubtypes, final int depth)
-    throws CoreException
+    public IMarker[] findMarkers(final String type,
+            final boolean includeSubtypes, final int depth)
+            throws CoreException
     {
         throw new UnsupportedOperationException();
     }
 
-    public int findMaxProblemSeverity(final String type, final boolean includeSubtypes,
-            final int depth) throws CoreException
-            {
+    public int findMaxProblemSeverity(final String type,
+            final boolean includeSubtypes, final int depth)
+            throws CoreException
+    {
         throw new UnsupportedOperationException();
-            }
+    }
 
     public String getFileExtension()
     {
@@ -195,7 +221,7 @@ public class MockResource implements IResource
 
     public IPath getFullPath()
     {
-        throw new UnsupportedOperationException();
+        return _path;
     }
 
     public long getLocalTimeStamp()
@@ -220,7 +246,7 @@ public class MockResource implements IResource
 
     public long getModificationStamp()
     {
-        throw new UnsupportedOperationException();
+        return _modificationStamp;
     }
 
     public String getName()
@@ -230,27 +256,46 @@ public class MockResource implements IResource
 
     public IContainer getParent()
     {
-        throw new UnsupportedOperationException();
+        final IPath myParent = getProjectRelativePath().removeLastSegments(1);
+
+        // if the parent is the empty path, then our parent is the root.
+        if (myParent.segmentCount() == 0)
+        {
+            return getProject();
+        }
+        return _project.getFolder(getProjectRelativePath().removeLastSegments(1));
     }
 
-    public Map<?,?> getPersistentProperties() throws CoreException
+    public Map<?, ?> getPersistentProperties() throws CoreException
     {
         throw new UnsupportedOperationException();
     }
 
-    public String getPersistentProperty(final QualifiedName key) throws CoreException
+    public String getPersistentProperty(final QualifiedName key)
+            throws CoreException
     {
         throw new UnsupportedOperationException();
     }
 
     public IProject getProject()
     {
-        throw new UnsupportedOperationException();
+        return _project;
+    }
+
+    public void setProject(final IProject project)
+    {
+        _project = project;
     }
 
     public IPath getProjectRelativePath()
     {
-        throw new UnsupportedOperationException();
+        if (getType() == IResource.ROOT || getType() == IResource.PROJECT)
+        {
+            return new Path("");
+        }
+        IPath projectPath = getProject().getFullPath();
+        Assert.assertTrue(projectPath.isPrefixOf(getFullPath()));
+        return getFullPath().removeFirstSegments(projectPath.segmentCount());
     }
 
     public IPath getRawLocation()
@@ -268,24 +313,30 @@ public class MockResource implements IResource
         throw new UnsupportedOperationException();
     }
 
-    public Map<?,?> getSessionProperties() throws CoreException
+    public Map<?, ?> getSessionProperties() throws CoreException
     {
         throw new UnsupportedOperationException();
     }
 
-    public Object getSessionProperty(final QualifiedName key) throws CoreException
+    public Object getSessionProperty(final QualifiedName key)
+            throws CoreException
     {
         throw new UnsupportedOperationException();
     }
 
-    public IWorkspace getWorkspace()
+    public MockWorkspace getWorkspace()
     {
-        throw new UnsupportedOperationException();
+        return _workspace;
+    }
+
+    public void setWorkspace(final MockWorkspace workspace)
+    {
+        _workspace = workspace;
     }
 
     public boolean isAccessible()
     {
-        throw new UnsupportedOperationException();
+        return exists();
     }
 
     public boolean isDerived()
@@ -358,8 +409,8 @@ public class MockResource implements IResource
         throw new UnsupportedOperationException();
     }
 
-    public void move(final IPath destination, final boolean force, final IProgressMonitor monitor)
-    throws CoreException
+    public void move(final IPath destination, final boolean force,
+            final IProgressMonitor monitor) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -367,27 +418,29 @@ public class MockResource implements IResource
 
     public void move(final IPath destination, final int updateFlags,
             final IProgressMonitor monitor) throws CoreException
-            {
+    {
         throw new UnsupportedOperationException();
 
-            }
+    }
 
-    public void move(final IProjectDescription description, final boolean force,
-            final boolean keepHistory, final IProgressMonitor monitor) throws CoreException
-            {
-        throw new UnsupportedOperationException();
-
-            }
-
-    public void move(final IProjectDescription description, final int updateFlags,
+    public void move(final IProjectDescription description,
+            final boolean force, final boolean keepHistory,
             final IProgressMonitor monitor) throws CoreException
-            {
+    {
         throw new UnsupportedOperationException();
 
-            }
+    }
+
+    public void move(final IProjectDescription description,
+            final int updateFlags, final IProgressMonitor monitor)
+            throws CoreException
+    {
+        throw new UnsupportedOperationException();
+
+    }
 
     public void refreshLocal(final int depth, final IProgressMonitor monitor)
-    throws CoreException
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -405,8 +458,8 @@ public class MockResource implements IResource
 
     }
 
-    public void setDerived(final boolean isDerived, final IProgressMonitor monitor)
-    throws CoreException
+    public void setDerived(final boolean isDerived,
+            final IProgressMonitor monitor) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -418,8 +471,8 @@ public class MockResource implements IResource
 
     }
 
-    public void setLocal(final boolean flag, final int depth, final IProgressMonitor monitor)
-    throws CoreException
+    public void setLocal(final boolean flag, final int depth,
+            final IProgressMonitor monitor) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -430,8 +483,8 @@ public class MockResource implements IResource
         throw new UnsupportedOperationException();
     }
 
-    public void setPersistentProperty(final QualifiedName key, final String value)
-    throws CoreException
+    public void setPersistentProperty(final QualifiedName key,
+            final String value) throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -444,21 +497,21 @@ public class MockResource implements IResource
     }
 
     public void setResourceAttributes(final ResourceAttributes attributes)
-    throws CoreException
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
     }
 
     public void setSessionProperty(final QualifiedName key, final Object value)
-    throws CoreException
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
     }
 
     public void setTeamPrivateMember(final boolean isTeamPrivate)
-    throws CoreException
+            throws CoreException
     {
         throw new UnsupportedOperationException();
 
@@ -478,5 +531,21 @@ public class MockResource implements IResource
     public IPathVariableManager getPathVariableManager()
     {
         throw new UnsupportedOperationException();
+    }
+
+    public void dispose() throws Exception
+    {
+        _project = null;
+        _workspace = null;
+    }
+    
+    public String toString()
+    {
+        return _path.toString();
+    }
+
+    public void incrementModStamp()
+    {
+        _modificationStamp++;
     }
 }
