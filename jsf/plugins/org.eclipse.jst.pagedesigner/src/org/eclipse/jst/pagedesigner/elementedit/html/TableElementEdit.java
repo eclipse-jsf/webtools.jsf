@@ -57,11 +57,10 @@ import org.w3c.dom.Node;
  * @version 1.5
  */
 public class TableElementEdit extends AbstractElementEdit {
+
 	private final static Action action = new Action() {
         // TODO: what's this for?
 	};
-
-	private static int FAKE_INDEX = -10;
 
 	/*
 	 * (non-Javadoc)
@@ -70,21 +69,27 @@ public class TableElementEdit extends AbstractElementEdit {
 	 *      org.w3c.dom.Element)
 	 */
 	public void fillContextMenu(IMenuManager contextMenu, Element ele) {
-		final IMenuManager tableMenu = new MenuManager(PDPlugin
-				.getResourceString("ElementEdit.Submenu.Table"));//$NON-NLS-1$
+
+		final ElementEditPart tablePart =
+			(ElementEditPart) ((IDOMElement) ele).getAdapterFor(EditPart.class);
+
+		final Element table = (Element) tablePart.getModel();
+
+		final TableChildElementPosition position = new TableUtil(table).getPosition((Node)null);
+		final int cellRow = position.getRowIndex();
+		final int cellColumn = position.getColumnIndex();
+
+		final IMenuManager tableMenu =
+			new MenuManager(PDPlugin.getResourceString("ElementEdit.Submenu.Table")); //$NON-NLS-1$
 		tableMenu.add(action);
-		final ElementEditPart tablePart = (ElementEditPart) ((IDOMElement) ele)
-				.getAdapterFor(EditPart.class);
-		// ok, we passed the checking, now let's create the actions.
 		tableMenu.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
 				tableMenu.removeAll();
-				fillTableMenu(tablePart, FAKE_INDEX, FAKE_INDEX, tableMenu);
+				fillTableMenu(tablePart, cellRow, cellColumn, tableMenu);
 			}
 		});
 
-		contextMenu.appendToGroup(PageDesignerActionConstants.GROUP_CONTAINER,
-				tableMenu);
+		contextMenu.appendToGroup(PageDesignerActionConstants.GROUP_CONTAINER, tableMenu);
 	}
 
 	/*
@@ -95,24 +100,24 @@ public class TableElementEdit extends AbstractElementEdit {
 	 *      org.eclipse.jst.pagedesigner.parts.NodeEditPart,
 	 *      org.eclipse.jface.viewers.ISelection)
 	 */
-	public boolean fillContainerContextMenu(IMenuManager contextMenu,
-			final ElementEditPart tablePart, NodeEditPart nodePart,
+	public boolean fillContainerContextMenu(
+			IMenuManager contextMenu,
+			final ElementEditPart tablePart,
+			NodeEditPart nodePart,
 			ISelection innerSelection) {
-		super.fillContainerContextMenu(contextMenu,
-				tablePart, nodePart, innerSelection);
 
-		Element table = (Element) tablePart.getModel();
-		Node node = (Node) nodePart.getModel();
+		super.fillContainerContextMenu(contextMenu, tablePart, nodePart, innerSelection);
 
-		TableChildElementPosition position = new TableUtil(table)
-				.getPosition(node);
+		final Element table = (Element) tablePart.getModel();
+		final Node node = (Node) nodePart.getModel();
+
+		final TableChildElementPosition position = new TableUtil(table).getPosition(node);
 		final int cellRow = position.getRowIndex();
 		final int cellColumn = position.getColumnIndex();
 
-		final IMenuManager tableMenu = new MenuManager(PDPlugin
-				.getResourceString("ElementEdit.Submenu.Table"));//$NON-NLS-1$
+		final IMenuManager tableMenu =
+			new MenuManager(PDPlugin.getResourceString("ElementEdit.Submenu.Table")); //$NON-NLS-1$
 		tableMenu.add(action);
-		// ok, we passed the checking, now let's create the actions.
 		tableMenu.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
 				tableMenu.removeAll();
@@ -120,8 +125,7 @@ public class TableElementEdit extends AbstractElementEdit {
 			}
 		});
 
-		contextMenu.appendToGroup(PageDesignerActionConstants.GROUP_CONTAINER,
-				tableMenu);
+		contextMenu.appendToGroup(PageDesignerActionConstants.GROUP_CONTAINER, tableMenu);
 		return true;
 	}
 

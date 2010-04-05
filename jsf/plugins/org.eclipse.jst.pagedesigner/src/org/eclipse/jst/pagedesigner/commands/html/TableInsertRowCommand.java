@@ -59,7 +59,7 @@ public class TableInsertRowCommand extends DesignerCommand {
 	 * @see org.eclipse.gef.commands.Command#canExecute()
 	 */
 	public boolean canExecute() {
-		if (this._rowIndex < 0) {
+		if (this._rowIndex < 0 && this._rowIndex != -10) {
 			return false;
 		}
 		List list = new ArrayList();
@@ -101,38 +101,43 @@ public class TableInsertRowCommand extends DesignerCommand {
 		Element insertElement = createDefaultElement();
 
 		if (this._rowIndex < list.size()) {
-			// int index = TableUtil.countRowIndexInDOMTree(this._tableEle,
-			// this._rowIndex);
-			int index = this._rowIndex;
-			Element tr = (Element) list.get(index);
-			Element nextTr = tr;
-
-			// int headRows = TableUtil.countSectionRows(this._tableEle,
-			// IHTMLConstants.TAG_THEAD);
-			// int footRows = TableUtil.countSectionRows(this._tableEle,
-			// IHTMLConstants.TAG_TFOOT);
-			if (!_isBefore) {
-				int parentIndex = index - 1;
-				/**
-				 * doesn't need any more,since the row index is from model now
-				 * int bodyRows = list.size() - headRows - footRows; boolean
-				 * hasBodyRow = false; boolean hasFootRow = false; if (bodyRows >
-				 * 0) { hasBodyRow = true; } if (footRows > 0) { hasFootRow =
-				 * true; } //last row in THEAD excute insert row after command
-				 * if ((this._rowIndex == headRows) && hasBodyRow && hasFootRow) {
-				 * parentIndex = index - footRows - 1; } //last row in TBODY
-				 * excute insert row after command if ((this._rowIndex ==
-				 * (list.size() - footRows)) && hasBodyRow && hasFootRow) {
-				 * parentIndex = list.size() - 1; }
-				 */
-
-				tr = (Element) list.get(parentIndex);
-			}
-
-			if (tr.getParentNode() == nextTr.getParentNode()) {
-				tr.getParentNode().insertBefore(insertElement, nextTr);
+			if (this._rowIndex != -10) {
+				// int index = TableUtil.countRowIndexInDOMTree(this._tableEle,
+				// this._rowIndex);
+				int index = this._rowIndex;
+				Element tr = (Element) list.get(index);
+				Element nextTr = tr;
+	
+				// int headRows = TableUtil.countSectionRows(this._tableEle,
+				// IHTMLConstants.TAG_THEAD);
+				// int footRows = TableUtil.countSectionRows(this._tableEle,
+				// IHTMLConstants.TAG_TFOOT);
+				if (!_isBefore) {
+					int parentIndex = index - 1;
+					/**
+					 * doesn't need any more,since the row index is from model now
+					 * int bodyRows = list.size() - headRows - footRows; boolean
+					 * hasBodyRow = false; boolean hasFootRow = false; if (bodyRows >
+					 * 0) { hasBodyRow = true; } if (footRows > 0) { hasFootRow =
+					 * true; } //last row in THEAD excute insert row after command
+					 * if ((this._rowIndex == headRows) && hasBodyRow && hasFootRow) {
+					 * parentIndex = index - footRows - 1; } //last row in TBODY
+					 * excute insert row after command if ((this._rowIndex ==
+					 * (list.size() - footRows)) && hasBodyRow && hasFootRow) {
+					 * parentIndex = list.size() - 1; }
+					 */
+	
+					tr = (Element) list.get(parentIndex);
+				}
+	
+				if (tr.getParentNode() == nextTr.getParentNode()) {
+					tr.getParentNode().insertBefore(insertElement, nextTr);
+				} else {
+					tr.getParentNode().appendChild(insertElement);
+				}
 			} else {
-				tr.getParentNode().appendChild(insertElement);
+				//empty table - append first row
+				_tableEle.appendChild(insertElement);
 			}
 		} else {
 			// int index = TableUtil.countRowIndexInDOMTree(this._tableEle,
@@ -149,9 +154,13 @@ public class TableInsertRowCommand extends DesignerCommand {
 		Document doc = this._tableEle.getOwnerDocument();
 		Element ele = doc.createElement(IHTMLConstants.TAG_TR);
 		int columnCount = _tableUtil.getColumnCount();
+		if (columnCount < 1) {
+			columnCount = 1;
+		}
 		for (int i = 0; i < columnCount; i++) {
 			Element td = doc.createElement(IHTMLConstants.TAG_TD);
-			Node node = doc.createTextNode(""); //$NON-NLS-1$
+			Node node = doc.createTextNode(
+					CommandResources.getString("TableInsertColumnCommand.Text.Default")); //$NON-NLS-1$
 			td.appendChild(node);
 			ele.appendChild(td);
 		}

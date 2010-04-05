@@ -57,7 +57,12 @@ public class TableInsertColumnCommand extends DesignerCommand {
 	 * @see org.eclipse.gef.commands.Command#canExecute()
 	 */
 	public boolean canExecute() {
-		if (this._columnIndex < 0) {
+		List trList = new ArrayList();
+		TableUtil.getTrElements(this._tableEle, trList);
+		if (trList == null || trList.isEmpty()) {
+			return false;
+		}
+		if (this._columnIndex < 0 && this._columnIndex != -10) {
 			return false;
 		}
 		boolean isAffectedByColSpan = _tableUtil
@@ -107,28 +112,32 @@ public class TableInsertColumnCommand extends DesignerCommand {
 					tr.appendChild(createDefaultElement(hasTH));
 				}
 			} else {
-				Element cell = (Element) cells.get(this._columnIndex);
-				if (!cell.getTagName().equalsIgnoreCase("fake")) //$NON-NLS-1$
-				{
-					tr.insertBefore(createDefaultElement(hasTH), cell);
-				} else {
-					boolean hasRealElement = false;
-					for (int k = _columnIndex + 1; k < cells.size(); k++) {
-						Element td = (Element) cells.get(k);
-						if (!td.getTagName().equalsIgnoreCase("fake")) //$NON-NLS-1$
-						{
-							hasRealElement = true;
-							tr.insertBefore(createDefaultElement(hasTH), td);
-							break;
+				if (this._columnIndex != -10) {
+					Element cell = (Element) cells.get(this._columnIndex);
+					if (!cell.getTagName().equalsIgnoreCase("fake")) //$NON-NLS-1$
+					{
+						tr.insertBefore(createDefaultElement(hasTH), cell);
+					} else {
+						boolean hasRealElement = false;
+						for (int k = _columnIndex + 1; k < cells.size(); k++) {
+							Element td = (Element) cells.get(k);
+							if (!td.getTagName().equalsIgnoreCase("fake")) //$NON-NLS-1$
+							{
+								hasRealElement = true;
+								tr.insertBefore(createDefaultElement(hasTH), td);
+								break;
+							}
+						}
+						if (!hasRealElement) {
+							tr.appendChild(createDefaultElement(hasTH));
 						}
 					}
-					if (!hasRealElement) {
-						tr.appendChild(createDefaultElement(hasTH));
-					}
+				} else {
+					tr.appendChild(createDefaultElement(hasTH));
 				}
 			}
-
 		}
+
 		formatNode(this._tableEle);
 	}
 
@@ -141,7 +150,8 @@ public class TableInsertColumnCommand extends DesignerCommand {
 			td = doc.createElement(IHTMLConstants.TAG_TD);
 		}
 
-		Node node = doc.createTextNode(""); //$NON-NLS-1$
+		Node node = doc.createTextNode(
+				CommandResources.getString("TableInsertColumnCommand.Text.Default")); //$NON-NLS-1$
 		td.appendChild(node);
 		return td;
 	}

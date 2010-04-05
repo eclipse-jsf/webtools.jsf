@@ -197,6 +197,9 @@ public class TableUtil {
 	 */
 	public TableChildElementPosition getPosition(Node node) {
 		TableChildElementPosition position = new TableChildElementPosition();
+		if (node == null) {
+			return position;
+		}
 		String tagName = node.getLocalName();
 		if (IHTMLConstants.TAG_TR.equalsIgnoreCase(tagName)) {
 			List list = new ArrayList();
