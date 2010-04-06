@@ -16,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -364,12 +366,18 @@ public class PreviewUtil {
 				Node attrNode = attrMap.item(i);
 				if (attrNode instanceof Attr) {
 					Attr attr = (Attr) attrNode;
-					attr.setNodeValue(getValueOFEP(attr.getNodeValue()));
-					attr.setNodeValue(PathUtil.convertToAbsolutePath(attr
-							.getNodeValue(), null));
-                    //TODO: dead?
-//					StringBuffer buf = new StringBuffer();
-//					String attrValue = attr.getNodeValue();
+					String value = attr.getNodeValue();
+					value = getValueOFEP(value);
+					//Bug 307801 - [WPE] WPE does not render Images with URL encoding in their path in the preview pane
+					try {
+						value = URLDecoder.decode(value, "UTF-8"); //$NON-NLS-1$
+					} catch(UnsupportedEncodingException uee) {
+						//we tried to decode using recommended encoding, we failed
+					} catch(IllegalArgumentException iae) {
+						//we tried to decode using recommended encoding, we failed
+					}
+					value = PathUtil.convertToAbsolutePath(value, null);
+					attr.setNodeValue(value);
 				}
 			}
 		}

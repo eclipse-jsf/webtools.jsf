@@ -11,8 +11,10 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLDecoder;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWTException;
@@ -59,6 +61,14 @@ public class ImageResolver {
 		String url = getResolvedURL(element, attrName);
 		if (url == null) {
 			return null;
+		}
+		//Bug 307801 - [WPE] WPE does not render Images with URL encoding in their path in the preview pane
+		try {
+			url = URLDecoder.decode(url, "UTF-8"); //$NON-NLS-1$
+		} catch(UnsupportedEncodingException uee) {
+			//we tried to decode using recommended encoding, we failed
+		} catch(IllegalArgumentException iae) {
+			//we tried to decode using recommended encoding, we failed
 		}
 		Image img = null;
 		int colonIndex = url.indexOf(":"); //$NON-NLS-1$
