@@ -375,7 +375,7 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 
 		int[] delta = new int[columnMinWidths.length];
 		int sigmaDelta = 0;
-		for (int i = 0; i < columnMinWidths.length && toDistribute > 0; i++) {
+		for (int i = 0; i < columnMinWidths.length; i++) {
 			if (_tableInfo.getWidthSpecified()[i]) {
 				delta[i] = 0;
 			} else {
@@ -386,10 +386,84 @@ public class CSSTableLayout2 extends CSSBlockFlowLayout implements ICSSPainter {
 				sigmaDelta += delta[i];
 			}
 		}
+
+		// re-calculate the width of columns that use a percentage
+		int[] widthPercentages = _tableInfo.getWidthPercentages();
+		int[] calculatedWidths = new int[columnMaxWidths.length];
+		int percentageWidthsTotal = 0;
+		for (int i=0; i < widthPercentages.length; i++) {
+			if (widthPercentages[i] > 0) {
+				// add the widths of the percent width columns
+				// back into the available pool
+				toDistribute += columnMinWidths[i];
+			}
+		}
+
+		for (int i=0; i < widthPercentages.length; i++) {
+			if (widthPercentages[i] > 0) {
+				double val = toDistribute * (widthPercentages[i] / 100.0);
+				calculatedWidths[i] = (int) val;
+				if (calculatedWidths[i] < columnMinWidths[i]) {
+					// percent width is too small, so use
+					// the columnMinWidth instead
+					calculatedWidths[i] = columnMinWidths[i];
+				}
+				percentageWidthsTotal += calculatedWidths[i];
+			} else {
+				calculatedWidths[i] = 0;
+			}
+		}
+
+		if (percentageWidthsTotal > toDistribute) {
+			// calculated width is too large, so shrink the columns
+			// to fit the available space
+			int widthColumnCount = 0;
+			for (int i=0; i < widthPercentages.length; i++) {
+				if (widthPercentages[i] > 0) {
+					widthColumnCount++;
+				}
+			}
+
+			int extraSpace = percentageWidthsTotal - toDistribute;
+			int shrinkBy = (int)
+				Math.ceil((double) extraSpace / (double) widthColumnCount);
+
+			for (int i=0; i < calculatedWidths.length; i++) {
+				if (calculatedWidths[i] > 0) {
+					calculatedWidths[i] -= shrinkBy;
+				}
+			}
+		}
+
+		// adjust the columnMinWidth values to compensate for the
+		// calculated percentages
+		for (int i=0; i < calculatedWidths.length; i++) {
+			// if column size was calculated, then re-calculate the delta
+			if (calculatedWidths[i] > 0) {
+				// remove the previous calculation from the sigmaDelta
+				int len = columnMaxWidths[i] - columnMinWidths[i];
+				delta[i] = 0;
+				if (len <= 0) {
+					len = 0;
+				}
+				sigmaDelta -= len;
+
+				// change the minSize to the calculated size
+				columnMinWidths[i] = calculatedWidths[i];
+				toDistribute -= columnMinWidths[i];
+			}
+		}
+
 		if (sigmaDelta == 0) {
-			// should not happen, but anyway, distribute all to the last column
-			// columnMinWidths[columnMinWidths.length-1] += toDistribute;
-			averageDeltaToCell(columnMinWidths, toDistribute);
+			// may happen with percent width column calculations.
+			// find out how much space is left and distribute it
+			// equally to all columns that are not fixed-width.
+			int extraSpace = toDistribute;
+			for (int i=0; i < columnMinWidths.length; i++) {
+				extraSpace -= columnMinWidths[i];
+			}
+
+			averageDeltaToCell(columnMinWidths, extraSpace);
 		} else {
 			int left = toDistribute;
 			for (int i = 0; i < columnMinWidths.length - 1; i++) {
