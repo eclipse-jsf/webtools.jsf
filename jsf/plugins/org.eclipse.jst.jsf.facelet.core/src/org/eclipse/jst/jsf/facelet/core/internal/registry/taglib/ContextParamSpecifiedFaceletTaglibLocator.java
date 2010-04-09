@@ -19,26 +19,17 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.WorkspaceJob;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.common.internal.managedobject.AbstractManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
+import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
-import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration.WebappListener;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
 
 /**
@@ -52,29 +43,33 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
 public class ContextParamSpecifiedFaceletTaglibLocator extends
         AbstractFaceletTaglibLocator
 {
-    private static final String ID = ContextParamSpecifiedFaceletTaglibLocator.class.getCanonicalName();
+    private static final String ID = ContextParamSpecifiedFaceletTaglibLocator.class
+            .getCanonicalName();
     private static final String DISPLAYNAME = Messages.ContextParamSpecifiedFaceletTaglibLocator_0;
-    private final IProject                       _project;
+    private final IProject _project;
     private final Map<String, IFaceletTagRecord> _records;
-    private final TagRecordFactory               _factory;
-    private final TaglibFileManager              _fileManager;
+    private final TagRecordFactory _factory;
+    private final TaglibFileManager _fileManager;
 
     /**
      * @param project
      * @param factory
      * @param webAppProvider
      * @param vcQuery
+     * @param wsMediator
      */
     public ContextParamSpecifiedFaceletTaglibLocator(final IProject project,
-            final TagRecordFactory factory, final IModelProvider webAppProvider,
-            final AbstractVirtualComponentQuery vcQuery)
+            final TagRecordFactory factory,
+            final IModelProvider webAppProvider,
+            final AbstractVirtualComponentQuery vcQuery,
+            final WorkspaceMediator wsMediator)
     {
         super(ID, DISPLAYNAME);
         _project = project;
         _records = new HashMap<String, IFaceletTagRecord>();
         _factory = factory;
         _fileManager = new TaglibFileManager(project,
-                new LibraryChangeHandler(), webAppProvider, vcQuery);
+                new LibraryChangeHandler(), webAppProvider, vcQuery, wsMediator);
     }
 
     /*
@@ -103,9 +98,9 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
         super.stop();
     }
 
-
     @Override
-    protected Map<String, ? extends IFaceletTagRecord> doLocate(final IProject context)
+    protected Map<String, ? extends IFaceletTagRecord> doLocate(
+            final IProject context)
     {
         final List<IFile> files = _fileManager.getFiles();
 
@@ -119,8 +114,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
                 try
                 {
                     tracker = _fileManager.getInstance(file);
-                }
-                catch (final ManagedObjectException e)
+                } catch (final ManagedObjectException e)
                 {
                     FaceletCorePlugin.log("Creating record", e); //$NON-NLS-1$
                 }
@@ -146,29 +140,27 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
         try
         {
             is = file.getContents();
-            final TagModelLoader loader = new TagModelLoader(file.getFullPath().toFile().getCanonicalPath());
+            final TagModelLoader loader = new TagModelLoader(file.getFullPath()
+                    .toFile().getCanonicalPath());
             loader.loadFromInputStream(is);
             final FaceletTaglib taglib = loader.getTaglib();
             if (taglib != null)
             {
                 return _factory.createRecords(taglib);
             }
-        }
-        catch (final Exception e)
+        } catch (final Exception e)
         {
             FaceletCorePlugin
                     .log(
                             "Loading web root taglibs for project: " + _project.getName(), e); //$NON-NLS-1$
-        }
-        finally
+        } finally
         {
             if (is != null)
             {
                 try
                 {
                     is.close();
-                }
-                catch (final IOException e)
+                } catch (final IOException e)
                 {
                     FaceletCorePlugin.log("Closing taglib.xml", e); //$NON-NLS-1$
                 }
@@ -177,134 +169,13 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
         return null;
     }
 
-    private static class TaglibFileManager extends
-            ResourceSingletonObjectManager<TaglibFileTracker, IFile>
+    static class TaglibFileTracker extends AbstractManagedObject implements
+            IResourceLifecycleListener
     {
-        private final LibraryChangeHandler    _handler;
-        private final WebappConfiguration     _webAppConfiguration;
-        private final IResourceChangeListener _newFileListener;
-
-        public TaglibFileManager(final IProject project,
-                final LibraryChangeHandler handler, final IModelProvider webAppProvider,
-                final AbstractVirtualComponentQuery vcQuery)
-        {
-            super(project.getWorkspace());
-            _handler = handler;
-            _webAppConfiguration = new WebappConfiguration(project, webAppProvider, vcQuery);
-            // TODO: fold into LifecycleListener
-            _newFileListener = new IResourceChangeListener()
-            {
-                public void resourceChanged(final IResourceChangeEvent event)
-                {
-                    // if the event is post change && has the same parent
-                    // project
-                    if (event.getType() == IResourceChangeEvent.POST_CHANGE
-                            && event.getDelta().findMember(
-                                    project.getFullPath()) != null)
-                    {
-                        new WorkspaceJob("Context param update") //$NON-NLS-1$
-                        {
-                            
-                            @Override
-                            public IStatus runInWorkspace(IProgressMonitor monitor)
-                                    throws CoreException
-                            {
-                                for (final IFile file : _webAppConfiguration.getFiles())
-                                {
-                                    final IResourceDelta delta = event.getDelta()
-                                            .findMember(file.getFullPath());
-
-                                    if (delta != null)
-                                    {
-                                        if (delta.getKind() == IResourceDelta.ADDED)
-                                        {
-                                            
-                                            _handler.added(file);
-                                        }
-                                    }
-                                }
-                                return Status.OK_STATUS;
-                            }
-                        }.schedule();
-                    }
-                }
-            };
-
-            getWorkspace().addResourceChangeListener(
-                    _newFileListener);
-        }
-
-        public List<IFile> getFiles()
-        {
-            return _webAppConfiguration.getFiles();
-        }
-
-        public void initFiles()
-        {
-            _webAppConfiguration.start();
-            _webAppConfiguration.addListener(new WebappListener()
-            {
-                @Override
-                public void webappChanged(final WebappChangeEvent event)
-                {
-                    for (final IFile file : event.getRemoved())
-                    {
-                        TaglibFileTracker tracker;
-                        try
-                        {
-                            tracker = getInstance(file);
-                            _handler.removed(tracker._uri, file);
-                        }
-                        catch (final ManagedObjectException e)
-                        {
-                            FaceletCorePlugin.log("While removing for webapp change", e); //$NON-NLS-1$
-                        }
-                    }
-                    
-                    for (final IFile file  : event.getAdded())
-                    {
-                        _handler.added(file);
-                    }
-                }
-            });
-        }
-
-        @Override
-        protected TaglibFileTracker createNewInstance(final IFile file)
-        {
-            return new TaglibFileTracker(file, this, _handler);
-        }
-
-        public void addListener(final IResourceLifecycleListener listener)
-        {
-            super.addLifecycleEventListener(listener);
-        }
-
-        public void removeListener(final IResourceLifecycleListener listener)
-        {
-            super.removeLifecycleEventListener(listener);
-        }
-
-        /* (non-Javadoc)
-         * @see org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager#dispose()
-         */
-        @Override
-        public void dispose()
-        {
-            _webAppConfiguration.dispose();
-            getWorkspace().removeResourceChangeListener(
-                    _newFileListener);
-            super.dispose();
-        }
-    }
-
-    private static class TaglibFileTracker extends AbstractManagedObject
-            implements IResourceLifecycleListener
-    {
-        private final IFile                _file;
-        private String                     _uri;
-        private final AtomicLong           _lastModifiedStamp = new AtomicLong();
-        private TaglibFileManager          _manager;
+        private final IFile _file;
+        String _uri;
+        private final AtomicLong _lastModifiedStamp = new AtomicLong();
+        private TaglibFileManager _manager;
         private final LibraryChangeHandler _handler;
 
         public TaglibFileTracker(final IFile file,
@@ -354,17 +225,17 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
 
             switch (eventType)
             {
-                case RESOURCE_ADDED:
-                    // added resources kick an add event.
-                    _handler.added(_file);
+            case RESOURCE_ADDED:
+                // added resources kick an add event.
+                _handler.added(_file);
                 break;
-                case RESOURCE_CHANGED:
-                    // changed resources kick a change event
-                    _handler.changed(_uri, _file);
+            case RESOURCE_CHANGED:
+                // changed resources kick a change event
+                _handler.changed(_uri, _file);
                 break;
-                case RESOURCE_INACCESSIBLE:
-                    // removed resources kick a remove event
-                    _handler.removed(_uri, _file);
+            case RESOURCE_INACCESSIBLE:
+                // removed resources kick a remove event
+                _handler.removed(_uri, _file);
                 break;
             }
 
@@ -373,7 +244,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
 
     }
 
-    private class LibraryChangeHandler
+    class LibraryChangeHandler
     {
         public void added(final IFile file)
         {
@@ -381,10 +252,8 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
             TaglibFileTracker tracker = null;
             try
             {
-                tracker = _fileManager
-                        .getInstance(file);
-            }
-            catch (final ManagedObjectException e)
+                tracker = _fileManager.getInstance(file);
+            } catch (final ManagedObjectException e)
             {
                 FaceletCorePlugin.log("Adding new library", e); //$NON-NLS-1$
             }

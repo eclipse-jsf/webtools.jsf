@@ -1,14 +1,17 @@
-package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
+package org.eclipse.jst.jsf.common.internal.finder.matcher;
 
 import java.util.jar.JarEntry;
 import java.util.regex.Pattern;
+
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.IMatcher;
 
 
 /**
  * @author cbateman
  *
  */
-public class TaglibJarEntryFinder extends TaglibFinder<JarEntry, JarEntry>
+public class TaglibJarEntryFinder extends TaglibFinder<JarEntry, JarEntry> implements IMatcher
 {
     /**
      * Unique id of this strategy.
@@ -34,5 +37,20 @@ public class TaglibJarEntryFinder extends TaglibFinder<JarEntry, JarEntry>
             return input;
         }
         return getNoResult();
+    }
+
+    public boolean matches(Object matchThis)
+    {
+        if (matchThis instanceof JarEntry)
+        {
+            try
+            {
+                return perform((JarEntry) matchThis) != getNoResult();
+            } catch (Exception e)
+            {
+                JSFCommonPlugin.log(e, "While matching jar entry: "+matchThis); //$NON-NLS-1$
+            }
+        }
+        return false;
     }
 }

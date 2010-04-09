@@ -166,12 +166,6 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
             FaceletCoreTraceOptions
                     .log("TLDTagRegistry.initialize_TagRecord: Initializing new tld record: " + tagRecord.toString()); //$NON-NLS-1$
         }
-        // long startTime = 0;
-        //
-        // if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
-        // {
-        // startTime = System.nanoTime();
-        // }
         final FaceletNamespace ns = new FaceletNamespace(tagRecord, _resolver);
         _nsResolved.put(tagRecord.getURI(), ns);
 
@@ -181,13 +175,6 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
                     TagRegistryChangeEvent.EventType.ADDED_NAMESPACE,
                     Collections.singletonList(ns)));
         }
-
-        // if (FaceletCoreTraceOptions.TRACE_JSPTAGREGISTRY_PERF)
-        // {
-        //                System.out.printf("Time to update namespace %s was %d\n", //$NON-NLS-1$
-        // ns.getNSUri(), Long.valueOf(System.nanoTime()
-        // - startTime));
-        // }
         return ns;
     }
 

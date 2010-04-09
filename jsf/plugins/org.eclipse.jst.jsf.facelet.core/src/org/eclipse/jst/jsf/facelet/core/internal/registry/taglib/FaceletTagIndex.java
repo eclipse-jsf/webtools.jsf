@@ -13,13 +13,23 @@ package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
+import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.AlwaysMatcher;
 import org.eclipse.jst.jsf.common.internal.locator.AbstractLocatorProvider;
+import org.eclipse.jst.jsf.common.internal.locator.AbstractLocatorProvider.DefaultLocatorProvider;
+import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
+import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
+import org.eclipse.jst.jsf.common.internal.resource.DefaultJarProvider;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
+import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceLocator;
+import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
+import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
 
 /**
  * @author cbateman
@@ -27,18 +37,19 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManag
  */
 /**
  * @author cbateman
- *
+ * 
  */
 public class FaceletTagIndex extends
-ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
+        ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
 {
     private IProjectTaglibDescriptorFactory _factory;
 
     /**
      * @param ws
-     * @param factory 
+     * @param factory
      */
-    public FaceletTagIndex(final IWorkspace ws, final IProjectTaglibDescriptorFactory factory)
+    public FaceletTagIndex(final IWorkspace ws,
+            final IProjectTaglibDescriptorFactory factory)
     {
         super(ws);
         _factory = factory;
@@ -54,7 +65,8 @@ ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
     {
         if (INSTANCE == null)
         {
-            INSTANCE = new FaceletTagIndex(ws, new DefaultProjectTaglibDescriptorFactory());
+            INSTANCE = new FaceletTagIndex(ws,
+                    new DefaultProjectTaglibDescriptorFactory());
 
         }
         return INSTANCE;
@@ -65,7 +77,7 @@ ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
     {
         final TagRecordFactory factory = new TagRecordFactory(project);
 
-        return  _factory.create(project, factory);
+        return _factory.create(project, factory);
     }
 
     /**
@@ -80,10 +92,12 @@ ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
 
     /**
      * The default factory for creating per-project tag descriptors.
+     * 
      * @author cbateman
-     *
+     * 
      */
-    public static class DefaultProjectTaglibDescriptorFactory extends AbstractProjectTaglibDescriptorFactory
+    public static class DefaultProjectTaglibDescriptorFactory extends
+            AbstractProjectTaglibDescriptorFactory
     {
         @Override
         public IProjectTaglibDescriptor create(IProject project,
@@ -93,7 +107,23 @@ ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
             locators.add(new JarFileFaceletTaglibLocator(factory));
             locators.add(new ContextParamSpecifiedFaceletTaglibLocator(project,
                     factory, ModelProviderManager.getModelProvider(project),
-                    new DefaultVirtualComponentQuery()));
+                    new DefaultVirtualComponentQuery(), new WorkspaceMediator()));
+            List<IJSFResourceLocator> resourceLocators = new ArrayList<IJSFResourceLocator>();
+            resourceLocators.add(new JarBasedJSFResourceLocator(
+                    Collections.EMPTY_LIST,
+                    new CopyOnWriteArrayList<ILocatorChangeListener>(),
+                    new DefaultJarProvider(Collections
+                            .singletonList(new AlwaysMatcher())),
+                    new ContentTypeResolver()));
+            resourceLocators.add(new WorkspaceJSFResourceLocator(
+                    Collections.EMPTY_LIST,
+                    new CopyOnWriteArrayList<ILocatorChangeListener>(),
+                    new DefaultVirtualComponentQuery(),
+                    new ContentTypeResolver()));
+            final DefaultLocatorProvider<IJSFResourceLocator> resourceLocatorProvider = new DefaultLocatorProvider<IJSFResourceLocator>(
+                    resourceLocators);
+            locators.add(new CompositeComponentTaglibLocator(
+                    resourceLocatorProvider));
             LocatorProvider provider = new LocatorProvider(locators);
             return new ProjectTaglibDescriptor(project, factory, provider);
         }
@@ -103,10 +133,10 @@ ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
      * The locator provider used by the tag index.
      * 
      * @author cbateman
-     *
+     * 
      */
     public static class LocatorProvider extends
-    AbstractLocatorProvider<AbstractFaceletTaglibLocator>
+            AbstractLocatorProvider<AbstractFaceletTaglibLocator>
     {
         private final List<AbstractFaceletTaglibLocator> _locators;
 

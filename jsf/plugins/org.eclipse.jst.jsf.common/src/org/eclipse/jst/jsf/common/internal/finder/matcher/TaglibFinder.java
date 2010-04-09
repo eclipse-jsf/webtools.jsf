@@ -1,4 +1,4 @@
-package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
+package org.eclipse.jst.jsf.common.internal.finder.matcher;
 
 import org.eclipse.jst.jsf.common.internal.strategy.AbstractIdentifiableStrategy;
 
