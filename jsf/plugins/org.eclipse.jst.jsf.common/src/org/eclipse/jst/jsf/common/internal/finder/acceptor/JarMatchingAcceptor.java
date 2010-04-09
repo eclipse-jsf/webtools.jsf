@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.common.internal.finder.acceptor;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -131,7 +132,11 @@ public class JarMatchingAcceptor extends MatchingAcceptor<IProject, JarFile>
                             .getLocation();
                 }
                 final String libraryPathString = libraryPath.toString();
-                return new JarFile(libraryPathString);
+                final File file = new File(libraryPathString);
+                if (file.exists())
+                {
+                    return new JarFile(file);
+                }
             }
         }
         return null;
