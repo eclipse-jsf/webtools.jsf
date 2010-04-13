@@ -13,7 +13,6 @@ package org.eclipse.jst.jsf.validation.el.tests.base;
 
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +28,8 @@ import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.core.JSFVersion;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.resolver.AbstractStructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsf.designtime.resolver.CachingSymbolContextResolver;
@@ -253,17 +253,16 @@ public abstract class BaseTestCase extends ConfigurableTestCase
             IFile bundleFile = res.getFile("Bundle.properties");
             assertTrue(bundleFile.exists());
             
-            JSFAppConfigManager  cfgManager = 
-                JSFAppConfigManager.getInstance(_jdtTestEnv.getProjectEnvironment().getTestProject());
+            IJSFAppConfigManager  cfgManager = 
+                JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(_jdtTestEnv.getProjectEnvironment().getTestProject());
             assertNotNull(cfgManager);
             
-            List<?> mbeans = cfgManager.getManagedBeans();
+            List<ManagedBeanType> mbeans = cfgManager.getManagedBeans();
             Map<String, ManagedBeanType>  nameTest = new HashMap<String, ManagedBeanType>();
             
-            for (final Iterator<?> it = mbeans.iterator(); it.hasNext();)
+            for (final ManagedBeanType mbean : mbeans)
             {
-                ManagedBeanType  mbean = (ManagedBeanType) it.next();
-                nameTest.put(mbean.getManagedBeanName().getTextContent(), mbean);
+            	nameTest.put(mbean.getManagedBeanName().getTextContent(), mbean);
             }
 
             assertTrue(nameTest.containsKey("myBean"));

@@ -13,6 +13,8 @@ package org.eclipse.jst.jsf.core.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.jst.jsf.core.tests.appconfig.CompositeJSFAppConfigLocatorProviderStrategyTests;
+import org.eclipse.jst.jsf.core.tests.appconfig.JSFAppConfigManagerFactoryTests;
 import org.eclipse.jst.jsf.core.tests.appconfig.validation.AppConfigValidationUtilTestCase;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryProviderTests;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryValidatorTest;
@@ -106,6 +108,9 @@ public class AllTests
         // Jsf library provider tests
         suite.addTestSuite(JsfLibraryProviderTests.class);
 
+        //JSFAppConfig Tests
+        suite.addTestSuite(CompositeJSFAppConfigLocatorProviderStrategyTests.class);
+        suite.addTestSuite(JSFAppConfigManagerFactoryTests.class);
 		//$JUnit-END$
 		return suite;
 	}

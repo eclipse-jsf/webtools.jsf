@@ -25,9 +25,11 @@ import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.internal.symbols.ResourceBundleSymbolSourceProvider;
+import org.eclipse.jst.jsf.facesconfig.emf.ResourceBundleType;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
@@ -92,8 +94,8 @@ public class TestResourceBundleSymbolSourceProvider extends TestCase
 
 	public void testSanity()
 	{
-        final JSFAppConfigManager appconfigMgr = JSFAppConfigManager.getInstance(_projectTestEnvironment.getTestProject());
-        final List<?> resourceBundles = appconfigMgr.getResourceBundles();
+        final IJSFAppConfigManager appconfigMgr = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(_projectTestEnvironment.getTestProject());
+        final List<ResourceBundleType> resourceBundles = appconfigMgr.getResourceBundles();
         assertEquals(2, resourceBundles.size());
 	}
 	

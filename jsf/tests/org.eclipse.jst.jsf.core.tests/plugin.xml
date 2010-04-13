@@ -19,4 +19,21 @@
             name="TEST_PP_LIB_EMPTY">
       </jsfLibrary>
    </extension>
+
+<!--
+   <extension
+         point="org.eclipse.jst.jsf.core.jsfAppConfigManagerFactory">
+      <factory
+            class="org.eclipse.jst.jsf.core.tests.appconfig.TestJSFAppConfigManagerFactoryFromExtension">
+      </factory>
+   </extension>
+-->
+<!--    
+   <extension
+         point="org.eclipse.jst.jsf.core.jsfAppConfigLocatorProviderFactory">
+      <locatorProvider
+            class="org.eclipse.jst.jsf.core.tests.appconfig.TestLocatorProvider">
+      </locatorProvider>
+   </extension>
+-->   
 </plugin>

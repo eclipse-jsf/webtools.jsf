@@ -29,6 +29,7 @@ import org.eclipse.jst.jsf.core.jsfappconfig.JARFileJSFAppConfigProvider;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.core.jsfappconfig.RuntimeClasspathJSFAppConfigLocater;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentExtensionType;
@@ -226,7 +227,9 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
 
         final IJSFAppConfigLocater locator =
             new RuntimeClasspathJSFAppConfigLocater();
-        locator.setJSFAppConfigManager(JSFAppConfigManager.getInstance(_testEnv
+        
+        //until setJSFAppConfigManager accepts IJSFAppConfigManagers, leave deprecated method call
+        locator.setJSFAppConfigManager((IJSFAppConfigManager)JSFAppConfigManager.getInstance(_testEnv
                 .getTestProject()));
         final JARFileJSFAppConfigProvider provider =
             new JARFileJSFAppConfigProvider(libName);
@@ -241,7 +244,9 @@ public class TestJARFileJSFAppConfigProvider extends TestCase
 
         final IJSFAppConfigLocater locator =
             new RuntimeClasspathJSFAppConfigLocater();
-        locator.setJSFAppConfigManager(JSFAppConfigManager.getInstance(_testEnv
+        
+        //until setJSFAppConfigManager accepts IJSFAppConfigManagers, leave deprecated method call
+        locator.setJSFAppConfigManager((IJSFAppConfigManager)JSFAppConfigManager.getInstance(_testEnv
                 .getTestProject()));
         final JARFileJSFAppConfigProvider provider =
             new JARFileJSFAppConfigProvider(libName);
