@@ -26,6 +26,11 @@ public class Messages extends NLS
     /**
      * see messages.properties
      */
+    public static String UserLibraryVersionValidator_possiblyIncompatibleLibrary;
+
+    /**
+     * see messages.properties
+     */
     public static String UserLibraryVersionValidator_versionMismatch;
 
     static

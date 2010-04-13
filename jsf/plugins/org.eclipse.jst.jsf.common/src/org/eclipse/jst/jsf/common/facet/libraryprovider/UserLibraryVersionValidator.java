@@ -28,7 +28,6 @@ import org.eclipse.jst.common.project.facet.core.libprov.user.KeyClassesValidato
 import org.eclipse.jst.common.project.facet.core.libprov.user.UserLibraryProviderInstallOperationConfig;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.facet.Messages;
-import org.eclipse.osgi.util.NLS;
 
 
 /**
@@ -85,18 +84,11 @@ public abstract class UserLibraryVersionValidator extends KeyClassesValidator
         if (libraryVersion == null)
             return new Status(IStatus.WARNING, JSFCommonPlugin.PLUGIN_ID, Messages.UserLibraryVersionValidator_cannotReadLibraryVersion);
 
-        if (isLibraryFacetCompatible(facetVersion, libraryVersion))
+        if (libraryVersion.compareToIgnoreCase(facetVersion) >= 0) // JSF 2.0 lib for JSF 1.2 app, JSF 1.2 lib for JSF 1.2 app
             return Status.OK_STATUS;
 
-        final String errorMessage = NLS.bind(Messages.UserLibraryVersionValidator_versionMismatch, libraryVersion, facetVersion);
-        return new Status(IStatus.ERROR, JSFCommonPlugin.PLUGIN_ID, errorMessage);
-    }
-
-
-    private boolean isLibraryFacetCompatible (final String facetVersion,
-                                              final String libraryVersion)
-    {
-        return libraryVersion.startsWith(facetVersion);
+        // e.g. JSF 1.2 library used for a JSF 2.0 app
+        return new Status(IStatus.WARNING, JSFCommonPlugin.PLUGIN_ID, Messages.UserLibraryVersionValidator_possiblyIncompatibleLibrary);
     }
 
 
