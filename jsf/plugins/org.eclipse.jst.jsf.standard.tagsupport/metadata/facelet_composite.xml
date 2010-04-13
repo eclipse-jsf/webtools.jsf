@@ -30,46 +30,68 @@
 			<item id="actionSource">
 				<display-label>%actionSource.display-label</display-label>
 				<description>%actionSource.description</description>
+				<small-icon>small/ACTIONSOURCE.gif</small-icon>
+				<large-icon>large/ACTIONSOURCE.gif</large-icon>				
 			</item>
 			<item id="attribute">
 				<display-label>%attribute.display-label</display-label>
 				<description>%attribute.description</description>
+				<small-icon>small/ATTRIBUTE.gif</small-icon>
+				<large-icon>large/ATTRIBUTE.gif</large-icon>				
 			</item>
 			<item id="editableValueHolder">
 				<display-label>%editableValueHolder.display-label</display-label>
 				<description>%editableValueHolder.description</description>
+				<small-icon>small/EDITABLEVALUEHOLDER.gif</small-icon>
+				<large-icon>large/EDITABLEVALUEHOLDER.gif</large-icon>				
 			</item>
 			<item id="extension">
 				<display-label>%extension.display-label</display-label>
 				<description>%extension.description</description>
+				<small-icon>small/EXTENSION.gif</small-icon>
+				<large-icon>large/EXTENSION.gif</large-icon>				
 			</item>
 			<item id="facet">
 				<display-label>%facet.display-label</display-label>
 				<description>%facet.description</description>
+				<small-icon>small/FACET.gif</small-icon>
+				<large-icon>large/FACET.gif</large-icon>				
 			</item>
 			<item id="implementation">
 				<display-label>%implementation.display-label</display-label>
 				<description>%implementation.description</description>
+				<small-icon>small/IMPLEMENTATION.gif</small-icon>
+				<large-icon>large/IMPLEMENTATION.gif</large-icon>				
 			</item>
 			<item id="insertChildren">
 				<display-label>%insertChildren.display-label</display-label>
 				<description>%insertChildren.description</description>
+				<small-icon>small/INSERTCHILDREN.gif</small-icon>
+				<large-icon>large/INSERTCHILDREN.gif</large-icon>				
 			</item>
 			<item id="insertFacet">
 				<display-label>%insertFacet.display-label</display-label>
 				<description>%insertFacet.description</description>
+				<small-icon>small/INSERTFACET.gif</small-icon>
+				<large-icon>large/INSERTFACET.gif</large-icon>				
 			</item>
 			<item id="interface">
 				<display-label>%interface.display-label</display-label>
 				<description>%interface.description</description>
+				<small-icon>small/INTERFACE.gif</small-icon>
+				<large-icon>large/INTERFACE.gif</large-icon>				
 			</item>
 			<item id="renderFacet">
 				<display-label>%renderFacet.display-label</display-label>
 				<description>%renderFacet.description</description>
+				<small-icon>small/RENDERFACET.gif</small-icon>
+				<large-icon>large/RENDERFACET.gif</large-icon>				
 			</item>
 			<item id="valueHolder">
 				<display-label>%valueHolder.display-label</display-label>
 				<description>%valueHolder.description</description>
+				<small-icon>small/VALUEHOLDER.gif</small-icon>
+				<large-icon>large/VALUEHOLDER.gif</large-icon>				
 			</item>
 		</value>
 	</trait>

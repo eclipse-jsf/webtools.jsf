@@ -14,7 +14,7 @@
 	</trait>
 
 	<trait id="images-base-path">
-		<value xsi:type="mdt:StringValue">$nl$/icons/palette/FaceletsUI</value>
+		<value xsi:type="mdt:StringValue">$nl$/icons/palette/UI</value>
 	</trait>
 
 	<trait id="display-label">
@@ -28,52 +28,74 @@
 	<trait id="default-prefix">
 		<value xsi:type="mdt:StringValue">ui</value>
 	</trait>
-
+	
 	<trait id="paletteInfos">
 		<value xsi:type="pi:PaletteInfos">
 			<item id="component" tag="component">
 				<display-label>%component.display-label</display-label>
 				<description>%component.description</description>
+				<small-icon>small/UI_COMPONENT.gif</small-icon>
+				<large-icon>large/UI_COMPONENT.gif</large-icon>
 			</item>
 			<item id="composition">
 				<display-label>%composition.display-label</display-label>
 				<description>%composition.description</description>
+				<small-icon>small/UI_COMPOSITION.gif</small-icon>
+				<large-icon>large/UI_COMPOSITION.gif</large-icon>
 			</item>
 			<item id="debug">
 				<display-label>%debug.display-label</display-label>
 				<description>%debug.description</description>
+				<small-icon>small/UI_DEBUG.gif</small-icon>
+				<large-icon>large/UI_DEBUG.gif</large-icon>				
 			</item>
 			<item id="decorate">
 				<display-label>%decorate.display-label</display-label>
 				<description>%decorate.description</description>
+				<small-icon>small/UI_DECORATE.gif</small-icon>
+				<large-icon>large/UI_DECORATE.gif</large-icon>				
 			</item>
 			<item id="define">
 				<display-label>%define.display-label</display-label>
 				<description>%define.description</description>
+				<small-icon>small/UI_DEFINE.gif</small-icon>
+				<large-icon>large/UI_DEFINE.gif</large-icon>				
 			</item>
 			<item id="fragment">
 				<display-label>%fragment.display-label</display-label>
 				<description>%fragment.description</description>
+				<small-icon>small/UI_FRAGMENT.gif</small-icon>
+				<large-icon>large/UI_FRAGMENT.gif</large-icon>	
 			</item>
 			<item id="include">
 				<display-label>%include.display-label</display-label>
 				<description>%include.description</description>
+				<small-icon>small/UI_INCLUDE.gif</small-icon>
+				<large-icon>large/UI_INCLUDE.gif</large-icon>					
 			</item>
 			<item id="insert">
 				<display-label>%insert.display-label</display-label>
 				<description>%insert.description</description>
+				<small-icon>small/UI_INSERT.gif</small-icon>
+				<large-icon>large/UI_INSERT.gif</large-icon>					
 			</item>
 			<item id="param">
 				<display-label>%param.display-label</display-label>
 				<description>%param.description</description>
+				<small-icon>small/UI_PARAM.gif</small-icon>
+				<large-icon>large/UI_PARAM.gif</large-icon>					
 			</item>
 			<item id="remove">
 				<display-label>%remove.display-label</display-label>
 				<description>%remove.description</description>
+				<small-icon>small/UI_REMOVE.gif</small-icon>
+				<large-icon>large/UI_REMOVE.gif</large-icon>					
 			</item>
 			<item id="repeat">
 				<display-label>%repeat.display-label</display-label>
 				<description>%repeat.description</description>
+				<small-icon>small/UI_REPEAT.gif</small-icon>
+				<large-icon>large/UI_REPEAT.gif</large-icon>					
 			</item>
 		</value>
 	</trait>
