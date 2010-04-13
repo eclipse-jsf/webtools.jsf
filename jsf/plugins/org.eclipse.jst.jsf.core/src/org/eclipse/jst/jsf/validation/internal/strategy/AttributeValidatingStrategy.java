@@ -47,13 +47,14 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.region.Region2AttrAdapter;
 import org.eclipse.jst.jsf.core.internal.region.Region2ElementAdapter;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
-import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
-import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter.DTELExpression;
+import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewObjectMappingService.ElementData;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterForClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
@@ -543,11 +544,10 @@ AbstractXMLViewValidationStrategy
         {
             _conversionTypes = new HashSet<String>();
             final IProject project = _validationContext.getFile().getProject();
-            final JSFAppConfigManager appConfig = JSFAppConfigManager.getInstance(project);
-            final List converters = appConfig.getConverters();
-            for (final Iterator it = converters.iterator(); it.hasNext();)
+            final IJSFAppConfigManager appConfig = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(project);
+            final List<ConverterType> converters = appConfig.getConverters();
+            for (final ConverterType converterType : converters)
             {
-                final ConverterType converterType = (ConverterType) it.next();
                 final ConverterForClassType forClassType = converterType.getConverterForClass();
                 if (forClassType != null)
                 {

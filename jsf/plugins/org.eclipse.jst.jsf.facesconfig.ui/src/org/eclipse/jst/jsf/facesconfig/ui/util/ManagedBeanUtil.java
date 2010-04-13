@@ -12,11 +12,11 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.util;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 
 /**
@@ -36,25 +36,21 @@ public class ManagedBeanUtil {
 	 * @return int - 0 if bean doesn't exist, otherwise the choice from the
 	 *         Duplicate Bean dialog
 	 */
-	public static boolean isBeanDuplicate(IProject project, String beanName) 
+	public static boolean isBeanDuplicate(final IProject project, final String beanName) 
     {
-	    JSFAppConfigManager appCfgMgr = JSFAppConfigManager.getInstance(project);
+	    final IJSFAppConfigManager appCfgMgr = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(project);
         
 		if (appCfgMgr != null) 
         {
-			List beans = appCfgMgr.getManagedBeans();
+			final List<ManagedBeanType> beans = appCfgMgr.getManagedBeans();
 
 			// Iterate through the bean list
-			for (Iterator i = beans.iterator(); i.hasNext();) {
-				Object o = i.next();
-				if (o instanceof ManagedBeanType) {
-					ManagedBeanType mbti = (ManagedBeanType) o;
-					if (mbti.getManagedBeanName() != null) {
-						String name = mbti.getManagedBeanName()
-								.getTextContent();
-						if (name != null && name.equals(beanName)) {
-							return true;
-						}
+			for (final ManagedBeanType mbti : beans) {
+				if (mbti.getManagedBeanName() != null) {
+					final String name = mbti.getManagedBeanName()
+							.getTextContent();
+					if (name != null && name.equals(beanName)) {
+						return true;
 					}
 				}
 			}
@@ -73,8 +69,8 @@ public class ManagedBeanUtil {
 	 *            seed reference name
 	 * @return String - default managed bean name
 	 */
-	public static String getDefaultManagedBeanName(IProject project,
-			String refName) {
+	public static String getDefaultManagedBeanName(final IProject project,
+			final String refName) {
 		String defaultName = refName;
 
 		int newRefNameIndex = 1;

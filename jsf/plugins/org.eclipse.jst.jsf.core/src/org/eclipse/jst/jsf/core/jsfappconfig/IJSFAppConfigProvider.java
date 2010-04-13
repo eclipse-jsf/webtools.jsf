@@ -18,7 +18,9 @@ import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
  * 
  * <p><b>Provisional API - subject to change</b></p>
  * 
+ * @noimplement - should use {@link AbstractJSFAppConfigProvider} or {@link ArtifactEditJSFAppConfigProvider} if that config can be modified
  * @author Ian Trimble - Oracle
+ * 
  */
 public interface IJSFAppConfigProvider {
 

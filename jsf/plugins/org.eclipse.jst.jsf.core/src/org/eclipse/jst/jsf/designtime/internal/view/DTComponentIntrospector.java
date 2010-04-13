@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.designtime.internal.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +38,8 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
 import org.eclipse.jst.jsf.core.internal.jem.BeanProxyUtil.BeanProxyWrapper;
 import org.eclipse.jst.jsf.core.internal.jem.BeanProxyUtil.ProxyException;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
@@ -209,13 +209,12 @@ public final class DTComponentIntrospector
     public static String findComponentClass(final String componentType,
             final IProject project)
     {
-        final JSFAppConfigManager manager = JSFAppConfigManager
-                .getInstance(project);
-        final List components = manager.getComponents();
+        final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
+                .getJSFAppConfigManagerInstance(project);
+        final List<ComponentType> components = manager.getComponents();
 
-        for (final Iterator it = components.iterator(); it.hasNext();)
+        for (final ComponentType component : components)
         {
-            final ComponentType component = (ComponentType) it.next();
             final String type = component.getComponentType().getTextContent()
                     .trim();
 
@@ -236,14 +235,12 @@ public final class DTComponentIntrospector
     public static String findConverterClass(final String converterId,
             final IProject project)
     {
-        final JSFAppConfigManager manager = JSFAppConfigManager
-                .getInstance(project);
-        final List converters = manager.getConverters();
+        final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
+                .getJSFAppConfigManagerInstance(project);
+        final List<ConverterType> converters = manager.getConverters();
 
-        for (final Iterator it = converters.iterator(); it.hasNext();)
+        for (final ConverterType converter : converters)
         {
-            final ConverterType converter = (ConverterType) it.next();
-
             if (converter != null && converter.getConverterId() != null
                     && converter.getConverterId().getTextContent() != null)
             {
@@ -273,14 +270,12 @@ public final class DTComponentIntrospector
     public static String findValidatorClass(final String validatorId,
             final IProject project)
     {
-        final JSFAppConfigManager manager = JSFAppConfigManager
-                .getInstance(project);
-        final List converters = manager.getValidators();
+        final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
+                .getJSFAppConfigManagerInstance(project);
+        final List<ValidatorType> validators = manager.getValidators();
 
-        for (final Iterator it = converters.iterator(); it.hasNext();)
+        for (final ValidatorType validatorType : validators)
         {
-            final ValidatorType validatorType = (ValidatorType) it.next();
-            
             if (validatorType != null && validatorType.getValidatorId() != null && 
                     validatorType.getValidatorId().getTextContent() != null)
             {

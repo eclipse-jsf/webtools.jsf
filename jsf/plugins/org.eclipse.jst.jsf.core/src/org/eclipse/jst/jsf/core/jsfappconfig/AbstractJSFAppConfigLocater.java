@@ -15,9 +15,11 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+
 /**
  * Abstract implementation of {@link IJSFAppConfigLocater} that provides common
- * locater functionality. {@link IJSFAppConfigLocater} implementations should
+ * locater functionality. {@link IJSFAppConfigLocater} implementations MUST
  * extend this class or provide similar functionality.
  * 
  * <p><b>Provisional API - subject to change</b></p>
@@ -28,43 +30,33 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 
 	/**
 	 * {@link JSFAppConfigManager} instance to which this locater belongs.
+	 * @deprecated - DO NOT USE
 	 */
 	protected JSFAppConfigManager manager = null;
+	
+	/**
+	 * {@link IJSFAppConfigManager} instance to which this locater belongs.
+	 */
+	private IJSFAppConfigManager _manager;
 
 	/**
 	 * Set of known {@link IJSFAppConfigProvider} instances.
 	 */
 	protected Set configProviders = new LinkedHashSet();
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#setJSFAppConfigManager(org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager)
-	 */
-	public void setJSFAppConfigManager(JSFAppConfigManager manager) {
-		this.manager = manager;
+	
+	public void setJSFAppConfigManager(final IJSFAppConfigManager manager) {
+		this._manager = manager;
+	}
+	
+	public IJSFAppConfigManager getJSFAppConfigManager() {
+		return _manager;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigManager()
-	 */
-	public JSFAppConfigManager getJSFAppConfigManager() {
-		return manager;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#startLocating()
-	 */
 	public abstract void startLocating();
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#stopLocating()
-	 */
 	public abstract void stopLocating();
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater#getJSFAppConfigProviders()
-	 */
-	public Set getJSFAppConfigProviders() {
+	public Set<IJSFAppConfigProvider> getJSFAppConfigProviders() {
 		return configProviders;
 	}
 
@@ -77,11 +69,11 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 	 * added.
 	 * @return true if instance was added, else false.
 	 */
-	protected boolean addConfigProvider(IJSFAppConfigProvider configProvider) {
-		boolean added = configProviders.add(configProvider);
-		if (added && manager != null) {
+	protected boolean addConfigProvider(final IJSFAppConfigProvider configProvider) {
+		final boolean added = configProviders.add(configProvider);
+		if (added && getJSFAppConfigManager() != null) {
 			configProvider.setJSFAppConfigLocater(this);
-			manager.notifyJSFAppConfigProvidersChangeListeners(
+			getJSFAppConfigManager().notifyJSFAppConfigProvidersChangeListeners(
 					configProvider,
 					JSFAppConfigProvidersChangeEvent.ADDED);
 		}
@@ -97,13 +89,13 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 	 * removed.
 	 * @return true if instance was removed, else false.
 	 */
-	protected boolean removeConfigProvider(IJSFAppConfigProvider configProvider) {
+	protected boolean removeConfigProvider(final IJSFAppConfigProvider configProvider) {
 		if (configProvider != null) {
 			configProvider.releaseFacesConfigModel();
 		}
-		boolean removed = configProviders.remove(configProvider);
-		if (removed && manager != null) {
-			manager.notifyJSFAppConfigProvidersChangeListeners(
+		final boolean removed = configProviders.remove(configProvider);
+		if (removed && getJSFAppConfigManager() != null) {
+			getJSFAppConfigManager().notifyJSFAppConfigProvidersChangeListeners(
 					configProvider,
 					JSFAppConfigProvidersChangeEvent.REMOVED);
 		}
@@ -122,13 +114,13 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 	 * @param newConfigProviders New set of {@link IJSFAppConfigProvider}
 	 * instances. 
 	 */
-	protected void updateConfigProviders(Set newConfigProviders) {
+	protected void updateConfigProviders(final Set newConfigProviders) {
 		if (newConfigProviders != null) {
-			LinkedHashSet oldConfigProviders = new LinkedHashSet();
+			final LinkedHashSet oldConfigProviders = new LinkedHashSet();
 			//iterate over existing set
-			Iterator itConfigProviders = configProviders.iterator();
+			final Iterator itConfigProviders = configProviders.iterator();
 			while (itConfigProviders.hasNext()) {
-				IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itConfigProviders.next();
+				final IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itConfigProviders.next();
 				//remove provider from new set if it is already in existing set
 				if (!newConfigProviders.remove(configProvider)) {
 					//stage removal of existing provider that is not in new set
@@ -136,16 +128,16 @@ public abstract class AbstractJSFAppConfigLocater implements IJSFAppConfigLocate
 				}
 			}
 			//remove providers that are not in new set from existing set
-			Iterator itOldConfigProviders = oldConfigProviders.iterator();
+			final Iterator itOldConfigProviders = oldConfigProviders.iterator();
 			while (itOldConfigProviders.hasNext()) {
-				IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itOldConfigProviders.next();
+				final IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itOldConfigProviders.next();
 				//call removeConfigProvider(...) method so manager's listeners are notified
 				removeConfigProvider(configProvider);
 			}
 			//add providers that are still in new set to existing set
-			Iterator itNewConfigProviders = newConfigProviders.iterator();
+			final Iterator itNewConfigProviders = newConfigProviders.iterator();
 			while (itNewConfigProviders.hasNext()) {
-				IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itNewConfigProviders.next();
+				final IJSFAppConfigProvider configProvider = (IJSFAppConfigProvider)itNewConfigProviders.next();
 				//call addConfigProvider(...) method so manager's listeners are notified
 				addConfigProvider(configProvider);
 			}

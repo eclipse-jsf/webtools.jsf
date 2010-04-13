@@ -61,7 +61,7 @@ public class RuntimeClasspathJSFAppConfigLocater extends AbstractJSFAppConfigLoc
 	 */
 	public void locateProviders() {
 		try {
-			List JARs = JSFAppConfigUtils.getConfigFileJARsFromClasspath(manager.getProject());
+			List JARs = JSFAppConfigUtils.getConfigFileJARsFromClasspath(getJSFAppConfigManager().getProject());
 			Iterator itJARs = JARs.iterator();
 			Set newConfigProviders = new LinkedHashSet();
 			while (itJARs.hasNext()) {

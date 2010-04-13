@@ -12,7 +12,6 @@
 package org.eclipse.jst.pagedesigner.jsf.ui.actions;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -23,7 +22,8 @@ import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
 import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
@@ -163,19 +163,18 @@ public class JSFAddActionGroup {
     {
         String[] result = null;
         
-        JSFAppConfigManager appConfigMgr = 
-            JSFAppConfigManager.getInstance(project);
+        IJSFAppConfigManager appConfigMgr = 
+            JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(project);
 
         // getInstance may return null if there is a problem
         if (appConfigMgr != null)
         {
-            final List list = appConfigMgr.getValidators();
+            final List<ValidatorType> list = appConfigMgr.getValidators();
             result = new String[list.size()];
             int i = 0;
-            for (final Iterator it = list.iterator(); it.hasNext();) 
+            for (final ValidatorType validator : list) 
             {
-                ValidatorType validator = (ValidatorType) it.next();
-                ValidatorIdType validatorId = validator.getValidatorId();
+            	ValidatorIdType validatorId = validator.getValidatorId();
                 if (validatorId != null)
                 {
                     result[i++] = validatorId.getTextContent() != null ?
@@ -193,18 +192,17 @@ public class JSFAddActionGroup {
     {
         String[] result = null;
         
-        JSFAppConfigManager appConfigMgr = 
-            JSFAppConfigManager.getInstance(project);
+        IJSFAppConfigManager appConfigMgr = 
+            JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(project);
 
         // getInstance may return null if there is a problem
         if (appConfigMgr != null)
         {
-            final List list = appConfigMgr.getConverters();
+            final List<ConverterType> list = appConfigMgr.getConverters();
             //prune out converters for classes, they're not valid here
-            final List converterIdList = new ArrayList();
-            for (final Iterator it = list.iterator(); it.hasNext();)
+            final List<String> converterIdList = new ArrayList();
+            for (final ConverterType converter : list)
             {
-                ConverterType converter = (ConverterType) it.next();
                 ConverterIdType converterId = converter.getConverterId();
                 if (converterId != null)
                 {
@@ -213,7 +211,7 @@ public class JSFAddActionGroup {
                 }
             }
             result = new String[converterIdList.size()];
-            result = (String[]) converterIdList.toArray(result);
+            result = converterIdList.toArray(result);
         }
 		return result;
 	}

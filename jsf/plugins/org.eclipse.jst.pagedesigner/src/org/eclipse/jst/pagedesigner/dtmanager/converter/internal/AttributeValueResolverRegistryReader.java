@@ -34,28 +34,8 @@ public class AttributeValueResolverRegistryReader extends
                 IJMTConstants.EXTENSION_POINT_PAGEDESIGNER,
                 "attributeValueResolver", //$NON-NLS-1$
                 "class", //$NON-NLS-1$
-                new CanonicalComparatorWithPrefixExceptions<IAttributeValueResolver>()
-                {
-                    @Override
-                    protected int prefixSort(
-                            SortableExecutableExtension<IAttributeValueResolver> o1,
-                            SortableExecutableExtension<IAttributeValueResolver> o2)
-                    {
-                        // if o1 is contributed by open source, sort it
-                        // after 
-                        if (o1.getContributorId().startsWith("org.eclipse.jst")) //$NON-NLS-1$
-                        {
-                            return 1;
-                        }
-                        // if o2 is contributed by open source, sort o1 first
-                        else if (o2.getContributorId().startsWith("org.eclipse.jst")) //$NON-NLS-1$
-                        {
-                            return -1;
-                        }
-                        // otherwise, we don't care
-                        return 0;
-                    }
-                });
+                new CompareOrgEclipseJstContributorsLastComparator<IAttributeValueResolver>()
+        );
     }
 
     /**

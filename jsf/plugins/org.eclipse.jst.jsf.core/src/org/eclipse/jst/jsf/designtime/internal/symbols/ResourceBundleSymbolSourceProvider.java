@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.designtime.internal.symbols;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +28,9 @@ import org.eclipse.jst.jsf.context.symbol.source.AbstractSymbolSourceProviderFac
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProvider;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.designtime.symbols.FileContextUtil;
 import org.eclipse.jst.jsf.designtime.symbols.SymbolUtil;
 import org.eclipse.jst.jsf.facesconfig.emf.BaseNameType;
@@ -67,12 +67,11 @@ public final class ResourceBundleSymbolSourceProvider extends
            final IFile   fileContext = FileContextUtil.deriveIFileFromContext(context);
            final IProject project = fileContext.getProject();
            
-           final JSFAppConfigManager appconfigMgr = JSFAppConfigManager.getInstance(project);
-           final List resourceBundles = appconfigMgr.getResourceBundles();
+           final IJSFAppConfigManager appconfigMgr = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(project);
+           final List<ResourceBundleType> resourceBundles = appconfigMgr.getResourceBundles();
            
-           for (final Iterator it = resourceBundles.iterator(); it.hasNext();)
-           {
-               ResourceBundleType  resBundle = (ResourceBundleType) it.next();
+           for (final ResourceBundleType  resBundle : resourceBundles)
+           {            
                final String  basename = getBaseName(resBundle);
                final String  name = getVarName(resBundle);
                

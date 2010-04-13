@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
@@ -66,13 +66,12 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 			return true;//shouldn't get here
 		
 		//in case that this is not JSF faceted or missing configs, need to pass
-		if (JSFAppConfigManager.getInstance(wr.getProject()) == null) 
+		if (JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()) == null) 
 			return true;
 			
 		IFile jsp = (IFile)wr.getResource();
-		List rules = JSFAppConfigManager.getInstance(wr.getProject()).getNavigationRulesForPage(jsp);
-		for(Iterator it=rules.iterator();it.hasNext();){
-			NavigationRuleType rule = (NavigationRuleType)it.next();
+		List<NavigationRuleType> rules = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()).getNavigationRulesForPage(jsp);
+		for(final NavigationRuleType rule : rules){
 			for (Iterator cases=rule.getNavigationCase().iterator();cases.hasNext();){				
 				NavigationCaseType navCase = (NavigationCaseType)cases.next();					
 				if (navCase.getFromOutcome() != null && 
@@ -90,16 +89,15 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
-		List ret = new ArrayList();
+		final List<NavigationRuleType> ret = new ArrayList<NavigationRuleType>();
 		if (getStructuredDocumentContext() == null)
 			return ret;
 		
-		IWorkspaceContextResolver wr = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
-		if (wr != null && JSFAppConfigManager.getInstance(wr.getProject()) != null) {//may not be JSF faceted project or know faces-config){			
+		final IWorkspaceContextResolver wr = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
+		if (wr != null && JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()) != null) {//may not be JSF faceted project or know faces-config){			
 			IFile jsp = (IFile)wr.getResource();
-			List rules = JSFAppConfigManager.getInstance(wr.getProject()).getNavigationRulesForPage(jsp);
-			for(Iterator it=rules.iterator();it.hasNext();){
-				NavigationRuleType rule = (NavigationRuleType)it.next();
+			List<NavigationRuleType> rules = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()).getNavigationRulesForPage(jsp);
+			for(final NavigationRuleType rule : rules){
 				if (rule != null)
 					ret.addAll(createProposals(rule));
 			}

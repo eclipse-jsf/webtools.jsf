@@ -29,7 +29,8 @@ import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
@@ -117,7 +118,7 @@ public class DefaultBeanSymbolSourceProvider
     {
         List   symbols = new ArrayList();
         
-        final JSFAppConfigManager  configManager = JSFAppConfigManager.getInstance(iProject);
+        final IJSFAppConfigManager  configManager = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(iProject);
         
 
         if (configManager != null)

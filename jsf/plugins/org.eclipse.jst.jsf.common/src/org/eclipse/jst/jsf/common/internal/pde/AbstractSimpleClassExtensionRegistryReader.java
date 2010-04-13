@@ -31,6 +31,8 @@ public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
     private final String _configElementName;
     private final Comparator<SortableExecutableExtension<T>> _comparator;
 
+	private boolean _logWarnings = false;
+
     /**
      * @param extPtNamespace
      * @param extPtId
@@ -96,7 +98,7 @@ public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
             {
                 Collections.sort(result, _comparator);
             }
-        } else
+        } else if (_logWarnings)
         {
             JSFCommonPlugin.log(IStatus.WARNING, String.format(
                     "No extensions found for: %s.%s", //$NON-NLS-1$
@@ -119,6 +121,13 @@ public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
      */
     protected abstract void handleLoadFailure(final CoreException ce);
 
+    /**
+     * @param doLogWarnings
+     */
+    protected void logWarnings(final boolean doLogWarnings) {
+    	_logWarnings = doLogWarnings;
+    }
+    
     /**
      * A comparator that sorts canonically by extension namespace and id, but
      * can make exceptions for certain prefices.
@@ -156,6 +165,33 @@ public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
                 SortableExecutableExtension<T> o2);
     }
 
+    /**
+     * Ensures that contributions from "org.eclipse.jst" plugins are sorted last
+     *
+     * @param <T>
+     */
+    public static class CompareOrgEclipseJstContributorsLastComparator<T> extends CanonicalComparatorWithPrefixExceptions<T> {
+        @Override
+        protected int prefixSort(
+                SortableExecutableExtension<T> o1,
+                SortableExecutableExtension<T> o2)
+        {
+	            // if o1 is contributed by open source, sort it
+	            // after 
+	            if (o1.getContributorId().startsWith("org.eclipse.jst")) //$NON-NLS-1$
+	            {
+	                return 1;
+	            }
+	            // if o2 is contributed by open source, sort o1 first
+	            else if (o2.getContributorId().startsWith("org.eclipse.jst")) //$NON-NLS-1$
+	            {
+	                return -1;
+	            }
+	            // otherwise, we don't care
+	            return 0;
+        }
+
+    }
     /**
      * Used to sort extensions before locking down the list.
      * 

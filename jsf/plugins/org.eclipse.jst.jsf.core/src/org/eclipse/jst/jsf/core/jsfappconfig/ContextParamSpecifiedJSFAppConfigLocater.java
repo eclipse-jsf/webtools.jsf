@@ -153,7 +153,7 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 	 * @see org.eclipse.jst.jsf.core.jsfappconfig.WebContentRelativeJSFAppConfigLocater#getFilenames()
 	 */
 	protected List getFilenames() {
-		return JSFAppConfigUtils.getConfigFilesFromContextParam(manager.getProject());
+		return JSFAppConfigUtils.getConfigFilesFromContextParam(getJSFAppConfigManager().getProject());
 	}
 
 	/**

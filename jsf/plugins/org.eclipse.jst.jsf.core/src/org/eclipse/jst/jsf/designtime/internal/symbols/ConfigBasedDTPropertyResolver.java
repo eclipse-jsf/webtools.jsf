@@ -20,7 +20,8 @@ import java.util.Map;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.DefaultDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.IDecorativeResolver;
@@ -121,8 +122,8 @@ public class ConfigBasedDTPropertyResolver extends DefaultDTPropertyResolver
     private List<AbstractDTPropertyResolver> retrieveDecorativePropertyResolvers(
             final IProject project)
     {
-        final JSFAppConfigManager manager = JSFAppConfigManager
-                .getInstance(project);
+        final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
+                .getJSFAppConfigManagerInstance(project);
         final List<String> propertyResolvers = manager.getPropertyResolvers();
         final List<AbstractDTPropertyResolver> resolvers = new ArrayList<AbstractDTPropertyResolver>();
         for (final String propertyResolver : propertyResolvers)

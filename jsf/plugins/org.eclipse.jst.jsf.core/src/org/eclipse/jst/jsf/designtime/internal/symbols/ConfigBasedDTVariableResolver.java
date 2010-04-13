@@ -23,7 +23,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
+import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.designtime.el.DefaultDTVariableResolver;
@@ -113,8 +114,8 @@ public class ConfigBasedDTVariableResolver extends DefaultDTVariableResolver
             final IProject project)
     {
         //final long  curTime = System.nanoTime();
-        final JSFAppConfigManager manager = JSFAppConfigManager
-                .getInstance(project);
+        final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
+                .getJSFAppConfigManagerInstance(project);
         final List<String> variableResolvers = manager.getVariableResolvers();
         final List<AbstractDTVariableResolver> resolvers = new ArrayList<AbstractDTVariableResolver>();
         for (final String variableResolver : variableResolvers)

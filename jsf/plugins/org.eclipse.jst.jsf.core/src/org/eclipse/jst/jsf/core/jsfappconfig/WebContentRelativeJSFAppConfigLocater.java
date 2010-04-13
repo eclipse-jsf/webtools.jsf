@@ -40,7 +40,7 @@ public abstract class WebContentRelativeJSFAppConfigLocater extends AbstractJSFA
 	 * updates the set of {@link IJSFAppConfigProvider} instances accordingly.
 	 */
 	public void locateProviders() {
-		IProject project = manager.getProject();
+		IProject project = getJSFAppConfigManager().getProject();
 		IVirtualFolder webContentFolder = new DefaultVirtualComponentQuery().getWebContentFolder(project);
 		if (webContentFolder != null) {
 			List filenames = getFilenames();

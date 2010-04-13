@@ -133,7 +133,7 @@ public class DefaultJSFAppConfigLocater extends WebContentRelativeJSFAppConfigLo
 		 */
 		protected void initDefConfigPath() {
 			if (defConfigPath == null) {
-				IProject project = manager.getProject();
+				IProject project = getJSFAppConfigManager().getProject();
 				if (project != null) {
 					IVirtualFolder webContentFolder = new DefaultVirtualComponentQuery().getWebContentFolder(project);
 					if (webContentFolder != null) {
