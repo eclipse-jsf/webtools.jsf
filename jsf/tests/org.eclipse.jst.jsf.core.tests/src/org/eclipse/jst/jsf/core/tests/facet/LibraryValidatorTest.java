@@ -74,7 +74,7 @@ public abstract class LibraryValidatorTest extends TestCase
         assertNotNull(validator);
 
         final IStatus status = validator.validateVersionStrings("1.2", "1.1.2");
-        assertEquals(IStatus.ERROR, status.getSeverity());
+        assertEquals(IStatus.WARNING, status.getSeverity());
     }
 
 
