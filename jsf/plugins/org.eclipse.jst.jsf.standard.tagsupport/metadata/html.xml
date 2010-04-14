@@ -74,6 +74,13 @@
 			<item id="TABLE"/>
 			<item id="TEXTAREA"/>
 			<item id="DIV"/>
+			<item id="LINK">							
+				<tag-create>
+					<attribute id="href" value=""/>
+					<attribute id="rel" value="Stylesheet"/>
+					<attribute id="type" value="text/css"/>
+				</tag-create>
+			</item>
 		</value>
 	</trait>
 
@@ -204,13 +211,27 @@
 	</entity>	
 	<entity id="LINK">
 		<include-entity-group id="common-core-attributes"/>
+		<include-entity-group id="common-html-attributes"/>
 		<include-entity-group id="common-language-attributes"/>
-		<include-entity-group id="common-event-attributes"/>		
+		<include-entity-group id="common-event-attributes"/>	
+		<trait id="display-label">	
+			<value xsi:type="mdt:StringValue">%LINK.display-label</value>
+		</trait>	
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%LINK.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/HTML_LINK.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/HTML_LINK.gif</value>
+		</trait>	
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
 			</trait>
-		</entity>	
+		</entity>
+
 	</entity>
 	<entity id="META">
 		<include-entity-group id="common-language-attributes"/>
