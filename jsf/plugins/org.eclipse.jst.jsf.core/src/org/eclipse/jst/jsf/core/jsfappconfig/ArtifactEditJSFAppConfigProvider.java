@@ -88,6 +88,7 @@ public class ArtifactEditJSFAppConfigProvider extends AbstractJSFAppConfigProvid
 			facesConfigArtifactEdit.dispose();
 			facesConfigArtifactEdit = null;
 		}
+		facesConfig = null;
 	}
 
 	/*

@@ -98,6 +98,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 	 */
 	public void releaseFacesConfigModel() {
 		jsfAppConfigLocater.getJSFAppConfigManager().removeFacesConfigChangeAdapter(facesConfig);
+		facesConfig = null;
 	}
 
 	/**
@@ -158,6 +159,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 
 	private FacesConfigType getFacesConfig()
 	{
+		FacesConfigType	result = null;
 		JarFile 		jarFile = null;
 		File    		tempFile = null;
 		OutputStream	tempFileStream = null;
@@ -194,10 +196,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
                         resource.load(Collections.EMPTY_MAP);
 						EList resourceContents = resource.getContents();
 						if (resourceContents != null && resourceContents.size() > 0) {
-							facesConfig = (FacesConfigType)resourceContents.get(0);
-							if (facesConfig != null) {
-								jsfAppConfigLocater.getJSFAppConfigManager().addFacesConfigChangeAdapter(facesConfig);
-							}
+						    result = (FacesConfigType)resourceContents.get(0);
 						}
 					}
 				} catch(IllegalStateException ise) {
@@ -209,7 +208,7 @@ public class JARFileJSFAppConfigProvider extends AbstractJSFAppConfigProvider {
 				}
 			}
 
-			return facesConfig;
+			return result;
 		}
 		catch (IOException ioe)
 		{
