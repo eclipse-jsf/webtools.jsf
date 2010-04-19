@@ -21,7 +21,6 @@ import org.eclipse.jst.j2ee.common.Listener;
 import org.eclipse.jst.j2ee.common.ParamValue;
 import org.eclipse.jst.j2ee.webapplication.Servlet;
 import org.eclipse.jst.j2ee.webapplication.ServletMapping;
-import org.eclipse.jst.j2ee.webapplication.WebApp;
 import org.eclipse.jst.j2ee.webapplication.internal.impl.ServletTypeImpl;
 import org.eclipse.jst.jsf.common.webxml.WebXmlUpdater;
 import org.eclipse.jst.jsf.common.webxml.WebXmlUtilsForJ2EE;
@@ -57,7 +56,6 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
 
     private IProject project;
     private WebXmlUpdater updater;
-    private WebApp webapp;
 
     private IProject createProject (final String projectName)
     throws Exception
@@ -74,8 +72,6 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
         super.setUp();
         this.project = createProject(this.getClass().getName() + "_" + getName());
         this.updater = new WebXmlUpdater(project, null);
-        this.webapp = (WebApp) updater.getProvider().getModelObject();
-
     }
 
 
@@ -96,11 +92,11 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
     private void setupServlet()
     {
         // Write servlet to web.xml
-        assertFalse(WebXmlUtilsForJ2EE.existsServlet(webapp, SERVLET_NAME, SERVLET_CLASS_NAME));
+        assertFalse(WebXmlUtilsForJ2EE.existsServlet(updater.getWebAppForJ2EE(), SERVLET_NAME, SERVLET_CLASS_NAME));
         updater.addServlet(SERVLET_NAME, SERVLET_CLASS_NAME, SERVLET_LOAD_ON_STARTUP);
 
         // Read servlet from web.xml
-        final Servlet servlet = WebXmlUtilsForJ2EE.findServlet(webapp, SERVLET_CLASS_NAME);
+        final Servlet servlet = WebXmlUtilsForJ2EE.findServlet(updater.getWebAppForJ2EE(), SERVLET_CLASS_NAME);
         assertEquals(SERVLET_NAME, servlet.getServletName());
         assertEquals(SERVLET_CLASS_NAME, ((ServletTypeImpl) servlet.getWebType()).getClassName());
         assertEquals(Integer.parseInt(SERVLET_LOAD_ON_STARTUP), servlet.getLoadOnStartup().intValue());
@@ -110,11 +106,11 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
     public void testAddContextParam () throws Exception
     {
         // Write param to web.xml
-        assertFalse(WebXmlUtilsForJ2EE.existsContextParam(webapp, CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE));
+        assertFalse(WebXmlUtilsForJ2EE.existsContextParam(updater.getWebAppForJ2EE(), CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE));
         updater.addContextParam(CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE, CONTEXT_PARAM_DESCRIPTION);
 
         // Read param from web.xml
-        final ParamValue param = WebXmlUtilsForJ2EE.findContextParam(webapp, CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE);
+        final ParamValue param = WebXmlUtilsForJ2EE.findContextParam(updater.getWebAppForJ2EE(), CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE);
         assertEquals(CONTEXT_PARAM_NAME, param.getName());
         assertEquals(CONTEXT_PARAM_VALUE, param.getValue());
         assertEquals(CONTEXT_PARAM_DESCRIPTION, ((Description) param.getDescriptions().get(0)).getValue());
@@ -125,11 +121,11 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
     {
         setupServlet();
         // Write servlet-mapping to web.xml
-        assertFalse(WebXmlUtilsForJ2EE.existsServletMapping(webapp, SERVLET_NAME, SERVLET_URL_PATTERN));
+        assertFalse(WebXmlUtilsForJ2EE.existsServletMapping(updater.getWebAppForJ2EE(), SERVLET_NAME, SERVLET_URL_PATTERN));
         updater.addServletMapping(SERVLET_NAME, SERVLET_CLASS_NAME, SERVLET_URL_PATTERN);
 
         // Read from web.xml
-        final ServletMapping mapping = WebXmlUtilsForJ2EE.findServletMapping(webapp, SERVLET_NAME, SERVLET_URL_PATTERN);
+        final ServletMapping mapping = WebXmlUtilsForJ2EE.findServletMapping(updater.getWebAppForJ2EE(), SERVLET_NAME, SERVLET_URL_PATTERN);
         assertEquals(SERVLET_NAME, mapping.getName());
         assertEquals(SERVLET_URL_PATTERN, mapping.getUrlPattern());
     }
@@ -138,11 +134,11 @@ public class VendorSpecificWebXmlConfigurationForJ2EETest extends TestCase
     public void testAddListener () throws Exception
     {
         // Write to web.xml
-        assertFalse(WebXmlUtilsForJ2EE.existsListener(webapp, LISTENER_CLASS));
+        assertFalse(WebXmlUtilsForJ2EE.existsListener(updater.getWebAppForJ2EE(), LISTENER_CLASS));
         updater.addListener(LISTENER_CLASS);
 
         // Read from web.xml
-        final Listener listener = WebXmlUtilsForJ2EE.findListener(webapp, LISTENER_CLASS);
+        final Listener listener = WebXmlUtilsForJ2EE.findListener(updater.getWebAppForJ2EE(), LISTENER_CLASS);
         assertEquals(LISTENER_CLASS, listener.getListenerClassName());
     }
 }
