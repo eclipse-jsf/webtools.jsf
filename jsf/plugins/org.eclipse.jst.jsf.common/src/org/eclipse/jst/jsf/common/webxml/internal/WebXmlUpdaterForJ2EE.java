@@ -126,4 +126,11 @@ public class WebXmlUpdaterForJ2EE extends AbstractWebXmlUpdater
     {
         provider.modify(new ListenerAdderForJ2EE(project, listenerClass), WebXmlUtils.WEB_XML_PATH);
     }
+
+
+    @Override
+    public Object getWebApp()
+    {
+        return webApp;
+    }
 }

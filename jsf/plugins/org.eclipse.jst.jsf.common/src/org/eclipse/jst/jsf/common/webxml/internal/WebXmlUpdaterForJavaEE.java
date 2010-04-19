@@ -128,4 +128,11 @@ public class WebXmlUpdaterForJavaEE extends AbstractWebXmlUpdater
     public void addListener (final String listenerClass)
     {
         provider.modify(new ListenerAdderForJavaEE(project, listenerClass), WebXmlUtils.WEB_XML_PATH);
+    }
+
+
+    @Override
+    public Object getWebApp()
+    {
+        return webApp;
     }}

@@ -53,6 +53,24 @@ public class WebXmlUpdater
 
 
     /**
+     * @return WebApp object associated with this WebXmlUpdater object
+     */
+    public WebApp getWebAppForJavaEE ()
+    {
+        return (WebApp) updater.getWebApp();
+    }
+
+
+    /**
+     * @return WebApp object associated with this WebXmlUpdater object
+     */
+    public org.eclipse.jst.j2ee.webapplication.WebApp getWebAppForJ2EE ()
+    {
+        return (org.eclipse.jst.j2ee.webapplication.WebApp) updater.getWebApp();
+    }
+
+
+    /**
      * @return Provider object for the webapp this WebXmlUpdater is associated
      *         with. This may be used by clients to perform additional complex 
      *         updates to web.xml using getProvider.modify(new Runnable(), ...) 

@@ -132,4 +132,10 @@ public abstract class AbstractWebXmlUpdater
      * @param listenerClass
      */
     public abstract void addListener (final String listenerClass);
+
+
+    /**
+     * @return The WebApp object associated with this updater
+     */
+    public abstract Object getWebApp ();
 }
