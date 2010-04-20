@@ -19,5 +19,4 @@ public class MockWorkspaceMediator extends WorkspaceMediator
             throw new RuntimeException(e);
         }
     }
-
 }

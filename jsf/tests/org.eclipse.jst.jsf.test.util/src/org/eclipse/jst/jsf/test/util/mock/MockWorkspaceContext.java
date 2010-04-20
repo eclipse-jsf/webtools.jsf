@@ -66,6 +66,11 @@ public class MockWorkspaceContext
         return _ownedResources.get(path);
     }
 
+    public MockFile getFile(final IPath path)
+    {
+        return (MockFile) getResource(path);
+    }
+
     public MockProject getProject(final IPath path)
     {
         return (MockProject) _ownedResources.get(path);

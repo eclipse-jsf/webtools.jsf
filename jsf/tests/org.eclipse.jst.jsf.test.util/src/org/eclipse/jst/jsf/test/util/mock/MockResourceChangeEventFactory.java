@@ -28,19 +28,35 @@ public class MockResourceChangeEventFactory
         return new MockResourceChangeEvent(IResourceChangeEvent.POST_CHANGE,
                 delta);
     }
-    
+
     public IResourceChangeEvent createSimpleFileRemove(MockFile file)
     {
-        final MockResourceDelta delta = _deltaFactory.createSimpleFileRemoved(file);
+        final MockResourceDelta delta = _deltaFactory
+                .createSimpleFileRemoved(file);
         return new MockResourceChangeEvent(IResourceChangeEvent.POST_CHANGE,
                 delta);
     }
 
     public IResourceChangeEvent createSimpleFileAdded(final MockFile file)
     {
-        final MockResourceDelta delta = _deltaFactory.createSimpleFileAdded(file);
+        final MockResourceDelta delta = _deltaFactory
+                .createSimpleFileAdded(file);
         return new MockResourceChangeEvent(IResourceChangeEvent.POST_CHANGE,
                 delta);
+    }
+
+    public IResourceChangeEvent createSimpleProjectClosed(
+            final MockProject project)
+    {
+        return new MockResourceChangeEvent(project,
+                IResourceChangeEvent.PRE_CLOSE, null);
+    }
+
+    public IResourceChangeEvent createSimpleProjectDeleted(
+            final MockProject project)
+    {
+        return new MockResourceChangeEvent(project,
+                IResourceChangeEvent.PRE_DELETE, null);
     }
 
 }
