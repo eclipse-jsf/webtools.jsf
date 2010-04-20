@@ -15,18 +15,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
-import org.eclipse.jst.jsf.common.internal.managedobject.AbstractManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
-import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
@@ -49,7 +44,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
     private final IProject _project;
     private final Map<String, IFaceletTagRecord> _records;
     private final TagRecordFactory _factory;
-    private final TaglibFileManager _fileManager;
+    private final TaglibResourceManager _fileManager;
 
     /**
      * @param project
@@ -68,8 +63,10 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
         _project = project;
         _records = new HashMap<String, IFaceletTagRecord>();
         _factory = factory;
-        _fileManager = new TaglibFileManager(project,
-                new LibraryChangeHandler(), webAppProvider, vcQuery, wsMediator);
+        WebappConfiguration webConfig = new WebappConfiguration(project, webAppProvider,
+                vcQuery, wsMediator);
+        _fileManager = new TaglibResourceManager(project,
+                new LibraryChangeHandler(), wsMediator, webConfig);
     }
 
     /*
@@ -113,7 +110,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
                 TaglibFileTracker tracker = null;
                 try
                 {
-                    tracker = _fileManager.getInstance(file);
+                    tracker = (TaglibFileTracker) _fileManager.getInstance(file);
                 } catch (final ManagedObjectException e)
                 {
                     FaceletCorePlugin.log("Creating record", e); //$NON-NLS-1$
@@ -137,6 +134,10 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
     private IFaceletTagRecord createTagRecord(final IFile file)
     {
         InputStream is = null;
+        if (!file.isAccessible())
+        {
+            return null;
+        }
         try
         {
             is = file.getContents();
@@ -144,7 +145,8 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
                     .toFile().getCanonicalPath());
             loader.loadFromInputStream(is);
             final FaceletTaglib taglib = loader.getTaglib();
-            if (taglib != null)
+            // if no valid namespace, don't create a record.
+            if (taglib != null && taglib.getNamespaceUri() != null && taglib.getNamespaceUri().trim().length()>0)
             {
                 return _factory.createRecords(taglib);
             }
@@ -169,82 +171,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
         return null;
     }
 
-    static class TaglibFileTracker extends AbstractManagedObject implements
-            IResourceLifecycleListener
-    {
-        private final IFile _file;
-        String _uri;
-        private final AtomicLong _lastModifiedStamp = new AtomicLong();
-        private TaglibFileManager _manager;
-        private final LibraryChangeHandler _handler;
-
-        public TaglibFileTracker(final IFile file,
-                final TaglibFileManager manager,
-                final LibraryChangeHandler handler)
-        {
-            _manager = manager;
-            _manager.addListener(this);
-            _file = file;
-            _lastModifiedStamp.set(file.getModificationStamp());
-            _handler = handler;
-        }
-
-        public final void setUri(final String uri)
-        {
-            _uri = uri;
-        }
-
-        @Override
-        public void checkpoint()
-        {
-            // nothing currently persisted
-
-        }
-
-        @Override
-        public void destroy()
-        {
-            // nothing currently persisted
-        }
-
-        @Override
-        public void dispose()
-        {
-            _manager.removeListener(this);
-            _manager = null;
-        }
-
-        public EventResult acceptEvent(final ResourceLifecycleEvent event)
-        {
-            if (!_file.equals(event.getAffectedResource()))
-            {
-                return EventResult.getDefaultEventResult();
-            }
-
-            final EventType eventType = event.getEventType();
-
-            switch (eventType)
-            {
-            case RESOURCE_ADDED:
-                // added resources kick an add event.
-                _handler.added(_file);
-                break;
-            case RESOURCE_CHANGED:
-                // changed resources kick a change event
-                _handler.changed(_uri, _file);
-                break;
-            case RESOURCE_INACCESSIBLE:
-                // removed resources kick a remove event
-                _handler.removed(_uri, _file);
-                break;
-            }
-
-            return EventResult.getDefaultEventResult();
-        }
-
-    }
-
-    class LibraryChangeHandler
+    class LibraryChangeHandler implements ILibraryChangeHandler
     {
         public void added(final IFile file)
         {
@@ -252,7 +179,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
             TaglibFileTracker tracker = null;
             try
             {
-                tracker = _fileManager.getInstance(file);
+                tracker = (TaglibFileTracker) _fileManager.getInstance(file);
             } catch (final ManagedObjectException e)
             {
                 FaceletCorePlugin.log("Adding new library", e); //$NON-NLS-1$
@@ -276,21 +203,63 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
         public void removed(final String uri, final IFile file)
         {
             final IFaceletTagRecord tagRecord = _records.remove(uri);
-            fireChangeEvent(new TaglibChangedEvent(
-                    ContextParamSpecifiedFaceletTaglibLocator.this, tagRecord,
-                    null, CHANGE_TYPE.REMOVED));
+            if (tagRecord != null)
+            {
+                fireChangeEvent(new TaglibChangedEvent(
+                        ContextParamSpecifiedFaceletTaglibLocator.this, tagRecord,
+                        null, CHANGE_TYPE.REMOVED));
+            }
         }
 
         public void changed(final String uri, final IFile file)
         {
             final IFaceletTagRecord oldValue = _records.remove(uri);
             final IFaceletTagRecord newValue = createTagRecord(file);
-            if (newValue != null)
+
+            if (oldValue == null)
             {
-                _records.put(uri, newValue);
-                fireChangeEvent(new TaglibChangedEvent(
-                        ContextParamSpecifiedFaceletTaglibLocator.this,
-                        oldValue, newValue, CHANGE_TYPE.CHANGED));
+                // no oldValue, is newValue so ADD
+                if (newValue != null)
+                {
+                    _records.put(uri, newValue);
+                    fireChangeEvent(new TaglibChangedEvent(
+                            ContextParamSpecifiedFaceletTaglibLocator.this, null,
+                            newValue, CHANGE_TYPE.ADDED));
+                }
+            }
+            // if there is an old value
+            else
+            {
+                // oldValue but no new value, so REMOVE
+                if (newValue == null)
+                {
+                    fireChangeEvent(new TaglibChangedEvent(
+                            ContextParamSpecifiedFaceletTaglibLocator.this, oldValue,
+                            null, CHANGE_TYPE.REMOVED));
+                    
+                }
+                // both old and new value, so a change of some kind
+                else
+                {
+                    _records.put(uri, newValue);
+                    // if the namespaces match, then it's a simple change
+                    if (oldValue.getURI() != null && oldValue.getURI().equals(newValue.getURI()))
+                    {
+                        fireChangeEvent(new TaglibChangedEvent(
+                                ContextParamSpecifiedFaceletTaglibLocator.this,
+                                oldValue, newValue, CHANGE_TYPE.CHANGED));
+                    }
+                    // otherwise, it's a remove of old value and an add of new value
+                    else
+                    {
+                        fireChangeEvent(new TaglibChangedEvent(
+                                ContextParamSpecifiedFaceletTaglibLocator.this, oldValue,
+                                null, CHANGE_TYPE.REMOVED));
+                        fireChangeEvent(new TaglibChangedEvent(
+                                ContextParamSpecifiedFaceletTaglibLocator.this, null,
+                                newValue, CHANGE_TYPE.ADDED));
+                    }
+                }
             }
         }
     }

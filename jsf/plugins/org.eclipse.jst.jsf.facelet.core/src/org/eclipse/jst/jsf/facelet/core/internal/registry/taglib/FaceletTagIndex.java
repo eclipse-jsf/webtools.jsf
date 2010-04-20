@@ -31,10 +31,7 @@ import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
 
-/**
- * @author cbateman
- * 
- */
+
 /**
  * @author cbateman
  * 

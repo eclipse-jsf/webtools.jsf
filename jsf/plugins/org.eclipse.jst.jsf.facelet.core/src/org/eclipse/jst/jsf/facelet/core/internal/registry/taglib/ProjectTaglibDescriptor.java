@@ -128,7 +128,8 @@ public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
 
     public void destroy()
     {
-        // do nothing
+        // call dispose;  there is no persistent data to cleanup.
+        dispose();
     }
 
     public void dispose()

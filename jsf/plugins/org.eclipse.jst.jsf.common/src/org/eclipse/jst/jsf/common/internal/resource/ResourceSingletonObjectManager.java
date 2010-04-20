@@ -215,6 +215,36 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
         lifecycleListener.removeListener(listener);
     }
 
+    /**
+     * Add additional resources to the set to listen to.
+     * 
+     * @param res
+     */
+    protected final void addResource(final IResource res)
+    {
+        final LifecycleListener lifecycleListener = lazilyGetLifecycleListener();
+        lifecycleListener.addResource(res);
+    }
+
+    /**
+     * Remove a resource that is being listened to.  Must not be used to remove
+     * internally added resources (i.e. only use this if you called addResource(res).
+     * 
+     * @param res
+     */
+    protected final void removeResource(final IResource res)
+    {
+        synchronized(this)
+        {
+            if (_perResourceObjects.keySet().contains(res))
+            {
+                throw new IllegalArgumentException("Can't remove managed resources with this method"); //$NON-NLS-1$
+            }
+        }
+        final LifecycleListener lifecycleListener = lazilyGetLifecycleListener();
+        lifecycleListener.removeResource(res);
+    }
+
     private synchronized LifecycleListener lazilyGetLifecycleListener()
     {
         if (_lifecycleListener == null)

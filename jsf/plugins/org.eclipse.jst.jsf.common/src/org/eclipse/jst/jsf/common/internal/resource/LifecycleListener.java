@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -35,27 +36,29 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
 public class LifecycleListener extends ImmutableLifecycleListener implements
         IResourceChangeListener
 {
-    private static boolean                           ENABLE_TEST_TRACKING = false;
-    private static long                                    _seqId;
+    private static boolean ENABLE_TEST_TRACKING = false;
+    private static long _seqId;
 
-    private final CopyOnWriteArrayList<IResource>          _resources;
+    private final CopyOnWriteArrayList<IResource> _resources;
     final CopyOnWriteArrayList<IResourceLifecycleListener> _listeners;
-    private AtomicBoolean                                  _isDisposed          = new AtomicBoolean(
-                                                                                        false);
-    private ITestTracker                                   _testTracker;                       // ==
+    private final AtomicBoolean _isDisposed = new AtomicBoolean(false);
+    private ITestTracker _testTracker; // ==
     private final IWorkspace _workspace;
-                                                                                                // null;
-                                                                                                // initialized
-                                                                                                // by
-                                                                                                // setter
-                                                                                                // injection
+
+    // null;
+    // initialized
+    // by
+    // setter
+    // injection
 
     /**
      * Initialize an inactive lifecycle listener. A workspace listener will not
      * be installed by this constructor. The object created using this
      * constructor will not fire any events until addResource is called at least
      * once to add a target resource
-     * @param workspace the workspace to listen to for changes.
+     * 
+     * @param workspace
+     *            the workspace to listen to for changes.
      */
     public LifecycleListener(final IWorkspace workspace)
     {
@@ -68,7 +71,8 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * Create a new lifecycle listener for the res
      * 
      * @param res
-     * @param workspace the workspace to listen to for changes.
+     * @param workspace
+     *            the workspace to listen to for changes.
      */
     public LifecycleListener(final IResource res, final IWorkspace workspace)
     {
@@ -79,9 +83,11 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
 
     /**
      * @param resources
-     * @param workspace the workspace to listen to for changes.
+     * @param workspace
+     *            the workspace to listen to for changes.
      */
-    public LifecycleListener(final List<IResource> resources, final IWorkspace workspace)
+    public LifecycleListener(final List<IResource> resources,
+            final IWorkspace workspace)
     {
         this(workspace);
         _resources.addAll(resources);
@@ -103,6 +109,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
     {
         ENABLE_TEST_TRACKING = newValue;
     }
+
     /**
      * Adds listener to the list of objects registered to receive lifecycle
      * events for this resource. Only adds the listener if it is not already in
@@ -114,6 +121,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * 
      * @param listener
      */
+    @Override
     public void addListener(final IResourceLifecycleListener listener)
     {
         if (isDisposed())
@@ -132,6 +140,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * 
      * @param listener
      */
+    @Override
     public void removeListener(final IResourceLifecycleListener listener)
     {
         if (isDisposed())
@@ -191,8 +200,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             // remove the workspace listener
             if (_resources.size() == 0)
             {
-                _workspace.removeResourceChangeListener(
-                        this);
+                _workspace.removeResourceChangeListener(this);
             }
         }
     }
@@ -210,8 +218,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             {
                 // remove first to minimize the chance that the listener will
                 // be triggered during the remainder of dispose
-                _workspace.removeResourceChangeListener(
-                        this);
+                _workspace.removeResourceChangeListener(this);
                 _resources.clear();
             }
         }
@@ -239,85 +246,85 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
 
         switch (event.getType())
         {
-            case IResourceChangeEvent.PRE_CLOSE:
-            {
-                final IProject proj = (IProject) event.getResource();
+        case IResourceChangeEvent.PRE_CLOSE:
+        {
+            final IProject proj = (IProject) event.getResource();
 
-                // must use iterator to ensure copy on write behaviour
-                for (final IResource res : _resources)
+            // must use iterator to ensure copy on write behaviour
+            for (final IResource res : _resources)
+            {
+                if (proj == res || proj == res.getProject())
                 {
-                    if (proj == res || proj == res.getProject())
-                    {
-                        fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                                EventType.RESOURCE_INACCESSIBLE,
-                                ReasonType.RESOURCE_PROJECT_CLOSED));
-                    }
+                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                            EventType.RESOURCE_INACCESSIBLE,
+                            ReasonType.RESOURCE_PROJECT_CLOSED));
                 }
             }
+        }
             break;
 
-            case IResourceChangeEvent.PRE_DELETE:
-            {
-                final IProject proj = (IProject) event.getResource();
+        case IResourceChangeEvent.PRE_DELETE:
+        {
+            final IProject proj = (IProject) event.getResource();
 
-                // must use iterator to ensure copy on write behaviour
-                for (final IResource res : _resources)
+            // must use iterator to ensure copy on write behaviour
+            for (final IResource res : _resources)
+            {
+                // if the resource being tracked is the resource being
+                // deleted,
+                // then fire a resource delete event
+                if (proj == res)
                 {
-                    // if the resource being tracked is the resource being
-                    // deleted,
-                    // then fire a resource delete event
-                    if (proj == res)
-                    {
-                        fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                                EventType.RESOURCE_INACCESSIBLE,
-                                ReasonType.RESOURCE_DELETED));
-                    }
-                    // if the resource being tracked is a resource in the
-                    // project being
-                    // deleted, then fire a project deleted event
-                    else if (proj == res.getProject())
-                    {
-                        fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                                EventType.RESOURCE_INACCESSIBLE,
-                                ReasonType.RESOURCE_PROJECT_DELETED));
-                    }
+                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                            EventType.RESOURCE_INACCESSIBLE,
+                            ReasonType.RESOURCE_DELETED));
+                }
+                // if the resource being tracked is a resource in the
+                // project being
+                // deleted, then fire a project deleted event
+                else if (proj == res.getProject())
+                {
+                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                            EventType.RESOURCE_INACCESSIBLE,
+                            ReasonType.RESOURCE_PROJECT_DELETED));
                 }
             }
+        }
             break;
 
-            case IResourceChangeEvent.POST_CHANGE:
+        case IResourceChangeEvent.POST_CHANGE:
+        {
+            for (final IResource res : _resources)
             {
-                for (final IResource res : _resources)
+                IResourceDelta delta = event.getDelta();
+
+                // long seqId2 = _seqId++;
+                // if (ENABLE_TEST_TRACKING && _testTracker != null)
+                // {
+                // _testTracker.fireEvent(Event.START_TRACKING, seqId2,
+                // "testFindMember");
+                // }
+                // only care about post change events to resources
+                // that we are tracking
+                delta = delta.findMember(res.getFullPath());
+
+                if (delta != null)
                 {
-                    IResourceDelta delta = event.getDelta();
-
-                    // long seqId2 = _seqId++;
-                    // if (ENABLE_TEST_TRACKING && _testTracker != null)
-                    // {
-                    // _testTracker.fireEvent(Event.START_TRACKING, seqId2,
-                    // "testFindMember");
-                    // }
-                    // only care about post change events to resources
-                    // that we are tracking
-                    delta = delta.findMember(res.getFullPath());
-
-                    if (delta != null)
-                    {
-                        visit(delta);
-                    }
-
-                    // if (ENABLE_TEST_TRACKING && _testTracker != null)
-                    // {
-                    // _testTracker.fireEvent(Event.STOP_TRACKING, seqId2,
-                    // "testFindMember");
-                    // }
+                    visit(delta);
                 }
+
+                // if (ENABLE_TEST_TRACKING && _testTracker != null)
+                // {
+                // _testTracker.fireEvent(Event.STOP_TRACKING, seqId2,
+                // "testFindMember");
+                // }
             }
+        }
             break;
 
-            default:
-                // do nothing
-                // we only handle these three
+        default:
+            // do nothing
+            // we only handle these three
         }
 
         if (ENABLE_TEST_TRACKING && _testTracker != null)
@@ -357,27 +364,55 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         if (res.getType() == IResource.ROOT)
         {
             handleWorkspaceRoot(delta);
+        } else if (res instanceof IContainer)
+        {
+            handleContainer(delta, (IContainer) res);
+        } else
+        {
+            handleFile(delta, res);
         }
+    }
 
+    private void handleContainer(final IResourceDelta delta, final IContainer res)
+    {
+        for (final IResourceDelta childDelta : delta.getAffectedChildren())
+        {
+            if (childDelta.getResource().getType() == IResource.FILE
+                    && childDelta.getKind() == IResourceDelta.ADDED)
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(childDelta.getResource(),
+                        EventType.RESOURCE_ADDED, ReasonType.RESOURCE_ADDED));
+            }
+        }
+    }
+
+    private void handleFile(final IResourceDelta delta, final IResource res)
+    {
         switch (delta.getKind())
         {
-            case IResourceDelta.CHANGED:
-            {
-                // the contents of the file have changed
-                if ((delta.getFlags() & IResourceDelta.CONTENT) != 0)
-                {
-                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                            EventType.RESOURCE_CHANGED,
-                            ReasonType.RESOURCE_CHANGED_CONTENTS));
-                }
-            }
-            break;
-            case IResourceDelta.REMOVED:
+        case IResourceDelta.ADDED:
+        {
+            fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                    EventType.RESOURCE_ADDED, ReasonType.RESOURCE_ADDED));
+        }
+        break;
+        case IResourceDelta.CHANGED:
+        {
+            // the contents of the file have changed
+            if ((delta.getFlags() & IResourceDelta.CONTENT) != 0)
             {
                 fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                        EventType.RESOURCE_INACCESSIBLE,
-                        ReasonType.RESOURCE_DELETED));
+                        EventType.RESOURCE_CHANGED,
+                        ReasonType.RESOURCE_CHANGED_CONTENTS));
             }
+        }
+            break;
+        case IResourceDelta.REMOVED:
+        {
+            fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                    EventType.RESOURCE_INACCESSIBLE,
+                    ReasonType.RESOURCE_DELETED));
+        }
             break;
         }
     }

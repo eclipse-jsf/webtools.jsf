@@ -22,6 +22,10 @@ abstract class LibraryOperation
 
     protected LibraryOperation(final IFaceletTagRecord changeRecord)
     {
+        if (changeRecord == null)
+        {
+            throw new NullPointerException();
+        }
         _changeRecord = changeRecord;
     }
 
