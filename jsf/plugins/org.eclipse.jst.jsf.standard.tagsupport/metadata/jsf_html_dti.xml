@@ -708,10 +708,14 @@
 						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeFromXPathOperation">
 							<parameter value="size"/>
 							<parameter value="count(selectItem)"/>
+							<parameter value="http://java.sun.com/jsf/core"/>
+							<parameter value="selectItem"/>
 						</operation>
 					</operation>
 					<!-- iterate over "selectItem" children -->
 					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<parameter value="http://java.sun.com/jsf/core"/>
 						<parameter value="selectItem"/>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
@@ -793,6 +797,8 @@
 					<!-- iterate over "selectItem" children -->
 					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
 						<parameter value="selectItem"/>
+						<parameter value="http://java.sun.com/jsf/core"/>
+						<parameter value="selectItem"/>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
 						</operation>
@@ -866,10 +872,14 @@
 						<operation id="org.eclipse.jst.pagedesigner.CreateAttributeFromXPathOperation">
 							<parameter value="size"/>
 							<parameter value="count(selectItem)"/>
+							<parameter value="http://java.sun.com/jsf/core"/>
+							<parameter value="selectItem"/>
 						</operation>
 					</operation>
 					<!-- iterate over "selectItem" children -->
 					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<parameter value="http://java.sun.com/jsf/core"/>
 						<parameter value="selectItem"/>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
@@ -945,6 +955,8 @@
 					</operation>
 					<!-- iterate over "selectItem" children -->
 					<operation id="org.eclipse.jst.pagedesigner.IterateOverElementsOperation">
+						<parameter value="selectItem"/>
+						<parameter value="http://java.sun.com/jsf/core"/>
 						<parameter value="selectItem"/>
 						<operation id="org.eclipse.jst.pagedesigner.AppendChildElementOperation">
 							<parameter value="option"/>
