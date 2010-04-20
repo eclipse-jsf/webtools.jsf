@@ -3561,10 +3561,10 @@ public class DocumentRootImpl extends EObjectImpl implements DocumentRoot {
 				return ((FeatureMap.Internal)getMixed()).getWrapper();
 			case FacesConfigPackage.DOCUMENT_ROOT__XMLNS_PREFIX_MAP:
 				if (coreType) return getXMLNSPrefixMap();
-				else return getXMLNSPrefixMap().map();
+				    return getXMLNSPrefixMap().map();
 			case FacesConfigPackage.DOCUMENT_ROOT__XSI_SCHEMA_LOCATION:
 				if (coreType) return getXSISchemaLocation();
-				else return getXSISchemaLocation().map();
+				     return getXSISchemaLocation().map();
 			case FacesConfigPackage.DOCUMENT_ROOT__ABSOLUTE_ORDERING:
 				return getAbsoluteOrdering();
 			case FacesConfigPackage.DOCUMENT_ROOT__ACTION_LISTENER:

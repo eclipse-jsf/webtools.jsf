@@ -25,7 +25,6 @@ import org.eclipse.jst.jsf.facesconfig.emf.*;
  * <!-- end-user-doc -->
  * @generated
  */
-@SuppressWarnings("nls")
 public class FacesConfigFactoryImpl extends EFactoryImpl implements FacesConfigFactory {
     /**
 	 * <!-- begin-user-doc -->
