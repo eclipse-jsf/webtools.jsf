@@ -14,13 +14,37 @@ import org.eclipse.osgi.util.NLS;
  * 
  * @author Debajit Adhikary
  */
+/**
+ * @author dadhikar
+ *
+ */
+/**
+ * @author dadhikar
+ *
+ */
+/**
+ * @author dadhikar
+ *
+ */
 public class Messages extends NLS
 {
     private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.common.facet.messages"; //$NON-NLS-1$
 
+    /**
+     * see messages.properties
+     */
     public static String UserLibraryVersionValidator_cannotReadLibraryVersion;
 
+    /**
+     * see messages.properties
+     */
+    public static String UserLibraryVersionValidator_possiblyIncompatibleLibrary;
+    
+    /**
+     * see messages.properties
+     */
     public static String UserLibraryVersionValidator_versionMismatch;
+
 
     static
     {
