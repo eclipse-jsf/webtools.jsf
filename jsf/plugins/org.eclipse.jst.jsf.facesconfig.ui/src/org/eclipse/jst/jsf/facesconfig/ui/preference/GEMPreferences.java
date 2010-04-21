@@ -22,6 +22,8 @@ import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.accessibility.AccessibleAdapter;
+import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
@@ -329,6 +331,15 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		canvasColor = addColorField(
 				CANVAS_COLOR,
 				PreferenceMessages.CanvasPreferenceTab_LABEL_BackgroundColor, canvasGroup);
+        // Fix for Bug 268443: [hotbug] FacesConfig Editor preferences page needs more info for screen readers
+        // https://bugs.eclipse.org/bugs/show_bug.cgi?id=268443
+        canvasColor.getColorSelector().getButton().getAccessible().addAccessibleListener(
+                new AccessibleAdapter () {         
+                    public void getName (final AccessibleEvent e) {
+                        e.result = PreferenceMessages.CanvasPreferenceTab_LABEL_BackgroundColor;
+                    }
+                });
+
 		addBooleanField(
 				SNAP_TO_GEOMETRY,
 				PreferenceMessages.CanvasPreferenceTab_LABEL_SnapToGeometry, canvasGroup);
@@ -338,7 +349,13 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		gridColor = addColorField(
 				GRID_COLOR,
 				PreferenceMessages.CanvasPreferenceTab_LABEL_GridLineColor, canvasGroup);
-		gridWidth = addIntegerField(
+        gridColor.getColorSelector().getButton().getAccessible().addAccessibleListener(
+                new AccessibleAdapter () {         
+                    public void getName (final AccessibleEvent e) {
+                        e.result = PreferenceMessages.CanvasPreferenceTab_LABEL_GridLineColor;
+                    }
+                });
+        gridWidth = addIntegerField(
 				GRID_WIDTH,
 				PreferenceMessages.CanvasPreferenceTab_LABEL_GridWidth, canvasGroup);
 		gridHeight = addIntegerField(
@@ -349,6 +366,12 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		iconFont = addFontField(
 				FIGURE_LABEL_FONT,
 				PreferenceMessages.CanvasPreferenceTab_LABEL_IconLabelFont, iconGroup);
+        iconFont.getChangeControl(iconGroup).getAccessible().addAccessibleListener(
+                new AccessibleAdapter () {         
+                    public void getName (final AccessibleEvent e) {
+                        e.result = PreferenceMessages.CanvasPreferenceTab_LABEL_IconLabelFont;
+                    }
+                });
 		addComboField(LABEL_PLACEMENT, PreferenceMessages.CanvasPreferenceTab_LABEL_LabelPlacement,
 				getLabelPlacementLabels(), iconGroup);
 		// inputPortColor = addColorField(
@@ -368,12 +391,31 @@ public final class GEMPreferences extends FieldEditorPreferencePage implements
 		lineFont = addFontField(
 				LINE_LABEL_FONT,
 				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelFont, lineGroup);
+        lineFont.getChangeControl(lineGroup).getAccessible().addAccessibleListener(
+                new AccessibleAdapter () {         
+                    public void getName (final AccessibleEvent e) {
+                        e.result = PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelFont;
+                    }
+                });
 		lineLabelColor = addColorField(
 				LINE_LABEL_COLOR,
 				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelColor, lineGroup);
+        lineLabelColor.getColorSelector().getButton().getAccessible().addAccessibleListener(
+                new AccessibleAdapter () {         
+                    public void getName (final AccessibleEvent e) {
+                        e.result = PreferenceMessages.CanvasPreferenceTab_LABEL_LineLabelColor;
+                    }
+                });
+		
 		lineColor = addColorField(
 				LINE_COLOR,
 				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineColor, lineGroup);
+        lineColor.getColorSelector().getButton().getAccessible().addAccessibleListener(
+                new AccessibleAdapter () {         
+                    public void getName (final AccessibleEvent e) {
+                        e.result = PreferenceMessages.CanvasPreferenceTab_LABEL_LineColor;
+                    }
+                });
 		addIntegerField(
 				LINE_WIDTH,
 				 PreferenceMessages.CanvasPreferenceTab_LABEL_LineWidth, lineGroup);
