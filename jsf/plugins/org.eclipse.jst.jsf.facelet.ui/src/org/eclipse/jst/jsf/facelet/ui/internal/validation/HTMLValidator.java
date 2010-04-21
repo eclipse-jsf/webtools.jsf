@@ -6,9 +6,11 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -33,12 +35,15 @@ import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
+import org.eclipse.wst.validation.AbstractValidator;
+import org.eclipse.wst.validation.ValidationResult;
+import org.eclipse.wst.validation.ValidationState;
 import org.eclipse.wst.validation.internal.core.ValidationException;
 import org.eclipse.wst.validation.internal.operations.LocalizedMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IReporter;
 import org.eclipse.wst.validation.internal.provisional.core.IValidationContext;
-import org.eclipse.wst.validation.internal.provisional.core.IValidatorJob;
+import org.eclipse.wst.validation.internal.provisional.core.IValidator;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMAttr;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -50,7 +55,7 @@ import org.w3c.dom.Element;
  * @author cbateman
  *
  */
-public class HTMLValidator implements IValidatorJob
+public class HTMLValidator extends AbstractValidator implements IValidator
 {
     public ISchedulingRule getSchedulingRule(final IValidationContext helper)
     {
@@ -79,6 +84,19 @@ public class HTMLValidator implements IValidatorJob
     {
         // do nothing
     }
+
+    @Override
+	public ValidationResult validate(IResource resource, int kind, ValidationState state, IProgressMonitor monitor){
+		ValidationResult vr = new ValidationResult();
+		if (resource == null || !(resource instanceof IFile)) {
+			return vr;
+		}
+		IFile currentFile = (IFile) resource;
+        if (shouldValidate(currentFile)) {
+            validateFile(currentFile, vr.getReporter(monitor));
+        }
+		return vr;
+	}
 
     public void validate(final IValidationContext helper,
             final IReporter reporter) throws ValidationException
