@@ -2,49 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
     <extension
-       id="org.eclipse.jst.jsf.project.facet"
-       name="%plugin.facet.extension.name"
-       point="org.eclipse.wst.common.project.facet.core.facets">
-
-    <project-facet id="jsf.facelet">
-      <label>Facelet</label>
-      <description>%plugin.facet.description</description>
-      <default-version
-            provider="org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacetDefaultVersionProvider">
-      </default-version>
-    </project-facet>
-
-    <project-facet-version facet="jsf.facelet" version="1.0">
-       <constraint>
-        <and>
-          <requires
-                facet="jst.jsf"
-                version="[1.0">
-          </requires>
-        </and>
-      </constraint>
-    </project-facet-version> 
-
-    <action id="jsf.facelet.v10.install" facet="jsf.facelet" type="INSTALL" version="1.0">
-        <delegate class="org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletInstallDelegate"/>
-        <config-factory
-              class="org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacetInstallDataModelProvider">
-        </config-factory>
-    </action>  
-    <action id="jsf.facelet.v10.uninstall" facet="jsf.facelet" type="UNINSTALL" version="1.0" >
-        <delegate class="org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletUninstallDelegate"/>
-        <config-factory
-              class="org.eclipse.jst.jsf.facelet.core.internal.facet.FaceletFacetUninstallModelProvider">
-        </config-factory>
-    </action>
-  </extension> 
-    <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
-    <supported>
-        <runtime-component any="true"/>
-            <facet id="jsf.facelet" version="1.0"/> 
-    </supported>
-    </extension>
-    <extension
           point="org.eclipse.jst.jsf.core.tagregistry">
        <tagRegistry
              class="org.eclipse.jst.jsf.facelet.core.internal.registry.FaceletRegistryManager$MyRegistryFactory"
@@ -67,23 +24,6 @@
              class="org.eclipse.jst.jsf.facelet.core.internal.view.DTFaceletViewHandler"
              id="org.eclipse.jst.jsf.facelet.core.html.viewhandler">
        </viewhandler>
-    </extension>
-    <extension
-          point="org.eclipse.wst.common.project.facet.core.presets">
-       <static-preset
-             extends="preset.jst.jsf.v1_2"
-             id="org.eclipse.jst.jsf.facelet.core.preset">
-          <facet
-                id="jsf.facelet"
-                version="1.0">
-          </facet>
-          <label>
-             %Facelet_1_0_Project
-          </label>
-          <description>
-             %Facelet_1_0_PresetDesc
-          </description>
-       </static-preset>
     </extension>
     <extension
         point="org.eclipse.emf.edit.itemProviderAdapterFactories">
