@@ -59,9 +59,9 @@ public class EditHelper {
 	}
 
 	/**
-	 * Move operation position infront of next non-blank and non-transparent
+	 * Move operation position in front of next non-blank and non-transparent
 	 * char. The caller should ensure position's container node is not
-	 * tranparent text node.
+	 * transparent text node.
 	 * 
 	 * @param position
 	 * @param forward
@@ -99,7 +99,7 @@ public class EditHelper {
 	}
 
 	/**
-	 * This caret from current operation postion to next position, this method
+	 * This caret from current operation position to next position, this method
 	 * will convert DesignPosition in to DOMPosition, then call dom function to
 	 * move dom position. Here we might insert some complex rules to see whether
 	 * move is valid.
@@ -161,8 +161,8 @@ public class EditHelper {
 
 		if (name != null
 				&& (name.equalsIgnoreCase(IHTMLConstants.TAG_BODY)
-						|| name.equalsIgnoreCase(IHTMLConstants.TAG_HEAD) || name
-						.equalsIgnoreCase(IHTMLConstants.TAG_HTML))) {
+						|| name.equalsIgnoreCase(IHTMLConstants.TAG_HEAD)
+						|| name.equalsIgnoreCase(IHTMLConstants.TAG_HTML))) {
 			return null;
 		}
 		Node parent = node.getParentNode();
