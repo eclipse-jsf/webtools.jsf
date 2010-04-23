@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.gef.EditPart;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
@@ -76,26 +75,6 @@ public final class EditModelQuery {
 
 	static final HashSet UNREMOVEBLE_TAGS = new HashSet();
 
-	// Nodes that can hold other nodes.
-	static final String[] HTML_CONTAINER_NODES = {
-	//
-			IHTMLConstants.TAG_BODY, //
-			IHTMLConstants.TAG_HTML, //
-			IHTMLConstants.TAG_SPAN, //
-			IHTMLConstants.TAG_FORM, //
-			IHTMLConstants.TAG_P,//
-			IHTMLConstants.TAG_SPAN,//
-			IHTMLConstants.TAG_DIV,//
-			IHTMLConstants.TAG_LI,//
-			IHTMLConstants.TAG_OL,//
-			IHTMLConstants.TAG_UL //
-	};
-
-	static final String[] NON_HTML_CONTAINER_NODES = {
-			IJSFConstants.TAG_VIEW, //
-			IJSFConstants.TAG_PANELGRID, //
-			IJSFConstants.TAG_PANELGROUP, //
-			IJSFConstants.TAG_SUBVIEW };
 	static {
 		UNREMOVEBLE_TAGS.add(IHTMLConstants.TAG_HTML);
 		UNREMOVEBLE_TAGS.add(IHTMLConstants.TAG_HEAD);
