@@ -16,6 +16,7 @@ import junit.framework.TestSuite;
 import org.eclipse.jst.jsf.core.tests.appconfig.CompositeJSFAppConfigLocatorProviderStrategyTests;
 import org.eclipse.jst.jsf.core.tests.appconfig.JSFAppConfigManagerFactoryTests;
 import org.eclipse.jst.jsf.core.tests.appconfig.validation.AppConfigValidationUtilTestCase;
+import org.eclipse.jst.jsf.core.tests.contenttype.TestContentTypes;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryProviderTests;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryValidatorTest;
 import org.eclipse.jst.jsf.core.tests.facet.VendorSpecificWebXmlConfigurationForJ2EETest;
@@ -57,6 +58,8 @@ public class AllTests
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.core.tests");
 		//$JUnit-BEGIN$
+		suite.addTestSuite(TestContentTypes.class);
+
         suite.addTestSuite(TestJDTBeanPropertyWorkingCopy.class);
         suite.addTestSuite(TestJDTBeanIntrospector.class);
         suite.addTestSuite(TestTypeUtil.class);
