@@ -50,13 +50,21 @@ public class HTMLUtil {
 	 * the HTML tags considered to be hidden
 	 */
 	static final String[] HiddenTags = new String[] {
-			IHTMLConstants.TAG_APPLET, IHTMLConstants.TAG_AREA,
-			IHTMLConstants.TAG_BASE, IHTMLConstants.TAG_BASEFONT,
-			IHTMLConstants.TAG_HEAD, IHTMLConstants.TAG_IFRAME,
-			IHTMLConstants.TAG_ISINDEX, IHTMLConstants.TAG_META,
-			IHTMLConstants.TAG_NOEMBED, IHTMLConstants.TAG_NOFRAMES,
-			IHTMLConstants.TAG_NOSCRIPT, IHTMLConstants.TAG_SCRIPT,
-			IHTMLConstants.TAG_STYLE, IHTMLConstants.TAG_TITLE,
+			IHTMLConstants.TAG_APPLET,
+			IHTMLConstants.TAG_AREA,
+			IHTMLConstants.TAG_BASE,
+			IHTMLConstants.TAG_BASEFONT,
+			IHTMLConstants.TAG_HEAD,
+			IHTMLConstants.TAG_IFRAME,
+			IHTMLConstants.TAG_ISINDEX,
+			IHTMLConstants.TAG_LINK,
+			IHTMLConstants.TAG_META,
+			IHTMLConstants.TAG_NOEMBED,
+			IHTMLConstants.TAG_NOFRAMES,
+			IHTMLConstants.TAG_NOSCRIPT,
+			IHTMLConstants.TAG_SCRIPT,
+			IHTMLConstants.TAG_STYLE,
+			IHTMLConstants.TAG_TITLE,
 			IHTMLConstants.TAG_PARAM };
 
 	/**
