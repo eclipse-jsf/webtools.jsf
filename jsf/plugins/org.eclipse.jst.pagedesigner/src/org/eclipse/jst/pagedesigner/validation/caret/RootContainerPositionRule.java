@@ -14,17 +14,18 @@ package org.eclipse.jst.pagedesigner.validation.caret;
 import java.util.Arrays;
 
 import org.eclipse.gef.EditPart;
+import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
- * This rule deal with containers 'body', 'view', 'subview'.
+ * This rule deal with containers 'body', 'head', 'view', 'subview'.
  * 
  * @author mengbo
  */
 public class RootContainerPositionRule extends DefaultPositionRule {
-	static final String[] HTML_ROOT_CONTAINERS = { "body" }; //$NON-NLS-1$
+	static final String[] HTML_ROOT_CONTAINERS = { IHTMLConstants.TAG_BODY, IHTMLConstants.TAG_HEAD };
 
 	/**
 	 * @param actionData
@@ -47,7 +48,7 @@ public class RootContainerPositionRule extends DefaultPositionRule {
 		}
 		Node node = target.getNode();
 		if (hasBasicContainers(EditModelQuery.getDocumentNode(node))) {
-			return true;// isWithinkBasicContainer(node);
+			return true;// isWithinBasicContainer(node);
 		}
 		return super.hasEditableArea(target);
 	}
@@ -60,7 +61,7 @@ public class RootContainerPositionRule extends DefaultPositionRule {
 	public boolean isEditable(Target target) {
 		Node node = target.getNode();
 		if (hasBasicContainers(EditModelQuery.getDocumentNode(node))) {
-			boolean result = isWithinkBasicContainer(node);
+			boolean result = isWithinBasicContainer(node);
 			return result;
 		}
 		return super.isEditable(target);
@@ -78,7 +79,7 @@ public class RootContainerPositionRule extends DefaultPositionRule {
 
 	}
 
-	private static boolean isWithinkBasicContainer(Node node) {
+	private static boolean isWithinBasicContainer(Node node) {
 		return EditModelQuery.isChild(HTML_ROOT_CONTAINERS, node, true, false);
 	}
 

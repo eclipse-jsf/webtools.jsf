@@ -83,9 +83,9 @@ public class ItemCreationEditPolicy extends DropEditPolicy
 
 	/**
 	 * @param host
-	 * @return
+	 * @return the graphical viewer
 	 */
-	private IHTMLGraphicalViewer getViewer(EditPart host) {
+	protected IHTMLGraphicalViewer getViewer(EditPart host) {
 		return (IHTMLGraphicalViewer) ((GraphicalEditPart) host).getViewer();
 	}
 

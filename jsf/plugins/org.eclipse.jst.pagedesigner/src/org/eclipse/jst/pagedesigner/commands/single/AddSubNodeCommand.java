@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.commands.single;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
 
@@ -53,16 +54,27 @@ public class AddSubNodeCommand extends SingleNodeCommand {
 	 * @see org.eclipse.jst.pagedesigner.commands.DesignerCommand#doExecute()
 	 */
 	protected void doExecute() {
-		String prefix = JSPUtil.getOrCreatePrefix(_parent.getModel(), _url,
-				null);
-		_child = (IDOMElement) _parent.getOwnerDocument().createElement(
-				prefix + ":" + _tagName); //$NON-NLS-1$
+		String nodeName = null;
+		if (ITLDConstants.URI_HTML.equals(_url)) {
+			nodeName = _tagName;
+		} else {
+			String prefix = JSPUtil.getOrCreatePrefix(_parent.getModel(), _url, null);
+			nodeName = prefix + ":" + _tagName; //$NON-NLS-1$
+		}
+
+		_child = (IDOMElement) _parent.getOwnerDocument().createElement(nodeName);
+
+		if (_child == null) {
+			return;
+		}
+
 		for (Iterator iterator = _attributes.keySet().iterator(); iterator
 				.hasNext();) {
 			String key = (String) iterator.next();
 			String value = (String) _attributes.get(key);
 			_child.setAttribute(key, value);
 		}
+
 		_parent.appendChild(_child);
 	}
 

@@ -42,7 +42,7 @@ public class EditPartPositionHelper {
 //			.getLogger(EditPartPositionHelper.class);
 
 	/**
-	 * Add something to curent
+	 * Add something to current
 	 * 
 	 * @param lineBox
 	 * @param host
@@ -156,9 +156,9 @@ public class EditPartPositionHelper {
 	}
 
 	/**
-	 * This function find the position, if there is one which is widget or text
-	 * and it contains p, or there is not such widget, then boxLine will returns
-	 * the widget that are in a sameline which contains p;
+	 * This function finds the position, if there is one which is widget or text
+	 * and it contains p, or there is not such widget, then boxLine will return
+	 * the widget that are in a same line which contains p;
 	 * @param rootHost 
 	 * @param host 
 	 * 
@@ -204,7 +204,7 @@ public class EditPartPositionHelper {
 			}
             addToCurrentLine(boxLine, host, p, validator);
 		} else {
-			// root host. we always supporse it has editable area.
+			// root host. we always support it has editable area.
 			if (host == rootHost) {
 				if (host.getChildren().size() > 0) {
 					List children = host.getChildren();
@@ -228,13 +228,13 @@ public class EditPartPositionHelper {
 			}
 			// container
 			else {
-				// cann't edit it.
+				// can't edit it.
 				if (!validator.hasEditableArea(target)) {
 					if (lPart.contains(p) && //
 							(validator.isValidPosition(new DesignRefPosition(
 									target.getPart(), true)) || //
 							validator.isValidPosition(new DesignRefPosition(
-									target.getPart(), true)))) {
+									target.getPart(), false)))) {
 						return new DesignRefPosition(host, lPart
 								.isBeforePoint(p)
 								|| !lPart.atLeftPart(p));
@@ -248,7 +248,7 @@ public class EditPartPositionHelper {
 							(!validator.isValidPosition(new DesignRefPosition(
 									target.getPart(), true)) && //
 							!validator.isValidPosition(new DesignRefPosition(
-									target.getPart(), true)))) {
+									target.getPart(), false)))) {
 						if (host.getChildren().size() > 0) {
 							List children = host.getChildren();
 							for (int i = 0, size = children.size(); i < size; i++) {
@@ -280,7 +280,7 @@ public class EditPartPositionHelper {
 	}
 
 	/**
-	 * similiar to findEditPartPositionConstrained, this method is used to
+	 * Similar to findEditPartPositionConstrained, this method is used to
 	 * vertically move caret.
 	 * 
 	 * @param host
@@ -314,7 +314,7 @@ public class EditPartPositionHelper {
 
 	/**
 	 * This method is used for move up/down, except for using tactics to deal
-	 * with container, this method is similiar to findEditPartPosition.
+	 * with container, this method is similar to findEditPartPosition.
 	 * 
 	 * @param rootHost 
 	 * @param host 
@@ -357,7 +357,7 @@ public class EditPartPositionHelper {
 			}
             addToCurrentLine(boxLine, host, p, validator);
 		} else {
-			// root host. we always supporse it has editable area.
+			// root host. we always support it has editable area.
 			if (host == rootHost) {
 				if (host.getChildren().size() > 0) {
 					List children = host.getChildren();
@@ -380,7 +380,7 @@ public class EditPartPositionHelper {
 			}
 			// container
 			else {
-				// cann't edit it.
+				// can't edit it.
 				if (!validator.hasEditableArea(target)
 						|| !validator.allowsMoveIn(target)) {
 					if (validator.canReference(target, true)
@@ -560,8 +560,8 @@ public class EditPartPositionHelper {
 	}
 
 	/*
-	 * Here we are doing something to avoid reference witespace tag. Since we
-	 * still need to improve whitespace tags's layout furthure more.
+	 * Here we are doing something to avoid reference whitespace tag. Since we
+	 * still need to improve whitespace tags's layout further more.
 	 */
 	private static EditPart getNextConcretPart(DesignPosition position,
 			List<Boolean> caretIsAtRightTest) {

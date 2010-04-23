@@ -24,6 +24,8 @@ import org.eclipse.jst.pagedesigner.elementedit.IElementEditFactory;
  */
 public class HTMLElementEditFactory implements IElementEditFactory 
 {
+    final static TagIdentifier HTMLHEAD_TAG_IDENTIFIER =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_HTML, IHTMLConstants.TAG_HEAD);
     final static TagIdentifier HTMLTABLE_TAG_IDENTIFIER =
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_HTML, IHTMLConstants.TAG_TABLE);
     
@@ -35,6 +37,16 @@ public class HTMLElementEditFactory implements IElementEditFactory
 	public IElementEdit createElementEdit(TagIdentifier tagIdentifier) {
 		if (HTMLTABLE_TAG_IDENTIFIER.isSameTagType(tagIdentifier)) {
 			return new TableElementEdit();
+		} else if (HTMLHEAD_TAG_IDENTIFIER.isSameTagType(tagIdentifier)) {
+			return new HeadElementEdit();
+		} else if (tagIdentifier != null) {
+			// No need to check the URI, it was checked to get this factory.
+			// Just check the tag name, ignoring case in the HTML tag names.
+			// The HTML tag meta data uses upper case and the programming
+			// constants are in lower case.
+			if (IHTMLConstants.TAG_LINK.equalsIgnoreCase(tagIdentifier.getTagName())) {
+				return new StylesheetLinkElementEdit();
+			}
 		}
 		return null;
 	}
