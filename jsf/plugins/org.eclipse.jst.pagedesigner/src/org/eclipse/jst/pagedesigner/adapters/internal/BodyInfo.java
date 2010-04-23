@@ -24,10 +24,9 @@ import org.w3c.dom.Node;
 /**
  * @author mengbo
  */
-// XXX: currently hardcoded as sigleton implementation,
-// it is believed in the future will not use singleton, because we want to
-// dynamically
-// support other taglibs.
+// XXX: currently hard coded as singleton implementation,
+// it is believed in the future will not use singleton, because
+// we want to dynamically support other taglibs.
 public class BodyInfo implements IBodyInfo {
 	private static final BodyInfo _instance = new BodyInfo();
 
