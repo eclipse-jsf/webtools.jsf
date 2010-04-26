@@ -2,9 +2,9 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension 
-      point="org.eclipse.core.runtime.contentTypes"> 
+      point="org.eclipse.core.contenttype.contentTypes"> 
       <content-type  
-         id="facesConfigFile" 
+         id="org.eclipse.jst.jsf.facesconfig.facesConfigFile" 
          name="%facesconfig.name" 
          base-type="org.eclipse.core.runtime.xml" 
          file-extensions="xml"
