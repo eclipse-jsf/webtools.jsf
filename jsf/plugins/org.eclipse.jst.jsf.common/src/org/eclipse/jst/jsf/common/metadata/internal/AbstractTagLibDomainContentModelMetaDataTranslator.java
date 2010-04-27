@@ -340,7 +340,7 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 	 */
 	protected Model createTLDModel() {
 		Model entity = getFactory().createModel();
-		entity.setId(_assistant.getMergedModel().getModelKey().getUri());
+		entity.setId(_assistant.getMergedModel().getModelContext().getModelIdentifier());
 		return entity;
 	}	
 	

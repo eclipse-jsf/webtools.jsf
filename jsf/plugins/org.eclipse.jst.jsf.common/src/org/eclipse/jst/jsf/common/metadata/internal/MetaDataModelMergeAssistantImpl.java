@@ -21,14 +21,14 @@ import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataException;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
+import org.eclipse.jst.jsf.common.metadata.query.internal.IMetaDataQuery;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SearchControl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleResultSet;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleTraitQueryVisitorImpl;
-import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 /**
  * Implements {@link IMetaDataModelMergeAssistant}
  * 
@@ -208,11 +208,11 @@ public class MetaDataModelMergeAssistantImpl implements
 	public void setMergeComplete() {
 		final Model model = (Model)getMergedModel().getRoot();
 		if (model != null){
-			StandardModelFactory.debug(">> Begin processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+			StandardModelFactory.debug(">> Begin processIncludeGroups for: "+getMergedModel().getModelContext(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 			
 			processIncludeGroups(model);			
 			
-			StandardModelFactory.debug(">> End processIncludeGroups for: "+getMergedModel().getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+			StandardModelFactory.debug(">> End processIncludeGroups for: "+getMergedModel().getModelContext(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 		}		
 	}
 	
@@ -311,7 +311,7 @@ public class MetaDataModelMergeAssistantImpl implements
 				if (include.getModelUri() == null||
 						(include.getModelUri()
 							.equals(getMergedModel()
-								.getModelKey().getUri())) ){
+								.getModelContext().getModelIdentifier())) ){
 					final EntityGroup eg = ((Model)getMergedModel().getRoot()).findIncludeGroup(include.getId());
 					addIncludeRefs(entity, eg);
 				} else //external model include
@@ -325,20 +325,16 @@ public class MetaDataModelMergeAssistantImpl implements
 	 * @param include
 	 */
 	private void addIncludeRefs(final Entity entity, final IncludeEntityGroup include) {
-		final ITaglibDomainMetaDataModelContext modelContext = new TaglibDomainMetaDataModelContextImpl(				
-				getMergedModel().getModelKey().getDomain(), 
-				getMergedModel().getModelKey().getProject(), 
-				include.getModelUri()
-		);
-		
-		final Model externalModel = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+		final IMetaDataModelContext modelContext = getMergedModel().getModelContext();
+		final IMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
+		final Model externalModel = query.getQueryHelper().getModel(include.getModelUri());
 		if (externalModel != null){
 			final EntityGroup entityGroup = externalModel.findIncludeGroup(include.getId());		
 			addIncludeRefs(entity, entityGroup);
 		}
 		else {
-			JSFCommonPlugin.log(IStatus.ERROR, "Unable to load external metadata model refs for "+modelContext.getURI() //$NON-NLS-1$
-					+ " into "+ entity.getModel().getCurrentModelContext().getUri()); //$NON-NLS-1$
+			JSFCommonPlugin.log(IStatus.ERROR, "Unable to load external metadata model refs for "+modelContext.getModelIdentifier() //$NON-NLS-1$
+					+ " into "+ include.getModelUri()); //$NON-NLS-1$
 		}
 	}
 

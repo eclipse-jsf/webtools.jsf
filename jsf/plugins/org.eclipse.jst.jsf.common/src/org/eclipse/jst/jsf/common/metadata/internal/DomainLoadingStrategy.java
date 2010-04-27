@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 
@@ -32,8 +33,8 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	protected String domain;
 
 	private MetaDataModel _model;
-	private List /*<IDomainSourceModelType>*/ _sourceTypes;
-	private List /*<IMetaDataSourceModelProvider>*/ _sources;
+	private List <IDomainSourceModelType> _sourceTypes;
+	private List <IMetaDataSourceModelProvider> _sources;
 	
 	/**
 	 * Constructor
@@ -75,30 +76,29 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * @param model 
 	 * @param sources
 	 */
-	protected void mergeModel(MetaDataModel model, List/*<IMetaDataSourceModelProvider>*/ sources) {		
+	protected void mergeModel(final MetaDataModel model, final List <IMetaDataSourceModelProvider> sources) {		
 
-		StandardModelFactory.debug(">> Begin Merge: "+model.getModelKey()+"("+sources.size()+ " sources)", StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		StandardModelFactory.debug(">> Begin Merge: "+model.getModelContext()+"("+sources.size()+ " sources)", StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		IMetaDataModelMergeAssistant assistant = createModelMergeAssistant(model);
-		for (Iterator/*<IMetaDataSourceModelProvider>*/ it = sources.iterator();it.hasNext();){
-			IMetaDataSourceModelProvider mds = (IMetaDataSourceModelProvider)it.next();		
-			Iterator translators = mds.getLocator().getDomainSourceModelType().getTranslators().iterator();
+		final IMetaDataModelMergeAssistant assistant = createModelMergeAssistant(model);
+		for (final IMetaDataSourceModelProvider mds : sources){
+			final Iterator translators = mds.getLocator().getDomainSourceModelType().getTranslators().iterator();
 			while (translators.hasNext()){
-				IMetaDataTranslator translator = (IMetaDataTranslator)translators.next();
+				final IMetaDataTranslator translator = (IMetaDataTranslator)translators.next();
 				if (translator.canTranslate(mds)){
-					StandardModelFactory.debug(">>> Merging: "+model.getModelKey()+"::"+mds, StandardModelFactory.DEBUG_MD_LOAD);  //$NON-NLS-1$//$NON-NLS-2$
+					StandardModelFactory.debug(">>> Merging: "+model.getModelContext()+"::"+mds, StandardModelFactory.DEBUG_MD_LOAD);  //$NON-NLS-1$//$NON-NLS-2$
 					assistant.setSourceModelProvider(mds);
 					try {
 						translator.translate(assistant);
 					} catch (Exception e) {							
-						StandardModelFactory.debug(">>>> Error during translate/merge of: "+model.getModelKey()+": "+mds, StandardModelFactory.DEBUG_MD_LOAD);															 //$NON-NLS-1$ //$NON-NLS-2$
+						StandardModelFactory.debug(">>>> Error during translate/merge of: "+model.getModelContext()+": "+mds, StandardModelFactory.DEBUG_MD_LOAD);															 //$NON-NLS-1$ //$NON-NLS-2$
 						JSFCommonPlugin.log(IStatus.ERROR, "Error during load of: "+mds, e); //$NON-NLS-1$
 					}
 				}				
 			}
 		}
 		assistant.setMergeComplete();
-		StandardModelFactory.debug(">> End Merge: "+model.getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+		StandardModelFactory.debug(">> End Merge: "+model.getModelContext(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 	}
 	
 	/**
@@ -113,7 +113,7 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * Allows for subclasses to override the default mechanism for sorting the source types.
 	 * @param sourceTypes
 	 */
-	protected void sortSourceTypes(List/*<IDomainSourceModelType>*/ sourceTypes) {
+	protected void sortSourceTypes(List <IDomainSourceModelType> sourceTypes) {
 		//allows override
 	}
 
@@ -121,7 +121,7 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * @return list of <code>IDomainSourceModelType</code>s located in the <code>DomainSourceTypesRegistry</code> 
 	 * for the specified uri
 	 */
-	protected List/*<IDomainSourceModelType>*/ loadDomainSourceModelTypes() {
+	protected List <IDomainSourceModelType> loadDomainSourceModelTypes() {
 		return DomainSourceTypesRegistry.getInstance().getDomainSourceTypes(domain); 
 	}
 
@@ -131,19 +131,18 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	 * @return list of <code>IMetaDataSourceModelProvider</code> instances from the domain source types applicable for 
 	 * this domain for this particular uri specified in the model
 	 */
-	protected List/*<IMetaDataSourceModelProvider>*/ locateMetaDataSourceInstances(List/*<IDomainSourceModelType>*/ sourceTypes, MetaDataModel model) {
-		List/*<IMetaDataSourceModelProvider>*/ sources = new ArrayList/*<IMetaDataSourceModelProvider>*/();		
-		for (Iterator/*<IDomainSourceModelType>*/ it = sourceTypes.iterator();it.hasNext();){
-			IDomainSourceModelType sourceType = (IDomainSourceModelType)it.next();
-			IMetaDataLocator locator = sourceType.getLocator(model.getModelKey().getProject());
+	protected List <IMetaDataSourceModelProvider> locateMetaDataSourceInstances(final List <IDomainSourceModelType> sourceTypes, MetaDataModel model) {
+		final List<IMetaDataSourceModelProvider> sources = new ArrayList<IMetaDataSourceModelProvider>();	
+		final IProject project = getProject(model);
+		for (final IDomainSourceModelType sourceType : sourceTypes){
+			final IMetaDataLocator locator = sourceType.getLocator(project);
 			if (locator != null) {
 				//We MUST set the sourceType here to associate the handler with locator to use for the source models
 				locator.setDomainSourceModelType(sourceType);
 								
-				List/*<IMetaDataSourceModelProvider>*/ providers = locator.locateMetaDataModelProviders(model.getModelKey().getUri());
+				final List <IMetaDataSourceModelProvider> providers = locator.locateMetaDataModelProviders(model.getModelContext().getModelIdentifier());
 				if (providers != null && !providers.isEmpty()){
-					for (Iterator mdProviders =providers.iterator();mdProviders.hasNext();){
-						IMetaDataSourceModelProvider provider = (IMetaDataSourceModelProvider)mdProviders.next();
+					for (final IMetaDataSourceModelProvider provider : providers){
 						//We MUST set the sourceType here to associate the translators to use for the source models
 						provider.setLocator(locator);
 						sources.add(provider);
@@ -156,10 +155,14 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 		return sources;
 	}
 	
+	private IProject getProject(final MetaDataModel model) {
+		return (IProject)model.getModelContext().getAdapter(IProject.class);
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataObserver#notifyMetadataChanged(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataChangeNotificationEvent)
 	 */
-	public void notifyMetadataChanged(IMetaDataChangeNotificationEvent event) {
+	public void notifyMetadataChanged(final IMetaDataChangeNotificationEvent event) {
 		//for now, if any event occurs, we need to flush the _model so that it will rebuild
 		_model.setNeedsRefresh();
 	}
@@ -176,10 +179,9 @@ public class DomainLoadingStrategy implements IDomainLoadingStrategy, IMetaDataO
 	
 	private void removeOldLocatorObservers(){
 		if (_sources != null){
-			for (Iterator it= _sources.iterator();it.hasNext();){				
-				IMetaDataSourceModelProvider provider = (IMetaDataSourceModelProvider)it.next();
+			for (final IMetaDataSourceModelProvider provider :  _sources){							
 				if (provider != null) {
-					IMetaDataLocator locator = provider.getLocator();
+					final IMetaDataLocator locator = provider.getLocator();
 					if (locator != null){
 						locator.removeObserver(this);		
 						locator.setDomainSourceModelType(null);

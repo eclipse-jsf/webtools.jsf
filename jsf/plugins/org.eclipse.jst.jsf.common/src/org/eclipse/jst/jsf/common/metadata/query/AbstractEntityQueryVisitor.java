@@ -21,11 +21,27 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 public abstract class AbstractEntityQueryVisitor extends AbstractEntityVisitor
 		implements IEntityQueryVisitor {
 
+	private String _delimiter = "/"; //$NON-NLS-1$
+
 	/** 
 	 * @return EmptyResultSet.   Subclasses should override.
 	 */
-	public IResultSet findEntities(Entity initialEntityContext, String entityKey) {
+	public IResultSet<Entity> findEntities(final Entity initialEntityContext, final String entityKey) {
 		return new EmptyResultSet();
 	}
 
+	/**
+	 * @return String delimiting levels in the hierarchy.  Defaults to "/"
+	 */
+	protected String  getLevelDelimiter() {		
+		return _delimiter;
+	}
+	
+	/**
+	 * Sets the string used to delimit the levels in an entityKey
+	 * @param delimiter
+	 */
+	protected void setLevelDelimiter(final String delimiter) {
+		_delimiter = delimiter;
+	}
 }

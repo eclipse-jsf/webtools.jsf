@@ -16,8 +16,9 @@ import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelConte
 
 /**
  * Simple implementation of {@link ITaglibDomainMetaDataModelContext}
+ * @deprecated - Helios
  */
-public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextImpl implements ITaglibDomainMetaDataModelContext, Cloneable
+public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextImpl implements IMetaDataModelContext, ITaglibDomainMetaDataModelContext, Cloneable
 {
 	private final IProject _project;
 	private final String _uri;
@@ -59,4 +60,13 @@ public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextIm
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+
+    
+	public String getDomainId() {
+		return getDomainID();
+	}
+
+	public String getModelIdentifier() {
+		return getURI();
+	}
 }

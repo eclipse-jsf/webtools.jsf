@@ -19,21 +19,22 @@ import org.eclipse.jst.jsf.common.metadata.query.AbstractResultSet;
 
 /**
  * Simple implementation of {@link org.eclipse.jst.jsf.common.metadata.query.IResultSet} by extending AbstractResultSet
+ * @param <T> 
  *
  */
-public final class SimpleResultSet/*<T>*/ extends AbstractResultSet/*<T>*/ {	
-	private List/*<T>*/ results;	
+public final class SimpleResultSet<T> extends AbstractResultSet<T> {	
+	private List<T> results;	
 	
 	/**
 	 * Constructor passing a list to hold the results
 	 * @param results 
 	 */
-	public SimpleResultSet(List/*<T>*/ results){
+	public SimpleResultSet(List<T> results){
 		super();
 		this.results = results;
 	}
 
-	protected List getInternalResults(){
+	protected List<T> getInternalResults(){
 		if (results == null){
 			results = Collections.EMPTY_LIST;
 		}

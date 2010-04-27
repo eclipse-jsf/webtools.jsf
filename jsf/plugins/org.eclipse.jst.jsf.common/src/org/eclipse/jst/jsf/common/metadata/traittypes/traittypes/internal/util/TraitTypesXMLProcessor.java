@@ -2,16 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesXMLProcessor.java,v 1.5 2008/11/18 22:24:43 gkessler Exp $
+ * $Id: TraitTypesXMLProcessor.java,v 1.6 2010/04/27 17:40:11 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
-
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage;
 
 /**

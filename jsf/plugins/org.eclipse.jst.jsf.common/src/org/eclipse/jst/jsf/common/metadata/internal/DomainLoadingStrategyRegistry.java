@@ -32,12 +32,8 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 public class DomainLoadingStrategyRegistry{
 	private static DomainLoadingStrategyRegistry INSTANCE;
 	
-	private HashMap/*<String, DomainLoadingStrategyDescriptorImpl>*/ domainLoadingStrategyDescriptors;
+	private HashMap <String, DomainLoadingStrategyDescriptorImpl> domainLoadingStrategyDescriptors;
 	
-//	public static final String TAGLIB_DOMAIN ="TagLibraryDomain"; //this does *not* belong here.  FIX ME
-//	public static final String TAGLIB_DOMAIN_SOURCE_HANDLER_ID = TAGLIB_DOMAIN + "SourceHandler";
-//	public static final String TAGLIB_DOMAIN_TRANSLATOR = "com.foo.translators."+TAGLIB_DOMAIN + "Translator";
-
 	private static final String EXTENSION_POINT_ID = "domainLoadingStrategies"; //$NON-NLS-1$
 
 	private DomainLoadingStrategyRegistry(){
@@ -58,8 +54,8 @@ public class DomainLoadingStrategyRegistry{
 	 * Loads registry with descriptors from the domainLoadingStrategies ext-pt.    
 	 */
 	synchronized final void  init(){
-		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-		IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, EXTENSION_POINT_ID );
+		final IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+		final IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, EXTENSION_POINT_ID );
 		if (point != null) {
 			IConfigurationElement[] elements = point.getConfigurationElements();
 			for (int i = 0; i < elements.length; i++) {
@@ -74,7 +70,7 @@ public class DomainLoadingStrategyRegistry{
 	 * Add domain loading strategy descriptor for a domain to the registry domains
 	 * @param strategy
 	 */
-	protected void addDomainLoadingStrategyDescriptor(DomainLoadingStrategyDescriptorImpl strategy){
+	protected void addDomainLoadingStrategyDescriptor(final DomainLoadingStrategyDescriptorImpl strategy){
 		getDescriptors().put(strategy.getDomain(), strategy);
 	}
 	
@@ -82,8 +78,8 @@ public class DomainLoadingStrategyRegistry{
 	 * @param domain
 	 * @return an instance of an <code>IDomainLoadingStrategy</code> for the given domain
 	 */
-	public IDomainLoadingStrategy getLoadingStrategy(String domain){
-		DomainLoadingStrategyDescriptorImpl strategy = (DomainLoadingStrategyDescriptorImpl)getDescriptors().get(domain);
+	public IDomainLoadingStrategy getLoadingStrategy(final String domain){
+		final DomainLoadingStrategyDescriptorImpl strategy = getDescriptors().get(domain);
 		if (strategy == null){
 			return createDefaultLoadingStrategy();
 		}
@@ -98,13 +94,13 @@ public class DomainLoadingStrategyRegistry{
 		return new DomainLoadingStrategy(null);
 	}
 
-	private IDomainLoadingStrategy createLoadingStrategy(String domain){
-		return ((DomainLoadingStrategyDescriptorImpl)getDescriptors().get(domain)).newInstance();			
+	private IDomainLoadingStrategy createLoadingStrategy(final String domain){
+		return getDescriptors().get(domain).newInstance();			
 	}
 	
-	private Map/*<String, DomainLoadingStrategyDescriptorImpl>*/ getDescriptors(){
+	private Map <String, DomainLoadingStrategyDescriptorImpl> getDescriptors(){
 		if (domainLoadingStrategyDescriptors == null){
-			domainLoadingStrategyDescriptors = new HashMap/*<String, DomainLoadingStrategyDescriptorImpl>*/();			
+			domainLoadingStrategyDescriptors = new HashMap<String, DomainLoadingStrategyDescriptorImpl>();			
 		}
 		return domainLoadingStrategyDescriptors;
 	}

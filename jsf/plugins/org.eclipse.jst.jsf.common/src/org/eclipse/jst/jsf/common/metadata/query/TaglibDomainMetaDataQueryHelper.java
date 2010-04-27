@@ -20,12 +20,14 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModel;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelManager;
+import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManagerFactory;
+import org.eclipse.jst.jsf.common.metadata.internal.ModelKeyDescriptor;
 import org.eclipse.jst.jsf.common.metadata.internal.TaglibDomainMetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManager;
+import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleEntityQueryVisitorImpl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleTraitQueryVisitorImpl;
-import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 
 
 /**
@@ -35,6 +37,14 @@ import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchCont
  * 	<br>1) Get the ITaglibDomainMetaDataModelContext using createMetaDataModelContext or createTagLibraryDomainMetaDataModelContext
  * 	<br>2) Use appropriate getXXX methods using the ITaglibDomainMetaDataModelContext.
  * <p><b>Provisional API - subject to change</b></p>
+ * 
+ * @deprecated - Helios <p> 
+ * 			use ITaglibMetaDataQuery:<p>
+ * 			<code>
+ * 				IMetaDataDomainContext context 	= MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);<br/>
+ * 				ITaglibMetaDataQuery query 		= MetaDataQueryFactory.getInstance().createQuery(context);
+ * 			</code> 
+ * <p>
  * @see IResultSet
  * @see IEntityQueryVisitor
  * @see ITraitQueryVisitor
@@ -42,7 +52,9 @@ import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchCont
  * @see Model
  * @see Entity
  * @see Trait
- */
+ * 
+
+ */			
 public final class TaglibDomainMetaDataQueryHelper{
 	/**
 	 * Domain id for Tag library domain of metatdata  
@@ -70,12 +82,12 @@ public final class TaglibDomainMetaDataQueryHelper{
 	 * @return Model object for given context.   May return null if not located.
 	 */
 	public static Model getModel(final ITaglibDomainMetaDataModelContext modelContext) {
-		MetaDataModel model = getMDModel(modelContext);
-		//we may want to throw error that model is empty
-		if (model != null && !model.isEmpty()){			
-			return (Model)model.getRoot();
-		}
-		return null;
+//		MetaDataModel model = getMDModel(modelContext);
+//		//we may want to throw error that model is empty
+//		if (model != null && !model.isEmpty()){			
+//			return (Model)model.getRoot();
+//		}
+		return getMDModel(modelContext);
 	}
 
 	/**
@@ -184,19 +196,51 @@ public final class TaglibDomainMetaDataQueryHelper{
 	/**
 	 * Retrieve the MetaDataModel from the ModelManager for given key
 	 * @param modelContext
-	 * @return MetaDataModel
+	 * @return Model
 	 */
-	private static MetaDataModel getMDModel(final ITaglibDomainMetaDataModelContext modelContext){
-		MetaDataModelManager mgr = null;
-		if (modelContext.getProject() != null)
-			mgr = MetaDataModelManager.getInstance(modelContext.getProject());
-		else //temp(?)
-			mgr = MetaDataModelManager.getSharedInstance();	
-		
+	private static Model getMDModel(final ITaglibDomainMetaDataModelContext modelContext){
+		final IMetaDataModelContext context = getContextAdapter(modelContext);		
+		final IMetaDataModelManager mgr = MetaDataModelManagerFactory.getMetaDataModelManagerInstance(modelContext.getProject());
 		if (mgr != null)
-			return mgr.getModel(modelContext);
+			return mgr.getModel(context);
+		
+//		MetaDataModelManager mgr = null;
+//		if (modelContext.getProject() != null)
+//			mgr = MetaDataModelManager.getInstance(modelContext.getProject());
+//		else //temp(?)
+//			mgr = MetaDataModelManager.getSharedInstance();	
+//		
+//		if (mgr != null)
+//			return mgr.getModel(modelContext);
 		
 		return null;
+	}
+
+	private static IMetaDataModelContext getContextAdapter(
+			final ITaglibDomainMetaDataModelContext modelContext) {		
+		return new IMetaDataModelContext() {
+			
+			public Object getAdapter(Class adapter) {	
+				if (adapter == IProject.class)
+					return getProject();
+				else if (adapter == ModelKeyDescriptor.class)
+					return new ModelKeyDescriptor(modelContext.getProject(), modelContext.getDomainID(), modelContext.getURI());
+				return null;
+			}
+			
+			public String getDomainId() {				
+				return modelContext.getDomainID();
+			}
+			
+			public IProject getProject() {
+				return modelContext.getProject();
+			}
+			
+			public String getModelIdentifier() {
+				//doing below for "fixing" the jsp11 uri
+				return ((ModelKeyDescriptor)getAdapter(ModelKeyDescriptor.class)).getUri();
+			}
+		};
 	}
 
 	/**

@@ -7,6 +7,8 @@
  <extension-point id="domainSourceModelTypes" name="%extension-point.name.4" schema="schema/DomainSourceModelTypes.exsd"/>
  <extension-point id="domainSourceModelTypeTranslators" name="%extension-point.name.5" schema="schema/DomainSourceModelTypeTranslators.exsd"/>
  <extension-point id="standardMetaDataFiles" name="%extension-point.name.6" schema="schema/StandardMetaDataFiles.exsd"/>
+ <extension-point id="mdModelManagerFactory" name="%extension-point.name.7" schema="schema/MDModelManagerFactory.exsd"/>
+ <extension-point id="domainQueryFactory" name="%extension-point.name.8" schema="schema/DomainQueryFactory.exsd"/>
    <extension
          point="org.eclipse.jst.jsf.common.domainLoadingStrategies">
       <domainLoader
@@ -62,6 +64,12 @@
            factory="org.eclipse.jst.jsf.context.symbol.internal.source.UnknownTypeContextSymbolFactory"
            factoryId="org.eclipse.jst.jsf.common.unknownTypeSymbolFactory">
      </contextSymbolFactory>
+  </extension>
+  <extension
+        point="org.eclipse.jst.jsf.common.domainQueryFactory">
+     <factory
+           class="org.eclipse.jst.jsf.common.metadata.query.internal.taglib.TaglibDomainMetaDataQueryFactory">
+     </factory>
   </extension>
  
 </plugin>

@@ -19,9 +19,9 @@ import java.util.List;
 public interface IMetaDataLocator {
 	/**
 	 * @param uri
-	 * @return a list of <code>IMetaDataModelProvider</code>s for the uri located by this instance 
+	 * @return a list of <code>IMetaDataSourceModelProvider</code>s for the uri located by this instance 
 	 */
-	public List/*<IMetaDataModelProvider>*/ locateMetaDataModelProviders(String uri);
+	public List <IMetaDataSourceModelProvider> locateMetaDataModelProviders(String uri);
 	
 	/**
 	 * Opportunity for service to start (add listeners, etc.). 

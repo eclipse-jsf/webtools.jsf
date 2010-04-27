@@ -19,12 +19,13 @@ import java.util.List;
  * Abstract implementation of {@link IResultSet} that developers may subclass.
  * Users should assume that the results are only valid at the time of the query.  This may change in the future.
  * <p><b>Provisional API - subject to change</b></p>
+ * @param <T> 
  */
-public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
+public abstract class AbstractResultSet<T> implements IResultSet<T> {
 	private List		_results;
 	private boolean 	_isClosed = false;
 	
-	public List getResults() throws MetaDataException {
+	public List<T> getResults() throws MetaDataException {
 		initIfNecessary();
 		return _results;
 	}
@@ -50,14 +51,14 @@ public abstract class AbstractResultSet/*<T>*/ implements IResultSet/*<T>*/ {
 	/**
 	 * @return List of results.  Null is tolerated.
 	 */
-	protected abstract List getInternalResults();
+	protected abstract List<T> getInternalResults();
 	
 	private void initIfNecessary() throws MetaDataException {
 		if (_isClosed)
 			throw new MetaDataException("Attempt to access a closed resultset."); //$NON-NLS-1$
 		
 		if (_results == null) {
-			List checkNullResults = getInternalResults();
+			List<T> checkNullResults = getInternalResults();
 			if (checkNullResults == null){
 				checkNullResults = Collections.EMPTY_LIST;
 			} 

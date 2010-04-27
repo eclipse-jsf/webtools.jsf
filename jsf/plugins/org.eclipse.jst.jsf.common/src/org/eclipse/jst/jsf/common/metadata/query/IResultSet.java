@@ -21,14 +21,15 @@ import java.util.List;
  * 
  * <p>Not intended to be implemented directly by clients.  Developers should extend {@link AbstractResultSet} instead.
  * <p><b>Provisional API - subject to change</b></p>
+ * @param <T> 
  */
-public interface IResultSet/*<T>*/{
+public interface IResultSet<T> {
 	
 	/**
 	 * @return unmodifiable List of results.  May NOT be null.  Implementer must return Collections.EMPTY_LIST instead.
 	 * @throws MetaDataException 
 	 */
-	public List/*<T>*/ getResults() throws MetaDataException;
+	public List<T>  getResults() throws MetaDataException;
 
 	/**
 	 * Signal that the query results are no longer required allowing for any cleanup that may be required

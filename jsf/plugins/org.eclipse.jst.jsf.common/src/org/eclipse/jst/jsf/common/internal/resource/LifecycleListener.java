@@ -253,7 +253,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             // must use iterator to ensure copy on write behaviour
             for (final IResource res : _resources)
             {
-                if (proj == res || proj == res.getProject())
+                if (res != null && (proj == res || proj == res.getProject()))
                 {
                     fireLifecycleEvent(new ResourceLifecycleEvent(res,
                             EventType.RESOURCE_INACCESSIBLE,
@@ -273,7 +273,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
                 // if the resource being tracked is the resource being
                 // deleted,
                 // then fire a resource delete event
-                if (proj == res)
+                if (res != null && proj == res)
                 {
                     fireLifecycleEvent(new ResourceLifecycleEvent(res,
                             EventType.RESOURCE_INACCESSIBLE,
@@ -282,7 +282,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
                 // if the resource being tracked is a resource in the
                 // project being
                 // deleted, then fire a project deleted event
-                else if (proj == res.getProject())
+                else if (res != null && proj == res.getProject())
                 {
                     fireLifecycleEvent(new ResourceLifecycleEvent(res,
                             EventType.RESOURCE_INACCESSIBLE,
@@ -296,28 +296,30 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         {
             for (final IResource res : _resources)
             {
-                IResourceDelta delta = event.getDelta();
-
-                // long seqId2 = _seqId++;
-                // if (ENABLE_TEST_TRACKING && _testTracker != null)
-                // {
-                // _testTracker.fireEvent(Event.START_TRACKING, seqId2,
-                // "testFindMember");
-                // }
-                // only care about post change events to resources
-                // that we are tracking
-                delta = delta.findMember(res.getFullPath());
-
-                if (delta != null)
-                {
-                    visit(delta);
-                }
-
-                // if (ENABLE_TEST_TRACKING && _testTracker != null)
-                // {
-                // _testTracker.fireEvent(Event.STOP_TRACKING, seqId2,
-                // "testFindMember");
-                // }
+            	if (res != null) {
+	                IResourceDelta delta = event.getDelta();
+	
+	                // long seqId2 = _seqId++;
+	                // if (ENABLE_TEST_TRACKING && _testTracker != null)
+	                // {
+	                // _testTracker.fireEvent(Event.START_TRACKING, seqId2,
+	                // "testFindMember");
+	                // }
+	                // only care about post change events to resources
+	                // that we are tracking
+	                delta = delta.findMember(res.getFullPath());
+	
+	                if (delta != null)
+	                {
+	                    visit(delta);
+	                }
+	
+	                // if (ENABLE_TEST_TRACKING && _testTracker != null)
+	                // {
+	                // _testTracker.fireEvent(Event.STOP_TRACKING, seqId2,
+	                // "testFindMember");
+	                // }
+            	}
             }
         }
             break;

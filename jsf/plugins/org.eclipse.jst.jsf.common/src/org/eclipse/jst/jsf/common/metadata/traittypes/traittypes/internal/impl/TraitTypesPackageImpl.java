@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesPackageImpl.java,v 1.8 2010/03/01 18:10:07 cbateman Exp $
+ * $Id: TraitTypesPackageImpl.java,v 1.9 2010/04/27 17:40:10 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
@@ -10,11 +10,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator;

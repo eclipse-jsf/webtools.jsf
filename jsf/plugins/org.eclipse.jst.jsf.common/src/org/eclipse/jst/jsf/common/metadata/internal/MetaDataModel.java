@@ -20,17 +20,20 @@ import org.eclipse.jst.jsf.common.metadata.Model;
 public class MetaDataModel {
 
 	private Object root;
+	private IMetaDataModelContext modelContext;	
 	private ModelKeyDescriptor modelKeyDescriptor;
 	private IDomainLoadingStrategy strategy;
 	private boolean refresh;
+
+
 	
 	/**
 	 * Constructor
-	 * @param key
+	 * @param context 
 	 * @param strategy
 	 */
-	public MetaDataModel(ModelKeyDescriptor key, IDomainLoadingStrategy strategy){
-		this.modelKeyDescriptor = key;
+	public MetaDataModel(final IMetaDataModelContext context, final IDomainLoadingStrategy strategy){
+		this.modelContext = context;
 		this.strategy = strategy;
 	}
 
@@ -46,15 +49,25 @@ public class MetaDataModel {
 	 */
 	public void setRoot(Object root){
 		this.root = root;
-		if (root != null)
-			((Model)root).setCurrentModelContext(modelKeyDescriptor);
+		if (root != null) {
+			//setCurrentModelContext has been deprecated... ModelKeyDescriptor can die after that
+			Model m = (Model)root;
+			m.setCurrentModelContext(getModelKey());
+		}
+	}
+	
+	private ModelKeyDescriptor getModelKey() {
+		if (modelKeyDescriptor == null) {
+			modelKeyDescriptor = (ModelKeyDescriptor)modelContext.getAdapter(ModelKeyDescriptor.class);
+		}
+		return modelKeyDescriptor;
 	}
 	
 	/**
-	 * @return ModelKeyDescriptor for this model
+	 * @return modelContext
 	 */
-	public ModelKeyDescriptor getModelKey(){
-		return modelKeyDescriptor;
+	public IMetaDataModelContext getModelContext(){
+		return modelContext;
 	}
 
 //	public void accept(IEntityVisitor visitor){
@@ -76,9 +89,9 @@ public class MetaDataModel {
 	 * Load the model.  Delegates to the strategy.
 	 */
 	public synchronized void load(){
-		StandardModelFactory.debug("> Begin Loading: "+getModelKey(), StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+		StandardModelFactory.debug("> Begin Loading: "+modelContext.toString(), StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 		strategy.load(this);
-		StandardModelFactory.debug("> End Loading: "+getModelKey(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
+		StandardModelFactory.debug("> End Loading: "+modelContext.toString(),StandardModelFactory.DEBUG_MD_LOAD); //$NON-NLS-1$
 	}
 	
 	/**
@@ -113,12 +126,13 @@ public class MetaDataModel {
 			strategy.cleanup();
 		strategy = null;
 		root = null;
-		modelKeyDescriptor = null;
+//		modelKeyDescriptor = null;
+		modelContext = null;
 	}
 	
 	public String toString() {
 		StringBuffer buf = new StringBuffer("MetaDataModel: "); //$NON-NLS-1$
-		buf.append(getModelKey());
+		buf.append(modelContext.toString());
 		return buf.toString();
 	}
 

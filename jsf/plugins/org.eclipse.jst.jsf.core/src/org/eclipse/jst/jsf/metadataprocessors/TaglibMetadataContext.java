@@ -50,7 +50,7 @@ public class TaglibMetadataContext extends MetaDataContext {
 	/*package*/ TaglibMetadataContext(Entity tagAttrEntity, Trait trait){
 		super(tagAttrEntity, trait);
 		Assert.isNotNull(tagAttrEntity);
-		this.uri = tagAttrEntity.getModel().getCurrentModelContext().getUri();
+		this.uri = tagAttrEntity.getModel().getCurrentModelContext().getUri().toString();
 		if (!(tagAttrEntity.eContainer() instanceof Entity))
 		{
 		    throw new IllegalArgumentException("tagAttrEntity must be contained in a tag Entity to use this constructor"); //$NON-NLS-1$

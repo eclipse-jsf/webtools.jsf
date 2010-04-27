@@ -165,7 +165,7 @@ public class DomainSourceModelTypeDescriptor {
 		}
 		
 		private Set createTranslatorInstances() {
-			translators = new HashSet/*<IMetaDataTranslator>*/();
+			translators = new HashSet<IMetaDataTranslator>();
 			if (getTranslatorDescriptors().size() == 0){// for TagLibDomain, we are adding null translator via extension (as of 7/16/07)
 				//would get here if a domain and source type was defined without a domain translator.  Should not happen, but 
 				//add Null Translator for now....
@@ -185,10 +185,10 @@ public class DomainSourceModelTypeDescriptor {
 
 			}
 			
-			Iterator/*<DomainSourceModelTranslatorDescriptor>*/it = getTranslatorDescriptors().iterator();
+			Iterator <DomainSourceModelTranslatorDescriptor>it = getTranslatorDescriptors().iterator();
 			while (it.hasNext()){
-				DomainSourceModelTranslatorDescriptor d = (DomainSourceModelTranslatorDescriptor)it.next();
-				Class klass = JSFCommonPlugin.loadClass(d.getTranslator(), d.getBundleId());
+				final DomainSourceModelTranslatorDescriptor d = it.next();
+				final Class klass = JSFCommonPlugin.loadClass(d.getTranslator(), d.getBundleId());
 				try {
 					translators.add(klass.newInstance());
 				} catch (InstantiationException e) {
@@ -209,15 +209,15 @@ public class DomainSourceModelTypeDescriptor {
 	 */
 	static class DomainSourceModelTranslatorDescriptor {
 
-		private String _translator;
-		private String _bundleId;
+		private final String _translator;
+		private final String _bundleId;
 
 		/**
 		 * Constructor
 		 * @param translator
 		 * @param bundleId
 		 */
-		public DomainSourceModelTranslatorDescriptor(String translator, String bundleId) {
+		public DomainSourceModelTranslatorDescriptor(final String translator, final String bundleId) {
 			this._translator = translator;
 			this._bundleId = bundleId;
 		}

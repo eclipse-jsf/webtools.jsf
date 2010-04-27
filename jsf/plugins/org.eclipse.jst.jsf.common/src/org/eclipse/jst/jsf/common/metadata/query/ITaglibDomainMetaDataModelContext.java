@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IProject;
  * Context for determining the Model to locate in the MetaDataManager
  * <p>Should NOT be implemented by clients
  * <p><b>Provisional API - subject to change</b></p>
+ * @deprecated - Helios
  */
 public interface ITaglibDomainMetaDataModelContext extends IMetaDataModelContext {
 	/**

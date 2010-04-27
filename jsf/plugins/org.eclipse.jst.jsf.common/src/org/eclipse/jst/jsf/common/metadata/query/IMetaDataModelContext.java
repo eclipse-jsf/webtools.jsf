@@ -15,6 +15,7 @@ import org.eclipse.jst.jsf.context.IModelContext;
 
 /**
  * <p><b>Provisional API - subject to change</b></p>
+ * @deprecated - Helios
  */
 public interface IMetaDataModelContext extends IModelContext {
 	/**

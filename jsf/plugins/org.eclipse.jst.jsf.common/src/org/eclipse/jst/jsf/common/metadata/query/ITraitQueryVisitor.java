@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.common.metadata.query;
 
 import org.eclipse.jst.jsf.common.metadata.Entity;
+import org.eclipse.jst.jsf.common.metadata.Trait;
 
 /**
  * Trait querying interface
@@ -24,7 +25,7 @@ public interface ITraitQueryVisitor extends ITraitVisitor{
 	 * @param traitKey
 	 * @return IResultSet of Traits.  IResultSet must NOT be null.  Implementers may return {@link EmptyResultSet}.
 	 */
-	public IResultSet/*<Trait>*/ findTraits(final Entity entity,
+	public IResultSet<Trait> findTraits(final Entity entity,
 			final String traitKey);
 
 }

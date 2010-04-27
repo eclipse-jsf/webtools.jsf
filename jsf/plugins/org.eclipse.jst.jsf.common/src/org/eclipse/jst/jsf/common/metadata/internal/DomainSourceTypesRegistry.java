@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.DomainSourceModelTypeDescrip
 public class DomainSourceTypesRegistry{
 	private static final String EXTENSION_POINT_ID = "domainSourceModelTypes"; //$NON-NLS-1$
 	private static DomainSourceTypesRegistry INSTANCE;
-	private Map/*<String, List/*<DomainSourceModelTypeDescriptor>>*/ domainSourceTypeDescriptors;
+	private Map<String, List<DomainSourceModelTypeDescriptor>> domainSourceTypeDescriptors;
 	
 	private DomainSourceTypesRegistry(){
 		init();
@@ -52,18 +51,17 @@ public class DomainSourceTypesRegistry{
 	 * @param domain identifier
 	 * @return list of <code>IDomainSourceModelType</code> sorted in descending order by ordinal
 	 */
-	public List/*<IDomainSourceModelType>*/ getDomainSourceTypes(String domain){		
-		List/*<DomainSourceModelTypeDescriptor>*/ list = getDomainSourceModelDescriptors(domain);
-		List/*<IDomainSourceModelType>*/ types = new ArrayList/*<IDomainSourceModelType>*/();
-		for(Iterator/*<DomainSourceModelTypeDescriptor>*/ it=list.iterator();it.hasNext();){
-			DomainSourceModelTypeDescriptor d = (DomainSourceModelTypeDescriptor)it.next();
+	public List<IDomainSourceModelType> getDomainSourceTypes(String domain){		
+		final List<DomainSourceModelTypeDescriptor> list = getDomainSourceModelDescriptors(domain);
+		final List<IDomainSourceModelType> types = new ArrayList<IDomainSourceModelType>();
+		for(final DomainSourceModelTypeDescriptor d : list){		
 			types.add(d.getInstance());
 		}
 		//default sort descending by ordinal 
 		Collections.sort(types, new Comparator(){
-			public int compare(Object o1, Object o2) {
-				DomainSourceModelTypeImpl desc1 = (DomainSourceModelTypeImpl)o1;
-				DomainSourceModelTypeImpl desc2 = (DomainSourceModelTypeImpl)o2;
+			public int compare(final Object o1, final Object o2) {
+				final DomainSourceModelTypeImpl desc1 = (DomainSourceModelTypeImpl)o1;
+				final DomainSourceModelTypeImpl desc2 = (DomainSourceModelTypeImpl)o2;
 				if (desc1.getOrdinal() == desc2.getOrdinal())
 						return 0;
 				if (desc1.getOrdinal() > desc2.getOrdinal())
@@ -77,8 +75,8 @@ public class DomainSourceTypesRegistry{
 		return types;
 	}
 	
-	private List getDomainSourceModelDescriptors(String domain) {
-		List ret = (List)getDescriptors().get(domain);
+	private List getDomainSourceModelDescriptors(final String domain) {
+		final List ret = getDescriptors().get(domain);
 		if (ret != null && ret.size()>0)
 			return ret;
 		
@@ -86,54 +84,48 @@ public class DomainSourceTypesRegistry{
 	}
 
 	private List getDefaultSourceModelDescriptor() {
-		List ret = new ArrayList();
-		DomainSourceModelTypeDescriptor desc = new DomainSourceModelTypeDescriptor();
+		final List ret = new ArrayList();
+		final DomainSourceModelTypeDescriptor desc = new DomainSourceModelTypeDescriptor();
 		ret.add(desc);
 		return ret;
 	}
 
 	private synchronized void init() {
-		IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-		IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, EXTENSION_POINT_ID );
+		final IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+		final IExtensionPoint point = extensionRegistry.getExtensionPoint(JSFCommonPlugin.PLUGIN_ID, EXTENSION_POINT_ID );
 		if (point != null) {
-			IConfigurationElement[] elements = point.getConfigurationElements();
+			final IConfigurationElement[] elements = point.getConfigurationElements();
 			for (int i = 0; i < elements.length; i++) {
-				IConfigurationElement element = elements[i];
+				final IConfigurationElement element = elements[i];
 				addDomainSourceTypeDescriptor(element);
 			}
 		}
 	}
 
-	private void addDomainSourceTypeDescriptor(IConfigurationElement element) {
-		String domainId = element.getAttribute("domainId"); //$NON-NLS-1$
-		String srcHdlrId = element.getAttribute("domainSourceModelTypeId"); //$NON-NLS-1$
-		String locator = element.getAttribute("locator"); //$NON-NLS-1$
-		String ordinalStr = element.getAttribute("ordinal"); //$NON-NLS-1$
+	private void addDomainSourceTypeDescriptor(final IConfigurationElement element) {
+		final String domainId = element.getAttribute("domainId"); //$NON-NLS-1$
+		final String srcHdlrId = element.getAttribute("domainSourceModelTypeId"); //$NON-NLS-1$
+		final String locator = element.getAttribute("locator"); //$NON-NLS-1$
+		final String ordinalStr = element.getAttribute("ordinal"); //$NON-NLS-1$
 		int ordinal = 1;
 		if (ordinalStr!=null && !ordinalStr.equals("")){ //$NON-NLS-1$
 			ordinal = Integer.parseInt(ordinalStr);
 		}
-		DomainSourceModelTypeDescriptor d = new DomainSourceModelTypeDescriptor(domainId, srcHdlrId, locator, element.getContributor().getName(), ordinal);
-		List/*<DomainSourceTypeDescriptor>*/ descs = (List)getDescriptors().get(domainId);
+		final DomainSourceModelTypeDescriptor d = new DomainSourceModelTypeDescriptor(domainId, srcHdlrId, locator, element.getContributor().getName(), ordinal);
+		List<DomainSourceModelTypeDescriptor> descs = getDescriptors().get(domainId);
 		if (descs == null){
-			descs = new ArrayList/*<DomainSourceTypeDescriptor>*/();
+			descs = new ArrayList<DomainSourceModelTypeDescriptor>();
 			getDescriptors().put(domainId, descs);
 		}
 		descs.add(d);
 	}
 
-	private Map/*<String, List/*<DomainSourceTypeDescriptor>>*/ getDescriptors() {
+	private Map<String, List<DomainSourceModelTypeDescriptor>> getDescriptors() {
 		if (domainSourceTypeDescriptors == null){
-			domainSourceTypeDescriptors = new HashMap/*<String, List/*<DomainSourceTypeDescriptor>>*/();
+			domainSourceTypeDescriptors = new HashMap<String, List<DomainSourceModelTypeDescriptor>>();
 		}
 		return domainSourceTypeDescriptors;
 	}
 	
-//	private Map/*<String, List/*<IDomainSourceModelType>>*/ getDomainSourceTypes() {
-//		if (domainSourceTypes == null){
-//			domainSourceTypes = new HashMap/*<String, List/*<IDomainSourceModelType>>*/();
-//		}
-//		return domainSourceTypes;
-//	}
 
 }

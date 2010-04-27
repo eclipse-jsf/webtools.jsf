@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceFactoryImpl;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.util.MetadataResourceImpl;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 
 /**
  * Singleton that produces and loads standard metadata models.  
@@ -104,24 +103,35 @@ public class StandardModelFactory {
 		super();
 	}
 	
+//	/**
+//	 * Factory method that probably belongs somewhere else!
+//	 * @param key
+//	 * @param strategy
+//	 * @return an empty MetaDataModel
+//	 * @deprecated
+//	 */
+//	public MetaDataModel createModel(ModelKeyDescriptor key, IDomainLoadingStrategy strategy){
+//		return new MetaDataModel(key, strategy);
+//	}
+	
 	/**
-	 * Factory method that probably belongs somewhere else!
-	 * @param key
+	 * @param context
 	 * @param strategy
-	 * @return an empty MetaDataModel
+	 * @return MetaDataModel
 	 */
-	public MetaDataModel createModel(ModelKeyDescriptor key, IDomainLoadingStrategy strategy){
-		return new MetaDataModel(key, strategy);
+	public MetaDataModel createModel(final IMetaDataModelContext context, final IDomainLoadingStrategy strategy) {
+		return new MetaDataModel(context, strategy);
 	}
-
-	/**
-	 * Factory method that probably belongs somewhere else!
-	 * @param modelContext 
-	 * @return a ModelKeyDescriptor for the context
-	 */
-	public ModelKeyDescriptor createModelKeyDescriptor(final ITaglibDomainMetaDataModelContext modelContext) {
-		return new ModelKeyDescriptor(modelContext.getProject(), modelContext.getDomainID(), modelContext.getURI());
-	}
+//
+//	/**
+//	 * Factory method that probably belongs somewhere else!
+//	 * @param modelContext 
+//	 * @return a ModelKeyDescriptor for the context
+//	 * @deprecated
+//	 */
+//	public ModelKeyDescriptor createModelKeyDescriptor(final ITaglibDomainMetaDataModelContext modelContext) {
+//		return new ModelKeyDescriptor(modelContext.getProject(), modelContext.getDomainID(), modelContext.getURI());
+//	}
 	
 	/**
 	 * @param inputStream
@@ -289,5 +299,6 @@ public class StandardModelFactory {
 		if (debugFlag)
 			System.out.println(msg + "["+Thread.currentThread().getId()+"]"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
+
 	
 }

@@ -31,7 +31,7 @@ public class SimpleTraitQueryVisitorImpl extends AbstractTraitQueryVisitor  {
 	private String _traitQuery;
 	private SearchControl _control;
 	private boolean _stop;
-	private List/*<Trait>*/ _traitResults;
+	private List<Trait> _traitResults;
 
 	/**
 	 * Constructor that also creates a default SearchControl
@@ -53,13 +53,13 @@ public class SimpleTraitQueryVisitorImpl extends AbstractTraitQueryVisitor  {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitQueryVisitor#findTraits(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
 	 */
-	public IResultSet/*<Trait>*/ findTraits(final Entity entity, final String traitQuery){
+	public IResultSet<Trait> findTraits(final Entity entity, final String traitQuery){
 		
 		resetQuery();
 		if (entity != null){			
 			this._traitQuery = traitQuery;			
-			for (Iterator/*<Trait>*/ it=entity.getTraits().iterator();it.hasNext();){
-				Trait t = (Trait)it.next();
+			for (Iterator<Trait> it=entity.getTraits().iterator();it.hasNext();){
+				Trait t = it.next();
 				t.accept(this);
 				if (stopVisiting())
 					break;
@@ -72,7 +72,7 @@ public class SimpleTraitQueryVisitorImpl extends AbstractTraitQueryVisitor  {
 	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor#visit(org.eclipse.jst.jsf.common.metadata.Trait)
 	 */
 	public void visit(Trait trait) {		
-		if (trait.equals(_traitQuery))
+		if (trait.getId().equals(_traitQuery))
 			getInternalTraitResults().add(trait);		
 		
 		checkShouldStopVisitingTraits();
@@ -89,9 +89,9 @@ public class SimpleTraitQueryVisitorImpl extends AbstractTraitQueryVisitor  {
 	/**
 	 * @return lazy init of a SimpleResultSet of Traits
 	 */
-	private List/*<Trait>*/ getInternalTraitResults(){
+	private List<Trait> getInternalTraitResults(){
 		if (_traitResults == null){
-			_traitResults = new ArrayList/*<Trait>*/();
+			_traitResults = new ArrayList<Trait>();
 		}
 		return _traitResults;
 	}

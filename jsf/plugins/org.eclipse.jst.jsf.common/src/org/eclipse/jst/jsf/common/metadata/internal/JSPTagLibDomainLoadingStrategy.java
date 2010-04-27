@@ -32,7 +32,7 @@ public class JSPTagLibDomainLoadingStrategy extends DomainLoadingStrategy {
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.DomainLoadingStrategy#sortSourceTypes(java.util.List)
 	 */
-	protected void sortSourceTypes(List/*<IDomainSourceType>*/ sourceTypes) {
+	protected void sortSourceTypes(List<IDomainSourceModelType> sourceTypes) {
 		//an opportunity to override the priority of the source types...
 	}
 

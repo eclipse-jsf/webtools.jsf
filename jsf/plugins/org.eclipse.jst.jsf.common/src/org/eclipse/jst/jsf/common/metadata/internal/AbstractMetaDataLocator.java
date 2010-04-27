@@ -20,7 +20,7 @@ import java.util.Set;
 public abstract class AbstractMetaDataLocator implements IMetaDataLocator, IMetaDataObservable{
 	
 	private IDomainSourceModelType domainSourceModelType;
-	private Set/*<IMetaDataObserver>*/ observers;
+	private Set <IMetaDataObserver> observers;
 
 	/**
 	 * Constructor
@@ -40,28 +40,28 @@ public abstract class AbstractMetaDataLocator implements IMetaDataLocator, IMeta
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator#setDomainSourceModelType(org.eclipse.jst.jsf.common.metadata.internal.IDomainSourceModelType)
 	 */
 	public void setDomainSourceModelType(
-			IDomainSourceModelType domainSourceModelType) {
+			final IDomainSourceModelType domainSourceModelType) {
 		this.domainSourceModelType = domainSourceModelType;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator#addObserver(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataObserver)
 	 */
-	public void addObserver(IMetaDataObserver observer) {
+	public void addObserver(final IMetaDataObserver observer) {
 		observers.add(observer);		
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator#removeObserver(org.eclipse.jst.jsf.common.metadata.internal.IMetaDataObserver)
 	 */
-	public void removeObserver(IMetaDataObserver observer) {	
+	public void removeObserver(final IMetaDataObserver observer) {	
 		observers.remove(observer);
 	}
 	
 	/**
 	 * @return the set of {@link IMetaDataObserver}s for this instance
 	 */
-	public Set/*<IMetaDataObserver>*/ getObservers(){
+	public Set <IMetaDataObserver> getObservers(){
 		return observers;
 	}
 

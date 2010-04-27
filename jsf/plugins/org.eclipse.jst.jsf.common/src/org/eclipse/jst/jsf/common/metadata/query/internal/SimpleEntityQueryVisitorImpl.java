@@ -33,7 +33,7 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor imp
 	private boolean _stop;
 
 	private EntityQueryFilterVisitor entityQuery;
-	private List/*<Entity>*/ _entityResults;
+	private List<Entity> _entityResults;
 	private Entity initialEntityContext;
 
 	/**
@@ -56,7 +56,7 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor imp
 	/* (non-Javadoc)
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityQueryVisitor#findEntities(org.eclipse.jst.jsf.common.metadata.Entity, java.lang.String)
 	 */
-	public IResultSet/*<Entity>*/ findEntities(final Entity initialEntity,
+	public IResultSet<Entity> findEntities(final Entity initialEntity,
 			final String entityKey) {
 		
 		resetQuery();
@@ -75,9 +75,9 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor imp
 		_entityResults = null;
 	}
 
-	private List/*<Entity>*/ getInternalEntityResults(){
+	private List<Entity> getInternalEntityResults(){
 		if (_entityResults == null){
-			_entityResults = new ArrayList/*<Entity>*/();
+			_entityResults = new ArrayList<Entity>();
 		}
 		return _entityResults;
 	}
@@ -137,7 +137,7 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor imp
 		/**
 		 * Constructor
 		 * @param initialContextId - Entity id from which the query is rooted
-		 * @param queryKey - query key which may be compound ("A/B/C")
+		 * @param queryKey - query key which may be compound ("A/B/C" - assuming "/" is the delimiter)
 		 */
 		public EntityQueryFilterVisitor(final String initialContextId, final String queryKey){			
 			init(initialContextId, queryKey);			
@@ -146,11 +146,11 @@ public class SimpleEntityQueryVisitorImpl extends AbstractEntityQueryVisitor imp
 		private void init(final String initialContextId, final String key) {
 			entityQueue = new ArrayList<String>(3);
 			addLevel(initialContextId);
-			if (key == null || key.trim().equals("") || key.trim().equals("/")){  //$NON-NLS-1$ //$NON-NLS-2$
+			if (key == null || key.trim().equals("") || key.trim().equals(getLevelDelimiter())){  //$NON-NLS-1$ 
 				addLevel(""); //$NON-NLS-1$
 			}
 			else {
-				final StringTokenizer st = new StringTokenizer(key, "/"); //$NON-NLS-1$
+				final StringTokenizer st = new StringTokenizer(key, getLevelDelimiter());
 				String partialKey = st.nextToken();
 				addLevel(partialKey);
 				while (st.hasMoreElements()){

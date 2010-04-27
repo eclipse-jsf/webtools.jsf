@@ -298,7 +298,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
             final EventResult result = EventResult.getDefaultEventResult();
 
             // not interested
-            if (!_resource.equals(event.getAffectedResource()))
+            if ((_resource != null && !_resource.equals(event.getAffectedResource()) || _resource == null)) //if resource == null, then it is the workspace, and can bail
             {
                 return EventResult.getDefaultEventResult();
             }

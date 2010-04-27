@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.MissingResourceException;
@@ -35,22 +36,21 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 
 
 /**
  * Registry of standard metadata files
  */
 public final class StandardMetaDataFileRegistry {
-	private Map/*<String, List<IMetaDataSourceModelProvider>>*/ mdFilesMap 	= new HashMap/*<String, List<IMetaDataSourceModelProvider>>*/(1);
-	private List/*<IMetaDataSourceModelProvider>*/ EMPTY_LIST 	= new ArrayList/*<IMetaDataSourceModelProvider>*/(0);
+	private Map<String, List<IMetaDataSourceModelProvider>> mdFilesMap 	= new HashMap<String, List<IMetaDataSourceModelProvider>>(1);
+	private List<IMetaDataSourceModelProvider> 				EMPTY_LIST 	= new ArrayList<IMetaDataSourceModelProvider>(0);
 
 	private static StandardMetaDataFileRegistry reg;
 	
 	/**
 	 * @return the singleton instance of the registry
 	 */
-	public static StandardMetaDataFileRegistry getInstance() {
+	public synchronized static StandardMetaDataFileRegistry getInstance() {
 		if (reg == null){
 			reg = new StandardMetaDataFileRegistry();
 		}
@@ -66,8 +66,8 @@ public final class StandardMetaDataFileRegistry {
 	 * @return list of standard metadata sources as <code>IMetaDataSourceModelProvider</code>s.  
 	 * Returns empty list of no standard metadata files are registered for the given uri.
 	 */
-	public synchronized List/*<IMetaDataSourceModelProvider>*/ getStandardMetaDataModelProviders(String uri) {
-		List/*<IMetaDataSourceModelProvider>*/ theList = (List)mdFilesMap.get(uri);
+	public synchronized List<IMetaDataSourceModelProvider> getStandardMetaDataModelProviders(String uri) {
+		List<IMetaDataSourceModelProvider> theList = mdFilesMap.get(uri);
 		return theList != null ? theList : EMPTY_LIST ;
 	}
 		
@@ -77,9 +77,9 @@ public final class StandardMetaDataFileRegistry {
 	 * @param fileInfo 
 	 */
 	public synchronized void addStandardMetaDataFileInfo(String uri, IStandardMetaDataSourceInfo fileInfo) {
-		List/*<IMetaDataSourceModelProvider>*/ providers = (List) mdFilesMap.get(uri);
+		List<IMetaDataSourceModelProvider> providers = mdFilesMap.get(uri);
 		if (providers == null) {
-			providers = new ArrayList/*<IStandardMetaDataSourceInfo>*/();
+			providers = new ArrayList<IMetaDataSourceModelProvider>();
 			mdFilesMap.put(uri, providers);
 		}
 		providers.add(new StandardMetaDataFilesProvider(fileInfo));
@@ -250,8 +250,8 @@ static class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvid
 				
 				private String getImageBase(){
 					if (imageBase == null){
-						Model aModel = (Model)getSourceModel();
-						Trait t = TaglibDomainMetaDataQueryHelper.getTrait(aModel, "images-base-path"); //$NON-NLS-1$
+						final Model aModel = (Model)getSourceModel();
+						final Trait t = getImageBasePath(aModel);
 						if (t == null){
 							imageBase = "";		 //$NON-NLS-1$
 						} else {
@@ -262,6 +262,16 @@ static class StandardMetaDataFilesProvider implements IMetaDataSourceModelProvid
 						}
 					}
 					return imageBase;
+				}
+				
+				private Trait getImageBasePath(final Model aModel) {
+					for (final Iterator it= aModel.getTraits().iterator(); it.hasNext();) {
+						Trait t = (Trait)it.next();
+						if (t.getId().equals("images-base-path")){ //$NON-NLS-1$
+							return t;
+						}
+					}
+					return null;
 				}
 				
 			};

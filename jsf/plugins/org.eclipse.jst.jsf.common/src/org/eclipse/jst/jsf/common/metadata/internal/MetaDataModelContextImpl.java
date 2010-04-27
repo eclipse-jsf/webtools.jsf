@@ -15,6 +15,7 @@ import org.eclipse.jst.jsf.common.metadata.query.IMetaDataModelContext;
 
 /**
  * Simple implementation of {@link IMetaDataModelContext}
+ * @deprecated - Helios
  *
  */
 public class MetaDataModelContextImpl implements IMetaDataModelContext, Cloneable {

@@ -1,17 +1,14 @@
 /**
  * Copyright (c) 2007 Oracle Corporation
  *
- * $Id: BooleanValueImpl.java,v 1.1 2010/01/21 00:01:44 gkessler Exp $
+ * $Id: BooleanValueImpl.java,v 1.2 2010/04/27 17:40:10 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesPackage;
 

@@ -70,6 +70,7 @@ public interface Model extends Entity {
 	 * <p>
 	 * If the meaning of the '<em>Current Model Context</em>' attribute isn't clear,
 	 * there really should be more of a description here...
+	 * @deprecated - Helios
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Current Model Context</em>' attribute.
@@ -83,6 +84,7 @@ public interface Model extends Entity {
 	/**
 	 * Sets the value of the '{@link org.eclipse.jst.jsf.common.metadata.Model#getCurrentModelContext <em>Current Model Context</em>}' attribute.
 	 * <!-- begin-user-doc -->
+	 * @deprecated - Helios
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Current Model Context</em>' attribute.
 	 * @see #getCurrentModelContext()
