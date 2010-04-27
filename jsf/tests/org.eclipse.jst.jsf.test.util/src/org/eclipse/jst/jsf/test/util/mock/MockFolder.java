@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 
 public class MockFolder extends MockContainer implements IFolder
 {
@@ -53,7 +54,7 @@ public class MockFolder extends MockContainer implements IFolder
 
     public IFolder getFolder(String name)
     {
-        throw new UnsupportedOperationException();
+        return super.getFolder(new Path(name));
     }
 
     public void move(IPath destination, boolean force, boolean keepHistory,

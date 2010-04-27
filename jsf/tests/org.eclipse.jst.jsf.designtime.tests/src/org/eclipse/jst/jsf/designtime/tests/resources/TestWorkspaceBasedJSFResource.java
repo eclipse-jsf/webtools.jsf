@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.designtime.tests.resources;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
@@ -38,5 +39,11 @@ public class TestWorkspaceBasedJSFResource
 
         _file.setExists(false);
         assertFalse(_res.isAccessible());
+    }
+    
+    @Test
+    public void testGetResource()
+    {
+        assertEquals(_file, _res.getResource());
     }
 }

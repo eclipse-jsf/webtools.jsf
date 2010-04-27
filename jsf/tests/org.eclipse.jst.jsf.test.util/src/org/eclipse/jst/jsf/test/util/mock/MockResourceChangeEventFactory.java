@@ -1,5 +1,6 @@
 package org.eclipse.jst.jsf.test.util.mock;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResourceChangeEvent;
 
 public class MockResourceChangeEventFactory
@@ -57,6 +58,14 @@ public class MockResourceChangeEventFactory
     {
         return new MockResourceChangeEvent(project,
                 IResourceChangeEvent.PRE_DELETE, null);
+    }
+
+    public IResourceChangeEvent createSimpleFolderAdded(IFolder folder)
+    {
+        final MockResourceDelta delta = _deltaFactory
+                .createSimpleFolderAdded(folder);
+        return new MockResourceChangeEvent(IResourceChangeEvent.POST_CHANGE,
+                delta);
     }
 
 }
