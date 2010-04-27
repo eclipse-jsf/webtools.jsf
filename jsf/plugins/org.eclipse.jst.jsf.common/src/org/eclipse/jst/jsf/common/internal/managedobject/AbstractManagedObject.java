@@ -35,7 +35,10 @@ public abstract class AbstractManagedObject implements IManagedObject
      * org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject#dispose
      * ()
      */
-    public abstract void dispose();
+    public void dispose()
+    {
+        _isDisposed.set(true);
+    }
 
     public boolean isDisposed()
     {

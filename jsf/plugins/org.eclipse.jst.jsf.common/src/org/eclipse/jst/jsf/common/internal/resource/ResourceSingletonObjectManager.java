@@ -254,9 +254,14 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
         return _lifecycleListener;
     }
 
-    /*package*/ static class ManagedResourceObject<MANAGEDOBJECT extends IManagedObject>
+    /**
+     * @author cbateman
+     * 
+     * @param <MANAGEDOBJECT>
+     */
+    protected final static class ManagedResourceObject<MANAGEDOBJECT extends IManagedObject>
     {
-        private final MANAGEDOBJECT            _managedObject;
+        private final MANAGEDOBJECT _managedObject;
         private final MyLifecycleEventListener _eventListener;
 
         private ManagedResourceObject(final MANAGEDOBJECT managedObject,
@@ -266,11 +271,17 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
             _eventListener = eventListener;
         }
 
+        /**
+         * @return the managed object
+         */
         public MANAGEDOBJECT getManagedObject()
         {
             return _managedObject;
         }
 
+        /**
+         * @return the event listener
+         */
         public MyLifecycleEventListener getEventListener()
         {
             return _eventListener;
@@ -298,7 +309,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
             final EventResult result = EventResult.getDefaultEventResult();
 
             // not interested
-            if ((_resource != null && !_resource.equals(event.getAffectedResource()) || _resource == null)) //if resource == null, then it is the workspace, and can bail
+            if (!_resource.equals(event.getAffectedResource()))
             {
                 return EventResult.getDefaultEventResult();
             }
