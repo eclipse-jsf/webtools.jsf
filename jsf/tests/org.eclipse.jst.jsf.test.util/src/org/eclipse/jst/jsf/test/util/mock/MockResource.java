@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.test.util.mock;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class MockResource implements IResource
     private MockWorkspace _workspace;
     private IProject _project;
     private long _modificationStamp;
+	private Map<QualifiedName, Object> _sessionProps;
     public final static List<Integer> VALID_TYPES;
 
     static
@@ -315,13 +317,13 @@ public class MockResource implements IResource
 
     public Map<?, ?> getSessionProperties() throws CoreException
     {
-        throw new UnsupportedOperationException();
+    	return getSessionPropsMap();
     }
 
     public Object getSessionProperty(final QualifiedName key)
             throws CoreException
     {
-        throw new UnsupportedOperationException();
+    	return getSessionProperties().get(key);
     }
 
     public MockWorkspace getWorkspace()
@@ -506,11 +508,17 @@ public class MockResource implements IResource
     public void setSessionProperty(final QualifiedName key, final Object value)
             throws CoreException
     {
-        throw new UnsupportedOperationException();
-
+    	getSessionPropsMap().put(key, value);
     }
 
-    public void setTeamPrivateMember(final boolean isTeamPrivate)
+    private Map<QualifiedName, Object> getSessionPropsMap() {
+    	if (_sessionProps == null) {
+    		_sessionProps = new HashMap<QualifiedName, Object>();
+    	}
+		return _sessionProps;
+	}
+
+	public void setTeamPrivateMember(final boolean isTeamPrivate)
             throws CoreException
     {
         throw new UnsupportedOperationException();

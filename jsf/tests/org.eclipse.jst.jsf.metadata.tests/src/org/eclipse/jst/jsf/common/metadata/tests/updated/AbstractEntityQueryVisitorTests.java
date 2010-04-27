@@ -9,7 +9,7 @@
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jst.jsf.common.metadata.tests;
+package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -18,7 +18,7 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.EmptyResultSet;
 
-public class AbstractEntityQueryVisitorTest extends TestCase {
+public class AbstractEntityQueryVisitorTests extends TestCase {
 	private NullEntityQueryVisitor visitor;
 	protected void setUp() throws Exception {
 		super.setUp();

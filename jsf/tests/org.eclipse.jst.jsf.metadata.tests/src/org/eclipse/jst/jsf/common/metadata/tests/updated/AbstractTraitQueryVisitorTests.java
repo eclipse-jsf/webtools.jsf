@@ -9,34 +9,35 @@
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jst.jsf.common.metadata.tests;
+package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.common.metadata.Entity;
-import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
+import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.query.AbstractTraitQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.EmptyResultSet;
 
-public class AbstractEntityQueryVisitorTest extends TestCase {
-	private NullEntityQueryVisitor visitor;
+public class AbstractTraitQueryVisitorTests extends TestCase {
+	private NullTraitQueryVisitor visitor;
 	protected void setUp() throws Exception {
 		super.setUp();
-		visitor = new NullEntityQueryVisitor();		
+		visitor = new NullTraitQueryVisitor();		
 	}
 
-	public void testFindEntities() {
+	public void testFindTraits() {
 		Assert.assertNotNull(visitor);
-		Assert.assertEquals(EmptyResultSet.class, visitor.findEntities(null, null).getClass());
+		Assert.assertEquals(EmptyResultSet.class, visitor.findTraits(null, null).getClass());
 	}
 
-	private class NullEntityQueryVisitor extends AbstractEntityQueryVisitor{
+	private class NullTraitQueryVisitor extends AbstractTraitQueryVisitor{
 
 		@Override
-		public void visit(Entity entity) {
-			// nada			
+		public void visit(Trait trait) {
+			//nada		
 		}
 
+		
 	}
 	
 }

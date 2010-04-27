@@ -8,31 +8,34 @@
  * Contributors:
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.jsf.common.metadata.tests;
+package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
 import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
-import org.eclipse.jst.jsf.common.metadata.internal.TaglibDomainMetaDataModelContextImpl;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
+import org.eclipse.jst.jsf.common.metadata.tests.AbstractBaseMetaDataTestCase;
 
 public class ModelImplTests extends AbstractBaseMetaDataTestCase {
-	protected ITaglibDomainMetaDataModelContext baseContext;
+
 	Model model;
 	public void setUp() throws Exception {
 		super.setUp();
 		
-		baseContext = new TaglibDomainMetaDataModelContextImpl(domain, project, baseTestUri);
-		model = TaglibDomainMetaDataQueryHelper.getModel(baseContext);
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		model = query.findTagLibraryModel(baseTestUri);
 		assertNotNull(model);
 	}
-	public void testAccept() {
-//		fail("Not yet implemented");
-	}
-
+	
 	public void testGetModel() {
 		assertNotNull(model.getModel());
 		assertEquals(model.getModel(), model);
+	}
+
+	public void testGetModelId() {
 		assertEquals(baseTestUri, model.getId());
 	}
 
@@ -44,14 +47,6 @@ public class ModelImplTests extends AbstractBaseMetaDataTestCase {
 
 	public void testSetSourceModelProvider() {
 //		fail("Not yet implemented");
-	}
-
-	public void testGetCurrentModelContext() {
-		//context
-		assertNotNull(model.getCurrentModelContext());
-		assertEquals(model.getCurrentModelContext().getProject(), project);
-		assertEquals(model.getCurrentModelContext().getDomain(), domain);
-		assertEquals(model.getCurrentModelContext().getUri(), baseTestUri);
 	}
 
 	public void testSetCurrentModelContext() {
@@ -89,7 +84,7 @@ public class ModelImplTests extends AbstractBaseMetaDataTestCase {
 	public void testGetId() {
 		//id
 		assertNotNull(model.getId());
-		assertEquals(baseTestUri+" is not same as model.getId()",baseTestUri, model.getId() );		
+		assertEquals(baseTestUri+" is not same as model.getId()", baseTestUri, model.getId() );		
 	}
 
 	public void testSetId() {

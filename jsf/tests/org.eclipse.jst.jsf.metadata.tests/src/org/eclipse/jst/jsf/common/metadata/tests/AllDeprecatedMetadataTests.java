@@ -13,11 +13,11 @@ package org.eclipse.jst.jsf.common.metadata.tests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class AllMetadataTests {
+public class AllDeprecatedMetadataTests {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite(
-				"Test for org.eclipse.jst.jsf.common.metadata.tests");
+				"Tests for org.eclipse.jst.jsf.common.metadata (deprecated)");
 		//$JUnit-BEGIN$
 		suite.addTestSuite(EmptyResultSetTest.class);
 		suite.addTestSuite(MetaDataExceptionTest.class);

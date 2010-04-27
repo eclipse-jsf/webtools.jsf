@@ -2,7 +2,11 @@ package org.eclipse.jst.jsf.metadata.tests.pagedesigner;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.metadata.tests.util.IJSFRuntimeRequiredV11;
@@ -77,6 +81,7 @@ public class PaletteTests extends JSPTestCase implements IJSFRuntimeRequiredV11 
 
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void testLoadJSPModel() {
 		Model JSP11Model = TaglibDomainMetaDataQueryHelper.getModel(
 				TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(
@@ -89,8 +94,15 @@ public class PaletteTests extends JSPTestCase implements IJSFRuntimeRequiredV11 
 						_testEnv.getTestProject(), "jsp11"));
 		
 		
-		assertNotNull(jsp11Model);
-		assertSame(jsp11Model, JSP11Model);
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(_testEnv.getTestProject());
+		ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		Model JSP11Model_2 = query.getQueryHelper().getModel(CMDocType.JSP11_DOC_TYPE);
+		assertNotNull(JSP11Model_2);
+		assertSame(jsp11Model, JSP11Model_2);
+		
+		Model jsp11Model_2 = query.getQueryHelper().getModel("jsp11");
+		assertNotNull(jsp11Model_2);
+		assertSame(jsp11Model, jsp11Model_2);
 	}
 	
 	public void testPalletteDrawers() {

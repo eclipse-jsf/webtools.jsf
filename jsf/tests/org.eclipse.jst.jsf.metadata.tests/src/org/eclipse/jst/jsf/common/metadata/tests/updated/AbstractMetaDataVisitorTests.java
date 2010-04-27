@@ -9,34 +9,27 @@
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jst.jsf.common.metadata.tests;
+package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.eclipse.jst.jsf.common.metadata.Entity;
-import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
-import org.eclipse.jst.jsf.common.metadata.query.EmptyResultSet;
+import org.eclipse.jst.jsf.common.metadata.query.AbstractMetaDataVisitor;
 
-public class AbstractEntityQueryVisitorTest extends TestCase {
-	private NullEntityQueryVisitor visitor;
+public class AbstractMetaDataVisitorTests extends TestCase {
+	private NullMetaDataVisitor visitor;
 	protected void setUp() throws Exception {
 		super.setUp();
-		visitor = new NullEntityQueryVisitor();		
+		visitor = new NullMetaDataVisitor();		
 	}
 
-	public void testFindEntities() {
+	public void testFindTraits() {
 		Assert.assertNotNull(visitor);
-		Assert.assertEquals(EmptyResultSet.class, visitor.findEntities(null, null).getClass());
+		Assert.assertEquals(false, visitor.stopVisiting());
 	}
 
-	private class NullEntityQueryVisitor extends AbstractEntityQueryVisitor{
-
-		@Override
-		public void visit(Entity entity) {
-			// nada			
-		}
-
+	private class NullMetaDataVisitor extends AbstractMetaDataVisitor{
+		//
 	}
 	
 }

@@ -15,21 +15,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.eclipse.jst.jsf.common.metadata.tests.AbstractEntityQueryVisitorTest;
-import org.eclipse.jst.jsf.common.metadata.tests.AbstractMetaDataVisitorTest;
-import org.eclipse.jst.jsf.common.metadata.tests.AbstractTraitQueryVisitorTest;
-import org.eclipse.jst.jsf.common.metadata.tests.EmptyResultSetTest;
-import org.eclipse.jst.jsf.common.metadata.tests.EntityImplTests;
-import org.eclipse.jst.jsf.common.metadata.tests.IncludeEntityGroupImplTests;
-import org.eclipse.jst.jsf.common.metadata.tests.MergeTests;
-import org.eclipse.jst.jsf.common.metadata.tests.MetaDataExceptionTest;
-import org.eclipse.jst.jsf.common.metadata.tests.MetaDataQueryHelperTests;
-import org.eclipse.jst.jsf.common.metadata.tests.MissingMDExtensionModelTests;
-import org.eclipse.jst.jsf.common.metadata.tests.ModelImplTests;
-import org.eclipse.jst.jsf.common.metadata.tests.ModelProviderAdapterTests;
-import org.eclipse.jst.jsf.common.metadata.tests.TinyTestTests;
-import org.eclipse.jst.jsf.common.metadata.tests.TraitImplTests;
-import org.eclipse.jst.jsf.common.metadata.tests.TraitValueHelperTests;
+import org.eclipse.jst.jsf.common.metadata.tests.AllDeprecatedMetadataTests;
+import org.eclipse.jst.jsf.common.metadata.tests.updated.AllUpdatedMetadataTests;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.metadata.tests.metadataprocessing.AttributeValueRuntimeTypeExtensionsTests;
@@ -83,25 +70,28 @@ public class AllTests {
 				"Test Suite for org.eclipse.jst.jsf.metadata.tests");
 		//$JUnit-BEGIN$
 			
-		//model 		
-		addTestSuite(suite, TraitImplTests.class);
-		addTestSuite(suite, IncludeEntityGroupImplTests.class);
-		addTestSuite(suite, EntityImplTests.class);
-		addTestSuite(suite, ModelImplTests.class);
-		addTestSuite(suite, MergeTests.class);
-		addTestSuite(suite, TinyTestTests.class);
+//		//model 		
+//		addTestSuite(suite, TraitImplTests.class);
+//		addTestSuite(suite, IncludeEntityGroupImplTests.class);
+//		addTestSuite(suite, EntityImplTests.class);
+//		addTestSuite(suite, ModelImplTests.class);
+//		addTestSuite(suite, MergeTests.class);
+//		addTestSuite(suite, TinyTestTests.class);
+//		
+//		addTestSuite(suite, MissingMDExtensionModelTests.class);
+//
+////		//query + main API
+//		addTestSuite(suite, EmptyResultSetTest.class);
+//		addTestSuite(suite, MetaDataExceptionTest.class);
+//		addTestSuite(suite, AbstractMetaDataVisitorTest.class);
+//		addTestSuite(suite, AbstractEntityQueryVisitorTest.class);
+//		addTestSuite(suite, AbstractTraitQueryVisitorTest.class);
+//		addTestSuite(suite, MetaDataQueryHelperTests.class);
+//		addTestSuite(suite, TraitValueHelperTests.class);
+//		addTestSuite(suite, ModelProviderAdapterTests.class);		
 		
-		addTestSuite(suite, MissingMDExtensionModelTests.class);
-
-//		//query + main API
-		addTestSuite(suite, EmptyResultSetTest.class);
-		addTestSuite(suite, MetaDataExceptionTest.class);
-		addTestSuite(suite, AbstractMetaDataVisitorTest.class);
-		addTestSuite(suite, AbstractEntityQueryVisitorTest.class);
-		addTestSuite(suite, AbstractTraitQueryVisitorTest.class);
-		addTestSuite(suite, MetaDataQueryHelperTests.class);
-		addTestSuite(suite, TraitValueHelperTests.class);
-		addTestSuite(suite, ModelProviderAdapterTests.class);
+		suite.addTest(AllDeprecatedMetadataTests.suite());
+		suite.addTest(AllUpdatedMetadataTests.suite());
 		
 //		//metadataprocessing
 		addTestSuite(suite, MetaDataProcessorsFactoryTests.class);

@@ -1,0 +1,104 @@
+/*******************************************************************************
+ * Copyright (c) 2007, 2008 Oracle Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Oracle Corporation - initial API and implementation
+ *******************************************************************************/
+
+package org.eclipse.jst.jsf.common.metadata.tests.updated;
+
+import java.util.ResourceBundle;
+
+import junit.framework.TestCase;
+
+import org.eclipse.core.resources.IProject;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jst.jsf.common.metadata.Model;
+import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IClassLoaderProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.internal.IResourceBundleProvider;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
+import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
+import org.eclipse.swt.graphics.Image;
+
+public class ModelProviderAdapterTests extends TestCase {
+	private final String JSF_HTML_URI	= "http://java.sun.com/jsf/html";
+	private final String IMAGES_BASE 	= 	"/icons/palette/JSFHTML/small/";
+	
+	private Trait _trait;
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+		IProject project = new MockWorkspaceContext().createProject("testProject");
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		Model model = query.findTagLibraryModel(JSF_HTML_URI);
+		assertNotNull(model);
+		//get the trait that was defined by the "palette" md file.  This will establish the correct sourceModelProvider.
+		_trait = query.findTrait(model, "display-label");
+		assertNotNull(_trait);
+	}
+
+	public void testImageDescriptorProvider() {	
+
+		IImageDescriptorProvider imageProvider = (IImageDescriptorProvider)_trait.getSourceModelProvider().getAdapter(IImageDescriptorProvider.class);
+		assertNotNull(imageProvider);
+		ImageDescriptor id = imageProvider.getImageDescriptor(IMAGES_BASE+"JSF_COMMANDBUTTON");
+		assertNotNull(id);
+		Image image = id.createImage();
+		assertNotNull(image);
+		image.dispose();
+				
+	}
+
+//Comment out till resourceBundleHelper issues on Linux is resolved: https://bugs.eclipse.org/bugs/show_bug.cgi?id=202537
+	public void testResourceBundlerProvider() {
+		
+		IResourceBundleProvider bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
+		assertNotNull(bundleProvider);
+		
+		ResourceBundle bundle = bundleProvider.getResourceBundle();
+		assertNotNull(bundle);
+		
+		assertNotNull(bundle.getString("JSFHTML.display-label"));
+		assertEquals("JSF HTML", bundle.getString("JSFHTML.display-label"));
+		assertNotNull(bundle.getString("column.display-label"));
+		assertEquals("Column", bundle.getString("column.display-label"));
+		
+		//
+		IProject project = new MockWorkspaceContext().createProject("testProject");
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		Model model = query.findTagLibraryModel("RootOfPluginTest");
+		assertNotNull(model);
+		_trait = query.findTrait(model, "T1");
+		assertNotNull(_trait);
+		bundleProvider = (IResourceBundleProvider)_trait.getSourceModelProvider().getAdapter(IResourceBundleProvider.class);
+		assertNotNull(bundleProvider);
+		bundle = bundleProvider.getResourceBundle();
+		assertNotNull(bundle.getString("NLS"));
+		assertEquals("This is externalized text", bundle.getString("NLS"));		
+	}
+	
+	@SuppressWarnings({ })
+	public void testClassloaderProvider() {
+		
+		IClassLoaderProvider classLoaderProvider = (IClassLoaderProvider)_trait.getSourceModelProvider().getAdapter(IClassLoaderProvider.class);
+		assertNotNull(classLoaderProvider);
+		Class<?> klass = classLoaderProvider.loadClass("java.lang.String");
+		assertNotNull(klass);
+		
+		// when all MD was moved from WPE to tagsupport plugin, there was no longer a plugin specific class to load here.    FIX ME later.
+//		klass = classLoaderProvider.loadClass("org.eclipse.jst.pagedesigner.jsf.ui.util.JSFUIPluginResourcesUtil");
+//		assertNotNull(klass);
+	}
+	
+}

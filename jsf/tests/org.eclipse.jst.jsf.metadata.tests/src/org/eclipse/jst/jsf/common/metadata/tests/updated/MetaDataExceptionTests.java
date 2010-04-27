@@ -9,7 +9,7 @@
  *     Oracle Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.jst.jsf.common.metadata.tests;
+package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.jst.jsf.common.metadata.query.MetaDataException;
 
-public class MetaDataExceptionTest extends TestCase {
+public class MetaDataExceptionTests extends TestCase {
 
 	public void testMetaDataException() {
 		MetaDataException e = new MetaDataException();
