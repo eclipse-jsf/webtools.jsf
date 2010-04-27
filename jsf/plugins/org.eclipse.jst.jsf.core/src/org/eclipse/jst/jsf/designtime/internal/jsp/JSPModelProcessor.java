@@ -477,6 +477,13 @@ public class JSPModelProcessor
         getApplicationMap().clear();
         getRequestMap().clear();
         getSessionMap().clear();
+
+        if (taglibResolver == null) {
+            // unusual, but protect against possible NPE
+            JSFCorePlugin.log(IStatus.ERROR, "Program Error: taglib resolver is null."); //$NON-NLS-1$
+            return;
+        }
+
         //long curTime = System.currentTimeMillis();
         recurseChildNodes(model, document.getChildNodes(), taglibResolver);
         //long netTime = System.currentTimeMillis() - curTime;

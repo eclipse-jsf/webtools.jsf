@@ -377,6 +377,9 @@
         <content-type
               contentTypeId="org.eclipse.jst.jsp.core.jspsource">
         </content-type>
+        <content-type
+              contentTypeId="org.eclipse.jst.jsp.core.jspfragmentsource">
+        </content-type>
      </tagRegistry>
   </extension>
   <extension
