@@ -23,10 +23,10 @@ public class ResourceIdentifier
     /**
      * The namespace for validation diagnositics created by validate.
      */
-    public static final String ResourceIdentifierValidationNamespace = JSFCorePlugin.PLUGIN_ID+"_JSFResourceIdentifier"; //$NON-NLS-1$
+    public static final String ResourceIdentifierValidationNamespace = JSFCorePlugin.PLUGIN_ID
+            + "_JSFResourceIdentifier"; //$NON-NLS-1$
     private final String _resName;
 
-    
     /**
      * @param resName
      */
@@ -88,7 +88,9 @@ public class ResourceIdentifier
 
         if (getResourceName() == null)
         {
-            status.add(new Status(IStatus.ERROR, id, RESOURCE_NAME_MUST_NOT_BE_EMPTY, Messages.ResourceIdentifier_0, null));
+            status.add(new Status(IStatus.ERROR, id,
+                    RESOURCE_NAME_MUST_NOT_BE_EMPTY,
+                    Messages.ResourceIdentifier_0, null));
         }
 
         return status;
@@ -101,7 +103,7 @@ public class ResourceIdentifier
     {
         return validate().isOK();
     }
-    
+
     @Override
     public String toString()
     {
@@ -130,4 +132,28 @@ public class ResourceIdentifier
         }
         return idString;
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (super.equals(obj))
+        {
+            return true;
+        }
+
+        if (obj instanceof ResourceIdentifier)
+        {
+            String meToString = toString();
+            String otherToString = obj.toString();
+            return meToString.equals(otherToString);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return toString().hashCode();
+    }
+
 }

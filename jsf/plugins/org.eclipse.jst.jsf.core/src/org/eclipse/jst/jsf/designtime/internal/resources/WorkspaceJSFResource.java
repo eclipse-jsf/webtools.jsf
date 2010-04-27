@@ -36,4 +36,10 @@ public class WorkspaceJSFResource extends JSFResource
     {
         return _res.isAccessible();
     }
+
+    @Override
+    public boolean isFragment()
+    {
+        return _res.getType() != IResource.FILE; 
+    }
 }

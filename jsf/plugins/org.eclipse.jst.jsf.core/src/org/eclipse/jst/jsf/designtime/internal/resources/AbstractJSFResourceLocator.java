@@ -6,15 +6,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.internal.locator.AbstractLocator;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
+import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener.JSFResourceChangedEvent;
 
 /**
  * A locator that finds JSF resources.
  * 
  * @author cbateman
- *
+ * 
  */
 public abstract class AbstractJSFResourceLocator extends
-        AbstractLocator<List<JSFResource>, IProject, String> implements IJSFResourceLocator
+        AbstractLocator<List<JSFResource>, IProject, String> implements
+        IJSFResourceLocator
 {
 
     /**
@@ -31,5 +33,25 @@ public abstract class AbstractJSFResourceLocator extends
     }
 
     protected abstract List<JSFResource> doLocate(IProject context);
+
+    /**
+     * TODO: would be better to have a private interface to call fire.
+     * 
+     * @param event
+     */
+    protected void fireChangeEvent(final JSFResourceChangedEvent event)
+    {
+        super.fireChangeEvent(event);
+    }
+
+    public void addListener(JSFResourceChangeListener listener)
+    {
+        super.addListener(listener);
+    }
+
+    public void removeListener(JSFResourceChangeListener listener)
+    {
+        super.removeListener(listener);
+    }
 
 }

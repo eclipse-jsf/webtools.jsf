@@ -5,18 +5,16 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceManager;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceTracker;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration.WebappListener;
 
-class TaglibResourceManager extends
-        ResourceSingletonObjectManager<TaglibResourceTracker, IResource>
+class TaglibResourceManager extends ResourceManager<IFile>
 {
     private ILibraryChangeHandler _handler;
     private final WebappConfiguration _webAppConfiguration;
-//    private final IResourceChangeListener _newFileListener;
 
     public TaglibResourceManager(final IProject project,
             final ILibraryChangeHandler handler,
@@ -26,30 +24,16 @@ class TaglibResourceManager extends
         super(project.getWorkspace());
         _handler = handler;
         _webAppConfiguration = webAppConfiguration;
-        // TODO: fold into LifecycleListener
-//        _newFileListener = new IResourceChangeListener()
-//        {
-//            public void resourceChanged(final IResourceChangeEvent event)
-//            {
-//                // if the event is post change && has the same parent
-//                // project
-//                if (event.getType() == IResourceChangeEvent.POST_CHANGE
-//                        && event.getDelta().findMember(project.getFullPath()) != null)
-//                {
-//                    wsMediator.runInWorkspaceJob(new HandleFileAddJob(event), "Context param update"); //$NON-NLS-1$
-//                }
-//            }
-//        };
-
-//        getWorkspace().addResourceChangeListener(_newFileListener);
     }
 
-    public List<IFile> getFiles()
+    @Override
+    public List<IFile> getResources()
     {
         return _webAppConfiguration.getFiles();
     }
 
-    public void initFiles()
+    @Override
+    public void initResources()
     {
         _webAppConfiguration.start();
         _webAppConfiguration.addListener(new WebappListener()
@@ -90,23 +74,13 @@ class TaglibResourceManager extends
     }
 
     @Override
-    protected TaglibResourceTracker createNewInstance(final IResource resource)
+    protected ResourceTracker createNewInstance(final IResource resource)
     {
         if (resource.getType() == IResource.FILE)
         {
             return new TaglibFileTracker((IFile) resource, this, _handler);
         }
         throw new IllegalArgumentException();
-    }
-
-    public void addListener(final IResourceLifecycleListener listener)
-    {
-        super.addLifecycleEventListener(listener);
-    }
-
-    public void removeListener(final IResourceLifecycleListener listener)
-    {
-        super.removeLifecycleEventListener(listener);
     }
 
     /*
@@ -120,7 +94,6 @@ class TaglibResourceManager extends
     public void dispose()
     {
         _webAppConfiguration.dispose();
-//        getWorkspace().removeResourceChangeListener(_newFileListener);
         super.dispose();
     }
 }

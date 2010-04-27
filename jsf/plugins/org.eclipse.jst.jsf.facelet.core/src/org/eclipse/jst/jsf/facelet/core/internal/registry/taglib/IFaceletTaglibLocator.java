@@ -14,5 +14,8 @@ import org.eclipse.jst.jsf.common.internal.locator.ILocator;
  */
 public interface IFaceletTaglibLocator extends ILocator<Map<String, ? extends IFaceletTagRecord>, IProject, String>
 {
-    // do nothing
+    /**
+     * @param listener
+     */
+    public abstract void addListener(final Listener listener);
 }

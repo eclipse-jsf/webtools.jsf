@@ -39,7 +39,7 @@ import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLoc
 public class FaceletTagIndex extends
         ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
 {
-    private IProjectTaglibDescriptorFactory _factory;
+    private final IProjectTaglibDescriptorFactory _factory;
 
     /**
      * @param ws
@@ -97,31 +97,32 @@ public class FaceletTagIndex extends
             AbstractProjectTaglibDescriptorFactory
     {
         @Override
-        public IProjectTaglibDescriptor create(IProject project,
-                TagRecordFactory factory)
+        public IProjectTaglibDescriptor create(final IProject project,
+                final TagRecordFactory factory)
         {
             final List<AbstractFaceletTaglibLocator> locators = new ArrayList<AbstractFaceletTaglibLocator>();
             locators.add(new JarFileFaceletTaglibLocator(factory));
             locators.add(new ContextParamSpecifiedFaceletTaglibLocator(project,
                     factory, ModelProviderManager.getModelProvider(project),
                     new DefaultVirtualComponentQuery(), new WorkspaceMediator()));
-            List<IJSFResourceLocator> resourceLocators = new ArrayList<IJSFResourceLocator>();
+            final List<IJSFResourceLocator> resourceLocators = new ArrayList<IJSFResourceLocator>();
             resourceLocators.add(new JarBasedJSFResourceLocator(
                     Collections.EMPTY_LIST,
                     new CopyOnWriteArrayList<ILocatorChangeListener>(),
                     new DefaultJarProvider(Collections
                             .singletonList(new AlwaysMatcher())),
                     new ContentTypeResolver()));
+            final IWorkspace workspace = project.getWorkspace();
             resourceLocators.add(new WorkspaceJSFResourceLocator(
                     Collections.EMPTY_LIST,
                     new CopyOnWriteArrayList<ILocatorChangeListener>(),
                     new DefaultVirtualComponentQuery(),
-                    new ContentTypeResolver()));
+                    new ContentTypeResolver(), workspace));
             final DefaultLocatorProvider<IJSFResourceLocator> resourceLocatorProvider = new DefaultLocatorProvider<IJSFResourceLocator>(
                     resourceLocators);
             locators.add(new CompositeComponentTaglibLocator(
                     resourceLocatorProvider));
-            LocatorProvider provider = new LocatorProvider(locators);
+            final LocatorProvider provider = new LocatorProvider(locators);
             return new ProjectTaglibDescriptor(project, factory, provider);
         }
     }

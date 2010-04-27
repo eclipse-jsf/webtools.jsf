@@ -13,5 +13,12 @@ import org.eclipse.jst.jsf.common.internal.locator.ILocator;
  */
 public interface IJSFResourceLocator extends ILocator<List<JSFResource>, IProject, String>
 {
-    // nothing for now.
+    /**
+     * @param listener
+     */
+    public void addListener(final JSFResourceChangeListener listener);
+    /**
+     * @param listener
+     */
+    public void removeListener(final JSFResourceChangeListener listener);
 }

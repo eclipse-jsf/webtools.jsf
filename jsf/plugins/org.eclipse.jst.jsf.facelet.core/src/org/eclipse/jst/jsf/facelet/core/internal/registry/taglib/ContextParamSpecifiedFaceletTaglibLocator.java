@@ -78,7 +78,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
     @Override
     public void start(final IProject project)
     {
-        _fileManager.initFiles();
+        _fileManager.initResources();
         super.start(project);
     }
 
@@ -99,7 +99,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
     protected Map<String, ? extends IFaceletTagRecord> doLocate(
             final IProject context)
     {
-        final List<IFile> files = _fileManager.getFiles();
+        final List<IFile> files = _fileManager.getResources();
 
         _records.clear();
 

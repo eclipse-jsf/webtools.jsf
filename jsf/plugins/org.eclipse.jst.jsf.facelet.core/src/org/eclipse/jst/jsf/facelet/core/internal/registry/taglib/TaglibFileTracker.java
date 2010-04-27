@@ -1,26 +1,22 @@
 package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
+import org.eclipse.jst.jsf.common.internal.resource.ResourceTracker;
 
-class TaglibFileTracker extends TaglibResourceTracker
+class TaglibFileTracker extends ResourceTracker<IFile>
 {
-    private final IFile _file;
     private String _uri;
-    private final AtomicLong _lastModifiedStamp = new AtomicLong();
     private TaglibResourceManager _manager;
     private final ILibraryChangeHandler _handler;
 
     public TaglibFileTracker(final IFile file, final TaglibResourceManager manager,
             final ILibraryChangeHandler handler)
     {
+        super(file);
         _manager = manager;
         _manager.addListener(this);
-        _file = file;
-        _lastModifiedStamp.set(file.getModificationStamp());
         _handler = handler;
     }
 
@@ -42,64 +38,23 @@ class TaglibFileTracker extends TaglibResourceTracker
     }
 
     @Override
-    public EventResult acceptEvent(final ResourceLifecycleEvent event)
+    protected void fireResourceInAccessible(final ReasonType reasonType)
     {
-        if (!_file.equals(event.getAffectedResource()))
-        {
-            return EventResult.getDefaultEventResult();
-        }
-
-        final EventType eventType = event.getEventType();
-
-        switch (eventType)
-        {
-        case RESOURCE_ADDED:
-            // added resources kick an add event.
-            _handler.added(_file);
-            break;
-        case RESOURCE_CHANGED:
-            // changed resources kick a change event
-            _handler.changed(_uri, _file);
-            break;
-        case RESOURCE_INACCESSIBLE:
-            // removed resources kick a remove event
-            _handler.removed(_uri, _file);
-            break;
-        }
-
-        return EventResult.getDefaultEventResult();
+        // removed resources kick a remove event
+        _handler.removed(_uri, getResource());
     }
-    
-//    private final static class HandleFileAddJob implements IWorkspaceRunnable
-//    {
-//        private final IResourceChangeEvent _event;
-//        private List<IFile> _files;
-//        private ILibraryChangeHandler   _handler;
-//        
-//        private HandleFileAddJob(final IResourceChangeEvent event, final List<IFile> files,
-//                final ILibraryChangeHandler handler)
-//        {
-//            _event = event;
-//            _files = files;
-//            _handler = handler;
-//        }
-//
-//        public void run(final IProgressMonitor monitor)
-//                throws CoreException
-//        {
-//            for (final IFile file : _files)
-//            {
-//                final IResourceDelta delta = _event.getDelta()
-//                        .findMember(file.getFullPath());
-//
-//                if (delta != null)
-//                {
-//                    if (delta.getKind() == IResourceDelta.ADDED)
-//                    {
-//                        _handler.added(file);
-//                    }
-//                }
-//            }
-//        }
-//    }
+
+    @Override
+    protected void fireResourceChanged(final ReasonType reasonType)
+    {
+        // changed resources kick a change event
+        _handler.changed(_uri, getResource());
+    }
+
+    @Override
+    protected void fireResourceAdded(final IResource affectedResource, final ReasonType reasonType)
+    {
+        // added resources kick an add event.
+        _handler.added(getResource());
+    }
 }
