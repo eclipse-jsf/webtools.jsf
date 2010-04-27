@@ -38,7 +38,7 @@
        point="org.eclipse.wst.common.project.facet.core.facets">
 
     <project-facet id="jst.jsf">
-      <label>JavaServer Faces</label>
+      <label>%plugin.facet.name</label>
       <description>%plugin.facet.description</description>
     </project-facet>
 
