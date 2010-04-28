@@ -564,6 +564,16 @@ public final class JSFCoreUtilHelper
             // always create a new one.
             return false;
         }
+
+        @Override
+        public boolean projectIsValid(IProject project) {
+            if (project == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
         
     }
 
