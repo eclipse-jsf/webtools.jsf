@@ -22,8 +22,8 @@ public class TestJSFResource
     public void testSetup() throws Exception
     {
         final ContentTypeResolver contentTypeResolver = new ContentTypeResolver(new MockContentTypeManager());
-        _xhtmlJsfResource = new TestableJSFResource(new ResourceIdentifier("someResource.xhtml"), contentTypeResolver, false);
-        _xhtmlNotAJSFResource = new TestableJSFResource(new ResourceIdentifier("someResource.foo"), contentTypeResolver, false);
+        _xhtmlJsfResource = new TestableJSFResource(new ResourceIdentifier("someResource.xhtml"), contentTypeResolver);
+        _xhtmlNotAJSFResource = new TestableJSFResource(new ResourceIdentifier("someResource.foo"), contentTypeResolver);
     }
     
     @Test
@@ -36,26 +36,17 @@ public class TestJSFResource
     
     private final static class TestableJSFResource extends JSFResource
     {
-        private final boolean _isFragment;
 
         private TestableJSFResource(final ResourceIdentifier id,
-                final ContentTypeResolver contentTypeResolver,
-                final boolean isFragment)
+                final ContentTypeResolver contentTypeResolver)
         {
             super(id, contentTypeResolver);
-            _isFragment = isFragment;
         }
 
         @Override
         public boolean isAccessible()
         {
             return true;
-        }
-
-        @Override
-        public boolean isFragment()
-        {
-           return _isFragment;
         }
     }
 }

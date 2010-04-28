@@ -18,10 +18,10 @@ public class MockResourceChangeEventFactory
         this(new MockResourceDeltaFactory());
     }
 
-    public IResourceChangeEvent createSimpleFileChange(MockFile file,
-            boolean incrementModStamp)
+    public IResourceChangeEvent createSimpleFileChange(final MockFile file,
+            final boolean incrementModStamp)
     {
-        MockResourceDelta delta = _deltaFactory.createSimpleFileChange(file);
+        final MockResourceDelta delta = _deltaFactory.createSimpleFileChange(file);
         if (incrementModStamp)
         {
             file.incrementModStamp();
@@ -30,7 +30,7 @@ public class MockResourceChangeEventFactory
                 delta);
     }
 
-    public IResourceChangeEvent createSimpleFileRemove(MockFile file)
+    public IResourceChangeEvent createSimpleFileRemove(final MockFile file)
     {
         final MockResourceDelta delta = _deltaFactory
                 .createSimpleFileRemoved(file);
@@ -60,7 +60,7 @@ public class MockResourceChangeEventFactory
                 IResourceChangeEvent.PRE_DELETE, null);
     }
 
-    public IResourceChangeEvent createSimpleFolderAdded(IFolder folder)
+    public IResourceChangeEvent createSimpleFolderAdded(final IFolder folder)
     {
         final MockResourceDelta delta = _deltaFactory
                 .createSimpleFolderAdded(folder);
@@ -68,4 +68,11 @@ public class MockResourceChangeEventFactory
                 delta);
     }
 
+    public IResourceChangeEvent createSimpleFolderDeleted(final IFolder folder)
+    {
+        final MockResourceDelta delta = _deltaFactory
+                .createSimpleFolderRemoved(folder);
+        return new MockResourceChangeEvent(IResourceChangeEvent.POST_CHANGE,
+                delta);
+    }
 }

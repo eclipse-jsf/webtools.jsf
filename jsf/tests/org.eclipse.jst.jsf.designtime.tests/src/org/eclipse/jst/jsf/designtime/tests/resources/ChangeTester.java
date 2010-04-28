@@ -27,7 +27,7 @@ public abstract class ChangeTester<EVENTTYPE>
      * @param resourceRoot
      */
     public ChangeTester(final MockWorkspaceContext context,
-            MockResourceChangeEventFactory factory, final IFolder resourceRoot)
+            final MockResourceChangeEventFactory factory, final IFolder resourceRoot)
     {
         _context = context;
         _eventFactory = factory;
@@ -43,7 +43,7 @@ public abstract class ChangeTester<EVENTTYPE>
         _context.fireWorkspaceEvent(event);
     }
 
-    public void fireResourceFileAdd(String resourceId)
+    public void fireResourceFileAdd(final String resourceId)
     {
         installListener();
         final IFile file = _resourceRoot.getFile(resourceId);
@@ -70,7 +70,7 @@ public abstract class ChangeTester<EVENTTYPE>
 
     protected abstract void installListener();
 
-    public void fireResourceFileDelete(String resourceId)
+    public void fireResourceFileDelete(final String resourceId)
     {
         installListener();
         final IFile file = getFile(resourceId);
@@ -80,12 +80,21 @@ public abstract class ChangeTester<EVENTTYPE>
 
     }
 
-    public void fireResourceFolderAdd(String folderName)
+    public void fireResourceFolderAdd(final String folderName)
     {
         installListener();
         final IFolder folder = getFolder(folderName);
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFolderAdded(folder);
+        _context.fireWorkspaceEvent(event);
+    }
+
+    public void fireResourceFolderDelete(final String folderName)
+    {
+        installListener();
+        final IFolder folder = getFolder(folderName);
+        final IResourceChangeEvent event = _eventFactory
+                .createSimpleFolderDeleted(folder);
         _context.fireWorkspaceEvent(event);
     }
 

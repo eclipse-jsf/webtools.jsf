@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
 import org.eclipse.jst.jsf.common.internal.resource.IJarProvider;
-import org.eclipse.jst.jsf.designtime.internal.resources.JSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
 import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
 import org.eclipse.jst.jsf.test.util.mock.MockContentTypeManager;
@@ -45,10 +45,10 @@ public class TestJarBasedJSFResourceLocator
         
         _locator.start(new MockProject(new Path("foo"), null));
         // we can pass null here since our jar provider doesn't care about projects.
-        final List<JSFResource> foundResources = _locator.locate(null);
+        final List<IJSFResourceFragment> foundResources = _locator.locate(null);
         assertEquals(2, foundResources.size());
         final Set<String> foundResourceIds = new HashSet<String>();
-        for (final JSFResource res : foundResources)
+        for (final IJSFResourceFragment res : foundResources)
         {
             foundResourceIds.add(res.getId().toString());
         }

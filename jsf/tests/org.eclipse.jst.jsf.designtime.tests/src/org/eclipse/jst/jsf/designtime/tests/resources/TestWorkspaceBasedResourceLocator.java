@@ -18,14 +18,16 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
-import org.eclipse.jst.jsf.designtime.internal.resources.JSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment.Type;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener.JSFResourceChangedEvent;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener.JSFResourceChangedEvent.CHANGE_TYPE;
+import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceContainer;
 import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifier;
 import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifierFactory;
 import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifierFactory.InvalidIdentifierException;
-import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceContainer;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
 import org.eclipse.jst.jsf.test.util.mock.MockContainer;
@@ -99,10 +101,10 @@ public class TestWorkspaceBasedResourceLocator
         _locator.start(_project);
         // we can pass null here since our jar provider doesn't care about
         // projects.
-        final List<JSFResource> foundResources = _locator.locate(_project);
+        final List<IJSFResourceFragment> foundResources = _locator.locate(_project);
         assertEquals(3, foundResources.size());
         final Set<String> foundResourceIds = new HashSet<String>();
-        for (final JSFResource res : foundResources)
+        for (final IJSFResourceFragment res : foundResources)
         {
             foundResourceIds.add(res.getId().toString());
         }
@@ -116,7 +118,7 @@ public class TestWorkspaceBasedResourceLocator
             throws InvalidIdentifierException
     {
         _locator.start(_project);
-        JSFResource changeThis = findById(_locator, "mylib333/tag1.xhtml");
+        final IJSFResourceFragment changeThis = findById(_locator, "mylib333/tag1.xhtml");
         _changeTester.fireResourceFileContentsChange("mylib333/tag1.xhtml");
         _changeTester.assertNumEvents(1);
         final JSFResourceChangedEvent event = _changeTester.getEvent(0);
@@ -129,7 +131,7 @@ public class TestWorkspaceBasedResourceLocator
     public void testRemoveChange_File() throws InvalidIdentifierException
     {
         _locator.start(_project);
-        JSFResource changeThis = findById(_locator, "mylib333/tag1.xhtml");
+        final IJSFResourceFragment changeThis = findById(_locator, "mylib333/tag1.xhtml");
         assertEquals(3, _locator.locate(_project).size());
         _changeTester.fireResourceFileDelete("mylib333/tag1.xhtml");
         _changeTester.assertNumEvents(1);
@@ -165,23 +167,24 @@ public class TestWorkspaceBasedResourceLocator
         assertEquals(CHANGE_TYPE.ADDED, event.getChangeType());
         assertNull(event.getOldValue());
         assertNotNull(event.getNewValue());
-        JSFResource newValue = event.getNewValue();
-        assertTrue(newValue instanceof WorkspaceJSFResource);
-        IResource resource = ((WorkspaceJSFResource)newValue).getResource();
+        assertEquals(Type.CONTAINER, event.getNewValue().getType());
+        final JSFResourceContainer newValue = (JSFResourceContainer) event.getNewValue();
+        assertTrue(newValue instanceof WorkspaceJSFResourceContainer);
+        final IResource resource = ((WorkspaceJSFResourceContainer)newValue).getResource();
         assertEquals(IResource.FOLDER, resource.getType());
         assertEquals("mylib999", resource.getName());
-        assertTrue(newValue.isFragment());
+        assertEquals(Type.CONTAINER, newValue.getType());
         assertEquals(4, _locator.locate(_project).size());
     }
 
-    private JSFResource findById(final WorkspaceJSFResourceLocator locator,
+    private IJSFResourceFragment findById(final WorkspaceJSFResourceLocator locator,
             final String id) throws InvalidIdentifierException
     {
         final ResourceIdentifier resId = _resourceIdFactory
                 .createLibraryResource(id);
         assertNotNull(resId);
-        final List<JSFResource> located = _locator.locate(_project);
-        for (final JSFResource res : located)
+        final List<IJSFResourceFragment> located = _locator.locate(_project);
+        for (final IJSFResourceFragment res : located)
         {
             if (res.getId().equals(resId))
             {
