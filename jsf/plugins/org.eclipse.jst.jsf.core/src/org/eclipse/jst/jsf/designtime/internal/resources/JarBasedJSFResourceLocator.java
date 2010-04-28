@@ -48,7 +48,7 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
     public JarBasedJSFResourceLocator(
             final String id,
             final String displayName,
-            final List<JSFResource> noResultValue,
+            final List<IJSFResourceFragment> noResultValue,
             final CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList,
             final IJarProvider provider,
             final ContentTypeResolver contentTypeResolver)
@@ -65,7 +65,7 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
      * @param contentTypeResolver
      */
     public JarBasedJSFResourceLocator(
-            final List<JSFResource> noResultValue,
+            final List<IJSFResourceFragment> noResultValue,
             final CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList,
             final IJarProvider provider,
             final ContentTypeResolver contentTypeResolver)
@@ -75,9 +75,9 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
     }
 
     @Override
-    protected List<JSFResource> doLocate(final IProject project)
+    protected List<IJSFResourceFragment> doLocate(final IProject project)
     {
-        final List<JSFResource> resourcesFound = new ArrayList<JSFResource>();
+        final List<IJSFResourceFragment> resourcesFound = new ArrayList<IJSFResourceFragment>();
 
         final Collection<? extends JarFile> jars = _provider.getJars(project);
 

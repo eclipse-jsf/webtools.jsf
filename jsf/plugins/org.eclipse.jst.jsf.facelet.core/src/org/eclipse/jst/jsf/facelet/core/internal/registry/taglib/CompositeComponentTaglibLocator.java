@@ -6,9 +6,13 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorProvider;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceContainer;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment.Type;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceLocator;
-import org.eclipse.jst.jsf.designtime.internal.resources.JSFResource;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener;
+import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceContainer;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.JSFResourceBasedTagRecord.Builder;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
@@ -32,55 +36,103 @@ public class CompositeComponentTaglibLocator extends
             final Builder builder = new Builder();
             switch (event.getChangeType())
             {
-            case ADDED:
-            case CHANGED:
-            {
-                List<TaglibChangedEvent> events = Collections.EMPTY_LIST;
-
-                if (event.getNewValue().isFragment())
+                case ADDED:
+                case CHANGED:
                 {
-                    // if it's a fragment handle as a possible library add
-                    events = handleFolderAddChange(event, builder);
-                } else
-                {
-                    // otherwise, handle as a file add.
-                    events = handleFileAddChange(event, builder);
+                    handleAddAndChange(event, builder);
                 }
-                _records = builder.merge(events, _records);
-                for (final TaglibChangedEvent fireEvent : events)
-                {
-                    fireChangeEvent(fireEvent);
-                }
-            }
                 break;
-            case REMOVED:
-            {
-                final JSFResource oldValue = event.getOldValue();
-                builder.addTag(oldValue, CHANGE_TYPE.REMOVED);
-                final List<TaglibChangedEvent> events = builder.createRemove(
-                        CompositeComponentTaglibLocator.this, _records);
-                _records = builder.merge(events, _records);
-                for (final TaglibChangedEvent fireEvent : events)
+                case REMOVED:
                 {
-                    fireChangeEvent(fireEvent);
+                    handleRemove(event, builder);
                 }
-            }
                 break;
             }
         }
 
-        private List<TaglibChangedEvent> handleFolderAddChange(
-                JSFResourceChangedEvent event, Builder builder)
+        private void handleRemove(final JSFResourceChangedEvent event,
+                final Builder builder)
         {
-            final JSFResource newValue = event.getNewValue();
+            List<TaglibChangedEvent> events = Collections.EMPTY_LIST;
+            switch (event.getOldValue().getType())
+            {
+                case RESOURCE:
+                {
+                    events = handleRemoveResource(event, builder);
+                }
+                break;
+                case CONTAINER:
+                {
+                    events = handleRemoveContainer(event, builder);
+                }
+                break;
+            }
+
+            _records = builder.merge(events, _records);
+            for (final TaglibChangedEvent fireEvent : events)
+            {
+                fireChangeEvent(fireEvent);
+            }
+        }
+
+        private List<TaglibChangedEvent> handleRemoveContainer(
+                final JSFResourceChangedEvent event, final Builder builder)
+        {
+            final IJSFResourceFragment oldValue = event.getOldValue();
+            builder.addLibrary((IJSFResourceContainer) oldValue,
+                    CHANGE_TYPE.REMOVED);
+            return builder.createRemove(CompositeComponentTaglibLocator.this,
+                    _records);
+        }
+
+        private List<TaglibChangedEvent> handleRemoveResource(
+                final JSFResourceChangedEvent event, final Builder builder)
+        {
+            final IJSFResourceFragment oldValue = event.getOldValue();
+            builder.addTag((IJSFResource) oldValue, CHANGE_TYPE.REMOVED);
+            return builder.createRemove(CompositeComponentTaglibLocator.this,
+                    _records);
+        }
+
+        private void handleAddAndChange(final JSFResourceChangedEvent event,
+                final Builder builder)
+        {
+            List<TaglibChangedEvent> events = Collections.EMPTY_LIST;
+
+            switch (event.getNewValue().getType())
+            {
+                case CONTAINER:
+                    // if it's a fragment handle as a possible library add
+                    events = handleFolderAddChange(event, builder);
+                break;
+                case RESOURCE:
+                    // otherwise, handle as a file add.
+                    events = handleFileAddChange(event, builder);
+                break;
+            }
+
+            _records = builder.merge(events, _records);
+
+            for (final TaglibChangedEvent fireEvent : events)
+            {
+                fireChangeEvent(fireEvent);
+            }
+        }
+
+        private List<TaglibChangedEvent> handleFolderAddChange(
+                final JSFResourceChangedEvent event, final Builder builder)
+        {
+            final JSFResourceContainer newValue = (JSFResourceContainer) event
+                    .getNewValue();
             builder.addLibrary(newValue, CHANGE_TYPE.ADDED);
-            return builder.createMerge(CompositeComponentTaglibLocator.this, _records);
+            return builder.createMerge(CompositeComponentTaglibLocator.this,
+                    _records);
         }
 
         private List<TaglibChangedEvent> handleFileAddChange(
                 final JSFResourceChangedEvent event, final Builder builder)
         {
-            final JSFResource newValue = event.getNewValue();
+            final IJSFResource newValue = (IJSFResource) event.getNewValue();
             builder.addTag(newValue, CHANGE_TYPE.ADDED);
             return builder.createMerge(CompositeComponentTaglibLocator.this,
                     _records);
@@ -121,10 +173,14 @@ public class CompositeComponentTaglibLocator extends
         final Builder builder = new Builder();
         for (final IJSFResourceLocator locator : _locatorProvider.getLocators())
         {
-            final List<JSFResource> resources = locator.locate(initialContext);
-            for (final JSFResource resource : resources)
+            final List<IJSFResourceFragment> resources = locator
+                    .locate(initialContext);
+            for (final IJSFResourceFragment resource : resources)
             {
-                builder.addTag(resource, CHANGE_TYPE.ADDED);
+                if (resource.getType() == Type.RESOURCE)
+                {
+                    builder.addTag((IJSFResource) resource, CHANGE_TYPE.ADDED);
+                }
             }
         }
         _records = builder.build();

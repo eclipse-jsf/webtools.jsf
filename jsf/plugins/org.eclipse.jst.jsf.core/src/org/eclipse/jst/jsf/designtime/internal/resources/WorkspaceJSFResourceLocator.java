@@ -31,7 +31,7 @@ public class WorkspaceJSFResourceLocator extends AbstractJSFResourceLocator
     public WorkspaceJSFResourceLocator(
             final String id,
             final String displayName,
-            final List<JSFResource> noResultValue,
+            final List<IJSFResourceFragment> noResultValue,
             final CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList,
             final AbstractVirtualComponentQuery vcQuery,
             final ContentTypeResolver contentTypeResolver,
@@ -50,7 +50,7 @@ public class WorkspaceJSFResourceLocator extends AbstractJSFResourceLocator
      * @param workspace
      */
     public WorkspaceJSFResourceLocator(
-            final List<JSFResource> noResultValue,
+            final List<IJSFResourceFragment> noResultValue,
             final CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList,
             final AbstractVirtualComponentQuery vcQuery,
             final ContentTypeResolver contentTypeResolver,
@@ -70,7 +70,7 @@ public class WorkspaceJSFResourceLocator extends AbstractJSFResourceLocator
     }
 
     @Override
-    protected List<JSFResource> doLocate(final IProject project)
+    protected List<IJSFResourceFragment> doLocate(final IProject project)
     {
         return _workspaceResourceManager.getJSFResources();
     }

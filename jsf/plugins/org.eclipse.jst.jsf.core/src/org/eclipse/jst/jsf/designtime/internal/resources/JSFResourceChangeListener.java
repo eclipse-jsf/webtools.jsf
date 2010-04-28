@@ -46,8 +46,8 @@ public abstract class JSFResourceChangeListener implements ILocatorChangeListene
         }
 
         private final CHANGE_TYPE       _changeType;
-        private final JSFResource _oldValue;
-        private final JSFResource _newValue;
+        private final IJSFResourceFragment _oldValue;
+        private final IJSFResourceFragment _newValue;
 
         /**
          * @param source
@@ -57,8 +57,8 @@ public abstract class JSFResourceChangeListener implements ILocatorChangeListene
          */
         public JSFResourceChangedEvent(
                 final AbstractJSFResourceLocator source,
-                final JSFResource oldValue, 
-                final JSFResource newValue,
+                final IJSFResourceFragment oldValue, 
+                final IJSFResourceFragment newValue,
                 final CHANGE_TYPE changeType)
         {
             super(source);
@@ -84,7 +84,7 @@ public abstract class JSFResourceChangeListener implements ILocatorChangeListene
         /**
          * @return the old value. This is null if the event is ADDED
          */
-        public final JSFResource getOldValue()
+        public final IJSFResourceFragment getOldValue()
         {
             return _oldValue;
         }
@@ -92,7 +92,7 @@ public abstract class JSFResourceChangeListener implements ILocatorChangeListene
         /**
          * @return the new value.  This is null if the event is REMOVED
          */
-        public final JSFResource getNewValue()
+        public final IJSFResourceFragment getNewValue()
         {
             return _newValue;
         }

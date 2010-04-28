@@ -11,7 +11,7 @@ import org.eclipse.jst.jsf.common.internal.locator.ILocator;
  * @author cbateman
  *
  */
-public interface IJSFResourceLocator extends ILocator<List<JSFResource>, IProject, String>
+public interface IJSFResourceLocator extends ILocator<List<IJSFResourceFragment>, IProject, String>
 {
     /**
      * @param listener

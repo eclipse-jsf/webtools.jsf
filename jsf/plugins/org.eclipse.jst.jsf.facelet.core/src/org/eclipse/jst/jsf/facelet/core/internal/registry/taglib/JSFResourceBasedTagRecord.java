@@ -9,7 +9,8 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.jsf.designtime.internal.resources.JSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceContainer;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibFactory;
@@ -119,24 +120,25 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
      */
     public static class Builder
     {
+        private static final List<FaceletTaglibTag> WHOLE_LIBRARY = new ArrayList<FaceletTaglibTag>(
+                0);
         private final Map<String, List<FaceletTaglibTag>> _tags = new HashMap<String, List<FaceletTaglibTag>>();
         private static final String FACELET_FILE_CONTENT_TYPE = "org.eclipse.wst.html.core.htmlsource"; //$NON-NLS-1$
 
         /**
          * @param jsfResource
-         * @param changeType 
+         * @param changeType
          */
-        public void addTag(final JSFResource jsfResource,
+        public void addTag(final IJSFResource jsfResource,
                 final CHANGE_TYPE changeType)
         {
-            String libraryName = jsfResource.getId().getLibraryName();
+            final String libraryName = jsfResource.getId().getLibraryName();
             if (libraryName == null)
             {
                 return;
             }
-            final String uri = String
-                    .format(
-                            "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
+            final String uri = String.format(
+                    "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
             List<FaceletTaglibTag> tags = _tags.get(uri);
             if (tags == null)
             {
@@ -152,42 +154,53 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
 
             switch (changeType)
             {
-            case ADDED:
-            case CHANGED:
-                // only add to the list on a add/change if the resource exists
-                // and is the right type
-                if (jsfResource.isAccessible()
-                        && jsfResource.isContentType(FACELET_FILE_CONTENT_TYPE))
-                {
-                    tags.add(tag);
-                }
+                case ADDED:
+                case CHANGED:
+                    // only add to the list on a add/change if the resource
+                    // exists
+                    // and is the right type
+                    if (jsfResource.isAccessible()
+                            && jsfResource
+                                    .isContentType(FACELET_FILE_CONTENT_TYPE))
+                    {
+                        tags.add(tag);
+                    }
                 break;
-            case REMOVED:
-                // add all comers to the remove list.  They will only be removal
-                // on merge if ADDED/CHANGED path decided they should be there.
-                tags.add(tag);
+                case REMOVED:
+                    // add all comers to the remove list. There will only be
+                    // removal
+                    // on merge if ADDED/CHANGED path decided they should be
+                    // there.
+                    tags.add(tag);
+                break;
             }
         }
 
         /**
          * @param jsfResource
-         * @param added
+         * @param changeType
          */
-        public void addLibrary(JSFResource jsfResource, CHANGE_TYPE added)
+        public void addLibrary(final IJSFResourceContainer jsfResource,
+                final CHANGE_TYPE changeType)
         {
-            String libraryName = jsfResource.getId().getLibraryName();
+            final String libraryName = jsfResource.getId().getLibraryName();
             if (libraryName == null)
             {
                 return;
             }
-            final String uri = String
-                    .format(
-                            "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
-            List<FaceletTaglibTag> tags = _tags.get(uri);
-            if (tags == null)
+            final String uri = String.format(
+                    "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
+            if (changeType == CHANGE_TYPE.REMOVED)
             {
-                tags = new ArrayList<FaceletTaglibTag>();
-                _tags.put(uri, tags);
+                _tags.put(uri, WHOLE_LIBRARY);
+            } else
+            {
+                List<FaceletTaglibTag> tags = _tags.get(uri);
+                if (tags == null)
+                {
+                    tags = new ArrayList<FaceletTaglibTag>();
+                    _tags.put(uri, tags);
+                }
             }
         }
 
@@ -230,9 +243,9 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                             .getValue(), CHANGE_TYPE.ADDED);
                 } else
                 {
-                    JSFResourceBasedTagRecord oldRecord = records.get(entry
-                            .getKey());
-                    JSFResourceBasedTagRecord newRecord = oldRecord
+                    final JSFResourceBasedTagRecord oldRecord = records
+                            .get(entry.getKey());
+                    final JSFResourceBasedTagRecord newRecord = oldRecord
                             .mergeTags(entry.getValue()._tags);
                     event = new TaglibChangedEvent(locator, oldRecord,
                             newRecord, CHANGE_TYPE.CHANGED);
@@ -249,8 +262,8 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
          *         _tags from records.
          */
         public List<TaglibChangedEvent> createRemove(
-                AbstractFaceletTaglibLocator locator,
-                Map<String, JSFResourceBasedTagRecord> records)
+                final AbstractFaceletTaglibLocator locator,
+                final Map<String, JSFResourceBasedTagRecord> records)
         {
             final Map<String, JSFResourceBasedTagRecord> newRecords = build();
             final List<TaglibChangedEvent> mergeEvents = new ArrayList<TaglibChangedEvent>();
@@ -258,21 +271,29 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                     .entrySet())
             {
                 TaglibChangedEvent event = null;
+                final JSFResourceBasedTagRecord oldRecord = records
+                        .get(entry.getKey());
+                if (oldRecord != null)
                 {
-                    JSFResourceBasedTagRecord oldRecord = records.get(entry
-                            .getKey());
-                    if (oldRecord != null)
+                    final List<FaceletTaglibTag> tags = entry.getValue()._tags;
+                    if (tags == WHOLE_LIBRARY)
                     {
-                        JSFResourceBasedTagRecord newRecord = oldRecord
+                        event = new TaglibChangedEvent(locator, oldRecord,
+                                null, CHANGE_TYPE.REMOVED);
+                    } else
+                    {
+                        final JSFResourceBasedTagRecord newRecord = oldRecord
                                 .removeTags(entry.getValue()._tags);
                         event = new TaglibChangedEvent(locator, oldRecord,
                                 newRecord, CHANGE_TYPE.CHANGED);
                     }
                 }
-                mergeEvents.add(event);
+                if (event != null)
+                {
+                    mergeEvents.add(event);
+                }
             }
             return mergeEvents;
-
         }
 
         /**
@@ -282,19 +303,36 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
          *         here.
          */
         public Map<String, JSFResourceBasedTagRecord> merge(
-                List<TaglibChangedEvent> events,
+                final List<TaglibChangedEvent> events,
                 final Map<String, JSFResourceBasedTagRecord> withThese)
         {
             final Map<String, JSFResourceBasedTagRecord> newMap = new HashMap<String, JSFResourceBasedTagRecord>(
                     withThese);
             for (final TaglibChangedEvent event : events)
             {
-                IFaceletTagRecord newRecord = event.getNewValue();
-                // doubles as null check
-                if (newRecord instanceof JSFResourceBasedTagRecord)
+                switch (event.getChangeType())
                 {
-                    newMap.put(newRecord.getURI(),
-                            (JSFResourceBasedTagRecord) newRecord);
+                    case ADDED:
+                    case CHANGED:
+                    {
+                        final IFaceletTagRecord newRecord = event.getNewValue();
+                        // doubles as null check
+                        if (newRecord instanceof JSFResourceBasedTagRecord)
+                        {
+                            newMap.put(newRecord.getURI(),
+                                    (JSFResourceBasedTagRecord) newRecord);
+                        }
+                    }
+                        break;
+                    case REMOVED:
+                    {
+                        final IFaceletTagRecord oldRecord = event.getOldValue();
+                        if (oldRecord != null)
+                        {
+                            newMap.remove(oldRecord.getURI());
+                        }
+                    }
+                    break;
                 }
             }
             return newMap;

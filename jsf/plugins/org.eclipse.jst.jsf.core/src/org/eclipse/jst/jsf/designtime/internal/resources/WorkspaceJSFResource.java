@@ -8,7 +8,7 @@ import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
  * @author cbateman
  *
  */
-public class WorkspaceJSFResource extends JSFResource
+public class WorkspaceJSFResource extends JSFResource implements IWorkspaceJSFResourceFragment
 {
     private final IResource _res;
 
@@ -23,9 +23,6 @@ public class WorkspaceJSFResource extends JSFResource
         _res = res;
     }
 
-    /**
-     * @return the corresponding design time workspace resource.
-     */
     public final IResource getResource()
     {
         return _res;
@@ -35,11 +32,5 @@ public class WorkspaceJSFResource extends JSFResource
     public final boolean isAccessible()
     {
         return _res.isAccessible();
-    }
-
-    @Override
-    public boolean isFragment()
-    {
-        return _res.getType() != IResource.FILE; 
     }
 }

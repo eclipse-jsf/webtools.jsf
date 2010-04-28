@@ -78,7 +78,13 @@ public class ResourceLifecycleEvent
         /**
          * Occurs when a non-project resource is added.
          */
-        RESOURCE_ADDED
+        RESOURCE_ADDED,
+        /**
+         * Occurs when a resource was has been moved.  This results
+         * in a remove and add for the moved resource, plus a similar
+         * pair for all its children if it is a container.
+         */
+        RESOURCE_MOVED
     }
 
     private final IResource   _affectedResource;

@@ -15,7 +15,7 @@ import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListen
  * 
  */
 public abstract class AbstractJSFResourceLocator extends
-        AbstractLocator<List<JSFResource>, IProject, String> implements
+        AbstractLocator<List<IJSFResourceFragment>, IProject, String> implements
         IJSFResourceLocator
 {
 
@@ -26,13 +26,13 @@ public abstract class AbstractJSFResourceLocator extends
      * @param mutableListenerList
      */
     protected AbstractJSFResourceLocator(String id, String displayName,
-            List<JSFResource> noResultValue,
+            List<IJSFResourceFragment> noResultValue,
             CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList)
     {
         super(id, displayName, noResultValue, mutableListenerList);
     }
 
-    protected abstract List<JSFResource> doLocate(IProject context);
+    protected abstract List<IJSFResourceFragment> doLocate(IProject context);
 
     /**
      * TODO: would be better to have a private interface to call fire.

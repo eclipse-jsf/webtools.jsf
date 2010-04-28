@@ -8,9 +8,8 @@ import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
  * @author cbateman
  * 
  */
-public abstract class JSFResource
+public abstract class JSFResource extends JSFResourceFragment implements IJSFResource
 {
-    private final ResourceIdentifier _id;
     private final ContentTypeResolver _contentTypeResolver;
 
     /**
@@ -20,7 +19,7 @@ public abstract class JSFResource
     public JSFResource(final ResourceIdentifier id,
             final ContentTypeResolver contentTypeResolver)
     {
-        _id = id;
+        super(id, Type.RESOURCE);
         _contentTypeResolver = contentTypeResolver;
     }
 
@@ -29,36 +28,24 @@ public abstract class JSFResource
      */
     public final ResourceIdentifier getId()
     {
-        return _id;
+        return (ResourceIdentifier) super.getId();
     }
 
     /**
      * @return true if this jsf resource is currently accessible.
      */
+    @Override
     public abstract boolean isAccessible();
 
-    /**
-     * @param contentTypeName
-     * @return true if the resources matches the content type indicated by the
-     *         contentTypeName.
-     */
     public boolean isContentType(final String contentTypeName)
     {
-        return _contentTypeResolver.matchesType(contentTypeName, _id
+        return _contentTypeResolver.matchesType(contentTypeName, getId()
                 .getResourceName());
     }
-
-    /**
-     * @return a resource fragment is something which does not represent
-     * a JSF resource but which is a concrete object in the underlying design time system
-     * that maps to part or a "fragment" of a JSF resource.  The most common instance
-     * is a workspace folder or jar entry that represents the library part of a resource id.
-     */
-    public abstract boolean isFragment();
 
     @Override
     public String toString()
     {
-        return _id.toString();
+        return getId().toString();
     }
 }

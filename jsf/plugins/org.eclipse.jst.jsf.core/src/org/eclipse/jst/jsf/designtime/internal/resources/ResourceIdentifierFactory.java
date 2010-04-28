@@ -92,6 +92,15 @@ public class ResourceIdentifierFactory
     }
 
     /**
+     * @param libraryName
+     * @return a new resource fragment identifier for a library folder.
+     */
+    public ResourceFragmentIdentifier createLibraryFragment(final String libraryName)
+    {
+        return new LibraryResourceFragmentIdentifier(libraryName);
+    }
+
+    /**
      * Indicates an invalid id.
      * 
      * @author cbateman
@@ -154,6 +163,5 @@ public class ResourceIdentifierFactory
          * 
          */
         private static final long serialVersionUID = -8926293207447823901L;
-        
     }
 }

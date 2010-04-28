@@ -14,7 +14,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  * @author cbateman
  * 
  */
-public class ResourceIdentifier
+public class ResourceIdentifier extends ResourceFragmentIdentifier
 {
     /**
      * Resource name is not optional on identifiers.
@@ -37,49 +37,27 @@ public class ResourceIdentifier
     }
 
     /**
-     * @return the locale prefix or null if none.
+     * Allow fragments to be 
      */
-    public String getLocalePrefix()
+    protected ResourceIdentifier()
     {
-        return null;
+        super();
+        _resName = null;
     }
-
-    /**
-     * @return the library name or null if none.
-     */
-    public String getLibraryName()
-    {
-        return null;
-    }
-
-    /**
-     * @return the library version or null if none.
-     */
-    public String getLibraryVersion()
-    {
-        return null;
-    }
-
     /**
      * @return the resource name or null if none.
      */
+    @Override
     public String getResourceName()
     {
         return _resName;
     }
 
     /**
-     * @return the resource version or null if none.
-     */
-    public String getResourceVersion()
-    {
-        return null;
-    }
-
-    /**
      * @return a status object multi-value that contains the results of
      *         validating this resoure identifier.
      */
+    @Override
     public IStatus validate()
     {
         final String id = ResourceIdentifierValidationNamespace;
@@ -94,14 +72,6 @@ public class ResourceIdentifier
         }
 
         return status;
-    }
-
-    /**
-     * @return true if validate().isOK is true.
-     */
-    public boolean isValid()
-    {
-        return validate().isOK();
     }
 
     @Override
@@ -120,12 +90,12 @@ public class ResourceIdentifier
         {
             idString = String.format("%s/%s", getLibraryName(), idString); //$NON-NLS-1$
         }
-
+    
         if (getLocalePrefix() != null)
         {
             idString = String.format("%s/%s", getLocalePrefix(), idString); //$NON-NLS-1$
         }
-
+    
         if (getResourceVersion() != null)
         {
             idString += "/" + getResourceVersion(); //$NON-NLS-1$
@@ -134,26 +104,9 @@ public class ResourceIdentifier
     }
 
     @Override
-    public boolean equals(Object obj)
+    public final boolean isFragment()
     {
-        if (super.equals(obj))
-        {
-            return true;
-        }
-
-        if (obj instanceof ResourceIdentifier)
-        {
-            String meToString = toString();
-            String otherToString = obj.toString();
-            return meToString.equals(otherToString);
-        }
         return false;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return toString().hashCode();
     }
 
 }

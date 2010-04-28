@@ -104,33 +104,4 @@ public class JarBasedJSFResource extends JSFResource
         }
         return null;
     }
-
-    @Override
-    public boolean isFragment()
-    {
-        JarFile jarFile = null;
-        try
-        {
-            jarFile = getJarFile();
-            if (jarFile != null)
-            {
-                final ZipEntry entry = getZipEntry(jarFile);
-                return entry.isDirectory();
-            }
-        } finally
-        {
-            if (jarFile != null)
-            {
-                // TODO:
-//                try
-//                {
-//                    jarFile.close();
-//                } catch (IOException e)
-//                {
-//                    // fall-through.
-//                }
-            }
-        }
-        return false;
-    }
 }
