@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.facelet.core.internal.registry;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCoreTraceOptions;
@@ -108,6 +109,22 @@ public final class FaceletRegistryManager extends
         public String getDisplayName()
         {
             return Messages.FaceletRegistryManager_REGISTRY_FACTORY_DISPLAYNAME;
+        }
+
+        @Override
+        public boolean projectIsValid(IProject project) {
+            if (project == null)
+            {
+                return false;
+            }
+
+            final JSFVersion jsfVersion = JSFVersion.valueOfProject(project);
+            if (jsfVersion != null && jsfVersion.compareTo(JSFVersion.V2_0) >= 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

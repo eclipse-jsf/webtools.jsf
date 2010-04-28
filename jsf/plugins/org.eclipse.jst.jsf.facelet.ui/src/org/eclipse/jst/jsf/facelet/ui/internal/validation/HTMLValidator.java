@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.facelet.ui.internal.validation;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -57,12 +58,22 @@ import org.w3c.dom.Element;
  */
 public class HTMLValidator extends AbstractValidator implements IValidator
 {
+    /**
+     * @param helper
+     * @return no rule, null
+     */
     public ISchedulingRule getSchedulingRule(final IValidationContext helper)
     {
         // no rule...
         return null;
     }
 
+    /**
+     * @param helper
+     * @param reporter
+     * @return status of this validation
+     * @throws ValidationException
+     */
     public IStatus validateInJob(final IValidationContext helper,
             final IReporter reporter) throws ValidationException
     {
@@ -195,8 +206,18 @@ public class HTMLValidator extends AbstractValidator implements IValidator
                     .getDeclaredNamespaces(rootElement.getAttributes());
             final ITagRegistry tagRegistry = ViewUtil
                     .getHtmlTagRegistry(project);
-            final Collection<? extends Namespace> namespaces = tagRegistry
-                    .getAllTagLibraries();
+            final Collection<? extends Namespace> namespaces;
+            if (tagRegistry != null)
+            {
+                namespaces = tagRegistry.getAllTagLibraries();
+            }
+            else
+            {
+                // unexpected
+                namespaces = Collections.EMPTY_SET;
+                JSFCorePlugin.log(IStatus.ERROR, "Program Error: HTML tag registry not found"); //$NON-NLS-1$
+            }
+
             for (final Attr attr : declaredNamespaces)
             {
                 // only validate prefix declarations

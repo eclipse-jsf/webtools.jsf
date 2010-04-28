@@ -155,12 +155,15 @@ public class FaceletDocumentFactory
             try
             {
                 registry = factory.createTagRegistry(project);
-                final Namespace ns = registry.getTagLibrary(uri);
-
-                if (ns != null)
+                if (registry != null)
                 {
-                    adapter = new NamespaceCMAdapter(ns, project);
-                    _cmDocuments.put(uri, adapter);
+                    final Namespace ns = registry.getTagLibrary(uri);
+
+                    if (ns != null)
+                    {
+                        adapter = new NamespaceCMAdapter(ns, project);
+                        _cmDocuments.put(uri, adapter);
+                    }
                 }
             }
             catch (final TagRegistryFactoryException e)

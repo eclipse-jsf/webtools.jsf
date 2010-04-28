@@ -111,6 +111,11 @@ public class XHTMLContentAssistProcessor2 implements IContentAssistProcessor
         try
         {
             registry = factory.createTagRegistry(project);
+            if (registry == null)
+            {
+                return proposals;
+            }
+
             final Collection<? extends Namespace> tagLibs = registry
                     .getAllTagLibraries();
 

@@ -25,6 +25,9 @@ import org.eclipse.jst.jsf.core.internal.JSFCoreTraceOptions;
 import org.eclipse.jst.jsf.designtime.internal.Messages;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject;
+import org.eclipse.wst.common.project.facet.core.IProjectFacet;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
 /**
  * A per-resource singleton manager for TLDTagRegistry's.
@@ -36,6 +39,7 @@ public final class TLDRegistryManager extends
         ResourceSingletonObjectManager<TLDTagRegistry, IProject>
 {
     // STATIC
+    private final static String JST_WEB_MODULE = "jst.web"; //$NON-NLS-1$
     private static TLDRegistryManager INSTANCE;
 
     /**
@@ -140,6 +144,35 @@ public final class TLDRegistryManager extends
         public String getDisplayName()
         {
             return Messages.TLDRegistryManager_DisplayName;
+        }
+
+        @Override
+        public boolean projectIsValid(IProject project) {
+            if (project == null)
+            {
+                return false;
+            }
+
+            // Check that this is a dynamic web project
+            // (I.E. the JST Web facet is installed)
+            try
+            {
+                if (ProjectFacetsManager.isProjectFacetDefined(JST_WEB_MODULE))
+                {
+                    IFacetedProject faceted = ProjectFacetsManager.create(project);
+                    IProjectFacet webModuleFacet = ProjectFacetsManager.getProjectFacet(JST_WEB_MODULE);
+                    if (faceted != null && faceted.hasProjectFacet(webModuleFacet))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (CoreException ce)
+            {
+            	JSFCorePlugin.log(ce, "TLDRegistryManager failed checking web project"); //$NON-NLS-1$
+            }
+
+            return false;
         }
     }
 

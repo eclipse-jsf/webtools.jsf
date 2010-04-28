@@ -39,6 +39,14 @@ public abstract class TagRegistryFactory implements IIdentifiableStrategy<IProje
     public abstract ITagRegistry createTagRegistry(final IProject project) throws TagRegistryFactoryException;
 
     /**
+     * @param project
+     * @return determines whether a particular tag registry is appropriate for
+     * the project. If there is no valid tag registry for a project (i.e. due
+     * to lack of facet or bad facet version), return false.
+     */
+    public abstract boolean projectIsValid(final IProject project);
+
+    /**
      * Allow 
      * 
      * @param project

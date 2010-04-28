@@ -65,8 +65,8 @@ public final class CompositeTagRegistryFactory
         return INSTANCE;
     }
 
-    private final Map<IContentType, Set<ITagRegistryFactoryInfo>> _cachedExtensionsByType =
-        new HashMap<IContentType, Set<ITagRegistryFactoryInfo>>(4);
+    private final Map<TagRegistryIdentifier, Set<ITagRegistryFactoryInfo>> _cachedExtensionsByType =
+        new HashMap<TagRegistryIdentifier, Set<ITagRegistryFactoryInfo>>(4);
 
     private CompositeTagRegistryFactory()
     {
@@ -191,8 +191,7 @@ public final class CompositeTagRegistryFactory
     private Set<ITagRegistryFactoryInfo> findMatchingExtensions(
             TagRegistryIdentifier id, Set<ITagRegistryFactoryInfo> handlers)
     {
-        Set<ITagRegistryFactoryInfo> matching = _cachedExtensionsByType.get(id
-                .getContentType());
+        Set<ITagRegistryFactoryInfo> matching = _cachedExtensionsByType.get(id);
 
         if (matching == null)
         {
@@ -200,23 +199,22 @@ public final class CompositeTagRegistryFactory
 
             for (final ITagRegistryFactoryInfo handler : handlers)
             {
-                if (handler.getContentTypes().contains(id.getContentType()))
+                if (handler.getContentTypes().contains(id.getContentType())
+                        && handler.getTagRegistryFactory().projectIsValid(id.getProject()))
                 {
                     matching.add(handler);
                 }
             }
 
             // if there is nothing matching, just store the empty set and
-            // discard
-            // the extra memory
+            // discard the extra memory
             if (matching.size() > 0)
             {
-                _cachedExtensionsByType.put(id.getContentType(), matching);
+                _cachedExtensionsByType.put(id, matching);
             }
             else
             {
-                _cachedExtensionsByType.put(id.getContentType(),
-                        Collections.EMPTY_SET);
+                _cachedExtensionsByType.put(id, Collections.EMPTY_SET);
             }
         }
         return matching;
