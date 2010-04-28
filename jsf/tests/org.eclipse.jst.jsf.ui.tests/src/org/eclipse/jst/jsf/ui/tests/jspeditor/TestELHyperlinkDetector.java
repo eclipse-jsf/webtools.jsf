@@ -29,7 +29,7 @@ import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
-import org.eclipse.jst.jsf.ui.internal.jspeditor.ELHyperlinkDetector;
+import org.eclipse.jst.jsf.ui.internal.jspeditor.JSPELHyperlinkDetector;
 import org.eclipse.jst.jsf.ui.internal.jspeditor.ITestHyperlink;
 import org.eclipse.jst.jsf.ui.internal.jspeditor.JSPSourceUtil;
 import org.eclipse.ui.IEditorInput;
@@ -150,7 +150,7 @@ public class TestELHyperlinkDetector extends TestCase {
 	}
 
 	private static class TestableELHyperlinkDetector extends
-			ELHyperlinkDetector {
+			JSPELHyperlinkDetector {
 		@Override
 		public IHyperlink[] detectHyperlinks(
 				final IStructuredDocumentContext context, final IRegion region) {
