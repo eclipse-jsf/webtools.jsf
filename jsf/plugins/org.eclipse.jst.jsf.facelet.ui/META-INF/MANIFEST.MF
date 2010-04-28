@@ -35,5 +35,6 @@ Export-Package: org.eclipse.jst.jsf.facelet.ui.internal;x-internal:=true,
  org.eclipse.jst.jsf.facelet.ui.internal.contentassist;x-internal:=true,
  org.eclipse.jst.jsf.facelet.ui.internal.facet;x-internal:=true,
  org.eclipse.jst.jsf.facelet.ui.internal.hover;x-internal:=true,
+ org.eclipse.jst.jsf.facelet.ui.internal.htmleditor;x-internal:=true,
  org.eclipse.jst.jsf.facelet.ui.internal.validation;x-internal:=true
 Bundle-Vendor: %Bundle-Vendor.0

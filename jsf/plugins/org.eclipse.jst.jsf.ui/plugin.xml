@@ -100,7 +100,7 @@
     <extension
           point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
        <hyperlinkDetector
-             class="org.eclipse.jst.jsf.ui.internal.jspeditor.ELHyperlinkDetector"
+             class="org.eclipse.jst.jsf.ui.internal.jspeditor.JSPELHyperlinkDetector"
              id="org.eclipse.jst.jsf.ui.elhyperlinkdetector"
              name="%EL_Hyperlinkdetector_name"
              targetId="org.eclipse.jst.jsp.core.jspsource">

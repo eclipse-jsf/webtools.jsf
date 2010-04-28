@@ -24,7 +24,7 @@
 
     <extension point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
        <hyperlinkDetector
-             class="org.eclipse.jst.jsf.ui.internal.jspeditor.ELHyperlinkDetector"
+             class="org.eclipse.jst.jsf.facelet.ui.internal.htmleditor.FaceletELHyperlinkDetector"
              id="org.eclipse.jst.jsf.ui.elhyperlinkdetector"
              name="%EL_Hyperlinkdetector_name"
              targetId="org.eclipse.wst.html.core.htmlsource">
