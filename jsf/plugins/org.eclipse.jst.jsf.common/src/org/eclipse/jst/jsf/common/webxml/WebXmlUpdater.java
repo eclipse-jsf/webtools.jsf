@@ -13,6 +13,8 @@
 package org.eclipse.jst.jsf.common.webxml;
 
 
+import java.util.List;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jst.j2ee.model.IModelProvider;
@@ -164,6 +166,48 @@ public class WebXmlUpdater
                                   final String servletName)
     {
         updater.addFilterMapping(filterName, filterClass, servletName);
+    }
+
+
+    /**
+     * @param paramName
+     *            Name of context param
+     * @return Value of given context param.
+     */
+    public String getContextParamValue (final String paramName)
+    {
+        return updater.getContextParamValue(paramName);
+    }
+
+
+    /**
+     * @param paramName
+     *            Name of context param
+     * @param valuesDelimiterRegex
+     *            Delimiter string for values
+     * @return Values of given context param as a list. This is useful when the
+     *         multiple values are demarcated by a delimiter string.
+     * 
+     */
+    public List<String> getContextParamValuesAsList (final String paramName,
+                                                     final String valuesDelimiterRegex)
+    {
+        return updater.getContextParamValuesAsList(paramName, valuesDelimiterRegex);
+    }
+
+
+    /**
+     * Sets the value of the given context param name to the given value. If
+     * paramName is not found, a new context-param is created with the given
+     * paramName and paramValue.
+     * 
+     * @param paramName
+     * @param paramValue
+     */
+    public void setContextParamValue (final String paramName,
+                                      final String paramValue)
+    {
+        updater.setContextParamValue(paramName, paramValue);
     }
 
 

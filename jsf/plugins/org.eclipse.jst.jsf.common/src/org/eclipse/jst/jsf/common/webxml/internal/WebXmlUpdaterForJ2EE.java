@@ -12,6 +12,8 @@
 
 package org.eclipse.jst.jsf.common.webxml.internal;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jst.j2ee.model.IModelProvider;
@@ -113,6 +115,28 @@ public class WebXmlUpdaterForJ2EE extends AbstractWebXmlUpdater
 
 
     @Override
+    public String getContextParamValue (final String paramName)
+    {
+        return WebXmlUtilsForJ2EE.getContextParamValue(webApp, paramName);
+    }
+
+
+    @Override
+    public List<String> getContextParamValuesAsList(String paramName, String valuesDelimiterRegex)
+    {
+        return WebXmlUtilsForJ2EE.getContextParamValuesAsList(webApp, paramName, valuesDelimiterRegex);
+    }
+
+
+    @Override
+    public void setContextParamValue(String paramName, String paramValue)
+    {
+        WebXmlUtilsForJ2EE.setContextParamValue(webApp, paramName, paramValue);
+    }
+
+
+    @Override
+    
     public void addContextParam (final String paramName,
                                  final String paramValue,
                                  final String description)
@@ -134,3 +158,4 @@ public class WebXmlUpdaterForJ2EE extends AbstractWebXmlUpdater
         return webApp;
     }
 }
+

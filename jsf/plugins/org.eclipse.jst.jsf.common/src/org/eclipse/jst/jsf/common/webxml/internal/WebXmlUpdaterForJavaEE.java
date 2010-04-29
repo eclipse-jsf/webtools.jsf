@@ -15,6 +15,8 @@ package org.eclipse.jst.jsf.common.webxml.internal;
 import static org.eclipse.jst.jsf.common.webxml.WebXmlUtilsForJavaEE.findFilter;
 import static org.eclipse.jst.jsf.common.webxml.WebXmlUtilsForJavaEE.findServlet;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jst.j2ee.model.IModelProvider;
@@ -22,6 +24,7 @@ import org.eclipse.jst.javaee.web.Filter;
 import org.eclipse.jst.javaee.web.Servlet;
 import org.eclipse.jst.javaee.web.WebApp;
 import org.eclipse.jst.jsf.common.webxml.WebXmlUtils;
+import org.eclipse.jst.jsf.common.webxml.WebXmlUtilsForJavaEE;
 import org.eclipse.jst.jsf.common.webxml.internal.operations.ContextParamAdderForJavaEE;
 import org.eclipse.jst.jsf.common.webxml.internal.operations.FilterAdderForJavaEE;
 import org.eclipse.jst.jsf.common.webxml.internal.operations.FilterMapperAdderForJavaEE;
@@ -114,6 +117,27 @@ public class WebXmlUpdaterForJavaEE extends AbstractWebXmlUpdater
     }
 
 
+    @Override
+    public String getContextParamValue (final String paramName)
+    {
+        return WebXmlUtilsForJavaEE.getContextParamValue(webApp, paramName);
+    }
+
+
+    @Override
+    public List<String> getContextParamValuesAsList (final String paramName,
+                                                    final String valuesDelimiterRegex)
+    {
+        return WebXmlUtilsForJavaEE.getContextParamValuesAsList(webApp, paramName, valuesDelimiterRegex);
+    }
+
+    
+    @Override
+    public void setContextParamValue(String paramName, String paramValue)
+    {
+        WebXmlUtilsForJavaEE.setContextParamValue(webApp, paramName, paramValue);
+    }
+
 
     @Override
     public void addContextParam (final String paramName,
@@ -135,4 +159,5 @@ public class WebXmlUpdaterForJavaEE extends AbstractWebXmlUpdater
     public Object getWebApp()
     {
         return webApp;
-    }}
+    }
+}

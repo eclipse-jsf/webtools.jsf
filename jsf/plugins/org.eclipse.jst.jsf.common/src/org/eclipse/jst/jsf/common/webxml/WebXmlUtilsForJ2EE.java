@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.common.webxml;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jst.j2ee.common.CommonFactory;
@@ -493,6 +494,77 @@ public class WebXmlUtilsForJ2EE
         }
 
         return null;
+    }
+
+
+    /**
+     * @param webApp
+     * @param paramName
+     * @return the param value or null if not found
+     */
+    public static String getContextParamValue (final WebApp webApp,
+                                               final String paramName)
+    {
+        for (final Object param : webApp.getContextParams())
+        {
+            final ParamValue contextParam = (ParamValue) param;
+            if (contextParam.getName().equals(paramName))
+            {
+                return contextParam.getValue();
+            }
+        }
+
+        return null;
+    }
+
+
+    /**
+     * @param webApp
+     * @param paramName Name of context param
+     * @param valuesDelimiterRegex
+     * @return Values of the given context param as a list
+     */
+    public static List<String> getContextParamValuesAsList (final WebApp webApp,
+                                                            final String paramName,
+                                                            final String valuesDelimiterRegex)
+    {
+        final String valuesString = getContextParamValue(webApp, paramName);
+        return Arrays.asList(valuesString.split(valuesDelimiterRegex));
+    }
+
+
+    /**
+     * Updates the value of a context param if it exists. Otherwise, adds this
+     * as a new context param.
+     * 
+     * @param webApp
+     * @param paramName
+     * @param paramValue
+     */
+    public static void setContextParamValue (final WebApp webApp,
+                                             final String paramName,
+                                             final String paramValue)
+    {
+        ParamValue contextParam = null;
+
+        for (final Object p : webApp.getContextParams())
+        {
+            final ParamValue param = (ParamValue) p;
+            if (param.getName().equals(paramName))
+            {
+                contextParam = param;
+                break;
+            }
+        }
+
+        if (contextParam == null)
+        {
+            webApp.getContextParams().add(createContextParam(paramName, paramValue, null));
+        }
+        else
+        {
+            contextParam.setValue(paramValue);
+        }
     }
 
 

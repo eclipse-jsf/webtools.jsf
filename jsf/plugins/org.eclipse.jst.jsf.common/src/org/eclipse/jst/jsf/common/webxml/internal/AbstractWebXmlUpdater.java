@@ -13,6 +13,8 @@
 package org.eclipse.jst.jsf.common.webxml.internal;
 
 
+import java.util.List;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jst.j2ee.model.IModelProvider;
@@ -116,6 +118,37 @@ public abstract class AbstractWebXmlUpdater
     public abstract void addFilterMapping (final String filterName,
                                            final String filterClass,
                                            final String servletName);
+
+    /**
+     * @param paramName
+     *            Name of context param
+     * @return Value of given context param.
+     */
+    public abstract String getContextParamValue (final String paramName);
+
+
+    /**
+     * @param paramName
+     *            Name of context param
+     * @param valuesDelimiterRegex
+     *            Delimiter string for values
+     * @return Values of given context param as a list. This is useful when the
+     *         multiple values are demarcated by a delimiter string.
+     */
+    public abstract List<String> getContextParamValuesAsList (final String paramName,
+                                                              final String valuesDelimiterRegex);
+
+
+    /**
+     * Sets the value of the given context param name to the given value. If
+     * paramName is not found, a new context-param is created with the given
+     * paramName and paramValue.
+     *
+     * @param paramName
+     * @param paramValue
+     */
+    public abstract void setContextParamValue (final String paramName,
+                                               final String paramValue);
 
 
     /**
