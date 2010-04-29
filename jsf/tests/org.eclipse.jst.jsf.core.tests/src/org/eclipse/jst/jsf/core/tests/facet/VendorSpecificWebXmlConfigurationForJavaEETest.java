@@ -12,6 +12,9 @@
 
 package org.eclipse.jst.jsf.core.tests.facet;
 
+import java.util.Arrays;
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
@@ -112,6 +115,44 @@ public class VendorSpecificWebXmlConfigurationForJavaEETest extends TestCase
         assertEquals(CONTEXT_PARAM_NAME, param.getParamName());
         assertEquals(CONTEXT_PARAM_VALUE, param.getParamValue());
         assertEquals(CONTEXT_PARAM_DESCRIPTION, ((Description) param.getDescriptions().get(0)).getValue());
+    }
+
+
+    public void testGetContextParamValue ()
+    {
+        assertFalse(WebXmlUtilsForJavaEE.existsContextParam(updater.getWebAppForJavaEE(), CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE));
+        updater.addContextParam(CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE, CONTEXT_PARAM_DESCRIPTION);
+
+        final String contextParamValue = updater.getContextParamValue(CONTEXT_PARAM_NAME);
+        assertNotNull(contextParamValue);
+        assertEquals(CONTEXT_PARAM_VALUE, contextParamValue);
+    }
+
+
+    public void testGetContextParamValuesAsList ()
+    {
+        assertFalse(WebXmlUtilsForJavaEE.existsContextParam(updater.getWebAppForJavaEE(), CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE));
+        final String delimiter = ";";
+        final String paramValue = CONTEXT_PARAM_VALUE + "1" + delimiter + CONTEXT_PARAM_VALUE + "2" + delimiter + CONTEXT_PARAM_VALUE + "3";
+        updater.addContextParam(CONTEXT_PARAM_NAME, paramValue, CONTEXT_PARAM_DESCRIPTION);
+
+        final List<String> expectedList = Arrays.asList(CONTEXT_PARAM_VALUE + "1", CONTEXT_PARAM_VALUE + "2", CONTEXT_PARAM_VALUE + "3");
+        final List<String> actualList = updater.getContextParamValuesAsList(CONTEXT_PARAM_NAME, delimiter);
+        assertEquals(expectedList, actualList);
+    }
+
+
+    public void testSetContextParamValue ()
+    {
+        assertFalse(WebXmlUtilsForJavaEE.existsContextParam(updater.getWebAppForJavaEE(), CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE));
+        updater.setContextParamValue(CONTEXT_PARAM_NAME, CONTEXT_PARAM_VALUE); // Adds new context param
+        assertEquals(CONTEXT_PARAM_VALUE, updater.getContextParamValue(CONTEXT_PARAM_NAME));
+
+        final String updatedValue = CONTEXT_PARAM_VALUE + "updated";
+        assertFalse(updater.getContextParamValue(CONTEXT_PARAM_NAME).equals(updatedValue));
+
+        updater.setContextParamValue(CONTEXT_PARAM_NAME, updatedValue);
+        assertEquals(updatedValue, updater.getContextParamValue(CONTEXT_PARAM_NAME));
     }
 
 
