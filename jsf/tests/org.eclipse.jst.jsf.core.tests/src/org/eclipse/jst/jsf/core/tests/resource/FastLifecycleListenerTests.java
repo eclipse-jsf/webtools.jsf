@@ -1,15 +1,14 @@
 package org.eclipse.jst.jsf.core.tests.resource;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
-import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
@@ -35,7 +34,7 @@ public class FastLifecycleListenerTests
         _wsContext = new MockWorkspaceContext();
         _project = _wsContext.createProject("SomeTestProject");
         _file = (MockFile) _project.getFile("myfile.txt");
-        _factory = new MockResourceChangeEventFactory();
+        _factory = new MockResourceChangeEventFactory(_wsContext);
     }
 
     @Test
@@ -43,7 +42,7 @@ public class FastLifecycleListenerTests
     {
         final LifecycleListener listener = new LifecycleListener(_file,
                 _wsContext.getWorkspace());
-        final MyListener tester = new MyListener(_wsContext, listener);
+        final MyTestListener tester = new MyTestListener(_wsContext, listener);
         final IResourceChangeEvent event = _factory.createSimpleFileChange(
                 _file, true);
         tester.fireAndExpect(event, _file, EventType.RESOURCE_CHANGED,
@@ -58,7 +57,7 @@ public class FastLifecycleListenerTests
     {
         final LifecycleListener listener = new LifecycleListener(_wsContext
                 .getWorkspace());
-        final MyListener tester = new MyListener(_wsContext, listener);
+        final MyTestListener tester = new MyTestListener(_wsContext, listener);
         final IResourceChangeEvent event = _factory.createSimpleFileChange(
                 _file, true);
         tester.fireAndExpectNull(event);
@@ -82,7 +81,7 @@ public class FastLifecycleListenerTests
         final LifecycleListener listener = new LifecycleListener(_wsContext
                 .getWorkspace());
         listener.dispose();
-        listener.addListener(new MyListener(_wsContext));
+        listener.addListener(new MyTestListener(_wsContext));
     }
 
     @Test(expected = IllegalStateException.class)
@@ -91,7 +90,7 @@ public class FastLifecycleListenerTests
         final LifecycleListener listener = new LifecycleListener(_wsContext
                 .getWorkspace());
         listener.dispose();
-        listener.removeListener(new MyListener(_wsContext));
+        listener.removeListener(new MyTestListener(_wsContext));
     }
 
     @Test
@@ -109,7 +108,7 @@ public class FastLifecycleListenerTests
     {
         final LifecycleListener listener = new LifecycleListener(_file,
                 _wsContext.getWorkspace());
-        final MyListener tester = new MyListener(_wsContext, listener);
+        final MyTestListener tester = new MyTestListener(_wsContext, listener);
         IResourceChangeEvent event = _factory.createSimpleFileChange(_file,
                 true);
         tester.fireAndExpect(event, _file, EventType.RESOURCE_CHANGED,
@@ -131,7 +130,7 @@ public class FastLifecycleListenerTests
         // now add the file's parent and fire again
         listener.addResource(_file.getParent());
         tester.fireAndExpect(event, _file, EventType.RESOURCE_ADDED,
-                ReasonType.RESOURCE_ADDED);
+                ReasonType.RESOURCE_ADDED_TO_CONTAINER);
     }
 
     @Test
@@ -139,7 +138,7 @@ public class FastLifecycleListenerTests
     {
         final LifecycleListener listener = new LifecycleListener(_project,
                 _wsContext.getWorkspace());
-        final MyListener tester = new MyListener(_wsContext, listener);
+        final MyTestListener tester = new MyTestListener(_wsContext, listener);
         final IResourceChangeEvent event = _factory
                 .createSimpleProjectClosed(_project);
         tester.fireAndExpect(event, _project, EventType.RESOURCE_INACCESSIBLE,
@@ -148,7 +147,8 @@ public class FastLifecycleListenerTests
         // remove the project and add the file
         listener.removeResource(_project);
         listener.addResource(_file);
-        tester.fireAndExpect(event, _file, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_CLOSED);
+        tester.fireAndExpect(event, _file, EventType.RESOURCE_INACCESSIBLE,
+                ReasonType.RESOURCE_PROJECT_CLOSED);
     }
 
     @Test
@@ -156,59 +156,106 @@ public class FastLifecycleListenerTests
     {
         final LifecycleListener listener = new LifecycleListener(_project,
                 _wsContext.getWorkspace());
-        final MyListener tester = new MyListener(_wsContext, listener);
+        final MyTestListener tester = new MyTestListener(_wsContext, listener);
         final IResourceChangeEvent event = _factory
                 .createSimpleProjectDeleted(_project);
         tester.fireAndExpect(event, _project, EventType.RESOURCE_INACCESSIBLE,
-                ReasonType.RESOURCE_PROJECT_CLOSED);
+                ReasonType.RESOURCE_DELETED);
 
         // remove the project and add the file
         listener.removeResource(_project);
         listener.addResource(_file);
-        tester.fireAndExpect(event, _file, EventType.RESOURCE_INACCESSIBLE, ReasonType.RESOURCE_PROJECT_CLOSED);
+        tester.fireAndExpect(event, _file, EventType.RESOURCE_INACCESSIBLE,
+                ReasonType.RESOURCE_PROJECT_DELETED);
     }
 
-    private static class MyListener implements IResourceLifecycleListener
+    @Test(expected = NullPointerException.class)
+    public void testPassNullTo_Workspace_Constructor()
     {
-        private ResourceLifecycleEvent _event;
-        private MockWorkspaceContext  _wsContext;
-
-        public MyListener(final MockWorkspaceContext wsContext)
-        {
-            _wsContext = wsContext;
-        }
-
-        public MyListener(final MockWorkspaceContext wsContext, final LifecycleListener listener)
-        {
-            listener.addListener(this);
-            _wsContext = wsContext;
-        }
-
-        public EventResult acceptEvent(final ResourceLifecycleEvent event)
-        {
-            _event = event;
-            return EventResult.getDefaultEventResult();
-        }
-
-        public void fireAndExpect(final IResourceChangeEvent fire,
-                final IResource expectedResource, final EventType eventType,
-                final ReasonType reasonType)
-        {
-            fireEvent(fire);
-            assertNotNull(_event);
-            assertSame(expectedResource, _event.getAffectedResource());
-        }
-
-        public void fireAndExpectNull(final IResourceChangeEvent fire)
-        {
-            fireEvent(fire);
-            assertNull(_event);
-        }
-
-        protected void fireEvent(final IResourceChangeEvent event)
-        {
-            _event = null;
-            _wsContext.fireWorkspaceEvent(event);
-        }
+        new LifecycleListener(null);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testPassNullToResource_Workspace_Constructor()
+    {
+        boolean failed = false;
+        try
+        {
+            new LifecycleListener((IResource) null, _wsContext.getWorkspace());
+        } catch (final NullPointerException npe)
+        {
+            failed = true;
+        }
+        assertTrue(failed);
+
+        failed = false;
+
+        try
+        {
+            new LifecycleListener(_file, null);
+        } catch (final NullPointerException npe)
+        {
+            failed = true;
+        }
+
+        assertTrue(failed);
+
+        new LifecycleListener((IResource) null, null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testPassNullToListResource_Workspace_Constructor()
+    {
+        boolean failed = false;
+        try
+        {
+            new LifecycleListener((List<IResource>) null, _wsContext
+                    .getWorkspace());
+        } catch (final NullPointerException npe)
+        {
+            failed = true;
+        }
+        assertTrue(failed);
+
+        failed = false;
+        try
+        {
+            new LifecycleListener(new ArrayList<IResource>(), null);
+        } catch (final NullPointerException npe)
+        {
+            failed = true;
+        }
+
+        assertTrue(failed);
+
+        failed = false;
+        try
+        {
+            List<IResource> resources = new ArrayList<IResource>();
+            resources.add(_file);
+            resources.add(null);
+            new LifecycleListener(resources, _wsContext.getWorkspace());
+        } catch (NullPointerException npe)
+        {
+            failed = true;
+        }
+
+        assertTrue(failed);
+        new LifecycleListener((IResource) null, null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testPassNullToAddResource()
+    {
+        final LifecycleListener listener = new LifecycleListener(_wsContext.getWorkspace());
+        listener.addResource(null);
+    }
+    
+    @Test(expected = NullPointerException.class)
+    public void testPassNullToAddListener()
+    {
+        final LifecycleListener listener = new LifecycleListener(_wsContext.getWorkspace());
+        listener.addListener(null);
+    }
+
 }

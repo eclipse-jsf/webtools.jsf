@@ -59,6 +59,26 @@ public class MockResource implements IResource
         return _type;
     }
 
+    @Override
+    public boolean equals(Object target)
+    {
+        if (this == target)
+            return true;
+        if (!(target instanceof MockResource))
+            return false;
+        MockResource resource = (MockResource) target;
+        return getType() == resource.getType() && _path.equals(resource._path) && _workspace.equals(resource._workspace);
+    }
+
+    
+    @Override
+    public int hashCode()
+    {
+        int code = _path.hashCode();
+        code ^= getType();
+        return code;
+    }
+
     @SuppressWarnings("rawtypes")
     public Object getAdapter(final Class adapter)
     {

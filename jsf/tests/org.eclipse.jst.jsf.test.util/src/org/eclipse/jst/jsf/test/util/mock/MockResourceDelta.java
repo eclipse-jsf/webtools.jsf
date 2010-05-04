@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.test.util.mock;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.internal.runtime.AdapterManager;
@@ -31,10 +32,42 @@ public class MockResourceDelta implements IResourceDelta
             final List<MockResourceDelta> childDeltas)
     {
         super();
+        if (afterEventResource == null && beforeEventResource == null)
+        {
+            throw new IllegalArgumentException();
+        }
         _afterEventResource = afterEventResource;
         _beforeEventResource = beforeEventResource;
         _status = status;
         _childDeltas = childDeltas;
+    }
+
+    /**
+     * @param delta
+     * @return a new resource delta that combines delta with my values. If there
+     *         are conflicts, delta's value is used.
+     */
+    public MockResourceDelta merge(final MockResourceDelta delta)
+    {
+        final List<MockResourceDelta> mergedChildren = new ArrayList<MockResourceDelta>(
+                _childDeltas);
+
+        for (final MockResourceDelta mergeMe : delta._childDeltas)
+        {
+            for (final Iterator<MockResourceDelta> it = mergedChildren
+                    .iterator(); it.hasNext();)
+            {
+                if (it.next().getActiveResource().equals(
+                        mergeMe.getActiveResource()))
+                {
+                    it.remove();
+                }
+            }
+            mergedChildren.add(mergeMe);
+        }
+
+        return new MockResourceDelta(delta._afterEventResource,
+                delta._beforeEventResource, delta._status, mergedChildren);
     }
 
     /*
@@ -63,10 +96,10 @@ public class MockResourceDelta implements IResourceDelta
         final boolean includePhantoms = (memberFlags & IContainer.INCLUDE_PHANTOMS) != 0;
         final boolean includeTeamPrivate = (memberFlags & IContainer.INCLUDE_TEAM_PRIVATE_MEMBERS) != 0;
         final boolean includeHidden = (memberFlags & IContainer.INCLUDE_HIDDEN) != 0;
-        int mask = includePhantoms ? ALL_WITH_PHANTOMS : REMOVED | ADDED
-                | CHANGED;
-        if ((getKind() & mask) == 0)
-            return;
+//        int mask = includePhantoms ? ALL_WITH_PHANTOMS : REMOVED | ADDED
+//                | CHANGED;
+        // if ((getKind() & mask) == 0)
+        // return;
         if (!visitor.visit(this))
             return;
         for (final MockResourceDelta childDelta : _childDeltas)
@@ -206,7 +239,6 @@ public class MockResourceDelta implements IResourceDelta
      */
     public IPath getFullPath()
     {
-
         return getActiveResource().getFullPath();
     }
 
@@ -258,22 +290,28 @@ public class MockResourceDelta implements IResourceDelta
         return AdapterManager.getDefault().getAdapter(this, adapter);
     }
 
-    private IResource getActiveResource()
+    public IResource getActiveResource()
     {
         switch (getStateType())
         {
-        case AFTER_EVENT:
-            return _afterEventResource;
-        case BEFORE_EVENT:
-            return _beforeEventResource;
-        default:
-            throw new IllegalStateException("Should not get here");
+            case AFTER_EVENT:
+                return _afterEventResource;
+            case BEFORE_EVENT:
+                return _beforeEventResource;
+            default:
+                throw new IllegalStateException("Should not get here");
         }
+    }
+
+    public final List<MockResourceDelta> getChildDeltas()
+    {
+        return _childDeltas;
     }
 
     private StateType getStateType()
     {
-        if (getKind() == ADDED || getKind() == ADDED_PHANTOM || isSet(MOVED_TO) || isSet(MOVED_FROM))
+        if (getKind() == ADDED || getKind() == ADDED_PHANTOM
+                || isSet(MOVED_FROM))
         {
             return StateType.AFTER_EVENT;
         }
@@ -324,4 +362,11 @@ public class MockResourceDelta implements IResourceDelta
         // ICoreConstants.M_TEAM_PRIVATE_MEMBER);
         return false;
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("%s [delta]", getActiveResource().getFullPath());
+    }
+
 }

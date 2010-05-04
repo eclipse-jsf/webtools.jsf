@@ -5,6 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.runtime.Path;
@@ -33,7 +36,7 @@ public class TestResourceTracker
         private boolean _changeFired;
         private ReasonType _changeReason;
         private boolean _addFired;
-        private ReasonType _addReason;
+        private List<ReasonType> _addReason = new ArrayList<ReasonType>();
 
         public TestableResourceTracker(final IResource resource)
         {
@@ -41,14 +44,14 @@ public class TestResourceTracker
         }
 
         @Override
-        protected void fireResourceInAccessible(final ReasonType reasonType)
+        protected void fireResourceInAccessible(final IResource resource, final ReasonType reasonType)
         {
             _inAccessibleFired = true;
             _inAccessibleReason = reasonType;
         }
 
         @Override
-        protected void fireResourceChanged(final ReasonType reasonType)
+        protected void fireResourceChanged(final IResource resource, final ReasonType reasonType)
         {
             _changeFired = true;
             _changeReason = reasonType;
@@ -59,7 +62,7 @@ public class TestResourceTracker
                 final ReasonType reasonType)
         {
             _addFired = true;
-            _addReason = reasonType;
+            _addReason.add(reasonType);
         }
 
         public final boolean isInAccessibleFired()
@@ -87,7 +90,7 @@ public class TestResourceTracker
             return _addFired;
         }
 
-        public final ReasonType getAddReason()
+        public final List<ReasonType> getAddReason()
         {
             return _addReason;
         }
@@ -104,8 +107,8 @@ public class TestResourceTracker
     @Before
     public void setUp() throws Exception
     {
-        _eventFactory = new MockResourceChangeEventFactory();
         _wsContext = new MockWorkspaceContext();
+        _eventFactory = new MockResourceChangeEventFactory(_wsContext);
         final MockProject createProject = _wsContext.createProject(new Path(
                 "TestResourceTracker_Project"));
         _testResource = (MockFile) createProject
@@ -171,7 +174,8 @@ public class TestResourceTracker
                 .createSimpleFileAdded(_testResource);
         _wsContext.fireWorkspaceEvent(event);
         assertTrue(_resourceTracker.isAddFired());
-        assertEquals(ReasonType.RESOURCE_ADDED, _resourceTracker.getAddReason());
+        assertEquals(1, _resourceTracker.getAddReason().size());
+        assertEquals(ReasonType.RESOURCE_ADDED, _resourceTracker.getAddReason().get(0));
         assertFalse(_resourceTracker.isInAccessibleFired());
         assertFalse(_resourceTracker.isChangeFired());
     }

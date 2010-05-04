@@ -159,4 +159,9 @@ public class MockContainer extends MockResource implements IContainer
     {
         throw new UnsupportedOperationException();
     }
+
+    public final IMockResourceFactory getResFactory()
+    {
+        return _resFactory;
+    }
 }
