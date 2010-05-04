@@ -11,11 +11,11 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
  * A managed object that tracks changes to a resource.
  * 
  * @author cbateman
- * @param <RESTYPE> 
+ * @param <RESTYPE>
  * 
  */
-public abstract class ResourceTracker<RESTYPE extends IResource> extends AbstractManagedObject implements
-        IResourceLifecycleListener
+public abstract class ResourceTracker<RESTYPE extends IResource> extends
+        AbstractManagedObject implements IResourceLifecycleListener
 {
     private final RESTYPE _resource;
     private final AtomicLong _lastModifiedStamp = new AtomicLong();
@@ -58,17 +58,17 @@ public abstract class ResourceTracker<RESTYPE extends IResource> extends Abstrac
         final ReasonType reasonType = event.getReasonType();
         switch (eventType)
         {
-        case RESOURCE_ADDED:
-            // added resources kick an add event.
-            fireResourceAdded(event.getAffectedResource(), reasonType);
+            case RESOURCE_ADDED:
+                // added resources kick an add event.
+                fireResourceAdded(event.getAffectedResource(), reasonType);
             break;
-        case RESOURCE_CHANGED:
-            // changed resources kick a change event
-            fireResourceChanged(reasonType);
+            case RESOURCE_CHANGED:
+                // changed resources kick a change event
+                fireResourceChanged(event.getAffectedResource(), reasonType);
             break;
-        case RESOURCE_INACCESSIBLE:
-            // removed resources kick a remove event
-            fireResourceInAccessible(reasonType);
+            case RESOURCE_INACCESSIBLE:
+                // removed resources kick a remove event
+                fireResourceInAccessible(event.getAffectedResource(), reasonType);
             break;
         }
 
@@ -84,22 +84,29 @@ public abstract class ResourceTracker<RESTYPE extends IResource> extends Abstrac
         return _resource.equals(event.getAffectedResource());
     }
 
-    
     /**
+     * @param affectedResource 
      * @param reasonType
      */
-    protected abstract void fireResourceInAccessible(ReasonType reasonType);
-
-    /**
-     * @param reasonType
-     */
-    protected abstract void fireResourceChanged(ReasonType reasonType);
+    protected abstract void fireResourceInAccessible(IResource affectedResource, ReasonType reasonType);
 
     /**
      * @param affectedResource 
      * @param reasonType
      */
-    protected abstract void fireResourceAdded(IResource affectedResource, ReasonType reasonType);
+    protected abstract void fireResourceChanged(IResource affectedResource, ReasonType reasonType);
+
+    /**
+     * Note that this may fire for both the new resource and it's parent
+     * container if both are registered by the lifecycle event. Check reasonType
+     * to ensure you getting the event you want: i.e. RESOURCE_ADDED vs.
+     * RESOURCE_ADDED_TO_CONTAINER
+     * 
+     * @param affectedResource
+     * @param reasonType
+     */
+    protected abstract void fireResourceAdded(IResource affectedResource,
+            ReasonType reasonType);
 
     @Override
     public void dispose()

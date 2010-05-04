@@ -38,14 +38,14 @@ class TaglibFileTracker extends ResourceTracker<IFile>
     }
 
     @Override
-    protected void fireResourceInAccessible(final ReasonType reasonType)
+    protected void fireResourceInAccessible(final IResource resource, final ReasonType reasonType)
     {
         // removed resources kick a remove event
         _handler.removed(_uri, getResource());
     }
 
     @Override
-    protected void fireResourceChanged(final ReasonType reasonType)
+    protected void fireResourceChanged(final IResource resource, final ReasonType reasonType)
     {
         // changed resources kick a change event
         _handler.changed(_uri, getResource());

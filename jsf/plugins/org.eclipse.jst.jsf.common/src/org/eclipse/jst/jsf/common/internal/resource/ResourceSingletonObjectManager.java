@@ -328,7 +328,7 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
                         _managedObject.dispose();
                     }
                 }
-                // dispose is external code out our control, so make sure
+                // dispose/destroy is external code out our control, so make sure
                 // unmanage gets called if it blows up.
                 finally
                 {

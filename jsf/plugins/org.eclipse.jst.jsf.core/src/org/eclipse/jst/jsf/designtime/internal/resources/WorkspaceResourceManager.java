@@ -83,41 +83,40 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                                 "While trying to locate JSF resources in the workspace"); //$NON-NLS-1$
             }
 
-            final VisitorMatcher<IContainer, IResource, String> matcher = 
-                new VisitorMatcher<IContainer, IResource, String>(
-                    "", "", //$NON-NLS-1$ //$NON-NLS-2$
-                    new FileMatchingAcceptor(), Collections
-                            .singletonList(new AlwaysMatcher()));
-            try
-            {
-                final Collection<? extends IResource> foundResources = matcher
-                        .find(folder);
-                for (final IResource res : foundResources)
-                {
-                    track(folder, res);
-                }
-            } catch (final Exception e)
-            {
-                JSFCorePlugin
-                        .log(e,
-                                "While trying to locate JSF resources in the workspace"); //$NON-NLS-1$
-            }
+            trackAllInFolder(folder);
         }
     }
 
-    private IWorkspaceJSFResourceFragment trackRootRelative(final IResource res)
-            throws ManagedObjectException, InvalidIdentifierException
+    private List<IWorkspaceJSFResourceFragment> trackAllInFolder(
+            final IContainer folder)
     {
-        return track(getRootResourceFolder(), res);
+        final VisitorMatcher<IContainer, IResource, String> matcher = new VisitorMatcher<IContainer, IResource, String>(
+                "", "", //$NON-NLS-1$ //$NON-NLS-2$
+                new FileMatchingAcceptor(), Collections
+                        .singletonList(new AlwaysMatcher()));
+        final List<IWorkspaceJSFResourceFragment> newFragments = new ArrayList<IWorkspaceJSFResourceFragment>();
+        try
+        {
+            final Collection<? extends IResource> foundResources = matcher
+                    .find(folder);
+            for (final IResource res : foundResources)
+            {
+                newFragments.add(track(folder, res));
+            }
+        } catch (final Exception e)
+        {
+            JSFCorePlugin.log(e,
+                    "While trying to locate JSF resources in the workspace"); //$NON-NLS-1$
+        }
+        return newFragments;
     }
 
     private IWorkspaceJSFResourceFragment track(
             final IContainer containerFolder, final IResource res)
             throws ManagedObjectException, InvalidIdentifierException
     {
-        final IPath containerPath = containerFolder.getFullPath();
-
-        final IPath fullPath = res.getFullPath().makeRelativeTo(containerPath);
+        final IPath fullPath = res.getFullPath().makeRelativeTo(
+                getRootResourceFolder().getFullPath());
         // cause the resource to get tracked
         final JSFResourceTracker tracker = (JSFResourceTracker) getInstance(res);
         IWorkspaceJSFResourceFragment jsfRes = null;
@@ -129,7 +128,8 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         } else
         {
             jsfRes = new WorkspaceJSFResourceContainer(_factory
-                    .createLibraryFragment(res.getName()), (IContainer) res);
+                    .createLibraryFragment(fullPath.toString()),
+                    (IContainer) res);
         }
         tracker.setJsfResource(jsfRes);
         addLifecycleEventListener(tracker);
@@ -186,15 +186,31 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         }
 
         @Override
-        protected void fireResourceInAccessible(final ReasonType reasonType)
+        protected void fireResourceInAccessible(
+                final IResource affectedResource, final ReasonType reasonType)
         {
-            removeLifecycleEventListener(this);
-            _locator.fireChangeEvent(new JSFResourceChangedEvent(_locator,
-                    _jsfResource, null, CHANGE_TYPE.REMOVED));
+            if (reasonType == ReasonType.RESOURCE_DELETED_FROM_CONTAINER
+                    || reasonType == ReasonType.RESOURCE_MOVED_CONTAINER)
+            {
+                try
+                {
+                    final JSFResourceTracker tracker = (JSFResourceTracker) getInstance(affectedResource);
+                    final IWorkspaceJSFResourceFragment jsfResource = tracker
+                            .getJsfResource();
+                    // removeLifecycleEventListener(this);
+                    _locator.fireChangeEvent(new JSFResourceChangedEvent(
+                            _locator, jsfResource, null, CHANGE_TYPE.REMOVED));
+                } catch (final ManagedObjectException e)
+                {
+                    JSFCorePlugin.log(e,
+                            "Processing an inaccessible resource event"); //$NON-NLS-1$
+                }
+            }
         }
 
         @Override
-        protected void fireResourceChanged(final ReasonType reasonType)
+        protected void fireResourceChanged(final IResource affectedResource,
+                final ReasonType reasonType)
         {
             _locator.fireChangeEvent(new JSFResourceChangedEvent(_locator,
                     _jsfResource, _jsfResource, CHANGE_TYPE.CHANGED));
@@ -204,39 +220,79 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         protected void fireResourceAdded(final IResource affectedResource,
                 final ReasonType reasonType)
         {
-            final IContainer parent = affectedResource.getParent();
-            if (parent != null && parent.isAccessible())
+            if (reasonType == ReasonType.RESOURCE_ADDED_TO_CONTAINER
+                    || reasonType == ReasonType.RESOURCE_MOVED_CONTAINER)
             {
-                try
+                final IContainer parent = affectedResource.getParent();
+                if (parent != null && parent.isAccessible())
                 {
-                    final IWorkspaceJSFResourceFragment newJsfRes = trackRootRelative(affectedResource);
-                    final JSFResourceChangedEvent event = new JSFResourceChangedEvent(
-                            _locator, null, newJsfRes, CHANGE_TYPE.ADDED);
-                    _locator.fireChangeEvent(event);
-                } catch (final ManagedObjectException e)
-                {
-                    JSFCorePlugin.log(e,
-                            "While adding new resource " + affectedResource); //$NON-NLS-1$
-                } catch (final InvalidIdentifierException e)
-                {
-                    JSFCorePlugin.log(e,
-                            "While adding new resource " + affectedResource); //$NON-NLS-1$
+                    try
+                    {
+                        final IWorkspaceJSFResourceFragment newJsfRes = track(
+                                parent, affectedResource);
+                        fireNewJSFResourceEvent(newJsfRes);
+                        if (reasonType == ReasonType.RESOURCE_MOVED_CONTAINER
+                                && affectedResource instanceof IContainer)
+                        {
+                            final List<IWorkspaceJSFResourceFragment> newFragments = trackAllInFolder((IContainer) affectedResource);
+                            for (final IWorkspaceJSFResourceFragment frag : newFragments)
+                            {
+                                fireNewJSFResourceEvent(frag);
+                            }
+                        }
+                    } catch (final ManagedObjectException e)
+                    {
+                        JSFCorePlugin
+                                .log(
+                                        e,
+                                        "While adding new resource " + affectedResource); //$NON-NLS-1$
+                    } catch (final InvalidIdentifierException e)
+                    {
+                        JSFCorePlugin
+                                .log(
+                                        e,
+                                        "While adding new resource " + affectedResource); //$NON-NLS-1$
+                    }
                 }
             }
+        }
+
+        private void fireNewJSFResourceEvent(
+                final IWorkspaceJSFResourceFragment newJsfRes)
+        {
+            final JSFResourceChangedEvent event = new JSFResourceChangedEvent(
+                    _locator, null, newJsfRes, CHANGE_TYPE.ADDED);
+            _locator.fireChangeEvent(event);
         }
 
         @Override
         protected boolean isInteresting(final ResourceLifecycleEvent event)
         {
+            boolean isInteresting = false;
             switch (event.getEventType())
             {
                 case RESOURCE_ADDED:
-                    return getResource() instanceof IContainer
+                {
+                    final IResource resource = getResource();
+                    isInteresting = (event.getReasonType() == ReasonType.RESOURCE_ADDED_TO_CONTAINER || event
+                            .getReasonType() == ReasonType.RESOURCE_MOVED_CONTAINER)
                             && event.getAffectedResource().getParent().equals(
-                                    getResource());
+                                    resource);
+                }
+                break;
+                case RESOURCE_INACCESSIBLE:
+                {
+                    final IResource resource = getResource();
+                    isInteresting = (event.getReasonType() == ReasonType.RESOURCE_DELETED_FROM_CONTAINER || event
+                            .getReasonType() == ReasonType.RESOURCE_MOVED_CONTAINER)
+                            && event.getAffectedResource().getParent().equals(
+                                    resource);
+                }
+                break;
                 default:
-                    return super.isInteresting(event);
+                    isInteresting = super.isInteresting(event);
             }
+            return isInteresting;
         }
 
         public final IWorkspaceJSFResourceFragment getJsfResource()

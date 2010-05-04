@@ -21,6 +21,8 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.ITestTracker;
 import org.eclipse.jst.jsf.common.internal.ITestTracker.Event;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener.EventResult;
@@ -36,7 +38,14 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Reaso
 public class LifecycleListener extends ImmutableLifecycleListener implements
         IResourceChangeListener
 {
+    private static final String CANNOT_ADD_NULL_RESOURCE = "Cannot add null resource"; //$NON-NLS-1$
     private static boolean ENABLE_TEST_TRACKING = false;
+    private static final boolean TRACE_EVENTS;
+    static
+    {
+        TRACE_EVENTS = Boolean.valueOf(Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID+"/debug/lifecyclelistener")).booleanValue();//$NON-NLS-1$
+    }
+    
     private static long _seqId;
 
     private final CopyOnWriteArrayList<IResource> _resources;
@@ -59,9 +68,15 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * 
      * @param workspace
      *            the workspace to listen to for changes.
+     * @throws NullPointerException
+     *             if workspace is null.
      */
     public LifecycleListener(final IWorkspace workspace)
     {
+        if (workspace == null)
+        {
+            throw new NullPointerException(CANNOT_ADD_NULL_RESOURCE);
+        }
         _resources = new CopyOnWriteArrayList<IResource>();
         _listeners = new CopyOnWriteArrayList<IResourceLifecycleListener>();
         _workspace = workspace;
@@ -73,10 +88,16 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * @param res
      * @param workspace
      *            the workspace to listen to for changes.
+     * @throws NullPointerException
+     *             if res or workspace is null.
      */
     public LifecycleListener(final IResource res, final IWorkspace workspace)
     {
         this(workspace);
+        if (res == null)
+        {
+            throw new NullPointerException(CANNOT_ADD_NULL_RESOURCE);
+        }
         _resources.add(res);
         workspace.addResourceChangeListener(this);
     }
@@ -85,12 +106,23 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * @param resources
      * @param workspace
      *            the workspace to listen to for changes.
+     * @throws NullPointerException
+     *             if resources, a member of resources or workspace is null.
      */
     public LifecycleListener(final List<IResource> resources,
             final IWorkspace workspace)
     {
         this(workspace);
-        _resources.addAll(resources);
+        for (final IResource resource : resources)
+        {
+            if (resource != null)
+            {
+                _resources.add(resource);
+            } else
+            {
+                throw new NullPointerException(CANNOT_ADD_NULL_RESOURCE);
+            }
+        }
         workspace.addResourceChangeListener(this);
     }
 
@@ -118,6 +150,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
      * Method is thread-safe and may block the caller
      * 
      * Throws {@link IllegalStateException} if isDisposed() == true
+     * Throws {@link NullPointerException} if listener == null
      * 
      * @param listener
      */
@@ -127,6 +160,11 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         if (isDisposed())
         {
             throw new IllegalStateException();
+        }
+        
+        if (listener == null)
+        {
+            throw new NullPointerException("Cannot pass null listener"); //$NON-NLS-1$
         }
         _listeners.addIfAbsent(listener);
     }
@@ -152,9 +190,15 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
 
     /**
      * @param res
+     *            a resource you want to receive events for. MUST NOT BE NULL.
+     * @throw {@link NullPointerException} if res is null
      */
     public void addResource(final IResource res)
     {
+        if (res == null)
+        {
+            throw new NullPointerException(CANNOT_ADD_NULL_RESOURCE);
+        }
         synchronized (_resources)
         {
             // don't add any resources if we've disposed before acquiring the
@@ -328,6 +372,11 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
     {
         boolean disposeAfter = false;
 
+        if (TRACE_EVENTS)
+        {
+            System.err.println(event);
+        }
+
         // NOTE: must use iterator through _listeners so that
         // CopyOnWriteArrayList protects us from concurrent modification
         for (final IResourceLifecycleListener listener : _listeners)
@@ -356,21 +405,23 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             handleWorkspaceRoot(delta);
         } else if (res instanceof IContainer)
         {
-            handleContainer(delta);
+            handleContainer(delta, res);
         } else
         {
             handleFile(delta, res);
         }
     }
 
-    private void handleContainer(final IResourceDelta delta)
+    private void handleContainer(final IResourceDelta delta, IResource container)
     {
+        handleChange(delta, container, container);
+
         for (final IResourceDelta childDelta : delta.getAffectedChildren())
         {
             if (childDelta.getResource().getType() == IResource.FILE
                     || childDelta.getResource().getType() == IResource.FOLDER)
             {
-                handleChange(childDelta, childDelta.getResource());
+                handleChange(childDelta, childDelta.getResource(), container);
             }
         }
     }
@@ -382,7 +433,7 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
             case IResourceDelta.ADDED:
             case IResourceDelta.REMOVED:
             {
-                handleChange(delta, res);
+                handleChange(delta, res, res);
             }
             break;
             case IResourceDelta.CHANGED:
@@ -399,39 +450,85 @@ public class LifecycleListener extends ImmutableLifecycleListener implements
         }
     }
 
-    private void handleChange(final IResourceDelta delta, final IResource res)
+    private void handleChange(final IResourceDelta delta, final IResource res, final IResource interestedResource)
     {
         switch (delta.getKind())
         {
             case IResourceDelta.ADDED:
             {
-                if ((delta.getFlags() & IResourceDelta.MOVED_FROM) != 0)
-                {
-                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                            EventType.RESOURCE_ADDED, ReasonType.RESOURCE_MOVED));
-                } else
-                {
-                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                            EventType.RESOURCE_ADDED, ReasonType.RESOURCE_ADDED));
-                }
+                handleAdd(delta, res, interestedResource);
             }
             break;
 
             case IResourceDelta.REMOVED:
             {
-                if ((delta.getFlags() & IResourceDelta.MOVED_TO) != 0)
-                {
-                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                            EventType.RESOURCE_INACCESSIBLE,
-                            ReasonType.RESOURCE_MOVED));
-                } else
-                {
-                    fireLifecycleEvent(new ResourceLifecycleEvent(res,
-                            EventType.RESOURCE_INACCESSIBLE,
-                            ReasonType.RESOURCE_DELETED));
-                }
+                handleRemove(delta, res, interestedResource);
             }
             break;
+        }
+    }
+
+    private void handleRemove(final IResourceDelta delta, final IResource res,
+            final IResource interestedResource)
+    {
+        if ((delta.getFlags() & IResourceDelta.MOVED_TO) != 0)
+        {
+            if (res.equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_INACCESSIBLE,
+                        ReasonType.RESOURCE_MOVED));
+            }
+            else if (res.getParent().equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_INACCESSIBLE,
+                        ReasonType.RESOURCE_MOVED_CONTAINER));
+            }
+        } else
+        {
+            if (res.equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_INACCESSIBLE,
+                        ReasonType.RESOURCE_DELETED));
+            }
+            else if (res.getParent().equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_INACCESSIBLE, 
+                        ReasonType.RESOURCE_DELETED_FROM_CONTAINER));
+            }
+        }
+    }
+
+    private void handleAdd(final IResourceDelta delta, final IResource res,
+            final IResource interestedResource)
+    {
+        if ((delta.getFlags() & IResourceDelta.MOVED_FROM) != 0)
+        {
+            if (res.equals(interestedResource))
+            {
+            fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                    EventType.RESOURCE_ADDED, ReasonType.RESOURCE_MOVED));
+            }
+            else if (res.getParent().equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_ADDED, ReasonType.RESOURCE_MOVED_CONTAINER));
+            }
+        } else
+        {
+            if (res.equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                    EventType.RESOURCE_ADDED, ReasonType.RESOURCE_ADDED));
+            }
+            else if (res.getParent().equals(interestedResource))
+            {
+                fireLifecycleEvent(new ResourceLifecycleEvent(res,
+                        EventType.RESOURCE_ADDED, ReasonType.RESOURCE_ADDED_TO_CONTAINER));
+            }
         }
     }
 

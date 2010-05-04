@@ -145,10 +145,9 @@ class ProjectTracker
 
             // if the root is the source, check if a projected has been added
             // or opened
-            // EventType eventType = event.getEventType();
             if (event.getEventType() == EventType.RESOURCE_ADDED
                     && event.getReasonType() == ReasonType.PROJECT_OPENED
-                    && res instanceof IProject)
+                    && res.getType() == IResource.PROJECT)
             {
                 handleNewProject((IProject) res);
             }
