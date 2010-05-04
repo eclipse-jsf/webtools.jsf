@@ -328,8 +328,10 @@ public class XMLViewObjectConstructionStrategy extends
             final ElementData elementData = XMLViewObjectMappingService
                     .createElementData(uri, node.getLocalName(), context,
                             attributeToProperties);
-
-            _mappingService.createMapping(elementData, mappedObject);
+            //Bug 269050 - IllegalArgumentException in createMapping() method
+            if (elementData != null) {
+            	_mappingService.createMapping(elementData, mappedObject);
+            }
         }
     }
 
