@@ -32,7 +32,7 @@ public class TypeComparatorPreferences
             case TypeComparatorDiagnosticFactory.METHOD_EXPRESSION_EXPECTED_ID:
                 return Diagnostic.ERROR;
             case TypeComparatorDiagnosticFactory.INCOMPATIBLE_TYPES_ID:
-                return Diagnostic.WARNING;
+                return Diagnostic.INFO;
             case TypeComparatorDiagnosticFactory.VALUE_EXPRESSION_EXPECTED_ID:
                 return Diagnostic.ERROR;
             case TypeComparatorDiagnosticFactory.INCOMPATIBLE_METHOD_TYPES_ID:

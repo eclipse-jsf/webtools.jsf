@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.jsf.common.dom.AttrDOMAdapter;
 import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.dom.DOMAdapter;
@@ -82,6 +81,7 @@ public class AttributeValidatingStrategy extends
 AbstractXMLViewValidationStrategy
 {
     private static final  String       DISABLE_ALTERATIVE_TYPES_KEY = "jsfCoreDisableConverterValidation"; //$NON-NLS-1$
+    private static final  String       ENABLE_ALTERATIVE_TYPES_KEY  = "jsfCoreEnableConverterValidation"; //$NON-NLS-1$
     static final boolean               DEBUG;
     static
     {
@@ -427,17 +427,30 @@ AbstractXMLViewValidationStrategy
 
     private boolean disableAlternativeTypes()
     {
-        String res = System.getProperty(DISABLE_ALTERATIVE_TYPES_KEY);
-        if (res == null) {
-            //check env var also
-            res = System.getenv(DISABLE_ALTERATIVE_TYPES_KEY);
-        }
-        if (res != null)
+        if (hasProperty(DISABLE_ALTERATIVE_TYPES_KEY))
         {
             return true;
         }
-        final IPreferenceStore prefStore = JSFCorePlugin.getDefault().getPreferenceStore();
-        return prefStore.getBoolean("org.eclipse.jst.jsf.core."+DISABLE_ALTERATIVE_TYPES_KEY); //$NON-NLS-1$
+
+        if (hasProperty(ENABLE_ALTERATIVE_TYPES_KEY))
+        {
+            return false;
+        }
+        
+//      As of Helios, alternative type is disabled by default
+        return true;
+        
+//        final IPreferenceStore prefStore = JSFCorePlugin.getDefault().getPreferenceStore();
+//        return prefStore.getBoolean("org.eclipse.jst.jsf.core."+DISABLE_ALTERATIVE_TYPES_KEY); //$NON-NLS-1$
+    }
+    
+    private boolean hasProperty(final String key) {
+    	 String res = System.getProperty(key);
+         if (res == null) {
+             //check env var also
+             res = System.getenv(key);
+         }
+         return res != null;
     }
     /**
      * @return true if alternative type comparison (i.e. post-conversion) passes
@@ -448,6 +461,9 @@ AbstractXMLViewValidationStrategy
             final Region2AttrAdapter attrAdapter)
     {
         final long curTime = System.nanoTime();
+        
+        //As of Helios, alternative type is disabled by default
+        //and enabled by the ENABLE_ALTERNATIVE_TYPES_KEY system/env property
         if (disableAlternativeTypes())
         {
             return expectedType;
