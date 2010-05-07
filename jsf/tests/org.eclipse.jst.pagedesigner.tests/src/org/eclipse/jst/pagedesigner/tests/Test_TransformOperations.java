@@ -180,6 +180,122 @@ public class Test_TransformOperations extends TestCase {
 	}
 
 	/**
+	 * Test "CheckModeOperation".
+	 */
+	public void testCheckModeOperation() {
+		try {
+			webProjectTestEnv.loadResourceInWebRoot(
+				PageDesignerTestsPlugin.getDefault().getBundle()
+				, "/testdata/checkmodeop/checkModeOp.tld.data"
+				, "/META-INF/checkModeOp.tld");
+
+			webProjectTestEnv.loadResourceInWebRoot(
+				PageDesignerTestsPlugin.getDefault().getBundle()
+				,"/testdata/checkmodeop/testCheckModeOperation.jsp.data"
+				,"/testCheckModeOperation.jsp");
+
+			ContextWrapper wrapper = null;
+
+			// First converter is simple use of CheckModeOperation
+			// containing child operations.
+			// Exercises both design and preview mode, but there should
+			// only be conversion for design view, based on the design
+			// time info trait in the meta-data for the tag in this test.
+			try {
+				wrapper = 
+					getDocumentContext("/WebContent/testCheckModeOperation.jsp", 365);
+
+				String prefix = "cmo";
+				String localName = "testTagOne";
+				ITagConverter tagConverter = 
+					getTagConverter(wrapper, prefix, localName, IConverterFactory.MODE_DESIGNER);
+				assertNotNull(tagConverter);
+
+				// invoke ITagConverter instance
+				tagConverter.convertRefresh(null);
+
+				// get and test result element
+				Element resultElement = tagConverter.getResultElement();
+				assertNotNull(resultElement);
+				assertEquals("div", resultElement.getLocalName());
+
+				// Ensure correct child element was copied to child node list.
+				// First child is text node, look at second child.
+				List<?> childNodes = tagConverter.getChildModeList();
+				assertTrue(childNodes.size() > 1);
+				Node secondChildNode = (Node)childNodes.get(1);
+				assertTrue(secondChildNode instanceof Element);
+				Element secondChildElement = (Element)secondChildNode;
+				assertEquals("span", secondChildElement.getLocalName());
+				assertEquals("t1ChildSpan", secondChildElement.getAttribute("id"));
+
+				// now try in preview mode
+				tagConverter = 
+					getTagConverter(wrapper, prefix, localName, IConverterFactory.MODE_PREVIEW);
+				assertNotNull(tagConverter);
+
+				// invoke ITagConverter instance
+				tagConverter.convertRefresh(null);
+
+				// get and test result element
+				resultElement = tagConverter.getResultElement();
+				assertNull(resultElement);
+			} finally {
+				if (wrapper != null) {
+					wrapper.dispose();
+				}
+			}
+
+			// Second tag converter has the CheckModeOperation
+			// as a sibling operation for additional transforms.
+			// Exercises both design and preview mode.
+			try {
+				wrapper = 
+					getDocumentContext("/WebContent/testCheckModeOperation.jsp", 531);
+
+				String prefix = "cmo";
+				String localName = "testTagTwo";
+
+				// test conversion for design mode
+				ITagConverter tagConverter = 
+					getTagConverter(wrapper, prefix, localName, IConverterFactory.MODE_DESIGNER);
+				assertNotNull(tagConverter);
+
+				// invoke ITagConverter instance
+				tagConverter.convertRefresh(null);
+
+				// get and test result element
+				Element resultElement = tagConverter.getResultElement();
+				assertNotNull(resultElement);
+				assertEquals("div", resultElement.getLocalName());
+				assertEquals("designId", resultElement.getAttribute("id"));
+
+				// now try in preview mode
+				tagConverter = 
+					getTagConverter(wrapper, prefix, localName, IConverterFactory.MODE_PREVIEW);
+				assertNotNull(tagConverter);
+
+				// invoke ITagConverter instance
+				tagConverter.convertRefresh(null);
+
+				// get and test result element
+				resultElement = tagConverter.getResultElement();
+				assertNotNull(resultElement);
+				assertEquals("div", resultElement.getLocalName());
+				assertEquals("previewId", resultElement.getAttribute("id"));
+			} finally {
+				if (wrapper != null) {
+					wrapper.dispose();
+				}
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			fail(ex.getLocalizedMessage());
+		}
+	}
+
+
+	/**
 	 * Test "ConvertAttributeToTextOperation".
 	 */
 	public void testConvertAttributeToTextOperation() {
@@ -256,29 +372,8 @@ public class Test_TransformOperations extends TestCase {
 		ContextWrapper wrapper = null;
 		try {
 			wrapper = getDocumentContext("/WebContent/Test_TransformOperations.jsp", 620);
-			IStructuredDocumentContext context = wrapper.getContext();
-            IDOMContextResolver resolver =
-                IStructuredDocumentContextResolverFactory.INSTANCE.
-                    getDOMContextResolver(context);
-
-            //get Element
-            Node node = resolver.getNode();
-            assertTrue(node instanceof Element);
-            assertEquals("h", node.getPrefix());
-            assertEquals("commandLink", node.getLocalName());
-            Element element = (Element)node;
-
-            //get IDOMDocument
-            IStructuredModel model = wrapper.getModel();
-            assertTrue(model instanceof IDOMModel);
-            IDOMDocument document = ((IDOMModel)model).getDocument();
-            assertNotNull(document);
-
-            //get ITagConverter instance
-            ITagConverter tagConverter = DTManager.getInstance().getTagConverter(
-            		element,
-            		IConverterFactory.MODE_DESIGNER,
-            		document);
+			ITagConverter tagConverter = 
+				getTagConverter(wrapper, "h", "commandLink", IConverterFactory.MODE_DESIGNER);
             assertNotNull(tagConverter);
 
             //invoke ITagConverter instance
@@ -519,48 +614,56 @@ public class Test_TransformOperations extends TestCase {
 		ContextWrapper wrapper = null;
 		try {
 			wrapper = getDocumentContext("/WebContent/Test_TransformOperations.jsp", docOffset);
-			IStructuredDocumentContext context = wrapper.getContext();
-            IDOMContextResolver resolver =
-                IStructuredDocumentContextResolverFactory.INSTANCE.
-                    getDOMContextResolver(context);
+			ITagConverter tagConverter =
+				getTagConverter(wrapper, prefix, localName, IConverterFactory.MODE_DESIGNER);
 
-            //get Element
-            Node node = resolver.getNode();
-            if (
-            		node instanceof Element &&
-            		node.getPrefix().equals(prefix) &&
-            		node.getLocalName().equals(localName)) {
-
-            	Element element = (Element)node;
-
-	            //get IDOMDocument
-	            IStructuredModel model = wrapper.getModel();
-	            if (model instanceof IDOMModel) {
-		            IDOMDocument document = ((IDOMModel)model).getDocument();
-		            if (document != null) {
-		
-			            //get ITagConverter instance
-			            ITagConverter tagConverter = DTManager.getInstance().getTagConverter(
-			            		element,
-			            		IConverterFactory.MODE_DESIGNER,
-			            		document);
-			            if (tagConverter != null) {
-			
-				            //invoke ITagConverter instance
-				            tagConverter.convertRefresh(null);
-				
-				            //get result element
-				            resultElement = tagConverter.getResultElement();
-			            }
-		            }
-	            }
-            }
+			if (tagConverter != null) {
+				//invoke ITagConverter instance
+				tagConverter.convertRefresh(null);
+	
+				//get result element
+				resultElement = tagConverter.getResultElement();
+			}
 		} finally {
 			if (wrapper != null) {
 				wrapper.dispose();
 			}
 		}		
 		return resultElement;
+	}
+
+	private ITagConverter getTagConverter(ContextWrapper wrapper, String prefix,
+			String localName, int mode) throws Exception {
+		ITagConverter tagConverter = null;
+		IStructuredDocumentContext context = wrapper.getContext();
+		IDOMContextResolver resolver =
+			IStructuredDocumentContextResolverFactory.INSTANCE.
+				getDOMContextResolver(context);
+
+		//get Element
+		Node node = resolver.getNode();
+		if (node instanceof Element
+				&& node.getPrefix().equals(prefix)
+				&& node.getLocalName().equals(localName)) {
+
+			Element element = (Element)node;
+
+			//get IDOMDocument
+			IStructuredModel model = wrapper.getModel();
+			if (model instanceof IDOMModel) {
+				IDOMDocument document = ((IDOMModel)model).getDocument();
+				if (document != null) {
+	
+					//get ITagConverter instance
+					tagConverter = DTManager.getInstance().getTagConverter(
+							element,
+							mode,
+							document);
+				}
+			}
+		}
+
+		return tagConverter;
 	}
 
     private ContextWrapper getDocumentContext(String path, int offset) throws Exception {
@@ -597,5 +700,4 @@ public class Test_TransformOperations extends TestCase {
             model.releaseFromRead();
         }
     }
-
 }

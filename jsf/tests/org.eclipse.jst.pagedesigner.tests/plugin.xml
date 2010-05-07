@@ -4,6 +4,10 @@
    <extension
          point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
       <standardMetaDataFile
+            location="/metadata/checkmodeop_dti.xml"
+            uri="org.eclipse.jst.pagedesigner.tests.testCheckModeOperation">
+      </standardMetaDataFile>
+      <standardMetaDataFile
             location="/metadata/test-metadata.xml"
             uri="org.eclipse.jst.pagedesigner.tests.tagCreatorFactory1">
       </standardMetaDataFile>
