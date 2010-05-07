@@ -53,74 +53,78 @@
 
 	<extension point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
 		<linkCreator class="org.eclipse.jst.pagedesigner.actions.link.HtmlLinkCreator" linkIdentifier="Html Link"/>
-  <tagTransformOperation
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildElementOperation"
         id="AppendChildElementOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildTextFromXPathOperation"
         id="AppendChildTextFromXPathOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.AppendChildTextOperation"
         id="AppendChildTextOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.ConvertAttributeToTextOperation"
         id="ConvertAttributeToTextOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAllAttributesOperation"
         id="CopyAllAttributesOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAttributeOperation"
         id="CopyAttributeOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
-          class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAttributeWithRenameOperation"
-          id="CopyAttributeWithRenameOperation">
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyAttributeWithRenameOperation"
+        id="CopyAttributeWithRenameOperation">
     </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CopyChildrenOperation"
         id="CopyChildrenOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateAttributeFromXPathOperation"
         id="CreateAttributeFromXPathOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
     <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateAttributeOperation"
         id="CreateAttributeOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CreateElementOperation"
         id="CreateElementOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IfNotOperation"
         id="IfNotOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IfOperation"
         id="IfOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.IterateOverElementsOperation"
         id="IterateOverElementsOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.MakeParentElementCurrentOperation"
         id="MakeParentElementCurrentOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.RemoveAttributeOperation"
         id="RemoveAttributeOperation">
-  </tagTransformOperation>
-      <tagTransformOperation
+    </tagTransformOperation>
+    <tagTransformOperation
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.RenameAttributeOperation"
         id="RenameAttributeOperation">
-  </tagTransformOperation>
+    </tagTransformOperation>
+    <tagTransformOperation
+        class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CheckModeOperation"
+        id="CheckModeOperation">
+    </tagTransformOperation>
 	</extension>
 	
 	<extension id="org.eclipse.jst.pagedesigner.commands" point="org.eclipse.ui.commands">

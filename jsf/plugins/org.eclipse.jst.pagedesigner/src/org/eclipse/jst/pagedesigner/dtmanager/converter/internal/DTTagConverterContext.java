@@ -11,6 +11,7 @@
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import org.eclipse.jst.pagedesigner.converter.ConvertPosition;
+import org.eclipse.jst.pagedesigner.converter.IConverterFactory;
 import org.eclipse.jst.pagedesigner.dtmanager.converter.AbstractTagConverterContext;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -76,4 +77,23 @@ public class DTTagConverterContext extends AbstractTagConverterContext {
 		}
 	}
 
+	/**
+	 * Utility method to get the current converter mode. Values are
+	 * defined in <code>IConverterFactory</code>.
+	 * 
+	 * <br>This method is available on the DTTagConverter but was not
+	 * part of the ITagConverter and not available as a public API.
+	 * The addition of this method allows an ITransformOperation for
+	 * a DTTagConverter to get at the mode.
+	 * See https://bugs.eclipse.org/bugs/show_bug.cgi?id=252861 
+	 * 
+	 * @return the converter mode. If unable to get the mode, return -1.
+	 */
+	public int getMode() {
+		if (tagConverter != null) {
+			return ((DTTagConverter) tagConverter).getMode();
+		}
+
+		return IConverterFactory.MODE_DESIGNER;
+	}
 }
