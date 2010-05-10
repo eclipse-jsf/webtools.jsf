@@ -146,11 +146,33 @@ public class HTMLValidator extends AbstractValidator implements IValidator
                 JSFCorePlugin.getDefault().getPreferenceStore());
         prefs.load();
 
-        final ValidationReporter jsfReporter = new ValidationReporter(this,
-                reporter, file, prefs);
-        validator.validateView(file, jsfReporter);
-        // TODO: break off into composite strategies
-        validateFaceletHtml(file, jsfReporter);
+        IStructuredModel model = null;
+        try
+        {
+            model = StructuredModelManager.getModelManager().getModelForRead(
+                    file);
+
+            final ValidationReporter jsfReporter = new ValidationReporter(this,
+                    reporter, file, prefs, model);
+            validator.validateView(file, jsfReporter);
+            // TODO: break off into composite strategies
+            validateFaceletHtml(file, jsfReporter);
+        }
+        catch (final CoreException e)
+        {
+            JSFCorePlugin.log("Error validating JSF", e);
+        }
+        catch (final IOException e)
+        {
+            JSFCorePlugin.log("Error validating JSF", e);
+        }
+        finally
+        {
+            if (null != model)
+            {
+                model.releaseFromRead();
+            }
+        }
     }
 
     private void validateFaceletHtml(final IFile file,

@@ -10,9 +10,12 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.ui.internal.validation;
 
+import java.io.IOException;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.IDocument;
@@ -24,6 +27,8 @@ import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator;
 import org.eclipse.jst.jsf.validation.internal.JSFValidatorFactory;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.jst.jsp.core.internal.validation.JSPValidator;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocumentRegion;
 import org.eclipse.wst.sse.ui.internal.reconcile.validator.ISourceValidator;
@@ -99,9 +104,31 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
                         JSFCorePlugin.getDefault().getPreferenceStore());
                 prefs.load();
 
-                final ValidationReporter jsfReporter = new ValidationReporter(
-                        this, reporter, file, prefs);
-                validator.validateView(file, regions, jsfReporter);
+                IStructuredModel model = null;
+                try
+                {
+                    model = StructuredModelManager.getModelManager().getModelForRead(
+                            file);
+
+                    final ValidationReporter jsfReporter = new ValidationReporter(
+                            this, reporter, file, prefs, model);
+                    validator.validateView(file, regions, jsfReporter);
+                }
+                catch (final CoreException e)
+                {
+                    JSFCorePlugin.log("Error validating JSF", e); //$NON-NLS-1$
+                }
+                catch (final IOException e)
+                {
+                    JSFCorePlugin.log("Error validating JSF", e); //$NON-NLS-1$
+                }
+                finally
+                {
+                    if (null != model)
+                    {
+                        model.releaseFromRead();
+                    }
+                }
             }
         }
     }
@@ -134,9 +161,31 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
                     JSFCorePlugin.getDefault().getPreferenceStore());
             prefs.load();
     
-            final ValidationReporter jsfReporter = new ValidationReporter(this,
-                    reporter, file, prefs);
-            validator.validateView(file, jsfReporter);
+            IStructuredModel model = null;
+            try
+            {
+                model = StructuredModelManager.getModelManager().getModelForRead(
+                        file);
+
+                final ValidationReporter jsfReporter = new ValidationReporter(this,
+                        reporter, file, prefs, model);
+                validator.validateView(file, jsfReporter);
+            }
+            catch (final CoreException e)
+            {
+                JSFCorePlugin.log("Error validating JSF", e); //$NON-NLS-1$
+            }
+            catch (final IOException e)
+            {
+                JSFCorePlugin.log("Error validating JSF", e); //$NON-NLS-1$
+            }
+            finally
+            {
+                if (null != model)
+                {
+                    model.releaseFromRead();
+                }
+            }
         }
     }
 

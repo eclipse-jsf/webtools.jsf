@@ -6,6 +6,7 @@ import org.eclipse.jst.jsf.ui.internal.validation.ValidationMessageFactory;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.strategy.DiagnosticFactory;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 import org.eclipse.wst.validation.internal.provisional.core.IReporter;
 import org.eclipse.wst.validation.internal.provisional.core.IValidator;
@@ -21,12 +22,13 @@ import org.eclipse.wst.validation.internal.provisional.core.IValidator;
 
     public ValidationReporter(final IValidator validator,
             final IReporter reporter, final IFile file,
-            final ValidationPreferences prefs)
+            final ValidationPreferences prefs, 
+            final IStructuredModel model)
     {
         _validator = validator;
         _reporter = reporter;
         _file = file;
-        _factory = new ValidationMessageFactory(prefs);
+        _factory = new ValidationMessageFactory(prefs, model);
     }
 
     public void report(final Diagnostic problem, final int start,

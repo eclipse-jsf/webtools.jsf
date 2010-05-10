@@ -22,6 +22,8 @@ import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.JSFTypeComparatorPreferences;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.validation.internal.core.Message;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
@@ -34,13 +36,14 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 public final class ValidationMessageFactory
 {
     private final Map<String, SeverityOverrideStrategy> _strategies;
-
+    private IStructuredModel _model = null;
     /**
      * @param prefs
-     * 
+     * @param model
      */
-    public ValidationMessageFactory(final ValidationPreferences prefs)
+    public ValidationMessageFactory(final ValidationPreferences prefs, final IStructuredModel model)
     {
+    	_model = model;
         _strategies = new HashMap<String, SeverityOverrideStrategy>();
         _strategies.put(DiagnosticFactory.SOURCE_ID,
                 new ELSeverityOverrideStrategy(prefs));
@@ -78,6 +81,14 @@ public final class ValidationMessageFactory
 
         message.setOffset(offset);
         message.setLength(length);
+		if (this._model != null) {
+			IStructuredDocument flatModel = this._model.getStructuredDocument();
+			if (flatModel != null) {
+				int line = flatModel.getLineOfOffset(message.getOffset());
+				if (line >= 0)
+					message.setLineNo(line + 1);
+			}
+		}
 
         return message;
     }

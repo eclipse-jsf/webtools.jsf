@@ -11,6 +11,7 @@
  ********************************************************************************/
 package org.eclipse.jst.jsf.validation.internal.appconfig;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +40,8 @@ import org.eclipse.jst.jsp.core.internal.Logger;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.validation.AbstractValidator;
 import org.eclipse.wst.validation.ValidationResult;
 import org.eclipse.wst.validation.ValidationState;
@@ -301,14 +304,41 @@ public class AppConfigValidator extends AbstractValidator implements IValidator 
         final List messages = new ArrayList();
         validator.validate(facesConfigType, messages, file);
 
+        if (messages.size() > 0) {
+        	IStructuredModel model = null;
+            try
+            {
+                model = StructuredModelManager.getModelManager().getModelForRead(
+                        file);
+                reportProblems(reporter, messages, model);
+            } catch (IOException e) {
+            	JSFCorePlugin.log("Error reporting FacesConfig validation problems", e); //$NON-NLS-1$
+    		} catch (CoreException e) {
+    			JSFCorePlugin.log("Error reporting FacesConfig validation problems", e); //$NON-NLS-1$
+    		} finally {
+            	if (model != null) {
+            		model.releaseFromRead();
+            	}
+            }
+        }
+    }
+
+    //sets line number and reports message
+    private void reportProblems(final IReporter reporter, final List messages, final IStructuredModel model) {
         for (final Iterator it = messages.iterator(); it.hasNext();)
         {
             final IMessage message = (IMessage) it.next();
+            if (model != null) {
+	            final int line = model.getStructuredDocument().getLineOfOffset(message.getOffset());
+				if (line >= 0)
+					message.setLineNo(line + 1);
+            }
             reporter.addMessage(this, message);
         }
     }
 
-    /**
+
+	/**
      * @param project
      * @return the version string for the JSF facet on project
      * or null if not found
