@@ -343,7 +343,7 @@
             domainId="TagLibraryDomain"
             domainSourceModelTypeId="TaglibContentModelHandler"
             locator="org.eclipse.jst.jsf.core.metadata.internal.TaglibMetaDataLocator"
-            ordinal="0">
+            ordinal="5">
       </domainSourceModelTypes>
    </extension> 
    

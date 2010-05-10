@@ -37,7 +37,7 @@ public abstract class Namespace implements Serializable
      * @return the view elements in this namespace. May be empty but MUST NOT BE
      *         NULL.
      */
-    public abstract Collection getViewElements();
+    public abstract Collection<? extends ITagElement> getViewElements();
     
     /**
      * This method should be light weight if possible.  Unlike calling

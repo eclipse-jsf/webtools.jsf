@@ -276,7 +276,10 @@ public class PaletteItemManager implements IPaletteItemManager,
 		sortCategories();
 	}
 
-	private void sortCategories() {
+	/**
+	 * Sort palette categories
+	 */
+	protected void sortCategories() {
 		//note that once we store ordering customizations, we will need to do something different
 		synchronized(_paletteCategories) {
 			Collections.sort(_paletteCategories, new Comparator(){

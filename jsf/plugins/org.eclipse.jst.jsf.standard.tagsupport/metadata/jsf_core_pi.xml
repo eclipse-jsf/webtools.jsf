@@ -59,6 +59,9 @@
 		</trait>
 	</entity>
 	<entity id="ajax" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.ajax.description</value>
+		</trait>
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_AJAX.gif</value>
 		</trait>
@@ -90,6 +93,7 @@
 			<value xsi:type="mdt:StringValue">large/JSF_CONVERTNUMBER.gif</value>
 		</trait>
 	</entity>
+	
 	<entity id="converter" type="tag">
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_CONVERTER.gif</value>
@@ -97,8 +101,10 @@
 		<trait id="large-icon">
 			<value xsi:type="mdt:StringValue">large/JSF_CONVERTER.gif</value>
 		</trait>
-	</entity>
-	<entity id="event" type="tag">
+	</entity><entity id="event" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.event.description</value>
+		</trait>	
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_EVENT.gif</value>
 		</trait>
@@ -123,6 +129,9 @@
 		</trait>
 	</entity>
 	<entity id="metadata" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.metadata.description</value>
+		</trait>	
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_METADATA.gif</value>
 		</trait>
@@ -203,6 +212,9 @@
 		</trait>
 	</entity>
 	<entity id="validateRequired" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.validateRequired.description</value>
+		</trait>		
 		<trait id="small-icon">
 			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEREQUIRED.gif</value>
 		</trait>
