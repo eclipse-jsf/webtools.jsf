@@ -230,9 +230,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
     		addModificationListeners();
         }
 		
-
-		this.getContainer().getShell().pack();
-
 		return composite;
 	}
 
@@ -486,4 +483,22 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	}
 
 
+    /**
+     * Fix for Bug Bug 300454: "Finish button in New Project wizard is enabled
+     * even if JSF facet does not have library information"
+     * https://bugs.eclipse.org/bugs/show_bug.cgi?id=300454
+     * 
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jface.wizard.WizardPage#isPageComplete()
+     */
+    @Override
+    public boolean isPageComplete()
+    {
+        final LibraryInstallDelegate librariesInstallDelegate = (LibraryInstallDelegate) getDataModel().getProperty(LIBRARY_PROVIDER_DELEGATE);
+        if (librariesInstallDelegate == null)
+            throw new IllegalArgumentException("LibraryInstallDelegate is expected to be non-null"); //$NON-NLS-1$
+
+        return super.isPageComplete() && (librariesInstallDelegate.validate().getSeverity() != IStatus.ERROR);
+    }
 }
