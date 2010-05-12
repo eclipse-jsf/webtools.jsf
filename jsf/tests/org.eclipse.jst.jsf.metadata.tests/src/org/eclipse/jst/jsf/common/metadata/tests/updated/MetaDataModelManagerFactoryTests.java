@@ -42,7 +42,7 @@ public class MetaDataModelManagerFactoryTests extends TestCase {
 	
 //// test extension disabled becuz it screws up tests	
 //	public void testExtPtMDModelManagerSetup() {
-//		IMetaDataModelManager mgr = MetaDataModelManagerFactory.getMetaDataModelManagerInstance(projectTestEnvironment.getTestProject());
+//		IMetaDataModelManager mgr = MetaDataModelManagerFactory.getMetaDataModelManagerInstance(_project);
 //		assertNotNull(mgr);
 //		assertEquals("TestMDModelManager", mgr.getClass().getSimpleName());;
 //	}

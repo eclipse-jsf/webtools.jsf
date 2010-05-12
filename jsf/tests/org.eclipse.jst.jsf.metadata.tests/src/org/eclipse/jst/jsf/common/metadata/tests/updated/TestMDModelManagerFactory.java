@@ -11,7 +11,7 @@
 
 package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.internal.AbstractMetaDataModelManager;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelContext;
@@ -21,7 +21,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelManagerFactory
 
 public class TestMDModelManagerFactory implements IMetaDataModelManagerFactory {
 
-	public IMetaDataModelManager getInstance(IProject project) {
+	public IMetaDataModelManager getInstance(IResource projectOrWorkspaceRoot) {
 		return new TestMDModelManager();
 	}
 

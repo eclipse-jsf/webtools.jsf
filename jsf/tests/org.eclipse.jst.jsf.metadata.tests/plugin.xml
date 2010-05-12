@@ -79,11 +79,12 @@
             class="org.eclipse.jst.jsf.common.metadata.tests.updated.FakeDomainQueryFactory">
       </factory>
    </extension>
+
 <!--   
    <extension
          point="org.eclipse.jst.jsf.common.mdModelManagerFactory">
       <factory
-            class="org.eclipse.jst.jsf.common.metadata.tests.TestMDModelManagerFactory">
+            class="org.eclipse.jst.jsf.common.metadata.tests.updated.TestMDModelManagerFactory">
       </factory>
    </extension>
 -->   
