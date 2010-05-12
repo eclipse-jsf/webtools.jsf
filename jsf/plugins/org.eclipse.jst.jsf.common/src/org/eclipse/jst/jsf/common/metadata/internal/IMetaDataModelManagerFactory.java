@@ -11,15 +11,15 @@
 
 package org.eclipse.jst.jsf.common.metadata.internal;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 
 /**
  * A factory that will produce {@link IMetaDataModelManager}s
  */
 public interface IMetaDataModelManagerFactory {
 	/**
-	 * @param project
-	 * @return IMetaDataModelManager for the project
+	 * @param projectOrWorkspaceRoot
+	 * @return IMetaDataModelManager for the project, or shared IMetaDataModelManager for the workspace
 	 */
-	public IMetaDataModelManager getInstance(IProject project);
+	public IMetaDataModelManager getInstance(IResource projectOrWorkspaceRoot);
 }

@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -29,7 +30,7 @@ import org.eclipse.jst.jsf.common.internal.strategy.TestableProjectFactoryStrate
  * Produces {@link IMetaDataModelManager}s
  *
  */
-public final class MetaDataModelManagerFactory extends ResourceSingletonObjectManager<IMetaDataModelManager, IProject> {
+public final class MetaDataModelManagerFactory extends ResourceSingletonObjectManager<IMetaDataModelManager, IResource> {
 
 	private static MetaDataModelManagerFactory 	INSTANCE;
 	
@@ -53,10 +54,10 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	 */
 	public static IMetaDataModelManager getMetaDataModelManagerInstance(final IProject project) {
 		try {
-			return getMetaDataModelManagerFactoryInstance(project).getInstance(project);			
+			return getMetaDataModelManagerFactoryInstance(project).getInstance(project != null ? project : ResourcesPlugin.getWorkspace().getRoot());			
 		} catch (ManagedObjectException e) {
-			if (project.getProject() != null)
-				JSFCommonPlugin.log(e, "Cannot create IMetaDataModelManager for "+project.getProject().getName()+ " (1)"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (project != null)
+				JSFCommonPlugin.log(e, "Cannot create IMetaDataModelManager for "+project.getName()+ " (1)"); //$NON-NLS-1$ //$NON-NLS-2$
 			else
 				JSFCommonPlugin.log(e, "Cannot create workspace shared IMetaDataModelManager (1)"); //$NON-NLS-1$ 
 		}
@@ -89,32 +90,32 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	}
 	
 	@Override
-	protected IMetaDataModelManager createNewInstance(final IProject project) {
+	protected IMetaDataModelManager createNewInstance(final IResource resource) {
 		try {
-			final IMetaDataModelManagerFactory factory = getMetaDataModelManagerFactoryProviderInstances(project);
+			final IMetaDataModelManagerFactory factory = getMetaDataModelManagerFactoryProviderInstances(resource);
 			if (factory != null)
-				return factory.getInstance(project);
+				return factory.getInstance(resource);
 		} catch (Exception e) {
-			if (project != null)
-				JSFCommonPlugin.log(e, "Cannot create IMetaDataModelManager for "+project.getName()+ " (2)"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (resource != null)
+				JSFCommonPlugin.log(e, "Cannot create IMetaDataModelManager for "+resource.getName()+ " (2)"); //$NON-NLS-1$ //$NON-NLS-2$
 			else
 				JSFCommonPlugin.log(e, "Cannot create workspace shared IMetaDataModelManager (2)"); //$NON-NLS-1$ 
 		}			
 		return null;
 	}
 
-	private IMetaDataModelManagerFactory getMetaDataModelManagerFactoryProviderInstances(final IProject project) {
+	private IMetaDataModelManagerFactory getMetaDataModelManagerFactoryProviderInstances(final IResource resource) {
 		final CompositeFactorySelectionStrategyProvider factoryProvider = new CompositeFactorySelectionStrategyProvider();		
-		return factoryProvider != null ? factoryProvider.getFactoryToUse(project) : null;
+		return factoryProvider != null ? factoryProvider.getFactoryToUse(resource) : null;
 	}
 	
 	private class CompositeFactorySelectionStrategyProvider
 	{
-		public IMetaDataModelManagerFactory getFactoryToUse(final IProject project) {
+		public IMetaDataModelManagerFactory getFactoryToUse(final IResource resource) {
 			final MetaDataModelManagerProviderSelectionStrategy providerSelector = new MetaDataModelManagerProviderSelectionStrategy();		
 	        addStrategies(providerSelector);
 	        
-			final IMetaDataModelManagerFactory provider = providerSelector.perform(project);
+			final IMetaDataModelManagerFactory provider = providerSelector.perform(resource);
 	        if (provider != providerSelector.getNoResult())
 	        {
 	            return provider;
@@ -132,7 +133,7 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	
 	private static class MetaDataModelManagerProviderSelectionStrategy
 		extends
-			AbstractTestableExtensibleDefaultProviderSelectionStrategy<IProject, IMetaDataModelManagerFactory> {
+			AbstractTestableExtensibleDefaultProviderSelectionStrategy<IResource, IMetaDataModelManagerFactory> {
 		
 		private static final IMetaDataModelManagerFactory NO_RESULT = null;
 		
@@ -143,7 +144,7 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	}
 	
 	private abstract class AbstractManagerProviderStrategy 
-		implements ISimpleStrategy<IProject, IMetaDataModelManagerFactory> {
+		implements ISimpleStrategy<IResource, IMetaDataModelManagerFactory> {
 		
 		private final IMetaDataModelManagerFactory NO_RESULT = null;
 		public IMetaDataModelManagerFactory getNoResult() {
@@ -151,11 +152,10 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 		}
 	}
 	
-
 	private class DefaultManagerProviderStrategy extends
 			AbstractManagerProviderStrategy {
 
-		public IMetaDataModelManagerFactory perform(final IProject input) throws Exception {
+		public IMetaDataModelManagerFactory perform(final IResource input) throws Exception {
 			return new DefaultManagerProvider();
 		}
 
@@ -164,9 +164,9 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	private static class DefaultManagerProvider 
 		implements IMetaDataModelManagerFactory {
 
-		public IMetaDataModelManager getInstance(final IProject project) {
-			if (project != null)
-				return new MetaDataModelManager(project);
+		public IMetaDataModelManager getInstance(final IResource project) {
+			if (project != null && project instanceof IProject)
+				return new MetaDataModelManager((IProject)project);
 			return MetaDataModelManager.getSharedInstance();
 		}
 		
@@ -175,7 +175,7 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	private class ExtensionBasedManagerProviderStrategy 
 		extends AbstractManagerProviderStrategy {
 	
-		public IMetaDataModelManagerFactory perform(final IProject input) throws Exception {
+		public IMetaDataModelManagerFactory perform(final IResource input) throws Exception {
 			return EXT_PT_BASED_FACTORY != null ? EXT_PT_BASED_FACTORY : getNoResult();
 		}
 	}
