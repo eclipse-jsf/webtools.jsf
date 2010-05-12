@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.ELProxyContributor;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.ServletBeanProxyContributor;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.IFaceletTagRecord.TagRecordDescriptor;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.FaceletLibraryClassTagLib;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.FaceletXMLDefnTaglib;
@@ -38,17 +39,22 @@ public class TagRecordFactory
 
     /**
      * @param project
+     * @param useJEMProxy TODO
      */
-    public TagRecordFactory(final IProject project)
+    public TagRecordFactory(final IProject project, boolean useJEMProxy)
     {
         _project = project;
         ProxyFactoryRegistry registry = NULL_REGISTRY;
-        try
+        if (useJEMProxy)
         {
-            registry = createProxyRegistry(_project);
-        } catch (final Exception e)
-        {
-            FaceletCorePlugin.log("While creatinng proxy", e); //$NON-NLS-1$
+            try
+            {
+                registry = createProxyRegistry(_project);
+            } catch (final Exception e)
+            {
+                FaceletCorePlugin.log("While creatinng proxy", e); //$NON-NLS-1$
+            }
+            
         }
         _registry = registry;
     }
@@ -57,7 +63,7 @@ public class TagRecordFactory
      * @param taglibDefn
      * @return the new tag record
      */
-    public IFaceletTagRecord createRecords(final FaceletTaglib taglibDefn)
+    public IFaceletTagRecord createRecords(final FaceletTaglib taglibDefn, final TagRecordDescriptor descriptor)
     {
         IFaceletTagRecord retValue = null;
 
@@ -67,7 +73,7 @@ public class TagRecordFactory
             {
                 final LibraryClassBasedTagRecord record = new LibraryClassBasedTagRecord(
                         _registry, (FaceletLibraryClassTagLib) taglibDefn,
-                        _project);
+                        _project, descriptor);
                 try
                 {
                     record.initURI();
@@ -86,7 +92,7 @@ public class TagRecordFactory
             // retValue = record;
         } else
         {
-            final XMLBasedTagRecord record = new XMLBasedTagRecord(taglibDefn);
+            final XMLBasedTagRecord record = new XMLBasedTagRecord(taglibDefn, descriptor);
             retValue = record;
         }
         return retValue;

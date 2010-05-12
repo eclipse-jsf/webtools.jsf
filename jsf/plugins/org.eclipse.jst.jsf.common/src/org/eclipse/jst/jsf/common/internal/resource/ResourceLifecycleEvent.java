@@ -10,14 +10,21 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.internal.resource;
 
+import java.util.EventObject;
+
 import org.eclipse.core.resources.IResource;
 
 /**
  * @author cbateman
  * 
  */
-public class ResourceLifecycleEvent
+public class ResourceLifecycleEvent extends EventObject
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8692801944833729L;
+
     /**
      * the type of lifecycle event this enum is not closed and may add new
      * fields in the future
@@ -111,13 +118,16 @@ public class ResourceLifecycleEvent
     private final ReasonType _reasonType;
 
     /**
+     * @param source 
      * @param affectedResource
      * @param eventType
      * @param reasonType
      */
-    public ResourceLifecycleEvent(final IResource affectedResource,
+    public ResourceLifecycleEvent(final LifecycleListener source,
+            final IResource affectedResource,
             final EventType eventType, final ReasonType reasonType)
     {
+        super(source);
         _affectedResource = affectedResource;
         _eventType = eventType;
         _reasonType = reasonType;

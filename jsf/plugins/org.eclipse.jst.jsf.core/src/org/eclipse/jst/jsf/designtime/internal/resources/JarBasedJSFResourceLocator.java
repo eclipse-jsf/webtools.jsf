@@ -17,8 +17,9 @@ import org.eclipse.jst.jsf.common.internal.finder.VisitorMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.acceptor.JarEntryMatchingAcceptor;
 import org.eclipse.jst.jsf.common.internal.finder.matcher.TaglibJarEntryFinder;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
+import org.eclipse.jst.jsf.common.internal.resource.ClasspathJarFile;
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
-import org.eclipse.jst.jsf.common.internal.resource.IJarProvider;
+import org.eclipse.jst.jsf.common.internal.resource.IJarLocator;
 import org.eclipse.jst.jsf.common.internal.util.JarUtilities;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
@@ -30,7 +31,7 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
  */
 public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
 {
-    private final IJarProvider _provider;
+    private final IJarLocator _provider;
     private final ContentTypeResolver _contentTypeResolver;
     private static final Pattern _resourcePathPattern = Pattern
             .compile("META-INF/resources/(.*)"); //$NON-NLS-1$
@@ -50,7 +51,7 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
             final String displayName,
             final List<IJSFResourceFragment> noResultValue,
             final CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList,
-            final IJarProvider provider,
+            final IJarLocator provider,
             final ContentTypeResolver contentTypeResolver)
     {
         super(id, displayName, noResultValue, mutableListenerList);
@@ -67,7 +68,7 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
     public JarBasedJSFResourceLocator(
             final List<IJSFResourceFragment> noResultValue,
             final CopyOnWriteArrayList<ILocatorChangeListener> mutableListenerList,
-            final IJarProvider provider,
+            final IJarLocator provider,
             final ContentTypeResolver contentTypeResolver)
     {
         this(
@@ -75,17 +76,33 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
     }
 
     @Override
+    public void start(final IProject initialContext)
+    {
+        _provider.start(initialContext);
+        super.start(initialContext);
+    }
+
+    @Override
+    public void stop()
+    {
+        _provider.stop();
+        super.stop();
+    }
+
+    @Override
     protected List<IJSFResourceFragment> doLocate(final IProject project)
     {
         final List<IJSFResourceFragment> resourcesFound = new ArrayList<IJSFResourceFragment>();
-
-        final Collection<? extends JarFile> jars = _provider.getJars(project);
-
-        for (final JarFile jarFile : jars)
+        final Collection<? extends ClasspathJarFile> jars = _provider
+                .getJars(project);
+        for (final ClasspathJarFile classpathJarFile : jars)
         {
-            resourcesFound.addAll(processJar(jarFile));
+            final JarFile jarFile = classpathJarFile.getJarFile();
+            if (jarFile != null)
+            {
+                resourcesFound.addAll(processJar(jarFile));
+            }
         }
-
         return resourcesFound;
     }
 
@@ -97,7 +114,6 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
     private List<JSFResource> processJar(final JarFile jarFile)
     {
         final List<JSFResource> tagLibsFound = new ArrayList<JSFResource>();
-
         try
         {
             if (jarFile != null)
@@ -118,7 +134,6 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
                             final String group = patternMatcher.group(1);
                             if (group != null && group.trim().length() > 0)
                             {
-
                                 final ResourceIdentifier libRes = new ResourceIdentifierFactory()
                                         .createLibraryResource(group);
                                 final URL jarUrl = JarUtilities.INSTANCE
@@ -154,5 +169,4 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
         }
         return tagLibsFound;
     }
-
 }

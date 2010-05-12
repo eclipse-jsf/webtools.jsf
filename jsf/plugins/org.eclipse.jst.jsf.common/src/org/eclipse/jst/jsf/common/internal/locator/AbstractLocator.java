@@ -27,6 +27,8 @@ public abstract class AbstractLocator<LOCATORTYPE, CONTEXTTYPE, IDTYPE>
     private final String _displayName;
     private boolean _isStarted;
 
+    private Exception _startTrace;
+
     /**
      * Available for sub-classes that want to use reasonable defaults and only provide
      * mandatory data.
@@ -105,14 +107,23 @@ public abstract class AbstractLocator<LOCATORTYPE, CONTEXTTYPE, IDTYPE>
 
     public void start(final CONTEXTTYPE initialContext)
     {
+        if (isStarted())
+        {
+            throw new IllegalStateException("Locator was already started", _startTrace); //$NON-NLS-1$
+        }
+
         // set the started flag
         setStarted(true);
+        _startTrace = new Exception("Locator was started on this trace"); //$NON-NLS-1$
     }
 
     public void stop()
     {
         // set the started flag
+        // clear all listeners
+        _listeners.clear();
         setStarted(false);
+        _startTrace = null;
     }
 
     /**

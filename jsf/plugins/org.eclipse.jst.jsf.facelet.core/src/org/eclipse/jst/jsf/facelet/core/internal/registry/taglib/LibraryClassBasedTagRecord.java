@@ -80,10 +80,12 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1
      * @param registry
      * @param model
      * @param project 
+     * @param descriptor 
      */
     public LibraryClassBasedTagRecord(final ProxyFactoryRegistry registry,
-            final FaceletLibraryClassTagLib model, final IProject project)
+            final FaceletLibraryClassTagLib model, final IProject project, TagRecordDescriptor descriptor)
     {
+        super(descriptor);
         _registry = registry;
         _model = model;
         _project = project;

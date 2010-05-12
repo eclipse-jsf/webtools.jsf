@@ -24,7 +24,8 @@ import org.eclipse.jst.jsf.common.internal.locator.AbstractLocatorProvider;
 import org.eclipse.jst.jsf.common.internal.locator.AbstractLocatorProvider.DefaultLocatorProvider;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
-import org.eclipse.jst.jsf.common.internal.resource.DefaultJarProvider;
+import org.eclipse.jst.jsf.common.internal.resource.DefaultJarLocator;
+import org.eclipse.jst.jsf.common.internal.resource.JavaCoreMediator;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceLocator;
@@ -72,7 +73,7 @@ public class FaceletTagIndex extends
     @Override
     protected IProjectTaglibDescriptor createNewInstance(final IProject project)
     {
-        final TagRecordFactory factory = new TagRecordFactory(project);
+        final TagRecordFactory factory = new TagRecordFactory(project, true);
 
         return _factory.create(project, factory);
     }
@@ -84,7 +85,8 @@ public class FaceletTagIndex extends
      */
     public void flush(final IProject project)
     {
-        unmanageResource(project);
+        IProjectTaglibDescriptor flushedDescriptor = unmanageResource(project);
+        flushedDescriptor.destroy();
     }
 
     /**
@@ -109,8 +111,9 @@ public class FaceletTagIndex extends
             resourceLocators.add(new JarBasedJSFResourceLocator(
                     Collections.EMPTY_LIST,
                     new CopyOnWriteArrayList<ILocatorChangeListener>(),
-                    new DefaultJarProvider(Collections
-                            .singletonList(new AlwaysMatcher())),
+                    new DefaultJarLocator(
+                            Collections.singletonList(new AlwaysMatcher()),
+                            new JavaCoreMediator()),
                     new ContentTypeResolver()));
             final IWorkspace workspace = project.getWorkspace();
             resourceLocators.add(new WorkspaceJSFResourceLocator(

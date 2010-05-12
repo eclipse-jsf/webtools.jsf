@@ -113,9 +113,22 @@ public final class JSFCommonPlugin extends EMFPlugin {
      * @param msg
      */
     public static void log(final Exception e, final String msg) {
-        final ILog log = getPlugin().getLog();
-
-        log.log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.OK, msg, e));
+        Implementation plugin2 = getPlugin();
+        if (plugin2 != null)
+        {
+            final ILog log = getPlugin().getLog();
+            if (log != null)
+            {
+                log.log(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.OK, msg, e));
+                return;
+            }
+        }
+        // if plugin not active, dump to stderr
+        System.err.print(msg+": "); //$NON-NLS-1$
+        if (e != null)
+        {
+            e.printStackTrace(System.err);
+        }
     }
 
     /**

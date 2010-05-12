@@ -27,6 +27,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.javaee.web.IWebCommon;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
+import org.eclipse.jst.jsf.common.internal.resource.EventResult;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;

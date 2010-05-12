@@ -1,6 +1,8 @@
 package org.eclipse.jst.jsf.common.internal.util;
 
+import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -11,6 +13,8 @@ import java.util.jar.JarFile;
  */
 public class JarUtilities
 {
+    private static final String JAR_PREFIX = "jar:"; //$NON-NLS-1$
+    private static final String JAR_FILE_PREFIX = JAR_PREFIX + "file:"; //$NON-NLS-1$
     /**
      * A common instance.
      */
@@ -59,5 +63,28 @@ public class JarUtilities
         final String urlString = String.format("jar:file:///%s!/%s", //$NON-NLS-1$
                 filePath, jarEntryName); 
         return new URL(urlString); 
+    }
+    
+    /**
+     * @param url
+     * @return a file for the URL if url is in the local file system (must conform to jar:file:// uri).
+     * or null.
+     */
+    public File getFile(final URL url)
+    {
+        String string = url.toString();
+        if (string != null && string.startsWith(JAR_FILE_PREFIX))
+        {
+            string = string.substring(JAR_PREFIX.length());
+            try
+            {
+                return new File(URI.create(string));
+            } catch (IllegalArgumentException e)
+            {
+                // fallthorough and return null if the file can't do anything
+                // with the string.
+            }
+        }
+        return null;
     }
 }

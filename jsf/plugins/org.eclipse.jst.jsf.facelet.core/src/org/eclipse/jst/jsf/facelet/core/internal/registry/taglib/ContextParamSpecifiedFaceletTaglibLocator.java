@@ -23,6 +23,7 @@ import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponen
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.IFaceletTagRecord.WorkspaceTagRecordDescriptor;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
@@ -148,7 +149,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
             // if no valid namespace, don't create a record.
             if (taglib != null && taglib.getNamespaceUri() != null && taglib.getNamespaceUri().trim().length()>0)
             {
-                return _factory.createRecords(taglib);
+                return _factory.createRecords(taglib, new WorkspaceTagRecordDescriptor(file));
             }
         } catch (final Exception e)
         {

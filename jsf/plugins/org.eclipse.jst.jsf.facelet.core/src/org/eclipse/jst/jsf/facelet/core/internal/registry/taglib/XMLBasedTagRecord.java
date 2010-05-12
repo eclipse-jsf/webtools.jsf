@@ -34,9 +34,11 @@ public class XMLBasedTagRecord extends FaceletTagRecord
 
     /**
      * @param taglibDefn
+     * @param descriptor 
      */
-    public XMLBasedTagRecord(final FaceletTaglib taglibDefn)
+    public XMLBasedTagRecord(final FaceletTaglib taglibDefn, final TagRecordDescriptor descriptor)
     {
+        super(descriptor);
         _taglibDefn = taglibDefn;
     }
 

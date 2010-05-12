@@ -24,21 +24,31 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.F
 public abstract class FaceletTagRecord implements IFaceletTagRecord
 {
     private final CopyOnWriteArrayList<ITagRecordChangeListener> _listeners;
+    private final TagRecordDescriptor _descriptor;
 
     /**
+     * @param descriptor 
      * 
      */
-    public FaceletTagRecord()
+    public FaceletTagRecord(final TagRecordDescriptor descriptor)
     {
         _listeners = new CopyOnWriteArrayList<ITagRecordChangeListener>();
+        _descriptor = descriptor;
     }
 
-    public final void addListener(final ITagRecordChangeListener listener)
+    
+    public TagRecordDescriptor getDescriptor()
+    {
+        return _descriptor;
+    }
+
+
+    public void addListener(final ITagRecordChangeListener listener)
     {
         _listeners.addIfAbsent(listener);
     }
 
-    public final void removeListener(final ITagRecordChangeListener listener)
+    public void removeListener(final ITagRecordChangeListener listener)
     {
         _listeners.remove(listener);
     }
@@ -64,4 +74,5 @@ public abstract class FaceletTagRecord implements IFaceletTagRecord
     public abstract FaceletTaglibTag getTag(final String name);
 
     public abstract Collection<? extends FaceletTaglibTag> getTags();
+    
 }

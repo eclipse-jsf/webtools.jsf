@@ -1,5 +1,7 @@
 package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,10 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jst.jsf.common.internal.util.JarUtilities;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResource;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceContainer;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
+import org.eclipse.jst.jsf.designtime.internal.resources.IJarBasedJSFResource;
+import org.eclipse.jst.jsf.designtime.internal.resources.IWorkspaceJSFResourceFragment;
+import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceContainer;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibFactory;
@@ -30,10 +40,13 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
     /**
      * @param uri
      * @param tags
+     * @param descriptor
      */
     public JSFResourceBasedTagRecord(final String uri,
-            final List<FaceletTaglibTag> tags)
+            final List<FaceletTaglibTag> tags,
+            final TagRecordDescriptor descriptor)
     {
+        super(descriptor);
         _uri = uri;
         _tags = tags;
     }
@@ -93,7 +106,7 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
             }
             tags.add(mergeTag);
         }
-        return new JSFResourceBasedTagRecord(_uri, tags);
+        return new JSFResourceBasedTagRecord(_uri, tags, getDescriptor());
     }
 
     /* package */JSFResourceBasedTagRecord removeTags(
@@ -109,7 +122,7 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                 tags.remove(tag);
             }
         }
-        return new JSFResourceBasedTagRecord(_uri, tags);
+        return new JSFResourceBasedTagRecord(_uri, tags, getDescriptor());
     }
 
     /**
@@ -120,9 +133,9 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
      */
     public static class Builder
     {
-        private static final List<FaceletTaglibTag> WHOLE_LIBRARY = new ArrayList<FaceletTaglibTag>(
-                0);
-        private final Map<String, List<FaceletTaglibTag>> _tags = new HashMap<String, List<FaceletTaglibTag>>();
+        private static final LibEntry WHOLE_LIBRARY = new LibEntry(null);
+        private static final JSFResourceBasedTagRecord WHOLE_LIB_RECORD = new JSFResourceBasedTagRecord(null, Collections.EMPTY_LIST, null);
+        private final Map<String, LibEntry> _tags = new HashMap<String, LibEntry>();
         private static final String FACELET_FILE_CONTENT_TYPE = "org.eclipse.wst.html.core.htmlsource"; //$NON-NLS-1$
 
         /**
@@ -139,10 +152,10 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
             }
             final String uri = String.format(
                     "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
-            List<FaceletTaglibTag> tags = _tags.get(uri);
+            LibEntry tags = _tags.get(uri);
             if (tags == null)
             {
-                tags = new ArrayList<FaceletTaglibTag>();
+                tags = new LibEntry(createDescriptor(jsfResource));
                 _tags.put(uri, tags);
             }
             final String resourceName = jsfResource.getId().getResourceName();
@@ -151,19 +164,17 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
             final FaceletTaglibTag tag = FaceletTaglibFactory.eINSTANCE
                     .createFaceletTaglibTag();
             tag.setTagName(resourceNamePath.toString());
-
             switch (changeType)
             {
                 case ADDED:
                 case CHANGED:
                     // only add to the list on a add/change if the resource
-                    // exists
-                    // and is the right type
+                    // exists and is the right type
                     if (jsfResource.isAccessible()
                             && jsfResource
                                     .isContentType(FACELET_FILE_CONTENT_TYPE))
                     {
-                        tags.add(tag);
+                        tags.addTag(tag);
                     }
                 break;
                 case REMOVED:
@@ -171,7 +182,7 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                     // removal
                     // on merge if ADDED/CHANGED path decided they should be
                     // there.
-                    tags.add(tag);
+                    tags.addTag(tag);
                 break;
             }
         }
@@ -195,10 +206,10 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                 _tags.put(uri, WHOLE_LIBRARY);
             } else
             {
-                List<FaceletTaglibTag> tags = _tags.get(uri);
+                LibEntry tags = _tags.get(uri);
                 if (tags == null)
                 {
-                    tags = new ArrayList<FaceletTaglibTag>();
+                    tags = new LibEntry(createDescriptor(jsfResource));
                     _tags.put(uri, tags);
                 }
             }
@@ -210,14 +221,23 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
         public Map<String, JSFResourceBasedTagRecord> build()
         {
             final Map<String, JSFResourceBasedTagRecord> records = new HashMap<String, JSFResourceBasedTagRecord>();
-            for (final Map.Entry<String, List<FaceletTaglibTag>> entry : _tags
+            for (final Map.Entry<String, LibEntry> entry : _tags
                     .entrySet())
             {
-                final JSFResourceBasedTagRecord newRecord = new JSFResourceBasedTagRecord(
-                        entry.getKey(), entry.getValue());
-                records.put(entry.getKey(), newRecord);
+                if (entry.getValue() == WHOLE_LIBRARY)
+                {
+                    records.put(entry.getKey(), WHOLE_LIB_RECORD);
+                }
+                else
+                {
+                    final String uri = entry.getKey();
+                    final List<FaceletTaglibTag> tags = new ArrayList<FaceletTaglibTag>(entry.getValue().getTags());
+                    final TagRecordDescriptor descriptor = entry.getValue().getDescriptor();
+                    final JSFResourceBasedTagRecord newRecord = new JSFResourceBasedTagRecord(
+                            uri, tags, descriptor);
+                    records.put(entry.getKey(), newRecord);
+                }
             }
-
             return records;
         }
 
@@ -239,8 +259,8 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                 TaglibChangedEvent event = null;
                 if (!records.containsKey(entry.getKey()))
                 {
-                    event = new TaglibChangedEvent(locator, null, entry
-                            .getValue(), CHANGE_TYPE.ADDED);
+                    event = new TaglibChangedEvent(locator, null,
+                            entry.getValue(), CHANGE_TYPE.ADDED);
                 } else
                 {
                     final JSFResourceBasedTagRecord oldRecord = records
@@ -271,12 +291,12 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                     .entrySet())
             {
                 TaglibChangedEvent event = null;
-                final JSFResourceBasedTagRecord oldRecord = records
-                        .get(entry.getKey());
+                final JSFResourceBasedTagRecord oldRecord = records.get(entry
+                        .getKey());
                 if (oldRecord != null)
                 {
-                    final List<FaceletTaglibTag> tags = entry.getValue()._tags;
-                    if (tags == WHOLE_LIBRARY)
+                    final JSFResourceBasedTagRecord record = entry.getValue();
+                    if (record == WHOLE_LIB_RECORD)
                     {
                         event = new TaglibChangedEvent(locator, oldRecord,
                                 null, CHANGE_TYPE.REMOVED);
@@ -323,7 +343,7 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                                     (JSFResourceBasedTagRecord) newRecord);
                         }
                     }
-                        break;
+                    break;
                     case REMOVED:
                     {
                         final IFaceletTagRecord oldRecord = event.getOldValue();
@@ -336,6 +356,66 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                 }
             }
             return newMap;
+        }
+
+        private TagRecordDescriptor createDescriptor(final IJSFResourceFragment resource)
+        {
+            if (resource instanceof IWorkspaceJSFResourceFragment)
+            {
+                if (resource instanceof WorkspaceJSFResourceContainer)
+                {
+                    final IResource res = ((WorkspaceJSFResourceContainer)resource).getResource();
+                    return new WorkspaceTagRecordDescriptor((IFolder) res);
+                }
+                final IResource res = ((IWorkspaceJSFResourceFragment) resource)
+                        .getResource();
+                return new WorkspaceTagRecordDescriptor((IFile) res);
+            } else if (resource instanceof IJarBasedJSFResource)
+            {
+                final URL jarURL = ((IJarBasedJSFResource) resource)
+                        .getJarURL();
+                final File file = JarUtilities.INSTANCE.getFile(jarURL);
+                if (file != null)
+                {
+                    final String absolutePath = file.getAbsolutePath();
+                    final String jarEntryName = ((IJarBasedJSFResource) resource)
+                            .getJarEntryName();
+                    return new JarTagRecordDescriptor(new Path(absolutePath),
+                            jarEntryName);
+                }
+            }
+            return null;
+        }
+
+        private static class LibEntry
+        {
+            private final TagRecordDescriptor _descriptor;
+            private final List<FaceletTaglibTag> _tags;
+
+            /**
+             * @param descriptor
+             */
+            public LibEntry(final TagRecordDescriptor descriptor)
+            {
+                super();
+                _descriptor = descriptor;
+                _tags = new ArrayList<FaceletTaglibTag>();
+            }
+
+            public TagRecordDescriptor getDescriptor()
+            {
+                return _descriptor;
+            }
+
+            public void addTag(final FaceletTaglibTag tag)
+            {
+                _tags.add(tag);
+            }
+
+            public List<FaceletTaglibTag> getTags()
+            {
+                return Collections.unmodifiableList(_tags);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
  * @author cbateman
  * 
  */
-public class JarBasedJSFResource extends JSFResource
+public class JarBasedJSFResource extends JSFResource implements IJarBasedJSFResource
 {
 
     private final URL _jarURL;
@@ -37,7 +37,7 @@ public class JarBasedJSFResource extends JSFResource
     /**
      * @return the uri pointing in the the jar where the resource lives.
      */
-    public final URL getJarURL()
+    public URL getJarURL()
     {
         return _jarURL;
     }
@@ -45,7 +45,7 @@ public class JarBasedJSFResource extends JSFResource
     /**
      * @return the jar entry name for this resource.
      */
-    protected String getJarEntryName()
+    public String getJarEntryName()
     {
         return String.format("META-INF/resources/%s", getId().toString()); //$NON-NLS-1$
     }
@@ -59,7 +59,7 @@ public class JarBasedJSFResource extends JSFResource
      * @return true if is accessible.
      */
     @Override
-    public final boolean isAccessible()
+    public boolean isAccessible()
     {
         JarFile jarFile = null;
         try

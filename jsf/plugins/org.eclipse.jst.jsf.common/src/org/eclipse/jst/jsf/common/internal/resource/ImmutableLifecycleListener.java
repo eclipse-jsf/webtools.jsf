@@ -16,9 +16,10 @@ package org.eclipse.jst.jsf.common.internal.resource;
  * Clients may only register and deregister for events.
  *
  * @author cbateman
+ * @param <LISTENERTYPE> 
  *
  */
-public abstract class ImmutableLifecycleListener
+public abstract class ImmutableLifecycleListener<LISTENERTYPE extends ILifecycleListener>
 {
 
     /**
@@ -32,7 +33,7 @@ public abstract class ImmutableLifecycleListener
      * 
      * @param listener
      */
-    public abstract void addListener(final IResourceLifecycleListener listener);
+    public abstract void addListener(final LISTENERTYPE listener);
 
     /**
      * Removes listener from the list of registered listeners
@@ -43,5 +44,5 @@ public abstract class ImmutableLifecycleListener
      *
      * @param listener
      */
-    public abstract void removeListener(final IResourceLifecycleListener listener);
+    public abstract void removeListener(final LISTENERTYPE listener);
 }

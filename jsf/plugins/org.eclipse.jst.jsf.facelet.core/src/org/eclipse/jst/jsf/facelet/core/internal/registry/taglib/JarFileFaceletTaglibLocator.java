@@ -23,15 +23,23 @@ import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.AlwaysMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.IMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.VisitorMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.acceptor.JarEntryMatchingAcceptor;
 import org.eclipse.jst.jsf.common.internal.finder.matcher.TaglibJarEntryFinder;
-import org.eclipse.jst.jsf.common.internal.resource.DefaultJarProvider;
-import org.eclipse.jst.jsf.common.internal.resource.IJarProvider;
+import org.eclipse.jst.jsf.common.internal.resource.ClasspathJarFile;
+import org.eclipse.jst.jsf.common.internal.resource.DefaultJarLocator;
+import org.eclipse.jst.jsf.common.internal.resource.IJarLocator;
+import org.eclipse.jst.jsf.common.internal.resource.IJarLocator.JarChangeEvent;
+import org.eclipse.jst.jsf.common.internal.resource.IJarLocator.JarChangeListener;
+import org.eclipse.jst.jsf.common.internal.resource.JavaCoreMediator;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.IFaceletTagRecord.JarTagRecordDescriptor;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.Listener.TaglibChangedEvent.CHANGE_TYPE;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglib;
 
 /**
@@ -52,9 +60,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      */
     public static final TaglibJarEntryFinder _taglibGlassfishFinder = new TaglibJarEntryFinder(
             Pattern.compile("com/sun/faces/metadata/taglib/.*\\.taglib\\.xml")); //$NON-NLS-1$
-
     private static final List<IMatcher> MATCHERS;
-
     static
     {
         final List<IMatcher> matchers = new ArrayList<IMatcher>();
@@ -67,15 +73,16 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             .getCanonicalName();
     private final TagRecordFactory _factory;
     private final Map<String, IFaceletTagRecord> _records;
-    private final IJarProvider _provider;
+    private final IJarLocator _locator;
 
     /**
      * @param factory
      */
     public JarFileFaceletTaglibLocator(final TagRecordFactory factory)
     {
-        this(factory, new DefaultJarProvider(Collections
-                .singletonList(new AlwaysMatcher())));
+        this(factory, new DefaultJarLocator(
+                Collections.singletonList(new AlwaysMatcher()),
+                new JavaCoreMediator()));
     }
 
     /**
@@ -83,37 +90,108 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      * @param jarProvider
      */
     public JarFileFaceletTaglibLocator(final TagRecordFactory factory,
-            final IJarProvider jarProvider)
+            final IJarLocator jarProvider)
     {
         super(ID, DISPLAYNAME);
         _factory = factory;
         _records = new HashMap<String, IFaceletTagRecord>();
-        _provider = jarProvider;
+        _locator = jarProvider;
+    }
+
+    @Override
+    public void start(final IProject project)
+    {
+        _locator.start(project);
+        final List<LibJarEntry> tagLibsFound = new ArrayList<LibJarEntry>();
+        final Collection<? extends ClasspathJarFile> jars = _locator
+                .getJars(project);
+        for (final ClasspathJarFile cpJarFile : jars)
+        {
+            final JarFile jarFile = cpJarFile.getJarFile();
+            if (jarFile != null)
+            {
+                tagLibsFound.addAll(processJar(cpJarFile));
+            }
+        }
+        for (final LibJarEntry jarEntry : tagLibsFound)
+        {
+            final IFaceletTagRecord record = _factory.createRecords(jarEntry
+                    .getTaglib(), new JarTagRecordDescriptor(
+                    jarEntry.getPath(), jarEntry.getEntryName()));
+            if (record != null)
+            {
+                _records.put(record.getURI(), record);
+            }
+        }
+        _locator.addListener(new JarChangeListener()
+        {
+            @Override
+            public void changed(final JarChangeEvent event)
+            {
+                switch (event.getType())
+                {
+                    case JAR_ADDED:
+                    {
+                        final ClasspathJarFile jar = event.getJar();
+                        final List<LibJarEntry> foundLibs = processJar(jar);
+                        for (final LibJarEntry lib : foundLibs)
+                        {
+                            IFaceletTagRecord newRecord = _factory.createRecords(
+                                    lib.getTaglib(),
+                                    new JarTagRecordDescriptor(lib
+                                            .getPath(), lib
+                                            .getEntryName()));
+                            _records.put(newRecord.getURI(), newRecord);
+                            fireChangeEvent(new TaglibChangedEvent(
+                                    JarFileFaceletTaglibLocator.this, null,
+                                    newRecord,
+                                    CHANGE_TYPE.ADDED));
+                        }
+                    }
+                    break;
+                    case JAR_REMOVED:
+                    {
+                        final ClasspathJarFile jar = event.getJar();
+                        final List<IFaceletTagRecord>  removeRecords = 
+                            new ArrayList<IFaceletTagRecord>();
+                        for (final Map.Entry<String, IFaceletTagRecord> entry : _records
+                                .entrySet())
+                        {
+                            if (entry.getValue().getDescriptor()
+                                    .getPath().equals(jar.getPath()))
+                            {
+                                removeRecords.add(entry.getValue());
+                            }
+                        }
+                        
+                        for (final IFaceletTagRecord removeMe : removeRecords)
+                        {
+                            _records.remove(removeMe);
+                            fireChangeEvent(new TaglibChangedEvent(
+                                    JarFileFaceletTaglibLocator.this,
+                                    removeMe, null,
+                                    CHANGE_TYPE.REMOVED));
+                        }
+                    }
+                    break;
+                }
+            }
+        });
+        super.start(project);
+    }
+
+    @Override
+    public void stop()
+    {
+        _locator.stop();
+        super.stop();
     }
 
     @Override
     public Map<String, ? extends IFaceletTagRecord> doLocate(
             final IProject project)
     {
-        final List<FaceletTaglib> tagLibsFound = new ArrayList<FaceletTaglib>();
-
-        final Collection<? extends JarFile> jars = _provider.getJars(project);
-
-        for (final JarFile jarFile : jars)
-        {
-            tagLibsFound.addAll(processJar(jarFile));
-        }
-
-        for (final FaceletTaglib tag : tagLibsFound)
-        {
-            final IFaceletTagRecord record = _factory.createRecords(tag);
-            if (record != null)
-            {
-                _records.put(record.getURI(), record);
-            }
-        }
-
-        return _records;
+        return Collections.unmodifiableMap(_records);
     }
 
     /**
@@ -121,10 +199,10 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      * @param defaultDtdStream
      * @throws Exception
      */
-    private List<FaceletTaglib> processJar(final JarFile jarFile)
+    private static List<LibJarEntry> processJar(final ClasspathJarFile cpJarFile)
     {
-        final List<FaceletTaglib> tagLibsFound = new ArrayList<FaceletTaglib>();
-
+        final List<LibJarEntry> tagLibsFound = new ArrayList<LibJarEntry>();
+        final JarFile jarFile = cpJarFile.getJarFile();
         try
         {
             if (jarFile != null)
@@ -140,14 +218,14 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                     try
                     {
                         is = jarFile.getInputStream(jarEntry);
-                        final TagModelLoader loader = new TagModelLoader(
-                                jarEntry.getName());
+                        final String name = jarEntry.getName();
+                        final TagModelLoader loader = new TagModelLoader(name);
                         loader.loadFromInputStream(is);
                         final FaceletTaglib tagLib = loader.getTaglib();
-
                         if (tagLib != null)
                         {
-                            tagLibsFound.add(tagLib);
+                            tagLibsFound.add(new LibJarEntry(tagLib, cpJarFile
+                                    .getPath(), name));
                         }
                     } catch (final Exception e)
                     {
@@ -181,5 +259,36 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             }
         }
         return tagLibsFound;
+    }
+
+    private static class LibJarEntry
+    {
+        private final FaceletTaglib _taglib;
+        private final String _entryName;
+        private final IPath _iPath;
+
+        public LibJarEntry(final FaceletTaglib taglib, final IPath iPath,
+                final String entryName)
+        {
+            super();
+            _taglib = taglib;
+            _iPath = iPath;
+            _entryName = entryName;
+        }
+
+        public FaceletTaglib getTaglib()
+        {
+            return _taglib;
+        }
+
+        public String getEntryName()
+        {
+            return _entryName;
+        }
+
+        public IPath getPath()
+        {
+            return _iPath;
+        }
     }
 }
