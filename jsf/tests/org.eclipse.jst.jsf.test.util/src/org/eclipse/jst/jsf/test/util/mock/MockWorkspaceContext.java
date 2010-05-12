@@ -1,5 +1,10 @@
 package org.eclipse.jst.jsf.test.util.mock;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,13 +31,13 @@ import org.eclipse.core.runtime.Path;
 public class MockWorkspaceContext
 {
     private final MockWorkspace _ws;
-
     private final Map<IPath, MockResource> _ownedResources;
 
     public MockWorkspaceContext(final MockWorkspace ws)
     {
         _ws = ws;
         _ownedResources = new HashMap<IPath, MockResource>();
+        ((MockWorkspaceRoot)ws.getRoot()).setContext(this);
     }
 
     public MockWorkspaceContext()
@@ -91,13 +96,11 @@ public class MockWorkspaceContext
     public MockProject createProject(final String baseId)
     {
         int i = 0;
-
         while (_ownedResources.get(generateName(baseId, i)) != null)
         {
             // keep looping until we get TestProject_i that doesn't exist
             i++;
         }
-
         return createProject(generateName(baseId, i), false);
     }
 
@@ -134,10 +137,45 @@ public class MockWorkspaceContext
         return project;
     }
 
+    public MockFile attachFile(MockProject project, IPath projectRelativePath,
+            File file)
+    {
+        assertEquals(checkExists(project.getFullPath(), true), project);
+        // throw an exception if projectRelativePath already exists
+        checkExists(project.getFullPath().append(projectRelativePath), false);
+        assertTrue(file.exists());
+        MockFile iFile = (MockFile) project.getFile(projectRelativePath);
+        InputStream inStream = null;
+        try
+        {
+            inStream = new FileInputStream(file);
+            iFile.setContents(inStream, 0, null);
+            return iFile;
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        } catch (CoreException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            if (inStream != null)
+            {
+                try
+                {
+                    inStream.close();
+                } catch (IOException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
     private MockResource checkExists(final IPath path, final boolean replace)
     {
         final MockResource resource = _ownedResources.get(path);
-
         if (resource != null && !replace)
         {
             throw new IllegalArgumentException(path.toString()
@@ -171,7 +209,6 @@ public class MockWorkspaceContext
             MockResource resource = checkExists(newFileFullPath, true);
             if (resource == null)
             {
-
                 resource = new MockFile(newFileFullPath);
                 ((MockResource) resource).setWorkspace(_ws);
                 ((MockResource) resource).setProject(container.getProject());
@@ -179,7 +216,6 @@ public class MockWorkspaceContext
                 {
                     final ZipEntry entry = _zip.getEntry(_pathIntoZip
                             + path.toString());
-
                     if (entry != null)
                     {
                         final InputStream inputStream = _zip
@@ -190,7 +226,6 @@ public class MockWorkspaceContext
                                     false, true, new NullProgressMonitor());
                         }
                     }
-
                     ensurePathToNewResource(container, path);
                 }
                 _ownedResources.put(newFileFullPath, resource);
@@ -205,7 +240,6 @@ public class MockWorkspaceContext
             MockResource resource = checkExists(newFileFullPath, true);
             if (resource == null)
             {
-
                 resource = new MockFolder(newFileFullPath, this);
                 ((MockResource) resource).setWorkspace(_ws);
                 ((MockResource) resource).setProject(container.getProject());

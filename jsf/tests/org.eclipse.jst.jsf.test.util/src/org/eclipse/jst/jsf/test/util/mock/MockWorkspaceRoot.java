@@ -14,72 +14,77 @@ import org.eclipse.core.runtime.Path;
 
 public class MockWorkspaceRoot extends MockContainer implements IWorkspaceRoot
 {
+    private MockWorkspaceContext _wsContext;
 
     public MockWorkspaceRoot()
     {
         super(IResource.ROOT, new Path(""), null);
     }
 
-    public void delete(boolean deleteContent, boolean force,
-            IProgressMonitor monitor) throws CoreException
+    public void setContext(MockWorkspaceContext context)
+    {
+        _wsContext = context;
+    }
+
+    public void delete(final boolean deleteContent, final boolean force,
+            final IProgressMonitor monitor) throws CoreException
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IContainer[] findContainersForLocation(IPath location)
+    public IContainer[] findContainersForLocation(final IPath location)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IContainer[] findContainersForLocationURI(URI location)
+    public IContainer[] findContainersForLocationURI(final URI location)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IContainer[] findContainersForLocationURI(URI location,
-            int memberFlags)
+    public IContainer[] findContainersForLocationURI(final URI location,
+            final int memberFlags)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IFile[] findFilesForLocation(IPath location)
+    public IFile[] findFilesForLocation(final IPath location)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IFile[] findFilesForLocationURI(URI location)
+    public IFile[] findFilesForLocationURI(final URI location)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IFile[] findFilesForLocationURI(URI location, int memberFlags)
+    public IFile[] findFilesForLocationURI(final URI location, final int memberFlags)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IContainer getContainerForLocation(IPath location)
+    public IContainer getContainerForLocation(final IPath location)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IFile getFileForLocation(IPath location)
+    public IFile getFileForLocation(final IPath location)
     {
         throw new UnsupportedOperationException();
         
     }
 
-    public IProject getProject(String name)
+    public IProject getProject(final String name)
     {
-        throw new UnsupportedOperationException();
-        
+        return _wsContext.getProject(new Path(name));
     }
 
     public IProject[] getProjects()
@@ -88,7 +93,7 @@ public class MockWorkspaceRoot extends MockContainer implements IWorkspaceRoot
         
     }
 
-    public IProject[] getProjects(int memberFlags)
+    public IProject[] getProjects(final int memberFlags)
     {
         throw new UnsupportedOperationException();
         
@@ -103,6 +108,21 @@ public class MockWorkspaceRoot extends MockContainer implements IWorkspaceRoot
     @Override
     public IContainer getParent()
     {
+        return null;
+    }
+
+    @Override
+    public IFile getFile(IPath path)
+    {
+        if (path == null || path.segmentCount() == 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        IProject project = getProject(path.segment(0));
+        if (project != null)
+        {
+            return project.getFile(path.removeFirstSegments(1));
+        }
         return null;
     }
 }

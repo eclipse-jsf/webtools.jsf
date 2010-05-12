@@ -11,6 +11,7 @@ import junit.framework.Assert;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.jst.jsf.common.internal.resource.EventResult;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
@@ -18,7 +19,7 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.Event
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 
-class MyTestListener implements IResourceLifecycleListener
+class MyTestListener extends AbstractTestListener<ResourceLifecycleEvent> implements IResourceLifecycleListener
 {
     private final List<EventData> _events = new ArrayList<EventData>();
     private final MockWorkspaceContext _wsContext;

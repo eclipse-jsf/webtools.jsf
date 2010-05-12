@@ -43,15 +43,12 @@ public class TestSerializableTLDTagElement extends TestCase
                         "jst.web").getVersion("2.4"));
         _webProject.createFromZip(zipFile, true);
         */
-        final ZipFile zipFile = JSFTestUtil.createZipFile(
-        		TestsPlugin.getDefault().getBundle(),
-        		"/testfiles/testzips/TLDTests2.zip");
-        _webProject = new WebProjectTestEnvironment(
-        		this,
-        		JavaFacet.VERSION_1_5,
-        		ProjectFacetsManager.getProjectFacet("jst.web").getVersion("2.4"));
+        final ZipFile zipFile = JSFTestUtil.createZipFile(TestsPlugin
+                .getDefault().getBundle(), "/testfiles/testzips/TLDTests2.zip");
+        _webProject = new WebProjectTestEnvironment(this,
+                JavaFacet.VERSION_1_5, ProjectFacetsManager.getProjectFacet(
+                        "jst.web").getVersion("2.4"));
         _webProject.createFromZip2(zipFile, true);
-
         assertNotNull(_webProject);
 
         _sampleTldElementDeclaration = findElementDeclaration(_webProject

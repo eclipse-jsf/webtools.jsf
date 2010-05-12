@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.jst.jsf.common.internal.resource.EventResult;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;

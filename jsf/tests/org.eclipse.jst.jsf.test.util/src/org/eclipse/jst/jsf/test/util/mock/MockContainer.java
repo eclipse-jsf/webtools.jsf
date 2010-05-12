@@ -26,7 +26,7 @@ public class MockContainer extends MockResource implements IContainer
 
     public void loadAllMembers() throws Exception 
     {
-        _resFactory.forceLoad((MockProject) this.getProject());
+        getResFactory().forceLoad((MockProject) this.getProject());
     }
     
     @Override
@@ -34,7 +34,7 @@ public class MockContainer extends MockResource implements IContainer
     {
         try
         {
-            _resFactory.dispose();
+            getResFactory().dispose();
         } finally
         {
             super.dispose();
@@ -81,7 +81,7 @@ public class MockContainer extends MockResource implements IContainer
     {
         try
         {
-            return (IFile) _resFactory.createFile(this, path);
+            return (IFile) getResFactory().createFile(this, path);
         } catch (Exception e)
         {
             throw new AssertionFailedError(e.getLocalizedMessage());
@@ -97,7 +97,7 @@ public class MockContainer extends MockResource implements IContainer
     {
         try
         {
-            return _resFactory.createFolder(this, path);
+            return getResFactory().createFolder(this, path);
         } catch (Exception e)
         {
             throw new AssertionFailedError(e.getLocalizedMessage());
@@ -127,8 +127,8 @@ public class MockContainer extends MockResource implements IContainer
 
     public IResource[] members(int memberFlags) throws CoreException
     {
-        // ignore member flags for now
-        return _resFactory.getCurrentMembers(this).toArray(new IResource[0]);
+        // TODO: ignore member flags for now
+        return getResFactory().getCurrentMembers(this).toArray(new IResource[0]);
     }
 
     public IFile[] findDeletedMembersWithHistory(int depth,
@@ -160,7 +160,7 @@ public class MockContainer extends MockResource implements IContainer
         throw new UnsupportedOperationException();
     }
 
-    public final IMockResourceFactory getResFactory()
+    public IMockResourceFactory getResFactory()
     {
         return _resFactory;
     }

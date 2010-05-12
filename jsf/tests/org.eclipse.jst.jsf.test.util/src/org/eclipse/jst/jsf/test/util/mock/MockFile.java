@@ -1,7 +1,10 @@
 package org.eclipse.jst.jsf.test.util.mock;
 
+import static junit.framework.Assert.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -14,6 +17,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentDescription;
 import org.eclipse.jst.jsf.test.util.Activator;
@@ -23,6 +27,7 @@ public class MockFile extends MockResource implements IFile
 {
 
     private byte[]  _contents;
+    private File    _concreteFile;
 
     public MockFile(final IPath path)
     {
@@ -156,11 +161,17 @@ public class MockFile extends MockResource implements IFile
         try
         {
             captureBytes = JSFTestUtil.loadFromInputStream(source);
+            // keep concrete file in sync if we have one.
+            if (_concreteFile != null && _concreteFile.exists())
+            {
+                JSFTestUtil.saveToFileSystem(captureBytes.toByteArray(), _concreteFile.toURI());
+            }
         } catch (IOException e)
         {
             throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Failed loading mock contents from stream"));
         }
         _contents = captureBytes.toByteArray();
+        
     }
 
     public void setContents(final IFileState source, final boolean force,
@@ -180,5 +191,34 @@ public class MockFile extends MockResource implements IFile
             final IProgressMonitor monitor) throws CoreException
     {
         setContents(source, (updateFlags | IResource.FORCE)!= 0, (updateFlags | IResource.KEEP_HISTORY) != 0, monitor);
+    }
+
+    @Override
+    public IPath getLocation()
+    {
+        File concreteFile = ensureConcreteFile();
+        return Path.fromOSString(concreteFile.getAbsolutePath());
+    }
+
+    private File ensureConcreteFile()
+    {
+        if (_concreteFile == null)
+        {
+            String tempFileName = getFullPath().toString().replace('/', '_');
+            try
+            {
+                _concreteFile = File.createTempFile(tempFileName, "."+getFullPath().getFileExtension());
+                _concreteFile.deleteOnExit();
+                assertTrue(_concreteFile.exists());
+                if (_contents != null)
+                {
+                    JSFTestUtil.saveToFileSystem(_contents, _concreteFile.toURI());
+                }
+            } catch (IOException e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
+        return _concreteFile;
     }
 }
