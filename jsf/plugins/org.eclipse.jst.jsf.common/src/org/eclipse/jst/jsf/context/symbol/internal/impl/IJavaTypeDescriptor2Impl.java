@@ -230,14 +230,17 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
     
     private void copySignatures(List  list, IType[]  types)
     {
-        for (int i = 0; i < types.length; i++)
+        if (types != null)
         {
-            final IType type_ = types[i];
-            final String signature = TypeUtil.getSignature(type_);
-            
-            if (signature != null)
+            for (int i = 0; i < types.length; i++)
             {
-                list.add(signature);
+                final IType type_ = types[i];
+                final String signature = TypeUtil.getSignature(type_);
+
+                if (signature != null)
+                {
+                    list.add(signature);
+                }
             }
         }
     }
