@@ -119,6 +119,11 @@ public class TestDTJSPExternalContext extends TestCase
 			assertEquals(1, symbols.size());
 			assertContainsVariable(symbols,"noneSymbol");
 			
+//			final Map<String, ISymbol> viewMap = externalContext.getFlashMap();
+//			symbols = viewMap.values();
+//			assertEquals(1, symbols.size());
+//			assertContainsVariable(symbols,"flashSymbol");
+			
 			externalContext.trace(System.out);
 		}
 	}
@@ -174,6 +179,10 @@ public class TestDTJSPExternalContext extends TestCase
 					
 				case ISymbolConstants.SYMBOL_SCOPE_NONE:
 					return initNoneMap();
+					
+//				case ISymbolConstants.SYMBOL_SCOPE_FLASH:
+//					return initFlashMap();	
+//					
 			}
 			
 			throw new IllegalArgumentException();
@@ -221,5 +230,16 @@ public class TestDTJSPExternalContext extends TestCase
 			
 			return map;
 		}
+		
+//		private Map<String, ISymbol> initFlashMap()
+//		{
+//			final Map<String, ISymbol> map = new HashMap<String, ISymbol>();
+//
+//			final ISymbol  symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+//			symbol.setName("flashSymbol");
+//			map.put("flashSymbol", symbol);
+//			
+//			return map;
+//		}
 	}
 }

@@ -76,6 +76,8 @@ public class AllTests {
         suite.addTestSuite(TestDesignTimeApplicationManager.class);
         suite.addTestSuite(TestJSPViewDefnAdapter.class);
         suite.addTestSuite(TestSerializableTLDTagElement.class);
+        suite.addTestSuite(TestJSF20ImplicitVariables.class);
+        suite.addTestSuite(TestJSF20DefaultBeanSymbolSourceProvider.class);
         //addTestSuite(suite, JSPViewSuite.class);
 
         // $JUnit-END$

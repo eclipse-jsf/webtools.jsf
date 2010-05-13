@@ -315,6 +315,7 @@ public class TestDesignTimeApplicationManager extends TestCase {
         IDTViewHandler viewHandler = manager.getViewHandler();
         assertNotNull(viewHandler);
         assertTrue(viewHandler instanceof DefaultDTViewHandler);
+        
     }
 
     public void testSetViewHandler() throws Exception

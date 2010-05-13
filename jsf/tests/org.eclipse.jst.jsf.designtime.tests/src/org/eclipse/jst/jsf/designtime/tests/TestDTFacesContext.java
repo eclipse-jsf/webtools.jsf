@@ -15,6 +15,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.jst.common.project.facet.core.JavaFacet;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.tests.util.JSFFacetedTestEnvironment;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
@@ -25,6 +26,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.IViewRootHandle;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 
 public class TestDTFacesContext extends TestCase 
 {
@@ -41,9 +43,13 @@ public class TestDTFacesContext extends TestCase
         JSFTestUtil.setInternetProxyPreferences(true,
                 "www-proxy.us.oracle.com", "80");
 
-         _webProjectTestEnv= new WebProjectTestEnvironment(getProjectName());
+         _webProjectTestEnv= new WebProjectTestEnvironment(getProjectName(), JavaFacet.VERSION_1_5, ProjectFacetsManager.getProjectFacet( "jst.web" ).getVersion("2.5"));
         _webProjectTestEnv.createProject(false);
 
+        _webProjectTestEnv.
+        	loadResourceInWebRoot(DesignTimeTestsPlugin.getDefault().getBundle(),
+                              "/testdata/faces-config_2_0.xml.data", 
+                              "/WEB-INF/faces-config.xml");
         final IResource res = _webProjectTestEnv.loadResourceInWebRoot(
                 DesignTimeTestsPlugin.getDefault().getBundle(),
                 "/testdata/testdata1.jsp.data", TESTJSP1_PATH);
@@ -54,7 +60,7 @@ public class TestDTFacesContext extends TestCase
         _jsfFactedTestEnvironment = new JSFFacetedTestEnvironment(
                 _webProjectTestEnv);
         _jsfFactedTestEnvironment
-                .initialize(IJSFCoreConstants.FACET_VERSION_1_1);
+                .initialize(IJSFCoreConstants.FACET_VERSION_2_0);
     }
 
     @Override
@@ -86,6 +92,8 @@ public class TestDTFacesContext extends TestCase
         final DTUIViewRoot viewRoot = handle.updateViewRoot();
         assertNotNull(viewRoot);
         assertEquals("/"+TESTJSP1_PATH, viewRoot.getViewId());
+        
+        assertNotNull(viewRoot.getViewMap());
     }
 
     public void _testAdaptContextObject() {
