@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.designtime.internal.view;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.eclipse.core.resources.IFile;
@@ -19,6 +21,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jst.jsf.common.internal.resource.ImmutableLifecycleListener;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessAdvisor;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessListener;
@@ -228,6 +231,11 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
                 }
             };
         }
+
+		@Override
+		protected Map<String, ISymbol> doGetMapForScope(int scopeMask) {			
+			return Collections.emptyMap();
+		}
         
     }
 

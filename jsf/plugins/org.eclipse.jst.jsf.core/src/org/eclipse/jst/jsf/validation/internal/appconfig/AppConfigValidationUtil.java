@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.Adapter;
@@ -29,6 +30,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.util.TypeUtil;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.ListEntriesType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
@@ -268,16 +270,19 @@ public final class AppConfigValidationUtil
     
     /**
      * @param scope
+     * @param file
+     * @param version 
      * @return an error message if scope does not match a valid
      * scope enum.
      */
-    public static IMessage validateManagedBeanScope(ManagedBeanScopeType scope)
-    {
+    public static IMessage validateManagedBeanScope(ManagedBeanScopeType scope, IFile file, JSFVersion version)
+    {    	
         // scope must be one of a few enums
         if (!"request".equals(scope.getTextContent()) //$NON-NLS-1$
                 && !"session".equals(scope.getTextContent()) //$NON-NLS-1$
                 && !"application".equals(scope.getTextContent()) //$NON-NLS-1$
-                && !"none".equals(scope.getTextContent())) //$NON-NLS-1$
+                && !"none".equals(scope.getTextContent())//$NON-NLS-1$
+                && ((version == null) || !((version.compareTo(JSFVersion.V2_0) >=0) && "view".equals(scope.getTextContent()) )))  //$NON-NLS-1$
         {
             return DiagnosticFactory.create_BEAN_SCOPE_NOT_VALID();
         }

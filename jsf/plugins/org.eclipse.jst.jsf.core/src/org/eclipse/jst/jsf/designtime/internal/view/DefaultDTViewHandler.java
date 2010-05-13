@@ -38,9 +38,9 @@ import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessAdvisor;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessEvent;
+import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessEvent.ChangeType;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessListener;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.VersionStamp;
-import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessEvent.ChangeType;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.w3c.dom.Node;
 
@@ -227,7 +227,7 @@ public class DefaultDTViewHandler extends AbstractDTViewHandler
     protected DTUIViewRoot newView(final DTFacesContext facesContext,
             final String viewId)
     {
-        return new DefaultDTUIViewRoot();
+        return new DefaultDTUIViewRoot(facesContext);
     }
 
     @Override

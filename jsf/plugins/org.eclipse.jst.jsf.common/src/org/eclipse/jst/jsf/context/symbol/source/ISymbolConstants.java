@@ -40,7 +40,29 @@ public class ISymbolConstants {
      * Mask to indicate all 'none' scope symbols for a particular context
      */
     public final static int  SYMBOL_SCOPE_NONE = 8;
+    
+//JSF2.0    
+    /**
+     * Mask to indicate all 'view' scope symbols for a particular context
+     */
+    public final static int  SYMBOL_SCOPE_VIEW = 16;
 
+    /**
+     * Mask to indicate all 'flash' scope symbols for a particular context
+     */
+    public final static int  SYMBOL_SCOPE_FLASH = 32;
+    
+    /**
+     * the string representation for view scope
+     */
+    public final static String  SYMBOL_SCOPE_VIEW_STRING = "view"; //$NON-NLS-1$
+    
+    /**
+     * the string representation for flash scope
+     */
+    public final static String  SYMBOL_SCOPE_FLASH_STRING = "flash"; //$NON-NLS-1$
+//
+    
     /**
      * All scopes
      */
@@ -48,7 +70,9 @@ public class ISymbolConstants {
                                                 SYMBOL_SCOPE_REQUEST 
                                                 | SYMBOL_SCOPE_SESSION 
                                                 | SYMBOL_SCOPE_APPLICATION 
-                                                | SYMBOL_SCOPE_NONE;
+                                                | SYMBOL_SCOPE_NONE
+                                                | SYMBOL_SCOPE_VIEW
+                                                | SYMBOL_SCOPE_FLASH;
 
     /**
      * the string representation for request scope
@@ -80,7 +104,9 @@ public class ISymbolConstants {
         return scope  == SYMBOL_SCOPE_APPLICATION
                    || scope == SYMBOL_SCOPE_REQUEST
                    || scope == SYMBOL_SCOPE_SESSION
-                   || scope == SYMBOL_SCOPE_NONE;
+                   || scope == SYMBOL_SCOPE_NONE
+                   || scope == SYMBOL_SCOPE_VIEW
+                   || scope == SYMBOL_SCOPE_FLASH;
     }
     
     /**
@@ -105,6 +131,14 @@ public class ISymbolConstants {
         else if (scopeMask == SYMBOL_SCOPE_NONE)
         {
             return SYMBOL_SCOPE_NONE_STRING;
+        }
+        else if (scopeMask == SYMBOL_SCOPE_VIEW)
+        {
+            return SYMBOL_SCOPE_VIEW_STRING;
+        }
+        else if (scopeMask == SYMBOL_SCOPE_FLASH)
+        {
+            return SYMBOL_SCOPE_FLASH_STRING;
         }
         
         return null;
@@ -133,7 +167,14 @@ public class ISymbolConstants {
         {
             return SYMBOL_SCOPE_NONE;
         }
-        
+        else if (SYMBOL_SCOPE_VIEW_STRING.equals(scopeString))
+        {
+            return SYMBOL_SCOPE_VIEW;
+        }
+        else if (SYMBOL_SCOPE_FLASH_STRING.equals(scopeString))
+        {
+            return SYMBOL_SCOPE_FLASH;
+        }
         return -1;
     }
 }

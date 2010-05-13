@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 
 /**
@@ -146,6 +147,13 @@ public abstract class EObjectValidationVisitor
         return _version;
     }
     
+    
+    /**
+     * @return {@link JSFVersion} of this file
+     */
+    protected JSFVersion getJSFVersion() {    	
+    	return JSFVersion.valueOfString(_version);
+    }
     /**
      * @param messages 
      * @param message

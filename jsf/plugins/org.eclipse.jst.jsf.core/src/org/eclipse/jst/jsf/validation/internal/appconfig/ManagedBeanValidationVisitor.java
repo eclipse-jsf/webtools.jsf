@@ -56,7 +56,7 @@ public class ManagedBeanValidationVisitor extends EObjectValidationVisitor
         if (scope != null && scope.getTextContent() != null)
         {
             addMessageInfo(messages
-                    , AppConfigValidationUtil.validateManagedBeanScope(scope)
+                    , AppConfigValidationUtil.validateManagedBeanScope(scope, file, getJSFVersion())
                     , scope, file);
         }
     }

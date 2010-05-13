@@ -28,8 +28,10 @@ import org.eclipse.jst.jsf.context.symbol.IMapTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.designtime.DesignTimeApplicationManager;
 import org.eclipse.jst.jsf.designtime.context.IDTExternalContext;
+import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
 
 /**
  * Provides the default built-in JSF symbols
@@ -71,13 +73,22 @@ public class DefaultBuiltInSymbolProvider
 
     private static final String FACES_CONTEXT_FULLY_QUALIFIED_CLASS = "javax.faces.context.FacesContext"; //$NON-NLS-1$
     private static final String VIEW_FULLY_QUALIFIED_CLASS          = "javax.faces.component.UIViewRoot"; //$NON-NLS-1$
-
+    
     private static final ISymbol SYMBOL_COOKIE_IMPLICIT_OBJ;
     private static final ISymbol SYMBOL_HEADER_IMPLICIT_OBJ;
     private static final ISymbol SYMBOL_HEADER_VALUES_IMPLICIT_OBJ;
     private static final ISymbol SYMBOL_PARAM_IMPLICIT_OBJ;
     private static final ISymbol SYMBOL_PARAM_VALUES_IMPLICIT_OBJ;
     private static final ISymbol SYMBOL_INIT_PARAM_IMPLICIT_OBJ;
+    
+    //JSF2.0
+    private static final String VIEW_SCOPE                   		= "viewScope";                		//$NON-NLS-1$
+    private static final String FLASH_SCOPE                   		= "flash";                			//$NON-NLS-1$
+    private static final String CC_IMPLICIT_OBJ                		= "cc";      						//$NON-NLS-1$
+    private static final String COMPONENT_IMPLICIT_OBJ              = "component";     					//$NON-NLS-1$
+    private static final String RESOURCE_IMPLICIT_OBJ               = "resource";      					//$NON-NLS-1$
+    
+    private static final String UICOMPONENT_FULLY_QUALIFIED_CLASS   	= "javax.faces.component.UIComponent";//$NON-NLS-1$
     
     static
     {
@@ -144,6 +155,17 @@ public class DefaultBuiltInSymbolProvider
         {
             symbol = getApplicationScopeSymbols(file).get(name);
         }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_VIEW) != 0
+                && symbol == null)
+        {
+            symbol = getViewScopeSymbols(file).get(name);
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_FLASH) != 0
+                && symbol == null)
+        {
+            symbol = getFlashScopeSymbols(file).get(name);
+        }
+        
 
         return symbol;
     }
@@ -173,6 +195,14 @@ public class DefaultBuiltInSymbolProvider
         {
             symbols.addAll(getApplicationScopeSymbols(file).values());
         }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_VIEW) != 0)
+        {
+        	 symbols.addAll(getViewScopeSymbols(file).values());
+        }     
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_FLASH) != 0)
+        {
+        	 symbols.addAll(getFlashScopeSymbols(file).values());
+        }         
         return symbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
 
@@ -190,6 +220,14 @@ public class DefaultBuiltInSymbolProvider
         if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_APPLICATION) != 0)
         {
             symbols.addAll(getApplicationScopeSymbols(file).values());
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_VIEW) != 0)
+        {
+            symbols.addAll(getViewScopeSymbols(file).values());
+        }
+        if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_FLASH) != 0)
+        {
+            symbols.addAll(getFlashScopeSymbols(file).values());
         }
 
         return symbols;
@@ -221,6 +259,24 @@ public class DefaultBuiltInSymbolProvider
                 ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
         requestSymbols.put(symbol.getName(), symbol);
         
+        //add jsf2.0 implicits
+        if (JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >=0) {
+        	symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
+                    .getProject(), UICOMPONENT_FULLY_QUALIFIED_CLASS,
+                    CC_IMPLICIT_OBJ,
+                    ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+            requestSymbols.put(symbol.getName(), symbol);
+            
+
+//            _symbolFactory.createJavaComponentSymbol(CC_IMPLICIT_OBJ, typeDesc, ""); //$NON-NLS-1$
+        	symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
+                    .getProject(), UICOMPONENT_FULLY_QUALIFIED_CLASS,
+                    COMPONENT_IMPLICIT_OBJ,
+                    ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+            requestSymbols.put(symbol.getName(), symbol);
+                       
+        }
+        
         return Collections.unmodifiableMap(requestSymbols);
     }
 
@@ -244,9 +300,43 @@ public class DefaultBuiltInSymbolProvider
                 ISymbolConstants.SYMBOL_SCOPE_APPLICATION, APPLICATION_SCOPE);
         symbols.put(symbol.getName(), symbol);
         
+        //add jsf2.0 implicits
+        if (JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >=0) {        	
+        	symbol = _symbolFactory.createUnknownInstanceSymbol(
+                    RESOURCE_IMPLICIT_OBJ,
+                    ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
+        	symbols.put(symbol.getName(), symbol);
+        }
+        
         return Collections.unmodifiableMap(symbols);
     }
+    
+    private Map<String,ISymbol> getViewScopeSymbols(final IFile file)
+    {
+    	if(JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >= 0) { 
+	    	
+	        ISymbol symbol = createScopeSymbol(file,
+	                ISymbolConstants.SYMBOL_SCOPE_VIEW, VIEW_SCOPE);
+	
+	        return Collections.unmodifiableMap
+	            (Collections.singletonMap(symbol.getName(), symbol));
+    	}
+    	return Collections.emptyMap();
+    }
 
+    private Map<String,ISymbol> getFlashScopeSymbols(final IFile file)
+    {
+    	if(JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >= 0) { 
+	    	
+	        ISymbol symbol = createScopeSymbol(file,
+	                ISymbolConstants.SYMBOL_SCOPE_FLASH, FLASH_SCOPE);
+	
+	        return Collections.unmodifiableMap
+	            (Collections.singletonMap(symbol.getName(), symbol));
+    	}
+    	return Collections.emptyMap();
+    }
+    
     private ISymbol createScopeSymbol(final IFile file, final int scopeMask,
             final String name)
     {
@@ -304,6 +394,17 @@ public class DefaultBuiltInSymbolProvider
                         .getDTExternalContext(_externalContextKey);
 
                 scopeMap.putAll(externalContext.getMapForScope(_scopeMask));
+                
+                DTUIViewRoot viewRoot = manager
+                	.getFacesContext(_externalContextKey)
+                	.getViewRootHandle().getCachedViewRoot();
+
+                if (viewRoot == null) {
+                	viewRoot = manager
+                	.getFacesContext(_externalContextKey)
+                	.getViewRootHandle().updateViewRoot();
+                }
+                scopeMap.putAll(viewRoot.getViewMap());
             }
 
             return scopeMap.entrySet();

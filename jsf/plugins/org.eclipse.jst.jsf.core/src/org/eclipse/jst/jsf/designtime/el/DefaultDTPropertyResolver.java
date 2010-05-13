@@ -23,10 +23,12 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.StringLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
+import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
+import org.eclipse.jst.jsf.designtime.symbols.JSFSymbolFactory;
 
 /**
  * A design time proxy for the runtime PropertyResolver.  This is used to
@@ -40,6 +42,10 @@ import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
  */
 public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
 {
+	private static final String UICOMPONENT_SYMBOL_SIGNATURE 	= "Ljavax.faces.component.UIComponent;"; //$NON-NLS-1$
+	private static final String ATTRS_SYMBOL_NAME 				= "attrs"; //$NON-NLS-1$
+	private JSFSymbolFactory 	_symbolFactory 					= new JSFSymbolFactory();
+	 
     /**
      * Returns a symbol encapsulating the property on base with the name
      * properyId
@@ -92,6 +98,11 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
                     factoredProperties = factorKey(propertyId);
                 }
             }
+            //if symbol is "attrs", add it if applicable
+            else if (propertyId instanceof String 
+            		&& ((String)propertyId).equals(ATTRS_SYMBOL_NAME)) {
+            	return getCCAttrsSymbolIfNecessary(typeDesc);
+            }
 
             // check unconstrained type
             if (typeDesc instanceof IBoundedTypeDescriptor)
@@ -104,6 +115,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
                     return ((IBoundedTypeDescriptor)typeDesc).getUnboundedProperty(propertyId, TypeConstants.TYPE_JAVAOBJECT);
                 }
             }
+            
         }
 
         int i = 0;
@@ -164,13 +176,29 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
             if (typeDesc != null)
             {
                 symbolsList =  typeDesc.getProperties();
+                addCCAttrsIfNecessary(typeDesc, symbolsList);
             }
         }
 
         return (ISymbol[]) symbolsList.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
 
-    /* (non-Javadoc)
+    private ISymbol getCCAttrsSymbolIfNecessary(final ITypeDescriptor typeDesc) {
+    	ISymbol attrsSymbol = null;
+    	if (typeDesc.instanceOf(UICOMPONENT_SYMBOL_SIGNATURE)) {
+    		attrsSymbol = _symbolFactory.createUnknownInstanceSymbol(ATTRS_SYMBOL_NAME, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);    		
+    	}
+    	return attrsSymbol;
+    }
+    
+    private void addCCAttrsIfNecessary(final ITypeDescriptor typeDesc, final List symbolsList) {
+    	final ISymbol attrsSymbol = getCCAttrsSymbolIfNecessary(typeDesc);
+    	if (attrsSymbol != null) {    		
+    		symbolsList.add(attrsSymbol);
+    	}
+	}
+
+	/* (non-Javadoc)
      * @see org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver#getProperty(org.eclipse.jst.jsf.context.symbol.ISymbol, int)
      */
     public ISymbol getProperty(ISymbol base, int offset) 
@@ -208,6 +236,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
                 return objSymbol.call("get", args, base.getName()+"["+offset+"]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             }
 
+            return getCCAttrsSymbolIfNecessary(typeDesc);
             // check unconstrained type
 //            if (typeDesc instanceof IBoundedTypeDescriptor)
 //            {

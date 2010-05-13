@@ -78,7 +78,14 @@ public class JSPTagVariableSymbolSourceProvider extends
                 {
                     symbols.addAll(modelProcessor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_NONE_STRING).values());
                 }
-                    
+                if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_VIEW) != 0)
+                {
+                    symbols.addAll(modelProcessor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_VIEW_STRING).values());
+                }
+                if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_FLASH) != 0)
+                {
+                    symbols.addAll(modelProcessor.getMapForScope(ISymbolConstants.SYMBOL_SCOPE_FLASH_STRING).values());
+                }  
                 return symbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
             }
             catch (Exception e)

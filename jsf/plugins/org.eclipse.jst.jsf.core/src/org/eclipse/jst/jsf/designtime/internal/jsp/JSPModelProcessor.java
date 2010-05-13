@@ -206,6 +206,8 @@ public class JSPModelProcessor
     private Map<Object, ISymbol>    _sessionMap;
     private Map<Object, ISymbol>    _applicationMap;
     private Map<Object, ISymbol>    _noneMap;
+    private Map<Object, ISymbol>    _viewMap;
+    private Map<Object, ISymbol>    _flashMap;
 
     // used to avoid infinite recursion in refresh.  Must never be null
     private final CountingMutex     _lastModificationStampMonitor = new CountingMutex();
@@ -597,7 +599,7 @@ public class JSPModelProcessor
     }
 
    /**
-     * @param scopeName - one of "request", "session" or "application"
+     * @param scopeName - one of "request", "session" or "application" or "view" if JSF2.x
      * @return an unmodifable map containing all known symbols for
      * that scope.  If scopeName is not found, returns the empty map.
      */
@@ -645,6 +647,14 @@ public class JSPModelProcessor
         {
             return getNoneMap();
         }
+        else if (ISymbolConstants.SYMBOL_SCOPE_VIEW_STRING.equals(scopeName))
+        {
+            return getViewMap();
+        }
+        else if (ISymbolConstants.SYMBOL_SCOPE_FLASH_STRING.equals(scopeName))
+        {
+            return getFlashMap();
+        }
 
         Platform.getLog(JSFCorePlugin.getDefault().getBundle()).log(new Status(IStatus.ERROR, JSFCorePlugin.PLUGIN_ID, 0, "Scope not found: "+scopeName, new Throwable())); //$NON-NLS-1$
         return null;
@@ -689,6 +699,26 @@ public class JSPModelProcessor
         }
 
         return _noneMap;
+    }
+    
+    private Map<Object, ISymbol> getViewMap()
+    {
+        if (_viewMap == null)
+        {
+        	_viewMap = new HashMap<Object, ISymbol>();
+        }
+
+        return _viewMap;
+    }
+    
+    private Map<Object, ISymbol> getFlashMap()
+    {
+        if (_flashMap == null)
+        {
+        	_flashMap = new HashMap<Object, ISymbol>();
+        }
+
+        return _flashMap;
     }
 
     /**

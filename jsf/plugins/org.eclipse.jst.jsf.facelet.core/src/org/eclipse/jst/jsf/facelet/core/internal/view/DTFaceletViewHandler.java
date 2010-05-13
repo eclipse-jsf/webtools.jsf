@@ -82,7 +82,7 @@ public class DTFaceletViewHandler extends DefaultDTViewHandler
     @Override
     protected DTUIViewRoot newView(DTFacesContext facesContext, String viewId)
     {
-        return new FaceletUIViewRoot();
+        return new FaceletUIViewRoot(facesContext);
     }
 
     @Override

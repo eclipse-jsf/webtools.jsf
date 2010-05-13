@@ -11,10 +11,14 @@
 package org.eclipse.jst.jsf.designtime.internal.view;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentTypeInfo;
+import org.eclipse.jst.jsf.context.symbol.ISymbol;
+import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 
 /**
  * The interface for all design view root objects.
@@ -100,6 +104,22 @@ public abstract class DTUIViewRoot extends ComponentInfo
     {
         _versionStamp = versionStamp;
     }
+    
+    
+    /**
+     * @return a map of ISymbols representing the currently available
+     * view scope variables.  Never null, empty if no symbols
+     * Map is unmodifiable (throws exception on mutation operations)
+     */
+    public final Map<String, ISymbol> getViewMap() {
+    	return Collections.unmodifiableMap(doGetMapForScope(ISymbolConstants.SYMBOL_SCOPE_VIEW));
+    }
+    
+    /**
+     * @param scopeMask
+     * @return Map of symbols
+     */
+    protected abstract Map<String, ISymbol> doGetMapForScope(final int scopeMask);
 
     /**
      * @return true if the view root is out of sync with its view source.
