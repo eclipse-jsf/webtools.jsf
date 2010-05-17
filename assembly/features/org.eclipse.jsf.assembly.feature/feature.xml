@@ -32,6 +32,10 @@
          id="org.eclipse.jst.webpageeditor.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.jsf.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.jst.jsf.common"
          download-size="0"
