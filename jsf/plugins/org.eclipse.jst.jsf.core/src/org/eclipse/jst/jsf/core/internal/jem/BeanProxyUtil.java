@@ -354,11 +354,15 @@ public final class BeanProxyUtil
             PARENT_LOOP: while (curType != null)
             {
                 final IMethodProxy[] declaredMethods = curType.getDeclaredMethods();
-                final IMethodProxy foundMethod = findMethodInList(methodName, argTypes, declaredMethods);
-                if (foundMethod != null)
+                if (declaredMethods != null)
                 {
-                    return foundMethod;
+                    final IMethodProxy foundMethod = findMethodInList(methodName, argTypes, declaredMethods);
+                    if (foundMethod != null)
+                    {
+                        return foundMethod;
+                    }
                 }
+
                 // avoid infinite loop: if the parent of curType can't 
                 // be resolved, JEM returns the same type, so curType
                 // never becomes null
