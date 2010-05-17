@@ -1,0 +1,4 @@
+build.xml
+*bin.dist.zip
+org.eclipse.jst.jsf.feature*.jar
+feature.temp.folder
