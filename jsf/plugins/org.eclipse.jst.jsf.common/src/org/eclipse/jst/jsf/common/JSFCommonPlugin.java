@@ -112,7 +112,7 @@ public final class JSFCommonPlugin extends EMFPlugin {
      * @param e
      * @param msg
      */
-    public static void log(final Exception e, final String msg) {
+    public static void log(final Throwable e, final String msg) {
         Implementation plugin2 = getPlugin();
         if (plugin2 != null)
         {

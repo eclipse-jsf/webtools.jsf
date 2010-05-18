@@ -195,7 +195,7 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                 final CHANGE_TYPE changeType)
         {
             final String libraryName = jsfResource.getId().getLibraryName();
-            if (libraryName == null)
+            if (libraryName == null || libraryName.trim().length() == 0)
             {
                 return;
             }

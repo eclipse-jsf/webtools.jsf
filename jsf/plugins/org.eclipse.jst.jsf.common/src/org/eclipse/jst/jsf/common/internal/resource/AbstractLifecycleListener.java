@@ -31,8 +31,10 @@ public abstract class AbstractLifecycleListener<EVENTTYPE extends EventObject, L
     {
         TRACE_EVENTS = Boolean.valueOf(
                 Platform.getDebugOption(JSFCommonPlugin.PLUGIN_ID
-                        + "/debug/lifecyclelistener")).booleanValue();//$NON-NLS-1$
+                        + "/debug/lifecyclelistener")).booleanValue() //$NON-NLS-1$
+                || Boolean.valueOf(System.getProperty("org.eclipse.jst.jsf.common/debug/lifecyclelistener")).booleanValue(); //$NON-NLS-1$
     }
+
     private final CopyOnWriteArrayList<LISTENERTYPE> _listeners = new CopyOnWriteArrayList<LISTENERTYPE>();
     private final CopyOnWriteArrayList<LIFECYCLEOBJECT> _lifecycleObjects = new CopyOnWriteArrayList<LIFECYCLEOBJECT>();
     private final AtomicBoolean _isDisposed = new AtomicBoolean(false);

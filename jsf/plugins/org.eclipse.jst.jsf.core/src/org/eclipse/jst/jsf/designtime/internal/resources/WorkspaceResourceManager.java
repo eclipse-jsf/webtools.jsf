@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
@@ -63,27 +64,31 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
     @Override
     protected JSFResourceTracker createNewInstance(final IResource resource)
     {
-        return new JSFResourceTracker(resource);
+        final boolean isJSFResource = !getRootResourceFolder().getParent()
+                .equals(resource);
+        return new JSFResourceTracker(resource, isJSFResource);
     }
 
     @Override
     public void initResources()
     {
         final IFolder folder = getRootResourceFolder();
-
-        if (folder != null && folder.isAccessible())
+        if (folder != null)
         {
             try
             {
-                track(folder.getParent(), folder);
+                track(folder.getParent());
+                track(folder);
             } catch (final Exception e1)
             {
                 JSFCorePlugin
                         .log(e1,
                                 "While trying to locate JSF resources in the workspace"); //$NON-NLS-1$
             }
-
-            trackAllInFolder(folder);
+            if (folder.isAccessible())
+            {
+                trackAllInFolder(folder);
+            }
         }
     }
 
@@ -92,8 +97,8 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
     {
         final VisitorMatcher<IContainer, IResource, String> matcher = new VisitorMatcher<IContainer, IResource, String>(
                 "", "", //$NON-NLS-1$ //$NON-NLS-2$
-                new FileMatchingAcceptor(), Collections
-                        .singletonList(new AlwaysMatcher()));
+                new FileMatchingAcceptor(),
+                Collections.singletonList(new AlwaysMatcher()));
         final List<IWorkspaceJSFResourceFragment> newFragments = new ArrayList<IWorkspaceJSFResourceFragment>();
         try
         {
@@ -101,7 +106,7 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                     .find(folder);
             for (final IResource res : foundResources)
             {
-                newFragments.add(track(folder, res));
+                newFragments.add(track(res));
             }
         } catch (final Exception e)
         {
@@ -111,8 +116,7 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         return newFragments;
     }
 
-    private IWorkspaceJSFResourceFragment track(
-            final IContainer containerFolder, final IResource res)
+    private IWorkspaceJSFResourceFragment track(final IResource res)
             throws ManagedObjectException, InvalidIdentifierException
     {
         final IPath fullPath = res.getFullPath().makeRelativeTo(
@@ -122,13 +126,13 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         IWorkspaceJSFResourceFragment jsfRes = null;
         if (res.getType() == IResource.FILE)
         {
-            jsfRes = new WorkspaceJSFResource(_factory
-                    .createLibraryResource(fullPath.toString()), res,
+            jsfRes = new WorkspaceJSFResource(
+                    _factory.createLibraryResource(fullPath.toString()), res,
                     _contentTypeResolver);
         } else
         {
-            jsfRes = new WorkspaceJSFResourceContainer(_factory
-                    .createLibraryFragment(fullPath.toString()),
+            jsfRes = new WorkspaceJSFResourceContainer(
+                    _factory.createLibraryFragment(fullPath.toString()),
                     (IContainer) res);
         }
         tracker.setJsfResource(jsfRes);
@@ -166,12 +170,15 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
     {
         final List<IJSFResourceFragment> jsfResources = new ArrayList<IJSFResourceFragment>();
         final Map<IResource, ManagedResourceObject<ResourceTracker<IResource>>> jsfResourceTrackers = getPerResourceObjects();
-
         for (final Map.Entry<IResource, ManagedResourceObject<ResourceTracker<IResource>>> entry : jsfResourceTrackers
                 .entrySet())
         {
-            jsfResources.add(((JSFResourceTracker) entry.getValue()
-                    .getManagedObject()).getJsfResource());
+            final JSFResourceTracker jsfResourceTracker = (JSFResourceTracker) entry
+                    .getValue().getManagedObject();
+            if (jsfResourceTracker.isJSFResource())
+            {
+                jsfResources.add(jsfResourceTracker.getJsfResource());
+            }
         }
         return jsfResources;
     }
@@ -179,10 +186,25 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
     private class JSFResourceTracker extends ResourceTracker<IResource>
     {
         private IWorkspaceJSFResourceFragment _jsfResource;
+        private final boolean _isJSFResource;
 
-        public JSFResourceTracker(final IResource resource)
+        /**
+         * @param resource
+         * @param isJSFResource
+         *            if false, indicates that the resource being tracked is
+         *            related to JSF resources but not an actual JSF resource
+         *            (i.e. web root).
+         */
+        public JSFResourceTracker(final IResource resource,
+                final boolean isJSFResource)
         {
             super(resource);
+            _isJSFResource = isJSFResource;
+        }
+
+        public boolean isJSFResource()
+        {
+            return _isJSFResource;
         }
 
         @Override
@@ -194,18 +216,47 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
             {
                 try
                 {
-                    final JSFResourceTracker tracker = (JSFResourceTracker) getInstance(affectedResource);
-                    final IWorkspaceJSFResourceFragment jsfResource = tracker
-                            .getJsfResource();
-                    // removeLifecycleEventListener(this);
-                    _locator.fireChangeEvent(new JSFResourceChangedEvent(
-                            _locator, jsfResource, null, CHANGE_TYPE.REMOVED));
+                    final List<JSFResourceTracker> trackers = getTrackers(affectedResource);
+                    for (final JSFResourceTracker tracker : trackers)
+                    {
+                        final IWorkspaceJSFResourceFragment jsfResource = tracker
+                                .getJsfResource();
+                        removeLifecycleEventListener(tracker);
+                        _locator.fireChangeEvent(new JSFResourceChangedEvent(
+                                _locator, jsfResource, null,
+                                CHANGE_TYPE.REMOVED));
+                    }
                 } catch (final ManagedObjectException e)
                 {
                     JSFCorePlugin.log(e,
                             "Processing an inaccessible resource event"); //$NON-NLS-1$
                 }
             }
+        }
+
+        private List<JSFResourceTracker> getTrackers(final IResource res)
+                throws ManagedObjectException
+        {
+            final JSFResourceTracker tracker = (JSFResourceTracker) getInstance(res);
+            final List<JSFResourceTracker> allChildren = new ArrayList<JSFResourceTracker>();
+            allChildren.add(tracker);
+            if (res instanceof IContainer)
+            {
+                final IPath parentPath = res.getFullPath();
+                for (final Entry<IResource, ManagedResourceObject<ResourceTracker<IResource>>> trackerEntry : getPerResourceObjects()
+                        .entrySet())
+                {
+                    final IPath trackerPath = trackerEntry.getKey()
+                            .getFullPath();
+                    if (parentPath.isPrefixOf(trackerPath)
+                            && !parentPath.equals(trackerPath))
+                    {
+                        allChildren.add((JSFResourceTracker) trackerEntry
+                                .getValue().getManagedObject());
+                    }
+                }
+            }
+            return allChildren;
         }
 
         @Override
@@ -228,8 +279,7 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                 {
                     try
                     {
-                        final IWorkspaceJSFResourceFragment newJsfRes = track(
-                                parent, affectedResource);
+                        final IWorkspaceJSFResourceFragment newJsfRes = track(affectedResource);
                         fireNewJSFResourceEvent(newJsfRes);
                         if (reasonType == ReasonType.RESOURCE_MOVED_CONTAINER
                                 && affectedResource instanceof IContainer)
@@ -243,14 +293,12 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                     } catch (final ManagedObjectException e)
                     {
                         JSFCorePlugin
-                                .log(
-                                        e,
+                                .log(e,
                                         "While adding new resource " + affectedResource); //$NON-NLS-1$
                     } catch (final InvalidIdentifierException e)
                     {
                         JSFCorePlugin
-                                .log(
-                                        e,
+                                .log(e,
                                         "While adding new resource " + affectedResource); //$NON-NLS-1$
                     }
                 }
@@ -269,24 +317,41 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         protected boolean isInteresting(final ResourceLifecycleEvent event)
         {
             boolean isInteresting = false;
+            final ReasonType reasonType = event.getReasonType();
             switch (event.getEventType())
             {
                 case RESOURCE_ADDED:
                 {
                     final IResource resource = getResource();
-                    isInteresting = (event.getReasonType() == ReasonType.RESOURCE_ADDED_TO_CONTAINER || event
-                            .getReasonType() == ReasonType.RESOURCE_MOVED_CONTAINER)
-                            && event.getAffectedResource().getParent().equals(
-                                    resource);
+                    isInteresting = (reasonType == ReasonType.RESOURCE_ADDED_TO_CONTAINER || reasonType == ReasonType.RESOURCE_MOVED_CONTAINER)
+                            && event.getAffectedResource().getParent()
+                                    .equals(resource);
+                    // ignore if my resource is web content and this is trying
+                    // to add something other than resources folder
+                    if (resource.equals(_vcQuery.getWebContentFolder(_project)
+                            .getUnderlyingFolder()))
+                    {
+                        isInteresting &= event.getAffectedResource().equals(
+                                getRootResourceFolder());
+                    }
                 }
                 break;
                 case RESOURCE_INACCESSIBLE:
                 {
                     final IResource resource = getResource();
-                    isInteresting = (event.getReasonType() == ReasonType.RESOURCE_DELETED_FROM_CONTAINER || event
-                            .getReasonType() == ReasonType.RESOURCE_MOVED_CONTAINER)
-                            && event.getAffectedResource().getParent().equals(
-                                    resource);
+                    // if the resource made inaccessible was deleted or moved
+                    // from its container
+                    // and it's parent is me, then it is interesting.
+                    isInteresting = (reasonType == ReasonType.RESOURCE_DELETED_FROM_CONTAINER || reasonType == ReasonType.RESOURCE_MOVED_CONTAINER)
+                            && event.getAffectedResource().getParent()
+                                    .equals(resource);
+                    // or if the resource being delted or moved is the root
+                    // folder and that is my resource.
+                    // isInteresting |= (reasonType ==
+                    // ReasonType.RESOURCE_DELETED || reasonType ==
+                    // ReasonType.RESOURCE_MOVED_CONTAINER)
+                    // && (resource.equals(event.getAffectedResource()) &&
+                    // resource.equals(getRootResourceFolder()));
                 }
                 break;
                 default:

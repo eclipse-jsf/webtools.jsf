@@ -52,7 +52,8 @@ public abstract class AbstractRegistryReader<T>
                     
                     public void handleException(Throwable exception)
                     {
-                        JSFCommonPlugin.log(exception);
+                    	// This is expected during testing if there running as JUnit test (non-plugin)
+                        JSFCommonPlugin.log(exception, "Loading extension point"); //$NON-NLS-1$
                     }
                 });
             }
