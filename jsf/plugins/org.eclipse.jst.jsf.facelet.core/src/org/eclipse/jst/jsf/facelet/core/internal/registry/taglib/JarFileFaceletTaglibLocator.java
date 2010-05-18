@@ -74,7 +74,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
     private final TagRecordFactory _factory;
     private final Map<String, IFaceletTagRecord> _records;
     private final IJarLocator _locator;
-	private final List<IMatcher> _jarEntryMatchers;
+    private final List<IMatcher> _jarEntryMatchers;
 
     /**
      * @param factory
@@ -102,8 +102,8 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      * @param jarEntryMatchers
      */
     public JarFileFaceletTaglibLocator(final TagRecordFactory factory,
-            final IJarLocator jarProvider, final List<IMatcher> jarEntryMatchers)
-    {
+            final IJarLocator jarProvider, final List<IMatcher>  jarEntryMatchers)
+    {    
         super(ID, DISPLAYNAME);
         _factory = factory;
         _records = new HashMap<String, IFaceletTagRecord>();
@@ -149,7 +149,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                         final List<LibJarEntry> foundLibs = processJar(jar, _jarEntryMatchers);
                         for (final LibJarEntry lib : foundLibs)
                         {
-                            IFaceletTagRecord newRecord = _factory.createRecords(
+                            final IFaceletTagRecord newRecord = _factory.createRecords(
                                     lib.getTaglib(),
                                     new JarTagRecordDescriptor(lib
                                             .getPath(), lib
@@ -213,7 +213,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      * @throws Exception
      */
     private static List<LibJarEntry> processJar(final ClasspathJarFile cpJarFile,
-    		final List<IMatcher> jarEntryMatchers)
+            final List<IMatcher> jarEntryMatchers)
     {
         final List<LibJarEntry> tagLibsFound = new ArrayList<LibJarEntry>();
         final JarFile jarFile = cpJarFile.getJarFile();
@@ -223,7 +223,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             {
                 final JarEntryMatchingAcceptor acceptor = new JarEntryMatchingAcceptor();
                 final VisitorMatcher<JarFile, JarEntry, String> matcher = new VisitorMatcher<JarFile, JarEntry, String>(
-                        "", "", acceptor, MATCHERS); //$NON-NLS-1$//$NON-NLS-2$
+                        "", "", acceptor, jarEntryMatchers); //$NON-NLS-1$//$NON-NLS-2$
                 final Collection<? extends JarEntry> matchingEntries = matcher
                         .find(jarFile);
                 for (final JarEntry jarEntry : matchingEntries)
