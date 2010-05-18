@@ -42,6 +42,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFileChange((MockFile) file, true);
         _context.fireWorkspaceEvent(event);
+        removeListener();
     }
 
     public void fireResourceFileAdd(final String resourceId)
@@ -51,6 +52,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFileAdded((MockFile) file);
         _context.fireWorkspaceEvent(event);
+        removeListener();
     }
 
     private IFile getFile(final String resourceId)
@@ -81,7 +83,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFileRemove((MockFile) file);
         _context.fireWorkspaceEvent(event);
-
+        removeListener();
     }
 
     public void fireResourceFolderAdd(final String folderName)
@@ -91,6 +93,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFolderAdded(folder);
         _context.fireWorkspaceEvent(event);
+        removeListener();
     }
 
     public void fireResourceFolderDelete(final String folderName)
@@ -100,7 +103,20 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFolderDeleted(folder);
         _context.fireWorkspaceEvent(event);
+        removeListener();
     }
+
+    public void fireResourceFileDeleteRecusive(final String folderName)
+    {
+        installListener();
+        final IFolder folder = getFolder(folderName);
+        final IResourceChangeEvent event = _eventFactory
+                .createRecursiveFolderDeleted(folder);
+        _context.fireWorkspaceEvent(event);
+        removeListener();
+    }
+
+    protected abstract void removeListener();
 
     public void fireResourceFolderRename(final String folderName,
             final String newFolderName)
@@ -111,6 +127,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFolderRename(folder, newFolder);
         _context.fireWorkspaceEvent(event);
+        removeListener();
     }
 
     public void fireResourceFileRename(String fileName, String newFileName)
@@ -121,7 +138,9 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         final IResourceChangeEvent event = _eventFactory
                 .createSimpleFileRename(folder, newFolder);
         _context.fireWorkspaceEvent(event);
+        removeListener();
     }
+
     public EVENTTYPE getEvent(final int eventNum)
     {
         return _events.get(eventNum);
@@ -157,6 +176,4 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
     {
         assertEquals(numEvents, _events.size());
     }
-
-
 }

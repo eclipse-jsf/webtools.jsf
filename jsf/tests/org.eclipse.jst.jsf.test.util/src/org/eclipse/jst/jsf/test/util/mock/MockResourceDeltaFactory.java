@@ -19,11 +19,10 @@ import org.eclipse.core.runtime.CoreException;
 
 public class MockResourceDeltaFactory
 {
-//    private final MockWorkspaceContext _wsContext;
-
+    // private final MockWorkspaceContext _wsContext;
     public MockResourceDeltaFactory(final MockWorkspaceContext wsContext)
     {
-//        _wsContext = wsContext;
+        // _wsContext = wsContext;
     }
 
     private void checkResourceValid(final IResource res)
@@ -62,31 +61,31 @@ public class MockResourceDeltaFactory
             final int kind)
     {
         checkResourceValid(folder);
-        MockResourceDelta root = newAddDelta(folder, kind);
-
-//        MockResourceDelta folderAdd = (MockResourceDelta) root
-//                .findMember(folder.getFullPath());
-//
-//        if (folderAdd == null)
-//        {
-//            throw new IllegalStateException();
-//        }
-//
-//        // TODO: add recursive folders
-//        try
-//        {
-//            for (final IResource child : folder.members())
-//            {
-//                if (child.getType() == IResource.FILE)
-//                {
-//                    MockResourceDelta newAddDelta = new MockResourceDelta(child, null, kind, Collections.EMPTY_LIST);
-//                    folderAdd.getChildDeltas().add(newAddDelta);
-//                }
-//            }
-//        } catch (CoreException e)
-//        {
-//            throw new RuntimeException(e);
-//        }
+        final MockResourceDelta root = newAddDelta(folder, kind);
+        // MockResourceDelta folderAdd = (MockResourceDelta) root
+        // .findMember(folder.getFullPath());
+        //
+        // if (folderAdd == null)
+        // {
+        // throw new IllegalStateException();
+        // }
+        //
+        // // TODO: add recursive folders
+        // try
+        // {
+        // for (final IResource child : folder.members())
+        // {
+        // if (child.getType() == IResource.FILE)
+        // {
+        // MockResourceDelta newAddDelta = new MockResourceDelta(child, null,
+        // kind, Collections.EMPTY_LIST);
+        // folderAdd.getChildDeltas().add(newAddDelta);
+        // }
+        // }
+        // } catch (CoreException e)
+        // {
+        // throw new RuntimeException(e);
+        // }
         return root;
     }
 
@@ -112,6 +111,12 @@ public class MockResourceDeltaFactory
     {
         checkResourceValid(folder);
         return newRemoveDelta(folder, kind);
+    }
+
+    public MockResourceDelta createRecursiveFolderRemoved(final IFolder folder)
+    {
+        checkResourceValid(folder);
+        return newRemoveDeltaRecursive(folder, IResourceDelta.REMOVED);
     }
 
     @SuppressWarnings("unchecked")
@@ -141,6 +146,33 @@ public class MockResourceDeltaFactory
         return createWorkspaceRootedDeltaTo(resource, delta);
     }
 
+    private MockResourceDelta newRemoveDeltaRecursive(final IFolder folder,
+            final int kind)
+    {
+        final MockResourceDelta delta = recursiveContainerRemoved(folder, kind);
+        return createWorkspaceRootedDeltaTo(folder, delta);
+    }
+
+    private MockResourceDelta recursiveContainerRemoved(
+            final IResource rootRes, final int kind)
+    {
+        List<MockResourceDelta> childDeltas = new ArrayList<MockResourceDelta>();
+        try
+        {
+            if (rootRes instanceof IContainer)
+            {
+                for (final IResource res : ((IContainer) rootRes).members())
+                {
+                    childDeltas.add(recursiveContainerRemoved(res, kind));
+                }
+            }
+            return new MockResourceDelta(null, rootRes, kind, childDeltas);
+        } catch (CoreException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * @return a delta that doesn't represent a change itself but has
      *         descendants that do.
@@ -158,8 +190,8 @@ public class MockResourceDeltaFactory
         IContainer parent = res.getParent();
         while (parent != null)
         {
-            curDelta = createPathToChangeDelta(parent, Collections
-                    .singletonList(curDelta));
+            curDelta = createPathToChangeDelta(parent,
+                    Collections.singletonList(curDelta));
             parent = parent.getParent();
         }
         return curDelta;
@@ -190,7 +222,8 @@ public class MockResourceDeltaFactory
         return createFolderMove(folder, newFolder);
     }
 
-    public MockResourceDelta createFolderMove(IFolder folder, IFolder newFolder)
+    public MockResourceDelta createFolderMove(final IFolder folder,
+            final IFolder newFolder)
     {
         final MockResourceDelta fileAddEvent = createSimpleFolderAdded(
                 newFolder, IResourceDelta.ADDED | IResourceDelta.MOVED_FROM);
@@ -265,7 +298,7 @@ public class MockResourceDeltaFactory
             for (final Map.Entry<IResource, MockResourceDelta> entry : _merged
                     .entrySet())
             {
-                IResource key = entry.getKey();
+                final IResource key = entry.getKey();
                 if (key == null)
                 {
                     throw new NullPointerException();
@@ -285,7 +318,6 @@ public class MockResourceDeltaFactory
                             break;
                         }
                     }
-
                     if (mergeChild != null)
                     {
                         newDelta.getChildDeltas().remove(mergeChild);

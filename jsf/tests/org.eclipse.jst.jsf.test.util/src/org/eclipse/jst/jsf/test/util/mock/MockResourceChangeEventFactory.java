@@ -73,6 +73,13 @@ public class MockResourceChangeEventFactory
         return newPostChangeEvent(delta);
     }
 
+    public IResourceChangeEvent createRecursiveFolderDeleted(final IFolder folder)
+    {
+        final MockResourceDelta delta = _deltaFactory
+                .createRecursiveFolderRemoved(folder);
+        return newPostChangeEvent(delta);
+    }
+
     public IResourceChangeEvent createSimpleFolderRename(final IFolder folder,
             final IFolder newFolderName)
     {

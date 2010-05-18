@@ -20,21 +20,25 @@ import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment.Type;
+import org.eclipse.jst.jsf.designtime.internal.resources.IWorkspaceJSFResourceFragment;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResource;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener.JSFResourceChangedEvent;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceChangeListener.JSFResourceChangedEvent.CHANGE_TYPE;
 import org.eclipse.jst.jsf.designtime.internal.resources.JSFResourceContainer;
+import org.eclipse.jst.jsf.designtime.internal.resources.ResourceFragmentIdentifier;
 import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifier;
 import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifierFactory;
 import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifierFactory.InvalidIdentifierException;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResource;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceContainer;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
+import org.eclipse.jst.jsf.test.util.junit4.BugRegressionTest;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
 import org.eclipse.jst.jsf.test.util.mock.MockContainer;
 import org.eclipse.jst.jsf.test.util.mock.MockContentTypeManager;
 import org.eclipse.jst.jsf.test.util.mock.MockProject;
+import org.eclipse.jst.jsf.test.util.mock.MockResource;
 import org.eclipse.jst.jsf.test.util.mock.MockResourceChangeEventFactory;
 import org.eclipse.jst.jsf.test.util.mock.MockVirtualComponentQuery;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
@@ -50,7 +54,6 @@ public class TestWorkspaceBasedResourceLocator
     private MockProject _project;
     private MockContainer _webContentFolder;
     private IFolder _resourceRoot;
-
     private MockResourceChangeEventFactory _eventFactory;
     private ResourceIdentifierFactory _resourceIdFactory;
     private ChangeTester<JSFResourceChangedEvent, CHANGE_TYPE> _changeTester;
@@ -82,18 +85,21 @@ public class TestWorkspaceBasedResourceLocator
         _changeTester = new ChangeTester<JSFResourceChangedEvent, CHANGE_TYPE>(
                 _context, _eventFactory, _resourceRoot)
         {
+            private JSFResourceChangeListener _listener;
+
             @Override
             protected void installListener()
             {
                 _events.clear();
-                _locator.addListener(new JSFResourceChangeListener()
+                _listener = new JSFResourceChangeListener()
                 {
                     @Override
                     public void changed(final JSFResourceChangedEvent event)
                     {
                         _events.add(event);
                     }
-                });
+                };
+                _locator.addListener(_listener);
             }
 
             @Override
@@ -101,6 +107,12 @@ public class TestWorkspaceBasedResourceLocator
                     final CHANGE_TYPE type)
             {
                 return event.getChangeType() == type;
+            }
+
+            @Override
+            protected void removeListener()
+            {
+                _locator.removeListener(_listener);
             }
         };
     }
@@ -198,7 +210,7 @@ public class TestWorkspaceBasedResourceLocator
         _locator.start(_project);
         assertEquals(3, _locator.locate(_project).size());
         _changeTester.fireResourceFolderRename("mylib333", "mylib1111");
-        _changeTester.assertNumEvents(2);
+        _changeTester.assertNumEvents(3);
         {
             final JSFResourceChangedEvent event = _changeTester
                     .getSingleEvent(CHANGE_TYPE.ADDED);
@@ -215,23 +227,36 @@ public class TestWorkspaceBasedResourceLocator
             assertEquals("mylib1111", resource.getName());
             assertEquals(Type.CONTAINER, newValue.getType());
         }
-
         {
-            final JSFResourceChangedEvent event = _changeTester
-                    .getSingleEvent(CHANGE_TYPE.REMOVED);
-            assertEquals(CHANGE_TYPE.REMOVED, event.getChangeType());
-            assertNotNull(event.getOldValue());
-            assertNull(event.getNewValue());
-            assertEquals(Type.CONTAINER, event.getOldValue().getType());
-            final JSFResourceContainer oldValue = (JSFResourceContainer) event
-                    .getOldValue();
-            assertTrue(oldValue instanceof WorkspaceJSFResourceContainer);
-            final IResource resource = ((WorkspaceJSFResourceContainer) oldValue)
-                    .getResource();
-            assertEquals(IResource.FOLDER, resource.getType());
-            assertEquals("mylib333", resource.getName());
-            assertEquals(Type.CONTAINER, oldValue.getType());
-
+            final List<JSFResourceChangedEvent> events = _changeTester
+                    .getEvent(CHANGE_TYPE.REMOVED);
+            assertEquals(2, events.size());
+            JSFResourceChangedEvent event = events.get(0);
+            {
+                assertNotNull(event.getOldValue());
+                assertNull(event.getNewValue());
+                assertEquals(Type.CONTAINER, event.getOldValue().getType());
+                final JSFResourceContainer oldValue = (JSFResourceContainer) event
+                        .getOldValue();
+                assertTrue(oldValue instanceof WorkspaceJSFResourceContainer);
+                final IResource resource = ((WorkspaceJSFResourceContainer) oldValue)
+                        .getResource();
+                assertEquals(IResource.FOLDER, resource.getType());
+                assertEquals("mylib333", resource.getName());
+                assertEquals(Type.CONTAINER, oldValue.getType());
+            }
+            event = events.get(1);
+            {
+                assertNotNull(event.getOldValue());
+                assertNull(event.getNewValue());
+                assertEquals(Type.RESOURCE, event.getOldValue().getType());
+                final IWorkspaceJSFResourceFragment oldValue = (IWorkspaceJSFResourceFragment) event
+                        .getOldValue();
+                final IResource resource = ((IWorkspaceJSFResourceFragment) oldValue)
+                        .getResource();
+                assertEquals(IResource.FILE, resource.getType());
+                assertEquals("tag1.xhtml", resource.getName());
+            }
         }
         assertEquals(3, _locator.locate(_project).size());
     }
@@ -241,7 +266,8 @@ public class TestWorkspaceBasedResourceLocator
     {
         _locator.start(_project);
         assertEquals(3, _locator.locate(_project).size());
-        _changeTester.fireResourceFileRename("mylib333/tag1.xhtml", "mylib333/tag2.xhtml");
+        _changeTester.fireResourceFileRename("mylib333/tag1.xhtml",
+                "mylib333/tag2.xhtml");
         _changeTester.assertNumEvents(2);
         {
             final JSFResourceChangedEvent event = _changeTester
@@ -250,8 +276,7 @@ public class TestWorkspaceBasedResourceLocator
             assertNull(event.getOldValue());
             assertNotNull(event.getNewValue());
             assertEquals(Type.RESOURCE, event.getNewValue().getType());
-            final JSFResource newValue = (JSFResource) event
-                    .getNewValue();
+            final JSFResource newValue = (JSFResource) event.getNewValue();
             assertTrue(newValue instanceof WorkspaceJSFResource);
             final IResource resource = ((WorkspaceJSFResource) newValue)
                     .getResource();
@@ -260,7 +285,6 @@ public class TestWorkspaceBasedResourceLocator
             assertEquals("mylib333/tag2.xhtml", newValue.getId().toString());
             assertEquals(Type.RESOURCE, newValue.getType());
         }
-
         {
             final JSFResourceChangedEvent event = _changeTester
                     .getSingleEvent(CHANGE_TYPE.REMOVED);
@@ -268,8 +292,7 @@ public class TestWorkspaceBasedResourceLocator
             assertNotNull(event.getOldValue());
             assertNull(event.getNewValue());
             assertEquals(Type.RESOURCE, event.getOldValue().getType());
-            final JSFResource oldValue = (JSFResource) event
-                    .getOldValue();
+            final JSFResource oldValue = (JSFResource) event.getOldValue();
             assertTrue(oldValue instanceof WorkspaceJSFResource);
             final IResource resource = ((WorkspaceJSFResource) oldValue)
                     .getResource();
@@ -280,7 +303,97 @@ public class TestWorkspaceBasedResourceLocator
         assertEquals(3, _locator.locate(_project).size());
     }
 
-    
+    @Test
+    @BugRegressionTest(bugNumber = 312358)
+    public void testResourceRootDoesntExist()
+    {
+        ((MockResource) _resourceRoot).setExists(false);
+        _locator.start(_project);
+        // the workspace listener should get added event though the resource
+        // root doesn't yet exist.
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        // simulate adding the folder
+        ((MockResource) _resourceRoot).setExists(true);
+        _changeTester.fireResourceFolderAdd("");
+        _changeTester.assertNumEvents(1);
+        // simulate adding a sub-folder
+        _changeTester.fireResourceFolderAdd("ezcomp");
+        _changeTester.assertNumEvents(1);
+        List<JSFResourceChangedEvent> events = _changeTester
+                .getEvent(CHANGE_TYPE.ADDED);
+        assertEquals(1, events.size());
+        JSFResourceChangedEvent event = events.get(0);
+        ResourceFragmentIdentifier id = event.getNewValue().getId();
+        assertTrue(event.getNewValue().getType() == Type.CONTAINER);
+        assertEquals("ezcomp", id.getLibraryName());
+    }
+
+    @Test
+    @BugRegressionTest(bugNumber = 312358)
+    public void testRemoveResourceRootAndAdd()
+    {
+        _locator.start(_project);
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        // delete the folder
+        _changeTester.fireResourceFolderDelete("");
+        // should get an event for root, lib333 and lib333/tag1.xhtml
+        _changeTester.assertNumEvents(3);
+        // should still be listening event after root is removed in case
+        // it gets added back
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        // now add back the folder
+        _changeTester.fireResourceFolderAdd("");
+        _changeTester.assertNumEvents(1);
+        {
+            final JSFResourceChangedEvent event = _changeTester
+                    .getSingleEvent(CHANGE_TYPE.ADDED);
+            assertEquals("", event.getNewValue().getId().toString());
+        }
+        // now add a child to the resource root and assert we discover it.
+        _changeTester.fireResourceFolderAdd("ezcomp");
+        _changeTester.assertNumEvents(1);
+        {
+            final JSFResourceChangedEvent event = _changeTester
+                    .getSingleEvent(CHANGE_TYPE.ADDED);
+            assertEquals("ezcomp", event.getNewValue().getId().toString());
+        }
+    }
+
+    @Test
+    @BugRegressionTest(bugNumber = 312358)
+    public void testAddNoneResourceFolderToWebContent()
+    {
+        _locator.start(_project);
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        // delete the folder
+        _changeTester.fireResourceFolderAdd("../foobar");
+        _changeTester.assertNumEvents(0);
+    }
+
+    @Test
+    @BugRegressionTest(bugNumber = 312358)
+    public void testRemoveRecursiveFolder()
+    {
+        _locator.start(_project);
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        // delete the folder
+        _changeTester.fireResourceFileDeleteRecusive("");
+        final int expectedEvents = 3;
+        _changeTester.assertNumEvents(expectedEvents);
+        List<JSFResourceChangedEvent> events = _changeTester
+                .getEvent(CHANGE_TYPE.REMOVED);
+        assertEquals(expectedEvents, events.size());
+        Set<String> ids = new HashSet<String>();
+        for (final JSFResourceChangedEvent event : events)
+        {
+            ids.add(event.getOldValue().getId().toString());
+        }
+        assertTrue(ids.contains(""));
+        assertTrue(ids.contains("mylib333"));
+        assertTrue(ids.contains("mylib333/tag1.xhtml"));
+        assertEquals(expectedEvents, ids.size());
+    }
+
     private IJSFResourceFragment findById(
             final WorkspaceJSFResourceLocator locator, final String id)
             throws InvalidIdentifierException

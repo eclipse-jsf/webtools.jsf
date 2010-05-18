@@ -21,6 +21,7 @@ import java.util.TreeSet;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
@@ -293,6 +294,22 @@ public class TestJSPModelProcessor extends TestCase
             // resource change event
             waitForAndAssertProcessorDisposed(processor, true);
         }
+    }
+
+    public void testFileDoesnotExist()
+    {
+        IFile file = _testJSP1.getProject().getFile("/doesNotExist.jsp");
+        assertFalse(file.isAccessible());
+        boolean caughtException = false;
+        try
+        {
+            JSPModelProcessor.get(file);
+        }
+        catch (CoreException e)
+        {
+            caughtException = true;
+        }
+        assertTrue(caughtException);
     }
 
     public void testExplicitRefresh() throws Exception

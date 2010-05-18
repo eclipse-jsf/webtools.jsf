@@ -42,6 +42,10 @@ public class ELAssert extends Assert
     {
         final IStructuredDocumentContext context = 
             IStructuredDocumentContextFactory.INSTANCE.getContext(document, docPos);
+        if (context == null)
+        {
+        	fail("context is null");
+        }
         final ITextRegionContextResolver resolver =
             IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
         return resolver.getRegionText();
