@@ -28,10 +28,11 @@ import org.eclipse.jst.jsf.common.internal.resource.DefaultJarLocator;
 import org.eclipse.jst.jsf.common.internal.resource.JavaCoreMediator;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
+import org.eclipse.jst.jsf.common.internal.strategy.AbstractTestableExtensibleDefaultProviderSelectionStrategy;
+import org.eclipse.jst.jsf.common.internal.strategy.ISimpleStrategy;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
-
 
 /**
  * @author cbateman
@@ -40,17 +41,25 @@ import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLoc
 public class FaceletTagIndex extends
         ResourceSingletonObjectManager<IProjectTaglibDescriptor, IProject>
 {
-    private final IProjectTaglibDescriptorFactory _factory;
+    private ISimpleStrategy<IProject, IProjectTaglibDescriptorFactory> _tagDescriptorFactoryProvider;
 
     /**
      * @param ws
-     * @param factory
      */
-    public FaceletTagIndex(final IWorkspace ws,
-            final IProjectTaglibDescriptorFactory factory)
+    public FaceletTagIndex(final IWorkspace ws)
     {
         super(ws);
-        _factory = factory;
+        _tagDescriptorFactoryProvider = new ProjectTaglibDescriptorFactoryProviderSelectionStrategy();
+    }
+
+    /**
+     * @param ws
+     * @param tagDescriptorFactoryProvider
+     */
+    public FaceletTagIndex(final IWorkspace ws, final ISimpleStrategy<IProject, IProjectTaglibDescriptorFactory> tagDescriptorFactoryProvider)
+    {
+        this(ws);
+        _tagDescriptorFactoryProvider = tagDescriptorFactoryProvider;
     }
 
     private static FaceletTagIndex INSTANCE;
@@ -63,9 +72,7 @@ public class FaceletTagIndex extends
     {
         if (INSTANCE == null)
         {
-            INSTANCE = new FaceletTagIndex(ws,
-                    new DefaultProjectTaglibDescriptorFactory());
-
+            INSTANCE = new FaceletTagIndex(ws);
         }
         return INSTANCE;
     }
@@ -74,8 +81,16 @@ public class FaceletTagIndex extends
     protected IProjectTaglibDescriptor createNewInstance(final IProject project)
     {
         final TagRecordFactory factory = new TagRecordFactory(project, true);
-
-        return _factory.create(project, factory);
+        IProjectTaglibDescriptorFactory descFactory;
+        try
+        {
+            descFactory = _tagDescriptorFactoryProvider
+                    .perform(project);
+            return descFactory.create(project, factory);
+        } catch (Exception e)
+        {
+            return null;
+        }
     }
 
     /**
@@ -85,8 +100,61 @@ public class FaceletTagIndex extends
      */
     public void flush(final IProject project)
     {
-        IProjectTaglibDescriptor flushedDescriptor = unmanageResource(project);
+        final IProjectTaglibDescriptor flushedDescriptor = unmanageResource(project);
         flushedDescriptor.destroy();
+    }
+
+    /**
+     * Used to decide what provider gets used to get the descriptor factory.
+     * This allows us to inject a different descriptor factory than the default
+     * through either a test setter (test-only) or production (ext point).
+     * 
+     * @author cbateman
+     * 
+     */
+    private static class ProjectTaglibDescriptorFactoryProviderSelectionStrategy
+            extends
+            AbstractTestableExtensibleDefaultProviderSelectionStrategy<IProject, IProjectTaglibDescriptorFactory>
+    {
+        private static final IProjectTaglibDescriptorFactory NO_RESULT = null;
+
+        public ProjectTaglibDescriptorFactoryProviderSelectionStrategy()
+        {
+            super();
+            addDefaultStrategy(new DefaultProjectTaglibDescriptorFactoryProvider(
+                    new DefaultProjectTaglibDescriptorFactory()));
+            addExtensionStrategy(new ExtensionBasedTagDescriptorFactoryProviderStrategy());
+        }
+
+        @Override
+        public IProjectTaglibDescriptorFactory getNoResult()
+        {
+            return NO_RESULT;
+        }
+    }
+
+    private static class DefaultProjectTaglibDescriptorFactoryProvider
+            implements
+            ISimpleStrategy<IProject, IProjectTaglibDescriptorFactory>
+    {
+        private final DefaultProjectTaglibDescriptorFactory _factory;
+
+        public DefaultProjectTaglibDescriptorFactoryProvider(
+                final DefaultProjectTaglibDescriptorFactory factory)
+        {
+            _factory = factory;
+        }
+
+        public IProjectTaglibDescriptorFactory perform(final IProject input)
+                throws Exception
+        {
+            return _factory;
+        }
+
+        public IProjectTaglibDescriptorFactory getNoResult()
+        {
+            return null;
+        }
     }
 
     /**
@@ -108,13 +176,13 @@ public class FaceletTagIndex extends
                     factory, ModelProviderManager.getModelProvider(project),
                     new DefaultVirtualComponentQuery(), new WorkspaceMediator()));
             final List<IJSFResourceLocator> resourceLocators = new ArrayList<IJSFResourceLocator>();
-            resourceLocators.add(new JarBasedJSFResourceLocator(
-                    Collections.EMPTY_LIST,
-                    new CopyOnWriteArrayList<ILocatorChangeListener>(),
-                    new DefaultJarLocator(
-                            Collections.singletonList(new AlwaysMatcher()),
-                            new JavaCoreMediator()),
-                    new ContentTypeResolver()));
+            resourceLocators
+                    .add(new JarBasedJSFResourceLocator(Collections.EMPTY_LIST,
+                            new CopyOnWriteArrayList<ILocatorChangeListener>(),
+                            new DefaultJarLocator(Collections
+                                    .singletonList(new AlwaysMatcher()),
+                                    new JavaCoreMediator()),
+                            new ContentTypeResolver()));
             final IWorkspace workspace = project.getWorkspace();
             resourceLocators.add(new WorkspaceJSFResourceLocator(
                     Collections.EMPTY_LIST,

@@ -58,6 +58,10 @@ public abstract class AbstractSimpleClassExtensionRegistryReader<T> extends
         final List<SortableExecutableExtension<T>> result = new ArrayList<SortableExecutableExtension<T>>();
         final IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
                 .getExtensionPoint(getExtPtNamespace(), getExtPtId());
+        if (extensionPoint == null)
+        {
+            return;
+        }
         IExtension[] extensions = extensionPoint.getExtensions();
         for (int i = 0; i < extensions.length; i++)
         {

@@ -74,6 +74,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
     private final TagRecordFactory _factory;
     private final Map<String, IFaceletTagRecord> _records;
     private final IJarLocator _locator;
+	private final List<IMatcher> _jarEntryMatchers;
 
     /**
      * @param factory
@@ -92,10 +93,22 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
     public JarFileFaceletTaglibLocator(final TagRecordFactory factory,
             final IJarLocator jarProvider)
     {
+        this(factory, jarProvider, MATCHERS);
+    }
+
+    /**
+     * @param factory
+     * @param jarProvider
+     * @param jarEntryMatchers
+     */
+    public JarFileFaceletTaglibLocator(final TagRecordFactory factory,
+            final IJarLocator jarProvider, final List<IMatcher> jarEntryMatchers)
+    {
         super(ID, DISPLAYNAME);
         _factory = factory;
         _records = new HashMap<String, IFaceletTagRecord>();
         _locator = jarProvider;
+        _jarEntryMatchers = jarEntryMatchers;
     }
 
     @Override
@@ -110,7 +123,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             final JarFile jarFile = cpJarFile.getJarFile();
             if (jarFile != null)
             {
-                tagLibsFound.addAll(processJar(cpJarFile));
+                tagLibsFound.addAll(processJar(cpJarFile, _jarEntryMatchers));
             }
         }
         for (final LibJarEntry jarEntry : tagLibsFound)
@@ -133,7 +146,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                     case JAR_ADDED:
                     {
                         final ClasspathJarFile jar = event.getJar();
-                        final List<LibJarEntry> foundLibs = processJar(jar);
+                        final List<LibJarEntry> foundLibs = processJar(jar, _jarEntryMatchers);
                         for (final LibJarEntry lib : foundLibs)
                         {
                             IFaceletTagRecord newRecord = _factory.createRecords(
@@ -199,7 +212,8 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
      * @param defaultDtdStream
      * @throws Exception
      */
-    private static List<LibJarEntry> processJar(final ClasspathJarFile cpJarFile)
+    private static List<LibJarEntry> processJar(final ClasspathJarFile cpJarFile,
+    		final List<IMatcher> jarEntryMatchers)
     {
         final List<LibJarEntry> tagLibsFound = new ArrayList<LibJarEntry>();
         final JarFile jarFile = cpJarFile.getJarFile();

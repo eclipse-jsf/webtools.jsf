@@ -4,6 +4,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.eclipse.core.runtime.ISafeRunnable;
+import org.eclipse.core.runtime.SafeRunner;
+import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+
 /**
  * A utility base class that simplifies the reading and caching of extension
  * point information.
@@ -39,7 +43,18 @@ public abstract class AbstractRegistryReader<T>
         {
             if (_isInitialized.compareAndSet(false, true))
             {
-                initialize();
+                SafeRunner.run(new ISafeRunnable()
+                {
+                    public void run() throws Exception
+                    {
+                        initialize();
+                    }
+                    
+                    public void handleException(Throwable exception)
+                    {
+                        JSFCommonPlugin.log(exception);
+                    }
+                });
             }
             return _extensions;
         }

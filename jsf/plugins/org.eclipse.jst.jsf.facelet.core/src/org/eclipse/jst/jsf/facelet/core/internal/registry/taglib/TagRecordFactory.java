@@ -61,6 +61,7 @@ public class TagRecordFactory
 
     /**
      * @param taglibDefn
+     * @param descriptor 
      * @return the new tag record
      */
     public IFaceletTagRecord createRecords(final FaceletTaglib taglibDefn, final TagRecordDescriptor descriptor)
