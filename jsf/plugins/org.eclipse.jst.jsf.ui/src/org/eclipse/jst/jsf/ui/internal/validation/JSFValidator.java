@@ -90,7 +90,8 @@ public class JSFValidator extends JSPValidator implements ISourceValidator
 
         final IFile file = getFile(helper);
 
-        if (fDocument instanceof IStructuredDocument)
+        if (fDocument instanceof IStructuredDocument
+                && file != null)
         {
             final IStructuredDocument sDoc = (IStructuredDocument) fDocument;
             final IStructuredDocumentRegion[] regions = sDoc
