@@ -56,7 +56,10 @@ public class TLDRegistryPreferences
         // in which strategies will be consulted !!!
         list.add(new OrderableObject(new StrategyIdentifier(PersistedDataTagStrategy.createDescriptor()), true));
         list.add(new OrderableObject(new StrategyIdentifier(DefaultJSPTagResolver.createDescriptor()), true));
-        list.add(new OrderableObject(new StrategyIdentifier(TagIntrospectingStrategy.createDescriptor()), true));
+        // Bug 312954 - temporarily disable the default preference for the
+        // TagIntrospectingStrategy. When bug 312936 and 240394 get resolved,
+        // roll back this change and re-enable.
+        list.add(new OrderableObject(new StrategyIdentifier(TagIntrospectingStrategy.createDescriptor()), false));
         DEFAULT_STRATEGY_ORDER = Collections.unmodifiableList(list);
         
 
