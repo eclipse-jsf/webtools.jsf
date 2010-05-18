@@ -172,7 +172,7 @@ public class StartupHandler implements IStartup
         {
             final IFile file = getIFile(editorRef);
 
-            if (file != null)
+            if (file != null && file.isAccessible())
             {
                 try
                 {

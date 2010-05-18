@@ -49,7 +49,7 @@ public class JSPTagVariableSymbolSourceProvider extends
     {
         final IFile   fileContext = FileContextUtil.deriveIFileFromContext(context);
         
-        if (isProvider(fileContext))
+        if (isProvider(fileContext) &&  fileContext.isAccessible())
         {
         	JSPModelProcessor modelProcessor = null;
         	
