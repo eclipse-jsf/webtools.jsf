@@ -152,4 +152,8 @@ public class TestDefaultTagCreatorForJSFHTML extends BaseDefaultTagCreatorTestCa
         doCreateTest(IJSFConstants.TAG_IDENTIFIER_INPUTTEXTAREA, "jsp", "jsp", 358,false, null);
     }
 
+    public void testCreateOutputLink() throws Exception
+    {
+        doCreateTest(IJSFConstants.TAG_IDENTIFIER_OUTPUTLINK, "jsp", "jsp", 358,false, null);
+    }
 }
