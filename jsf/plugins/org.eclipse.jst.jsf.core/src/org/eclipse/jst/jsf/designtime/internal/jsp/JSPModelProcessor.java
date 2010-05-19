@@ -274,12 +274,8 @@ public class JSPModelProcessor
             model.releaseFromRead();
         }
         
-        throw new CoreException
-            (new Status(IStatus.ERROR
-                        , "org.eclipse.blah" //$NON-NLS-1$
-                        , 0
-                        ,"model not of expected type" //$NON-NLS-1$
-                        , new Throwable()));
+        JSFCorePlugin.log("Couldn't get valid model for file: "+file.toString(), new Exception()); //$NON-NLS-1$
+        return null;
     }
 
     private void dispose()
@@ -444,7 +440,10 @@ public class JSPModelProcessor
                     if (_forceRefresh || isModelDirty())
                     {
                         model = getModelForFile(_file);
-                        refreshInternal(model);
+                        if (model != null)
+                        {
+                            refreshInternal(model);
+                        }
                         _lastModificationStampMonitor.setModificationStamp(_file.getModificationStamp());
                     }
                 }
