@@ -31,6 +31,7 @@
 			<item id="message"/>			
 			<item id="messages"/>
 			<item id="outputFormat"/>
+			<item id="outputLink"/>
 			<item id="outputScript"/>
 			<item id="outputStylesheet"/>
 			<item id="panelGrid"/>
@@ -331,9 +332,10 @@
 		</trait>
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
+				<attribute id="value" value="somePage.jsf"></attribute>
 				<template><![CDATA[
 				<outputText value="outputLink"
-					_$uri$="http://java.sun.com/jsf/html" />
+					_uri_="http://java.sun.com/jsf/html" />
 				]]></template>
 
 			</value>
