@@ -58,8 +58,12 @@ public class ContainmentValidatingStrategy extends
         Messages.ContainmentValidatingStrategy_DisplayName;
     private final static ElementToTagIdentifierMapping elem2TagIdMapper = 
         new ElementToTagIdentifierMapping();
+    
+    private static final  String  ENABLE_CONTAINMENT_VALIDATION_KEY  = "jsfCoreEnableContainmentValidation"; //$NON-NLS-1$
+    
     private int                                        _containmentValidationCount;  // = 0;
     private final JSFValidationContext                 _jsfValidationContext;
+    private boolean 								   _enabled;						
 
     /**
      * @param jsfValidationContext
@@ -69,9 +73,10 @@ public class ContainmentValidatingStrategy extends
     {
         super(ID, DISPLAY_NAME);
         _jsfValidationContext = jsfValidationContext;
+        _enabled = getEnablementProperty();
     }
 
-    @Override
+	@Override
     public boolean isInteresting(DOMAdapter domAdapter)
     {
         return domAdapter instanceof Region2ElementAdapter;
@@ -80,7 +85,8 @@ public class ContainmentValidatingStrategy extends
     @Override
     public void validate(DOMAdapter domAdapter)
     {
-        if (domAdapter instanceof Region2ElementAdapter)
+        if (_enabled 
+        		&& domAdapter instanceof Region2ElementAdapter)
         {
             final Region2ElementAdapter elementAdapter = 
                 (Region2ElementAdapter) domAdapter;
@@ -88,6 +94,15 @@ public class ContainmentValidatingStrategy extends
         }
     }
 
+    private boolean getEnablementProperty() {
+		 String res = System.getProperty(ENABLE_CONTAINMENT_VALIDATION_KEY);
+		 if (res == null) {
+		     //check env var also
+		     res = System.getenv(ENABLE_CONTAINMENT_VALIDATION_KEY);
+		 }
+		 return res != null;		
+	}
+    
     private void validateContainment(
             final Region2ElementAdapter elementAdapter,
             final JSFValidationContext jsfValidationContext)
