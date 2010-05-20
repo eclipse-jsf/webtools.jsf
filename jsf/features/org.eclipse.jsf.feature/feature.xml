@@ -24,7 +24,7 @@
       <discovery label="JavaServer Faces (JSF) Tools Updates" url="http://download.eclipse.org/webtools/updates/"/>
    </url>
 
-      <plugin
+   <plugin
          id="org.eclipse.jst.jsf.common"
          download-size="0"
          install-size="0"
@@ -89,6 +89,13 @@
 
    <plugin
          id="org.eclipse.jst.jsf.standard.tagsupport"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.jsf.branding"
          download-size="0"
          install-size="0"
          version="0.0.0"
