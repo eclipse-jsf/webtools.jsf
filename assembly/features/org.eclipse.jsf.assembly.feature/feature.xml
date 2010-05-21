@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.jsf.assembly.feature"
-      label="%feature.name"
+      label="%name"
       version="3.2.0.qualifier"
-      provider-name="%feature.provider"
+      provider-name="%provider"
       plugin="org.eclipse.jsf.branding">
 
    <description>
-      %feature.description
+      %description
    </description>
 
    <copyright>
-      %feature.copyright
+      %copyright
    </copyright>
 
    <license url="license.html">
-      %feature.license
+      %license
    </license>
 
    <url>
@@ -35,82 +35,5 @@
    <includes
          id="org.eclipse.jsf.feature"
          version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.common"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.common.runtime"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.common.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.facelet.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.facelet.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.facesconfig"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.facesconfig.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jst.jsf.standard.tagsupport"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.jsf.branding"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
 </feature>
