@@ -83,7 +83,7 @@
     </extension> 
     <extension point="org.eclipse.wst.sse.ui.sourcevalidation">
 		<validator
-			scope="total"
+			scope="partial"
 			class="org.eclipse.jst.jsf.ui.internal.validation.JSFValidator"
 			id="org.eclipse.jst.jsf.validation.JSFAttributeValueValidator">
 			<contentTypeIdentifier
