@@ -73,7 +73,7 @@ public class ContainmentValidatingStrategy extends
     {
         super(ID, DISPLAY_NAME);
         _jsfValidationContext = jsfValidationContext;
-        _enabled = getEnablementProperty();
+        _enabled = isEnabled();
     }
 
 	@Override
@@ -94,7 +94,10 @@ public class ContainmentValidatingStrategy extends
         }
     }
 
-    private boolean getEnablementProperty() {
+    /**
+     * @return true if the containment validation strategy is enabled
+     */
+    public static boolean isEnabled() {
 		 String res = System.getProperty(ENABLE_CONTAINMENT_VALIDATION_KEY);
 		 if (res == null) {
 		     //check env var also
