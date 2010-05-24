@@ -56,7 +56,7 @@ public class TestJSPSemanticsValidator_Containment extends TestCase
     private IStructuredDocument         _jspStructuredDocument;
     private IStructuredModel            _jspFragStructuredModel;
     private IStructuredDocument         _jspFragStructuredDocument;
-
+    private boolean						_containmentValidationEnabled;
 
     @Override
     protected void setUp() throws Exception
@@ -92,9 +92,11 @@ public class TestJSPSemanticsValidator_Containment extends TestCase
         // 	initialize test case for faces 1.1
         final JSFFacetedTestEnvironment jsfFacedEnv = new JSFFacetedTestEnvironment(_testEnv);
         jsfFacedEnv.initialize(IJSFCoreConstants.FACET_VERSION_1_1);
+        
+        _containmentValidationEnabled = ContainmentValidatingStrategy.isEnabled();
     }
 
-    @Override
+	@Override
     protected void tearDown() throws Exception {
         super.tearDown();
 
@@ -128,7 +130,7 @@ public class TestJSPSemanticsValidator_Containment extends TestCase
         final IStructuredDocumentContext firstIncorrectlyNested =
             IStructuredDocumentContextFactory.INSTANCE
                 .getContext(_jspStructuredDocument, 538);
-        checkTag(firstIncorrectlyNested, validator, reporter, 1);
+        checkTag(firstIncorrectlyNested, validator, reporter, _containmentValidationEnabled ? 1 : 0);
         reporter.reset();
 
         final IStructuredDocumentContext secondIncorrectlyNested =

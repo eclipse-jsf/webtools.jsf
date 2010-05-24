@@ -25,6 +25,7 @@ import org.eclipse.jst.jsf.core.tests.util.JSFCoreUtilHelper;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.eclipse.jst.jsf.validation.internal.XMLViewDefnValidator;
+import org.eclipse.jst.jsf.validation.internal.strategy.ContainmentValidatingStrategy;
 import org.eclipse.jst.jsp.core.internal.domdocument.DOMModelForJSP;
 import org.eclipse.wst.common.project.facet.core.ProjectFacetsManager;
 import org.eclipse.wst.sse.core.StructuredModelManager;
@@ -34,6 +35,8 @@ import org.eclipse.wst.validation.internal.provisional.core.IMessage;
 public class TestJSPSemanticsValidator_AttributeValues extends TestCase
 {
     private WebProjectTestEnvironment _webProject;
+    private boolean					  _containmentValidationEnabled;
+    
 
     @Override
     protected void setUp() throws Exception
@@ -60,6 +63,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         _webProject.createFromZip2(zipFile, true);
         JSFCoreUtilHelper.injectTestTagRegistryFactoryProvider(JSFCoreUtilHelper.createSimpleRegistryFactory());
         Job.getJobManager().beginRule(_webProject.getTestProject(), null);
+        _containmentValidationEnabled = ContainmentValidatingStrategy.isEnabled();
     }
 
     @Override
@@ -110,7 +114,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         // there should only be 3, but because we don't want to have the jars
         // in the path, we trigger a containment warning on the loadBundle
         // since the f:view in the doc can't be fully resolved.
-        assertEquals(4, mockReporter.getReportedProblems().size());
+        assertEquals(_containmentValidationEnabled ? 4 : 3, mockReporter.getReportedProblems().size());
 
         mockReporter.assertExpectedMessage(591, 25, IMessage.HIGH_SEVERITY);
         mockReporter.assertExpectedMessage(936, 1, IMessage.NORMAL_SEVERITY);
@@ -134,7 +138,7 @@ public class TestJSPSemanticsValidator_AttributeValues extends TestCase
         // in the path, we trigger a containment warning on the loadBundle
         // since the f:view in the doc can't be fully resolved.
         // at 845 we also get two, one for syntax error and one for missing bracket
-        assertEquals(10, mockReporter.getReportedProblems().size());
+        assertEquals(_containmentValidationEnabled ? 10 : 9, mockReporter.getReportedProblems().size());
 
         mockReporter.assertExpectedMessage(603, 2, IMessage.NORMAL_SEVERITY);
         mockReporter.assertExpectedMessage(648, 4, IMessage.NORMAL_SEVERITY);
