@@ -252,7 +252,7 @@ public class TestWorkspaceBasedResourceLocator
                 assertEquals(Type.RESOURCE, event.getOldValue().getType());
                 final IWorkspaceJSFResourceFragment oldValue = (IWorkspaceJSFResourceFragment) event
                         .getOldValue();
-                final IResource resource = ((IWorkspaceJSFResourceFragment) oldValue)
+                final IResource resource = (oldValue)
                         .getResource();
                 assertEquals(IResource.FILE, resource.getType());
                 assertEquals("tag1.xhtml", resource.getName());
@@ -319,11 +319,11 @@ public class TestWorkspaceBasedResourceLocator
         // simulate adding a sub-folder
         _changeTester.fireResourceFolderAdd("ezcomp");
         _changeTester.assertNumEvents(1);
-        List<JSFResourceChangedEvent> events = _changeTester
+        final List<JSFResourceChangedEvent> events = _changeTester
                 .getEvent(CHANGE_TYPE.ADDED);
         assertEquals(1, events.size());
-        JSFResourceChangedEvent event = events.get(0);
-        ResourceFragmentIdentifier id = event.getNewValue().getId();
+        final JSFResourceChangedEvent event = events.get(0);
+        final ResourceFragmentIdentifier id = event.getNewValue().getId();
         assertTrue(event.getNewValue().getType() == Type.CONTAINER);
         assertEquals("ezcomp", id.getLibraryName());
     }
@@ -380,10 +380,10 @@ public class TestWorkspaceBasedResourceLocator
         _changeTester.fireResourceFileDeleteRecusive("");
         final int expectedEvents = 3;
         _changeTester.assertNumEvents(expectedEvents);
-        List<JSFResourceChangedEvent> events = _changeTester
+        final List<JSFResourceChangedEvent> events = _changeTester
                 .getEvent(CHANGE_TYPE.REMOVED);
         assertEquals(expectedEvents, events.size());
-        Set<String> ids = new HashSet<String>();
+        final Set<String> ids = new HashSet<String>();
         for (final JSFResourceChangedEvent event : events)
         {
             ids.add(event.getOldValue().getId().toString());
@@ -392,6 +392,18 @@ public class TestWorkspaceBasedResourceLocator
         assertTrue(ids.contains("mylib333"));
         assertTrue(ids.contains("mylib333/tag1.xhtml"));
         assertEquals(expectedEvents, ids.size());
+    }
+
+    @Test
+    @BugRegressionTest(bugNumber = 314145)
+    public void testRenameFileInRootFolder()
+    {
+        _locator.start(_project);
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        _changeTester.fireResourceFileRename("../t11.jsp", "../t11.jspx");
+        // the workspace resource locator shouldn't care if something outside
+        // the resources sub-dir changes.
+        _changeTester.assertNumEvents(0);
     }
 
     private IJSFResourceFragment findById(
