@@ -345,6 +345,15 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                     isInteresting = (reasonType == ReasonType.RESOURCE_DELETED_FROM_CONTAINER || reasonType == ReasonType.RESOURCE_MOVED_CONTAINER)
                             && event.getAffectedResource().getParent()
                                     .equals(resource);
+                    // ignore if my resource is web content and this is trying
+                    // to add something other than resources folder
+                    if (resource.equals(_vcQuery.getWebContentFolder(_project)
+                            .getUnderlyingFolder()))
+                    {
+                        isInteresting &= event.getAffectedResource().equals(
+                                getRootResourceFolder());
+                    }
+//                    isInteresting &= (_isJSFResource || (resource.getType() == IResource.FOLDER && "resources".equals(resource.getName()))); //$NON-NLS-1$
                     // or if the resource being delted or moved is the root
                     // folder and that is my resource.
                     // isInteresting |= (reasonType ==
