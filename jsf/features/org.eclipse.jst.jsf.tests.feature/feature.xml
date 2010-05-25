@@ -3,18 +3,18 @@
       id="org.eclipse.jst.jsf.tests.feature"
       label="%feature.name"
       version="3.2.0.qualifier"
-      provider-name="%feature.provider">
+      provider-name="%provider">
 
    <description>
-      %feature.description
+      %description
    </description>
 
    <copyright>
-      %feature.copyright
+      %copyright
    </copyright>
 
    <license url="license.html">
-      %feature.license
+      %license
    </license>
 
    <plugin
