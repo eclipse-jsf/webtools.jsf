@@ -274,6 +274,8 @@ AbstractXMLViewValidationStrategy
                                     elementAdapter, attrAdapter, safeELText);
                             isEL = true;
                         }
+                    } else {
+                        isEL = true;
                     }
                 }
             }
