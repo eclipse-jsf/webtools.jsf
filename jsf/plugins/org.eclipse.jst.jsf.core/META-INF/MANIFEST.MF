@@ -118,5 +118,6 @@ Export-Package: org.eclipse.jst.jsf.core,
  org.eclipse.jst.jsf.validation.internal.el;x-friends:="org.eclipse.jst.jsf.ui,org.eclipse.jst.jsf.validation.el.tests",
  org.eclipse.jst.jsf.validation.internal.el.diagnostics;x-friends:="org.eclipse.jst.jsf.validation.el.tests",
  org.eclipse.jst.jsf.validation.internal.el.operators;x-internal:=true,
+ org.eclipse.jst.jsf.validation.internal.facelet,
  org.eclipse.jst.jsf.validation.internal.strategy;x-internal:=true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

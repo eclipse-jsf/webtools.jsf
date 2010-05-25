@@ -26,6 +26,10 @@ public class Messages extends NLS {
 	 * see messages.properties
 	 */
 	public static String ValidationMessageFactory_DefaultTypeComparatorDisplayName;
+	/**
+	 * see messages.properties
+	 */
+	public static String ValidationMessageFactory_DefaultFaceletSeverityDisplayName;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

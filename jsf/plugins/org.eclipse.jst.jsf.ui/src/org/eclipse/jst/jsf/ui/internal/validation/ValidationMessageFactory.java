@@ -9,7 +9,6 @@
  *    Cameron Bateman/Oracle - initial API and implementation
  * 
  ********************************************************************************/
-
 package org.eclipse.jst.jsf.ui.internal.validation;
 
 import java.util.HashMap;
@@ -22,6 +21,8 @@ import org.eclipse.jst.jsf.validation.internal.ELValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.JSFTypeComparatorPreferences;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
 import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
+import org.eclipse.jst.jsf.validation.internal.facelet.FaceletDiagnosticFactory;
+import org.eclipse.jst.jsf.validation.internal.facelet.FaceletValidationPreferences;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.validation.internal.core.Message;
@@ -37,18 +38,22 @@ public final class ValidationMessageFactory
 {
     private final Map<String, SeverityOverrideStrategy> _strategies;
     private IStructuredModel _model = null;
+
     /**
      * @param prefs
      * @param model
      */
-    public ValidationMessageFactory(final ValidationPreferences prefs, final IStructuredModel model)
+    public ValidationMessageFactory(final ValidationPreferences prefs,
+            final IStructuredModel model)
     {
-    	_model = model;
+        _model = model;
         _strategies = new HashMap<String, SeverityOverrideStrategy>();
         _strategies.put(DiagnosticFactory.SOURCE_ID,
                 new ELSeverityOverrideStrategy(prefs));
         _strategies.put(TypeComparatorDiagnosticFactory.SOURCE_IDENTIFIER,
                 new TypeComparatorOverrideStrategy(prefs));
+        _strategies.put(FaceletDiagnosticFactory.SOURCE_ID,
+                new FaceletSeverityOverrideStrategy(prefs));
     }
 
     /**
@@ -64,7 +69,6 @@ public final class ValidationMessageFactory
         int severity = diagnostic.getSeverity();
         final String sourceId = diagnostic.getSource();
         final SeverityOverrideStrategy strategy = _strategies.get(sourceId);
-
         // only override if there's a strategy to do so
         if (strategy != null)
         {
@@ -74,22 +78,21 @@ public final class ValidationMessageFactory
                 severity = value.intValue();
             }
         }
-
         final Message message = new MyLocalizedMessage(
                 convertSeverity(severity), diagnostic.getMessage(), file,
                 diagnostic.getCode());
-
         message.setOffset(offset);
         message.setLength(length);
-		if (this._model != null) {
-			IStructuredDocument flatModel = this._model.getStructuredDocument();
-			if (flatModel != null) {
-				int line = flatModel.getLineOfOffset(message.getOffset());
-				if (line >= 0)
-					message.setLineNo(line + 1);
-			}
-		}
-
+        if (this._model != null)
+        {
+            IStructuredDocument flatModel = this._model.getStructuredDocument();
+            if (flatModel != null)
+            {
+                int line = flatModel.getLineOfOffset(message.getOffset());
+                if (line >= 0)
+                    message.setLineNo(line + 1);
+            }
+        }
         return message;
     }
 
@@ -165,6 +168,33 @@ public final class ValidationMessageFactory
         public String getDisplayName()
         {
             return Messages.ValidationMessageFactory_DefaultTypeComparatorDisplayName;
+        }
+    }
+
+    private static class FaceletSeverityOverrideStrategy extends
+            SeverityOverrideStrategy
+    {
+        private final ValidationPreferences _prefs;
+
+        public FaceletSeverityOverrideStrategy(final ValidationPreferences prefs)
+        {
+            super(FaceletDiagnosticFactory.SOURCE_ID);
+            _prefs = prefs;
+        }
+
+        @Override
+        public Integer override(final Diagnostic diagnostic)
+        {
+            final int code = diagnostic.getCode();
+            final FaceletValidationPreferences faceletPrefs = _prefs
+                    .getFaceletValidationPrefs();
+            return Integer.valueOf(faceletPrefs.getDiagnosticSeverity(code));
+        }
+
+        @Override
+        public String getDisplayName()
+        {
+            return Messages.ValidationMessageFactory_DefaultFaceletSeverityDisplayName;
         }
     }
 }

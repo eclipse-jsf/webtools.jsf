@@ -14,16 +14,14 @@ import org.eclipse.wst.validation.internal.provisional.core.IValidator;
 /*package*/class ValidationReporter implements
         IJSFViewValidator.IValidationReporter
 {
-    private final IValidator            _validator;
-    private final IReporter             _reporter;
-    private final IFile                 _file;
-    private final ValidationMessageFactory  _factory;
-
+    private final IValidator _validator;
+    private final IReporter _reporter;
+    private final IFile _file;
+    private final ValidationMessageFactory _factory;
 
     public ValidationReporter(final IValidator validator,
             final IReporter reporter, final IFile file,
-            final ValidationPreferences prefs, 
-            final IStructuredModel model)
+            final ValidationPreferences prefs, final IStructuredModel model)
     {
         _validator = validator;
         _reporter = reporter;
@@ -34,33 +32,35 @@ import org.eclipse.wst.validation.internal.provisional.core.IValidator;
     public void report(final Diagnostic problem, final int start,
             final int length)
     {
-    	if (shouldReportProblem(problem.getCode())) {
-	        final IMessage message = _factory.createFromDiagnostic(
-	                problem, start, length, _file);
-	
-	        if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
-	        {	        	
-	        	_reporter.addMessage(_validator, message);
-	        }
-    	}
+        if (shouldReportProblem(problem.getCode()))
+        {
+            final IMessage message = _factory.createFromDiagnostic(problem,
+                    start, length, _file);
+            if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
+            {
+                _reporter.addMessage(_validator, message);
+            }
+        }
     }
 
     /**
      * @param problemCode
      * @return filters out problems to be reported by code
      */
-    private boolean shouldReportProblem(final int problemCode) {
-    	switch (problemCode) {
-    		case DiagnosticFactory.CONTAINMENT_ERROR_MISSING_VIEW:
-    			return false;
-    		default:
-    			return true;
-    	}
-	}
-
-	public void report(IMessage message)
+    private boolean shouldReportProblem(final int problemCode)
     {
-		//not capable of filtering problems by code...   should not be used
+        switch (problemCode)
+        {
+            case DiagnosticFactory.CONTAINMENT_ERROR_MISSING_VIEW:
+                return false;
+            default:
+                return true;
+        }
+    }
+
+    public void report(IMessage message)
+    {
+        // not capable of filtering problems by code... should not be used
         if ((message.getSeverity() & IMessage.ALL_MESSAGES) != 0)
         {
             _reporter.addMessage(_validator, message);

@@ -12,6 +12,7 @@
 package org.eclipse.jst.jsf.validation.internal;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jst.jsf.validation.internal.facelet.FaceletValidationPreferences;
 
 /**
  * @author cbateman
@@ -22,6 +23,7 @@ public class ValidationPreferences
     private final IPreferenceStore                      _prefStore;
     private final ELValidationPreferences               _elPrefs;
     private final JSFTypeComparatorPreferences          _typeComparatorPrefs;
+    private final FaceletValidationPreferences          _faceletPrefs;
     /**
      * Constructor
      * @param prefStore 
@@ -31,6 +33,7 @@ public class ValidationPreferences
         _prefStore = prefStore;
         _elPrefs = new ELValidationPreferences();
         _typeComparatorPrefs = new JSFTypeComparatorPreferences();
+        _faceletPrefs = new FaceletValidationPreferences();
     }
 
     /**
@@ -47,6 +50,14 @@ public class ValidationPreferences
     public JSFTypeComparatorPreferences getTypeComparatorPrefs()
     {
         return _typeComparatorPrefs;
+    }
+
+    /**
+     * @return the el preferences
+     */
+    public FaceletValidationPreferences getFaceletValidationPrefs() 
+    {
+        return _faceletPrefs;
     }
 
     /**IPreferenceStore
@@ -66,6 +77,7 @@ public class ValidationPreferences
     {
         _elPrefs.load(prefStore);
         _typeComparatorPrefs.load(prefStore);
+        _faceletPrefs.load(prefStore);
     }
 
     /**
@@ -77,6 +89,7 @@ public class ValidationPreferences
     {
         _elPrefs.commit(prefStore);
         _typeComparatorPrefs.commit(prefStore);
+        _faceletPrefs.commit(prefStore);
     }
     
     /**
@@ -86,5 +99,6 @@ public class ValidationPreferences
     {
         _elPrefs.setDefaults();
         _typeComparatorPrefs.setDefaults();
+        _faceletPrefs.setDefaults();
     }
 }

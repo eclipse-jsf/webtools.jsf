@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
@@ -33,6 +32,7 @@ import org.eclipse.jst.jsf.facelet.ui.internal.FaceletUiPlugin;
 import org.eclipse.jst.jsf.validation.internal.IJSFViewValidator;
 import org.eclipse.jst.jsf.validation.internal.JSFValidatorFactory;
 import org.eclipse.jst.jsf.validation.internal.ValidationPreferences;
+import org.eclipse.jst.jsf.validation.internal.facelet.FaceletDiagnosticFactory;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
@@ -58,6 +58,7 @@ import org.w3c.dom.Element;
  */
 public class HTMLValidator extends AbstractValidator implements IValidator
 {
+	private FaceletDiagnosticFactory _diagnosticFactory = new FaceletDiagnosticFactory();
     /**
      * @param helper
      * @return no rule, null
@@ -258,13 +259,7 @@ public class HTMLValidator extends AbstractValidator implements IValidator
 
                     if (findUri == null)
                     {
-                        // XXX: Add resource locator call to find composite components,
-                        // per the glassfish changes.
-                        // TODO: need factory
-                        final Diagnostic diag = new BasicDiagnostic(
-                                Diagnostic.WARNING, "", -1,
-                                "Can't find facelet tag library for uri "
-                                        + declaredUri, null);
+                        final Diagnostic diag = _diagnosticFactory.create_CANNOT_FIND_FACELET_TAGLIB(declaredUri);
                         final IDOMAttr domAttr = (IDOMAttr) attr;
                         reporter.report(diag, domAttr.getValueRegionStartOffset(), domAttr
                                 .getValue().length());
