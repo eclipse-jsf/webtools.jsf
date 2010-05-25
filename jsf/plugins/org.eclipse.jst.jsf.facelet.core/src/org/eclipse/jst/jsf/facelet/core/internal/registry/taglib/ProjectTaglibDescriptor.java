@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorProvider;
+import org.eclipse.jst.jsf.core.internal.tld.IFaceletConstants;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 
 /**
@@ -31,7 +32,6 @@ import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
  */
 public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
 {
-
     private final AtomicInteger                      _isInitialized = new AtomicInteger(
                                                                             0);
     private final IProject                           _project;
@@ -40,6 +40,7 @@ public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
     private final Map<String, IFaceletTagRecord>     _tagRecords;
     private final TagRecordFactory _factory;
     private final AtomicBoolean     _isDisposed = new AtomicBoolean(false);
+    private final DefaultStandardTaglibLocator _defaultTaglibLocator;
 
     /**
      * @param project
@@ -55,6 +56,8 @@ public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
         _locatorProvider.initialize();
         _factory = factory; 
         _libChangeListener = new MyChangeListener();
+        _defaultTaglibLocator = new DefaultStandardTaglibLocator();
+        _defaultTaglibLocator.start(project);
     }
 
     private void initialize()
@@ -80,6 +83,30 @@ public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
                             _tagRecords.putAll(locator.locate(_project));
                         }
                     });
+                }
+                // ensure that we add the standard tag libraries if we don't find them 
+                // on the classpath.  The spec doesn't require that taglib's are
+                // included in a JSF impl for these
+                ensureStandardLibraries(_project);
+            }
+        }
+    }
+
+    private void ensureStandardLibraries(final IProject project)
+    {
+        final Map<String, ? extends IFaceletTagRecord>  defaultRecords = _defaultTaglibLocator.locate(project);
+        for (final String uri : IFaceletConstants.ALL_FACELET_TAGLIBS)
+        {
+            if (!_tagRecords.containsKey(uri))
+            {
+                IFaceletTagRecord faceletTagRecord = defaultRecords.get(uri);
+                if (faceletTagRecord != null)
+                {
+                    _tagRecords.put(uri, faceletTagRecord);
+                }
+                else
+                {
+                    FaceletCorePlugin.log("Could not find taglib for uri: "+uri, new Exception()); //$NON-NLS-1$
                 }
             }
         }

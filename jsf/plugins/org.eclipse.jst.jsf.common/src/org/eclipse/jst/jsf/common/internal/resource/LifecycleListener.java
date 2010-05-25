@@ -366,7 +366,7 @@ public class LifecycleListener extends
     private void handleWorkspaceRoot(final IResourceDelta delta)
     {
         for (final IResourceDelta childDelta : delta
-                .getAffectedChildren(IResourceDelta.ADDED))
+                .getAffectedChildren(IResourceDelta.ADDED|IResourceDelta.CHANGED))
         {
             final IResource res = childDelta.getResource();
             if ((childDelta.getFlags() & IResourceDelta.OPEN) != 0 &&
