@@ -24,7 +24,7 @@ import org.eclipse.jst.jsf.common.internal.pde.AbstractSimpleClassExtensionRegis
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.common.internal.strategy.AbstractTestableExtensibleDefaultProviderSelectionStrategy;
 import org.eclipse.jst.jsf.common.internal.strategy.ISimpleStrategy;
-import org.eclipse.jst.jsf.common.internal.strategy.TestableProjectFactoryStrategy;
+import org.eclipse.jst.jsf.common.internal.strategy.TestableResourceFactoryStrategy;
 
 /**
  * Produces {@link IMetaDataModelManager}s
@@ -181,7 +181,7 @@ public final class MetaDataModelManagerFactory extends ResourceSingletonObjectMa
 	}
 	
 	private static class TestableManagerProviderStrategy<IMetaDataModelManagerFactory>
-		extends TestableProjectFactoryStrategy<IMetaDataModelManagerFactory> {
+		extends TestableResourceFactoryStrategy<IMetaDataModelManagerFactory> {
 	
 		/**
 		 * @param testableFactorySessionKey - project property session key for property value holding testable instance 
