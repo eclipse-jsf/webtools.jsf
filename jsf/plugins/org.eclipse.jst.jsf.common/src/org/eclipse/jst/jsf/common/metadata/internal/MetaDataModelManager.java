@@ -14,10 +14,14 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Model;
 
@@ -33,7 +37,7 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
 	private static IMetaDataModelManager SHARED_INSTANCE;
 	
 	// used to lock all instance calls for getModel
-	private static final Object  GLOBAL_INSTANCE_LOCK = new Object();
+	private static final Lock  GLOBAL_INSTANCE_LOCK = new ReentrantLock();
 	private final ModelMap models; 
 	
 	
@@ -56,8 +60,28 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
 	}
 
     public Model getModel(
-            final IMetaDataModelContext modelContext) {
-        synchronized (GLOBAL_INSTANCE_LOCK) {
+            final IMetaDataModelContext modelContext) 
+    {
+        boolean gotLock = false;
+        try
+        {
+            final int maxTries = 6;
+            int numTries = 0;
+            final Job currentJob = Job.getJobManager().currentJob();
+            while (numTries < maxTries &&
+                    !(gotLock = GLOBAL_INSTANCE_LOCK.tryLock(5000, TimeUnit.MILLISECONDS)))
+            {
+                numTries++;
+                if (currentJob != null)
+                {
+                    currentJob.yieldRule(null);
+                }
+            }
+
+            if (!gotLock)
+            {
+                return null;
+            }
             StandardModelFactory.debug(">START getModel: "+modelContext, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
 
             MetaDataModel model = models.get(modelContext);
@@ -85,15 +109,26 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
     		}
     		return null;
         }
+        catch (final InterruptedException e)
+        {
+            return null;
+        }
+        finally
+        {
+            if (gotLock)
+            {
+                GLOBAL_INSTANCE_LOCK.unlock();
+            }
+        }
     }
 
 	private MetaDataModel loadMetadata(final IMetaDataModelContext context) {
-        if (!Thread.holdsLock(GLOBAL_INSTANCE_LOCK)) {
-            JSFCommonPlugin
-                    .log(IStatus.ERROR,
-                            "Internal Error: loadMetadata must not be called if class lock not held"); //$NON-NLS-1$
-            return null;
-        }
+//        if (!Thread.holdsLock(GLOBAL_INSTANCE_LOCK.)) {
+//            JSFCommonPlugin
+//                    .log(IStatus.ERROR,
+//                            "Internal Error: loadMetadata must not be called if class lock not held"); //$NON-NLS-1$
+//            return null;
+//        }
 
         final IDomainLoadingStrategy strategy = DomainLoadingStrategyRegistry
                 .getInstance().getLoadingStrategy(
