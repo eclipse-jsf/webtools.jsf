@@ -66,11 +66,11 @@
 					widget="true"
 					setNonVisualChildElements="true">
 				    <resolve-attribute-value attributeName="value"/>
-				    <resolve-attribute-value attributeName="image"/>
+				    <resolve-attribute-value attributeName="src"/>
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
-					<resolve-attribute-value attributeName="image"/>
+					<resolve-attribute-value attributeName="src"/>
 				</tag-decorate-info>
 			</value>
 		</trait>
@@ -131,11 +131,11 @@
 					widget="true"
 					setNonVisualChildElements="true">
 				    <resolve-attribute-value attributeName="value"/>
-				    <resolve-attribute-value attributeName="image"/>
+				    <resolve-attribute-value attributeName="src"/>
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="value"/>
-					<resolve-attribute-value attributeName="image"/>
+					<resolve-attribute-value attributeName="src"/>
 				</tag-decorate-info>
 			</value>
 		</trait>
