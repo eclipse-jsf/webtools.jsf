@@ -31,8 +31,11 @@ import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 public class FaceletNamespaceMetaDataLocator 
 		extends AbstractMetaDataLocator
 		implements IPathSensitiveMetaDataLocator, ITagRegistryListener {
-
-	private static final IContentType FACELET_CONTENTTYPE = Platform.getContentTypeManager().findContentTypeFor("foo.xhtml"); //$NON-NLS-1$
+	
+	//in the future if there is an explicit xhtml content type id, we will need to use that here
+	private static final IContentType XHTML_CONTENTTYPE = 
+			Platform.getContentTypeManager().getContentType("org.eclipse.wst.html.core.htmlsource"); //$NON-NLS-1$
+	
 	private IProject _project;
 	private ITagRegistry _reg; 
 
@@ -49,7 +52,7 @@ public class FaceletNamespaceMetaDataLocator
 	}
 
 	public void startLocating() {
-		final TagRegistryIdentifier tagRegId = new TagRegistryIdentifier(_project, FACELET_CONTENTTYPE);
+		final TagRegistryIdentifier tagRegId = new TagRegistryIdentifier(_project, XHTML_CONTENTTYPE);
 		_reg = CompositeTagRegistryFactory.getInstance().getRegistry(tagRegId);
 		if (_reg != null) {
 			_reg.addListener(this);
