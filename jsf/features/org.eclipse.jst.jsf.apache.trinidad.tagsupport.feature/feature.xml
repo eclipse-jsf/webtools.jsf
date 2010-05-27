@@ -17,10 +17,6 @@
       %license
    </license>
 
-   <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/webtools/updates"/>
-      <discovery label="Web Tools Platform (WTP) Updates" url="http://download.eclipse.org/webtools/updates"/>
-   </url>
 
    <requires>
       <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
