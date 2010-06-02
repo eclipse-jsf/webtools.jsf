@@ -91,7 +91,11 @@
             <rules>
                <contentType
                      exactMatch="false"
-                     id="org.eclipse.wst.html.core.htmlsource">
+                     id="jsf.facelet">
+               </contentType>
+               <contentType
+                     exactMatch="false"
+                     id="jsf.facelet.composite">
                </contentType>
             </rules>
          </include>
