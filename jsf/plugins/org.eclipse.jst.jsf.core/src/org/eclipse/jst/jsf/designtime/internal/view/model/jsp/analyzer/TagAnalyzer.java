@@ -572,9 +572,11 @@ public final class TagAnalyzer
                             JavaCore.VERSION_1_3,
                             JavaCore.VERSION_1_3).getSeverity() == IStatus.ERROR)
             {
-                JSFCorePlugin.log(
-                        "Bad tag class name in " + tldDecl.toString(), //$NON-NLS-1$
-                        new Throwable());
+            	if (JSFCoreTraceOptions.TRACE_JSPTAGINTROSPECTOR)
+                {
+                    JSFCoreTraceOptions.log(
+                        "Bad tag class name in " + tldDecl.toString()); //$NON-NLS-1$
+                }
                 return null;
             }
 
