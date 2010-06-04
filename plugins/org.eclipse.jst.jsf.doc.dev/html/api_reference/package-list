@@ -1,4 +1,8 @@
 org.eclipse.jst.jsf.common.dom
+org.eclipse.jst.jsf.common.internal.componentcore
+org.eclipse.jst.jsf.common.internal.finder.acceptor
+org.eclipse.jst.jsf.common.internal.finder.matcher
+org.eclipse.jst.jsf.common.internal.util
 org.eclipse.jst.jsf.common.metadata
 org.eclipse.jst.jsf.common.metadata.query
 org.eclipse.jst.jsf.common.metadata.traittypes.traittypes
