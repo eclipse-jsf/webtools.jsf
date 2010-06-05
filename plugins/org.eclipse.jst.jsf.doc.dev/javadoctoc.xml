@@ -2,6 +2,10 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 	 <toc label="Javadoc Packages Reference">
 <topic href="html/api_reference/org/eclipse/jst/jsf/common/dom/package-summary.html" label="org.eclipse.jst.jsf.common.dom"/>
+<topic href="html/api_reference/org/eclipse/jst/jsf/common/internal/componentcore/package-summary.html" label="org.eclipse.jst.jsf.common.internal.componentcore"/>
+<topic href="html/api_reference/org/eclipse/jst/jsf/common/internal/finder/acceptor/package-summary.html" label="org.eclipse.jst.jsf.common.internal.finder.acceptor"/>
+<topic href="html/api_reference/org/eclipse/jst/jsf/common/internal/finder/matcher/package-summary.html" label="org.eclipse.jst.jsf.common.internal.finder.matcher"/>
+<topic href="html/api_reference/org/eclipse/jst/jsf/common/internal/util/package-summary.html" label="org.eclipse.jst.jsf.common.internal.util"/>
 <topic href="html/api_reference/org/eclipse/jst/jsf/common/metadata/package-summary.html" label="org.eclipse.jst.jsf.common.metadata"/>
 <topic href="html/api_reference/org/eclipse/jst/jsf/common/metadata/query/package-summary.html" label="org.eclipse.jst.jsf.common.metadata.query"/>
 <topic href="html/api_reference/org/eclipse/jst/jsf/common/metadata/traittypes/traittypes/package-summary.html" label="org.eclipse.jst.jsf.common.metadata.traittypes.traittypes"/>

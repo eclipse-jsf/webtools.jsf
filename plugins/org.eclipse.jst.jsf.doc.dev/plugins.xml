@@ -1,5 +1,7 @@
 org.eclipse.jst.jsf.core;
 org.eclipse.jst.jsf.ui;
+org.eclipse.jst.jsf.facelet.core;
+org.eclipse.jst.jsf.facelet.ui;
 org.eclipse.jst.jsf.facesconfig;
 org.eclipse.jst.jsf.facesconfig.ui;
 org.eclipse.jst.jsf.common;

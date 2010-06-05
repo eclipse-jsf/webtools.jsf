@@ -1,5 +1,7 @@
 /org.eclipse.jst.jsf.core/src;
 /org.eclipse.jst.jsf.ui/src;
+/org.eclipse.jst.jsf.facelet.core/src;
+/org.eclipse.jst.jsf.facelet.ui/src;
 /org.eclipse.jst.jsf.facesconfig/facesconfig;
 /org.eclipse.jst.jsf.facesconfig.ui/src;
 /org.eclipse.jst.jsf.common/src;
