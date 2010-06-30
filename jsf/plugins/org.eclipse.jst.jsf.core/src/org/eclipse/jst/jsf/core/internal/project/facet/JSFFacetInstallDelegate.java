@@ -217,10 +217,11 @@ public final class JSFFacetInstallDelegate implements IDelegate {
         updater.addContextParam("org.apache.myfaces.PRETTY_HTML", "true", Messages.JSFFacetInstallDelegate_PrettyHtmlDescription); //$NON-NLS-1$ //$NON-NLS-2$
         updater.addContextParam("org.apache.myfaces.DETECT_JAVASCRIPT", "false", null);  //$NON-NLS-1$//$NON-NLS-2$
         updater.addContextParam("org.apache.myfaces.AUTO_SCROLL", "true", Messages.JSFFacetInstallDelegate_AutoScrollDescription); //$NON-NLS-1$ //$NON-NLS-2$
-        
-        updater.addServlet("faces", "org.apache.myfaces.webapp.MyFacesServlet", "1"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        updater.addServletMapping("faces", "org.apache.myfaces.webapp.MyFacesServlet", "*.jsf");  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-        updater.addServletMapping("faces", "org.apache.myfaces.webapp.MyFacesServlet", "*.faces");  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+// Following 3 lines disabled for https://bugs.eclipse.org/bugs/show_bug.cgi?id=317865         
+//        updater.addServlet("faces", "org.apache.myfaces.webapp.MyFacesServlet", "1"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//        updater.addServletMapping("faces", "org.apache.myfaces.webapp.MyFacesServlet", "*.jsf");  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+//        updater.addServletMapping("faces", "org.apache.myfaces.webapp.MyFacesServlet", "*.faces");  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
         
         updater.addListener("org.apache.myfaces.webapp.StartupServletContextListener"); //$NON-NLS-1$
         
@@ -256,10 +257,11 @@ public final class JSFFacetInstallDelegate implements IDelegate {
         updater.addContextParam("javax.faces.STATE_SAVING_METHOD", "client", Messages.JSFFacetInstallDelegate_StateSavingMethod);  //$NON-NLS-1$//$NON-NLS-2$
         updater.addContextParam("javax.servlet.jsp.jstl.fmt.localizationContext", "resources.application", null); //$NON-NLS-1$ //$NON-NLS-2$
         updater.addListener("com.sun.faces.config.ConfigureListener"); //$NON-NLS-1$
-        
-        updater.addServlet("Faces Servlet", "javax.faces.webapp.FacesServlet", "1");   //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-        updater.addServletMapping("Faces Servlet", "javax.faces.webapp.FacesServlet", "*.jsf");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-        updater.addServletMapping("Faces Servlet", "javax.faces.webapp.FacesServlet", "*.faces");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+
+//Following 3 lines disabled for https://bugs.eclipse.org/bugs/show_bug.cgi?id=317865 and https://bugs.eclipse.org/bugs/show_bug.cgi?id=317868        
+//        updater.addServlet("Faces Servlet", "javax.faces.webapp.FacesServlet", "1");   //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+//        updater.addServletMapping("Faces Servlet", "javax.faces.webapp.FacesServlet", "*.jsf");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+//        updater.addServletMapping("Faces Servlet", "javax.faces.webapp.FacesServlet", "*.faces");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
     }
 
 

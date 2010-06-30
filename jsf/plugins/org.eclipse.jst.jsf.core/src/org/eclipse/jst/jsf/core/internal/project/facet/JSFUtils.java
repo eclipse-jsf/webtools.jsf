@@ -241,16 +241,6 @@ public abstract class JSFUtils {
      * @param webApp
      */
     public abstract void rollbackWebApp(Object webApp);
-
-
-    /**
-     * @param webAppObj
-     * @param resource
-     * @param existingURL
-     * @return the modified url path for the (possibly) jsf resource.
-     */
-    public abstract IPath getFileUrlPath(Object webAppObj, IResource resource,
-            IPath existingURL);
     
     /**
      * @param fileExtension
@@ -276,6 +266,25 @@ public abstract class JSFUtils {
         // currently always return true.
         // need to find quick way of determining whether this is a JSF JSP Page
         return true;
+    }
+    
+    /**
+     * @param webApp
+     * @return the default file extension from the context param. Default is
+     *         "jsp" if no context param.
+     */
+    protected String getDefaultSuffix(Object webApp) {
+    	String contextParam = null;
+    	if(isJavaEE(webApp)) {
+    		contextParam = JEEUtils.getContextParam((org.eclipse.jst.javaee.web.WebApp) webApp, JSF_DEFAULT_SUFFIX_CONTEXT_PARAM);
+    	}
+    	else {
+    		contextParam = J2EEUtils.getContextParam((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, JSF_DEFAULT_SUFFIX_CONTEXT_PARAM);
+    	}
+    	if(contextParam == null) {
+    		return getDefaultDefaultSuffix();
+    	}
+   		return normalizeSuffix(contextParam);
     }
     
     /**
@@ -392,5 +401,249 @@ public abstract class JSFUtils {
             return elements;        
         }
 
+    }
+    
+	/**
+	 * Finds and returns a JSF Servlet definition, or null if servlet is not defined.
+	 * 
+	 * @param webApp
+	 * @return Servlet or null
+	 */    
+    protected Object findJSFServlet(Object webApp) {
+    	if(isJavaEE(webApp)) {
+    		return JEEUtils.findServlet((org.eclipse.jst.javaee.web.WebApp) webApp, JSF_SERVLET_CLASS);
+    	}
+   		return J2EEUtils.findServlet((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, JSF_SERVLET_CLASS);
+    }
+
+    /**
+     * Creates servlet reference in WebApp if not present or updates servlet
+     * name if found using the passed configuration.
+     * 
+     * @param webApp
+     * @param config
+     * @param servlet
+     * @return Servlet servlet - if passed servlet was null, will return created
+     *         servlet
+     */
+    protected Object createOrUpdateServletRef(final Object webApp,
+            final IDataModel config, Object servlet)
+    {
+        String displayName = getDisplayName(config);
+        String className = getServletClassname(config);
+    	if(isJavaEE(webApp)) {
+    		return JEEUtils.createOrUpdateServletRef((org.eclipse.jst.javaee.web.WebApp) webApp, displayName, className, (org.eclipse.jst.javaee.web.Servlet) servlet);
+    	}
+   		return J2EEUtils.createOrUpdateServletRef((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, displayName, className, (org.eclipse.jst.j2ee.webapplication.Servlet) servlet);
+    }
+
+    /**
+     * Creates servlet-mappings for the servlet for 2.5 WebModules or greated
+     * 
+     * @param webApp
+     * @param urlMappingList
+     *            - list of string values to be used in url-pattern for
+     *            servlet-mapping
+     * @param servlet
+     */
+    protected void setUpURLMappings(final Object webApp,
+            final List<String> urlMappingList, final Object servlet)
+    {
+    	if(isJavaEE(webApp)) {
+    		JEEUtils.setUpURLMappings((org.eclipse.jst.javaee.web.WebApp) webApp, urlMappingList, (org.eclipse.jst.javaee.web.Servlet) servlet);
+    	}
+    	else {
+    		J2EEUtils.setUpURLMappings((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, urlMappingList, (org.eclipse.jst.j2ee.webapplication.Servlet) servlet);
+    	}
+    }
+
+	/**
+	 * Removes servlet-mappings for servlet using servlet-name for >= 2.5 WebModules.
+	 * @param webApp
+	 * @param servlet
+	 */
+	protected void removeURLMappings(final Object webApp, final Object servlet) {
+    	if(isJavaEE(webApp)) {
+    		JEEUtils.removeURLMappings((org.eclipse.jst.javaee.web.WebApp) webApp, (org.eclipse.jst.javaee.web.Servlet) servlet);
+    	}
+    	else {
+    		J2EEUtils.removeURLMappings((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, (org.eclipse.jst.j2ee.webapplication.Servlet) servlet);
+    	}
+	}
+	
+	/**
+	 * Removes servlet definition
+	 * @param webApp
+	 * @param servlet
+	 */
+	protected void removeJSFServlet(final Object webApp, final Object servlet) {
+    	if(isJavaEE(webApp)) {
+    		JEEUtils.removeServlet((org.eclipse.jst.javaee.web.WebApp) webApp, (org.eclipse.jst.javaee.web.Servlet) servlet);
+    	}
+    	else {
+    		J2EEUtils.removeServlet((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, (org.eclipse.jst.j2ee.webapplication.Servlet) servlet);
+    	}
+	}
+	
+    /**
+     * Removes context-param
+     * @param webApp
+     */
+    protected void removeJSFContextParams(final Object webApp) {
+    	if(isJavaEE(webApp)) {
+    		JEEUtils.removeContextParam((org.eclipse.jst.javaee.web.WebApp) webApp, JSF_CONFIG_CONTEXT_PARAM);
+    	}
+    	else {
+    		J2EEUtils.removeContextParam((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, JSF_CONFIG_CONTEXT_PARAM);
+    	}
+    }
+    
+	/**
+	 * Creates or updates context-params
+	 * @param webApp
+	 * @param config
+	 */
+	protected void setupContextParams(final Object webApp, final IDataModel config) {
+        final String paramValue = config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH);
+        if (paramValue != null && !paramValue.equals(JSF_DEFAULT_CONFIG_PATH)) {
+        	if(isJavaEE(webApp)) {
+        		JEEUtils.setupContextParam((org.eclipse.jst.javaee.web.WebApp) webApp, JSF_CONFIG_CONTEXT_PARAM, paramValue);
+        	}
+        	else {
+        		J2EEUtils.setupContextParam((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, JSF_CONFIG_CONTEXT_PARAM, paramValue);
+        	}
+        }
+
+	}
+	
+    /**
+     * @param map
+     * @param webApp
+     * @return extension from map. Will return null if file extension not found
+     *         in url patterns.
+     */
+    protected String getFileExtensionFromMap(final Object webApp, final Object map) {
+    	if(isJavaEE(webApp)) {
+    		return JEEUtils.getFileExtensionFromMap((org.eclipse.jst.javaee.web.ServletMapping) map);
+    	}
+   		return J2EEUtils.getFileExtensionFromMap((org.eclipse.jst.j2ee.webapplication.ServletMapping) map);
+    }
+
+    /**
+     * @param webApp 
+     * @param map
+     * @return prefix mapping. may return null.
+     */
+    protected String getPrefixMapping(final Object webApp, final Object map) {
+    	if(isJavaEE(webApp)) {
+    		return JEEUtils.getPrefixMapping((org.eclipse.jst.javaee.web.ServletMapping) map);
+    	}
+   		return J2EEUtils.getPrefixMapping((org.eclipse.jst.j2ee.webapplication.ServletMapping) map);
+    }
+    
+    /**
+     * @param webAppObj
+     * @param resource
+     * @param existingURL
+     * @return the modified url path for the (possibly) jsf resource.
+     */
+    public IPath getFileUrlPath(Object webAppObj, IResource resource,
+            IPath existingURL) {
+        // if not a JSF page, do nothing
+        if (!isJSFPage(resource))
+        {
+            return null;
+        }
+
+        Object servlet = findJSFServlet(webAppObj);
+        if (servlet == null)
+        {// if no faces servlet, do nothing
+            return null;
+        }
+
+        String defaultSuffix = getDefaultSuffix(webAppObj);
+        // is the resource using default_suffix
+        String fileExtension = resource.getFileExtension();
+        boolean canUseExtensionMapping = fileExtension != null && fileExtension.equalsIgnoreCase(defaultSuffix);
+        // if not using default extension and is not a known file extension,
+        // then we will abort
+        if (!canUseExtensionMapping
+                && !isValidKnownExtension(resource.getFileExtension()))
+            return null;
+
+    	if(isJavaEE(webAppObj)) {
+    		org.eclipse.jst.javaee.web.WebApp webApp =  (org.eclipse.jst.javaee.web.WebApp) webAppObj;
+
+            final String servletName = ((org.eclipse.jst.javaee.web.Servlet) servlet).getServletName();
+
+            String foundFileExtension = null;
+            for (final org.eclipse.jst.javaee.web.ServletMapping map : webApp.getServletMappings())
+            {
+                if (map != null &&
+                        map.getServletName() != null &&
+                        map.getServletName().trim().equals(servletName.trim()))
+                {
+                    foundFileExtension = getFileExtensionFromMap(webAppObj, map);
+                    if (foundFileExtension != null && canUseExtensionMapping)
+                    {
+                        return existingURL.removeFileExtension()
+                                .addFileExtension(foundFileExtension);
+                    }
+
+                    String foundPrefixMapping = getPrefixMapping(webAppObj, map);
+                    if (foundPrefixMapping != null)
+                    {
+                        return new Path(foundPrefixMapping).append(existingURL);
+                    }
+                }
+            }
+
+            if (!canUseExtensionMapping && foundFileExtension != null)
+            {
+                // we could prompt user that this may not work...
+                // for now we will return the extension mapping
+                return existingURL.removeFileExtension().addFileExtension(
+                        foundFileExtension);
+            }
+
+            // we could, at this point, add a url mapping to the faces servlet,
+            // or prompt user that it may be a good idea to add one... 
+
+    	}
+    	else {
+            Iterator mappings = ((org.eclipse.jst.j2ee.webapplication.Servlet)servlet).getMappings().iterator();
+            org.eclipse.jst.j2ee.webapplication.ServletMapping map = null;
+            String foundFileExtension = null;
+            String foundPrefixMapping = null;
+            while (mappings.hasNext())
+            {
+                map = (org.eclipse.jst.j2ee.webapplication.ServletMapping)mappings.next();
+
+                foundFileExtension = getFileExtensionFromMap(webAppObj, map);
+                if (foundFileExtension != null && canUseExtensionMapping) 
+                {
+                    return existingURL.removeFileExtension().addFileExtension(foundFileExtension);
+                }
+                
+                if (foundPrefixMapping == null)
+                {
+                    foundPrefixMapping = getPrefixMapping(webAppObj, map);
+                }
+            }
+            if (foundPrefixMapping != null)
+            {
+                return new Path(foundPrefixMapping).append(existingURL); 
+            }
+            if (! canUseExtensionMapping && foundFileExtension != null){
+                //we could prompt user that this may not work...
+                //for now we will return the extension mapping
+                return existingURL.removeFileExtension().addFileExtension(foundFileExtension);
+            }
+            
+            // we could, at this point, add a url mapping to the faces servlet, 
+            // or prompt user that it may be a good idea to add one...
+
+    	}
+    	return null;
     }
 }
