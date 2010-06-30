@@ -12,11 +12,9 @@ package org.eclipse.jst.jsf.core.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
@@ -50,7 +48,7 @@ public final class CompositeTagRegistryFactory
     {
         TEST_PROVIDER = factoryProvider;
         // TODO: this is risky
-        _cachedExtensionsByType.clear();
+//        _cachedExtensionsByType.clear();
     }
 
     /**
@@ -65,8 +63,8 @@ public final class CompositeTagRegistryFactory
         return INSTANCE;
     }
 
-    private final Map<TagRegistryIdentifier, Set<ITagRegistryFactoryInfo>> _cachedExtensionsByType =
-        new HashMap<TagRegistryIdentifier, Set<ITagRegistryFactoryInfo>>(4);
+//    private final Map<TagRegistryIdentifier, Set<ITagRegistryFactoryInfo>> _cachedExtensionsByType =
+//        new HashMap<TagRegistryIdentifier, Set<ITagRegistryFactoryInfo>>(4);
 
     private CompositeTagRegistryFactory()
     {
@@ -188,37 +186,32 @@ public final class CompositeTagRegistryFactory
         return Collections.emptySet();
     }
 
-    private Set<ITagRegistryFactoryInfo> findMatchingExtensions(
-            TagRegistryIdentifier id, Set<ITagRegistryFactoryInfo> handlers)
-    {
-        Set<ITagRegistryFactoryInfo> matching = _cachedExtensionsByType.get(id);
+	private Set<ITagRegistryFactoryInfo> findMatchingExtensions(
+			TagRegistryIdentifier id, Set<ITagRegistryFactoryInfo> handlers) 
+	{
+		Set<ITagRegistryFactoryInfo> matching = new HashSet<ITagRegistryFactoryInfo>(
+				4);
 
-        if (matching == null)
-        {
-            matching = new HashSet<ITagRegistryFactoryInfo>(4);
+		for (final ITagRegistryFactoryInfo handler : handlers) {
+			if (handler.getContentTypes().contains(id.getContentType())
+					&& handler.getTagRegistryFactory().projectIsValid(
+							id.getProject())) {
+				matching.add(handler);
+			}
+		}
 
-            for (final ITagRegistryFactoryInfo handler : handlers)
-            {
-                if (handler.getContentTypes().contains(id.getContentType())
-                        && handler.getTagRegistryFactory().projectIsValid(id.getProject()))
-                {
-                    matching.add(handler);
-                }
-            }
-
-            // if there is nothing matching, just store the empty set and
-            // discard the extra memory
-            if (matching.size() > 0)
-            {
-                _cachedExtensionsByType.put(id, matching);
-            }
-            else
-            {
-                _cachedExtensionsByType.put(id, Collections.EMPTY_SET);
-            }
-        }
-        return matching;
-    }
+		// // if there is nothing matching, just store the empty set and
+		// // discard the extra memory
+		// if (matching.size() > 0)
+		// {
+		// _cachedExtensionsByType.put(id, matching);
+		// }
+		// else
+		// {
+		// _cachedExtensionsByType.put(id, Collections.EMPTY_SET);
+		// }
+		return matching;
+	}
 
     /**
      * Identifies a content type/project context in which to request a tag
