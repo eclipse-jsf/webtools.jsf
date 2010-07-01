@@ -12,14 +12,14 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 
 import java.util.Iterator;
 
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
-import org.eclipse.emf.ecore.xml.type.XMLTypeFactory;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.MetadataFactory;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.StringValue;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.TraitTypesFactory;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMDocument;
 import org.eclipse.wst.xml.core.internal.contentmodel.CMElementDeclaration;
@@ -65,8 +65,7 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 		if (t == null){
 			t = internalCreateTrait(entity, key);
 
-			SimpleAnyType val = XMLTypeFactory.eINSTANCE.createSimpleAnyType();
-			val.setInstanceType(EcorePackage.eINSTANCE.getEString());
+			StringValue val = TraitTypesFactory.eINSTANCE.createStringValue();			
 			val.setValue(value);
 			
 			t.setValue(val);
@@ -85,9 +84,8 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 		if (t == null){
 			t = internalCreateTrait(entity, key);
 
-			SimpleAnyType val = XMLTypeFactory.eINSTANCE.createSimpleAnyType();
-			val.setInstanceType(EcorePackage.eINSTANCE.getEBoolean());
-			val.setRawValue(value == true ? "true" : "false");
+			BooleanValue val = TraitTypesFactory.eINSTANCE.createBooleanValue();		
+			val.setTrue(value);
 			
 			t.setValue(val);
 		}
@@ -158,7 +156,7 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 			if (entity == null){
 				entity = MetadataFactory.eINSTANCE.createEntity();
 				entity.setId(getTagNodeName(tag));
-				entity.setType("tag");
+				entity.setType("tag"); //$NON-NLS-1$
 				getMergedModel().getChildEntities().add(entity);
 			}
 			setTagEntityTraits(tag, entity);
@@ -180,12 +178,12 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 	 * @param entity
 	 */
 	protected void setTagEntityTraits(CMElementDeclaration tag, Entity entity) {
-		createSimpleStringEntityTraitIfNecessary(entity, "display-label", getTagDisplayName(tag));
-		createSimpleStringEntityTraitIfNecessary(entity, "description", getTagDescription(tag));	
-		createSimpleStringEntityTraitIfNecessary(entity, "small-icon", getTagSmallIcon(tag));
-		createSimpleStringEntityTraitIfNecessary(entity, "large-icon", getTagLargeIcon(tag));
-		createSimpleBooleanObjectEntityTraitIfNecessary(entity, "expert", getTagIsExpert(tag));
-		createSimpleBooleanObjectEntityTraitIfNecessary(entity, "hidden", getTagIsHidden(tag));
+		createSimpleStringEntityTraitIfNecessary(entity, "display-label", getTagDisplayName(tag)); //$NON-NLS-1$
+		createSimpleStringEntityTraitIfNecessary(entity, "description", getTagDescription(tag));	 //$NON-NLS-1$
+		createSimpleStringEntityTraitIfNecessary(entity, "small-icon", getTagSmallIcon(tag)); //$NON-NLS-1$
+		createSimpleStringEntityTraitIfNecessary(entity, "large-icon", getTagLargeIcon(tag)); //$NON-NLS-1$
+		createSimpleBooleanObjectEntityTraitIfNecessary(entity, "expert", getTagIsExpert(tag)); //$NON-NLS-1$
+		createSimpleBooleanObjectEntityTraitIfNecessary(entity, "hidden", getTagIsHidden(tag)); //$NON-NLS-1$
 		
 		createAttributeEntities(entity, tag);
 	}
@@ -218,9 +216,9 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 	protected void createAttributeTraits(Entity attr,
 			CMAttributeDeclaration cmAttr) {
 		
-		createSimpleStringEntityTraitIfNecessary(attr, "description", getTagAttributeDescription(cmAttr));	
-		createSimpleBooleanObjectEntityTraitIfNecessary(attr, "required", getTagAttributeIsRequired(cmAttr));
-		createSimpleStringEntityTraitIfNecessary(attr, "default-value", getTagAttributeDefaultValue(cmAttr));
+		createSimpleStringEntityTraitIfNecessary(attr, "description", getTagAttributeDescription(cmAttr));	 //$NON-NLS-1$
+		createSimpleBooleanObjectEntityTraitIfNecessary(attr, "required", getTagAttributeIsRequired(cmAttr)); //$NON-NLS-1$
+		createSimpleStringEntityTraitIfNecessary(attr, "default-value", getTagAttributeDefaultValue(cmAttr)); //$NON-NLS-1$
 	}
 	
 	/**
@@ -284,11 +282,11 @@ public abstract class AbstractTagLibDomainContentModelMetaDataTranslator {
 	protected void createTagfileTraits(CMDocument doc) {
 		Model model = getMergedModel();
 
-		createSimpleStringEntityTraitIfNecessary(model, "display-label", getURIDisplayLabel());			
-		createSimpleStringEntityTraitIfNecessary(model, "description", getURIDescription());
-		createSimpleStringEntityTraitIfNecessary(model, "default-prefix", getURIDefaultPrefix());
-		createSimpleBooleanObjectEntityTraitIfNecessary(model, "expert", getURIExpert());
-		createSimpleBooleanObjectEntityTraitIfNecessary(model, "hidden", getURIHidden());
+		createSimpleStringEntityTraitIfNecessary(model, "display-label", getURIDisplayLabel()); //$NON-NLS-1$
+		createSimpleStringEntityTraitIfNecessary(model, "description", getURIDescription()); //$NON-NLS-1$
+		createSimpleStringEntityTraitIfNecessary(model, "default-prefix", getURIDefaultPrefix()); //$NON-NLS-1$
+		createSimpleBooleanObjectEntityTraitIfNecessary(model, "expert", getURIExpert()); //$NON-NLS-1$
+		createSimpleBooleanObjectEntityTraitIfNecessary(model, "hidden", getURIHidden()); //$NON-NLS-1$
 		
 	}
 	

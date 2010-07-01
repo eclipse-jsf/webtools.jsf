@@ -29,19 +29,26 @@ public class ModelKeyDescriptor {
 	 * @param domain
 	 * @param uri
 	 */
-	public ModelKeyDescriptor(IProject project, String domain, String uri){
+	public ModelKeyDescriptor(final IProject project, final String domain, final String uri){
 		this.project = project;
 		this.domain = domain;
-		this.uri = uri;
-		String proj = project != null ? project.getName() : "Null"; //$NON-NLS-1$
-		StringBuffer buf = new StringBuffer(proj);
+		this.uri = fixJSPURIIfNecessary(uri);
+		final String proj = project != null ? project.getName() : "Null"; //$NON-NLS-1$
+		final StringBuffer buf = new StringBuffer(proj);
 		buf.append(":"); //$NON-NLS-1$
-		buf.append(domain);
+		buf.append(this.domain);
 		buf.append(":"); //$NON-NLS-1$
-		buf.append(uri);
+		buf.append(this.uri);
 		key = buf.toString();
 	}
 	
+	//this is a workaround for issue where jsp "uri" may upper or lower cased
+	private String fixJSPURIIfNecessary(final String tempuri) {
+		if (tempuri != null && tempuri.equals("jsp11")) //$NON-NLS-1$
+			return tempuri.toUpperCase();
+		return tempuri;
+	}
+
 	/**
 	 * @return domain id
 	 */

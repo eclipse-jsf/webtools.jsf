@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitTypesAdapterFactory.java,v 1.4 2007/04/16 19:54:18 itrimble Exp $
+ * $Id: TraitTypesAdapterFactory.java,v 1.4.6.1 2010/07/01 23:25:04 rsrinivasan Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.internal.util;
 
@@ -25,120 +25,154 @@ import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.*;
  */
 public class TraitTypesAdapterFactory extends AdapterFactoryImpl {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final String copyright = "Copyright (c) 2007 Oracle Corporation";
+	 * @generated
+	 */
+    public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
     /**
-     * The cached model package.
-     * <!-- begin-user-doc -->
+	 * The cached model package.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected static TraitTypesPackage modelPackage;
 
     /**
-     * Creates an instance of the adapter factory.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TraitTypesAdapterFactory() {
-        if (modelPackage == null) {
-            modelPackage = TraitTypesPackage.eINSTANCE;
-        }
-    }
+		if (modelPackage == null) {
+			modelPackage = TraitTypesPackage.eINSTANCE;
+		}
+	}
 
     /**
-     * Returns whether this factory is applicable for the type of the object.
-     * <!-- begin-user-doc -->
+	 * Returns whether this factory is applicable for the type of the object.
+	 * <!-- begin-user-doc -->
      * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
      * <!-- end-user-doc -->
-     * @return whether this factory is applicable for the type of the object.
-     * @generated
-     */
+	 * @return whether this factory is applicable for the type of the object.
+	 * @generated
+	 */
     public boolean isFactoryForType(Object object) {
-        if (object == modelPackage) {
-            return true;
-        }
-        if (object instanceof EObject) {
-            return ((EObject)object).eClass().getEPackage() == modelPackage;
-        }
-        return false;
-    }
+		if (object == modelPackage) {
+			return true;
+		}
+		if (object instanceof EObject) {
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
+		}
+		return false;
+	}
 
     /**
-     * The switch the delegates to the <code>createXXX</code> methods.
-     * <!-- begin-user-doc -->
+	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected TraitTypesSwitch modelSwitch =
         new TraitTypesSwitch() {
-            public Object caseListOfValues(ListOfValues object) {
-                return createListOfValuesAdapter();
-            }
-            public Object caseSetGenerator(SetGenerator object) {
-                return createSetGeneratorAdapter();
-            }
-            public Object defaultCase(EObject object) {
-                return createEObjectAdapter();
-            }
-        };
+			public Object caseListOfValues(ListOfValues object) {
+				return createListOfValuesAdapter();
+			}
+			public Object caseSetGenerator(SetGenerator object) {
+				return createSetGeneratorAdapter();
+			}
+			public Object caseStringValue(StringValue object) {
+				return createStringValueAdapter();
+			}
+			public Object caseBooleanValue(BooleanValue object) {
+				return createBooleanValueAdapter();
+			}
+			public Object defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
     /**
-     * Creates an adapter for the <code>target</code>.
-     * <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param target the object to adapt.
-     * @return the adapter for the <code>target</code>.
-     * @generated
-     */
+	 * @param target the object to adapt.
+	 * @return the adapter for the <code>target</code>.
+	 * @generated
+	 */
     public Adapter createAdapter(Notifier target) {
-        return (Adapter)modelSwitch.doSwitch((EObject)target);
-    }
+		return (Adapter)modelSwitch.doSwitch((EObject)target);
+	}
 
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues <em>List Of Values</em>}'.
-     * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues <em>List Of Values</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues
+	 * @generated
+	 */
     public Adapter createListOfValuesAdapter() {
-        return null;
-    }
+		return null;
+	}
 
     /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator <em>Set Generator</em>}'.
-     * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator <em>Set Generator</em>}'.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.SetGenerator
+	 * @generated
+	 */
     public Adapter createSetGeneratorAdapter() {
-        return null;
-    }
+		return null;
+	}
 
     /**
-     * Creates a new adapter for the default case.
-     * <!-- begin-user-doc -->
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.StringValue <em>String Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.StringValue
+	 * @generated
+	 */
+	public Adapter createStringValueAdapter() {
+		return null;
+	}
+
+				/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue <em>Boolean Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue
+	 * @generated
+	 */
+	public Adapter createBooleanValueAdapter() {
+		return null;
+	}
+
+				/**
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc -->
      * This default implementation returns null.
      * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @generated
-     */
+	 * @return the new adapter.
+	 * @generated
+	 */
     public Adapter createEObjectAdapter() {
-        return null;
-    }
+		return null;
+	}
 
 } //TraitTypesAdapterFactory

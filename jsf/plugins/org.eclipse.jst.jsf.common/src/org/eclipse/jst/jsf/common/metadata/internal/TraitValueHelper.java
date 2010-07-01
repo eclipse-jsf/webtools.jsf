@@ -24,7 +24,9 @@ import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.BooleanValue;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
+import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.StringValue;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -37,7 +39,7 @@ public class TraitValueHelper {
 	 * @param trait
 	 * @return EClass of trait value
 	 */
-	public static EClass getValueType(Trait trait){
+	public static EClass getValueType(final Trait trait){
 		if (trait == null)
 			return null;
 		if (trait.getValue() != null)
@@ -49,13 +51,17 @@ public class TraitValueHelper {
 	 * @param trait
 	 * @return value of trait as String Object.  
 	 */
-	public static Object getValue(Trait trait){
+	public static Object getValue(final Trait trait){
 		if (trait == null)
 			return null;
+		
 		if (trait.getValue() == null)
 			return null;
 		
-		if (trait.getValue() instanceof SimpleAnyType){
+		if (trait.getValue() instanceof StringValue) {
+			return ((StringValue)trait.getValue()).getValue();
+		}
+		else if (trait.getValue() instanceof SimpleAnyType){
 			return ((SimpleAnyType)trait.getValue()).getRawValue();
 		}
 		else if (trait.getValue() instanceof AnyType){
@@ -70,10 +76,10 @@ public class TraitValueHelper {
 		return trait.getValue();
 	}
 	
-	private static String getTextValueFromFeatureMap(FeatureMap map) {
-		for (Iterator it=map.iterator();it.hasNext();){
-			FeatureMap.Entry entry = (FeatureMap.Entry)it.next();
-			if (entry.getEStructuralFeature().getName().equals("text"))		
+	private static String getTextValueFromFeatureMap(final FeatureMap map) {
+		for (final Iterator it=map.iterator();it.hasNext();){
+			final FeatureMap.Entry entry = (FeatureMap.Entry)it.next();
+			if (entry.getEStructuralFeature().getName().equals("text"))		 //$NON-NLS-1$
 				return (String)entry.getValue();
 		}
 		return null;
@@ -83,12 +89,14 @@ public class TraitValueHelper {
 	 * @param trait
 	 * @return value of trait as String.  If externalized, will resolve from resource bundle.
 	 */
-	public static String getValueAsString(Trait trait){
-		Object val = getValue(trait);
+	public static String getValueAsString(final Trait trait){
+		final Object val = getValue(trait);
 		if (val instanceof String){			
-			String result = getNLSValue(trait, (String)val);
-			return result;
+			return getNLSValue(trait, (String)val);			
 		}
+		else if (val instanceof BooleanValue)
+			return String.valueOf(((BooleanValue)val).isTrue());
+		
 		return null;
 	}
 	
@@ -98,16 +106,16 @@ public class TraitValueHelper {
 	 * @return List of Strings.  If externalized, will resolve from resource bundle 
 	 * using getNLSValue(Trait trait, String rawValue)
 	 */
-	public synchronized static List getValueAsListOfStrings(Trait trait){
+	public synchronized static List getValueAsListOfStrings(final Trait trait){
 		//PROTO ONLY!!! Need to make WAY more robust!
-		List ret = new ArrayList();
+		final List ret = new ArrayList();
 		if (trait.getValue() instanceof ListOfValues) {
-			for(Iterator it=trait.getValue().eContents().iterator();it.hasNext();){
-				Object o = it.next();				
+			for(final Iterator it=trait.getValue().eContents().iterator();it.hasNext();){
+				final Object o = it.next();				
 				if (o instanceof SimpleAnyType){
-					SimpleAnyType sat = (SimpleAnyType)o;
-					String rawValue = getTextValueFromFeatureMap(sat.getMixed());
-					String nlsValue = getNLSValue(trait, rawValue);
+					final SimpleAnyType sat = (SimpleAnyType)o;
+					final String rawValue = getTextValueFromFeatureMap(sat.getMixed());
+					final String nlsValue = getNLSValue(trait, rawValue);
 					
 					ret.add(nlsValue);
 				}	
@@ -130,10 +138,10 @@ public class TraitValueHelper {
 	 * @param rawValue of string in from metadata
 	 * @return the NLS Value or rawValue if it cannot be located
 	 */
-	public static String getNLSValue(Trait trait, String rawValue) {
+	public static String getNLSValue(final Trait trait, final String rawValue) {
 		String result = rawValue;
-		if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){ 
-			String key = rawValue.substring(1);
+		if (rawValue.startsWith("%") && !rawValue.startsWith("%%")){   //$NON-NLS-1$//$NON-NLS-2$
+			final String key = rawValue.substring(1);
 			result = getNLSPropertyValue(trait, key);	
 			if (result == null){
 				result = rawValue;
@@ -165,13 +173,17 @@ public class TraitValueHelper {
 	}
 
 	/**
-	 * Will take get the value as a String and attempt to coerce to boolean.
+	 * If trait type is {@link BooleanValue} returns value, otherwise
+	 * it will get the value as a String and attempt to coerce to boolean.
 	 * Will return 'false' if coercion fails, or value was null.
 	 * @param trait
 	 * @return true or false 
 	 */
-	public static boolean getValueAsBoolean(Trait trait) {
-		String val = getValueAsString(trait);
+	public static boolean getValueAsBoolean(final Trait trait) {
+		if (trait != null && trait.getValue() instanceof BooleanValue) {
+			return ((BooleanValue)trait.getValue()).isTrue();
+		}
+		final String val = getValueAsString(trait);
 		if (val == null)
 			return false;
 		

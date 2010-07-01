@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
-	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
-	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  	
-	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
-	xmlns:qe="http://org.eclipse.jsf.pagedesigner/quickEditTabSections.ecore"
-	id="HTML"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+	xmlns:qe="http://org.eclipse.jsf.pagedesigner/quickEditTabSections.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="HTML" 
 	type="tagFile">
-	<trait id="paletteInfos" >
+	<trait id="paletteInfos">
 		<value xsi:type="pi:PaletteInfos">
 			<item id="BR"/>
 			<item id="INPUT.TEXT" tag="INPUT"/>
@@ -76,11 +77,11 @@
 	</trait>
 
 	<trait id="images-base-path">
-		<value>$nl$/icons/palette/HTML</value>
+		<value xsi:type="mdt:StringValue">$nl$/icons/palette/HTML</value>
 	</trait>
 
 	<trait id="display-label">
-		<value>HTML 4.0</value>
+		<value xsi:type="mdt:StringValue">HTML 4.0</value>
 	</trait>
 	
 	<entity id="A">
@@ -88,16 +89,16 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>
 		<trait id="display-label">
-			<value>%A.display-label</value>
+			<value xsi:type="mdt:StringValue">%A.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%A.description</value>
+			<value xsi:type="mdt:StringValue">%A.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_A.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_A.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_A.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_A.gif</value>
 		</trait>
 	</entity>
 	<entity id="BODY">
@@ -109,19 +110,19 @@
 	<entity id="BR">
 		<include-entity-group id="common-core-attributes"/>
 		<trait id="display-label">
-			<value>%BR.display-label</value>
+			<value xsi:type="mdt:StringValue">%BR.display-label</value>
 		</trait>
 		<trait id="description">
-			<value>%BR.description</value>
+			<value xsi:type="mdt:StringValue">%BR.description</value>
 		</trait>		
 		<trait id="expert">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/HTML_BR.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_BR.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_BR.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_BR.gif</value>
 		</trait>
 	</entity>
 	<entity id="INPUT">
@@ -129,19 +130,19 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>	
 		<trait id="display-label">
-			<value>%INPUT.TEXT.display-label</value>
+			<value xsi:type="mdt:StringValue">%INPUT.TEXT.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%INPUT.TEXT.description</value>
+			<value xsi:type="mdt:StringValue">%INPUT.TEXT.description</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/HTML_INPUT_TEXT.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_INPUT_TEXT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_INPUT_TEXT.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_INPUT_TEXT.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>			
 	</entity>
 	<entity id="FORM">
@@ -150,16 +151,16 @@
 		<include-entity-group id="common-event-attributes"/>	
 		<include-entity-group id="form-event-attributes"/>
 		<trait id="display-label">
-			<value>%FORM.display-label</value>
+			<value xsi:type="mdt:StringValue">%FORM.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%FORM.description</value>
+			<value xsi:type="mdt:StringValue">%FORM.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_FORM.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_FORM.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_FORM.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_FORM.gif</value>
 		</trait>
 	</entity>
 	<entity id="HEAD">
@@ -168,16 +169,16 @@
 	<entity id="HR">
 		<include-entity-group id="common-core-attributes"/>
 		<trait id="display-label">
-			<value>%HR.display-label</value>
+			<value xsi:type="mdt:StringValue">%HR.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%HR.description</value>
+			<value xsi:type="mdt:StringValue">%HR.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_HR.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_HR.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_HR.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_HR.gif</value>
 		</trait>
 	</entity>	
 	<entity id="HTML">
@@ -188,16 +189,16 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>	
 		<trait id="display-label">
-			<value>%IMG.display-label</value>
+			<value xsi:type="mdt:StringValue">%IMG.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%IMG.description</value>
+			<value xsi:type="mdt:StringValue">%IMG.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_IMG.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_IMG.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_IMG.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_IMG.gif</value>
 		</trait>
 	</entity>	
 	<entity id="LINK">
@@ -206,7 +207,7 @@
 		<include-entity-group id="common-event-attributes"/>		
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
 			</trait>
 		</entity>	
 	</entity>
@@ -214,7 +215,7 @@
 		<include-entity-group id="common-language-attributes"/>
 		<entity id="content">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ContentType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ContentType</value>
 			</trait>
 		</entity>
 	</entity>
@@ -223,7 +224,7 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>
 		<trait id="small-icon">
-			<value>small/HTML_OBJECT.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_OBJECT.gif</value>
 		</trait>
 	</entity>			
 	<entity id="SELECT">
@@ -231,19 +232,19 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>	
 		<trait id="display-label">
-			<value>%SELECT.display-label</value>
+			<value xsi:type="mdt:StringValue">%SELECT.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%SELECT.description</value>
+			<value xsi:type="mdt:StringValue">%SELECT.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_SELECT.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_SELECT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_SELECT.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_SELECT.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>			
 	</entity>		
 	<entity id="TABLE">
@@ -251,16 +252,16 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>	
 		<trait id="display-label">
-			<value>%TABLE.display-label</value>
+			<value xsi:type="mdt:StringValue">%TABLE.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%TABLE.description</value>
+			<value xsi:type="mdt:StringValue">%TABLE.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_TABLE.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_TABLE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_TABLE.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_TABLE.gif</value>
 		</trait>
 	</entity>
 	<entity id="TEXTAREA">
@@ -268,19 +269,19 @@
 		<include-entity-group id="common-language-attributes"/>
 		<include-entity-group id="common-event-attributes"/>	
 		<trait id="display-label">
-			<value>%TEXTAREA.display-label</value>
+			<value xsi:type="mdt:StringValue">%TEXTAREA.display-label</value>
 		</trait>					
 		<trait id="description">
-			<value>%TEXTAREA.description</value>
+			<value xsi:type="mdt:StringValue">%TEXTAREA.description</value>
 		</trait>		
 		<trait id="small-icon">
-			<value>small/HTML_TEXTAREA.gif</value>
+			<value xsi:type="mdt:StringValue">small/HTML_TEXTAREA.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/HTML_TEXTAREA.gif</value>
+			<value xsi:type="mdt:StringValue">large/HTML_TEXTAREA.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>	
 	<entity id="TITLE">
@@ -289,7 +290,7 @@
 	<entityGroup id="common-html-attributes">
 		<entity id="align">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -301,133 +302,133 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>
 		</entity>
 	
 		<entity id="alt">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="src">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="accesskey">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CharacterType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CharacterType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="accept">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="accept-charset">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="border">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="disabled">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="height">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>		
 		<entity id="ismap">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="longdesc">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.URIType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.URIType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>	
 		<entity id="maxlength">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="readonly">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 		</entity>
 		<entity id="rel">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="rev">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>	
 		<entity id="rows">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="shape">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -446,34 +447,34 @@
 				</value>		
 			</trait>
 			<trait id="default-value">
-				<value>default</value>
+				<value xsi:type="mdt:StringValue">default</value>
 			</trait>		
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="size">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="tabindex">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
 			</trait>
-			<trait id="valid-minimum"><value>0</value></trait>
-			<trait id="valid-maximum"><value>32767</value></trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
+			<trait id="valid-maximum"><value xsi:type="mdt:StringValue">32767</value></trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="target">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -484,28 +485,28 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 		<entity id="type">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>	
 		<entity id="usemap">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>		
 		<entity id="valign">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -516,15 +517,15 @@
 				</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>
 		</entity>			
 		<entity id="width">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.html</value>
+				<value xsi:type="mdt:StringValue">%property.category.html</value>
 			</trait>			
 		</entity>
 							
@@ -532,174 +533,174 @@
 	<entityGroup id="common-core-attributes">
 		<entity id="id">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>			
 		</entity>
 		<entity id="class">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>			
 		</entity>
 		<entity id="style">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>			
 		</entity>
 		<entity id="title">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>			
 		</entity>		
 	</entityGroup>
 	<entityGroup id="common-event-attributes"> 
 		<entity id="onclick">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="ondblclick">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onmousedown">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onmouseup">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onmouseover">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onmousemove">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onmouseout">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onkeypress">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onkeydown">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onkeyup">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<!--almost common events - should be refactored-->
 		<entity id="onblur">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onchange">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onfocus">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
 		<entity id="onselect">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>					
 	</entityGroup>
 	<entityGroup id="form-event-attributes">
 		<entity id="onsubmit">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>	
 		<entity id="onreset">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>			
 	</entityGroup>
-	<entityGroup id="common-language-attributes" >
+	<entityGroup id="common-language-attributes">
 		<entity id="dir">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">
@@ -714,15 +715,15 @@
 				</value>
 			</trait>	
 			<trait id="category">
-				<value>%property.category.language</value>
+				<value xsi:type="mdt:StringValue">%property.category.language</value>
 			</trait>					
 		</entity>
 		<entity id="lang">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.LanguageCodeType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LanguageCodeType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.language</value>
+				<value xsi:type="mdt:StringValue">%property.category.language</value>
 			</trait>					
 		</entity>		
 	</entityGroup>	

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<md:metadatamodel
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
 	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
-	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
-	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
-	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
-	id="http://java.sun.com/jsf/html"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="http://java.sun.com/jsf/html" 
 	type="tagFile">
 	
 	<trait id="is-jsf-component-library">
-		<value>true</value>
+		<value xsi:type="mdt:BooleanValue">true</value>
 	</trait>
 	
-	<trait id="paletteInfos" >
+	<trait id="paletteInfos">
 		<value xsi:type="pi:PaletteInfos">
 			<item id="outputLabel"/>
 			<item id="inputText"/>
@@ -42,39 +42,39 @@
 	</trait>
 	
 	<trait id="images-base-path">
-		<value>/icons/palette/JSFHTML/</value>
+		<value xsi:type="mdt:StringValue">/icons/palette/JSFHTML/</value>
 	</trait>
 
 	<trait id="display-label">
-		<value>%JSFHTML.display-label</value>
+		<value xsi:type="mdt:StringValue">%JSFHTML.display-label</value>
 	</trait>
 		
 	<entity id="commandButton" type="tag">	
 		<trait id="display-label">
-			<value>%commandButton.display-label</value>
+			<value xsi:type="mdt:StringValue">%commandButton.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_COMMANDBUTTON.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_COMMANDBUTTON.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_COMMANDBUTTON.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_COMMANDBUTTON.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>	
 	</entity>
 	<entity id="commandLink" type="tag">		
 		<trait id="display-label">
-			<value>%commandLink.display-label</value>
+			<value xsi:type="mdt:StringValue">%commandLink.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_COMMANDLINK.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_COMMANDLINK.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_COMMANDLINK.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_COMMANDLINK.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>	
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
@@ -87,13 +87,13 @@
 	</entity>
 	<entity id="dataTable" type="tag">
 		<trait id="display-label">
-			<value>%dataTable.display-label</value>
+			<value xsi:type="mdt:StringValue">%dataTable.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_DATATABLE.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_DATATABLE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_DATATABLE.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_DATATABLE.gif</value>
 		</trait>	
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
@@ -115,120 +115,120 @@
 					</facet>
 				</column>
 				]]></template>
-				<attribute id="border" value="1" />
+				<attribute id="border" value="1"/>
 			</value>
 		</trait>
 	</entity>
 	<entity id="form" type="tag">
 		<trait id="display-label">
-			<value>%form.display-label</value>
+			<value xsi:type="mdt:StringValue">%form.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_FORM.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_FORM.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_FORM.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_FORM.gif</value>
 		</trait>	
 	</entity>
 
 	<entity id="graphicImage" type="tag">
 		<trait id="display-label">
-			<value>%graphicImage.display-label</value>
+			<value xsi:type="mdt:StringValue">%graphicImage.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_GRAPHICIMAGE.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_GRAPHICIMAGE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_GRAPHICIMAGE.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_GRAPHICIMAGE.gif</value>
 		</trait>		
 	</entity>
 	<entity id="inputHidden" type="tag">
 		<trait id="display-label">
-			<value>%inputHidden.display-label</value>
+			<value xsi:type="mdt:StringValue">%inputHidden.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_INPUTHIDDEN.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_INPUTHIDDEN.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_INPUTHIDDEN.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_INPUTHIDDEN.gif</value>
 		</trait>	
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>	
 	</entity>
 	<entity id="inputSecret" type="tag">
 		<trait id="display-label">
-			<value>%inputSecret.display-label</value>
+			<value xsi:type="mdt:StringValue">%inputSecret.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_INPUTSECRET.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_INPUTSECRET.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_INPUTSECRET.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_INPUTSECRET.gif</value>
 		</trait>	
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="inputText" type="tag">
 		<trait id="display-label">
-			<value>%inputText.display-label</value>
+			<value xsi:type="mdt:StringValue">%inputText.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_INPUTTEXT.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_INPUTTEXT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_INPUTTEXT.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_INPUTTEXT.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="inputTextarea" type="tag">
 		<trait id="display-label">
-			<value>%inputTextarea.display-label</value>
+			<value xsi:type="mdt:StringValue">%inputTextarea.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_INPUTTEXTAREA.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_INPUTTEXTAREA.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_INPUTTEXTAREA.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_INPUTTEXTAREA.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="message" type="tag">
 		<trait id="display-label">
-			<value>%message.display-label</value>
+			<value xsi:type="mdt:StringValue">%message.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_MESSAGE.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_MESSAGE.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_MESSAGE.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_MESSAGE.gif</value>
 		</trait>
 	</entity>
 	<entity id="messages" type="tag">
 		<trait id="display-label">
-			<value>%messages.display-label</value>
+			<value xsi:type="mdt:StringValue">%messages.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_MESSAGES.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_MESSAGES.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_MESSAGES.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_MESSAGES.gif</value>
 		</trait>	
 	</entity>
 	<entity id="outputFormat" type="tag">
 		<trait id="display-label">
-			<value>%outputFormat.display-label</value>
+			<value xsi:type="mdt:StringValue">%outputFormat.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_OUTPUTFORMAT.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_OUTPUTFORMAT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_OUTPUTFORMAT.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_OUTPUTFORMAT.gif</value>
 		</trait>	
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
@@ -237,35 +237,35 @@
 						_uri_="http://java.sun.com/jsf/core" />
 					]]>
 				</template>
-				<attribute id="value" value="outputFormat" />
+				<attribute id="value" value="outputFormat"/>
 			</value>			
 		</trait>
 	</entity>
 	<entity id="outputLabel" type="tag">		
 		<trait id="display-label">
-			<value>%outputLabel.display-label</value>
+			<value xsi:type="mdt:StringValue">%outputLabel.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_OUTPUTLABEL.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_OUTPUTLABEL.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_OUTPUTLABEL.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_OUTPUTLABEL.gif</value>
 		</trait>		
  		<trait id="tag-create">
  			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="value" value="outputLabel" />
+				<attribute id="value" value="outputLabel"/>
  			</value>
  		</trait>
 	</entity>
 	<entity id="outputLink" type="tag">
 		<trait id="display-label">
-			<value>%outputLink.display-label</value>
+			<value xsi:type="mdt:StringValue">%outputLink.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_OUTPUTLINK.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_OUTPUTLINK.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_OUTPUTLINK.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_OUTPUTLINK.gif</value>
 		</trait>
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
@@ -279,29 +279,29 @@
 	</entity>
 	<entity id="outputText" type="tag">
 		<trait id="display-label">
-			<value>%outputText.display-label</value>
+			<value xsi:type="mdt:StringValue">%outputText.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_OUTPUTTEXT.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_OUTPUTTEXT.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_OUTPUTTEXT.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_OUTPUTTEXT.gif</value>
 		</trait>			
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
-				<attribute id="value" value="outputText" />
+				<attribute id="value" value="outputText"/>
 			</value>
 		</trait>
 	</entity>
 	<entity id="panelGrid" type="tag">
 		<trait id="display-label">
-			<value>%panelGrid.display-label</value>
+			<value xsi:type="mdt:StringValue">%panelGrid.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_PANELGRID.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_PANELGRID.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_PANELGRID.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_PANELGRID.gif</value>
 		</trait>
 		<trait id="tag-create">
 			<value xsi:type="pi:TagCreationInfo">
@@ -315,129 +315,129 @@
 				<outputText value="item4"
 					_uri_="http://java.sun.com/jsf/html" />
 				]]></template>
-				<attribute id="border" value="1" />
-				<attribute id="columns" value="2" />
+				<attribute id="border" value="1"/>
+				<attribute id="columns" value="2"/>
 			</value>
 		</trait>					
 	</entity>
 	<entity id="panelGroup" type="tag">
 		<trait id="display-label">
-			<value>%panelGroup.display-label</value>
+			<value xsi:type="mdt:StringValue">%panelGroup.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_PANELGROUP.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_PANELGROUP.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_PANELGROUP.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_PANELGROUP.gif</value>
 		</trait>	
 	</entity>
 	<entity id="selectBooleanCheckbox" type="tag">
 		<trait id="display-label">
-			<value>%selectBooleanCheckbox.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectBooleanCheckbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTBOOLEANCHECKBOX.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTBOOLEANCHECKBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTBOOLEANCHECKBOX.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTBOOLEANCHECKBOX.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="selectManyCheckbox" type="tag">
 		<trait id="display-label">
-			<value>%selectManyCheckbox.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectManyCheckbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTMANYCHECKBOX.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTMANYCHECKBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTMANYCHECKBOX.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTMANYCHECKBOX.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="selectManyListbox" type="tag">
 		<trait id="display-label">
-			<value>%selectManyListbox.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectManyListbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTMANYLISTBOX.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTMANYLISTBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTMANYLISTBOX.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTMANYLISTBOX.gif</value>
 		</trait>	
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="selectManyMenu" type="tag">
 		<trait id="display-label">
-			<value>%selectManyMenu.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectManyMenu.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTMANYMENU.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTMANYMENU.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTMANYMENU.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTMANYMENU.gif</value>
 		</trait>		
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="selectOneListbox" type="tag">
 		<trait id="display-label">
-			<value>%selectOneListbox.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectOneListbox.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTONELISTBOX.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTONELISTBOX.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTONELISTBOX.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTONELISTBOX.gif</value>
 		</trait>		
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="selectOneMenu" type="tag">
 		<trait id="display-label">
-			<value>%selectOneMenu.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectOneMenu.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTONEMENU.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTONEMENU.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTONEMENU.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTONEMENU.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="selectOneRadio" type="tag">
 		<trait id="display-label">
-			<value>%selectOneRadio.display-label</value>
+			<value xsi:type="mdt:StringValue">%selectOneRadio.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_SELECTONERADIO.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTONERADIO.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_SELECTONERADIO.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTONERADIO.gif</value>
 		</trait>
 		<trait id="requires-html-form">
-			<value>true</value>
+			<value xsi:type="mdt:BooleanValue">true</value>
 		</trait>
 	</entity>
 	<entity id="column" type="tag">
 		<trait id="display-label">
-			<value>%column.display-label</value>
+			<value xsi:type="mdt:StringValue">%column.display-label</value>
 		</trait>
 		<trait id="small-icon">
-			<value>small/JSF_COLUMN.gif</value>
+			<value xsi:type="mdt:StringValue">small/JSF_COLUMN.gif</value>
 		</trait>
 		<trait id="large-icon">
-			<value>large/JSF_COLUMN.gif</value>
+			<value xsi:type="mdt:StringValue">large/JSF_COLUMN.gif</value>
 		</trait>		
 	</entity>
 </md:metadatamodel>
