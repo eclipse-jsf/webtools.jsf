@@ -39,10 +39,7 @@ Import-Package: org.eclipse.jdt.core,
  org.eclipse.jst.javaee.web,
  org.eclipse.jst.jsf.common.runtime.internal.model.component,
  org.eclipse.jst.jsf.core.jsfappconfig,
- org.eclipse.jst.jsf.designtime.internal.view,
- org.eclipse.wst.xml.core.internal.contentmodel,
- org.eclipse.wst.xml.core.internal.contentmodel.factory,
- org.eclipse.wst.xml.core.internal.regions
+ org.eclipse.jst.jsf.designtime.internal.view
 Export-Package: org.eclipse.jst.jsf.facelet.core.internal;x-internal:=true,
  org.eclipse.jst.jsf.facelet.core.internal.cm;x-internal:=true,
  org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd;x-friends:="org.eclipse.jst.jsf.facelet.tagsupport",
