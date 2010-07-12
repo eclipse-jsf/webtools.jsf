@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jsf_sdk.feature"
       label="%name"
-      version="3.2.0.qualifier"
+      version="3.2.1.qualifier"
       provider-name="%provider"
       image="eclipse_update_120.jpg">
 
@@ -17,8 +17,6 @@
    <license url="license.html">
       %license
    </license>
-
-
 
    <includes
          id="org.eclipse.jsf.feature"
