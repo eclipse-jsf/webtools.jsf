@@ -47,7 +47,7 @@ public class DefaultStandardTaglibLocator extends AbstractFaceletTaglibLocator
                 final URL url = FaceletCorePlugin.getDefault().getBundle()
                         .getEntry(location);
                 final URL fileURL = FileLocator.toFileURL(url);
-                File file = new File(fileURL.toURI());
+                File file = new File(fileURL.getPath());
                 final InputStream openStream = fileURL.openStream();
                 final TagModelLoader loader = new TagModelLoader(
                         file.getAbsolutePath());
