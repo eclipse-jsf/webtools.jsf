@@ -1,6 +1,0 @@
-# Debugging options for the org.eclipse.jst.jsf.core
-
-# Turn on general debugging for the org.eclipse.jsf.ui plugin.
-org.eclipse.jst.jsf.ui/debug=false
-
-org.eclipse.jst.jsf.ui/metadatagen=false
