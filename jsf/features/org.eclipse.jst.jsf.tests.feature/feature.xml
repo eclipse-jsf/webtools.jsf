@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.jst.jsf.tests.feature"
-      label="%feature.name"
+      label="%name"
       version="3.2.0.qualifier"
       provider-name="%provider">
 
