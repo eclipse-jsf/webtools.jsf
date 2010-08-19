@@ -1,11 +1,14 @@
 package org.eclipse.jst.jsf.test.util.mock;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.cert.X509Certificate;
 import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IPath;
@@ -65,8 +68,7 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Dictionary getHeaders()
+    public Dictionary<String,String> getHeaders()
     {
         throw new UnsupportedOperationException();
     }
@@ -81,12 +83,12 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    public ServiceReference[] getRegisteredServices()
+    public ServiceReference<?>[] getRegisteredServices()
     {
         throw new UnsupportedOperationException();
     }
 
-    public ServiceReference[] getServicesInUse()
+    public ServiceReference<?>[] getServicesInUse()
     {
         throw new UnsupportedOperationException();
     }
@@ -101,8 +103,7 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Dictionary getHeaders(String locale)
+    public Dictionary<String, String> getHeaders(String locale)
     {
         throw new UnsupportedOperationException();
     }
@@ -112,30 +113,27 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Class loadClass(String name) throws ClassNotFoundException
+    public Class<?> loadClass(String name) throws ClassNotFoundException
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Enumeration getResources(String name) throws IOException
+    public Enumeration<URL> getResources(String name) throws IOException
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Enumeration getEntryPaths(String path)
+    public Enumeration<String> getEntryPaths(String path)
     {
         throw new UnsupportedOperationException();
     }
 
-    public URL getEntry(String path)
+	public URL getEntry(String path)
     {
         IPath entryPath = new Path(_bundleRootPath).append(path);
         try
         {
-            return entryPath.toFile().toURL();
+            return entryPath.toFile().toURI().toURL();
         } catch (MalformedURLException e)
         {
             throw new RuntimeException(e);
@@ -147,8 +145,7 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Enumeration findEntries(String path, String filePattern,
+    public Enumeration<URL> findEntries(String path, String filePattern,
             boolean recurse)
     {
         throw new UnsupportedOperationException();
@@ -159,8 +156,7 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("rawtypes")
-    public Map getSignerCertificates(int signersType)
+    public Map<X509Certificate,List<X509Certificate>> getSignerCertificates(int signersType)
     {
         throw new UnsupportedOperationException();
     }
@@ -169,4 +165,16 @@ public class MockBundle implements Bundle
     {
         throw new UnsupportedOperationException();
     }
+
+	public int compareTo(Bundle o) {
+        throw new UnsupportedOperationException();
+	}
+
+	public <A> A adapt(Class<A> type) {
+        throw new UnsupportedOperationException();
+	}
+
+	public File getDataFile(String filename) {
+        throw new UnsupportedOperationException();
+	}
 }
