@@ -15,6 +15,7 @@ package org.eclipse.jst.jsf.context;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -61,7 +62,44 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory
     {
         if (isValidDelegate(delegate))
         {
-            _delegates.addIfAbsent(delegate);
+        	synchronized(_delegates)
+        	{
+        		_delegates.addIfAbsent(delegate);
+        		if (_delegates.size() > 1)
+        		{
+        			List<IAdaptable> delegates = new ArrayList<IAdaptable>(_delegates);
+
+        			Collections.sort(delegates, new Comparator()
+        			{
+						public int compare(Object delegate1, Object delegate2) 
+						{
+							final Class<?>  clazz1 = delegate1.getClass();
+							final Class<?>  clazz2 = delegate2.getClass();
+							
+							Package package1 = clazz1.getPackage();
+							Package package2 = clazz2.getPackage();
+							boolean package1IsOSS = package1.getName().startsWith("org.eclipse.jst"); //$NON-NLS-1$
+							boolean package2IsOSS = package2.getName().startsWith("org.eclipse.jst"); //$NON-NLS-1$
+							
+							if (package1IsOSS && !package2IsOSS)
+							{
+								// sort the oss one after the non-oss one
+								return 1;
+							}
+							else if (!package1IsOSS && package2IsOSS)
+							{
+								return -1;
+							}
+							
+							// otherwise they are either both oss or both non-oss, so just
+							// sort canonically by name.
+							return clazz1.getName().compareTo(clazz2.getName());
+						}
+        			});
+        			_delegates.clear();
+        			_delegates.addAll(delegates);
+        		}
+        	}
         }
     }
 
