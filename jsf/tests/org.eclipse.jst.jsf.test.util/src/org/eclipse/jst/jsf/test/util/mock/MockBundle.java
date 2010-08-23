@@ -83,12 +83,14 @@ public class MockBundle implements Bundle
         throw new UnsupportedOperationException();
     }
 
-    public ServiceReference<?>[] getRegisteredServices()
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public ServiceReference[] getRegisteredServices()
     {
         throw new UnsupportedOperationException();
     }
 
-    public ServiceReference<?>[] getServicesInUse()
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public ServiceReference[] getServicesInUse()
     {
         throw new UnsupportedOperationException();
     }
