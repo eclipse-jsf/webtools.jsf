@@ -260,19 +260,19 @@ ${cursor}
              id="org.eclipse.jst.jsf.ui.new_jsf_page_html_xhtml_xmllsyntax"
              name="%NewJSFPage_xhtml_xmlsyntax">
           <pattern>
-             &lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot; ?&gt;
+             &lt;?xml version=&quot;1.0&quot; encoding=&quot;${encoding}&quot; ?&gt;
 &lt;jsp:root xmlns:jsp=&quot;http://java.sun.com/JSP/Page&quot; xmlns:f=&quot;http://java.sun.com/jsf/core&quot; xmlns:h=&quot;http://java.sun.com/jsf/html&quot; version=&quot;2.0&quot;&gt;
     &lt;jsp:directive.page language=&quot;java&quot;
-        contentType=&quot;text/html; charset=ISO-8859-1&quot; pageEncoding=&quot;ISO-8859-1&quot; /&gt;
+        contentType=&quot;text/html; charset=${encoding}&quot; pageEncoding=&quot;${encoding}&quot; /&gt;
     &lt;jsp:text&gt;
-        &lt;![CDATA[ &lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot; ?&gt; ]]&gt;
+        &lt;![CDATA[ &lt;?xml version=&quot;1.0&quot; encoding=&quot;${encoding}&quot; ?&gt; ]]&gt;
     &lt;/jsp:text&gt;
     &lt;jsp:text&gt;
         &lt;![CDATA[ &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt; ]]&gt;
     &lt;/jsp:text&gt;
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
 &lt;head&gt;
-&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot; /&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=${encoding}&quot; /&gt;
 &lt;title&gt;Insert title here&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
