@@ -6,7 +6,7 @@
          <meta.schema plugin="org.eclipse.jst.jsf.core" id="symbolContextResolverFactory" name="Symbol Context Resolver Factory Delegate"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Provisional API -- subject to change.
       </documentation>
    </annotation>
 
