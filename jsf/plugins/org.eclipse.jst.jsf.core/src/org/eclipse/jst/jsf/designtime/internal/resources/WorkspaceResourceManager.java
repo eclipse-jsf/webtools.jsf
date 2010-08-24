@@ -107,7 +107,19 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                     .find(folder);
             for (final IResource res : foundResources)
             {
-                newFragments.add(track(res));
+                try
+                {
+                    newFragments.add(track(res));
+                } catch (final InvalidIdentifierException e)
+                {
+                    JSFCorePlugin.log(IStatus.INFO,
+                        "Ignoring invalid JSF resource: "+res); //$NON-NLS-1$
+                }
+                catch (final ManagedObjectException e)
+                {
+                    JSFCorePlugin.log(e,
+                        "Problem adding managed object for resource: "+res); //$NON-NLS-1$
+                }
             }
         } catch (final Exception e)
         {
