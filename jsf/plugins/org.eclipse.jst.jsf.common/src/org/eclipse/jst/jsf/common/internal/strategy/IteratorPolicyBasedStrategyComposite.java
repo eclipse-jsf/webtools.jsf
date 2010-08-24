@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.common.internal.strategy;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
@@ -54,7 +55,7 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, RESULT
     {
         super();
         _policy = policy;
-        _strategies = new HashMap<IDTYPE, STRATEGYTYPE>();
+        _strategies = new LinkedHashMap<IDTYPE, STRATEGYTYPE>();
     }
 
     /**
@@ -65,7 +66,7 @@ public abstract class IteratorPolicyBasedStrategyComposite<INPUT, OUTPUT, RESULT
     {
         super(compositionStrategy);
         _policy = policy;
-        _strategies = new HashMap<IDTYPE, STRATEGYTYPE>();
+        _strategies = new LinkedHashMap<IDTYPE, STRATEGYTYPE>();
     }
 
     /**
