@@ -7,7 +7,7 @@
     xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     
     <trait id="is-jsf-component-library">
-		<value>true</value>
+		<value xsi:type="mdt:BooleanValue">true</value>
 	</trait>
     
     <entity id="forEach" type="tag"/>

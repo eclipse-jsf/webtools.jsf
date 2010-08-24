@@ -20,7 +20,7 @@
 		</trait>
         <entity id="firstClickPassed">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
         </entity>
         <entity id="initialFocusId"/>
@@ -42,7 +42,7 @@
         <entity id="shortText"/>
         <entity id="halign">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
 			<trait id="valid-values">
 			 	<value xsi:type="mdt:ListOfValues">
@@ -56,7 +56,7 @@
         </entity>
         <entity id="valign">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
             <trait id="valid-values">
                 <value xsi:type="mdt:ListOfValues">
@@ -68,33 +68,33 @@
         </entity>
         <entity id="width">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="height">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="columnSpan">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="rowSpan">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="wrappingDisabled">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
         </entity>
         <entity id="headers"/>
         <entity id="header">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
             </trait>
         </entity>        
     </entity>
@@ -115,33 +115,33 @@
         <entity id="name"/>
         <entity id="width">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+               <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="height">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="marginWidth">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
             <trait id="valid-minimum">
-            	<value>1</value>
+            	<value xsi:type="mdt:StringValue">1</value>
             </trait>
         </entity>
         <entity id="marginHeight">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
             <trait id="valid-minimum">
-            	<value>1</value>
+            	<value xsi:type="mdt:StringValue">1</value>
             </trait>
         </entity>
         <entity id="scrolling">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
 			<trait id="valid-values">
 			 	<value xsi:type="mdt:ListOfValues">
@@ -151,7 +151,7 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>auto</value>
+				<value xsi:type="mdt:StringValue">auto</value>
 			</trait>
         </entity>
     </entity>
@@ -185,43 +185,43 @@
 		</trait>
         <entity id="onload">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
         <entity id="onunload">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.event</value>
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
 			</trait>			
 		</entity>
         <entity id="width">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="height">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="frameSpacing">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="borderWidth">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="frameBorderWidth">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
     </entity>
@@ -247,7 +247,7 @@
 		</trait>
         <entity id="mode">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
 			<trait id="valid-values">
 			 	<value xsi:type="mdt:ListOfValues">
@@ -257,7 +257,7 @@
 				</value>
 			</trait>
 			<trait id="default-value">
-				<value>default</value>
+				<value xsi:type="mdt:StringValue">default</value>
 			</trait>
         </entity>
     </entity>
@@ -277,7 +277,7 @@
 		</trait>
         <entity id="halign">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
 			<trait id="valid-values">
 			 	<value xsi:type="mdt:ListOfValues">
@@ -291,7 +291,7 @@
         </entity>
         <entity id="valign">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
             <trait id="valid-values">
                 <value xsi:type="mdt:ListOfValues">
@@ -303,7 +303,7 @@
         </entity>
         <entity id="width">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>              
     </entity>
@@ -345,12 +345,12 @@
 		</trait>
         <entity id="width">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
             </trait>
         </entity>
         <entity id="halign">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
             </trait>
 			<trait id="valid-values">
 			 	<value xsi:type="mdt:ListOfValues">
@@ -364,17 +364,17 @@
         </entity>
         <entity id="cellSpacing">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="cellPadding">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="borderWidth">
             <trait id="attribute-value-runtime-type">
-                <value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
             </trait>
         </entity>
         <entity id="summary"/>      
@@ -382,18 +382,18 @@
     <entityGroup id="common-trinidadh-attributes">
         <entity id="inlineStyle">
         	<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>			
 		</entity>
         <entity id="styleClass">
 			<trait id="attribute-value-runtime-type">
-				<value>org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>				
         </entity>
         <entity id="shortDesc"/>
@@ -401,7 +401,7 @@
     <entityGroup id="common-partialTrigger-attribute">
     	<entity id="partialTriggers">
     		<trait id="category">
-				<value>%property.category.core</value>
+				<value xsi:type="mdt:StringValue">%property.category.core</value>
 			</trait>
     	</entity>
     </entityGroup>
