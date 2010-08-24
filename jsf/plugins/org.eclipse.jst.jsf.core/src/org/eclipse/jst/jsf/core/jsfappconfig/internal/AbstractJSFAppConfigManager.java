@@ -11,6 +11,8 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.ISafeRunnable;
+import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -219,11 +221,21 @@ public abstract class AbstractJSFAppConfigManager
 	 */
 	protected List<FacesConfigType> getFacesConfigModels() {
 		final List<FacesConfigType> facesConfigModels = new ArrayList<FacesConfigType>();		
-		for(final IJSFAppConfigProvider configProvider : getJSFAppConfigProviders()) {			
-			final FacesConfigType facesConfig = configProvider.getFacesConfigModel();
-			if (facesConfig != null) {
-				facesConfigModels.add(facesConfig);
-			}
+		for(final IJSFAppConfigProvider configProvider : getJSFAppConfigProviders()) {		
+		    SafeRunner.run(new ISafeRunnable() {
+
+                public void handleException(Throwable exception) {
+                    //SafeRunner will log the exception
+                }
+
+                public void run() throws Exception {
+                    final FacesConfigType facesConfig = configProvider.getFacesConfigModel();
+                    if (facesConfig != null) {
+                        facesConfigModels.add(facesConfig);
+                    }
+                }
+		        
+		    });
 		}
 		return facesConfigModels;
 	}

@@ -34,8 +34,8 @@ public class ELResolverTypeTranslator extends Translator {
         
         FacesConfigPackage facesPackage = FacesConfigPackage.eINSTANCE;
         return new Translator[] {
-            new Translator(TEXT_ATTRIBUTE_VALUE, facesPackage.getPropertyResolverType_TextContent()),
-            new Translator("id", facesPackage.getPropertyResolverType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
+            new Translator(TEXT_ATTRIBUTE_VALUE, facesPackage.getELResolverType_TextContent()),
+            new Translator("id", facesPackage.getELResolverType_Id(), DOM_ATTRIBUTE) //$NON-NLS-1$
         };
     }
 }
