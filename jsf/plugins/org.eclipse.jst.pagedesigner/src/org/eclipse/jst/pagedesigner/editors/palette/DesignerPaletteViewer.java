@@ -142,7 +142,7 @@ public class DesignerPaletteViewer extends PaletteViewer {
 		super.setPaletteRoot(root);
 		// add palette model change listener
 		// PaletteRoot root = getPaletteRoot();
-		if (root instanceof DesignerPaletteRoot) {
+		if (root instanceof DesignerPaletteRoot && ((DesignerPaletteRoot) root).getPaletteManager() != null) {
 			((DesignerPaletteRoot) root).getPaletteManager()
 					.addEntryChangeListener(_paletteModelListener);
 		}

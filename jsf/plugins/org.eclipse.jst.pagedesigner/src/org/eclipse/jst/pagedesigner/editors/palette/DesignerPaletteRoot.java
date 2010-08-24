@@ -44,10 +44,10 @@ public class DesignerPaletteRoot extends PaletteRoot {
 		
 		this._paletteContext = PaletteItemManager.createPaletteContext(file);
 		this._manager = PaletteItemManager.getInstance(_paletteContext);
-		
-		setupBasicItems();
-		loadItems();
-
+		if (this._manager != null) {
+			setupBasicItems();
+			loadItems();
+		}
 		// TODO: register listener on the manager for toolpalette change event.
 
 	}

@@ -27,6 +27,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentType;
@@ -107,6 +108,10 @@ public class PaletteItemManager implements IPaletteItemManager,
 			if (MANAGER_LOCK.tryLock(MANAGER_LOCK_TIMEOUT, TimeUnit.SECONDS)){
 				hasLock = true;
 				final TagRegistryIdentifier regId = getTagRegistryIdentifier(paletteContext);
+				if (regId == null) {
+					PDPlugin.log(new Status(IStatus.ERROR, PDPlugin.getPluginId(), "Unable to display palette for "+paletteContext.getFile().getName()+".  Unknown content type for file."));  //$NON-NLS-1$//$NON-NLS-2$
+					return null;
+				}
 				PaletteItemManager manager = _managers.get(regId);
 				if (manager == null) {
 					 manager = new PaletteItemManager(regId);
@@ -115,6 +120,7 @@ public class PaletteItemManager implements IPaletteItemManager,
 				} 
 				manager.addFile(paletteContext.getFile());
 				return manager;
+				
 			}
 			//if we get here then the lock has timed out
 			PDPlugin.log(new Status(Status.ERROR, PDPlugin.getPluginId(), "(getInstance()) Failed to get managers lock for" + paletteContext.getFile().toString())); //$NON-NLS-1$
