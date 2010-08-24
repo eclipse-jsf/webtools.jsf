@@ -148,8 +148,18 @@ public class JSFCorePlugin extends WTPPlugin
     public static void log(final int severity, final String message,
             final Throwable ex)
     {
-        getDefault().getLog().log(
-                new Status(severity, PLUGIN_ID, IStatus.OK, message, ex));
+    	Status logObject = new Status(severity, PLUGIN_ID, IStatus.OK, message, ex);
+    	JSFCorePlugin default1 = getDefault();
+    	if (default1 != null)
+    	{
+    		ILog log = default1.getLog();
+    		if (log != null)
+    		{
+    			log.log(logObject);
+    			return;
+    		}
+    	}
+    	System.err.println(logObject.toString());
     }
 
     /**

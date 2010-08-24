@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.internal.finder.VisitorMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.acceptor.JarEntryMatchingAcceptor;
 import org.eclipse.jst.jsf.common.internal.finder.matcher.TaglibJarEntryFinder;
@@ -22,6 +23,7 @@ import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
 import org.eclipse.jst.jsf.common.internal.resource.IJarLocator;
 import org.eclipse.jst.jsf.common.internal.util.JarUtilities;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.designtime.internal.resources.ResourceIdentifierFactory.InvalidIdentifierException;
 
 /**
  * A JSF resource locator that finds resources in jars.
@@ -142,7 +144,11 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
                                         libRes, jarUrl, _contentTypeResolver));
                             }
                         }
-                    } catch (final Exception e)
+                    } catch (final InvalidIdentifierException e) 
+                    {
+                    	JSFCorePlugin.log(IStatus.INFO, "Ignoring invalid id: "+e.getId()); //$NON-NLS-1$
+                	}
+                    catch (final Exception e)
                     {
                         JSFCorePlugin.log(
                                 "Error initializing facelet registry entry", //$NON-NLS-1$

@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.AlwaysMatcher;
@@ -126,9 +127,19 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
         IWorkspaceJSFResourceFragment jsfRes = null;
         if (res.getType() == IResource.FILE)
         {
-            jsfRes = new WorkspaceJSFResource(
-                    _factory.createLibraryResource(fullPath.toString()), res,
-                    _contentTypeResolver);
+        	try
+        	{
+	            jsfRes = new WorkspaceJSFResource(
+	                    _factory.createLibraryResource(fullPath.toString()), res,
+	                    _contentTypeResolver);
+        	}
+        	catch (InvalidIdentifierException e)
+        	{
+        		// ensure that the tracker gets released before we throw the exception.
+        		unmanageResource(res);
+        		tracker.dispose();
+        		throw e;
+        	}
         } else
         {
             jsfRes = new WorkspaceJSFResourceContainer(
@@ -298,7 +309,7 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                     } catch (final InvalidIdentifierException e)
                     {
                         JSFCorePlugin
-                                .log(e,
+                                .log(IStatus.INFO,
                                         "While adding new resource " + affectedResource); //$NON-NLS-1$
                     }
                 }
