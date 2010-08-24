@@ -1,12 +1,13 @@
 package org.eclipse.jst.jsf.core.tests.resource;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jst.jsf.common.internal.resource.ClasspathEntryLifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.IClasspathLifecycleListener.ClasspathLifecycleEvent;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJDTWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJavaChangeEventFactory;
@@ -20,9 +21,9 @@ import org.junit.experimental.categories.Category;
 @Category(NoPluginEnvironment.class)
 public class FastClasspathEntryLifecycleTests
 {
-    private MockWorkspaceContext _wsContext;
+    private IWorkspaceContext _wsContext;
     private MockJavaChangeEventFactory _factory;
-    private MockProject _project;
+    private IProject _project;
     private MockJDTWorkspaceContext _jdtContext;
     private MockJavaProject _javaProject;
 

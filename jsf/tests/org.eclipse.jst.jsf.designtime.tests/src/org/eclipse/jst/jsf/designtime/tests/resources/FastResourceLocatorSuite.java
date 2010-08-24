@@ -1,13 +1,13 @@
 package org.eclipse.jst.jsf.designtime.tests.resources;
 
-import org.eclipse.jst.jsf.test.util.junit4.FastTest;
-import org.junit.experimental.categories.Categories;
+import org.eclipse.jst.jsf.test.util.junit4.DualModeEnvironment;
 import org.junit.experimental.categories.Categories.IncludeCategory;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-@RunWith(Categories.class)
-@IncludeCategory(FastTest.class)
+@RunWith(Suite.class)
+@IncludeCategory(DualModeEnvironment.class)
 @SuiteClasses({TestResourceIdentifierFactory.class,
     TestJarBasedJSFResource.class, TestJarBasedJSFResourceLocator.class,
     TestWorkspaceBasedJSFResource.class, TestWorkspaceBasedResourceLocator.class,

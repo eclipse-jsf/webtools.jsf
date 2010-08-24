@@ -19,20 +19,20 @@ import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockFile;
 import org.eclipse.jst.jsf.test.util.mock.MockProject;
-import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 
 public class MockJDTWorkspaceContext
 {
-    private final MockWorkspaceContext _wsContext;
-    private final Map<MockProject, List<IPackageFragmentRoot>> _cpEntriesByProject;
+    private final IWorkspaceContext _wsContext;
+    private final Map<IProject, List<IPackageFragmentRoot>> _cpEntriesByProject;
     private final CopyOnWriteArrayList<IElementChangedListener> _listeners = new CopyOnWriteArrayList<IElementChangedListener>();
 
-    public MockJDTWorkspaceContext(final MockWorkspaceContext wsContext)
+    public MockJDTWorkspaceContext(final IWorkspaceContext wsContext)
     {
         _wsContext = wsContext;
-        _cpEntriesByProject = new HashMap<MockProject, List<IPackageFragmentRoot>>();
+        _cpEntriesByProject = new HashMap<IProject, List<IPackageFragmentRoot>>();
     }
 
     @SuppressWarnings("unchecked")
@@ -77,18 +77,25 @@ public class MockJDTWorkspaceContext
      * @return a new mock classpath entry. This entry will automatically be
      *         added to project as a file and to any MockJavaProject created
      *         through this context for project.
+     * @throws Exception 
      */
     public IPackageFragmentRoot createCPELibraryInProject(
-            final MockProject project, final IPath projectRelativePath,
+            final IProject project, final IPath projectRelativePath,
             final File file)
     {
-        _wsContext.attachFile(project, projectRelativePath, file);
-        return createAndAddPackageFragmentRoot(project,
-                new Path(file.getAbsolutePath()));
+        try
+        {
+            _wsContext.attachFile(project, projectRelativePath, file);
+            return createAndAddPackageFragmentRoot(project,
+                    new Path(file.getAbsolutePath()));
+        } catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
     private IPackageFragmentRoot createAndAddPackageFragmentRoot(
-            final MockProject project, final IPath absPathToRoot)
+            final IProject project, final IPath absPathToRoot)
     {
         final IJavaProject javaProject = createJavaProject(project);
         final IPackageFragmentRoot fragRoot = new MockPackageFragmentRoot(
@@ -97,7 +104,7 @@ public class MockJDTWorkspaceContext
         return fragRoot;
     }
 
-    private void addCPEntry(final MockProject project,
+    private void addCPEntry(final IProject project,
             final IPackageFragmentRoot packageRoot)
     {
         List<IPackageFragmentRoot> entriesForProject = _cpEntriesByProject

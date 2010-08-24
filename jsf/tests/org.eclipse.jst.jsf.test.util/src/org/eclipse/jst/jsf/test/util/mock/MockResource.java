@@ -33,7 +33,7 @@ public class MockResource implements IResource
     private boolean _exists = true; // always exist by default
     private MockWorkspace _workspace;
     private IProject _project;
-    private long _modificationStamp;
+    private long _modificationStamp = -1;
 	private Map<QualifiedName, Object> _sessionProps;
     public final static List<Integer> VALID_TYPES;
 

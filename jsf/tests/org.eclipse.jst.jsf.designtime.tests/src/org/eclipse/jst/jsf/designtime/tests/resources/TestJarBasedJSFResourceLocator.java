@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
@@ -18,8 +19,8 @@ import org.eclipse.jst.jsf.common.internal.resource.IJarLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
 import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockContentTypeManager;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJDTWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJavaCoreMediator;
@@ -33,9 +34,8 @@ public class TestJarBasedJSFResourceLocator
     private IJarLocator _jarProvider;
     private JarBasedJSFResourceLocator _locator;
     private MockJDTWorkspaceContext _jdtContext;
-    private MockWorkspaceContext _wsContext;
-    private MockProject _project;
-//    private MockFile _jarIFile;
+    private IWorkspaceContext _wsContext;
+    private IProject _project;
 
     @SuppressWarnings("unchecked")
     @Before

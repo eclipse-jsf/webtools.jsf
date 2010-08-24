@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.test.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,8 +54,6 @@ import org.osgi.framework.Bundle;
  */
 public class TestUtil
 {
-
-
     /**
      * 
      * @param prjname
@@ -66,8 +65,16 @@ public class TestUtil
     public static IProject createProjectFromZip(Bundle bundle, String prjname,
             String path) throws Exception
     {
-
         URL url = FileLocator.find(bundle, new Path(path), null);
+        // if this fails, it most likely that path is wrong.
+        Assert.assertNotNull(url);
+        return createProjectFromZip(prjname, url);
+    }
+
+    public static IProject createProjectFromZip(File file, String prjname)
+            throws Exception
+    {
+        URL url = file.toURL();
         // if this fails, it most likely that path is wrong.
         Assert.assertNotNull(url);
         return createProjectFromZip(prjname, url);
@@ -97,11 +104,9 @@ public class TestUtil
      * @param dir
      * @throws Exception
      */
-    private static void expandZip(URL url, IContainer dir)
-            throws Exception
+    private static void expandZip(URL url, IContainer dir) throws Exception
     {
         ZipInputStream zis = null;
-
         try
         {
             // first, count number of items in zip file
@@ -126,8 +131,7 @@ public class TestUtil
                         ensurePath(folder);
                         folder.create(true, true, null);
                     }
-                } 
-                else
+                } else
                 {
                     IFile file = dir.getFile(new Path(name));
                     ensurePath(file);
@@ -141,7 +145,6 @@ public class TestUtil
                         file.create(new ZipStreamWrapper(zis), true, null);
                     }
                 }
-
                 ze = zis.getNextEntry();
             }
         } finally
@@ -157,14 +160,14 @@ public class TestUtil
         }
     }
 
-    private static String getPrefix(ZipInputStream zipStream) throws IOException
+    private static String getPrefix(ZipInputStream zipStream)
+            throws IOException
     {
         ZipEntry ze = zipStream.getNextEntry();
         while (ze != null)
         {
             String name = ze.getName();
-            if (name != null && name.endsWith(".project")
-                    && !ze.isDirectory())
+            if (name != null && name.endsWith(".project") && !ze.isDirectory())
             {
                 int index = name.lastIndexOf(".project");
                 return name.substring(0, index);
@@ -201,14 +204,11 @@ public class TestUtil
      * 
      * @return
      */
-    public static IFile copyFile(Bundle bundle, IProject project, String targetPath,
-            String sourcePath) throws Exception
+    public static IFile copyFile(Bundle bundle, IProject project,
+            String targetPath, String sourcePath) throws Exception
     {
-
-        URL url = FileLocator.find(bundle,
-                new Path(sourcePath), null);
+        URL url = FileLocator.find(bundle, new Path(sourcePath), null);
         InputStream stream = url.openStream();
-
         IFile file = null;
         IPath path = new Path(sourcePath);
         if (targetPath != null && targetPath.length() > 0)
@@ -219,7 +219,6 @@ public class TestUtil
         {
             file = project.getFile(path.lastSegment());
         }
-
         if (!file.exists())
         {
             ensurePath(file);
@@ -228,7 +227,6 @@ public class TestUtil
         {
             file.setContents(stream, IFile.FORCE, null);
         }
-
         return file;
     }
 
@@ -246,8 +244,8 @@ public class TestUtil
     {
         IFile file = project.getFile(filePath);
         ensurePath(file);
-        ByteArrayInputStream stream = new ByteArrayInputStream(content
-                .getBytes());
+        ByteArrayInputStream stream = new ByteArrayInputStream(
+                content.getBytes());
         file.create(stream, true, null);
         return file;
     }
@@ -263,7 +261,6 @@ public class TestUtil
      */
     public static String getFileAsString(String path) throws Exception
     {
-
         URL url = FileLocator.find(Activator.getDefault().getBundle(),
                 new Path(path), null);
         InputStream stream = url.openStream();
@@ -282,38 +279,43 @@ public class TestUtil
     }
 
     /**
-	 * create a project from a zip file.
-	 * 
-	 * @param prjname
-	 * @param zipStream
-	 * @throws Exception
-	 */
-	private static IProject createProjectFromZip(final String prjname,
-			final URL url) throws Exception {
-		final IProject[] holder = new IProject[1];
-		IWorkspaceRunnable r = new IWorkspaceRunnable() {
-			public void run(IProgressMonitor monitor) throws CoreException {
-				IProject prj = ResourcesPlugin.getWorkspace().getRoot()
-						.getProject(prjname);
-				if (!prj.exists()) {
-					prj.create(null);
-				}
-				prj.open(null);
-				ValidationFramework.getDefault().suspendValidation(prj, true);
-				try {
-					expandZip(url, prj);
-				} catch (Exception ex) {
-					throw new CoreException(new Status(0,
-							Activator.PLUGIN_ID, 0, ex
-									.getMessage(), ex));
-				}
-				holder[0] = prj;
-			}
-		};
+     * create a project from a zip file.
+     * 
+     * @param prjname
+     * @param zipStream
+     * @throws Exception
+     */
+    private static IProject createProjectFromZip(final String prjname,
+            final URL url) throws Exception
+    {
+        final IProject[] holder = new IProject[1];
+        IWorkspaceRunnable r = new IWorkspaceRunnable()
+        {
+            public void run(IProgressMonitor monitor) throws CoreException
+            {
+                IProject prj = ResourcesPlugin.getWorkspace().getRoot()
+                        .getProject(prjname);
+                if (!prj.exists())
+                {
+                    prj.create(null);
+                }
+                prj.open(null);
+                ValidationFramework.getDefault().suspendValidation(prj, true);
+                try
+                {
+                    expandZip(url, prj);
+                } catch (Exception ex)
+                {
+                    throw new CoreException(new Status(0, Activator.PLUGIN_ID,
+                            0, ex.getMessage(), ex));
+                }
+                holder[0] = prj;
+            }
+        };
         ResourcesPlugin.getWorkspace().run(r, null);
-		return holder[0];
-	}
-	
+        return holder[0];
+    }
+
     public static String removeAllWhitespace(String s)
     {
         StringBuffer buffer = new StringBuffer(s.length());
@@ -326,6 +328,7 @@ public class TestUtil
         }
         return buffer.toString();
     }
+
     /**
      * remove resource, following schedule rule.
      * 
@@ -341,7 +344,6 @@ public class TestUtil
         }
         Job job = new Job("DeleteProject")
         {
-
             protected IStatus run(IProgressMonitor monitor)
             {
                 try
@@ -353,12 +355,10 @@ public class TestUtil
                 }
                 return Status.OK_STATUS;
             }
-
         };
         job.setPriority(Job.SHORT);
         job.setRule(ResourcesPlugin.getWorkspace().getRoot());
         job.schedule();
-
         // wait
         try
         {
@@ -373,8 +373,9 @@ public class TestUtil
     public static boolean verifyProjectStatus(final IProject project,
             final boolean isOpenCondition, final int waitTimeInMs)
     {
-        return TestUtil.waitForCondition(createProjectStatusCondition(project,
-                isOpenCondition), waitTimeInMs, 20);
+        return TestUtil.waitForCondition(
+                createProjectStatusCondition(project, isOpenCondition),
+                waitTimeInMs, 20);
     }
 
     public static TestCondition createProjectStatusCondition(
@@ -413,14 +414,12 @@ public class TestUtil
         {
             Assert.fail("Your wait interval is less than 1");
         }
-
         do
         {
             if (condition.test())
             {
                 return true;
             }
-
             try
             {
                 Thread.sleep(waitPerInterval);
@@ -429,7 +428,6 @@ public class TestUtil
                 // ignore.
             }
         } while (curIteration++ < numIntervals);
-
         // if we get to here, then the condition was not satisified in the
         // time alloted
         return false;

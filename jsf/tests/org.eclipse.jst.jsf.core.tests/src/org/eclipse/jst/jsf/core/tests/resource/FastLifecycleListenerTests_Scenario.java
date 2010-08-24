@@ -8,38 +8,42 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
 import org.eclipse.jst.jsf.core.tests.resource.MyTestListener.EventData;
-import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
-import org.eclipse.jst.jsf.test.util.mock.MockFile;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
+import org.eclipse.jst.jsf.test.util.junit4.DualModeEnvironment;
+import org.eclipse.jst.jsf.test.util.junit4.WorkspaceContext;
+import org.eclipse.jst.jsf.test.util.junit4.WorkspaceRunner;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContextWithEvents;
 import org.eclipse.jst.jsf.test.util.mock.MockResourceChangeEventFactory;
-import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 
-@Category(NoPluginEnvironment.class)
+@RunWith(WorkspaceRunner.class)
+@Category(DualModeEnvironment.class)
 public class FastLifecycleListenerTests_Scenario
 {
-    private MockWorkspaceContext _wsContext;
+    @WorkspaceContext
+    private IWorkspaceContextWithEvents _wsContext;
     private MockResourceChangeEventFactory _factory;
-    private MockProject _project;
-    private MockFile _file;
+    private IProject _project;
+    private IFile _file;
     private IFolder _folderInProject;
     private IFolder _folderInFolder;
 
     @Before
     public void setUp() throws Exception
     {
-        _wsContext = new MockWorkspaceContext();
+//        _wsContext = new MockWorkspaceContext();
         _project = _wsContext.createProject("SomeTestProject");
         _folderInProject = _project.getFolder("/folder");
         _folderInFolder = _project.getFolder("/folder/folderInFolder");
-        _file = (MockFile) _project.getFile("/folder/myfile.txt");
+        _file = _project.getFile("/folder/myfile.txt");
         _factory = new MockResourceChangeEventFactory(_wsContext);
     }
 

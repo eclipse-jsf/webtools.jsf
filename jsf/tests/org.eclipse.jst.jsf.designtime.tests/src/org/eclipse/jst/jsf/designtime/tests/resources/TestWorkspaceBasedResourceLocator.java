@@ -11,9 +11,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.zip.ZipFile;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.internal.locator.ILocatorChangeListener;
@@ -35,24 +36,31 @@ import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceCon
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
 import org.eclipse.jst.jsf.test.util.junit4.BugRegressionTest;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
-import org.eclipse.jst.jsf.test.util.mock.MockContainer;
+import org.eclipse.jst.jsf.test.util.junit4.WorkspaceContext;
+import org.eclipse.jst.jsf.test.util.junit4.WorkspaceRunner;
+import org.eclipse.jst.jsf.test.util.mock.FileSystemZipLoader;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContextWithEvents;
 import org.eclipse.jst.jsf.test.util.mock.MockContentTypeManager;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
 import org.eclipse.jst.jsf.test.util.mock.MockResource;
 import org.eclipse.jst.jsf.test.util.mock.MockResourceChangeEventFactory;
 import org.eclipse.jst.jsf.test.util.mock.MockVirtualComponentQuery;
-import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.TestName;
+import org.junit.runner.RunWith;
 
+@RunWith(WorkspaceRunner.class)
 @Category(NoPluginEnvironment.class)
 public class TestWorkspaceBasedResourceLocator
 {
+    @Rule public TestName name = new TestName();
+
     private WorkspaceJSFResourceLocator _locator;
-    private MockWorkspaceContext _context;
-    private MockProject _project;
-    private MockContainer _webContentFolder;
+    @WorkspaceContext private IWorkspaceContextWithEvents _context;
+    private IProject _project;
+    private IContainer _webContentFolder;
     private IFolder _resourceRoot;
     private MockResourceChangeEventFactory _eventFactory;
     private ResourceIdentifierFactory _resourceIdFactory;
@@ -63,14 +71,13 @@ public class TestWorkspaceBasedResourceLocator
     @Before
     public void setUp() throws Exception
     {
-        _context = new MockWorkspaceContext();
         final File file = new File("./testdata/TestProject.zip");
         assertTrue(file.exists());
-        final ZipFile zipFile = new ZipFile(file);
+        final FileSystemZipLoader zipFileLoader = new FileSystemZipLoader(file, "Test2/");
         _project = _context.loadProject(
-                new Path("TestProjectTaglibDescriptor"), zipFile, "Test2/");
-        _project.loadAllMembers();
-        _webContentFolder = (MockContainer) _context.getResource(_project
+                new Path("TestProjectTaglibDescriptor_"+name.getMethodName()), zipFileLoader);
+        _context.ensureAllMembers(_project);
+        _webContentFolder = (IContainer) _context.getResource(_project
                 .getFullPath().append("/WebContent"));
         assertNotNull(_webContentFolder);
         _resourceRoot = _webContentFolder.getFolder(new Path("resources"));
@@ -311,7 +318,7 @@ public class TestWorkspaceBasedResourceLocator
         _locator.start(_project);
         // the workspace listener should get added event though the resource
         // root doesn't yet exist.
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         // simulate adding the folder
         ((MockResource) _resourceRoot).setExists(true);
         _changeTester.fireResourceFolderAdd("");
@@ -333,14 +340,14 @@ public class TestWorkspaceBasedResourceLocator
     public void testRemoveResourceRootAndAdd()
     {
         _locator.start(_project);
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         // delete the folder
         _changeTester.fireResourceFolderDelete("");
         // should get an event for root, lib333 and lib333/tag1.xhtml
         _changeTester.assertNumEvents(3);
         // should still be listening event after root is removed in case
         // it gets added back
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         // now add back the folder
         _changeTester.fireResourceFolderAdd("");
         _changeTester.assertNumEvents(1);
@@ -364,7 +371,7 @@ public class TestWorkspaceBasedResourceLocator
     public void testAddNoneResourceFolderToWebContent()
     {
         _locator.start(_project);
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         // delete the folder
         _changeTester.fireResourceFolderAdd("../foobar");
         _changeTester.assertNumEvents(0);
@@ -375,7 +382,7 @@ public class TestWorkspaceBasedResourceLocator
     public void testRemoveRecursiveFolder()
     {
         _locator.start(_project);
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         // delete the folder
         _changeTester.fireResourceFileDeleteRecusive("");
         final int expectedEvents = 3;
@@ -399,7 +406,7 @@ public class TestWorkspaceBasedResourceLocator
     public void testRenameFileInRootFolder()
     {
         _locator.start(_project);
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         _changeTester.fireResourceFileRename("../t11.jsp", "../t11.jspx");
         // the workspace resource locator shouldn't care if something outside
         // the resources sub-dir changes.
@@ -416,7 +423,7 @@ public class TestWorkspaceBasedResourceLocator
     	// condition with this regression test, but it was not previously
     	// covered
         _locator.start(_project);
-        assertEquals(1, _context.getWorkspace().getListeners().size());
+        assertEquals(1, _context.getListeners().size());
         _changeTester.fireResourceFolderAdd("mylib");
         // the mylib should register a library add
         _changeTester.assertNumEvents(1);

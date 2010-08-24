@@ -15,7 +15,11 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -28,7 +32,7 @@ import org.eclipse.core.runtime.Path;
  * @author cbateman
  * 
  */
-public class MockWorkspaceContext
+public class MockWorkspaceContext implements IWorkspaceContextWithEvents
 {
     private final MockWorkspace _ws;
     private final Map<IPath, MockResource> _ownedResources;
@@ -37,7 +41,7 @@ public class MockWorkspaceContext
     {
         _ws = ws;
         _ownedResources = new HashMap<IPath, MockResource>();
-        ((MockWorkspaceRoot)ws.getRoot()).setContext(this);
+        ((MockWorkspaceRoot) ws.getRoot()).setContext(this);
     }
 
     public MockWorkspaceContext()
@@ -45,11 +49,27 @@ public class MockWorkspaceContext
         this(new MockWorkspace(new MockWorkspaceRoot()));
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#fireWorkspaceEvent
+     * (org.eclipse.core.resources.IResourceChangeEvent)
+     */
     public void fireWorkspaceEvent(final IResourceChangeEvent event)
     {
         _ws.fireResourceChangeEvent(event);
     }
 
+    public void init() throws Exception
+    {
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#dispose()
+     */
     public void dispose() throws Exception
     {
         for (final Map.Entry<IPath, MockResource> entry : _ownedResources
@@ -61,27 +81,60 @@ public class MockWorkspaceContext
         _ws.dispose();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#getWorkspace()
+     */
     public MockWorkspace getWorkspace()
     {
         return _ws;
     }
 
-    public MockResource getResource(final IPath path)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#getResource(org.
+     * eclipse.core.runtime.IPath)
+     */
+    public IResource getResource(final IPath path)
     {
         return _ownedResources.get(path);
     }
 
-    public MockFile getFile(final IPath path)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#getFile(org.eclipse
+     * .core.runtime.IPath)
+     */
+    public IFile getFile(final IPath path)
     {
         return (MockFile) getResource(path);
     }
 
-    public MockProject getProject(final IPath path)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#getProject(org.eclipse
+     * .core.runtime.IPath)
+     */
+    public IProject getProject(final IPath path)
     {
         return (MockProject) _ownedResources.get(path);
     }
 
-    public MockProject createProject(final IPath path, final boolean replace)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#createProject(org
+     * .eclipse.core.runtime.IPath, boolean)
+     */
+    private IProject createProject(final IPath path, final boolean replace)
     {
         final MockProject project = new MockProject(path,
                 new MyMockResourceFactory());
@@ -89,16 +142,19 @@ public class MockWorkspaceContext
         return project;
     }
 
-    /**
-     * @return a mock project with a generated name that is guaranteed not to
-     *         conflict with any that already exist in this context.
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#createProject(java
+     * .lang.String)
      */
-    public MockProject createProject(final String baseId)
+    public IProject createProject(final String baseId)
     {
         int i = 0;
         while (_ownedResources.get(generateName(baseId, i)) != null)
         {
-            // keep looping until we get TestProject_i that doesn't exist
+            // keep looping until we get baseId_i that doesn't exist
             i++;
         }
         return createProject(generateName(baseId, i), false);
@@ -109,63 +165,86 @@ public class MockWorkspaceContext
         return new Path(baseId + "_TestProject_" + i);
     }
 
-    public MockProject createProject(final IPath path)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#createProject(org
+     * .eclipse.core.runtime.IPath)
+     */
+    public IProject createProject(final IPath path)
     {
         return createProject(path, false);
     }
 
-    public void attachProject(final MockProject project, final boolean replace)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#attachProject(org
+     * .eclipse.jst.jsf.test.util.mock.MockProject, boolean)
+     */
+    private void attachProject(final IProject project, final boolean replace)
     {
         checkExists(project.getFullPath(), replace);
-        project.setWorkspace(_ws);
-        _ownedResources.put(project.getFullPath(), project);
+        ((MockProject) project).setWorkspace(_ws);
+        _ownedResources.put(project.getFullPath(), (MockProject) project);
     }
 
-    public MockProject loadProject(final IPath path, final ZipFile zip)
-            throws Exception
-    {
-        return loadProject(path, zip, "");
-    }
-
-    public MockProject loadProject(final IPath path, final ZipFile zip,
-            final String pathIntoZip) throws Exception
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#loadProject(org.
+     * eclipse.core.runtime.IPath, java.util.zip.ZipFile, java.lang.String)
+     */
+    public IProject loadProject(final IPath path,
+            final ZipFileLoader zipFileLoader) throws Exception
     {
         checkExists(path, false);
         final MockProject project = new MockProject(path,
-                new MyMockResourceFactory(zip, pathIntoZip));
+                new MyMockResourceFactory(zipFileLoader.getZipFile(),
+                        zipFileLoader.getPathInZip()));
         attachProject(project, false);
         return project;
     }
 
-    public MockFile attachFile(MockProject project, IPath projectRelativePath,
-            File file)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#attachFile(org.eclipse
+     * .jst.jsf.test.util.mock.MockProject, org.eclipse.core.runtime.IPath,
+     * java.io.File)
+     */
+    public MockFile attachFile(final IProject project, final IPath projectRelativePath,
+            final File file)
     {
         assertEquals(checkExists(project.getFullPath(), true), project);
         // throw an exception if projectRelativePath already exists
         checkExists(project.getFullPath().append(projectRelativePath), false);
         assertTrue(file.exists());
-        MockFile iFile = (MockFile) project.getFile(projectRelativePath);
+        final MockFile iFile = (MockFile) project.getFile(projectRelativePath);
         InputStream inStream = null;
         try
         {
             inStream = new FileInputStream(file);
             iFile.setContents(inStream, 0, null);
             return iFile;
-        } catch (IOException e)
+        } catch (final IOException e)
         {
             throw new RuntimeException(e);
-        } catch (CoreException e)
+        } catch (final CoreException e)
         {
             throw new RuntimeException(e);
-        }
-        finally
+        } finally
         {
             if (inStream != null)
             {
                 try
                 {
                     inStream.close();
-                } catch (IOException e)
+                } catch (final IOException e)
                 {
                     throw new RuntimeException(e);
                 }
@@ -210,8 +289,8 @@ public class MockWorkspaceContext
             if (resource == null)
             {
                 resource = new MockFile(newFileFullPath);
-                ((MockResource) resource).setWorkspace(_ws);
-                ((MockResource) resource).setProject(container.getProject());
+                (resource).setWorkspace(_ws);
+                (resource).setProject(container.getProject());
                 if (_zip != null)
                 {
                     final ZipEntry entry = _zip.getEntry(_pathIntoZip
@@ -241,8 +320,8 @@ public class MockWorkspaceContext
             if (resource == null)
             {
                 resource = new MockFolder(newFileFullPath, this);
-                ((MockResource) resource).setWorkspace(_ws);
-                ((MockResource) resource).setProject(container.getProject());
+                (resource).setWorkspace(_ws);
+                (resource).setProject(container.getProject());
                 ensurePathToNewResource(container, path);
                 _ownedResources.put(newFileFullPath, resource);
             }
@@ -261,7 +340,7 @@ public class MockWorkspaceContext
                 final String nextSegment = leadingPath.segments()[0];
                 curPath = curPath.append(nextSegment);
                 leadingPath = leadingPath.removeFirstSegments(1);
-                MockResource newContainer = checkExists(curPath, true);
+                final MockResource newContainer = checkExists(curPath, true);
                 if (newContainer == null)
                 {
                     newFolder(container, curPath);
@@ -269,7 +348,7 @@ public class MockWorkspaceContext
             }
         }
 
-        protected void newFolder(MockContainer container, IPath curPath)
+        protected void newFolder(final MockContainer container, final IPath curPath)
         {
             MockResource newContainer;
             newContainer = new MockFolder(curPath, this);
@@ -325,5 +404,32 @@ public class MockWorkspaceContext
                 }
             }
         }
+    }
+
+    public List<IResourceChangeListener> getListeners()
+    {
+        return getWorkspace().getListeners();
+    }
+
+    public List<IResourceChangeListener> getListeners(final List<Class<? extends IResourceChangeListener>>  includeListeners)
+    {
+        final List<IResourceChangeListener> listeners = new ArrayList<IResourceChangeListener>();
+        for (final IResourceChangeListener listener : getListeners())
+        {
+            SEARCH_CLASSES: for (final Class<? extends IResourceChangeListener> clazz : includeListeners)
+            {
+                if (clazz.isAssignableFrom(listener.getClass()))
+                {
+                    listeners.add(listener);
+                    break SEARCH_CLASSES;
+                }
+            }
+        }
+        return listeners;
+    }
+
+    public void ensureAllMembers(final IProject project) throws Exception
+    {
+        ((MockProject) project).loadAllMembers();
     }
 }

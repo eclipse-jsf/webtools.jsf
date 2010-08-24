@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelManager;
 import org.eclipse.jst.jsf.common.metadata.internal.MetaDataModelManagerFactory;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 
 public class MetaDataModelManagerFactoryTests extends TestCase {
@@ -23,7 +24,7 @@ public class MetaDataModelManagerFactoryTests extends TestCase {
 	private IProject _project;
 	
 	public void setUp() throws Exception {
-		MockWorkspaceContext context = new MockWorkspaceContext();
+		IWorkspaceContext context = new MockWorkspaceContext();
 		_project = context.createProject("MetaDataModelManagerFactoryTests"+"_"+getName());
 	}
 

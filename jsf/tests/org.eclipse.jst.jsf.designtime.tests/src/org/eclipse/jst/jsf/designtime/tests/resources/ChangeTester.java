@@ -1,7 +1,6 @@
 package org.eclipse.jst.jsf.designtime.tests.resources;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
@@ -10,14 +9,13 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.jst.jsf.test.util.mock.MockFile;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContextWithEvents;
 import org.eclipse.jst.jsf.test.util.mock.MockResourceChangeEventFactory;
-import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 
 public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
 {
     protected final List<EVENTTYPE> _events = new ArrayList<EVENTTYPE>();
-    private final MockWorkspaceContext _context;
+    private final IWorkspaceContextWithEvents _context;
     private final MockResourceChangeEventFactory _eventFactory;
     private final IFolder _resourceRoot;
 
@@ -26,7 +24,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
      * @param factory
      * @param resourceRoot
      */
-    public ChangeTester(final MockWorkspaceContext context,
+    public ChangeTester(final IWorkspaceContextWithEvents context,
             final MockResourceChangeEventFactory factory,
             final IFolder resourceRoot)
     {
@@ -40,7 +38,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         installListener();
         final IFile file = getFile(resourceId);
         final IResourceChangeEvent event = _eventFactory
-                .createSimpleFileChange((MockFile) file, true);
+                .createSimpleFileChange(file, true);
         _context.fireWorkspaceEvent(event);
         removeListener();
     }
@@ -50,7 +48,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         installListener();
         final IFile file = _resourceRoot.getFile(resourceId);
         final IResourceChangeEvent event = _eventFactory
-                .createSimpleFileAdded((MockFile) file);
+                .createSimpleFileAdded(file);
         _context.fireWorkspaceEvent(event);
         removeListener();
     }
@@ -59,7 +57,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
     {
         final IFile file = _resourceRoot.getFile(resourceId);
         assertNotNull(file);
-        assertTrue(file.exists());
+//        assertTrue(file.exists());
         return file;
     }
 
@@ -67,7 +65,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
     {
         final IFolder folder = _resourceRoot.getFolder(folderName);
         assertNotNull(folder);
-        assertTrue(folder.exists());
+//        assertTrue(folder.exists());
         return folder;
     }
 
@@ -81,7 +79,7 @@ public abstract class ChangeTester<EVENTTYPE, CHANGETYPE>
         installListener();
         final IFile file = getFile(resourceId);
         final IResourceChangeEvent event = _eventFactory
-                .createSimpleFileRemove((MockFile) file);
+                .createSimpleFileRemove(file);
         _context.fireWorkspaceEvent(event);
         removeListener();
     }

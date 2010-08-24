@@ -50,8 +50,7 @@ public class MockFile extends MockResource implements IFile
     public void create(final InputStream source, final boolean force,
             final IProgressMonitor monitor) throws CoreException
     {
-        throw new UnsupportedOperationException();
-
+        setContents(source, 0, monitor);
     }
 
     public void create(final InputStream source, final int updateFlags,

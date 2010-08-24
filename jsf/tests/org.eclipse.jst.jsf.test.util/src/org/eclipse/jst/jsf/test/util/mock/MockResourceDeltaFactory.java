@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.CoreException;
 public class MockResourceDeltaFactory
 {
     // private final MockWorkspaceContext _wsContext;
-    public MockResourceDeltaFactory(final MockWorkspaceContext wsContext)
+    public MockResourceDeltaFactory(final IWorkspaceContext wsContext)
     {
         // _wsContext = wsContext;
     }

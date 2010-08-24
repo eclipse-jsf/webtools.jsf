@@ -7,7 +7,6 @@ import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
 
 public class MockJavaChangeEventFactory
 {
@@ -27,7 +26,7 @@ public class MockJavaChangeEventFactory
     }
 
     public ElementChangedEvent createSimpleJarRemoved(
-            final MockProject project, final IPackageFragmentRoot packageRoots)
+            final IProject project, final IPackageFragmentRoot packageRoots)
     {
         final IJavaElementDelta delta = createSimpleJarAddedDelta(project,
                 packageRoots, IJavaElementDelta.F_REMOVED_FROM_CLASSPATH);

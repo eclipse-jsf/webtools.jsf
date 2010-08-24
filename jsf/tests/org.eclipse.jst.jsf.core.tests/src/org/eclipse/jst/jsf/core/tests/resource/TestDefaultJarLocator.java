@@ -6,6 +6,7 @@ import static junit.framework.Assert.assertNotNull;
 import java.io.File;
 import java.util.Collection;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -15,7 +16,7 @@ import org.eclipse.jst.jsf.common.internal.resource.IJarLocator.JarChangeEvent;
 import org.eclipse.jst.jsf.common.internal.resource.IJarLocator.JarChangeEvent.Type;
 import org.eclipse.jst.jsf.common.internal.resource.IJarLocator.JarChangeListener;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJDTWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJavaChangeEventFactory;
@@ -29,8 +30,8 @@ import org.junit.experimental.categories.Category;
 @Category(NoPluginEnvironment.class)
 public class TestDefaultJarLocator
 {
-    private MockWorkspaceContext _wsContext;
-    private MockProject _project;
+    private IWorkspaceContext _wsContext;
+    private IProject _project;
     private MockJavaChangeEventFactory _factory;
     private MockJDTWorkspaceContext _jdtContext;
     private MockJavaProject _javaProject;

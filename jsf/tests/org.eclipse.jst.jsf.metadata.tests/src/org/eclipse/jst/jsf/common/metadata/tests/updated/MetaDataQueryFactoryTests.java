@@ -20,6 +20,7 @@ import org.eclipse.jst.jsf.common.metadata.query.internal.IMetaDataQuery;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
 import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class MetaDataQueryFactoryTests extends TestCase {
 	private IProject _project;
 	
 	public void setUp() throws Exception {
-		MockWorkspaceContext context = new MockWorkspaceContext();
+		IWorkspaceContext context = new MockWorkspaceContext();
 		_project = context.createProject("MetaDataQueryFactoryTests"+"_"+getName());
 	}
 

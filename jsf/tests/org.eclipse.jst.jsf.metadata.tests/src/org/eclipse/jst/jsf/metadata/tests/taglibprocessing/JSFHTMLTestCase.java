@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.metadata.tests.taglibprocessing;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -31,7 +32,6 @@ import org.eclipse.jst.jsf.metadata.tests.util.JSPTestCase;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationInfo;
-import org.eclipse.jst.jsf.test.util.mock.MockProject;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 
 public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV11{
@@ -100,7 +100,7 @@ public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV
 	
 	public void testQuery() throws Exception {
 		//tests querying JSF_HTML using new APIs
-		MockProject project = new MockWorkspaceContext().createProject("test"); 
+		IProject project = new MockWorkspaceContext().createProject("test"); 
 		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
 		ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context); 
 		

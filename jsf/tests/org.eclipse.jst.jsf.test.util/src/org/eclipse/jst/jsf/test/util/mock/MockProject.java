@@ -26,7 +26,7 @@ public class MockProject extends MockContainer implements IProject
 
     public MockProject(final IPath path, final IMockResourceFactory resFactory)
     {
-        super(IResource.PROJECT, new Path("MockProject_"+path), resFactory);
+        super(IResource.PROJECT,path, resFactory);
         setProject(this);
     }
 

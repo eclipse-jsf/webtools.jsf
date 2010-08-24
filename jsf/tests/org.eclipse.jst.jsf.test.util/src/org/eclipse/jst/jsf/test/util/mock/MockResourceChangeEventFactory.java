@@ -2,6 +2,7 @@ package org.eclipse.jst.jsf.test.util.mock;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 
 public class MockResourceChangeEventFactory
@@ -14,31 +15,31 @@ public class MockResourceChangeEventFactory
         _deltaFactory = deltaFactory;
     }
 
-    public MockResourceChangeEventFactory(final MockWorkspaceContext wsContext)
+    public MockResourceChangeEventFactory(final IWorkspaceContext wsContext)
     {
         this(new MockResourceDeltaFactory(wsContext));
     }
 
-    public IResourceChangeEvent createSimpleFileChange(final MockFile file,
+    public IResourceChangeEvent createSimpleFileChange(final IFile file,
             final boolean incrementModStamp)
     {
         final MockResourceDelta delta = _deltaFactory
                 .createSimpleFileChange(file);
-        if (incrementModStamp)
+        if (incrementModStamp && file instanceof MockFile)
         {
-            file.incrementModStamp();
+            ((MockResource) file).incrementModStamp();
         }
         return newPostChangeEvent(delta);
     }
 
-    public IResourceChangeEvent createSimpleFileRemove(final MockFile file)
+    public IResourceChangeEvent createSimpleFileRemove(final IFile file)
     {
         final MockResourceDelta delta = _deltaFactory
                 .createSimpleFileRemoved(file);
         return newPostChangeEvent(delta);
     }
 
-    public IResourceChangeEvent createSimpleFileAdded(final MockFile file)
+    public IResourceChangeEvent createSimpleFileAdded(final IFile file)
     {
         final MockResourceDelta delta = _deltaFactory
                 .createSimpleFileAdded(file);
@@ -46,14 +47,14 @@ public class MockResourceChangeEventFactory
     }
 
     public IResourceChangeEvent createSimpleProjectClosed(
-            final MockProject project)
+            final IProject project)
     {
         return new MockResourceChangeEvent(project,
                 IResourceChangeEvent.PRE_CLOSE, null);
     }
 
     public IResourceChangeEvent createSimpleProjectDeleted(
-            final MockProject project)
+            final IProject project)
     {
         return new MockResourceChangeEvent(project,
                 IResourceChangeEvent.PRE_DELETE, null);

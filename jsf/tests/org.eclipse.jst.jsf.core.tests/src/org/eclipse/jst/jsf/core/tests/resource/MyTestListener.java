@@ -17,19 +17,19 @@ import org.eclipse.jst.jsf.common.internal.resource.LifecycleListener;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.ReasonType;
-import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
+import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContextWithEvents;
 
 class MyTestListener extends AbstractTestListener<ResourceLifecycleEvent> implements IResourceLifecycleListener
 {
     private final List<EventData> _events = new ArrayList<EventData>();
-    private final MockWorkspaceContext _wsContext;
+    private final IWorkspaceContextWithEvents _wsContext;
 
-    public MyTestListener(final MockWorkspaceContext wsContext)
+    public MyTestListener(final IWorkspaceContextWithEvents wsContext)
     {
         _wsContext = wsContext;
     }
 
-    public MyTestListener(final MockWorkspaceContext wsContext,
+    public MyTestListener(final IWorkspaceContextWithEvents wsContext,
             final LifecycleListener listener)
     {
         listener.addListener(this);
