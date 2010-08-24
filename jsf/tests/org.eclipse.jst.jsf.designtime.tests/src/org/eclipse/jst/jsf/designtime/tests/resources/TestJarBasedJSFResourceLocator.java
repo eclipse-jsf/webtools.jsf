@@ -19,7 +19,6 @@ import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceFragment;
 import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
 import org.eclipse.jst.jsf.test.util.junit4.NoPluginEnvironment;
 import org.eclipse.jst.jsf.test.util.mock.MockContentTypeManager;
-import org.eclipse.jst.jsf.test.util.mock.MockFile;
 import org.eclipse.jst.jsf.test.util.mock.MockProject;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.java.MockJDTWorkspaceContext;
@@ -36,7 +35,7 @@ public class TestJarBasedJSFResourceLocator
     private MockJDTWorkspaceContext _jdtContext;
     private MockWorkspaceContext _wsContext;
     private MockProject _project;
-    private MockFile _jarIFile;
+//    private MockFile _jarIFile;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -64,7 +63,7 @@ public class TestJarBasedJSFResourceLocator
         _locator.start(_project);
         // we can pass null here since our jar provider doesn't care about projects.
         final List<IJSFResourceFragment> foundResources = _locator.locate(_project);
-        assertEquals(2, foundResources.size());
+        assertEquals(3, foundResources.size());
         final Set<String> foundResourceIds = new HashSet<String>();
         for (final IJSFResourceFragment res : foundResources)
         {
@@ -73,5 +72,26 @@ public class TestJarBasedJSFResourceLocator
         // contains a directory for mylib
         assertTrue(foundResourceIds.contains("mylib"));
         assertTrue(foundResourceIds.contains("mylib/tag1.xhtml"));
+        // @BugRegressionTest(bugNumber = 318478)
+        assertTrue(foundResourceIds.contains("mylib/invalidDir"));
     }
+    
+//    @Test
+//    @BugRegressionTest(bugNumber = 318478)
+//    public void testAddInvalidResource()
+//    {
+//        _locator.start(_project);
+//        assertEquals(1, _context.getWorkspace().getListeners().size());
+//        _changeTester.fireResourceFolderAdd("mylib");
+//        // the mylib should register a library add
+//        _changeTester.assertNumEvents(1);
+//        _changeTester.fireResourceFolderAdd("mylib/invalidDir");
+//        // the dir is potentially valid as a fragment
+//        _changeTester.assertNumEvents(1);
+//        // the workspace resource locator shouldn't care if something with
+//        // an invalid id is added
+//        _changeTester.fireResourceFileAdd("mylib/invalidDir/file.css");
+//        _changeTester.assertNumEvents(0);
+//    }
+
 }

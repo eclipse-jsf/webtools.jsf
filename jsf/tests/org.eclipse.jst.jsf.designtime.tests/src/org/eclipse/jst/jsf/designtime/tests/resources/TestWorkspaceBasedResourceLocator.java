@@ -406,6 +406,29 @@ public class TestWorkspaceBasedResourceLocator
         _changeTester.assertNumEvents(0);
     }
 
+    @Test
+    @BugRegressionTest(bugNumber = 318478)
+    public void testAddInvalidResource()
+    {
+    	// when we add a file like "/foo/bar/res.css to the webroot/resources,
+    	//this should trigger an internal invalid id exception and cause
+    	// a lack of resulting resource add events.  This is not a new
+    	// condition with this regression test, but it was not previously
+    	// covered
+        _locator.start(_project);
+        assertEquals(1, _context.getWorkspace().getListeners().size());
+        _changeTester.fireResourceFolderAdd("mylib");
+        // the mylib should register a library add
+        _changeTester.assertNumEvents(1);
+        _changeTester.fireResourceFolderAdd("mylib/invalidDir");
+        // the dir is potentially valid as a fragment
+        _changeTester.assertNumEvents(1);
+        // the workspace resource locator shouldn't care if something with
+        // an invalid id is added
+        _changeTester.fireResourceFileAdd("mylib/invalidDir/file.css");
+        _changeTester.assertNumEvents(0);
+    }
+    
     private IJSFResourceFragment findById(
             final WorkspaceJSFResourceLocator locator, final String id)
             throws InvalidIdentifierException
