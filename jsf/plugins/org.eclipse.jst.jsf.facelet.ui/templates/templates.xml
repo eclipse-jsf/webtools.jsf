@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<templates>
-<template id="org.eclipse.jst.jsf.facelet.ui.new_simple_footer_xhtml" autoinsert="false" context="html_new" deleted="false" description="%New_Footer_Description" enabled="true" name="%New_Facelet_Footer">%New_Facelet_Footer.footer</template>
-<template id="org.eclipse.jst.jsf.facelet.ui.new_header_xhtml" autoinsert="false" context="html_new" deleted="false" description="%New_Facelet_Header_Description" enabled="true" name="%New_Facelet_Header">%New_Facelet_Header.header</template>
-<template id="org.eclipse.jst.jsf.facelet.ui.new_basic_template_xhtml" autoinsert="false" context="html_new" deleted="false" description="%New_Facelet_Template_Description" enabled="true" name="%New_Facelet_Template">%New_Facelet_Template.template</template>
-<template id="org.eclipse.jst.jsf.facelet.ui.new_basic_composition_xhtml" autoinsert="false" context="html_new" deleted="false" description="%New_Simple_Facelet_Composition_Page_Description" enabled="true" name="%New_Simple_Facelet_Composition_Page">%New_Simple_Facelet_Composition_Page.composition</template>
-</templates>
