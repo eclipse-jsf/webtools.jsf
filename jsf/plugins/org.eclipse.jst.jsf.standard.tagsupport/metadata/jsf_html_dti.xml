@@ -240,13 +240,17 @@
 					multiLevel="true"
 					widget="true">
 					<resolve-attribute-value attributeName="src"/>
+					<!--
 					<resolve-attribute-value attributeName="value"/>
 					<resolve-attribute-value attributeName="url"/>
+					-->
 				</tag-decorate-info>
 				<tag-decorate-info id="vpd-decorate-preview">
 					<resolve-attribute-value attributeName="src"/>
+					<!--
 					<resolve-attribute-value attributeName="value"/>
 					<resolve-attribute-value attributeName="url"/>
+					-->
 				</tag-decorate-info>
 			</value>
 		</trait>
