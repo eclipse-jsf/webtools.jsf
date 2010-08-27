@@ -28,13 +28,8 @@ This guide is intended for setup of Trinidad for use with the Eclipse Web Tools 
 <h3>JSF Library Configuration</h3>
 As with all frameworks, Trinidad requires certain libraries to be on the classpath.
 Some libraries <i>may</i> be provided by the server runtime (for example, a JEE5 server runtime will likely provide a JSF 1.2 implementation and JSTL 1.2).
-When required libraries are not provided by the server runtime, it is recommended that they be added as one or more JSF Libraries (please refer to <a href="../../tasks/jsf_libs.html">Creating and Updating JSF Libraries</a>).<br/>
+When required libraries are not provided by the server runtime, it is recommended that they be added as one or more user Libraries (please refer to <a href="../../reference/jsf_library_management.html">Creating and Updating JSF Libraries</a>).<br/>
 <br/>
-The following image demonstrates one approach to setting up required libraries - relevant JSF libraries and their typical Java libraries ("JARs") are outlined in red, JSF Library names and JAR filesystem locations are arbitrary:<br/>
-<br/>
-<img src="images/trinidad_initialsetupguide_JSFLibs.png" alt="Example of JSF Libraries"/>
-<h6 class="CaptionFigColumn">Example of JSF Libraries</h6>
-<p class="Note"><b>NOTE:</b> The image above shows libraries typically required for a recent version of Trinidad for JSF 1.2 - other versions may have different requirements. Please consult online resources at the <a href="http://myfaces.apache.org/trinidad/index.html">Apache MyFaces Trinidad</a> website for complete and current information.</p>
 
 <h3>Dynamic Web Project Configuration</h3>
 When creating a Dynamic Web Project, specify the use of the <i>JavaServer Faces (v1.1 or v1.2, depending on requirements) Project</i> "Configuration", as shown below:<br/>
@@ -43,7 +38,7 @@ When creating a Dynamic Web Project, specify the use of the <i>JavaServer Faces 
 <h6 class="CaptionFigColumn">JavaServer Faces v1.2 Project</h6>
 Proceed through the wizard until reaching the <em class="UILabel">JSF Capabilities</em> page. On this page, select the required JSF Libraries as previously created, as shown below:<br/>
 <br/>
-<img src="images/trinidad_initialsetupguide_JSFCapabilities.png" alt="JSF Capabilities"/>
+<img src="../../reference/images/jsf_library_configuration.png" alt="JSF Capabilities"/>
 <h6 class="CaptionFigColumn">JSF Capabilities</h6>
 <p class="Note"><b>NOTE:</b> If JSF Libraries were created with different names than shown above, the available library names may differ.</p>
 Complete the wizard to create the Dynamic Web Project.
