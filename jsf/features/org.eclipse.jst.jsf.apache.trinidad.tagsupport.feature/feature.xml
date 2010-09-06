@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"
       label="%featureName"
-      version="2.2.100.qualifier"
+      version="2.2.101.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -16,7 +16,6 @@
    <license url="license.html">
       %license
    </license>
-
 
    <requires>
       <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
