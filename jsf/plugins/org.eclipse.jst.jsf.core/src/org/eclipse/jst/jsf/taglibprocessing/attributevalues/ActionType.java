@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Gerry Kessler/Oracle - initial API and implementation
+ *    Xiaonan Jiang/IBM  - https://bugs.eclipse.org/bugs/show_bug.cgi?id=308337
  *    
  ********************************************************************************/
 
@@ -19,10 +20,12 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
@@ -33,6 +36,9 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage;
 import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.wst.common.componentcore.ComponentCore;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.osgi.framework.Bundle;
 
 /**
@@ -71,18 +77,49 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 			
 		IFile jsp = (IFile)wr.getResource();
 		List<NavigationRuleType> rules = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()).getNavigationRulesForPage(jsp);
-		for(final NavigationRuleType rule : rules){
-			for (Iterator cases=rule.getNavigationCase().iterator();cases.hasNext();){				
+		for (final NavigationRuleType rule : rules) {
+			for (Iterator cases=rule.getNavigationCase().iterator();cases.hasNext();) {				
 				NavigationCaseType navCase = (NavigationCaseType)cases.next();					
 				if (navCase.getFromOutcome() != null && 
 						value.equals(navCase.getFromOutcome().getTextContent().trim()))
 					return true;				
 			}
 		}
+		if (JSFVersion.valueOfProject(jsp.getProject()).compareTo(JSFVersion.V2_0) >= 0) {
+			int index = value.indexOf('?');
+			if (index != -1) {
+				value = value.substring(0, index);
+			}
+			if (value != null && value.length() > 1) {
+				IVirtualFolder webRoot = ComponentCore.createComponent(jsp.getProject()).getRootFolder();
+				if (value.charAt(0) == '/') {
+					IVirtualFile file = webRoot.getFile(new Path(value));
+					if (file.exists()) {
+						return true;
+					}
+				} else {
+					IPath webContentPath = webRoot.getUnderlyingFolder().getFullPath();
+					IPath filePath = jsp.getFullPath();
+					if (filePath.matchingFirstSegments(webContentPath) == webContentPath.segmentCount()) {
+						String extension = filePath.getFileExtension();
+						filePath = filePath.removeFirstSegments(webContentPath.segmentCount());
+						filePath = filePath.removeLastSegments(1);
+						filePath = filePath.append(value);
+						if (filePath.getFileExtension() == null && extension != null) {
+							filePath = filePath.addFileExtension(extension);
+						}
+						IVirtualFile file = webRoot.getFile(filePath);
+						if (file.exists()) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+
 		IValidationMessage msg = new ValidationMessage(Messages.ActionType_invalid_value);
 		getValidationMessages().add(msg);
 		return false;
-		
 	}
 	
 	/* (non-Javadoc)
@@ -97,7 +134,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 		if (wr != null && JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()) != null) {//may not be JSF faceted project or know faces-config){			
 			IFile jsp = (IFile)wr.getResource();
 			List<NavigationRuleType> rules = JSFAppConfigManagerFactory.getJSFAppConfigManagerInstance(wr.getProject()).getNavigationRulesForPage(jsp);
-			for(final NavigationRuleType rule : rules){
+			for (final NavigationRuleType rule : rules) {
 				if (rule != null)
 					ret.addAll(createProposals(rule));
 			}
@@ -108,7 +145,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	private List createProposals(NavigationRuleType rule) {
 		List ret = new ArrayList();
 		List cases = rule.getNavigationCase();
-		for(Iterator it=cases.iterator();it.hasNext();){
+		for (Iterator it=cases.iterator();it.hasNext();) {
 			NavigationCaseType navCase = (NavigationCaseType)it.next();
 			PossibleValue pv = createProposal(rule, navCase);
 			if (pv != null)
@@ -168,11 +205,11 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	}
 	
 	private ImageDescriptor getImageDesc(String img) 
-    {
+	{
 		Bundle bundle = FacesConfigPlugin.getPlugin().getBundle();
 		URL url = FileLocator.find(bundle, new Path(img), null);
 		ImageDescriptor desc = ImageDescriptor.createFromURL(url);
-		if (desc == MISSING_IMAGE){
+		if (desc == MISSING_IMAGE) {
 			return null;
 		}
 		return desc;
