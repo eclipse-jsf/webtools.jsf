@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.facesconfig.ui.page.IntroductionPage;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.PageflowEditor;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.AddConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.AddNodeCommand;
+import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DelegatingCommandStack;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteConnectionCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.DeleteNodeCommand;
 import org.eclipse.jst.jsf.facesconfig.ui.pageflow.command.ReconnectConnectionCommand;
@@ -87,8 +88,9 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		AddNodeCommand command = new AddNodeCommand();
 		command.setParent(getPageflow());
 		command.setChild(source);
-		editor.getDelegatingCommandStack().execute(
-				command);
+		DelegatingCommandStack stack = editor.getDelegatingCommandStack();
+		assertNotNull("PageflowPage will not be added to the Pageflow, as the underlying command stack is null", stack.getCurrentCommandStack());
+		stack.execute(command);
 		return source;
 	}
 

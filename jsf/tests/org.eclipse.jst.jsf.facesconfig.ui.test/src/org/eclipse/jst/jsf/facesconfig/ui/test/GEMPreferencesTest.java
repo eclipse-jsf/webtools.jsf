@@ -69,6 +69,8 @@ public class GEMPreferencesTest extends FacesConfigEditorTest {
 		GEMPreferences page = (GEMPreferences) dialog.getSelectedPage();
 		assertNotNull(page);
 		// there is no much open mehtods for testing....
+		
+		dialog.close();
 	}
 
 	protected static Shell getShell() {
