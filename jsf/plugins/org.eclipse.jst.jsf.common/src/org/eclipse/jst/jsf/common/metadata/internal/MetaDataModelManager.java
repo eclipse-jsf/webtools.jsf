@@ -155,11 +155,18 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
             models.put(model);
     }
 
+    @Override
     public void dispose() {
     	super.dispose();
     	models.dispose();
     }
-    
+
+    @Override
+    public void destroy() {
+        // no persistent data to cleanup. just call dispose
+        dispose();
+    }
+
     /**
      * Map of models keyed by DOMAIN_ID:MODEL_ID from the context.   Project is not part of key.
      * 
