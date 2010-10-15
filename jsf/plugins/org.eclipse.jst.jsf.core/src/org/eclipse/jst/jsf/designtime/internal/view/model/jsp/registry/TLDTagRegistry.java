@@ -125,7 +125,10 @@ public final class TLDTagRegistry extends AbstractTagRegistry implements
         // call checkpoint to flush serializable data
         checkpoint();
         //_persistedTagStrategy.dispose();
-        
+
+        _prefs.removeListener(_myPropertyListener);
+        _prefs.dispose();
+
         _nsResolved.clear();
         _changeOperations.clear();
 
