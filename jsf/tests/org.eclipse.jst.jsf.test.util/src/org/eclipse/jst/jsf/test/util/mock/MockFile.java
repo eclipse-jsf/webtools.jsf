@@ -18,16 +18,20 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentDescription;
+import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.core.runtime.content.IContentTypeSettings;
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jst.jsf.test.util.Activator;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 
 public class MockFile extends MockResource implements IFile
 {
 
-    private byte[]  _contents;
-    private File    _concreteFile;
+    private byte[] _contents;
+    private File _concreteFile;
 
     public MockFile(final IPath path)
     {
@@ -83,8 +87,7 @@ public class MockFile extends MockResource implements IFile
 
     public String getCharset() throws CoreException
     {
-        throw new UnsupportedOperationException();
-
+        return "UTF-8";
     }
 
     public String getCharset(final boolean checkImplicit) throws CoreException
@@ -101,8 +104,121 @@ public class MockFile extends MockResource implements IFile
 
     public IContentDescription getContentDescription() throws CoreException
     {
-        throw new UnsupportedOperationException();
+        return new IContentDescription()
+        {
 
+            public void setProperty(QualifiedName key, Object value)
+            {
+                throw new UnsupportedOperationException();
+
+            }
+
+            public boolean isRequested(QualifiedName key)
+            {
+                throw new UnsupportedOperationException();
+            }
+
+            public Object getProperty(QualifiedName key)
+            {
+                return null;
+            }
+
+            public IContentType getContentType()
+            {
+                return new IContentType()
+                {
+
+                    public void addFileSpec(String fileSpec, int type)
+                            throws CoreException
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public void removeFileSpec(String fileSpec, int type)
+                            throws CoreException
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public void setDefaultCharset(String userCharset)
+                            throws CoreException
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public IContentType getBaseType()
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public IContentDescription getDefaultDescription()
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public IContentDescription getDescriptionFor(
+                            InputStream contents, QualifiedName[] options)
+                            throws IOException
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public IContentDescription getDescriptionFor(
+                            Reader contents, QualifiedName[] options)
+                            throws IOException
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public String getDefaultCharset()
+                    {
+                        return "UTF-8";
+                    }
+
+                    public String[] getFileSpecs(int type)
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public String getId()
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public String getName()
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public boolean isAssociatedWith(String fileName)
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public boolean isAssociatedWith(String fileName,
+                            IScopeContext context)
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public boolean isKindOf(IContentType another)
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+
+                    public IContentTypeSettings getSettings(
+                            IScopeContext context) throws CoreException
+                    {
+                        throw new UnsupportedOperationException();
+                    }
+                };
+            }
+
+            public String getCharset()
+            {
+                return "UTF-8";
+            }
+        };
     }
 
     public InputStream getContents() throws CoreException
@@ -154,7 +270,9 @@ public class MockFile extends MockResource implements IFile
     {
         if (_contents != null && !force)
         {
-            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Attempt to reset contents without force"));
+            throw new CoreException(new Status(IStatus.ERROR,
+                    Activator.PLUGIN_ID,
+                    "Attempt to reset contents without force"));
         }
         ByteArrayOutputStream captureBytes;
         try
@@ -163,14 +281,18 @@ public class MockFile extends MockResource implements IFile
             // keep concrete file in sync if we have one.
             if (_concreteFile != null && _concreteFile.exists())
             {
-                JSFTestUtil.saveToFileSystem(captureBytes.toByteArray(), _concreteFile.toURI());
+                JSFTestUtil.saveToFileSystem(captureBytes.toByteArray(),
+                        _concreteFile.toURI());
             }
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
-            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Failed loading mock contents from stream"));
+            throw new CoreException(new Status(IStatus.ERROR,
+                    Activator.PLUGIN_ID,
+                    "Failed loading mock contents from stream"));
         }
         _contents = captureBytes.toByteArray();
-        
+
     }
 
     public void setContents(final IFileState source, final boolean force,
@@ -183,13 +305,15 @@ public class MockFile extends MockResource implements IFile
     public void setContents(final InputStream source, final int updateFlags,
             final IProgressMonitor monitor) throws CoreException
     {
-        setContents(source, (updateFlags | IResource.FORCE)!= 0, (updateFlags | IResource.KEEP_HISTORY) != 0, monitor);
+        setContents(source, (updateFlags | IResource.FORCE) != 0,
+                (updateFlags | IResource.KEEP_HISTORY) != 0, monitor);
     }
 
     public void setContents(final IFileState source, final int updateFlags,
             final IProgressMonitor monitor) throws CoreException
     {
-        setContents(source, (updateFlags | IResource.FORCE)!= 0, (updateFlags | IResource.KEEP_HISTORY) != 0, monitor);
+        setContents(source, (updateFlags | IResource.FORCE) != 0,
+                (updateFlags | IResource.KEEP_HISTORY) != 0, monitor);
     }
 
     @Override
@@ -206,14 +330,17 @@ public class MockFile extends MockResource implements IFile
             String tempFileName = getFullPath().toString().replace('/', '_');
             try
             {
-                _concreteFile = File.createTempFile(tempFileName, "."+getFullPath().getFileExtension());
+                _concreteFile = File.createTempFile(tempFileName, "."
+                        + getFullPath().getFileExtension());
                 _concreteFile.deleteOnExit();
                 assertTrue(_concreteFile.exists());
                 if (_contents != null)
                 {
-                    JSFTestUtil.saveToFileSystem(_contents, _concreteFile.toURI());
+                    JSFTestUtil.saveToFileSystem(_contents,
+                            _concreteFile.toURI());
                 }
-            } catch (IOException e)
+            }
+            catch (IOException e)
             {
                 throw new RuntimeException(e);
             }

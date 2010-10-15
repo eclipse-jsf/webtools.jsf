@@ -101,8 +101,7 @@ public class MockVirtualFile implements IVirtualFile
 
     public IResource getUnderlyingResource()
     {
-        throw new UnsupportedOperationException();
-
+        return getUnderlyingFile();
     }
 
     public IResource[] getUnderlyingResources()
