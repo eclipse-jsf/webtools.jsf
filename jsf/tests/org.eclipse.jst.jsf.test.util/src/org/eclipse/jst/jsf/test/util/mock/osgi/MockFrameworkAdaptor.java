@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Properties;
 
 import org.eclipse.osgi.framework.adaptor.BundleClassLoader;
@@ -396,4 +397,9 @@ public class MockFrameworkAdaptor implements FrameworkAdaptor
     {
         throw new UnsupportedOperationException();
     }
+
+	public Enumeration<URL> findEntries(List<BundleData> datas, String path,
+			String filePattern, int options) {
+		return null;
+	}
 }
