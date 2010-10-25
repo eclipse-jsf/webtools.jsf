@@ -494,7 +494,7 @@
                 function that will handle errors.&lt;/p&gt;
 
             </description>
-            <name>oneerror</name>
+            <name>onerror</name>
             <required>false</required>
             <type>java.lang.String</type>
         </attribute>
