@@ -41,7 +41,8 @@ public class MetaDataLocatorFactory
 	public synchronized static MetaDataLocatorFactory getInstance(){
 		if (INSTANCE == null){
 			INSTANCE = new MetaDataLocatorFactory();
-			ResourcesPlugin.getWorkspace().addResourceChangeListener(INSTANCE, IResourceChangeEvent.PRE_CLOSE);
+			ResourcesPlugin.getWorkspace().addResourceChangeListener(INSTANCE,
+			        IResourceChangeEvent.PRE_CLOSE | IResourceChangeEvent.PRE_DELETE);
 		}
 		return INSTANCE;
 	}
