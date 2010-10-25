@@ -44,12 +44,17 @@ public final class MetaDataModelContext implements IMetaDataModelContext {
 	public Object getAdapter(Class adapter) {
 		if (adapter == ModelKeyDescriptor.class)
 			return new ModelKeyDescriptor(_project, _domainId, _modelId);
+		if (adapter == IProject.class)
+			return _project;
 		return null;
 	}
 
-	public IProject getProject() {
-		return _project;
-	}
+//	/**
+//	 * @return project
+//	 */
+//	public IProject getProject() {
+//		return _project;
+//	}
 
 	public String getDomainId() {
 		return _domainId;
@@ -62,8 +67,8 @@ public final class MetaDataModelContext implements IMetaDataModelContext {
 	@Override
 	public String toString() {
 		final StringBuffer buf = new StringBuffer();
-		if (getProject() != null) {
-			buf.append(getProject().getName()).append(":"); //$NON-NLS-1$
+		if (_project != null) {
+			buf.append(_project.getName()).append(":"); //$NON-NLS-1$
 		}
 		buf.append(getDomainId()).append(":"); //$NON-NLS-1$
 		buf.append(getModelIdentifier()).append(":"); //$NON-NLS-1$

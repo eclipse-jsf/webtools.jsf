@@ -52,6 +52,8 @@ public class TaglibDomainMetaDataModelContextImpl extends MetaDataModelContextIm
 	public Object getAdapter(Class adapter) {
 		if (adapter.equals(ITaglibDomainMetaDataModelContext.class))
 			return this;
+		if (adapter.equals(IProject.class))
+			return _project;
 		
 		return super.getAdapter(adapter);
 	}
