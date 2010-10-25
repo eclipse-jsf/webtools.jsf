@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.core.jsfappconfig;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
@@ -58,12 +59,20 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 	}
 
 	private Object getModelObject() {
-		Object modelObject = null;
-		IModelProvider provider = ModelProviderManager.getModelProvider(getJSFAppConfigManager().getProject());
-		if (provider != null) {
-			modelObject = provider.getModelObject();
-		}
-		return modelObject;
+        Object modelObject = null;
+        IProject project = getJSFAppConfigManager().getProject();
+        if (project.isAccessible()) {
+            IModelProvider provider = ModelProviderManager.getModelProvider(project);
+            if (provider != null) {
+                // we can't get the model if the workspace tree is currently locked.
+                // to avoid the logged message, check the workspace tree here.
+                if (!project.getWorkspace().isTreeLocked()) {
+                    modelObject = provider.getModelObject();
+                }
+            }
+        }
+
+        return modelObject;
 	}
 
 	/*

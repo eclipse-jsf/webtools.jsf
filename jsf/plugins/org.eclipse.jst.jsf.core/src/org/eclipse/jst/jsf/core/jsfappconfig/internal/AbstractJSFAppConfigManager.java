@@ -252,6 +252,7 @@ public abstract class AbstractJSFAppConfigManager
      *  <li>clearing the facesConfigChangeListeners collection</li>
      * </ul>
      */
+    @Override
     public void dispose() {
         //instruct locaters to stop locating
         stopConfigLocaters();
@@ -260,10 +261,12 @@ public abstract class AbstractJSFAppConfigManager
         configProvidersChangeListeners.clear();
         facesConfigChangeListeners.clear();
     }
-    
-	public void destroy() {
-		// 		
-	}
+
+    @Override
+    public void destroy() {
+        // no persistent data to cleanup. just call dispose.
+        dispose();
+    }
 
 	public void checkpoint() {
 		//		
