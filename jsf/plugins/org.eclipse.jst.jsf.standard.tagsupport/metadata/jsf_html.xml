@@ -19,7 +19,23 @@
 				<section id="id"/>
 				<section id="style"/>			
 			</value>
-		</trait>	
+		</trait>
+		<entity id="onload">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
+			</trait>			
+		</entity>
+		<entity id="onunload">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
+			</trait>			
+		</entity>					
 	</entity>	
 	<entity id="button" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
