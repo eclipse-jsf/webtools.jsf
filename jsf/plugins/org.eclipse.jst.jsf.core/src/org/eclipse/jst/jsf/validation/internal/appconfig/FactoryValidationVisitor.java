@@ -250,7 +250,7 @@ public class FactoryValidationVisitor extends EObjectValidationVisitor
         }
 
         protected String getInstanceOf() {
-            return "javax.faces.faces.ViewDeclarationLanguageFactory"; //$NON-NLS-1$
+            return "javax.faces.view.ViewDeclarationLanguageFactory"; //$NON-NLS-1$
         }
 
         protected EObjectValidationVisitor[] getChildNodeValidators() {
