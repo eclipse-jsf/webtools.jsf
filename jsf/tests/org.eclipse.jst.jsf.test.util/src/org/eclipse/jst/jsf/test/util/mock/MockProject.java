@@ -121,7 +121,8 @@ public class MockProject extends MockContainer implements IProject
 
     public boolean isNatureEnabled(String natureId) throws CoreException
     {
-        throw new UnsupportedOperationException();
+        // for now, assume if we have the nature then it is enabled.
+        return hasNature(natureId);
     }
 
     public boolean isOpen()
