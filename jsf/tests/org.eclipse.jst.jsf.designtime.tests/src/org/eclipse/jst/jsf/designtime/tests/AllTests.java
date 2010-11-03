@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.designtime.tests;
 
 import org.eclipse.jst.jsf.designtime.tests.views.TestJSPViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.tests.views.persistence.TestSerializableTLDTagElement;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -62,6 +63,9 @@ public class AllTests {
         final TestSuite suite = new TestSuite(
                 "Test for org.eclipse.jst.jsf.designtime.tests");
         // $JUnit-BEGIN$
+        suite.addTest(JSFTestUtil.getPreventJavaScriptJobsTest());
+
+        suite.addTestSuite(TestStartupHandler.class);
         suite.addTestSuite(TestDefaultBeanSymbolSourceProvider.class);
         suite.addTestSuite(TestResourceBundleMapSource.class);
         suite.addTestSuite(TestDefaultPropertyResolver.class);
@@ -72,7 +76,6 @@ public class AllTests {
         suite.addTestSuite(TestJSPDefaultSymbolFactory.class);
         // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=219215
         //        suite.addTestSuite(TestJSPModelProcessor.class);
-        suite.addTestSuite(TestStartupHandler.class);
         suite.addTestSuite(TestDesignTimeApplicationManager.class);
         suite.addTestSuite(TestJSPViewDefnAdapter.class);
         suite.addTestSuite(TestSerializableTLDTagElement.class);
@@ -80,6 +83,7 @@ public class AllTests {
         suite.addTestSuite(TestJSF20DefaultBeanSymbolSourceProvider.class);
         //addTestSuite(suite, JSPViewSuite.class);
 
+        suite.addTest(JSFTestUtil.getAllowJavaScriptJobsTest());
         // $JUnit-END$
         return suite;
     }

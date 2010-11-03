@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.zip.ZipFile;
 
 import junit.framework.Assert;
+import junit.framework.Test;
+import junit.framework.TestResult;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -33,6 +35,10 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.IJobChangeListener;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -407,6 +413,61 @@ public final class JSFTestUtil
             System.err.println("Could not delete resource: "+resource.getLocation().toOSString());
         }
         return success;
+    }
+
+    private static IJobChangeListener javaScriptJobChangeListener;
+
+    public static void preventJavaScriptJobs() {
+    	if (javaScriptJobChangeListener == null) {
+	    	javaScriptJobChangeListener = new JobChangeAdapter() {
+	    		@Override
+	    		public void scheduled(IJobChangeEvent event) {
+	    			Job job = event.getJob();
+	    			if (job != null) {
+	    				String jobName = job.getName();
+	    				if (jobName != null && jobName.length() > 0) {
+	    					if (jobName.toUpperCase().contains("JAVASCRIPT")) { //$NON-NLS-1$
+	    						job.cancel();
+	    					}
+	    				}
+	    			}
+	    		}
+	    	};
+    	}
+    	Job.getJobManager().addJobChangeListener(javaScriptJobChangeListener);
+    }
+
+    public static void allowJavaScriptJobs() {
+    	if (javaScriptJobChangeListener != null) {
+    		Job.getJobManager().removeJobChangeListener(javaScriptJobChangeListener);
+    		//don't null out javaScriptJobChangeListener as it may be reused without re-construction
+    	}
+    }
+
+    public static Test getPreventJavaScriptJobsTest() {
+    	return new PreventJavaScriptJobsTest();
+    }
+
+    public static Test getAllowJavaScriptJobsTest() {
+    	return new AllowJavaScriptJobsTest();
+    }
+
+    static class PreventJavaScriptJobsTest implements Test {
+    	public int countTestCases() {
+    		return 1;
+    	}
+    	public void run(TestResult result) {
+    		preventJavaScriptJobs();
+    	}
+    }
+
+    static class AllowJavaScriptJobsTest implements Test {
+    	public int countTestCases() {
+    		return 1;
+    	}
+    	public void run(TestResult result) {
+    		allowJavaScriptJobs();
+    	}
     }
 
     private JSFTestUtil()

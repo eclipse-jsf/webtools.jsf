@@ -139,14 +139,14 @@ public class TestStartupHandler extends TestCase
                     {
                         try {
                             numTries++;
-                            Thread.sleep(1000);
+                            Thread.sleep(1500);
                         } catch (InterruptedException e) {
                             // fall through
                         }
 
-                        if (numTries > 10)
+                        if (numTries > 20)
                         {
-                            throw new RuntimeException("Number of tries exceeeded 10");
+                            throw new RuntimeException("Number of tries exceeded 20");
                         }
                     }
                 }
