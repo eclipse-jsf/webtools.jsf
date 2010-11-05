@@ -44,6 +44,7 @@ import org.eclipse.jst.jsf.core.tests.util.TestJDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.util.TestTypeUtil;
 import org.eclipse.jst.jsf.core.tests.validation.TestJSPSemanticsValidator_AttributeValues;
 import org.eclipse.jst.jsf.core.tests.validation.TestJSPSemanticsValidator_Containment;
+import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 
 /**
  * The full test suite for core.tests
@@ -58,6 +59,8 @@ public class AllTests
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.jst.jsf.core.tests");
 		//$JUnit-BEGIN$
+		suite.addTestSuite(JSFTestUtil.getPreventJavaScriptJobsTestCase());
+
 		suite.addTestSuite(TestContentTypes.class);
 
         suite.addTestSuite(TestJDTBeanPropertyWorkingCopy.class);
@@ -114,6 +117,8 @@ public class AllTests
         //JSFAppConfig Tests
         suite.addTestSuite(CompositeJSFAppConfigLocatorProviderStrategyTests.class);
         suite.addTestSuite(JSFAppConfigManagerFactoryTests.class);
+
+        suite.addTestSuite(JSFTestUtil.getAllowJavaScriptJobsTestCase());
 		//$JUnit-END$
 		return suite;
 	}

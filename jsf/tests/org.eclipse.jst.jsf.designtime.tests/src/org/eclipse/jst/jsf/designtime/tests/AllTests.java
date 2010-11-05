@@ -63,7 +63,7 @@ public class AllTests {
         final TestSuite suite = new TestSuite(
                 "Test for org.eclipse.jst.jsf.designtime.tests");
         // $JUnit-BEGIN$
-        suite.addTest(JSFTestUtil.getPreventJavaScriptJobsTest());
+        suite.addTestSuite(JSFTestUtil.getPreventJavaScriptJobsTestCase());
 
         suite.addTestSuite(TestStartupHandler.class);
         suite.addTestSuite(TestDefaultBeanSymbolSourceProvider.class);
@@ -83,7 +83,7 @@ public class AllTests {
         suite.addTestSuite(TestJSF20DefaultBeanSymbolSourceProvider.class);
         //addTestSuite(suite, JSPViewSuite.class);
 
-        suite.addTest(JSFTestUtil.getAllowJavaScriptJobsTest());
+        suite.addTestSuite(JSFTestUtil.getAllowJavaScriptJobsTestCase());
         // $JUnit-END$
         return suite;
     }

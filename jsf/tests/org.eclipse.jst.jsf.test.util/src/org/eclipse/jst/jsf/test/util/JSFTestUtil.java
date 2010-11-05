@@ -25,8 +25,7 @@ import java.util.Arrays;
 import java.util.zip.ZipFile;
 
 import junit.framework.Assert;
-import junit.framework.Test;
-import junit.framework.TestResult;
+import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -444,28 +443,22 @@ public final class JSFTestUtil
     	}
     }
 
-    public static Test getPreventJavaScriptJobsTest() {
-    	return new PreventJavaScriptJobsTest();
+    public static Class<? extends TestCase> getPreventJavaScriptJobsTestCase() {
+    	return PreventJavaScriptJobsTestCase.class;
     }
 
-    public static Test getAllowJavaScriptJobsTest() {
-    	return new AllowJavaScriptJobsTest();
+    public static Class<? extends TestCase> getAllowJavaScriptJobsTestCase() {
+    	return AllowJavaScriptJobsTestCase.class;
     }
 
-    static class PreventJavaScriptJobsTest implements Test {
-    	public int countTestCases() {
-    		return 1;
-    	}
-    	public void run(TestResult result) {
+    public static class PreventJavaScriptJobsTestCase extends TestCase {
+    	public void testPreventJavaScriptJobs() throws Exception {
     		preventJavaScriptJobs();
     	}
     }
 
-    static class AllowJavaScriptJobsTest implements Test {
-    	public int countTestCases() {
-    		return 1;
-    	}
-    	public void run(TestResult result) {
+    public static class AllowJavaScriptJobsTestCase extends TestCase {
+    	public void testAllowJavaScriptJobs() throws Exception {
     		allowJavaScriptJobs();
     	}
     }
