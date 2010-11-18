@@ -63,24 +63,27 @@ IStructuredDocumentContextResolverFactory2, IAdaptable
             .getWorkspaceContextResolver(context);
             if (resolver != null)
             {
-                final IProject project = resolver.getProject();
                 final IResource res = resolver.getResource();
 
-                if (project != null && res instanceof IFile)
+                if (res instanceof IFile)
                 {
                     final IFile file = (IFile) res;
+                    final IProject project = file.getProject();
 
-                    try
+                    if (project != null)
                     {
-                        return new ViewBasedTaglibResolver(context, file,
-                                project);
-                    }
-                    catch (final IllegalArgumentException e)
-                    {
-                        // the constructor will throw this if the view
-                        // definition
-                        // adapter for file is not of the base type it needs
-                        // just fall through, no need to log
+                        try
+                        {
+                            return new ViewBasedTaglibResolver(context, file,
+                                    project);
+                        }
+                        catch (final IllegalArgumentException e)
+                        {
+                            // the constructor will throw this if the view
+                            // definition
+                            // adapter for file is not of the base type it needs
+                            // just fall through, no need to log
+                        }
                     }
                 }
             }

@@ -50,7 +50,12 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 		{
 			return null;
 		}
-		
+
+		return getProject(path);
+	}
+
+	private IProject getProject(String path)
+	{
 		// TOODO needs rework for linked resources
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IPath iPath = new Path(path);
@@ -77,13 +82,13 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
 	public IResource getResource() 
 	{
-		IProject project = getProject();
+		final String path = getPath();
 		
-		if (project != null)
+		if (path != null)
 		{
-			final String path = getPath();
+			IProject project = getProject(path);
 			
-			if (path != null)
+			if (project != null)
 			{
 				final IPath iPath = new Path(path);
 				if (iPath.isAbsolute())

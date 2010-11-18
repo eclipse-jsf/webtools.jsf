@@ -45,12 +45,15 @@ public class DTAppManagerUtil
                 IStructuredDocumentContextResolverFactory.INSTANCE
                         .getWorkspaceContextResolver(context);
 
-        final IProject project = wkResolver.getProject();
         final IResource res = wkResolver.getResource();
 
-        if (project != null && res instanceof IFile)
+        if (res instanceof IFile)
         {
-            return getXMLViewDefnAdapter(project, (IFile) res);
+            final IProject project = res.getProject();
+            if (project != null)
+            {
+                return getXMLViewDefnAdapter(project, (IFile) res);
+            }
         }
         // not found
         return null;
@@ -142,17 +145,15 @@ public class DTAppManagerUtil
         {
             return null;
         }
-        IProject project = null;
-        project = resolver.getProject();
 
-        if (project == null)
-        {
-            return null;
-        }
         final IResource resource = resolver.getResource();
         if (resource != null)
         {
-            return getViewRootHandle(resource);
+            IProject project = resource.getProject();
+            if (project != null)
+            {
+                return getViewRootHandle(resource);
+            }
         }
         return null;
     }
