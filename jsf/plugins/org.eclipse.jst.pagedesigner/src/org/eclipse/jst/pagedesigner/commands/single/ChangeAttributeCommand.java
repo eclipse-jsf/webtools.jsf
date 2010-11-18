@@ -87,6 +87,8 @@ public class ChangeAttributeCommand extends SingleNodeCommand {
 		if (!isEmptyString(value) || _keepEmptyAttribute) {
 			_element.setAttribute(name, value);
 		}
+		//Bug 330413 - [WPE] Modifying tag attribute using property sheet doesn't notify team system of edit
+		notifyTeamFrameworkOfEdit();
 	}
 
 	private boolean isSameValue(String value1, String value2) {
