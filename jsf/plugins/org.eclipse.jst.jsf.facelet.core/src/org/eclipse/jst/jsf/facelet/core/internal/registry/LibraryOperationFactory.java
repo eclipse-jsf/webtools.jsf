@@ -56,12 +56,9 @@ class LibraryOperationFactory
         @Override
         protected IStatus doRun()
         {
-            synchronized (_tagRegistry)
-            {
-                // fire change event if applicable
-                _tagRegistry.initialize(_changeRecord, true);
-                return Status.OK_STATUS;
-            }
+            // fire change event if applicable
+            _tagRegistry.initialize(_changeRecord, true);
+            return Status.OK_STATUS;
         }
     }
 
@@ -100,18 +97,13 @@ class LibraryOperationFactory
         @Override
         protected IStatus doRun()
         {
-            IStatus result = null;
+            IStatus result = new RemoveTagLibrary(_tagRegistry, _changeRecord).doRun();
 
-            synchronized (_tagRegistry)
+            if (result.getSeverity() != IStatus.ERROR
+                    && result.getSeverity() != IStatus.CANCEL)
             {
-                result = new RemoveTagLibrary(_tagRegistry, _changeRecord).doRun();
-
-                if (result.getSeverity() != IStatus.ERROR
-                        && result.getSeverity() != IStatus.CANCEL)
-                {
-                    result = new AddTagLibrary(_tagRegistry, _changeRecord)
-                            .doRun();
-                }
+                result = new AddTagLibrary(_tagRegistry, _changeRecord)
+                        .doRun();
             }
 
             return result;

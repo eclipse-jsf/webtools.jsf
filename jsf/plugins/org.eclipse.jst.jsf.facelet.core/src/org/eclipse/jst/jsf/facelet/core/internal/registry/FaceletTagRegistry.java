@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.ILock;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -54,7 +55,8 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
     private final FaceletDocumentFactory                    _factory;
     private final LibraryOperationFactory                   _operationFactory = new LibraryOperationFactory(
                                                                                       this);
-    private boolean                                         _isInitialized;
+    private final ILock										_lock = Job.getJobManager().newLock();
+    private volatile boolean                                _isInitialized;
 
     private ChangeJob                                       _changeJob;
     private MyTaglibListener                                _listener;
@@ -100,28 +102,54 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
      *         the containned objects are not copies.
      */
     @Override
-    public synchronized Collection<FaceletNamespace> getAllTagLibraries()
+    public Collection<FaceletNamespace> getAllTagLibraries()
     {
-        final Set<FaceletNamespace> allTagLibraries = new HashSet<FaceletNamespace>();
-        if (!_isInitialized)
-        {
-            try
-            {
-                initialize(false);
-                _isInitialized = true;
-            }
-            catch (final JavaModelException e)
-            {
-                FaceletCorePlugin.log("Problem during initialization", e); //$NON-NLS-1$
-            }
-            catch (final CoreException e)
-            {
-                FaceletCorePlugin.log("Problem during initialization", e); //$NON-NLS-1$
-            }
-        }
-        allTagLibraries.addAll(_nsResolved.values());
-        allTagLibraries.addAll(_unResolved);
-        return allTagLibraries;
+    	boolean setEndRule = false;
+    	try {
+			final Set<FaceletNamespace> allTagLibraries = new HashSet<FaceletNamespace>();
+			
+			if (!_isInitialized)
+			{
+				// preemptive project rule setting here ensures consistent lock ordering
+				// and gives the opportunity for the other thread having the project lock
+				// to finish before we enter synchronization block created with reentrant 
+				// lock below
+				// NOTE: it is essential to have _lock.acquire() after project rule start
+				// NOTE: if current thread already has any rule, do not start project rule
+				if(Job.getJobManager().currentRule() == null){
+					Job.getJobManager().beginRule(_project, null);
+					setEndRule = true;
+				}				
+				_lock.acquire();
+				
+				// double check after sync block if no one else entered "if(!_isInitialized)"
+				if(!_isInitialized){
+					try
+					{
+						initialize(false);
+						_isInitialized = true;
+					}
+					catch (final JavaModelException e)
+					{
+						FaceletCorePlugin.log("Problem during initialization", e); //$NON-NLS-1$
+					}
+					catch (final CoreException e)
+					{
+						FaceletCorePlugin.log("Problem during initialization", e); //$NON-NLS-1$
+					}
+				}
+			}else{
+				_lock.acquire();
+			}
+			allTagLibraries.addAll(_nsResolved.values());
+			allTagLibraries.addAll(_unResolved);
+			return allTagLibraries;
+    	} finally {
+    		_lock.release();
+    		if (setEndRule){
+    			Job.getJobManager().endRule(_project);
+    		}
+    	}
     }
 
     private void initialize(boolean fireEvent) throws JavaModelException, CoreException
@@ -195,7 +223,7 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
     }
 
     @Override
-    public synchronized Namespace getTagLibrary(final String uri)
+    public Namespace getTagLibrary(final String uri)
     {
         // TODO:
         getAllTagLibraries();
@@ -214,9 +242,14 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
 //                {
 //                    JSFCoreTraceOptions.log("FaceletTagRegistry.refresh: start"); //$NON-NLS-1$
 //                }
-
-                synchronized (FaceletTagRegistry.this)
+            	boolean setEndRule = false;
+                try
                 {
+                	if(Job.getJobManager().currentRule() == null){
+    					Job.getJobManager().beginRule(_project, null);
+    					setEndRule = true;
+    				}
+                	_lock.acquire();
                     if (JSFCoreTraceOptions.TRACE_JSPTAGREGISTRY)
                     {
                         JSFCoreTraceOptions
@@ -262,6 +295,11 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
 //                                .log("TLDTagRegistry.refresh: finished");
 //                    }
                     return Status.OK_STATUS;
+                } finally {
+                	_lock.release();
+                	if (setEndRule){
+                		Job.getJobManager().endRule(_project);
+                	}
                 }
             }
         };
@@ -303,13 +341,20 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
         public ChangeJob(final String projectName)
         {
             super("Update job for project " + projectName); //$NON-NLS-1$
+            // preemptive project rule setting here ensures consistent lock ordering
+            // and gives the opportunity for the other thread having the project lock
+            // to finish before we enter synchronization block created with reentrant 
+            // lock below
+            // NOTE: it is essential to have _lock.acquire() after project rule start
+            setRule(_project);
         }
 
         @Override
         protected IStatus run(final IProgressMonitor monitor)
         {
-            synchronized (FaceletTagRegistry.this)
+            try 
             {
+            	_lock.acquire();
                 _rescheduleTime = -1;
 
                 LibraryOperation operation = null;
@@ -333,6 +378,8 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
                 }
 
                 return multiStatus;
+            } finally {
+            	_lock.release();
             }
         }
     }
@@ -371,4 +418,5 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
         // TODO ??
 
     }
+
 }
