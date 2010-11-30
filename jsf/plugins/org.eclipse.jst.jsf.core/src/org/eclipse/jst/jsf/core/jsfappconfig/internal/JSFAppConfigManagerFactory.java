@@ -36,7 +36,7 @@ public class JSFAppConfigManagerFactory
 	 * @param project
 	 * @return IJSFAppConfigManager
 	 */
-	public synchronized static IJSFAppConfigManager getJSFAppConfigManagerInstance(final IProject project) {
+	public static IJSFAppConfigManager getJSFAppConfigManagerInstance(final IProject project) {
 		try {
 			return getJSFAppConfigManagerFactoryInstance(project).getInstance(project);			
 		} catch (ManagedObjectException e) {
@@ -45,7 +45,7 @@ public class JSFAppConfigManagerFactory
 		return null;
 	}
 	
-	private static JSFAppConfigManagerFactory getJSFAppConfigManagerFactoryInstance(final IProject project) {
+	private synchronized static JSFAppConfigManagerFactory getJSFAppConfigManagerFactoryInstance(final IProject project) {
 		if (INSTANCE == null) {
 			INSTANCE = new JSFAppConfigManagerFactory(project);
 		}
