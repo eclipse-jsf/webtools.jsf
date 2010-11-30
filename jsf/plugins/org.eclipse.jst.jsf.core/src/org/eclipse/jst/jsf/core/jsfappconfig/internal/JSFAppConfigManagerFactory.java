@@ -1,7 +1,9 @@
 package org.eclipse.jst.jsf.core.jsfappconfig.internal;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.common.internal.strategy.AbstractTestableExtensibleDefaultProviderSelectionStrategy;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
@@ -71,7 +73,30 @@ public class JSFAppConfigManagerFactory
 		return null;
 	}
 
-	private IJSFAppConfigManagerFactory getJSFAppConfigManagerFactoryProviderInstance(final IProject project) {
+    @Override
+    protected IAdaptable unsafeRunBeforeGetInstance(IProject project) {
+        super.unsafeRunBeforeGetInstance(project);
+
+        if (!isInstance(project) && Job.getJobManager().currentRule() == null) {
+                //Acquire a scheduling rule on the project so creation of a JSFAppConfigManager
+                //does not attempt to acquire a rule which may be unavailable while still
+                //synchronized on the ResourceSingletonObjectManager (JSFAppConfigManagerFactory)
+                Job.getJobManager().beginRule(project, null);
+                return new AdaptableBoolean(true);
+        }
+        return null;
+    }
+
+    @Override
+    protected void unsafeRunAfterGetInstance(IProject project, IAdaptable stateObject) {
+        super.unsafeRunAfterGetInstance(project, stateObject);
+
+        if (stateObject instanceof AdaptableBoolean && ((AdaptableBoolean)stateObject).acquiredRule) {
+            Job.getJobManager().endRule(project);
+        }
+    }
+
+    private IJSFAppConfigManagerFactory getJSFAppConfigManagerFactoryProviderInstance(final IProject project) {
 		final CompositeFactorySelectionStrategyProvider factoryProvider = new CompositeFactorySelectionStrategyProvider();		
 		return factoryProvider != null ? factoryProvider.getFactoryToUse(project) : null;
 	}
@@ -108,6 +133,16 @@ public class JSFAppConfigManagerFactory
 		public IJSFAppConfigManagerFactory getNoResult() {
 			return NO_RESULT;
 		}
-	}
+	}      private static class AdaptableBoolean implements IAdaptable {
+        private final boolean acquiredRule;
+        
+        public AdaptableBoolean(boolean acquiredRule) {
+            this.acquiredRule = acquiredRule;
+        }
+
+        public Object getAdapter(Class adapter) {
+            return null;
+        }   
+    }
 	
 }

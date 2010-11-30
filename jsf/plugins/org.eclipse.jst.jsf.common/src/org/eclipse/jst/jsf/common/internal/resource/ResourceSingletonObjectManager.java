@@ -18,6 +18,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.internal.managedobject.IManagedObject;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
@@ -75,25 +76,34 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
     throws ManagedObjectException
     {
         assertNotDisposed();
-        synchronized(this)
+        IAdaptable stateObject = null;
+        try
         {
-            runBeforeGetInstance(key);
-            ManagedResourceObject managedResObject = _perResourceObjects.get(key);
-    
-            if (managedResObject == null)
+            stateObject = unsafeRunBeforeGetInstance(key);
+            synchronized(this)
             {
-                final MANAGEDOBJECT managedObject = createNewInstance(key);
-    
-                if (managedObject == null)
+                runBeforeGetInstance(key);
+                ManagedResourceObject managedResObject = _perResourceObjects.get(key);
+        
+                if (managedResObject == null)
                 {
-                    throw new ManagedObjectException(
-                            "No object available for resource"); //$NON-NLS-1$
+                    final MANAGEDOBJECT managedObject = createNewInstance(key);
+        
+                    if (managedObject == null)
+                    {
+                        throw new ManagedObjectException(
+                                "No object available for resource"); //$NON-NLS-1$
+                    }
+                    managedResObject = manageResource(key, managedObject);
                 }
-                managedResObject = manageResource(key, managedObject);
+    
+                runAfterGetInstance(key);
+                return (MANAGEDOBJECT) managedResObject.getManagedObject();
             }
-
-            runAfterGetInstance(key);
-            return (MANAGEDOBJECT) managedResObject.getManagedObject();
+        }
+        finally
+        {
+            unsafeRunAfterGetInstance(key, stateObject);
         }
     }
 
@@ -117,6 +127,27 @@ public abstract class ResourceSingletonObjectManager<MANAGEDOBJECT extends IMana
      * @param resource
      */
     protected void runAfterGetInstance(final RESOURCE resource)
+    {
+        // do nothing by default
+    }
+    
+    /**
+     * Callback run outside of synchronized code block in getInstance
+     * @param resource
+     * @return A state object to be passed to unsafeRunAfterGetInstance, or null.
+     */
+    protected IAdaptable unsafeRunBeforeGetInstance(final RESOURCE resource)
+    {
+        // do nothing by default
+        return null;
+    }
+
+    /**
+     * Callback run outside of synchronized code block in getInstance
+     * @param resource
+     * @param adaptable State object returned from unsafeRunBeforeGetInstance call, may be null.
+     */
+    protected void unsafeRunAfterGetInstance(final RESOURCE resource, final IAdaptable adaptable)
     {
         // do nothing by default
     }

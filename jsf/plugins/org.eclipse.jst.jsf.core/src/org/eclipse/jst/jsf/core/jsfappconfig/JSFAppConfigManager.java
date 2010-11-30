@@ -6,7 +6,9 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceSingletonObjectManager;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
@@ -48,7 +50,7 @@ public class JSFAppConfigManager
 	 */
 	public static JSFAppConfigManager getInstance(final IProject project) {
 		try {
-			return FACTORY.getInstance(project);
+		    return FACTORY.getInstance(project);
 		} catch (ManagedObjectException e) {
 			JSFCorePlugin.log(e, "Failed to get JSFAppConfigManager instance for "+project.getName()); //$NON-NLS-1$
 		}
@@ -129,13 +131,50 @@ public class JSFAppConfigManager
 	private static class JSFAppConfigManagerFactory 
 		extends ResourceSingletonObjectManager<JSFAppConfigManager, IProject> {
 
-		protected JSFAppConfigManagerFactory() {
+		@Override
+        protected IAdaptable unsafeRunBeforeGetInstance(IProject project) {
+            super.unsafeRunBeforeGetInstance(project);
+
+            if (!isInstance(project) && Job.getJobManager().currentRule() == null) {
+                    //Acquire a scheduling rule on the project so creation of a JSFAppConfigManager
+                    //does not attempt to acquire a rule which may be unavailable while still
+                    //synchronized on the ResourceSingletonObjectManager (JSFAppConfigManagerFactory)
+                    Job.getJobManager().beginRule(project, null);
+                    return new AdaptableBoolean(true);
+            }
+            return null;
+        }
+
+        @Override
+        protected void unsafeRunAfterGetInstance(IProject project, IAdaptable stateObject) {
+            super.unsafeRunAfterGetInstance(project, stateObject);
+
+            if (stateObject instanceof AdaptableBoolean && ((AdaptableBoolean)stateObject).acquiredRule) {
+                Job.getJobManager().endRule(project);
+            }
+        }
+
+        protected JSFAppConfigManagerFactory() {
 			super(ResourcesPlugin.getWorkspace());			
 		}
 
 		@Override
 		protected JSFAppConfigManager createNewInstance(final IProject project) {			
 			return new JSFAppConfigManager(project);
+		}
+		
+		private static class AdaptableBoolean implements IAdaptable {
+		    private final boolean acquiredRule;
+		    
+		    public AdaptableBoolean(boolean acquiredRule) {
+		        this.acquiredRule = acquiredRule;
+		    }
+
+            public Object getAdapter(Class adapter) {
+                return null;
+            }
+		    
+		    
 		}
 		
 	}
