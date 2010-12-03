@@ -50,6 +50,8 @@ import org.w3c.dom.Text;
  */
 public class Test_TransformOperations extends TestCase {
 
+	private static final String OUTPUT_PREFIX = "[Test_TransformOperations]";
+
 	private WebProjectTestEnvironment webProjectTestEnv;
 
 	protected void setUp() throws Exception {
@@ -623,6 +625,8 @@ public class Test_TransformOperations extends TestCase {
 	
 				//get result element
 				resultElement = tagConverter.getResultElement();
+			} else {
+				System.out.printf("%s getTagConverter(...) returned null for %s:%s at document offset %d\n", OUTPUT_PREFIX, prefix, localName, docOffset);
 			}
 		} finally {
 			if (wrapper != null) {
@@ -659,6 +663,30 @@ public class Test_TransformOperations extends TestCase {
 							element,
 							mode,
 							document);
+				} else {
+					System.out.printf("%s model.getDocument() returned null for %s:%s\n", OUTPUT_PREFIX, prefix, localName);
+				}
+			} else {
+				System.out.printf("%s wrapper.getModel() returned unexpected result for %s:%s\n", OUTPUT_PREFIX, prefix, localName);
+			}
+		} else {
+			if (node instanceof Element) {
+				if (node.getPrefix().equals(prefix)) {
+					if (!node.getLocalName().equals(localName)) {
+						System.out.printf("%s resolver.getNode().getLocalName() is incorrect for %s:%s\n", OUTPUT_PREFIX, prefix, localName);
+					}
+				} else {
+					System.out.printf("%s resolver.getNode().getPrefix() is incorrect for %s:%s\n", OUTPUT_PREFIX, prefix, localName);
+				}
+			} else {
+				if (node != null) {
+					if (node instanceof Text) {
+						System.out.printf("%s resolver.getNode() returned Text (\"%s\") instead of Element for %s:%s\n", OUTPUT_PREFIX, ((Text)node).getNodeValue(), prefix, localName);
+					} else {
+						System.out.printf("%s resolver.getNode() returned %s (when Element was expected) for %s:%s\n", OUTPUT_PREFIX, node.getClass().getName(), prefix, localName);
+					}
+				} else {
+					System.out.printf("%s resolver.getNode() returned null for %s:%s\n", OUTPUT_PREFIX, prefix, localName);
 				}
 			}
 		}

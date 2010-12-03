@@ -13,6 +13,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.test;
 
 
 
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
@@ -88,10 +89,36 @@ public class PageflowEditorTest extends FacesConfigEditorTest {
 		AddNodeCommand command = new AddNodeCommand();
 		command.setParent(getPageflow());
 		command.setChild(source);
-		DelegatingCommandStack stack = editor.getDelegatingCommandStack();
-		assertNotNull("PageflowPage will not be added to the Pageflow, as the underlying command stack is null", stack.getCurrentCommandStack());
+		DelegatingCommandStack stack = getDelegatingCommandStack(60000);
+		assertNotNull("PageflowPage will not be added to the Pageflow, as the editor's delegating command stack is null", stack);
+		assertNotNull("PageflowPage will not be added to the Pageflow, as the current command stack is null", stack.getCurrentCommandStack());
 		stack.execute(command);
 		return source;
+	}
+
+	private DelegatingCommandStack getDelegatingCommandStack(int msToWait) {
+		final int INTERVAL_MS = 1500;
+		DelegatingCommandStack dcStack = null;
+		CommandStack ccStack = null;
+		int msWaited = 0;
+		while ((dcStack == null || ccStack == null) && msWaited < msToWait) {
+			dcStack = editor.getDelegatingCommandStack();
+			if (dcStack != null) {
+				ccStack = dcStack.getCurrentCommandStack();
+			}
+			if (dcStack == null || ccStack == null) {
+				try {
+					Thread.sleep(INTERVAL_MS);
+					msWaited += INTERVAL_MS;
+				} catch(InterruptedException iex) {
+					msWaited = msToWait;
+				}
+			}
+		}
+		if (msWaited > 0) {
+			System.out.printf("[PageflowEditorTest.getDelegatingCommandStack(...)] waited %dms for a valid CommandStack\n", msWaited);
+		}
+		return dcStack;
 	}
 
 	private FacesConfigType getFacesConfig() {
