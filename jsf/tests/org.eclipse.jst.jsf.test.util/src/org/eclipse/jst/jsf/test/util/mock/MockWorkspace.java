@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFilterMatcherDescriptor;
 import org.eclipse.core.resources.IMarker;
@@ -96,6 +97,19 @@ public class MockWorkspace implements IWorkspace
         throw new UnsupportedOperationException();
 
     }
+
+	public void build(IBuildConfiguration[] buildConfigs, int kind,
+			boolean buildReferences, IProgressMonitor monitor)
+			throws CoreException
+	{
+        throw new UnsupportedOperationException();
+	}
+
+	public IBuildConfiguration newBuildConfig(String projectName,
+			String configName)
+	{
+		return null;
+	}
 
     public void checkpoint(final boolean build)
     {

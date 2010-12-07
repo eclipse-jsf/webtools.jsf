@@ -36,6 +36,7 @@ import org.eclipse.core.internal.resources.WorkManager;
 import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.internal.resources.WorkspaceDescription;
 import org.eclipse.core.internal.watson.ElementTree;
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFilterMatcherDescriptor;
 import org.eclipse.core.resources.IMarker;
@@ -498,7 +499,7 @@ public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
         }
 
         @Override
-        public IProject[] getBuildOrder()
+        public IBuildConfiguration[] getBuildOrder()
         {
             return _ws.getBuildOrder();
         }

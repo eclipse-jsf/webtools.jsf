@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -41,6 +42,12 @@ public class MockProject extends MockContainer implements IProject
     {
         throw new UnsupportedOperationException();
     }
+
+	public void build(IBuildConfiguration config, int kind,
+			IProgressMonitor monitor) throws CoreException
+	{
+        throw new UnsupportedOperationException();
+	}
 
     public void close(IProgressMonitor monitor) throws CoreException
     {
@@ -176,4 +183,31 @@ public class MockProject extends MockContainer implements IProject
     {
         return getWorkspace().getRoot();
     }
+
+	public IBuildConfiguration getActiveBuildConfig() throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IBuildConfiguration getBuildConfig(String configName)
+			throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IBuildConfiguration[] getBuildConfigs() throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IBuildConfiguration[] getReferencedBuildConfigs(String configName,
+			boolean includeMissing) throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean hasBuildConfig(String configName) throws CoreException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
