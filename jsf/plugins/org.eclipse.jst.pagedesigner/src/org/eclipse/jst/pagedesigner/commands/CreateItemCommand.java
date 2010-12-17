@@ -63,8 +63,6 @@ public class CreateItemCommand extends DesignerCommand implements ICustomizableC
                 getModel(), this._position, this._customizationData);
         if (element != null) 
         {
-        	//Bug 330412 - [WPE] Drag 'n' Drop of tag from palette doesn't notify team system of edit
-        	notifyTeamFrameworkOfEdit();
             formatNode(element);
         }
         this._ele = element;

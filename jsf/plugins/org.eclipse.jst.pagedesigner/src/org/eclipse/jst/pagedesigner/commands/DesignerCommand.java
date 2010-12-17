@@ -11,9 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.commands;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
@@ -31,7 +28,6 @@ import org.eclipse.jst.pagedesigner.dom.EditValidateUtil;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.utils.SelectionHelper;
-import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
@@ -333,22 +329,6 @@ public abstract class DesignerCommand extends Command {
 		// XXX: there should have some other way to get the FormatProcessor.
 		// currently hardcoded to HTMLFormatProcessorImpl().
 		new HTMLFormatProcessorImpl().formatNode(node);
-	}
-
-	/**
-	 * Notifies the team framework of an edit to the model's underlying file.
-	 */
-	public void notifyTeamFrameworkOfEdit() {
-		IFile file = StructuredModelUtil.getFileFor(_model);
-		if (file != null) {
-			IWorkspace workspace = file.getWorkspace();
-			if (workspace != null) {
-				IStatus status = workspace.validateEdit(new IFile[]{file}, null);
-				if (!status.isOK()) {
-					_log.info(status.getMessage());
-				}
-			}
-		}
 	}
 
 	/**

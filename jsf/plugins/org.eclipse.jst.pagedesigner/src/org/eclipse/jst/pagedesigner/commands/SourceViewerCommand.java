@@ -11,16 +11,12 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.commands;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
@@ -100,22 +96,6 @@ public abstract class SourceViewerCommand extends Command {
 	 */
 	public final void formatNode(Node node) {
 		new HTMLFormatProcessorImpl().formatNode(node);
-	}
-
-	/**
-	 * Notifies the team framework of an edit to the model's underlying file.
-	 */
-	public void notifyTeamFrameworkOfEdit() {
-		IFile file = StructuredModelUtil.getFileFor(getModel());
-		if (file != null) {
-			IWorkspace workspace = file.getWorkspace();
-			if (workspace != null) {
-				IStatus status = workspace.validateEdit(new IFile[]{file}, null);
-				if (!status.isOK()) {
-					_log.info(status.getMessage());
-				}
-			}
-		}
 	}
 
 	/**

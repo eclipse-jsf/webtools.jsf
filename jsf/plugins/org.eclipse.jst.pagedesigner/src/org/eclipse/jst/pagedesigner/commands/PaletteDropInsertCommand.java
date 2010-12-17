@@ -97,8 +97,6 @@ public class PaletteDropInsertCommand extends SourceViewerCommand implements ICu
                     _creationProvider, getModel()
                     , position, getCustomizationData());
             if (element != null) {
-            	//Bug 330412 - [WPE] Drag 'n' Drop of tag from palette doesn't notify team system of edit
-            	notifyTeamFrameworkOfEdit();
                 formatNode(element);
             }
             this._element = element;
