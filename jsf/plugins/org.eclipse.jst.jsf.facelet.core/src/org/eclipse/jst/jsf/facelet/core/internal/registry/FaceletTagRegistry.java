@@ -182,7 +182,8 @@ public final class FaceletTagRegistry extends AbstractTagRegistry implements
         {
             for (final IFaceletTagRecord taglib : tagDesc.getTagLibraries())
             {
-                initialize(taglib, fireEvent);
+            	if (taglib.getURI() != null)
+            		initialize(taglib, fireEvent);
             }
 
             _listener = new MyTaglibListener();

@@ -92,7 +92,7 @@ public class WPETabbedPropertySheetPage extends TabbedPropertySheetPage {
 		getEditor().setFocus();
 		_hiearchAction.refresh(selectedNode, innerNode);
 		this.getSite().getActionBars().getToolBarManager().update(true);
-		super.selectionChanged(null, new StructuredSelection(selectedNode));
+		super.selectionChanged(getEditor(), new StructuredSelection(selectedNode));
 	}
 
 	/**

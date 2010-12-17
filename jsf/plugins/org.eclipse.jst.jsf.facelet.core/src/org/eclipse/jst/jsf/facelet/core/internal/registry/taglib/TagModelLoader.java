@@ -222,14 +222,9 @@ public class TagModelLoader
                     }
                     if (foundEntry != null)
                     {
-                        final java.net.URI uri = new java.net.URI(foundEntry.getURI());
-                        URL url = URIUtil.toURL(uri);
+                        final java.net.URI uri = URIUtil.fromString(foundEntry.getURI());
+                        final URL url = URIUtil.toURL(uri);
                         return url.openStream();
-//                        final String uriString = foundEntry.getURI();
-//                        if (URIUtil.isFileURI(uriString))
-//                        {
-//                            return new File(URIUtil.toFile(uriString));
-//                        }
                     }
                 }
             }
