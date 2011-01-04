@@ -160,6 +160,14 @@
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
 			contextId="org.eclipse.jst.pagedesigner.editorContext"
 			sequence="M1+M2+F12"/>
+		<key sequence="M1+F5" 
+			 commandId="org.eclipse.ui.part.nextPage"
+			 contextId="org.eclipse.jst.pagedesigner.editorContext"
+			 schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" />
+		<key sequence="M1+M2+F5" 
+			 commandId="org.eclipse.ui.part.previousPage"
+			 contextId="org.eclipse.jst.pagedesigner.editorContext"
+			 schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" />
 	</extension>
 	
 	<extension point="org.eclipse.wst.sse.ui.editorConfiguration">
