@@ -14,7 +14,11 @@ package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
@@ -39,8 +43,13 @@ public class WebPathType extends PathType implements
 				validateFileRelativeToWebRoot(url.getPath());
 			} 
 		} catch (MalformedURLException e) {
-			//is this a valid path relative to the 			
-			validateFileRelativeToWebRoot(value);						
+			//is this a valid path relative to the
+			if (value != null && value.length() > 1 && value.charAt(0) == '/') { 
+				validateFileRelativeToWebRoot(value);						
+			} else {
+				//Bug 325490 - [JSF2.0] False warning from facelet validator when working with facelet pages in a sub-folder
+				validateFileRelativeToCurrentFile(value);
+			}
 		}
 		return getValidationMessages().size() == 0;
 
@@ -69,4 +78,23 @@ public class WebPathType extends PathType implements
         	       
         return webRoot;
     }
+
+	//Bug 325490 - [JSF2.0] False warning from facelet validator when working with facelet pages in a sub-folder
+    private void validateFileRelativeToCurrentFile(String value) {
+		IPath webContentPath = ComponentCore.createComponent(getProject()).getRootFolder().getUnderlyingFolder().getFullPath();
+        final IWorkspaceContextResolver wkspaceResolver =
+            IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver( getStructuredDocumentContext() );
+        IResource resource = wkspaceResolver.getResource();
+        IPath filePath = resource.getFullPath();
+		if (filePath.matchingFirstSegments(webContentPath) == webContentPath.segmentCount()) {
+			filePath = filePath.removeFirstSegments(webContentPath.segmentCount());
+			filePath = filePath.removeLastSegments(1);
+			filePath = filePath.append(value);
+			IVirtualFile file = getWebRoot().getFile(filePath);
+			if (!file.exists()){
+				getValidationMessages().add(new ValidationMessage(Messages.WebPathType_2));
+			}
+		}
+	}
+
 }
