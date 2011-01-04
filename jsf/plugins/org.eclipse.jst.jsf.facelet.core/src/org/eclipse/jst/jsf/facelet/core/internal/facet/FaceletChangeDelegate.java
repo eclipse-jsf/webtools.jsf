@@ -146,7 +146,7 @@ public abstract class FaceletChangeDelegate implements IDelegate
                 {
                     final ViewHandlerType viewHandler = (ViewHandlerType) viewIt
                             .next();
-                    if (viewHandler != null
+                    if (viewHandler != null && viewHandler.getTextContent() != null
                             && RUNTIME_VIEWHANDLER_CLASS_NAME
                                     .equals(viewHandler.getTextContent().trim()))
                     {

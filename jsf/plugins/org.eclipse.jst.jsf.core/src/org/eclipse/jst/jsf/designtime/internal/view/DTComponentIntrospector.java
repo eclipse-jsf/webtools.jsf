@@ -218,7 +218,7 @@ public final class DTComponentIntrospector
             final String type = component.getComponentType().getTextContent()
                     .trim();
 
-            if (componentType.equals(type))
+            if (componentType.equals(type) && component.getComponentClass() != null && component.getComponentClass().getTextContent() != null)
             {
                 return component.getComponentClass().getTextContent().trim();
             }

@@ -212,7 +212,7 @@ public class TagModelParser
 
             if (node.getNodeType() == Node.ELEMENT_NODE)
             {
-                if (ELEMENT_NAME_LIBRARY_CLASS.equals(node.getNodeName()))
+                if (node.getTextContent() != null && ELEMENT_NAME_LIBRARY_CLASS.equals(node.getNodeName()))
                 {
                     final FaceletLibraryClassTagLib faceletLibraryClassTagLib = FaceletTaglibFactory.eINSTANCE
                             .createFaceletLibraryClassTagLib();

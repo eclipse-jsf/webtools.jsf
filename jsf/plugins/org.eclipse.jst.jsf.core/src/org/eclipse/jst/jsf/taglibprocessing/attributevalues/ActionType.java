@@ -80,7 +80,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 		for (final NavigationRuleType rule : rules) {
 			for (Iterator cases=rule.getNavigationCase().iterator();cases.hasNext();) {				
 				NavigationCaseType navCase = (NavigationCaseType)cases.next();					
-				if (navCase.getFromOutcome() != null && 
+				if (navCase.getFromOutcome() != null && navCase.getFromOutcome().getTextContent() != null &&
 						value.equals(navCase.getFromOutcome().getTextContent().trim()))
 					return true;				
 			}

@@ -127,7 +127,8 @@ public class FaceletUninstallDelegate extends FaceletChangeDelegate
                         {
                             final ViewHandlerType viewHandlerType = (ViewHandlerType) viewHandlerIt
                                     .next();
-                            if (viewHandlerType != null
+                            if (viewHandlerType != null && viewHandlerType
+                                    .getTextContent() != null
                                     && RUNTIME_VIEWHANDLER_CLASS_NAME
                                             .equals(viewHandlerType
                                                     .getTextContent().trim()))
