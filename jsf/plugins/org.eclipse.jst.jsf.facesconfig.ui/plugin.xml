@@ -106,4 +106,29 @@
               label="%propertyTab.general"/>
      </propertyTabs>
   </extension>-->
+
+  <!-- Context for Faces Config Editor. This is activated in FacesConfigEditor.init() -->
+  <extension point="org.eclipse.ui.contexts">
+      <context description="%editor.binding.context.description"
+          id="org.eclipse.jst.jsf.facesconfig.editorContext"
+          name="%editor.binding.context.name"
+          parentId="org.eclipse.ui.textEditorScope" />
+  </extension>
+
+  <!-- Key-binding for Next Page in the multi-page Faces Config Editor -->
+  <extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+F5" 
+			 commandId="org.eclipse.ui.part.nextPage"
+			 contextId="org.eclipse.jst.jsf.facesconfig.editorContext"
+			 schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" />
+  </extension>
+
+  <!-- Key-binding for Previous Page in the multi-page Facesd Config Editor -->
+  <extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+M2+F5" 
+			 commandId="org.eclipse.ui.part.previousPage"
+			 contextId="org.eclipse.jst.jsf.facesconfig.editorContext"
+			 schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" />
+  </extension>
+
 </plugin>
