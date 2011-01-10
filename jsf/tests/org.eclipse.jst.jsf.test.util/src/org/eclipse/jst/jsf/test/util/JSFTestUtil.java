@@ -273,11 +273,11 @@ public final class JSFTestUtil
         final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         final byte[]  inBuffer = new byte[1024];
         int bytesRead;
-        int curPos = 0;
+//        int curPos = 0;
         while ((bytesRead = stream.read(inBuffer)) != -1)
         {
             buffer.write(inBuffer,0,bytesRead);
-            curPos+=bytesRead;
+//            curPos+=bytesRead;
         }
 
         return buffer;
