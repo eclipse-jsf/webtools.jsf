@@ -13,6 +13,8 @@
 package org.eclipse.jst.jsf.context.resolver.structureddocument.internal.impl;
 
 
+import java.util.Iterator;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
@@ -91,28 +93,27 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     private IDOMContextResolver delegateGetDOMResolver(
             final IStructuredDocumentContext context)
     {
-        synchronized (_delegates)
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
         {
-            for (final IAdaptable adaptable : _delegates)
+            IAdaptable adapter = it.next();
+
+            final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) adapter
+            .getAdapter(IStructuredDocumentContextResolverFactory.class);
+
+            if (delegateFactory != null)
             {
+                final IDOMContextResolver contextResolver = delegateFactory
+                .getDOMContextResolver(context);
 
-                final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) adaptable
-                .getAdapter(IStructuredDocumentContextResolverFactory.class);
-
-                if (delegateFactory != null)
+                if (contextResolver != null)
                 {
-                    final IDOMContextResolver contextResolver = delegateFactory
-                    .getDOMContextResolver(context);
-
-                    if (contextResolver != null)
-                    {
-                        return contextResolver;
-                    }
+                    return contextResolver;
                 }
             }
-
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -145,23 +146,22 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     private ITextRegionContextResolver delegateGetTextRegionResolver(
             final IStructuredDocumentContext context)
     {
-        synchronized (_delegates)
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
         {
-            for (final Object element : _delegates)
+            IAdaptable adapter = it.next();
+            final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) (adapter)
+            .getAdapter(IStructuredDocumentContextResolverFactory.class);
+            final ITextRegionContextResolver contextResolver = delegateFactory
+            .getTextRegionResolver(context);
+
+            if (contextResolver != null)
             {
-                final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) ((IAdaptable) element)
-                .getAdapter(IStructuredDocumentContextResolverFactory.class);
-                final ITextRegionContextResolver contextResolver = delegateFactory
-                .getTextRegionResolver(context);
-
-                if (contextResolver != null)
-                {
-                    return contextResolver;
-                }
+                return contextResolver;
             }
-
-            return null;
         }
+
+        return null;
     }
 
     public IWorkspaceContextResolver getWorkspaceContextResolver(
@@ -192,23 +192,22 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     private IWorkspaceContextResolver delegateGetWorkspaceContextResolver(
             final IStructuredDocumentContext context)
     {
-        synchronized (_delegates)
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
         {
-            for (final Object element : _delegates)
+            IAdaptable adapter = it.next();
+            final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) (adapter)
+            .getAdapter(IStructuredDocumentContextResolverFactory.class);
+            final IWorkspaceContextResolver contextResolver = delegateFactory
+            .getWorkspaceContextResolver(context);
+
+            if (contextResolver != null)
             {
-                final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) ((IAdaptable) element)
-                .getAdapter(IStructuredDocumentContextResolverFactory.class);
-                final IWorkspaceContextResolver contextResolver = delegateFactory
-                .getWorkspaceContextResolver(context);
-
-                if (contextResolver != null)
-                {
-                    return contextResolver;
-                }
+                return contextResolver;
             }
-
-            return null;
         }
+
+        return null;
     }
 
     public ITaglibContextResolver getTaglibContextResolver(
@@ -249,28 +248,27 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     private ITaglibContextResolver delegateGetTaglibContextResolver(
             final IStructuredDocumentContext context)
     {
-        synchronized (_delegates)
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
         {
-            for (final IAdaptable adapter : _delegates)
+            IAdaptable adapter = it.next();
+            final IStructuredDocumentContextResolverFactory delegateFactory =
+                (IStructuredDocumentContextResolverFactory) adapter
+                .getAdapter(IStructuredDocumentContextResolverFactory.class);
+
+            if (delegateFactory != null)
             {
-                final IStructuredDocumentContextResolverFactory delegateFactory =
-                    (IStructuredDocumentContextResolverFactory) adapter
-                    .getAdapter(IStructuredDocumentContextResolverFactory.class);
+                final ITaglibContextResolver contextResolver = delegateFactory
+                        .getTaglibContextResolver(context);
 
-                if (delegateFactory != null)
+                if (contextResolver != null)
                 {
-                    final ITaglibContextResolver contextResolver = delegateFactory
-                            .getTaglibContextResolver(context);
-
-                    if (contextResolver != null)
-                    {
-                        return contextResolver;
-                    }
+                    return contextResolver;
                 }
             }
-
-            return null;
         }
+
+        return null;
     }
 
     public IMetadataContextResolver getMetadataContextResolver(
@@ -300,50 +298,48 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
     private IMetadataContextResolver delegateGetMetadataContextResolver(
             final IStructuredDocumentContext context)
     {
-        synchronized (_delegates)
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
         {
-            for (final Object element : _delegates)
+            IAdaptable adapter = it.next();
+            final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) (adapter)
+            .getAdapter(IStructuredDocumentContextResolverFactory.class);
+            final IMetadataContextResolver contextResolver = delegateFactory
+            .getMetadataContextResolver(context);
+
+            if (contextResolver != null)
             {
-                final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) ((IAdaptable) element)
-                .getAdapter(IStructuredDocumentContextResolverFactory.class);
-                final IMetadataContextResolver contextResolver = delegateFactory
-                .getMetadataContextResolver(context);
-
-                if (contextResolver != null)
-                {
-                    return contextResolver;
-                }
+                return contextResolver;
             }
-
-            return null;
         }
+
+        return null;
     }
 
 	public <T> T getResolver(final IStructuredDocumentContext context, final Class<T> clazz) {
 
 	    {
-	        synchronized (_delegates)
-	        {
-	            for (final IAdaptable adapter : _delegates)
-	            {
-	                final IStructuredDocumentContextResolverFactory delegateFactory =
-	                    (IStructuredDocumentContextResolverFactory) adapter
-	                    .getAdapter(IStructuredDocumentContextResolverFactory.class);
+	        Iterator<IAdaptable> it = getDelegatesIterator();
+	        while (it.hasNext())
+            {
+	            IAdaptable adapter = it.next();
+                final IStructuredDocumentContextResolverFactory delegateFactory =
+                    (IStructuredDocumentContextResolverFactory) adapter
+                    .getAdapter(IStructuredDocumentContextResolverFactory.class);
 
-	                if (delegateFactory != null 
-	                		&& delegateFactory instanceof IStructuredDocumentContextResolverFactory2)
-	                {
-	                    final IStructuredDocumentContextResolverFactory2 contextResolverFactory = (IStructuredDocumentContextResolverFactory2)delegateFactory;                            
-	                    final T contextResolver = contextResolverFactory.getResolver(context, clazz);
-	                    if (contextResolver != null)
-	                    {
-	                        return contextResolver;
-	                    }
-	                }
-	            }
+                if (delegateFactory != null 
+                		&& delegateFactory instanceof IStructuredDocumentContextResolverFactory2)
+                {
+                    final IStructuredDocumentContextResolverFactory2 contextResolverFactory = (IStructuredDocumentContextResolverFactory2)delegateFactory;                            
+                    final T contextResolver = contextResolverFactory.getResolver(context, clazz);
+                    if (contextResolver != null)
+                    {
+                        return contextResolver;
+                    }
+                }
+            }
 
-	            return null;
-	        }
-	    }
+            return null;
+        }
 	}
 }

@@ -109,21 +109,20 @@ public class StructuredDocumentContextFactory extends AbstractStructuredDocument
 	
 	private IStructuredDocumentContext delegateGetContext(ITextViewer textViewer, int documentPosition)
 	{
-		synchronized(_delegates)
+        final Iterator it = getDelegatesIterator();
+		
+		while (it.hasNext())
 		{
-			for (final Iterator it = _delegates.iterator(); it.hasNext();)
-			{
-				IStructuredDocumentContextFactory delegateFactory = (IStructuredDocumentContextFactory) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory.class);
-				IStructuredDocumentContext context = delegateFactory.getContext(textViewer, documentPosition);
-				
-				if (context != null)
-				{
-					return context;
-				}
-			}
+			IStructuredDocumentContextFactory delegateFactory = (IStructuredDocumentContextFactory) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory.class);
+			IStructuredDocumentContext context = delegateFactory.getContext(textViewer, documentPosition);
 			
-			return null;
+			if (context != null)
+			{
+				return context;
+			}
 		}
+		
+		return null;
 	}
 
 	/**
@@ -144,21 +143,20 @@ public class StructuredDocumentContextFactory extends AbstractStructuredDocument
 	
 	private IStructuredDocumentContext delegateGetContext(IDocument document, int documentPosition)
 	{
-		synchronized(_delegates)
-		{
-			for (final Iterator it = _delegates.iterator(); it.hasNext();)
-			{
-				IStructuredDocumentContextFactory delegateFactory = (IStructuredDocumentContextFactory) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory.class);
-				IStructuredDocumentContext context = delegateFactory.getContext(document, documentPosition);
-				
-				if (context != null)
-				{
-					return context;
-				}
-			}
+        final Iterator it = getDelegatesIterator();
+        
+        while (it.hasNext())
+        {
+			IStructuredDocumentContextFactory delegateFactory = (IStructuredDocumentContextFactory) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory.class);
+			IStructuredDocumentContext context = delegateFactory.getContext(document, documentPosition);
 			
-			return null;
+			if (context != null)
+			{
+				return context;
+			}
 		}
+		
+		return null;
 	}
 
     public IStructuredDocumentContext getContext(IDocument document, Node node) 
@@ -201,21 +199,20 @@ public class StructuredDocumentContextFactory extends AbstractStructuredDocument
     
     private IStructuredDocumentContext delegateGetContext(IDocument document, Node node)
     {
-        synchronized(_delegates)
+        final Iterator it = getDelegatesIterator();
+        
+        while (it.hasNext())
         {
-            for (final Iterator it = _delegates.iterator(); it.hasNext();)
-            {
-                IStructuredDocumentContextFactory delegateFactory = (IStructuredDocumentContextFactory) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory.class);
-                IStructuredDocumentContext context = delegateFactory.getContext(document, node);
-                
-                if (context != null)
-                {
-                    return context;
-                }
-            }
+            IStructuredDocumentContextFactory delegateFactory = (IStructuredDocumentContextFactory) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory.class);
+            IStructuredDocumentContext context = delegateFactory.getContext(document, node);
             
-            return null;
+            if (context != null)
+            {
+                return context;
+            }
         }
+        
+        return null;
     }
     
     public IStructuredDocumentContext getContext(Element element) 
@@ -245,26 +242,24 @@ public class StructuredDocumentContextFactory extends AbstractStructuredDocument
 		return null;
 	}
 	
-    private IStructuredDocumentContext delegateGetContext(Element element) {
-        synchronized(_delegates)
+    private IStructuredDocumentContext delegateGetContext(Element element)
+    {
+        final Iterator it = getDelegatesIterator();
+        
+        while (it.hasNext())
         {
-            for (final Iterator it = _delegates.iterator(); it.hasNext();)
+            IStructuredDocumentContextFactory2 delegateFactory = (IStructuredDocumentContextFactory2) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory2.class);
+            if (delegateFactory != null)
             {
-                IStructuredDocumentContextFactory2 delegateFactory = (IStructuredDocumentContextFactory2) ((IAdaptable) it.next()).getAdapter(IStructuredDocumentContextFactory2.class);
-                if (delegateFactory != null)
+                IStructuredDocumentContext context = delegateFactory.getContext(element);
+                
+                if (context != null)
                 {
-	                IStructuredDocumentContext context = delegateFactory.getContext(element);
-	                
-	                if (context != null)
-	                {
-	                    return context;
-	                }
+                    return context;
                 }
             }
-            
-            return null;
         }
+        
+        return null;
 	}
-
-
 }

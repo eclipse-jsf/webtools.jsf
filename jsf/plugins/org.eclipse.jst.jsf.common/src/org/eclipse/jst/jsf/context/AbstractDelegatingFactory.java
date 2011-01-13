@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -108,7 +109,10 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory
      */
     public final boolean removeFactoryDelegate(final IAdaptable delegate)
     {
-        return _delegates.remove(delegate);
+        synchronized(_delegates)
+        {
+            return _delegates.remove(delegate);
+        }
     }
 
     /**
@@ -136,5 +140,17 @@ public abstract class AbstractDelegatingFactory implements IDelegatingFactory
 
         // if no found, delegate is not supported
         return false;
+    }
+
+    /**
+     * @return an iterator to _delegates which is retrieved in a synchronized block to protect against
+     * access during sorting.
+     */
+    protected final Iterator<IAdaptable> getDelegatesIterator()
+    {
+        synchronized(_delegates)
+        {
+            return _delegates.iterator();
+        }
     }
 }
