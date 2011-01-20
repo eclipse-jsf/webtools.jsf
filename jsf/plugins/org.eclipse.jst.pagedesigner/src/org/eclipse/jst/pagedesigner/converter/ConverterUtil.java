@@ -67,6 +67,10 @@ public class ConverterUtil {
 	 * @return true if hostElement represents an empty container
 	 */
 	public static boolean isEmptyContainer(Element hostElement) {
+		String hostElementString = hostElement.toString();
+		if (hostElementString != null && hostElementString.startsWith("/")) { //$NON-NLS-1$
+			return false;
+		}
 		NodeList nl = hostElement.getChildNodes();
 		if (nl == null || nl.getLength() == 0) {
 			return true;

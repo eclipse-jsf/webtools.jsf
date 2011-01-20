@@ -155,6 +155,9 @@ public class SkinsMenuItemBuilder {
 			return nsURI;
 		}
 		public String getName() {
+			if (name == null) {
+				return nsURI;
+			}
 			return name;
 		}
 		/*
