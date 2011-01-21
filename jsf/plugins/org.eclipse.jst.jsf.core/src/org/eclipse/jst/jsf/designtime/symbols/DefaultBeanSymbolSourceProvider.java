@@ -226,7 +226,8 @@ public class DefaultBeanSymbolSourceProvider
    
     private boolean isBeanScopeInMask(final ManagedBeanScopeType scope, final int scopeMask)
     {
-        final int testScope = ISymbolConstants.getMaskForString(scope.getTextContent());
+        final int testScope =
+        	scope != null ? ISymbolConstants.getMaskForString(scope.getTextContent()) : -1;
         
         if (testScope != -1)
         {

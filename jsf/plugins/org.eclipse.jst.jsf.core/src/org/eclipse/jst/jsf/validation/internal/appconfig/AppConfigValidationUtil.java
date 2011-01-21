@@ -236,8 +236,11 @@ public final class AppConfigValidationUtil
         
         if (node != null)
         {
-            return node.getEndStructuredDocumentRegion().getEndOffset()
+        	if(node.getEndStructuredDocumentRegion() != null) { 
+        		return node.getEndStructuredDocumentRegion().getEndOffset()
                       - node.getStartStructuredDocumentRegion().getStartOffset();
+        	}
+       		return node.getStartStructuredDocumentRegion().getLength();
         }
         
         return -1;
