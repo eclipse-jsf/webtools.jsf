@@ -70,7 +70,7 @@ public class MockMarker implements IMarker
         return defaultValue;
     }
 
-    public Map<?, ?> getAttributes() throws CoreException
+    public Map<String, Object> getAttributes() throws CoreException
     {
         return Collections.unmodifiableMap(_attributes);
     }

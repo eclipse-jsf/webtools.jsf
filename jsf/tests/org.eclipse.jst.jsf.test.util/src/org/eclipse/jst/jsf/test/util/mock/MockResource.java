@@ -288,7 +288,7 @@ public class MockResource implements IResource
         return _project.getFolder(getProjectRelativePath().removeLastSegments(1));
     }
 
-    public Map<?, ?> getPersistentProperties() throws CoreException
+    public Map<QualifiedName, String> getPersistentProperties() throws CoreException
     {
         throw new UnsupportedOperationException();
     }
@@ -335,7 +335,7 @@ public class MockResource implements IResource
         throw new UnsupportedOperationException();
     }
 
-    public Map<?, ?> getSessionProperties() throws CoreException
+    public Map<QualifiedName, Object> getSessionProperties() throws CoreException
     {
     	return getSessionPropsMap();
     }

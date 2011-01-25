@@ -278,8 +278,7 @@ public class MockFrameworkAdaptor implements FrameworkAdaptor
                 return 0;
             }
 
-            @SuppressWarnings("rawtypes")
-            public Dictionary getManifest() throws BundleException
+            public Dictionary<String, String> getManifest() throws BundleException
             {
                 // TODO Auto-generated method stub
                 return null;
@@ -303,8 +302,7 @@ public class MockFrameworkAdaptor implements FrameworkAdaptor
                 return null;
             }
 
-            @SuppressWarnings("rawtypes")
-            public Enumeration getEntryPaths(final String path)
+            public Enumeration<String> getEntryPaths(final String path)
             {
                 // TODO Auto-generated method stub
                 return null;
@@ -365,6 +363,18 @@ public class MockFrameworkAdaptor implements FrameworkAdaptor
             {
                 // TODO Auto-generated method stub
 
+            }
+
+            public Bundle getBundle()
+            {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            public Enumeration<URL> findLocalResources(String path)
+            {
+                // TODO Auto-generated method stub
+                return null;
             }
         };
     }
