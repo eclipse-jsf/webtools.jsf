@@ -98,7 +98,6 @@ import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.editor.IFormPage;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IGotoMarker;
-import org.eclipse.ui.internal.BaseSaveAction;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
@@ -549,17 +548,14 @@ public class FacesConfigEditor extends FormEditor implements
                         setPageText(sourcePageId, EditorMessages.FacesConfigEditor_Source_TabName);
                         sourcePage.update();
 
-                        /* Bug 263806 - Problems saving file from source tab of faces-config editor
+                        /*
+                         * Bug 335276 - compile errors with near M5 platform
                          * 
-                         * Getting the save action and calling partDeactivated on it will attach
-                         * the internal listener necessary for the save action to receive subsequent
-                         * property change events. (There is no public method available to just hook
-                         * up the internal listener to our part.)
+                         * Code previously added to address Bug 263806 relied on internal classes
+                         * that have since been removed. Bug 263806 no longer requires the code that
+                         * was added in order to function correctly, and so the old fix for Bug
+                         * 263806 has simply been removed.
                          */
-                        IAction sourcePageSaveAction = sourcePage.getAction("save"); //$NON-NLS-1$
-                        if (sourcePageSaveAction instanceof BaseSaveAction) {
-                        	((BaseSaveAction)sourcePageSaveAction).partDeactivated(FacesConfigEditor.this);
-                        }
 
                         // default active page to 0
                         setActivePage(0);
