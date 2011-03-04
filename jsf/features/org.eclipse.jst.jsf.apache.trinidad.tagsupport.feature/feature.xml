@@ -2,10 +2,8 @@
 <feature
       id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"
       label="%featureName"
-      version="2.2.101.qualifier"
-      provider-name="%providerName"
-      license-feature="org.eclipse.license"
-      license-feature-version="1.0.0.qualifier">
+      version="2.2.200.qualifier"
+      provider-name="%providerName">
 
    <description>
       %description
