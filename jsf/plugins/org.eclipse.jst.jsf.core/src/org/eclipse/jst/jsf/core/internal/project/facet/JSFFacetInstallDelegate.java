@@ -339,21 +339,40 @@ public final class JSFFacetInstallDelegate implements IDelegate {
             final IDataModel config, final IProgressMonitor monitor,
             final JSFUtils jsfUtil)
     {
+    	// Bug 293460 - Installing JSF facet should update web.xml only if needed.
+    	if (shouldModify(jsfUtil)) {
 
-        final IModelProvider provider = jsfUtil.getModelProvider();
-        final IPath webXMLPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
-        if (jsfUtil.isJavaEE(provider.getModelObject()))
-        {
-            provider.modify(new UpdateWebXMLForJavaEE(project, config, jsfUtil),
-                    doesDDFileExist(project, webXMLPath) ? webXMLPath
-                            : IModelProvider.FORCESAVE);
-        } else
-        {// must be 2.3 or 2.4
-            provider.modify(new UpdateWebXMLForJ2EE(project, config, jsfUtil),
-                    webXMLPath);
-        }
-        // TODO: is the MyFaces check a todo?
-        // Check if runtime is MyFaces or Sun-RI
+	        final IModelProvider provider = jsfUtil.getModelProvider();
+	        final IPath webXMLPath = new Path("WEB-INF").append("web.xml"); //$NON-NLS-1$ //$NON-NLS-2$
+	        if (jsfUtil.isJavaEE(provider.getModelObject()))
+	        {
+	            provider.modify(new UpdateWebXMLForJavaEE(project, config, jsfUtil),
+	                    doesDDFileExist(project, webXMLPath) ? webXMLPath
+	                            : IModelProvider.FORCESAVE);
+	        } else
+	        {// must be 2.3 or 2.4
+	            provider.modify(new UpdateWebXMLForJ2EE(project, config, jsfUtil),
+	                    webXMLPath);
+	        }
+	        // TODO: is the MyFaces check a todo?
+	        // Check if runtime is MyFaces or Sun-RI
+
+    	}
+    }
+
+    private boolean shouldModify(JSFUtils jsfUtil) {
+    	boolean shouldModify = true;
+    	IModelProvider provider = jsfUtil.getModelProvider();
+    	if (provider != null) {
+        	WebApp webApp = (WebApp) provider.getModelObject();
+        	if (webApp != null) {
+        		Object objServlet = jsfUtil.findJSFServlet(webApp);
+        		if (objServlet != null) {
+        			shouldModify = false;
+        		}
+        	}
+    	}
+    	return shouldModify;
     }
 
 	private boolean doesDDFileExist(final IProject project, final IPath webXMLPath) {
