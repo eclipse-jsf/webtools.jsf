@@ -364,9 +364,9 @@ public final class JSFFacetInstallDelegate implements IDelegate {
     	boolean shouldModify = true;
     	IModelProvider provider = jsfUtil.getModelProvider();
     	if (provider != null) {
-        	WebApp webApp = (WebApp) provider.getModelObject();
-        	if (webApp != null) {
-        		Object objServlet = jsfUtil.findJSFServlet(webApp);
+        	Object objWebApp = provider.getModelObject();
+        	if (objWebApp != null) {
+        		Object objServlet = jsfUtil.findJSFServlet(objWebApp);
         		if (objServlet != null) {
         			shouldModify = false;
         		}
