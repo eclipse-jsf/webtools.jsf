@@ -165,7 +165,13 @@ public class ProjectTaglibDescriptor implements IProjectTaglibDescriptor
         {
             for (final AbstractFaceletTaglibLocator locator : _locatorProvider.getLocators())
             {
-                locator.stop();
+                try
+                {
+                    locator.stop();
+                } catch (Exception e)
+                {
+                    FaceletCorePlugin.log("Disposing ProjectTaglibDescriptor", e); //$NON-NLS-1$
+                }
             }
             _factory.dispose();
         }
