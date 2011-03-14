@@ -81,6 +81,7 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		converters.add(createConverter("Long")); //$NON-NLS-1$
 		converters.add(createConverter("Number")); //$NON-NLS-1$
 		converters.add(createConverter("Short")); //$NON-NLS-1$
+		converters.add(createConverter("Enum")); //$NON-NLS-1$
 		// converters by for-class (see spec 3.3.3 -- Standard Converter Implementions
 		converters.add(createForClassConverter("java.lang.Boolean", "javax.faces.convert.BooleanConverter")); //$NON-NLS-1$ //$NON-NLS-2$
         converters.add(createForClassConverter("java.lang.Byte", "javax.faces.convert.ByteConverter")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -90,11 +91,15 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
         converters.add(createForClassConverter("java.lang.Integer", "javax.faces.convert.IntegerConverter")); //$NON-NLS-1$ //$NON-NLS-2$
         converters.add(createForClassConverter("java.lang.Long", "javax.faces.convert.LongConverter")); //$NON-NLS-1$ //$NON-NLS-2$
         converters.add(createForClassConverter("java.lang.Short", "javax.faces.converter.ShortConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+        converters.add(createForClassConverter("java.lang.Enum", "javax.faces.converter.EnumConverter")); //$NON-NLS-1$ //$NON-NLS-2$
 		//create and add validators
 		EList validators = facesConfig.getValidator();
 		validators.add(createValidator("DoubleRange")); //$NON-NLS-1$
 		validators.add(createValidator("Length")); //$NON-NLS-1$
 		validators.add(createValidator("LongRange")); //$NON-NLS-1$
+		validators.add(createValidator("Bean")); //$NON-NLS-1$
+		validators.add(createValidator("RegularExpression")); //$NON-NLS-1$
+		validators.add(createValidator("Required")); //$NON-NLS-1$
 		//create and add UI components
 		EList components = facesConfig.getComponent();
 		components.add(createUIComponent("Column")); //$NON-NLS-1$
