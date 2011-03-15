@@ -13,8 +13,8 @@ package org.eclipse.jst.pagedesigner.properties.celleditors;
 
 import org.eclipse.jface.preference.PreferenceManager;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.single.ChangeStyleCommand;
+import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.ui.dialogs.StyleDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -23,7 +23,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSStyleDeclaration;
 import org.eclipse.wst.css.core.internal.util.declaration.CSSPropertyContext;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
-import org.w3c.dom.css.ElementCSSInlineStyle;
 
 /**
  * A css dialog cell editor
@@ -31,14 +30,17 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
  */
 public class CSSDialogCellEditor extends EditableDialogCellEditor {
 	private IDOMElement _element;
+	private IPropertyPageDescriptor _attr;
 
 	/**
 	 * @param parent
+	 * @param attr 
 	 * @param element 
 	 */
-	public CSSDialogCellEditor(Composite parent, IDOMElement element) {
+	public CSSDialogCellEditor(Composite parent, IPropertyPageDescriptor attr, IDOMElement element) {
 		super(parent);
 		_element = element;
+		_attr = attr;
 	}
 
 	/*
@@ -47,14 +49,14 @@ public class CSSDialogCellEditor extends EditableDialogCellEditor {
 	 * @see org.eclipse.jface.viewers.DialogCellEditor#openDialogBox(org.eclipse.swt.widgets.Control)
 	 */
 	protected Object openDialogBox(Control cellEditorWindow) {
-		ICSSStyleDeclaration styleDeclaration = (ICSSStyleDeclaration) ((ElementCSSInlineStyle) _element)
-				.getStyle();
-
-		PreferenceManager manager = new PreferenceManager();
-		Shell shell = cellEditorWindow.getShell();
+		final ICSSStyleDeclaration styleDeclaration = CSSStyleDeclarationFactory.getInstance().
+								getStyleDeclaration(_element, _attr.getAttributeName());
+		
+		final PreferenceManager manager = new PreferenceManager();
+		final Shell shell = cellEditorWindow.getShell();
 
 		final CSSPropertyContext context = new CSSPropertyContext(styleDeclaration);
-		StyleDialog dialog = new StyleDialog(shell, manager, _element, context);
+		final StyleDialog dialog = new StyleDialog(shell, manager, _element, context);
 		if (dialog.open() == Window.OK) {
 			if (context.isModified()) {			
 				PlatformUI.getWorkbench().getDisplay().asyncExec(
@@ -62,7 +64,7 @@ public class CSSDialogCellEditor extends EditableDialogCellEditor {
 	                    {
 	                        public void run()
 	                        {
-	            				ChangeStyleCommand c = new ChangeStyleCommand(_element, context);
+	            				final ChangeStyleCommand c = new ChangeStyleCommand(_element, _attr.getAttributeName(), context);
 	                        	c.execute();
 	                        }
 	            });
@@ -70,7 +72,7 @@ public class CSSDialogCellEditor extends EditableDialogCellEditor {
 		}
 
 		String style = (_element == null ? null : _element
-				.getAttribute(IJSFConstants.ATTR_STYLE));
+				.getAttribute(_attr.getAttributeName()));
 		return style == null ? "" : style; //$NON-NLS-1$
 	}
 }

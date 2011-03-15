@@ -703,7 +703,7 @@
         </entity>
         <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -775,7 +775,7 @@
         </entity>
 	    <entity id="contentStyle">
 	     	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -816,7 +816,7 @@
 		</trait>    		    	
         <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -891,7 +891,7 @@
         </entity>
        <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -947,7 +947,7 @@
 		</trait>      	   		
         <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -1013,7 +1013,7 @@
 		</trait>   		    	    	
        	<entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -1361,12 +1361,12 @@
 		</trait>     		      	
         <entity id="titleClass">
             <trait id="attribute-value-runtime-type">
-                <value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
             </trait>
         </entity>
         <entity id="separatorClass">
             <trait id="attribute-value-runtime-type">
-                <value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
             </trait>
         </entity>
     </entity>
@@ -1594,7 +1594,7 @@
         <entity id="icon"/>
        	<entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -1873,7 +1873,7 @@
         <entity id="label"/>
         <entity id="labelStyle">
             <trait id="attribute-value-runtime-type">
-                <value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
             </trait>        
         </entity>
         <entity id="accessKey">
@@ -2058,7 +2058,7 @@
         </entity>
        <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>
@@ -3824,7 +3824,7 @@
     <entityGroup id="common-trinidad-attributes">
         <entity id="inlineStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.core</value>
@@ -3832,7 +3832,7 @@
 		</entity>
         <entity id="styleClass">
 			<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.core</value>
@@ -4128,7 +4128,7 @@
     <entityGroup id="common-select-tag-attributes">
        <entity id="contentStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.css</value>

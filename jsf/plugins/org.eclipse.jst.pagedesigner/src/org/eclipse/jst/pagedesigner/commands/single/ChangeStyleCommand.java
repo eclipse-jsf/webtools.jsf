@@ -13,9 +13,9 @@ package org.eclipse.jst.pagedesigner.commands.single;
 
 import java.util.Map;
 
-import org.eclipse.jst.jsf.core.internal.tld.IJSFConstants;
 import org.eclipse.jst.pagedesigner.commands.CommandResources;
 import org.eclipse.jst.pagedesigner.dom.DOMStyleUtil;
+import org.eclipse.jst.pagedesigner.properties.celleditors.CSSStyleDeclarationFactory;
 import org.eclipse.wst.css.core.internal.provisional.document.ICSSStyleDeclaration;
 import org.eclipse.wst.css.core.internal.util.declaration.CSSPropertyContext;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMElement;
@@ -30,6 +30,8 @@ public class ChangeStyleCommand extends SingleNodeCommand {
 
 	private CSSPropertyContext _context = null;
 
+	private String _styleAttrName;
+
 	/**
 	 * @param node
 	 * @param map
@@ -38,16 +40,43 @@ public class ChangeStyleCommand extends SingleNodeCommand {
 		super(CommandResources
 				.getString("ChangeStyleCommand.Label.ChangeStyle"), node); //$NON-NLS-1$
 		_styleProperties = map;
+		_styleAttrName = "style"; //$NON-NLS-1$
+	}
+	
+	/**
+	 * @param node
+	 * @param styleAttrName 
+	 * @param map
+	 */
+	public ChangeStyleCommand(IDOMElement node, String styleAttrName, Map map) {
+		super(CommandResources
+				.getString("ChangeStyleCommand.Label.ChangeStyle"), node); //$NON-NLS-1$
+		_styleProperties = map;
+		_styleAttrName = styleAttrName;
 	}
 
 	/**
 	 * @param node
 	 * @param context
+	 * @deprecated
 	 */
 	public ChangeStyleCommand(IDOMElement node, CSSPropertyContext context) {
 		super(CommandResources
 				.getString("ChangeStyleCommand.Label.ChangeStyle"), node); //$NON-NLS-1$
 		_context = context;
+		_styleAttrName = "style"; //$NON-NLS-1$
+	}
+	
+	/**
+	 * @param node
+	 * @param styleAttrName 
+	 * @param context
+	 */
+	public ChangeStyleCommand(IDOMElement node, String styleAttrName, CSSPropertyContext context) {
+		super(CommandResources
+				.getString("ChangeStyleCommand.Label.ChangeStyle"), node); //$NON-NLS-1$
+		_context = context;
+		_styleAttrName = styleAttrName;
 	}
 
 	/*
@@ -60,13 +89,12 @@ public class ChangeStyleCommand extends SingleNodeCommand {
 		try {
 			if (_styleProperties != null) {
 				IDOMElement original = this.getOriginalElement();
-				DOMStyleUtil.insertStyle(original, _styleProperties);
+				DOMStyleUtil.insertStyle(original, _styleAttrName, _styleProperties);
 			} else if (_context != null) {
-				ICSSStyleDeclaration styleDeclaration = (ICSSStyleDeclaration) ((ElementCSSInlineStyle) getOriginalElement())
-						.getStyle();
+				ICSSStyleDeclaration styleDeclaration = CSSStyleDeclarationFactory.getInstance().getStyleDeclaration(getOriginalElement(), _styleAttrName);
 
 				if (styleDeclaration == null) {
-					getOriginalElement().setAttribute(IJSFConstants.ATTR_STYLE,
+					getOriginalElement().setAttribute(_styleAttrName,
 							""); //$NON-NLS-1$
 					styleDeclaration = (ICSSStyleDeclaration) ((ElementCSSInlineStyle) getOriginalElement())
 							.getStyle();

@@ -42,6 +42,7 @@ import org.w3c.dom.Element;
  * 
  * @author mengbo
  */
+@SuppressWarnings("deprecation")
 public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 	public CellEditor createCellEditor(Composite parent,
 			IPropertyPageDescriptor attr, Element element) {
@@ -101,7 +102,7 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 //				if (!param.equalsIgnoreCase("STYLE")) {
 //					return null;
 //				}
-				CSSDialogCellEditor cellEditor = new CSSDialogCellEditor(parent,
+				CSSDialogCellEditor cellEditor = new CSSDialogCellEditor(parent, attr,
 						(IDOMElement) element);
 				ed = cellEditor;
 		}
@@ -143,7 +144,7 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.meta.NEWMDIAttributeCellEditorFactory#createDialogField(org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor,
 	 *      org.w3c.dom.Element, org.w3c.dom.Element)
-	 */
+	 */	
 	public DialogField createDialogField(IPropertyPageDescriptor attr) {
 
 		String type = attr.getValueType();

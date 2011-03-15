@@ -382,7 +382,7 @@
     <entityGroup id="common-trinidadh-attributes">
         <entity id="inlineStyle">
         	<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSStyleType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.core</value>
@@ -390,7 +390,7 @@
 		</entity>
         <entity id="styleClass">
 			<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.pagedesigner.attributevalues.CSSClassType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
 			</trait>
 			<trait id="category">
 				<value xsi:type="mdt:StringValue">%property.category.core</value>

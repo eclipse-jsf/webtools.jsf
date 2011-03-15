@@ -31,6 +31,7 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
 
 /**
  * @author mengbo
+ * @deprecated
  */
 public class StyleButtonDialogField extends StringButtonDialogField implements
 		IElementContextable {

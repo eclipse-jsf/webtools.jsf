@@ -37,14 +37,26 @@ public class ChangeStyleAction extends Action {
 
 	private IDOMElement _element;
 
+	private String _attribute;
+
 	/**
 	 * @param part
 	 * @param ele
 	 */
 	public ChangeStyleAction(ElementEditPart part, IDOMElement ele) {
+		this(part, ele, "style");//$NON-NLS-1$
+	}
+	
+	/**
+	 * @param part
+	 * @param ele
+	 * @param styleAttributeName 
+	 */
+	public ChangeStyleAction(ElementEditPart part, IDOMElement ele, String styleAttributeName) {
 		super(MY_TEXT);
 		this._editPart = part;
 		this._element = ele;
+		this._attribute = styleAttributeName;
 	}
 
 	public void run() {
@@ -58,7 +70,7 @@ public class ChangeStyleAction extends Action {
 		StyleDialog dialog = new StyleDialog(shell, manager, _element, context);
 		if (dialog.open() == Window.OK) {
 			if (context.isModified()) {
-				ChangeStyleCommand c = new ChangeStyleCommand(_element, context);
+				ChangeStyleCommand c = new ChangeStyleCommand(_element, _attribute, context);
 				c.execute();
 			}
 		}

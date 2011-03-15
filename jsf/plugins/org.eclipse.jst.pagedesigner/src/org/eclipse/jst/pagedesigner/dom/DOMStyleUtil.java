@@ -27,6 +27,8 @@ import org.w3c.dom.css.ElementCSSInlineStyle;
  * @version 1.5
  */
 public final class DOMStyleUtil {
+	
+	private static final String STYLE_ATTR = "style"; //$NON-NLS-1$
 	/**
 	 * @param original
 	 * @param cssProperty
@@ -34,11 +36,22 @@ public final class DOMStyleUtil {
 	 */
 	public static String getInlineStyleProperty(Element original,
 			String cssProperty) {
+		return getInlineStyleProperty(original, STYLE_ATTR, cssProperty);
+	}
+	
+	/**
+	 * @param original
+	 * @param styleAttributeName 
+	 * @param cssProperty
+	 * @return the inline style property
+	 */
+	public static String getInlineStyleProperty(Element original, String styleAttributeName,
+			String cssProperty) {
 		if (original instanceof ElementCSSInlineStyle) {
 			CSSStyleDeclaration styledecl = ((ElementCSSInlineStyle) original)
 					.getStyle();
 			if (styledecl == null) {
-				if (original.getAttribute("style") == null) { //$NON-NLS-1$
+				if (original.getAttribute(styleAttributeName) == null) { 
 					return null;
 				}
 				// else mean it has style attribute.
@@ -55,11 +68,11 @@ public final class DOMStyleUtil {
 		// normally should not happen. But anyway, we need to have a fail safe
 		// path.
 
-		String oldstyle = original.getAttribute("style"); //$NON-NLS-1$
+		String oldstyle = original.getAttribute(styleAttributeName); 
 		if (oldstyle == null || oldstyle.length() == 0) {
 			return null;
 		}
-		StringTokenizer tokenizer = new StringTokenizer(oldstyle, ";"); //$NON-NLS-1$
+		StringTokenizer tokenizer = new StringTokenizer(oldstyle, ";");  //$NON-NLS-1$
 
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken().trim();
@@ -80,18 +93,29 @@ public final class DOMStyleUtil {
 	}
 
 	/**
-	 * insert style into element
+	 * insert style into element  - style attribute
 	 * 
 	 * @param original
 	 * @param map
 	 */
 	public static void insertStyle(Element original, Map map) {
+		insertStyle(original, STYLE_ATTR, map); 
+	}
+
+	/**
+	 * insert style into element
+	 * 
+	 * @param original
+	 * @param styleAttrName 
+	 * @param map
+	 */
+	public static void insertStyle(Element original, String styleAttrName, Map map) {
 		if (original instanceof ElementCSSInlineStyle) {
 			CSSStyleDeclaration styledecl = ((ElementCSSInlineStyle) original)
 					.getStyle();
 			if (styledecl == null) {
-				if (original.getAttribute("style") == null) { //$NON-NLS-1$
-					original.setAttribute("style", ""); //$NON-NLS-1$ //$NON-NLS-2$
+				if (original.getAttribute(styleAttrName) == null) { 
+					original.setAttribute(styleAttrName, ""); //$NON-NLS-1$ 
 					styledecl = ((ElementCSSInlineStyle) original).getStyle();
 				}
 			}
@@ -117,7 +141,7 @@ public final class DOMStyleUtil {
 		// normally should not happen. But anyway, we need to have a fail safe
 		// path.
 
-		String oldstyle = original.getAttribute("style"); //$NON-NLS-1$
+		String oldstyle = original.getAttribute(styleAttrName); 
 		if (oldstyle == null) {
 			oldstyle = ""; //$NON-NLS-1$
 		}
@@ -159,16 +183,15 @@ public final class DOMStyleUtil {
 				buffer.append(key).append(": ").append(value).append("; "); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
-		original.setAttribute("style", buffer.toString()); //$NON-NLS-1$
+		original.setAttribute(styleAttrName, buffer.toString()); 
 	}
-
 	/**
 	 * @param ele
 	 * @return true if supports the style attribute
 	 */
 	public static boolean supportStyleAttribute(IDOMElement ele) {
 		CMElementDeclaration decl = CMUtil.getElementDeclaration(ele);
-		if (decl != null && decl.getAttributes().getNamedItem("style") != null) { //$NON-NLS-1$
+		if (decl != null && decl.getAttributes().getNamedItem(STYLE_ATTR) != null) { 
 			return true;
 		}
         return false;
