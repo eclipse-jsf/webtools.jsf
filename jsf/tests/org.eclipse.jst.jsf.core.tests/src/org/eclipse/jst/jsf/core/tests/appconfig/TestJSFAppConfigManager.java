@@ -108,6 +108,10 @@ public class TestJSFAppConfigManager implements IJSFAppConfigManager {
 		return getManager().getVariableResolvers();
 	}
 
+	public List<String> getELResolvers() {
+		return getManager().getELResolvers();
+	}
+
 	public List<ConverterType> getConverters() {
 		return getManager().getConverters();
 	}
