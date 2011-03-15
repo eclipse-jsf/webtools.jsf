@@ -147,6 +147,11 @@ public interface IJSFAppConfigManager extends IManagedObject{
 	public List<String> getVariableResolvers();
 
 	/**
+	 * @return List of all EL resolver class names registered.
+	 */
+	public List<String> getELResolvers();
+
+	/**
 	 * Gets list of all ConverterType instances from all known faces-config
 	 * models; list may be empty.
 	 * 

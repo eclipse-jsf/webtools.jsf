@@ -28,6 +28,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ApplicationType;
 import org.eclipse.jst.jsf.facesconfig.emf.BehaviorType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
+import org.eclipse.jst.jsf.facesconfig.emf.ELResolverType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigExtensionType;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.FactoryType;
@@ -335,6 +336,29 @@ public abstract class AbstractJSFAppConfigManager
             }
         }
         return allVariableResolvers;
+    }
+
+	public final List<String> getELResolvers()
+    {
+        final List<String> allELResolvers = new ArrayList<String>();
+        final List<ApplicationType> applications = getApplications();      
+        for (final ApplicationType  application : applications)
+        {           
+            for (final Iterator it = application.getELResolver().iterator(); it.hasNext();)
+            {
+                final ELResolverType varRes = (ELResolverType) it.next();
+                String varClass = varRes.getTextContent();
+                if (varClass != null)
+                {
+                    varClass = varClass.trim();
+                    if (!"".equals(varClass)) //$NON-NLS-1$
+                    {
+                        allELResolvers.add(varClass);
+                    }
+                }
+            }
+        }
+        return allELResolvers;
     }
 
 	public List<ConverterType> getConverters() {

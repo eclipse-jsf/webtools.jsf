@@ -125,6 +125,8 @@ public class ConfigBasedDTPropertyResolver extends DefaultDTPropertyResolver
         final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
                 .getJSFAppConfigManagerInstance(project);
         final List<String> propertyResolvers = manager.getPropertyResolvers();
+        final List<String> elResolvers = manager.getELResolvers();
+        propertyResolvers.addAll(elResolvers);
         final List<AbstractDTPropertyResolver> resolvers = new ArrayList<AbstractDTPropertyResolver>();
         for (final String propertyResolver : propertyResolvers)
         {

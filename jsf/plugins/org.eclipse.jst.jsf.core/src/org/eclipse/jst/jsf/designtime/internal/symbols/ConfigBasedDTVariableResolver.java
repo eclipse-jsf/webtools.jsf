@@ -117,6 +117,8 @@ public class ConfigBasedDTVariableResolver extends DefaultDTVariableResolver
         final IJSFAppConfigManager manager = JSFAppConfigManagerFactory
                 .getJSFAppConfigManagerInstance(project);
         final List<String> variableResolvers = manager.getVariableResolvers();
+        final List<String> elResolvers = manager.getELResolvers();
+        variableResolvers.addAll(elResolvers);
         final List<AbstractDTVariableResolver> resolvers = new ArrayList<AbstractDTVariableResolver>();
         for (final String variableResolver : variableResolvers)
         {
