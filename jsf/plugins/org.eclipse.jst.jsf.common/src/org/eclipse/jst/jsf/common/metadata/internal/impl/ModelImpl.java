@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.8 2010/01/27 23:54:32 gkessler Exp $
+ * $Id: ModelImpl.java,v 1.9 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -51,7 +51,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList entityGroups = null;
+	protected EList<EntityGroup> entityGroups;
 
 	/**
 	 * The default value of the '{@link #getSourceModelProvider() <em>Source Model Provider</em>}' attribute.
@@ -91,6 +91,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return MetadataPackage.Literals.MODEL;
 	}
@@ -137,9 +138,9 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getEntityGroups() {
+	public EList<EntityGroup> getEntityGroups() {
 		if (entityGroups == null) {
-			entityGroups = new EObjectResolvingEList(EntityGroup.class, this, MetadataPackage.MODEL__ENTITY_GROUPS);
+			entityGroups = new EObjectResolvingEList<EntityGroup>(EntityGroup.class, this, MetadataPackage.MODEL__ENTITY_GROUPS);
 		}
 		return entityGroups;
 	}
@@ -149,6 +150,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MetadataPackage.MODEL__ENTITY_GROUPS:
@@ -166,11 +168,13 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MetadataPackage.MODEL__ENTITY_GROUPS:
 				getEntityGroups().clear();
-				getEntityGroups().addAll((Collection)newValue);
+				getEntityGroups().addAll((Collection<? extends EntityGroup>)newValue);
 				return;
 			case MetadataPackage.MODEL__SOURCE_MODEL_PROVIDER:
 				setSourceModelProvider((IMetaDataSourceModelProvider)newValue);
@@ -204,6 +208,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.MODEL__ENTITY_GROUPS:
@@ -243,6 +248,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.MODEL__ENTITY_GROUPS:

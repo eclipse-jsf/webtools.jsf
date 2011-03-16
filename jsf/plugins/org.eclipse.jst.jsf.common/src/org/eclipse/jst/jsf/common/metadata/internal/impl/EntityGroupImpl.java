@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityGroupImpl.java,v 1.6 2008/11/18 22:24:39 gkessler Exp $
+ * $Id: EntityGroupImpl.java,v 1.7 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -42,6 +42,7 @@ public class EntityGroupImpl extends EntityImpl implements EntityGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return MetadataPackage.Literals.ENTITY_GROUP;
 	}

@@ -103,17 +103,15 @@ public interface Model extends Entity {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Entity Groups</em>' reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getModel_EntityGroups()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.EntityGroup"
+	 * @model keys="id type"
 	 *        extendedMetaData="kind='element' name='entityGroup'"
 	 * @generated
 	 */
-	EList getEntityGroups();
+	EList<EntityGroup> getEntityGroups();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param groupId 
-	 * @return EntityGroup
 	 * @model
 	 * @generated
 	 */

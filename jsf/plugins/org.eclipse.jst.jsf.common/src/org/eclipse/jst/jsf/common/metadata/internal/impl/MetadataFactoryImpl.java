@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataFactoryImpl.java,v 1.5 2008/11/18 22:24:39 gkessler Exp $
+ * $Id: MetadataFactoryImpl.java,v 1.6 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -43,8 +43,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return MetadataFactory
-	 * @generated
+	 * @generated NOT
 	 */
 	public static MetadataFactory init() {
 		try {
@@ -74,15 +73,16 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case MetadataPackage.MODEL: return createModel();
 			case MetadataPackage.ENTITY_GROUP: return createEntityGroup();
 			case MetadataPackage.ENTITY: return createEntity();
-			case MetadataPackage.TRAIT: return createTrait();
 			case MetadataPackage.INCLUDE_ENTITY_GROUP: return createIncludeEntityGroup();
+			case MetadataPackage.TRAIT: return createTrait();
 			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");  //$NON-NLS-1$//$NON-NLS-2$
 		}
 	}
 
@@ -91,6 +91,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case MetadataPackage.IMETA_DATA_SOURCE_MODEL_PROVIDER:
@@ -98,7 +99,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 			case MetadataPackage.MODEL_CONTEXT:
 				return createModelContextFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 	}
 
@@ -107,6 +108,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case MetadataPackage.IMETA_DATA_SOURCE_MODEL_PROVIDER:
@@ -114,7 +116,7 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 			case MetadataPackage.MODEL_CONTEXT:
 				return convertModelContextToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 	}
 
@@ -171,9 +173,6 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eDataType IMetaDataSourceModelProvider
-	 * @param initialValue 
-	 * @return IMetaDataSourceModelProvider
 	 * @generated
 	 */
 	public IMetaDataSourceModelProvider createIMetaDataSourceModelProviderFromString(EDataType eDataType, String initialValue) {
@@ -183,9 +182,6 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eDataType 
-	 * @param instanceValue 
-	 * @return String
 	 * @generated
 	 */
 	public String convertIMetaDataSourceModelProviderToString(EDataType eDataType, Object instanceValue) {
@@ -195,9 +191,6 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eDataType 
-	 * @param initialValue 
-	 * @return ModelKeyDescriptor
 	 * @generated
 	 */
 	public ModelKeyDescriptor createModelContextFromString(EDataType eDataType, String initialValue) {
@@ -207,9 +200,6 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param eDataType 
-	 * @param instanceValue 
-	 * @return String
 	 * @generated
 	 */
 	public String convertModelContextToString(EDataType eDataType, Object instanceValue) {
@@ -228,10 +218,10 @@ public class MetadataFactoryImpl extends EFactoryImpl implements MetadataFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return MetadataPackage
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static MetadataPackage getPackage() {
 		return MetadataPackage.eINSTANCE;
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraitImpl.java,v 1.9 2008/11/18 22:24:39 gkessler Exp $
+ * $Id: TraitImpl.java,v 1.10 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -26,7 +26,9 @@ import org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link TraitImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.TraitImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.TraitImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.jst.jsf.common.metadata.internal.impl.TraitImpl#getSourceModelProvider <em>Source Model Provider</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,7 +70,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject value = null;
+	protected EObject value;
 
 	/**
 	 * The default value of the '{@link #getSourceModelProvider() <em>Source Model Provider</em>}' attribute.
@@ -104,6 +106,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return MetadataPackage.Literals.TRAIT;
 	}
@@ -211,6 +214,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MetadataPackage.TRAIT__VALUE:
@@ -224,6 +228,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MetadataPackage.TRAIT__ID:
@@ -241,6 +246,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MetadataPackage.TRAIT__ID:
@@ -261,6 +267,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.TRAIT__ID:
@@ -281,6 +288,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.TRAIT__ID:
@@ -298,6 +306,7 @@ public class TraitImpl extends EObjectImpl implements Trait {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

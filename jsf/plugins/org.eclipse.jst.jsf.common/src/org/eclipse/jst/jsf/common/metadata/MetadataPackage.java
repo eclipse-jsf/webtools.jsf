@@ -76,7 +76,7 @@ public interface MetadataPackage extends EPackage {
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getTrait()
 	 * @generated
 	 */
-	int TRAIT = 3;
+	int TRAIT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityImpl <em>Entity</em>}' class.
@@ -241,7 +241,7 @@ public interface MetadataPackage extends EPackage {
 	 * @see org.eclipse.jst.jsf.common.metadata.internal.impl.MetadataPackageImpl#getIncludeEntityGroup()
 	 * @generated
 	 */
-	int INCLUDE_ENTITY_GROUP = 4;
+	int INCLUDE_ENTITY_GROUP = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.jst.jsf.common.metadata.internal.impl.EntityGroupImpl <em>Entity Group</em>}' class.
@@ -314,6 +314,33 @@ public interface MetadataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
+	int INCLUDE_ENTITY_GROUP__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Model Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDE_ENTITY_GROUP__MODEL_URI = 1;
+
+	/**
+	 * The number of structural features of the '<em>Include Entity Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDE_ENTITY_GROUP_FEATURE_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
 	int TRAIT__ID = 0;
 
 	/**
@@ -342,33 +369,6 @@ public interface MetadataPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRAIT_FEATURE_COUNT = 3;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_ENTITY_GROUP__ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Model Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_ENTITY_GROUP__MODEL_URI = 1;
-
-	/**
-	 * The number of structural features of the '<em>Include Entity Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INCLUDE_ENTITY_GROUP_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '<em>ITrait Visitor</em>' data type.
@@ -611,7 +611,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>ITrait Visitor</em>'.
 	 * @see org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor
-	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor" serializable="false"
+	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor" serializeable="false"
 	 * @generated
 	 */
 	EDataType getITraitVisitor();
@@ -622,7 +622,7 @@ public interface MetadataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>IEntity Visitor</em>'.
 	 * @see org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor
-	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor" serializable="false"
+	 * @model instanceClass="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor" serializeable="false"
 	 * @generated
 	 */
 	EDataType getIEntityVisitor();

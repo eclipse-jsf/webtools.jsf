@@ -86,10 +86,10 @@
         containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
-        <details key="namespace" value="##targetNamespace"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceModelProvider" eType="#//IMetaDataSourceModelProvider"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceModelProvider" eType="#//IMetaDataSourceModelProvider"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ITraitVisitor" instanceClassName="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor"
       serializable="false"/>

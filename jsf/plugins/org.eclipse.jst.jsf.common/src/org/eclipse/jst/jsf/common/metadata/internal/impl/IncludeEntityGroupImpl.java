@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IncludeEntityGroupImpl.java,v 1.3 2008/11/18 22:24:39 gkessler Exp $
+ * $Id: IncludeEntityGroupImpl.java,v 1.4 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -89,6 +89,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return MetadataPackage.Literals.INCLUDE_ENTITY_GROUP;
 	}
@@ -140,6 +141,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MetadataPackage.INCLUDE_ENTITY_GROUP__ID:
@@ -155,6 +157,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MetadataPackage.INCLUDE_ENTITY_GROUP__ID:
@@ -172,6 +175,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.INCLUDE_ENTITY_GROUP__ID:
@@ -189,6 +193,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.INCLUDE_ENTITY_GROUP__ID:
@@ -202,7 +207,7 @@ public class IncludeEntityGroupImpl extends EObjectImpl implements IncludeEntity
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String toString() {
 		if (eIsProxy()) return super.toString();

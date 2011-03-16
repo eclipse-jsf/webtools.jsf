@@ -75,7 +75,7 @@ public interface Trait extends EObject {
 	 * @see #setValue(EObject)
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getTrait_Value()
 	 * @model containment="true" required="true"
-	 *        extendedMetaData="kind='element' namespace='##targetNamespace'"
+	 *        extendedMetaData="kind='element'"
 	 * @generated
 	 */
 	EObject getValue();
@@ -101,7 +101,7 @@ public interface Trait extends EObject {
 	 * @return the value of the '<em>Source Model Provider</em>' attribute.
 	 * @see #setSourceModelProvider(IMetaDataSourceModelProvider)
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getTrait_SourceModelProvider()
-	 * @model dataType="org.eclipse.jst.jsf.common.metadata.IMetaDataSourceModelProvider"
+	 * @model dataType="org.eclipse.jst.jsf.common.metadata.IMetaDataSourceModelProvider" transient="true"
 	 * @generated
 	 */
 	IMetaDataSourceModelProvider getSourceModelProvider();
@@ -119,8 +119,7 @@ public interface Trait extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param visitor 
-	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.query.ITraitVisitor"
+	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.ITraitVisitor"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
 	 * @generated
 	 */

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataSwitch.java,v 1.7 2008/11/18 22:24:36 gkessler Exp $
+ * $Id: MetadataSwitch.java,v 1.8 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -33,7 +33,7 @@ import org.eclipse.jst.jsf.common.metadata.Trait;
  * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage
  * @generated
  */
-public class MetadataSwitch {
+public class MetadataSwitch<T> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,11 +65,10 @@ public class MetadataSwitch {
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param theEObject 
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public Object doSwitch(EObject theEObject) {
+	public T doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -77,62 +76,60 @@ public class MetadataSwitch {
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param theEClass 
-	 * @param theEObject 
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(EClass theEClass, EObject theEObject) {
+	protected T doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		List eSuperTypes = theEClass.getESuperTypes();
-		return
-			eSuperTypes.isEmpty() ?
-				defaultCase(theEObject) :
-				doSwitch((EClass)eSuperTypes.get(0), theEObject);
+		else {
+			List<EClass> eSuperTypes = theEClass.getESuperTypes();
+			return
+				eSuperTypes.isEmpty() ?
+					defaultCase(theEObject) :
+					doSwitch(eSuperTypes.get(0), theEObject);
+		}
 	}
 
 	/**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param classifierID 
-	 * @param theEObject 
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected Object doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case MetadataPackage.MODEL: {
 				Model model = (Model)theEObject;
-				Object result = caseModel(model);
+				T result = caseModel(model);
 				if (result == null) result = caseEntity(model);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MetadataPackage.ENTITY_GROUP: {
 				EntityGroup entityGroup = (EntityGroup)theEObject;
-				Object result = caseEntityGroup(entityGroup);
+				T result = caseEntityGroup(entityGroup);
 				if (result == null) result = caseEntity(entityGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MetadataPackage.ENTITY: {
 				Entity entity = (Entity)theEObject;
-				Object result = caseEntity(entity);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MetadataPackage.TRAIT: {
-				Trait trait = (Trait)theEObject;
-				Object result = caseTrait(trait);
+				T result = caseEntity(entity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MetadataPackage.INCLUDE_ENTITY_GROUP: {
 				IncludeEntityGroup includeEntityGroup = (IncludeEntityGroup)theEObject;
-				Object result = caseIncludeEntityGroup(includeEntityGroup);
+				T result = caseIncludeEntityGroup(includeEntityGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MetadataPackage.TRAIT: {
+				Trait trait = (Trait)theEObject;
+				T result = caseTrait(trait);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -141,92 +138,92 @@ public class MetadataSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Trait</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trait</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Trait</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trait</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseTrait(Trait object) {
+	public T caseTrait(Trait object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Include Entity Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Include Entity Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Include Entity Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Include Entity Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseIncludeEntityGroup(IncludeEntityGroup object) {
+	public T caseIncludeEntityGroup(IncludeEntityGroup object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseModel(Model object) {
+	public T caseModel(Model object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Entity</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Entity</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseEntity(Entity object) {
+	public T caseEntity(Entity object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Entity Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Entity Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Entity Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Entity Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseEntityGroup(EntityGroup object) {
+	public T caseEntityGroup(EntityGroup object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>EObject</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public Object defaultCase(EObject object) {
+	public T defaultCase(EObject object) {
 		return null;
 	}
 

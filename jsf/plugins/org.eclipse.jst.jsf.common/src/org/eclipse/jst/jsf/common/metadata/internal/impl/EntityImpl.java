@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntityImpl.java,v 1.8 2010/01/27 23:54:32 gkessler Exp $
+ * $Id: EntityImpl.java,v 1.9 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -61,7 +61,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList childEntities = null;
+	protected EList<Entity> childEntities;
 
 	/**
 	 * The cached value of the '{@link #getTraits() <em>Traits</em>}' containment reference list.
@@ -71,7 +71,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList traits = null;
+	protected EList<Trait> traits;
 
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -121,7 +121,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList includeGroups = null;
+	protected EList<IncludeEntityGroup> includeGroups;
 
 	/**
 	 * The cached value of the Model
@@ -145,6 +145,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return MetadataPackage.Literals.ENTITY;
 	}
@@ -154,9 +155,9 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getChildEntities() {
+	public EList<Entity> getChildEntities() {
 		if (childEntities == null) {
-			childEntities = new EObjectContainmentEList(Entity.class, this, MetadataPackage.ENTITY__CHILD_ENTITIES);
+			childEntities = new EObjectContainmentEList<Entity>(Entity.class, this, MetadataPackage.ENTITY__CHILD_ENTITIES);
 		}
 		return childEntities;
 	}
@@ -166,9 +167,9 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTraits() {
+	public EList<Trait> getTraits() {
 		if (traits == null) {
-			traits = new EObjectContainmentEList(Trait.class, this, MetadataPackage.ENTITY__TRAITS);
+			traits = new EObjectContainmentEList<Trait>(Trait.class, this, MetadataPackage.ENTITY__TRAITS);
 		}
 		return traits;
 	}
@@ -178,9 +179,9 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getIncludeGroups() {
+	public EList<IncludeEntityGroup> getIncludeGroups() {
 		if (includeGroups == null) {
-			includeGroups = new EObjectResolvingEList(IncludeEntityGroup.class, this, MetadataPackage.ENTITY__INCLUDE_GROUPS);
+			includeGroups = new EObjectResolvingEList<IncludeEntityGroup>(IncludeEntityGroup.class, this, MetadataPackage.ENTITY__INCLUDE_GROUPS);
 		}
 		return includeGroups;
 	}
@@ -305,12 +306,13 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MetadataPackage.ENTITY__CHILD_ENTITIES:
-				return ((InternalEList)getChildEntities()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getChildEntities()).basicRemove(otherEnd, msgs);
 			case MetadataPackage.ENTITY__TRAITS:
-				return ((InternalEList)getTraits()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTraits()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -320,6 +322,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MetadataPackage.ENTITY__CHILD_ENTITIES:
@@ -341,15 +344,17 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MetadataPackage.ENTITY__CHILD_ENTITIES:
 				getChildEntities().clear();
-				getChildEntities().addAll((Collection)newValue);
+				getChildEntities().addAll((Collection<? extends Entity>)newValue);
 				return;
 			case MetadataPackage.ENTITY__TRAITS:
 				getTraits().clear();
-				getTraits().addAll((Collection)newValue);
+				getTraits().addAll((Collection<? extends Trait>)newValue);
 				return;
 			case MetadataPackage.ENTITY__ID:
 				setId((String)newValue);
@@ -359,7 +364,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 				return;
 			case MetadataPackage.ENTITY__INCLUDE_GROUPS:
 				getIncludeGroups().clear();
-				getIncludeGroups().addAll((Collection)newValue);
+				getIncludeGroups().addAll((Collection<? extends IncludeEntityGroup>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -370,6 +375,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.ENTITY__CHILD_ENTITIES:
@@ -396,6 +402,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MetadataPackage.ENTITY__CHILD_ENTITIES:
@@ -415,7 +422,7 @@ public class EntityImpl extends EObjectImpl implements Entity {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String toString() {
 		if (eIsProxy()) return super.toString();

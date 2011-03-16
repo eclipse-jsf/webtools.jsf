@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataXMLProcessor.java,v 1.4 2008/11/18 22:24:36 gkessler Exp $
+ * $Id: MetadataXMLProcessor.java,v 1.5 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 
@@ -45,7 +46,8 @@ public class MetadataXMLProcessor extends XMLProcessor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Map getRegistrations() {
+	@Override
+	protected Map<String, Resource.Factory> getRegistrations() {
 		if (registrations == null) {
 			super.getRegistrations();
 			registrations.put(XML_EXTENSION, new MetadataResourceFactoryImpl());

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataAdapterFactory.java,v 1.5 2008/11/18 22:24:36 gkessler Exp $
+ * $Id: MetadataAdapterFactory.java,v 1.6 2011/03/16 21:14:13 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.util;
 
@@ -64,6 +64,7 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -75,29 +76,35 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MetadataSwitch modelSwitch =
-		new MetadataSwitch() {
-			public Object caseModel(Model object) {
+	protected MetadataSwitch<Adapter> modelSwitch =
+		new MetadataSwitch<Adapter>() {
+			@Override
+			public Adapter caseModel(Model object) {
 				return createModelAdapter();
 			}
-			public Object caseEntityGroup(EntityGroup object) {
+			@Override
+			public Adapter caseEntityGroup(EntityGroup object) {
 				return createEntityGroupAdapter();
 			}
-			public Object caseEntity(Entity object) {
+			@Override
+			public Adapter caseEntity(Entity object) {
 				return createEntityAdapter();
 			}
-			public Object caseTrait(Trait object) {
-				return createTraitAdapter();
-			}
-			public Object caseIncludeEntityGroup(IncludeEntityGroup object) {
+			@Override
+			public Adapter caseIncludeEntityGroup(IncludeEntityGroup object) {
 				return createIncludeEntityGroupAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter caseTrait(Trait object) {
+				return createTraitAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -110,8 +117,9 @@ public class MetadataAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

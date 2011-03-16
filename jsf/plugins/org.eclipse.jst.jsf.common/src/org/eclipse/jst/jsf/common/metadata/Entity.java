@@ -50,11 +50,11 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Child Entities</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getEntity_ChildEntities()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.Entity" containment="true"
+	 * @model containment="true" keys="id type"
 	 *        extendedMetaData="kind='element' name='entity'"
 	 * @generated
 	 */
-	EList getChildEntities();
+	EList<Entity> getChildEntities();
 
 	/**
 	 * Returns the value of the '<em><b>Traits</b></em>' containment reference list.
@@ -67,11 +67,11 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Traits</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getEntity_Traits()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.Trait" containment="true"
+	 * @model containment="true" keys="id"
 	 *        extendedMetaData="kind='element' name='trait'"
 	 * @generated
 	 */
-	EList getTraits();
+	EList<Trait> getTraits();
 
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
@@ -136,17 +136,16 @@ public interface Entity extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Include Groups</em>' reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getEntity_IncludeGroups()
-	 * @model type="org.eclipse.jst.jsf.common.metadata.IncludeEntityGroup"
-	 *        extendedMetaData="kind='element' name='include-entity-group'"
+	 * @model extendedMetaData="kind='element' name='include-entity-group'"
 	 * @generated
 	 */
-	EList getIncludeGroups();
+	EList<IncludeEntityGroup> getIncludeGroups();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * @param visitor 	 
 	 * <!-- end-user-doc -->
-	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.query.IEntityVisitor"
+	 * @model visitorDataType="org.eclipse.jst.jsf.common.metadata.IEntityVisitor"
 	 * @generated
 	 */
 	void accept(IEntityVisitor visitor);
