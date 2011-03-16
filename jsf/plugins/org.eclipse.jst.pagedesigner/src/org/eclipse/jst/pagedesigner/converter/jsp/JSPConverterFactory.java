@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.converter.jsp;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
@@ -92,7 +93,7 @@ public class JSPConverterFactory implements IConverterFactory {
                 if (context != null){                	
                 	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
                 	if (wsResolver != null){
-                		return TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"JSP11", ITLDConstants.URI_JSP + ":"+hostElement.getLocalName()); //$NON-NLS-1$ //$NON-NLS-2$
+                		return TagImageManager.getInstance().getSmallIconImage((IFile)wsResolver.getResource(),"JSP11", ITLDConstants.URI_JSP + ":"+hostElement.getLocalName()); //$NON-NLS-1$ //$NON-NLS-2$
                 	}
                 }
             }

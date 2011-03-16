@@ -133,7 +133,7 @@ public class ContainmentValidatingStrategy extends
         final String tagName = elementAdapter.getLocalName();
         // final Element node = elementAdapter.
         
-		final IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(jsfValidationContext.getFile().getProject());
+		final IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(jsfValidationContext.getFile());
 		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(mdcontext);
 //        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
 //                .createMetaDataModelContext(jsfValidationContext.getFile()

@@ -10,6 +10,7 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.dtmanager;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
@@ -46,9 +47,9 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 		IDTInfo dtInfo = null;
 		final String nsURI = getURI(element);
 		if (nsURI != null) {
-			final IProject project = getProject(element);
-			if (project != null) {
-				final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+			final IFile file = getFile(element);
+			if (file != null) {
+				final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
 				final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
 				if (query != null) {
 					final Trait trait = query.getQueryHelper().getTrait(nsURI, element.getLocalName(), DTINFO_TRAIT_KEY);
@@ -103,4 +104,22 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 		return project;
 	}
 
+	/**
+	 * Gets the IFile of the specified
+	 * Element.
+	 * 
+	 * @param element Element instance.
+	 * @return IFile instance that contains the specified
+	 * Element.
+	 */
+	protected IFile getFile(final Element element) {
+		IFile file = null;
+		if (element instanceof IDOMNode) {
+			final IDOMModel model = ((IDOMNode)element).getModel();
+			if (model != null) {
+				file = StructuredModelUtil.getFileFor(model);
+			}
+		}
+		return file;
+	}
 }

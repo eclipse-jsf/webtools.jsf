@@ -156,9 +156,11 @@ public class JSPUtil {
 	private static boolean isTagDir(final String uri, final IDOMModel model) {
 		final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), 0);
 		if (context != null) {
-			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
-			if (resolver != null) {
-				final IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(resolver.getProject()); 
+			IFile file = StructuredModelUtil.getFileFor(model);
+//			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
+//			if (resolver != null) {
+			if (file != null) {
+				final IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file); 
 				final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(mdcontext);
 				final Model m = query.findTagLibraryModel(uri);
 				final Trait t = query.findTrait(m, "isTagDir"); //$NON-NLS-1$ 

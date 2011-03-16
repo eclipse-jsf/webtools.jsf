@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
@@ -157,8 +157,8 @@ public class AttributeGroup extends DialogFieldGroup {
 					String uri = _uri != null ? _uri : IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context).getNode().getBaseURI();
 					String tagName = _tagName != null ? _tagName :  IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context).getNode().getNodeName();
 					if (uri != null){
-						IProject project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context).getProject();						
-						IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project); 
+						IFile file = (IFile)IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context).getResource();
+						IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file); 
 						ITaglibDomainMetaDataQuery _query = MetaDataQueryFactory.getInstance().createQuery(mdcontext);
 						_tagEntity = _query.getQueryHelper().getEntity(uri, tagName);
 					}

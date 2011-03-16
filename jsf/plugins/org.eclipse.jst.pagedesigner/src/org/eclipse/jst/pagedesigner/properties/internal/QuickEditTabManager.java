@@ -213,7 +213,7 @@ public class QuickEditTabManager {
 		
 		if (ed.getEditorInput() instanceof FileEditorInput) {
 			final FileEditorInput input = (FileEditorInput)ed.getEditorInput();
-			final IMetaDataDomainContext mdContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(input.getFile().getProject());
+			final IMetaDataDomainContext mdContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(input.getFile());
 			return MetaDataQueryFactory.getInstance().createQuery(mdContext);
 		}
 		return null;

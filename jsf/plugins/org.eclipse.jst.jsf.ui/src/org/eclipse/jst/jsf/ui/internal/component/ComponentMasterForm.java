@@ -207,7 +207,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
                         if (model != null)
                         {
                             image = _metadataIconManager.getSmallIconImage(
-                                    model.getProject(), tagId);
+                                    model.getFile(), tagId);
                         }
                     }
                 }

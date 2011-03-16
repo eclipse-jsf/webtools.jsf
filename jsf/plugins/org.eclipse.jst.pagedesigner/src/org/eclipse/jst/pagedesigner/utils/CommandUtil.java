@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.utils;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
@@ -20,10 +21,6 @@ import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
 import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
@@ -31,7 +28,6 @@ import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.itemcreation.ITagCreator;
 import org.eclipse.jst.pagedesigner.itemcreation.internal.TagCreationFactory;
-import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
 
@@ -111,16 +107,17 @@ public class CommandUtil
     public static ITaglibDomainMetaDataModelContext getMetadataContext(
             final String uri, final IDOMModel model)
     {
-        final IStructuredDocument doc = model.getDocument()
-                .getStructuredDocument();
+//        final IStructuredDocument doc = model.getDocument()
+//                .getStructuredDocument();
+//
+//        final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+//                .getContext(doc, -1);
+//        final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+//                .getWorkspaceContextResolver(context);
+//
+//        final IProject project = resolver.getProject();
 
-        final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-                .getContext(doc, -1);
-        final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
-                .getWorkspaceContextResolver(context);
-
-        final IProject project = resolver.getProject();
-
+    	final IProject project = StructuredModelUtil.getProjectFor(model);
         final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
                 .createMetaDataModelContext(project, uri);
         return modelContext;
@@ -134,17 +131,8 @@ public class CommandUtil
     public static IMetaDataModelContext getMetadataModelContext(
             final String uri, final IDOMModel model)
     {
-        final IStructuredDocument doc = model.getDocument()
-                .getStructuredDocument();
-
-        final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
-                .getContext(doc, -1);
-        final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
-                .getWorkspaceContextResolver(context);
-
-        final IProject project = resolver.getProject();
-
-        final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+    	final IFile file = StructuredModelUtil.getFileFor(model);
+        final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
 
         return new MetaDataModelContext(uri, modelContext);
     }

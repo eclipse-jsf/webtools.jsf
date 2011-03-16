@@ -120,6 +120,11 @@ import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
         return _project;
     }
 
+    public final IFile getFile()
+    {
+        return _file;
+    }
+    
     public final String getViewId()
     {
         final DTFacesContext facesContext = getFacesContext();

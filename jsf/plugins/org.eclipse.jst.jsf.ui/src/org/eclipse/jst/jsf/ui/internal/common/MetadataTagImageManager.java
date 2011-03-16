@@ -12,7 +12,7 @@ package org.eclipse.jst.jsf.ui.internal.common;
 
 import java.util.Iterator;
 
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.metadata.Entity;
@@ -41,30 +41,30 @@ public class MetadataTagImageManager
     private static final String TRAIT_ICON_LARGE = "large-icon"; //$NON-NLS-1$
 
     /**
-     * @param project
+     * @param file
      * @param tagId
      * @return small image using metadata. May be null.
      */
-    public Image getSmallIconImage(final IProject project, final TagIdentifier tagId)
+    public Image getSmallIconImage(final IFile file, final TagIdentifier tagId)
     {
-        return getSmallIconImage(project, tagId.getUri(), tagId.getTagName());
+        return getSmallIconImage(file, tagId.getUri(), tagId.getTagName());
     }
     
     /**
      * Returns small image using metadata and may be null. Caller should NOT
      * dispose the image, but should call TagImageManager's dispose(image)
      * 
-     * @param project
+     * @param file
      * @param nsUri
      * @param tagName
      * @return small image using metadata. May be null.
      */
-    public Image getSmallIconImage(final IProject project, final String nsUri,
+    public Image getSmallIconImage(final IFile file, final String nsUri,
             final String tagName)
     {
         Image image = null;
         
-		final IMetaDataDomainContext 		context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		final IMetaDataDomainContext 		context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
 		final ITaglibDomainMetaDataQuery 	query = MetaDataQueryFactory.getInstance().createQuery(context);
 		
         final Model model = getModel(query, nsUri);

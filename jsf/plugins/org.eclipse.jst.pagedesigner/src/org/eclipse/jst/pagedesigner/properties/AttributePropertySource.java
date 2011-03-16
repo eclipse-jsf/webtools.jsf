@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.properties;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
@@ -92,7 +93,7 @@ public class AttributePropertySource implements IPropertySource {
 			else
 				uri = "HTML"; //$NON-NLS-1$
 		}
-		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(wsresolver.getProject());
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IFile)wsresolver.getResource());
 		_query = MetaDataQueryFactory.getInstance().createQuery(context);
 		return _query.getQueryHelper().getEntity(uri, _element.getLocalName());		
 	}

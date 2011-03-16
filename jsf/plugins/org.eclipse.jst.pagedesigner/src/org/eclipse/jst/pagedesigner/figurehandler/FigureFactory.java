@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.figurehandler;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
@@ -203,7 +204,7 @@ public final class FigureFactory
         if (context != null){   
         	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
         	if (wsResolver != null){
-        		image = TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),"HTML", element.getLocalName()); //$NON-NLS-1$
+        		image = TagImageManager.getInstance().getSmallIconImage((IFile)wsResolver.getResource(),"HTML", element.getLocalName()); //$NON-NLS-1$
         	}
         }
 		return image != null ? image : JSFUICommonPlugin.getDefault().getImage(

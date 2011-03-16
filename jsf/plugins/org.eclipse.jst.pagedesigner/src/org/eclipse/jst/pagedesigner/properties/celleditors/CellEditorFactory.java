@@ -58,11 +58,19 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 		CellEditor ed = null;
 		if (IAttributeRuntimeValueType.RELATIVEPATH.equalsIgnoreCase(type)|| IAttributeRuntimeValueType.WEBPATH.equalsIgnoreCase(type)) {
 			IProject project = getProject(element);
+			final IFile file = getFile(element);
 			if (project != null) {
 //				String typeParam = TraitValueHelper.getValueAsString(TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(),"type-param"));
 				ResourceDialogCellEditor cellEditor = new ResourceDialogCellEditor(
 						parent);
-				final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+				
+				IMetaDataDomainContext context = null;
+				
+				if (file != null)
+					context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
+				else
+					context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+				
 				final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
 				Trait fileExt = query.findTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
 				Trait separator = query.findTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
@@ -82,7 +90,7 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 					cellEditor.setSeparator(sep);
 
 				cellEditor.setProject(project);
-				cellEditor.setReferredFile(getFile(element));
+				cellEditor.setReferredFile(file);
 
 				if (IAttributeRuntimeValueType.WEBPATH.equalsIgnoreCase(type)) {
 					cellEditor.setWebPath(true);
@@ -149,7 +157,7 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 	 * 
 	 * @see org.eclipse.jst.pagedesigner.meta.NEWMDIAttributeCellEditorFactory#createDialogField(org.eclipse.jst.pagedesigner.meta.IAttributeDescriptor,
 	 *      org.w3c.dom.Element, org.w3c.dom.Element)
-	 */	
+	 */
 	public DialogField createDialogField(IPropertyPageDescriptor attr) {
 
 		String type = attr.getValueType();
@@ -163,6 +171,7 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 		if (IAttributeRuntimeValueType.RELATIVEPATH.equals(type) ||
 				IAttributeRuntimeValueType.WEBPATH.equals(type)) {
 			
+			//FIXME - should not be passing null project
 			final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IProject)null);
 			final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
 			Trait fileExt = query.findTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$

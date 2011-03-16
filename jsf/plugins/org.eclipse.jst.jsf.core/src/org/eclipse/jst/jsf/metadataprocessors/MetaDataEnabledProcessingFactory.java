@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -92,7 +94,7 @@ public final class MetaDataEnabledProcessingFactory {
 		
 		String attrKey = tagName + "/" + attributeName; //$NON-NLS-1$
 		
-    	final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject(sdContext));
+    	final IMetaDataDomainContext modelContext = getMetaDataDomainContext(sdContext);
 		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
 
 		Entity attrEntity = query.getQueryHelper().getEntity(uri, attrKey);
@@ -114,6 +116,17 @@ public final class MetaDataEnabledProcessingFactory {
 		return project;
 	}
 
+	private IFile getFile(final IStructuredDocumentContext sdContext) {
+		IFile file = null;
+		if (sdContext != null) {
+			final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+					.getWorkspaceContextResolver(sdContext);
+			final IResource res = resolver != null ? resolver.getResource() : null;
+			if (res instanceof IFile)
+				file = (IFile)res;
+		}
+		return file;
+	}
 	/**
 	 * A convenience method fully equivalent to:
 	 * 
@@ -148,9 +161,9 @@ public final class MetaDataEnabledProcessingFactory {
 	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
 			final Class featureType, final IStructuredDocumentContext sdContext,
 			final Entity attrEntity) {
-
-	   	final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject(sdContext));
-		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
+		
+		final IMetaDataDomainContext modelContext 	= getMetaDataDomainContext(sdContext);
+		final ITaglibDomainMetaDataQuery query 		= MetaDataQueryFactory.getInstance().createQuery(modelContext);
 
 		Trait trait = query.findTrait(attrEntity,
 				ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
@@ -180,6 +193,15 @@ public final class MetaDataEnabledProcessingFactory {
 		}
 		// return list of IMetaDataEnabledFeatures for this type
 		return Collections.unmodifiableList(retList);
+	}
+
+	private IMetaDataDomainContext getMetaDataDomainContext(
+			final IStructuredDocumentContext sdContext) {
+		final IFile file = getFile(sdContext);
+		if (file != null)
+			return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
+
+		return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject(sdContext));
 	}
 
 }

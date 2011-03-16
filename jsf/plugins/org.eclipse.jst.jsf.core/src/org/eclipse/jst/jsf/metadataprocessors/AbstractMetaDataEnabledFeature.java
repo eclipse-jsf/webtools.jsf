@@ -15,7 +15,9 @@ package org.eclipse.jst.jsf.metadataprocessors;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -39,6 +41,7 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	private MetaDataContext mdContext;
 	private IStructuredDocumentContext sdContext;
 	private IProject 					_project;
+	private IFile _file;
 
 	
 	/* (non-Javadoc)
@@ -76,7 +79,14 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 		return _project;
 	}
 
-	
+	private IFile getFile(){
+		if (_file == null){
+			IResource res = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getResource();
+			if (res instanceof IFile)
+				_file = (IFile)res;
+		}
+		return _file;
+	}
 	//common metadata accessors
 	/**
 	 * Return the single expected String value for a given property.
@@ -126,10 +136,18 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	}
 	private Trait getTraitForEntityUsingContext(final String traitName) {
 		//look for trait on given entity
-		final Entity entity = getMetaDataContext().getEntity();
-    	final  IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject());
+		final Entity entity = getMetaDataContext().getEntity();		
+		final IMetaDataDomainContext modelContext = getMetaDataDomainContext();
 		final IMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
 		return query.getQueryHelper().getTrait(entity, traitName);
+	}
+
+	private IMetaDataDomainContext getMetaDataDomainContext() {
+		final IFile file = getFile();
+		if (file != null)
+			return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
+		
+		return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject());
 	}
 
 	/**

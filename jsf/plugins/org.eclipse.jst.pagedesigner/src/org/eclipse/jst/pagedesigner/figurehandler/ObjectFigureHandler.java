@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.figurehandler;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
 import org.w3c.dom.Element;
 
@@ -27,7 +28,8 @@ import org.w3c.dom.Element;
 	 */
 	protected void initializeImage(Element node) {
 		if (_image == null) {
-			_image = TagImageManager.getInstance().getSmallIconImage(null, "HTML", node.getTagName()); //$NON-NLS-1$
+			//FIXME - file/project should NOT be null!
+			_image = TagImageManager.getInstance().getSmallIconImage((IFile)null, "HTML", node.getTagName()); //$NON-NLS-1$
 		}
 	}
 }

@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
@@ -532,7 +531,7 @@ public class JSPModelProcessor
     {
         final SymbolContribAggregator  aggregator =
             SymbolContribAggregator.
-               create(_file.getProject(), uri, elementName, attribute.getLocalName());
+               create(_file, uri, elementName, attribute.getLocalName());
 
         if (aggregator != null)
         {
@@ -581,7 +580,7 @@ public class JSPModelProcessor
     @SuppressWarnings("deprecation")
     private void processSetsLocale(final String uri, final String elementName, Node attribute)
     {
-        LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file.getProject(), uri, elementName, attribute.getLocalName());
+        LocaleSetAggregator  aggregator = LocaleSetAggregator.create(_file, uri, elementName, attribute.getLocalName());
 
         if (aggregator != null)
         {
@@ -732,11 +731,11 @@ public class JSPModelProcessor
     {
         private final static String SETS_LOCALE = "sets-locale"; //$NON-NLS-1$
 
-        private static LocaleSetAggregator create(final IProject project,
+        private static LocaleSetAggregator create(final IFile file,
                                               final String uri,
                                               final String elementName, final String attributeName)
         {
-    		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+    		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
     		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
     		final Trait trait = query.getQueryHelper().getTrait(uri, elementName+"/"+attributeName, SETS_LOCALE); //$NON-NLS-1$
 //            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
@@ -771,13 +770,13 @@ public class JSPModelProcessor
          * @param attributeName
          * @return a new instance only if attributeName is a symbol contributor
          */
-        private static SymbolContribAggregator create(final IProject project,
+        private static SymbolContribAggregator create(final IFile file,
                                               final String uri,
                                               final String elementName,
                                               final String attributeName)
         {
             final String entityKey = elementName+"/"+attributeName; //$NON-NLS-1$
-    		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+    		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
     		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
     		final Entity entity = query.getQueryHelper().getEntity(uri, entityKey);
     		Trait trait = query.getQueryHelper().getTrait(entity, CONTRIBUTES_VALUE_BINDING);

@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.jsf.ui.converter.jsfcore;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
@@ -117,7 +118,7 @@ public class JSFCoreConverterFactory implements IConverterFactory
                 if (context != null){   
                 	IWorkspaceContextResolver wsResolver  = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
                 	if (wsResolver != null){
-                		return TagImageManager.getInstance().getSmallIconImage(wsResolver.getProject(),ITLDConstants.URI_JSF_CORE, hostElement.getLocalName());
+                		return TagImageManager.getInstance().getSmallIconImage((IFile)wsResolver.getResource(),ITLDConstants.URI_JSF_CORE, hostElement.getLocalName());
                 	}
                 }
             }

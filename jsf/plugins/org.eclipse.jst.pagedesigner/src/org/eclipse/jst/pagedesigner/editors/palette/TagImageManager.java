@@ -13,6 +13,7 @@ package org.eclipse.jst.pagedesigner.editors.palette;
 
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Entity;
@@ -70,38 +71,59 @@ public class TagImageManager {
 	
 	/**
 	 * Returns small image using metadata and may be null.  Caller should NOT dispose the image, but should call TagImageManager's dispose(image)
-	 * @param project
+	 * @param file
 	 * @param nsUri
 	 * @param tagName
 	 * @return small image using metadata.  May be null.
 	 */
+	public Image getSmallIconImage(IFile file, String nsUri, String tagName) {
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);			
+		return getImage(context, nsUri, tagName, true);
+	}
+	
+	/**
+	 * Returns small image using metadata and may be null.  Caller should NOT dispose the image, but should call TagImageManager's dispose(image)
+	 * @param project 
+	 * @param nsUri
+	 * @param tagName
+	 * @return small image using metadata.  May be null.
+	 * @deprecated - use file rather than project
+	 */
 	public Image getSmallIconImage(IProject project, String nsUri, String tagName) {
-		Image image = null;
-		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
-		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
-		Model model = getModel(query, nsUri);
-		if (model != null){
-			ImageDescriptor imgDesc = getSmallIconImageDescriptor(query, model, tagName);
-			image = getOrCreateImage(imgDesc);
-		}
-		
-		return image;
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);			
+		return getImage(context, nsUri, tagName, true);
 	}
 
+	/**
+	 * @param file
+	 * @param nsUri
+	 * @param tagName
+	 * @return large image using metadata.  May be null.
+	 */
+	public Image getLargeIconImage(IFile file, String nsUri, String tagName) {
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
+		return getImage(context, nsUri, tagName, false);
+	}
+	
 	/**
 	 * @param project
 	 * @param nsUri
 	 * @param tagName
 	 * @return large image using metadata.  May be null.
+	 * @deprecated - use file rather than project
 	 */
 	public Image getLargeIconImage(IProject project, String nsUri, String tagName) {
-		Image image = null;
 		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		return getImage(context, nsUri, tagName, false);
+	}
+	
+	private Image getImage(final IMetaDataDomainContext context, final String nsUri, final String tagName, boolean getSmallImage) {
+		Image image = null;
 		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
 		Model model = getModel(query, nsUri);
 		if (model != null){
-			ImageDescriptor imgDesc = getLargeIconImageDescriptor(query, model, nsUri);
-			image = getOrCreateImage(imgDesc);	
+			ImageDescriptor imgDesc = getIconImageDescriptor(query, model, tagName, getSmallImage);
+			image = getOrCreateImage(imgDesc);
 		}
 		
 		return image;
@@ -129,35 +151,9 @@ public class TagImageManager {
 	}
 	
 	private Model getModel(ITaglibDomainMetaDataQuery query, String nsUri) {
-		Model model =query.findTagLibraryModel(nsUri);
-		// no caching at this time so there is no need to listen to model notifications
-//		if (model != null && !hasAdapter(model))
-//			addAdapter(model);
-		return model;
+		return query.findTagLibraryModel(nsUri);		
 	}
 
-
-//	private void addAdapter(Model model) {
-//		if (model != null){			
-////			model.eAdapters().add(INSTANCE);  
-//		}		
-//	}
-//
-//	private boolean hasAdapter(Model model) {
-//		for(Adapter a : model.eAdapters()){
-//			if (a == INSTANCE)
-//				return true;
-//		}
-//		return false;
-//	}
-
-	private ImageDescriptor getSmallIconImageDescriptor(ITaglibDomainMetaDataQuery query, Model model, String tagName) {
-		return getIconImageDescriptor(query, model, tagName, true);
-	}
-	
-	private ImageDescriptor getLargeIconImageDescriptor(ITaglibDomainMetaDataQuery query, Model model, String tagName) {
-		return getIconImageDescriptor(query, model, tagName, false);
-	}
 	
 	private ImageDescriptor getIconImageDescriptor(ITaglibDomainMetaDataQuery query, Model model, String tagName, boolean small) {		
 		ImageDescriptor icon = null;
