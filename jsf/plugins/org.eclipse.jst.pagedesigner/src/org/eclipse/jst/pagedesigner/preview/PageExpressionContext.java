@@ -8,57 +8,47 @@
  *
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
+ *     Oracle - move to pluggable EL resolving
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.preview;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.jsp.el.ELException;
-import javax.servlet.jsp.el.FunctionMapper;
-import javax.servlet.jsp.el.VariableResolver;
 
-import org.apache.commons.el.ExpressionEvaluatorImpl;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
+import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
-import org.eclipse.jst.pagedesigner.jsp.core.el.JSFELParserHelper;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IVariableInfo;
+import org.w3c.dom.Element;
 
 /**
  * This is a static class. But it has "session" concept in it. To make it static
  * is only to simplify its use.
  * 
- * This class currently is only used by TagConverter, when calculating the
- * displayed string for resource bundle items.
- * 
- * XXX: in the future, if we want to this to be non-static, we may incorportate
- * it into the context of the tag converter.
- * 
- * @author mengbo
- * @version 1.5
+ * @author mengbo, ian.trimble@oracle.com
  */
-// TODO: we may consider support cache the properties.
 public class PageExpressionContext {
-	private static final Logger _log = PDPlugin
-			.getLogger(PageExpressionContext.class);
+	private static final Logger _log = PDPlugin.getLogger(PageExpressionContext.class);
 
 	static PageExpressionContext _current;
 
 	List _pageVarProviders = new ArrayList();
-
-	VariableResolver resolver = new SimpleVariableResolver();
 
 	private IProject _prj;
 
@@ -105,77 +95,65 @@ public class PageExpressionContext {
 		try {
 			_pageVarProviders.remove(_pageVarProviders.size() - 1);
 		} catch (Exception ex) {
-			// "Error"
 			_log.info("PageExpressionContext.Info.0", ex); //$NON-NLS-1$
 		}
 	}
 
 	/**
-	 * this method is for design time expression evaluation. Currently it only
-	 * handles
+	 * This method is for design time expression evaluation.
 	 * 
 	 * @param expression
 	 * @param expectedClass 
-	 * @param options
-	 *            XXX: not used today. In the future, we may support things like
-	 *            locale in options
+	 * @param options Current Element is passed with a key of "ELEMENT"
 	 * @return the result of evaluating the expression
 	 * @throws ELException 
 	 */
-	public Object evaluateExpression(String expression, Class expectedClass,
-			Map options) throws ELException {
-		expression = JSFELParserHelper.toJspElExpression(expression);
-		ExpressionEvaluatorImpl evaluator = new ExpressionEvaluatorImpl();
-		FunctionMapper mapper = new EmptyFunctionMapper();
-
-		return evaluator.evaluate(expression, expectedClass, resolver, mapper);
+	public Object evaluateExpression(String expression, Class expectedClass, Map options)
+			throws ELException {
+		//Bug 319317 - Third-party plug-in providing javax.servlet.jsp.el version 2.1 or greater breaks WPE preview
+		String ret = expression;
+		if (options != null) {
+			Object objElement = options.get("ELEMENT"); //$NON-NLS-1$
+			if (objElement instanceof Element) {
+				ret = ELValueResolver.resolve((Element)objElement, expression);
+			}
+		}
+		return ret;
 	}
 
-	class SimpleVariableResolver implements VariableResolver {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see javax.servlet.jsp.el.VariableResolver#resolveVariable(java.lang.String)
-		 */
-		public Object resolveVariable(String varName) throws ELException {
-			// reverse order.
-			for (int k = _pageVarProviders.size() - 1; k >= 0; k--) {
-				IPageVariablesProvider _pageVars = (IPageVariablesProvider) _pageVarProviders
-						.get(k);
-				if (_pageVars != null) {
-					IVariableInfo[] vars = _pageVars.getBeanInfos();
-					if (vars != null) {
-						for (int i = 0; i < vars.length; i++) {
-							if (varName.equals(vars[i].getName())) {
-								// ok we found.
-								if (vars[i].getMode() == IVariableInfo.RESOURCEBUNDLE) {
-									String resourceName = vars[i]
-											.getTypeInfoString();
-									IStorage s = null;
-									try {
-										s = LoadBundleUtil
-												.getLoadBundleResource(_prj,
-														resourceName);
-									} catch (CoreException ex) {
-										// "Error"
-										_log
-												.info(
-														"PageExpressionContext.Info.0", ex); //$NON-NLS-1$
-									}
-									if (s == null) {
-										throw new ELException();
-									}
+	/**
+	 * Gets an Object associated with a page variable.
+	 * @param varName Page variable name.
+	 * @return The Object associated with the named page variable, or null if the Object cannot be
+	 * located.
+	 */
+	public Object getPageVariable(String varName) {
+		Object ret = null;
+		// reverse order.
+		for (int k = _pageVarProviders.size() - 1; k >= 0; k--) {
+			IPageVariablesProvider _pageVars = (IPageVariablesProvider) _pageVarProviders.get(k);
+			if (_pageVars != null) {
+				IVariableInfo[] vars = _pageVars.getBeanInfos();
+				if (vars != null) {
+					for (int i = 0; i < vars.length; i++) {
+						if (varName.equals(vars[i].getName())) {
+							if (vars[i].getMode() == IVariableInfo.RESOURCEBUNDLE) {
+								String resourceName = vars[i].getTypeInfoString();
+								IStorage storage = null;
+								try {
+									storage = LoadBundleUtil.getLoadBundleResource(_prj, resourceName);
+								} catch (CoreException cex) {
+									_log.info("PageExpressionContext.Info.0", cex); //$NON-NLS-1$
+								}
+								if (storage != null) {
 									InputStream input = null;
 									try {
-										input = new BufferedInputStream(s
-												.getContents());
-										Properties p = new Properties();
-										p.load(input);
-										return p;
-									} catch (CoreException e) {
-										throw new ELException(e);
-									} catch (IOException e) {
-										throw new ELException(e);
+										input = new BufferedInputStream(storage.getContents());
+										Properties properties = new Properties();
+										properties.load(input);
+										ret = properties;
+									} catch (Exception ignored) {
+										//ignore - we'll return null
 									} finally {
 										ResourceUtils.ensureClosed(input);
 									}
@@ -185,21 +163,56 @@ public class PageExpressionContext {
 					}
 				}
 			}
-			throw new ELException("Can't find: " + varName); //$NON-NLS-1$
+		}
+		return ret;
+	}
+
+
+
+	static class ELValueResolver {
+
+		static List<IELValueResolver> elValueResolvers;
+
+		public static String resolve(final Element element, final String elExpression) {
+			String value = elExpression;
+			if (elValueResolvers == null) {
+				readELValueResolvers();
+			}
+			for (IELValueResolver elValueResolver: elValueResolvers) {
+				value = elValueResolver.resolve(element, value);
+			}
+			return value;
+		}
+
+		private static void readELValueResolvers() {
+			elValueResolvers = new ArrayList<IELValueResolver>();
+			final IExtensionPoint pdExtPt =
+				Platform.getExtensionRegistry().getExtensionPoint(
+						PDPlugin.getPluginId(), IJMTConstants.EXTENSION_POINT_PAGEDESIGNER);
+			final IExtension[] extensions = pdExtPt.getExtensions();
+			for (final IExtension extension: extensions) {
+				final IConfigurationElement[] configElements = extension.getConfigurationElements();
+				for (final IConfigurationElement configElement: configElements) {
+					if (configElement.getName().equals("elValueResolver")) { //$NON-NLS-1$
+						try {
+							final Object objValueResolver = configElement.createExecutableExtension("class"); //$NON-NLS-1$
+							if (objValueResolver instanceof IELValueResolver) {
+								if (configElement.getContributor().getName().startsWith("org.eclipse.jst")) { //$NON-NLS-1$
+									//add to end (give precedence to contributor-provided resolvers)
+									elValueResolvers.add((IELValueResolver)objValueResolver);
+								} else {
+									//add at beginning (give precedence to contributor-provided resolvers)
+									elValueResolvers.add(0, (IELValueResolver)objValueResolver);
+								}
+							}
+						} catch(CoreException ce) {
+							PDPlugin.log("Error reading extensions for: " + configElement.toString(), ce); //$NON-NLS-1$
+						}
+					}
+				}
+			}
 		}
 
 	}
 
-	static class EmptyFunctionMapper implements FunctionMapper {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see javax.servlet.jsp.el.FunctionMapper#resolveFunction(java.lang.String,
-		 *      java.lang.String)
-		 */
-		public Method resolveFunction(String arg0, String arg1) {
-			return null;
-		}
-	}
 }

@@ -11,6 +11,8 @@
 package org.eclipse.jst.pagedesigner.dtmanager.converter.internal;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.jsp.el.ELException;
 import javax.xml.xpath.XPath;
@@ -211,9 +213,12 @@ public class DTTagConverterDecorator implements ITagConverterDecorator
                                     textNodeValue, dtInfo);
                         } else
                         {
+                        	//Bug 319317 - Third-party plug-in providing javax.servlet.jsp.el version 2.1 or greater breaks WPE preview
+                        	Map options = new HashMap();
+                        	options.put("ELEMENT", srcElement); //$NON-NLS-1$
                             newTextNodeValue = (String) PageExpressionContext
                                     .getCurrent().evaluateExpression(
-                                            textNodeValue, String.class, null);
+                                            textNodeValue, String.class, options);
                         }
                         if (newTextNodeValue != null
                                 && !textNodeValue.equals(newTextNodeValue))
@@ -384,9 +389,11 @@ public class DTTagConverterDecorator implements ITagConverterDecorator
                 PageExpressionContext current = PageExpressionContext.getCurrent();
                 if (current != null)
                 {
+                	//Bug 319317 - Third-party plug-in providing javax.servlet.jsp.el version 2.1 or greater breaks WPE preview
+                	Map options = new HashMap();
+                	options.put("ELEMENT", originalElement); //$NON-NLS-1$
                     return (String) current
-                            .evaluateExpression(oldAttributeValue, String.class,
-                                    null);
+                            .evaluateExpression(oldAttributeValue, String.class, options);
                 }
             } catch (ELException e)
             {

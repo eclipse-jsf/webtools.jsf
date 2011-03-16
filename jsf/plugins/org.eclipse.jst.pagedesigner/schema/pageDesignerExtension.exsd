@@ -29,6 +29,7 @@
             <element ref="propertyPageFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="paletteFactory" minOccurs="0" maxOccurs="unbounded"/>
             <element ref="attributeValueResolver" minOccurs="0" maxOccurs="unbounded"/>
+            <element ref="elValueResolver" minOccurs="0" maxOccurs="unbounded"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -259,6 +260,21 @@ The exception to this rule is that if the reference is not plugin-qualified, the
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn="org.eclipse.jst.pagedesigner.dtmanager.converter.internal.AbstractAttributeValueResolver:"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="elValueResolver">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.jst.pagedesigner.preview.IELValueResolver"/>
                </appInfo>
             </annotation>
          </attribute>

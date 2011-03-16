@@ -125,6 +125,9 @@
         class="org.eclipse.jst.pagedesigner.dtmanager.converter.operations.internal.CheckModeOperation"
         id="CheckModeOperation">
     </tagTransformOperation>
+    <elValueResolver
+          class="org.eclipse.jst.pagedesigner.preview.DefaultELValueResolver">
+    </elValueResolver>
 	</extension>
 	
 	<extension id="org.eclipse.jst.pagedesigner.commands" point="org.eclipse.ui.commands">

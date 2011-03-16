@@ -360,8 +360,11 @@ public abstract class AbstractTagConverter implements ITagConverter,
 		} else {
 			// preview mode. let's try to display the value.
 			try {
+				//Bug 319317 - Third-party plug-in providing javax.servlet.jsp.el version 2.1 or greater breaks WPE preview
+				Map options = new HashMap();
+				options.put("ELEMENT", _hostElement); //$NON-NLS-1$
 				return (String) PageExpressionContext.getCurrent()
-						.evaluateExpression(value, String.class, null);
+						.evaluateExpression(value, String.class, options);
 			} catch (Exception ex) {
 				// can't calculate the result. ignore.
 				// ex.printStackTrace();

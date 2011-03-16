@@ -102,7 +102,7 @@ Export-Package: org.eclipse.jst.pagedesigner;x-internal:=true,
  org.eclipse.jst.pagedesigner.meta;x-internal:=true,
  org.eclipse.jst.pagedesigner.meta.internal;x-internal:=true,
  org.eclipse.jst.pagedesigner.parts;x-internal:=true,
- org.eclipse.jst.pagedesigner.preview;x-internal:=true,
+ org.eclipse.jst.pagedesigner.preview,
  org.eclipse.jst.pagedesigner.properties;x-friends:="org.eclipse.jst.pagedesigner.tests",
  org.eclipse.jst.pagedesigner.properties.attrgroup;x-friends:="org.eclipse.jst.pagedesigner.tests",
  org.eclipse.jst.pagedesigner.properties.celleditors;x-friends:="org.eclipse.jst.pagedesigner.tests",
@@ -127,9 +127,7 @@ Import-Package: javax.servlet;version="2.4.0",
  javax.servlet.jsp.el;version="2.0.0",
  javax.servlet.jsp.resources;version="2.0.0",
  javax.servlet.jsp.tagext;version="2.0.0",
- javax.servlet.resources;version="2.4.0",
- org.apache.commons.el;version="1.0.0",
- org.apache.commons.el.parser;version="1.0.0"
+ javax.servlet.resources;version="2.4.0"
 
 
 
