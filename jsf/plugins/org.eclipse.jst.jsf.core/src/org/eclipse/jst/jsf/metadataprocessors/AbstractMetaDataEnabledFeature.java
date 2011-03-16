@@ -15,13 +15,18 @@ package org.eclipse.jst.jsf.metadataprocessors;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.IMetaDataQuery;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 
@@ -33,6 +38,7 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	
 	private MetaDataContext mdContext;
 	private IStructuredDocumentContext sdContext;
+	private IProject 					_project;
 
 	
 	/* (non-Javadoc)
@@ -63,12 +69,12 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 		return sdContext;
 	}
 	
-//	private IProject getProject(){
-//		if (_project == null){
-//			_project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getProject();
-//		}
-//		return _project;
-//	}
+	private IProject getProject(){
+		if (_project == null){
+			_project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getProject();
+		}
+		return _project;
+	}
 
 	
 	//common metadata accessors
@@ -121,7 +127,9 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	private Trait getTraitForEntityUsingContext(final String traitName) {
 		//look for trait on given entity
 		final Entity entity = getMetaDataContext().getEntity();
-		return TaglibDomainMetaDataQueryHelper.getTrait(entity, traitName);
+    	final  IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject());
+		final IMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
+		return query.getQueryHelper().getTrait(entity, traitName);
 	}
 
 	/**

@@ -18,8 +18,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.addtagmd.ElementData;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
@@ -78,16 +80,20 @@ public class TagMetadataLoader
     public ElementData getElementData(final String nsUri,
             final String tagName)
     {
-        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-                .createMetaDataModelContext(_project, nsUri);
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(_project);
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		final Entity entity = query.getQueryHelper().getEntity(nsUri, tagName);
 
-        final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
-                modelContext, tagName);
+//        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
+//                .createMetaDataModelContext(_project, nsUri);
+//
+//        final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
+//                modelContext, tagName);
 
         if (entity != null)
         {
-            Trait trait = 
-                TaglibDomainMetaDataQueryHelper.getTrait(entity, TRAIT_ADDITIONALELEMENTDATA);
+            Trait trait = query.findTrait(entity, TRAIT_ADDITIONALELEMENTDATA);
+//                TaglibDomainMetaDataQueryHelper.getTrait(entity, TRAIT_ADDITIONALELEMENTDATA);
             if (trait != null)
             {
                 EObject value= trait.getValue();
@@ -104,21 +110,23 @@ public class TagMetadataLoader
             final String key)
     {
         String value = null;
-        final Model model = getModel(nsUri);
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(_project);
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+        final Model model = getModel(query, nsUri);
         if (model != null)
         {
-            value = getString(key, model, tagName);
+            value = getString(query, key, model, tagName);
         }
         return value;
     }
 
-    private String getString(final String key, final Model model,
+    private String getString(final ITaglibDomainMetaDataQuery query, final String key, final Model model,
             final String tagName)
     {
         String value = null;
 
         // use palette infos if available
-        final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model,
+        final Trait trait = query.findTrait(model,
                 PALETTE_INFOS);
         if (trait != null)
         {
@@ -147,16 +155,18 @@ public class TagMetadataLoader
         return value;
     }
 
-    private Model getModel(final String nsUri)
+    private Model getModel(final ITaglibDomainMetaDataQuery query, final String nsUri)
     {
-        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-                .createMetaDataModelContext(_project, nsUri);
-        final Model model = TaglibDomainMetaDataQueryHelper
-                .getModel(modelContext);
+    	final Model model = query.findTagLibraryModel(nsUri);
+//        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
+//                .createMetaDataModelContext(_project, nsUri);
+//        final Model model = TaglibDomainMetaDataQueryHelper
+//                .getModel(modelContext);
         // no caching at this time so there is no need to listen to model
         // notifications
         // if (model != null && !hasAdapter(model))
         // addAdapter(model);
+    	
         return model;
     }
 }

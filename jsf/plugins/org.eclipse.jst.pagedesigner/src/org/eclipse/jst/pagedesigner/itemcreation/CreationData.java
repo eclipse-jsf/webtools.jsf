@@ -15,9 +15,12 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.core.internal.tld.ITLDConstants;
 import org.eclipse.jst.jsf.core.internal.tld.TagIdentifierFactory;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
@@ -51,20 +54,47 @@ public final class CreationData
                                // potentially expensive meta-data search
     
     /**
-     * The {@link ITaglibDomainMetaDataModelContext} for the tag creation
+     * The {@link IMetaDataModelContext} for the tag creation
      */
+    private final IMetaDataModelContext _modelContext;
     private final ITaglibDomainMetaDataModelContext _taglibMetaDataContext;
 
     // mutable because it may be changed from the original _domPosition
     private IDOMPosition _adjustedPosition;
 
-    
+    private ITaglibDomainMetaDataQuery _query;
+	
+    /**
+     * @param creationProvider 
+     * @param model 
+     * @param domPosition 
+     * @param modelContext 
+     * @param customizationData 
+     */
+    public CreationData(final ITagDropSourceData creationProvider,
+            final IDOMModel model, final IDOMPosition domPosition,
+            final IMetaDataModelContext modelContext,
+            final IAdaptable customizationData)
+    {
+        super();
+        this._creationProvider = creationProvider;
+        this._modelContext = modelContext;
+        this._taglibMetaDataContext = null;
+        this._domPosition = domPosition;
+        this._adjustedPosition = _domPosition;
+        this._model = model;
+        this._customizationData = customizationData; 
+        this._prefix = getPrefix(getUri(), model, getDefaultPrefix());
+        
+    }
+
     /**
      * @param creationProvider 
      * @param model 
      * @param domPosition 
      * @param taglibMetaDataContext 
      * @param customizationData 
+     * @deprecated - use the other constructor
      */
     public CreationData(final ITagDropSourceData creationProvider,
             final IDOMModel model, final IDOMPosition domPosition,
@@ -74,13 +104,13 @@ public final class CreationData
         super();
         this._creationProvider = creationProvider;
         this._taglibMetaDataContext = taglibMetaDataContext;
+        this._modelContext = null;
         this._domPosition = domPosition;
         this._adjustedPosition = _domPosition;
         this._model = model;
         this._customizationData = customizationData; 
         this._prefix = getPrefix(getUri(), model, getDefaultPrefix());
     }
-
     /**
      * Returns the ns prefix for the tag and also creates taglib reference if necessary
      * @param uri
@@ -159,12 +189,21 @@ public final class CreationData
         return _creationProvider;
     }
 
+    private  ITaglibDomainMetaDataQuery getQuery() {
+    	if (_query == null)
+    		_query = MetaDataQueryFactory.getInstance().createQuery(_modelContext);
+    	
+    	return _query;
+    }
     /**
      * @return the {@link Entity} for this tag element being created
      */
     public Entity getTagEntity() {
         if (_tagEntity == null){
-            _tagEntity = TaglibDomainMetaDataQueryHelper.getEntity(_taglibMetaDataContext, getTagName());
+        	if (_modelContext != null)
+        		_tagEntity = getQuery().getQueryHelper().getEntity(_modelContext.getModelIdentifier(), getTagName());
+        	else
+        		_tagEntity = TaglibDomainMetaDataQueryHelper.getEntity(_taglibMetaDataContext, getTagName());
             
         }
         return _tagEntity;
@@ -174,7 +213,12 @@ public final class CreationData
      * @return flag indicating that html form container ancestor is required
      */
     public boolean isHTMLFormRequired() {
-        Trait t = TaglibDomainMetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form"); //$NON-NLS-1$
+    	Trait t = null;
+    	if (_modelContext != null)
+    		t = getQuery().getQueryHelper().getTrait(getTagEntity(), "requires-html-form"); //$NON-NLS-1$
+    	else 
+    		t = TaglibDomainMetaDataQueryHelper.getTrait(getTagEntity(), "requires-html-form"); //$NON-NLS-1$
+    	
         if (t != null)
             return TraitValueHelper.getValueAsBoolean(t);
         
@@ -185,8 +229,15 @@ public final class CreationData
      * @return flag indicating that jsf component
      */
     public boolean isJSFComponent() {      
-        Model model = TaglibDomainMetaDataQueryHelper.getModel(_taglibMetaDataContext);
-        Trait t = TaglibDomainMetaDataQueryHelper.getTrait(model, "is-jsf-component-library"); //$NON-NLS-1$
+    	Model model = null;
+    	Trait t = null;
+    	if (_modelContext != null) {
+    		model = getQuery().findTagLibraryModel(_modelContext.getModelIdentifier());
+        	t = getQuery().findTrait(model, "is-jsf-component-library"); //$NON-NLS-1$ 
+    	} else {
+            model = TaglibDomainMetaDataQueryHelper.getModel(_taglibMetaDataContext);
+            t = TaglibDomainMetaDataQueryHelper.getTrait(model, "is-jsf-component-library"); //$NON-NLS-1$
+    	}
         if (t != null)
             return TraitValueHelper.getValueAsBoolean(t);
         
@@ -202,6 +253,14 @@ public final class CreationData
 	
     /**
      * @return the metadata context for the tag
+     */
+    public IMetaDataModelContext getMetaDataContext() {
+        return _modelContext;
+    }
+    
+    /**
+     * @return the (deprecated) metadata context for the tag
+     * @deprecated - use {@link IMetaDataModelContext}
      */
     public ITaglibDomainMetaDataModelContext getTaglibMetaDataContext() {
         return _taglibMetaDataContext;

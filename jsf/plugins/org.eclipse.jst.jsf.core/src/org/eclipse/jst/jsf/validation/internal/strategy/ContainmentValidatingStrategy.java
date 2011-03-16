@@ -19,8 +19,10 @@ import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.common.sets.AxiomaticSet;
 import org.eclipse.jst.jsf.common.sets.ConcreteAxiomaticSet;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
@@ -130,15 +132,17 @@ public class ContainmentValidatingStrategy extends
         final String uri = elementAdapter.getNamespace();
         final String tagName = elementAdapter.getLocalName();
         // final Element node = elementAdapter.
-
-        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-                .createMetaDataModelContext(jsfValidationContext.getFile()
-                        .getProject(), uri);
-        final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
-                modelContext, tagName);
+        
+		final IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(jsfValidationContext.getFile().getProject());
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(mdcontext);
+//        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
+//                .createMetaDataModelContext(jsfValidationContext.getFile()
+//                        .getProject(), uri);
+        final Entity entity = query.getQueryHelper().getEntity(
+                uri, tagName);
         if (entity != null)
         {
-            final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(
+            final Trait trait = query.findTrait(
                     entity, "containment-constraint"); //$NON-NLS-1$
 
             if (trait != null)

@@ -18,15 +18,18 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.metadataprocessors.features.IDefaultValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.pagedesigner.editors.properties.IPropertyPageDescriptor;
 import org.eclipse.jst.pagedesigner.jsp.core.IJSPCoreConstants;
-import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.meta.IAttributeRuntimeValueType;
+import org.eclipse.jst.pagedesigner.meta.ITagAttributeCellEditorFactory;
 import org.eclipse.jst.pagedesigner.properties.dialogfields.MDEnabledComboDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.ClasspathResourceButtonDialogField;
 import org.eclipse.jst.pagedesigner.ui.dialogfields.ContextableResourceButtonDialogField;
@@ -59,8 +62,10 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 //				String typeParam = TraitValueHelper.getValueAsString(TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(),"type-param"));
 				ResourceDialogCellEditor cellEditor = new ResourceDialogCellEditor(
 						parent);
-				Trait fileExt = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
-				Trait separator = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
+				final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+				final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+				Trait fileExt = query.findTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
+				Trait separator = query.findTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
 				String[] fileExts = null;
 				if (fileExt != null){
 					List exts = TraitValueHelper.getValueAsListOfStrings(fileExt);
@@ -157,8 +162,11 @@ public class CellEditorFactory implements ITagAttributeCellEditorFactory {
 
 		if (IAttributeRuntimeValueType.RELATIVEPATH.equals(type) ||
 				IAttributeRuntimeValueType.WEBPATH.equals(type)) {
-			Trait fileExt = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
-			Trait seperator = TaglibDomainMetaDataQueryHelper.getTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
+			
+			final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IProject)null);
+			final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+			Trait fileExt = query.findTrait(attr.getMetaDataContext().getEntity(), "file-extensions"); //$NON-NLS-1$
+			Trait seperator = query.findTrait(attr.getMetaDataContext().getEntity(), "separator"); //$NON-NLS-1$
 			
 			String[] fileExts = null;
 			if (fileExt != null){

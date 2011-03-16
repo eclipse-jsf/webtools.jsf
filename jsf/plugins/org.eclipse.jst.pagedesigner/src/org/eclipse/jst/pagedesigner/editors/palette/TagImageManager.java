@@ -19,10 +19,12 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
@@ -75,9 +77,11 @@ public class TagImageManager {
 	 */
 	public Image getSmallIconImage(IProject project, String nsUri, String tagName) {
 		Image image = null;
-		Model model = getModel(project, nsUri);
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		Model model = getModel(query, nsUri);
 		if (model != null){
-			ImageDescriptor imgDesc = getSmallIconImageDescriptor(model, tagName);
+			ImageDescriptor imgDesc = getSmallIconImageDescriptor(query, model, tagName);
 			image = getOrCreateImage(imgDesc);
 		}
 		
@@ -92,9 +96,11 @@ public class TagImageManager {
 	 */
 	public Image getLargeIconImage(IProject project, String nsUri, String tagName) {
 		Image image = null;
-		Model model = getModel(project, nsUri);
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		Model model = getModel(query, nsUri);
 		if (model != null){
-			ImageDescriptor imgDesc = getLargeIconImageDescriptor(model, nsUri);
+			ImageDescriptor imgDesc = getLargeIconImageDescriptor(query, model, nsUri);
 			image = getOrCreateImage(imgDesc);	
 		}
 		
@@ -122,9 +128,8 @@ public class TagImageManager {
 		return image;
 	}
 	
-	private Model getModel(IProject project, String nsUri) {
-		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, nsUri);
-		Model model =TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+	private Model getModel(ITaglibDomainMetaDataQuery query, String nsUri) {
+		Model model =query.findTagLibraryModel(nsUri);
 		// no caching at this time so there is no need to listen to model notifications
 //		if (model != null && !hasAdapter(model))
 //			addAdapter(model);
@@ -146,19 +151,19 @@ public class TagImageManager {
 //		return false;
 //	}
 
-	private ImageDescriptor getSmallIconImageDescriptor(Model model, String tagName) {
-		return getIconImageDescriptor(model, tagName, true);
+	private ImageDescriptor getSmallIconImageDescriptor(ITaglibDomainMetaDataQuery query, Model model, String tagName) {
+		return getIconImageDescriptor(query, model, tagName, true);
 	}
 	
-	private ImageDescriptor getLargeIconImageDescriptor(Model model, String tagName) {
-		return getIconImageDescriptor(model, tagName, false);
+	private ImageDescriptor getLargeIconImageDescriptor(ITaglibDomainMetaDataQuery query, Model model, String tagName) {
+		return getIconImageDescriptor(query, model, tagName, false);
 	}
 	
-	private ImageDescriptor getIconImageDescriptor(Model model, String tagName, boolean small) {		
+	private ImageDescriptor getIconImageDescriptor(ITaglibDomainMetaDataQuery query, Model model, String tagName, boolean small) {		
 		ImageDescriptor icon = null;
 		
 		//use palette infos if available
-		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "paletteInfos"); //$NON-NLS-1$
+		Trait trait = query.findTrait(model, "paletteInfos"); //$NON-NLS-1$
 		if (trait != null){
 			PaletteInfos tags = (PaletteInfos)trait.getValue();
 			for (Iterator it=tags.getInfos().iterator();it.hasNext();){
@@ -175,13 +180,13 @@ public class TagImageManager {
 			}	
 		}
 		if (icon == null) {
-			for (Iterator it=model.getChildEntities().iterator();it.hasNext();){
+			for (Iterator it=model.getChildEntities().iterator();it.hasNext();){ 
 				Entity tagAsEntity = (Entity)it.next();
 				if (tagAsEntity.getId().equalsIgnoreCase(tagName)){										
 					if (small)
-						icon = getImageDescriptorFromTagTraitValueAsString(tagAsEntity, TRAIT_ICON_SMALL, DEFAULT_SMALL_ICON);
+						icon = getImageDescriptorFromTagTraitValueAsString(query, tagAsEntity, TRAIT_ICON_SMALL, DEFAULT_SMALL_ICON);
 					else
-						icon = getImageDescriptorFromTagTraitValueAsString(tagAsEntity, TRAIT_ICON_LARGE, DEFAULT_LARGE_ICON);	
+						icon = getImageDescriptorFromTagTraitValueAsString(query, tagAsEntity, TRAIT_ICON_LARGE, DEFAULT_LARGE_ICON);	
 					
 					break;
 				}				
@@ -201,8 +206,8 @@ public class TagImageManager {
 		return image;
 	}
 	
-	private ImageDescriptor getImageDescriptorFromTagTraitValueAsString(Entity entity, String key, ImageDescriptor defaultValue){
-		Trait t = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
+	private ImageDescriptor getImageDescriptorFromTagTraitValueAsString(ITaglibDomainMetaDataQuery query, Entity entity, String key, ImageDescriptor defaultValue){
+		Trait t = query.findTrait(entity, key);
 		if (t != null){
 			String imgDesc = TraitValueHelper.getValueAsString(t);
 			return getImageDescriptorFromString(t.getSourceModelProvider(), imgDesc, defaultValue);

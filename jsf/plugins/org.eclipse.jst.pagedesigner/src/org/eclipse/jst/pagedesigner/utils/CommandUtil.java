@@ -13,8 +13,12 @@ package org.eclipse.jst.pagedesigner.utils;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
 import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
 import org.eclipse.jst.jsf.common.ui.internal.logging.Logger;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
@@ -52,7 +56,7 @@ public class CommandUtil
     {
         try
         {
-            final ITaglibDomainMetaDataModelContext modelContext = getMetadataContext(
+            final IMetaDataModelContext modelContext = CommandUtil.getMetadataModelContext(
                     dropSourceData.getNamespace(), model);
 
             ITagDropSourceData tagDropSourceData = null;
@@ -97,11 +101,12 @@ public class CommandUtil
         }
         return null;
     }
-
+    
     /**
      * @param uri
      * @param model
      * @return the metadata context for uri in the DOM model or null if none.
+     * @deprecated - will be removed in post Indigo release
      */
     public static ITaglibDomainMetaDataModelContext getMetadataContext(
             final String uri, final IDOMModel model)
@@ -119,5 +124,28 @@ public class CommandUtil
         final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
                 .createMetaDataModelContext(project, uri);
         return modelContext;
+    }
+
+    /**
+     * @param uri
+     * @param model
+     * @return the metadata model context for uri in the DOM model or null if none.
+     */
+    public static IMetaDataModelContext getMetadataModelContext(
+            final String uri, final IDOMModel model)
+    {
+        final IStructuredDocument doc = model.getDocument()
+                .getStructuredDocument();
+
+        final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE
+                .getContext(doc, -1);
+        final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+                .getWorkspaceContextResolver(context);
+
+        final IProject project = resolver.getProject();
+
+        final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+
+        return new MetaDataModelContext(uri, modelContext);
     }
 }

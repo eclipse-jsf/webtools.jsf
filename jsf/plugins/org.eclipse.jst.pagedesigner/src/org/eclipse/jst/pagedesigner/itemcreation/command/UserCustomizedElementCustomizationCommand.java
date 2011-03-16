@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ResolverUtil;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
 import org.eclipse.jst.pagedesigner.PDPlugin;
@@ -18,6 +17,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.TagToolCreationAdapter;
 import org.eclipse.jst.pagedesigner.editors.palette.impl.PaletteItemManager;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
+import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.jst.pagedesigner.utils.JSPUtil;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.w3c.dom.Element;
@@ -119,9 +119,11 @@ public class UserCustomizedElementCustomizationCommand extends
                     final String tagName = child.getTagIdentifier().getTagName();
                     final ITagDropSourceData creationProvider =
                         TagToolCreationAdapter.findProviderForContainer(uri, tagName, PaletteItemManager.createPaletteContext(fileForDocument));
-                    final ITaglibDomainMetaDataModelContext modelContext = 
-                        TaglibDomainMetaDataQueryHelper
-                            .createMetaDataModelContext(fileForDocument.getProject(), child.getTagIdentifier().getUri());
+                    
+        			final IMetaDataModelContext modelContext = CommandUtil.getMetadataModelContext(child.getTagIdentifier().getUri(), _model);
+//                    final ITaglibDomainMetaDataModelContext modelContext = 
+//                        TaglibDomainMetaDataQueryHelper
+//                            .createMetaDataModelContext(fileForDocument.getProject(), child.getTagIdentifier().getUri());
 //                    		.createMetaDataModelContext(project, child.getTagIdentifier().getUri());
                     IDOMPosition domPosition = new DOMPosition(_element, childCount++);
                     CreationData creationData = new CreationData(creationProvider,_model, domPosition, modelContext, child);

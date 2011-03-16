@@ -17,9 +17,11 @@ import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
@@ -66,8 +68,11 @@ class MetadataContextResolver implements IMetadataContextResolver
             final String uri = tagResolver.getTagURIForNodeName(element);
             final IProject project = wsResolver.getProject();
             
-            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
-            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key); //$NON-NLS-1$
+    		final IMetaDataDomainContext mdContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);			
+    		final ITaglibDomainMetaDataQuery query = (ITaglibDomainMetaDataQuery)MetaDataQueryFactory.getInstance().createQuery(mdContext);
+            final Trait trait = query.getQueryHelper().getTrait(uri, element.getLocalName()+"/"+attribute.getLocalName(),  key); //$NON-NLS-1$
+//            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+//            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName()+"/"+attribute.getLocalName(), key); //$NON-NLS-1$
             if( trait != null )
             {
             	return TraitValueHelper.getValueAsListOfStrings(trait);
@@ -80,8 +85,11 @@ class MetadataContextResolver implements IMetadataContextResolver
             final String uri = tagResolver.getTagURIForNodeName(element);
             final IProject project = wsResolver.getProject();
             
-            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
-            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName(), key);
+    		final IMetaDataDomainContext mdContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);			
+    		final ITaglibDomainMetaDataQuery query = (ITaglibDomainMetaDataQuery)MetaDataQueryFactory.getInstance().createQuery(mdContext);
+    		final Trait trait = query.getQueryHelper().getTrait(uri, element.getLocalName(),  key);
+//            final ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri);
+//            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(mdContext, element.getLocalName(), key);
             if( trait != null )
             {
             	return TraitValueHelper.getValueAsListOfStrings(trait);

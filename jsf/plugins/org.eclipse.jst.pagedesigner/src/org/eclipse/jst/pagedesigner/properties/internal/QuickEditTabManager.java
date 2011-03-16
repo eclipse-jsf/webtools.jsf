@@ -17,8 +17,10 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -144,13 +146,19 @@ public class QuickEditTabManager {
 		if (_lastElement != node){
 			_lastElement = node;
 			_quickEditTabSections = null;
-			_tagEntity = getTagEntity(part, selection, node);
-			if (_tagEntity != null) {
-				Trait pds = TaglibDomainMetaDataQueryHelper.getTrait(_tagEntity, QuickEditTabSections.TRAIT_ID);
-				if (pds != null){
-					_quickEditTabSections = (QuickEditTabSections)pds.getValue();
-				}		
-			}			
+			String uri = getTagURIForNodeName(part, selection, node);
+			if (uri != null) {
+				final ITaglibDomainMetaDataQuery query = getQuery(part, node);
+				if (query != null) {
+					_tagEntity = query.getQueryHelper().getEntity(uri, node.getLocalName());
+					if (_tagEntity != null) {
+						Trait pds = query.findTrait(_tagEntity, QuickEditTabSections.TRAIT_ID);
+						if (pds != null){
+							_quickEditTabSections = (QuickEditTabSections)pds.getValue();
+						}		
+					}			
+				}
+			}
 		}
 		return _quickEditTabSections;
 	}
@@ -161,7 +169,7 @@ public class QuickEditTabManager {
 	}
 
 	private QName getTagId() {
-		return TaglibDomainMetaDataQueryHelper.getQNameForTagEntity(_tagEntity);
+		return new QName(_tagEntity.getModel().getId(), _tagEntity.getId());
 	}
 
 	/**
@@ -176,7 +184,7 @@ public class QuickEditTabManager {
 		_groupsManager = null;
 	}
 	
-	private Entity getTagEntity(IWorkbenchPart part, ISelection selection, Element node){
+	private String getTagURIForNodeName(IWorkbenchPart part, ISelection selection, Element node) {
 		HTMLEditor ed = null;
 		if (part instanceof HTMLEditor)
 			ed = (HTMLEditor)part;
@@ -184,17 +192,31 @@ public class QuickEditTabManager {
 			return null;
 		
 		if (ed.getEditorInput() instanceof FileEditorInput) {
-			FileEditorInput input = (FileEditorInput)ed.getEditorInput();
 			IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(ed.getDocument(), node);
 			if (context != null){
 				ITaglibContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getTaglibContextResolver(context);
 				if (resolver != null){
-					ITaglibDomainMetaDataModelContext mdContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(input.getFile().getProject(),resolver.getTagURIForNodeName(node));
-					return TaglibDomainMetaDataQueryHelper.getEntity(mdContext, node.getLocalName());
+					return resolver.getTagURIForNodeName(node);
 				}
 			}
 		}
-		return null;		
+		return null;
+	}
+	
+	private ITaglibDomainMetaDataQuery getQuery(IWorkbenchPart part, Element node) {
+		HTMLEditor ed = null;
+		if (part instanceof HTMLEditor)
+			ed = (HTMLEditor)part;
+		if (ed == null)
+			return null;
+		
+		
+		if (ed.getEditorInput() instanceof FileEditorInput) {
+			final FileEditorInput input = (FileEditorInput)ed.getEditorInput();
+			final IMetaDataDomainContext mdContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(input.getFile().getProject());
+			return MetaDataQueryFactory.getInstance().createQuery(mdContext);
+		}
+		return null;
 	}
 	
 	private QuickEditTabSectionsDescriptor getNullQuickEditTab() {

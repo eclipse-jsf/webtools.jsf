@@ -1,14 +1,13 @@
 package org.eclipse.jst.jsf.designtime.internal.view.mapping;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.dom.TagIdentifier;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.IMetaDataQuery;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.AttributeToPropertyMapping;
 import org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.TagMapping;
 
@@ -20,8 +19,8 @@ import org.eclipse.jst.jsf.designtime.internal.view.mapping.viewmapping.TagMappi
  */
 public class ViewMetadataLoader
 {
-    private final IProject                                       _project;
-    private final Map<String, ITaglibDomainMetaDataModelContext> _metadataContexts;
+    private final IProject                                      _project;
+    private final IMetaDataQuery			 					_query;
 
     /**
      * @param project
@@ -29,7 +28,9 @@ public class ViewMetadataLoader
     public ViewMetadataLoader(final IProject project)
     {
         _project = project;
-        _metadataContexts = new HashMap<String, ITaglibDomainMetaDataModelContext>();
+    	final  IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(_project);
+		_query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
+		
     }
 
     /**
@@ -39,13 +40,15 @@ public class ViewMetadataLoader
      */
     public TagMapping getTagToViewMapping(final TagIdentifier tagId)
     {
-        final ITaglibDomainMetaDataModelContext modelContext = createMetadataContext(tagId
-                .getUri());
-        final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
-                modelContext, tagId.getTagName());
+
+		final Entity entity = _query.getQueryHelper().getEntity(tagId.getUri(), tagId.getTagName());
+//        final ITaglibDomainMetaDataModelContext modelContext = createMetadataContext(tagId
+//                .getUri());
+//        final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
+//                modelContext, tagId.getTagName());
         if (entity != null)
         {
-            final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(
+            final Trait trait = _query.getQueryHelper().getTrait(
                     entity, ViewMetadataMapper.DEFAULT_MAPPING_TRAIT_ID);
             if (trait != null)
             {
@@ -55,20 +58,6 @@ public class ViewMetadataLoader
         return null;
     }
 
-    private ITaglibDomainMetaDataModelContext createMetadataContext(
-            final String uri)
-    {
-        ITaglibDomainMetaDataModelContext modelContext = _metadataContexts
-                .get(uri);
-
-        if (modelContext == null)
-        {
-            modelContext = TaglibDomainMetaDataQueryHelper
-                    .createMetaDataModelContext(_project, uri);
-            _metadataContexts.put(uri, modelContext);
-        }
-        return modelContext;
-    }
 
     /**
      * @param tagId
@@ -78,13 +67,12 @@ public class ViewMetadataLoader
     public AttributeToPropertyMapping getAttributeMapping(
             final TagIdentifier tagId, final String name)
     {
-        final ITaglibDomainMetaDataModelContext modelContext = createMetadataContext(tagId
-                .getUri());
-        final Entity entity = TaglibDomainMetaDataQueryHelper.getEntity(
-                modelContext, tagId.getTagName()+"/"+name); //$NON-NLS-1$
+
+        final Entity entity = _query.getQueryHelper().getEntity(
+                tagId.getUri(), tagId.getTagName()+"/"+name); //$NON-NLS-1$
         if (entity != null)
         {
-            final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(
+            final Trait trait = _query.getQueryHelper().getTrait(
                     entity, ViewMetadataMapper.DEFAULT_ATTRIBUTE_TRAIT_ID);
             if (trait != null)
             {

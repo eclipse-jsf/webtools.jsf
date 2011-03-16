@@ -20,9 +20,11 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -75,7 +77,7 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @param sdContext
 	 * @param uri
 	 *            annotation file uri
-	 * @param elementName
+	 * @param tagName
 	 * @param attributeName
 	 * @return returns null - if the metadata was not found <br>
 	 *         returns empty list - if not a
@@ -85,28 +87,31 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @see MetaDataEnabledProcessingFactory#ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME
 	 */
 	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
-			Class featureType, IStructuredDocumentContext sdContext,
-			String uri, String elementName, String attributeName) {
+			final Class featureType, final IStructuredDocumentContext sdContext,
+			final String uri, final String tagName, final String attributeName) {
 		
-		// look up the attribute's runtime type from MD
-		IProject _project = null;
-		if (sdContext != null) {
-			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
-					.getWorkspaceContextResolver(sdContext);
-			_project = resolver != null ? resolver.getProject() : null;
-		}
-		String _elem = elementName + "/" + attributeName; //$NON-NLS-1$
-		String _uri = uri;
-		ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-				.createMetaDataModelContext(_project, _uri);
-		Entity attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(modelContext,
-				_elem);
+		String attrKey = tagName + "/" + attributeName; //$NON-NLS-1$
+		
+    	final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject(sdContext));
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
+
+		Entity attrEntity = query.getQueryHelper().getEntity(uri, attrKey);
 
 		if (attrEntity != null) 
 			return getAttributeValueRuntimeTypeFeatureProcessors(featureType, sdContext, attrEntity);
 		
 		return Collections.EMPTY_LIST;
 
+	}
+
+	private IProject getProject(final IStructuredDocumentContext sdContext) {
+		IProject project = null;
+		if (sdContext != null) {
+			final IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
+					.getWorkspaceContextResolver(sdContext);
+			project = resolver != null ? resolver.getProject() : null;
+		}
+		return project;
 	}
 
 	/**
@@ -122,8 +127,8 @@ public final class MetaDataEnabledProcessingFactory {
 	 * @return the meta-data enabled feature
 	 */
 	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
-            Class featureType, IStructuredDocumentContext sdContext,
-            AttributeIdentifier attributeId)
+			final Class featureType, final IStructuredDocumentContext sdContext,
+			final AttributeIdentifier attributeId)
     {
 	    return getAttributeValueRuntimeTypeFeatureProcessors
 	    (featureType, sdContext, attributeId.getTagIdentifier().getUri()
@@ -141,10 +146,13 @@ public final class MetaDataEnabledProcessingFactory {
 	 *         or does not support the specified feature
 	 */
 	public List<IMetaDataEnabledFeature> getAttributeValueRuntimeTypeFeatureProcessors(
-			Class featureType, IStructuredDocumentContext sdContext,
-			Entity attrEntity) {
+			final Class featureType, final IStructuredDocumentContext sdContext,
+			final Entity attrEntity) {
 
-		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(attrEntity,
+	   	final IMetaDataDomainContext modelContext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject(sdContext));
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(modelContext);
+
+		Trait trait = query.findTrait(attrEntity,
 				ATTRIBUTE_VALUE_RUNTIME_TYPE_PROP_NAME);
 
 		if (trait == null) {

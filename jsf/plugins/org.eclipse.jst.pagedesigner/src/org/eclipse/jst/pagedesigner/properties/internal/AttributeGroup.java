@@ -18,7 +18,10 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.metadata.Entity;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogField;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.DialogFieldGroup;
 import org.eclipse.jst.jsf.common.ui.internal.dialogfield.IDialogFieldApplyListener;
@@ -102,7 +105,7 @@ public class AttributeGroup extends DialogFieldGroup {
 
 	private IPropertyPageDescriptor getPD(Entity tagEntity, String attrName) {		
 		IPropertyPageDescriptor pd = null;
-		Entity attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(tagEntity, attrName);
+		Entity attrEntity = getAttributeEntity(tagEntity, attrName);
 		if (attrEntity != null){
 			List pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(
 							IPropertyPageDescriptor.class, getStructuredDocumentContext(), attrEntity);					
@@ -114,6 +117,14 @@ public class AttributeGroup extends DialogFieldGroup {
 		return pd;
 	}
 
+    //we don't have enough context to use a query.   Must look at childEntities.
+	private Entity getAttributeEntity(final Entity tagEntity, final String attrName) {
+		for (final Entity attr : tagEntity.getChildEntities()) {
+			if (attr.getId().equals(attrName))
+				return attr;
+		}
+		return null;
+	}
 
 	private void resetStructuredDocumentContext() {
 		_sdContext = null;
@@ -146,8 +157,10 @@ public class AttributeGroup extends DialogFieldGroup {
 					String uri = _uri != null ? _uri : IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context).getNode().getBaseURI();
 					String tagName = _tagName != null ? _tagName :  IStructuredDocumentContextResolverFactory.INSTANCE.getDOMContextResolver(context).getNode().getNodeName();
 					if (uri != null){
-						IProject project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context).getProject();
-						_tagEntity = TaglibDomainMetaDataQueryHelper.getEntity(TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, uri), tagName);
+						IProject project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context).getProject();						
+						IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project); 
+						ITaglibDomainMetaDataQuery _query = MetaDataQueryFactory.getInstance().createQuery(mdcontext);
+						_tagEntity = _query.getQueryHelper().getEntity(uri, tagName);
 					}
 				}
 			}
@@ -169,7 +182,7 @@ public class AttributeGroup extends DialogFieldGroup {
 	public String getURI() {
 		if (getTagEntity() == null)
 			return _uri;
-		return getTagEntity().getModel().getCurrentModelContext().getUri();
+		return getTagEntity().getModel().getId();
 	}
 
 

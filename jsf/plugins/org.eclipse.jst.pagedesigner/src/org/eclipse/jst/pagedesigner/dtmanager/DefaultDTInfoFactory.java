@@ -12,11 +12,14 @@ package org.eclipse.jst.pagedesigner.dtmanager;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.core.internal.tld.CMUtil;
 import org.eclipse.jst.pagedesigner.dtmanager.dtinfo.DTInfo;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
+import org.eclipse.wst.xml.core.internal.provisional.contentmodel.CMDocType;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
@@ -39,24 +42,47 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 	 * (non-Javadoc)
 	 * @see org.eclipse.jst.pagedesigner.dtmanager.internal.provisional.IDTInfoFactory#getDTInfo(org.w3c.dom.Element)
 	 */
-	public IDTInfo getDTInfo(Element element) {
+	public IDTInfo getDTInfo(final Element element) {
 		IDTInfo dtInfo = null;
-		String nsURI = CMUtil.getElementNamespaceURI(element);
-		IProject project = getProject(element);
-		if (project != null) {
-			ITaglibDomainMetaDataModelContext context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, nsURI);
-			if (context != null) {
-				Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(context, element.getLocalName(), DTINFO_TRAIT_KEY);
-				if (trait != null) {
-					DTInfo dtInfoModelObject = (DTInfo)trait.getValue();
-					if (dtInfoModelObject != null) {
-						dtInfo = new DefaultDTInfo(dtInfoModelObject, trait);
+		final String nsURI = getURI(element);
+		if (nsURI != null) {
+			final IProject project = getProject(element);
+			if (project != null) {
+				final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+				final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+				if (query != null) {
+					final Trait trait = query.getQueryHelper().getTrait(nsURI, element.getLocalName(), DTINFO_TRAIT_KEY);
+					if (trait != null) {
+						final DTInfo dtInfoModelObject = (DTInfo)trait.getValue();
+						if (dtInfoModelObject != null) {
+							dtInfo = new DefaultDTInfo(dtInfoModelObject, trait);
+						}
 					}
 				}
 			}
 		}
 		return dtInfo;
 	}
+
+
+	private String getURI(Element element) {
+        String uri = CMUtil.getElementNamespaceURI(element);
+        
+        // give the content model priority
+        if (uri == null)
+        {
+            uri = element.getNamespaceURI();            
+        }
+
+		if (uri == null) //may occur when taglib not setup correctly or incomplete tag elements
+			return null;
+        if (uri.equals("jsp")) //$NON-NLS-1$
+        	uri = CMDocType.JSP11_DOC_TYPE;
+        if (uri.equals("html")) //$NON-NLS-1$
+        	uri = CMDocType.HTML_DOC_TYPE;
+        return uri;
+    }
+	
 
 	/**
 	 * Gets the IProject instance that contains the model of the specified
@@ -66,10 +92,10 @@ public class DefaultDTInfoFactory implements IDTInfoFactory {
 	 * @return IProject instance that contains the model of the specified
 	 * Element.
 	 */
-	protected IProject getProject(Element element) {
+	protected IProject getProject(final Element element) {
 		IProject project = null;
 		if (element instanceof IDOMNode) {
-			IDOMModel model = ((IDOMNode)element).getModel();
+			final IDOMModel model = ((IDOMNode)element).getModel();
 			if (model != null) {
 				project = StructuredModelUtil.getProjectFor(model);
 			}

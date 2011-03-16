@@ -8,8 +8,9 @@ import java.util.List;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataModelContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfo;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.PaletteInfos;
 import org.eclipse.jst.jsf.tagdisplay.internal.paletteinfos.TagCreationAttribute;
@@ -84,8 +85,8 @@ public final class MetadataTagDropSourceData implements ITagDropSourceData
 
     private TagCreationInfo getTagCreationInfo()
     {
-        final ITaglibDomainMetaDataModelContext metadataContext = CommandUtil
-                .getMetadataContext(getNamespace(), _model);
+        final IMetaDataModelContext metadataContext = CommandUtil
+                .getMetadataModelContext(getNamespace(), _model);
         TagCreationInfo tagCreationInfo = null;
         String id = getId();
         if (metadataContext != null && id != null)
@@ -108,14 +109,14 @@ public final class MetadataTagDropSourceData implements ITagDropSourceData
      * @return a tag creation info for the tag and id in the metadata context
      */
     static TagCreationInfo createCreationInfo(
-            final ITaglibDomainMetaDataModelContext metaDataContext,
+            final IMetaDataModelContext metaDataContext,
             final String id, final String tagName)
     {
-        final Model model = TaglibDomainMetaDataQueryHelper
-                .getModel(metaDataContext);
+    	final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(metaDataContext);
+        final Model model = query.findTagLibraryModel(metaDataContext.getModelIdentifier());
         if (model != null)
         {
-            Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model,
+            Trait trait = query.findTrait(model,
                     PaletteInfos.TRAIT_ID);
             if (trait != null)
             {
@@ -127,10 +128,10 @@ public final class MetadataTagDropSourceData implements ITagDropSourceData
                 }
             }
             // tag-creation trait on entity directly?
-            final Entity tag = getTagEntity(metaDataContext, tagName);
+            final Entity tag = query.findTagEntity(model, tagName);
             if (tag != null)
             {// metadata exists
-                trait = TaglibDomainMetaDataQueryHelper.getTrait(tag,
+                trait = query.findTrait(tag,
                         "tag-create"); //$NON-NLS-1$
                 if (trait != null && trait.getValue() != null)
                 {
@@ -140,16 +141,5 @@ public final class MetadataTagDropSourceData implements ITagDropSourceData
         }
         return null;
     }
-    /**
-     * @param metaDataContext
-     * @param tagName
-     * @return the {@link Entity} for this tag element being created
-     */
-    private static Entity getTagEntity(
-            final ITaglibDomainMetaDataModelContext metaDataContext,
-            final String tagName)
-    {
-        return TaglibDomainMetaDataQueryHelper.getEntity(metaDataContext,
-                tagName);
-    }
+
 }

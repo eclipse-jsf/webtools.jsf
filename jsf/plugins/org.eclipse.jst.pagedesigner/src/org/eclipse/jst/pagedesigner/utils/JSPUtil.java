@@ -21,10 +21,13 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
+import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -150,13 +153,15 @@ public class JSPUtil {
 		return prefix;
 	}
 
-	private static boolean isTagDir(String uri, IDOMModel model) {
-		IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), 0);
+	private static boolean isTagDir(final String uri, final IDOMModel model) {
+		final IStructuredDocumentContext context = IStructuredDocumentContextFactory.INSTANCE.getContext(model.getStructuredDocument(), 0);
 		if (context != null) {
 			IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(context);
 			if (resolver != null) {
-				ITaglibDomainMetaDataModelContext tldContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(resolver.getProject(), uri);
-				Trait t = TaglibDomainMetaDataQueryHelper.getTrait(tldContext, "", "isTagDir"); //$NON-NLS-1$ //$NON-NLS-2$		
+				final IMetaDataDomainContext mdcontext = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(resolver.getProject()); 
+				final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(mdcontext);
+				final Model m = query.findTagLibraryModel(uri);
+				final Trait t = query.findTrait(m, "isTagDir"); //$NON-NLS-1$ 
 				return TraitValueHelper.getValueAsBoolean(t);
 			}
 		}

@@ -20,9 +20,11 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.DTResourceProviderFactory;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.DTSkinManager;
 import org.eclipse.jst.pagedesigner.dtresourceprovider.IDTResourceProvider;
@@ -146,9 +148,11 @@ public class SkinsMenuItemBuilder {
 		private String name;
 		public TaglibData(String nsURI) {
 			this.nsURI = nsURI;
-			ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(project, nsURI);
-			Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
-			Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model, "display-label"); //$NON-NLS-1$
+			final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+			final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+
+			final Model model = query.findTagLibraryModel(nsURI);
+			final Trait trait = query.findTrait(model, "display-label"); //$NON-NLS-1$
 			this.name = TraitValueHelper.getValueAsString(trait);
 		}
 		public String getNSURI() {

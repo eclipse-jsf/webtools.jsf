@@ -25,10 +25,12 @@ import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IImageDescriptorProvider;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataSourceModelProvider;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
@@ -125,14 +127,17 @@ public class PaletteHelper {
 		TaglibPaletteDrawer category = findCategory(manager, tldURI);
 		if (category != null)
 			return category;
-
-		final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-				.createMetaDataModelContext(manager.getTagRegistryIdentifier().getProject(), tldURI);
-		final Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
-		category = createTaglibPaletteDrawer(manager, doc, model);
+		
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(manager.getTagRegistryIdentifier().getProject());
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		final Model model = query.findTagLibraryModel(tldURI);
+//		final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
+//				.createMetaDataModelContext(manager.getTagRegistryIdentifier().getProject(), tldURI);
+//		final Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+		category = createTaglibPaletteDrawer(manager, doc, model, query);
 
 		if (category != null) {
-			loadTags(category, doc, model);
+			loadTags(category, doc, model, query);
 			sortTags(category.getChildren());
 		}
 		return category;
@@ -169,10 +174,10 @@ public class PaletteHelper {
 	}
 
 	private void loadTags(final TaglibPaletteDrawer category, final CMDocument doc,
-			final Model model) {
+			final Model model, final ITaglibDomainMetaDataQuery query) {
 
 		if (model != null) {// load from metadata - should always drop in here
-			final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model,
+			final Trait trait = query.findTrait(model,
 					"paletteInfos"); //$NON-NLS-1$
 			if (trait != null) {
 				final PaletteInfos tags = (PaletteInfos) trait.getValue();
@@ -184,7 +189,7 @@ public class PaletteHelper {
 				for (final Iterator it = model.getChildEntities().iterator(); it
 						.hasNext();) {
 					final Entity tagAsEntity = (Entity) it.next();
-					createTagEntry(category, tagAsEntity, doc);
+					createTagEntry(category, tagAsEntity, doc, query);
 				}
 			}
 		} else {// fail safe loading from cmDoc... should no longer go in here
@@ -194,35 +199,35 @@ public class PaletteHelper {
 	}
 
 	private TaglibPaletteDrawer createTaglibPaletteDrawer(
-			final IPaletteItemManager manager, final CMDocument doc, final Model model) {
+			final IPaletteItemManager manager, final CMDocument doc, final Model model, ITaglibDomainMetaDataQuery query) {
 
 		TaglibPaletteDrawer category = null;
 		if (model != null) {
 			// do we create it?
-			final boolean isHidden = getBooleanTagTraitValue(model, "hidden", false); //$NON-NLS-1$
+			final boolean isHidden = getBooleanTagTraitValue(query, model, "hidden", false); //$NON-NLS-1$
 			if (isHidden) {
 				return null;
 			}
 
-			String label = getStringTagTraitValue(model,
+			String label = getStringTagTraitValue(query, model,
 					"display-label", model.getId()); //$NON-NLS-1$
 			label = label.equals("") ? model.getId() : label; //$NON-NLS-1$
 			category = manager.createTaglibPaletteDrawer(model.getId(), label);
 
-			String desc = getStringTagTraitValue(model,
+			String desc = getStringTagTraitValue(query, model,
 					"description", model.getId()); //$NON-NLS-1$
 			category.setDescription(formatDescription(desc));
 
-			final ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(
+			final ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(query, 
 					model, "small-icon", null); //$NON-NLS-1$
 			if (largeIconImage != null)
 				category.setLargeIcon(largeIconImage);
 
-			final String prefix = getStringTagTraitValue(model,
+			final String prefix = getStringTagTraitValue(query, model,
 					"default-prefix", null); //$NON-NLS-1$
 			category.setDefaultPrefix(prefix);
 
-			final boolean isVisible = !(getBooleanTagTraitValue(model,
+			final boolean isVisible = !(getBooleanTagTraitValue(query, model,
 					"expert", false)); //$NON-NLS-1$
 			category.setVisible(isVisible);
 
@@ -333,21 +338,21 @@ public class PaletteHelper {
 	}
 
 	private void createTagEntry(final TaglibPaletteDrawer category,
-			final Entity entity, final CMDocument doc) {
+			final Entity entity, final CMDocument doc, final ITaglibDomainMetaDataQuery query) {
 
-		final boolean hidden = getBooleanTagTraitValue(entity, "hidden", false); //$NON-NLS-1$
+		final boolean hidden = getBooleanTagTraitValue(query, entity, "hidden", false); //$NON-NLS-1$
 		if (hidden)// do not create a palette entry
 			return;
 
 		final String tagName = entity.getId();
-		final String label = getStringTagTraitValue(entity, "display-label", tagName); //$NON-NLS-1$
-		final String desc = formatDescription(getStringTagTraitValue(entity,
+		final String label = getStringTagTraitValue(query, entity, "display-label", tagName); //$NON-NLS-1$
+		final String desc = formatDescription(getStringTagTraitValue(query, entity,
 				"description", tagName)); //$NON-NLS-1$
-		final ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(
+		final ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(query,
 				entity, "small-icon", DEFAULT_SMALL_ICON); //$NON-NLS-1$
-		final ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(
+		final ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(query,
 				entity, "large-icon", DEFAULT_LARGE_ICON); //$NON-NLS-1$
-		final boolean expert = getBooleanTagTraitValue(entity, "expert", false); //$NON-NLS-1$
+		final boolean expert = getBooleanTagTraitValue(query, entity, "expert", false); //$NON-NLS-1$
 
 		internalCreateTagEntry(doc, category, tagName, tagName, label, desc,
 				smallIcon, largeIcon, expert);
@@ -355,21 +360,21 @@ public class PaletteHelper {
 	}
 
 	private void createTagEntry(final TaglibPaletteDrawer category,
-			final Entity entity, final Namespace ns) {
+			final Entity entity, final Namespace ns, final ITaglibDomainMetaDataQuery query) {
 
-		final boolean hidden = getBooleanTagTraitValue(entity, "hidden", false); //$NON-NLS-1$
+		final boolean hidden = getBooleanTagTraitValue(query, entity, "hidden", false); //$NON-NLS-1$
 		if (hidden)// do not create a palette entry
 			return;
 
 		final String tagName = entity.getId();
-		final String label = getStringTagTraitValue(entity, "display-label", tagName); //$NON-NLS-1$
-		final String desc = formatDescription(getStringTagTraitValue(entity,
+		final String label = getStringTagTraitValue(query, entity, "display-label", tagName); //$NON-NLS-1$
+		final String desc = formatDescription(getStringTagTraitValue(query, entity,
 				"description", tagName)); //$NON-NLS-1$
-		final ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(
+		final ImageDescriptor smallIcon = getImageDescriptorFromTagTraitValueAsString(query,
 				entity, "small-icon", DEFAULT_SMALL_ICON); //$NON-NLS-1$
-		final ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(
+		final ImageDescriptor largeIcon = getImageDescriptorFromTagTraitValueAsString(query,
 				entity, "large-icon", DEFAULT_LARGE_ICON); //$NON-NLS-1$
-		final boolean expert = getBooleanTagTraitValue(entity, "expert", false); //$NON-NLS-1$
+		final boolean expert = getBooleanTagTraitValue(query, entity, "expert", false); //$NON-NLS-1$
 
 		internalCreateTagEntry(ns, category, tagName, tagName, label, desc,
 				smallIcon, largeIcon, expert);
@@ -430,19 +435,19 @@ public class PaletteHelper {
 		return ns.getViewElement(tagName) != null;
 	}
 
-	private boolean getBooleanTagTraitValue(final Entity entity, final String key,
+	private boolean getBooleanTagTraitValue(final ITaglibDomainMetaDataQuery query, final Entity entity, final String key,
 			final boolean defaultValue) {
-		final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
+		final Trait trait = query.findTrait(entity, key);
 		if (trait != null) {
 			return TraitValueHelper.getValueAsBoolean(trait);
 		}
 		return defaultValue;
 	}
 
-	private String getStringTagTraitValue(final Entity entity, final String key,
+	private String getStringTagTraitValue(final ITaglibDomainMetaDataQuery query, final Entity entity, final String key,
 			final String defaultValue) {
 		
-		final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
+		final Trait trait = query.findTrait(entity, key);
 		if (trait != null) {
 			final String val = TraitValueHelper.getValueAsString(trait);
 			if (val != null)
@@ -451,9 +456,9 @@ public class PaletteHelper {
 		return defaultValue;
 	}
 
-	private ImageDescriptor getImageDescriptorFromTagTraitValueAsString(
+	private ImageDescriptor getImageDescriptorFromTagTraitValueAsString(final ITaglibDomainMetaDataQuery query, 
 			final Entity entity, final String key, final ImageDescriptor defaultValue) {
-		final Trait t = TaglibDomainMetaDataQueryHelper.getTrait(entity, key);
+		final Trait t = query.findTrait(entity, key);
 		if (t != null) {
 			final String imgDesc = TraitValueHelper.getValueAsString(t);
 			return getImageDescriptorFromString(t.getSourceModelProvider(),
@@ -572,48 +577,51 @@ public class PaletteHelper {
 			return category;
 
 		final IProject project = manager.getTagRegistryIdentifier().getProject();
-		final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-				.createMetaDataModelContext(project, ns.getNSUri());
-		final Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
-		category = createTaglibPaletteDrawer(manager,  ns, model);
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		final ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
+		final Model model = query.findTagLibraryModel(ns.getNSUri());
+//		final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
+//				.createMetaDataModelContext(project, ns.getNSUri());
+//		final Model model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+		category = createTaglibPaletteDrawer(manager,  ns, model, query);
 
 		if (category != null) {
-			loadTags(category, ns, model);
+			loadTags(category, ns, model, query);
 			sortTags(category.getChildren());
 		}
 		return category;
 	}
 
 	private TaglibPaletteDrawer createTaglibPaletteDrawer(
-			final IPaletteItemManager manager, final Namespace ns, final Model model) {
+			final IPaletteItemManager manager, final Namespace ns, final Model model, final ITaglibDomainMetaDataQuery query) {
 
 		TaglibPaletteDrawer category = null;
 		if (model != null) {
 			// do we create it?
-			final boolean isHidden = getBooleanTagTraitValue(model, "hidden", false); //$NON-NLS-1$
+			final boolean isHidden = getBooleanTagTraitValue(query, model, "hidden", false); //$NON-NLS-1$
 			if (isHidden) {
 				return null;
 			}
 
-			String label = getStringTagTraitValue(model,
+			String label = getStringTagTraitValue(query, model,
 					"display-label", model.getId()); //$NON-NLS-1$
 			label = label.equals("") ? model.getId() : label; //$NON-NLS-1$
 			category = manager.createTaglibPaletteDrawer(model.getId(), label);
 
-			final String desc = getStringTagTraitValue(model,
+			final String desc = getStringTagTraitValue(query, model,
 					"description", model.getId()); //$NON-NLS-1$
 			category.setDescription(formatDescription(desc));
 
-			final ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(
+			final ImageDescriptor largeIconImage = getImageDescriptorFromTagTraitValueAsString(query, 
 					model, "small-icon", null); //$NON-NLS-1$
 			if (largeIconImage != null)
 				category.setLargeIcon(largeIconImage);
 
-			final String prefix = getStringTagTraitValue(model,
+			final String prefix = getStringTagTraitValue(query, model,
 					"default-prefix", null); //$NON-NLS-1$
 			category.setDefaultPrefix(prefix);
 
-			final boolean isVisible = !(getBooleanTagTraitValue(model,
+			final boolean isVisible = !(getBooleanTagTraitValue(query, model,
 					"expert", false)); //$NON-NLS-1$
 			category.setVisible(isVisible);
 
@@ -624,10 +632,10 @@ public class PaletteHelper {
 	}
 
 	private void loadTags(final TaglibPaletteDrawer category,
-			final Namespace ns, final Model model) {
+			final Namespace ns, final Model model, final ITaglibDomainMetaDataQuery query) {
 
 		if (model != null) {// load from metadata - should always drop in here
-			final Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model,
+			final Trait trait = query.findTrait(model,
 					"paletteInfos"); //$NON-NLS-1$
 			if (trait != null) {
 				final PaletteInfos tags = (PaletteInfos) trait.getValue();
@@ -639,7 +647,7 @@ public class PaletteHelper {
 				for (final Iterator it = model.getChildEntities().iterator(); it
 						.hasNext();) {
 					final Entity tagAsEntity = (Entity) it.next();
-					createTagEntry(category, tagAsEntity, ns);
+					createTagEntry(category, tagAsEntity, ns, query);
 				}
 			}
 		} else {// fail safe loading from cmDoc... should no longer go in here

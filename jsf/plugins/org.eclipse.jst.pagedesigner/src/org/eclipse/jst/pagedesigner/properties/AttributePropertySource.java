@@ -16,8 +16,10 @@ import java.util.List;
 
 import org.eclipse.gef.commands.Command;
 import org.eclipse.jst.jsf.common.metadata.Entity;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagAttribute;
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
@@ -52,6 +54,8 @@ public class AttributePropertySource implements IPropertySource {
 	private IStructuredDocumentContext _context;
 
 	private IPropertyDescriptor[] _descriptors;
+
+	private ITaglibDomainMetaDataQuery _query;
 
 	/**
 	 * Constructor
@@ -88,9 +92,9 @@ public class AttributePropertySource implements IPropertySource {
 			else
 				uri = "HTML"; //$NON-NLS-1$
 		}
-		ITaglibDomainMetaDataModelContext domainContext = 
-				TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(wsresolver.getProject(), uri);
-		return TaglibDomainMetaDataQueryHelper.getEntity(domainContext, _element.getLocalName());		
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(wsresolver.getProject());
+		_query = MetaDataQueryFactory.getInstance().createQuery(context);
+		return _query.getQueryHelper().getEntity(uri, _element.getLocalName());		
 	}
 
 	/*
@@ -236,7 +240,7 @@ public class AttributePropertySource implements IPropertySource {
 //	}
 
 	private IPropertyDescriptor getAttrPropertyDescriptor(String attrName){
-		Entity attrEntity = TaglibDomainMetaDataQueryHelper.getEntity(_tagEntity, attrName);
+		Entity attrEntity = _query.findTagAttributeEntity(_tagEntity, attrName);
 		List ppds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, _context, attrEntity);
 		if (ppds.size() > 0)
 			return (IPropertyDescriptor)((IPropertyPageDescriptor)ppds.get(0)).getAdapter(IPropertyDescriptor.class);
