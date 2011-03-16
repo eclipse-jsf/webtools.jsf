@@ -30,7 +30,7 @@ public class TinyTestTests extends AbstractBaseMetaDataTestCase {
 		super.setUp();
 		String uri = "http://org.eclipse.jsf/tinytest";
 		
-		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(null);
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
 		_query = MetaDataQueryFactory.getInstance().createQuery(context);
 		model = _query.findTagLibraryModel(uri);
 		assertNotNull(model);

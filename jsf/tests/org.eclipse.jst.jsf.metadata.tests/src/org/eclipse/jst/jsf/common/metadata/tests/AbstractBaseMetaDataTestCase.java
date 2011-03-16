@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Trait;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.traittypes.traittypes.ListOfValues;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
@@ -34,7 +35,7 @@ import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
 
 public abstract class AbstractBaseMetaDataTestCase extends TestCase {
 	protected static final String projName = "TestCommonMetadataProject";
-	protected static final String domain = "TagLibraryDomain";
+	protected static final String domain = IMetaDataDomainContext.TAGLIB_DOMAIN_CONTEXT_ID;
 	protected static final String badDomain = "TagLibDomain";
 	protected static final String baseTestUri = "http://org.eclipse.jsf/test";
 	

@@ -39,15 +39,15 @@ public class MetaDataQueryContextFactoryTests extends TestCase{
 		IProject project = new MockWorkspaceContext().createProject("test");
 		IMetaDataDomainContext context = factory.createTaglibDomainModelContext(project);
 		assertNotNull(context);
-		assertEquals("TagLibraryDomain", context.getDomainId());
+		assertEquals(IMetaDataDomainContext.TAGLIB_DOMAIN_CONTEXT_ID, context.getDomainId());
 		assertNotNull(context.getAdapter((IProject.class)));
 		assertTrue(context instanceof IMetaDataModelManagerContext);
 		assertSame(((IMetaDataModelManagerContext)context).getProject(), project);
 		
 //	tests deprecated null project taglibdomain... even though not supposed to pass null project	
-		context = factory.createTaglibDomainModelContext(null);
+		context = factory.createTaglibDomainModelContext((IProject)null);
 		assertNotNull(context);
-		assertEquals("TagLibraryDomain", context.getDomainId());
+		assertEquals(IMetaDataDomainContext.TAGLIB_DOMAIN_CONTEXT_ID, context.getDomainId());
 		assertNull(context.getAdapter((IProject.class)));
 		assertTrue(context instanceof IMetaDataModelManagerContext);
 	}

@@ -67,8 +67,8 @@ public class MetaDataQueryHelperTests extends AbstractBaseMetaDataTestCase {
 		assertNotNull(baseTestUri+" model should not be null.",model);
 		
 	//null proj
-		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(null);
-		IMetaDataQuery nullProjectQuery = _query = MetaDataQueryFactory.getInstance().createQuery(context);
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IProject)null);
+		IMetaDataQuery nullProjectQuery = MetaDataQueryFactory.getInstance().createQuery(context);
 		model = nullProjectQuery.getQueryHelper().getModel(baseTestUri);
 		assertNotNull(baseTestUri+" model should not be null.",model);
 		//id

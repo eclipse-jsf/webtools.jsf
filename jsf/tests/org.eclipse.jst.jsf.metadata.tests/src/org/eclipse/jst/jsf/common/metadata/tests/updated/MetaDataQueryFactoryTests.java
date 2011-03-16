@@ -60,6 +60,7 @@ public class MetaDataQueryFactoryTests extends TestCase {
 
 	@Test
 	public void testCreateQuery() {
+
 		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(_project);
 		final IMetaDataQuery q = MetaDataQueryFactory.getInstance().createQuery(context);
 		assertNotNull(q);
@@ -70,6 +71,7 @@ public class MetaDataQueryFactoryTests extends TestCase {
 		assertNotNull(q2);
 		assertNotSame(q, q2);
 		
+		//the following verifies that the query factory ext-pt is working properly
 		IMetaDataModelManagerContext fakeDomainContext = new IMetaDataModelManagerContext() {
 			
 			@SuppressWarnings("rawtypes")
@@ -87,6 +89,7 @@ public class MetaDataQueryFactoryTests extends TestCase {
 				return _project;
 			}
 		};
+		
 		final IMetaDataQuery q3 = MetaDataQueryFactory.getInstance().createQuery(fakeDomainContext);
 		assertNotNull(q3);
 		assertNotSame(q, q3);

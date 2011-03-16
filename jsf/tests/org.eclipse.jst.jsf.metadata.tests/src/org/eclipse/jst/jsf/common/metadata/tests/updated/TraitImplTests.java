@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.metadata.tests.updated;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
@@ -26,7 +27,7 @@ public class TraitImplTests extends AbstractBaseMetaDataTestCase {
 	
 	public void setUp() throws Exception {
 		super.setUp();
-		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(null);
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IProject)null);
 		ITaglibDomainMetaDataQuery query = MetaDataQueryFactory.getInstance().createQuery(context);
 		model = query.findTagLibraryModel(baseTestUri);
 		assertNotNull(model);

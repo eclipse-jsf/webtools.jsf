@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import junit.framework.Assert;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xml.type.SimpleAnyType;
 import org.eclipse.jst.jsf.common.metadata.Entity;
@@ -42,7 +43,7 @@ public class TraitValueHelperTests extends ConfigurableTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(null);
+		IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IProject)null);
 		_query = MetaDataQueryFactory.getInstance().createQuery(context);
 		entity = _query.getQueryHelper().getEntity(uri, "tag/attr1");
 		Assert.assertNotNull(entity);
