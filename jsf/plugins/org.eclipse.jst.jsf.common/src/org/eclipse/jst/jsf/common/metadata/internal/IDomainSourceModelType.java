@@ -35,4 +35,9 @@ public interface IDomainSourceModelType {
 	 * @return set of {@link IMetaDataTranslator}s for the domain source model type
 	 */
 	public Set<IMetaDataTranslator> getTranslators();
+	
+	/**
+	 * @return oridinal for this type within the domain
+	 */
+	public int getOrdinal();
 }

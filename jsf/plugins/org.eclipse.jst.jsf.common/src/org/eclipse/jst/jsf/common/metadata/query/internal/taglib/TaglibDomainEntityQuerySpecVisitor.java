@@ -26,8 +26,8 @@ import org.eclipse.jst.jsf.common.metadata.query.AbstractEntityQueryVisitor;
 import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
 import org.eclipse.jst.jsf.common.metadata.query.internal.HierarchicalSearchControl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.IHierarchicalEntityVisitor;
-import org.eclipse.jst.jsf.common.metadata.query.internal.SearchControl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.IPredicateMatcher.MATCH;
+import org.eclipse.jst.jsf.common.metadata.query.internal.SearchControl;
 import org.eclipse.jst.jsf.common.metadata.query.internal.SimpleResultSet;
 
 /**

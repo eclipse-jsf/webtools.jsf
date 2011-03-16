@@ -26,7 +26,7 @@ import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainQueryFactory;
  */
 public final class MetaDataQueryFactory {
 	private static MetaDataQueryFactory INSTANCE = new MetaDataQueryFactory();
-	private static DomainQueryFactoryReader DOMAIN_FACTORY_READER = new DomainQueryFactoryReader();
+	private static DomainQueryFactoryReader DOMAIN_QUERY_FACTORY_READER;
 	/**
 	 * @return the singleton instance of the MetaDataQueryFactory
 	 */
@@ -37,20 +37,19 @@ public final class MetaDataQueryFactory {
 	}
 	
 	private MetaDataQueryFactory() {
-		//
+		DOMAIN_QUERY_FACTORY_READER = new DomainQueryFactoryReader();
 	}
 
 	/**
-	 * Create a query for against a domain of metadata that has no project context.
-	 * <p> 
-	 * This is the same as calling  createQuery(String domainId, IProject project) with project == null.
+	 * Create a query for against a domain of metadata
+	 * 
 	 * @param <T> 
 	 * @param context
 	 * @return {@link IMetaDataQuery}
 	 */
 	public <T extends IMetaDataQuery> T createQuery(final IMetaDataDomainContext context) {
 		//given domain id, get the query factory
-		final IMetaDataDomainQueryFactory factory = DOMAIN_FACTORY_READER.getFactoryFor(context.getDomainId());
+		final IMetaDataDomainQueryFactory factory = DOMAIN_QUERY_FACTORY_READER.getFactoryFor(context.getDomainId());
 		if (factory != null) 
 			return (T)factory.createQuery(context);
 		

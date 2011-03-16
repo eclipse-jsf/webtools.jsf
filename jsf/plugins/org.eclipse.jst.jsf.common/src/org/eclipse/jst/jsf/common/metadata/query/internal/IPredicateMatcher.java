@@ -24,7 +24,7 @@ public interface IPredicateMatcher<T> {
 	public MATCH matches(T object);
 	
 	/**
-	 * Reset the matcher should it be ca 
+	 * Reset the matcher
 	 */
 	public void reset();
 	/**

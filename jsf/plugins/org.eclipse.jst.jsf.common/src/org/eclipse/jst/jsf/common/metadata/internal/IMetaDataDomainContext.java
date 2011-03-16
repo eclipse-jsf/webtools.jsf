@@ -21,6 +21,12 @@ import org.eclipse.jst.jsf.context.IModelContext;
  *
  */
 public interface IMetaDataDomainContext extends IModelContext{
+	
+	/**
+	 * For convenience...
+	 */
+	public static final String TAGLIB_DOMAIN_CONTEXT_ID = "TagLibraryDomain"; //$NON-NLS-1$
+	
 	/**
 	 * @return domain identifier for this context.  
 	 */

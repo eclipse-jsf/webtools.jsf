@@ -14,10 +14,10 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import org.eclipse.core.resources.IProject;
 
 /**
- * Implementation of IMetaDataModelContext2
+ * Implementation of {@link IMetaDataModelContext}
  *
  */
-public final class MetaDataModelContext implements IMetaDataModelContext {
+public class MetaDataModelContext implements IMetaDataModelContext {
 
 	private final IProject 	_project;
 	private final String 	_domainId;

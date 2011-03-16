@@ -21,10 +21,7 @@ import java.util.List;
  */
 public class StandardMetaDataLocator extends AbstractMetaDataLocator {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.common.metadata.internal.IMetaDataLocator#locateMetaDataModelProviders(java.lang.String)
-	 */
-	public List locateMetaDataModelProviders(String uri) {
+	public List<IMetaDataSourceModelProvider> locateMetaDataModelProviders(String uri) {
 		return StandardMetaDataFileRegistry.getInstance().getStandardMetaDataModelProviders(uri);
 	}
 

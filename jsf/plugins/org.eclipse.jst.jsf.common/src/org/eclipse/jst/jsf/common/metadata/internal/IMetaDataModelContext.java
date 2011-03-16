@@ -14,9 +14,10 @@ package org.eclipse.jst.jsf.common.metadata.internal;
 import org.eclipse.jst.jsf.common.metadata.Model;
 
 /**
- * Context for establishing the metadata model
+ * Context for establishing the metadata model.   
+ * TODO: Should probably be moved to query internal package
  * <p>
- * @noimplement - not intended to be implemented, users must subclass {@link MetaDataModelContext} if necesary
+ * @noimplement - not intended to be implemented, users must subclass {@link MetaDataModelContext} if necessary
  */
 public interface IMetaDataModelContext extends IMetaDataDomainContext {
 	

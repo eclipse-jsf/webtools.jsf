@@ -23,7 +23,10 @@ import org.eclipse.jst.jsf.common.metadata.query.internal.IPredicateMatcher;
  */
 public class TaglibDomainTraitIdRegexPredicateMatcher implements IPredicateMatcher<Trait> {
 
-	private final Pattern _traitKey;
+	/**
+	 * id 
+	 */
+	protected final Pattern _idPattern;
 
 	/**
 	 * Constructor
@@ -31,11 +34,11 @@ public class TaglibDomainTraitIdRegexPredicateMatcher implements IPredicateMatch
 	 * @throws PatternSyntaxException
 	 */
 	public TaglibDomainTraitIdRegexPredicateMatcher(final TaglibDomainTraitQuerySpec traitSpec) throws PatternSyntaxException {
-		_traitKey = Pattern.compile(traitSpec.getKey().getTraitId());
+		_idPattern = Pattern.compile(traitSpec.getKey().getTraitId());
 	}
 
 	public MATCH matches(final Trait trait) {
-		if (_traitKey.matcher(trait.getId()).find())
+		if (_idPattern.matcher(trait.getId()).find())
 			return MATCH.FULLY;
 		return MATCH.NOT;
 	}
