@@ -959,7 +959,12 @@ public class FacesConfigEditor extends FormEditor implements
 	 * @return - the <code>DelegatingZoomManager</code>
 	 */
 	protected DelegatingZoomManager getDelegatingZoomManager() {
-		if (!isValidInput(getEditorInput()) || !isWebProject || !_addPagesTask.getArePagesLoaded()) {
+		if (
+				!isValidInput(getEditorInput()) ||
+				!isWebProject ||
+				_addPagesTask == null ||
+				!_addPagesTask.getArePagesLoaded() ||
+				pageflowPage == null) {
 			return null;
 		}
 		if (null == delegatingZoomManager) {
