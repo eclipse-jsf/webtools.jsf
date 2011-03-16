@@ -13,10 +13,13 @@ package org.eclipse.jst.jsf.metadata.tests.pagedesigner;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jst.jsf.common.metadata.Entity;
 import org.eclipse.jst.jsf.common.metadata.Model;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
+import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
+import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainMetaDataQuery;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.metadata.tests.util.SingleJSPTestCase;
 import org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature;
@@ -49,18 +52,24 @@ public class PropertyDescriptorTests extends SingleJSPTestCase {
 	
 	private Model getModel() {
 		if (_model == null) {
-			ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(null, uri);
-			_model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
+			_model = getQuery().findTagLibraryModel(uri);
+//			ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(null, uri);
+//			_model = TaglibDomainMetaDataQueryHelper.getModel(modelContext);
 		}
 
 		return _model;
+	}
+	
+	private ITaglibDomainMetaDataQuery getQuery() {
+		final IMetaDataDomainContext context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext((IProject)null);
+		return MetaDataQueryFactory.getInstance().createQuery(context);
 	}
 	
 	public void testBasics(){
 		assertNotNull(getModel());
 		assertEquals(1, getModel().getChildEntities().size());
 		
-		Entity tag = TaglibDomainMetaDataQueryHelper.getEntity(getModel(), "Tag");
+		Entity tag = getQuery().findTagEntity(getModel(), "Tag");
 		assertNotNull(tag);
 		assertTrue(tag.getChildEntities().size() == 3);
 
@@ -71,7 +80,7 @@ public class PropertyDescriptorTests extends SingleJSPTestCase {
 
 
 	private void testAttr1(Entity tag){	
-		Entity attr1 = TaglibDomainMetaDataQueryHelper.getEntity(tag, "Attr1");
+		Entity attr1 = getQuery().findTagAttributeEntity(tag, "Attr1");
 		assertNotNull(attr1);
 		assertTrue(attr1.getTraits().size() > 2);
 		
@@ -87,7 +96,7 @@ public class PropertyDescriptorTests extends SingleJSPTestCase {
 	}
 	
 	private void testDefaultAttr(Entity tag){	
-		Entity attr1 = TaglibDomainMetaDataQueryHelper.getEntity(tag, "DefaultAttr");
+		Entity attr1 = getQuery().findTagAttributeEntity(tag, "DefaultAttr");
 		assertNotNull(attr1);
 		
 		List<IMetaDataEnabledFeature> pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, getStructuredDocumentContext(_structuredDocument, _offset), attr1);
@@ -103,7 +112,7 @@ public class PropertyDescriptorTests extends SingleJSPTestCase {
 	
 	
 	public void testLocatePropertyPageDescForBooleanTagAttr() {
-		Entity boolAttr = TaglibDomainMetaDataQueryHelper.getEntity(getModel(), "Tag/boolAttr");
+		Entity boolAttr = getQuery().getQueryHelper().getEntity(getModel(), "Tag/boolAttr");
 		assertNotNull(boolAttr);
 		
 		List<IMetaDataEnabledFeature> pds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, getStructuredDocumentContext(_structuredDocument, _offset), boolAttr);

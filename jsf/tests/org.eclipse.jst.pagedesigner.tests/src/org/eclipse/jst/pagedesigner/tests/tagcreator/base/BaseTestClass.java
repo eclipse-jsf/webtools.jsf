@@ -52,6 +52,7 @@ import org.eclipse.jst.pagedesigner.editors.palette.impl.TaglibPaletteDrawer;
 import org.eclipse.jst.pagedesigner.itemcreation.CreationData;
 import org.eclipse.jst.pagedesigner.itemcreation.customizer.ICustomizationData;
 import org.eclipse.jst.pagedesigner.tests.PageDesignerTestsPlugin;
+import org.eclipse.jst.pagedesigner.utils.CommandUtil;
 import org.eclipse.wst.html.core.internal.document.DOMStyleModelImpl;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.sse.core.StructuredModelManager;
@@ -155,10 +156,6 @@ public class BaseTestClass extends TestCase
             final String tagName, final String defaultPrefix, final IFile file,
             final int offset, final ICustomizationData customizationData) throws Exception
     {
-        final ITaglibDomainMetaDataModelContext modelContext = TaglibDomainMetaDataQueryHelper
-                .createMetaDataModelContext(
-                        _webProjectTestEnv.getTestProject(), uri);
-
         final TagToolPaletteEntry entry = createNonNullPaletteEntry(uri,
                 tagName, file);
 
@@ -171,6 +168,7 @@ public class BaseTestClass extends TestCase
 
         final DOMPosition domPosition = new DOMPosition(node, 0);
         final IDOMModel model =(IDOMModel) context.getModel();
+        final ITaglibDomainMetaDataModelContext modelContext = CommandUtil.getMetadataContext(uri, model);
         return new CreationData(entry.getTemplate(), model,
                 domPosition, modelContext, customizationData);
     }

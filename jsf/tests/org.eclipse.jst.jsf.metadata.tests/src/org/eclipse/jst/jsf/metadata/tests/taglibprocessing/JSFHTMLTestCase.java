@@ -19,8 +19,6 @@ import org.eclipse.jst.jsf.common.metadata.Model;
 import org.eclipse.jst.jsf.common.metadata.Trait;
 import org.eclipse.jst.jsf.common.metadata.internal.IMetaDataDomainContext;
 import org.eclipse.jst.jsf.common.metadata.query.IResultSet;
-import org.eclipse.jst.jsf.common.metadata.query.ITaglibDomainMetaDataModelContext;
-import org.eclipse.jst.jsf.common.metadata.query.TaglibDomainMetaDataQueryHelper;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
 import org.eclipse.jst.jsf.common.metadata.query.internal.taglib.ITaglibDomainEntityPredicateMatcher;
@@ -36,8 +34,9 @@ import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
 
 public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV11{
 	private String _uri;
-	private ITaglibDomainMetaDataModelContext _context;
 	private static final boolean DEBUG = false;
+	
+	ITaglibDomainMetaDataQuery 	_query;
 	
 	public JSFHTMLTestCase () {
 		super(	JSFVersion.V1_1,
@@ -52,12 +51,15 @@ public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV
 //	            "/WEB-INF/lib/html_basic.tld");
 	    
 		_uri = "http://java.sun.com/jsf/html";
-		_context = TaglibDomainMetaDataQueryHelper.createMetaDataModelContext(_testEnv.getTestProject(), _uri);
+		final IMetaDataDomainContext 		context = MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(_testEnv.getTestProject());
+	 	_query = MetaDataQueryFactory.getInstance().createQuery(context);
 	}
 	
 	public void testPaletteInfos(){
-		Model model = TaglibDomainMetaDataQueryHelper.getModel(_context);
-		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(model , PaletteInfos.TRAIT_ID);
+		
+		Model model = _query.findTagLibraryModel(_uri);
+		Trait trait = _query.findTrait(model , PaletteInfos.TRAIT_ID);
+		
 		assertNotNull(trait);
 		assertTrue(trait.getValue() instanceof PaletteInfos);
 		PaletteInfos pis = (PaletteInfos)trait.getValue();
@@ -79,7 +81,7 @@ public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV
 	}
 	
 	public void testCreateInfos(){
-		Trait trait = TaglibDomainMetaDataQueryHelper.getTrait(_context , "dataTable", TagCreationInfo.TRAIT_ID);
+		Trait trait = _query.getQueryHelper().getTrait(_uri, "dataTable", TagCreationInfo.TRAIT_ID);
 		assertNotNull(trait);
 		assertTrue(trait.getValue() instanceof TagCreationInfo);
 		TagCreationInfo tci = (TagCreationInfo)trait.getValue();
@@ -88,7 +90,7 @@ public class JSFHTMLTestCase extends JSPTestCase implements IJSFRuntimeRequiredV
 		assertNotNull(template);
 		assertTrue(template instanceof String);
 
-		trait = TaglibDomainMetaDataQueryHelper.getTrait(_context , "commandLink", TagCreationInfo.TRAIT_ID);
+		trait = _query.getQueryHelper().getTrait(_uri, "commandLink", TagCreationInfo.TRAIT_ID);
 		assertNotNull(trait);
 		assertTrue(trait.getValue() instanceof TagCreationInfo);
 		tci = (TagCreationInfo)trait.getValue();
