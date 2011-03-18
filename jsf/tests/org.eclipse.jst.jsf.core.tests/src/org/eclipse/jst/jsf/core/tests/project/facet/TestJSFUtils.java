@@ -479,11 +479,11 @@ public abstract class TestJSFUtils extends TestCase
         assertTrue(_jsfUtils.isValidKnownExtension_testable("jsp"));
         assertTrue(_jsfUtils.isValidKnownExtension_testable("jspx")); //$NON-NLS-1$
         assertTrue(_jsfUtils.isValidKnownExtension_testable("jsf")); //$NON-NLS-1$
+        assertTrue(_jsfUtils.isValidKnownExtension_testable("jspf")); //$NON-NLS-1$)
         assertTrue(_jsfUtils.isValidKnownExtension_testable("xhtml")); //$NON-NLS-1$
 
         assertFalse(_jsfUtils.isValidKnownExtension_testable("html")); //$NON-NLS-1$)
         assertFalse(_jsfUtils.isValidKnownExtension_testable("dtd")); //$NON-NLS-1$)
-        assertFalse(_jsfUtils.isValidKnownExtension_testable("jspf")); //$NON-NLS-1$)
         assertFalse(_jsfUtils.isValidKnownExtension_testable("php")); //$NON-NLS-1$)
 
         assertFalse(_jsfUtils.isValidKnownExtension_testable("")); //$NON-NLS-1$)
