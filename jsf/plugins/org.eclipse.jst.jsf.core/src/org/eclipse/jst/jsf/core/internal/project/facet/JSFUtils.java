@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,6 +26,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.javaee.web.WebAppVersionType;
@@ -247,13 +250,23 @@ public abstract class JSFUtils {
      * @return true if the file extension is deemed to be for a JSF.
      */
     protected boolean isValidKnownExtension(String fileExtension) {
-        if (fileExtension != null &&
-                (   fileExtension.equalsIgnoreCase(DEFAULT_DEFAULT_MAPPING_SUFFIX) ||  
-                fileExtension.equalsIgnoreCase("jspx") ||  //$NON-NLS-1$
-                fileExtension.equalsIgnoreCase("jsf") || //$NON-NLS-1$
-                fileExtension.equalsIgnoreCase("xhtml"))) //$NON-NLS-1$
-            return true;
-
+    	//Bug 313830 - JSFUtils should use content type instead file extension in isValidKnownExtension.
+    	List<String> validKnownExtensions = new ArrayList<String>();
+    	for (String contentTypeId: new String[]{
+    			"org.eclipse.jst.jsp.core.jspsource", //$NON-NLS-1$
+    			"org.eclipse.jst.jsp.core.jspfragmentsource", //$NON-NLS-1$
+    			"jsf.facelet"}) { //$NON-NLS-1$
+        	IContentType contentType = Platform.getContentTypeManager().getContentType(contentTypeId);
+        	if (contentType != null) {
+        		String[] contentTypeExts = contentType.getFileSpecs(IContentType.FILE_EXTENSION_SPEC);
+        		if (contentTypeExts != null) {
+        			validKnownExtensions.addAll(Arrays.asList(contentTypeExts));
+        		}
+        	}
+    	}
+        if (fileExtension != null) {
+        	return validKnownExtensions.contains(fileExtension);
+        }
         return false;
     }
 
