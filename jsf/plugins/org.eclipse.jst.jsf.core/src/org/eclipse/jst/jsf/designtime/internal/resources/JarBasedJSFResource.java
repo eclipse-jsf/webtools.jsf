@@ -8,6 +8,7 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
 import org.eclipse.jst.jsf.common.internal.resource.ContentTypeResolver;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 
 /**
  * A JSF Resource that references an entry in the jar. Because of changes in the
@@ -74,14 +75,13 @@ public class JarBasedJSFResource extends JSFResource implements IJarBasedJSFReso
         {
             if (jarFile != null)
             {
-//                try
-//                {
-//                    // TODO
-////                    jarFile.close();
-//                } /*catch (IOException e)
-//                {
-//                    // fall-through.
-//                }*/
+                try
+                {
+                    jarFile.close();
+                } catch (IOException ioex)
+                {
+                	JSFCorePlugin.log("Error closing jar file", ioex); //$NON-NLS-1$
+                }
             }
         }
         return false;
