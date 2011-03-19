@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.test.util.mock;
 
 import static junit.framework.Assert.assertTrue;
@@ -18,12 +29,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentDescription;
 import org.eclipse.core.runtime.content.IContentType;
-import org.eclipse.core.runtime.content.IContentTypeSettings;
-import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.jst.jsf.test.util.Activator;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 
@@ -32,6 +40,7 @@ public class MockFile extends MockResource implements IFile
 
     private byte[] _contents;
     private File _concreteFile;
+    private MockContentTypeManager  _contentTypeManager;
 
     public MockFile(final IPath path)
     {
@@ -104,121 +113,17 @@ public class MockFile extends MockResource implements IFile
 
     public IContentDescription getContentDescription() throws CoreException
     {
-        return new IContentDescription()
+        IContentType[] contentType = _contentTypeManager.findContentTypesFor(getName());
+        if (contentType != null && contentType.length > 0)
         {
+            return new MockContentDescription(contentType[0]);
+        }
+        return new MockContentDescription();
+    }
 
-            public void setProperty(QualifiedName key, Object value)
-            {
-                throw new UnsupportedOperationException();
-
-            }
-
-            public boolean isRequested(QualifiedName key)
-            {
-                throw new UnsupportedOperationException();
-            }
-
-            public Object getProperty(QualifiedName key)
-            {
-                return null;
-            }
-
-            public IContentType getContentType()
-            {
-                return new IContentType()
-                {
-
-                    public void addFileSpec(String fileSpec, int type)
-                            throws CoreException
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public void removeFileSpec(String fileSpec, int type)
-                            throws CoreException
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public void setDefaultCharset(String userCharset)
-                            throws CoreException
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public IContentType getBaseType()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public IContentDescription getDefaultDescription()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public IContentDescription getDescriptionFor(
-                            InputStream contents, QualifiedName[] options)
-                            throws IOException
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public IContentDescription getDescriptionFor(
-                            Reader contents, QualifiedName[] options)
-                            throws IOException
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public String getDefaultCharset()
-                    {
-                        return "UTF-8";
-                    }
-
-                    public String[] getFileSpecs(int type)
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public String getId()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public String getName()
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public boolean isAssociatedWith(String fileName)
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public boolean isAssociatedWith(String fileName,
-                            IScopeContext context)
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public boolean isKindOf(IContentType another)
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-
-                    public IContentTypeSettings getSettings(
-                            IScopeContext context) throws CoreException
-                    {
-                        throw new UnsupportedOperationException();
-                    }
-                };
-            }
-
-            public String getCharset()
-            {
-                return "UTF-8";
-            }
-        };
+    public void setContentTypeManager(final MockContentTypeManager contentTypeManager)
+    {
+        _contentTypeManager = contentTypeManager;
     }
 
     public InputStream getContents() throws CoreException
@@ -268,12 +173,13 @@ public class MockFile extends MockResource implements IFile
             final boolean keepHistory, final IProgressMonitor monitor)
             throws CoreException
     {
-        if (_contents != null && !force)
-        {
-            throw new CoreException(new Status(IStatus.ERROR,
-                    Activator.PLUGIN_ID,
-                    "Attempt to reset contents without force"));
-        }
+        // TODO: this doesn't work for EMF uri handlers
+//        if (_contents != null && !force)
+//        {
+//            new CoreException(new Status(IStatus.ERROR,
+//                    Activator.PLUGIN_ID,
+//                    "Attempt to reset contents without force"));
+//        }
         ByteArrayOutputStream captureBytes;
         try
         {

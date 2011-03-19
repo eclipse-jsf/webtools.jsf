@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.test.util.mock;
 
 import java.io.IOException;
@@ -13,24 +24,34 @@ import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.core.runtime.content.IContentTypeMatcher;
 import org.eclipse.core.runtime.preferences.IScopeContext;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 
 public class MockContentTypeManager implements IContentTypeManager
 {
     private final Map<String, IContentType> _idToContentType;
-    private final static Map<String, IContentType>  DEFAULT_CONTENTTYPE_MAPPINGS;
-    
-    static
+    private IScopeContext _context = new InstanceScope();
+
+    public static Map<String, IContentType> createDefaultContentTypeMappings()
     {
         Map<String, IContentType> map = new HashMap<String, IContentType>();
-        map.put("org.eclipse.wst.html.core.htmlsource", new MockContentType(Collections.singleton("xhtml")));
-        DEFAULT_CONTENTTYPE_MAPPINGS = Collections.unmodifiableMap(map); 
+        map.put("org.eclipse.wst.html.core.htmlsource", MockContentType
+                .createContentType("org.eclipse.wst.html.core.htmlsource",
+                        new String[]
+                        { "xhtml" , "html", "htm"}, new String[0]));
+        map.put("org.eclipse.jst.jsp.core.jspsource", MockContentType
+                .createContentType("org.eclipse.jst.jsp.core.jspsource",
+                        new String[]
+                        { "jsp", "jspx", "jsv", "jtpl" }, new String[0]));
+
+        return map;
     }
+
     /**
      * Construct with a default set of extension to type mappings
      */
     public MockContentTypeManager()
     {
-        this(DEFAULT_CONTENTTYPE_MAPPINGS);
+        this(Collections.unmodifiableMap(createDefaultContentTypeMappings()));
     }
     
     public MockContentTypeManager(
@@ -90,6 +111,11 @@ public class MockContentTypeManager implements IContentTypeManager
     {
 
         throw new UnsupportedOperationException();
+    }
+
+    public IScopeContext getContext()
+    {
+        return _context;
     }
 
     public IContentType getContentType(final String contentTypeIdentifier)

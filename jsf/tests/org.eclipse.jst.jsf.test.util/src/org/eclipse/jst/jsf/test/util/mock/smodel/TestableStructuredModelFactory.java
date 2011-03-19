@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.test.util.mock.smodel;
 
 import java.io.BufferedInputStream;
@@ -41,7 +52,7 @@ public class TestableStructuredModelFactory
             NoSuchFieldException, BundleException, IllegalArgumentException,
             IllegalAccessException
     {
-        new BundleHacker().mockBundleContext(PlatformActivator.class);
+        new BundleHacker().mockBundleContext(PlatformActivator.class, null);
     }
 
     public IStructuredModel createUnManagedModelFor(final IFile file)
@@ -109,7 +120,6 @@ public class TestableStructuredModelFactory
     {
         final IModelLoader loader = new XMLModelLoader()
         {
-
             public IDocumentLoader getDocumentLoader()
             {
                 return new TestableXMLModelLoader();

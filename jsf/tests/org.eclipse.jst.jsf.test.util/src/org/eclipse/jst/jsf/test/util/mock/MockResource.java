@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Cameron Bateman/Oracle - initial API and implementation
+ *    
+ ********************************************************************************/
 package org.eclipse.jst.jsf.test.util.mock;
 
 import java.net.URI;
@@ -36,6 +47,7 @@ public class MockResource implements IResource
     private long _modificationStamp = -1;
 	private Map<QualifiedName, Object> _sessionProps;
     public final static List<Integer> VALID_TYPES;
+    private boolean _isSynchronized = true;
 
     static
     {
@@ -418,7 +430,12 @@ public class MockResource implements IResource
 
     public boolean isSynchronized(final int depth)
     {
-        throw new UnsupportedOperationException();
+        return _isSynchronized;
+    }
+
+    public void setSynchronized(boolean isSynchronized)
+    {
+        _isSynchronized = isSynchronized;
     }
 
     public boolean isTeamPrivateMember()
