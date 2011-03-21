@@ -53,26 +53,37 @@ public class CompositeComponentTaglibLocator extends
         private void handleRemove(final JSFResourceChangedEvent event,
                 final Builder builder)
         {
-            List<TaglibChangedEvent> events = Collections.EMPTY_LIST;
-            switch (event.getOldValue().getType())
-            {
-                case RESOURCE:
-                {
-                    events = handleRemoveResource(event, builder);
-                }
-                break;
-                case CONTAINER:
-                {
-                    events = handleRemoveContainer(event, builder);
-                }
-                break;
-            }
-
-            _records = builder.merge(events, _records);
-            for (final TaglibChangedEvent fireEvent : events)
-            {
-                fireChangeEvent(fireEvent);
-            }
+        	//Bug 324234 - NPE from CompositeComponentTaglibLocator
+        	if (event != null)
+        	{
+	            IJSFResourceFragment oldValue = event.getOldValue();
+	            if (oldValue != null)
+	            {
+	            	Type type = oldValue.getType();
+	            	if (type != null)
+	            	{
+			            List<TaglibChangedEvent> events = Collections.EMPTY_LIST;
+			            switch (type)
+			            {
+			                case RESOURCE:
+			                {
+			                    events = handleRemoveResource(event, builder);
+			                }
+			                break;
+			                case CONTAINER:
+			                {
+			                    events = handleRemoveContainer(event, builder);
+			                }
+			                break;
+			            }
+			            _records = builder.merge(events, _records);
+			            for (final TaglibChangedEvent fireEvent : events)
+			            {
+			                fireChangeEvent(fireEvent);
+			            }
+	            	}
+	            }
+        	}
         }
 
         private List<TaglibChangedEvent> handleRemoveContainer(
