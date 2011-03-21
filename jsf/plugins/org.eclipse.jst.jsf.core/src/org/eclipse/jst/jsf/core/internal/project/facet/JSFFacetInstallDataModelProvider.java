@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -40,10 +41,12 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
 import org.eclipse.wst.common.componentcore.datamodel.FacetInstallDataModelProvider;
 import org.eclipse.wst.common.componentcore.datamodel.properties.IFacetDataModelProperties;
+import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.frameworks.datamodel.IDataModel;
+import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
 import org.eclipse.wst.common.project.facet.core.IFacetedProjectWorkingCopy;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
-import org.eclipse.wst.common.project.facet.core.IFacetedProject.Action;
 
 /**
  * Provides a data model used by the JSF facet install.
@@ -273,9 +276,14 @@ public class JSFFacetInstallDataModelProvider extends
 						jars.add(entry.getPath().makeAbsolute().toString());
 					}
 				}
-			} catch (JavaModelException e) {
-			    // FIXME: what should we do in this case?
-			    JSFCorePlugin.log(e, "Error searching class path"); //$NON-NLS-1$
+			} catch (JavaModelException ignore) {
+				/*
+				 * Bug 330819 - Project Properties - Facets - Change Configuration - Receive npe error
+				 * 
+				 * Don't log error, as this is an expected exception if the Java project has not yet
+				 * been created - continue processing.
+				 */
+			    //JSFCorePlugin.log(e, "Error searching class path"); //$NON-NLS-1$
 			}			
 		}
 		//else as we do not have a javaProject yet, all we can do is validate that there is no duplicate jars (absolute path)
@@ -360,18 +368,30 @@ public class JSFFacetInstallDataModelProvider extends
 		
 		String webFolder = getWebContentFolderName();
 		if (proj.exists()) {
-			
-			webContentPath = ComponentCore.createComponent(proj).getRootFolder()
-						.getUnderlyingFolder().getRawLocation();
-		}
-		else {			
-
-			if (webFolder == null){
-				//we got problems... should not happen
-				return proj.getFullPath();
+			//Bug 330819 - Project Properties - Facets - Change Configuration - Receive npe error
+			IVirtualComponent virtComponent = ComponentCore.createComponent(proj);
+			if (virtComponent != null) {
+				IVirtualFolder virtFolder = virtComponent.getRootFolder();
+				if (virtFolder != null) {
+					IContainer container = virtFolder.getUnderlyingFolder();
+					if (container != null) {
+						webContentPath = container.getRawLocation();
+					}
+				}
+			} else {
+				//Java project has not been created yet
+				if (webFolder == null){
+					webContentPath = proj.getFullPath();
+				} else {
+					webContentPath = proj.getFullPath().append(webFolder);
+				}
 			}
-			webContentPath = proj.getFullPath().append(webFolder);
-
+		} else {	
+			if (webFolder == null){
+				webContentPath = proj.getFullPath();
+			} else {
+				webContentPath = proj.getFullPath().append(webFolder);
+			}
 		}
 		return webContentPath;
 	}
@@ -380,10 +400,18 @@ public class JSFFacetInstallDataModelProvider extends
 		String projName = (String)getProperty(FACET_PROJECT_NAME);
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projName);
 		if (project.exists()){
-			IPath webContentPath = ComponentCore.createComponent(project).getRootFolder()
-			.getUnderlyingFolder().getProjectRelativePath();
-
-			return webContentPath.toString();
+			//Bug 330819 - Project Properties - Facets - Change Configuration - Receive npe error
+			IVirtualComponent virtComponent = ComponentCore.createComponent(project);
+			if (virtComponent != null) {
+				IVirtualFolder virtFolder = virtComponent.getRootFolder();
+				if (virtFolder != null) {
+					IContainer container = virtFolder.getUnderlyingFolder();
+					if (container != null) {
+						IPath webContentPath = container.getProjectRelativePath();
+						return webContentPath.toString();
+					}
+				}
+			}
 		}
 		
 		IFacetedProjectWorkingCopy projWC = (IFacetedProjectWorkingCopy)getProperty(FACETED_PROJECT_WORKING_COPY);
