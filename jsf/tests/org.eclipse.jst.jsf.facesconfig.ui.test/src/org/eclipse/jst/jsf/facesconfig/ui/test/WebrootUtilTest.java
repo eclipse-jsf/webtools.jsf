@@ -12,6 +12,7 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.test;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -47,8 +48,8 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 		IResource resource = project.getFile(new Path("WebContent/web.xml"));
 		assertTrue(WebrootUtil.isUnderWebContentFolder(resource));
 
-		IFolder folder = WebrootUtil.getWebContentFolder(project);
-		IFile page1 = folder.getFile("page1.jsp");
+		IContainer container = WebrootUtil.getWebContentContainer(project);
+		IFile page1 = container.getFile(new Path("page1.jsp"));
 		page1.create(null, true, new NullProgressMonitor());
 
 		assertTrue(WebrootUtil.isUnderWebContentFolder(page1));
@@ -72,13 +73,13 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebContentFolder(org.eclipse.core.resources.IProject)}.
+	 * {@link org.eclipse.jst.jsf.common.ui.internal.utils.WebrootUtil#getWebContentContainer(org.eclipse.core.resources.IProject)}.
 	 */
-	public void testGetWebContentFolder() {
-		IFolder folder = WebrootUtil.getWebContentFolder(project);
-		assertNotNull(folder);
-		assertTrue(folder.exists());
-		assertEquals(folder.getFullPath().toString(), WEB_CONTENT_PATH);
+	public void testGetWebContentContainer() {
+		IContainer container = WebrootUtil.getWebContentContainer(project);
+		assertNotNull(container);
+		assertTrue(container.exists());
+		assertEquals(container.getFullPath().toString(), WEB_CONTENT_PATH);
 	}
 
 	/**
@@ -96,13 +97,13 @@ public class WebrootUtilTest extends FacesConfigEditorTest {
 	 */
 	public void testIsValidWebFile() throws CoreException {
 		
-		IFolder folder = WebrootUtil.getWebContentFolder(project);
-		IFile page1 = folder.getFile("page1.jsp");
+		IContainer container = WebrootUtil.getWebContentContainer(project);
+		IFile page1 = container.getFile(new Path("page1.jsp"));
 		page1.create(null, true, new NullProgressMonitor());
 
 		assertTrue(WebrootUtil.isValidWebFile(page1.getFullPath()));
 
-		IFile page2 = folder.getFile("page2.jsv");
+		IFile page2 = container.getFile(new Path("page2.jsv"));
 		page2.create(null, true, new NullProgressMonitor());
 		assertTrue(WebrootUtil.isValidWebFile(page2.getFullPath()));
 
