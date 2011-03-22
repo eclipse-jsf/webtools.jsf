@@ -112,8 +112,12 @@ public class WebrootUtil {
 	}
 
 	/**
-	 * @param project
-	 * @return folder where for web content
+	 * Gets the "web content" folder for the given project - this method should no longer be used
+	 * since it cannot handle the case where the project root is also the "web content" folder
+	 * (use {@link #getWebContentContainer(IProject)} instead).
+	 * @param project The IProject instance for which to get the "web content" folder.
+	 * @return The "web content" folder for the given project.
+	 * @deprecated
 	 */
 	public static IFolder getWebContentFolder(IProject project) {
 		IPath webContentPath = getWebContentPath(project);
@@ -122,6 +126,26 @@ public class WebrootUtil {
 			folder = project.getFolder(webContentPath.removeFirstSegments(1));
 		}
 		return folder;
+	}
+
+	/**
+	 * Gets the "web content" container for the given project - this method is to be considered
+	 * preferable to using {@link #getWebContentFolder(IProject)}, since it correctly handles the
+	 * case where the project root is also the "web content" container.
+	 * @param project The IProject instance for which to get the "web content" container.
+	 * @return The "web content" container for the given project.
+	 */
+	public static IContainer getWebContentContainer(IProject project) {
+		IPath webContentPath = getWebContentPath(project);
+		IContainer container = null;
+		if (webContentPath != null) {
+			if (webContentPath.segmentCount() > 1) {
+				container = project.getFolder(webContentPath.removeFirstSegments(1));
+			} else {
+				container = project;
+			}
+		}
+		return container;
 	}
 
 	/**

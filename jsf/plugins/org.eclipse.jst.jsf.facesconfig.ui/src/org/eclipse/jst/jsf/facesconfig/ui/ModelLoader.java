@@ -13,7 +13,7 @@ package org.eclipse.jst.jsf.facesconfig.ui;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
@@ -160,14 +160,12 @@ class ModelLoader
         {
             if (_isWebProject) 
             {
-                IFolder webContentFolder = WebrootUtil.getWebContentFolder(project);
-                Assert
-                        .isTrue(webContentFolder != null
-                                && webContentFolder.exists());
+                IContainer webContentContainer = WebrootUtil.getWebContentContainer(project);
+                Assert.isTrue(webContentContainer != null && webContentContainer.exists());
 
                 IPath relativePath = modelPath;
-                if (webContentFolder.getFullPath().isPrefixOf(modelPath)) {
-                    relativePath = modelPath.removeFirstSegments(webContentFolder
+                if (webContentContainer.getFullPath().isPrefixOf(modelPath)) {
+                    relativePath = modelPath.removeFirstSegments(webContentContainer
                             .getFullPath().segmentCount());
                 }
 

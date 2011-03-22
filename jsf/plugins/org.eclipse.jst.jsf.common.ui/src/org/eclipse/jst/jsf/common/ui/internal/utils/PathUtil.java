@@ -126,7 +126,7 @@ public final class PathUtil {
 		String name = ""; //$NON-NLS-1$
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(
 				projectName);
-		String webrootName = WebrootUtil.getWebContentFolder(project).getName();
+		String webrootName = WebrootUtil.getWebContentContainer(project).getName();
 
 		if (path.indexOf(webrootName) != -1) {
 			name = projectName + IFileFolderConstants.PATH_SEPARATOR
@@ -160,7 +160,7 @@ public final class PathUtil {
 						.getActiveEditor().getEditorInput()).getFile();
 			}
 			if (jsp != null) {
-				String webrootName = WebrootUtil.getWebContentFolder(
+				String webrootName = WebrootUtil.getWebContentContainer(
 						jsp.getProject()).getName();
 				webroot = jsp.getProject().getFolder(webrootName).getLocation()
 						.toString();

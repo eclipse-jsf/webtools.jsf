@@ -234,11 +234,11 @@ public class ProjectResolver implements URIResolver {
 		if (_project == null) {
 			return;
 		}
-		if (WebrootUtil.getWebContentFolder(_project) == null) {
+		if (WebrootUtil.getWebContentContainer(_project) == null) {
 			return;
 		}
-		IFolder webinf = WebrootUtil.getWebContentFolder(_project).getFolder(
-				IFileFolderConstants.FOLDER_WEBINF);
+		IFolder webinf = WebrootUtil.getWebContentContainer(_project).getFolder(
+				new Path(IFileFolderConstants.FOLDER_WEBINF));
 		if (webinf != null && webinf.exists()) {
 			seekTld(webinf);
 		}
@@ -276,8 +276,8 @@ public class ProjectResolver implements URIResolver {
 						+ WebrootUtil.getWebContentFolderName(_project) + uri;
 			}
 			if (uri.startsWith(URI_PREFIX_HTTP)) {
-				IFile webxml = WebrootUtil.getWebContentFolder(_project)
-						.getFolder(IFileFolderConstants.FOLDER_WEBINF).getFile(
+				IFile webxml = WebrootUtil.getWebContentContainer(_project)
+						.getFolder(new Path(IFileFolderConstants.FOLDER_WEBINF)).getFile(
 								IFileFolderConstants.FILE_WEB_XML);
 				IDOMModel xmlModel;
 
