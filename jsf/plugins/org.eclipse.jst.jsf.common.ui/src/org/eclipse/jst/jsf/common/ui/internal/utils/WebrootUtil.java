@@ -118,6 +118,7 @@ public class WebrootUtil {
 	 * @param project The IProject instance for which to get the "web content" folder.
 	 * @return The "web content" folder for the given project.
 	 * @deprecated
+	 * @see #getWebContentContainer(IProject)
 	 */
 	public static IFolder getWebContentFolder(IProject project) {
 		IPath webContentPath = getWebContentPath(project);
@@ -129,15 +130,16 @@ public class WebrootUtil {
 	}
 
 	/**
-	 * Gets the "web content" container for the given project - this method is to be considered
+	 * Gets the primary "web content" container for the given project - this method is considered
 	 * preferable to using {@link #getWebContentFolder(IProject)}, since it correctly handles the
-	 * case where the project root is also the "web content" container.
-	 * @param project The IProject instance for which to get the "web content" container.
-	 * @return The "web content" container for the given project.
+	 * case where the project root is also the primary "web content" container.
+	 * @param project The IProject instance for which to get the primary "web content" container.
+	 * @return The primary "web content" container for the given project.
+	 * @see #getWebContentContainers(IProject)
 	 */
 	public static IContainer getWebContentContainer(IProject project) {
-		IPath webContentPath = getWebContentPath(project);
 		IContainer container = null;
+		IPath webContentPath = getWebContentPath(project);
 		if (webContentPath != null) {
 			if (webContentPath.segmentCount() > 1) {
 				container = project.getFolder(webContentPath.removeFirstSegments(1));
@@ -146,6 +148,28 @@ public class WebrootUtil {
 			}
 		}
 		return container;
+	}
+
+	/**
+	 * Gets all "web content" containers for the given project (there can be multiple mappings to
+	 * the same runtime path).
+	 * @param project The IProject instance for which to get all "web content" containers.
+	 * @return All "web content" containers for the given project, or <code>null</code> if none are
+	 * found.
+	 * @see #getWebContentContainer(IProject)
+	 */
+	public static IContainer[] getWebContentContainers(IProject project) {
+		IContainer[] containers = null;
+		if (project != null) {
+			IVirtualComponent component = ComponentCore.createComponent(project);
+			if (component != null) {
+				IVirtualFolder rootFolder = component.getRootFolder();
+				if (rootFolder != null) {
+					containers = rootFolder.getUnderlyingFolders();
+				}
+			}
+		}
+		return containers;
 	}
 
 	/**

@@ -158,24 +158,27 @@ class ModelLoader
          */
         private FacesConfigArtifactEdit loadModel(IProject project, IPath modelPath) 
         {
+        	FacesConfigArtifactEdit edit = null;
             if (_isWebProject) 
             {
-                IContainer webContentContainer = WebrootUtil.getWebContentContainer(project);
-                Assert.isTrue(webContentContainer != null && webContentContainer.exists());
-
-                IPath relativePath = modelPath;
-                if (webContentContainer.getFullPath().isPrefixOf(modelPath)) {
-                    relativePath = modelPath.removeFirstSegments(webContentContainer
-                            .getFullPath().segmentCount());
+                IContainer[] webContentContainers = WebrootUtil.getWebContentContainers(project);
+                if (webContentContainers != null)
+                {
+	                for (IContainer webContentContainer: webContentContainers) {
+	                    Assert.isTrue(webContentContainer != null && webContentContainer.exists());
+	                    if (webContentContainer.getFullPath().isPrefixOf(modelPath))
+	                    {
+	                        IPath relativePath = modelPath;
+	                        relativePath = modelPath.removeFirstSegments(
+	                        		webContentContainer.getFullPath().segmentCount());
+	                        edit = FacesConfigArtifactEdit.getFacesConfigArtifactEditForWrite(
+	                        		project, relativePath.toString());
+	                        break;
+	                    }
+	                }
                 }
-
-                
-                return FacesConfigArtifactEdit
-                        .getFacesConfigArtifactEditForWrite(project, relativePath
-                                .toString());
             }
-            
-            return null;
+            return edit;
         }
     }
     
