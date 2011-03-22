@@ -315,6 +315,9 @@
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
 			<trait id="runtime-type-setter-required">
 				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>			
@@ -339,6 +342,9 @@
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
 				<value xsi:type="mdt:BooleanValue">true</value>
@@ -379,6 +385,9 @@
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
 			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
 			<trait id="runtime-type-setter-required">
 				<value xsi:type="mdt:BooleanValue">true</value>
 			</trait>
@@ -403,6 +412,9 @@
 		<entity id="value">
 			<trait id="attribute-value-runtime-type">
 				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
 			</trait>
 			<trait id="runtime-type-setter-required">
 				<value xsi:type="mdt:BooleanValue">true</value>
@@ -517,6 +529,14 @@
 				<section id="section.general.outputFormat.params" type="SECTION"/>	
 			</value>
 		</trait>		
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
+		</entity>	
 	</entity>
 	<entity id="outputLabel" type="tag">		
 		<include-entity-group id="basic-jsf-html-attributes"/>
@@ -534,6 +554,14 @@
 				<section id="style"/>			
 			</value>
 		</trait>		
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
+		</entity>	
 	</entity>
 	<entity id="outputLink" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
@@ -549,6 +577,14 @@
 				<section id="style"/>			
 			</value>
 		</trait>		
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
+		</entity>	
 	</entity>
 	<entity id="outputScript" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>		
@@ -594,6 +630,14 @@
 		<entity id="name">
 
 		</entity>	
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
+		</entity>	
 	</entity>
 	<entity id="outputText" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
@@ -610,6 +654,14 @@
 				<section id="section.general.outputText.converter" type="SECTION"/>	
 			</value>
 		</trait>		
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.Object</value>
+			</trait>
+		</entity>	
 	</entity>
 	<entity id="panelGrid" type="tag">
 		<include-entity-group id="basic-jsf-html-attributes"/>
