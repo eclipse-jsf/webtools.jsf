@@ -34,6 +34,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -1053,6 +1054,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 * @param mode
 	 */
 	public void setDesignerMode(int mode) {
+		boolean requiresResynch = (_mode == MODE_SOURCE);
 		if (_sashEditorPart != null && _mode != mode) {
 			switch (mode) {
 			case MODE_SASH_HORIZONTAL:
@@ -1073,6 +1075,9 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			}
 		}
 		this._mode = mode;
+		if (requiresResynch) {
+			resynch();
+		}
 	}
 
 	/*
@@ -1107,6 +1112,24 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 */
 	public int getDesignerMode() {
 		return this._mode;
+	}
+
+	private void resynch() {
+		if (_textEditor != null && _designViewer != null) {
+			ISelectionProvider provider = _textEditor.getSelectionProvider();
+			if (provider != null) {
+				ISelection selection = provider.getSelection();
+				if (selection instanceof TextSelection) {
+					TextSelection textSelection = (TextSelection)selection;
+					SelectionSynchronizer synchronizer = _designViewer.getSynchronizer();
+					if (synchronizer != null) {
+						synchronizer.textSelectionChanged(
+								textSelection.getOffset(),
+								textSelection.getOffset() + textSelection.getLength());
+					}
+				}
+			}
+		}
 	}
 
 	public IEditorPart getActiveEditor() {

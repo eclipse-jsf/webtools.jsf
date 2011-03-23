@@ -48,7 +48,7 @@ import org.w3c.dom.Node;
  * 
  * @author mengbo
  */
-/*package*/ class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
+public class HTMLGraphicalViewer extends ScrollingGraphicalViewer implements
 		IHTMLGraphicalViewer, CaretPositionTracker {
 	private IEditorPart _parentPart;
 	private Caret _caret;
@@ -504,7 +504,15 @@ import org.w3c.dom.Node;
 			setXoffset(rect.x);
 		}
 	}
-    
+
+	/**
+	 * Gets parent editor part.
+	 * @return Parent editor part.
+	 */
+	public IEditorPart getParent() {
+		return _parentPart;
+	}
+
 	// public void addPostSelectionChangedListener(ISelectionChangedListener
 	// listener)
 	// {

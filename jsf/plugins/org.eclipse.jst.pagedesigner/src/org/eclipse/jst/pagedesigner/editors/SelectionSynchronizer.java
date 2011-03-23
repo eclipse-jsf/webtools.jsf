@@ -120,49 +120,68 @@ public class SelectionSynchronizer implements ISelectionChangedListener {
 	 * @param end 
 	 */
 	public void textSelectionChanged(int start, int end) {
-		if (!_firingChange) {
-			try {
-				_firingChange = true;
-
-				// XXX: workaround a SSE problem. In SSE, when user select a
-				// range, it will fire two textSelectionChange event
-				// the first one indicate the correct range, the second one is
-				// zero size for caret position.
-				// @see ViewerSelectionManagerImpl.caretMoved
-				// We try to ignore the second event by checking whether the
-				// current real selection is empty
-				if (start == end) {
-					ITextSelection sel = (ITextSelection) _editor
-							.getHTMLEditor().getTextEditor()
-							.getSelectionProvider().getSelection();
-					if (sel.getLength() != 0) {
+		//Bug 332479 - [WPE] Design page processing still takes place even when design page is hidden
+		if (!htmlEditorIsInSourceOnlyMode()) {
+			if (!_firingChange) {
+				try {
+					_firingChange = true;
+	
+					// XXX: workaround a SSE problem. In SSE, when user select a
+					// range, it will fire two textSelectionChange event
+					// the first one indicate the correct range, the second one is
+					// zero size for caret position.
+					// @see ViewerSelectionManagerImpl.caretMoved
+					// We try to ignore the second event by checking whether the
+					// current real selection is empty
+					if (start == end) {
+						ITextSelection sel = (ITextSelection) _editor
+								.getHTMLEditor().getTextEditor()
+								.getSelectionProvider().getSelection();
+						if (sel.getLength() != 0) {
+							return;
+						}
+					}
+	
+					if (start > end) {
+						int temp = start;
+						start = end;
+						end = temp;
+					}
+					int offset = start;
+					int length = end - start;
+	
+					ITextSelection oldSelection = SelectionHelper
+							.convertFromDesignSelectionToTextSelection(_editor
+									.getGraphicViewer().getSelection());
+					if (oldSelection != null && oldSelection.getOffset() == offset
+							&& oldSelection.getLength() == length) {
 						return;
 					}
+	
+					ISelection selection = SelectionHelper
+							.convertToDesignerSelection(this._editor
+									.getGraphicViewer(), offset, length);
+					_editor.getGraphicViewer().setSelection(selection);
+				} finally {
+					_firingChange = false;
 				}
-
-				if (start > end) {
-					int temp = start;
-					start = end;
-					end = temp;
-				}
-				int offset = start;
-				int length = end - start;
-
-				ITextSelection oldSelection = SelectionHelper
-						.convertFromDesignSelectionToTextSelection(_editor
-								.getGraphicViewer().getSelection());
-				if (oldSelection != null && oldSelection.getOffset() == offset
-						&& oldSelection.getLength() == length) {
-					return;
-				}
-
-				ISelection selection = SelectionHelper
-						.convertToDesignerSelection(this._editor
-								.getGraphicViewer(), offset, length);
-				_editor.getGraphicViewer().setSelection(selection);
-			} finally {
-				_firingChange = false;
 			}
 		}
 	}
+
+	/**
+	 * Returns true if HTMLEditor is in source-only mode.
+	 * @return <code>true</code> if HTMLEditor is in source-only mode, else <code>false</code>.
+	 */
+	protected boolean htmlEditorIsInSourceOnlyMode() {
+		boolean ret = false;
+		if (_editor != null) {
+			HTMLEditor htmlEditor = _editor.getHTMLEditor();
+			if (htmlEditor != null) {
+				ret = (htmlEditor.getDesignerMode() == HTMLEditor.MODE_SOURCE);
+			}
+		}
+		return ret;
+	}
+
 }

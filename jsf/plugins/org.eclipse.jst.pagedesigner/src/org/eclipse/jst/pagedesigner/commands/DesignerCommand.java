@@ -26,11 +26,15 @@ import org.eclipse.jst.pagedesigner.dom.DOMRange;
 import org.eclipse.jst.pagedesigner.dom.EditModelQuery;
 import org.eclipse.jst.pagedesigner.dom.EditValidateUtil;
 import org.eclipse.jst.pagedesigner.dom.IDOMPosition;
+import org.eclipse.jst.pagedesigner.editors.HTMLEditor;
+import org.eclipse.jst.pagedesigner.editors.SimpleGraphicalEditor;
 import org.eclipse.jst.pagedesigner.parts.ElementEditPart;
 import org.eclipse.jst.pagedesigner.utils.SelectionHelper;
 import org.eclipse.jst.pagedesigner.viewer.DesignPosition;
 import org.eclipse.jst.pagedesigner.viewer.DesignRange;
+import org.eclipse.jst.pagedesigner.viewer.HTMLGraphicalViewer;
 import org.eclipse.jst.pagedesigner.viewer.IHTMLGraphicalViewer;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.wst.html.core.internal.format.HTMLFormatProcessorImpl;
 import org.eclipse.wst.sse.core.internal.provisional.INodeNotifier;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMDocument;
@@ -187,7 +191,10 @@ public abstract class DesignerCommand extends Command {
 		} else {
 			getModel().beginRecording(this, getLabel());
 		}
-		getViewer().startSelectionChange();
+		//Bug 332479 - [WPE] Design page processing still takes place even when design page is hidden
+		if (!htmlEditorIsInSourceOnlyMode()) {
+			getViewer().startSelectionChange();
+		}
 		getModel().aboutToChangeModel();
 		return true;
 	}
@@ -228,7 +235,11 @@ public abstract class DesignerCommand extends Command {
 
 		// enforce a validate, so things get layed out, thus all the figures
 		// will be valid.
-		this.getViewer().getViewport().validate();
+
+		//Bug 332479 - [WPE] Design page processing still takes place even when design page is hidden
+		if (!htmlEditorIsInSourceOnlyMode()) {
+			this.getViewer().getViewport().validate();
+		}
 
 		ISelection sel = getAfterCommandDesignerSelection();
 		if (sel != null) {
@@ -244,13 +255,16 @@ public abstract class DesignerCommand extends Command {
 			getModel().endRecording(this);
 		}
 
-		if (sel != null) {
-			getViewer().setSelection(sel);
-		} else {
-			getViewer().deselectAll();
-		}
-		if (getViewer() != null) {
-			getViewer().selectionChanged();
+		//Bug 332479 - [WPE] Design page processing still takes place even when design page is hidden
+		if (!htmlEditorIsInSourceOnlyMode()) {
+			if (sel != null) {
+				getViewer().setSelection(sel);
+			} else {
+				getViewer().deselectAll();
+			}
+			if (getViewer() != null) {
+				getViewer().selectionChanged();
+			}
 		}
 	}
 
@@ -373,4 +387,23 @@ public abstract class DesignerCommand extends Command {
 		}
 		return null;
 	}
+
+	/**
+	 * Returns true if HTMLEditor is in source-only mode.
+	 * @return <code>true</code> if HTMLEditor is in source-only mode, else <code>false</code>.
+	 */
+	protected boolean htmlEditorIsInSourceOnlyMode() {
+		boolean ret = false;
+		if (_viewer instanceof HTMLGraphicalViewer) {
+			IEditorPart parent = ((HTMLGraphicalViewer)_viewer).getParent();
+			if (parent instanceof SimpleGraphicalEditor) {
+				HTMLEditor htmlEditor = ((SimpleGraphicalEditor)parent).getHTMLEditor();
+				if (htmlEditor != null) {
+					ret = (htmlEditor.getDesignerMode() == HTMLEditor.MODE_SOURCE);
+				}
+			}
+		}
+		return ret;
+	}
+
 }
