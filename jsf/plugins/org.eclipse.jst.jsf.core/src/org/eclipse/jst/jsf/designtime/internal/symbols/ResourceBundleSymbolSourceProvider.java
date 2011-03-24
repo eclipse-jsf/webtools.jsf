@@ -11,12 +11,15 @@
 package org.eclipse.jst.jsf.designtime.internal.symbols;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.core.JavaModelException;
@@ -28,6 +31,7 @@ import org.eclipse.jst.jsf.context.symbol.source.AbstractSymbolSourceProviderFac
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProvider;
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
+import org.eclipse.jst.jsf.core.internal.tld.LoadBundleUtil;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
 import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
@@ -83,7 +87,13 @@ public final class ResourceBundleSymbolSourceProvider extends
                    } catch (JavaModelException e) {
                        JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
                     } catch (IOException e) {
-                        JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
+                    	//Bug 306811 - Invalid error "messages not found in classpath for project"
+                    	ISymbol symbol = createSymbolForResourceBundleInJAR(project, name, basename);
+                    	if (symbol != null) {
+                    		symbols.add(symbol);
+                    	} else {
+                    		JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
+                    	}
                     } catch (CoreException e) {
                         JSFCorePlugin.log(e, "Error creating base name for: "+basename); //$NON-NLS-1$
                     }
@@ -111,6 +121,39 @@ public final class ResourceBundleSymbolSourceProvider extends
         symbol.setTypeDescriptor(typeDesc);
         symbol.setDetailedDescription(Messages.getString("ResourceBundleSymbolSourceProvider.DetailedDescription")+basename+"</i>");  //$NON-NLS-1$//$NON-NLS-2$
         return symbol;
+    }
+
+    //Bug 306811 - Invalid error "messages not found in classpath for project"
+    private ISymbol createSymbolForResourceBundleInJAR(IProject project, final String name, final String basename) {
+    	IComponentSymbol symbol = null;
+    	InputStream in = null;
+    	try {
+    		final IStorage storage = LoadBundleUtil.getLoadBundleResource(project, basename);
+    		if (storage != null) {
+	    		in = storage.getContents();
+	    		Properties props = new Properties();
+	    		props.load(in);
+	    		final IMapTypeDescriptor typeDesc = SymbolFactory.eINSTANCE.createIMapTypeDescriptor();
+	    		typeDesc.setMapSource(props);
+	    		symbol = SymbolFactory.eINSTANCE.createIComponentSymbol();
+	    		symbol.setName(name);
+	    		symbol.setTypeDescriptor(typeDesc);
+	    		symbol.setDetailedDescription(Messages.getString("ResourceBundleSymbolSourceProvider.DetailedDescription") + basename + "</i>"); //$NON-NLS-1$ //$NON-NLS-2$
+    		}
+    	} catch(CoreException cex) {
+    		//fall through with null symbol
+    	} catch(IOException ioex) {
+    		//fall through with null symbol
+    	} finally {
+    		if (in != null) {
+    			try {
+    				in.close();
+    			} catch(IOException ignored) {
+    				//do nothing
+    			}
+    		}
+    	}
+    	return symbol;
     }
 
     private String getBaseName(ResourceBundleType resBundle)
