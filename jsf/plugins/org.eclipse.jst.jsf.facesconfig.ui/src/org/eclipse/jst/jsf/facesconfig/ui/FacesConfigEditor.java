@@ -356,6 +356,14 @@ public class FacesConfigEditor extends FormEditor implements
 			return;
 		}
 
+		//Bug 291054 - faces-config should be checked out if the user tries to modify it
+		if (input instanceof IFileEditorInput) {
+			IFile file = ((IFileEditorInput)input).getFile();
+			if (file.isReadOnly()) {
+				file.getWorkspace().validateEdit(new IFile[]{file}, site != null ? site.getShell() : null);
+			}
+		}
+
 		//Bug 191494 - Unable to switch pages in faces config editor without mouse
 		// Activate plugin context
 		IContextService contextService = (IContextService) getSite()
