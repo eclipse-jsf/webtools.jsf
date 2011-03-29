@@ -17,6 +17,7 @@ import org.eclipse.jst.jsf.core.tests.appconfig.CompositeJSFAppConfigLocatorProv
 import org.eclipse.jst.jsf.core.tests.appconfig.JSFAppConfigManagerFactoryTests;
 import org.eclipse.jst.jsf.core.tests.appconfig.validation.AppConfigValidationUtilTestCase;
 import org.eclipse.jst.jsf.core.tests.contenttype.TestContentTypes;
+import org.eclipse.jst.jsf.core.tests.facet.JsfDownloadableLibraryLocationTests;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryProviderTests;
 import org.eclipse.jst.jsf.core.tests.facet.JsfLibraryValidatorTest;
 import org.eclipse.jst.jsf.core.tests.facet.VendorSpecificWebXmlConfigurationForJ2EETest;
@@ -89,6 +90,7 @@ public class AllTests
 //		suite.addTestSuite(JSFLibraryConfigModelTestCases.class);
 		suite.addTestSuite(JSFLibraryRegistryUtilTestCases.class);
 		suite.addTestSuite(JsfLibraryValidatorTest.class);
+		suite.addTestSuite(JsfDownloadableLibraryLocationTests.class);
 
 		suite.addTestSuite(TestJSPSemanticsValidator_Containment.class);
         suite.addTestSuite(TestJSPSemanticsValidator_AttributeValues.class);
