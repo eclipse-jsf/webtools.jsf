@@ -27,6 +27,25 @@
 			adaptableType="org.eclipse.core.resources.IProject">
 			<adapter type="org.eclipse.wst.sse.core.internal.util.URIResolver" />
 		</factory>
+  <factory
+        adaptableType="org.eclipse.jst.pagedesigner.parts.NodeEditPart"
+        class="org.eclipse.jst.pagedesigner.utils.IFileAdapterFactory">
+        <adapter type="org.eclipse.core.resources.IFile">
+     </adapter>
+  </factory>
+  <factory
+        adaptableType="org.eclipse.jst.pagedesigner.parts.NodeEditPart"
+        class="org.eclipse.jst.pagedesigner.utils.IResourceAdapterFactory">
+        <adapter type="org.eclipse.core.resources.IResource">
+     </adapter>
+  </factory>
+  <factory
+        adaptableType="org.eclipse.jst.pagedesigner.parts.NodeEditPart"
+        class="org.eclipse.jst.pagedesigner.utils.IWorkbenchAdapterFactory">
+     <adapter
+           type="org.eclipse.ui.model.IWorkbenchAdapter">
+     </adapter>
+  </factory>
 	</extension>
 
 	 <extension
