@@ -313,7 +313,7 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
             MockResource resource = checkExists(newFileFullPath, true);
             if (resource == null)
             {
-            	resource = newFolder(container, newFileFullPath);
+                resource = newFolder(container, newFileFullPath);
                 ensurePathToNewResource(container, path);
             }
             return (MockFolder) resource;
@@ -388,10 +388,10 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
                     name = name.substring(_pathIntoZip.length());
                     if (entry.isDirectory())
                     {
-                    	if (name.endsWith("/"))
-                    	{
-                    		name = name.substring(0, name.length() - 1);
-                    	}
+                        if (name.endsWith("/"))
+                        {
+                            name = name.substring(0, name.length() - 1);
+                        }
                         createFolder(project, new Path(name));
                     } else
                     {
