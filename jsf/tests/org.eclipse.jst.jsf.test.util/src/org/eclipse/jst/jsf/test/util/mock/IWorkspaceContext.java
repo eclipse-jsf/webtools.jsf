@@ -10,6 +10,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IPath;
+import org.osgi.framework.Bundle;
 
 /**
  * @author cbateman
@@ -59,6 +60,7 @@ public interface IWorkspaceContext
 
     public IFile attachFile(IProject project, IPath projectRelativePath,
             File file) throws Exception;
+
     /**
      * @param path
      * @param zipFileLoader
@@ -67,6 +69,17 @@ public interface IWorkspaceContext
      */
     public abstract IProject loadProject(final IPath path,
             final ZipFileLoader zipFileLoader) throws Exception;
+
+    /**
+     * @param projectPath the path of the new project
+     * @param bundle the plugin containing the zip
+     * @param pathToZip relative to the plugin's root folder
+     * @return an IProject loaded from a zip in the plugin and 
+     *         into the path provided.
+     * @throws Exception
+     */
+    public abstract IProject loadProject(final IPath projectPath,
+            final Bundle bundle, final String pathIntoZip) throws Exception;
 
     /**
      * Method that implementers may choose to noop.

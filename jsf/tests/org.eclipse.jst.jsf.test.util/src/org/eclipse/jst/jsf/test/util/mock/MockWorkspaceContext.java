@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -14,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
+
+import junit.framework.Assert;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -21,9 +25,12 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jst.jsf.test.util.ZipStreamWrapper;
+import org.osgi.framework.Bundle;
 
 /**
  * A test context that can be used to construct a number of MockResources that
@@ -137,7 +144,7 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
     private IProject createProject(final IPath path, final boolean replace)
     {
         final MockProject project = new MockProject(path,
-                new MyMockResourceFactory());
+                new MyMockResourceFactoryFromZipFile());
         attachProject(project, replace);
         return project;
     }
@@ -197,8 +204,25 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
     {
         checkExists(path, false);
         final MockProject project = new MockProject(path,
-                new MyMockResourceFactory(zipFileLoader.getZipFile(),
+                new MyMockResourceFactoryFromZipFile(
+                        zipFileLoader.getZipFile(),
                         zipFileLoader.getPathInZip()));
+        attachProject(project, false);
+        return project;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#loadProject(
+     * org.eclipse.core.runtime.IPath, org.osgi.framework.Bundle,
+     * java.lang.String)
+     */
+    public IProject loadProject(IPath path, Bundle bundle, String pathIntoZip) throws Exception {
+        checkExists(path, false);
+        final MockProject project = new MockProject(path,
+                new MyMockResourceFactoryFromBundle(bundle, pathIntoZip));
         attachProject(project, false);
         return project;
     }
@@ -257,54 +281,8 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
         return resource;
     }
 
-    private class MyMockResourceFactory implements IMockResourceFactory
+    private abstract class AbstractMockResourceFactory implements IMockResourceFactory
     {
-        private ZipFile _zip;
-        private final String _pathIntoZip;
-
-        public MyMockResourceFactory()
-        {
-            // do nothing.
-            _pathIntoZip = "";
-        }
-
-        public MyMockResourceFactory(final ZipFile zip, final String pathIntoZip)
-                throws Exception
-        {
-            _zip = zip;
-            _pathIntoZip = pathIntoZip;
-        }
-
-        public MockFile createFile(final MockContainer container,
-                final IPath path) throws CoreException, IOException
-        {
-            final IPath newFileFullPath = container.getFullPath().append(path);
-            MockResource resource = checkExists(newFileFullPath, true);
-            if (resource == null)
-            {
-                resource = new MockFile(newFileFullPath);
-                resource.setWorkspace(_ws);
-                resource.setProject(container.getProject());
-                if (_zip != null)
-                {
-                    final ZipEntry entry = _zip.getEntry(_pathIntoZip
-                            + path.toString());
-                    if (entry != null)
-                    {
-                        final InputStream inputStream = _zip
-                                .getInputStream(entry);
-                        if (inputStream != null)
-                        {
-                            ((MockFile) resource).setContents(inputStream,
-                                    false, true, new NullProgressMonitor());
-                        }
-                    }
-                    ensurePathToNewResource(container, path);
-                }
-                _ownedResources.put(newFileFullPath, resource);
-            }
-            return (MockFile) resource;
-        }
 
         public MockFolder createFolder(final MockContainer container,
                 final IPath path)
@@ -349,14 +327,6 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
             return newContainer;
         }
 
-        public void dispose() throws Exception
-        {
-            if (_zip != null)
-            {
-                _zip.close();
-            }
-        }
-
         public List<MockResource> getCurrentMembers(
                 final MockContainer container)
         {
@@ -373,6 +343,83 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
                 }
             }
             return members;
+        }
+
+        public MockFile createFile(final MockContainer container,
+                final IPath path) throws Exception
+        {
+            return createFile(container, path, null);
+        }
+
+        protected MockFile createFile(final MockContainer container,
+                final IPath path, final InputStream contents) throws Exception
+        {
+            final IPath newFileFullPath = container.getFullPath().append(path);
+            MockResource resource = checkExists(newFileFullPath, true);
+            if (resource == null)
+            {
+                resource = new MockFile(newFileFullPath);
+                resource.setWorkspace(getWorkspace());
+                resource.setProject(container.getProject());
+                if (contents != null)
+                {
+                    ((MockFile) resource).setContents(contents, false, true, new NullProgressMonitor());
+                } else
+                {
+                    setContents((MockFile) resource, path);
+                }
+                ensurePathToNewResource(container, path);
+                _ownedResources.put(newFileFullPath, resource);
+            }
+
+            return (MockFile) resource;
+        }
+
+        protected abstract void setContents(final MockFile file, final IPath path) throws Exception;
+    }
+
+    private class MyMockResourceFactoryFromZipFile extends AbstractMockResourceFactory
+    {
+        private final ZipFile _zip;
+        private final String _pathIntoZip;
+
+        public MyMockResourceFactoryFromZipFile()
+        {
+            _zip = null;
+            _pathIntoZip = "";
+        }
+
+        public MyMockResourceFactoryFromZipFile(final ZipFile zip, final String pathIntoZip)
+        {
+            _zip = zip;
+            _pathIntoZip = pathIntoZip;
+        }
+
+        public void dispose() throws Exception
+        {
+            if (_zip != null)
+            {
+                _zip.close();
+            }
+        }
+
+        @Override
+        protected void setContents(MockFile file, IPath path) throws Exception {
+            if (_zip != null)
+            {
+                final ZipEntry entry = _zip.getEntry(_pathIntoZip
+                        + path.toString());
+                if (entry != null)
+                {
+                    final InputStream inputStream = _zip
+                            .getInputStream(entry);
+                    if (inputStream != null)
+                    {
+                        file.setContents(inputStream, false,
+                                true, new NullProgressMonitor());
+                    }
+                }
+            }
         }
 
         public void forceLoad(final MockProject project) throws Exception
@@ -392,11 +439,152 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
                         {
                             name = name.substring(0, name.length() - 1);
                         }
-                        createFolder(project, new Path(name));
+
+                        if (name.length() > 0)
+                        {
+                            createFolder(project, new Path(name));
+                        }
                     } else
                     {
                         createFile(project, new Path(name));
                     }
+                }
+            }
+        }
+    }
+
+    private class MyMockResourceFactoryFromBundle extends AbstractMockResourceFactory
+    {
+        private final URL _zipURL;
+        private final String _pathIntoZip;
+
+        public MyMockResourceFactoryFromBundle(Bundle bundle, String pathIntoZip)
+        {
+            _zipURL = FileLocator.find(bundle, new Path(pathIntoZip), null);
+            Assert.assertNotNull(_zipURL);
+            _pathIntoZip = getPrefix();
+        }
+
+        public void dispose() throws Exception
+        {
+        }
+
+        private String getPrefix()
+        {
+            ZipInputStream zis = null;
+            try
+            {
+                zis = new ZipInputStream(_zipURL.openStream());
+                ZipEntry entry = zis.getNextEntry();
+                while (entry != null)
+                {
+                    String name = entry.getName();
+                    if (name != null && name.endsWith(".project")
+                            && !entry.isDirectory())
+                    {
+                        int index = name.lastIndexOf(".project");
+                        return name.substring(0, index);
+                    }
+                    entry = zis.getNextEntry();
+                }
+            } catch (IOException e)
+            {
+                Assert.fail("Problem with zip file: " + _zipURL.toString());
+            } finally
+            {
+                try
+                {
+                    if (zis != null)
+                        zis.close();
+                } catch (Exception ex)
+                {
+                    // ignore
+                }
+            }
+
+            // if we get to here, then nothing to prepend
+            return "";
+        }
+
+        @Override
+        protected void setContents(final MockFile file, final IPath path) throws Exception
+        {
+            ZipInputStream zis = null;
+            try
+            {
+                zis = new ZipInputStream(_zipURL.openStream());
+                ZipEntry entry = zis.getNextEntry();
+                while (entry != null)
+                {
+                    String name = entry.getName();
+                    final int index = name.indexOf(_pathIntoZip
+                            + path.toString());
+                    if (index > -1)
+                    {
+                        name = name.substring(_pathIntoZip.length());
+                        if (!entry.isDirectory())
+                        {
+                            file.setContents(new ZipStreamWrapper(zis),
+                                    false, true, new NullProgressMonitor());
+                            return;
+                        }
+                    }
+                    entry = zis.getNextEntry();
+                }
+            } finally
+            {
+                try
+                {
+                    if (zis != null)
+                        zis.close();
+                } catch (Exception ex)
+                {
+                    // ignore
+                }
+            }
+        }
+
+        public void forceLoad(final MockProject project) throws Exception
+        {
+            ZipInputStream zis = null;
+            try
+            {
+                zis = new ZipInputStream(_zipURL.openStream());
+                ZipEntry entry = zis.getNextEntry();
+                while (entry != null)
+                {
+                    String name = entry.getName();
+                    final int removeIdx = name.indexOf(_pathIntoZip);
+                    if (removeIdx > -1)
+                    {
+                        name = name.substring(_pathIntoZip.length());
+                        if (entry.isDirectory())
+                        {
+                            if (name.endsWith("/"))
+                            {
+                                name = name.substring(0, name.length() - 1);
+                            }
+
+                            if (name.length() > 0)
+                            {
+                                createFolder(project, new Path(name));
+                            }
+                        } else
+                        {
+                            createFile(project, new Path(name), new ZipStreamWrapper(zis));
+                        }
+                    }
+                    entry = zis.getNextEntry();
+                }
+            } finally
+            {
+                try
+                {
+                    if (zis != null)
+                        zis.close();
+                } catch (Exception ex)
+                {
+                    // ignore
                 }
             }
         }

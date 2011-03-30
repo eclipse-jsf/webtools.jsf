@@ -71,6 +71,7 @@ import org.eclipse.jst.jsf.test.util.ProjectTestEnvironment;
 import org.eclipse.jst.jsf.test.util.TestUtil;
 import org.eclipse.jst.jsf.test.util.mock.AbstractWorkspaceContextWithEvents;
 import org.eclipse.swt.widgets.Display;
+import org.osgi.framework.Bundle;
 
 @SuppressWarnings("deprecation")
 public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
@@ -180,6 +181,14 @@ public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
         assertFalse(_workspace.getRoot().getProject(path.toString()).exists());
         return TestUtil.createProjectFromZip(zipFileLoader.getFile(),
                 path.toString());
+    }
+
+    public IProject loadProject(final IPath path,
+            final Bundle bundle, String pathToZip) throws Exception {
+        assertInitialized();
+        assertFalse(_workspace.getRoot().getProject(path.toString()).exists());
+        return TestUtil.createProjectFromZip(bundle, path.toString(),
+                pathToZip);
     }
 
     public IFile attachFile(final IProject project,
@@ -517,7 +526,7 @@ public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
         }
 
         @Override
-        @SuppressWarnings("rawtypes")
+        @SuppressWarnings({ "rawtypes", "unchecked" })
         public Map getDanglingReferences()
         {
             return _ws.getDanglingReferences();
