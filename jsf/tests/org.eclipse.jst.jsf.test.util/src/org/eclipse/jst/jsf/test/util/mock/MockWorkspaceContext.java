@@ -177,13 +177,6 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
         return createProject(path, false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#attachProject(org
-     * .eclipse.jst.jsf.test.util.mock.MockProject, boolean)
-     */
     private void attachProject(final IProject project, final boolean replace)
     {
         checkExists(project.getFullPath(), replace);
@@ -196,7 +189,8 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
      * 
      * @see
      * org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext#loadProject(org.
-     * eclipse.core.runtime.IPath, java.util.zip.ZipFile, java.lang.String)
+     * eclipse.core.runtime.IPath, org.eclipse.jst.jsf.test.util.mock.
+     * IWorkspaceContext.ZipFileLoader)
      */
     public IProject loadProject(final IPath path,
             final ZipFileLoader zipFileLoader) throws Exception
@@ -289,8 +283,8 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
             if (resource == null)
             {
                 resource = new MockFile(newFileFullPath);
-                (resource).setWorkspace(_ws);
-                (resource).setProject(container.getProject());
+                resource.setWorkspace(_ws);
+                resource.setProject(container.getProject());
                 if (_zip != null)
                 {
                     final ZipEntry entry = _zip.getEntry(_pathIntoZip
@@ -319,11 +313,8 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
             MockResource resource = checkExists(newFileFullPath, true);
             if (resource == null)
             {
-                resource = new MockFolder(newFileFullPath, this);
-                (resource).setWorkspace(_ws);
-                (resource).setProject(container.getProject());
+            	resource = newFolder(container, newFileFullPath);
                 ensurePathToNewResource(container, path);
-                _ownedResources.put(newFileFullPath, resource);
             }
             return (MockFolder) resource;
         }
@@ -348,13 +339,14 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
             }
         }
 
-        protected void newFolder(final MockContainer container, final IPath curPath)
+        protected MockResource newFolder(final MockContainer container, final IPath curPath)
         {
             MockResource newContainer;
             newContainer = new MockFolder(curPath, this);
             newContainer.setWorkspace(_ws);
             newContainer.setProject(container.getProject());
             _ownedResources.put(curPath, newContainer);
+            return newContainer;
         }
 
         public void dispose() throws Exception
@@ -396,7 +388,11 @@ public class MockWorkspaceContext implements IWorkspaceContextWithEvents
                     name = name.substring(_pathIntoZip.length());
                     if (entry.isDirectory())
                     {
-                        newFolder(project, new Path(name));
+                    	if (name.endsWith("/"))
+                    	{
+                    		name = name.substring(0, name.length() - 1);
+                    	}
+                        createFolder(project, new Path(name));
                     } else
                     {
                         createFile(project, new Path(name));
