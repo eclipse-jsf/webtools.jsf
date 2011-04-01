@@ -137,11 +137,11 @@
             translations="$nl$/templates/templates.properties">
       </include>
    </extension>
-   <!--<extension
+   <extension
          point="org.eclipse.wst.xml.core.modelQueryExtensions">
       <modelQueryExtension
             class="org.eclipse.jst.jsf.facelet.ui.internal.contentassist.MyModelQueryExtension"
             contentType="org.eclipse.wst.html.core.htmlsource">
       </modelQueryExtension>
-   </extension>-->
+   </extension>
 </plugin>
