@@ -17,7 +17,10 @@
             uri="http://org.eclipse.jsf/mergetest1"/>     
       <standardMetaDataFile
             location="/testfiles/metadata/FileIncludeExternalModel.xml"
-            uri="http://org.eclipse.jsf/mergetest2"/>               
+            uri="http://org.eclipse.jsf/mergetest2"/>            
+      <standardMetaDataFile
+            location="/testfiles/metadata/FileIncludeExternalModel2.xml"
+            uri="http://org.eclipse.jsf/mergetest3"/>                  
       <standardMetaDataFile
             location="/testfiles/metadata/doesntexist.xml"
             uri=" http://org.eclipse.jsf/missingFile "/>

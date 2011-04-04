@@ -177,6 +177,33 @@ public class MergeTests extends AbstractBaseMetaDataTestCase {
 		assertNotNull(entity);
 		assertEquals(0, entity.getChildEntities().size());
 		assertEquals(2, entity.getTraits().size());
+		
+		//do it again with another model to ensure that entity group from external model is still intact
+		uri =  "http://org.eclipse.jsf/mergetest3";
+		startTime(uri);
+		model = query.findTagLibraryModel(uri);
+		endTime();
+		assertNotNull(model);
+		
+		dumpMDTree(model, 0);
+		
+		//check model traits
+		assertEquals(1, model.getTraits().size());
+		trait = query.findTrait(model, "A1");
+		assertNotNull(trait);
+		assertEquals("A1FromEG1", TraitValueHelper.getValueAsString(trait));
+		
+		//check model entities
+		assertEquals(1, model.getChildEntities().size());
+		entity = query.findTagEntity(model, "a");
+		assertNotNull(entity);
+		assertEquals(0, entity.getChildEntities().size());
+		assertEquals(2, entity.getTraits().size());
+		
+		model = query.getQueryHelper().getModel("http://org.eclipse.jsf/mergetest1");
+		assertNotNull(model);
+		assertEquals(2, model.getEntityGroups().size());
+		
 	}
 
 	public void testLoadJSFCore(){

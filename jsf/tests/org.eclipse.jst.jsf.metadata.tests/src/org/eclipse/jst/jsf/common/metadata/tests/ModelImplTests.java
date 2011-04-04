@@ -62,6 +62,9 @@ public class ModelImplTests extends AbstractBaseMetaDataTestCase {
 		//EntityGroups
 		assertNotNull(model.getEntityGroups());
 		assertEquals(2, model.getEntityGroups().size());
+		
+		//test containment
+		assertEquals(model, model.getEntityGroups().get(0).getModel());
 	}
 
 	public void testFindIncludeGroup() {
