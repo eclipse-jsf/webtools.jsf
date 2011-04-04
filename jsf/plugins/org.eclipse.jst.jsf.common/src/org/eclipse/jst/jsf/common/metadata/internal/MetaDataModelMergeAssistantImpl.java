@@ -83,8 +83,15 @@ public class MetaDataModelMergeAssistantImpl implements
 	public void addEntityGroup(final EntityGroup entityGroup) {
 		final Model model = (Model)getMergedModel().getRoot();
 		if (!isExistingEntityGroup(model, entityGroup)){
-			model.getEntityGroups().add(entityGroup);
+			model.getEntityGroups().add(copyEntityGroup(entityGroup));
 		}
+	}
+
+	private EntityGroup copyEntityGroup(final EntityGroup entityGroup) {
+		final Copier copier = new Copier();
+		final EntityGroup egc =(EntityGroup)copier.copy(entityGroup);
+		copier.copyReferences();
+		return egc;
 	}
 
 	/* (non-Javadoc)

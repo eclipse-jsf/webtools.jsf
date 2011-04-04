@@ -2,16 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelImpl.java,v 1.9 2011/03/16 21:14:13 gkessler Exp $
+ * $Id: ModelImpl.java,v 1.10 2011/04/04 22:22:38 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jst.jsf.common.metadata.EntityGroup;
 import org.eclipse.jst.jsf.common.metadata.MetadataPackage;
 import org.eclipse.jst.jsf.common.metadata.Model;
@@ -44,7 +47,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	public static final String copyright = "Copyright (c) 2007 Oracle Corporation"; //$NON-NLS-1$
 
 	/**
-	 * The cached value of the '{@link #getEntityGroups() <em>Entity Groups</em>}' reference list.
+	 * The cached value of the '{@link #getEntityGroups() <em>Entity Groups</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEntityGroups()
@@ -140,7 +143,7 @@ public class ModelImpl extends EntityImpl implements Model {
 	 */
 	public EList<EntityGroup> getEntityGroups() {
 		if (entityGroups == null) {
-			entityGroups = new EObjectResolvingEList<EntityGroup>(EntityGroup.class, this, MetadataPackage.MODEL__ENTITY_GROUPS);
+			entityGroups = new EObjectContainmentEList<EntityGroup>(EntityGroup.class, this, MetadataPackage.MODEL__ENTITY_GROUPS);
 		}
 		return entityGroups;
 	}
@@ -203,6 +206,20 @@ public class ModelImpl extends EntityImpl implements Model {
 		}
 		return ret;
 	}
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case MetadataPackage.MODEL__ENTITY_GROUPS:
+				return ((InternalEList<?>)getEntityGroups()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

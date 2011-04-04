@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetadataPackageImpl.java,v 1.8 2011/03/16 21:14:13 gkessler Exp $
+ * $Id: MetadataPackageImpl.java,v 1.9 2011/04/04 22:22:38 gkessler Exp $
  */
 package org.eclipse.jst.jsf.common.metadata.internal.impl;
 
@@ -454,7 +454,7 @@ public class MetadataPackageImpl extends EPackageImpl implements MetadataPackage
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getModel_EntityGroups(), this.getEntityGroup(), null, "entityGroups", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getModel_EntityGroups(), this.getEntityGroup(), null, "entityGroups", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		getModel_EntityGroups().getEKeys().add(this.getEntity_Id());
 		getModel_EntityGroups().getEKeys().add(this.getEntity_Type());
 		initEAttribute(getModel_SourceModelProvider(), this.getIMetaDataSourceModelProvider(), "sourceModelProvider", null, 0, 1, Model.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

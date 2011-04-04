@@ -93,7 +93,7 @@ public interface Model extends Entity {
 	void setCurrentModelContext(ModelKeyDescriptor value);
 
 	/**
-	 * Returns the value of the '<em><b>Entity Groups</b></em>' reference list.
+	 * Returns the value of the '<em><b>Entity Groups</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.jst.jsf.common.metadata.EntityGroup}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -101,9 +101,9 @@ public interface Model extends Entity {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Entity Groups</em>' reference list.
+	 * @return the value of the '<em>Entity Groups</em>' containment reference list.
 	 * @see org.eclipse.jst.jsf.common.metadata.MetadataPackage#getModel_EntityGroups()
-	 * @model keys="id type"
+	 * @model containment="true" keys="id type"
 	 *        extendedMetaData="kind='element' name='entityGroup'"
 	 * @generated
 	 */

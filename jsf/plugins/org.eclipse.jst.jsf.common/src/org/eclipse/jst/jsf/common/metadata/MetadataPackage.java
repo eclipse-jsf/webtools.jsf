@@ -198,7 +198,7 @@ public interface MetadataPackage extends EPackage {
 	int MODEL__INCLUDE_GROUPS = ENTITY__INCLUDE_GROUPS;
 
 	/**
-	 * The feature id for the '<em><b>Entity Groups</b></em>' reference list.
+	 * The feature id for the '<em><b>Entity Groups</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -520,10 +520,10 @@ public interface MetadataPackage extends EPackage {
 	EAttribute getModel_CurrentModelContext();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.jst.jsf.common.metadata.Model#getEntityGroups <em>Entity Groups</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.jst.jsf.common.metadata.Model#getEntityGroups <em>Entity Groups</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Entity Groups</em>'.
+	 * @return the meta object for the containment reference list '<em>Entity Groups</em>'.
 	 * @see org.eclipse.jst.jsf.common.metadata.Model#getEntityGroups()
 	 * @see #getModel()
 	 * @generated
@@ -759,7 +759,7 @@ public interface MetadataPackage extends EPackage {
 		EAttribute MODEL__CURRENT_MODEL_CONTEXT = eINSTANCE.getModel_CurrentModelContext();
 
 		/**
-		 * The meta object literal for the '<em><b>Entity Groups</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Entity Groups</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
