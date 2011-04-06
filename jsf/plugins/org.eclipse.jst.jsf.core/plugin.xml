@@ -491,7 +491,6 @@
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.wst.html.core.htmlsource"
-            default-charset="UTF-8"
             file-extensions="xhtml"
             id="jsf.facelet"
             name="%Facelet.name"
@@ -510,7 +509,6 @@
       </content-type>
       <content-type
             base-type="jsf.facelet"
-            default-charset="UTF-8"
             file-extensions="xhtml"
             id="jsf.facelet.composite"
             name="%FaceletComposite.name"
