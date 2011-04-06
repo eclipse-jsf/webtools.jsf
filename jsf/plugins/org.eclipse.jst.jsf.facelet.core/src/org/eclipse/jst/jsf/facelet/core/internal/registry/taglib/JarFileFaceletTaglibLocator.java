@@ -24,6 +24,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.ecore.resource.Resource.IOWrappedException;
+import org.eclipse.emf.ecore.xmi.FeatureNotFoundException;
 import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.AlwaysMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.IMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.VisitorMatcher;
@@ -241,11 +243,26 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                             tagLibsFound.add(new LibJarEntry(tagLib, cpJarFile
                                     .getPath(), name));
                         }
-                    } catch (final Exception e)
+                    } catch (final Exception ex)
                     {
-                        FaceletCorePlugin.log(
-                                "Error initializing facelet registry entry", //$NON-NLS-1$
-                                e);
+                    	//Bug 325086 - Error initializing facelet registry entry
+                    	StringBuffer sb = new StringBuffer("Error initializing facelet registry entry"); //$NON-NLS-1$
+                    	if (jarEntry != null &&
+                    			ex instanceof IOWrappedException &&
+                    			ex.getCause() instanceof FeatureNotFoundException)
+                    	{
+                        	FeatureNotFoundException fnfex = (FeatureNotFoundException)ex.getCause();
+                    		sb.append(" ("); //$NON-NLS-1$
+                        	sb.append(jarFile.getName());
+                        	sb.append("!"); //$NON-NLS-1$
+                        	sb.append(jarEntry.getName());
+                        	sb.append(" is invalid at line "); //$NON-NLS-1$
+                           	sb.append(fnfex.getLine());
+                           	sb.append(", column "); //$NON-NLS-1$
+                           	sb.append(fnfex.getColumn());
+                        	sb.append(")"); //$NON-NLS-1$
+                    	}
+                        FaceletCorePlugin.log(sb.toString(), ex);
                     } finally
                     {
                         if (is != null)
