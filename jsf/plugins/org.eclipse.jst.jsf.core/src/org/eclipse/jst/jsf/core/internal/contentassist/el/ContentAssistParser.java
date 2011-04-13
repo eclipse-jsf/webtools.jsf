@@ -35,6 +35,7 @@ import org.eclipse.jst.jsp.core.internal.java.jspel.JSPELParserVisitor;
 import org.eclipse.jst.jsp.core.internal.java.jspel.ParseException;
 import org.eclipse.jst.jsp.core.internal.java.jspel.SimpleNode;
 import org.eclipse.jst.jsp.core.internal.java.jspel.Token;
+import org.eclipse.jst.jsp.core.internal.java.jspel.TokenMgrError;
 
 /**
  * Consumes an EL expression and converts into a completion prefix
@@ -103,6 +104,11 @@ public final class ContentAssistParser
             return visitor;
         }
         catch (ParseException pe)
+        {
+            // TODO: handle parser by using current and expected tokens
+        	return null;
+        }
+        catch (TokenMgrError tme)
         {
             // TODO: handle parser by using current and expected tokens
         	return null;
