@@ -123,9 +123,12 @@ public final class JSFFacetInstallDelegate implements IDelegate {
     			// Create config file
     			createConfigFile(project, fv, config, monitor, jsfUtil);
 
-    			// Update web model
-    			createServletAndModifyWebXML(project, config, monitor, jsfUtil);
-                updateWebXmlByJsfVendor(libConfig, project, monitor);
+    			final Boolean configureServlet = (Boolean) config.getProperty(IJSFFacetInstallDataModelProperties.CONFIGURE_SERVLET);
+    			if (configureServlet == null || configureServlet.booleanValue()) {
+	    			// Update web model
+	    			createServletAndModifyWebXML(project, config, monitor, jsfUtil);
+	                updateWebXmlByJsfVendor(libConfig, project, monitor);
+    			}
             }
             
 			if (monitor != null) {

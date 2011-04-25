@@ -56,5 +56,9 @@ public interface IJSFFacetInstallDataModelProperties extends
      * TODO:
      */
     public static final String COMPONENT_LIBRARIES = "IJSFFacetInstallDataModelProperties.COMPONENT_LIBRARIES"; //$NON-NLS-1$	 
-    
+
+    /**
+     * If this property is true, configure FacesServlet in web.xml. If false, no configuration should be done. 
+     */
+    public static final String CONFIGURE_SERVLET = "IJSFFacetInstallDataModelProperties.CONFIGURE_SERVLET"; //$NON-NLS-1$
 }

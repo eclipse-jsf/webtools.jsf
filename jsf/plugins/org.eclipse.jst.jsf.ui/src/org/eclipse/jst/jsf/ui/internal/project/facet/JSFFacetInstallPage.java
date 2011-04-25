@@ -60,6 +60,8 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
     private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
     
 	// UI
+    private Button btnConfigureServlet;
+    private Composite configureServletComposite;
 	private Label lblJSFConfig;
 	private Text txtJSFConfig;
 	private Label lblJSFServletName;
@@ -80,6 +82,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	private static final String SETTINGS_SERVLET_CLASSNAME = "servletClassname"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_MAPPINGS = "urlMappings"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_PATTERN = "pattern"; //$NON-NLS-1$
+	private static final String SETTINGS_CONFIGURE_SERVLET = "configureServlet"; //$NON-NLS-1$
 	
 	// private String projectName = null;
 	private Composite composite = null;
@@ -137,41 +140,63 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 
         if (jsfFacetConfigurationEnabled)
         {
-    		lblJSFConfig = new Label(composite, SWT.NONE);
+        	btnConfigureServlet = new Button(composite, SWT.CHECK);
+        	btnConfigureServlet.setText(Messages.JSFFacetInstallPage_ConfigureServletLabel);
+        	GridData gd0 = new GridData(GridData.FILL_HORIZONTAL);
+        	gd0.horizontalSpan = 3;
+        	btnConfigureServlet.setLayoutData(gd0);
+        	btnConfigureServlet.addSelectionListener(new SelectionAdapter() {
+        		public void widgetSelected(SelectionEvent se) {
+        			setCompositeEnabled(configureServletComposite, btnConfigureServlet.getSelection());
+        		}
+        	});
+
+        	configureServletComposite = new Composite(composite, SWT.NONE);
+    		final GridLayout csLayout = new GridLayout(3, false);
+    		csLayout.marginTop = 0;
+    		csLayout.marginBottom = 0;
+    		csLayout.marginRight = 0;
+    		csLayout.marginLeft = 5;
+    		configureServletComposite.setLayout(csLayout);
+        	GridData csGridData = new GridData(GridData.FILL_HORIZONTAL);
+        	csGridData.horizontalSpan = 3;
+        	configureServletComposite.setLayoutData(csGridData);
+
+    		lblJSFConfig = new Label(configureServletComposite, SWT.NONE);
     		lblJSFConfig.setText(Messages.JSFFacetInstallPage_JSFConfigLabel);
     		lblJSFConfig.setLayoutData(new GridData(GridData.BEGINNING));
     
-    		txtJSFConfig = new Text(composite, SWT.BORDER);
+    		txtJSFConfig = new Text(configureServletComposite, SWT.BORDER);
     		GridData gd1 = new GridData(GridData.FILL_HORIZONTAL);
     		gd1.horizontalSpan = 2;
     		txtJSFConfig.setLayoutData(gd1);
     
-    		lblJSFServletName = new Label(composite, SWT.NONE);
+    		lblJSFServletName = new Label(configureServletComposite, SWT.NONE);
     		lblJSFServletName
     				.setText(Messages.JSFFacetInstallPage_JSFServletNameLabel);
     		lblJSFServletName.setLayoutData(new GridData(GridData.BEGINNING));
     
-    		txtJSFServletName = new Text(composite, SWT.BORDER);
+    		txtJSFServletName = new Text(configureServletComposite, SWT.BORDER);
     		GridData gd2 = new GridData(GridData.FILL_HORIZONTAL);
     		gd2.horizontalSpan = 2;
     		txtJSFServletName.setLayoutData(gd2);
     
-    		lblJSFServletClassName = new Label(composite, SWT.NONE);
+    		lblJSFServletClassName = new Label(configureServletComposite, SWT.NONE);
     		lblJSFServletClassName
     				.setText(Messages.JSFFacetInstallPage_JSFServletClassNameLabel);
     		lblJSFServletClassName.setLayoutData(new GridData(GridData.BEGINNING));
     
-    		txtJSFServletClassName = new Text(composite, SWT.BORDER);
+    		txtJSFServletClassName = new Text(configureServletComposite, SWT.BORDER);
     		GridData gd2c = new GridData(GridData.FILL_HORIZONTAL);
     		gd2c.horizontalSpan = 2;
     		txtJSFServletClassName.setLayoutData(gd2c);
     		
-    		lblJSFServletURLPatterns = new Label(composite, SWT.NULL);
+    		lblJSFServletURLPatterns = new Label(configureServletComposite, SWT.NULL);
     		lblJSFServletURLPatterns
     				.setText(Messages.JSFFacetInstallPage_JSFURLMappingLabel);
     		lblJSFServletURLPatterns.setLayoutData(new GridData(GridData.BEGINNING
     				| GridData.VERTICAL_ALIGN_BEGINNING));
-    		lstJSFServletURLPatterns = new List(composite, SWT.BORDER);
+    		lstJSFServletURLPatterns = new List(configureServletComposite, SWT.BORDER);
     		GridData gd3 = new GridData(GridData.FILL_HORIZONTAL);
     		gd3.heightHint = convertHeightInCharsToPixels(5);
     		lstJSFServletURLPatterns.setLayoutData(gd3);
@@ -182,7 +207,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
     			}
     		});
     
-    		Composite btnComposite = new Composite(composite, SWT.NONE);
+    		Composite btnComposite = new Composite(configureServletComposite, SWT.NONE);
     		GridLayout gl = new GridLayout(1, false);
     		// gl.marginBottom = 0;
     		// gl.marginTop = 0;
@@ -233,6 +258,15 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		return composite;
 	}
 
+	private void setCompositeEnabled(Composite composite, boolean enabled) {
+		for (Control child: composite.getChildren()) {
+			child.setEnabled(enabled);
+			if (child instanceof Composite) {
+				setCompositeEnabled((Composite)child, enabled);
+			}
+		}
+	}
+
 	private void initializeValues() {
 		IDialogSettings root = dialogSettings.getSection(SETTINGS_ROOT);
 
@@ -266,6 +300,17 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		txtJSFServletClassName.setText(servletClassname);
 
 		loadURLMappingPatterns(root);
+
+		String configureServlet = Boolean.TRUE.toString();
+		if (root != null) {
+			configureServlet = root.get(SETTINGS_CONFIGURE_SERVLET);
+			if (configureServlet == null || configureServlet.equals("")) { //$NON-NLS-1$
+				configureServlet = ((Boolean) model.getDefaultProperty(CONFIGURE_SERVLET)).toString();
+			}
+		}
+		boolean enabled = Boolean.parseBoolean(configureServlet);
+		btnConfigureServlet.setSelection(enabled);
+		setCompositeEnabled(configureServletComposite, enabled);
 	}
 
 	private void initJSFCfgCtrlValues(IDialogSettings root) {
@@ -288,6 +333,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		DialogSettings root = new DialogSettings(SETTINGS_ROOT);
 		dialogSettings.addSection(root);
 
+		root.put(SETTINGS_CONFIGURE_SERVLET, getConfigureServlet());
 		root.put(SETTINGS_CONFIG, getJSFConfig());
 		root.put(SETTINGS_SERVLET, getJSFServletName());
 		root.put(SETTINGS_SERVLET_CLASSNAME, getJSFServletClassname());
@@ -310,6 +356,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	
 	private String[] getJSFPatterns() {
 		return lstJSFServletURLPatterns.getItems();
+	}
+
+	private boolean getConfigureServlet() {
+		return btnConfigureServlet.getSelection();
 	}
 
 	/*
@@ -340,6 +390,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	}
 
 	private void addModificationListeners() {
+		 synchHelper.synchCheckbox(btnConfigureServlet, CONFIGURE_SERVLET, null); 
 		 synchHelper.synchText(txtJSFConfig, CONFIG_PATH, null);
 		 synchHelper.synchText(txtJSFServletName, SERVLET_NAME, null);
 		 synchHelper.synchText(txtJSFServletClassName, SERVLET_CLASSNAME, null);

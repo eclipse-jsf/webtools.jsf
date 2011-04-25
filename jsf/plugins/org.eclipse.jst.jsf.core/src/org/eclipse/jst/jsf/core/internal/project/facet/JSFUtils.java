@@ -30,7 +30,10 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jst.j2ee.model.IModelProvider;
+import org.eclipse.jst.j2ee.webapplication.WebapplicationFactory;
+import org.eclipse.jst.javaee.core.JavaeeFactory;
 import org.eclipse.jst.javaee.web.WebAppVersionType;
+import org.eclipse.jst.javaee.web.WebFactory;
 import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
@@ -87,7 +90,14 @@ public abstract class JSFUtils {
 	public static final String PP_JSF_IMPLEMENTATION_TYPE = "jsf.implementation.type"; //$NON-NLS-1$
 
 	private static final String DEFAULT_DEFAULT_MAPPING_SUFFIX = "jsp"; //$NON-NLS-1$
-	
+
+	/**
+	 * In cases where there is no servlet mapping defined (where it can be implicit and provided
+	 * by the container), this system property can be used to provide the "implicit" servlet
+	 * mapping.
+	 */
+	private static final String SYS_PROP_SERVLET_MAPPING = "org.eclipse.jst.jsf.servletMapping"; //$NON-NLS-1$
+
 	private final JSFVersion  _version;
     private final IModelProvider _modelProvider;
 	
@@ -276,9 +286,13 @@ public abstract class JSFUtils {
      * @return true if the resource is deemed to be a JSF page.
      */
     protected boolean isJSFPage(IResource resource) {
-        // currently always return true.
+        // currently always return true if resource != null.
         // need to find quick way of determining whether this is a JSF JSP Page
-        return true;
+    	boolean isJSFPage = true;
+    	if (resource == null) {
+    		isJSFPage = false;
+    	}
+        return isJSFPage;
     }
     
     /**
@@ -288,13 +302,15 @@ public abstract class JSFUtils {
      */
     protected String getDefaultSuffix(Object webApp) {
     	String contextParam = null;
-    	if(isJavaEE(webApp)) {
-    		contextParam = JEEUtils.getContextParam((org.eclipse.jst.javaee.web.WebApp) webApp, JSF_DEFAULT_SUFFIX_CONTEXT_PARAM);
+    	if (webApp != null) {
+	    	if(isJavaEE(webApp)) {
+	    		contextParam = JEEUtils.getContextParam((org.eclipse.jst.javaee.web.WebApp) webApp, JSF_DEFAULT_SUFFIX_CONTEXT_PARAM);
+	    	}
+	    	else {
+	    		contextParam = J2EEUtils.getContextParam((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, JSF_DEFAULT_SUFFIX_CONTEXT_PARAM);
+	    	}
     	}
-    	else {
-    		contextParam = J2EEUtils.getContextParam((org.eclipse.jst.j2ee.webapplication.WebApp) webApp, JSF_DEFAULT_SUFFIX_CONTEXT_PARAM);
-    	}
-    	if(contextParam == null) {
+    	if (contextParam == null) {
     		return getDefaultDefaultSuffix();
     	}
    		return normalizeSuffix(contextParam);
@@ -569,9 +585,10 @@ public abstract class JSFUtils {
         }
 
         Object servlet = findJSFServlet(webAppObj);
+        List implicitServletMappings = new ArrayList();
         if (servlet == null)
-        {// if no faces servlet, do nothing
-            return null;
+        {
+        	servlet = createImplicitServletAndMapping(webAppObj, implicitServletMappings);
         }
 
         String defaultSuffix = getDefaultSuffix(webAppObj);
@@ -590,7 +607,13 @@ public abstract class JSFUtils {
             final String servletName = ((org.eclipse.jst.javaee.web.Servlet) servlet).getServletName();
 
             String foundFileExtension = null;
-            for (final org.eclipse.jst.javaee.web.ServletMapping map : webApp.getServletMappings())
+            List mappings;
+            if (webApp.getServletMappings().size() > 0) {
+            	mappings = webApp.getServletMappings();
+            } else {
+            	mappings = implicitServletMappings;
+            }
+            for (final org.eclipse.jst.javaee.web.ServletMapping map : (List<org.eclipse.jst.javaee.web.ServletMapping>) mappings)
             {
                 if (map != null &&
                         map.getServletName() != null &&
@@ -624,13 +647,19 @@ public abstract class JSFUtils {
 
     	}
     	else {
-            Iterator mappings = ((org.eclipse.jst.j2ee.webapplication.Servlet)servlet).getMappings().iterator();
+            List mappings;
+            if (((org.eclipse.jst.j2ee.webapplication.Servlet)servlet).getMappings().size() > 0) {
+            	mappings = ((org.eclipse.jst.j2ee.webapplication.Servlet)servlet).getMappings();
+            } else {
+            	mappings = implicitServletMappings;
+            }
+            Iterator itMappings = mappings.iterator();
             org.eclipse.jst.j2ee.webapplication.ServletMapping map = null;
             String foundFileExtension = null;
             String foundPrefixMapping = null;
-            while (mappings.hasNext())
+            while (itMappings.hasNext())
             {
-                map = (org.eclipse.jst.j2ee.webapplication.ServletMapping)mappings.next();
+                map = (org.eclipse.jst.j2ee.webapplication.ServletMapping)itMappings.next();
 
                 foundFileExtension = getFileExtensionFromMap(webAppObj, map);
                 if (foundFileExtension != null && canUseExtensionMapping) 
@@ -659,4 +688,39 @@ public abstract class JSFUtils {
     	}
     	return null;
     }
+
+    /**
+     * This creates a servlet and servlet mapping suitable for
+     * {@link #getFileUrlPath(Object, IResource, IPath)} to be able to proceed, but the returned
+     * objects are not fully-initialized for any and all purposes. USE WITH CAUTION.
+     *   
+     * @param webApp Web App object.
+     * @param mappings List to which the that the created servlet mapping will be added.
+     * @return Servlet instance (and a servlet mapping added to mappings).
+     */
+    private Object createImplicitServletAndMapping(Object webApp, List mappings) {
+    	Object servlet;
+    	String sysPropServletMapping = System.getProperty(SYS_PROP_SERVLET_MAPPING);
+    	if (sysPropServletMapping == null) {
+    		sysPropServletMapping = JSF_DEFAULT_URL_MAPPING;
+    	}
+    	if (isJavaEE(webApp)) {
+    		servlet = WebFactory.eINSTANCE.createServlet();
+        	((org.eclipse.jst.javaee.web.Servlet)servlet).setServletName(JSF_DEFAULT_SERVLET_NAME);
+        	org.eclipse.jst.javaee.web.ServletMapping mapping = WebFactory.eINSTANCE.createServletMapping();
+        	mapping.setServletName(JSF_DEFAULT_SERVLET_NAME);
+        	org.eclipse.jst.javaee.core.UrlPatternType pattern = JavaeeFactory.eINSTANCE.createUrlPatternType();
+        	pattern.setValue(sysPropServletMapping);
+        	mapping.getUrlPatterns().add(pattern);
+        	mappings.add(mapping);
+    	} else {
+    		servlet = WebapplicationFactory.eINSTANCE.createServlet();
+    		((org.eclipse.jst.j2ee.webapplication.Servlet)servlet).setServletName(JSF_DEFAULT_SERVLET_NAME);
+    		org.eclipse.jst.j2ee.webapplication.ServletMapping mapping = WebapplicationFactory.eINSTANCE.createServletMapping();
+    		mapping.setUrlPattern(sysPropServletMapping);
+    		mappings.add(mapping);
+    	}
+    	return servlet;
+    }
+
 }

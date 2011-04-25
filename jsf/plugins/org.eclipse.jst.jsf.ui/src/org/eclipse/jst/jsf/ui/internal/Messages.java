@@ -57,6 +57,10 @@ public class Messages extends NLS {
      * see messages.properties
      */
 	public static String JSFFacetInstallPage_DeployJarsLabel;
+	/**
+	 * see messages.properties
+	 */
+	public static String JSFFacetInstallPage_ConfigureServletLabel;
     /**
      * see messages.properties
      */

@@ -108,7 +108,7 @@ public class JSFFacetInstallDataModelProvider extends
     		names.add(SERVLET_URL_PATTERNS);
     		names.add(COMPONENT_LIBRARIES);
     		names.add(WEBCONTENT_DIR);
-    		
+    		names.add(CONFIGURE_SERVLET);
 		}
 
 		names.add(LIBRARY_PROVIDER_DELEGATE);
@@ -129,6 +129,8 @@ public class JSFFacetInstallDataModelProvider extends
 			return IJSFCoreConstants.JSF_CORE_FACET_ID;
 		} else if (propertyName.equals(WEBCONTENT_DIR)){
 			return "WebContent";  //not sure I need this //$NON-NLS-1$
+		} else if (propertyName.equals(CONFIGURE_SERVLET)) {
+			return Boolean.TRUE;
         } else if (propertyName.equals(LIBRARY_PROVIDER_DELEGATE)) {
             return this.libraryInstallDelegate;
 		} else if (propertyName.equals(COMPONENT_LIBRARIES)) {
