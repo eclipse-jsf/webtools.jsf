@@ -2,7 +2,6 @@ package org.eclipse.jst.jsf.test.util.junit4;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.List;
 
 import junit.framework.Assert;
 
@@ -20,6 +19,14 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.osgi.framework.Bundle;
 
+/**
+ * This class is not operable
+ * 
+ * Bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=343669
+ * disables this.  Need to find way of fixing this tracked by 
+ * https://bugs.eclipse.org/bugs/show_bug.cgi?id=343672
+ *
+ */
 public class WorkspaceRunner extends BlockJUnit4ClassRunner
 {
     @Rule
@@ -34,14 +41,15 @@ public class WorkspaceRunner extends BlockJUnit4ClassRunner
     {
         super(klass);
     }
-
-    @Override
-    protected List<MethodRule> rules(final Object test)
-    {
-        final List<MethodRule> rules = super.rules(test);
-        rules.add(new WorkspaceContextInjector());
-        return rules;
-    }
+//
+//  Removed: https://bugs.eclipse.org/bugs/show_bug.cgi?id=343669
+//	@Override  
+//    protected List<MethodRule> rules(final Object test)
+//    {
+//        final List<MethodRule> rules = super.rules(test);
+//        rules.add(new WorkspaceContextInjector());
+//        return rules;
+//    }
 
     public static class WorkspaceContextInjector implements MethodRule
     {
