@@ -362,9 +362,9 @@ public abstract class TestJSFUtils extends TestCase
     {
         final org.eclipse.jst.javaee.web.WebApp javaEEWebApp = WebFactory.eINSTANCE
                 .createWebApp();
-        assertEquals(WebAppVersionType._25_LITERAL, javaEEWebApp.getVersion());
+        assertEquals(WebAppVersionType._30_LITERAL, javaEEWebApp.getVersion());
         assertTrue(_jsfUtils.isJavaEE(javaEEWebApp));
-        javaEEWebApp.setVersion(WebAppVersionType._30_LITERAL);
+        javaEEWebApp.setVersion(WebAppVersionType._25_LITERAL);
         assertTrue(_jsfUtils.isJavaEE(javaEEWebApp));
 
         final org.eclipse.jst.j2ee.webapplication.WebApp J2EEWebApp = org.eclipse.jst.j2ee.webapplication.WebapplicationFactory.eINSTANCE
@@ -470,7 +470,7 @@ public abstract class TestJSFUtils extends TestCase
 //    @Test
     public void testIsJSFPage()
     {
-        assertTrue(_jsfUtils.isJSFPage_testable(null));
+        assertFalse(_jsfUtils.isJSFPage_testable(null));
     }
 
 //    @Test
