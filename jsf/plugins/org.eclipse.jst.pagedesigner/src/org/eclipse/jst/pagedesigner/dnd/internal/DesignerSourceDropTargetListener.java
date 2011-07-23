@@ -11,16 +11,20 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.dnd.internal;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.dnd.TemplateTransfer;
 import org.eclipse.jst.pagedesigner.commands.PaletteDropInsertCommand;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
+import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.ui.part.ResourceTransfer;
 import org.eclipse.ui.texteditor.ITextEditorDropTargetListener;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.sse.ui.internal.ExtendedEditorDropTargetAdapter;
@@ -51,7 +55,7 @@ public class DesignerSourceDropTargetListener extends
 	 */
 	public Transfer[] getTransfers() {
 		return new Transfer[] { TemplateTransfer.getInstance(),
-				TextTransfer.getInstance() };
+				TextTransfer.getInstance(), ResourceTransfer.getInstance() };
 	}
 
 	/*
@@ -73,14 +77,18 @@ public class DesignerSourceDropTargetListener extends
 		if (_textEditor.getTextViewer() != null) {
 			text = _textEditor.getTextViewer().getTextWidget();
 			if (TemplateTransfer.getInstance().isSupportedType(
-					event.currentDataType)) {
+					event.currentDataType) ||
+					ResourceTransfer.getInstance().isSupportedType(
+							event.currentDataType)) {
 				if (_textEditor.getTextViewer() != null) {
 						Point p = new Point(event.x, event.y);
 						SourceViewerDragDropHelper.getInstance().updateCaret(
 								_textEditor, p);
 						_location = text.getCaretOffset();
 						if (TemplateTransfer.getInstance().isSupportedType(
-								event.currentDataType)) {
+								event.currentDataType) ||
+								ResourceTransfer.getInstance().isSupportedType(
+										event.currentDataType)) {
 							_location = SourceViewerDragDropHelper.getInstance()
 									.getValidLocation(_textEditor, _location);
 						}
@@ -137,7 +145,27 @@ public class DesignerSourceDropTargetListener extends
 		    
 			}
 			return command;
-		}
+		} else if (ResourceTransfer.getInstance().isSupportedType(event.currentDataType)) {
+			Object data = event.data;
+			PaletteDropInsertCommand command = null;
+			if (data instanceof IResource[]) {
+				IResource[] resources = (IResource[]) data;
+				if (resources.length > 0 && (resources[0] instanceof IFile)) {
+					IFile file = (IFile) resources[0];
+					ITagDropSourceData dropSource = (ITagDropSourceData) file
+							.getAdapter(ITagDropSourceData.class);
+					if (dropSource != null) {
+						command = new PaletteDropInsertCommand(
+								PageDesignerResources
+										.getInstance()
+										.getString(
+												"DesignerSourceDropTargetListener.InserCommandLabel"), //$NON-NLS-1$
+								_textEditor, dropSource, _location);
+					}
+				}
+			}
+			return command;
+        }
 		return null;
 	}
 
