@@ -34,10 +34,6 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMAttributeDeclaration;
 public class CMNodeNamedMapAdapter implements
         Map<String, ITagAttributeHandler>
 {
-    /**
-     * serializable id
-     */
-    private static final long                       serialVersionUID = -4188412823197830484L;
     private transient final TLDElementDeclaration   _tldElement;
     private transient final IAttributeAdvisor       _advisor;
     private transient final AtomicBoolean           _isInitialized = new AtomicBoolean(false);

@@ -326,10 +326,5 @@ public abstract class DTUIViewRoot extends ComponentInfo
              */
             PROJECT_CLEANED
         }
-
-        /**
-         * 
-         */
-        private static final long serialVersionUID = 6765346004772568514L;
     }
 }
