@@ -16,12 +16,18 @@ package org.eclipse.jst.jsf.core.internal.project.facet;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jst.common.project.facet.core.libprov.LibraryInstallDelegate;
 import org.eclipse.jst.common.project.facet.core.libprov.LibraryProviderOperationConfig;
 import org.eclipse.jst.common.project.facet.core.libprov.user.UserLibraryProviderInstallOperationConfig;
@@ -292,13 +298,21 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 	/**
 	 * @param project
 	 * @param jsfConfigPath
+	 * @param jsfUtils
 	 * @return absolute IPath to jsfConfig
 	 */
-	private IPath resolveConfigPath(final IProject project, final String jsfConfigPath) {
-		return ComponentCore.createComponent(project).getRootFolder()
-				.getUnderlyingFolder().getRawLocation().append(
-						new Path(jsfConfigPath));
-
+	private IPath resolveConfigPath(
+			final IProject project, final String jsfConfigPath, final JSFUtils jsfUtils) {
+		IPath path = null;
+		final IPath webXMLPath = getWebXMLPathFromModel(jsfUtils);
+		if (webXMLPath != null) {
+			path = webXMLPath.removeLastSegments(2).append(jsfConfigPath);
+		}
+		if (path == null) {
+			path = ComponentCore.createComponent(project).getRootFolder()
+				.getUnderlyingFolder().getRawLocation().append(new Path(jsfConfigPath));
+		}
+		return path;
 	}
 
 	/**
@@ -313,7 +327,11 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 			final IProgressMonitor monitor, final JSFUtils jsfUtil) {
 
 
-		final IPath configPath = resolveConfigPath(project, config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH));
+		final IPath configPath =
+				resolveConfigPath(
+						project,
+						config.getStringProperty(IJSFFacetInstallDataModelProperties.CONFIG_PATH),
+						jsfUtil);
 		try {
 			// do not overwrite if the file exists
 			if (!configPath.toFile().exists()) {
@@ -350,7 +368,7 @@ public final class JSFFacetInstallDelegate implements IDelegate {
 	        if (jsfUtil.isJavaEE(provider.getModelObject()))
 	        {
 	            provider.modify(new UpdateWebXMLForJavaEE(project, config, jsfUtil),
-	                    doesDDFileExist(project, webXMLPath) ? webXMLPath
+	                    doesDDFileExist(jsfUtil) ? webXMLPath
 	                            : IModelProvider.FORCESAVE);
 	        } else
 	        {// must be 2.3 or 2.4
@@ -378,8 +396,42 @@ public final class JSFFacetInstallDelegate implements IDelegate {
     	return shouldModify;
     }
 
-	private boolean doesDDFileExist(final IProject project, final IPath webXMLPath) {
-		return project.getProjectRelativePath().append(webXMLPath).toFile().exists();		
+	private boolean doesDDFileExist(final JSFUtils jsfUtils) {
+		boolean exists = false;
+		IPath path = getWebXMLPathFromModel(jsfUtils);
+		if (path != null) {
+			exists = path.toFile().exists();
+		}
+		return exists;		
+	}
+
+	private IPath getWebXMLPathFromModel(final JSFUtils jsfUtils) {
+		IPath path = null;
+		if (jsfUtils != null) {
+			final IModelProvider provider = jsfUtils.getModelProvider();
+			if (provider != null) {
+				final Object modelObject = provider.getModelObject();
+				if (modelObject instanceof EObject) {
+					final Resource resource = ((EObject)modelObject).eResource();
+					if (resource != null) {
+						final URI uri = resource.getURI();
+						if (uri != null && uri.isPlatformResource()) {
+							final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+							if (workspace != null) {
+								final IWorkspaceRoot root = workspace.getRoot();
+								if (root != null) {
+									final IResource iResource = root.findMember(new Path(uri.toPlatformString(true)));
+									if (iResource != null) {
+										path = iResource.getLocation();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return path;
 	}
 
 	private class UpdateWebXMLForJavaEE implements Runnable {
