@@ -83,6 +83,11 @@ public class ELExpressionValidator
             // some syntatical issue
             if (expr.getLastToken().endColumn < _elText.trim().length()-1)
             {
+            	if (ELValidationUtil.isProjectEL22(_context) &&
+            			_elText.trim().charAt(expr.getLastToken().endColumn) == '(')
+            	{
+            		return expr;
+            	}
                 final int offset = _context.getDocumentPosition() + expr.getLastToken().endColumn;
                 final int length = _elText.trim().length() - expr.getLastToken().endColumn;
                 final Diagnostic diagnostic =

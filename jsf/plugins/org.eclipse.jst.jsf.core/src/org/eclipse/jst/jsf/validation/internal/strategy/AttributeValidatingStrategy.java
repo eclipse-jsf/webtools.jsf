@@ -32,6 +32,7 @@ import org.eclipse.jst.jsf.common.dom.AttrDOMAdapter;
 import org.eclipse.jst.jsf.common.dom.AttributeIdentifier;
 import org.eclipse.jst.jsf.common.dom.DOMAdapter;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
+import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparator;
 import org.eclipse.jst.jsf.common.internal.types.TypeComparatorDiagnosticFactory;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
@@ -65,6 +66,7 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage;
 import org.eclipse.jst.jsf.validation.internal.AbstractXMLViewValidationStrategy;
 import org.eclipse.jst.jsf.validation.internal.JSFValidationContext;
 import org.eclipse.jst.jsf.validation.internal.el.ELExpressionValidator;
+import org.eclipse.jst.jsf.validation.internal.el.ELValidationUtil;
 import org.eclipse.jst.jsp.core.internal.regions.DOMJSPRegionContexts;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegion;
 import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionCollection;
@@ -407,6 +409,9 @@ AbstractXMLViewValidationStrategy
                         expectedType = maybeAddAlternativeTypes(
                                 expectedType, exprType, elementAdapter,
                                 attrAdapter);
+                        if (ELValidationUtil.isProjectEL22(_validationContext.getFile())) {
+                        	expectedType = addEL22Alternatives(expectedType);
+                        }
                         status = _typeComparator.calculateTypeCompatibility(
                                 expectedType, exprType);
                         if (status.getSeverity() != Diagnostic.OK)
@@ -425,6 +430,36 @@ AbstractXMLViewValidationStrategy
                 }
             }
         }
+    }
+
+    private CompositeType addEL22Alternatives(final CompositeType expectedType) {
+    	CompositeType type = expectedType;
+    	if (expectedType != null) {
+    		final int assignmentTypeMask = expectedType.getAssignmentTypeMask();
+    		if ((assignmentTypeMask & IAssignable.ASSIGNMENT_TYPE_RHS) != 0 ||
+    				assignmentTypeMask == IAssignable.ASSIGNMENT_TYPE_NONE) {
+        		int assignmentType = IAssignable.ASSIGNMENT_TYPE_NONE;
+        		if ((assignmentTypeMask & IAssignable.ASSIGNMENT_TYPE_RHS) != 0) {
+        			assignmentType = IAssignable.ASSIGNMENT_TYPE_RHS;
+        		}
+        		final List<String> signatures = new ArrayList<String>();
+        		for (final String signature: expectedType.getSignatures()) {
+        			signatures.add(signature);
+            		final List<String> methodSignatures = new ArrayList<String>();
+            		for (int i = 0; i < 20; i++) {
+            			final String methodSignature = Signature.createMethodSignature(
+            					methodSignatures.toArray(new String[i]),
+            					Signature.getElementType(signature)); 
+            			signatures.add(methodSignature);
+            			methodSignatures.add("Ljava.lang.String;"); //$NON-NLS-1$
+            		}
+        		}
+        		type = new CompositeType(
+        				signatures.toArray(new String[signatures.size()]),
+        				assignmentType);
+    		}
+    	}
+    	return type;
     }
 
     private boolean disableAlternativeTypes()
