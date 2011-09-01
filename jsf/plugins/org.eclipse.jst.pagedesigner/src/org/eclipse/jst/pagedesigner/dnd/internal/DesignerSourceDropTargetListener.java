@@ -20,6 +20,7 @@ import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.editors.palette.IDropSourceData;
 import org.eclipse.jst.pagedesigner.editors.palette.ITagDropSourceData;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
@@ -116,10 +117,19 @@ public class DesignerSourceDropTargetListener extends
 		}
 		text.setCaretOffset(_location);
 		Command command = getCommand(event);
-		if (command == null) {
-			return;
+		if (command != null) {
+			command.execute();
 		}
-		command.execute();
+
+		// For a resource transfer, we don't want the source drag listener
+		// to do cleanup and actually remove the source file. See the
+		// Javadoc note in the Navigator view's CommonDropAdapterAssistant
+		// handleDrop() method.
+		if (event != null) {
+			if (event.detail != DND.DROP_NONE) {
+				event.detail = DND.DROP_COPY;
+			}
+		}
 	}
 
 	private Command getCommand(DropTargetEvent event) {
