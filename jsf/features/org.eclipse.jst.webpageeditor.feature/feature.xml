@@ -2,11 +2,9 @@
 <feature
       id="org.eclipse.jst.webpageeditor.feature"
       label="%featureName"
-      version="2.3.4.qualifier"
+      version="2.3.5.qualifier"
       provider-name="%providerName"
-      image="eclipse_update_120.jpg"
-      license-feature="org.eclipse.license"
-      license-feature-version="1.0.0.qualifier">
+      image="eclipse_update_120.jpg">
 
    <description>
       %description
