@@ -28,8 +28,8 @@ import org.eclipse.ui.IKeyBindingService;
 import org.eclipse.ui.INestableKeyBindingService;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
-//import org.eclipse.ui.internal.PopupMenuExtender;
 
 /**
  * @author mengbo
@@ -422,14 +422,34 @@ public class SashEditorSite implements IEditorSite {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.ui.services.IServiceLocator#getService(java.lang.Class)
+	 */
 	public Object getService(Class api) {
-		// return null
-		return null;
+		Object service = null;
+		if (api != null && _sashEditor != null) {
+			final IWorkbenchPartSite site = _sashEditor.getSite();
+			if (site != null) {
+				service = site.getService(api);
+			}
+		}
+		return service;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.ui.services.IServiceLocator#hasService(java.lang.Class)
+	 */
 	public boolean hasService(Class api) {
-		// no service
-		return false;
+		boolean has = false;
+		if (api != null && _sashEditor != null) {
+			final IWorkbenchPartSite site = _sashEditor.getSite();
+			if (site != null) {
+				has = site.hasService(api);
+			}
+		}
+		return has;
 	}
 
 }
