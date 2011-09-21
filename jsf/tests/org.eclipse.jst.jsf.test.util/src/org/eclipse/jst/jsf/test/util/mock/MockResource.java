@@ -116,6 +116,13 @@ public class MockResource implements IResource
 
     }
 
+    public void accept(IResourceProxyVisitor visitor,
+            final int depth, final int memberFlags) throws CoreException
+    {
+        throw new UnsupportedOperationException();
+
+    }
+
     public void accept(final IResourceVisitor visitor) throws CoreException
     {
         accept(visitor, IResource.DEPTH_INFINITE, IResource.NONE);
