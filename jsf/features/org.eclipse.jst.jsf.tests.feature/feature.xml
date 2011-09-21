@@ -2,11 +2,9 @@
 <feature
       id="org.eclipse.jst.jsf.tests.feature"
       label="%name"
-      version="3.2.4.qualifier"
+      version="3.2.500.qualifier"
       provider-name="%provider"
-     image="eclipse_update_120.jpg"
-      license-feature="org.eclipse.license"
-      license-feature-version="1.0.0.qualifier">
+      image="eclipse_update_120.jpg">
 
    <description>
       %description
