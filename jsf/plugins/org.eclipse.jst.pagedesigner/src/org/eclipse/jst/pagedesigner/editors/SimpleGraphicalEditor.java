@@ -186,6 +186,11 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 			_model.getUndoManager().disconnect(this);
 		}
 
+		_paletteViewerPage = null;
+		_palette = null;
+		_model = null;
+		_viewer = null;
+
 		super.dispose();
 	}
 
