@@ -495,12 +495,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 	 * @see org.eclipse.wst.common.frameworks.internal.datamodel.ui.DataModelWizardPage#propertyChanged(org.eclipse.wst.common.frameworks.datamodel.DataModelEvent)
 	 */
 	public void propertyChanged(DataModelEvent event) {
-		if (webAppDataModel != null) {
+		if (webAppDataModel != null && jsfFacetConfigurationEnabled) {
 			String propertyName = event.getPropertyName();
-			if (propertyName
-					.equals(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER)) {
-				model.setStringProperty(WEBCONTENT_DIR, event.getProperty()
-						.toString());
+			if (propertyName.equals(IJ2EEModuleFacetInstallDataModelProperties.CONFIG_FOLDER)) {
+				model.setStringProperty(WEBCONTENT_DIR, event.getProperty().toString());
 			}
 		}
 		super.propertyChanged(event);
