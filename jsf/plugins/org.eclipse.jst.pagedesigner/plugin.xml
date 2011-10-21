@@ -266,7 +266,7 @@
  <extension
         point="org.eclipse.ui.preferencePages">
      <page
-           category="org.eclipse.jst.jsf.ui.JSFRootPage"
+           category="org.eclipse.wst.html.ui.preferences.web"
            class="org.eclipse.jst.pagedesigner.ui.preferences.PDPreferencePage"
            id="org.eclipse.jst.jsf.pagedesigner.ui.preferences.PDPreferences"
            name="%preferencepage.webPageEditor.name"/>
