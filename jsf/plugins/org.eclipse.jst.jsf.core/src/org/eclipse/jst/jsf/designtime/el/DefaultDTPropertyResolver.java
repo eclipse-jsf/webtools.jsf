@@ -19,12 +19,15 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.core.IField;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.StringLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor;
+import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
@@ -183,9 +186,22 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         return (ISymbol[]) symbolsList.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
 
+    private boolean isAttrsValidProperty(final ITypeDescriptor typeDesc) {
+    	boolean valid = false;
+    	if (typeDesc instanceof IJavaTypeDescriptor2) {
+    		final IType type = ((IJavaTypeDescriptor2)typeDesc).getType();
+    		if (type != null) {
+	    		//"CURRENT_COMPOSITE_COMPONENT" will only be present from 2.0 on, where "attrs" is valid
+				final IField field = type.getField("CURRENT_COMPOSITE_COMPONENT"); //$NON-NLS-1$
+				valid = (field != null && field.exists());
+    		}
+    	}
+    	return valid;
+    }
+
     private ISymbol getCCAttrsSymbolIfNecessary(final ITypeDescriptor typeDesc) {
     	ISymbol attrsSymbol = null;
-    	if (typeDesc.instanceOf(UICOMPONENT_SYMBOL_SIGNATURE)) {
+    	if (typeDesc.instanceOf(UICOMPONENT_SYMBOL_SIGNATURE) && isAttrsValidProperty(typeDesc)) {
     		attrsSymbol = _symbolFactory.createUnknownInstanceSymbol(ATTRS_SYMBOL_NAME, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);    		
     	}
     	return attrsSymbol;
