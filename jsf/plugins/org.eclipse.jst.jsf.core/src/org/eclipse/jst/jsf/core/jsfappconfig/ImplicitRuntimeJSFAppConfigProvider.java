@@ -11,6 +11,7 @@
 package org.eclipse.jst.jsf.core.jsfappconfig;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
@@ -66,6 +67,10 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 	 * facesConfig property.
 	 */
 	protected void createModel() {
+		//Bug 340093 - [JSF2.0] Need version mechanism for determining what implicit components are valid
+		final boolean isAtLeastJSF20Project = JSFAppConfigUtils.isValidJSFProject(
+				jsfAppConfigLocater.getJSFAppConfigManager().getProject(),
+				IJSFCoreConstants.FACET_VERSION_2_0);
 		facesConfig = FacesConfigFactory.eINSTANCE.createFacesConfigType();
 		//create and add converters by id
 		EList converters = facesConfig.getConverter();
@@ -81,25 +86,31 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		converters.add(createConverter("Long")); //$NON-NLS-1$
 		converters.add(createConverter("Number")); //$NON-NLS-1$
 		converters.add(createConverter("Short")); //$NON-NLS-1$
-		converters.add(createConverter("Enum")); //$NON-NLS-1$
+		if (isAtLeastJSF20Project) {
+			converters.add(createConverter("Enum")); //$NON-NLS-1$
+		}
 		// converters by for-class (see spec 3.3.3 -- Standard Converter Implementions
 		converters.add(createForClassConverter("java.lang.Boolean", "javax.faces.convert.BooleanConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Byte", "javax.faces.convert.ByteConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Character", "javax.faces.convert.CharacterConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Double", "javax.faces.convert.DoubleConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Float", "javax.faces.convert.FloatConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Integer", "javax.faces.convert.IntegerConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Long", "javax.faces.convert.LongConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Short", "javax.faces.converter.ShortConverter")); //$NON-NLS-1$ //$NON-NLS-2$
-        converters.add(createForClassConverter("java.lang.Enum", "javax.faces.converter.EnumConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Byte", "javax.faces.convert.ByteConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Character", "javax.faces.convert.CharacterConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Double", "javax.faces.convert.DoubleConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Float", "javax.faces.convert.FloatConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Integer", "javax.faces.convert.IntegerConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Long", "javax.faces.convert.LongConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		converters.add(createForClassConverter("java.lang.Short", "javax.faces.converter.ShortConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		if (isAtLeastJSF20Project) {
+			converters.add(createForClassConverter("java.lang.Enum", "javax.faces.converter.EnumConverter")); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 		//create and add validators
 		EList validators = facesConfig.getValidator();
 		validators.add(createValidator("DoubleRange")); //$NON-NLS-1$
 		validators.add(createValidator("Length")); //$NON-NLS-1$
 		validators.add(createValidator("LongRange")); //$NON-NLS-1$
-		validators.add(createValidator("Bean")); //$NON-NLS-1$
-		validators.add(createValidator("RegularExpression")); //$NON-NLS-1$
-		validators.add(createValidator("Required")); //$NON-NLS-1$
+		if (isAtLeastJSF20Project) {
+			validators.add(createValidator("Bean")); //$NON-NLS-1$
+			validators.add(createValidator("RegularExpression")); //$NON-NLS-1$
+			validators.add(createValidator("Required")); //$NON-NLS-1$
+		}
 		//create and add UI components
 		EList components = facesConfig.getComponent();
 		components.add(createUIComponent("Column")); //$NON-NLS-1$
@@ -110,7 +121,7 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		components.add(createUIComponent("Input")); //$NON-NLS-1$
 		components.add(createUIComponent("Message")); //$NON-NLS-1$
 		components.add(createUIComponent("Messages")); //$NON-NLS-1$
-        components.add(createUIComponent("NamingContainer")); //$NON-NLS-1$
+		components.add(createUIComponent("NamingContainer")); //$NON-NLS-1$
 		components.add(createUIComponent("Output")); //$NON-NLS-1$
 		components.add(createUIComponent("Panel")); //$NON-NLS-1$
 		components.add(createUIComponent("Parameter")); //$NON-NLS-1$

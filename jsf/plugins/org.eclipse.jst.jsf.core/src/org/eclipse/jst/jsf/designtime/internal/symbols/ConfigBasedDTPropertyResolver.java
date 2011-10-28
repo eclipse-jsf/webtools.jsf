@@ -153,6 +153,7 @@ public class ConfigBasedDTPropertyResolver extends DefaultDTPropertyResolver
     public void setProject(final IProject project)
     {
         _project = project;
+        super.setProject(project);
     }
 
     // private void retrievePropertyResolver() {

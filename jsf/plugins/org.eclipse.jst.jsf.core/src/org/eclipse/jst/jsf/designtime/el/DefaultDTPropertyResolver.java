@@ -17,20 +17,20 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.core.IField;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.StringLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IBoundedTypeDescriptor;
-import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.ITypeDescriptor;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.designtime.symbols.JSFSymbolFactory;
 
 /**
@@ -47,16 +47,14 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
 {
 	private static final String UICOMPONENT_SYMBOL_SIGNATURE 	= "Ljavax.faces.component.UIComponent;"; //$NON-NLS-1$
 	private static final String ATTRS_SYMBOL_NAME 				= "attrs"; //$NON-NLS-1$
+
 	private JSFSymbolFactory 	_symbolFactory 					= new JSFSymbolFactory();
-	 
-    /**
-     * Returns a symbol encapsulating the property on base with the name
-     * properyId
-     * 
-     * @param base
-     * @param propertyId
-     * @return the symbol for the named propertyId or null if not found
-     */
+	private IProject			_project						= null;
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver#getProperty(org.eclipse.jst.jsf.context.symbol.ISymbol, java.lang.Object)
+	 */
     public ISymbol getProperty(ISymbol base, Object propertyId)
     {
         ITypeDescriptor typeDesc = null;
@@ -145,10 +143,10 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         // may be null if none matched
         return matchedSymbol;
     }
-    
-    /**
-     * @param base
-     * @return all properties of base
+
+    /*
+     * (non-Javadoc)
+     * @see org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver#getAllProperties(org.eclipse.jst.jsf.context.symbol.ISymbol)
      */
     public ISymbol[] getAllProperties(ISymbol base)
     {
@@ -185,34 +183,6 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
 
         return (ISymbol[]) symbolsList.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
-
-    private boolean isAttrsValidProperty(final ITypeDescriptor typeDesc) {
-    	boolean valid = false;
-    	if (typeDesc instanceof IJavaTypeDescriptor2) {
-    		final IType type = ((IJavaTypeDescriptor2)typeDesc).getType();
-    		if (type != null) {
-	    		//"CURRENT_COMPOSITE_COMPONENT" will only be present from 2.0 on, where "attrs" is valid
-				final IField field = type.getField("CURRENT_COMPOSITE_COMPONENT"); //$NON-NLS-1$
-				valid = (field != null && field.exists());
-    		}
-    	}
-    	return valid;
-    }
-
-    private ISymbol getCCAttrsSymbolIfNecessary(final ITypeDescriptor typeDesc) {
-    	ISymbol attrsSymbol = null;
-    	if (typeDesc.instanceOf(UICOMPONENT_SYMBOL_SIGNATURE) && isAttrsValidProperty(typeDesc)) {
-    		attrsSymbol = _symbolFactory.createUnknownInstanceSymbol(ATTRS_SYMBOL_NAME, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);    		
-    	}
-    	return attrsSymbol;
-    }
-    
-    private void addCCAttrsIfNecessary(final ITypeDescriptor typeDesc, final List symbolsList) {
-    	final ISymbol attrsSymbol = getCCAttrsSymbolIfNecessary(typeDesc);
-    	if (attrsSymbol != null) {    		
-    		symbolsList.add(attrsSymbol);
-    	}
-	}
 
 	/* (non-Javadoc)
      * @see org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver#getProperty(org.eclipse.jst.jsf.context.symbol.ISymbol, int)
@@ -274,7 +244,31 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         
         return null;
     }
-    
+
+    /**
+     * Sets the current project.
+     * @param project Current project instance.
+     */
+    public void setProject(IProject project) {
+    	_project = project;
+    }
+
+    private ISymbol getCCAttrsSymbolIfNecessary(final ITypeDescriptor typeDesc) {
+    	ISymbol attrsSymbol = null;
+    	if (typeDesc.instanceOf(UICOMPONENT_SYMBOL_SIGNATURE) &&
+    			JSFAppConfigUtils.isValidJSFProject(_project, IJSFCoreConstants.FACET_VERSION_2_0)) {
+    		attrsSymbol = _symbolFactory.createUnknownInstanceSymbol(ATTRS_SYMBOL_NAME, ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);    		
+    	}
+    	return attrsSymbol;
+    }
+
+    private void addCCAttrsIfNecessary(final ITypeDescriptor typeDesc, final List symbolsList) {
+    	final ISymbol attrsSymbol = getCCAttrsSymbolIfNecessary(typeDesc);
+    	if (attrsSymbol != null) {    		
+    		symbolsList.add(attrsSymbol);
+    	}
+	}
+
     /**
      * @param typeDesc
      * @return the type descriptor's property iterator or empty list
@@ -288,7 +282,7 @@ public class DefaultDTPropertyResolver extends AbstractDTPropertyResolver
         }
         return Collections.EMPTY_LIST.iterator();
     }
-    
+
     /**
      * Takes a key expression and factors it down to into all property segments it contains.
      * Property segments occur mainly when String keys contain '.' characters, indicating that
