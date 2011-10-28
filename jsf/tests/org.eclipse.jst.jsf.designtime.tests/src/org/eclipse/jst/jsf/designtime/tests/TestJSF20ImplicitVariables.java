@@ -131,6 +131,7 @@ public class TestJSF20ImplicitVariables extends TestCase
 		assertEquals(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL, ((IInstanceSymbol)symbol).getRuntimeSource());
 		
 		DefaultDTPropertyResolver propresolver = new DefaultDTPropertyResolver();
+		propresolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 		ISymbol[] props = propresolver.getAllProperties(symbol);
 		assertContainsVariable(props, ATTRS_SYMBOL_NAME);
 //		assertContainsVariable(props, "attributes"); //need real jars on cp
@@ -154,6 +155,7 @@ public class TestJSF20ImplicitVariables extends TestCase
 		assertEquals(ERuntimeSource.BUILT_IN_SYMBOL_LITERAL, ((IInstanceSymbol)symbol).getRuntimeSource());
 		
 		DefaultDTPropertyResolver propresolver = new DefaultDTPropertyResolver();
+		propresolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 		ISymbol[] props = propresolver.getAllProperties(symbol);
 		assertContainsVariable(props, ATTRS_SYMBOL_NAME);
 //		assertContainsVariable(props, "attributes");		//need real jars on cp

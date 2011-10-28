@@ -254,6 +254,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         final ISymbol[] properties = propResolver.getAllProperties(symbol);
         assertEquals(NUM_PROPERTIES_TEST_BEAN_1, properties.length);
         final Map<String, ISymbol> checkProps = new HashMap<String, ISymbol>();
@@ -309,6 +310,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         final ISymbol[] properties = propResolver.getAllProperties(symbol);
         // there no design-time identifiable properties
         // note that this is different that what JDTBeanIntrospector returns
@@ -354,6 +356,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         final ISymbol[] properties = propResolver.getAllProperties(symbol);
 
         // should have three properties
@@ -419,6 +422,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         {
             final ISymbol[] properties = propResolver.getAllProperties(symbol);
             assertEquals(2, properties.length); // should have defined property
@@ -489,6 +493,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         ISymbol[] properties = propResolver.getAllProperties(symbol);
 
         // should be two properties: mapProp and class
@@ -527,6 +532,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
 
         // test array of strings property
         {
@@ -650,6 +656,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         final ISymbol[] properties = propResolver.getAllProperties(symbol);
 
         // should have no properties since a list won't be treated like
@@ -686,6 +693,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         ISymbol[] properties = propResolver.getAllProperties(symbol);
 
         // should be just one property plus Object.class
@@ -725,6 +733,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         ISymbol[] properties = propResolver.getAllProperties(symbol);
 
         // should be just one property plus Object.class
@@ -762,6 +771,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         final ISymbol propSymbol = propResolver.getProperty(symbol, "anyProp");
 
         assertNotNull(propSymbol);
@@ -796,6 +806,7 @@ public class TestDefaultPropertyResolver extends TestCase
 
         final DefaultDTPropertyResolver propResolver =
             new DefaultDTPropertyResolver();
+		propResolver.setProject(_jdtTestEnvironment.getProjectEnvironment().getTestProject());
         {
             ISymbol oneDot = propResolver.getProperty(symbol, "one");
             assertNotNull(oneDot);
