@@ -112,6 +112,11 @@ public final class DiagnosticFactory
     public final static int LOCALE_FORMAT_NOT_VALID_ID = 16;
     
     /**
+     * Problem id
+     */
+    public final static int BEAN_SCOPE_NOT_VALID_JSF2_ID = 17;
+
+    /**
      * @return message indicating text that should be EL was
      * not found sorrounded in #{} values
      */
@@ -232,13 +237,23 @@ public final class DiagnosticFactory
     }
     
     /**
-     * @return an error indicating an invalid bean scope enum value
+     * @return an error indicating an invalid bean scope enum value (pre-JSF2)
      */
     public static IMessage create_BEAN_SCOPE_NOT_VALID()
     {
         return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
             Messages.BEAN_SCOPE_NOT_VALID_ID
             , null, BEAN_SCOPE_NOT_VALID_ID);    
+    }
+    
+    /**
+     * @return an error indicating an invalid bean scope enum value (JSF2+)
+     */
+    public static IMessage create_BEAN_SCOPE_NOT_VALID_JSF2()
+    {
+        return new MyLocalizedMessage(IMessage.NORMAL_SEVERITY,
+            Messages.BEAN_SCOPE_NOT_VALID_JSF2_ID
+            , null, BEAN_SCOPE_NOT_VALID_JSF2_ID);    
     }
     
     /**
