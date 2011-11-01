@@ -15,8 +15,10 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.jst.jsf.common.ui.internal.guiutils.SWTUtils;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
-import org.eclipse.jst.jsf.facesconfig.ui.IFacesConfigConstants;
+import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanScopeTreeItem;
 import org.eclipse.jst.jsf.facesconfig.ui.util.JavaClassUtils;
 import org.eclipse.jst.jsf.facesconfig.ui.util.ManagedBeanUtil;
 import org.eclipse.swt.SWT;
@@ -147,11 +149,13 @@ public class ManagedBeanPropertyPage extends WizardPage implements ISummaryDataS
 						WizardMessages.ManagedBeanPropertyWizardPage_ManagedBeanScope,
 						1);
 
-		String[] items = {
-				IFacesConfigConstants.MANAGED_BEAN_SCOPE_APPLICATION,
-				IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION,
-				IFacesConfigConstants.MANAGED_BEAN_SCOPE_REQUEST,
-				IFacesConfigConstants.MANAGED_BEAN_SCOPE_NONE };
+		//Bug 312727 - [JSF2.0] Add view scope to FacesConfigEditor for Managed Beans
+		String[] items = ManagedBeanScopeTreeItem.scopeItems;
+		if (currentProject != null) {
+			if (!JSFAppConfigUtils.isValidJSFProject(currentProject, IJSFCoreConstants.FACET_VERSION_2_0)) {
+				items = ManagedBeanScopeTreeItem.scopeItemsPreJSF2;
+			}
+		}
 
 		scopeCombo = SWTUtils.createCombo(generalSection, items, 1);
 		gd = new GridData(GridData.FILL_HORIZONTAL);

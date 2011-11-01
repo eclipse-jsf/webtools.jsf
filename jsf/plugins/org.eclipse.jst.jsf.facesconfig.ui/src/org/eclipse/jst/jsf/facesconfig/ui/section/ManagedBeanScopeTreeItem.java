@@ -29,10 +29,20 @@ public class ManagedBeanScopeTreeItem {
 	 * Possible values for bean scope
 	 */
 	public static final String[] scopeItems = {
+			IFacesConfigConstants.MANAGED_BEAN_SCOPE_APPLICATION,
 			IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION,
 			IFacesConfigConstants.MANAGED_BEAN_SCOPE_REQUEST,
+			IFacesConfigConstants.MANAGED_BEAN_SCOPE_VIEW,
+			IFacesConfigConstants.MANAGED_BEAN_SCOPE_NONE};
+
+	/**
+	 * Possible values for bean scope if we can determine that we are in a pre-JSF 2.0 context
+	 */
+	public static final String[] scopeItemsPreJSF2 = {
 			IFacesConfigConstants.MANAGED_BEAN_SCOPE_APPLICATION,
-			IFacesConfigConstants.MANAGED_BEAN_SCOPE_NONE };
+			IFacesConfigConstants.MANAGED_BEAN_SCOPE_SESSION,
+			IFacesConfigConstants.MANAGED_BEAN_SCOPE_REQUEST,
+			IFacesConfigConstants.MANAGED_BEAN_SCOPE_NONE};
 
 	private String scope;
 

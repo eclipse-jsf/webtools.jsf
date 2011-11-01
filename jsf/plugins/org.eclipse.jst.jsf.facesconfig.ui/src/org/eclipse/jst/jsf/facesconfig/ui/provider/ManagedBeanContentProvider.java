@@ -15,8 +15,11 @@ package org.eclipse.jst.jsf.facesconfig.ui.provider;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
 import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanScopeTreeItem;
@@ -32,7 +35,23 @@ import org.eclipse.jst.jsf.facesconfig.ui.section.ManagedBeanScopeTreeItem;
  */
 public class ManagedBeanContentProvider implements ITreeContentProvider {
 
+	private IProject project;
 	private List scopeItemList = null;
+
+	/**
+	 * Creates an instance.
+	 */
+	public ManagedBeanContentProvider() {
+		this(null);
+	}
+
+	/**
+	 * Creates an instance.
+	 * @param project Current project instance.
+	 */
+	public ManagedBeanContentProvider(IProject project) {
+		this.project = project;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -45,9 +64,16 @@ public class ManagedBeanContentProvider implements ITreeContentProvider {
 		if (parent instanceof FacesConfigType) {
 			if (scopeItemList == null) {
 				scopeItemList = new ArrayList();
-				for (int i = 0; i < ManagedBeanScopeTreeItem.scopeItems.length; i++) {
+				//Bug 312727 - [JSF2.0] Add view scope to FacesConfigEditor for Managed Beans
+				String[] scopeItems = ManagedBeanScopeTreeItem.scopeItems;
+				if (project != null) {
+					if (!JSFAppConfigUtils.isValidJSFProject(project, IJSFCoreConstants.FACET_VERSION_2_0)) {
+						scopeItems = ManagedBeanScopeTreeItem.scopeItemsPreJSF2;
+					}
+				}
+				for (int i = 0; i < scopeItems.length; i++) {
 					ManagedBeanScopeTreeItem scopeTreeItem = new ManagedBeanScopeTreeItem(
-							ManagedBeanScopeTreeItem.scopeItems[i],
+							scopeItems[i],
 							(FacesConfigType) parent);
 					scopeItemList.add(scopeTreeItem);
 				}

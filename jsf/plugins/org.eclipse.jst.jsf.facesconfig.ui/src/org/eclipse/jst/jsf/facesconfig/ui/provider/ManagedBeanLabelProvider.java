@@ -37,6 +37,7 @@ public class ManagedBeanLabelProvider extends LabelProvider {
 	private static final String SCOPE_APPLICATION_IMAGE_FILE = "Scope_Application.gif"; //$NON-NLS-1$
 	private static final String SCOPE_REQUEST_IMAGE_FILE = "Scope_Request.gif"; //$NON-NLS-1$
 	private static final String SCOPE_SESSION_IMAGE_FILE = "Scope_Session.gif"; //$NON-NLS-1$
+	private static final String SCOPE_VIEW_IMAGE_FILE = "Scope_View.gif"; //$NON-NLS-1$
 	private static final String MANAGED_BEAN_IMAGE_FILE = "facesconfig/FacesConfig_ManagedBean.gif"; //$NON-NLS-1$
 	
 	/** Cache of images that have been dispensed by this provider */
@@ -97,6 +98,10 @@ public class ManagedBeanLabelProvider extends LabelProvider {
 					.equals(scopeTreeItem.getScope())) {
 				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
 						SCOPE_NONE_IMAGE_FILE);
+			} else if (IFacesConfigConstants.MANAGED_BEAN_SCOPE_VIEW
+					.equals(scopeTreeItem.getScope())) {
+				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
+						SCOPE_VIEW_IMAGE_FILE);
 			} else {
 				imageDesc = EditorPlugin.getDefault().getImageDescriptor(
 						SCOPE_IMAGE_FILE);

@@ -14,6 +14,7 @@ package org.eclipse.jst.jsf.facesconfig.ui.section;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -41,6 +43,7 @@ import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorMessages;
 import org.eclipse.jst.jsf.facesconfig.ui.EditorPlugin;
 import org.eclipse.jst.jsf.facesconfig.ui.page.FacesConfigMasterDetailPage;
+import org.eclipse.jst.jsf.facesconfig.ui.page.IFacesConfigPage;
 import org.eclipse.jst.jsf.facesconfig.ui.provider.ManagedBeanContentProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.provider.ManagedBeanLabelProvider;
 import org.eclipse.jst.jsf.facesconfig.ui.wizard.NewManagedBeanWizard;
@@ -50,9 +53,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * @author sfshi
@@ -91,7 +96,23 @@ public class ManagedBeanMasterSection extends FacesConfigMasterSection {
 		gd = new GridData(GridData.FILL_BOTH);
 		treeViewer.getControl().setLayoutData(gd);
 
-		treeViewer.setContentProvider(new ManagedBeanContentProvider());
+		//Bug 312727 - [JSF2.0] Add view scope to FacesConfigEditor for Managed Beans
+		IContentProvider contentProvider = new ManagedBeanContentProvider();
+		final IFacesConfigPage page = getPage();
+		if (page != null) {
+			final IEditorInput input = page.getEditorInput();
+			if (input instanceof FileEditorInput) {
+				final IFile file = ((FileEditorInput)input).getFile();
+				if (file != null) {
+					final IProject project = file.getProject();
+					if (project != null) {
+						contentProvider = new ManagedBeanContentProvider(project);
+					}
+				}
+			}
+		}
+		treeViewer.setContentProvider(contentProvider);
+
 		treeViewer.setLabelProvider(new ManagedBeanLabelProvider());
 		treeViewer.addSelectionChangedListener(this);
 

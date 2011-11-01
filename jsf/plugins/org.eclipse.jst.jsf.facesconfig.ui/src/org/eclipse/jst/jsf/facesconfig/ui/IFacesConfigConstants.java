@@ -155,6 +155,11 @@ public interface IFacesConfigConstants {
 	/**
 	 * 
 	 */
+	public static final String MANAGED_BEAN_SCOPE_VIEW = "view"; //$NON-NLS-1$
+
+	/**
+	 * 
+	 */
 	public static final String MANAGED_BEAN_SCOPE_NONE = "none"; //$NON-NLS-1$
 
 }
