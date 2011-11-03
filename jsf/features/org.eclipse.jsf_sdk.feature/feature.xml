@@ -2,12 +2,11 @@
 <feature
       id="org.eclipse.jsf_sdk.feature"
       label="%name"
-      version="3.3.1.qualifier"
+      version="3.4.0.qualifier"
       provider-name="%provider"
       image="eclipse_update_120.jpg"
       license-feature="org.eclipse.license"
       license-feature-version="1.0.0.qualifier">
-      
 
    <description>
       %description
