@@ -43,7 +43,7 @@ public class FacesConfigConverterIDTypeTests extends SingleJSPTestCase {
 		IPossibleValues pv = (IPossibleValues)getProcessor(IPossibleValues.class, JSF_HTML_URI, "inputText", "converter");		
 		assertNotNull(pv);
 		
-		assertEquals(14, pv.getPossibleValues().size());
+		assertEquals(13, pv.getPossibleValues().size());
 
 		assertPossibleValues(pv.getPossibleValues(),
 			new String[]{
@@ -59,8 +59,7 @@ public class FacesConfigConverterIDTypeTests extends SingleJSPTestCase {
 				"javax.faces.Integer",
 				"javax.faces.Number",
 				"javax.faces.Long",
-				"javax.faces.Short",
-				"javax.faces.Enum"} );
+				"javax.faces.Short"} );
 
 	}
 	public void testGetExpectedRuntimeValue() {

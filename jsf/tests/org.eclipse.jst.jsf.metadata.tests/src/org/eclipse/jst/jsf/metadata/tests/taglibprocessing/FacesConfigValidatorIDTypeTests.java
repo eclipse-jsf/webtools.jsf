@@ -45,17 +45,14 @@ public class FacesConfigValidatorIDTypeTests extends SingleJSPTestCase {
 		IPossibleValues pv = (IPossibleValues)getProcessor(IPossibleValues.class, JSF_CORE_URI, tagName, attrName);		
 		assertNotNull(pv);
 		
-		assertEquals(7, pv.getPossibleValues().size());
+		assertEquals(4, pv.getPossibleValues().size());
 
 		assertPossibleValues(pv.getPossibleValues(),
 			new String[]{
 				"com.foo.myvalidator",
 				"javax.faces.DoubleRange", 
 				"javax.faces.Length",
-				"javax.faces.LongRange",
-				"javax.faces.Bean",
-				"javax.faces.RegularExpression",
-				"javax.faces.Required"} );
+				"javax.faces.LongRange"} );
 
 	}
 	
