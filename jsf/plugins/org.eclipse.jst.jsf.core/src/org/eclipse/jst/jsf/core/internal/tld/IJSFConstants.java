@@ -85,6 +85,11 @@ public interface IJSFConstants
 	final static public String TAG_SUBVIEW = "subview"; //$NON-NLS-1$
 
 	/**
+	 * validateBean tagname
+	 */
+	final static public String TAG_VALIDATEBEAN = "validateBean"; //$NON-NLS-1$
+
+	/**
 	 * validateDoubleRange tagname
 	 */
 	final static public String TAG_VALIDATEDOUBLERANGE = "validateDoubleRange"; //$NON-NLS-1$
@@ -98,6 +103,16 @@ public interface IJSFConstants
 	 * validateLongRange tagname
 	 */
 	final static public String TAG_VALIDATELONGRANGE = "validateLongRange"; //$NON-NLS-1$
+
+	/**
+	 * validateRegex tagname
+	 */
+	final static public String TAG_VALIDATEREGEX = "validateRegex"; //$NON-NLS-1$
+
+	/**
+	 * validateRequired tagname
+	 */
+	final static public String TAG_VALIDATEREQUIRED = "validateRequired"; //$NON-NLS-1$
 
 	/**
 	 * validator tagname
@@ -118,6 +133,11 @@ public interface IJSFConstants
 	 * view tagname
 	 */
 	final static public String TAG_VIEW = "view"; //$NON-NLS-1$
+
+	/**
+	 * viewParam tagname
+	 */
+	final static public String TAG_VIEWPARAM = "viewParam"; //$NON-NLS-1$
 
 	/**
 	 * column tagname
@@ -250,6 +270,12 @@ public interface IJSFConstants
      */
     final static TagIdentifier TAG_IDENTIFIER_VIEW =
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VIEW);
+
+    /**
+     * TagIdentifier for TAG_VIEWPARAM
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VIEWPARAM =
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VIEWPARAM);
 
     /**
      * TagIdentifier for TAG_LOADBUNDLE
@@ -486,6 +512,12 @@ public interface IJSFConstants
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_SUBVIEW);
 
     /**
+     * TagIdentifier for TAG_VALIDATEBEAN
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATEBEAN =
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATEBEAN);
+
+    /**
      * TagIdentifier for TAG_VALIDATEDOUBLERANGE
      */
     final static TagIdentifier TAG_IDENTIFIER_VALIDATEDOUBLERANGE =
@@ -502,6 +534,18 @@ public interface IJSFConstants
      */
     final static TagIdentifier TAG_IDENTIFIER_VALIDATELONGRANGE =
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATELONGRANGE);
+
+    /**
+     * TagIdentifier for TAG_VALIDATEREGEX
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATEREGEX =
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATEREGEX);
+
+    /**
+     * TagIdentifier for TAG_VALIDATEREQUIRED
+     */
+    final static TagIdentifier TAG_IDENTIFIER_VALIDATEREQUIRED =
+    	TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_VALIDATEREQUIRED);
 
     /**
      * TagIdentifier for TAG_VALIDATOR

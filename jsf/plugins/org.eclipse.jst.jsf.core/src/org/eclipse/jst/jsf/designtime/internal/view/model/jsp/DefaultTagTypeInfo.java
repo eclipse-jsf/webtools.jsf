@@ -62,6 +62,9 @@ public final class DefaultTagTypeInfo
             case V1_2:
                 return JSF12_ELEMENTS.get(tagId);
 
+            case V2_0:
+            	return JSF20_ELEMENTS.get(tagId);
+
             default:
                 return null;
         }
@@ -151,6 +154,22 @@ public final class DefaultTagTypeInfo
                                                                                        { "javax.faces.component.StateHolder", }, //$NON-NLS-1$
                                                                                        "javax.faces.ViewRoot", //$NON-NLS-1$
                                                                                        null);
+
+    private static final ComponentTypeInfo      COMPINFO_VIEWPARAM            = new ComponentTypeInfo(
+    		                                                                          "javax.faces.ViewParameter", //$NON-NLS-1$
+    		                                                                          "javax.faces.component.UIViewParameter", //$NON-NLS-1$
+                                                                                      new String[]
+                                                                                      {
+           "javax.faces.component.UIInput", "javax.faces.component.UIOutput", //$NON-NLS-1$ //$NON-NLS-2$
+           "javax.faces.component.UIComponentBase", //$NON-NLS-1$
+           "javax.faces.component.UIComponent", "java.lang.Object",                  }, //$NON-NLS-1$ //$NON-NLS-2$
+                                                                                      new String[]
+                                                                                      {
+           "javax.faces.component.EditableValueHolder", //$NON-NLS-1$
+           "javax.faces.component.ValueHolder", //$NON-NLS-1$
+           "javax.faces.component.StateHolder"                                       }, //$NON-NLS-1$
+    		                                                                          "javax.faces.ViewParameter", //$NON-NLS-1$
+    		                                                                          null);
 
     // expected type info for jsf/html components
     private static final ComponentTypeInfo      COMPINFO_COLUMN                = new ComponentTypeInfo(
@@ -519,6 +538,10 @@ public final class DefaultTagTypeInfo
                                                                                        "javax.faces.Number"); //$NON-NLS-1$
 
     // default validators
+    private static final ValidatorTypeInfo      VALIDATORINFO_BEAN             = new ValidatorTypeInfo(
+    		                                                                           "javax.faces.validator.BeanValidator", //$NON-NLS-1$
+    		                                                                           "javax.faces.Bean"); //$NON-NLS-1$
+
     private static final ValidatorTypeInfo      VALIDATORINFO_DOUBLERANGE      = new ValidatorTypeInfo(
                                                                                        "javax.faces.validator.DoubleRangeValidator", //$NON-NLS-1$
                                                                                        "javax.faces.DoubleRange"); //$NON-NLS-1$
@@ -531,8 +554,17 @@ public final class DefaultTagTypeInfo
                                                                                        "javax.faces.validator.LongRangeValidator", //$NON-NLS-1$
                                                                                        "javax.faces.LongRange"); //$NON-NLS-1$
 
+    private static final ValidatorTypeInfo      VALIDATORINFO_REGEX            = new ValidatorTypeInfo(
+    		                                                                           "javax.faces.validator.RegexValidator", //$NON-NLS-1$
+                                                                                       "javax.faces.RegularExpression"); //$NON-NLS-1$
+
+    private static final ValidatorTypeInfo      VALIDATORINFO_REQUIRED         = new ValidatorTypeInfo(
+                                                                                       "javax.faces.validator.RequiredValidator", //$NON-NLS-1$
+                                                                                       "javax.faces.Required"); //$NON-NLS-1$
+
     private static Map<TagIdentifier, TypeInfo> JSF11_ELEMENTS;
     private static Map<TagIdentifier, TypeInfo> JSF12_ELEMENTS;
+    private static Map<TagIdentifier, TypeInfo> JSF20_ELEMENTS;
 
     static
     {
@@ -650,6 +682,14 @@ public final class DefaultTagTypeInfo
 
         JSF12_ELEMENTS = Collections
                 .unmodifiableMap(new HashMap<TagIdentifier, TypeInfo>(commonElements));
+
+        //JSF 2.0
+        Map<TagIdentifier, TypeInfo> jsf20Elements = new HashMap<TagIdentifier, TypeInfo>(commonElements);
+        jsf20Elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATEBEAN, VALIDATORINFO_BEAN);
+        jsf20Elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATEREGEX, VALIDATORINFO_REGEX);
+        jsf20Elements.put(IJSFConstants.TAG_IDENTIFIER_VALIDATEREQUIRED, VALIDATORINFO_REQUIRED);
+        jsf20Elements.put(IJSFConstants.TAG_IDENTIFIER_VIEWPARAM, COMPINFO_VIEWPARAM);
+        JSF20_ELEMENTS = Collections.unmodifiableMap(jsf20Elements);
     }
 
 }
