@@ -43,7 +43,7 @@ public class CompositeJSFAppConfigLocatorProviderStrategyTests extends TestCase 
 //		//uses the TestLocatorProvider that was loaded using ext-pt (currently)
 //		CompositeLocatorProviderStrategy strategy = new CompositeLocatorProviderStrategy(projectTestEnvironment.getTestProject(), null);
 //		assertNotNull(strategy.getLocators());
-//		assertEquals(5, strategy.getLocators().size());//expecting FakeProvider + default set	
+//		assertEquals(6, strategy.getLocators().size());//expecting FakeProvider + default set	
 //		assertTrue(strategy.getLocators().get(0).getClass().getSimpleName().equals("FakeLocator"));
 //	
 //		IJSFAppConfigManager mgr = JSFAppConfigManagerFactory.getInstance(projectTestEnvironment.getTestProject());
@@ -62,7 +62,7 @@ public class CompositeJSFAppConfigLocatorProviderStrategyTests extends TestCase 
 		projectTestEnvironment.getTestProject().setSessionProperty(CompositeJSFAppConfigLocatorProviderStrategy.TESTABLE_FACTORY_SESSION_KEY, testLocatorProvider);
 		CompositeJSFAppConfigLocatorProviderStrategy strategy = new CompositeJSFAppConfigLocatorProviderStrategy(projectTestEnvironment.getTestProject());
 		assertNotNull(strategy.getLocators());
-		assertEquals(5, strategy.getLocators().size());//expecting FakeProvider + default set	
+		assertEquals(6, strategy.getLocators().size());//expecting FakeProvider + default set	
 		assertTrue(strategy.getLocators().get(0).getClass().getSimpleName().equals("FakeLocator"));
 	}
 	
@@ -70,7 +70,7 @@ public class CompositeJSFAppConfigLocatorProviderStrategyTests extends TestCase 
 		//since we are not using an extension, if no testable is provided, must be using default
 		CompositeJSFAppConfigLocatorProviderStrategy strategy = new CompositeJSFAppConfigLocatorProviderStrategy(projectTestEnvironment.getTestProject());
 		assertNotNull(strategy.getLocators());
-		assertEquals(4, strategy.getLocators().size());//expecting default set only	
+		assertEquals(5, strategy.getLocators().size());//expecting default set only	
 		assertTrue(strategy.getLocators().get(0).getClass().getSimpleName().equals("ImplicitRuntimeJSFAppConfigLocater"));
 
 	}
