@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Ian Trimble/Oracle - maintenance (JSF 2.x custom scope)
  *    
  ********************************************************************************/
 
@@ -29,6 +30,8 @@ import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolFactory;
 import org.eclipse.jst.jsf.context.symbol.source.ISymbolConstants;
+import org.eclipse.jst.jsf.core.IJSFCoreConstants;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.core.jsfappconfig.internal.IJSFAppConfigManager;
 import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
@@ -126,9 +129,15 @@ public class DefaultBeanSymbolSourceProvider
             for (final Iterator aIt = configManager.getManagedBeans().iterator(); aIt.hasNext();)
             {
                 ManagedBeanType  bean = (ManagedBeanType) aIt.next();
-                
+
                 // only bother with all this if we care about the scope of this bean
-                if (isBeanScopeInMask(bean.getManagedBeanScope(), symbolScopeMask))
+                // allow for custom scopes (any value) in JSF 2.x if mask is "ISymbolConstants.SYMBOL_SCOPE_ALL"
+                final boolean beanIsInScope =
+                		isBeanScopeInMask(bean.getManagedBeanScope(), symbolScopeMask) ||
+            			(JSFAppConfigUtils.isValidJSFProject(iProject, IJSFCoreConstants.FACET_VERSION_2_0) &&
+            			(symbolScopeMask == ISymbolConstants.SYMBOL_SCOPE_ALL));
+
+                if (beanIsInScope)
                 {
                     final String name = bean.getManagedBeanName().getTextContent();
                     final String detailedDescription = createAdditionalProposalInfo(bean);

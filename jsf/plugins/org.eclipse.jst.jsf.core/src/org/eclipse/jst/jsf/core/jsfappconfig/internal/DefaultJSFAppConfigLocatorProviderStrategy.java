@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigLocator;
 import org.eclipse.jst.jsf.core.jsfappconfig.ContextParamSpecifiedJSFAppConfigLocater;
 import org.eclipse.jst.jsf.core.jsfappconfig.DefaultJSFAppConfigLocater;
 import org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater;
@@ -12,7 +13,7 @@ import org.eclipse.jst.jsf.core.jsfappconfig.ImplicitRuntimeJSFAppConfigLocater;
 import org.eclipse.jst.jsf.core.jsfappconfig.RuntimeClasspathJSFAppConfigLocater;
 
 /**
- * The platforms default LocatorProviderStrategy.
+ * The platform's default JSFAppConfigLocatorProviderStrategy.
  * <p>
  * Will return:
  * <ol>
@@ -20,6 +21,7 @@ import org.eclipse.jst.jsf.core.jsfappconfig.RuntimeClasspathJSFAppConfigLocater
  * <li>DefaultJSFAppConfigLocater</li>
  * <li>ContextParamSpecifiedJSFAppConfigLocater</li>
  * <li>RuntimeClasspathJSFAppConfigLocater</li>
+ * <li>AnnotationJSFAppConfigLocator</li>
  * <ol>
  *
  */
@@ -49,7 +51,11 @@ public class DefaultJSFAppConfigLocatorProviderStrategy
 		// runtime classpath locater
 		IJSFAppConfigLocater classpathConfigLocater = new RuntimeClasspathJSFAppConfigLocater();
 		ret.add(classpathConfigLocater);
-		
+
+		// annotation config locator
+		IJSFAppConfigLocater annotationConfigLocator = new AnnotationJSFAppConfigLocator();
+		ret.add(annotationConfigLocator);
+
 		return Collections.unmodifiableList(ret);
 	}
 

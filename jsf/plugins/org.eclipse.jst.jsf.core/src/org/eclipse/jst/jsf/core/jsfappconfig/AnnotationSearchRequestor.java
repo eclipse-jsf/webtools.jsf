@@ -1,0 +1,360 @@
+/*******************************************************************************
+ * Copyright (c) 2011 Oracle Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Andrew McCulloch - initial API and implementation
+ *    Ian Trimble - maintenance
+ *******************************************************************************/ 
+package org.eclipse.jst.jsf.core.jsfappconfig;
+
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.MANAGED_BEAN_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.REFERENCED_BEAN_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_COMPONENT_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_CONVERTER_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_RENDERER_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_VALIDATOR_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.VIEW_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.APPLICATION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.NONE_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.SESSION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CUSTOM_SCOPED_ANNOTATION_CLASS;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.core.IAnnotation;
+import org.eclipse.jdt.core.IMemberValuePair;
+import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.search.SearchMatch;
+import org.eclipse.jdt.core.search.SearchRequestor;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentFamilyType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
+import org.eclipse.jst.jsf.facesconfig.emf.ComponentTypeType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterForClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.ConverterType;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanScopeType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
+import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanNameType;
+import org.eclipse.jst.jsf.facesconfig.emf.ReferencedBeanType;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.RenderKitType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererType;
+import org.eclipse.jst.jsf.facesconfig.emf.RendererTypeType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorClassType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorIdType;
+import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
+
+/**
+ * SearchRequestor that looks at annotations for JSF configuration.
+ * 
+ * <p><b>Provisional API - subject to change</b></p>
+ * 
+ * @author Andrew McCulloch - Oracle
+ */
+public class AnnotationSearchRequestor extends SearchRequestor {
+    
+    private final FacesConfigType facesConfig;
+    
+    AnnotationSearchRequestor(final FacesConfigType facesConfig) {
+         this.facesConfig = facesConfig;
+    }
+    
+    public void acceptSearchMatch(SearchMatch match) throws CoreException {
+        if (match.getAccuracy() == SearchMatch.A_ACCURATE) {
+            Object element = match.getElement();
+            if (element instanceof IType) {
+                IType type = (IType) element;
+                IAnnotation[] annotations = type.getAnnotations();
+                if (annotations != null) {
+                    for (int i = 0, k = annotations.length; i < k; i++) {
+                        if (annotations[i].exists()) {
+                            String annotationType = annotations[i].getElementName();
+                            String[][] resolvedAnnotationTypes = type.resolveType(annotationType);
+                            if (resolvedAnnotationTypes != null) {
+                                String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
+                                if (MANAGED_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                    addManagedBean(annotations[i], type);
+                                } else if (REFERENCED_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                    addReferencedBean(annotations[i], type);
+                                } else if (FACES_COMPONENT_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                    addComponent(annotations[i], type);
+                                } else if (FACES_CONVERTER_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                    addConverter(annotations[i], type);
+                                } else if (FACES_RENDERER_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                    addRenderer(annotations[i], type);
+                                } else if (FACES_VALIDATOR_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                    addValidator(annotations[i], type);
+                                }               
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addReferencedBean(IAnnotation referencedBeanAnnotation, IType beanType) throws JavaModelException {
+        IMemberValuePair[] pairs = referencedBeanAnnotation.getMemberValuePairs();
+        String beanNameString = null;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("name".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    beanNameString = (String)pair.getValue();
+                }
+            }
+        }
+        if (beanNameString == null) {
+            beanNameString = beanType.getElementName();
+            if (beanNameString != null && beanNameString.length() > 0) {
+                StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toUpperCase());
+                beanNameString = casedName.append(beanNameString.substring(1)).toString();
+            }
+        }
+        String beanClassName = beanType.getFullyQualifiedName();
+
+        if (beanNameString != null && beanClassName != null) {
+            ReferencedBeanType bean = FacesConfigFactory.eINSTANCE.createReferencedBeanType();
+            ReferencedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createReferencedBeanNameType();
+            beanName.setTextContent(beanNameString);
+            bean.setReferencedBeanName(beanName);
+            ReferencedBeanClassType beanClass = FacesConfigFactory.eINSTANCE.createReferencedBeanClassType();
+            beanClass.setTextContent(beanClassName);
+            bean.setReferencedBeanClass(beanClass);
+            facesConfig.getReferencedBean().add(bean);
+        }
+    }
+
+    private void addManagedBean(IAnnotation beanAnnotation, IType beanType) throws JavaModelException {
+        IMemberValuePair[] pairs = beanAnnotation.getMemberValuePairs();
+        String beanNameString = null;
+        Boolean isBeanEager = Boolean.FALSE;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("name".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    beanNameString = (String)pair.getValue();
+                } else if ("eager".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_BOOLEAN) { //$NON-NLS-1$
+                    isBeanEager = (Boolean)pair.getValue();
+                }
+            }
+        }
+        if (beanNameString == null || beanNameString.length() < 1) {
+            beanNameString = beanType.getElementName();
+            if (beanNameString != null && beanNameString.length() > 0) {
+                StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toLowerCase());
+                beanNameString = casedName.append(beanNameString.substring(1)).toString();
+            }
+        }
+        String beanClassName = beanType.getFullyQualifiedName();
+
+        String beanScopeString = "request"; //$NON-NLS-1$
+        IAnnotation[] annotations = beanType.getAnnotations();
+        if (annotations != null) {
+	        for (int i = 0, k = annotations.length; i < k; i++) {
+                if (annotations[i].exists()) {
+                    String annotationType = annotations[i].getElementName();
+                    String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
+                    if (resolvedAnnotationTypes != null) {
+                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
+                        if (APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "application"; //$NON-NLS-1$
+                        } else if (VIEW_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "view"; //$NON-NLS-1$
+                        } else if (NONE_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "none"; //$NON-NLS-1$
+                        } else if (SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "session"; //$NON-NLS-1$
+                        } else if (CUSTOM_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                            IMemberValuePair[] scopePairs = annotations[i].getMemberValuePairs();
+                            if (scopePairs != null && scopePairs.length == 1 && scopePairs[0].getValueKind() == IMemberValuePair.K_STRING) {
+                                beanScopeString = (String)scopePairs[0].getValue();
+                            }
+                        }
+                    }
+                }
+	        }
+        }
+
+        if (beanNameString != null && beanClassName != null) {
+            ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
+            ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
+            beanName.setTextContent(beanNameString);
+            bean.setManagedBeanName(beanName);
+            ManagedBeanClassType beanClass = FacesConfigFactory.eINSTANCE.createManagedBeanClassType();
+            beanClass.setTextContent(beanClassName);
+            bean.setManagedBeanClass(beanClass);
+            ManagedBeanScopeType beanScope = FacesConfigFactory.eINSTANCE.createManagedBeanScopeType();
+            beanScope.setTextContent(beanScopeString);
+            bean.setManagedBeanScope(beanScope);
+            bean.setEager(isBeanEager.booleanValue());
+            facesConfig.getManagedBean().add(bean);
+        }
+    }
+
+    private void addValidator(IAnnotation validatorAnnotation, IType validatorType) throws JavaModelException {
+        String validatorClassName = validatorType.getFullyQualifiedName();
+        IMemberValuePair[] pairs = validatorAnnotation.getMemberValuePairs();
+        String validatorIDString = null;
+//        Boolean isDefaultBoolean = null;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    validatorIDString = (String)pair.getValue();
+                    //isDefault not used in emf model
+//                } else if ("isDefault".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_BOOLEAN) {  //$NON-NLS-1$
+//                    isDefaultBoolean = (Boolean)pair.getValue();
+                }
+            }
+        }
+        
+        if (validatorClassName != null && validatorIDString != null) {
+            ValidatorType validator = FacesConfigFactory.eINSTANCE.createValidatorType();
+            ValidatorClassType validatorClass = FacesConfigFactory.eINSTANCE.createValidatorClassType();
+            validatorClass.setTextContent(validatorClassName);
+            validator.setValidatorClass(validatorClass);
+            
+            ValidatorIdType validatorID = FacesConfigFactory.eINSTANCE.createValidatorIdType();
+            validatorID.setTextContent(validatorIDString);
+            validator.setValidatorId(validatorID);
+            
+
+//          if (isDefaultBoolean == null) {
+//              isDefaultBoolean = Boolean.FALSE;
+//          }
+            
+            facesConfig.getValidator().add(validator);
+        }
+    }
+
+    private void addRenderer(IAnnotation rendererAnnotation, IType rendererType) throws JavaModelException {
+        String rendererClassName = rendererType.getFullyQualifiedName();
+        IMemberValuePair[] pairs = rendererAnnotation.getMemberValuePairs();
+        String rendererTypeString = null;
+        String componentFamilyString = null;
+        String renderKitIDString = null;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("rendererType".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    rendererTypeString = (String)pair.getValue();
+                } else if ("componentFamily".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) {  //$NON-NLS-1$
+                    componentFamilyString = (String)pair.getValue();
+                } else if ("renderKitId".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) {  //$NON-NLS-1$
+                    renderKitIDString = (String)pair.getValue();
+                }
+            }
+        }
+        
+        if (rendererClassName != null && rendererTypeString != null && componentFamilyString != null) {
+            RendererType renderer = FacesConfigFactory.eINSTANCE.createRendererType();
+            RendererClassType rendererClass = FacesConfigFactory.eINSTANCE.createRendererClassType();
+            rendererClass.setTextContent(rendererClassName);
+            renderer.setRendererClass(rendererClass);
+
+
+            RendererTypeType rendererTypeType = FacesConfigFactory.eINSTANCE.createRendererTypeType();
+            rendererTypeType.setTextContent(rendererTypeString);
+            renderer.setRendererType(rendererTypeType);
+            
+            ComponentFamilyType componentFamily = FacesConfigFactory.eINSTANCE.createComponentFamilyType();
+            componentFamily.setTextContent(componentFamilyString);
+            renderer.setComponentFamily(componentFamily);
+
+            
+            if (renderKitIDString == null) {
+                //use the default
+                renderKitIDString = "HTML_BASIC"; //$NON-NLS-1$
+            }
+            EList renderKits = facesConfig.getRenderKit();
+            if (renderKits != null) {
+                RenderKitType renderKit = null;
+                for (int i = 0, k = renderKits.size(); i < k; i++) {
+                    if (((RenderKitType)renderKits.get(i)).getRenderKitId() != null && renderKitIDString.equals(((RenderKitType)renderKits.get(i)).getRenderKitId().getTextContent())) {
+                        renderKit = (RenderKitType)(renderKits.get(i));
+                    }
+                }
+                if (renderKit == null) {
+                    renderKit = FacesConfigFactory.eINSTANCE.createRenderKitType();
+                    RenderKitIdType renderKitID = FacesConfigFactory.eINSTANCE.createRenderKitIdType();
+                    renderKitID.setTextContent(renderKitIDString);
+                    renderKit.setRenderKitId(renderKitID);
+                    renderKits.add(renderKit);
+                }
+                renderKit.getRenderer().add(renderer);
+            }
+        }
+    }
+
+    private void addConverter(IAnnotation converterAnnotation, IType converterType) throws JavaModelException {
+        String converterClassName = converterType.getFullyQualifiedName();
+        IMemberValuePair[] pairs = converterAnnotation.getMemberValuePairs();
+        String converterIDString = null;
+        String converterForClassString = null;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    converterIDString = (String)pair.getValue();
+                } else if ("forClass".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_CLASS) {  //$NON-NLS-1$
+                    converterForClassString = (String)pair.getValue();
+                }
+            }
+        }
+        if (converterClassName != null) {
+            ConverterType converter = FacesConfigFactory.eINSTANCE.createConverterType();
+            ConverterClassType converterClass = FacesConfigFactory.eINSTANCE.createConverterClassType();
+            converterClass.setTextContent(converterClassName);
+            converter.setConverterClass(converterClass);
+
+            if (converterIDString != null) {
+                ConverterIdType converterID = FacesConfigFactory.eINSTANCE.createConverterIdType();
+                converterID.setTextContent(converterIDString);
+                converter.setConverterId(converterID);
+            }  
+            
+            if (converterForClassString == null) {
+                //use the default
+                converterForClassString = "java.lang.Object"; //$NON-NLS-1$
+            }
+            ConverterForClassType converterForClass = FacesConfigFactory.eINSTANCE.createConverterForClassType();
+            converterForClass.setTextContent(converterForClassString);
+            converter.setConverterForClass(converterForClass);
+            facesConfig.getConverter().add(converter);
+        }
+    }
+
+    private void addComponent(IAnnotation componentAnnotation, IType componentType) throws JavaModelException {
+        String componentClassName = componentType.getFullyQualifiedName();
+        IMemberValuePair[] pairs = componentAnnotation.getMemberValuePairs();
+        String componentTypeString = null;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    componentTypeString = (String)pair.getValue();
+                }
+            }
+        }
+        if (componentTypeString != null && componentClassName != null) {
+            ComponentType component =  FacesConfigFactory.eINSTANCE.createComponentType();
+            ComponentClassType componentClass = FacesConfigFactory.eINSTANCE.createComponentClassType();
+            componentClass.setTextContent(componentClassName);
+            component.setComponentClass(componentClass);
+            
+            ComponentTypeType componentTypeType = FacesConfigFactory.eINSTANCE.createComponentTypeType();
+            componentTypeType.setTextContent(componentTypeString);
+            component.setComponentType(componentTypeType);
+            
+            facesConfig.getComponent().add(component);
+        }
+    }
+}
