@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -26,17 +27,20 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.core.JSFVersion;
+import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.jst.jsf.core.jsfappconfig.internal.JSFAppConfigManagerFactory;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.DisplayNameType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationCaseType;
 import org.eclipse.jst.jsf.facesconfig.emf.NavigationRuleType;
+import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage;
 import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
 import org.eclipse.jst.jsf.metadataprocessors.features.ValidationMessage;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.ComponentCore;
+import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.osgi.framework.Bundle;
@@ -126,7 +130,7 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 	 * @see org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues#getPossibleValues()
 	 */
 	public List getPossibleValues() {
-		final List<NavigationRuleType> ret = new ArrayList<NavigationRuleType>();
+		final List<IPossibleValue> ret = new ArrayList<IPossibleValue>();
 		if (getStructuredDocumentContext() == null)
 			return ret;
 		
@@ -138,6 +142,8 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 				if (rule != null)
 					ret.addAll(createProposals(rule));
 			}
+			//Bug 306451 - [JSF2.0] Support for Implicit navigation
+			ret.addAll(createImplicitProposals(jsp));
 		}
 		return ret;
 	}
@@ -191,7 +197,64 @@ public class ActionType extends MethodBindingType implements IPossibleValues{
 		return pv;
 	}
 
-	
+	//Bug 306451 - [JSF2.0] Support for Implicit navigation
+	private List createImplicitProposals(final IFile fromFile) {
+		List ret = new ArrayList();
+		if (fromFile != null) {
+			final IProject project = fromFile.getProject();
+			if (project != null) {
+				final IVirtualComponent component = ComponentCore.createComponent(project);
+				if (component != null) {
+					final IVirtualFolder folder = component.getRootFolder();
+					if (folder != null) {
+						final IPath webContentPath = folder.getUnderlyingFolder().getFullPath();
+						IPath fromPath = fromFile.getFullPath();
+						if (webContentPath.isPrefixOf(fromPath)) {
+							fromPath = fromPath.makeRelativeTo(webContentPath);
+							final IPath fromPathParent = fromPath.removeLastSegments(1);
+							final List<IFile> files =
+									JSFAppConfigUtils.getImplicitNavigationFiles(fromFile);
+							for (final IFile currentFile: files) {
+								IPath currentPath = currentFile.getFullPath();
+								if (webContentPath.isPrefixOf(currentPath)) {
+									currentPath = currentPath.makeRelativeTo(webContentPath);
+									final String toViewId = '/' + currentPath.toString();
+									boolean isRelative = false;
+									if (fromPathParent.isPrefixOf(currentPath)) {
+										currentPath = currentPath.makeRelativeTo(fromPathParent);
+										isRelative = true;
+									}
+									String value = currentPath.toString();
+									final String fromPathExt = fromPath.getFileExtension();
+									if (fromPathExt != null &&
+											fromPathExt.equals(currentPath.getFileExtension())) {
+										value = currentPath.removeFileExtension().toString();
+									}
+									if (!isRelative) {
+										value = '/' + value;
+									}
+									final String navDisplay =
+											NLS.bind(
+													Messages.ActionType_navcase_display,
+													new String[]{value, toViewId});
+									final PossibleValue possibleValue =
+											new PossibleValue(value, navDisplay);
+									possibleValue.setIcon(getNavCaseImageDescriptor());
+									possibleValue.setAdditionalInformation(
+											NLS.bind(
+													Messages.ActionType_implicit_navigation_additional_info,
+													toViewId));
+									ret.add(possibleValue);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
 	private ImageDescriptor getNavCaseImageDescriptor() {
 		ImageDescriptor ret = super.getImage();
 		if (ret != null && ret != MISSING_IMAGE)

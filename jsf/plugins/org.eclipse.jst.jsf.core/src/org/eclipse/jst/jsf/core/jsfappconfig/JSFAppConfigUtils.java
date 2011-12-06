@@ -23,13 +23,20 @@ import java.util.StringTokenizer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceProxy;
+import org.eclipse.core.resources.IResourceProxyVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -362,6 +369,71 @@ public class JSFAppConfigUtils {
 			}
 		}
 		return JARsList;
+	}
+
+	//Bug 306451 - [JSF2.0] Support for Implicit navigation
+	/**
+	 * Get all files that are possible destinations for implicit navigation (JSF 2.x or greater).
+	 * 
+	 * @param fromFile IFile instance that navigation is from.
+	 * @return List of IFile instances that are possible destinations.
+	 */
+	public static List<IFile> getImplicitNavigationFiles(final IFile fromFile) {
+		List<IFile> files = new ArrayList<IFile>();
+		if (fromFile != null) {
+			final IProject project = fromFile.getProject();
+			if (isValidJSFProject(project, IJSFCoreConstants.JSF_VERSION_2_0)) {
+				final IVirtualFolder webContentFolder = new DefaultVirtualComponentQuery().getWebContentFolder(project);
+				if (webContentFolder != null) {
+					final IContainer[] rootContainers = webContentFolder.getUnderlyingFolders();
+					if (rootContainers != null && rootContainers.length > 0) {
+						for (int i = 0; i < rootContainers.length; i++) {
+							try {
+								rootContainers[i].accept(new JSFAppConfigUtils().new ImplicitNavigationResourceProxyVisitor(files), IResource.NONE);
+							} catch(CoreException cEx) {
+								JSFCorePlugin.log(IStatus.ERROR, cEx.getLocalizedMessage(), cEx);
+							}
+						}
+						files.remove(fromFile);
+					}
+				}
+			}
+		}
+		return files;
+	}
+
+
+
+	class ImplicitNavigationResourceProxyVisitor implements IResourceProxyVisitor {
+
+		private List<IFile> files;
+		private IContentTypeManager contentTypeMgr;
+		private IContentType jspSourceType;
+		private IContentType htmlSourceType;
+
+		public ImplicitNavigationResourceProxyVisitor(List<IFile> files) {
+			this.files = files;
+			this.contentTypeMgr = Platform.getContentTypeManager();
+			this.jspSourceType = contentTypeMgr.getContentType("org.eclipse.jst.jsp.core.jspsource"); //$NON-NLS-1$
+			this.htmlSourceType = contentTypeMgr.getContentType("org.eclipse.wst.html.core.htmlsource"); //$NON-NLS-1$
+		}
+
+		public boolean visit(IResourceProxy proxy) throws CoreException {
+			switch (proxy.getType()) {
+			case IResource.FOLDER:
+				return true;
+			case IResource.FILE:
+				IContentType contentType = contentTypeMgr.findContentTypeFor(proxy.getName());
+				if (contentType != null) {
+					if (contentType.isKindOf(jspSourceType) || contentType.isKindOf(htmlSourceType)) {
+						files.add((IFile)proxy.requestResource());
+					}
+				}
+				break;
+			}
+			return false;
+		}
+
 	}
 
 }

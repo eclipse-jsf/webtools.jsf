@@ -40,6 +40,10 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
+	public static String ActionType_implicit_navigation_additional_info;
+	/**
+	 * see messages.properties
+	 */
 	public static String BooleanType_invalid_values;
 	/**
 	 * see messages.properties
