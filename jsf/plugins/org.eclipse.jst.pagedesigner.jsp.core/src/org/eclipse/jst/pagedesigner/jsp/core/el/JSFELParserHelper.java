@@ -11,12 +11,6 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.jsp.core.el;
 
-import java.io.StringReader;
-
-import org.apache.commons.el.Expression;
-import org.apache.commons.el.ExpressionString;
-import org.apache.commons.el.parser.ELParser;
-import org.apache.commons.el.parser.ParseException;
 
 /**
  * Utility class to implement support functionality to "morph" JSP EL into JSF
@@ -41,30 +35,14 @@ public final class JSFELParserHelper {
 	}
 
 	/**
-	 * Gets the parsed form of the given expression string. Returns either an
-	 * Expression or ExpressionString.
+	 * Gets the parsed form of the given expression string.
 	 * @param expressionString 
 	 * @return the result of parsing expressionString
+	 * @deprecated Use desired EL parser directly.
 	 */
 	public static Object parseExpression(String expressionString) {
-		expressionString = toJspElExpression(expressionString);
-
-		ELParser parser = new ELParser(new StringReader(expressionString));
-		try {
-			Object expression = parser.ExpressionString();
-			if (!(expression instanceof Expression)
-					&& !(expression instanceof ExpressionString)) {
-				return null;
-			}
-
-			return expression;
-		} catch (ParseException e) {
-
-			// String msg = "Invalid expression: '" + expressionString + "'";
-			// log.debug(msg, e);
-			// throw new ReferenceSyntaxException(msg, e);
-		}
-		return null;
+		throw new UnsupportedOperationException(
+				"Use desired EL parser directly."); //$NON-NLS-1$
 	}
 
 	/**
