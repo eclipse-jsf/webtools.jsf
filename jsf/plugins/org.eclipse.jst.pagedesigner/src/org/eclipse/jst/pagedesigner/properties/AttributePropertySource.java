@@ -241,11 +241,13 @@ public class AttributePropertySource implements IPropertySource {
 //	}
 
 	private IPropertyDescriptor getAttrPropertyDescriptor(String attrName){
-		Entity attrEntity = _query.findTagAttributeEntity(_tagEntity, attrName);
-		List ppds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, _context, attrEntity);
-		if (ppds.size() > 0)
-			return (IPropertyDescriptor)((IPropertyPageDescriptor)ppds.get(0)).getAdapter(IPropertyDescriptor.class);
-		
+		//Bug 364667 - NullPointerException occurs when I try to display attributes for an HTML element in Web Page Editor
+		if (_query != null) {
+			Entity attrEntity = _query.findTagAttributeEntity(_tagEntity, attrName);
+			List ppds = MetaDataEnabledProcessingFactory.getInstance().getAttributeValueRuntimeTypeFeatureProcessors(IPropertyPageDescriptor.class, _context, attrEntity);
+			if (ppds.size() > 0)
+				return (IPropertyDescriptor)((IPropertyPageDescriptor)ppds.get(0)).getAdapter(IPropertyDescriptor.class);
+		}
 		return null;
 			
 	}
