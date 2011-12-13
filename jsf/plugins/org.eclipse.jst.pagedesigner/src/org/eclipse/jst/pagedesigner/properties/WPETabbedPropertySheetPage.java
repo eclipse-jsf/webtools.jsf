@@ -199,9 +199,12 @@ public class WPETabbedPropertySheetPage extends TabbedPropertySheetPage {
 	public void dispose() {
 		this.getSite().getWorkbenchWindow().getSelectionService().removePostSelectionListener(getSelectionListener());
 		this.getSite().setSelectionProvider(null);
-		manager.releaseInstance();
-		manager.dispose();
-		manager = null;
+		//manager could be null here
+		if (manager != null) {
+			manager.releaseInstance();
+			manager.dispose();
+			manager = null;
+		}
 		_selListener = null;
 		_htmlEditor = null;
 		super.dispose();
