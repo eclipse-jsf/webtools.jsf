@@ -44,6 +44,10 @@ public class Messages extends NLS {
 	/**
 	 * see messages.properties
 	 */
+	public static String AnyStringType_empty_value;
+	/**
+	 * see messages.properties
+	 */
 	public static String BooleanType_invalid_values;
 	/**
 	 * see messages.properties

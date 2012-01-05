@@ -530,7 +530,7 @@
 		</entity>
 		<entity id="target">
 			<trait id="attribute-value-runtime-type">
-				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.AnyStringType</value>
 			</trait>
 			<trait id="valid-values">
 				<value xsi:type="mdt:ListOfValues">

@@ -221,6 +221,10 @@
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType"
             id="attributevalues.StringType"/>
       <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.AnyStringType"
+            id="attributevalues.AnyStringType">
+      </attributeValueRuntimeType>
+      <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.BooleanType"
             id="attributevalues.BooleanType"/>
       <attributeValueRuntimeType
