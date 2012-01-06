@@ -132,12 +132,12 @@ public class FaceletDocumentFactory
                         break FIND_TLDRECORD;
                     }
                 }
-
-                if (tldTagInfo == null)
-                {
-                    tldTagInfo = new MetadataTagInfo(_project, uri);
-                }
             }
+        }
+        //Bug 361005 - NPE in Attributes Tab of Web Page Editor Properties
+        if (tldTagInfo == null)
+        {
+            tldTagInfo = new MetadataTagInfo(_project, uri);
         }
         return tldTagInfo;
     }
