@@ -12,11 +12,15 @@
 
 package org.eclipse.jst.jsf.facesconfig.ui.pageflow;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor;
@@ -28,6 +32,7 @@ import org.eclipse.ui.actions.ActionFactory;
  * 
  */
 public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
+
 	/** the action registry */
 	private final ActionRegistry actionRegistry;
 
@@ -42,7 +47,6 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	public PageflowEditorContextMenuProvider(EditPartViewer viewer,
 			ActionRegistry actionRegistry) {
 		super(viewer);
-
 		this.actionRegistry = actionRegistry;
 	}
 
@@ -58,10 +62,12 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 		// add typical undo/redo commands
 		appendActionToUndoGroup(menuManager, ActionFactory.UNDO.getId());
 		appendActionToUndoGroup(menuManager, ActionFactory.REDO.getId());
+
 		// add edit commands, including copy, paste, delete
 		appendActionToEditGroup(menuManager, ActionFactory.COPY.getId());
 		appendActionToEditGroup(menuManager, ActionFactory.PASTE.getId());
 		appendActionToEditGroup(menuManager, ActionFactory.DELETE.getId());
+
 		// Add Open Editor Action
 		appendActionToEditGroup(menuManager, FacesConfigEditor.EDITOR_ID);
 
@@ -72,15 +78,14 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 		// right and center.
 		appendAlignmentSubmenu(menuManager);
 
+		//append the show view submenu
 		appendShowViewSubmenu(menuManager);
-
 	}
 
 	/**
-	 * Appends the alignment subment.
+	 * Appends the alignment submenu.
 	 * 
-	 * @param menuManager
-	 *            manager of workbench
+	 * @param menuManager manager of workbench
 	 */
 	private void appendShowViewSubmenu(IMenuManager menuManager) {
 		// Show View Actions
@@ -105,10 +110,9 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	}
 
 	/**
-	 * Appends the alignment subment.
+	 * Appends the alignment submenu.
 	 * 
-	 * @param menuManager
-	 *            manager of workbench
+	 * @param menuManager manager of workbench
 	 */
 	private void appendAlignmentSubmenu(IMenuManager menuManager) {
 		// Alignment Actions
@@ -161,31 +165,10 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	}
 
 	/**
-	 * Appends the specified action to the specified menu group
-	 * 
-	 * @param menu -
-	 *            menu manager
-	 * @param actionId -
-	 *            action's ID
-	 * @param menuGroup -
-	 *            menu group name
-	 */
-	 // TODO: dead code
-//	private void appendActionToMenu(IMenuManager menu, String actionId,
-//			String menuGroup) {
-//		IAction action = getActionRegistry().getAction(actionId);
-//		if (null != action && action.isEnabled()) {
-//			menu.appendToGroup(menuGroup, action);
-//		}
-//	}
-
-	/**
 	 * Appends the specified action to the 'Undo' menu group
 	 * 
-	 * @param menu -
-	 *            menu manager
-	 * @param actionId -
-	 *            action's ID
+	 * @param menu menu manager
+	 * @param actionId action's ID
 	 */
 	private void appendActionToUndoGroup(IMenuManager menu, String actionId) {
 		IAction action = getActionRegistry().getAction(actionId);
@@ -197,10 +180,8 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	/**
 	 * Appends the specified action to the 'edit' menu group
 	 * 
-	 * @param menu -
-	 *            menu manager
-	 * @param actionId -
-	 *            action's ID
+	 * @param menu menu manager
+	 * @param actionId action's ID
 	 */
 	private void appendActionToEditGroup(IMenuManager menu, String actionId) {
 		IAction action = getActionRegistry().getAction(actionId);
@@ -210,28 +191,10 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 	}
 
 	/**
-	 * Appends the specified action to the 'add' menu group
-	 * 
-	 * @param menu -
-	 *            menu manager
-	 * @param actionId -
-	 *            action's ID
-	 */
-	 // TODO: dead code
-//	private void appendActionToAddGroup(IMenuManager menu, String actionId) {
-//		IAction action = getActionRegistry().getAction(actionId);
-//		if (null != action && action.isEnabled()) {
-//			menu.appendToGroup(GEFActionConstants.GROUP_ADD, action);
-//		}
-//	}
-
-	/**
 	 * Appends the specified action to the 'save' menu group
 	 * 
-	 * @param menu -
-	 *            menu manager
-	 * @param actionId -
-	 *            action's ID
+	 * @param menu menu manager
+	 * @param actionId action's ID
 	 */
 	private void appendActionToSaveGroup(IMenuManager menu, String actionId) {
 		IAction action = getActionRegistry().getAction(actionId);
@@ -239,4 +202,27 @@ public class PageflowEditorContextMenuProvider extends ContextMenuProvider {
 			menu.appendToGroup(GEFActionConstants.GROUP_SAVE, action);
 		}
 	}
+
+	//Bug 367897 - Faces-config | Navigation Rule, provide un-usable menu items (Run As, Debug As, Profile As)
+	private static List<String> DISALLOWED_CONTRIBUTION_IDS = new ArrayList<String>();
+	static {
+		DISALLOWED_CONTRIBUTION_IDS.add("org.eclipse.debug.ui.contextualLaunch.profile.submenu"); //$NON-NLS-1$
+		DISALLOWED_CONTRIBUTION_IDS.add("org.eclipse.debug.ui.contextualLaunch.debug.submenu"); //$NON-NLS-1$
+		DISALLOWED_CONTRIBUTION_IDS.add("org.eclipse.debug.ui.contextualLaunch.run.submenu"); //$NON-NLS-1$
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.action.ContributionManager#allowItem(org.eclipse.jface.action.IContributionItem)
+	 */
+	protected boolean allowItem(IContributionItem itemToAdd) {
+		boolean allow = true;
+		if (itemToAdd != null) {
+			final String itemToAddId = itemToAdd.getId();
+			if (itemToAddId != null) {
+				allow = !DISALLOWED_CONTRIBUTION_IDS.contains(itemToAddId);
+			}
+		}
+		return allow;
+	}
+
 }
