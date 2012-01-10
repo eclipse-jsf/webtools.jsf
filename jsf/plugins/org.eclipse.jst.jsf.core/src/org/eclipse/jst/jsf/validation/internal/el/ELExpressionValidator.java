@@ -65,6 +65,11 @@ public class ELExpressionValidator
      */
     public ASTExpression validateXMLNode() 
     {
+    	//Bug 325496 - [JSF2.0] False warning from facelet validator for the attribute value #{resource['lib:file']}
+    	if (isELResourceReference(_elText)) {
+    		return null;
+    	}
+
         JSPELParser elParser = JSPELParser.createParser(_elText);
         // = 
         try {
@@ -114,6 +119,23 @@ public class ELExpressionValidator
             _reporter.report(diagnostic, offset, length);
             return null;
         }
+    }
+
+    private boolean isELResourceReference(String elText) {
+    	boolean isResource = false;
+    	//does EL contain enough chars?
+    	if (elText != null && elText.length() > 8) {
+    		//does EL begin with "resource[" and end with "]"?
+    		if (elText.toLowerCase().startsWith("resource[") && //$NON-NLS-1$
+    				elText.endsWith("]")) { //$NON-NLS-1$
+    			//is project JSF 2.0 or greater?
+    			if (ELValidationUtil.isProjectEL22(_context)) {
+    				//if all above is true, EL is a resource reference
+    				isResource = true;
+    			}
+    		}
+    	}
+    	return isResource;
     }
 
     /**
