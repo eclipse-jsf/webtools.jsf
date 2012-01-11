@@ -144,6 +144,8 @@ public class FacesConfigEditor extends FormEditor implements
 	 */
 	private ComposedAdapterFactory adapterFactory;
 
+	private int overviewPageID;
+
 	/** id of the pageflowPage */
 	private int pageflowPageID;
 
@@ -156,6 +158,8 @@ public class FacesConfigEditor extends FormEditor implements
 	private int sourcePageId;
 
 	private PageflowEditor pageflowPage;
+
+	private OverviewPage overviewPage;
 
 	/** The source text editor. */
 	private StructuredTextEditor sourcePage;
@@ -535,8 +539,8 @@ public class FacesConfigEditor extends FormEditor implements
                                 addPage(page1, FacesConfigEditor.this.getEditorInput());
                             }
                             
-                            IFormPage overviewPage = new OverviewPage(FacesConfigEditor.this);
-                            addPage(overviewPage, FacesConfigEditor.this.getEditorInput());
+                            overviewPage = new OverviewPage(FacesConfigEditor.this);
+                            overviewPageID = addPage(overviewPage, FacesConfigEditor.this.getEditorInput());
         
                             // Page flow
                             createAndAddPageflowPage();
@@ -1194,6 +1198,12 @@ public class FacesConfigEditor extends FormEditor implements
 		// getActionBarContributor().setActivePage(getActiveEditor());
 		// refresh content depending on current page
 		currentPageChanged();
+		//Bug 367899 - Navigation Information doesn't get synchronized with "From Outcome" updates
+		if (newPageIndex == overviewPageID) {
+			if (overviewPage != null) {
+				overviewPage.refreshAll();
+			}
+		}
 	}
 
 	public void dispose() 
