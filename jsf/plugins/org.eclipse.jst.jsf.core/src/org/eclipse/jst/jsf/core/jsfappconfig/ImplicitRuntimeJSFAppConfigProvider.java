@@ -108,7 +108,7 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		validators.add(createValidator("LongRange")); //$NON-NLS-1$
 		if (isAtLeastJSF20Project) {
 			validators.add(createValidator("Bean")); //$NON-NLS-1$
-			validators.add(createValidator("RegularExpression")); //$NON-NLS-1$
+			validators.add(createValidator("RegularExpression", "Regex")); //$NON-NLS-1$ //$NON-NLS-2$
 			validators.add(createValidator("Required")); //$NON-NLS-1$
 		}
 		//create and add UI components
@@ -147,6 +147,10 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 		components.add(createHTMLComponent("HtmlOutputLabel")); //$NON-NLS-1$
 		components.add(createHTMLComponent("HtmlOutputLink")); //$NON-NLS-1$
 		components.add(createHTMLComponent("HtmlOutputText")); //$NON-NLS-1$
+		if (isAtLeastJSF20Project) {
+			components.add(createHTMLComponent("HtmlOutcomeTargetLink")); //$NON-NLS-1$
+			components.add(createHTMLComponent("HtmlOutcomeTargetButton")); //$NON-NLS-1$
+		}
 		components.add(createHTMLComponent("HtmlPanelGrid")); //$NON-NLS-1$
 		components.add(createHTMLComponent("HtmlPanelGroup")); //$NON-NLS-1$
 		components.add(createHTMLComponent("HtmlSelectBooleanCheckbox")); //$NON-NLS-1$
@@ -202,28 +206,39 @@ public class ImplicitRuntimeJSFAppConfigProvider extends AbstractJSFAppConfigPro
 	/**
 	 * Creates a {@link ValidatorType} instance.
 	 * 
-	 * @param name Base name of validator from which validator-id and
-	 * validator-class are formed.
+	 * @param id Base ID of validator from which validator-id is formed.
+	 * @param classname Base classname of validator from which validator-class is formed.
 	 * @return {@link ValidatorType} instance.
 	 */
-	protected ValidatorType createValidator(String name) {
+	protected ValidatorType createValidator(String id, String classname) {
 		ValidatorType validatorType = FacesConfigFactory.eINSTANCE.createValidatorType();
 		//set validator-id
 		ValidatorIdType validatorIdType = FacesConfigFactory.eINSTANCE.createValidatorIdType();
 		StringBuffer sb = new StringBuffer();
 		sb.append("javax.faces."); //$NON-NLS-1$
-		sb.append(name);
+		sb.append(id);
 		validatorIdType.setTextContent(sb.toString());
 		validatorType.setValidatorId(validatorIdType);
 		//set validator-class
 		ValidatorClassType validatorClassType = FacesConfigFactory.eINSTANCE.createValidatorClassType();
 		sb = new StringBuffer();
 		sb.append("javax.faces.validator."); //$NON-NLS-1$
-		sb.append(name);
+		sb.append(classname);
 		sb.append("Validator"); //$NON-NLS-1$
 		validatorClassType.setTextContent(sb.toString());
 		validatorType.setValidatorClass(validatorClassType);
 		return validatorType;
+	}
+
+	/**
+	 * Creates a {@link ValidatorType} instance.
+	 * 
+	 * @param name Base name of validator from which validator-id and
+	 * validator-class are formed.
+	 * @return {@link ValidatorType} instance.
+	 */
+	protected ValidatorType createValidator(String name) {
+		return createValidator(name, name);
 	}
 
 	/**

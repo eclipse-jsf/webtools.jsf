@@ -537,6 +537,48 @@
       </md:value>
     </trait>
   </entity>
+  <entity id="button" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>javax.faces.component.html.HtmlOutcomeTargetButton</className>
+            <superClasses>javax.faces.component.UIOutcomeTarget</superClasses>
+            <superClasses>javax.faces.component.UIOutput</superClasses>
+            <superClasses>javax.faces.component.UIComponentBase</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>javax.faces.HtmlOutcomeTargetButton</componentType>
+            <componentFamily>javax.faces.OutcomeTarget</componentFamily>
+            <renderType>javax.faces.Button</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
+  <entity id="link" type="tag">
+    <trait id="viewElementMapping">
+      <md:value xsi:type="viewMap:TagMapping">
+        <versionedTagToViewMappings>
+          <typeInfo xsi:type="viewMap:ComponentTypeInfo_">
+            <className>javax.faces.component.html.HtmlOutcomeTargetLink</className>
+            <superClasses>javax.faces.component.UIOutcomeTarget</superClasses>
+            <superClasses>javax.faces.component.UIOutput</superClasses>
+            <superClasses>javax.faces.component.UIComponentBase</superClasses>
+            <superClasses>javax.faces.component.UIComponent</superClasses>
+            <superClasses>java.lang.Object</superClasses>
+            <interfaces>javax.faces.component.ValueHolder</interfaces>
+            <interfaces>javax.faces.component.StateHolder</interfaces>
+            <componentType>javax.faces.HtmlOutcomeTargetLink</componentType>
+            <componentFamily>javax.faces.OutcomeTarget</componentFamily>
+            <renderType>javax.faces.Link</renderType>
+          </typeInfo>
+        </versionedTagToViewMappings>
+      </md:value>
+    </trait>
+  </entity>
   <entityGroup id="common-valueholder-attributes">
       <entity id="value">
         <trait id="attributeMapping">
