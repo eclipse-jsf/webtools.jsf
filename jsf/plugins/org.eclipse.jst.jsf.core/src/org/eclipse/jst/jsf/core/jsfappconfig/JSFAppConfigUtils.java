@@ -52,6 +52,9 @@ import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponen
 import org.eclipse.jst.jsf.core.IJSFCoreConstants;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.internal.Messages;
+import org.eclipse.jst.jsf.facesconfig.emf.FacesConfigFactory;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanExtensionType;
+import org.eclipse.jst.jsf.facesconfig.emf.ManagedBeanType;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
@@ -79,6 +82,14 @@ public class JSFAppConfigUtils {
 	 */
 	public static final String FACES_CONFIG_IN_JAR_PATH = "META-INF/faces-config.xml"; //$NON-NLS-1$
 
+	/** ID of managed bean's description instance to indicate content identifies bean's "source" **/ 
+	public static final String MANAGEDBEAN_SOURCE_ID = "MANAGEDBEAN_SOURCE_ID"; //$NON-NLS-1$
+	/** Indicates that a managed bean was defined in a faces-config file **/
+	public static final String MANAGEDBEAN_SOURCE_FACES_CONFIG_FILE = "FACES_CONFIG_FILE"; //$NON-NLS-1$
+	/** Indicates that a managed bean was defined by a JSF annotation **/
+	public static final String MANAGEDBEAN_SOURCE_JSF_ANNOTATION = "JSF_ANNOTATION"; //$NON-NLS-1$
+	/** Indicates that a managed bean was defined by a CDI annotation **/
+	public static final String MANAGEDBEAN_SOURCE_CDI_ANNOTATION = "CDI_ANNOTATION"; //$NON-NLS-1$
     
     /**
      * @param project
@@ -400,6 +411,116 @@ public class JSFAppConfigUtils {
 			}
 		}
 		return files;
+	}
+
+	/**
+	 * Sets the "source" (one of the MANAGEDBEAN_SOURCE_* constants) of the managed bean.
+	 * @param managedBean Managed bean instance.
+	 * @param source "Source" of the managed bean.
+	 */
+	public static void setManagedBeanSource(final ManagedBeanType managedBean, final String source) {
+		if (managedBean != null) {
+			ManagedBeanExtensionType extension = getManagedBeanSourceExtension(managedBean);
+			if (extension == null) {
+				extension = FacesConfigFactory.eINSTANCE.createManagedBeanExtensionType();
+				extension.setId(MANAGEDBEAN_SOURCE_ID);
+				managedBean.getManagedBeanExtension().add(extension);
+			}
+			final String content = extension.getTextContent();
+			if (content != null) {
+				if (!content.trim().equals(source)) {
+					extension.setTextContent(source);
+				}
+			} else {
+				extension.setTextContent(source);
+			}
+		}
+	}
+
+	/**
+	 * Gets the "source" (one of the MANAGEDBEAN_SOURCE_* constants) of the managed bean.
+	 * @param managedBean Managed bean instance.
+	 * @return "Source" of the managed bean (assumes MANAGEDBEAN_SOURCE_FACES_CONFIG_FILE if not
+	 * set on the managed bean).
+	 */
+	public static String getManagedBeanSource(final ManagedBeanType managedBean) {
+		String source = MANAGEDBEAN_SOURCE_FACES_CONFIG_FILE;
+		final ManagedBeanExtensionType extension = getManagedBeanSourceExtension(managedBean);
+		if (extension != null) {
+			source = extension.getTextContent().trim();
+		}
+		return source;
+	}
+
+	/**
+	 * Gets the managed bean instance's extension object that has ID of MANAGEDBEAN_SOURCE_ID.
+	 * @param managedBean Managed bean instance.
+	 * @return The managed bean's extension object that has ID of MANAGEDBEAN_SOURCE_ID.
+	 */
+	public static ManagedBeanExtensionType getManagedBeanSourceExtension(final ManagedBeanType managedBean) {
+		ManagedBeanExtensionType extension = null;
+		if (managedBean != null) {
+			final EList extensions = managedBean.getManagedBeanExtension();
+			for (final Object curExtObj: extensions) {
+				if (curExtObj instanceof ManagedBeanExtensionType) {
+					final ManagedBeanExtensionType curExt = (ManagedBeanExtensionType) curExtObj;
+					final String id = curExt.getId();
+					if (id != null && id.equals(MANAGEDBEAN_SOURCE_ID)) {
+						extension = curExt;
+						break;
+					}
+				}
+			}
+		}
+		return extension;
+	}
+
+	/**
+	 * Returns <code>true</code> if the managed bean is defined in a faces-config file.
+	 * @param managedBean Managed bean instance to test.
+	 * @return <code>true</code> if the managed bean is defined in a faces-config file, else
+	 * <code>false</code>.
+	 */
+	public static boolean isDefinedInFacesConfigFile(final ManagedBeanType managedBean) {
+		boolean ret = false;
+		if (managedBean != null) {
+			ret = !isDefinedByJSFAnnotation(managedBean) && !isDefinedByCDIAnnotation(managedBean);
+		}
+		return ret;
+	}
+
+	/**
+	 * Returns <code>true</code> if the managed bean is defined by a JSF annotation.
+	 * @param managedBean Managed bean instance to test.
+	 * @return <code>true</code> if the managed bean is defined by a JSF annotation, else
+	 * <code>false</code>.
+	 */
+	public static boolean isDefinedByJSFAnnotation(final ManagedBeanType managedBean) {
+		boolean ret = false;
+		if (managedBean != null) {
+			final String source = getManagedBeanSource(managedBean);
+			if (source != null && source.equals(MANAGEDBEAN_SOURCE_JSF_ANNOTATION)) {
+				ret = true;
+			}
+		}
+		return ret;
+	}
+
+	/**
+	 * Returns <code>true</code> if the managed bean is defined by a CDI annotation.
+	 * @param managedBean Managed bean instance to test.
+	 * @return <code>true</code> if the managed bean is defined by a CDI annotation, else
+	 * <code>false</code>.
+	 */
+	public static boolean isDefinedByCDIAnnotation(final ManagedBeanType managedBean) {
+		boolean ret = false;
+		if (managedBean != null) {
+			final String source = getManagedBeanSource(managedBean);
+			if (source != null && source.equals(MANAGEDBEAN_SOURCE_CDI_ANNOTATION)) {
+				ret = true;
+			}
+		}
+		return ret;
 	}
 
 

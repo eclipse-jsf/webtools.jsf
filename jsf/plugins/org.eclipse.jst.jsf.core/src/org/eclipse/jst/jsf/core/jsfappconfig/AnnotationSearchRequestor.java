@@ -17,11 +17,20 @@ import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvid
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_CONVERTER_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_RENDERER_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_VALIDATOR_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.VIEW_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.APPLICATION_SCOPED_ANNOTATION_CLASS;
+
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.NONE_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.VIEW_SCOPED_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.SESSION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.APPLICATION_SCOPED_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CUSTOM_SCOPED_ANNOTATION_CLASS;
+
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_NAMED_BEAN_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_MODEL_BEAN_ANNOTATION_CLASS;
+
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_REQUEST_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_SESSION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_APPLICATION_SCOPED_ANNOTATION_CLASS;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
@@ -97,7 +106,11 @@ public class AnnotationSearchRequestor extends SearchRequestor {
                                     addRenderer(annotations[i], type);
                                 } else if (FACES_VALIDATOR_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
                                     addValidator(annotations[i], type);
-                                }               
+                                } else if (CDI_NAMED_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                	addCDINamedBean(annotations[i], type);
+                                } else if (CDI_MODEL_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                                	addCDIModelBean(type);
+                                }
                             }
                         }
                     }
@@ -168,14 +181,14 @@ public class AnnotationSearchRequestor extends SearchRequestor {
                     String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
                     if (resolvedAnnotationTypes != null) {
                         String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
-                        if (APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "application"; //$NON-NLS-1$
+                        if (NONE_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "none"; //$NON-NLS-1$
                         } else if (VIEW_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
                         	beanScopeString = "view"; //$NON-NLS-1$
-                        } else if (NONE_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "none"; //$NON-NLS-1$
                         } else if (SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
                         	beanScopeString = "session"; //$NON-NLS-1$
+                        } else if (APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "application"; //$NON-NLS-1$
                         } else if (CUSTOM_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
                             IMemberValuePair[] scopePairs = annotations[i].getMemberValuePairs();
                             if (scopePairs != null && scopePairs.length == 1 && scopePairs[0].getValueKind() == IMemberValuePair.K_STRING) {
@@ -199,6 +212,7 @@ public class AnnotationSearchRequestor extends SearchRequestor {
             beanScope.setTextContent(beanScopeString);
             bean.setManagedBeanScope(beanScope);
             bean.setEager(isBeanEager.booleanValue());
+            JSFAppConfigUtils.setManagedBeanSource(bean, JSFAppConfigUtils.MANAGEDBEAN_SOURCE_JSF_ANNOTATION);
             facesConfig.getManagedBean().add(bean);
         }
     }
@@ -357,4 +371,113 @@ public class AnnotationSearchRequestor extends SearchRequestor {
             facesConfig.getComponent().add(component);
         }
     }
+
+    private void addCDINamedBean(IAnnotation beanAnnotation, IType beanType) throws JavaModelException {
+        IMemberValuePair[] pairs = beanAnnotation.getMemberValuePairs();
+
+        String beanNameString = null;
+        if (pairs != null) {
+            for (IMemberValuePair pair : pairs) {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
+                    beanNameString = (String)pair.getValue();
+                }
+            }
+        }
+        if (beanNameString == null || beanNameString.length() < 1) {
+            beanNameString = beanType.getElementName();
+            if (beanNameString != null && beanNameString.length() > 0) {
+                StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toLowerCase());
+                beanNameString = casedName.append(beanNameString.substring(1)).toString();
+            }
+        }
+
+        String beanClassName = beanType.getFullyQualifiedName();
+
+        String beanScopeString = "dependent"; //$NON-NLS-1$
+        IAnnotation[] annotations = beanType.getAnnotations();
+        if (annotations != null) {
+	        for (int i = 0, k = annotations.length; i < k; i++) {
+                if (annotations[i].exists()) {
+                    String annotationType = annotations[i].getElementName();
+                    String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
+                    if (resolvedAnnotationTypes != null) {
+                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
+                        if (CDI_REQUEST_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "request"; //$NON-NLS-1$
+                        } else if (CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "conversation"; //$NON-NLS-1$
+                        } else if (CDI_SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "session"; //$NON-NLS-1$
+                        } else if (CDI_APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "application"; //$NON-NLS-1$
+                        }
+                    }
+                }
+	        }
+        }
+
+        if (beanNameString != null && beanClassName != null) {
+            ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
+            ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
+            beanName.setTextContent(beanNameString);
+            bean.setManagedBeanName(beanName);
+            ManagedBeanClassType beanClass = FacesConfigFactory.eINSTANCE.createManagedBeanClassType();
+            beanClass.setTextContent(beanClassName);
+            bean.setManagedBeanClass(beanClass);
+            ManagedBeanScopeType beanScope = FacesConfigFactory.eINSTANCE.createManagedBeanScopeType();
+            beanScope.setTextContent(beanScopeString);
+            bean.setManagedBeanScope(beanScope);
+            bean.setEager(false);
+            JSFAppConfigUtils.setManagedBeanSource(bean, JSFAppConfigUtils.MANAGEDBEAN_SOURCE_CDI_ANNOTATION);
+            facesConfig.getManagedBean().add(bean);
+        }
+    }
+
+    private void addCDIModelBean(IType beanType) throws JavaModelException {
+        String beanNameString = beanType.getElementName();
+        if (beanNameString != null && beanNameString.length() > 0) {
+            StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toLowerCase());
+            beanNameString = casedName.append(beanNameString.substring(1)).toString();
+        }
+
+        String beanClassName = beanType.getFullyQualifiedName();
+
+        String beanScopeString = "request"; //$NON-NLS-1$
+        IAnnotation[] annotations = beanType.getAnnotations();
+        if (annotations != null) {
+	        for (int i = 0, k = annotations.length; i < k; i++) {
+                if (annotations[i].exists()) {
+                    String annotationType = annotations[i].getElementName();
+                    String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
+                    if (resolvedAnnotationTypes != null) {
+                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
+                        if (CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "conversation"; //$NON-NLS-1$
+                        } else if (CDI_SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "session"; //$NON-NLS-1$
+                        } else if (CDI_APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
+                        	beanScopeString = "application"; //$NON-NLS-1$
+                        }
+                    }
+                }
+	        }
+        }
+
+        if (beanNameString != null && beanClassName != null) {
+            ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
+            ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
+            beanName.setTextContent(beanNameString);
+            bean.setManagedBeanName(beanName);
+            ManagedBeanClassType beanClass = FacesConfigFactory.eINSTANCE.createManagedBeanClassType();
+            beanClass.setTextContent(beanClassName);
+            bean.setManagedBeanClass(beanClass);
+            ManagedBeanScopeType beanScope = FacesConfigFactory.eINSTANCE.createManagedBeanScopeType();
+            beanScope.setTextContent(beanScopeString);
+            bean.setManagedBeanScope(beanScope);
+            bean.setEager(false);
+            JSFAppConfigUtils.setManagedBeanSource(bean, JSFAppConfigUtils.MANAGEDBEAN_SOURCE_CDI_ANNOTATION);
+            facesConfig.getManagedBean().add(bean);
+        }
+    }
+
 }

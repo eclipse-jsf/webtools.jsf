@@ -224,7 +224,7 @@ public class DefaultBeanSymbolSourceProvider
         {
             additionalInfo.append("<p><b>"); //$NON-NLS-1$
             additionalInfo.append(Messages.getString("DefaultBeanSymbolSourceProvider.AdditionalInformation.Description")); //$NON-NLS-1$
-            additionalInfo.append("</b>"); //$NON-NLS-1$
+            additionalInfo.append(" </b>"); //$NON-NLS-1$
             additionalInfo.append(descBuffer);
             additionalInfo.append("</p>"); //$NON-NLS-1$
         }
