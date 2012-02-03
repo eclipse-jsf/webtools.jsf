@@ -64,7 +64,15 @@
           <requires facet="jst.web" version="[2.5"/>
         </and>
       </constraint>
-    </project-facet-version> 
+    </project-facet-version>
+
+    <project-facet-version facet="jst.jsf" version="2.1">
+       <constraint>
+        <and>
+          <requires facet="jst.web" version="[2.5"/>
+        </and>
+      </constraint>
+    </project-facet-version>
 
     <action id="jst.jsf.v11.install" facet="jst.jsf" type="INSTALL" version="1.1">
       	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
@@ -94,7 +102,17 @@
     <action id="jst.jsf.v20.uninstall" facet="jst.jsf" version="2.0" type="UNINSTALL">
         <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallConfig$Factory"/>
 	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
- 	</action>  
+ 	</action>
+
+ 	<action id="jst.jsf.v21.install" facet="jst.jsf" type="INSTALL" version="2.1">
+      	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDelegate"/>
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetInstallDataModelProvider"/>
+    </action>  
+      
+    <action id="jst.jsf.v21.uninstall" facet="jst.jsf" version="2.1" type="UNINSTALL">
+        <config-factory class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallConfig$Factory"/>
+	 	<delegate class="org.eclipse.jst.jsf.core.internal.project.facet.JSFFacetUninstallDelegate"/>
+ 	</action>
 	      	
   </extension> 
   
@@ -147,12 +165,33 @@
            %JSFv20PresetDesc
         </description>
      </static-preset>
+     <static-preset
+           id="preset.jst.jsf.v2_1" extends="default.configuration">
+        <label>
+           %JSFv21Project
+        </label>
+        <facet
+              id="jst.java"
+              version="1.6">
+        </facet>
+        <facet
+              id="jst.web"
+              version="3.0">
+        </facet>
+        <facet
+              id="jst.jsf"
+              version="2.1">
+        </facet>
+        <description>
+           %JSFv21PresetDesc
+        </description>
+     </static-preset>
   </extension>
 
   <extension point="org.eclipse.wst.common.project.facet.core.runtimes">
     <supported>
 		<runtime-component any="true"/>
-        	<facet id="jst.jsf" version="1.1,1.2,2.0"/> 
+        	<facet id="jst.jsf" version="1.1,1.2,2.0,2.1"/> 
     </supported>
   </extension>
     
@@ -456,6 +495,17 @@
   <extension point="org.eclipse.jst.common.project.facet.core.legacyLibraryProviderDetectors">
     <detector class="org.eclipse.jst.jsf.core.internal.project.facet.LegacyJSFLibraryProviderDetector"/>
   </extension>
+
+    <!-- JSF 2.1 Downloadable library provider -->
+    <extension point="org.eclipse.jst.common.project.facet.core.downloadableLibraries">
+        <import-definitions url="http://www.eclipse.org/webtools/jsf/jsf-library/jsf-2.1-downloadable-libraries.xml">
+            <enablement>
+                <with variable="requestingProjectFacet">
+                    <test property="org.eclipse.wst.common.project.facet.core.projectFacet" value="jst.jsf:2.1" forcePluginActivation="true"/>
+                </with>
+            </enablement>
+        </import-definitions>
+    </extension>
 
     <!-- JSF 2.0 Downloadable library provider -->
     <extension point="org.eclipse.jst.common.project.facet.core.downloadableLibraries">

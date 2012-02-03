@@ -42,7 +42,11 @@ public enum JSFVersion {
 	/**
 	 * Supports JSF Version 2.0
 	 */
-	V2_0;
+	V2_0,
+	/**
+	 * Supports JSF Version 2.1
+	 */
+	V2_1;
 	
 	// WARNING: you MUST add newer versions to the end; the ordinal value of
 	// of the version is used in compareTo.
@@ -58,6 +62,8 @@ public enum JSFVersion {
                 return IJSFCoreConstants.JSF_VERSION_1_2;
             case V2_0:
                 return IJSFCoreConstants.JSF_VERSION_2_0;
+            case V2_1:
+            	return IJSFCoreConstants.JSF_VERSION_2_1;
             case UNKNOWN:
                 return "unknown"; //$NON-NLS-1$
             default:
@@ -83,9 +89,13 @@ public enum JSFVersion {
         {
             return V1_2;
         }
-        else if (IJSFCoreConstants.FACET_VERSION_2_0.equals(valueAsString))
+        else if (IJSFCoreConstants.JSF_VERSION_2_0.equals(valueAsString))
         {
             return V2_0;
+        }
+        else if (IJSFCoreConstants.JSF_VERSION_2_1.equals(valueAsString))
+        {
+        	return V2_1;
         }
         else if ("unknown".equals(valueAsString)) //$NON-NLS-1$
         {
