@@ -43,6 +43,7 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceMouseTrackAdapter;
+import org.eclipse.jst.pagedesigner.editors.actions.DesignPageActionContributor;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.adapter.IDocumentPageVariableAdapter;
@@ -75,10 +76,14 @@ import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.MultiPageEditorSite;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
+import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
+import org.eclipse.wst.sse.core.StructuredModelManager;
+import org.eclipse.wst.sse.core.internal.provisional.IModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
+import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.eclipse.wst.sse.ui.internal.provisional.extensions.ISourceEditingTextTools;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
@@ -152,6 +157,8 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	private IPropertySheetPage _tabbedPropSheet;
 
 	private ISelectionChangedListener _selChangedListener;
+
+	private DesignPageActionContributor _designPageActionContributor;
 
     // TODO:This class is never used locally
 //	private class TextInputListener implements ITextInputListener {
@@ -640,8 +647,10 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				result = _textEditor.getAdapter(key);
 			}
 		} else if (key == IPageVariablesProvider.class) {
-			Object obj = ((IDOMModel) getModel()).getDocument().getAdapterFor(
+			IStructuredModel model = getModel();
+			Object obj = ((IDOMModel)model).getDocument().getAdapterFor(
 					IDocumentPageVariableAdapter.class);
+			model.releaseFromEdit();
 			if (obj instanceof IPageVariablesProvider) {
 				return obj;
 			}
@@ -706,7 +715,19 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	public IStructuredModel getModel() {
 		IStructuredModel model = null;
 		if (_textEditor != null) {
-			model = ((DesignerStructuredTextEditorJSP) _textEditor).getModel();
+			IDocumentProvider documentProvider = _textEditor.getDocumentProvider();
+			if (documentProvider != null) {
+				IDocument document = documentProvider.getDocument(_textEditor.getEditorInput());
+				if (document instanceof IStructuredDocument) {
+					IModelManager modelManager =  StructuredModelManager.getModelManager();
+					if (modelManager != null) {
+						model = modelManager.getExistingModelForEdit(document);
+						if (model == null) {
+							model = modelManager.getModelForEdit((IStructuredDocument)document);
+						}
+					}
+				}
+			}
 		}
 		return model;
 	}
@@ -891,7 +912,6 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		// TextViewer to set us straight
 		super.setInput(input);
 		if (_designViewer != null) {
-
 			_designViewer.setModel(getModel());
 		}
 		setPartName(input.getName());
@@ -1019,19 +1039,24 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			// display it.
 			StringBuffer result = new StringBuffer();
 			try {
-				// PreviewHandler.generatePreview(this.getModel(),
-				// this.getEditorInput(), result);
+				//Bug 350990 - Web Page Editor intolerably slow
+				if (_mode == MODE_SOURCE) {
+					_designViewer.setModel(getModel());
+				}
 				DocumentEditPart part = (DocumentEditPart) this._designViewer
 						.getGraphicViewer().getContents();
 				PreviewHandlerNew.generatePreview(part, result);
+				//Bug 350990 - Web Page Editor intolerably slow
+				if (_mode == MODE_SOURCE) {
+					_designViewer.setModel(null);
+				}
 			} catch (Exception ex) {
 				result = new StringBuffer();
-				result
-						.append(this.getModel().getStructuredDocument()
-								.getText());
+				IStructuredModel model = getModel();
+				result.append(model.getStructuredDocument().getText());
+				model.releaseFromEdit();
 				// Error in page changing
 				_log.info("Error.HTMLEditor.6", ex); //$NON-NLS-1$
-				ex.printStackTrace();
 			}
 			File file = PreviewUtil.toFile(result, getEditorInput());
 			if (file != null) {
@@ -1054,7 +1079,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 * @param mode
 	 */
 	public void setDesignerMode(int mode) {
-		boolean requiresResynch = (_mode == MODE_SOURCE);
+		boolean modeWasSourceOnly = (_mode == MODE_SOURCE);
 		if (_sashEditorPart != null && _mode != mode) {
 			switch (mode) {
 			case MODE_SASH_HORIZONTAL:
@@ -1065,6 +1090,11 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				break;
 			case MODE_SOURCE:
 				_sashEditorPart.setMaximizedEditor(this._textEditor);
+				//Bug 350990 - Web Page Editor intolerably slow
+				_designViewer.setModel(null);
+				if (_designPageActionContributor != null) {
+					_designPageActionContributor.disableRangeModeActions();
+				}
 				break;
 			case MODE_SASH_VERTICAL:
 			default:
@@ -1075,9 +1105,20 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			}
 		}
 		this._mode = mode;
-		if (requiresResynch) {
+		if (modeWasSourceOnly) {
+			//Bug 350990 - Web Page Editor intolerably slow
+			_designViewer.setModel(getModel());
 			resynch();
 		}
+	}
+
+	/**
+	 * Sets the current DesignPageActionContributor instance.
+	 * @param designPageActionContributor Current DesignPageActionContributor instance.
+	 */
+	public void setDesignPageActionContributor(
+			final DesignPageActionContributor designPageActionContributor) {
+		_designPageActionContributor = designPageActionContributor;
 	}
 
 	/*

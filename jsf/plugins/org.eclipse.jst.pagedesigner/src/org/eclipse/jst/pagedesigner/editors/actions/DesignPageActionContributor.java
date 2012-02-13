@@ -51,6 +51,12 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 
 	private IEditorPart _editorPart;
 
+	private DesignerToolBarAction uAction = null;
+	private DesignerToolBarAction bAction = null;
+	private DesignerToolBarAction iAction = null;
+	private DesignerToolBarAction smallAction = null;
+	private DesignerToolBarAction bigAction = null;
+
 	/**
 	 * @param manager
 	 * @param id
@@ -81,20 +87,20 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 	private void initToolbar(IToolBarManager toolbar) {
 		DesignActionBarFactory factory = DesignActionBarFactory.getInstance();
 
-		Action action = factory.getStyleAction(IHTMLConstants.TAG_U);
-		toolbar.add(action);
+		uAction = factory.getStyleAction(IHTMLConstants.TAG_U);
+		toolbar.add(uAction);
 
-		action = factory.getStyleAction(IHTMLConstants.TAG_B);
-		toolbar.add(action);
+		bAction = factory.getStyleAction(IHTMLConstants.TAG_B);
+		toolbar.add(bAction);
 
-		action = factory.getStyleAction(IHTMLConstants.TAG_I);
-		toolbar.add(action);
+		iAction = factory.getStyleAction(IHTMLConstants.TAG_I);
+		toolbar.add(iAction);
 
-		action = factory.getStyleAction(IHTMLConstants.TAG_SMALL);
-		toolbar.add(action);
+		smallAction = factory.getStyleAction(IHTMLConstants.TAG_SMALL);
+		toolbar.add(smallAction);
 
-		action = factory.getStyleAction(IHTMLConstants.TAG_BIG);
-		toolbar.add(action);
+		bigAction = factory.getStyleAction(IHTMLConstants.TAG_BIG);
+		toolbar.add(bigAction);
 		// action = factory.getStyleAction(PARAGRAPH_ACTION_ID);
 		// toolbar.add(action);
 	}
@@ -212,20 +218,36 @@ public class DesignPageActionContributor extends EditorActionBarContributor {
 	}
 
 	private void setViewerOnActions(IHTMLGraphicalViewer viewer) {
-		IContributionItem[] items = getActionBars().getToolBarManager()
-				.getItems();
+		final IContributionItem[] items = getActionBars().getToolBarManager().getItems();
 		if (items != null) {
 			for (int i = 0; i < items.length; i++) {
-				if (items[i] instanceof ActionContributionItem) {
-					IAction action = ((ActionContributionItem) items[i])
-							.getAction();
+				final IContributionItem item = items[i]; 
+				if (item instanceof ActionContributionItem) {
+					final IAction action = ((ActionContributionItem) item).getAction();
 					if (action instanceof DesignerToolBarAction) {
 						((DesignerToolBarAction) action).setViewer(viewer);
 					}
 				}
 			}
 		}
+		//under e4, contributions are not as expected, so we need to take extra steps
+		uAction.setViewer(viewer);
+		bAction.setViewer(viewer);
+		iAction.setViewer(viewer);
+		smallAction.setViewer(viewer);
+		bigAction.setViewer(viewer);
+	}
 
+	/**
+	 * Disables actions that work on a range (which is not possible while the graphical viewer is
+	 * hidden).
+	 */
+	public void disableRangeModeActions() {
+		uAction.setEnabled(false);
+		bAction.setEnabled(false);
+		iAction.setEnabled(false);
+		smallAction.setEnabled(false);
+		bigAction.setEnabled(false);
 	}
 
 	/**

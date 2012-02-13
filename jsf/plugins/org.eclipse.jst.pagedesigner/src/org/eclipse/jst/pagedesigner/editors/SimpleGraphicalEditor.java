@@ -184,6 +184,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	public void dispose() {
 		if (_model != null) {
 			_model.getUndoManager().disconnect(this);
+			_model.releaseFromEdit();
 		}
 
 		_paletteViewerPage = null;
@@ -385,6 +386,14 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
         return false;
 	}
 
+	/**
+	 * Returns <code>true</code> if the current model is valid.
+	 * @return <code>true</code> if the current model is valid, else <code>false</code>.
+	 */
+	public boolean isModelValid() {
+		return _model != null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -395,6 +404,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 			if (_model.getUndoManager() != null)
 				_model.getUndoManager().disconnect(this);
 			_model.removeModelStateListener(_internalModelListener);
+			_model.releaseFromEdit();
 		}
 
 		this._model = model;

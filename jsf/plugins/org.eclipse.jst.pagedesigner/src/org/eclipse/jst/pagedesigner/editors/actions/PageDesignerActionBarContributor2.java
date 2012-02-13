@@ -196,6 +196,7 @@ public class PageDesignerActionBarContributor2 extends
 	public void setActiveEditor(IEditorPart targetEditor) {
 		if (targetEditor instanceof HTMLEditor) {
 			_htmlEditor = (HTMLEditor) targetEditor;
+			_htmlEditor.setDesignPageActionContributor(_designViewerActionBarContributor);
 			//StructuredTextEditor textEditor = _htmlEditor.getTextEditor();
 			// TODO: never read this._model = textEditor.getModel();
 		}
