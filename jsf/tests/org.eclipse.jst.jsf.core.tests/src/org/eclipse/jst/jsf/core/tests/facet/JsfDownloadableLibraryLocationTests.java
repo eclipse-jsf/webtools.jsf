@@ -18,6 +18,7 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.Proxy.Type;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class JsfDownloadableLibraryLocationTests extends TestCase
     private static final String CATALOG_URL_PREFIX = "http://www.eclipse.org/webtools/jsf/jsf-library";
     private static final String[] CATALOG_URLS =
     {
+    	CATALOG_URL_PREFIX + "/jsf-2.1-downloadable-libraries.xml",
         CATALOG_URL_PREFIX + "/jsf-2.0-downloadable-libraries.xml",
         CATALOG_URL_PREFIX + "/jsf-1.2-downloadable-libraries.xml",
         CATALOG_URL_PREFIX + "/jsf-1.1-downloadable-libraries.xml"
@@ -171,7 +173,7 @@ public class JsfDownloadableLibraryLocationTests extends TestCase
     {
         for (final String url : downloadUrls)
         {
-            assertTrue(isValidUrl(url));
+            assertTrue("Cannot download library from: " + url, isValidUrl(url));
         }
     }
 
@@ -214,8 +216,12 @@ public class JsfDownloadableLibraryLocationTests extends TestCase
         final URL url = new URL(urlString);
         final HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection(httpProxy);
         urlConnection.connect();
-
-        final int responseCode = urlConnection.getResponseCode();
+        int responseCode = -1;
+        try {
+        	responseCode = urlConnection.getResponseCode();
+        } catch(SocketException sockEx) {
+        	//ignore and proceed with response code == -1
+        }
         return 200 <= responseCode && responseCode <= 299;
     }
 }
