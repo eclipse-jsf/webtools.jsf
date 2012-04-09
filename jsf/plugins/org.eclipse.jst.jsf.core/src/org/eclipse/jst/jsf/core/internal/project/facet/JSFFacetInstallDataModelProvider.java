@@ -64,6 +64,7 @@ public class JSFFacetInstallDataModelProvider extends
     private final boolean jsfFacetConfigurationEnabled = JsfFacetConfigurationUtil.isJsfFacetConfigurationEnabled();
 
     private LibraryInstallDelegate libraryInstallDelegate = null;
+    private IPropertyChangeListener propertyChangeListener=null;
     
     private void initLibraryInstallDelegate()
     {
@@ -73,25 +74,34 @@ public class JSFFacetInstallDataModelProvider extends
         if( this.libraryInstallDelegate == null && fpjwc != null && fv != null )
         {
             this.libraryInstallDelegate = new LibraryInstallDelegate( fpjwc, fv );
+            this.propertyChangeListener=new IPropertyChangeListener()
+            {
+            	public void propertyChanged( final String property,
+                        final Object oldValue,
+                        final Object newValue )
+            	{
+            		final IDataModel dm = getDataModel();
+            		
+            		if( dm != null )
+            		{
+            			dm.notifyPropertyChange( LIBRARY_PROVIDER_DELEGATE, IDataModel.VALUE_CHG );
+            		}
+            	}
+            	
+            };
             
-            this.libraryInstallDelegate.addListener
-            ( 
-                new IPropertyChangeListener()
-                {
-                    public void propertyChanged( final String property,
-                                                 final Object oldValue,
-                                                 final Object newValue )
-                    {
-                        final IDataModel dm = getDataModel();
-    
-                        if( dm != null )
-                        {
-                            dm.notifyPropertyChange( LIBRARY_PROVIDER_DELEGATE, IDataModel.VALUE_CHG );
-                        }
-                    }
-                }
-            );
+            this.libraryInstallDelegate.addListener(propertyChangeListener);
         }
+    }
+    
+    public void dispose()
+    {
+    	if(this.libraryInstallDelegate!=null)
+    	{
+    		this.libraryInstallDelegate.removeListener(propertyChangeListener);
+    		this.libraryInstallDelegate.dispose();
+    	}
+    	super.dispose();
     }
     
 	private String 	errorMessage;
