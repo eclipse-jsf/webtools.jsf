@@ -81,6 +81,11 @@ class Messages extends NLS {
     /**
      * see messages.properties
      */
+    public static String BEAN_SCOPE_NOT_VALID_JSF2_ID;
+
+    /**
+     * see messages.properties
+     */
     public static String MAP_ENTRIES_CAN_ONLY_BE_SET_ON_MAP_TYPE_ID;
 
     /**

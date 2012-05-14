@@ -280,13 +280,26 @@ public final class AppConfigValidationUtil
      */
     public static IMessage validateManagedBeanScope(ManagedBeanScopeType scope, IFile file, JSFVersion version)
     {    	
+    	final String textContent = scope.getTextContent();
         // scope must be one of a few enums
-        if (!"request".equals(scope.getTextContent()) //$NON-NLS-1$
-                && !"session".equals(scope.getTextContent()) //$NON-NLS-1$
-                && !"application".equals(scope.getTextContent()) //$NON-NLS-1$
-                && !"none".equals(scope.getTextContent())//$NON-NLS-1$
-                && ((version == null) || !((version.compareTo(JSFVersion.V2_0) >=0) && "view".equals(scope.getTextContent()) )))  //$NON-NLS-1$
+        if (!"request".equals(textContent) //$NON-NLS-1$
+                && !"session".equals(textContent) //$NON-NLS-1$
+                && !"application".equals(textContent) //$NON-NLS-1$
+                && !"none".equals(textContent)//$NON-NLS-1$
+                && ((version == null) || !((version.compareTo(JSFVersion.V2_0) >=0) && "view".equals(textContent))))  //$NON-NLS-1$
         {
+            //if JSF version >= 2.0, scope may be EL pointing at a Map instance
+            if (version != null && version.compareTo(JSFVersion.V2_0) >=0) {
+                final String elRegex = "#\\{(.*)\\}"; //$NON-NLS-1$
+                final Pattern pattern = Pattern.compile(elRegex);
+                final Matcher matcher = pattern.matcher(textContent.trim());
+                if (matcher.matches())
+                {
+                    //scope is EL, validate it
+                    return validateELExpression(textContent);
+                }
+                return DiagnosticFactory.create_BEAN_SCOPE_NOT_VALID_JSF2();
+            }
             return DiagnosticFactory.create_BEAN_SCOPE_NOT_VALID();
         }
         
