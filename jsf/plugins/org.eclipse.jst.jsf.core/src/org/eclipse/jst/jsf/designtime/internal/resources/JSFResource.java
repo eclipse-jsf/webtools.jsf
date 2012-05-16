@@ -39,8 +39,12 @@ public abstract class JSFResource extends JSFResourceFragment implements IJSFRes
 
     public boolean isContentType(final String contentTypeName)
     {
-        return _contentTypeResolver.matchesType(contentTypeName, getId()
-                .getResourceName());
+    	if (_contentTypeResolver != null && getId()!= null)
+    	{
+	        return _contentTypeResolver.matchesType(contentTypeName, getId()
+	                .getResourceName());
+    	}
+    	return false;
     }
 
     @Override

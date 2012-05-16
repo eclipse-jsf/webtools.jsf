@@ -13,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jst.jsf.common.internal.finder.VisitorMatcher;
 import org.eclipse.jst.jsf.common.internal.finder.acceptor.JarEntryMatchingAcceptor;
 import org.eclipse.jst.jsf.common.internal.finder.matcher.TaglibJarEntryFinder;
@@ -146,7 +145,8 @@ public class JarBasedJSFResourceLocator extends AbstractJSFResourceLocator
                         }
                     } catch (final InvalidIdentifierException e) 
                     {
-                    	JSFCorePlugin.log(IStatus.INFO, "Ignoring invalid id: "+e.getId()); //$NON-NLS-1$
+                    	// Bug 377405: ignore due to perf problems.
+                    	//JSFCorePlugin.log(IStatus.INFO, "Ignoring invalid id: "+e.getId()); //$NON-NLS-1$
                 	}
                     catch (final Exception e)
                     {

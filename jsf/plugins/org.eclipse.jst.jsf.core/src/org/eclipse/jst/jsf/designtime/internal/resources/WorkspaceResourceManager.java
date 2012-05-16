@@ -112,8 +112,10 @@ public class WorkspaceResourceManager extends ResourceManager<IResource>
                     newFragments.add(track(res));
                 } catch (final InvalidIdentifierException e)
                 {
-                    JSFCorePlugin.log(IStatus.INFO,
-                        "Ignoring invalid JSF resource: "+res); //$NON-NLS-1$
+                	// Bug 377405: this call can get expensive for a project with many things on the Facelet classpath
+                	// and all it does is remote informational logging.
+//                    JSFCorePlugin.log(IStatus.INFO,
+//                        "Ignoring invalid JSF resource: "+res); //$NON-NLS-1$
                 }
                 catch (final ManagedObjectException e)
                 {
