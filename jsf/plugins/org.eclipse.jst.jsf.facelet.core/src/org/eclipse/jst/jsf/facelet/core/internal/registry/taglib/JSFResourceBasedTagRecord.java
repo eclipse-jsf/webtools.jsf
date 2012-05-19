@@ -170,9 +170,13 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
                 case CHANGED:
                     // only add to the list on a add/change if the resource
                     // exists and is the right type
-                    if (jsfResource.isAccessible()
-                            && jsfResource
-                                    .isContentType(FACELET_FILE_CONTENT_TYPE))
+                	// Bug 377405: order the isContentType call first because
+                	// it has a high probability of returning false and
+                	// short-circuiting the isAccessible call that can
+                	// be very expensive (10-100 times)
+                    if (jsfResource
+                                    .isContentType(FACELET_FILE_CONTENT_TYPE)
+                                    && jsfResource.isAccessible())
                     {
                         tags.addTag(tag);
                     }
