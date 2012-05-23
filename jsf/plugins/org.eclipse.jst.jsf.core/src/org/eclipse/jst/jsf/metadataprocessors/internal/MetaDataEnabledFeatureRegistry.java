@@ -158,17 +158,9 @@ public class MetaDataEnabledFeatureRegistry{
 		for (Iterator it=typeCacheMap.keySet().iterator();it.hasNext();){
 			String featureTypeId = (String)it.next();
 			Class featureTypeClass = typeCacheMap.get(featureTypeId);
-			try {
-//				if (featureTypeClass.equals(typeClass)){
-//					ret.add(featureTypeClass);
-//				}
-//				else 
-					if (typeClass.asSubclass(featureTypeClass) != null)	{	
-					ret.addAll(featuresMap.get(featureTypeId));
-				}						
-			} catch (ClassCastException e) {//
+			if (featureTypeClass.isAssignableFrom(typeClass))	{	
+				ret.addAll(featuresMap.get(featureTypeId));
 			}
-			
 		}
 		return ret;
 	}
