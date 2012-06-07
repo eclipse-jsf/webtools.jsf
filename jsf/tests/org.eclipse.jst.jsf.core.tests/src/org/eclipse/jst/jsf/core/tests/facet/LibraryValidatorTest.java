@@ -12,19 +12,9 @@
 
 package org.eclipse.jst.jsf.core.tests.facet;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.jar.JarFile;
-
 import junit.framework.TestCase;
 
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Plugin;
-import org.eclipse.jst.jsf.core.tests.TestsPlugin;
-import org.osgi.framework.Bundle;
 
 
 /**
@@ -34,10 +24,12 @@ import org.osgi.framework.Bundle;
 public abstract class LibraryValidatorTest extends TestCase
 {
     private String classNameIdentifyingJarToUse;
+    /*
     private String jarPath;
     private String jarPathWithoutImplementationVersionEntry;
     private String jarPathWithNonstandardImplementationVersionEntry;
     private String expectedLibraryVersion;
+    */
     private UserLibraryVersionValidatorProxy validator;
 
 
@@ -51,19 +43,23 @@ public abstract class LibraryValidatorTest extends TestCase
 
 
     public LibraryValidatorTest (final String name,
-                                 final String classNameIdentifyingJarToUse,
+                                 final String classNameIdentifyingJarToUse
+                                 /*
                                  final String jarPath,
                                  final String jarPathWithoutImplementationVersionEntry,
                                  final String jarPathWithNonstandardImplementationVersionEntry,
-                                 final String expectedLibraryVersion)
+                                 final String expectedLibraryVersion*/
+                                 )
     {
         super(name);
 
         this.classNameIdentifyingJarToUse = classNameIdentifyingJarToUse;
+        /*
         this.jarPath = jarPath;
         this.jarPathWithoutImplementationVersionEntry = jarPathWithoutImplementationVersionEntry;
         this.jarPathWithNonstandardImplementationVersionEntry = jarPathWithNonstandardImplementationVersionEntry;
         this.expectedLibraryVersion = expectedLibraryVersion;
+        */
 
         this.validator = new UserLibraryVersionValidatorProxy(this.classNameIdentifyingJarToUse);
     }
@@ -113,7 +109,7 @@ public abstract class LibraryValidatorTest extends TestCase
         fail();
     }
 
-
+    /*
     protected File getFileFromPlugin (final String relativePathToFile,
                                       final Plugin plugin)
     throws IOException, URISyntaxException
@@ -128,23 +124,25 @@ public abstract class LibraryValidatorTest extends TestCase
         assertTrue(file.exists());
         return file;
     }
+    */
 
-
+    /*
     public void testReadLibraryVersionFromJarWithManifestEntry ()
     throws IOException, URISyntaxException
     {
         final JarFile jarFile = new JarFile(getFileFromPlugin(jarPath, TestsPlugin.getDefault()));
         assertEquals(expectedLibraryVersion, validator.getLibraryVersion(jarFile)); 
     }
+	*/
 
-
+    /*
     public void testReadLibraryVersionFromJarWithoutManifestEntry ()
     throws IOException, URISyntaxException
     {
         final JarFile jarFile = new JarFile(getFileFromPlugin(jarPathWithoutImplementationVersionEntry, TestsPlugin.getDefault()));
         assertNull("Was expecting library-version string to be null", validator.getLibraryVersion(jarFile)); //$NON-NLS-1$
     }
-
+    */
 
     /**
      * Regression test-case. This would fail earlier without the patch in
@@ -156,6 +154,7 @@ public abstract class LibraryValidatorTest extends TestCase
      * @throws URISyntaxException
      *
      */
+    /*
     public void testReadLibraryVersionFromJarWithNonstandardImplementationVersion()
     throws IOException, URISyntaxException
     {
@@ -163,4 +162,5 @@ public abstract class LibraryValidatorTest extends TestCase
         assertNotNull("Was expecting library-version string to be non-null", validator.getLibraryVersion(jarFile)); //$NON-NLS-1$
         assertEquals(expectedLibraryVersion, validator.getLibraryVersion(jarFile));
     }
+    */
 }
