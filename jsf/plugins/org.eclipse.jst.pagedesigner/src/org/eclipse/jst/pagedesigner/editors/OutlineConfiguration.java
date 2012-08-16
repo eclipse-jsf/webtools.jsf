@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -78,4 +79,39 @@ public class OutlineConfiguration extends JSPContentOutlineConfiguration {
 		}
 		return selectedStructures;
 	}
+
+    @Override
+    public TransferDropTargetListener[] getTransferDropTargetListeners(
+            TreeViewer treeViewer)
+    {
+        TransferDropTargetListener[] originalListeners =  
+                super.getTransferDropTargetListeners(treeViewer);
+        
+        List<TransferDropTargetListener> configuredListeners = 
+                getConfiguredTransferDropTargetListeners();
+        
+        TransferDropTargetListener[] consolidated = 
+                new TransferDropTargetListener[originalListeners.length + configuredListeners.size()];
+        
+        int i = 0;
+        // Put the configured listeners ahead of the original,
+        // which just allows reordering of the nodes/tags;
+        // otherwise, the LocalSelectionTransfer (for reordering)
+        // takes precedence over a ResourceTransfer.
+        for (TransferDropTargetListener configured : configuredListeners)
+        {
+            consolidated[i++] = configured;
+        }
+        for (TransferDropTargetListener original : originalListeners)
+        {
+            consolidated[i++] = original;
+        }
+        
+        return consolidated;
+    }
+	
+    private List<TransferDropTargetListener> getConfiguredTransferDropTargetListeners()
+    {
+        return OutlineTargetListenerReader.getListeners();
+    }
 }

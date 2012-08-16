@@ -96,6 +96,11 @@ public interface IJMTConstants {
 	public static final String ELEMENT_EDIT_FACTORY = "elementEditFactory"; //$NON-NLS-1$
 
 	/**
+	 * local name of outline target listener extension
+	 */
+	public static final String OUTLINE_TARGET_LISTENER = "outlineTargetListener"; //$NON-NLS-1$
+	
+	/**
 	 * local name of link creator extension
 	 */
 	public static final String LINK_CREATOR = "linkCreator"; //$NON-NLS-1$
