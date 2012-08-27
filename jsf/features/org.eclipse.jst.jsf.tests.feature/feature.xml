@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.jsf.tests.feature"
       label="%name"
-      version="3.2.500.qualifier"
+      version="3.2.501.qualifier"
       provider-name="%provider"
       image="eclipse_update_120.jpg">
 
