@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="http://java.sun.com/jsf/core" 
+	type="tagFile">
+	
+
+	<entity id="view" type="tag">
+		<entity id="locale">
+			<trait id="sets-locale">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>
+	</entity>
+</md:metadatamodel>

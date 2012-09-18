@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"
+	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
+	xmlns:qe="http://org.eclipse.jsf.pagedesigner/quickEditTabSections.ecore"
+	xmlns:addTagMD="http://org.eclipse.jst.jsf.facelet.core/additionalTagMetadata.ecore"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="http://java.sun.com/jsf/facelets"
+	type="tagFile">
+
+	<trait id="is-jsf-component-library">
+		<value xsi:type="mdt:StringValue">true</value>
+	</trait>
+
+	<trait id="images-base-path">
+		<value xsi:type="mdt:StringValue">$nl$/icons/palette/UI</value>
+	</trait>
+
+	<trait id="display-label">
+		<value xsi:type="mdt:StringValue">%FaceletUI.display-label</value>
+	</trait>
+
+	<trait id="description">
+		<value xsi:type="mdt:StringValue">%FaceletUI.description</value>
+	</trait>
+
+	<trait id="default-prefix">
+		<value xsi:type="mdt:StringValue">ui</value>
+	</trait>
+	
+	<trait id="paletteInfos">
+		<value xsi:type="pi:PaletteInfos">
+			<item id="component" tag="component">
+				<display-label>%component.display-label</display-label>
+				<description>%component.description</description>
+				<small-icon>small/UI_COMPONENT.gif</small-icon>
+				<large-icon>large/UI_COMPONENT.gif</large-icon>
+			</item>
+			<item id="composition">
+				<display-label>%composition.display-label</display-label>
+				<description>%composition.description</description>
+				<small-icon>small/UI_COMPOSITION.gif</small-icon>
+				<large-icon>large/UI_COMPOSITION.gif</large-icon>
+			</item>
+			<item id="debug">
+				<display-label>%debug.display-label</display-label>
+				<description>%debug.description</description>
+				<small-icon>small/UI_DEBUG.gif</small-icon>
+				<large-icon>large/UI_DEBUG.gif</large-icon>				
+			</item>
+			<item id="decorate">
+				<display-label>%decorate.display-label</display-label>
+				<description>%decorate.description</description>
+				<small-icon>small/UI_DECORATE.gif</small-icon>
+				<large-icon>large/UI_DECORATE.gif</large-icon>				
+			</item>
+			<item id="define">
+				<display-label>%define.display-label</display-label>
+				<description>%define.description</description>
+				<small-icon>small/UI_DEFINE.gif</small-icon>
+				<large-icon>large/UI_DEFINE.gif</large-icon>				
+			</item>
+			<item id="fragment">
+				<display-label>%fragment.display-label</display-label>
+				<description>%fragment.description</description>
+				<small-icon>small/UI_FRAGMENT.gif</small-icon>
+				<large-icon>large/UI_FRAGMENT.gif</large-icon>	
+			</item>
+			<item id="include">
+				<display-label>%include.display-label</display-label>
+				<description>%include.description</description>
+				<small-icon>small/UI_INCLUDE.gif</small-icon>
+				<large-icon>large/UI_INCLUDE.gif</large-icon>					
+			</item>
+			<item id="insert">
+				<display-label>%insert.display-label</display-label>
+				<description>%insert.description</description>
+				<small-icon>small/UI_INSERT.gif</small-icon>
+				<large-icon>large/UI_INSERT.gif</large-icon>					
+			</item>
+			<item id="param">
+				<display-label>%param.display-label</display-label>
+				<description>%param.description</description>
+				<small-icon>small/UI_PARAM.gif</small-icon>
+				<large-icon>large/UI_PARAM.gif</large-icon>					
+			</item>
+			<item id="remove">
+				<display-label>%remove.display-label</display-label>
+				<description>%remove.description</description>
+				<small-icon>small/UI_REMOVE.gif</small-icon>
+				<large-icon>large/UI_REMOVE.gif</large-icon>					
+			</item>
+			<item id="repeat">
+				<display-label>%repeat.display-label</display-label>
+				<description>%repeat.description</description>
+				<small-icon>small/UI_REPEAT.gif</small-icon>
+				<large-icon>large/UI_REPEAT.gif</large-icon>					
+			</item>
+		</value>
+	</trait>
+	<entity id="component">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>component</name>
+				<attribute>
+					<name>id</name>
+					<usage>OPTIONAL</usage>
+					<description>%id.description</description>
+				</attribute>
+				<attribute>
+					<name>binding</name>
+					<usage>OPTIONAL</usage>
+					<description>%binding.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="id">
+
+		</entity>
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.component.UIComponent</value>
+			</trait>
+		</entity>
+	</entity>
+
+	<entity id="composition">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>composition</name>
+				<attribute>
+					<name>template</name>
+					<usage>OPTIONAL</usage>
+					<description>%template.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="template">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.facelet.core.attributevalues.TemplateWebPathType
+				</value>
+			</trait>
+		</entity>
+	</entity>
+
+	<entity id="debug">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>debug</name>
+				<attribute>
+					<name>hotkey</name>
+					<usage>OPTIONAL</usage>
+					<description>%hotkey.description</description>
+				</attribute>
+				<attribute>
+					<name>rendered</name>
+					<usage>OPTIONAL</usage>
+					<description>%rendered.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="hotkey">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType
+				</value>
+			</trait>
+		</entity>
+		<entity id="rendered">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				</value>
+			</trait>
+		</entity>
+	</entity>
+
+	<entity id="decorate" type="tag">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>decorate</name>
+				<attribute>
+					<name>template</name>
+					<usage>REQUIRED</usage>
+					<description>%template.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="template">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.facelet.core.attributevalues.TemplateWebPathType
+				</value>
+			</trait>
+		</entity>
+	</entity>
+
+	<entity id="define">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>define</name>
+				<attribute>
+					<name>name</name>
+					<usage>REQUIRED</usage>
+					<description>%define_name.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="name">
+
+		</entity>
+	</entity>
+
+	<entity id="fragment">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>fragment</name>
+				<attribute>
+					<name>id</name>
+					<usage>OPTIONAL</usage>
+					<description>%id.description</description>
+				</attribute>
+				<attribute>
+					<name>binding</name>
+					<usage>OPTIONAL</usage>
+					<description>%binding.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="id">
+
+		</entity>
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType
+				</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.component.UIComponent</value>
+			</trait>
+		</entity>
+	</entity>
+
+	<entity id="include">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>include</name>
+				<attribute>
+					<name>src</name>
+					<usage>REQUIRED</usage>
+					<description>%src.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="src">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.facelet.core.attributevalues.TemplateWebPathType
+				</value>
+			</trait>
+		</entity>
+	</entity>
+
+	<entity id="insert">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>insert</name>
+				<attribute>
+					<name>name</name>
+					<usage>OPTIONAL</usage>
+					<description>%insert_name.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="name">
+
+		</entity>
+	</entity>
+
+	<entity id="param">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>param</name>
+				<attribute>
+					<name>name</name>
+					<usage>REQUIRED</usage>
+					<description>%param_name.description</description>
+				</attribute>
+				<attribute>
+					<name>value</name>
+					<usage>REQUIRED</usage>
+					<description>%param_value.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="name">
+
+		</entity>
+		<entity id="value">
+
+		</entity>
+	</entity>
+
+	<entity id="repeat">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>repeat</name>
+				<attribute>
+					<name>value</name>
+					<usage>REQUIRED</usage>
+					<description>%repeat_value.description</description>
+				</attribute>
+				<attribute>
+					<name>var</name>
+					<usage>REQUIRED</usage>
+					<description>%repeat_var.description</description>
+				</attribute>
+				<attribute>
+					<name>varStatus</name>
+					<usage>OPTIONAL</usage>
+					<description>%repeat_varStatus.description</description>
+				</attribute>
+				<attribute>
+					<name>offset</name>
+					<usage>OPTIONAL</usage>
+					<description>%repeat_offset.description</description>
+				</attribute>
+				<attribute>
+					<name>size</name>
+					<usage>OPTIONAL</usage>
+					<description>%repeat_size.description</description>
+				</attribute>
+				<attribute>
+					<name>step</name>
+					<usage>OPTIONAL</usage>
+					<description>%repeat_step.description</description>
+				</attribute>
+			</value>
+		</trait>
+		<entity id="offset">
+			<trait id="required" xsi:type="mdt:BooleanType">true</trait>
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType
+				</value>
+			</trait>
+		</entity>
+		<entity id="size">
+			<trait id="required" xsi:type="mdt:BooleanType">true</trait>
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType
+				</value>
+			</trait>
+		</entity>
+		<entity id="step">
+			<trait id="required" xsi:type="mdt:BooleanType">true</trait>
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType
+				</value>
+			</trait>
+		</entity>
+		<entity id="value">
+			<trait id="required" xsi:type="mdt:BooleanType">true</trait>
+
+		</entity>
+		<entity id="var">
+			<trait id="required" xsi:type="mdt:BooleanType">true</trait>
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueBindingType
+				</value>
+			</trait>
+		</entity>
+		<entity id="varStatus">
+			<trait id="required" xsi:type="mdt:BooleanType">true</trait>
+
+		</entity>
+	</entity>
+	<entity id="remove">
+		<trait id="additionalElementData">
+			<value xsi:type="addTagMD:ElementData">
+				<name>remove</name>
+				<attribute>
+					<name>name</name>
+					<usage>OPTIONAL</usage>
+					<description>%name.description</description>
+				</attribute>
+			</value>
+		</trait>
+	</entity>
+	<entity id="name">
+
+	</entity>
+</md:metadatamodel>

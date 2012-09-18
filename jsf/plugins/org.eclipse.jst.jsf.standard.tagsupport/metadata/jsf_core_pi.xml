@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="http://java.sun.com/jsf/core" 
+	type="tagFile">
+	
+	<trait id="is-jsf-component-library">
+		<value xsi:type="mdt:BooleanValue">true</value>
+	</trait>
+	
+	<trait id="paletteInfos">
+		<value xsi:type="pi:PaletteInfos">						
+			<item id="view"/>
+			<item id="validator"/>
+			<item id="valueChangeListener"/>			
+			<item id="actionListener"/>
+			<item id="convertDateTime"/>
+			<item id="converter"/>
+			<item id="convertNumber"/>			
+			<item id="facet"/>
+			<item id="attribute"/>
+			<item id="loadBundle"/>
+			<item id="param"/>
+			<item id="selectItem"/>
+			<item id="selectItems"/>
+			<item id="subview"/>
+			<item id="validateDoubleRange"/>
+			<item id="validateLength"/>
+			<item id="validateLongRange"/>
+			<item id="verbatim"/>			
+			<item id="ajax"/>
+			<item id="event"/>
+			<item id="metadata"/>
+			<item id="validateBean"/>
+			<item id="validateRegex"/>
+			<item id="validateRequired"/>
+			<item id="viewParam"/>
+		</value>
+	</trait>
+
+	<trait id="images-base-path">
+		<value xsi:type="mdt:StringValue">icons/palette/JSFCORE</value>
+	</trait>
+
+	<trait id="display-label">
+		<value xsi:type="mdt:StringValue">%JSFCORE.display-label</value>
+	</trait>
+	
+	<entity id="actionListener" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_ACTIONLISTENER.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_ACTIONLISTENER.gif</value>
+		</trait>
+	</entity>
+	<entity id="ajax" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.ajax.description</value>
+		</trait>
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_AJAX.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_AJAX.gif</value>
+		</trait>
+	</entity>
+	<entity id="attribute" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_ATTRIBUTE.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_ATTRIBUTE.gif</value>
+		</trait>
+	</entity>	
+	<entity id="convertDateTime" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_CONVERTDATETIME.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_CONVERTDATETIME.gif</value>
+		</trait>
+	</entity>
+	<entity id="convertNumber" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_CONVERTNUMBER.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_CONVERTNUMBER.gif</value>
+		</trait>
+	</entity>
+	
+	<entity id="converter" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_CONVERTER.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_CONVERTER.gif</value>
+		</trait>
+	</entity><entity id="event" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.event.description</value>
+		</trait>	
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_EVENT.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_EVENT.gif</value>
+		</trait>
+	</entity>	
+	<entity id="facet" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_FACET.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_FACET.gif</value>
+		</trait>
+	</entity>
+	<entity id="loadBundle" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_LOADBUNDLE.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_LOADBUNDLE.gif</value>
+		</trait>
+	</entity>
+	<entity id="metadata" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.metadata.description</value>
+		</trait>	
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_METADATA.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_METADATA.gif</value>
+		</trait>
+	</entity>	
+	<entity id="param" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_PARAM.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_PARAM.gif</value>
+		</trait>
+	</entity>
+	<entity id="selectItem" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTITEM.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTITEM.gif</value>
+		</trait>
+	</entity>
+	<entity id="selectItems" type="tag">	
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_SELECTITEMS.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_SELECTITEMS.gif</value>
+		</trait>
+	</entity>
+	<entity id="subview" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_SUBVIEW.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_SUBVIEW.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateBean" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEBEAN.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEBEAN.gif</value>
+		</trait>
+	</entity>	
+	<entity id="validateDoubleRange" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEDOUBLERANGE.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEDOUBLERANGE.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateLength" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATELENGTH.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATELENGTH.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateLongRange" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATELONGRANGE.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATELONGRANGE.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateRegex" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEREGEX.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEREGEX.gif</value>
+		</trait>
+	</entity>
+	<entity id="validateRequired" type="tag">
+		<trait id="description">
+			<value xsi:type="mdt:StringValue">%JSFCORE.validateRequired.description</value>
+		</trait>		
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATEREQUIRED.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATEREQUIRED.gif</value>
+		</trait>
+	</entity>
+	<entity id="validator" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALIDATOR.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALIDATOR.gif</value>
+		</trait>
+	</entity>
+	<entity id="valueChangeListener" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VALUECHANGELISTENER.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VALUECHANGELISTENER.gif</value>
+		</trait>
+	</entity>
+	<entity id="verbatim" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VERBATIM.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VERBATIM.gif</value>
+		</trait>
+	</entity>
+	<entity id="view" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VIEW.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VIEW.gif</value>
+		</trait>	
+	</entity>
+	<entity id="viewParam" type="tag">
+		<trait id="small-icon">
+			<value xsi:type="mdt:StringValue">small/JSF_VIEWPARAM.gif</value>
+		</trait>
+		<trait id="large-icon">
+			<value xsi:type="mdt:StringValue">large/JSF_VIEWPARAM.gif</value>
+		</trait>	
+	</entity>
+</md:metadatamodel>

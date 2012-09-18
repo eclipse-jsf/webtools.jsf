@@ -1,0 +1,1434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" 
+	xmlns:cnst="http://org.eclipse.jst.jsf.core/constraints.ecore" 
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	id="http://java.sun.com/jsf/html" 
+	type="tagFile">
+
+	<entity id="body" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>		
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="style"/>			
+			</value>
+		</trait>
+		<entity id="onload">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
+			</trait>			
+		</entity>
+		<entity id="onunload">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.event</value>
+			</trait>			
+		</entity>					
+	</entity>	
+	<entity id="button" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="outcome"/>
+				<section id="includeViewParams"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+		<entity id="fragment">					
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+		<entity id="includeViewParams">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="image">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="outcome">	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+	</entity>
+	<entity id="column" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+			</value>
+		</trait>		
+	</entity>
+	<entity id="commandButton" type="tag">	
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="action"/>				
+				<section id="type"/>
+				<section id="style"/>
+				<section id="section.general.commandButton.listener" type="SECTION"/>
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+						<tagId>
+							<uri>http://java.sun.com/jsf/html</uri>
+							<name>form</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="type">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>		
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>button</item>
+					<item>reset</item>
+					<item>submit</item>
+				</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:StringValue">submit</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="image">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="label">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+	</entity>
+	<entity id="commandLink" type="tag">		
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="action"/>				
+				<section id="style"/>	
+				<section id="section.general.commandLink.listener" type="SECTION"/>			
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+						<tagId>
+							<uri>http://java.sun.com/jsf/html</uri>
+							<name>form</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+	</entity>
+	<entity id="dataTable" type="tag">
+		<include-entity-group id="jsf-table-attributes"/>
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="var"/>
+				<section id="width"/>
+				<section id="border"/>
+				<section id="bgcolor"/>
+				<section id="style"/>	
+				<section id="section.general.dataTable.columns" type="SECTION"/>		
+			</value>
+		</trait>
+		<entity id="bgcolor">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ColorType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="var">
+			<trait id="contributes-value-binding">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+			<trait id="value-binding-scope">
+				<value xsi:type="mdt:StringValue">request</value>
+			</trait>
+			<trait id="value-binding-symbol-factory">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.designtime.core.loadBundle</value>
+			</trait>
+			<trait id="category"><value xsi:type="mdt:StringValue">%property.category.jsf</value></trait>			
+		</entity>
+	</entity>
+	<entity id="form" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<include-entity-group id="form-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="style"/>			
+			</value>
+		</trait>	
+	</entity>
+	<entity id="head" type="tag">
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="binding"/>	
+				<section id="lang"/>
+				<section id="dir"/>		
+			</value>
+		</trait>	
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.component.UIComponent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>					
+		</entity>	
+	</entity>
+	<entity id="graphicImage" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="url"/>
+				<section id="binding"/>
+				<section id="style"/>			
+			</value>
+		</trait>
+	</entity>
+	<entity id="inputHidden" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>	
+				<!--  <section id="section.general.inputHidden.type" type="SECTION"/>	-->
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>			
+		</entity>
+	</entity>
+	<entity id="inputSecret" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>	
+				<!-- <section id="section.general.inputSecret.type" type="SECTION"/> -->
+				<section id="section.general.inputText.others" type="SECTION"/>				
+			</value>
+		</trait>		
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>	
+	</entity>
+	<entity id="inputText" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>	
+				<!--  <section id="section.general.inputText.type" type="SECTION"/> -->
+				<section id="section.general.inputText.others" type="SECTION"/>							
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>	
+	</entity>
+	<entity id="inputTextarea" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>		
+				<!-- <section id="section.general.inputTextarea.type" type="SECTION"/> -->
+				<section id="section.general.inputTextarea.others" type="SECTION"/>	
+			</value>
+		</trait>		
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>	
+	</entity>
+	<entity id="link" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="outcome"/>
+				<section id="includeViewParams"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+		<entity id="fragment">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+		<entity id="includeViewParams">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="image">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="outcome">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+	</entity>	
+	<entity id="message" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="for-entity"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="for"/>			
+			</value>
+		</trait>
+	</entity>
+	<entity id="messages" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="layout"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+		<entity id="layout">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>list</item>
+					<item>table</item>
+				</value>
+			</trait>
+			<trait id="displayed-values">	
+				<value xsi:type="mdt:ListOfValues">							
+					<item>%messages.layout.displayed-values.list</item>		
+					<item>%messages.layout.displayed-values.table</item>
+				</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:StringValue">list</value>
+			</trait>				
+		</entity>	
+	</entity>
+	<entity id="outputFormat" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>		
+				<section id="section.general.outputFormat.params" type="SECTION"/>	
+			</value>
+		</trait>		
+	</entity>
+	<entity id="outputLabel" type="tag">		
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<include-entity-group id="for-entity"/>		
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="for"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+	</entity>
+	<entity id="outputLink" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+	</entity>
+	<entity id="outputScript" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>		
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="binding"/>
+				<section id="section.general.outputText.converter" type="SECTION"/>	
+			</value>
+		</trait>
+		<entity id="target">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+		</entity>	
+		<entity id="library">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+		</entity>	
+		<entity id="name">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+		</entity>	
+	</entity>
+		<entity id="outputStylesheet" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="binding"/>
+				<section id="section.general.outputText.converter" type="SECTION"/>	
+			</value>
+		</trait>
+		<entity id="library">
+		
+		</entity>	
+		<entity id="name">
+
+		</entity>	
+	</entity>
+	<entity id="outputText" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="binding"/>
+				<section id="style"/>	
+				<section id="section.general.outputText.converter" type="SECTION"/>	
+			</value>
+		</trait>		
+	</entity>
+	<entity id="panelGrid" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="jsf-table-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="columns"/>
+				<section id="border"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+	</entity>
+	<entity id="panelGroup" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>		
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+	</entity>
+	<entity id="selectBooleanCheckbox" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>			
+			</value>
+		</trait>		
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>
+	</entity>
+	<entity id="selectManyCheckbox" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="layout"/>
+				<section id="style"/>	
+				<section id="section.general.selectManyCheckbox.choices" type="SECTION"/>			
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="layout">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>pageDirection</item>
+					<item>lineDirection</item>
+				</value>
+			</trait>
+			<trait id="displayed-values">				
+				<value xsi:type="mdt:ListOfValues">
+					<item>%selectManyCheckbox.layout.displayed-values.pageDirection</item>		
+					<item>%selectManyCheckbox.layout.displayed-values.lineDirection</item>
+				</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:StringValue">lineDirection</value>
+			</trait>
+		</entity>
+		<entity id="value">
+            <trait id="attribute-value-runtime-type">
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+            </trait>
+            <trait id="runtime-type-setter-required">
+                <value xsi:type="mdt:BooleanValue">true</value>
+            </trait>
+        </entity>
+    </entity>
+	<entity id="selectManyListbox" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="size"/>
+				<section id="style"/>	
+				<section id="section.general.selectManyListbox.choices" type="SECTION"/>		
+			</value>
+		</trait>		
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+	    <entity id="value">
+            <trait id="attribute-value-runtime-type">
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+            </trait>
+            <trait id="runtime-type-setter-required">
+                <value xsi:type="mdt:BooleanValue">true</value>
+            </trait>
+        </entity>
+	</entity>
+	<entity id="selectManyMenu" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>		
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>	
+				<section id="section.general.selectManyMenu.choices" type="SECTION"/>		
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+            <trait id="attribute-value-runtime-type">
+                <value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+            </trait>
+            <trait id="runtime-type-setter-required">
+                <value xsi:type="mdt:BooleanValue">true</value>
+            </trait>
+        </entity>
+	</entity>
+	<entity id="selectOneListbox" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="size"/>
+				<section id="style"/>			
+				<section id="section.general.selectOneListbox.choices" type="SECTION"/>
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>
+	</entity>
+	<entity id="selectOneMenu" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="style"/>	
+				<section id="section.general.selectOneMenu.choices" type="SECTION"/>		
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>
+	</entity>
+	<entity id="selectOneRadio" type="tag">
+		<include-entity-group id="basic-jsf-html-attributes"/>
+		<include-entity-group id="common-jsf-html-attributes"/>
+		<include-entity-group id="common-html-attributes" uri="HTML"/>
+		<include-entity-group id="common-language-attributes" uri="HTML"/>
+		<include-entity-group id="common-core-attributes" uri="HTML"/>
+		<include-entity-group id="common-event-attributes" uri="HTML"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="id"/>
+				<section id="value"/>
+				<section id="layout"/>
+				<section id="style"/>
+				<section id="section.general.selectOneRadio.choices" type="SECTION"/>			
+			</value>
+		</trait>
+		<trait id="containment-constraint">
+			<value xsi:type="cnst:ContainsTagConstraint">
+				<set-generator>
+					<algorithm>xpath</algorithm>
+					<expression>ancestor::*</expression>
+				</set-generator>
+				<satisfies-set>
+						<tagId>
+							<uri>http://java.sun.com/jsf/core</uri>
+							<name>view</name>
+						</tagId>
+				</satisfies-set>
+			</value>
+		</trait>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueType</value>
+			</trait>
+			<trait id="runtime-type-setter-required">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>
+		</entity>	
+		<entity id="layout">
+			<include-entity-group>common-attributes</include-entity-group>
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>pageDirection</item>
+					<item>lineDirection</item>
+				</value>
+			</trait>
+			<trait id="displayed-values">		
+				<value xsi:type="mdt:ListOfValues">		
+					<item>%selectOneRadio.layout.displayed-values.pageDirection</item>		
+					<item>%selectOneRadio.layout.displayed-values.lineDirection</item>
+				</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:StringValue">lineDirection</value>
+			</trait>				
+		</entity>			
+	</entity>
+	<entityGroup id="basic-jsf-html-attributes">
+		<entity id="id">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="binding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">javax.faces.component.UIComponent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>					
+		</entity>	
+		<entity id="converter">			
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.FacesConfigConverterIDType</value>
+			</trait>			
+			<trait id="config-type">
+				<value xsi:type="mdt:StringValue">javax.faces.convert.Converter</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+		<entity id="rendered">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>				
+		</entity>	
+		<entity id="required">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+		<entity id="styleClass">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>				
+		</entity>
+		<entity id="value">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ValueBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.String</value>
+			</trait>			
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>	
+		</entity>
+		<entity id="valueChangeListener">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">void</value>
+			</trait>			
+			<trait id="runtime-param-types">
+				<value xsi:type="mdt:StringValue">javax.faces.event.ValueChangeEvent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>	
+		</entity>	
+		<entity id="validator">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+			</trait>	
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">void</value>
+			</trait>			
+			<trait id="runtime-param-types">
+				<value xsi:type="mdt:ListOfValues">
+					<item>javax.faces.context.FacesContext</item>
+					<item>javax.faces.component.UIComponent</item>
+					<item>java.lang.Object</item>		
+				</value>						
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>	
+	</entityGroup>
+	<entityGroup id="common-jsf-html-attributes">
+		<!-- This group will be refactored -->
+		<entity id="action">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.ActionType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">java.lang.String</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>							
+		</entity>
+		<entity id="actionListener">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+			</trait>
+			<trait id="runtime-return-type">
+				<value xsi:type="mdt:StringValue">void</value>
+			</trait>			
+			<trait id="runtime-param-types">
+				<value xsi:type="mdt:StringValue">javax.faces.event.ActionEvent</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="cols">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="escape">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>			
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="globalOnly">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">false</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>		
+		<entity id="immediate">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>				
+		</entity>	
+		<entity id="readonly">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">false</value>
+			</trait>			
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>		
+		<entity id="redisplay">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>				
+		</entity>
+
+		<entity id="showDetail">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">true</value>
+			</trait>		
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>
+		<entity id="dalign">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>right</item>					
+					<item>left</item>
+					<item>center</item>
+					<item>justify</item>					
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>	
+		<entity id="ialign">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>bottom</item>
+					<item>middle</item>
+					<item>top</item>
+					<item>right</item>
+					<item>left</item>					
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>			
+		<entity id="linktype">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>index</item>
+					<item>subsection</item>
+					<item>bookmark</item>
+					<item>start</item>
+					<item>next</item>					
+					<item>stylesheet</item>
+					<item>chapter</item>
+					<item>help</item>
+					<item>alternate</item>
+					<item>appendix</item>	
+					<item>contents</item>
+					<item>section</item>					
+					<item>prev</item>
+					<item>previous</item>
+					<item>glossary</item>
+					<item>copyright</item>				
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="media">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>tv</item>
+					<item>braille</item>
+					<item>tty</item>
+					<item>print</item>
+					<item>all</item>					
+					<item>projection</item>
+					<item>handheld</item>
+					<item>screen</item>
+					<item>aural</item>
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>	
+		<entity id="scope">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>row</item>
+					<item>col</item>
+					<item>rowgroup</item>
+					<item>colgroup</item>				
+				</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>	
+	</entityGroup>
+	<entityGroup id="jsf-table-attributes">
+		<entity id="bgcolor">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>	
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>		
+		</entity>	
+		<entity id="border">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="cellpadding">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="cellspacing">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>
+			<trait id="valid-minimum"><value xsi:type="mdt:StringValue">0</value></trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="columns">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>
+			<trait id="valid-minimum">
+				<value xsi:type="mdt:StringValue">0</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="columnClasses">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>		
+		<entity id="first">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+			</trait>
+			<trait id="valid-minimum">
+				<value xsi:type="mdt:StringValue">0</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="footerClass">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>	
+		<entity id="frame">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>none</item>
+					<item>above</item>
+					<item>below</item>
+					<item>hsides</item>
+					<item>vsides</item>
+					<item>lhs</item>
+					<item>rhs</item>			
+					<item>box</item>
+					<item>border</item>	
+				</value>
+			</trait>
+			<trait id="displayed-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>%any.frame.displayed-values.none</item>
+					<item>%any.frame.displayed-values.above</item>
+					<item>%any.frame.displayed-values.below</item>
+					<item>%any.frame.displayed-values.hsides</item>
+					<item>%any.frame.displayed-values.vsides</item>
+					<item>%any.frame.displayed-values.lhs</item>
+					<item>%any.frame.displayed-values.rhs</item>			
+					<item>%any.frame.displayed-values.box</item>
+					<item>%any.frame.displayed-values.border</item>		
+				</value>	
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:StringValue">none</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>			
+		</entity>			
+		<entity id="headerClass">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="rowClasses">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="rules">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>none</item>
+					<item>groups</item>
+					<item>rows</item>
+					<item>cols</item>
+					<item>all</item>
+				</value>
+			</trait>
+			<trait id="displayed-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>%any.rules.displayed-values.none</item>
+					<item>%any.rules.displayed-values.groups</item>
+					<item>%any.rules.displayed-values.rows</item>
+					<item>%any.rules.displayed-values.cols</item>
+					<item>%any.rules.displayed-values.all</item>	
+				</value>	
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:StringValue">none</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>							
+		</entity>
+		<entity id="showSummary">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+			</trait>
+			<trait id="default-value">
+				<value xsi:type="mdt:BooleanValue">false</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+		<entity id="summary">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+	</entityGroup>
+	<entityGroup id="for-entity">
+		<entity id="for">
+			<trait id="attribute-value-runtime-type">
+				<value xsi:type="mdt:StringValue">org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+			</trait>
+			<trait id="category">
+				<value xsi:type="mdt:StringValue">%property.category.jsf</value>
+			</trait>
+		</entity>
+	</entityGroup>
+</md:metadatamodel>
