@@ -160,6 +160,8 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 
 	private DesignPageActionContributor _designPageActionContributor;
 
+	private IStructuredModel _model;
+
     // TODO:This class is never used locally
 //	private class TextInputListener implements ITextInputListener {
 //		public void inputDocumentAboutToBeChanged(IDocument oldInput,
@@ -516,7 +518,12 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		_log = null;
 		_selChangedListener = null;
 		_textEditor = null;
-		
+
+		if (_model != null) {
+			_model.releaseFromEdit();
+			_model = null;
+		}
+
 		super.dispose();
 		
 	}
@@ -647,10 +654,8 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				result = _textEditor.getAdapter(key);
 			}
 		} else if (key == IPageVariablesProvider.class) {
-			IStructuredModel model = getModel();
-			Object obj = ((IDOMModel)model).getDocument().getAdapterFor(
+			Object obj = ((IDOMModel)getModel()).getDocument().getAdapterFor(
 					IDocumentPageVariableAdapter.class);
-			model.releaseFromEdit();
 			if (obj instanceof IPageVariablesProvider) {
 				return obj;
 			}
@@ -710,26 +715,28 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	}
 
 	/**
+	 * Caller MUST NOT release this model, it will be released in {@link #dispose()}.
 	 * @return the structured model
 	 */
 	public IStructuredModel getModel() {
-		IStructuredModel model = null;
-		if (_textEditor != null) {
-			IDocumentProvider documentProvider = _textEditor.getDocumentProvider();
-			if (documentProvider != null) {
-				IDocument document = documentProvider.getDocument(_textEditor.getEditorInput());
-				if (document instanceof IStructuredDocument) {
-					IModelManager modelManager =  StructuredModelManager.getModelManager();
-					if (modelManager != null) {
-						model = modelManager.getExistingModelForEdit(document);
-						if (model == null) {
-							model = modelManager.getModelForEdit((IStructuredDocument)document);
+		if (_model == null) {
+			if (_textEditor != null) {
+				IDocumentProvider documentProvider = _textEditor.getDocumentProvider();
+				if (documentProvider != null) {
+					IDocument document = documentProvider.getDocument(_textEditor.getEditorInput());
+					if (document instanceof IStructuredDocument) {
+						IModelManager modelManager =  StructuredModelManager.getModelManager();
+						if (modelManager != null) {
+							_model = modelManager.getExistingModelForEdit(document);
+							if (_model == null) {
+								_model = modelManager.getModelForEdit((IStructuredDocument)document);
+							}
 						}
 					}
 				}
 			}
 		}
-		return model;
+		return _model;
 	}
 
 
@@ -1052,9 +1059,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				}
 			} catch (Exception ex) {
 				result = new StringBuffer();
-				IStructuredModel model = getModel();
-				result.append(model.getStructuredDocument().getText());
-				model.releaseFromEdit();
+				result.append(getModel().getStructuredDocument().getText());
 				// Error in page changing
 				_log.info("Error.HTMLEditor.6", ex); //$NON-NLS-1$
 			}
@@ -1079,7 +1084,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 * @param mode
 	 */
 	public void setDesignerMode(int mode) {
-		boolean modeWasSourceOnly = (_mode == MODE_SOURCE);
+		boolean modeWasSourceOnly = (_mode == MODE_SOURCE && _mode != mode);
 		if (_sashEditorPart != null && _mode != mode) {
 			switch (mode) {
 			case MODE_SASH_HORIZONTAL:

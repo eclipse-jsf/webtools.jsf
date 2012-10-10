@@ -39,6 +39,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.commands.ActionHandler;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -82,9 +83,11 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionContext;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.wst.sse.core.internal.PropagatingAdapter;
 import org.eclipse.wst.sse.core.internal.provisional.IModelStateListener;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapterFactory;
@@ -184,7 +187,6 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 	public void dispose() {
 		if (_model != null) {
 			_model.getUndoManager().disconnect(this);
-			_model.releaseFromEdit();
 		}
 
 		_paletteViewerPage = null;
@@ -262,6 +264,22 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 		((UpdateAction) action).update();
 	}
 
+	private void activateActionHandler(final IAction action) {
+		if (action != null) {
+			final IWorkbenchPartSite site = getSite();
+			if (site != null) {
+				final IHandlerService service =
+						(IHandlerService) site.getService(IHandlerService.class);
+				if (service != null) {
+					final String commandId = action.getId();
+					if (commandId != null) {
+						service.activateHandler(commandId, new ActionHandler(action));
+					}
+				}
+			}
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -282,7 +300,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_UNDO_DISABLED));
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_UNDO);
 		action.setId(IWorkbenchCommandConstants.EDIT_UNDO);
-		getSite().getKeyBindingService().registerAction(action);
+		activateActionHandler(action);
 		registry.registerAction(action);
 
 		action = new DesignerUndoRedoAction(false, this);
@@ -292,7 +310,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_REDO_DISABLED));
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_REDO);
 		action.setId(IWorkbenchCommandConstants.EDIT_REDO);
-		getSite().getKeyBindingService().registerAction(action);
+		activateActionHandler(action);
 		registry.registerAction(action);
 
 		action = new DeleteAction(this);
@@ -302,7 +320,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_DELETE);
 		action.setId(IWorkbenchCommandConstants.EDIT_DELETE);
-		getSite().getKeyBindingService().registerAction(action);
+		activateActionHandler(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
 
@@ -313,7 +331,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED));
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_COPY);
 		action.setId(IWorkbenchCommandConstants.EDIT_COPY);
-		getSite().getKeyBindingService().registerAction(action);
+		activateActionHandler(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
 
@@ -324,7 +342,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_CUT_DISABLED));
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_CUT);
 		action.setId(IWorkbenchCommandConstants.EDIT_CUT);
-		getSite().getKeyBindingService().registerAction(action);
+		activateActionHandler(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
 
@@ -335,7 +353,7 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 				.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED));
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_PASTE);
 		action.setId(IWorkbenchCommandConstants.EDIT_PASTE);
-		getSite().getKeyBindingService().registerAction(action);
+		activateActionHandler(action);
 		this.getSelectionActions().add(action.getId());
 		registry.registerAction(action);
 	}
@@ -404,7 +422,6 @@ public class SimpleGraphicalEditor extends GraphicalEditorWithFlyoutPalette impl
 			if (_model.getUndoManager() != null)
 				_model.getUndoManager().disconnect(this);
 			_model.removeModelStateListener(_internalModelListener);
-			_model.releaseFromEdit();
 		}
 
 		this._model = model;
