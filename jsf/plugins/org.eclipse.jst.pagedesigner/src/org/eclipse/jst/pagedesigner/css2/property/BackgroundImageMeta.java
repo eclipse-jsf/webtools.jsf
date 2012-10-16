@@ -24,6 +24,7 @@ import org.eclipse.jst.pagedesigner.IHTMLConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.utils.DOMUtil;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
 import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
@@ -169,6 +170,13 @@ public class BackgroundImageMeta extends CSSPropertyMeta {
 							}
 						}
 					}
+				} catch(SWTException swtEx) {
+					/*
+					 * We're probably trying to create an image from a valid URL to an invalid
+					 * resource (such as a URL to a folder or to a file that is not an image file);
+					 * ignoring the exception will result in a return of null, which is what we want
+					 * in this case.
+					 */
 				}
 			} else if (image.isDisposed()) {
 				//shouldn't be able to get here from there, but...just in case
