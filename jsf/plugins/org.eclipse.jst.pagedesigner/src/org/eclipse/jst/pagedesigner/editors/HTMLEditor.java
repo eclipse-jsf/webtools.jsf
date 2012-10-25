@@ -856,6 +856,12 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		case IEditorPart.PROP_INPUT: {
 			if (source == _textEditor) {
 				if (_textEditor.getEditorInput() != getEditorInput()) {
+					//Bug 392859 - [Regression] Incorrect WPE model returned from HTMLEditor after page name change.
+					// release the old model
+					if (_model != null) {
+						_model.releaseFromEdit();
+						_model = null;
+					}
 					setInput(_textEditor.getEditorInput());
 					// title should always change when input changes.
 					// create runnable for following post call
