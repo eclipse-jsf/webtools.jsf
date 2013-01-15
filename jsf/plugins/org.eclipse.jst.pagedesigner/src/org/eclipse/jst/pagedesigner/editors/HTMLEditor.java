@@ -43,6 +43,8 @@ import org.eclipse.jst.jsf.common.ui.internal.utils.ResourceUtils;
 import org.eclipse.jst.pagedesigner.IJMTConstants;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceMouseTrackAdapter;
+import org.eclipse.jst.pagedesigner.editors.IWPEPersistenceListener.IPersistenceEvent;
+import org.eclipse.jst.pagedesigner.editors.IWPEPersistenceListener.PersistenceEventType;
 import org.eclipse.jst.pagedesigner.editors.actions.DesignPageActionContributor;
 import org.eclipse.jst.pagedesigner.editors.pagedesigner.PageDesignerResources;
 import org.eclipse.jst.pagedesigner.jsp.core.pagevar.IPageVariablesProvider;
@@ -174,6 +176,8 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 //				_designViewer.setModel(getModel());
 //		}
 //	}
+
+	private List<IWPEPersistenceListener> persistenceListeners;
 
 	/**
 	 * Default constructor
@@ -476,7 +480,13 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 * @return StructuredTextEditor
 	 */
 	protected StructuredTextEditor createTextEditor() {
-		return new DesignerStructuredTextEditorJSP();
+		return new DesignerStructuredTextEditorJSP() {
+			@Override
+			protected void performRevert() {
+				super.performRevert();
+				firePersistenceEvent(PersistenceEventType.REVERTED);
+			}
+		};
 	}
 
 	private void disconnectDesignPage() {
@@ -524,12 +534,18 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 			_model = null;
 		}
 
+		if (persistenceListeners != null) {
+			persistenceListeners.clear();
+			persistenceListeners = null;
+		}
+
 		super.dispose();
 		
 	}
 
 	public void doSave(IProgressMonitor monitor) {
 		_textEditor.doSave(monitor);
+		firePersistenceEvent(PersistenceEventType.SAVED);
 	}
 
 	/*
@@ -542,6 +558,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 */
 	public void doSaveAs() {
 		_textEditor.doSaveAs();
+		firePersistenceEvent(PersistenceEventType.SAVED_AS);
 	}
 
 	private void editorInputIsAcceptable(IEditorInput input)
@@ -1225,6 +1242,59 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		EditPart contentEditPart = _designViewer.getGraphicViewer().getRootEditPart().getContents();
 		if (contentEditPart instanceof DocumentEditPart) {
 			((DocumentEditPart)contentEditPart).styleChanged();
+		}
+	}
+
+	/**
+	 * Adds a {@link IWPEPersistenceListener persistence listener} to this editor.
+	 * 
+	 * <p>This type of listener is cleaned when the editor is disposed.</p>
+	 * 
+	 * @param listener
+	 */
+	public void addPersistenceListener(IWPEPersistenceListener listener) {
+		if (persistenceListeners == null) {
+			persistenceListeners = new ArrayList<IWPEPersistenceListener>(5);
+		}
+		persistenceListeners.add(listener);
+	}
+
+	/**
+	 * Removes a {@link IWPEPersistenceListener persistence listener} added to this 
+	 * editor.
+	 * 
+	 * <p>This type of listener is cleaned when the editor is disposed.</p>
+	 * 
+	 * @param listener
+	 */
+	public void removePersistenceListener(IWPEPersistenceListener listener) {
+		if (persistenceListeners != null) {
+			if (persistenceListeners.remove(listener) && persistenceListeners.isEmpty()) {
+				persistenceListeners = null;
+			}
+		}
+	}
+
+	private void firePersistenceEvent(final PersistenceEventType type) {
+		if (persistenceListeners != null) {
+			List<IWPEPersistenceListener> listeners = new ArrayList<IWPEPersistenceListener>(persistenceListeners);
+			IPersistenceEvent event = new IPersistenceEvent() {			
+				public HTMLEditor getWPEInstance() {
+					return HTMLEditor.this;
+				}
+				
+				public PersistenceEventType getEventType() {
+					return type;
+				}
+			};
+			
+			for (IWPEPersistenceListener listener : listeners) {
+				try {
+					listener.notify(event);
+				} catch (Exception e) {
+					PDPlugin.log("Exception thrown while notifying a persistence listener", e); //$NON-NLS-1$
+				}
+			}
 		}
 	}
 
