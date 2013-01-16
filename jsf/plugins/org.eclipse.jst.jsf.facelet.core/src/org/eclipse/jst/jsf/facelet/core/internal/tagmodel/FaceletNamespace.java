@@ -28,6 +28,7 @@ public class FaceletNamespace extends
      * The namespace that this tag library is associated with
      */
     private final FaceletNamespaceData _data;
+    private boolean isInitialized;
 
     /**
      * @param record
@@ -54,7 +55,9 @@ public class FaceletNamespace extends
     @Override
     public Collection<? extends ITagElement> getViewElements()
     {
-        return _data.getAllViewElements().values();
+        Collection<ITagElement> values = _data.getAllViewElements().values();
+        this.isInitialized = true;
+        return values;
     }
 
     @Override
@@ -78,7 +81,7 @@ public class FaceletNamespace extends
     @Override
     public boolean isInitialized()
     {
-        return _data.isInitialized();
+        return this.isInitialized || _data.isInitialized();
     }
 
     /**
