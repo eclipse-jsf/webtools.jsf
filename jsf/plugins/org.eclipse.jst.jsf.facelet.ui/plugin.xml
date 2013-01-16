@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="faceletValidator" name="%extension-point.name" schema="schema/faceletValidator.exsd"/>
    <extension
          point="org.eclipse.wst.sse.ui.editorConfiguration">
       <sourceViewerConfiguration
@@ -85,6 +86,14 @@
                <facet
                      id="jst.jsf" version="2.0">
                </facet>
+               <facet
+                     id="jst.jsf"
+                     version="2.1">
+               </facet>
+               <facet
+                     id="jst.jsf"
+                     version="2.2">
+               </facet>
             </rules>
          </include>
          <include>
@@ -143,5 +152,12 @@
             class="org.eclipse.jst.jsf.facelet.ui.internal.contentassist.MyModelQueryExtension"
             contentType="org.eclipse.wst.html.core.htmlsource">
       </modelQueryExtension>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.facelet.ui.faceletValidator">
+      <validationStrategy
+            class="org.eclipse.jst.jsf.facelet.ui.internal.validation.DefaultFaceletValidationStrategy"
+            id="org.eclipse.jst.jsf.facelet.ui.defaultValidationStrategy">
+      </validationStrategy>
    </extension>
 </plugin>

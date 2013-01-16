@@ -1,8 +1,13 @@
 package org.eclipse.jst.jsf.facelet.ui.internal;
 
+import java.util.Map;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory;
+import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory.ExtensionData;
 import org.eclipse.jst.jsf.designtime.internal.view.model.TagRegistryFactory.TagRegistryFactoryException;
+import org.eclipse.jst.jsf.facelet.ui.internal.validation.AbstractFaceletValidationStrategy;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -19,6 +24,9 @@ public class FaceletUiPlugin extends AbstractUIPlugin
 
     // The shared instance
     private static FaceletUiPlugin plugin;
+
+    private final Object extensionLock = new Object();
+    private BasicExtensionFactory<AbstractFaceletValidationStrategy>  faceletValidationStrategyExtension;
 
     /*
      * (non-Javadoc)
@@ -66,4 +74,15 @@ public class FaceletUiPlugin extends AbstractUIPlugin
         getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, "", e));
     }
 
+    
+    public Map<String, ExtensionData<AbstractFaceletValidationStrategy>> getValidationStrategy()
+    {
+        synchronized (this.extensionLock) {
+            if (this.faceletValidationStrategyExtension == null)
+            {
+                this.faceletValidationStrategyExtension = new BasicExtensionFactory<AbstractFaceletValidationStrategy>(this.getBundle(), "faceletValidator", "validationStrategy", false);
+            }
+            return this.faceletValidationStrategyExtension.getExtensions();
+        }
+    }
 }
