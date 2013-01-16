@@ -1,11 +1,17 @@
 package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.impl;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.Description;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.IdentifiableLangStringValue;
 
 /**
@@ -48,6 +54,45 @@ class Util
         return retString;
     }
 
+    public static String concatDesc(final EObject listOwner, final EList<Description> list, final String filterString,
+    		final String separationString)
+    {
+        if (filterString == null)
+        {
+            throw new NullPointerException("language must not be null"); //$NON-NLS-1$
+        }
+
+        String retString = ""; //$NON-NLS-1$
+        for (final Description obj : list)
+        {
+            if (obj != null
+                    && passesFilter(filterString.length() == 0 ? null
+                            : filterString, obj)) {
+                FeatureMap contents = obj.getAny();
+                Object object = contents.get(
+                        XMLTypePackage.Literals.XML_TYPE_DOCUMENT_ROOT__TEXT,
+                        true);
+                if (object instanceof String) {
+                    
+                    retString += (String) object;
+                }
+                else if (object instanceof Collection)
+                {
+                    Iterator<Object> it = ((Collection)object).iterator();
+                    while (it.hasNext())
+                    {
+                        Object next = it.next();
+                        if (next instanceof String)
+                        {
+                            retString += (String) next;
+                        }
+                    }
+                }
+            }
+        }
+        return retString;
+    }
+    
     private static boolean passesFilter(final String expectedLang,
             final IdentifiableLangStringValue langOwner)
     {
@@ -56,6 +101,14 @@ class Util
                 .equals(lang)));
     }
     
+    private static boolean passesFilter(final String expectedLang,
+    		final Description langOwner)
+    {
+    	final Object lang = langOwner.getLang();
+        return ((expectedLang == null && lang == null) || (expectedLang != null && expectedLang
+                .equals(lang)));
+    }
+
     public static Object getSimplifiedNestedField(final EObject owner,
             final EReference firstLevelFeature, EAttribute simplifiedFeature)
     {

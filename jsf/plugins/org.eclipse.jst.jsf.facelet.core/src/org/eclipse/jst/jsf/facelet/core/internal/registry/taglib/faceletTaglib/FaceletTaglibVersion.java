@@ -30,183 +30,229 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum FaceletTaglibVersion implements Enumerator
 {
     /**
-     * The '<em><b>20</b></em>' literal object.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>20</b></em>' literal object.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #_20_VALUE
-     * @generated
-     * @ordered
-     */
-    _20(0, "_20", "2.0");  //$NON-NLS-1$//$NON-NLS-2$
+	 * @see #_20_VALUE
+	 * @generated
+	 * @ordered
+	 */
+    _20(0, "_20", "2.0"),  //$NON-NLS-1$ //$NON-NLS-2$
+    /**
+	 * The '<em><b>21</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #_21_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	_21(1, "_21", "2.1"),  //$NON-NLS-1$ //$NON-NLS-2$
+	/**
+	 * The '<em><b>22</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #_22_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	_22(2, "_22", "2.2");  //$NON-NLS-1$//$NON-NLS-2$
 
     /**
-     * The '<em><b>20</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>20</b></em>' literal value.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of '<em><b>20</b></em>' literal object isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @see #_20
-     * @model literal="2.0"
-     * @generated
-     * @ordered
-     */
+	 * @see #_20
+	 * @model literal="2.0"
+	 * @generated
+	 * @ordered
+	 */
     public static final int _20_VALUE = 0;
 
     /**
-     * An array of all the '<em><b>Version</b></em>' enumerators.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>21</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>21</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #_21
+	 * @model literal="2.1"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int _21_VALUE = 1;
+
+				/**
+	 * The '<em><b>22</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>22</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #_22
+	 * @model literal="2.2"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int _22_VALUE = 2;
+
+				/**
+	 * An array of all the '<em><b>Version</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     private static final FaceletTaglibVersion[] VALUES_ARRAY =
-        new FaceletTaglibVersion[]
-        {
-            _20,
-        };
+        new FaceletTaglibVersion[] {
+			_20,
+			_21,
+			_22,
+		};
 
     /**
-     * A public read-only list of all the '<em><b>Version</b></em>' enumerators.
-     * <!-- begin-user-doc -->
+	 * A public read-only list of all the '<em><b>Version</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static final List<FaceletTaglibVersion> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
     /**
-     * Returns the '<em><b>Version</b></em>' literal with the specified literal value.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Version</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
      * @param literal 
      * @return the version
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static FaceletTaglibVersion get(String literal)
     {
-        for (int i = 0; i < VALUES_ARRAY.length; ++i)
-        {
-            FaceletTaglibVersion result = VALUES_ARRAY[i];
-            if (result.toString().equals(literal))
-            {
-                return result;
-            }
-        }
-        return null;
-    }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			FaceletTaglibVersion result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
     /**
-     * Returns the '<em><b>Version</b></em>' literal with the specified name.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Version</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
      * @param name 
      * @return the version
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static FaceletTaglibVersion getByName(String name)
     {
-        for (int i = 0; i < VALUES_ARRAY.length; ++i)
-        {
-            FaceletTaglibVersion result = VALUES_ARRAY[i];
-            if (result.getName().equals(name))
-            {
-                return result;
-            }
-        }
-        return null;
-    }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			FaceletTaglibVersion result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
     /**
-     * Returns the '<em><b>Version</b></em>' literal with the specified integer value.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Version</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
      * @param value 
      * @return the version
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static FaceletTaglibVersion get(int value)
     {
-        switch (value)
-        {
-            case _20_VALUE: return _20;
-        }
-        return null;
-    }
+		switch (value) {
+			case _20_VALUE: return _20;
+			case _21_VALUE: return _21;
+			case _22_VALUE: return _22;
+		}
+		return null;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     private final int value;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     private final String name;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     private final String literal;
 
     /**
-     * Only this class can construct instances.
-     * <!-- begin-user-doc -->
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     private FaceletTaglibVersion(int value, String name, String literal)
     {
-        this.value = value;
-        this.name = name;
-        this.literal = literal;
-    }
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public int getValue()
     {
-      return value;
-    }
+	  return value;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getName()
     {
-      return name;
-    }
+	  return name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getLiteral()
     {
-      return literal;
-    }
+	  return literal;
+	}
 
     /**
-     * Returns the literal value of the enumerator, which is its string representation.
-     * <!-- begin-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString()
     {
-        return literal;
-    }
+		return literal;
+	}
     
 } //FaceletTaglibVersion

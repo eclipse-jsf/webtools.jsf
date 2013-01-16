@@ -39,97 +39,94 @@ import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.U
 public abstract class UserVisibleTaglibObjectImpl extends EObjectImpl implements UserVisibleTaglibObject
 {
     /**
-     * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDescription()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Description> description;
 
     /**
-     * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getDisplayName() <em>Display Name</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getDisplayName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getDisplayName()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<DisplayName> displayName;
 
     /**
-     * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIcon() <em>Icon</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getIcon()
-     * @generated
-     * @ordered
-     */
+	 * @see #getIcon()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Icon> icon;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected UserVisibleTaglibObjectImpl()
     {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass()
     {
-        return FaceletTaglibPackage.Literals.USER_VISIBLE_TAGLIB_OBJECT;
-    }
+		return FaceletTaglibPackage.Literals.USER_VISIBLE_TAGLIB_OBJECT;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Description> getDescription()
     {
-        if (description == null)
-        {
-            description = new EObjectContainmentEList<Description>(Description.class, this, FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION);
-        }
-        return description;
-    }
+		if (description == null) {
+			description = new EObjectContainmentEList<Description>(Description.class, this, FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION);
+		}
+		return description;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<DisplayName> getDisplayName()
     {
-        if (displayName == null)
-        {
-            displayName = new EObjectContainmentEList<DisplayName>(DisplayName.class, this, FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME);
-        }
-        return displayName;
-    }
+		if (displayName == null) {
+			displayName = new EObjectContainmentEList<DisplayName>(DisplayName.class, this, FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME);
+		}
+		return displayName;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Icon> getIcon()
     {
-        if (icon == null)
-        {
-            icon = new EObjectContainmentEList<Icon>(Icon.class, this, FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON);
-        }
-        return icon;
-    }
+		if (icon == null) {
+			icon = new EObjectContainmentEList<Icon>(Icon.class, this, FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON);
+		}
+		return icon;
+	}
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -138,7 +135,7 @@ public abstract class UserVisibleTaglibObjectImpl extends EObjectImpl implements
      */
     public String getDescription(String language, String separationString)
     {
-        return Util.concat(this, getDescription(), language, separationString);
+        return Util.concatDesc(this, getDescription(), language, separationString);
     }
 
     /**
@@ -158,7 +155,7 @@ public abstract class UserVisibleTaglibObjectImpl extends EObjectImpl implements
      */
     public String getDisplayName(String language, String separationString)
     {
-        return Util.concat(this, getDescription(), language, separationString);
+        return Util.concatDesc(this, getDescription(), language, separationString);
     }
 
     /**
@@ -172,113 +169,108 @@ public abstract class UserVisibleTaglibObjectImpl extends EObjectImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
     {
-        switch (featureID)
-        {
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
-                return ((InternalEList<?>)getDescription()).basicRemove(otherEnd, msgs);
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
-                return ((InternalEList<?>)getDisplayName()).basicRemove(otherEnd, msgs);
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
-                return ((InternalEList<?>)getIcon()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
+				return ((InternalEList<?>)getDescription()).basicRemove(otherEnd, msgs);
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
+				return ((InternalEList<?>)getDisplayName()).basicRemove(otherEnd, msgs);
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
+				return ((InternalEList<?>)getIcon()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType)
     {
-        switch (featureID)
-        {
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
-                return getDescription();
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
-                return getDisplayName();
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
-                return getIcon();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
+				return getDescription();
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
+				return getDisplayName();
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
+				return getIcon();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue)
     {
-        switch (featureID)
-        {
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
-                getDescription().clear();
-                getDescription().addAll((Collection<? extends Description>)newValue);
-                return;
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
-                getDisplayName().clear();
-                getDisplayName().addAll((Collection<? extends DisplayName>)newValue);
-                return;
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
-                getIcon().clear();
-                getIcon().addAll((Collection<? extends Icon>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
+				getDescription().clear();
+				getDescription().addAll((Collection<? extends Description>)newValue);
+				return;
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
+				getDisplayName().clear();
+				getDisplayName().addAll((Collection<? extends DisplayName>)newValue);
+				return;
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
+				getIcon().clear();
+				getIcon().addAll((Collection<? extends Icon>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID)
     {
-        switch (featureID)
-        {
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
-                getDescription().clear();
-                return;
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
-                getDisplayName().clear();
-                return;
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
-                getIcon().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
+				getDescription().clear();
+				return;
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
+				getDisplayName().clear();
+				return;
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
+				getIcon().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID)
     {
-        switch (featureID)
-        {
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
-                return description != null && !description.isEmpty();
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
-                return displayName != null && !displayName.isEmpty();
-            case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
-                return icon != null && !icon.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DESCRIPTION:
+				return description != null && !description.isEmpty();
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__DISPLAY_NAME:
+				return displayName != null && !displayName.isEmpty();
+			case FaceletTaglibPackage.USER_VISIBLE_TAGLIB_OBJECT__ICON:
+				return icon != null && !icon.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //UserVisibleTaglibObjectImpl
