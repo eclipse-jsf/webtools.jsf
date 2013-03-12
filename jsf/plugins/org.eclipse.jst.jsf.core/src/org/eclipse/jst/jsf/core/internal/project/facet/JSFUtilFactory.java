@@ -63,6 +63,8 @@ public class JSFUtilFactory
             return new JSFUtils20(modelProvider);
         case V2_1:
         	return new JSFUtils21(modelProvider);
+        case V2_2:
+        	return new JSFUtils22(modelProvider);
         default:
             throw new IllegalArgumentException("Unknown version: "+version); //$NON-NLS-1$
         }
