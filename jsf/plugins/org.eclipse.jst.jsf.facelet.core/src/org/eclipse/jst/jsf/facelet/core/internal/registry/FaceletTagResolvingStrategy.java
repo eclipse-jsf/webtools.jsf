@@ -14,6 +14,7 @@ import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.AbstractTagResolvi
 import org.eclipse.jst.jsf.designtime.internal.view.model.jsp.IAttributeAdvisor;
 import org.eclipse.jst.jsf.facelet.core.internal.cm.FaceletDocumentFactory;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FaceletTaglibTag;
+import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib.FullyQualifiedClass;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.ComponentTagDefn;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.ConverterTagDefn;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.faceletTaglib_1_0.HandlerTagDefn;
@@ -145,7 +146,15 @@ import org.eclipse.jst.jsf.facelet.core.internal.tagmodel.ValidatorTag;
             return new SourceTag(uri, tagName, source, _factory, advisor);
         }
 
-        return new NoArchetypeFaceletTag(uri, tagName, _factory, advisor);
+        return handleNewFaceletTagDefn(uri, tagName, tagDefn, advisor);
+    }
+
+    private FaceletTag handleNewFaceletTagDefn(final String uri, final String tagName, FaceletTaglibTag tagDefn,
+            final IAttributeAdvisor advisor) {
+        FullyQualifiedClass handlerClassElement = tagDefn.getHandlerClassElement();
+        return new NoArchetypeFaceletTag(uri, tagName,
+                safeGetString(handlerClassElement != null ? safeGetString(handlerClassElement.getValue()) : null),
+                _factory, advisor);
     }
     
     private static String safeGetString(final String value)

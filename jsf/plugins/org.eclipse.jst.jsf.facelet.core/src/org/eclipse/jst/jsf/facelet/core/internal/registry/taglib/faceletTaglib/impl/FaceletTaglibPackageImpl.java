@@ -1862,7 +1862,7 @@ public class FaceletTaglibPackageImpl extends EPackageImpl implements FaceletTag
 		   new String[] {
 			 "name", ":0", //$NON-NLS-1$ //$NON-NLS-2$
 			 "kind", "elementWildcard", //$NON-NLS-1$ //$NON-NLS-2$
-			 "processing", "lax" //$NON-NLS-1$ //$NON-NLS-2$
+			 "processing", "lax"  //$NON-NLS-1$//$NON-NLS-2$
 		   });		
 		addAnnotation
 		  (getDescription_Id(), 

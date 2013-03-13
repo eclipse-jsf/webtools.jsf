@@ -25,7 +25,19 @@ public final class NoArchetypeFaceletTag extends FaceletTag {
      */
     public NoArchetypeFaceletTag(final String uri, final String name, final FaceletDocumentFactory factory, 
             final IAttributeAdvisor advisor) {
-        super(uri, name, TagType.HANDLER, null, factory, advisor);
+        this(uri, name, null, factory, advisor);
     }
 
+    /**
+     * @param uri
+     * @param name
+     * @param handlerClassName
+     * @param factory
+     * @param advisor
+     */
+    public NoArchetypeFaceletTag(final String uri, final String name, final String handlerClassName, final FaceletDocumentFactory factory, 
+            final IAttributeAdvisor advisor)
+    {
+        super(uri, name, TagType.HANDLER, handlerClassName, factory, advisor);
+    }
 }

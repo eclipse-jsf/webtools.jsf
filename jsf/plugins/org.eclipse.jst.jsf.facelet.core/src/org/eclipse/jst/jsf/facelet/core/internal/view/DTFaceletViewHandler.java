@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.core.runtime.content.IContentTypeManager;
 import org.eclipse.jst.jsf.common.internal.JSPUtil;
 import org.eclipse.jst.jsf.common.runtime.internal.model.component.ComponentInfo;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot;
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.VersionStamp;
@@ -121,8 +121,7 @@ public class DTFaceletViewHandler extends DefaultDTViewHandler
     @Override
     public boolean supportsViewDefinition(final IFile file)
     {
-        // XXX: cover case where we are in a JSF 1.2 project and the file is facelet.
-        return JSFAppConfigUtils.isValidJSFProject(file.getProject(), "2.0") && //$NON-NLS-1$
+        return JSFVersion.guessAtLeast(JSFVersion.V2_0, file.getProject()) &&
             (JSPUtil.isJSPContentType(file) || isHTMLContent(file));
     }
 

@@ -25,7 +25,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
-import org.eclipse.jst.j2ee.model.ModelProviderManager;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractCompCoreQueryFactory;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractJEEModelProviderQuery;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.TagModelParser;
@@ -113,12 +114,17 @@ public class TaglibValidator implements IValidatorJob
         
         if (isInValidPath)
         {
-            for (final String configuredPath : WebappConfiguration.getConfigFilesFromContextParam(project, ModelProviderManager.getModelProvider(project)))
+            AbstractCompCoreQueryFactory compCoreQueryFactory = FaceletCorePlugin.getDefault().getCompCoreQueryFactory();
+            AbstractJEEModelProviderQuery modelProvider = compCoreQueryFactory.createJEEModelProviderQuery(project);
+            if (modelProvider != null)
             {
-                final IPath path = webFolderPath.append(configuredPath);
-                if (path.equals(filePath))
+                for (final String configuredPath : WebappConfiguration.getConfigFilesFromContextParam(project, modelProvider))
                 {
-                    return true;
+                    final IPath path = webFolderPath.append(configuredPath);
+                    if (path.equals(filePath))
+                    {
+                        return true;
+                    }
                 }
             }
         }

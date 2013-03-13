@@ -7,10 +7,8 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
-import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
-import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
-import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter.DTELExpression;
+import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil;
 import org.eclipse.jst.jsf.ui.internal.contentassist.JSFContentAssistProcessor;
 import org.eclipse.jst.jsf.ui.internal.contentassist.el.JSFELContentAssistProcessor;
 
@@ -36,7 +34,7 @@ public class CompositeAttributeAssistProcessor implements
     {
         _nonELProcessor = new JSFContentAssistProcessor();
         _elProcessor = new JSFELContentAssistProcessor();
-        
+
         char[] nonELChars = 
             _nonELProcessor.getCompletionProposalAutoActivationCharacters();
         char[] elChars =
@@ -44,9 +42,8 @@ public class CompositeAttributeAssistProcessor implements
         _activationChars = new char[nonELChars.length+elChars.length];
         System.arraycopy(nonELChars, 0, _activationChars, 0, nonELChars.length);
         System.arraycopy(elChars, 0, _activationChars, nonELChars.length, elChars.length);
-        
-        
     }
+
     public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer,
             int offset)
     {
@@ -97,24 +94,12 @@ public class CompositeAttributeAssistProcessor implements
         
         if (context != null)
         {
-            XMLViewDefnAdapter adapter = 
-                DTAppManagerUtil.getXMLViewDefnAdapter(context);
-            if (adapter != null)
+            DTELExpression elExpression = ViewUtil.getDTELExpression(context);
+
+            // only return true if we definitively find EL
+            if(elExpression != null)
             {
-                try
-                {
-                    DTELExpression elExpression = adapter.getELExpression(context);
-    
-                    // only return true if we definitively find EL
-                    if(elExpression != null)
-                    {
-                        return true;
-                    }
-                }
-                catch (ViewHandlerException e)
-                {
-                    // fall through to false, no el
-                }
+                return true;
             }
         }
         // all other cases, return false

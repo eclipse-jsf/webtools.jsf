@@ -110,7 +110,7 @@ public class FaceletDocumentFactory
      */
     private TagInfo createExternalTagInfo(final String uri)
     {
-        final JSFVersion jsfVersion = JSFVersion.valueOfProject(_project);
+        final JSFVersion jsfVersion = JSFVersion.guessJSFVersion(_project);
         TagInfo tldTagInfo = null;
         if (jsfVersion != null)
         {

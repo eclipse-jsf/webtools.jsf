@@ -82,13 +82,13 @@ public class DefaultBuiltInSymbolProvider
     private static final ISymbol SYMBOL_INIT_PARAM_IMPLICIT_OBJ;
     
     //JSF2.0
-    private static final String VIEW_SCOPE                   		= "viewScope";                		//$NON-NLS-1$
-    private static final String FLASH_SCOPE                   		= "flash";                			//$NON-NLS-1$
-    private static final String CC_IMPLICIT_OBJ                		= "cc";      						//$NON-NLS-1$
-    private static final String COMPONENT_IMPLICIT_OBJ              = "component";     					//$NON-NLS-1$
-    private static final String RESOURCE_IMPLICIT_OBJ               = "resource";      					//$NON-NLS-1$
+    private static final String VIEW_SCOPE                          = "viewScope";                      //$NON-NLS-1$
+    private static final String FLASH_SCOPE                         = "flash";                          //$NON-NLS-1$
+    private static final String CC_IMPLICIT_OBJ                     = "cc";                             //$NON-NLS-1$
+    private static final String COMPONENT_IMPLICIT_OBJ              = "component";                      //$NON-NLS-1$
+    private static final String RESOURCE_IMPLICIT_OBJ               = "resource";                       //$NON-NLS-1$
     
-    private static final String UICOMPONENT_FULLY_QUALIFIED_CLASS   	= "javax.faces.component.UIComponent";//$NON-NLS-1$
+    private static final String UICOMPONENT_FULLY_QUALIFIED_CLASS       = "javax.faces.component.UIComponent";//$NON-NLS-1$
     
     static
     {
@@ -197,11 +197,11 @@ public class DefaultBuiltInSymbolProvider
         }
         if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_VIEW) != 0)
         {
-        	 symbols.addAll(getViewScopeSymbols(file).values());
+             symbols.addAll(getViewScopeSymbols(file).values());
         }     
         if ((symbolScopeMask & ISymbolConstants.SYMBOL_SCOPE_FLASH) != 0)
         {
-        	 symbols.addAll(getFlashScopeSymbols(file).values());
+             symbols.addAll(getFlashScopeSymbols(file).values());
         }         
         return symbols.toArray(ISymbol.EMPTY_SYMBOL_ARRAY);
     }
@@ -260,8 +260,8 @@ public class DefaultBuiltInSymbolProvider
         requestSymbols.put(symbol.getName(), symbol);
         
         //add jsf2.0 implicits
-        if (JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >=0) {
-        	symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
+        if (JSFVersion.guessAtLeast(JSFVersion.V2_0, file.getProject()) ) {
+            symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
                     .getProject(), UICOMPONENT_FULLY_QUALIFIED_CLASS,
                     CC_IMPLICIT_OBJ,
                     ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
@@ -269,7 +269,7 @@ public class DefaultBuiltInSymbolProvider
             
 
 //            _symbolFactory.createJavaComponentSymbol(CC_IMPLICIT_OBJ, typeDesc, ""); //$NON-NLS-1$
-        	symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
+            symbol = _symbolFactory.createBeanOrUnknownInstanceSymbol(file
                     .getProject(), UICOMPONENT_FULLY_QUALIFIED_CLASS,
                     COMPONENT_IMPLICIT_OBJ,
                     ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
@@ -301,11 +301,11 @@ public class DefaultBuiltInSymbolProvider
         symbols.put(symbol.getName(), symbol);
         
         //add jsf2.0 implicits
-        if (JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >=0) {        	
-        	symbol = _symbolFactory.createUnknownInstanceSymbol(
+        if (JSFVersion.guessAtLeast(JSFVersion.V2_0, file.getProject()) ) {
+            symbol = _symbolFactory.createUnknownInstanceSymbol(
                     RESOURCE_IMPLICIT_OBJ,
                     ERuntimeSource.BUILT_IN_SYMBOL_LITERAL);
-        	symbols.put(symbol.getName(), symbol);
+            symbols.put(symbol.getName(), symbol);
         }
         
         return Collections.unmodifiableMap(symbols);
@@ -313,28 +313,26 @@ public class DefaultBuiltInSymbolProvider
     
     private Map<String,ISymbol> getViewScopeSymbols(final IFile file)
     {
-    	if(JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >= 0) { 
-	    	
-	        ISymbol symbol = createScopeSymbol(file,
-	                ISymbolConstants.SYMBOL_SCOPE_VIEW, VIEW_SCOPE);
-	
-	        return Collections.unmodifiableMap
-	            (Collections.singletonMap(symbol.getName(), symbol));
-    	}
-    	return Collections.emptyMap();
+        if (JSFVersion.guessAtLeast(JSFVersion.V2_0, file.getProject()) ) {
+            ISymbol symbol = createScopeSymbol(file,
+                    ISymbolConstants.SYMBOL_SCOPE_VIEW, VIEW_SCOPE);
+    
+            return Collections.unmodifiableMap
+                (Collections.singletonMap(symbol.getName(), symbol));
+        }
+        return Collections.emptyMap();
     }
 
     private Map<String,ISymbol> getFlashScopeSymbols(final IFile file)
     {
-    	if(JSFVersion.valueOfProject(file.getProject()).compareTo(JSFVersion.V2_0) >= 0) { 
-	    	
-	        ISymbol symbol = createScopeSymbol(file,
-	                ISymbolConstants.SYMBOL_SCOPE_FLASH, FLASH_SCOPE);
-	
-	        return Collections.unmodifiableMap
-	            (Collections.singletonMap(symbol.getName(), symbol));
-    	}
-    	return Collections.emptyMap();
+        if (JSFVersion.guessAtLeast(JSFVersion.V2_0, file.getProject()) ) {
+            ISymbol symbol = createScopeSymbol(file,
+                    ISymbolConstants.SYMBOL_SCOPE_FLASH, FLASH_SCOPE);
+    
+            return Collections.unmodifiableMap
+                (Collections.singletonMap(symbol.getName(), symbol));
+        }
+        return Collections.emptyMap();
     }
     
     private ISymbol createScopeSymbol(final IFile file, final int scopeMask,
@@ -396,13 +394,13 @@ public class DefaultBuiltInSymbolProvider
                 scopeMap.putAll(externalContext.getMapForScope(_scopeMask));
                 
                 DTUIViewRoot viewRoot = manager
-                	.getFacesContext(_externalContextKey)
-                	.getViewRootHandle().getCachedViewRoot();
+                    .getFacesContext(_externalContextKey)
+                    .getViewRootHandle().getCachedViewRoot();
 
                 if (viewRoot == null) {
-                	viewRoot = manager
-                	.getFacesContext(_externalContextKey)
-                	.getViewRootHandle().updateViewRoot();
+                    viewRoot = manager
+                    .getFacesContext(_externalContextKey)
+                    .getViewRootHandle().updateViewRoot();
                 }
                 scopeMap.putAll(viewRoot.getViewMap());
             }

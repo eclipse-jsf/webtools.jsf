@@ -14,6 +14,8 @@ package org.eclipse.jst.jsf.core.internal;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -28,8 +30,8 @@ import org.eclipse.jst.jsf.designtime.el.AbstractDTMethodResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTPropertyResolver;
 import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory;
-import org.eclipse.jst.jsf.designtime.internal.DecoratableExtensionFactory;
 import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory.ExtensionData;
+import org.eclipse.jst.jsf.designtime.internal.DecoratableExtensionFactory;
 import org.eclipse.jst.jsf.designtime.internal.resolver.ViewBasedTaglibResolverFactory;
 import org.eclipse.jst.jsf.designtime.internal.view.AbstractDTViewHandler;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -365,10 +367,41 @@ public class JSFCorePlugin extends WTPPlugin
     private final static String                                VIEWHANDLER_EXT_POINT_NAME = "viewhandler"; //$NON-NLS-1$
     private final static String                                VIEWHANDLER_ELEMENT_NAME   = "viewhandler"; //$NON-NLS-1$
 
+    
     /**
-     * @return the preference store for this bundle TODO: this is copied from
-     *         AbstractUIPlugin; need to upgrade to new IPreferencesService
+     * @param viewHandler 
+     * @return checks for an override handler and returns it, using viewHandler as a decorated object.  This allows
+     * an adopter to selectively decorate the view handler provided by the framework.
      */
+    public synchronized static AbstractDTViewHandler getViewOverrideHandler(final AbstractDTViewHandler viewHandler)
+    {
+        final IExtensionPoint extension = getDefault().getExtension(VIEWHANDLEROVERRIDE_EXT_POINT_NAME);
+        if (extension != null)
+        {
+            final IConfigurationElement[] configurationElements = extension.getConfigurationElements();
+            if (configurationElements.length > 1)
+            {
+                log(IStatus.ERROR, "More than one view handler override registered"); //$NON-NLS-1$
+                return null;
+            }
+            if (configurationElements.length == 1)
+            {
+                try {
+                    return (AbstractDTViewHandler) configurationElements[0].createExecutableExtension("class"); //$NON-NLS-1$
+                } catch (CoreException e) {
+                    log("Failed to load class for view override", e); //$NON-NLS-1$
+                }
+            }
+        }
+        return null;
+    }
+    private final static String                                VIEWHANDLEROVERRIDE_EXT_POINT_NAME = "viewHandlerOverride"; //$NON-NLS-1$
+//    private final static String                                VIEWHANDLEROVERRIDE_VIEWHANDLER_ELEMENT_NAME   = "viewHandlerOverride"; //$NON-NLS-1$
+
+    /**
+     * @return the preference store for this bundle 
+     */
+    @SuppressWarnings("deprecation")
     public synchronized IPreferenceStore getPreferenceStore()
     {
         // Create the preference store lazily.

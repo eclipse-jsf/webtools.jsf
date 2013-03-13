@@ -117,14 +117,7 @@ public final class FaceletRegistryManager extends
             {
                 return false;
             }
-
-            final JSFVersion jsfVersion = JSFVersion.valueOfProject(project);
-            if (jsfVersion != null && jsfVersion.compareTo(JSFVersion.V2_0) >= 0)
-            {
-                return true;
-            }
-
-            return false;
+            return JSFVersion.guessAtLeast(JSFVersion.V2_0, project);
         }
     }
 }

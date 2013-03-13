@@ -12,6 +12,10 @@ package org.eclipse.jst.jsf.core;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
 import org.eclipse.wst.common.project.facet.core.IFacetedProject;
 import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
@@ -165,5 +169,53 @@ public enum JSFVersion {
             // TODO: is this worth logging?
         }
         return null;
+    }
+    
+    
+    /**
+     * @param project
+     * @return the best guess at what JSF version the project is or null if can't determine.
+     */
+    public static JSFVersion guessJSFVersion(final IProject project) {
+        JSFVersion jsfVersion = JSFVersion.valueOfProject(project);
+        if (jsfVersion == null) {
+            try
+            {
+                IJavaProject javaProj = JavaCore.create(project);
+                if (javaProj != null && javaProj.exists())
+                {
+                    if (javaProj.findType("javax.faces.component.html.HtmlBody") != null) //$NON-NLS-1$
+                    {
+                        // at least 2.0 inside here
+                        jsfVersion = JSFVersion.V2_0;
+                        if (javaProj.findType("javax.faces.view.facelets.FaceletCacheFactory") != null) //$NON-NLS-1$
+                        {
+                            // add in 2.1
+                            jsfVersion = JSFVersion.V2_1;
+                        }
+                    }
+                }
+            }
+            catch (JavaModelException jme)
+            {
+                JSFCorePlugin.log(jme, "Trying to guess jsf version"); //$NON-NLS-1$
+            }
+        }
+        return jsfVersion;
+    }
+    
+    /**
+     * @param atLeastThisVersion
+     * @param project
+     * @return true if the project has at least JSFVersion passed based guessJSFVersion
+     */
+    public static boolean guessAtLeast(final JSFVersion atLeastThisVersion, final IProject project)
+    {
+        if (project != null && project.isAccessible())
+        {
+            JSFVersion guessJSFVersion = guessJSFVersion(project);
+            return guessJSFVersion != null && guessJSFVersion.compareTo(atLeastThisVersion) >= 0;
+        }
+        return false;
     }
 }

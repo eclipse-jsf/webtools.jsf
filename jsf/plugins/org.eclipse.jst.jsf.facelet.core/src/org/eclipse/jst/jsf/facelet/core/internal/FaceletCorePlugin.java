@@ -1,9 +1,15 @@
 package org.eclipse.jst.jsf.facelet.core.internal;
 
+import java.util.List;
+
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractCompCoreQueryFactory;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractCompCoreQueryFactory.DefaultCompCoreQueryFactory;
+import org.eclipse.jst.jsf.common.internal.pde.AbstractSimpleClassExtensionRegistryReader;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -27,6 +33,7 @@ public class FaceletCorePlugin extends EMFPlugin
 
     // The shared instance
     private static Implementation plugin;
+
 
     /**
      * Create the instance.
@@ -91,6 +98,33 @@ public class FaceletCorePlugin extends EMFPlugin
             plugin = this;
         }
 
+        private AbstractCompCoreQueryFactory compCoreQueryFactory;
+
+        /**
+         * @return the query factory
+         */
+        public AbstractCompCoreQueryFactory getCompCoreQueryFactory()
+        {
+            synchronized(this)
+            {
+                if (compCoreQueryFactory == null)
+                {
+                    List<AbstractCompCoreQueryFactory> extensions = new MyCompCoreFactoryLoader().getExtensions();
+                    if (!extensions.isEmpty())
+                    {
+                        compCoreQueryFactory =  extensions.get(0);
+                        
+                    }
+                    else
+                    {
+                        this.compCoreQueryFactory = new DefaultCompCoreQueryFactory();
+                    }   
+                }
+                return this.compCoreQueryFactory;
+            }
+        }
+        
+        
         @Override
         public void start(BundleContext bundleContext) throws Exception
         {
@@ -107,7 +141,19 @@ public class FaceletCorePlugin extends EMFPlugin
         }
     }
 
-    
+    private static class MyCompCoreFactoryLoader extends AbstractSimpleClassExtensionRegistryReader<AbstractCompCoreQueryFactory>
+    {
+
+        protected MyCompCoreFactoryLoader() {
+            super(PLUGIN_ID, "componentCoreQueryFactory", "componentCoreQueryFactory", "class", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        }
+
+        @Override
+        protected void handleLoadFailure(CoreException ce) {
+            FaceletCorePlugin.log(ce);
+        }
+        
+    }
     /**
      * Returns the shared instance
      * 
@@ -133,4 +179,22 @@ public class FaceletCorePlugin extends EMFPlugin
         getDefault().getLog().log(status);
     }
 
+    /**
+     * @param exception
+     */
+    public static void log(final Throwable exception)
+    {
+        log("Caught exception", exception); //$NON-NLS-1$
+    }
+
+    /**
+     * @param logMessage
+     * @param exception
+     */
+    public static void logInfo(final String logMessage, final Throwable exception)
+    {
+        final IStatus status = new Status(IStatus.INFO, PLUGIN_ID,
+                logMessage, exception);
+        getDefault().getLog().log(status);
+    }
 }

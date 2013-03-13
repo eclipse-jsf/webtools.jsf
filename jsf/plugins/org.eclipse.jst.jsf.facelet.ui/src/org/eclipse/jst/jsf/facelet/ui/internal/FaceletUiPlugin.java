@@ -75,6 +75,9 @@ public class FaceletUiPlugin extends AbstractUIPlugin
     }
 
     
+    /**
+     * @return the validation strategy extension data
+     */
     public Map<String, ExtensionData<AbstractFaceletValidationStrategy>> getValidationStrategy()
     {
         synchronized (this.extensionLock) {

@@ -34,6 +34,7 @@ import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 
 
 
@@ -314,8 +315,11 @@ public class IInstanceSymbolItemProvider
         final String replacementText = symbol.getName();
         final String displayText = getText(symbol);
         //final String additionalText = symbol.getDetailedDescription();
-        final Image displayImage = 
-            ExtendedImageRegistry.getInstance().getImage(getImage(symbol));
+        // for running headless, we need to avoid hitting the image registry
+        // because it accesses the Display object that won't exist
+        final Image displayImage = Display.getCurrent() != null ?
+            ExtendedImageRegistry.getInstance().getImage(getImage(symbol))
+            : null;
 
         return new ICompletionProposal[]
         {

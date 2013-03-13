@@ -18,7 +18,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.j2ee.model.IModelProvider;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractJEEModelProviderQuery;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.common.internal.managedobject.ObjectManager.ManagedObjectException;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
@@ -56,7 +56,7 @@ public class ContextParamSpecifiedFaceletTaglibLocator extends
      */
     public ContextParamSpecifiedFaceletTaglibLocator(final IProject project,
             final TagRecordFactory factory,
-            final IModelProvider webAppProvider,
+            final AbstractJEEModelProviderQuery webAppProvider,
             final AbstractVirtualComponentQuery vcQuery,
             final WorkspaceMediator wsMediator)
     {

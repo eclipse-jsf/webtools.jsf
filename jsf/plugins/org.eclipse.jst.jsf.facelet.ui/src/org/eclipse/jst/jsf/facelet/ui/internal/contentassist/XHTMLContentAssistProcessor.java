@@ -44,6 +44,7 @@ import org.w3c.dom.Node;
  * @author cbateman
  *
  */
+@SuppressWarnings("deprecation")
 public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
 {
     private IFile _file;

@@ -50,7 +50,6 @@ import org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver;
 import org.eclipse.jst.jsf.designtime.internal.BasicExtensionFactory.ExtensionData;
 import org.eclipse.jst.jsf.designtime.internal.view.AbstractDTViewHandler;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler;
-import org.eclipse.wst.common.project.facet.core.IProjectFacetVersion;
 
 /**
  * Per-web-application manager that manages design time information for a
@@ -214,8 +213,9 @@ public final class DesignTimeApplicationManager
      */
     public static boolean hasJSFDesignTime(final IProject project)
     {
+        JSFVersion guessJSFVersion = JSFVersion.guessJSFVersion(project);
         return project != null && project.isAccessible()
-                && JSFAppConfigUtils.isValidJSFProject(project);
+                && (JSFAppConfigUtils.isValidJSFProject(project) || (guessJSFVersion != null && guessJSFVersion.compareTo(JSFVersion.V2_0) >= 0));
     }
 
     // instance definition
@@ -673,17 +673,14 @@ public final class DesignTimeApplicationManager
 
         protected String getHandlerId(final IProject project)
         {
-            IProjectFacetVersion projectFacet = JSFAppConfigUtils.getProjectFacet(project);
-            if (projectFacet != null)
+            JSFVersion projectVersion = JSFVersion.guessJSFVersion(project);
+            if (projectVersion != null)
             {
-                JSFVersion projectVersion = JSFVersion.valueOfFacetVersion(projectFacet);
-                
                 String defaultHandler = PRE_20_DEFAULT_VIEW_HANDLER_ID;
                 
                 // starting with JSF 2.0 a new view handler that first
                 // processes as Facelet and then delegates to JSP is
                 // used by default
-                // TODO: check the web.xml flag that reverts things to 1.2 defaults
                 if (projectVersion.compareTo(JSFVersion.V2_0) >= 0)
                 {
                     defaultHandler = JSF_20_DEFAULT_VIEW_HANDLER_ID;
@@ -695,7 +692,6 @@ public final class DesignTimeApplicationManager
             }
             return null;
         }
-        
 
         public synchronized IDTViewHandler getViewHandler(
                 final IProject project, final LifecycleListener listener)
@@ -713,8 +709,17 @@ public final class DesignTimeApplicationManager
                             .getViewHandlers(PRE_20_DEFAULT_VIEW_HANDLER_ID);
                 }
 
-                final AbstractDTViewHandler viewHandler = viewHandlers
+                AbstractDTViewHandler viewHandler = viewHandlers
                         .getInstance(project);
+                if (JSFVersion.guessAtLeast(JSFVersion.V2_0, project))
+                {
+                    final AbstractDTViewHandler overrideHandler = JSFCorePlugin.getViewOverrideHandler(viewHandler);
+                    if (overrideHandler != null)
+                    {
+                        overrideHandler.setParent(viewHandler);
+                        viewHandler = overrideHandler;
+                    }
+                }
                 viewHandler.setLifecycleListener(listener);
                 return viewHandler;
             }

@@ -39,6 +39,8 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
 {
     private final AtomicBoolean _isDisposed    = new AtomicBoolean(false);
 
+    private AbstractDTViewHandler parent;
+
     /**
      * the path separator
      */
@@ -128,6 +130,21 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
     protected void doDispose()
     {
         // do nothing by default
+    }
+
+    /**
+     * @return the parent or null if there is no parent.  A handler may
+     * delegate to its parent if it has one or override behaviour itself.
+     */
+    public AbstractDTViewHandler getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent
+     */
+    public void setParent(AbstractDTViewHandler parent) {
+        this.parent = parent;
     }
 
     /**

@@ -12,7 +12,6 @@ package org.eclipse.jst.jsf.facelet.core.internal.registry.taglib;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -24,8 +23,8 @@ import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jst.j2ee.model.IModelProvider;
-import org.eclipse.jst.javaee.web.IWebCommon;
+import org.eclipse.jst.javaee.core.ParamValue;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractJEEModelProviderQuery;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.common.internal.resource.EventResult;
 import org.eclipse.jst.jsf.common.internal.resource.IResourceLifecycleListener;
@@ -34,7 +33,6 @@ import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent;
 import org.eclipse.jst.jsf.common.internal.resource.ResourceLifecycleEvent.EventType;
 import org.eclipse.jst.jsf.common.internal.resource.WorkspaceMediator;
 import org.eclipse.jst.jsf.facelet.core.internal.registry.taglib.WebappConfiguration.WebappListener.WebappChangeEvent;
-import org.eclipse.wst.common.componentcore.resources.IVirtualFile;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 
 /**
@@ -59,19 +57,19 @@ public class WebappConfiguration
      */
     private final ContextParamAdapter _contextParamAdapter;
     private List<IFile> _cachedFiles;
-    private final IModelProvider _modelProvider;
+    private final AbstractJEEModelProviderQuery _modelProvider;
     private final AbstractVirtualComponentQuery _vcQuery;
     private final LifecycleListener _lifecycleListener;
     private final WorkspaceMediator _wsMediator;
 
     /**
      * @param project
-     * @param modelProvider
+     * @param webAppProvider
      * @param vcQuery
      * @param wsMediator
      */
     public WebappConfiguration(final IProject project,
-            final IModelProvider modelProvider,
+            final AbstractJEEModelProviderQuery webAppProvider,
             final AbstractVirtualComponentQuery vcQuery,
             final WorkspaceMediator wsMediator)
     {
@@ -80,7 +78,7 @@ public class WebappConfiguration
         _lifecycleListener = new LifecycleListener(getWebXmlFile(project),
                 project.getWorkspace());
         _contextParamAdapter = new ContextParamAdapter();
-        _modelProvider = modelProvider;
+        _modelProvider = webAppProvider;
         _wsMediator = wsMediator;
     }
 
@@ -106,8 +104,12 @@ public class WebappConfiguration
     public List<IFile> getFiles()
     {
         final IVirtualFolder folder = _vcQuery.getWebContentFolder(_project);
-
         if (folder == null)
+        {
+            return Collections.emptyList();
+        }
+        final IContainer underlyingContainer = folder.getUnderlyingFolder();
+        if (underlyingContainer == null)
         {
             return Collections.emptyList();
         }
@@ -118,10 +120,10 @@ public class WebappConfiguration
 
         for (final String filename : filenames)
         {
-            final IVirtualFile vfile = folder.getFile(new Path(filename));
-            if (vfile != null)
+            final IFile vfile = underlyingContainer.getFile(new Path(filename));
+            if (vfile != null && vfile.isAccessible())
             {
-                files.add(vfile.getUnderlyingFile());
+                files.add(vfile);
             }
         }
         _cachedFiles = files;
@@ -170,51 +172,29 @@ public class WebappConfiguration
      * @param project
      *            IProject instance for which to get the context parameter's
      *            value.
-     * @param provider
+     * @param modelProvider
      * @return List of application configuration file names as listed in the JSF
      *         CONFIG_FILES context parameter ("javax.faces.CONFIG_FILES"); list
      *         may be empty.
      */
     public static List<String> getConfigFilesFromContextParam(
-            final IProject project, final IModelProvider provider)
+            final IProject project, final AbstractJEEModelProviderQuery modelProvider)
     {
-        List<String> filesList = Collections.EMPTY_LIST;
-        // if (JSFAppConfigUtils.isValidJSFProject(project))
+        List<String> filesList = new ArrayList<String>(5);
         {
-            final Object webAppObj = provider.getModelObject();
-            if (webAppObj != null)
-            {
-                if (webAppObj instanceof org.eclipse.jst.javaee.web.WebApp)
+            List<ParamValue> paramValues = modelProvider.getWebAppParamValues();
+            for (final ParamValue paramValue : paramValues){
+                if (paramValue.getParamName().equals(
+                        FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)
+                        || paramValue.getParamName().equals(
+                                JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
                 {
-                    filesList = getConfigFilesForJEEApp((org.eclipse.jst.javaee.web.WebApp) webAppObj);
+                    String filesString = paramValue.getParamValue();
+                    filesList.addAll(parseFilesString(filesString));
                 }
             }
-
         }
-        return filesList;
-    }
-
-    private static List<String> getConfigFilesForJEEApp(
-            final org.eclipse.jst.javaee.web.WebApp webApp)
-    {
-        String filesString = null;
-        final List contextParams = webApp.getContextParams();
-        final Iterator itContextParams = contextParams.iterator();
-        final List<String> fileStrings = new ArrayList<String>();
-        while (itContextParams.hasNext())
-        {
-            final org.eclipse.jst.javaee.core.ParamValue paramValue = (org.eclipse.jst.javaee.core.ParamValue) itContextParams
-                    .next();
-            if (paramValue.getParamName().equals(
-                    FACELET_10_LIBRARIES_CONTEXT_PARAM_NAME)
-                    || paramValue.getParamName().equals(
-                            JSF20_FACELET_LIBRARIES_CONTEXT_PARAM_NAME))
-            {
-                filesString = paramValue.getParamValue();
-                fileStrings.addAll(parseFilesString(filesString));
-            }
-        }
-        return fileStrings;
+        return filesList.isEmpty() ? Collections.EMPTY_LIST : filesList;
     }
 
     private static List<String> parseFilesString(final String filesString)
@@ -351,20 +331,11 @@ public class WebappConfiguration
             {
                 public void run(final IProgressMonitor monitor) throws CoreException
                 {
-                    final Object modelObject = _modelProvider.getModelObject();
-                    if (modelObject instanceof org.eclipse.jst.javaee.web.WebApp)
+                    List<ParamValue> webAppParamValues = _modelProvider.getWebAppParamValues();
+                    for (final org.eclipse.jst.javaee.core.ParamValue paramValue : webAppParamValues)
                     {
-                        for (final org.eclipse.jst.javaee.core.ParamValue paramValue : ((IWebCommon) modelObject)
-                                .getContextParams())
-                        {
-                            processParamValue(paramValue);
-                        }
+                        processParamValue(paramValue);
                     }
-                    // TODO: possibly handle facelets 1.0 in pre-2.5 webapps in
-                    // the
-                    // future
-                    // if it's worth the complexity.
-                    // SEE previous revs in CVS.
                 }
             };
             _wsMediator.runInWorkspaceJob(runnable, "Update web xml"); //$NON-NLS-1$

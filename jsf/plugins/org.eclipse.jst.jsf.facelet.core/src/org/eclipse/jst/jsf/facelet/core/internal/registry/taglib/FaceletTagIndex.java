@@ -17,8 +17,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.jst.j2ee.model.ModelProviderManager;
-import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractCompCoreQueryFactory;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractJEEModelProviderQuery;
+import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
 import org.eclipse.jst.jsf.common.internal.finder.AbstractMatcher.AlwaysMatcher;
 import org.eclipse.jst.jsf.common.internal.locator.AbstractLocatorProvider;
 import org.eclipse.jst.jsf.common.internal.locator.AbstractLocatorProvider.DefaultLocatorProvider;
@@ -33,6 +34,7 @@ import org.eclipse.jst.jsf.common.internal.strategy.ISimpleStrategy;
 import org.eclipse.jst.jsf.designtime.internal.resources.IJSFResourceLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.JarBasedJSFResourceLocator;
 import org.eclipse.jst.jsf.designtime.internal.resources.WorkspaceJSFResourceLocator;
+import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 
 /**
  * @author cbateman
@@ -172,9 +174,11 @@ public class FaceletTagIndex extends
         {
             final List<AbstractFaceletTaglibLocator> locators = new ArrayList<AbstractFaceletTaglibLocator>();
             locators.add(new JarFileFaceletTaglibLocator(factory));
-            locators.add(new ContextParamSpecifiedFaceletTaglibLocator(project,
-                    factory, ModelProviderManager.getModelProvider(project),
-                    new DefaultVirtualComponentQuery(), new WorkspaceMediator()));
+            ContextParamSpecifiedFaceletTaglibLocator createContextParamSpecific = createContextParamSpecific(project, factory);
+            if (createContextParamSpecific != null)
+            {
+                locators.add(createContextParamSpecific);
+            }
             final List<IJSFResourceLocator> resourceLocators = new ArrayList<IJSFResourceLocator>();
             resourceLocators
                     .add(new JarBasedJSFResourceLocator(Collections.EMPTY_LIST,
@@ -183,18 +187,36 @@ public class FaceletTagIndex extends
                                     .singletonList(new AlwaysMatcher()),
                                     new JavaCoreMediator()),
                             new ContentTypeResolver()));
-            final IWorkspace workspace = project.getWorkspace();
-            resourceLocators.add(new WorkspaceJSFResourceLocator(
-                    Collections.EMPTY_LIST,
-                    new CopyOnWriteArrayList<ILocatorChangeListener>(),
-                    new DefaultVirtualComponentQuery(),
-                    new ContentTypeResolver(), workspace));
+            resourceLocators.add(createJsfResourceLocator(project));
             final DefaultLocatorProvider<IJSFResourceLocator> resourceLocatorProvider = new DefaultLocatorProvider<IJSFResourceLocator>(
                     resourceLocators);
             locators.add(new CompositeComponentTaglibLocator(
                     resourceLocatorProvider));
             final LocatorProvider provider = new LocatorProvider(locators);
             return new ProjectTaglibDescriptor(project, factory, provider);
+        }
+
+        private WorkspaceJSFResourceLocator createJsfResourceLocator(final IProject project) {
+            return new WorkspaceJSFResourceLocator(
+                    Collections.EMPTY_LIST,
+                    new CopyOnWriteArrayList<ILocatorChangeListener>(),
+                    FaceletCorePlugin.getDefault().getCompCoreQueryFactory().createVirtualComponentQuery(project),
+                    new ContentTypeResolver(), project.getWorkspace());
+        }
+
+        private ContextParamSpecifiedFaceletTaglibLocator createContextParamSpecific(final IProject project,
+                final TagRecordFactory factory) {
+            AbstractCompCoreQueryFactory compCoreQueryFactory = FaceletCorePlugin.getDefault()
+                    .getCompCoreQueryFactory();
+            AbstractJEEModelProviderQuery modelProviderQuery = compCoreQueryFactory
+                    .createJEEModelProviderQuery(project);
+            AbstractVirtualComponentQuery virtualComponentQuery = compCoreQueryFactory
+                    .createVirtualComponentQuery(project);
+            if (modelProviderQuery != null && virtualComponentQuery != null) {
+                return new ContextParamSpecifiedFaceletTaglibLocator(project, factory, modelProviderQuery,
+                        virtualComponentQuery, new WorkspaceMediator());
+            }
+            return null;
         }
     }
 

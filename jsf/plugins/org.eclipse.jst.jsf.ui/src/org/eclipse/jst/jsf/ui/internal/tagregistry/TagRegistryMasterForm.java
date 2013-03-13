@@ -40,7 +40,7 @@ import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.Namespace;
 import org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin;
 import org.eclipse.jst.jsf.common.ui.internal.form.AbstractMasterForm;
 import org.eclipse.jst.jsf.common.ui.internal.utils.JSFSharedImages;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
+import org.eclipse.jst.jsf.core.JSFVersion;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.jst.jsf.ui.internal.JSFUITraceOptions;
 import org.eclipse.jst.jsf.ui.internal.tagregistry.ProjectTracker.ProjectAdvisor;
@@ -75,7 +75,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
 {
     private static final String REFRESH_NAV_IMAGE_FILE = "refresh_nav_16.gif"; //$NON-NLS-1$
     
-	private TreeViewer           _registryTreeViewer;
+    private TreeViewer           _registryTreeViewer;
     // private Action _selectProjectAction;
     private Action               _refreshAction;
 
@@ -94,7 +94,8 @@ public class TagRegistryMasterForm extends AbstractMasterForm
             @Override
             public boolean shouldTrack(final IProject project)
             {
-                return JSFAppConfigUtils.isValidJSFProject(project);
+                JSFVersion guessJSFVersion = JSFVersion.guessJSFVersion(project);
+                return guessJSFVersion != null;
             }
         };
 
@@ -420,7 +421,7 @@ public class TagRegistryMasterForm extends AbstractMasterForm
     {
         private static final String CONFIGS_IMAGE_FILE = "configs.gif"; //$NON-NLS-1$
 
-		@Override
+        @Override
         public String getText(final Object obj)
         {
             if (obj instanceof TagRegistryInstance)

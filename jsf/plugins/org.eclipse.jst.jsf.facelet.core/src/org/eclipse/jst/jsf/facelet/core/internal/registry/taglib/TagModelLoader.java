@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +98,9 @@ public class TagModelLoader
                 .createFileURI(_resourceUri));
         if (res != null)
         {
-            res.load(is, Collections.EMPTY_MAP);
+            Map<String, Object> options = new HashMap<String, Object>();
+            options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
+            res.load(is, options);
             final EObject eObject = res.getContents().get(0);
             _docRoot = (DocumentRoot) eObject;
             _faceletTaglib = _docRoot.getFaceletTaglib();

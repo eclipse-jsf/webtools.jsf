@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
@@ -23,6 +24,7 @@ import org.eclipse.jst.j2ee.model.IModelProvider;
 import org.eclipse.jst.j2ee.model.ModelProviderManager;
 import org.eclipse.jst.j2ee.webapplication.ContextParam;
 import org.eclipse.jst.j2ee.webapplication.WebApp;
+import org.eclipse.wst.common.project.facet.core.FacetedProjectFramework;
 
 /**
  * ContextParamSpecifiedJSFAppConfigLocater attempts to locate application
@@ -61,7 +63,16 @@ public class ContextParamSpecifiedJSFAppConfigLocater extends WebContentRelative
 	private Object getModelObject() {
         Object modelObject = null;
         IProject project = getJSFAppConfigManager().getProject();
-        if (project.isAccessible()) {
+        boolean facetedProject = false;
+        try
+        {
+            facetedProject = FacetedProjectFramework.isFacetedProject(project);
+        }
+        catch (CoreException ce)
+        {
+            // ignore
+        }
+        if (facetedProject) {
             IModelProvider provider = ModelProviderManager.getModelProvider(project);
             if (provider != null) {
                 // we can't get the model if the workspace tree is currently locked.

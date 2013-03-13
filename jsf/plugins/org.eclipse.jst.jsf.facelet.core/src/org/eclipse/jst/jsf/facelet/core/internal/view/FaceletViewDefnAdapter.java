@@ -16,9 +16,9 @@ import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.designtime.context.DTFacesContext;
-import org.eclipse.jst.jsf.designtime.internal.view.TaglibBasedViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException.Cause;
+import org.eclipse.jst.jsf.designtime.internal.view.TaglibBasedViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
@@ -36,7 +36,10 @@ import org.w3c.dom.NamedNodeMap;
  */
 public class FaceletViewDefnAdapter extends TaglibBasedViewDefnAdapter
 {
-    FaceletViewDefnAdapter(final ITagRegistry tagRegistry)
+    /**
+     * @param tagRegistry
+     */
+    protected FaceletViewDefnAdapter(final ITagRegistry tagRegistry)
     {
         super(tagRegistry);
     }
