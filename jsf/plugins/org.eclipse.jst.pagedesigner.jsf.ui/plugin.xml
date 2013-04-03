@@ -15,6 +15,28 @@
 				varTypeMode="BUNDLE" varTypeString="basename" varName="var"
 				tagName="loadBundle" />
 		</taglib>
+  <taglib
+        uri="http://xmlns.jcp.org/jsf/html">
+     <tag
+           tagName="dataTable"
+           varName="var"
+           varNameIsAttr="true"
+           varTypeMode="EXPRESSION_COLLECTION_ITEM"
+           varTypeString="value"
+           varTypeStringIsAttr="true">
+     </tag>
+  </taglib>
+  <taglib
+        uri="http://xmlns.jcp.org/jsf/core">
+     <tag
+           tagName="loadBundle"
+           varName="var"
+           varNameIsAttr="true"
+           varTypeMode="BUNDLE"
+           varTypeString="basename"
+           varTypeStringIsAttr="true">
+     </tag>
+  </taglib>
 	</extension>
 	<extension
 		point="org.eclipse.ui.views.properties.tabbed.propertySections">
@@ -130,8 +152,14 @@
 		point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
 		<elementEditFactory
 			class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml.JSFHTMLElementEditFactory" />
+  <elementEditFactory
+        class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfhtml.JSFHTMLJCPElementEditFactory">
+  </elementEditFactory>
 		<elementEditFactory
 			class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore.JSFCoreElementEditFactory" />
+  <elementEditFactory
+        class="org.eclipse.jst.pagedesigner.jsf.ui.elementedit.jsfcore.JSFCoreJCPElementEditFactory">
+  </elementEditFactory>
 		<linkCreator
 			class="org.eclipse.jst.pagedesigner.jsf.ui.actions.JSFCommandLinkCreator"
 			linkIdentifier="JSF CommandLink" />

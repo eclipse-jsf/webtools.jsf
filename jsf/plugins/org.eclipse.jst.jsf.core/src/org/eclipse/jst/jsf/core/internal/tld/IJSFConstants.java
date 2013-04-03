@@ -284,10 +284,22 @@ public interface IJSFConstants
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_LOADBUNDLE);
 
     /**
+     * JCP version of TagIdentifier for TAG_LOADBUNDLE
+     */
+    final static TagIdentifier TAG_IDENTIFIER_LOADBUNDLE_JCP =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE_JCP, TAG_LOADBUNDLE);
+
+    /**
      * TagIdentifier for TAG_FACET
      */
     final static TagIdentifier TAG_IDENTIFIER_FACET =
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE, TAG_FACET);
+    
+    /**
+     * JCP version of TagIdentifier for TAG_FACET
+     */
+    final static TagIdentifier TAG_IDENTIFIER_FACET_JCP =
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_CORE_JCP, TAG_FACET);
     
     /**
      * TagIdentifier for TAG_VERBATIM
@@ -302,16 +314,34 @@ public interface IJSFConstants
         TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_DATATABLE);
 
     /**
+     * JCP version of TagIdentifier for TAG_DATATABLE
+     */
+    final static TagIdentifier TAG_IDENTIFIER_DATA_TABLE_JCP = 
+        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML_JCP, TAG_DATATABLE);
+
+    /**
      * TagIdentifier for TAG_PANELGRID
      */
     final static TagIdentifier TAG_IDENTIFIER_PANEL_GRID =
        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_PANELGRID);
 
     /**
+     * JCP version of TagIdentifier for TAG_PANELGRID
+     */
+    final static TagIdentifier TAG_IDENTIFIER_PANEL_GRID_JCP =
+       TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML_JCP, TAG_PANELGRID);
+
+    /**
      * TagIdentifier for TAG_COLUMN
      */
     final static TagIdentifier TAG_IDENTIFIER_COLUMN =
        TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML, TAG_COLUMN);
+
+    /**
+     * JCP version of TagIdentifier for TAG_COLUMN
+     */
+    final static TagIdentifier TAG_IDENTIFIER_COLUMN_JCP =
+       TagIdentifierFactory.createJSPTagWrapper(ITLDConstants.URI_JSF_HTML_JCP, TAG_COLUMN);
 
     /**
      * TagIdentifier for TAG_FORM

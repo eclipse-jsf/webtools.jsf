@@ -82,12 +82,15 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
             {
                 return null;
             }
-            StandardModelFactory.debug(">START getModel: "+modelContext, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
 
-            MetaDataModel model = models.get(modelContext);
+            final IMetaDataModelContext context = Aliases.get(modelContext);
+
+            StandardModelFactory.debug(">START getModel: " + context, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
+
+            MetaDataModel model = models.get(context);
             if (model == null) {
                 // long in = System.currentTimeMillis();
-                model = loadMetadata(modelContext);
+                model = loadMetadata(context);
                 //System.out.println("Time to load "+modelContext.getURI()+": "+
                 // String.valueOf(System.currentTimeMillis() - in));
             } else if (model.needsRefresh()) {
@@ -95,7 +98,7 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
                     model.reload();
                 } catch (ModelNotSetException e) {
                     // simply load it - should not get here
-                    model = loadMetadata(modelContext);
+                    model = loadMetadata(context);
                 }
             }
             
@@ -103,7 +106,7 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
 //                ((Model) model.getRoot())
 //                        .setCurrentModelContext(modelContext);
 
-            StandardModelFactory.debug(">END getModel: "+modelContext, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
+            StandardModelFactory.debug(">END getModel: " + context, StandardModelFactory.DEBUG_MD_GET); //$NON-NLS-1$
             if (model != null && !model.isEmpty()){			
     			return (Model)model.getRoot();
     		}
@@ -236,4 +239,45 @@ public final class MetaDataModelManager extends AbstractMetaDataModelManager {
             return buf.toString();
         }
     }
+
+
+
+	private static class Aliases {
+		private static final HashMap<String, String> aliasMap = new HashMap<String, String>(6);
+		static {
+			aliasMap.put(
+					"http://xmlns.jcp.org/jsf/composite", //$NON-NLS-1$
+					"http://java.sun.com/jsf/composite"); //$NON-NLS-1$
+			aliasMap.put(
+					"http://xmlns.jcp.org/jsf/core", //$NON-NLS-1$
+					"http://java.sun.com/jsf/core"); //$NON-NLS-1$
+			aliasMap.put(
+					"http://xmlns.jcp.org/jsf/html", //$NON-NLS-1$
+					"http://java.sun.com/jsf/html"); //$NON-NLS-1$
+			aliasMap.put(
+					"http://xmlns.jcp.org/jsf/jstl/core", //$NON-NLS-1$
+					"http://java.sun.com/jsf/jstl/core"); //$NON-NLS-1$
+			aliasMap.put(
+					"http://xmlns.jcp.org/jsf/jstl/functions", //$NON-NLS-1$
+					"http://java.sun.com/jsf/jstl/functions"); //$NON-NLS-1$
+			aliasMap.put(
+					"http://xmlns.jcp.org/jsf/facelets", //$NON-NLS-1$
+					"http://java.sun.com/jsf/facelets"); //$NON-NLS-1$
+		}
+
+		private static IMetaDataModelContext get(final IMetaDataModelContext context) {
+			IMetaDataModelContext copy = context;
+			if (context instanceof MetaDataModelContext) {
+				final String alias = aliasMap.get(context.getModelIdentifier());
+				if (alias != null) {
+					copy = new MetaDataModelContext(
+							(IProject) context.getAdapter(IProject.class),
+							context.getDomainId(),
+							alias);
+				}
+			}
+			return copy;
+		}
+	}
+
 }

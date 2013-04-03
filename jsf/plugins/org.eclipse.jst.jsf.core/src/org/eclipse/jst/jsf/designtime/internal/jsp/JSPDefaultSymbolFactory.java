@@ -98,11 +98,11 @@ public class JSPDefaultSymbolFactory extends AbstractContextSymbolFactory
         final String uri = resolver.getTagURIForNodeName(owningElement);
         
         // process core taglib
-        if (ITLDConstants.URI_JSF_CORE.equals(uri))
+        if (ITLDConstants.URI_JSF_CORE.equals(uri) || ITLDConstants.URI_JSF_CORE_JCP.equals(uri))
         {
             return handleCoreTags(symbolName, owningElement, attr, context, problems);
         }
-        else if (ITLDConstants.URI_JSF_HTML.equals(uri))
+        else if (ITLDConstants.URI_JSF_HTML.equals(uri) || ITLDConstants.URI_JSF_HTML_JCP.equals(uri))
         {
             return handleHtmlTags(symbolName, owningElement, attr, context, problems);
         }
