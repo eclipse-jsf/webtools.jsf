@@ -46,7 +46,10 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 		if (parent != null)
 		{
 			ITextRegion me = parent.getRegionAtCharacterOffset(_context.getDocumentPosition());
-			text = parent.getText(me);
+			if (me != null)
+			{
+			    text = parent.getText(me);
+			}
 		}
 	
 		return text;
@@ -62,7 +65,10 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 		if (parent != null)
 		{
 			ITextRegion me = parent.getRegionAtCharacterOffset(_context.getDocumentPosition());
-			endOffset =  parent.getEndOffset(me);
+			if (me != null)
+			{
+			    endOffset =  parent.getEndOffset(me);
+			}
 		}
 		
 		return endOffset;
@@ -78,7 +84,10 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 		if (parent != null)
 		{
 			ITextRegion me = parent.getRegionAtCharacterOffset(_context.getDocumentPosition());
-			length =  me.getLength();
+			if (me != null)
+			{
+			    length =  me.getLength();
+			}
 		}
 		
 		return length;
@@ -96,7 +105,10 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 		if (parent != null)
 		{
 			ITextRegion me = parent.getRegionAtCharacterOffset(_context.getDocumentPosition());
-			startOffset =  parent.getStartOffset(me);
+			if (me != null)
+			{
+			    startOffset =  parent.getStartOffset(me);
+			}
 		}
 		
 		return startOffset;
@@ -149,23 +161,26 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 		if (parent != null)
 		{
 			final ITextRegion me = parent.getRegionAtCharacterOffset(_context.getDocumentPosition());
-			ITextRegionList regions = parent.getRegions();
-			ITextRegion nextRegion = null;
-			for (final Iterator it = regions.iterator(); it.hasNext();)
+			if (me != null)
 			{
-				if (it.next() == me
-						&& it.hasNext())
-				{
-					nextRegion = (ITextRegion) it.next();
-				}
-			}
-			
-			if (nextRegion != null)
-			{
-				// use the first position offset in the next region
-				final int documentPosition = parent.getStartOffset(nextRegion);
-				newContext = 
-					IStructuredDocumentContextFactory.INSTANCE.getContext(_context.getStructuredDocument(), documentPosition);
+    			ITextRegionList regions = parent.getRegions();
+    			ITextRegion nextRegion = null;
+    			for (final Iterator it = regions.iterator(); it.hasNext();)
+    			{
+    				if (it.next() == me
+    						&& it.hasNext())
+    				{
+    					nextRegion = (ITextRegion) it.next();
+    				}
+    			}
+    			
+    			if (nextRegion != null)
+    			{
+    				// use the first position offset in the next region
+    				final int documentPosition = parent.getStartOffset(nextRegion);
+    				newContext = 
+    					IStructuredDocumentContextFactory.INSTANCE.getContext(_context.getStructuredDocument(), documentPosition);
+    			}
 			}
 		}
 		
@@ -184,29 +199,32 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 		if (parent != null)
 		{
 			final ITextRegion me = parent.getRegionAtCharacterOffset(_context.getDocumentPosition());
-			ITextRegionList regions = parent.getRegions();
-			final Iterator it = regions.iterator();
-			ITextRegion  prevRegion = null;
-			ITextRegion  nextRegion = null;
-			
-			SEARCH_LOOP: while (it.hasNext())
+			if (me != null)
 			{
-				nextRegion = (ITextRegion) it.next();
-
-				if (nextRegion == me)
-				{
-					break SEARCH_LOOP;
-				}
-				
-				prevRegion = nextRegion;
-			}
-			
-			if (prevRegion != null)
-			{
-				// use the last position offset in the prev region
-				final int documentPosition = parent.getStartOffset(prevRegion);
-				newContext = 
-					IStructuredDocumentContextFactory.INSTANCE.getContext(_context.getStructuredDocument(), documentPosition);
+    			ITextRegionList regions = parent.getRegions();
+    			final Iterator it = regions.iterator();
+    			ITextRegion  prevRegion = null;
+    			ITextRegion  nextRegion = null;
+    			
+    			SEARCH_LOOP: while (it.hasNext())
+    			{
+    				nextRegion = (ITextRegion) it.next();
+    
+    				if (nextRegion == me)
+    				{
+    					break SEARCH_LOOP;
+    				}
+    				
+    				prevRegion = nextRegion;
+    			}
+    			
+    			if (prevRegion != null)
+    			{
+    				// use the last position offset in the prev region
+    				final int documentPosition = parent.getStartOffset(prevRegion);
+    				newContext = 
+    					IStructuredDocumentContextFactory.INSTANCE.getContext(_context.getStructuredDocument(), documentPosition);
+    			}
 			}
 		}
 		
@@ -283,8 +301,7 @@ import org.eclipse.wst.sse.core.internal.provisional.text.ITextRegionList;
 
 		ITextRegion  container = doc.getRegionAtCharacterOffset(_context.getDocumentPosition());
 
-		while(container != null
-				&& container instanceof ITextRegionCollection)
+		while(container instanceof ITextRegionCollection)
 		{
 			regionPath.add(container);
 			container = ((ITextRegionCollection)container).getRegionAtCharacterOffset(_context.getDocumentPosition());
