@@ -181,8 +181,9 @@ public class TextAreaWidgetProvider extends AbstractWidgetProvider {
 	}
 
 	private int getTextCount(int begin, int end, Font swtFont, int textWidth) {
-		while (FigureUtilities.getTextWidth(_value.substring(begin, end),
-				swtFont) > textWidth) {
+		while (begin > -1 && end > begin &&
+				FigureUtilities.getTextWidth(
+						_value.substring(begin, end), swtFont) > textWidth) {
 			end--;
 		}
 		return end;
