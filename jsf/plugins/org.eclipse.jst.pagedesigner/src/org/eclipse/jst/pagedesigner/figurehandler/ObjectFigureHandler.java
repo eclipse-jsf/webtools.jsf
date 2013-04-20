@@ -12,7 +12,12 @@
 package org.eclipse.jst.pagedesigner.figurehandler;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jst.pagedesigner.editors.palette.TagImageManager;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMModel;
+import org.eclipse.wst.xml.core.internal.provisional.document.IDOMNode;
 import org.w3c.dom.Element;
 
 /**
@@ -28,8 +33,22 @@ import org.w3c.dom.Element;
 	 */
 	protected void initializeImage(Element node) {
 		if (_image == null) {
-			//FIXME - file/project should NOT be null!
-			_image = TagImageManager.getInstance().getSmallIconImage((IFile)null, "HTML", node.getTagName()); //$NON-NLS-1$
+			if (node instanceof IDOMNode) {
+				final IDOMModel model = ((IDOMNode)node).getModel();
+				if (model != null) {
+					final String location = model.getBaseLocation();
+					if (location != null) {
+						final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+						if (workspace != null) {
+							final IResource resource = workspace.getRoot().findMember(location);
+							if (resource.getType() == IResource.FILE) {
+								_image = TagImageManager.getInstance().getSmallIconImage(
+										(IFile)resource, "HTML", node.getTagName()); //$NON-NLS-1$
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
