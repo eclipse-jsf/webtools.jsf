@@ -76,7 +76,7 @@ import org.eclipse.wst.xml.core.internal.contentmodel.CMNode;
             for (int i = 0; it.hasNext(); i++)
             {
                 final ITagElement tagElement = (ITagElement) it.next(); 
-                if (i == index)
+                if (i == index  && tagElement != null)
                 {
                     ElementCMAdapter element = _elements.get(tagElement.getName());
                     

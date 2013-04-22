@@ -61,43 +61,46 @@ public class FunctionCompletionStrategy extends ContentAssistStrategy
             StructuredDocumentSymbolResolverFactory.getInstance().
                 getSymbolContextResolver(context);
 
-        final ISymbol symbol = SymbolResolveUtil.getSymbolForVariableSuffixExpr(context, getValue(), false);
-
-        // if we get a completion symbol, get it's proposals
-        if (symbol instanceof IObjectSymbol)
+        String text = getValue();
+        if (text != null)
         {
-            final List expectedMethodBindings = new ArrayList();
-            final ISymbol[] suffixes = getSymbols((IObjectSymbol) symbol,
-                                             context,
-                                             symbolResolver,
-                                             expectedMethodBindings);
-
-            final ComposedAdapterFactory factory =
-                new ComposedAdapterFactory(
-                       ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-            final IProposalCreationFactory  creationInfo =
-                new MyProposalFactory(context, getProposalStart().length(),
-                                        expectedMethodBindings);
-            
-            completionList = new ArrayList<ICompletionProposal>();
-            for (final ISymbol propSymbol : suffixes) {
-                final Object  provider =
-                  factory.adapt(propSymbol, IContentProposalProvider.class);
-
-                if (provider instanceof IContentProposalProvider)
-                {
-                    final ICompletionProposal[] proposal  =
-                        ((IContentProposalProvider) provider).
-                            getProposals(propSymbol, creationInfo);
-                    if (proposal != null)
+            final ISymbol symbol = SymbolResolveUtil.getSymbolForVariableSuffixExpr(context, getValue(), false);
+    
+            // if we get a completion symbol, get it's proposals
+            if (symbol instanceof IObjectSymbol)
+            {
+                final List expectedMethodBindings = new ArrayList();
+                final ISymbol[] suffixes = getSymbols((IObjectSymbol) symbol,
+                                                 context,
+                                                 symbolResolver,
+                                                 expectedMethodBindings);
+    
+                final ComposedAdapterFactory factory =
+                    new ComposedAdapterFactory(
+                           ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+                final IProposalCreationFactory  creationInfo =
+                    new MyProposalFactory(context, getProposalStart().length(),
+                                            expectedMethodBindings);
+                
+                completionList = new ArrayList<ICompletionProposal>();
+                for (final ISymbol propSymbol : suffixes) {
+                    final Object  provider =
+                      factory.adapt(propSymbol, IContentProposalProvider.class);
+    
+                    if (provider instanceof IContentProposalProvider)
                     {
-                    	addProposalsMatchingProposalStart(completionList,
-								proposal);
+                        final ICompletionProposal[] proposal  =
+                            ((IContentProposalProvider) provider).
+                                getProposals(propSymbol, creationInfo);
+                        if (proposal != null)
+                        {
+                        	addProposalsMatchingProposalStart(completionList,
+    								proposal);
+                        }
                     }
                 }
             }
-        }
-
+        }    
         return Collections.unmodifiableList(completionList);
     }
 

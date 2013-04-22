@@ -116,6 +116,10 @@ public final class ContentAssistParser
 	}
     
     private static String substring(String s, Region r) {
+        if (s == null && s.isEmpty())
+        {
+            return ""; //$NON-NLS-1$
+        }
         return s.substring(r.getOffset(), r.getOffset() + r.getLength());
     }
     
@@ -166,27 +170,29 @@ public final class ContentAssistParser
          * @param context - IStructuredDocumentContext
          * @return symbol and symbol region if resolved, null otherwise
          */
-        public SymbolInfo getSymbolInfo(IStructuredDocumentContext context) {
-        	if (_prefixResolved && _symbolStartPos < _symbolEndPos) {
-        		Region region = new Region(_symbolStartPos - 1, _symbolEndPos - _symbolStartPos + 1);
+        public SymbolInfo getSymbolInfo(IStructuredDocumentContext context)
+        {
+            if (_prefixResolved && _symbolStartPos < _symbolEndPos)
+            {
+                Region region = new Region(_symbolStartPos - 1, _symbolEndPos - _symbolStartPos + 1);
                 ISymbol symbol = null;
-                switch (_prefixType) {
-                case ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION:
-                    symbol = SymbolResolveUtil.getSymbolForVariable(context, substring(_fullText, region));
-                    break;
-                case ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION:
-                    symbol = SymbolResolveUtil.getSymbolForVariableSuffixExpr(context, _symbolPrefix + "." + substring(_fullText, region), _symbolEndPos == _fullText.length()); //$NON-NLS-1$
-                    break;
+                switch (_prefixType)
+                {
+                    case ContentAssistStrategy.PREFIX_TYPE_ID_COMPLETION:
+                        symbol = SymbolResolveUtil.getSymbolForVariable(context, substring(_fullText, region));
+                        break;
+                    case ContentAssistStrategy.PREFIX_TYPE_DOT_COMPLETION:
+                        symbol = SymbolResolveUtil.getSymbolForVariableSuffixExpr(context, _symbolPrefix
+                                + "." + substring(_fullText, region), _symbolEndPos == (_fullText != null ? _fullText.length():0)); //$NON-NLS-1$
+                        break;
                 }
-                if (symbol != null) {
-                    return new SymbolInfo(symbol, region);
-                }
-        	}
-        	return null;
+                if (symbol != null) { return new SymbolInfo(symbol, region); }
+            }
+            return null;
         }
 
 		private String getProposalStart() {
-            if (_symbolStartPos <= _relativePos) {
+            if (_symbolStartPos <= _relativePos && _fullText != null) {
                 return _fullText.substring(_symbolStartPos - 1, _relativePos - 1);
             }
             return ""; //$NON-NLS-1$
@@ -335,7 +341,7 @@ public final class ContentAssistParser
 
             Object retValue =  node.childrenAccept(this, data);
                 
-            if (!_prefixResolved)
+            if (!_prefixResolved && _fullText!=null)
             {
                 // if we haven't resolved the prefix yet, then we need
                 // to append this suffix value

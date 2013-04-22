@@ -3,6 +3,7 @@
  */
 package org.eclipse.jst.jsf.facelet.core.internal.cm;
 
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.jst.jsf.common.runtime.internal.view.model.common.ITagElement;
@@ -20,6 +21,7 @@ class ElementCMAdapter implements CMElementDeclaration, CMNamedNodeMap
 
     ElementCMAdapter(final ITagElement tagElement, final TagInfo tldTagInfo)
     {
+        assert tagElement != null;
         _tagElement = tagElement;
         _tLDTagInfo = tldTagInfo;
     }
@@ -51,7 +53,6 @@ class ElementCMAdapter implements CMElementDeclaration, CMNamedNodeMap
 
     public CMNamedNodeMap getLocalElements()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -79,7 +80,11 @@ class ElementCMAdapter implements CMElementDeclaration, CMNamedNodeMap
 
     public Object getProperty(final String propertyName)
     {
-        return _tLDTagInfo.getTagProperty(_tagElement.getName(), propertyName);
+        if (_tLDTagInfo != null)
+        {
+            return _tLDTagInfo.getTagProperty(_tagElement.getName(), propertyName);
+        }
+        return null;
     }
 
     public boolean supports(final String propertyName)
@@ -106,42 +111,57 @@ class ElementCMAdapter implements CMElementDeclaration, CMNamedNodeMap
 
     public int getLength()
     {
-        final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
-
-        if (map != null)
+        if (_tLDTagInfo != null)
         {
-            return map.getLength();
+            final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
+    
+            if (map != null)
+            {
+                return map.getLength();
+            }
         }
-
         return 0;
     }
 
     public CMNode getNamedItem(final String name)
     {
-        final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
-
-        if (map != null)
+        if (_tLDTagInfo != null)
         {
-            return map.getNamedItem(name);
+            final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
+    
+            if (map != null)
+            {
+                return map.getNamedItem(name);
+            }
         }
         return null;
     }
 
     public CMNode item(final int index)
     {
-        final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
-
-        if (map != null)
+        if (_tLDTagInfo != null)
         {
-            return map.item(index);
+            final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
+    
+            if (map != null)
+            {
+                return map.item(index);
+            }
         }
         return null;
     }
 
     public Iterator<?> iterator()
     {
-        final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
-        return map.iterator();
+        if (_tLDTagInfo != null)
+        {
+            final CMNamedNodeMap map = _tLDTagInfo.getAttributes(_tagElement.getName());
+            if (map != null)
+            {
+                return map.iterator();
+            }
+        }
+        return Collections.EMPTY_LIST.iterator();
     }
 
 }

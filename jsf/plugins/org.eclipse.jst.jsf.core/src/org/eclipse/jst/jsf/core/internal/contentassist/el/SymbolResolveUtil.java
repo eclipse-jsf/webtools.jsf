@@ -73,6 +73,10 @@ public class SymbolResolveUtil {
 	public static ISymbol getSymbolForVariableSuffixExpr(
 			final IStructuredDocumentContext context, final String fullName,
 			final boolean isLastSuffix) {
+	    if (fullName == null)
+	    {
+	        return null;
+	    }
 		String[] ids = fullName.split("\\."); //$NON-NLS-1$
 
 		// if no suffixes, only one id
