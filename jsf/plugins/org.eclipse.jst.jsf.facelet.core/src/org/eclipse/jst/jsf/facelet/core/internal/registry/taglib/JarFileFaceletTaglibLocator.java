@@ -66,8 +66,38 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
     static
     {
         final List<IMatcher> matchers = new ArrayList<IMatcher>();
-        matchers.add(_taglibGlassfishFinder);
-        matchers.add(_taglibMetaInfFinder);
+        matchers.add( new IMatcher() {
+        	public boolean matches(Object matchThis) {
+        		if (matchThis instanceof JarEntry)
+        		{
+        			final String name = ((JarEntry) matchThis).getName();
+        			if (name != null)
+        			{
+        				final int nameLength = name.length();
+        				if (nameLength > ".taglib.xml".length() || !name.endsWith(".taglib.xml")) //$NON-NLS-1$ //$NON-NLS-2$
+        				{
+        					return false;
+        				}
+        				if (nameLength > "META-INF/.taglib.xml".length()) //$NON-NLS-1$
+        				{
+        					if (_taglibMetaInfFinder.matches(matchThis))
+        					{
+        						return true;
+        					}
+        					if (nameLength > "com/sun/faces/metadata/taglib/.taglib.xml".length()) //$NON-NLS-1$
+        					{
+        						if (_taglibGlassfishFinder.matches(matchThis))
+        						{
+        							return true;
+        						}
+        					}
+        				}
+        				return false;
+        			}
+        		}
+        		return false;
+        	}
+        });
         MATCHERS = Collections.unmodifiableList(matchers);
     }
     private static final String DISPLAYNAME = Messages.JarFileFaceletTaglibLocator_0;
@@ -120,14 +150,14 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
         final List<LibJarEntry> tagLibsFound = new ArrayList<LibJarEntry>();
         final Collection<? extends ClasspathJarFile> jars = _locator
                 .getJars(project);
+        long curTime = System.currentTimeMillis();
         for (final ClasspathJarFile cpJarFile : jars)
         {
-            final JarFile jarFile = cpJarFile.getJarFile();
-            if (jarFile != null)
-            {
-                tagLibsFound.addAll(processJar(cpJarFile, _jarEntryMatchers));
-            }
+        	tagLibsFound.addAll(processJar(cpJarFile, _jarEntryMatchers));
         }
+        System.out.printf(
+        		"Time spent processing jars: %d\n", //$NON-NLS-1$
+        		Long.valueOf(System.currentTimeMillis()-curTime));
         for (final LibJarEntry jarEntry : tagLibsFound)
         {
             final IFaceletTagRecord record = _factory.createRecords(jarEntry
@@ -218,6 +248,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
             final List<IMatcher> jarEntryMatchers)
     {
         final List<LibJarEntry> tagLibsFound = new ArrayList<LibJarEntry>();
+        long curTime = System.currentTimeMillis();
         final JarFile jarFile = cpJarFile.getJarFile();
         try
         {
@@ -288,6 +319,14 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
                     FaceletCorePlugin.log("Error closing jar file", ioe); //$NON-NLS-1$
                 }
             }
+        }
+        long time = System.currentTimeMillis()-curTime;
+        if (time > 10)
+        {
+        	System.out.printf(
+        			"Time spent in processJar for %s was %dms\n", //$NON-NLS-1$
+        			cpJarFile.getPath(),
+        			Long.valueOf(time));
         }
         return tagLibsFound;
     }
