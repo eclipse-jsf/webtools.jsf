@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner.css2.font;
 
+import java.awt.Toolkit;
+
 import org.eclipse.jst.pagedesigner.css2.ICSSStyle;
 import org.eclipse.jst.pagedesigner.css2.property.FontFamilyMeta;
 import org.eclipse.jst.pagedesigner.css2.property.FontSizeMeta;
@@ -39,8 +41,28 @@ public class CSSFontManager implements ICSSFontManager {
 	private static final int CACHESIZE = 100; // we cache 100 font.
 
 	// the scale to convert the px to pt.
-	private final static double FONT_SCALE = ((double) Display.getCurrent()
-			.getDPI().x) / 72;
+	private final static double FONT_SCALE = getFontDPI() / 72;
+
+	static double getFontDPI() {
+		//Bug 368375 - Font size is very small in the Web Page Editor for some GTK/Linux environments
+		double fontDPI = -1;
+		if ("gtk".equals(SWT.getPlatform())) { //$NON-NLS-1$
+			Object value = Toolkit.getDefaultToolkit().getDesktopProperty("gnome.Xft/DPI"); //$NON-NLS-1$
+			if (value instanceof Integer) {
+				fontDPI = ((Integer)value).intValue() / 1024;
+				if (fontDPI == -1) {
+					fontDPI = 96;
+				}
+				if (fontDPI < 50) {
+					fontDPI = 50;
+				}
+			}
+		}
+		if (fontDPI == -1) {
+			fontDPI = Display.getCurrent().getDPI().x;
+		}
+		return fontDPI;
+	}
 
 	static String cssFontToLocalFont(String original) {
 		if ("serif".equalsIgnoreCase(original)) { //$NON-NLS-1$
