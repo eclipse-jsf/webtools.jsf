@@ -37,11 +37,13 @@ public class RelativePathType extends PathType implements
 			return true;
 		} catch (MalformedURLException e) {
 			//is this a valid path relative to the 			
-			IProject project = getProject();
-			IFile  file= project.getFile(new Path(value));
-			if (! file.exists())
-				getValidationMessages().add(new ValidationMessage( value+Messages.RelativePathType_0));
-			
+			IProject project = getProject2();
+			if (project != null)
+			{
+    			IFile  file= project.getFile(new Path(value));
+    			if (! file.exists())
+    				getValidationMessages().add(new ValidationMessage( value+Messages.RelativePathType_0));
+			}			
 			return getValidationMessages().size() == 0;
 		}
 	}

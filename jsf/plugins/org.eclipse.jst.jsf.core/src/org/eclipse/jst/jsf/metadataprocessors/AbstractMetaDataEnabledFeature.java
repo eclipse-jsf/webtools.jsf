@@ -28,18 +28,20 @@ import org.eclipse.jst.jsf.common.metadata.internal.TraitValueHelper;
 import org.eclipse.jst.jsf.common.metadata.query.internal.IMetaDataQuery;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryContextFactory;
 import org.eclipse.jst.jsf.common.metadata.query.internal.MetaDataQueryFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
+import org.eclipse.jst.jsf.context.IModelContext;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
+import org.eclipse.jst.jsf.metadataprocessors.internal.IMetaDataEnabledFeature2;
 
 /**
  * Simple abstract class that implementers of {@link IMetaDataEnabledFeature} can subclass in the <b>TagLibDomain</b> of metadata
  * <p><b>Provisional API - subject to change</b></p>*
  */
-public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabledFeature{
+public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabledFeature, IMetaDataEnabledFeature2{
 	
 	private MetaDataContext mdContext;
-	private IStructuredDocumentContext sdContext;
+	private IModelContext sdContext;
 	private IProject 					_project;
 	private IFile _file;
 
@@ -69,24 +71,55 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	 * @see org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature#getStructuredDocumentContext()
 	 */
 	public IStructuredDocumentContext getStructuredDocumentContext() {
-		return sdContext;
+	    if (sdContext instanceof IStructuredDocumentContext)
+	    {
+	        return (IStructuredDocumentContext) sdContext;
+	    }
+	    return null;
 	}
 	
-	private IProject getProject(){
-		if (_project == null){
-			_project = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getProject();
-		}
-		return _project;
+	/**
+	 * @return the model context
+	 */
+	public IModelContext getModelContext() {
+	    return this.sdContext;
+	}
+	
+	/**
+	 * @param modelContext
+	 */
+	public void setModelContext(IModelContext modelContext)
+	{
+	    this.sdContext = modelContext;
 	}
 
-	private IFile getFile(){
-		if (_file == null){
-			IResource res = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(sdContext).getResource();
-			if (res instanceof IFile)
-				_file = (IFile)res;
-		}
-		return _file;
-	}
+    /**
+     * @return the project
+     */
+    protected IProject getProject2()
+    {
+        if (_project == null)
+        {
+            _project = IStructuredDocumentContextResolverFactory2.INSTANCE.getWorkspaceContextResolver2(sdContext)
+                    .getProject();
+        }
+        return _project;
+    }
+
+    /**
+     * @return the file
+     */
+    protected IFile getFile2()
+    {
+        if (_file == null)
+        {
+            IResource res = IStructuredDocumentContextResolverFactory2.INSTANCE.getWorkspaceContextResolver2(sdContext)
+                    .getResource();
+            if (res instanceof IFile) _file = (IFile) res;
+        }
+        return _file;
+    }
+
 	//common metadata accessors
 	/**
 	 * Return the single expected String value for a given property.
@@ -143,11 +176,18 @@ public abstract class AbstractMetaDataEnabledFeature implements IMetaDataEnabled
 	}
 
 	private IMetaDataDomainContext getMetaDataDomainContext() {
-		final IFile file = getFile();
+		final IFile file = getFile2();
 		if (file != null)
+		{
 			return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(file);
+		}
 		
-		return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(getProject());
+		IProject project = getProject2();
+		if (project != null)
+		{
+		    return MetaDataQueryContextFactory.getInstance().createTaglibDomainModelContext(project);
+		}
+		return null;
 	}
 
 	/**

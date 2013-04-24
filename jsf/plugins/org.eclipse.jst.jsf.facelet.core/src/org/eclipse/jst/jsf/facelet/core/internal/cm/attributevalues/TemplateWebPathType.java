@@ -15,22 +15,20 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractCompCoreQueryFactory;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
+import org.eclipse.jst.jsf.context.IModelContext;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IXMLNodeContextResolver;
 import org.eclipse.jst.jsf.facelet.core.internal.FaceletCorePlugin;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
 import org.eclipse.jst.jsf.taglibprocessing.attributevalues.WebPathType;
-import org.eclipse.wst.common.componentcore.resources.IVirtualContainer;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Node;
 
 /**
  * Web-path attribute value type that adds possible values support
@@ -41,20 +39,22 @@ import org.w3c.dom.Node;
 public class TemplateWebPathType extends WebPathType implements IPossibleValues {
 
     public List getPossibleValues() {
-        final IStructuredDocumentContext context = getStructuredDocumentContext();
-        final IDOMContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE
-                .getDOMContextResolver(context);
-        if (resolver != null) {
-            final Node node = resolver.getNode();
-            if (node instanceof Attr) {
-                return createPossibleValues((Attr) node);
+        final IModelContext context = getModelContext();
+        if (context != null)
+        {
+            final IXMLNodeContextResolver resolver = IStructuredDocumentContextResolverFactory2.INSTANCE
+                    .getXMLNodeContextResolver(context);
+            if (resolver != null) {
+                if (resolver.isAttribute()) {
+                    return createPossibleValues(resolver.getValue());
+                }
             }
         }
         return Collections.EMPTY_LIST;
     }
 
-    private List createPossibleValues(final Attr node) {
-        String currentPathString = node.getNodeValue();
+    private List createPossibleValues(final String attrValue) {
+        String currentPathString = attrValue;
 
         final List possibleValues = new ArrayList();
 
@@ -65,15 +65,14 @@ public class TemplateWebPathType extends WebPathType implements IPossibleValues 
 
         final IPath currentPath = new Path(currentPathString);
 
-        final IVirtualContainer webRoot = getWebRoot();
+        final IContainer webRoot = getWebRoot();
 
         if (webRoot == null)
         {
             return possibleValues;
         }
 
-        final IResource deepestElement = findDeepestCommonElement(currentPath,
-                (IContainer) webRoot.getUnderlyingResource());
+        final IResource deepestElement = findDeepestCommonElement(currentPath, webRoot);
 
         if (deepestElement == null) {
             // empty
@@ -138,13 +137,18 @@ public class TemplateWebPathType extends WebPathType implements IPossibleValues 
         return deepestElement;
     }
 
-    private IVirtualContainer getWebRoot()
+    @Override
+    protected IContainer getWebRoot()
     {
-        AbstractCompCoreQueryFactory compCoreQueryFactory = FaceletCorePlugin.getDefault().getCompCoreQueryFactory();
-        AbstractVirtualComponentQuery virtualComponentQuery = compCoreQueryFactory.createVirtualComponentQuery(getProject());
-        if (virtualComponentQuery != null)
+        IProject project = getProject2();
+        if (project != null)
         {
-            return virtualComponentQuery.getWebContentFolder(getProject());
+            AbstractCompCoreQueryFactory compCoreQueryFactory = FaceletCorePlugin.getDefault().getCompCoreQueryFactory();
+            AbstractVirtualComponentQuery virtualComponentQuery = compCoreQueryFactory.createVirtualComponentQuery(project);
+            if (virtualComponentQuery != null)
+            {
+                return virtualComponentQuery.getWebContentFolder(project).getUnderlyingFolder();
+            }
         }
         return null;
     }

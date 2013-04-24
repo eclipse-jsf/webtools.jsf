@@ -17,6 +17,7 @@ import java.util.Iterator;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jst.jsf.context.AbstractDelegatingFactory;
+import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IMetadataContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
@@ -24,6 +25,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextRes
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IXMLNodeContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.wst.sse.core.internal.provisional.text.IStructuredDocument;
 
@@ -176,6 +178,39 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
 
         return resolver;
 
+    }
+    
+    public IWorkspaceContextResolver getWorkspaceContextResolver2(IModelContext context)
+    {
+        IWorkspaceContextResolver resolver = delegateGetWorkspaceContextResolver2(context);
+        
+        if (resolver != null)
+        {
+            return resolver;
+        }
+
+        if (context instanceof IStructuredDocumentContext)
+        {
+            return getWorkspaceContextResolver((IStructuredDocumentContext) context);
+        }
+        
+        return null;
+    }
+
+    private IWorkspaceContextResolver delegateGetWorkspaceContextResolver2(IModelContext context)
+    {
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
+        {
+            IAdaptable adapter = it.next();
+            final IStructuredDocumentContextResolverFactory2 delegateFactory = (IStructuredDocumentContextResolverFactory2) (adapter)
+                    .getAdapter(IStructuredDocumentContextResolverFactory2.class);
+            final IWorkspaceContextResolver contextResolver = delegateFactory.getWorkspaceContextResolver2(context);
+
+            if (contextResolver != null) { return contextResolver; }
+        }
+
+        return null;
     }
 
     private IWorkspaceContextResolver internalGetWorkspaceContextResolver(
@@ -342,4 +377,47 @@ IStructuredDocumentContextResolverFactory, IStructuredDocumentContextResolverFac
             return null;
         }
 	}
+
+    public IXMLNodeContextResolver getXMLNodeContextResolver(IModelContext context)
+    {
+        IXMLNodeContextResolver delegateGetXMLNodeResolver = delegateGetXMLNodeResolver(context);
+        if (delegateGetXMLNodeResolver != null)
+        {
+            return delegateGetXMLNodeResolver;
+        }
+
+        if (context instanceof IStructuredDocumentContext)
+        {
+           IDOMContextResolver domContextResolver = getDOMContextResolver((IStructuredDocumentContext) context);
+           return new DOMBasedXMLNodeContextResolver(domContextResolver);
+        }
+        
+        return null;
+    }
+    
+    private IXMLNodeContextResolver delegateGetXMLNodeResolver(
+            final IModelContext context)
+    {
+        Iterator<IAdaptable> it = getDelegatesIterator();
+        while (it.hasNext())
+        {
+            IAdaptable adapter = it.next();
+
+            final IStructuredDocumentContextResolverFactory delegateFactory = (IStructuredDocumentContextResolverFactory) adapter
+            .getAdapter(IStructuredDocumentContextResolverFactory.class);
+
+            if (delegateFactory instanceof IStructuredDocumentContextResolverFactory2)
+            {
+                final IXMLNodeContextResolver contextResolver = ((IStructuredDocumentContextResolverFactory2)delegateFactory)
+                .getXMLNodeContextResolver(context);
+
+                if (contextResolver != null)
+                {
+                    return contextResolver;
+                }
+            }
+        }
+
+        return null;
+    }
 }

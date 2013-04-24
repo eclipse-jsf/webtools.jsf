@@ -37,11 +37,14 @@ public class ResourceBundleType extends PathType implements IValidValues
 	{
 		try
 		{
-			IProject project = getProject();
-			IStorage bundle = LoadBundleUtil.getLoadBundleResource( project , value );
-			if( bundle != null )
+			IProject project = getProject2();
+			if (project != null)
 			{
-				return true;
+    			IStorage bundle = LoadBundleUtil.getLoadBundleResource( project , value );
+    			if( bundle != null )
+    			{
+    				return true;
+    			}
 			}
 		}
 		catch (CoreException e) 

@@ -25,8 +25,6 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jst.jsf.common.internal.types.CompositeType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigManager;
 import org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin;
 import org.eclipse.jst.jsf.facesconfig.emf.DescriptionType;
@@ -240,16 +238,14 @@ public abstract class FacesConfigIdentifierFeatures extends AbstractMetaDataEnab
 	}
 
 	private JSFAppConfigManager getJSFAppConfigMgr(){
-		return JSFAppConfigManager.getInstance(getProject());
-	}
-
-	private IProject getProject() {
-		IWorkspaceContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
-		if (resolver != null)
-			return resolver.getProject();
-		
+		IProject project = getProject2();
+		if (project != null)
+		{
+		    return JSFAppConfigManager.getInstance(project);
+		}
 		return null;
 	}
+
 
 	/**
 	 * @param jsfAppConfigManager

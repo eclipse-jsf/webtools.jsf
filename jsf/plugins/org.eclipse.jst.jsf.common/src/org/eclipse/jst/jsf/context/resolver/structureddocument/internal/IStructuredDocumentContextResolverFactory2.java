@@ -10,8 +10,10 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.context.resolver.structureddocument.internal;
 
+import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 
 /**
@@ -39,10 +41,23 @@ public interface IStructuredDocumentContextResolverFactory2 extends
     ITaglibContextResolver getTaglibContextResolverFromDelegates(IStructuredDocumentContext context);
 
     /**
+     * @param context
+     * @return a more generic way of resolving workspace context through IModelContext.  Allows for more flexible
+     * resolution through non-SSE models.
+     */
+    IWorkspaceContextResolver getWorkspaceContextResolver2(IModelContext context);
+    
+    /**
      * @param <T> resolver type
      * @param context
      * @param clazz
      * @return resolver of type T
      */
     <T> T getResolver(IStructuredDocumentContext context, Class<T> clazz);
+
+    /**
+     * @param context
+     * @return a resolver for xml nodes in a model context
+     */
+    IXMLNodeContextResolver getXMLNodeContextResolver(IModelContext context);
 }

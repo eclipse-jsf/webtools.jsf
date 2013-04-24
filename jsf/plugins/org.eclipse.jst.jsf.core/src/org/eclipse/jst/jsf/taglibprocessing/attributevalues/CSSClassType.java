@@ -40,10 +40,13 @@ public class CSSClassType extends AbstractRootTypeDescriptor implements
 	private List<IPossibleValue> _pvs;
 	
 	public List<IPossibleValue> getPossibleValues() {
-		if (_pvs == null){
-			IDOMContextResolver resolver = StructuredDocumentContextResolverFactory.getInstance().getDOMContextResolver(getStructuredDocumentContext());
-			_pvs = getCSSClasses(resolver.getDOMDocument());
-		}
+	    if (getStructuredDocumentContext() != null)
+	    {
+    		if (_pvs == null){
+    			IDOMContextResolver resolver = StructuredDocumentContextResolverFactory.getInstance().getDOMContextResolver(getStructuredDocumentContext());
+    			_pvs = getCSSClasses(resolver.getDOMDocument());
+    		}
+	    }
 		return _pvs;
 	}
 

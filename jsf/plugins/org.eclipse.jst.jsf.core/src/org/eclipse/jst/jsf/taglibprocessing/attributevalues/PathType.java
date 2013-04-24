@@ -14,9 +14,6 @@ package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.metadataprocessors.AbstractRootTypeDescriptor;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage;
 
@@ -26,7 +23,6 @@ import org.eclipse.jst.jsf.metadataprocessors.features.IValidationMessage;
  */
 public abstract class PathType extends AbstractRootTypeDescriptor {
 
-	private IProject _project = null;
 	private final List<IValidationMessage> _validationMsgs = new ArrayList<IValidationMessage>(1);
 
 	/**
@@ -34,20 +30,6 @@ public abstract class PathType extends AbstractRootTypeDescriptor {
 	 */
 	public PathType() {
 		super();
-	}
-
-	/**
-	 * @return IProject
-	 */
-	protected IProject getProject() {
-		if( _project == null )
-		{
-	        final IWorkspaceContextResolver wkspaceResolver =
-	            IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver( getStructuredDocumentContext() );
-	        _project = wkspaceResolver.getProject();
-		}
-		
-		return _project;
 	}
 
 	/**

@@ -38,8 +38,6 @@ import org.eclipse.jdt.core.search.SearchMatch;
 import org.eclipse.jdt.core.search.SearchParticipant;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.SearchRequestor;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.metadataprocessors.features.IPossibleValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.IValidValues;
 import org.eclipse.jst.jsf.metadataprocessors.features.PossibleValue;
@@ -123,13 +121,6 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 		}
 	}
 
-	private IWorkspaceContextResolver getWorkspaceContextResolver(){
-		if (getStructuredDocumentContext() == null)
-			return null;
-		
-		 return IStructuredDocumentContextResolverFactory.INSTANCE.getWorkspaceContextResolver(getStructuredDocumentContext());
-	}
-	
 	private List getTypes(){
 		IJavaProject jp = getJavaProject();
 		if (jp == null)
@@ -168,15 +159,12 @@ public class JavaClassType extends ObjectType implements IPossibleValues, IValid
 		return Collections.EMPTY_LIST;
 	}
 	
-	private IJavaProject getJavaProject() {
-		IWorkspaceContextResolver resolver = getWorkspaceContextResolver();
-		if (resolver != null){
-			IProject proj = resolver.getProject();
-			if (proj != null)
-				return JavaCore.create(proj);
-		}
-		return null;
-	}
+    private IJavaProject getJavaProject()
+    {
+        IProject proj = getProject2();
+        if (proj != null) { return JavaCore.create(proj); }
+        return null;
+    }
 
 	private List getInterfaces(IJavaProject jp) {
 		List ret = new ArrayList();

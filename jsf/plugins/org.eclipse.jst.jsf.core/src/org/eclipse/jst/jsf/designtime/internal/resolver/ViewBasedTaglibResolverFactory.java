@@ -22,6 +22,7 @@ import org.eclipse.jst.jsf.context.resolver.structureddocument.ITaglibContextRes
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IWorkspaceContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IStructuredDocumentContextResolverFactory2;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
+import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.IXMLNodeContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.designtime.DTAppManagerUtil;
 import org.eclipse.jst.jsf.designtime.internal.view.XMLViewDefnAdapter;
@@ -245,6 +246,21 @@ IStructuredDocumentContextResolverFactory2, IAdaptable
         {
             return this;
         }
+        return null;
+    }
+
+    public IWorkspaceContextResolver getWorkspaceContextResolver2(IModelContext context)
+    {
+        if (context instanceof IStructuredDocumentContext)
+        {
+            return getWorkspaceContextResolver((IStructuredDocumentContext) context);
+        }
+        return null;
+    }
+
+    public IXMLNodeContextResolver getXMLNodeContextResolver(IModelContext context)
+    {
+        // no xml node context resolver
         return null;
     }
 
