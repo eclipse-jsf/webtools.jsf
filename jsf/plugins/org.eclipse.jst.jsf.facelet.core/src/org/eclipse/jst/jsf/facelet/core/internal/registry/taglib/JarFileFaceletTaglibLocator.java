@@ -74,7 +74,7 @@ public class JarFileFaceletTaglibLocator extends AbstractFaceletTaglibLocator
         			if (name != null)
         			{
         				final int nameLength = name.length();
-        				if (nameLength > ".taglib.xml".length() || !name.endsWith(".taglib.xml")) //$NON-NLS-1$ //$NON-NLS-2$
+        				if (nameLength < ".taglib.xml".length() || !name.endsWith(".taglib.xml")) //$NON-NLS-1$ //$NON-NLS-2$
         				{
         					return false;
         				}
