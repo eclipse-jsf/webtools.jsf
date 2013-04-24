@@ -55,47 +55,11 @@
          <include>
             <rules>
                <projectNature
-                     id="org.eclipse.wst.common.modulecore.ModuleCoreNature">
-               </projectNature>
-            </rules>
-         </include>
-         <include>
-            <rules>
-               <projectNature
                      id="org.eclipse.jdt.core.javanature">
                </projectNature>
             </rules>
          </include>
 
-         <include>
-            <rules>
-               <facet
-                     id="jst.java">
-               </facet>
-            </rules>
-         </include>
-         <include>
-            <rules>
-               <facet
-                     id="jst.web">
-               </facet>
-            </rules>
-         </include>
-         <include>
-            <rules>
-               <facet
-                     id="jst.jsf" version="2.0">
-               </facet>
-               <facet
-                     id="jst.jsf"
-                     version="2.1">
-               </facet>
-               <facet
-                     id="jst.jsf"
-                     version="2.2">
-               </facet>
-            </rules>
-         </include>
          <include>
             <rules>
                <contentType
