@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.jst.jsf.common.internal.managedobject.AbstractManagedObject;
+import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
 import org.eclipse.jst.jsf.core.jsfappconfig.IFacesConfigChangeListener;
 import org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigLocater;
 import org.eclipse.jst.jsf.core.jsfappconfig.IJSFAppConfigProvider;
@@ -133,7 +134,15 @@ public abstract class AbstractJSFAppConfigManager
 	 */
 	protected void startConfigLocaters() {
 		for (final IJSFAppConfigLocater configLocater : configLocaters) {
-			configLocater.startLocating();
+			SafeRunner.run(new ISafeRunnable(){
+				public void handleException(Throwable e) {
+					JSFCorePlugin.log("While starting config locator", e); //$NON-NLS-1$
+				}
+
+				public void run() throws Exception {
+					configLocater.startLocating();
+				}
+			});
 		}
 	}
 	
@@ -143,8 +152,17 @@ public abstract class AbstractJSFAppConfigManager
 	 */
 	protected void stopConfigLocaters() {		
 		for (final IJSFAppConfigLocater configLocater : configLocaters) {
-			configLocater.stopLocating();
-			configLocater.dispose();
+			SafeRunner.run(new ISafeRunnable() {
+
+				public void handleException(Throwable exception) {
+					JSFCorePlugin.log("Stopping a config locator", exception); //$NON-NLS-1$
+				}
+
+				public void run() throws Exception {
+					configLocater.stopLocating();
+					configLocater.dispose();
+				}
+			});
 		}
 	}
 
@@ -173,7 +191,18 @@ public abstract class AbstractJSFAppConfigManager
 	public void notifyJSFAppConfigProvidersChangeListeners(final IJSFAppConfigProvider configProvider, final int eventType) {
 		final JSFAppConfigProvidersChangeEvent event = new JSFAppConfigProvidersChangeEvent(configProvider, eventType);
 		for (final IJSFAppConfigProvidersChangeListener listener : configProvidersChangeListeners) {
-			listener.changedJSFAppConfigProviders(event);
+			SafeRunner.run(new ISafeRunnable() {
+				
+				public void run() throws Exception {
+					listener.changedJSFAppConfigProviders(event);
+
+				}
+				
+				public void handleException(Throwable exception) {
+					JSFCorePlugin.log("While notifying listeners", exception); //$NON-NLS-1$
+					
+				}
+			});
 		}
 	}
 
@@ -196,7 +225,17 @@ public abstract class AbstractJSFAppConfigManager
 			final Class emfClass = ((EStructuralFeature)emfFeature).getEType().getInstanceClass();
 			final IFacesConfigChangeListener listener = facesConfigChangeListeners.get(emfClass);
 			if (listener != null) {
-				listener.notifyChanged(notification);
+				SafeRunner.run(new ISafeRunnable() {
+
+					public void handleException(Throwable exception) {
+						JSFCorePlugin.log("Problem while loading listeners", exception); //$NON-NLS-1$
+					}
+
+					public void run() throws Exception {
+						listener.notifyChanged(notification);
+					}
+					
+				});
 			}
 		}
 	}
@@ -209,7 +248,16 @@ public abstract class AbstractJSFAppConfigManager
 		final Iterator itConfigLocaters = configLocaters.iterator();
 		while (itConfigLocaters.hasNext()) {
 			final IJSFAppConfigLocater configLocater = (IJSFAppConfigLocater)itConfigLocaters.next();
-			allConfigProviders.addAll(configLocater.getJSFAppConfigProviders());
+			SafeRunner.run(new ISafeRunnable() {
+				
+				public void run() throws Exception {
+					allConfigProviders.addAll(configLocater.getJSFAppConfigProviders());
+				}
+				
+				public void handleException(Throwable exception) {
+					JSFCorePlugin.log("While getting app config providers", exception); //$NON-NLS-1$
+				}
+			});
 		}
 		return allConfigProviders;
 	}
