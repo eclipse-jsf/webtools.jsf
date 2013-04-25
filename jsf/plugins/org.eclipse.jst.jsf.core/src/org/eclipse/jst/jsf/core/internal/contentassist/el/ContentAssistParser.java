@@ -116,7 +116,7 @@ public final class ContentAssistParser
 	}
     
     private static String substring(String s, Region r) {
-        if (s == null || s.isEmpty())
+        if (s == null || s.length() < 1)
         {
             return ""; //$NON-NLS-1$
         }
