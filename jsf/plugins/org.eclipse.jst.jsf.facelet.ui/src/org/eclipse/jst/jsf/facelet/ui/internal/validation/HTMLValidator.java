@@ -102,6 +102,7 @@ public class HTMLValidator extends AbstractValidator implements IValidator {
                     strategies.clear();
                     maxPriority = priority;
                     strategies.add(instance);
+                    continue;
                 }
 
                 if (priority == maxPriority) {
