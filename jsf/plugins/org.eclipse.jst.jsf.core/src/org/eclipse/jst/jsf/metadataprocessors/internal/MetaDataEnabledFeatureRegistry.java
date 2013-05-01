@@ -13,6 +13,7 @@
 package org.eclipse.jst.jsf.metadataprocessors.internal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -91,7 +92,10 @@ public class MetaDataEnabledFeatureRegistry{
 			}
 			else {
 				List list = featuresMap.get(typeId);
-				list.add(aFeature);
+				if (list != null)
+				{
+					list.add(aFeature);
+				}
 			}
 		}
 	}
@@ -123,7 +127,7 @@ public class MetaDataEnabledFeatureRegistry{
 			featuresMap.put(typeId,new ArrayList());
 		
 		//copy current featuresMapped to typeId into return list
-		List<IMetaDataEnabledFeatureExtension> srcList = featuresMap.get(typeId);
+		List<IMetaDataEnabledFeatureExtension> srcList = getExtensionsForId(typeId);
 		List<IMetaDataEnabledFeatureExtension> ret = new ArrayList<IMetaDataEnabledFeatureExtension>(srcList.size());
 		copy(ret, srcList);	
 		
@@ -158,12 +162,20 @@ public class MetaDataEnabledFeatureRegistry{
 		for (Iterator it=typeCacheMap.keySet().iterator();it.hasNext();){
 			String featureTypeId = (String)it.next();
 			Class featureTypeClass = typeCacheMap.get(featureTypeId);
-			if (featureTypeClass.isAssignableFrom(typeClass))	{	
-				ret.addAll(featuresMap.get(featureTypeId));
+			if (featureTypeClass != null && featureTypeClass.isAssignableFrom(typeClass))	{	
+				ret.addAll(getExtensionsForId(featureTypeId));
 			}
 		}
 		return ret;
 	}
 	
-
+	private List<IMetaDataEnabledFeatureExtension> getExtensionsForId(String featureTypeId)
+	{
+		List<IMetaDataEnabledFeatureExtension> list = featuresMap.get(featureTypeId);
+		if (list == null)
+		{
+			return Collections.emptyList();
+		}
+		return Collections.unmodifiableList(list);
+	}
 }
