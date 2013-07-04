@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2012, 2013 Eclipse Foundation and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Distribution License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/org/documents/edl-v10.php
+ 
+  Contributors:
+    Thanh Ha (Eclipse Foundation) - initial implementation
+-->
+
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.eclipse</groupId>
+    <artifactId>wtp-parent</artifactId>
+    <version>3.5.0-SNAPSHOT</version>
+    <relativePath>../wtp-parent</relativePath>
+  </parent>
+
+  <groupId>org.eclipse.webtools.jsf</groupId>
+  <artifactId>org.eclipse.webtools.jsf</artifactId>
+  <version>3.5.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <!-- assembly -->
+    <module>assembly/features/org.eclipse.jsf.assembly.feature</module>
+    <module>assembly/features/org.eclipse.jsf_sdk.assembly.feature</module> 
+    <module>assembly/plugins/org.eclipse.jsf.branding</module>
+
+    <module>jsf/features/org.eclipse.jsf.feature</module>
+    <module>jsf/features/org.eclipse.jsf_sdk.feature</module>
+    <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature</module>
+    <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature</module>
+    <module>jsf/features/org.eclipse.jst.webpageeditor.feature</module>
+    <module>jsf/features/org.eclipse.jst.webpageeditor_sdk.feature</module>
+
+    <module>jsf/plugins/org.eclipse.jst.jsf.apache.trinidad.tagsupport</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.common</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.common.runtime</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.common.ui</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.core</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.facelet.core</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.facelet.ui</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.facesconfig</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.facesconfig.ui</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.standard.tagsupport</module>
+    <module>jsf/plugins/org.eclipse.jst.jsf.ui</module>
+    <module>jsf/plugins/org.eclipse.jst.pagedesigner</module>
+    <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsf.ui</module>
+    <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsp.core</module>
+  </modules>
+</project>
