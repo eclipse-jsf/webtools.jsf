@@ -1,7 +1,6 @@
 package org.eclipse.jst.jsf.facelet.core.internal;
 
-import org.eclipse.osgi.framework.debug.FrameworkDebugOptions;
-import org.eclipse.osgi.service.debug.DebugOptions;
+import org.eclipse.core.runtime.Platform;
 
 /**
  * Defines that standard runtime trace options for debugging. See .options file
@@ -47,22 +46,19 @@ public final class FaceletCoreTraceOptions
 
     static
     {
-        final DebugOptions debugOptions = FrameworkDebugOptions.getDefault();
+        ENABLED = getBooleanOption(FaceletCorePlugin.PLUGIN_ID
+                        + KEY_DEBUG_ENABLED);
 
-        ENABLED = debugOptions != null
-                && debugOptions.getBooleanOption(FaceletCorePlugin.PLUGIN_ID
-                        + KEY_DEBUG_ENABLED, false);
-
-        if (ENABLED && debugOptions != null)
+        if (ENABLED)
         {
-            TRACE_REGISTRYMANAGER = debugOptions.getBooleanOption(
-                    FaceletCorePlugin.PLUGIN_ID + KEY_VIEW_REGISTRYMANAGER, false);
-            TRACE_FACETINSTALLDELEGATE = debugOptions.getBooleanOption(
-                    FaceletCorePlugin.PLUGIN_ID + KEY_FACETINSTALLDELEGATE, false);
-            TRACE_FACETUNINSTALLDELEGATE = debugOptions.getBooleanOption(
-                    FaceletCorePlugin.PLUGIN_ID + KEY_FACETUNINSTALLDELEGATE, false);
-            TRACE_FACETCHANGEDELEGATE = debugOptions.getBooleanOption(
-                    FaceletCorePlugin.PLUGIN_ID + KEY_FACETCHANGEDELEGATE, false);
+            TRACE_REGISTRYMANAGER = getBooleanOption(
+                    FaceletCorePlugin.PLUGIN_ID + KEY_VIEW_REGISTRYMANAGER);
+            TRACE_FACETINSTALLDELEGATE = getBooleanOption(
+                    FaceletCorePlugin.PLUGIN_ID + KEY_FACETINSTALLDELEGATE);
+            TRACE_FACETUNINSTALLDELEGATE = getBooleanOption(
+                    FaceletCorePlugin.PLUGIN_ID + KEY_FACETUNINSTALLDELEGATE);
+            TRACE_FACETCHANGEDELEGATE = getBooleanOption(
+                    FaceletCorePlugin.PLUGIN_ID + KEY_FACETCHANGEDELEGATE);
         }
         else
         {
@@ -71,6 +67,12 @@ public final class FaceletCoreTraceOptions
             TRACE_FACETUNINSTALLDELEGATE = false;
             TRACE_FACETCHANGEDELEGATE = false;
         }
+    }
+    
+    private static boolean getBooleanOption(String key)
+    {
+    	Boolean enabled = Boolean.valueOf(Platform.getDebugOption(key));
+    	return enabled != null ? enabled.booleanValue() : false;
     }
 
     /**

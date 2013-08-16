@@ -10,8 +10,7 @@
  *******************************************************************************/
 package org.eclipse.jst.pagedesigner;
 
-import org.eclipse.osgi.framework.debug.FrameworkDebugOptions;
-import org.eclipse.osgi.service.debug.DebugOptions;
+import org.eclipse.core.runtime.Platform;
 
 /**
  * Defines that standard runtime trace options for debugging. See .options file
@@ -59,32 +58,33 @@ public final class PageDesignerTraceOptions
     
     static
     {
-        final DebugOptions debugOptions = FrameworkDebugOptions.getDefault();
         final String pluginId = PDPlugin.getPluginId();
-        ENABLED = debugOptions != null
-                && debugOptions.getBooleanOption(pluginId
-                        + KEY_DEBUG_ENABLED, false);
-
-        if (ENABLED)
-        {
-            TRACE_CONVERTERLOAD = debugOptions.getBooleanOption(
-                    pluginId + KEY_CONVERTER_LOAD, false);
-            TRACE_CONVERTERSELECT = debugOptions.getBooleanOption(
-                    pluginId + KEY_CONVERTER_SELECTION, false);
-            TRACE_ELEMENTEDITLOAD = debugOptions.getBooleanOption(
-                    pluginId + KEY_ELEMENTEDIT_LOAD, false);
-            TRACE_ELEMENTEDITSELECTION = debugOptions.getBooleanOption(
-                    pluginId + KEY_ELEMENTEDIT_SELECTION, false);
-        }
-        else
-        {
-            TRACE_CONVERTERLOAD = false;
-            TRACE_CONVERTERSELECT = false;
-            TRACE_ELEMENTEDITLOAD = false;
-            TRACE_ELEMENTEDITSELECTION = false;
-        }
+        
+        ENABLED = getBooleanOption(pluginId
+                + KEY_DEBUG_ENABLED);
+		if (ENABLED) {
+			TRACE_CONVERTERLOAD = getBooleanOption(pluginId
+					+ KEY_CONVERTER_LOAD);
+			TRACE_CONVERTERSELECT = getBooleanOption(pluginId
+					+ KEY_CONVERTER_SELECTION);
+			TRACE_ELEMENTEDITLOAD = getBooleanOption(pluginId
+					+ KEY_ELEMENTEDIT_LOAD);
+			TRACE_ELEMENTEDITSELECTION = getBooleanOption(pluginId
+					+ KEY_ELEMENTEDIT_SELECTION);
+		} else {
+			TRACE_CONVERTERLOAD = false;
+			TRACE_CONVERTERSELECT = false;
+			TRACE_ELEMENTEDITLOAD = false;
+			TRACE_ELEMENTEDITSELECTION = false;
+		}
     }
 
+    private static boolean getBooleanOption(String key)
+    {
+    	Boolean enabled = Boolean.valueOf(Platform.getDebugOption(key));
+    	return enabled != null ? enabled.booleanValue() : false;
+    }
+    
     /**
      * @param message
      */

@@ -10,8 +10,7 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.core.internal;
 
-import org.eclipse.osgi.framework.debug.FrameworkDebugOptions;
-import org.eclipse.osgi.service.debug.DebugOptions;
+import org.eclipse.core.runtime.Platform;
 
 /**
  * Defines that standard runtime trace options for debugging. See .options file
@@ -84,28 +83,25 @@ public final class JSFCoreTraceOptions
     
     static
     {
-        final DebugOptions debugOptions = FrameworkDebugOptions.getDefault();
-
-        ENABLED = debugOptions != null
-                && debugOptions.getBooleanOption(JSFCorePlugin.PLUGIN_ID
-                        + KEY_DEBUG_ENABLED, false);
+        ENABLED = getBooleanOption(JSFCorePlugin.PLUGIN_ID
+                        + KEY_DEBUG_ENABLED);
 
         if (ENABLED)
         {
-            TRACE_JSPTAGINTROSPECTOR = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR, false);
-            TRACE_JSPTAGREGISTRY = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY, false);
-            TRACE_JSPTAGREGISTRY_CHANGES = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_CHANGES, false);
-            TRACE_TLDREGISTRYMANAGER = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_TLDREGISTRYMANAGER, false);
-            TRACE_JSPTAGREGISTRY_PERF = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_PERF, false);
-            TRACE_JSPTAGINTROSPECTOR_PERF = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR_PERF, false);
-            TRACE_JSPTAGPERSISTENCE = debugOptions.getBooleanOption(
-                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGPERSISTENCE, false);
+            TRACE_JSPTAGINTROSPECTOR = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR);
+            TRACE_JSPTAGREGISTRY = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY);
+            TRACE_JSPTAGREGISTRY_CHANGES = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_CHANGES);
+            TRACE_TLDREGISTRYMANAGER = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_TLDREGISTRYMANAGER);
+            TRACE_JSPTAGREGISTRY_PERF = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGREGISTRY_PERF);
+            TRACE_JSPTAGINTROSPECTOR_PERF = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGINTROSPECTOR_PERF);
+            TRACE_JSPTAGPERSISTENCE = getBooleanOption(
+                    JSFCorePlugin.PLUGIN_ID + KEY_VIEW_JSPTAGPERSISTENCE);
         }
         else
         {
@@ -119,6 +115,11 @@ public final class JSFCoreTraceOptions
         }
     }
 
+    private static boolean getBooleanOption(String key)
+    {
+    	Boolean enabled = Boolean.valueOf(Platform.getDebugOption(key));
+    	return enabled != null ? enabled.booleanValue() : false;
+    }
     /**
      * @param message
      */

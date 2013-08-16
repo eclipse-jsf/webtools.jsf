@@ -1,7 +1,6 @@
 package org.eclipse.jst.jsf.ui.internal;
 
-import org.eclipse.osgi.framework.debug.FrameworkDebugOptions;
-import org.eclipse.osgi.service.debug.DebugOptions;
+import org.eclipse.core.runtime.Platform;
 
 /**
  * Defines that standard runtime trace options for debugging. See .options file
@@ -29,21 +28,24 @@ public final class JSFUITraceOptions
     
     static
     {
-        final DebugOptions debugOptions = FrameworkDebugOptions.getDefault();
-
-        ENABLED = debugOptions != null
-                && debugOptions.getBooleanOption(JSFUiPlugin.PLUGIN_ID
-                        + KEY_DEBUG_ENABLED, false);
+        ENABLED = getBooleanOption(JSFUiPlugin.PLUGIN_ID
+                        + KEY_DEBUG_ENABLED);
 
         if (ENABLED)
         {
-            TRACE_METADATAGEN = debugOptions.getBooleanOption(
-                    JSFUiPlugin.PLUGIN_ID + KEY_DESIGNTIME, false);
+            TRACE_METADATAGEN = getBooleanOption(
+                    JSFUiPlugin.PLUGIN_ID + KEY_DESIGNTIME);
         }
         else
         {
             TRACE_METADATAGEN = false;
         }
+    }
+
+    private static boolean getBooleanOption(String key)
+    {
+    	Boolean enabled = Boolean.valueOf(Platform.getDebugOption(key));
+    	return enabled != null ? enabled.booleanValue() : false;
     }
 
     /**
