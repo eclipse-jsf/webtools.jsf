@@ -12,11 +12,13 @@
 package org.eclipse.jst.jsf.test.util.mock.osgi;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.EnumSet;
 
-import org.eclipse.osgi.framework.adaptor.FrameworkAdaptor;
-import org.eclipse.osgi.framework.internal.core.BundleContextImpl;
-import org.eclipse.osgi.framework.internal.core.BundleHost;
-import org.eclipse.osgi.framework.internal.core.Framework;
+import org.eclipse.osgi.container.Module.Settings;
+import org.eclipse.osgi.internal.framework.BundleContextImpl;
+import org.eclipse.osgi.internal.framework.EquinoxBundle;
+import org.eclipse.osgi.internal.framework.EquinoxContainer;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 
@@ -43,19 +45,26 @@ public class BundleHacker
         final Field declaredField = clazz.getDeclaredField("context");
         declaredField.setAccessible(true);
 
-        final BundleHost host = createMockBundleHost();
-        BundleContextImpl bundleContextImpl = new BundleContextImpl(host)
-        {
-        };
+        @SuppressWarnings("unchecked")
+		EquinoxContainer container = new EquinoxContainer(Collections.EMPTY_MAP);
+        EquinoxBundle bundle = createEquinoxBundle(container);
+
+        BundleContextImpl bundleContextImpl = new BundleContextImpl(bundle,container);
+//        {
+//        };
         declaredField.set(instance, bundleContextImpl);
         return bundleContextImpl;
     }
 
-    private BundleHost createMockBundleHost() throws BundleException
-    {
-        final FrameworkAdaptor adaptor = new MockFrameworkAdaptor();
-        final Framework framework = new Framework(adaptor);
-        final BundleHost host = new BundleHost(null, framework);
-        return host;
-    }
+    private EquinoxBundle createEquinoxBundle(EquinoxContainer equinoxContainer) {
+		return new EquinoxBundle(-1L, null, null, EnumSet.of(Settings.USE_ACTIVATION_POLICY), 3, equinoxContainer);
+	}
+
+//    private BundleHost createMockBundleHost() throws BundleException
+//    {
+//        final FrameworkAdaptor adaptor = new MockFrameworkAdaptor();
+//        final Framework framework = new Framework(adaptor);
+//        final BundleHost host = new BundleHost(null, framework);
+//        return host;
+//    }
 }

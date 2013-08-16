@@ -10,7 +10,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.mock.IWorkspaceContext;
 import org.eclipse.jst.jsf.test.util.mock.MockWorkspaceContext;
-import org.eclipse.osgi.baseadaptor.loader.BaseClassLoader;
+import org.eclipse.osgi.internal.loader.ModuleClassLoader;
 import org.junit.Rule;
 import org.junit.rules.MethodRule;
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -27,6 +27,7 @@ import org.osgi.framework.Bundle;
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=343672
  *
  */
+@SuppressWarnings("deprecation")
 public class WorkspaceRunner extends BlockJUnit4ClassRunner
 {
     @Rule
@@ -64,9 +65,9 @@ public class WorkspaceRunner extends BlockJUnit4ClassRunner
                     : new MockWorkspaceContext();
             context.init();
             File baseLoc = null;
-            if (Platform.isRunning() && classLoader instanceof BaseClassLoader)
+            if (Platform.isRunning() && classLoader instanceof ModuleClassLoader)
             {
-                final Bundle bundle = ((BaseClassLoader) classLoader).getBundle();
+                final Bundle bundle = ((ModuleClassLoader) classLoader).getBundle();
                 final IPath absolutePath = JSFTestUtil.getAbsolutePath(bundle, "/");
                 baseLoc = absolutePath.toFile();
             } else
