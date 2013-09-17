@@ -2,7 +2,7 @@ Manifest-Version: 2.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: org.eclipse.jst.jsf.facesconfig.ui.test
-Bundle-Version: 1.3.0.qualifier
+Bundle-Version: 1.4.0.qualifier
 Bundle-Vendor: %plugin.provider
 Fragment-Host: org.eclipse.jst.jsf.facesconfig.ui;bundle-version="[1.0.0,2.0.0)"
 Bundle-Localization: plugin
