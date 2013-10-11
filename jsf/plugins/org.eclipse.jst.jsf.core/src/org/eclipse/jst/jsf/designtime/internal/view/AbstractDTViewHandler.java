@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -28,6 +29,8 @@ import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.StalenessListen
 import org.eclipse.jst.jsf.designtime.internal.view.DTUIViewRoot.VersionStamp;
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException.Cause;
 import org.eclipse.wst.common.componentcore.ComponentCore;
+import org.eclipse.wst.common.componentcore.resources.IVirtualComponent;
+import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 
 /**
  * All IDTViewHandler's must sub-class this abstract class.
@@ -209,12 +212,25 @@ public abstract class AbstractDTViewHandler implements IDTViewHandler
 
     private IPath getWebContentPath(final IProject project)
     {
+    	//Bug 418933 - Errors validating JSF/XHTML files
+    	IPath path = null;
         if (project != null)
         {
-            return ComponentCore.createComponent(project).getRootFolder()
-                    .getUnderlyingFolder().getFullPath();
+        	final IVirtualComponent component = ComponentCore.createComponent(project);
+        	if (component != null)
+        	{
+        		final IVirtualFolder folder = component.getRootFolder();
+        		if (folder != null)
+        		{
+        			final IContainer container = folder.getUnderlyingFolder();
+        			if (container != null)
+        			{
+        				path = container.getFullPath();
+        			}
+        		}
+        	}
         }
-        return null;
+        return path;
     }
 
     /**
