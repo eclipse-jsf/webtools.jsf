@@ -26,7 +26,6 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IWorkspaceRunnable;
-import org.eclipse.core.resources.WorkspaceLock;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -34,7 +33,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 
-@SuppressWarnings("deprecation")
 public class MockWorkspace implements IWorkspace
 {
     private final CopyOnWriteArrayList<IResourceChangeListener> _changeListeners = new CopyOnWriteArrayList<IResourceChangeListener>();
@@ -194,7 +192,7 @@ public class MockWorkspace implements IWorkspace
 
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Map getDanglingReferences()
     {
         throw new UnsupportedOperationException();
@@ -308,12 +306,6 @@ public class MockWorkspace implements IWorkspace
 
     public void setDescription(final IWorkspaceDescription description)
             throws CoreException
-    {
-        throw new UnsupportedOperationException();
-
-    }
-
-    public void setWorkspaceLock(final WorkspaceLock lock)
     {
         throw new UnsupportedOperationException();
 

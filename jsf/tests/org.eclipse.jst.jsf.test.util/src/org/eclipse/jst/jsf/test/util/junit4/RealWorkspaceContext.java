@@ -56,7 +56,6 @@ import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.resources.WorkspaceLock;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -826,12 +825,6 @@ public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
         public void setTreeLocked(final boolean locked)
         {
             _ws.setTreeLocked(locked);
-        }
-
-        @Override
-        public void setWorkspaceLock(final WorkspaceLock lock)
-        {
-            _ws.setWorkspaceLock(lock);
         }
 
         @Override
