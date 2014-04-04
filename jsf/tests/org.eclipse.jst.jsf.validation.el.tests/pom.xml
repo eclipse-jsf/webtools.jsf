@@ -8,6 +8,7 @@
  
   Contributors:
     Thanh Ha (Eclipse Foundation) - initial implementation
+    Ian Trimble (Oracle) - initial tests configuration
 -->
 
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
@@ -23,5 +24,20 @@
   <groupId>org.eclipse.webtools.jsf</groupId>
   <artifactId>org.eclipse.jst.jsf.validation.el.tests</artifactId>
   <version>1.5.0-SNAPSHOT</version>
-  <packaging>eclipse-plugin</packaging>
+  <packaging>eclipse-test-plugin</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <configuration>
+          <useUIHarness>true</useUIHarness>
+          <testSuite>org.eclipse.jst.jsf.validation.el.tests</testSuite>
+          <testClass>org.eclipse.jst.jsf.validation.el.tests.AllTests_1_1</testClass>
+          <argLine>-DjsfRuntimeJarsDirectoryV1.1=../jsfRuntimeJarsDirectory/V1.1 -DjsfRuntimeJarsDirectoryV1.2=../jsfRuntimeJarsDirectory/V1.2 -DjsfRuntimeJarsDirectoryV2.0=../jsfRuntimeJarsDirectory/V2.0</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
