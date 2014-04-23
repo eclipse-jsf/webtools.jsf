@@ -33,9 +33,9 @@
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
           <useUIHarness>true</useUIHarness>
-          <testSuite>org.eclipse.jst.jsf.common.runtime.tests</testSuite>
+          <testSuite>${project.artifactId}</testSuite>
           <testClass>org.eclipse.jst.jsf.common.runtime.tests.AllRuntimeTests</testClass>
-          <argLine>-DjsfRuntimeJarsDirectoryV1.1=../jsfRuntimeJarsDirectory/V1.1 -DjsfRuntimeJarsDirectoryV1.2=../jsfRuntimeJarsDirectory/V1.2 -DjsfRuntimeJarsDirectoryV2.0=../jsfRuntimeJarsDirectory/V2.0</argLine>
+          <argLine>-DjsfRuntimeJarsDirectoryV1.1=${project.basedir}/../jsfRuntimeJarsDirectory/V1.1 -DjsfRuntimeJarsDirectoryV1.2=${project.basedir}/../jsfRuntimeJarsDirectory/V1.2 -DjsfRuntimeJarsDirectoryV2.0=${project.basedir}/../jsfRuntimeJarsDirectory/V2.0</argLine>
         </configuration>
       </plugin>
     </plugins>

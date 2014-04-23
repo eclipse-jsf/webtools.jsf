@@ -32,10 +32,18 @@
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
+          <skipTests>true</skipTests>
           <useUIHarness>true</useUIHarness>
-          <testSuite>org.eclipse.jst.jsf.contentassist.tests</testSuite>
+          <testSuite>${project.artifactId}</testSuite>
           <testClass>org.eclipse.jst.jsf.contentassist.tests.AllTests</testClass>
-          <argLine>-DjsfRuntimeJarsDirectoryV1.1=../jsfRuntimeJarsDirectory/V1.1 -DjsfRuntimeJarsDirectoryV1.2=../jsfRuntimeJarsDirectory/V1.2 -DjsfRuntimeJarsDirectoryV2.0=../jsfRuntimeJarsDirectory/V2.0</argLine>
+          <dependencies>
+            <dependency>
+              <type>p2-installable-unit</type>
+              <artifactId>org.eclipse.jst.j2ee.ejb</artifactId>
+              <version>0.0.0</version>
+            </dependency>
+          </dependencies>
+          <argLine>-DjsfRuntimeJarsDirectoryV1.1=${project.basedir}/../jsfRuntimeJarsDirectory/V1.1 -DjsfRuntimeJarsDirectoryV1.2=${project.basedir}/../jsfRuntimeJarsDirectory/V1.2 -DjsfRuntimeJarsDirectoryV2.0=${project.basedir}/../jsfRuntimeJarsDirectory/V2.0</argLine>
         </configuration>
       </plugin>
     </plugins>
