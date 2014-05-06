@@ -6,7 +6,7 @@
       provider-name="%provider"
       plugin="org.eclipse.jsf.branding"
       license-feature="org.eclipse.license"
-      license-feature-version="1.0.0.qualifier">
+      license-feature-version="1.0.1.qualifier">
 
    <description>
       %description
