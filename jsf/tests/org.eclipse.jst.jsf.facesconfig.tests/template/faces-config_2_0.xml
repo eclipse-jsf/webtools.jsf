@@ -490,7 +490,7 @@
 		<description xml:lang="en-GB">What colour is it?</description>
 		<description xml:lang="fr">Quelle couleur est lui?</description>
 		<display-name xml:lang="en">English Display Name</display-name>
-		<display-name xml:lang="fr">Nom D'Affichage De Français</display-name>
+		<display-name xml:lang="fr">Nom D'Affichage De Francais</display-name>
 		
 		<icon xml:lang="en">
 			<small-icon>en_small-icon</small-icon>

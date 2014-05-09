@@ -78,7 +78,7 @@ public class ReadNavigationRuleTestCase extends BaseReadTestCase {
             assertEquals("en", displayNameType.getLang());
             
             displayNameType = FacesConfigModelUtil.
-                findDisplayNameType(navRule.getDisplayName(), "Nom D'Affichage De Français");
+                findDisplayNameType(navRule.getDisplayName(), "Nom D'Affichage De Francais");
             assertNotNull(displayNameType);
             assertEquals("fr", displayNameType.getLang());
         } finally {
