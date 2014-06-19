@@ -495,36 +495,22 @@
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.wst.html.core.htmlsource"
-            default-charset="UTF-8"
             file-extensions="xhtml"
             id="jsf.facelet"
             name="%Facelet.name"
             priority="high">
          <describer
-               class="org.eclipse.jst.jsf.core.internal.contenttype.XMLDocumentElementAttributeContentDescriber">
-            <parameter
-                  name="xmlns:.*"
-                  value=".*jsf.*">
-            </parameter>
-            <parameter
-                  name="xmlns:.*"
-                  value=".*faces.*">
-            </parameter>
+               class="org.eclipse.jst.jsf.core.internal.contenttype.ContentDescriberForFacelet">
          </describer>
       </content-type>
       <content-type
             base-type="jsf.facelet"
-            default-charset="UTF-8"
             file-extensions="xhtml"
             id="jsf.facelet.composite"
             name="%FaceletComposite.name"
             priority="high">
          <describer
-               class="org.eclipse.jst.jsf.core.internal.contenttype.XMLDocumentElementAttributeContentDescriber">
-            <parameter
-                  name="xmlns:.*"
-                  value="http://java.sun.com/jsf/composite">
-            </parameter>
+               class="org.eclipse.jst.jsf.core.internal.contenttype.ContentDescriberForFaceletCompositeComponent">
          </describer>
       </content-type>
    </extension>
