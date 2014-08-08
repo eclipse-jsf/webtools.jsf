@@ -60,6 +60,7 @@ import org.eclipse.jst.pagedesigner.ui.preferences.PDPreferences;
 import org.eclipse.jst.pagedesigner.utils.EditorUtil;
 import org.eclipse.jst.pagedesigner.utils.PreviewUtil;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -1296,6 +1297,14 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				}
 			}
 		}
+	}
+
+	/**
+	 * Updates the editor's title image
+	 * @param titleImage
+	 */
+	public void updateTitleImage(Image titleImage) {
+		setTitleImage(titleImage);
 	}
 
 }
