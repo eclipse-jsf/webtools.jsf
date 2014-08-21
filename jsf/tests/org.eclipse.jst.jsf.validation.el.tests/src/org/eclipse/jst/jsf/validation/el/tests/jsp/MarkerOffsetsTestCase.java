@@ -168,8 +168,10 @@ public class MarkerOffsetsTestCase extends SingleJSPTestCase
         list = assertSemanticError(2324, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID, 2324, 5);
 
+        /* reduced to warning for bug 243674 
         list = assertSemanticError(2359, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID, 2359, 2);
+        */
 
         list = assertSemanticError(2418, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.CANNOT_APPLY_OPERATOR_TO_METHOD_BINDING_ID, 2442, 25);

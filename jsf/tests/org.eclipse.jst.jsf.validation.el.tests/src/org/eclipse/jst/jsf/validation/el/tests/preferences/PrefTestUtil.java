@@ -110,7 +110,7 @@ final class PrefTestUtil extends Assert
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_EMPTY_ALWAYS_FALSE_ON_TYPE_ID,Diagnostic.WARNING);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_MINUS_ON_NULL_ALWAYS_ZERO_ID,Diagnostic.WARNING);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID,Diagnostic.ERROR);
-        PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID,Diagnostic.ERROR);
+        PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID,Diagnostic.WARNING); /* Bug 243674 */
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.TERNARY_OP_CHOICE_IS_ALWAYS_SAME_ID,Diagnostic.WARNING);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN_ID,Diagnostic.ERROR);
         PrefTestUtil.assertSeverityLevel(prefs, DiagnosticFactory.UNARY_OP_STRING_CONVERSION_NOT_GUARANTEED_ID,Diagnostic.WARNING);

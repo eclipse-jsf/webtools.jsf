@@ -106,10 +106,11 @@ public class LogicalNotTestCase extends SingleJSPTestCase {
     @Override
     public void testErrorExprs()
     {
+    	/* reduced to warning for bug 243674
         List<ReportedProblem> list = assertSemanticError(1430, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
-        list = assertSemanticError(1462, null, 1);
+    	list = assertSemanticError(1462, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
 
         list = assertSemanticError(1497, null, 1);
@@ -135,6 +136,7 @@ public class LogicalNotTestCase extends SingleJSPTestCase {
 
         list = assertSemanticError(1887, null, 1);
         ELAssert.assertContainsProblem(list, DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID);
+        */
     }
 
 }
