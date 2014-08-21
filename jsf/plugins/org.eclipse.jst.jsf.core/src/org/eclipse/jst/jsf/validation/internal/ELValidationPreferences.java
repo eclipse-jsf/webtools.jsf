@@ -361,7 +361,7 @@ public class ELValidationPreferences implements IJSFPreferenceModel
             case DiagnosticFactory.UNARY_OP_COULD_NOT_MAKE_NUMERIC_COERCION_ID:
                 return Diagnostic.ERROR;
             case DiagnosticFactory.UNARY_OP_CANNOT_COERCE_ARGUMENT_TO_BOOLEAN_ID:
-                return Diagnostic.ERROR;
+                return Diagnostic.WARNING; /* Bug 243674 */
             case DiagnosticFactory.TERNARY_OP_CHOICE_IS_ALWAYS_SAME_ID:
                 return Diagnostic.WARNING;
             case DiagnosticFactory.TERNARY_OP_CANNOT_COERCE_CHOICE_TO_BOOLEAN_ID:

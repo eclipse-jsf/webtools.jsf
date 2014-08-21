@@ -36,7 +36,7 @@ public class TypeComparatorPreferences
             case TypeComparatorDiagnosticFactory.VALUE_EXPRESSION_EXPECTED_ID:
                 return Diagnostic.ERROR;
             case TypeComparatorDiagnosticFactory.INCOMPATIBLE_METHOD_TYPES_ID:
-                return Diagnostic.ERROR;
+                return Diagnostic.WARNING; /* Bug 243674 */
             case TypeComparatorDiagnosticFactory.PROPERTY_NOT_READABLE_ID:
                 return Diagnostic.WARNING;
             case TypeComparatorDiagnosticFactory.PROPERTY_NOT_WRITABLE_ID:
