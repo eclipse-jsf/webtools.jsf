@@ -1,19 +1,29 @@
 package org.eclipse.jst.pagedesigner.editors;
 
 /**
- * Listens for persistence events fired from WPE instances, including
- * save and revert.
+ * Listens for persistence events fired from WPE instances, including save and revert.
  */
 public interface IWPEPersistenceListener {
+
 	/**
 	 * The type of the persistence event.
 	 *
 	 */
 	public static enum PersistenceEventType {
 		/**
+		 * WPE is about to be saved. A listener may request that this operation be cancelled.
+		 */
+		BEFORE_SAVE,
+
+		/**
 		 * WPE was saved
 		 */
 		SAVED,
+
+		/**
+		 * WPE is about to be saved as. A listener may request that this operation be cancelled.
+		 */
+		BEFORE_SAVE_AS,
 
 		/**
 		 * WPE was saved as
@@ -21,17 +31,22 @@ public interface IWPEPersistenceListener {
 		SAVED_AS,
 
 		/**
+		 * WPE is about to be reverted. A listener may request that this operation be cancelled.
+		 */
+		BEFORE_REVERT,
+
+		/**
 		 * WPE was reverted.
 		 */
 		REVERTED;
-	}		
+	}
 
 	/**
 	 * A persistence event.
 	 * 
 	 * <p>Not intended to be implemented by clients.</p>
-	 */	
-	public static interface IPersistenceEvent {		
+	 */
+	public static interface IPersistenceEvent {
 		/**
 		 * @return editor
 		 */
@@ -40,13 +55,24 @@ public interface IWPEPersistenceListener {
 		/**
 		 * @return EventType
 		 */
-		public PersistenceEventType getEventType();		
+		public PersistenceEventType getEventType();
+
+		/**
+		 * A listener requests that all further processing of the operation be stopped after this
+		 * event has first been sent to all listeners.
+		 */
+		public void cancelOperation();
+
+		/**
+		 * @return <code>true</code> if a listener has requested that the operation be cancelled.
+		 */
+		public boolean isOperationCancelled();
 	}
 
 	/**
 	 * A persistence event has occurred
-	 * @param event 
-	 */	
+	 * @param event
+	 */
 	public void notify(IPersistenceEvent event);
 
 }

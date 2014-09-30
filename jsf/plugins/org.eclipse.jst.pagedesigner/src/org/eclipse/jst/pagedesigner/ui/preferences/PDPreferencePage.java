@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.ui.preferences;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.jst.pagedesigner.PDPlugin;
 import org.eclipse.jst.pagedesigner.utils.EditorUtil;
 import org.eclipse.swt.SWT;
@@ -101,6 +102,11 @@ public final class PDPreferencePage extends FieldEditorPreferencePage implements
                 PDPreferences.CSS_USE_ARTIFICAL_CELL_PADDING,
                 PreferenceMessages.EditorPreferences_LABEL_CSSArtificalCellPadding,
                 _cssLayoutGroup);
+
+        addStringField(
+        		PDPreferences.HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES,
+        		PreferenceMessages.EditorPreferences_LABEL_HidePreviewPageForContentTypes,
+        		getFieldEditorParent());
     }
 
     
@@ -149,5 +155,12 @@ public final class PDPreferencePage extends FieldEditorPreferencePage implements
         BooleanField f = new BooleanField(name, labelText, parent);
         addField(f);
         return f;
+    }
+
+    private StringFieldEditor addStringField(String name, String labelText, Composite parent)
+    {
+    	StringFieldEditor f = new StringFieldEditor(name, labelText, parent);
+    	addField(f);
+    	return f;
     }
 }
