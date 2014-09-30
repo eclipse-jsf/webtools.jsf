@@ -14,6 +14,7 @@ package org.eclipse.jst.pagedesigner.editors;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,6 +27,8 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.content.IContentDescription;
+import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.views.palette.PalettePage;
@@ -76,6 +79,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.contexts.IContextService;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.MultiPageEditorSite;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
@@ -137,7 +141,7 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 
 	private SashEditorPart _sashEditorPart = null;
 
-	private int _previewPageIndex;
+	private int _previewPageIndex = -1;
 
 	/** The design viewer */
 	private SimpleGraphicalEditor _designViewer;
@@ -456,7 +460,35 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 				tabbed_createAndAddDesignSourcePage();
 			}
 			connectDesignPage();
-			createAndAddPreviewPage();
+
+			//show preview page unless preference is hiding for content type
+			boolean showPreviewPage = true;
+			final IEditorInput input = getEditorInput();
+			if (input instanceof FileEditorInput) {
+				final IFile file = ((FileEditorInput)input).getFile();
+				if (file != null) {
+					try {
+						final IContentDescription description = file.getContentDescription();
+						if (description != null) {
+							final IContentType type = description.getContentType();
+							if (type != null) {
+								final String id = type.getId();
+								if (id != null && id.length() > 0) {
+									if (Arrays.binarySearch(PDPreferences.getHiddenPreviewPageContentTypes(), id) > -1) {
+										showPreviewPage = false;
+									}
+								}
+							}
+						}
+					} catch (CoreException cEx) {
+						//do nothing
+					}
+				}
+			}
+			if (showPreviewPage) {
+				createAndAddPreviewPage();
+			}
+
 			DesignerSourceMouseTrackAdapter adapter = new DesignerSourceMouseTrackAdapter(
 					_textEditor, getEditDomain());
 			_textEditor.getTextViewer().getTextWidget().addMouseListener(
@@ -484,8 +516,10 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		return new DesignerStructuredTextEditorJSP() {
 			@Override
 			protected void performRevert() {
-				super.performRevert();
-				firePersistenceEvent(PersistenceEventType.REVERTED);
+				if (firePersistenceEvent(PersistenceEventType.BEFORE_REVERT)) {
+					super.performRevert();
+					firePersistenceEvent(PersistenceEventType.REVERTED);
+				}
 			}
 		};
 	}
@@ -545,8 +579,12 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	}
 
 	public void doSave(IProgressMonitor monitor) {
-		_textEditor.doSave(monitor);
-		firePersistenceEvent(PersistenceEventType.SAVED);
+		if (firePersistenceEvent(PersistenceEventType.BEFORE_SAVE)) {
+			_textEditor.doSave(monitor);
+			firePersistenceEvent(PersistenceEventType.SAVED);
+		} else {
+			monitor.setCanceled(true);
+		}
 	}
 
 	/*
@@ -558,8 +596,10 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 	 * @see IEditorPart
 	 */
 	public void doSaveAs() {
-		_textEditor.doSaveAs();
-		firePersistenceEvent(PersistenceEventType.SAVED_AS);
+		if (firePersistenceEvent(PersistenceEventType.BEFORE_SAVE_AS)) {
+			_textEditor.doSaveAs();
+			firePersistenceEvent(PersistenceEventType.SAVED_AS);
+		}
 	}
 
 	private void editorInputIsAcceptable(IEditorInput input)
@@ -1276,16 +1316,30 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		}
 	}
 
-	private void firePersistenceEvent(final PersistenceEventType type) {
+	/**
+	 * @param type
+	 * @return <code>true</code> if operation is to continue, otherwise <code>false</code>
+	 */
+	private boolean firePersistenceEvent(final PersistenceEventType type) {
 		if (persistenceListeners != null) {
 			List<IWPEPersistenceListener> listeners = new ArrayList<IWPEPersistenceListener>(persistenceListeners);
-			IPersistenceEvent event = new IPersistenceEvent() {			
+			IPersistenceEvent event = new IPersistenceEvent() {
+				private boolean cancelled;
+
 				public HTMLEditor getWPEInstance() {
 					return HTMLEditor.this;
 				}
 				
 				public PersistenceEventType getEventType() {
 					return type;
+				}
+
+				public boolean isOperationCancelled() {
+					return cancelled;
+				}
+
+				public void cancelOperation() {
+					cancelled = true;
 				}
 			};
 			
@@ -1296,7 +1350,9 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 					PDPlugin.log("Exception thrown while notifying a persistence listener", e); //$NON-NLS-1$
 				}
 			}
+			return !event.isOperationCancelled();
 		}
+		return true;
 	}
 
 	/**

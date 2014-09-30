@@ -7,6 +7,8 @@
  *******************************************************************************/ 
 package org.eclipse.jst.pagedesigner.ui.preferences;
 
+import java.util.Arrays;
+
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jst.pagedesigner.PDPlugin;
@@ -39,6 +41,12 @@ public class PDPreferences extends AbstractPreferenceInitializer {
             .getName()
             + ".CSSEnableAbsolutePositioning"; //$NON-NLS-1$
     /**
+     * Content types (as comma-delimited String) for which to hide preview page (default is the empty String).
+     */
+    public static final String HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES = PDPreferences.class.
+    		getName() +
+    		".hidePreviewPageForContentTypes"; //$NON-NLS-1$
+    /**
      * The default value for absolute positioning enablement
      */
     public static final boolean DEFAULT_CSS_ENABLE_ABSOLUTE_POSITIONING = false;
@@ -46,10 +54,24 @@ public class PDPreferences extends AbstractPreferenceInitializer {
      * The default value for artificial cell padding.
      */
     public static final int DEFAULT_CSS_USE_ARTIFICIAL_CELL_PADDING = 4;
+    /**
+     * Default value for content types for which to hide preview page.
+     */
+    public static final String DEFAULT_HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES = ""; //$NON-NLS-1$
 
-    private static IPreferenceStore getPreferenceStore()
+    @Override
+    public void initializeDefaultPreferences()
     {
-        return PDPlugin.getDefault().getPreferenceStore();
+        // Set default HTML editor split vertical (i.e. with top and bottom
+        // pane)
+        IPreferenceStore store = getPreferenceStore();
+        store.setDefault(SASH_EDITOR_MODE_PREF, HTMLEditor.MODE_SASH_VERTICAL);
+        store.setDefault(CSS_USE_ARTIFICAL_CELL_PADDING,
+                DEFAULT_CSS_USE_ARTIFICIAL_CELL_PADDING);
+        store.setDefault(CSS_ENABLE_ABSOLUTE_POSITIONING,
+                DEFAULT_CSS_ENABLE_ABSOLUTE_POSITIONING);
+        store.setDefault(HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES,
+        		DEFAULT_HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES);
     }
 
     /**
@@ -70,16 +92,86 @@ public class PDPreferences extends AbstractPreferenceInitializer {
         return store.getInt(CSS_USE_ARTIFICAL_CELL_PADDING);
     }
 
-    @Override
-    public void initializeDefaultPreferences()
+    /**
+     * Get list of content types for which to hide preview page. 
+     * @return Content types (as String array) for which to hide preview page. 
+     */
+    public static String[] getHiddenPreviewPageContentTypes()
     {
-        // Set default HTML editor split vertical (i.e. with top and bottom
-        // pane)
-        IPreferenceStore store = getPreferenceStore();
-        store.setDefault(SASH_EDITOR_MODE_PREF, HTMLEditor.MODE_SASH_VERTICAL);
-        store.setDefault(CSS_USE_ARTIFICAL_CELL_PADDING,
-                DEFAULT_CSS_USE_ARTIFICIAL_CELL_PADDING);
-        store.setDefault(CSS_ENABLE_ABSOLUTE_POSITIONING,
-                DEFAULT_CSS_ENABLE_ABSOLUTE_POSITIONING);
+    	String[] hiddenTypes = new String[0];
+    	final IPreferenceStore store = getPreferenceStore();
+    	final String hiddenTypesString = store.getString(HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES);
+    	if (hiddenTypesString != null && hiddenTypesString.length() > 0)
+    	{
+    		hiddenTypes = hiddenTypesString.split(","); //$NON-NLS-1$
+    	}
+    	return hiddenTypes;
     }
+
+    /**
+     * Adds content type to list of types for which to hide preview page.
+     * @param contentTypeId Content type to add to list.
+     */
+    public static void addHiddenPreviewPageContentType(String contentTypeId)
+    {
+    	if (contentTypeId != null && contentTypeId.length() > 0)
+    	{
+	    	final String[] hiddenContentTypes = getHiddenPreviewPageContentTypes();
+	    	if (Arrays.binarySearch(hiddenContentTypes, contentTypeId) < 0)
+	    	{
+	    		String hiddenTypesString = arrayToString(hiddenContentTypes);
+	    		if (hiddenTypesString.length() > 0)
+	    		{
+	    			hiddenTypesString = hiddenTypesString.concat(","); //$NON-NLS-1$
+	    		}
+	    		hiddenTypesString = hiddenTypesString.concat(contentTypeId.trim());
+	        	final IPreferenceStore store = getPreferenceStore();
+	        	store.setValue(HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES, hiddenTypesString);
+	    	}
+    	}
+    }
+
+    /**
+     * Removes content type from list of types for which to hide preview page.
+     * @param contentTypeId Content type to remove from list.
+     */
+    public static void removeHiddenPreviewPageContentType(String contentTypeId)
+    {
+    	if (contentTypeId != null && contentTypeId.length() > 0) {
+    		final String[] hiddenContentTypes = getHiddenPreviewPageContentTypes();
+    		if (Arrays.binarySearch(hiddenContentTypes, contentTypeId) >= 0)
+    		{
+    			final String hiddenTypesString = arrayToString(hiddenContentTypes);
+    			hiddenTypesString.replace(contentTypeId, ""); //$NON-NLS-1$
+    			hiddenTypesString.replace(",,", ","); //$NON-NLS-1$ //$NON-NLS-2$
+	        	final IPreferenceStore store = getPreferenceStore();
+	        	store.setValue(HIDE_PREVIEW_PAGE_FOR_CONTENT_TYPES, hiddenTypesString);
+    		}
+    	}
+    }
+
+    private static IPreferenceStore getPreferenceStore()
+    {
+        return PDPlugin.getDefault().getPreferenceStore();
+    }
+
+    private static String arrayToString(String[] array)
+    {
+    	String string = ""; //$NON-NLS-1$
+    	if (array != null && array.length > 0)
+    	{
+    		StringBuilder builder = new StringBuilder();
+    		for (int i = 0; i < array.length; i++)
+    		{
+    			if (i > 0)
+    			{
+    				builder.append(',');
+    			}
+    			builder.append(array[i]);
+    		}
+    		string = builder.toString();
+    	}
+    	return string;
+    }
+
 }
