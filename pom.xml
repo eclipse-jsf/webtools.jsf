@@ -26,6 +26,10 @@
   <version>3.6.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <properties>
+    <tycho.scmUrl>scm:git:git://git.eclipse.org/gitroot/jsf/webtools.jsf.tests.git</tycho.scmUrl>
+  </properties>
+
   <modules>
     <module>jsf/features/org.eclipse.jst.jsf.tests.feature</module>
     <module>jsf/tests/org.eclipse.jst.jsf.common.runtime.tests</module>
