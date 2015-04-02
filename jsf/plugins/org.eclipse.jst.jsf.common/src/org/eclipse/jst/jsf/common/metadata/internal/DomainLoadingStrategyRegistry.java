@@ -71,9 +71,15 @@ public class DomainLoadingStrategyRegistry{
 	 * @param strategy
 	 */
 	protected void addDomainLoadingStrategyDescriptor(final DomainLoadingStrategyDescriptorImpl strategy){
-		getDescriptors().put(strategy.getDomain(), strategy);
+		if (getDescriptors().containsKey(strategy.getDomain())) {
+			if (!strategy.getBundleId().equals(JSFCommonPlugin.PLUGIN_ID)) {
+				getDescriptors().put(strategy.getDomain(), strategy);
+			}
+		} else {
+			getDescriptors().put(strategy.getDomain(), strategy);
+		}
 	}
-	
+
 	/**
 	 * @param domain
 	 * @return an instance of an <code>IDomainLoadingStrategy</code> for the given domain
@@ -132,7 +138,14 @@ public class DomainLoadingStrategyRegistry{
 		public String getDomain() {	
 			return domain;
 		}
-		
+
+		/**
+		 * @return bundle ID
+		 */
+		public String getBundleId() {
+			return bundleId;
+		}
+
 		/**
 		 * @return new instance of IDomainLoadingStrategy
 		 */
