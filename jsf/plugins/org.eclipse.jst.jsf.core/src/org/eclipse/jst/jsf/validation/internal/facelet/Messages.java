@@ -15,7 +15,7 @@ import org.eclipse.osgi.util.NLS;
 
 class Messages extends NLS
 {
-    private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.core.validation.internal.facelet.messages"; //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "org.eclipse.jst.jsf.validation.internal.facelet.messages"; //$NON-NLS-1$
     static
     {
         NLS.initializeMessages(BUNDLE_NAME, Messages.class);
