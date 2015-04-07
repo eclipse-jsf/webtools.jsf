@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 
 /**
  * Content Describer for a "facelet composite component" (document element has an xmlns attribute
- * with a value that matches "http://java.sun.com/jsf/composite").
+ * with a value that matches "http://java.sun.com/jsf/composite" or
+ * "http://xmlns.jcp.org/jsf/composite").
  * 
  * @author ian.trimble@oracle.com
  */
@@ -23,7 +24,8 @@ public class ContentDescriberForFaceletCompositeComponent extends AbstractConten
 	@Override
 	protected Pattern[] getNSValuePatterns() {
 		return new Pattern[] {
-			Pattern.compile("http://java.sun.com/jsf/composite") //$NON-NLS-1$
+			Pattern.compile("http://java.sun.com/jsf/composite"), //$NON-NLS-1$
+			Pattern.compile("http://xmlns.jcp.org/jsf/composite") //$NON-NLS-1$
 		};
 	}
 

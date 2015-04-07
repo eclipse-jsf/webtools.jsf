@@ -137,6 +137,10 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
         private static final JSFResourceBasedTagRecord WHOLE_LIB_RECORD = new JSFResourceBasedTagRecord(null, Collections.EMPTY_LIST, null);
         private final Map<String, LibEntry> _tags = new HashMap<String, LibEntry>();
         private static final String FACELET_FILE_CONTENT_TYPE = "org.eclipse.wst.html.core.htmlsource"; //$NON-NLS-1$
+        private static final String[] COMPOSITE_LIB_NS_PREFIXES = new String[] {
+        	"http://java.sun.com/jsf/composite/", //$NON-NLS-1$
+            "http://xmlns.jcp.org/jsf/composite/" //$NON-NLS-1$
+        };
 
         /**
          * @param jsfResource
@@ -150,44 +154,45 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
             {
                 return;
             }
-            final String uri = String.format(
-                    "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
-            LibEntry tags = _tags.get(uri);
-            if (tags == null)
-            {
-                tags = new LibEntry(createDescriptor(jsfResource));
-                _tags.put(uri, tags);
-            }
-            final String resourceName = jsfResource.getId().getResourceName();
-            final IPath resourceNamePath = new Path(resourceName)
-                    .removeFileExtension();
-            final FaceletTaglibTag tag = FaceletTaglibFactory.eINSTANCE
-                    .createFaceletTaglibTag();
-            tag.setTagName(resourceNamePath.toString());
-            switch (changeType)
-            {
-                case ADDED:
-                case CHANGED:
-                    // only add to the list on a add/change if the resource
-                    // exists and is the right type
-                	// Bug 377405: order the isContentType call first because
-                	// it has a high probability of returning false and
-                	// short-circuiting the isAccessible call that can
-                	// be very expensive (10-100 times)
-                    if (jsfResource
-                                    .isContentType(FACELET_FILE_CONTENT_TYPE)
-                                    && jsfResource.isAccessible())
-                    {
+            for (String nsPrefix: COMPOSITE_LIB_NS_PREFIXES) {
+                final String uri = String.format("%s%s", nsPrefix, libraryName); //$NON-NLS-1$
+                LibEntry tags = _tags.get(uri);
+                if (tags == null)
+                {
+                    tags = new LibEntry(createDescriptor(jsfResource));
+                    _tags.put(uri, tags);
+                }
+                final String resourceName = jsfResource.getId().getResourceName();
+                final IPath resourceNamePath = new Path(resourceName)
+                        .removeFileExtension();
+                final FaceletTaglibTag tag = FaceletTaglibFactory.eINSTANCE
+                        .createFaceletTaglibTag();
+                tag.setTagName(resourceNamePath.toString());
+                switch (changeType)
+                {
+                    case ADDED:
+                    case CHANGED:
+                        // only add to the list on a add/change if the resource
+                        // exists and is the right type
+                    	// Bug 377405: order the isContentType call first because
+                    	// it has a high probability of returning false and
+                    	// short-circuiting the isAccessible call that can
+                    	// be very expensive (10-100 times)
+                        if (jsfResource
+                                        .isContentType(FACELET_FILE_CONTENT_TYPE)
+                                        && jsfResource.isAccessible())
+                        {
+                            tags.addTag(tag);
+                        }
+                    break;
+                    case REMOVED:
+                        // add all comers to the remove list. There will only be
+                        // removal
+                        // on merge if ADDED/CHANGED path decided they should be
+                        // there.
                         tags.addTag(tag);
-                    }
-                break;
-                case REMOVED:
-                    // add all comers to the remove list. There will only be
-                    // removal
-                    // on merge if ADDED/CHANGED path decided they should be
-                    // there.
-                    tags.addTag(tag);
-                break;
+                    break;
+                }
             }
         }
 
@@ -203,19 +208,20 @@ public class JSFResourceBasedTagRecord extends FaceletTagRecord
             {
                 return;
             }
-            final String uri = String.format(
-                    "http://java.sun.com/jsf/composite/%s", libraryName); //$NON-NLS-1$
-            if (changeType == CHANGE_TYPE.REMOVED)
-            {
-                _tags.put(uri, WHOLE_LIBRARY);
-            } else
-            {
-                LibEntry tags = _tags.get(uri);
-                if (tags == null)
-                {
-                    tags = new LibEntry(createDescriptor(jsfResource));
-                    _tags.put(uri, tags);
-                }
+            for (String nsPrefix: COMPOSITE_LIB_NS_PREFIXES) {
+	            final String uri = String.format("%s%s", nsPrefix, libraryName); //$NON-NLS-1$
+	            if (changeType == CHANGE_TYPE.REMOVED)
+	            {
+	                _tags.put(uri, WHOLE_LIBRARY);
+	            } else
+	            {
+	                LibEntry tags = _tags.get(uri);
+	                if (tags == null)
+	                {
+	                    tags = new LibEntry(createDescriptor(jsfResource));
+	                    _tags.put(uri, tags);
+	                }
+	            }
             }
         }
 
