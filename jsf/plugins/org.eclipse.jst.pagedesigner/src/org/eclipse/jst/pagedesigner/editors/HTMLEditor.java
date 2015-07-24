@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2015 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -539,9 +539,11 @@ public final class HTMLEditor extends MultiPageEditorPart implements
 		disconnectDesignPage();
 		
 		IWorkbenchWindow window = getSite().getWorkbenchWindow();
-		window.getPartService().removePartListener(_partListener);
-		window.getShell().removeShellListener(_partListener);
-		getSite().getPage().removePartListener(_partListener);
+		if (_partListener != null) {
+			window.getPartService().removePartListener(_partListener);
+			window.getShell().removeShellListener(_partListener);
+			getSite().getPage().removePartListener(_partListener);
+		}
 
 		if (_textEditor != null) {
 			_textEditor.removePropertyListener(this);
