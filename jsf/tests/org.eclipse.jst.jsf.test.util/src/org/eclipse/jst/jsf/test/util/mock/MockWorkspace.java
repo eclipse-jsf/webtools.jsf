@@ -27,7 +27,6 @@ import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.ICoreRunnable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -297,19 +296,6 @@ public class MockWorkspace implements IWorkspace
         throw new UnsupportedOperationException();
 
     }
-
-	public void run(ICoreRunnable action, ISchedulingRule rule, int flags, IProgressMonitor monitor)
-			throws CoreException
-	{
-		throw new UnsupportedOperationException();
-
-	}
-
-	public void run(ICoreRunnable action, IProgressMonitor monitor) throws CoreException
-	{
-		throw new UnsupportedOperationException();
-
-	}
 
     public IStatus save(final boolean full, final IProgressMonitor monitor)
             throws CoreException
