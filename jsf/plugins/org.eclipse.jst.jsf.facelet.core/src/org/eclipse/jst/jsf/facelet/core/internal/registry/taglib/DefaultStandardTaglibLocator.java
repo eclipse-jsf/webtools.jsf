@@ -29,11 +29,15 @@ public class DefaultStandardTaglibLocator extends AbstractFaceletTaglibLocator
     {
         final Set<String> set = new HashSet<String>();
         set.add("/std-taglibs/html_basic.taglib.xml"); //$NON-NLS-1$
+        set.add("/std-taglibs/html_basic_jcp.taglib.xml"); //$NON-NLS-1$
         set.add("/std-taglibs/composite.taglib.xml"); //$NON-NLS-1$
+        set.add("/std-taglibs/composite_jcp.taglib.xml"); //$NON-NLS-1$
         set.add("/std-taglibs/facelets_jsf_core.taglib.xml"); //$NON-NLS-1$
+        set.add("/std-taglibs/facelets_jsf_core_jcp.taglib.xml"); //$NON-NLS-1$
         set.add("/std-taglibs/jstl-core.taglib.xml"); //$NON-NLS-1$
         set.add("/std-taglibs/jstl-fn.taglib.xml"); //$NON-NLS-1$
         set.add("/std-taglibs/ui.taglib.xml"); //$NON-NLS-1$
+        set.add("/std-taglibs/ui_jcp.taglib.xml"); //$NON-NLS-1$
         taglibLocations = Collections.unmodifiableSet(set);
     }
     private static final Set<MyTagRecordDescriptor> DEFAULT_TAGLIBS;

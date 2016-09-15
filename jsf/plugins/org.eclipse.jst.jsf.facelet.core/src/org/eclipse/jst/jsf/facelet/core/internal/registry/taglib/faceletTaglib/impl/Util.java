@@ -69,9 +69,7 @@ class Util
                     && passesFilter(filterString.length() == 0 ? null
                             : filterString, obj)) {
                 FeatureMap contents = obj.getAny();
-                Object object = contents.get(
-                        XMLTypePackage.Literals.XML_TYPE_DOCUMENT_ROOT__TEXT,
-                        true);
+                Object object = getDescriptionValues(contents);
                 if (object instanceof String) {
                     
                     retString += (String) object;
@@ -93,6 +91,37 @@ class Util
         return retString;
     }
     
+    private static Object getDescriptionValues(FeatureMap contents)
+    {
+        Object object = contents.get(XMLTypePackage.Literals.XML_TYPE_DOCUMENT_ROOT__TEXT, true);
+        if (object instanceof Collection && hasNoSignificantContent((Collection) object))
+        {
+            object = contents.get(XMLTypePackage.Literals.XML_TYPE_DOCUMENT_ROOT__CDATA, true);
+        }
+        return object;
+    }
+
+    private static boolean hasNoSignificantContent(Collection col)
+    {
+    	boolean empty = true;
+    	if (col != null && !col.isEmpty())
+    	{
+    		for (Object obj: col)
+    		{
+    			if (obj instanceof String)
+    			{
+    				String str = (String) obj;
+    				if (!(str.replace('\n', ' ').trim().isEmpty()))
+    				{
+    					empty = false;
+    					break;
+    				}
+    			}
+    		}
+    	}
+    	return empty;
+    }
+
     private static boolean passesFilter(final String expectedLang,
             final IdentifiableLangStringValue langOwner)
     {

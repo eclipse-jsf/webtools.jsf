@@ -21,9 +21,17 @@ public final class IFaceletConstants implements ITLDConstants
      */
     public static final String URI_JSF_COMPOSITE = "http://java.sun.com/jsf/composite"; //$NON-NLS-1$
     /**
+     * The uri for the composite taglib (Facelets only) (JCP)
+     */
+    public static final String URI_JSF_COMPOSITE_JCP = "http://xmlns.jcp.org/jsf/composite"; //$NON-NLS-1$
+    /**
      * The uri for the ui taglib (Facelets only)
      */
     public static final String URI_JSF_UI = "http://java.sun.com/jsf/facelets"; //$NON-NLS-1$
+    /**
+     * The uri for the ui taglib (Facelets only) (JCP)
+     */
+    public static final String URI_JSF_UI_JCP = "http://xmlns.jcp.org/jsf/facelets"; //$NON-NLS-1$
     /**
      * The uri for the jsf implementation of JSTL core tags (Facelets only)
      */
@@ -37,9 +45,13 @@ public final class IFaceletConstants implements ITLDConstants
     {
         Set<String>  taglibs = new HashSet<String>();
         taglibs.add(URI_JSF_HTML);
+        taglibs.add(URI_JSF_HTML_JCP);
         taglibs.add(URI_JSF_CORE);
+        taglibs.add(URI_JSF_CORE_JCP);
         taglibs.add(URI_JSF_COMPOSITE);
+        taglibs.add(URI_JSF_COMPOSITE_JCP);
         taglibs.add(URI_JSF_UI);
+        taglibs.add(URI_JSF_UI_JCP);
         taglibs.add(URI_JSF_JSTL_CORE);
         taglibs.add(URI_JSF_JSTL_FUNCTIONS);
         
