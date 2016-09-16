@@ -111,7 +111,7 @@ class Util
     			if (obj instanceof String)
     			{
     				String str = (String) obj;
-    				if (!(str.replace('\n', ' ').trim().isEmpty()))
+    				if (str.replace('\n', ' ').trim().length() > 0)
     				{
     					empty = false;
     					break;
