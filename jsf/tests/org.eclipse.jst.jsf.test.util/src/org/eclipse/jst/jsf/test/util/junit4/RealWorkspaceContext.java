@@ -469,10 +469,10 @@ public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
 
         @Override
         public void endOperation(final ISchedulingRule rule,
-                final boolean build, final IProgressMonitor monitor)
+                final boolean build)
                 throws CoreException
         {
-            _ws.endOperation(rule, build, monitor);
+            _ws.endOperation(rule, build);
         }
 
 //        @Override
@@ -482,8 +482,7 @@ public class RealWorkspaceContext extends AbstractWorkspaceContextWithEvents
 //        }
 
         @Override
-        public Object getAdapter(
-                @SuppressWarnings("rawtypes") final Class adapter)
+        public <T> T getAdapter(final Class<T> adapter)
         {
             return _ws.getAdapter(adapter);
         }
