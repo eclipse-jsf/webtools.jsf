@@ -278,4 +278,9 @@ public class MockContentType implements IContentType
         return new FileSpec(fileSpec, type);
     }
 
+	public boolean isUserDefined()
+	{
+		throw new UnsupportedOperationException();
+	}
+
 }

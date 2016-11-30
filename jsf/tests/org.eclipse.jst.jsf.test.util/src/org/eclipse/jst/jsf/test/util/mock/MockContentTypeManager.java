@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.content.IContentDescription;
 import org.eclipse.core.runtime.content.IContentType;
@@ -135,5 +136,16 @@ public class MockContentTypeManager implements IContentTypeManager
     {
         throw new UnsupportedOperationException();
     }
+
+	public IContentType addContentType(String contentTypeIdentifier, String name, IContentType baseType)
+			throws CoreException
+	{
+		throw new UnsupportedOperationException();
+	}
+
+	public void removeContentType(String contentTypeIdentifier) throws CoreException
+	{
+		throw new UnsupportedOperationException();
+	}
 
 }
