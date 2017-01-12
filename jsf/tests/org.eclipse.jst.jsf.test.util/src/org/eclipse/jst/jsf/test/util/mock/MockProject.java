@@ -213,5 +213,7 @@ public class MockProject extends MockContainer implements IProject
 
 	public void clearCachedDynamicReferences() {
 		// TODO Auto-generated method stub
+		
 	}
+
 }
