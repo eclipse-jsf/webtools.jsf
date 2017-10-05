@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.jst.jsf.tests.feature"
-      label="%name"
+      label="%featureName"
       version="3.5.1.qualifier"
-      provider-name="%provider"
-      image="eclipse_update_120.jpg">
+      provider-name="%providerName"
+      image="eclipse_update_120.jpg"
+      license-feature="org.eclipse.license"
+      license-feature-version="1.0.1.qualifier">
 
    <description>
       %description
@@ -14,7 +16,7 @@
       %copyright
    </copyright>
 
-   <license url="license.html">
+   <license url="%licenseURL">
       %license
    </license>
 
