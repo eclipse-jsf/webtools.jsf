@@ -6,6 +6,7 @@ import org.eclipse.jdt.core.IBuffer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IModuleDescription;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
@@ -162,6 +163,10 @@ public class MockPackageFragmentRoot extends MockJavaElement implements
         throw new UnsupportedOperationException();
     }
 
+	public IModuleDescription getModuleDescription() {
+		throw new UnsupportedOperationException();
+	}
+
     @Override
     public boolean equals(final Object o)
     {
@@ -204,4 +209,5 @@ public class MockPackageFragmentRoot extends MockJavaElement implements
 //        }
         return buffer.toString();
     }
+
 }

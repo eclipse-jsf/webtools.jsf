@@ -122,7 +122,7 @@ public class MockValidationReporter extends ReporterAdapter
         }
         Assert.fail(String.format(
                 "Failed to find expected message at offset %d%s, length %d, found instead %s"
-                , offset, length, (code == null ? "" : ", with errorCode "+code), failMessage));
+                , offset, (code == null ? "" : ", with errorCode "+code), length, failMessage));
 
     }
 

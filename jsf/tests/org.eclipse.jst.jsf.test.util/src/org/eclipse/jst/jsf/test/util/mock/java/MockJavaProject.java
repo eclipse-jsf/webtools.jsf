@@ -12,6 +12,7 @@ import org.eclipse.jdt.core.IBuffer;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IModuleDescription;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IRegion;
@@ -433,6 +434,14 @@ public class MockJavaProject extends MockJavaElement implements IJavaProject
         throw new UnsupportedOperationException();
 
     }
+
+	public IModuleDescription findModule(String moduleName, WorkingCopyOwner owner) throws JavaModelException {
+		throw new UnsupportedOperationException();
+	}
+
+	public IModuleDescription getModuleDescription() throws JavaModelException {
+		throw new UnsupportedOperationException();
+	}
 
     @Override
     public boolean equals(Object o)
