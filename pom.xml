@@ -30,6 +30,46 @@
     <tycho.scmUrl>scm:git:git://git.eclipse.org/gitroot/jsf/webtools.jsf.git</tycho.scmUrl>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>webtools-common-site</id>
+      <layout>p2</layout>
+      <url>${webtools-common-site}</url>
+    </repository>
+    <repository>
+      <id>webtools-servertools-site</id>
+      <layout>p2</layout>
+      <url>${webtools-servertools-site}</url>
+    </repository>
+    <repository>
+      <id>webtools-sourceediting-site</id>
+      <layout>p2</layout>
+      <url>${webtools-sourceediting-site}</url>
+    </repository>
+    <repository>
+      <id>webtools-jsdt-site</id>
+      <layout>p2</layout>
+      <url>${webtools-jsdt-site}</url>
+    </repository>
+    <repository>
+      <id>webtools-jeetools-site</id>
+      <layout>p2</layout>
+      <url>${webtools-jeetools-site}</url>
+    </repository>
+
+    <!-- To reference parent pom -->
+    <repository>
+      <id>Webtools Repository - Releases</id>
+      <name>Webtools Repository - Releases</name>
+      <url>https://repo.eclipse.org/content/repositories/webtools-releases/</url>
+    </repository>
+    <repository>
+      <id>Webtools Repository - Snapshots</id>
+      <name>Webtools Repository - Snapshots</name>
+      <url>https://repo.eclipse.org/content/repositories/webtools-snapshots/</url>
+    </repository>
+  </repositories>
+
   <modules>
      <module>assembly/features/org.eclipse.jsf.assembly.feature</module>
      <module>assembly/features/org.eclipse.jsf_sdk.assembly.feature</module>
