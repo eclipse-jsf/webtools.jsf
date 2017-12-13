@@ -28,6 +28,7 @@
 
   <properties>
     <tycho.scmUrl>scm:git:git://git.eclipse.org/gitroot/jsf/webtools.jsf.git</tycho.scmUrl>
+    <tycho.version>1.0.0</tycho.version>
   </properties>
 
   <repositories>
