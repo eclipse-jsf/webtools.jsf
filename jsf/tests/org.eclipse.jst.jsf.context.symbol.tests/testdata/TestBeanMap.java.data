@@ -1,0 +1,19 @@
+package org.eclipse.jst.jsf.context.symbol.tests;
+
+import java.util.AbstractMap;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Test bean class that implements java.util.Map via AbstractMap
+ * @author cbateman
+ *
+ */
+public class TestBeanMap extends AbstractMap {
+
+    public Set entrySet() 
+    {
+        return new HashSet();
+    }
+
+}

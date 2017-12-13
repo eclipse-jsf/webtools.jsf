@@ -1,0 +1,141 @@
+package com.test;
+
+import java.util.*;
+
+public class TestBean1
+{
+// simple bean properties
+	public String getStringProp1()
+	{
+		return "";
+	}
+	
+	public void setStringProp1(String prop)
+	{
+	}
+	
+// simple boolean with is getter
+	public boolean isBooleanIsProp1()
+	{
+		return true;
+	}
+	
+	public void setBooleanIsProp1(boolean property)
+	{
+	}
+	
+// boolean "is" takes precedence over get
+	public boolean isBooleanIsProp2()
+	{
+		return true;
+	}
+	
+	public boolean getBooleanIsProp2()
+	{
+		return false;
+	}
+	
+	public void setBooleanIsProp2(boolean property)
+	{
+	}
+	
+// don't use is getter when type is not boolean
+	public String isNotBooleanIsProp1()
+	{
+		return "";
+	}
+	
+	public boolean getNotBooleanIsProp1()
+	{
+		return true;
+	}
+
+	public void setNotBooleanIsProp1(boolean property)
+	{
+	}
+	
+// don't use setter if parameter is not matching the getter
+	public String getStringProperty2()
+	{
+		return "";
+ 	}
+ 	
+ 	// incorrect parameter -- should be String
+ 	public void setStringProperty2(int wrongParam)
+ 	{
+ 	}
+ 	
+ // readonly property -- no setter
+ 	public String getReadonlyStringProperty()
+ 	{
+ 		return "readonly";
+ 	}
+ 	
+ // readonly is property -- no setter
+ 	public boolean isReadonlyBooleanProperty()
+ 	{
+ 	    return true;
+ 	}
+ 	
+ // write only property -- no getter
+ 	public void setWriteonlyStringProperty(String val)
+ 	{
+ 		return "blah";
+	}
+	
+//  bogus getter -- "" is not a bean name
+	public String get()
+	{
+		return "";
+	}
+
+//  String array getter
+	public String[] getStringArrayProperty()
+	{
+	}
+	
+	public void setStringArrayProperty(String[] arrayProp)
+	{
+		
+	}
+
+//  Collection property
+	public Collection getCollectionProperty()
+	{
+		return new ArrayList();
+	}
+	
+	public void setCollectionProperty(Collection prop)
+	{
+	}
+	
+// Map property
+	public Map getMapProperty()
+	{
+		return new HashMap();
+	}
+	
+	public void setMapProperty(Map prop)
+	{
+	}
+	
+// Another bean property
+    public AnotherBean getAnotherBean()
+    {
+    	return null;
+    }
+    
+    public void setAnotherBean(AnotherBean anotherBean)
+    {
+    }
+// Int array property
+	public int[] getIntArrayProperty()
+	{
+		return new int[] {0,1,2};
+	}
+// array of array of string
+	public String[][] getArrayOfArrayOfStringProperty()
+	{
+		return new String[3][];
+	}
+}

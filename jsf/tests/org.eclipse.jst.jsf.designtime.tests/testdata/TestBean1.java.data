@@ -1,0 +1,41 @@
+package com.test;
+
+import java.util.*;
+
+public class TestBean1
+{
+// simple bean properties
+	public String getStringProp1()
+	{
+		return "";
+	}
+	
+	public void setStringProp1(String prop)
+	{
+	}
+	
+// simple boolean with is getter
+	public boolean isBooleanIsProp1()
+	{
+		return true;
+	}
+	
+	public void setBooleanIsProp1(boolean property)
+	{
+	}
+// array of string property
+	public String[] getStringArrayProperty()
+	{
+	    return new String[] {"a", "b", "c"};
+	}
+// array of integer property
+	public int[] getIntArrayProperty()
+	{
+		return new int[] {0,1,2};
+	}
+// array of array of string
+	public String[][] getArrayOfArrayOfStringProperty()
+	{
+		return new String[3][];
+	}
+}

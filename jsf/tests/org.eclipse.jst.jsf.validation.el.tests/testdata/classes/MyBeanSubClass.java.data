@@ -1,0 +1,10 @@
+package beans;
+
+
+public class MyBeanSubClass extends MyBean 
+{
+	public String getSubClassStringProperty()
+	{
+		return "chicken";
+	}
+}

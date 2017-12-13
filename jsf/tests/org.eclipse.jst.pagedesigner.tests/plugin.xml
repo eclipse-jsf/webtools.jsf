@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+      <standardMetaDataFile
+            location="/metadata/checkmodeop_dti.xml"
+            uri="org.eclipse.jst.pagedesigner.tests.testCheckModeOperation">
+      </standardMetaDataFile>
+      <standardMetaDataFile
+            location="/metadata/test-metadata.xml"
+            uri="org.eclipse.jst.pagedesigner.tests.tagCreatorFactory1">
+      </standardMetaDataFile>
+      <standardMetaDataFile
+            location="/testdata/propertypages/test-metadata.xml"
+            uri="org.eclipse.jst.pagedesigner.tests.propertypages">
+      </standardMetaDataFile>      
+   </extension>
+   <extension
+         point="org.eclipse.jst.pagedesigner.pageDesignerExtension">
+      <elementEditFactory
+            class="org.eclipse.jst.pagedesigner.tests.tagcreatorPlugin.TestCreationFactory"></elementEditFactory>
+      <elementEditFactory
+            class="org.eclipse.jst.pagedesigner.tests.tagcreatorPlugin.UserCustomizedElementEditFactory">
+      </elementEditFactory>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="org.eclipse.jst.pagedesigner.tabPropertyContributor">
+		   <propertySection
+		         class="org.eclipse.jst.pagedesigner.tests.tabbed.properties.sections.FakePropertySection"
+		         id="section.fake"
+		         tab="sss">
+		   </propertySection>
+		   <propertySection
+		         class="org.eclipse.jst.pagedesigner.tests.tabbed.properties.sections.FakePropertySectionUsingDialogField"
+		         id="section.fake.dialogfield"
+		         tab="sss">
+		   </propertySection>  
+      </propertySections>
+   </extension>
+
+</plugin>

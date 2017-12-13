@@ -1,0 +1,14 @@
+
+
+public class MethodBean
+{
+    public String actionMethod()
+    {
+        return "chicken";
+    }
+
+    public String actionMethodWithParam(String arg)
+    {
+        return arg;
+    }
+}

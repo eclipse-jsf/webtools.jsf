@@ -1,0 +1,19 @@
+package com.test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class TestBeanWithGenericProperties
+{
+    public List<String> getListOfStrings()
+    {
+        return new ArrayList<String>();
+    }
+
+    public Map<String, String> getMapOfStringsKeyedByString()
+    {
+        return new HashMap<String, String>();
+    }
+}

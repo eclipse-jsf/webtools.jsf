@@ -1,0 +1,29 @@
+package com.test;
+
+import java.util.AbstractList;
+
+/**
+ * A bean class that implements java.util.List
+ * 
+ * @author cbateman
+ *
+ */
+public class MyListBean extends AbstractList 
+{
+    public Object get(int index) {
+        return null;
+    }
+
+    public int size() {
+        return 0;
+    }
+
+    /**
+     * Simulate a 
+     * @return
+     */
+    public String getStringProperty()
+    {
+        return "";
+    }
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+    xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+    xmlns:dti="http://org.eclipse.jsf.pagedesigner/dtinfo.ecore"
+    id="org.eclipse.jst.pagedesigner.tests.testCheckModeOperation"
+    type="tagFile">
+
+    <entity id="testTagOne" type="tag">
+        <trait id="dt-info">
+            <value xsi:type="dti:DTInfo">
+                <tag-convert-info>
+                    <operation id="org.eclipse.jst.pagedesigner.CheckModeOperation">
+                        <parameter value="design"/>
+                        <operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+                            <parameter value="div"/>
+                        </operation>
+                        <operation id="org.eclipse.jst.pagedesigner.CopyChildrenOperation"/>
+                    </operation>
+                </tag-convert-info>
+                <tag-decorate-info id="vpd-decorate-preview"
+                        nonVisual="true"
+                />
+            </value>
+        </trait>
+    </entity>
+    
+    <entity id="testTagTwo" type="tag">
+        <trait id="dt-info">
+            <value xsi:type="dti:DTInfo">
+                <tag-convert-info>
+                    <operation id="org.eclipse.jst.pagedesigner.CreateElementOperation">
+                        <parameter value="div"/>
+                    </operation>
+                    <operation id="org.eclipse.jst.pagedesigner.CheckModeOperation">
+                        <parameter value="design"/>
+                        <operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
+                            <parameter value="requiredAttr1"/>
+                        </operation>
+                        <operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
+                            <parameter value="requiredAttr1"/>
+                            <parameter value="id"/>
+                        </operation>
+                    </operation>
+                    <operation id="org.eclipse.jst.pagedesigner.CheckModeOperation">
+                        <parameter value="preview"/>
+                        <operation id="org.eclipse.jst.pagedesigner.CopyAttributeOperation">
+                            <parameter value="requiredAttr2"/>
+                        </operation>
+                        <operation id="org.eclipse.jst.pagedesigner.RenameAttributeOperation">
+                            <parameter value="requiredAttr2"/>
+                            <parameter value="id"/>
+                        </operation>
+                    </operation>
+                </tag-convert-info>
+            </value>
+        </trait>
+    </entity>
+
+</md:metadatamodel>

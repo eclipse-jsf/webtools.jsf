@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0" metadata-complete="true">
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+    <ordering id="ordering-id"> 
+    	<after>
+    		<name>afterName</name>
+    		<others id="after-others-id"></others>
+    	</after> 
+    	<before>
+    		<name>beforeName</name>
+    		<others id="before-others-id"></others> 
+    	</before>
+    </ordering> 
+    
+    <absolute-ordering id="absolute-ordering-id"> 
+    	<name>absoluteOrderingName</name>
+		<others id="absolute-ordering-others-id"></others>
+    </absolute-ordering>
+
+    <name>facesconfigName</name>
+    
+    <behavior id="behavior-id">
+		<description id="behaviorDescription1">my behavior</description>
+		<display-name id="behaviorDisplayName1">My behavior</display-name>
+		<icon id="behaviorIcon1">
+			<small-icon>small-icon</small-icon>
+			<large-icon>large-icon</large-icon>
+		</icon>
+    	<behavior-id>behavior-id-id</behavior-id>
+    	<behavior-class>behavior-class</behavior-class>
+		<attribute id="behavior1Attribute">
+			<description id="behavior1AttributeDescription1">behavior1AttributeDescription1</description>
+			<description id="behavior1AttributeDescription2">behavior1AttributeDescription2</description>
+			<display-name id="behavior1AttributeDisplayName1"  xml:lang="fr">behavior1AttributeDisplayName1</display-name>
+			<display-name id="behavior1AttributeDisplayName2">behavior1AttributeDisplayName2</display-name>
+			<icon id="behavior1AttributeIcon" >
+				<small-icon id="behavior1AttributeSmallIcon">behavior1AttributeSmallIcon</small-icon>
+				<large-icon id="behavior1AttributeLargeIcon" >behavior1AttributeLargeIcon</large-icon>				
+			</icon>
+			<attribute-name id="behavior1AttributeName">behavior1AttributeName</attribute-name>
+			<attribute-class id="behavior1AttributeClass">behavior1AttributeClass</attribute-class>
+			<default-value id="behavior1AttributeDefaultValue">behavior1AttributeDefaultValue</default-value>
+			<suggested-value id="behavior1AttributeSuggestedValue">behavior1AttributeSuggestedValue</suggested-value>
+			<attribute-extension id="behavior1AttributeExtension1"><a>B</a></attribute-extension>
+			<attribute-extension id="behavior1AttributeExtension2">
+				<faces-config version="2.0"></faces-config>
+			</attribute-extension>
+		</attribute>
+		<property id="behavior1Property">
+			<description>behavior1PropertyDescription</description>
+			<display-name>behavior1PropertyDisplayName</display-name>
+			<icon id="behavior1PropertyIcon" >
+				<small-icon id="behavior1PropertySmallIcon">behavior1PropertySmallIcon</small-icon>	
+			</icon>
+			<property-name>behavior1PropertyName</property-name>
+			<property-class>behavior1PropertyClass</property-class>
+		</property>
+		<behavior-extension>			
+			<a>B</a>
+			<behavior-extension-tag/>
+		</behavior-extension>
+
+    </behavior>
+
+	<lifecycle id="lifecycle1">
+		<phase-listener id="phaseListener1">
+			org.eclipse.wtp.jsf.tests.ValueResourcePhaseListener
+		</phase-listener>
+		<lifecycle-extension><lifecycle-extension-tag/></lifecycle-extension>
+	</lifecycle>
+
+
+	<factory id="factory1">
+		<application-factory id="applicationFactory1">application-factory</application-factory>
+		<exception-handler-factory id="exceptionHandlerFactory1">exception-handler-factory</exception-handler-factory>
+		<external-context-factory id="externalContextFactory1">external-context-factory</external-context-factory>
+		<partial-view-context-factory id="partialViewContextFactory1">partial-view-context-factory</partial-view-context-factory>
+		<faces-context-factory id="facesContextFactory1">faces-context-factory</faces-context-factory>
+		<lifecycle-factory id="lifecycleFactory1">lifecycle-factory</lifecycle-factory>
+		<view-declaration-language-factory id="viewDeclarationLanguageFactory1">view-declaration-language-factory</view-declaration-language-factory>
+		<tag-handler-delegate-factory id="tagHandlerDelegateFactory1">tag-handler-delegate-factory</tag-handler-delegate-factory>
+		<render-kit-factory id="renderKitFactory1">render-kit-factory</render-kit-factory>
+		<visit-context-factory id="visitContextFactory1">visit-context-factory</visit-context-factory>
+		<factory-extension><factory-extension-tag/></factory-extension>
+	</factory>
+
+	<!-- Component -->
+	<component id="component1">
+		<description id="componentDescription1">my component</description>
+		<display-name id="componentDisplayName1">My component</display-name>
+		<icon id="componentIcon1">
+			<small-icon>small-icon</small-icon>
+			<large-icon>large-icon</large-icon>
+		</icon>
+		<component-type>component-type</component-type>
+		<component-class>ComponentClass</component-class>
+		<facet id="componentFacet1">
+			<description id="componentFacet1_descripton1">Facet1 Description</description>
+			<display-name id="componentFacet1_displayName1">Component Facet 1</display-name>
+			<icon id="componentFacet1_icon1">
+				<small-icon>facet-small-icon</small-icon>
+				<large-icon>facet-large-icon</large-icon>
+			</icon>
+			<facet-name>facetName_chieb_sieb</facet-name>
+			<facet-extension><extendedBlah></extendedBlah></facet-extension>			
+		</facet>
+		<attribute id="componentAttribute1">
+			<description id="componentAttribute1_descripton1">attribute-description</description>
+			<display-name id="componentAttribute1_displayName1">attribute-display-name</display-name>
+			<icon id="componentAttribute1_icon1">
+				<small-icon>attribute-small-icon</small-icon>
+				<large-icon>attribute-large-icon</large-icon>
+			</icon>
+			<attribute-name>attribute-name</attribute-name>
+			<attribute-class>attribute-class</attribute-class>
+			<default-value>value5</default-value>
+			<suggested-value>attribute-suggested-value</suggested-value>
+			<attribute-extension><attr-extension/></attribute-extension>
+		</attribute>
+		<property id="componentProperty1">
+			<description id="componentProperty1_descripton1">myDescript blah blah</description>
+			<display-name id="componentProperty1_displayName1">Component Property 1</display-name>
+			<icon id="componentProperty1_icon1">
+				<small-icon>property-small-icon</small-icon>
+				<large-icon>property-large-icon</large-icon>
+			</icon>
+			<property-name id="componentProperty1_propertyName">property1</property-name>
+			<property-class id="componentProperty1_propertyClass">ComponentProperty</property-class>
+			<default-value>defaultValue6</default-value>
+			<suggested-value>suggestedValue</suggested-value>
+		</property>
+		<component-extension id="componentExtension1"><foo></foo></component-extension>
+	</component>
+
+
+	<!-- managed-bean -->
+	<managed-bean id="managedBean1" eager="true">
+		<description id="managedBean1Description">managed-bean-description</description>
+		<display-name id="managedBean1DisplayName">managed-bean-display-name</display-name>
+		<icon id="managedBean1Icon">
+			<small-icon>managedBean1-small-icon</small-icon>
+			<large-icon>managedBean1-large-icon</large-icon>
+		</icon>
+		<managed-bean-name>managedBeanName</managed-bean-name>
+		<managed-bean-class>managed-bean-class</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property id="managedBean1Property1">
+			<description id="managedBean1Property1_description">managed-property-description</description>
+			<display-name id="managedBean1Property1_displayName">managed-property-display-name</display-name>
+			<icon id="managedBean1Property1_icon">
+				<small-icon>managedBean1-property-small-icon</small-icon>
+				<large-icon>managedBean1-property-large-icon</large-icon>
+			</icon>
+			<property-name>bean-property-name</property-name>
+			<property-class>bean-property-class</property-class>
+			<value>bean-propertyValue1</value>
+		</managed-property>
+		<managed-property id="managedBean1Property2">
+			<property-name>bean-property2-name</property-name>
+			<property-class>bean-property2-class</property-class>
+			<null-value/>
+		</managed-property>
+		<managed-property id="managedBeanMapProperty">
+			<property-name>map-bean-name</property-name>
+			<property-class>map-bean-class</property-class>
+			<map-entries>
+				<key-class>propertyMapEntryKey</key-class>
+				<value-class>propertyMapEntryValueClass</value-class>
+				<map-entry id="mapPropertyEntryWithValue">
+					<key>propertyMapKey1</key>
+					<value>propertyMapValue1</value>
+				</map-entry>
+				<map-entry id="mapPropertyEntryWithNullValue">
+				    <key>propertyMapKey2</key>
+					<null-value/>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+		<managed-property id="managedBeanListProperty">
+			<property-name>list-bean-name</property-name>
+			<property-class>list-bean-class</property-class>
+			<list-entries id="x">
+				<value-class>managedBeanListPropertyClass</value-class>
+				<value>managedBeanListPropertyValue</value>
+				<null-value/>
+			</list-entries>
+		</managed-property>
+		<managed-bean-extension><managed-bean-extension-tag/></managed-bean-extension>
+	</managed-bean>
+	
+	<managed-bean id="mapBean1">
+		<managed-bean-name>mapBean1</managed-bean-name>
+		<managed-bean-class>mapBean1-class</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<map-entries>
+			<key-class>mapBeanEntryKey</key-class>
+			<value-class>mapBeanEntryValueClass</value-class>
+			<map-entry id="mapBeanEntryWithValue">
+				<key>mapBeanKey1</key>
+				<value>mapBeanValue1</value>
+			</map-entry>
+			<map-entry id="mapBeanEntryWithNullValue">
+			    <key>mapBeanKey2</key>
+				<null-value/>
+			</map-entry>
+		</map-entries>
+	</managed-bean>
+	
+	<managed-bean id="listBean1">
+		<managed-bean-name>listBean1</managed-bean-name>
+		<managed-bean-class>listBean1-class</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<list-entries>
+			<value-class>listBeanListPropertyClass</value-class>
+			<value>listBeanListPropertyValue</value>
+			<null-value/>
+		</list-entries>
+	</managed-bean>
+	
+	<converter id="converter1">
+		<description id="converter1Description">converter-description</description>
+		<display-name id="converter1DisplayName">converter-display-name</display-name>
+		<icon id="converter1Icon">
+			<small-icon>converter-small-icon</small-icon>
+			<large-icon>converter-large-icon</large-icon>
+		</icon>
+		<converter-for-class>converter-for-class</converter-for-class>
+		<converter-class>converter-class</converter-class>
+		<attribute id="converter1Attribute">
+			<description id="converter1_attribute_description">converter-attribute-description</description>
+			<display-name id="converter1_attribute_display-name">converter-attribute-display-name</display-name>
+			<icon id="converter1_attribute_icon">
+				<small-icon>converter1-attribute-small-icon</small-icon>
+				<large-icon>converter1-attribute-large-icon</large-icon>
+			</icon>
+			<attribute-name>converter1-attribute-name</attribute-name>
+			<attribute-class>converter1-attribute-class</attribute-class>
+			<default-value>converter1-default-value</default-value>
+			<suggested-value>converter1-attribute-suggested-value</suggested-value>
+			<attribute-extension>
+				<attr-extension/>
+			</attribute-extension>
+		</attribute>
+		<property id="converter1Property">
+			<description id="converter1_property_description">converter-property-description</description>
+			<display-name id="converter1_property_display-name">converter-property-display-name</display-name>
+			<icon id="converter1_property_icon">
+				<small-icon>converter1-property-small-icon</small-icon>
+				<large-icon>converter1-property-large-icon</large-icon>
+			</icon>
+			<property-name>converter-property-name</property-name>
+			<property-class>converter-property-propertyClass</property-class>
+			<default-value>converter-property-default-value</default-value>
+			<suggested-value>converter-property-suggested-value</suggested-value>
+		</property>
+		<converter-extension><converter-extension-tag/></converter-extension>
+	</converter>
+
+	<converter id="converter2">
+		<converter-id>converter2-id</converter-id>
+		<converter-class>converter2-class</converter-class>
+	</converter>
+	
+	<!-- Referenced-bean -->
+	<referenced-bean id="referencedBean1">
+		<description id="referencedBean1Description">Referenced Bean Desc</description>
+		<display-name id="referencedBean1DisplayName">referenced-bean-display</display-name>
+		<icon id="referencedBean1Icon">
+			<small-icon>referenced-bean-small-icon</small-icon>
+			<large-icon>referenced-bean-large-icon</large-icon>
+		</icon>
+		<referenced-bean-name>
+			referencedBeanName
+		</referenced-bean-name>
+		<referenced-bean-class>
+			referenced-bean-class
+		</referenced-bean-class>
+	</referenced-bean>
+
+	<!-- Render kit -->
+	<render-kit id="renderKit1">
+		<description id="renderKit1Description">Render kit Desc</description>
+		<display-name id="renderKit1DisplayName">Render kit disp name</display-name>
+		<icon id="renderKit1Icon">
+			<small-icon>small-renderkit-icon</small-icon>
+			<large-icon>large-renderkit-icon</large-icon>
+		</icon>
+		<render-kit-id>render-kit-Id</render-kit-id>
+		<render-kit-class>render-kit-class</render-kit-class>
+		<renderer id="renderKit1Renderer">
+			<description id="renderKit1RendererDescription">my renderer description</description>
+			<display-name id="renderKit1RendererDisplayName">my renderer display name</display-name>
+			<icon id="renderKit1RendererIcon">
+				<small-icon>renderer-small-icon</small-icon>
+				<large-icon>renderer-large-icon</large-icon>
+			</icon>
+			<component-family>component-family</component-family>
+			<renderer-type>renderer-type</renderer-type>
+			<renderer-class>renderer-class</renderer-class>
+			<facet id="renderKit1Renderer1Facet1">
+				<description id="renderKit1Renderer1Facet1Description">RendererFacetDescription</description>
+				<display-name id="renderKit1Renderer1Facet1DisplayName">RendererFacetDisplayName</display-name>
+				<icon id="renderKit1Renderer1Facet1Icon">
+					<small-icon>facet-renderer-small-icon</small-icon>
+					<large-icon>facet-renderer-large-icon</large-icon>
+				</icon>
+				<facet-name>rendererFacetName</facet-name>
+				<facet-extension></facet-extension>
+			</facet>
+			<attribute id="renderKit1RendererAttribute1">
+				<description id="renderKit1RendererAttribute1Description">renderer-attribute-attribute-description</description>
+				<display-name id="renderKit1RendererAttribute1DisplayName">renderer-attribute-display-name</display-name>
+				<icon id="renderKit1RendererAttribute1Icon">
+					<small-icon>renderer-attribute-small-icon</small-icon>
+					<large-icon>renderer-attribute-large-icon</large-icon>
+				</icon>
+				<attribute-name>renderer attribute name</attribute-name>
+				<attribute-class>renderer Attribute Class</attribute-class>
+				<default-value>renderer attribute default value</default-value>
+				<suggested-value>renderer attribute suggested value</suggested-value>
+				<attribute-extension>
+					<renderer-extension/>
+				</attribute-extension>
+				<attribute-extension>
+					<blah-extension/>
+				</attribute-extension>
+			</attribute>
+			<renderer-extension>
+				<renderer-extension-1/>
+			</renderer-extension>
+			<renderer-extension>
+				<renderer-extension-2/>
+			</renderer-extension>
+			<renderer-extension>
+				<renderer-extension-3/>
+			</renderer-extension>
+		</renderer>
+		<client-behavior-renderer id="client-behavior-renderer-id">
+			<client-behavior-renderer-type id="client-behavior-renderer-type-id">MyClientBehaviorRendererType</client-behavior-renderer-type>
+			<client-behavior-renderer-class id="client-behavior-renderer-class-id">com.test.MyClientBehaviorRenderer</client-behavior-renderer-class>		
+		</client-behavior-renderer>
+		<render-kit-extension><render-kit-extension-tag/></render-kit-extension>
+	</render-kit>
+
+	<!-- Validator rules -->
+	<validator id="validator1">
+		<description id="validator1_description">validator-description</description>
+		<display-name id="validator1_displayName">validator-display-name</display-name>
+		<icon id="validator1_icon">
+			<small-icon>validator-small-icon</small-icon>
+			<large-icon>validator-large-icon</large-icon>
+		</icon>
+		<validator-id>validator-Id</validator-id>
+		<validator-class>validator-class</validator-class>
+		<attribute id="validator1_attribute">
+			<description id="validator1_attribute_description">validator-attribute-description</description>
+			<display-name id="validator1_attribute_displayName">validator-attribute-display-name</display-name>
+			<icon id="validator1_attribute_icon">
+				<small-icon>validator-attribute-small-icon</small-icon>
+				<large-icon>validator-attribute-large-icon</large-icon>
+			</icon>
+			<attribute-name>validator-attribute-name</attribute-name>
+			<attribute-class>validator-attribute-class</attribute-class>
+			<default-value>validator-default-value</default-value>
+			<suggested-value>validator-attribute-suggested-value</suggested-value>
+			<attribute-extension>
+				<attribute-extension/>
+			</attribute-extension>
+		</attribute>
+		<property id="validator1_property">
+			<description id="validator1_property_description">validator-property-description</description>
+			<display-name id="validator1_property_displayName">validator-property-display-name</display-name>
+			<icon id="validator1_property_icon">
+				<small-icon>validator-property-small-icon</small-icon>
+				<large-icon>validator-property-large-icon</large-icon>
+			</icon>
+			<property-name>validator-property-name</property-name>
+			<property-class>validator-property-class</property-class>
+			<default-value>validator property default value</default-value>
+			<suggested-value>validator property suggested value</suggested-value>
+			<property-extension><future/></property-extension>
+		</property>
+		<validator-extension><validator-extension-tag/></validator-extension>
+	</validator>
+
+	<!-- variable/property resolver registration -->
+	<application id="application1">
+		<action-listener id="actionListener1">Action listener</action-listener>
+		<variable-resolver id="variableResolver1">
+			com.ibm.faces.databind.SelectItemsVarResolver
+		</variable-resolver>
+		<default-render-kit-id id="defaultRenderKit1">some renderer kit</default-render-kit-id>
+		<message-bundle id="messageBundle1">some messeage bundle goes here</message-bundle>
+		<navigation-handler id="navigationHandler1">navigation handler</navigation-handler>
+		<view-handler id="viewHandler1">view handler</view-handler>
+		<state-manager id="stateManager1">state manager</state-manager>
+
+		<property-resolver id="propertyResolver1">
+			com.ibm.faces.databind.SelectItemsPropResolver
+		</property-resolver>
+		<locale-config id="localeConfig1">
+			<default-locale id="defaultLocale1">en</default-locale>
+			<supported-locale id="supportedLocale_en">en</supported-locale>
+			<supported-locale id="supportedLocale_de">de</supported-locale>
+		</locale-config>
+		<el-resolver id="el-resolver-id">com.test.MyELResolver</el-resolver>
+<!-- 
+		<partial-traversal id="partial-traversal-id">com.test.MyPartialTraversal</partial-traversal>
+-->		
+		<resource-handler id="resource-handler-id">com.test.MyResourceHandler</resource-handler>
+		<system-event-listener id="system-event-listener-id">
+			<system-event-listener-class id="system-event-listener-class-id">com.test.MySystemEventListener</system-event-listener-class>
+			<system-event-class id="system-event-class-id">com.test.MySystemEvent</system-event-class>
+			<source-class id="source-class-id">com.test.MySource</source-class>			
+		</system-event-listener>
+		<default-validators id="default-validators-id">
+			<validator-id id="validator-id-id">MyValidator</validator-id>
+		</default-validators>
+		<resource-bundle id="resourceBundleId1">
+			<description id="resourceBundleDesc">Resource Bundle description blah</description>
+			<display-name id="resourceBundleDisplayName">Resource Bundle display name blah</display-name>
+			<icon id="resourceBundleId">
+				<small-icon>resourceBundle-smallIcon</small-icon>
+				<large-icon>resourceBundle-largeIcon</large-icon>
+			</icon>
+			<base-name>com.test.Bundle</base-name>
+			<var>bundleVar</var>
+		</resource-bundle>
+		<application-extension id="applicatinExtension1">
+			<some-extension-data/>
+		</application-extension>
+	</application>
+
+	<navigation-rule>
+		<description>Descri 1</description>
+		<display-name>display name 1</display-name>
+		<icon>
+			<small-icon>myicon</small-icon>
+		</icon>
+		<from-view-id>/Page1.jsp</from-view-id>
+		<navigation-case>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+
+			<display-name>what display name</display-name>
+			<icon>
+				<small-icon>small-icon</small-icon>
+			</icon>
+			<from-action>#{from-action}</from-action>
+			<from-outcome>drilldown</from-outcome>
+			<if>#{el-expression}</if>
+			<to-view-id>/edit.jsp</to-view-id>
+			<redirect include-view-params="true">
+				<view-param id="view-param-id">
+					<name>viewParamName</name>
+					<value>viewParamValue</value>
+				</view-param>
+			</redirect>
+		</navigation-case>
+		
+		<navigation-case>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<display-name>second navigation case</display-name>
+			<icon>
+				<small-icon>small-icon</small-icon>
+			</icon>
+			<from-action>#{action2}</from-action>
+			<from-outcome>outcome2</from-outcome>
+			<if>s</if>
+			<to-view-id>/edit2.jsp</to-view-id>
+		</navigation-case>
+		
+		<navigation-rule-extension><navigation-extension-tag/></navigation-rule-extension>
+	</navigation-rule>
+
+	<navigation-rule>
+		<description xml:lang="en">A navigation rule with lang attributes</description>
+		<description xml:lang="en-US">What color is it?</description>
+		<description xml:lang="en-GB">What colour is it?</description>
+		<description xml:lang="fr">Quelle couleur est lui?</description>
+		<display-name xml:lang="en">English Display Name</display-name>
+		<display-name xml:lang="fr">Nom D'Affichage De Francais</display-name>
+		
+		<icon xml:lang="en">
+			<small-icon>en_small-icon</small-icon>
+			<large-icon>en_large-icon</large-icon>
+		</icon>
+		<icon>
+			<small-icon>small-icon</small-icon>
+			<large-icon>large-icon</large-icon>
+		</icon>
+		<from-view-id>/Page1.jsp</from-view-id>
+		<navigation-case>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<description>nav case descr 2</description>
+			<display-name>second navigation rule navcase</display-name>
+			<icon>
+				<small-icon>small-icon</small-icon>
+			</icon>
+			<from-action>#{action3}</from-action>
+			<from-outcome>outcome3</from-outcome>
+			<to-view-id>/edit3.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<faces-config-extension>
+		<faces-config-extended-data/>
+	</faces-config-extension>
+</faces-config>

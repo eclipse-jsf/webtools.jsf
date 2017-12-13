@@ -1,0 +1,9 @@
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/mergetest3">
+	
+	<include-entity-group id="eg1" uri="http://org.eclipse.jsf/mergetest1"/>
+  	
+</metadatamodel>

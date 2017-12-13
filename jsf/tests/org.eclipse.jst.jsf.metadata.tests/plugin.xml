@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.jst.jsf.common.standardMetaDataFiles">
+      <standardMetaDataFile
+            location="/testfiles/metadata/jsf_test.xml"
+            uri="http://org.eclipse.jsf/test"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/jsf_test.xml"
+            uri="http://org.eclipse.jsf/test2"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/FileA.xml"
+            uri="http://org.eclipse.jsf/mergetest1"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/FileB.xml"
+            uri="http://org.eclipse.jsf/mergetest1"/>     
+      <standardMetaDataFile
+            location="/testfiles/metadata/FileIncludeExternalModel.xml"
+            uri="http://org.eclipse.jsf/mergetest2"/>            
+      <standardMetaDataFile
+            location="/testfiles/metadata/FileIncludeExternalModel2.xml"
+            uri="http://org.eclipse.jsf/mergetest3"/>                  
+      <standardMetaDataFile
+            location="/testfiles/metadata/doesntexist.xml"
+            uri=" http://org.eclipse.jsf/missingFile "/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/jsf_metadataprocessing.xml"
+            uri=" http://org.eclipse.jsf/metadataprocessing"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/jsf_tagprocessing.xml"
+            uri="http://org.eclipse.jsf/tagprocessing"/>    
+      <standardMetaDataFile
+            location="/testfiles/metadata/jsf_tinytest.xml"
+            uri="http://org.eclipse.jsf/tinytest"/>
+      <standardMetaDataFile
+            location="testfiles/metadata/TinyIncludeTest.xml"
+            uri="TinyIncludeTest"/>       
+      <standardMetaDataFile
+            location="./RootOfPluginTest.xml"
+            uri="RootOfPluginTest"/>                  
+      <standardMetaDataFile
+            location="/testfiles/metadata/traithelpertest.xml"
+            locator="org.eclipse.jst.jsf.common.metadata.tests.MyMDLocator"
+            uri="http://org.eclipse.jsf/traithelpertest"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/quickEditSectionTest.xml"
+            uri="http://org.eclipse.jsf/quickEditSectionTest"/>
+      <standardMetaDataFile
+            location="/testfiles/metadata/propertyDescriptorTest.xml"
+            uri="http://org.eclipse.jsf/propertyDescriptorTest"/>  
+      <standardMetaDataFile
+            location="/testfiles/metadata/missingMDModelTest.xml"
+            uri="http://org.eclipse.jsf/missingMDModelTest"/>  
+                                             
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.core.AttributeValueRuntimeTypes">
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.StringType"
+            id="MyStringArrayType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.types.MyBooleanType"
+            id="MyBooleanType"/>
+      <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.LongType"
+            id="MyLongType"/>
+      <attributeValueRuntimeType id="NoImplType"/>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.core.MetaDataEnabledFeatures">
+      <MetaDataEnabledFeature
+            class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataEnabledBarkAdapter"
+            typeid="org.eclipse.jst.jsf.core.attributevalues.BooleanType"/>
+      <MetaDataEnabledFeature
+            class="org.eclipse.jst.jsf.metadata.tests.metadataprocessing.MetaDataEnabledBarkAdapter"
+            typeid="org.eclipse.jst.jsf.metadata.tests.MyBooleanType"/>
+   </extension>
+   <extension
+         point="org.eclipse.jst.jsf.common.domainQueryFactory">
+      <factory
+            class="org.eclipse.jst.jsf.common.metadata.tests.updated.FakeDomainQueryFactory">
+      </factory>
+   </extension>
+
+<!--   
+   <extension
+         point="org.eclipse.jst.jsf.common.mdModelManagerFactory">
+      <factory
+            class="org.eclipse.jst.jsf.common.metadata.tests.updated.TestMDModelManagerFactory">
+      </factory>
+   </extension>
+-->   
+</plugin>

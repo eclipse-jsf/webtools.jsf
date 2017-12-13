@@ -1,0 +1,10 @@
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	id="RootOfPluginTest">	
+	
+	<trait id="T1">
+		<value>%NLS</value>
+	</trait>
+	
+</metadatamodel>

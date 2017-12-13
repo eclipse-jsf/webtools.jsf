@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+    xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+    xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"
+    xmlns:qe="http://org.eclipse.jsf.pagedesigner/QuickEditTabSections.ecore"
+    id="org.eclipse.jst.pagedesigner.tests.propertypages"
+    type="tagFile">
+    
+    <entity id="tagWithQuickEditMD" type="tag">
+    	<include-entity-group id="attrs"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="aBoolean"/>
+				<section id="aStyle"/>
+				<section id="aStringPropWithMd"/>
+				<section id="aStringPropNoMd"/>
+				<section id="section.fake" type="SECTION"/>
+				<section id="section.fake.dialogfield" type="SECTION"/>
+			</value>
+		</trait>
+		
+    </entity>
+    
+    <entity id="tagWithBadQuickEditMD" type="tag">
+    	<include-entity-group id="attrs"/>
+		<trait id="quick-edit-tab">
+			<value xsi:type="qe:QuickEditTabSections">
+				<section id="aBoolean"/>
+				<section id="aBogusAttr"/>
+				<section id="aStringPropWithMd"/>
+				<section id="aStringPropNoMd"/>
+				<section id="section.missing" type="SECTION"/>
+				<section id="section.fake.dialogfield" type="SECTION"/>
+			</value>
+		</trait>
+		
+    </entity>
+    
+    <entityGroup id="attrs">
+    	<entity id="aBoolean">
+    		<trait id="attribute-value-runtime-type">
+    			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+    		</trait>
+    	</entity>
+    	<entity id="aStyle">
+    		<trait id="attribute-value-runtime-type">
+    			<value>org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
+    		</trait>
+    	</entity>
+    	    <entity id="aStringPropWithMd">
+    		<trait id="attribute-value-runtime-type">
+    			<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+    		</trait>
+			<trait id="valid-values">
+				<value xsi:type="mdt:ListOfValues">
+					<item>A</item>
+					<item>B</item>
+					<item>C</item>
+				</value>
+			</trait>
+    	</entity>
+    </entityGroup>
+</md:metadatamodel>

@@ -1,0 +1,78 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%--
+The taglib directive below imports the JSTL library. If you uncomment it,
+you must also add the JSTL library to the project. The Add Library... action
+on Libraries node in Projects view can be used to add the JSTL 1.1 library.
+--%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+    <f:view>
+    <h1>JSP Page</h1>
+    	<!--  no errors -->
+    	<h:outputText value="#{myBean.stringProperty > '3'}"/>
+    	<h:outputText value="#{myBean.stringProperty gt '3'}"/>
+    	<h:outputText value="#{myBean.integerProperty > 3}"/>
+    	<h:outputText value="#{myBean.integerProperty gt 3}"/>
+    	<h:outputText value="#{myBean.integerProperty > '4' }"/>
+    	<h:outputText value="#{myBean.integerProperty gt '4' }"/>
+     	<h:outputText value="#{myBean.comparableProperty > myBean.collectionProperty}"/>
+    	<h:outputText value="#{myBean.comparableProperty gt myBean.collectionProperty}"/>
+    	<h:outputText value="#{myBean.integerProperty > -3}"/>
+    	<h:outputText value="#{myBean.doubleProperty > 5}"/>
+    	<h:outputText value="#{5 gt myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.bigDoubleProperty > myBean.bigIntegerProperty}"/>
+    	<h:outputText value="#{myBean.coins > 'quarter'}"/>
+    	<h:outputText value="#{myBean.coins gt 'quarter'}"/>
+    	<h:outputText value="#{myBean.rawEnum > 'quarter'}"/>
+    	<h:outputText value="#{myBean.coinEnum gt 'quarter'}"/>
+	<h:outputText value="#{myBean.rawEnum > myBean.coins}"/>
+	<h:outputText value="#{myBean.coinEnum > myBean.colors}"/>
+    	
+		<!--  warnings -->
+		<h:outputText value="#{5 > 3}"/>
+		<h:outputText value="#{5 gt 3}"/>
+		<h:outputText value="#{'4' > '34'}"/>
+		<h:outputText value="#{'4' gt '34'}"/>
+		<h:outputText value="#{'34' > '34'}"/>
+		<h:outputText value="#{'34' gt '34'}"/>
+		<h:outputText value="#{-5 > 2}"/>
+		<h:outputText value="#{-5 gt 2}"/>
+		<h:outputText value="#{2 > -5}"/>
+		<h:outputText value="#{2 gt -5}"/>
+		<h:outputText value="#{-5 > -5}"/>
+		<h:outputText value="#{-5 gt -5}"/>
+		<h:outputText value="#{myBean.integerProperty > null}"/>
+		<h:outputText value="#{null gt myBean.integerProperty}"/>
+		
+		<!-- errors -->
+		<h:outputText value="#{5 > true}"/>
+		<h:outputText value="#{5 gt true}"/>
+		<h:outputText value="#{myBean.integerProperty > myBean.booleanProperty}"/>
+		<h:outputText value="#{myBean.integerProperty gt myBean.booleanProperty}"/>
+		<h:outputText value="#{myBean.stringArrayProperty > myBean.booleanProperty}"/>
+		<h:outputText value="#{myBean.stringArrayProperty gt myBean.booleanProperty}"/>
+    	<h:outputText value="#{myBean.integerProperty > true }"/>
+    	<h:outputText value="#{myBean.integerProperty gt true }"/>
+    	<h:outputText value="#{myBean.booleanProperty > true}"/>
+    	<h:outputText value="#{myBean.booleanProperty gt true}"/>
+ 		<h:outputText value="#{true > false}"/>
+ 		<h:outputText value="#{true gt false}"/>
+ 		<h:outputText value="#{true > false}"/>
+		<h:outputText value="#{myBean.coins > myBean.colors}"/>
+		<h:outputText value="#{myBean.coins gt myBean.colors}"/>
+    </f:view>
+    </body>
+</html>

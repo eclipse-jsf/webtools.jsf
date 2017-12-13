@@ -1,0 +1,30 @@
+<%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%><%@taglib
+	uri="http://java.sun.com/jsf/core" prefix="f"%><%@taglib
+	uri="http://com.foo/test" prefix="p"%><%@ page language="java"
+	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<f:view>
+    <h:commandButton attr1="value1">
+        <p:tag1>
+            <p:tag1></p:tag1>
+        </p:tag1>
+        <p:tag2 tag2Attr1="tag2Attr1Value">
+            <p:tag7></p:tag7>
+            <p:tag6></p:tag6>
+        </p:tag2>
+        <p:tag3>
+            <p:tag8>
+                <p:tag9></p:tag9>
+            </p:tag8>
+        </p:tag3>
+    </h:commandButton>
+</f:view>
+</body>
+</html>

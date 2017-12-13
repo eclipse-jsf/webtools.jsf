@@ -1,0 +1,26 @@
+package beans;
+
+import java.util.HashMap;
+import java.util.TreeMap;
+
+public class BeanWithMapProperties {
+	public java.util.Map getMapProperty()
+	{
+		return new HashMap();
+	}
+	
+	public int getIntegerProperty()
+	{
+		return -1;
+	}
+	
+	public TreeMap getTreeMap()
+	{
+		return new TreeMap();
+	}
+	
+	public String actionProperty()
+	{
+		return "go";
+	}
+}

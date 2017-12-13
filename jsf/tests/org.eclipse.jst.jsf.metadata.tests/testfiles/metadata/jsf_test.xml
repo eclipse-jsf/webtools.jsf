@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/test"
+	type="tagFile">
+	
+	<trait id="model-trait">
+		<value>ATrait</value>
+	</trait>
+	
+	<!-- Note that this is fot testing multiple trait queries.  Not recommended! -->
+	<trait id="model-trait">
+		<value>DupeTrait</value>
+	</trait>
+	
+	<entity type="tag" id="validator">
+		<entity type="attribute" id="validatorId">
+			<trait id="attr-val-content-assistant">
+				<value>com.eclipse.wtp.jsf.ui.internal.ValidatorAttrValueContentAssistant</value>
+			</trait>
+			<trait id="attr-val-runtime-type">
+				<value>com.eclipse.wtp.jsf.core.internal.model.datatype.Validator</value>
+			</trait>
+		</entity>
+	</entity>
+	<entity type="tag" id="nopropsOrAttrs">
+	</entity>
+	<entity type="tag" id="noAttrs">
+		<trait id="A">
+			<value>a</value>
+		</trait>
+		<trait id="B"> 
+			<value>b</value>
+		</trait>
+	</entity>
+	<entity type="tag" id="loaded">
+		<include-entity-group id="eg2"/>
+		<entity type="attribute" id="att1">
+			<trait id="A1">
+				<value>a1</value>
+			</trait>
+			<trait id="B1">
+				<value>b1</value>
+			</trait>
+		</entity>
+		<entity type="attribute" id="att2">
+			<trait id="A2">
+				<value>a2</value>
+			</trait>
+			<trait id="B2">
+				<value>b2</value>
+			</trait>
+		</entity>
+		<entity type="attribute" id="att3">
+			<trait id="A3">
+				<value>a3</value>
+			</trait>
+			<trait id="B3">
+				<value>b3</value>
+			</trait>
+			<trait id="multival"> 
+				<value xsi:type="mdt:ListOfValues">
+					<item>1</item>
+					<item>2</item>
+					<item>3</item>
+				</value>
+			</trait>
+		</entity>	
+		<trait id="A">
+			<value>a</value>
+		</trait>
+		<trait id="B"> 
+			<value>b</value>
+		</trait>
+		<trait id="multival"> 
+			<value xsi:type="mdt:ListOfValues">
+				<item>1</item>
+				<item>2</item>
+				<item>3</item>
+			</value>				
+		</trait>
+	</entity>
+	<entity type="tag" id="NLS">	
+		<entity type="attribute" id="NLS">	
+			<trait id="NLS1">
+				<value>%NLS1</value>
+			</trait>
+			<trait id="NLS2">
+				<value>%NLS2</value>
+			</trait>  
+			<trait id="NLS3">
+				<value>%NLS3</value>
+			</trait>  			
+			<trait id="multival"> 
+				<value xsi:type="mdt:ListOfValues">
+					<item>%NLS1</item>
+					<item>%NLS2</item>
+				</value>
+			</trait>		
+		</entity>	
+		<trait id="NLS1">
+			<value>%NLS1</value>
+		</trait>
+		<trait id="NLS2">
+			<value>%NLS2</value>
+		</trait>  
+		<trait id="NLS3">
+			<value>%NLS3</value>
+		</trait>  			
+		<trait id="multival"> 
+			<value xsi:type="mdt:ListOfValues">
+				<item>%NLS1</item>
+				<item>%NLS2</item>
+			</value>
+		</trait>
+		<trait id="NullVal">
+			<value></value>
+		</trait>					
+	</entity>
+	<!-- Note that this is fot testing multiple entity queries.  Not recommended. -->
+	<entity type="tag" id="loaded">
+		<entity type="attribute" id="secondLoadedAtt1">
+			<trait id="A1">
+				<value>a1</value>
+			</trait>
+			<trait id="B1">
+				<value>b1</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entityGroup id="eg1">
+		<entity id="eg1-A"></entity>
+	</entityGroup>
+	<entityGroup id="eg2">
+		<trait id="eg2-A"><value>XXX</value> </trait>
+		<entity id="eg2-A"></entity>
+	</entityGroup>
+</metadatamodel>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2012, 2013 Eclipse Foundation and others.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Distribution License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/org/documents/edl-v10.php
+ 
+  Contributors:
+    Thanh Ha (Eclipse Foundation) - initial implementation
+    Ian Trimble (Oracle) - initial tests configuration
+-->
+
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.eclipse.webtools.jsf</groupId>
+    <artifactId>org.eclipse.webtools.jsf.tests</artifactId>
+    <version>3.6.0-SNAPSHOT</version>
+    <relativePath>../../../</relativePath>
+  </parent>
+
+  <groupId>org.eclipse.webtools.jsf</groupId>
+  <artifactId>org.eclipse.jst.jsf.context.symbol.tests</artifactId>
+  <version>1.5.0-SNAPSHOT</version>
+  <packaging>eclipse-test-plugin</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <configuration>
+          <useUIHarness>true</useUIHarness>
+          <testSuite>${project.artifactId}</testSuite>
+          <testClass>org.eclipse.jst.jsf.context.symbol.tests.AllTests</testClass>
+          <dependencies>
+            <dependency>
+              <type>p2-installable-unit</type>
+              <artifactId>org.eclipse.jst.j2ee.ejb</artifactId>
+              <version>0.0.0</version>
+            </dependency>
+          </dependencies>
+          <argLine>-DjsfRuntimeJarsDirectoryV1.1=${project.basedir}/../jsfRuntimeJarsDirectory/V1.1 -DjsfRuntimeJarsDirectoryV1.2=${project.basedir}/../jsfRuntimeJarsDirectory/V1.2 -DjsfRuntimeJarsDirectoryV2.0=${project.basedir}/../jsfRuntimeJarsDirectory/V2.0</argLine>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

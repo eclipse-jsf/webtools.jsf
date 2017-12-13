@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/metadataprocessing"
+	type="tagFile">
+
+  <entity type="tag" id="MyTag">
+  	<entity type="attribute" id="MyBooleanAttr">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyBooleanType</value>
+  		</trait>
+  	</entity>
+  	  	<entity type="attribute" id="BooleanAttr">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+  		</trait>
+  		<trait id="barks">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>woof</item>
+	  			<item>ruff</item>
+	  			<item>howlll</item>
+	  		</value>  
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="NutherBooleanAttr">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+  		</trait>
+  		<trait id="barks">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>WOOF</item>
+	  			<item>RUFF</item>
+	  			<item>HOWLLL</item>
+	  		</value>  		
+  		</trait>
+  	</entity>  	
+  	<entity type="attribute" id="MyValidValsAttr">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyStringArrayType</value>
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyNonMetaDataEnabledAttr">
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyNoImplMetaDataEnabledAttr">
+  	  	<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.NoImplType</value>
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyDualTypeAttr">
+  	  	<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyStringArrayType</value>
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>AFirstVal</item>
+	  			<item>ASecondVal</item>
+	  			<item>AThirdVal</item>
+	  			<item>AFourthVal</item>
+	  		</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyLongAttr">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.MyLongType</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="MyMissingType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.metadata.tests.WhereIsIt</value>
+  		</trait>
+  	</entity>
+  	<entity type="attribute" id="ValidatorID">
+	  	<trait id="attribute-value-runtime-type">
+			<value>org.eclipse.jst.jsf.core.IdentifierType</value>
+		</trait>
+	  	<trait id="identifier-type">
+	  		<value>javax.faces.validator</value>
+	  	</trait>
+  	</entity>
+  </entity>
+</metadatamodel>

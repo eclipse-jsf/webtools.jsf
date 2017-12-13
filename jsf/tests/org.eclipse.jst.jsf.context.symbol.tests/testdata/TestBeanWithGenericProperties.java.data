@@ -1,0 +1,34 @@
+package com.test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+public class TestBeanWithGenericProperties
+{
+    public List<String> getListOfStrings()
+    {
+        return new ArrayList<String>();
+    }
+
+    public Map<String, String> getMapOfStringsKeyedByString()
+    {
+        return new HashMap<String, String>();
+    }
+
+    public Map<String, TestBean1> getMapOfTestBeansByString()
+    {
+        return new HashMap<String, TestBean2>();
+    }
+
+    public Map<String, String> getMutableMapOfStringByString()
+    {
+        return new HashMap<String, String>();
+    }
+
+    public void setMutableMapOfStringByString(Map<String,String> map)
+    {
+        // do nothing, method sig is all that's required
+    }
+}

@@ -1,0 +1,71 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%--
+The taglib directive below imports the JSTL library. If you uncomment it,
+you must also add the JSTL library to the project. The Add Library... action
+on Libraries node in Projects view can be used to add the JSTL 1.1 library.
+--%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+    <f:view>
+    <h1>JSP Page</h1>
+    	<!--  no errors -->
+    	<h:inputText validator="#{myBean.getStringProperty}"/>
+    	<h:inputText validator="#{myBean.getIntegerProperty}"/>
+    	<h:inputText validator="#{myBean.getBooleanProperty}"/>
+    	<h:inputText validator="#{myBean.getDoubleProperty}"/>
+    	<h:inputText validator="#{myBean.getMapProperty}"/>
+    	<h:inputText validator="#{myBean.getStringArrayProperty}"/>
+    	<h:inputText validator="#{myBean.getCollectionProperty}"/>
+    	<h:inputText validator="#{myBean.getListProperty}"/>
+    	<h:inputText validator="#{myBean.getComparableProperty}"/>
+    	<h:inputText validator="#{myBean.getBigIntegerProperty}"/>
+    	<h:inputText validator="#{myBean.getBigDoubleProperty}"/>
+    	<h:inputText validator="#{myBean.recursiveCall}"/>
+    	<h:inputText validator="#{myBean.getWritableStringProperty}"/>
+    	<h:inputText validator="#{myBean.setWritableStringProperty}"/>
+    	<h:inputText validator="#{myBean.validate}"/>
+    	<h:inputText validator="#{myBean.validate2}"/>
+    	<h:inputText validator="#{myBean.getSelf}"/>
+    	<h:inputText validator="#{myBean.isIsStyleBooleanProperty}"/>
+
+    	<h:inputText validator="#{myBeanSubClass.getStringProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getIntegerProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getBooleanProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getDoubleProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getMapProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getStringArrayProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getCollectionProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getListProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getComparableProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getBigIntegerProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getBigDoubleProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.recursiveCall}"/>
+    	<h:inputText validator="#{myBeanSubClass.getWritableStringProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.setWritableStringProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.validate}"/>
+    	<h:inputText validator="#{myBeanSubClass.validate2}"/>
+    	<h:inputText validator="#{myBeanSubClass.getSelf}"/>
+    	<h:inputText validator="#{myBeanSubClass.isIsStyleBooleanProperty}"/>
+    	<h:inputText validator="#{myBeanSubClass.getSubClassStringProperty}"/>
+    	
+		<!--  warnings -->
+		
+		<!-- errors -->
+    	<h:inputText validator="#{-myBean.validate}"/>
+    	<h:inputText value="#{myBean.getIntegerProperty + myBean.getDoubleProperty}"/>
+    </f:view>
+    </body>
+</html>

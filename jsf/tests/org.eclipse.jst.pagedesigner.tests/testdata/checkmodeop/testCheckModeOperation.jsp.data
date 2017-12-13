@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib uri="org.eclipse.jst.pagedesigner.tests.testCheckModeOperation" prefix="cmo"%>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Test CheckModeOperation</title>
+</head>
+<body>
+    <div id="t1Div">
+        <cmo:testTagOne>
+            <span id="t1ChildSpan">
+                some text
+            </span>
+        </cmo:testTagOne>
+    </div>
+
+    <div id="t2Div">
+        <cmo:testTagTwo requiredAttr1="designId"
+                        requiredAttr2="previewId">
+            <span id="t2ChildSpan">
+                some text
+            </span>
+        </cmo:testTagTwo>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+package com.test;
+
+public class TestBean2
+{
+	private TestBean1		_myBean1;
+	
+	// test recursive properties like var.x.y.x.x.y...
+	public TestBean3 getMyBean3()
+	{
+		return null;
+	}
+}

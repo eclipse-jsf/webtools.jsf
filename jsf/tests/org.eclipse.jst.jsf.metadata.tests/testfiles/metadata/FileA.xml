@@ -1,0 +1,66 @@
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/mergetest1">
+	
+	<trait id="A1">
+		<value>A1</value>
+	</trait>
+	<trait id="Dupe">
+		<value>dupe from A</value>
+	</trait>
+	
+	<entity id="A">
+		<trait id="A1">
+			<value>A1</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entity id="Dupe">
+		<trait id="A1">
+			<value>A1FromA</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1FromA</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entity id="DupeWithInclude">
+		<include-entity-group id="eg1"/>
+		<trait id="A1">
+			<value>A1</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entity id="DupeWithInclude2">
+		<include-entity-group id="eg1"/>
+	</entity>
+	
+	<entityGroup id="eg1">
+		<trait id="A1">
+			<value>A1FromEG1</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1FromEG1</value>
+			</trait>
+			<trait id="aFromEG1">
+				<value>aFromEG1</value>
+			</trait>
+		</entity>
+  	</entityGroup>
+  	
+</metadatamodel>

@@ -1,0 +1,6 @@
+package org.eclipse.jst.jsf.core.tests.util;
+
+public enum TestEnum1 
+{
+	red, blue, green, yellow, orange, purple
+}

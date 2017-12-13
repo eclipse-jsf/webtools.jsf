@@ -1,0 +1,7 @@
+package beans;
+
+public enum MyEnum1
+{
+	penny, nickel, dime, quarter;
+}
+

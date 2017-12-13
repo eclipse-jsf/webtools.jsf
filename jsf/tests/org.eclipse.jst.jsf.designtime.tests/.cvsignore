@@ -1,0 +1,5 @@
+bin
+temp.folder
+@dot
+javaCompiler...args
+build.xml

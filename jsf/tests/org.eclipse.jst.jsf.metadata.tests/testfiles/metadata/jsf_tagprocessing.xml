@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/tagprocessing"
+	type="tagFile">
+	
+  <entity id="MyTag">
+  	<entity id="BooleanType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.BooleanType</value>
+  		</trait>
+  		<trait id="default-value">
+  			<value>true</value>
+  		</trait>
+  	</entity>  	
+  	<entity id="StringType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.StringType</value>
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>A</item>
+	  			<item>B</item>
+	  			<item>C</item>
+  				<item>D</item>
+  			</value>
+  		</trait>
+  		<trait id="displayed-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>A FirstVal</item>
+	  			<item>B SecondVal</item>
+	  			<item>C ThirdVal</item>
+	  			<item>D FourthVal</item>
+  			</value>
+  		</trait>  		
+  		<trait id="small-icon">
+  			<value>/testfiles/icons/attr_val.gif</value>
+  		</trait>
+  		<trait id="default-value">
+  			<value>A</value>
+  		</trait>
+  	</entity> 
+  	<entity id="IntegerType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+  		</trait>
+  		<trait id="valid-minimum"><value>0</value></trait>
+  		<trait id="valid-maximum"><value>255</value></trait>
+  		<trait id="default-value"><value>10</value></trait>
+  	</entity> 
+  	<entity id="LengthType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LengthType</value>
+  		</trait>
+  		<trait id="valid-minimum"><value>0%</value></trait> <!-- Check that min/max are ignored. Not valid for length type -->
+  		<trait id="valid-maximum"><value>100%</value></trait>
+  		<trait id="default-value"><value>100%</value></trait>
+  	</entity> 
+  	<entity id="EnumeratedIntegerType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.IntegerType</value>
+  		</trait>
+	  	<trait id="valid-values">
+	  		<value xsi:type="mdt:ListOfValues">
+	  			<item>0</item>
+	  			<item>3</item>
+	  			<item>5</item>
+	  		</value>
+	  	</trait>
+  		<trait id="default-value"><value>10</value></trait>
+  	</entity>
+  	<entity id="LongType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LongType</value>
+  		</trait>
+	  	<trait id="valid-minimum"><value>-1000</value></trait>
+  		<trait id="valid-maximum"><value>1000</value></trait>
+  	</entity>
+  	<entity id="EnumeratedLongType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LongType</value>
+  		</trait>
+	  	<trait id="valid-values">
+	  		<value xsi:type="mdt:ListOfValues">
+	  			<item>0</item>
+	  			<item>3</item>
+	  			<item>5</item>
+	  		</value>
+	  	</trait>
+	  	<trait id="valid-values-message"><value>bogus validation message</value></trait>
+	  	<trait id="valid-values-severity"><value>99</value></trait>
+	  	<trait id="valid-values-code"><value>X99</value></trait>
+	  	<trait id="default-value"><value>3</value></trait>
+  	</entity>    	
+  	<entity id="DoubleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.DoubleType</value>
+  		</trait>
+  		<trait id="valid-minimum"><value>188.23</value></trait>
+  		<trait id="valid-maximum"><value>245.32</value></trait>
+  	</entity>    	
+  	<entity id="EnumeratedDoubleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.DoubleType</value>
+  		</trait>
+  		<trait id="valid-values">
+  			<value xsi:type="mdt:ListOfValues">
+	  			<item>188.23</item>
+	  			<item>245.32</item>
+	  			<item>1</item>
+	  		</value>
+  		</trait>
+  		<trait id="default-value"><value>188.23</value></trait>
+  	</entity> 
+  	<entity id="JavaClassType1">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-interfaces">
+			<value>javax.xml.xpath.XPathFunctionResolver</value>
+		</trait>
+  	</entity>  
+  	<entity id="JavaClassType2">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-superclass">
+			<value>com.foo.MyConverter</value>
+		</trait>
+  	</entity>   
+  	<entity id="JavaClassType3">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-interfaces">
+			<value>javax.xml.xpath.XPathVariableResolver</value>
+		</trait>  		
+ 		<trait id="valid-superclass">
+			<value>com.foo.MyConverter</value>
+		</trait>
+  	</entity>  
+  	<entity id="JavaClassType4">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaClassType</value>
+  		</trait>
+ 		<trait id="valid-interfaces">
+			<value xsi:type="mdt:ListOfValues">
+				<item>javax.xml.xpath.XPathVariableResolver</item>
+				<item>javax.xml.xpath.XPathFunctionResolver</item>	
+			</value>		
+		</trait>  		
+ 		<trait id="valid-superclass">
+			<value>com.foo.MyConverter</value>
+		</trait>
+  	</entity>  
+  	<entity id="MethodBindingType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.MethodBindingType</value>
+  		</trait>
+  	</entity>
+  	<entity id="ColorType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ColorType</value>
+  		</trait>
+  		<trait id="default-value"><value>Black</value></trait>
+  	</entity>    
+  	<entity id="LanguageCodeType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LanguageCodeType</value>
+  		</trait>
+  		<trait id="category">
+  			<value>ACategory</value>
+  		</trait>
+  	</entity>   
+  	<entity id="LocaleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LocaleType</value>
+  		</trait>
+  		<trait id="category">
+  			<value>ACategory</value>
+  		</trait>
+  	</entity> 
+  	<entity id="CurrencyCodeType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CurrencyCodeType</value>
+  		</trait>
+  	</entity>
+  	<entity id="TimeZoneType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.TimeZoneType</value>
+  		</trait>
+  	</entity>   
+  	<entity id="RelativePathType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.RelativePathType</value>
+  		</trait>
+  	</entity>
+  	<entity id="WebPathType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.WebPathType</value>
+  		</trait>
+  	</entity>     	   		
+  	<entity id="JavaScriptType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.JavaScriptType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="CSSClassType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CSSClassType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="CSSStyleType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CSSStyleType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="ComponentIDType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ComponentIDType</value>
+  		</trait>
+  	</entity>
+  	<entity id="CharacterType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.CharacterType</value>
+  		</trait>
+  	</entity> 
+  	<entity id="ScriptType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ScriptType</value>
+  		</trait>
+  	</entity>    	 
+  	<entity id="LinkType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.LinkType</value>
+  		</trait>
+  	</entity>     
+  	<entity id="ContentType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.ContentType</value>
+  		</trait>
+  	</entity>     	
+  	<entity id="NumberPatternType">
+  		<trait id="attribute-value-runtime-type">
+  			<value>org.eclipse.jst.jsf.core.attributevalues.NumberPatternType</value>
+  		</trait>
+  	</entity>    
+  </entity>
+ </md:metadatamodel>

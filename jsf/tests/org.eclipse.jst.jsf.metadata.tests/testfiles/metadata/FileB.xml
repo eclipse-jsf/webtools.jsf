@@ -1,0 +1,96 @@
+<metadatamodel 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://org.eclipse.jsf/mergetest1">
+	
+	<trait id="B1">
+		<value>B1</value>
+	</trait>
+	<trait id="Dupe">
+		<value>dupe from B</value>
+	</trait>
+	
+	<entity id="B">
+		<trait id="B1">
+			<value>B1</value>
+		</trait>
+		<entity id="b">
+			<trait id="B1">
+				<value>B1</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entity id="Dupe">
+		<trait id="A1">
+			<value>A1FromB</value>
+		</trait>
+		<trait id="B1">
+			<value>B1</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1</value>
+			</trait>
+			<trait id="B1">
+				<value>B1</value>
+			</trait>
+		</entity>
+		<entity id="b"></entity>
+	</entity>
+	
+	<entity id="DupeWithInclude">
+		<include-entity-group id="eg1"/>
+		<include-entity-group id="eg2"/>
+		<trait id="A1">
+			<value>A1</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1</value>
+			</trait>
+		</entity>
+	</entity>
+	
+	<entityGroup id="eg1">
+		<!-- All traits and entities should not be merged... Should come from FileA -->
+		<trait id="B">
+			<value>trait SHOULD NOT appear in merge</value>
+		</trait>
+		<trait id="A1">
+			<value>A1FromEG1-B</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1FromEG1-1</value>
+			</trait>
+			<trait id="aFromEG1">
+				<value>aFromEG1-1</value>
+			</trait>
+		</entity>
+  	</entityGroup>
+  	
+	<entityGroup id="eg2">
+		<!-- All traits and entities should first come from eg1... Should come from FileA -->
+		<trait id="B">
+			<value>trait SHOULD appear in merge from eg2</value>
+		</trait>
+		<trait id="A1">
+			<value>A1FromEG1-B</value>
+		</trait>
+		<entity id="a">
+			<trait id="A1">
+				<value>A1FromEG2-B</value>
+			</trait>
+			<trait id="aFromEG1">
+				<value>aFromEG2-B</value>
+			</trait>
+		</entity>
+		<entity id="b">
+			<trait id="bFromEG2">
+				<value>bFromEG2-B</value>
+			</trait>
+		</entity>
+  	</entityGroup>
+</metadatamodel>

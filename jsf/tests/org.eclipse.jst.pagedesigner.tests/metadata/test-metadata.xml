@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+    xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+    xmlns:pi="http://org.eclipse.jsf.pagedesigner/paletteInfos.ecore"
+    id="org.eclipse.jst.pagedesigner.tests.tagCreatorFactory1"
+    type="tagFile">
+    
+    <trait id="is-jsf-component-library">
+        <value>true</value>
+    </trait>
+
+    <entity id="tagWithMetadata" type="tag">
+        <trait id="tag-create">
+            <value xsi:type="pi:TagCreationInfo">
+                <attribute id="requiredAttr1" value="foobar"/>
+                <attribute id="notRequiredAttr1" value="someOtherFooBar"/>
+                <template><![CDATA[
+                    <outputText value="CommandLink"
+                    _uri_="http://java.sun.com/jsf/html" />
+                ]]></template>
+            </value>
+            
+        </trait>
+    </entity>
+    
+    <entity id="tagWithRequiredAttr2" type="tag">
+        <trait id="tag-create">
+            <value xsi:type="pi:TagCreationInfo">
+                <attribute id="requiredAttr1" value="foobar"/>
+            </value>
+        </trait>
+    </entity>
+</md:metadatamodel>

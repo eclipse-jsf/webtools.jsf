@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE faces-config PUBLIC
+  "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+  "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config>
+	<component id="component1">
+		<component-type>component</component-type>
+		<component-class>componentClass</component-class>
+		<component-extension id="singleRootComponentExt">
+			<any-data attribute="any-data-attribute">
+				<first-child>someData</first-child>
+				<second-child>second Child's data</second-child>
+			</any-data>
+		</component-extension>
+	</component>
+	
+</faces-config>
