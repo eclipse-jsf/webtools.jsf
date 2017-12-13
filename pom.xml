@@ -31,31 +31,45 @@
   </properties>
 
   <modules>
-    <!-- assembly -->
-    <module>assembly/features/org.eclipse.jsf.assembly.feature</module>
-    <module>assembly/features/org.eclipse.jsf_sdk.assembly.feature</module> 
-    <module>assembly/plugins/org.eclipse.jsf.branding</module>
-
-    <module>jsf/features/org.eclipse.jsf.feature</module>
-    <module>jsf/features/org.eclipse.jsf_sdk.feature</module>
-    <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature</module>
-    <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature</module>
-    <module>jsf/features/org.eclipse.jst.webpageeditor.feature</module>
-    <module>jsf/features/org.eclipse.jst.webpageeditor_sdk.feature</module>
-
-    <module>jsf/plugins/org.eclipse.jst.jsf.apache.trinidad.tagsupport</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.common</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.common.runtime</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.common.ui</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.core</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.facelet.core</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.facelet.ui</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.facesconfig</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.facesconfig.ui</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.standard.tagsupport</module>
-    <module>jsf/plugins/org.eclipse.jst.jsf.ui</module>
-    <module>jsf/plugins/org.eclipse.jst.pagedesigner</module>
-    <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsf.ui</module>
-    <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsp.core</module>
+     <module>assembly/features/org.eclipse.jsf.assembly.feature</module>
+     <module>assembly/features/org.eclipse.jsf_sdk.assembly.feature</module>
+     <module>assembly/plugins/org.eclipse.jsf.branding</module>
+     <module>docs/features/org.eclipse.jst.jsf.doc.feature</module>
+     <module>docs/plugins/org.eclipse.jst.jsf.doc.dev</module>
+     <module>docs/plugins/org.eclipse.jst.jsf.doc.user</module>
+     <module>jsf/features/org.eclipse.jsf.feature</module>
+     <module>jsf/features/org.eclipse.jsf_sdk.feature</module>
+     <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature</module>
+     <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature</module>
+     <module>jsf/features/org.eclipse.jst.jsf.tests.feature</module>
+     <module>jsf/features/org.eclipse.jst.webpageeditor.feature</module>
+     <module>jsf/features/org.eclipse.jst.webpageeditor_sdk.feature</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.apache.trinidad.tagsupport</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.common</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.common.runtime</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.common.ui</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.core</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.facelet.core</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.facelet.ui</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.facesconfig</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.facesconfig.ui</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.standard.tagsupport</module>
+     <module>jsf/plugins/org.eclipse.jst.jsf.ui</module>
+     <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsf.ui</module>
+     <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsp.core</module>
+     <module>jsf/plugins/org.eclipse.jst.pagedesigner</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.common.runtime.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.contentassist.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.context.symbol.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.core.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.designtime.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.facesconfig.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.facesconfig.ui.test</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.metadataprocessingtests2</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.metadata.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.test.util</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.ui.tests</module>
+     <module>jsf/tests/org.eclipse.jst.jsf.validation.el.tests</module>
+     <module>jsf/tests/org.eclipse.jst.pagedesigner.tests</module>
   </modules>
 </project>
