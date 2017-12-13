@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>JSP JSF Source Page Editing Tools</title>
+</head>
+<body>
+<h1>JSP JSF Source Page Editing Tools</h1>
+<br>
+<p>The JSF Tools team has provided enhancements to the JSP source editor making JSF page development simpler.</p>  
+<p>The JSF Tooling has provided frameworks that allow the source page editor to provide services for most of the attribute values from the JSF standard Core and HTML tag libraries where it makes sense.  These frameworks are "meta-data" driven and extensible which would allow tag library developers to add their own content assist, validation and other service quite easily.   In other words, the features supplied with the JSF Tooling will eventually make it to the WTP layer so that the source editing experience for other JSP tag libraries will be improved.</p>
+<h2><a id="contentassist">Content Assist</a></h2>
+<br>
+<p>Content Assist is the Eclipse text editor term for providing context-based proposals at the currrent text insertion point.  The JSP editor already provides excellent tag library support whereby a popup of possible tags and attributes are made available as you type.</p>
+
+<ul>Examples of non-Expression Language (EL) support
+<li>String enumerations:
+<br><br>
+<img alt="String Enumerations" src="./images/ca_nonel_strings.png" / >
+<br>
+</li>
+<li>Faces Configuration Elements:
+<br><br>
+<img alt="Faces Config Elements" src="./images/ca_nonel_validators.png" / >
+<br>
+</li>
+</ul>
+<ul>Examples of Expression Language (EL) support
+<li>Value Bound Attributes:
+<br><br>
+<img alt="Value Bound Attributes" src="./images/ca_el_vb.png" / >
+<br>
+</li>
+<li>Method Bound Attributes:
+<br><br>
+<img alt="Method Bound Attributes" src="./images/ca_el_mb.png" / >
+<br>
+</li>
+</ul>
+<h2><a id="validation">Validation</a></h2>
+<br>
+<p>Beyond the basic JSP validation already provided with the JSP editor, there is now semantic validation of the JSF standard tag libraries for both EL and non-EL attribute values.</p>
+<p>The EL validation is quite comprehensive offering not only basic syntax validation, but also object existence and type and signature validations.</p>
+<p>If there is a problem with the value provided for an attribute it will be detected and you should see either a warning or error marker along with a "squiggly" under the value depending on the severity.  There may be multiple problems and each will be listed if you hover your mouse over the squiggly or the annotation marker in the side ruler.  The validation is aware of the JSF Faces Configuration model(s) in the the project and can flag problems of missing configuration items.</p>
+<img alt="Multiple Problems" src="./images/val_multi_problems.png" / >
+<p></p>
+
+<h2><a id="hyperlink">Hyperlink</a></h2>
+<br>
+Hyperlink to the Java editor from Managed Bean variable, Managed Bean property
+and Managed Bean method referenced in the Expression Language(EL) of a
+tag-attribute. Users can
+<b>(Ctrl+click)</b>
+on the hyperlink to navigate to the source of the Managed Bean.
+<br />
+<br />
+<img src="../../images/whats_new/2_0/wpe-hyperlink.png" alt="Hyperlink" />
+<br />
+<br />
+<p></p>
+<!--
+<h2><a id="snippets">Snippets</a></h2>
+<br>
+CONTENT
+-->
+<h2><a id="Futures">Future Features</a></h2>
+<br>
+<p>The JSF Tools team would like to be able to provide the following features for the JSF standard tag libraries using the meta-data frameworks developed in this release:</p>
+<ul>
+<li>Quick Fix/Quick Assist - provide context sensitive proposals for creating appropriate Java Classes and Faces Configuration elements</li>
+<li>Others? - please enter enhancement requests for your ideas using <a href="https://bugs.eclipse.org/bugs/">Bugzilla</a></li>
+</ul>
+<br>
+<img src="../../images/ngrelc.png"  alt="Related concepts" border="0"> 
+ <p>
+ <a href="./jsf_app_config_mgr.html">JSF Application Configuration</a><br>
+ </p>
+ <p> <img src="../../images/ngrelr.png"  alt="Related reference" border="0"> 
+</p>
+<p>
+<a href="../reference/taglibsupport.html">Tag Library Support</a><br>
+<a href="../reference/jsf-c.html">JSF Core Library</a><br>
+<a href="../reference/jsf-h.html">JSF HTML Library</a><br>
+</p>
+
+ <p> <img src="../../images/ngrelt.png"  alt="Related tasks" border="0"> 
+ <br>
+ <a href="../tasks/create_jsf_jsp_page.html">Create JSF JSP Page</a><br>
+</p>
+  
+</body>
+</html>

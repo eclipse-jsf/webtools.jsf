@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>JSF Design-Time Skinning Support</title>
+</head>
+<body>
+
+<h1>JSF Design-Time Skinning Support</h1>
+<p>
+JSF Application developers use JSF components that support skins to give
+their application a uniform look and feel. A Skin is typically one or
+more CSS stylesheets with pre-defined selectors and often a set of
+images that are referenced by the stylesheet(s). A JSF Component Library
+that supports skinning would use these pre-defined selectors in
+rendering the JSF component. The
+<a href="http://myfaces.apache.org/trinidad/index.html">Apache
+MyFaces Trinidad</a>
+("Trinidad") JSF library supports skinning.
+</p><p>
+The Web Page Editor (WPE) has design-time support for skins. This allows
+a JSF developer to visually see the effect of applying a particular skin
+on a JSF page that has JSF components that support skinning.
+</p>
+<h2>Display and Change Current Skin for a Project</h2>
+<h3>Project Properties</h3>
+The Project Properties dialog contains a new <b>Web Page Editor</b> node which displays skins provided for tag libraries and allows setting a <b>current</b> skin for each tag library.
+<br>
+<br>
+<img src="./images/DTSkinningUI_ProjectProps.png"
+	alt="Set current skin for a project">
+<br>
+<h3>Toolbar Button</h3>
+A new <b>Manage Skins</b> toolbar button (in the WPE toolbar) allows quick access to the Project Properties dialog and to a drop-down menu providing additional functionality as described below.
+<br>
+<br>
+<img src="./images/DTSkinningUI_ToolbarButton.png"
+	alt="Toolbar Button">
+<br>
+<h3>Toolbar Button Menu</h3>
+The toolbar button's drop-down menu provides access to the Project Properties dialog and also allows the user to quickly see and set the <b>current</b> skin for each tag library that supports design-time skinning.
+<br>
+<br>
+<img src="./images/DTSkinningUI_ToolbarButton_Menu.png"
+	alt="Toolbar Button">
+<br>
+<h3>WPE Context Menu</h3>
+The Web Page Editor's context menu (Design pane) allows the user to quickly see and set the "current" skin for each tag library that supports design-time skinning.
+<br>
+<br>
+<img src="./images/DTSkinningUI_WPE_ContextMenu.png"
+	alt="Toolbar Button">
+<br>
+
+
+</body>
+</html>

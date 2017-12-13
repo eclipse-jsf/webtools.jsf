@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>JSF Core Tag Library Support</title>
+</head>
+<body>
+<h1>JSF Core Tag Library Support</h1>
+<br>
+<p>The following table of attributes for the JSF Core tag library
+indicates whether or not the attribute value is supported for either
+validation or content assist:</p>
+<table border="1" title="JSF Core Attribute Support">
+	<tbody>
+		<tr>
+			<th>Attribute</th>
+			<th align="center">Validation</th>
+			<th align="center">Content Assist</th>
+		</tr>
+		<tr>
+			<td>actionListener</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>dateStyle</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>timeStyle</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>groupingUsed</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>integerOnly</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>maxFractionDigits</td>
+			<td align="center">Y</td>
+			<td align="center">N</td>
+		</tr>
+		<tr>
+			<td>maxIntegerDigits</td>
+			<td align="center">Y</td>
+			<td align="center">N</td>
+		</tr>
+		<tr>
+			<td>minFractionDigits</td>
+			<td align="center">Y</td>
+			<td align="center">N</td>
+		</tr>
+		<tr>
+			<td>converterId</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>itemDisabled</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>value</td>
+			<td align="center">Y*</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>rendered</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+
+		<tr>
+			<td>maximum</td>
+			<td align="center">Y</td>
+			<td align="center">N</td>
+		</tr>
+		<tr>
+			<td>minimum</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>validatorId</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+
+		<tr>
+			<td>escape</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>binding</td>
+			<td align="center">Y</td>
+			<td align="center">Y</td>
+		</tr>
+		<tr>
+			<td>id</td>
+			<td align="center">Y</td>
+			<td align="center">N</td>
+		</tr>
+	</tbody>
+</table>
+<ul>
+<li>* - only "selectItem" element for an EL expression is being validated for runtime type currently</li>
+<li>Any attribute not explicitly mentioned here does not support validation or content assist in this release.</li>
+<li>"Boolean" type attributes are validated according to the JSP specification which uses Boolean.valueOf(StringValue).  This means that seemingly invalid Strings as boolean evaluate to false.  ex.  "blue" means false</li>
+</ul>
+<p><img src="../../images/ngrelc.png" alt="Related concepts"
+	border="0" > <br>
+</p>
+
+<p><img src="../../images/ngrelr.png" alt="Related reference"
+	border="0" ></p>
+<p><a href="./taglibsupport.html">Tag Library Support</a><br>
+<a href="./jsf-h.html">JSF HTML Library</a><br>
+</p>
+<p><img src="../../images/ngrelt.png" alt="Related tasks" border="0" >
+</p>
+
+</body>
+</html>

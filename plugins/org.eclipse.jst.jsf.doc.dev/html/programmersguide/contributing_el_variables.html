@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Contributing EL Variables</title>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<link rel="stylesheet" href="../tutorials/default_style.css"></head>
+<body>
+<table summary="" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="bottom">
+<td align="left" width="86%">
+<h1>Contributing EL Variables</h1>
+
+</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>Overview</h3>
+The JSF tooling&nbsp; provides three ways to contribute EL variables to the framework depending on your goal.<br>
+<br>
+If you are a component developer and want to add support for EL
+variables that are declared by your component tags, you can use the
+symbol factory extension and meta-data.<br>
+<br>
+If you are a tooling developer and you wish to add new sources of
+variables without changing the behavior of other sources (beans, tag
+contributed variables), you can use the symbolProvider extension.<br>
+<br>
+If you are a tooling developer and you wish to modify the way all
+variables are resolved, you can use the variableResolver extension.<br>
+<h3>Symbol Factory Extension and Meta-data<br>
+</h3>
+A symbol factory is any factory class that extends
+<code>org.eclipse.jst.jsf.context.symbol.source.AbstractContextSymbolFactory</code>.&nbsp;
+Once you create your implementation, you can declare it to the
+framework using the
+<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_contextSymbolFactory.html">org.eclipse.jst.jsf.common.contextSymbolFactory</a> extension
+point.&nbsp; In the extension, you need to provide a unique
+factoryId.&nbsp; This factoryId is used to identify your factory and
+can then be used in your symbol factory meta-data section.&nbsp; See also the <a href="the_design_time_application_manager.html">Design Time Application Manager</a> for information.<br>
+<br>
+Your factory implementation will implement the following method:<br>
+<div class="code"><pre>
+protected abstract ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems, final IAdditionalContextSymbolInfo additionalInfo);
+</pre></div>
+<br>The <i>symbolName</i> is the one provided by the system, usually corresponding
+to the tag attribute, that declares the variable.  You may use
+this symbol name or ignore it and use your own, depending on how the
+variable will be named at runtime.  The <i>scope</i> argument is one of
+ISymbolConstants.SYMBOL_SCOPE_*.  The system value is passed in
+based on meta-data settings if present.  Your factory is not
+obligated to use this scope variable.   The IAdaptable <i>context</i>
+object provides context information about the source of the variable
+declaration.  This is usually an IModelContext object.  You
+can implement the supports() abstract method in such a way to tell the
+framework what types of context object you support.  
+The <i>problems</i> list is for future use.  In future versions, you will
+be able to add diagnostic objects to the list that report warnings or
+errors related to symbol creation.  Currently, the list is ignored.  The additionalInfo interface (if non-null) contains optional information provided to the framework about how to construct on an object<br>
+<h4>Simplified Symbol Context Factories</h4>
+<p>Starting in WTP 3.0, several default symbol factories have been added for common tasks.  
+These new factories can be used by specifying their factory ids (see <a href="the_design_time_application_manager.html#jsp_document_processor">JSP model processor</a>).  The following are the new ids with an explanation of their function:<br><br></p>
+
+<table border="1">
+<tr><th>Id</th><th>Additional meta-data</th><th>Explanation</th></tr>
+<tr><td>org.eclipse.jst.jsf.core.staticJavaTypeSymbol</td><td>optional-value-binding-static-type</td><td>Creates a statically-typed Java symbol based on the type signature passed using optional-value-binding-static-type meta-data value.</td></tr>
+<tr><td>org.eclipse.jst.jsf.core.valueExpressionSymbolFactory</td><td>optional-value-binding-valueexpr-attr</td><td>Creates a new symbol, using the attribute on the current tag specified by optional-value-binding-valueexpr-attr to extract type information from an EL expression.</td></tr>
+<tr><td>org.eclipse.jst.jsf.common.unknownTypeSymbolFactory</td><td>&nbsp;</td><td>Creates a new symbol with an unknown type that effectively allows all properties as valid.</td></tr>
+</table>
+
+<br>
+<p><b>Deprecation note:</b> Prior to WTP release 3.0 (Ganymede train), the method:</p>
+<div class="code"><pre>
+protected abstract ISymbol internalCreate(String symbolName, int scope, IAdaptable context, List problems);
+</pre></div><p>was used for this API. This method is now deprecated in favor of the new method that takes the IAdditionalContextSymbolInfo object.  Existing code is still backward compatible and is the equivalent of calling the new method with <i>null</i> for the additionalInfo argument.  You can migrate to the new method by simply implementing it instead and ignoring the additionalInfo argument which is always optional.</p>
+<h3>SymbolProvider Extension</h3>
+<p>JSF has many ways to contribute variables.&nbsp; If the framework has
+overlooked any or if you have added new ways yourself without affecting
+the way other variables, such as managed beans, are declared, then you
+can do so through the
+<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_common_symbolSourceProvider.html">org.eclipse.jst.jsf.common.symbolSourceProvider</a>
+extension.&nbsp; Your symbol provider will implement the
+<code>org.eclipse.jst.jsf.context.symbol.source.ISymbolSourceProviderFactory</code>
+interface.&nbsp; Every time the framework requests a list of variables
+through the default VariableResolver and ExternalContext, your provider
+will be queried for all its symbols at one or more scopes.</p>
+
+<p>Note that your symbol provider may not called if:</p>
+<ul>
+<li>the default variable resolver has been replaced by one that does not call the default external context.</li>
+<li>the default external context has been replaced by one that does not query the symbol providers.</li>
+</ul>
+<h3>VariableResolver Extension</h3>
+<p>The variable provider extension allows you to register your own design
+time resolver.&nbsp; You declare your resolver using the
+<a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_variableresolver.html">org.eclipse.jst.jsf.core.variableresolver extension point.</a>&nbsp;
+Your extension will declare a unique id and a class.&nbsp; The class
+must extend
+<code>org.eclipse.jst.jsf.designtime.el.AbstractDTVariableResolver</code>.&nbsp;
+To register your resolver as the active one for a project (note: JSF
+1.1 only supports a single variable resolver at a given time.&nbsp;
+Future versions supporting JSF 1.2 will have a more robust scheme
+matching what is defined in the newer specification), you use
+DesignTimeApplicationManager.setVariableResolverProvider specifying the
+id defined in your extension as the argument.</p>
+
+<p>Once your variable resolver is registered and active for a project, all
+variable resolution requests to the framework will call your
+implementation.&nbsp; This gives you complete control over how all EL
+variable symbols are discovered and instantiated by the design time
+framework.</p>
+
+<h4>Decorative resolvers</h4>
+
+<p>Starting in WTP 3.0, Variable and Property Resolvers support a decorative mechanism for adding
+variables and properties.  By setting the forRuntimeClass on the extension for these resolvers
+you can cause the resolver to only be consulted if the runtime class specified is found in the
+application configuration.  This allows the design time to behave similar to the runtime which
+allows decorative chaining of variable and property resolvers.  See 
+the <a href="../extpts_reference/jsf/org_eclipse_jst_jsf_core_variableresolver.html">org.eclipse.jst.jsf.core.variableresolver extension point.</a> for more information.</p>
+
+<h4>Per-project resolvers</h4>
+
+<p>Starting in WTP 3.0, Variable and Property Resolvers can be declared as being constructed on per-project
+basis instead of the (default) per-workspace convention.  See the entension point docs on instancePerProject value
+for more information.</p>
+</body></html>

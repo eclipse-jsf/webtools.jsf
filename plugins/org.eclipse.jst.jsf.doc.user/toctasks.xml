@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Tasks" link_to="toc.xml#jsf_tasks"> 
+	<topic label="Creating New JSF Projects"  href="html/tasks/create_jsf_app.html" /> 
+	<topic label="Adding JSF Facet to Existing projects" href="html/tasks/add_jsf_facet.html" /> 
+	<topic label="Creating JSF JSP Pages" href="html/tasks/create_jsf_jsp_page.html" /> 
+	<topic label="Creating Managed Beans" href="html/tasks/create_managedbean.html" /> 
+	<topic label="Creating Navigation Rules" href="html/tasks/define_navigations.html" >
+		<topic label="Defining Link Properties" href="html/tasks/define_link_properties.html"></topic>
+		<topic label="Testing Linked Pages" href="html/tasks/test_linked_pages.html"></topic>
+	</topic> 
+	<topic label="Configuring Faces Config File" href="html/tasks/use_facesconfig_editor.html">
+        <topic href="html/tasks/facesconfig_ui/add_component.html" label="Adding a Component"/>
+        <topic href="html/tasks/facesconfig_ui/add_renderkit.html" label="Adding a RenderKit"/>
+        <topic href="html/tasks/facesconfig_ui/add_converter.html" label="Adding a Converter"/>
+        <topic href="html/tasks/facesconfig_ui/add_validator.html" label="Adding a Validator"/>
+        <topic href="html/tasks/facesconfig_ui/add_action_listener.html" label="Adding an Action Listener"/>
+        <topic href="html/tasks/facesconfig_ui/add_default_renderkitid.html" label="Adding a Default RenderKit ID"/>
+        <topic href="html/tasks/facesconfig_ui/add_locale_config.html" label="Adding Locale Configuration"/>
+        <topic href="html/tasks/facesconfig_ui/add_messagebundle.html" label="Adding a Message Bundle"/>
+        <topic href="html/tasks/facesconfig_ui/add_navigation_rule.html" label="Adding a Navigation Handler"/>
+        <topic href="html/tasks/facesconfig_ui/add_property_resolver.html" label="Adding a Property Resolver"/>
+        <topic href="html/tasks/facesconfig_ui/add_state_manager.html" label="Adding a State Manager"/>
+        <topic href="html/tasks/facesconfig_ui/add_variable_resolver.html" label="Adding a Variable Resolver"/>
+        <topic href="html/tasks/facesconfig_ui/add_view_handler.html" label="Adding a View Handler"/>
+        <topic href="html/tasks/facesconfig_ui/add_application_factory.html" label="Adding an Application Factory"/>
+        <topic href="html/tasks/facesconfig_ui/add_facescontext_factory.html" label="Adding a Faces Context Factory"/>
+        <topic href="html/tasks/facesconfig_ui/add_lifecycle_factory.html" label="Adding a Lifecycle Factory"/>
+        <topic href="html/tasks/facesconfig_ui/add_rederkit_factory.html" label="Adding a RenderKit Factory"/>
+        <topic href="html/tasks/facesconfig_ui/add_phase_listener.html" label="Adding a Phase Listener"/>
+    </topic>
+	<topic href="html/tasks/jsf_validation.html" label="Validating JSF Applications">
+    <topic href="html/tasks/jsf_elvalidation_prefs.html" label="Changing EL Validation Preferences">
+    </topic>
+ </topic> 
+	<topic label="Executing JSF Pages" href="html/gettingstarted/tutorial/JSFTools_tutorial.html#testpage" />
+ <topic href="html/tasks/jsf_library_migration.html" label="Migrating JSF Libraries">
+ </topic> 
+</toc>

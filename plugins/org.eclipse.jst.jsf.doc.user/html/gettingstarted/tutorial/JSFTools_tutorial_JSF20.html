@@ -1,0 +1,420 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSF Tools tutorial - Build a JSF 2.0 application</title>
+
+
+<link rel="stylesheet" href="default_style.css">
+
+</head>
+
+
+<body link="#0000ff" vlink="#800080">
+
+
+<p></p>
+
+<h1 align="center">JSF Tools tutorial - Build a JSF 2.0 application</h1>
+
+<blockquote><b>Summary</b> <br>
+
+In this tutorial we will build and execute a JSF 2.0 web application and
+highlight the features provided by the JSF Tools project.</blockquote>
+
+<hr width="100%">
+<h3>Introduction</h3>
+
+<p>The JSF Tools project provides tools that simplify building JSF
+2.0 web applications These include an enhanced HTML Source Editor that
+provides content-assist and validation for JSF tags.In this tutorial we
+will create and execute a JSF 2.0 web application. The <a href="../../whats_new.htm#jsf20">New and Noteworthy page</a> lists all the tooling features available to support development of a JSF 2.0 web application.</p>
+<br />
+
+<a id="setup"></a>
+
+<h3>Setup</h3>
+<p></p>
+<ul>
+	<li><a href="http://java.sun.com/javase/downloads/index.jsp">The
+	Java SE 6 Development Kit (JDK)</a></li>
+
+	<li><a href="http://tomcat.apache.org/">Apache Tomcat 6.0</a></li>
+	<li><a href="http://eclipse.org/downloads/"> Eclipse IDE for
+	Java EE Developers</a></li>
+
+</ul>
+<p><a id="serversetup"></a></p>
+<h3>Setup Apache Tomcat Server instance</h3>
+Setup an instance of the Apache Tomcat Server using the information in
+'Setup' section of this tutorial
+<a
+	href="http://www.eclipse.org/webtools/community/tutorials/BuildJ2EEWebApp/BuildJ2EEWebApp.html">Building
+and Running a Web Application.</a>
+<p><a id="reglibs"></a></p>
+
+<h3>Create a JavaServer Faces Project</h3>
+
+<p>Create a New Dynamic Web Application with the name of <b>JSFFaceletsTutorial</b>.
+Set the target runtime to the <b>Apache Tomcat 6.0</b><br>
+In the <b>Configuration</b> section, click on the <b>Modify</b> button
+and select the <b>&ldquo;JavaServer Faces 2.0&rdquo;</b> facet. Skip the
+next panel to get to the JSF Capabilities page.</p>
+<br>
+<br>
+<img alt="New Dynamic Web Application"
+	src="images/new-dynamic-web-project-facelets.png" height="684"
+	width="385">
+<img alt="Project Facets" src="images/project-facets.png" height="459"
+	width="601">
+<br />
+
+<p>On the JSF Capabilities page, from the drop-down for the Type of
+the JSF Library, select <b>User Library</b>. <br>
+<br>
+
+<img alt="JSF Capabilities page"
+	src="images/jsf-capabilities-library.png" height="502"
+	width="554"></p>
+
+
+<br>
+<p>Click on the <b>Download library</b> icon. The Download Library
+dialog is displayed with the list of providers for the JSF
+implementation JAR files. Select the JSF 2.0 (Mojarra) library. Click <b>Next</b>.
+Accept the license and hit <b>Finish</b> <br>
+<br>
+<img alt="JSF Capabilities page" src="images/jsf-download-library-jsf20.png" height="421"
+	width="649"></p>
+
+
+<br>
+
+The tool downloads the JAR files, creates a JDT User Library and adds it
+to the current project. Select the checkbox for the new library if it is
+not selected. Next, select the
+<b>Manage libraries</b>
+icon.
+<br>
+<br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-capabilities-library-2-jsf20.png" height="537"
+	width="391">
+<br>
+<br>
+Click on the
+<b>Finish</b>
+button to create the JavaServer Faces Application. You may be asked to
+choose the J2EE perspective upon completion. Click OK.
+<br>
+
+<br>
+<p>Your JSF application has been created.<br>
+<br>
+<br>
+<p><a id="template"></a></p>
+<h3>Create Facelets template pages</h3>
+<p>You will now create a Facelets template page. Create a folder
+called <b>templates</b> under the <b>WEB-INF</b> folder. Use the HTML
+wizard to create a template page called, <b>BasicTemplate.xhtml</b>
+under this folder. Right-click on the <b>template</b> folder, select <b>New
+&raquo; HTML</b> to launch the HTML wizard. In the Select Templates page of
+the wizard, select the <b>New Facelet Template</b> template. Click
+Finish.</p>
+<img alt="Create Facelets Template" src="images/facelets-template.png"
+	height="660" width="804">
+
+<p>Edit the template file following the instructions in the
+template. You will create and include the header and footer templates.
+Your final template file should be as shown below.</p>
+<br />
+<br />
+
+<strong>BasicTemplate.xhtml</strong> <pre>
+<code>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+          &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+      xmlns:ui=&quot;http://java.sun.com/jsf/facelets&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;ui:insert name=&quot;title&quot;&gt;Facelets Tutorial&lt;/ui:insert&gt;&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div id=&quot;header&quot;&gt;
+    &lt;ui:insert name=&quot;header&quot;&gt;
+        &lt;ui:include src=&quot;/WEB-INF/templates/header.xhtml&quot;/&gt;
+    &lt;/ui:insert&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;content&quot;&gt;
+    &lt;ui:insert name=&quot;content&quot;&gt;
+    &lt;/ui:insert&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;footer&quot;&gt;
+    &lt;ui:insert name=&quot;footer&quot;&gt;
+        &lt;ui:include src=&quot;/WEB-INF/templates/footer.xhtml&quot;/&gt;
+    &lt;/ui:insert&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code>
+</pre>
+
+<p>Create the header and footer templates under the <b>template</b>
+folder using the <b>New HTML Wizard</b> as described above. In the
+Select Template page of the wizard, choose the corresponding template
+files, <b>New Facelet Header</b> and <b>New Facelet Footer</b>. Make
+changes to the templates as shown below.</p>
+<br />
+<br />
+<img alt="Facelets Template" src="images/facelets-header-footer.png"
+	height="371" width=254><br />
+<br />
+<p><a id="newpage"></a></p>
+
+<h3>Create a JSF Page</h3>
+<p>Create a JSF page with Facelets tags that will use the template
+created in the previous step. Use the HTML Page wizard to create a page
+called <b>login.xhtml</b> in the Web Content folder of the new
+application. In the Select Templates page of the wizard, select the <b>New
+Facelet Composition Page</b> template. Click Finish. <br>
+<br>
+<br>
+
+<strong>login.xhtml</strong> <pre>
+<code>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; 
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+    xmlns:ui=&quot;http://java.sun.com/jsf/facelets&quot;
+    xmlns:h=&quot;http://java.sun.com/jsf/html&quot;
+    xmlns:f=&quot;http://java.sun.com/jsf/core&quot;&gt;
+
+&lt;ui:composition template=&quot;&quot;&gt;
+    &lt;ui:define name=&quot;header&quot;&gt;
+        Add your header here or delete to use the default
+    &lt;/ui:define&gt;
+    &lt;ui:define name=&quot;content&quot;&gt;
+        Add your content here or delete to use the default
+    &lt;/ui:define&gt;
+    &lt;ui:define name=&quot;footer&quot;&gt;
+        Add your footer here or delete to use the default
+    &lt;/ui:define&gt;
+&lt;/ui:composition&gt;
+&lt;/html&gt;
+</code>
+</pre> <br />
+
+<p><a id="facelets-tagattr-validation"></a></p>
+<h3>Facelets Tag Attribute Validation and Content Assist</h3>
+<p>The JSF Tools  project adds support for
+validating attributes of Facelets tags and also provides Content Assists
+on them. Note the warning on the <b>template</b> attribute of the <b>&lt;ui:composition&gt;</b>
+tag.</p>
+<br>
+<br>
+<img alt="Facelets Tag Attribute Validation"
+	src="images/facelets-tagattr-validation.png" height="152" width="569">
+
+<br>
+<p>Position the cursor in between the double-quotes of the <b>template</b>
+attribute and hit <b>Ctrl + spacebar</b> to get Content Assist. You
+should see a pop-up listing the directories under the <b>WebContent</b>
+folder. Select <b>/WEB-INF/templates/BasicTemplate.xhtml</b></p>
+<br />
+<br />
+<img alt="Facelets Tag Attribute Content Assist"
+	src="images/facelets-tagattr-contentassist.png" height="116"
+	width="618"> <br />
+<br />
+<br />
+<p><a id="Facelets Login page"></a></p>
+<h3>Complete the JSF page</h3>
+<p>Delete the <b>&lt;ui:define&gt;</b> tags for the header and
+footer. The page will get the header and footer from the template. Add
+the tags for the login in the <b>content</b> section as shown below.
+Please note that the current release of the JSF Tools 
+project doesn't support the visual rendering of an XHTML page in the JSF
+Web Page Editor. However, all the productivity features available in the
+Source Page of the Web Page Editor for editing a JSP page are available
+in the HTML Source Editor for building a JSF Facelets page in XHTML.</p>
+<br />
+<br />
+
+<strong>login.xhtml</strong> <pre>
+<code>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; 
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+    xmlns:ui=&quot;http://java.sun.com/jsf/facelets&quot;
+    xmlns:h=&quot;http://java.sun.com/jsf/html&quot;
+    xmlns:f=&quot;http://java.sun.com/jsf/core&quot;&gt;
+
+&lt;ui:composition template=&quot;/WEB-INF/templates/BasicTemplate.xhtml&quot;&gt;
+    &lt;ui:define name=&quot;content&quot;&gt;
+        &lt;h:form&gt;
+            &lt;h:panelGrid columns=&quot;2&quot;&gt;
+                &lt;h:outputText value=&quot;Name&quot;&gt;&lt;/h:outputText&gt;
+                &lt;h:inputText value=&quot;#{loginBean.name}&quot;&gt;&lt;/h:inputText&gt;
+                &lt;h:outputText value=&quot;Password&quot;&gt;&lt;/h:outputText&gt;
+                &lt;h:inputSecret value=&quot;#{loginBean.password}&quot;&gt;&lt;/h:inputSecret&gt;
+            &lt;/h:panelGrid&gt;
+            &lt;h:commandButton value=&quot;Login&quot; action=&quot;login&quot;&gt;&lt;/h:commandButton&gt;
+        &lt;/h:form&gt;
+    &lt;/ui:define&gt;
+&lt;/ui:composition&gt;
+&lt;/html&gt;
+</code>
+</pre> <a id="faces-config-bean"></a>
+<h3>Configure the Managed Bean</h3>
+In the Project Explorer, expand the node,
+JSFFaceletsTutorial-&gt;WebContent. Double-click on <b>faces-config.xml</b>
+. This will launch the Faces Configuration editor. Select the <b>ManagedBean</b>
+tab. <br>
+<br>
+<img alt="Faces Config Editor Managed Bean"
+	src="images/facesconfig-editor-bean-facelets.png" height="373"
+	width="672"> <br>
+<br>
+Click on the <b>Add</b> button. This will launch the New Managed Bean
+wizard. Select the option, <b>Create a new Java class</b>. In the next
+wizard panel, enter the package as, <b>com.tutorial</b> and the Name of
+the class as <b>LoginBean</b> . Click the Finish button. <br>
+This will create the Java class and register it as a managed bean. Save
+the Faces Configuration editor.To edit the Java class, click on the
+hyperlink, <b>ManagedBean class</b> in the Managed bean page as shown in
+the figure below. This will launch the Java editor. <br>
+<br>
+<img alt="Faces Configuration Editor - Managed Bean tab"
+	src="images/fce-managedbean-class.png" height="181" width="599">
+<br>
+<br>
+
+<p><a id="createbean"></a></p>
+<br>
+Edit the Java class, <b>com.tutorial.LoginBean</b>. Add the following
+code and save. <br>
+<br>
+
+<strong>LoginBean.java</strong> <pre>
+<code>
+/**
+ * LoginBean.java
+ * 
+ */
+
+package com.tutorial;
+
+public class LoginBean
+{
+    private String name;
+    private String password;
+
+
+    public String getName ()
+    {
+        return name;
+    }
+
+
+    public void setName (final String name)
+    {
+        this.name = name;
+    }
+
+
+    public String getPassword ()
+    {
+        return password;
+    }
+
+
+    public void setPassword (final String password)
+    {
+        this.password = password;
+    }
+}
+</code>
+</pre>
+
+<h3>Add Another Page</h3>
+<p>Create a new HTML page welcome.xhtml in WebContent with the
+following content:</p>
+<br />
+<strong>welcome.xhtml</strong> <pre>
+<code>
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+    xmlns:ui=&quot;http://java.sun.com/jsf/facelets&quot;
+    xmlns:h=&quot;http://java.sun.com/jsf/html&quot;
+    xmlns:f=&quot;http://java.sun.com/jsf/core&quot;&gt;
+
+&lt;ui:composition template=&quot;/WEB-INF/templates/BasicTemplate.xhtml&quot;&gt;
+    &lt;ui:define name=&quot;content&quot;&gt;
+        &lt;h:outputLabel value=&quot;Welcome #{loginBean.name}&quot;&gt;&lt;/h:outputLabel&gt;
+    &lt;/ui:define&gt;
+&lt;/ui:composition&gt;
+&lt;/html&gt;
+</code>
+</pre>
+
+
+<h3>Set up Page Navigation Rules</h3>
+
+<p>Double-click on faces-config.xml to open the Faces Configuration
+Editor. Click on the <strong>Navigation Rule</strong> tab. Now drag the
+login.xhtml and welcome.xhtml files from Project Explorer onto the
+Navigation Rule grid as shown.</p>
+
+<img alt="Adding pages for the navigation rule"
+	src="images/navigation-01.png" width="717" height="430" />
+
+<p>Click on the Link tool in the palette on the right. Now draw an
+arrow from login.xhtml to welcome.xhtml as shown.</p>
+
+<img alt="Linking pages for the navigation rule"
+	src="images/navigation-02.png" width="720" height="432" />
+
+<p>Now, click on the arrow and open the <strong>Properties</strong>
+view. Click on the button with the ellipses next to the &ldquo;From
+Outcome&rdquo; field</p>
+
+<img alt="Setting an action for the navigation rule"
+	src="images/navigation-03.png" width="547" height="501" />
+
+<p>Select &ldquo;Login&rdquo; in this dialog. Click OK</p>
+
+<img alt="Selecting an action for the navigation rule"
+	src="images/navigation-04.png" width="786" height="379" />
+
+<p>Our navigation rule is now set up.</p>
+
+<h3><a id="testpage"></a>Run the JSF Facelets Page</h3>
+<p>You will now execute the <b>login.xhtml</b> page against the
+Apache Tomcat server. Choose <b>Run on Server</b> using the context menu
+while selecting the <b>login.xhtml</b> page in the navigator. Choose
+your Apache Tomcat server and set it up as required if you had not
+already done so. Click Finish. You should see from the Console view that
+the Tomcat server starts and then you should see the executing login
+page appear in the Web Browser like below. <br>
+<br />
+<br />
+<img alt="" src="images/run-facelets.png" width="454" height="269" /> <img
+	alt="" src="images/run-facelets-02.png" width="454" height="269" />
+
+
+<p><b> Congratulations! You have created and executed your first
+JSF Facelets application.</b></p>
+<br />
+</body>
+</html>

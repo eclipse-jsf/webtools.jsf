@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Apache MyFaces Trinidad - Initial Setup Guide</title>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="../../../book.css" type="text/css"/>
+</head>
+<body>
+<table summary="" cellspacing="0" cellpadding="0" width="100%">
+<tr valign="bottom">
+<td align="left" width="86%">
+<h1>Apache MyFaces Trinidad - Initial Setup Guide</h1>
+</td>
+</tr>
+</table>
+<hr/>
+
+<h2>Overview</h2>
+This guide intends to aid with the initial setup of a dynamic web application to make use of the <a href="http://myfaces.apache.org/trinidad/index.html">Apache MyFaces Trinidad</a> ("Trinidad") JSF library.
+While the goal is that this serves as sufficient information to guide the user through initial setup, the Trinidad website should always be considered as the source of complete and current information.
+This guide is intended for setup of Trinidad for use with the Eclipse Web Tools Platform ("WTP") more than as a general Trinidad setup guide (although the core concepts may not be specific to WTP).
+
+<h2>Dynamic Web Project Setup</h2>
+
+<h3>JSF Library Configuration</h3>
+As with all frameworks, Trinidad requires certain libraries to be on the classpath.
+Some libraries <i>may</i> be provided by the server runtime (for example, a JEE5 server runtime will likely provide a JSF 1.2 implementation and JSTL 1.2).
+When required libraries are not provided by the server runtime, it is recommended that they be added as one or more user Libraries (please refer to <a href="../../reference/jsf_library_management.html">Creating and Updating JSF Libraries</a>).<br/>
+<br/>
+
+<h3>Dynamic Web Project Configuration</h3>
+When creating a Dynamic Web Project, specify the use of the <i>JavaServer Faces (v1.1 or v1.2, depending on requirements) Project</i> "Configuration", as shown below:<br/>
+<br/>
+<img src="images/trinidad_initialsetupguide_Configuration.png" alt="JavaServer Faces v1.2 Project"/>
+<h6 class="CaptionFigColumn">JavaServer Faces v1.2 Project</h6>
+Proceed through the wizard until reaching the <em class="UILabel">JSF Capabilities</em> page. On this page, select the required JSF Libraries as previously created, as shown below:<br/>
+<br/>
+<img src="../../reference/images/jsf_library_configuration.png" alt="JSF Capabilities"/>
+<h6 class="CaptionFigColumn">JSF Capabilities</h6>
+<p class="Note"><b>NOTE:</b> If JSF Libraries were created with different names than shown above, the available library names may differ.</p>
+Complete the wizard to create the Dynamic Web Project.
+
+<h2>Web Application Descriptor Additions</h2>
+Some additions to the web application's descriptor (.../WEB-INF/web.xml) are required, and some additions are optional.
+<p class="Note"><b>NOTE:</b> Please consult online resources at the <a href="http://myfaces.apache.org/trinidad/index.html">Apache MyFaces Trinidad</a> website for complete and current information.</p>
+
+<h3>Required Additions</h3>
+The following additions need to be made to the web application's descriptor to configure Trinidad's resource servlet (which serves stylesheets, scripts, and images at runtime):
+<p class="Code"><pre>  &lt;servlet>
+    &lt;servlet-name>resources&lt;/servlet-name>
+    &lt;servlet-class>org.apache.myfaces.trinidad.webapp.ResourceServlet&lt;/servlet-class>
+  &lt;/servlet>
+
+  &lt;servlet-mapping>
+    &lt;servlet-name>resources&lt;/servlet-name>
+    &lt;url-pattern>/adf/*&lt;/url-pattern>
+  &lt;/servlet-mapping></pre></p>
+The following additions need to be made to the web application's descriptor to configure Trinidad's filter:
+<p class="Code"><pre>  &lt;filter>
+    &lt;filter-name>trinidad&lt;/filter-name>
+    &lt;filter-class>org.apache.myfaces.trinidad.webapp.TrinidadFilter&lt;/filter-class>
+  &lt;/filter>
+
+  &lt;filter-mapping>
+    &lt;filter-name>trinidad&lt;/filter-name>
+    &lt;servlet-name>faces&lt;/servlet-name>
+  &lt;/filter-mapping></pre></p>
+<p class="Note"><b>NOTE:</b> The <b>filter-mapping</b> shown above assumes that the standard JSF servlet's <b>servlet-name</b> is specified as "faces" - this may differ depending on user setup, and so should be specified appropriately.</p>
+
+<h3>Optional Additions</h3>
+The following additions to the web application's descriptor are optional, depending on your specific application's requirements:
+<p class="Code"><pre>  &lt;context-param>
+    &lt;param-name>javax.faces.STATE_SAVING_METHOD&lt;/param-name>
+    &lt;param-value>client&lt;/param-value>
+  &lt;/context-param>
+
+  &lt;context-param>
+    &lt;param-name>javax.faces.DEFAULT_SUFFIX&lt;/param-name>
+    &lt;param-value>.jspx&lt;/param-value>
+  &lt;/context-param>
+
+  &lt;context-param>
+    &lt;param-name>org.apache.myfaces.trinidad.USE_APPLICATION_VIEW_CACHE&lt;/param-name>
+    &lt;param-value>false&lt;/param-value>
+  &lt;/context-param>
+
+  &lt;context-param>
+    &lt;param-name>org.apache.myfaces.trinidad.CHECK_FILE_MODIFICATION&lt;/param-name>
+    &lt;param-value>false&lt;/param-value>
+  &lt;/context-param>
+
+  &lt;context-param>
+    &lt;param-name>org.apache.myfaces.trinidad.CHANGE_PERSISTENCE&lt;/param-name>
+    &lt;param-value>session&lt;/param-value>
+  &lt;/context-param>
+
+  &lt;context-param>
+    &lt;param-name>org.apache.myfaces.trinidad.resource.DEBUG&lt;/param-name>
+    &lt;param-value>false&lt;/param-value>
+  &lt;/context-param></pre></p>
+
+<p class="Note"><b>NOTE:</b> Some of these optional additions are Trinidad-specific, and some are not.</p>
+
+<h2>JSF Application Configuration Resource Additions</h2>
+An addition to the JSF application configuration resource (typically .../WEB-INF/faces-config.xml) is required.
+<p class="Note"><b>NOTE:</b> Please consult online resources at the <a href="http://myfaces.apache.org/trinidad/index.html">Apache MyFaces Trinidad</a> website for complete and current information.</p>
+
+<h3>Required Addition</h3>
+The following addition needs to be made to the JSF application configuration resource to configure Trinidad's core RenderKit:
+<p class="Code"><pre>  &lt;application>
+    &lt;default-render-kit-id>org.apache.myfaces.trinidad.core&lt;/default-render-kit-id>
+  &lt;/application></pre></p>
+
+</body>
+</html>

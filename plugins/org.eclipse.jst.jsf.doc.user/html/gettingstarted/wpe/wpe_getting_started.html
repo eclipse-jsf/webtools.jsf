@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Web Page Editor</title>
+	<meta http-equiv="Content-Style-Type" content="text/css"/>
+	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+	<link rel="stylesheet" href="../../../book.css" type="text/css"/>
+</head>
+
+<body>
+
+	<h1>Web Page Editor</h1>
+	<img src="images/wpe.png" alt="Web Page Editor"/>
+
+	<h2>Editor</h2>
+	The editor is where much of the overall editing experience takes place.
+	It can be configured, via the toolbar, to display both a WYSIWYG and
+	source view of the current document in either horizontal or vertical
+	split modes, or can be configured to display only either the WYSIWYG or
+	the source view (the image above shows split WYSIWYG and source views).
+	The currently-selected element is synchronized between all views.
+
+	<h3>Palette</h3>
+	<img src="images/wpe_palette.png" alt="Palette"/><br/>
+	<br/>
+	The palette displays an item for each tag in the JSP tag libraries that
+	are on the application's classpath, in addition to standard HTML and
+	JSP tags. The tag items can be dragged and dropped onto the WYSIWYG
+	design canvas to rapidly design web pages. The palette can be pinned open,
+	or can be set to automatically expand when the cursor is placed over it
+	while it is in its collapsed state.
+
+	<h3>Design/Preview Tabs</h3>
+	<img src="images/wpe_preview.png" alt="Preview"/><br/>
+	<br/>
+	The Design/Preview tabs of the editor allow the user to toggle between
+	the editable view (as shown in the first image) and a non-editable
+	preview (as shown in the image above) that closely emulates the web page
+	as it will be rendered at runtime.
+
+	<h2>Toolbar</h2>
+	<img src="images/wpe_toolbar.png" alt="Toolbar"/><br/>
+	<br/>
+	The toolbar allows the following functions:
+	<ul>
+		<li>Selecting horizontally-split WYSIWYG and source views</li>
+		<li>Selecting vertically-split WYSIWYG and source views</li>
+		<li>Selecting WYSIWYG-only view</li>
+		<li>Selecting source-only view</li>
+		<li>Underlining selected text</li>
+		<li>Bolding selected text</li>
+		<li>Italicizing selected text</li>
+		<li>Making selected text small</li>
+		<li>Making selected text large</li>
+	</ul>
+
+	<h2>Properties View</h2>
+	<img src="images/wpe_properties.png" alt="Properties"/><br/>
+	<br/>
+	The properties view allows inspection and editing of the selected element's
+	attributes. The "Quick Edit" tab within the view provides access to the
+	most-commonly edited attributes, while the "Attributes" tab provides access
+	to all attributes.
+
+	<h3>Element Navigation</h3>
+	<img src="images/wpe_elementnavigation.png" alt="Element Navigation"/><br/>
+	<br/>
+	The element navigation drop-down allows selection of the
+	currently-selected element's parent elements for editing within the
+	properties view.
+
+	<h2>Outline View</h2>
+	<img src="images/wpe_outlinemenu.png" alt="Outline Context Menu"/><br/>
+	<br/>
+	The outline view allows the user to visually inspect document structure
+	and allows selection of the current element to be changed. It also allows
+	elements to be dragged and dropped within the view, and a context menu
+	allows element and attribute manipulation.
+
+	<h2>Status Bar</h2>
+	The status bar displays the hierarchical location within the document
+	of the currently-selected element.<br/>
+	<br/>
+
+	<hr/>
+
+	<h2>Working with Elements in the WYSIWYG View</h2>
+
+	<h3>Inspecting Elements</h3>
+	<img src="images/wpe_editor_inspection.png" alt="Inspecting Elements"/><br/>
+	<br/>
+	By floating the cursor over an element or the border that represents the
+	element, tooltips provide feedback on which element will be selected if
+	the mouse is clicked.
+
+	<h3>Selecting Elements</h3>
+	<img src="images/wpe_editor_selection.png" alt="Selecting Elements"/><br/>
+	<br/>
+	Upon clicking an element or the border that represents the element, a
+	selection border displays the selected element (and the selection is
+	synchronized across all views).
+
+	<h3>Editing Elements Using Context Menu</h3>
+	<img src="images/wpe_editor_contextmenu.png" alt="Context Menu"/><br/>
+	<br/>
+	Right-clicking elements will bring up a context menu that allows editing,
+	selection, and other functionality on the selected element. As can be seen
+	in the image above, some elements allow tag-specific editing functionality.
+
+	<h3>Visually Inspecting and Selecting Non-Visual Child Components</h3>
+	<img src="images/wpe_editor_childcomps1.png" alt="Inspecting Child Components"/><br/>
+	<br/>
+	By floating the cursor over an element, non-visual child components of this
+	element (such as converters and validators) can be seen as semi-transparent
+	icons to the top-right of the element.<br/>
+	<br/>
+	<img src="images/wpe_editor_childcomps2.png" alt="Selecting Child Components"/><br/>
+	<br/>
+	Selecting the element and then clicking the "pin" icon that appears at the
+	top-right of the element will then allow selection of the non-visual child
+	component by clicking the component's icon.
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>Validating JSF Applications</title>
+</head>
+<body>
+<h1>Validating JSF Applications</h1>
+<br>
+<p>A valid JSF application has a valid Faces configuration and JSP pages that are syntactically and semantically correct.   The JSF Tooling, with the support of the WTP Tooling, will verify at design-time, as best it can, that the application can be executed at run-time.</p>
+<h3>Validating an Application</h3>
+<p>From the application node in the explorer, choose "Validate".   This action will validate all of the resources in the project using all validators enabled for "Manual".   From the JSF application perspective, this will validate the following:</p>
+<ul>
+	<li>Faces configuration files</li>
+	<li>JSP files</li>
+</ul>
+<p>To access the validators for the workspace: <b>Window -&gt; Preferences...-&gt; Validation</b></p>
+<img alt="Validator Preferences" src="./images/validationprefs.png">
+<p>The validators marked in yellow are those that have applicability to the JSF Web application.</p>
+<br>
+<h3>Validating Faces Configuration</h3>
+<br>
+<p>At this time, when a faces configuration is validated, it only verifies that the XML is syntactically correct and that the data conforms to the faces-configuration schema.  Future versions will perform semantic checks within a single faces configuration file and across all faces configuration files with an application.</p>
+<br>
+<h3>Validating JSF JSP Pages - The JSF View Validator</h3>
+<br>
+<p>The JSF View Validator will verify that the attribute values supplied in the JSP page for certain tags are valid.  This functionality relies on additional meta-data and classes being supplied by plugin providers for the tag libraries.   The JSF Tooling team has provided validation support for:</p>
+<ul>
+<li>JSF Core Tag Library</li>
+<li>JSF HTML Tag Library</li>
+</ul>
+<p>When there is a problem, there will be annotation markers in the rulers, problem markers in the problem view and "squigglies" underneath the problems in source.  Errors are in red and must be dealt with whereas the yellow warnings may not result in runtime problems and may sometimes be ignored.</p>
+<p>The validator will verify the attribute values with and without expression language (EL).  These kinds of validations are treated differently.   JSF EL is identified by "#{some expression}" in the attribute value.</p>
+<p>If the JSF View Validator is enabled, validation will not only take place at Build and/or Manual validation time, but also as-you-type.   Because validation of EL can be "expensive" you have the option of turning this option off separately.</p>
+<p>To access the EL Validator preferences:  <b>Window -&gt; Preferences... -&gt; Web and XML -&gt; JavaServer Faces Tools -&gt; Validation</b></p>
+<img alt="EL Validator Preferences" src="./images/elvalidationprefs.png" >
+<img src="../../images/ngrelc.png"  alt="Related concepts" border="0"> 
+<br>
+<p>
+<a href="../concepts/jsf_source_editing.html">JSF JSP Source Editing</a><br>
+<a href="../concepts/jsf_app_config_mgr.html">JSF Application Configuration</a><br>
+<a href="http://java.sun.com/javaee/javaserverfaces/reference/api/index.html">JavaServer Faces Specification</a><br>
+</p> 
+<p> <img src="../../images/ngrelr.png"  alt="Related reference" border="0"> 
+</p>
+<p>
+<a href="../reference/taglibsupport.html">Tag Library Support</a><br>
+<a href="../reference/jsf_library_management.html">JSF Libraries</a><br>
+</p>
+<p> <img src="../../images/ngrelt.png"  alt="Related tasks" border="0"> 
+</p> 
+<p>
+<a href="../tasks/create_jsf_app.html">Create JSF Application</a><br>
+<a href="../tasks/create_jsf_jsp_page.html">Create JSF JSP Page</a><br>
+</p>
+  
+</body>
+</html>

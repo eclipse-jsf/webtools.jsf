@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>What happens when a JSF Facet is installed?</title>
+</head>
+<body>
+<h1>What happens when a JSF Facet is installed?</h1>
+<br>
+When a JSF Facet is installed, the following occurs:
+<ul>
+	<li>The user specified JSF Libraries are added to the build
+	classpath if they are not deployed or, they are added as J2EE Module
+	Dependencies which allows them to be added to the build classpath and
+	deployed at module publish time</li>
+	<li>The project's Web Deployment Descriptor (web.xml) is updated
+	ensuring that the Faces Servlet is present along with the user's
+	specification for:
+	<ul>
+		<li>Faces Servlet Name</li>
+		<li>Faces Servlet URL Mappings</li>
+		<li>Context Params for application configuration file</li>
+	</ul>
+	</li>
+	<li>An empty Faces configuration file using the name and location
+	specified by the user is created. If a file with that name already
+	exists at that location, this step is skipped.</li>
+</ul>
+<br>
+The project should have the JSF implementation JAR files in its
+classpath. This can be configured by selecting the library type,"User Library" or if 
+the user has chosen a runtime adapter that is capable of supplying the
+JSF implementation libraries, the library configuration can be disabled
+by selecting the type, "Disable Library Configuration".
+<br>
+<br>
+<img src="../../images/ngrelc.png" alt="Related concepts" border="0">
+<p><a href="./jsf_facets.html">JSF Facets</a><br>
+<a href="./jsf_facets_uninstall.html">What happens when a JSF Facet
+is un-installed?</a><br>
+</p>
+
+<p><img src="../../images/ngrelr.png" alt="Related reference"
+	border="0"></p>
+<p></p>
+
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../book.css" type="text/css">
+<title>Migrating a project using the JSF Library to use the JDT User Library </title>
+</head>
+<body>
+<h1>Migrating a project using JSF Library to use JDT User Library</h1>
+<br>
+Existing JSF applications that use the JSF Library feature from
+earlier releases (WTP 3.1 and earlier), will continue to work in this
+release. The tool will detect an older workspace and configure the
+existing JSF application to use a 'Legacy Library Configuration' as the
+library type. Users are encouraged to switch to the 'Use Library' type. <br> 
+<h2>Step 1: Open Project Properties and Switch Library type to 'User Library'</h2>
+<br>
+<img src="./images/migration_jsflib_step1.png" alt="Switch library type to 'User Library'" >
+<br><br>
+<br>
+<img src="./images/migration_jsflib_step11.png" alt="Switch library type to 'User Library'" >
+<br><br>
+<p>
+<br>
+<h2>Step 2: Download JSF implementation JAR files</h2>
+<p>
+Click on the 'Download library..' icon to downlaod the JAR files of a JSF implementation. Select the provider, update the download destination folder and click 'Next'.
+<br><br>
+<img src="./images/migration_jsflib_step2.png" alt="Download  JSF implementation" >
+<br><br>
+Accept the license and press 'Finish' to download the JAR files to the project.
+<br><br>
+<img src="./images/migration_jsflib_step21.png" alt="Download  JSF implementation" >
+<br><br>
+<p>The tool will download the JAR files, create the User Library and add it to the project.</p>
+<br>
+<img src="./images/migration_jsflib_step22.png" alt="Download  JSF implementation" >
+<br><br>
+</p>
+<img src="../../images/ngrelc.png" alt="Related concepts" border="0">
+<p><a href="../concepts/jsf_facets_install.html">What happens when a JSF
+Facet is installed?</a><br>
+<p><img src="../../images/ngrelr.png" alt="Related reference"
+	border="0"></p>
+<p>
+<a href="../reference/jsf_library_management.html">JSF Library Management</a>
+</p>
+<br>
+<p><img src="../../images/ngrelt.png" alt="Related tasks" border="0">
+</p>
+<p> 
+<a href="create_jsf_jsp_page.html">Create JSF JSP page</a><br>
+</p>
+
+</body>
+</html>

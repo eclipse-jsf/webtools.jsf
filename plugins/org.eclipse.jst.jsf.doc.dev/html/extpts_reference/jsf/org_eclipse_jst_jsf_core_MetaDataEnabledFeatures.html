@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>MetaData Enabled Features</title>
+<style type="text/css">@import url("../../book.css");</style>
+<style type="text/css">@import url("../../schema.css");</style>
+</HEAD>
+<BODY>
+<H1 style="text-align:center">MetaData Enabled Features</H1>
+<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Identifier: </h6>org.eclipse.jst.jsf.core.MetaDataEnabledFeatures<p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Since: </h6>1.5
+<p></p>
+
+<h6 class="CaptionFigColumn SchemaHeader">Description: </h6>Defines a mapping between a runtime type defined by a different plugin and an implementing class in the extenders plugin.   This allows a provider to provide additional processing on an element or attribute instance that can be in addition to existing processing or a means to provide a new kind of processing of existing runtime types.
+
+<p><b>This extension point is provisional and subject to change</b></p><p></p>
+<h6 class="CaptionFigColumn SchemaHeader">Configuration Markup:</h6>
+<p></p>
+<p class="code SchemaDtd">&lt;!ELEMENT <a name="e.extension">extension</a> (<a href="#e.MetaDataEnabledFeature">MetaDataEnabledFeature</a>+)&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST extension</p>
+<p class="code SchemaDtdAttlist">point&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">id&nbsp;&nbsp;&nbsp;&nbsp;CDATA #IMPLIED</p><p class="code SchemaDtdAttlist">name&nbsp;&nbsp;CDATA #IMPLIED</p>&gt;</p>
+<p></p>
+<ul class="ConfigMarkupAttlistDesc">
+</ul>
+<br><p class="code SchemaDtd">&lt;!ELEMENT <a name="e.MetaDataEnabledFeature">MetaDataEnabledFeature</a> EMPTY&gt;</p>
+<p class="code SchemaDtd">&lt;!ATTLIST MetaDataEnabledFeature</p>
+<p class="code SchemaDtdAttlist">typeid&nbsp;CDATA #REQUIRED</p><p class="code SchemaDtdAttlist">class&nbsp;&nbsp;CDATA #REQUIRED</p>&gt;</p>
+<p></p>
+<p class="ConfigMarkupElementDesc">
+mapping between an different extenders runtime type id, and a processing class from the extenders plugin</p>
+<br>
+<ul class="ConfigMarkupAttlistDesc">
+<li><b>typeid</b> - Fully qualified runtime type id</li>
+<li><b>class</b> - Fully qualified implementing class that must implement <code>org.eclipse.jst.jsf.metadataprocessors.IMetaDataEnabledFeature</code>.</li>
+</ul>
+<br><br>
+<p class="note SchemaCopyright">
+Copyright (c) 2006 Oracle Corporation.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+ 
+Contributors:
+    Gerry Kessler/Oracle - initial API and implementation
+
+</p>
+</BODY>
+</HTML>

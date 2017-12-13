@@ -1,0 +1,14 @@
+/org.eclipse.jst.jsf.core/src;
+/org.eclipse.jst.jsf.ui/src;
+/org.eclipse.jst.jsf.facelet.core/src;
+/org.eclipse.jst.jsf.facelet.ui/src;
+/org.eclipse.jst.jsf.facesconfig/facesconfig;
+/org.eclipse.jst.jsf.facesconfig.ui/src;
+/org.eclipse.jst.jsf.common/src;
+/org.eclipse.jst.jsf.common.ui/src;
+/org.eclipse.jst.jsf.common.runtime/src;
+/org.eclipse.jst.jsf.standard.tagsupport/src;
+/org.eclipse.jst.jsf.apache.trinidad.tagsupport/src;
+/org.eclipse.jst.pagedesigner/src;
+/org.eclipse.jst.pagedesigner.jsf.ui/src;
+/org.eclipse.jst.pagedesigner.jsp.core/src;

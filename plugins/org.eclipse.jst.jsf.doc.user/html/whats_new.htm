@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>What's new</title>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="../book.css" type="text/css" />
+</head>
+<body>
+<table summary="" cellspacing="0" cellpadding="0" width="100%">
+	<tr valign="bottom">
+		<td align="left" width="86%">
+		<h1>New and Noteworthy</h1>
+		</td>
+	</tr>
+</table>
+<hr/>
+This section contains descriptions of the significant changes made to the JavaServer Faces Tooling in the WTP 3.2 release
+<p/><a id="jsf20"></a><p/>
+<h2>Support for JSF 2.0</h2>
+<h3>Project Configuration</h3>
+	JSF Tools now supports the configuration of a Dynamic Web Project as a
+	JSF 2.0 project. The tool allows the user to download the following JSF 2.0 implementation librarires:
+	<ul>
+	<li>JSF 2.0 (Mojarra 2.0.2-FCS)</li>
+	<li>JSF 2.0 (Apache Myfaces JSF Core-2.0 API 2.0.0)</li>
+	</ul>  
+<br>
+<br>
+<img alt="Project Facets" src="../images/whats_new/3_2/project-facets.png" height="459"
+	width="601"></img>
+	<img alt="Download JSF Implementation Libraryn"
+	src="../images/whats_new/3_2/jsf-download-library_20.png" height="421"
+	width="649"></img>
+<br />
+	<br />
+<h3>XHTML File Creation </h3>
+The tool provides a set of HTML templates that help in the creation of a Facelets XHTML page
+<br>
+<br>
+
+<img alt="HTML Templates" src="../images/whats_new/3_2/new-xhtml-file-templates.png" height="584"
+	width="438">
+<br />
+	<br />
+<h3>XHTML Source Editing</h3>
+The Web Page Editor (WPE) Source tab has been enhanced to support editing XHTML files. The source editor for XHTML files has similar features as are found in the <a href="concepts/jsf_source_editing.html" >source editor for JSF-JSP page.</a> Following is a list of features added in this release to support JSF 2.0.
+<h4>Content Assist</h4>
+<h4>Content asssit for Namespace</h4>
+Content Assist is available for library namespaces. Namespaces can be defined either explicitly through the Facelet taglib facility or implicitly through the detection of composites through the resource loading facility.
+<br>
+<br>
+
+<img alt="Content Assist for Namespace" src="../images/whats_new/3_2/namespace_ca.png" height="282"
+	width="442">
+<br />
+	<br />
+	<img alt="Content Assist for Namespace" src="../images/whats_new/3_2/namespace-composite-ca.png" height="314"
+	width="453">
+	<br />
+	<br />
+	<h4> Content asssit for tags and tag attributes</h4>
+Content Assist is available for new tags and tag attributes in the JSF Facelets libraries 
+<br>
+<br>
+
+<img alt="Content Assist for Tags" src="../images/whats_new/3_2/tags-ca.png" height="387"
+	width="344">
+<br />
+	<br />
+	<img alt="Content Assist for Tag attributes" src="../images/whats_new/3_2/tag-attr-ca.png" height="159" width="356">
+	<br />
+	<br />
+<h4> Content asssit for EL expression</h4>
+Content assist proposal on an EL expression includes the new implicit variables
+<br>
+<br>
+
+<img alt="Content Assist includes implicit objects" src="../images/whats_new/3_2/el-implicit-variables-ca.png" height="339"	width="525">
+<br />
+	<br />
+<h4>Composite Component support</h4>
+<h4>Content asssit for Namespace</h4>
+Content Assist for library namespaces includes composite components discovered through the resource loading facility, such as those defined under the sub-directories of a directory called "resources" in the web application root
+<br>
+<br>
+<img alt="Composite components" src="../images/whats_new/3_2/composite-components.png" height="293"	width="231">
+
+<br />
+<br />
+<img alt="Content Assist for Namespace" src="../images/whats_new/3_2/namespace-composite-ca.png" height="314" width="453">
+<br />
+<br />
+<h4> Content asssit for composite components tags </h4>
+<br>
+<br>
+<img alt="Content Assist for Composite Components Tags" src="../images/whats_new/3_2/composite-tags-ca.png" height="177"	width="529">
+<br />
+	<br />
+	<br>
+	<br></br></br>
+<h2>Web Page Editor (WPE) Design Pane enhancements</h2>
+
+	Visual rendering in the WPE Design pane has the following enhancements:
+	<ul>
+		<li>optiona to adjust or remove artificial box padding.</li>
+		<li>option to turn off absolute position rendering in CSS.</li>
+	</ul>
+	<br />
+
+	Relative uri resource such as images that contained url encoding
+	characters render properly.
+	<br />
+	<br />
+
+<hr/>
+This section contains descriptions of the following significant changes made to the JavaServer Faces Tooling for Release WTP 3.1:
+<p/><p/>
+<ul>
+<li>
+<p><a href="./reference/jsf_library_management.html">JSF Library Management</a>
+</p>
+</li>
+<li>
+<p><a href="./reference/jsf_design_time_skinning.html">JSF Design-Time Skinning Support</a>
+</p>
+</li>
+</ul>
+<hr/>
+This section contains descriptions of the following significant changes made to the JavaServer Faces Tooling for Release WTP 3.0:
+<p/><p/>
+<h3>Support for alternate view description language for JSF</h3>
+<ul class="indent">
+            <a href="http://wiki.eclipse.org/Design_Time_View_Handlers">See here for information on Alternative View Handler support</a>
+				<div>
+					<h4>Tag Registry View</h4>
+					<div>
+						<p>The Tag Registry View allows a JSF user to browse the JSF
+							tags declared in each project including information about what
+							components, converters and validators they create at runtime.
+						</p>
+					</div>
+					<div style="padding-top: 2em;padding-bottom: 2em;border-width: 0px; border-style: inset;margin: 1em;">
+						<img width="766" height="410" src="../images/whats_new/2_0/TagRegistry.png" alt="Picture of resolver extension in plugin.xml editor"/>
+					</div>
+				</div>
+				<div>
+					<h4>Component Tree View</h4>
+					<p>The Component Tree View allows a user to browse a design-time
+						approximation of what a view (i.e. a JSP page or Facelet XHTML)
+						will look like at runtime. This component tree will also be used
+						by an increasing number of component-based features in the future.
+					</p>
+					<div style="padding-top: 2em;padding-bottom: 2em;border-width: 0px; border-style: inset;margin: 1em;">
+						<img width="823" height="410" src="../images/whats_new/2_0/ComponentTree.png" alt="Picture of resolver extension in plugin.xml editor"/>
+					</div>
+				</div>
+</ul>
+<br/><!--new item--><h3>Hyperlink support in WPE's Source tab</h3><ul class="indent">
+				The Source tab of the Web Page Editor (WPE) supports Hyperlink on a
+				Managed Bean variable, Managed Bean property and Managed Bean method
+				referenced in the Expression Language(EL) of a tag-attribute. Users
+				can
+				<b>(Ctrl+click)</b>
+				on the hyperlink to navigate to the source of the Managed Bean.
+				<br/>
+				<br/>
+				<img src="../images/whats_new/2_0/wpe-hyperlink.png" alt="Hyperlink"/>
+				<br/>
+				<br/>
+			</ul><br/><!--new item--><h3>Hover Help support in WPE's Source tab</h3><ul class="indent">
+				The Source tab of the Web Page Editor (WPE) provides Hover Help on
+				all symbols defined in the Expression Language(EL) of a
+				tag-attribute including references to Managed Beans and Resource
+				Bundles.
+				<br/>
+				<br/>
+				<img src="../images/whats_new/2_0/wpe-hover-help.png" alt="Hover Help"/>
+				<br/>
+				<br/>
+			</ul><br/><!--new item--><h3>Enhancements to Web Page Editor (WPE) Property Pages</h3><ul class="indent">
+				The tabbed property pages in the Web Page Editor (WPE) have been
+				enhanced. This change is important for adopters of the project. See
+				<a href="http://wiki.eclipse.org/Enhancements_to_WPE_Property_Pages">Enhancements to WPE Property Pages</a>
+				for details.
+			</ul><br/><!--new item--><h3>Support for Apache MyFaces Trinidad</h3><ul class="indent">
+				Apache MyFaces Trinidad tags are now supported in the Web Page Editor, in source editors, and in the Properties view.
+				<br/>
+				<br/>
+				<img src="../images/whats_new/2_0/trinidad_in_wpe.png" alt="Trinidad tags in the Web Page Editor"/>
+				<br/>
+				<br/>
+				<img src="../images/whats_new/2_0/trinidad_codeassist.png" alt="Code-assist for Trinidad tags in source editors"/>
+				<br/>
+				<br/>
+				<img src="../images/whats_new/2_0/trinidad_properties.png" alt="Advanced property sections for Trinidad tags"/>
+			</ul><br/><!--new item--><h3>Improvements to EL content assist and hover help</h3><ul class="indent">
+                <div>Thanks to <b>Matthias Fuessel</b> for providing improvements to our EL support:</div>
+                
+                <div style="margin: 1em;">
+                    <img width="752" height="203" src="../images/whats_new/2_0/ImprovedContentAssist.png" alt="Improved icons and additional info in content assist"/>
+                </div>
+                <div style="padding-top: 1em;padding-bottom: 1em;border-width: 0px; border-style: inset;margin: 1em;">
+                    <img width="741" height="194" src="../images/whats_new/2_0/ImprovedHoverHelp.png" alt="Improved info in content assist"/>
+                </div>
+            </ul><br/><!--new item--><h3>New EL framework enhancements</h3><ul class="indent">
+	           <div><p>Thanks to <b>Xiaonan Jiang</b> at IBM for driving new framework requirements and providing prototypes.</p>
+               <h4>Decorative Variable and Property Resolvers</h4>
+               <p>To better support the decorative nature of JSF variable and property resolvers, we have added the ability
+                    to register decorative design time resolvers to the default application manager.  Decorative resolvers
+                    are called only if the runtime resolver that they are associated with is found in the configuration
+                    of the current web project.  For more information see: <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=206514#c22">here</a></p></div>
+               <div style="padding-top: 2em;padding-bottom: 2em;border-width: 0px; border-style: inset;margin: 1em;">
+                    <img width="407" height="194" src="../images/whats_new/2_0/DecorativeResolver.png" alt="Picture of resolver extension in plugin.xml editor"/>
+                </div>
+                <div>
+                    <h4>Enhancements to symbol creation API</h4>
+                    <p>We have refactored several internal symbol creation methods and combined them with contributions
+                    by <b>Matthias Fuessel</b> and <b>Xiaonan Jiang</b> (IBM), to create a new set of extension points
+                    to simplify creation of common JSF symbols.  See <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=211321#c11">here</a>
+                    for more details.</p>
+                    <p>
+                        We have also made the symbol creation methods available on a new factory called <i>JSFSymbolFactory</i>.
+                    </p>
+                </div>
+	        </ul><br/><!--new item--><h3>New EL validation preferences</h3><ul class="indent">
+               <div>
+               <p>New validation preferences for EL validation problems allow you
+               to change the severity of type assignment problems between Error, Warning and Ignore.</p></div>
+               <div style="padding-top: 2em;padding-bottom: 2em;margin: 1em;">
+                    <img width="666" height="585" src="../images/whats_new/2_0/NewELValidationPreferences.png" alt="Shows new preference options in the JSF-&gt;Validation properties page"/>
+                </div>
+            </ul><br/>
+<hr />
+<p>This section contains descriptions of the following significant
+changes made to the JavaServer Faces Tooling for Release 1.0:</p>
+
+<h3>Support for JSF 1.2</h3>
+<ul class="indent">
+	JSF Tools supports JavaServer Faces 1.1 and 1.2 versions.
+	<br />
+	<br />
+	<img
+		src="../images/whats_new/1_0/jsf-versions.png"
+		alt="Support for JSF 1.1 and 1.2" />
+	<br />
+	<br />
+</ul>
+<br />
+
+<!--new item-->
+<h3>Web Page Editor</h3>
+<ul class="indent">
+	An enhanced Web Page Editor is now available. Building on the existing
+	JSP editing support, it provides simultaneous synchronized visual and
+	source editing of a Faces JSP in a split pane arrangment, a
+	flyout/detachable palette, enhanced property sheets, a Preview page,
+	and more.
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/jsf-web-page-editor.png"
+		alt="Web Page Editor sample screenshot" />
+	<br />
+	<br />
+	The layout of the panes, as well as whether to show both, is
+	configurable.
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/jsf-layout.png" alt="Web Page Editor sample screenshot" />
+	<br />
+	<br />
+	More planned features and ideas can be found at the editor's
+	<a href="http://wiki.eclipse.org/index.php/Visual_JSF_Page_Designer">
+	wiki page </a>
+	.
+</ul>
+<br />
+
+<!--new item-->
+<h3>Faces Config Editor</h3>
+<ul class="indent">
+	The Faces Configuration Editor is a comprehensive multi-page editor to
+	edit the Faces configuration resource file. It includes a graphical
+	editor to visually define the navigational rules.
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/jsf-faces-config-editor.png"
+		alt="Faces Config Editor sample screenshot" />
+</ul>
+<br />
+
+<!--new item-->
+<h3>Improved HTML DataTable tag variable support</h3>
+<ul class="indent">
+	EL variables declared using the
+	<em>var</em>
+	attribute on the
+	<strong>h:dataTable</strong>
+	tag are now recognized by the JSF EL framework. The amount of
+	additional support varies depending on the "value" attribute used to
+	back the variable, the most complete being offered for scalar or array
+	objects with generic Lists.
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/DataTableVariableSupport.png" alt="content assist popup" />
+</ul>
+<br />
+
+<!--new item-->
+<h3>JSF Libraries are now regular Classpath Containers</h3>
+<ul class="indent">
+	JSF Libraries make use of the
+	<i>easier publishing of dependencies</i>
+	feature introduced in this release. References to JSF Libraries in a
+	project are made using the standard Java Build Path property page and
+	set to be published/exported using the J2EE Module Dependencies
+	property page, and will appear as JDT Libraries in the Project and
+	Package Explorer views.
+	<i> An upgrade of the JSF Library Registry will automatically occur
+	when an older workspace is opened. The actual references, however, will
+	require a manual upgrade. </i>
+	Information on this can be found at
+	<a href="http://wiki.eclipse.org/index.php/JSF_Library_Migration">
+	http://wiki.eclipse.org/index.php/JSF_Library_Migration </a>
+	. JSF Library references are still being created at JSF Facet
+	installation time, but if you need to add, modify, or remove references
+	after project creation, you will now be using the standard Java Build
+	Path and J2EE Module Dependencies property pages.
+	<br />
+	<br />
+	Creating a JSF Library Reference - JSF Libraries as Classpath Containers
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig1.png" alt="Fig 1. Add Library from Java Build Path" />
+	<br />
+	<br />
+	Add Library from Java Build Path
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig2.png" alt="Fig. 2 Choose JSF Libraries" />
+	<br />
+	<br />
+	Choose JSF Libraries
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig3.png" alt="Fig. 3 Select One or More Libraries" />
+	<br />
+	<br />
+	Select One or More Libraries
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig4.png"
+		alt="Fig. 4 JSF Libraries Added as Classpath Containers to Java Build Path" />
+	<br />
+	<br />
+	JSF Libraries Added as Classpath Containers to Java Build Path
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig5.png"
+		alt="Fig. 5 Select JSF Libraries for Publish and Export" />
+	<br />
+	<br />
+	Select JSF Libraries for Publish and Export
+</ul>
+<br />
+
+<!--new item-->
+<h3>Custom JSF Servlet Classname</h3>
+<ul class="indent">
+	The JSF servlet classname can now be specified during JSF Facet
+	installation.
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig6.png"
+		alt="Fig. 6 JSF Servlet Classname in JSF Facet Installation Wizard" />
+</ul>
+<br />
+
+<!--new item-->
+<h3>EL Validation Severity Configuration</h3>
+<ul class="indent">
+	The severity of problems found during EL validation can now be changed
+	by preferences. We have adapted the UI used by JDT to perform similar
+	severity changes on Java problems.
+	<br />
+	<br />
+	<img src="../images/whats_new/1_0/Fig7.png" alt="Fig. 7 JSF EL Validation Preference Page" />
+</ul>
+<br />
+
+
+<!-- Start Footer -->
+<div class="footer">
+<hr />
+<table summary="" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<td align="left" width="86%"></td>
+	</tr>
+</table>
+</div>
+<!-- class="footer" -->
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Reference" link_to="toc.xml#jsf_reference"> 
+	<topic label="Tag Library Support in the JSP Source Editor" href="html/reference/taglibsupport.html" > 
+		<topic label="JSF Core" href="html/reference/jsf-c.html" /> 
+		<topic label="JSF HTML" href="html/reference/jsf-h.html" />
+	</topic>
+	<topic label="JSF Library Management" href="html/reference/jsf_library_management.html" >
+	</topic>
+ <topic href="html/reference/jsf_design_time_skinning.html" label="JSF Design-Time Skinning Support">
+ </topic> 
+</toc>

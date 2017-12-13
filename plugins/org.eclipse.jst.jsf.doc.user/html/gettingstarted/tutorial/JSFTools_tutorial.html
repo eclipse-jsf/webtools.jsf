@@ -1,0 +1,542 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WTP Tutorials - JavaServer Faces Tools Tutorial</title>
+
+
+<link rel="stylesheet" href="default_style.css">
+
+</head>
+
+
+<body link="#0000ff" vlink="#800080">
+
+<div align="right">&nbsp;
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+
+	<tbody>
+
+		<tr>
+
+			<td colspan="2" align="left" bgcolor="#0080c0" valign="top"><b><font
+				color="#ffffff">&nbsp;Eclipse Corner Article</font></b></td>
+
+		</tr>
+
+	</tbody>
+</table>
+
+</div>
+
+<div align="left">
+<h1><img src="images/Idea.jpg" align="middle" height="86"
+	width="120"></h1>
+
+</div>
+
+<p></p>
+
+<h1 align="center">WTP Tutorials - JavaServer Faces Tools Tutorial</h1>
+
+<blockquote><b>Summary</b> <br>
+
+In this tutorial we will build and execute a JavaServer Faces
+application, and highlight the features contributed by the JSF Tools
+Project.
+<p><b> By Raghu Srinivasan, Oracle Corporation.</b> <br>
+
+<font size="-1">June 15, 2009</font></p>
+
+</blockquote>
+
+<hr width="100%">
+<h3>Introduction</h3>
+
+<p>In this tutorial we will create and execute a web application
+with JavaServer Faces capabilities. The WTP JSF Tools project has
+provided features that simplifies application building, configuration
+and execution. These include the Web Page Editor for visually editing a
+JSF-JSP web page, syntactic and semantic validation of a JSF-JSP page,
+the Faces Configuration Editor for editing the application configuration
+resource file.<br></br>
+You may wish to visit <a
+	href="http://www.eclipse.org/webtools/community/tutorials/BuildJ2EEWebApp/BuildJ2EEWebApp.html">Building
+and Running a Web Application</a> before attempting this tutorial. That
+tutorial covers setup of the server instance that this tutorial does
+not.<a id="setup"></a></p>
+
+<h3>Setup</h3>
+<p></p>
+<ul>
+	<li><a href="http://java.sun.com/javase/downloads/index.jsp">The
+	Java SE 6 Development Kit (JDK)</a></li>
+	<li><a href="http://eclipse.org/downloads/">Eclipse 3.5 </a></li>
+	<li><a href="http://download.eclipse.org/webtools/downloads/">Eclipse
+	Web Tools Platform Project(WTP) 3.1</a></li>
+
+	<li><a href="http://tomcat.apache.org/">Apache Tomcat 6.0</a></li>
+	<li><a
+		href="http://java.sun.com/javaee/javaserverfaces/download.html">JavaServer
+	Faces RI v1.2</a></li>
+	<li>JSP (tm) Standard Tag Library 1.2 implementation</li>
+</ul>
+<p><a id="reglibs"></a></p>
+<h3>Make the Web Page Editor the default editor for JSP pages</h3>
+
+The JSF Tools Project-contributed Web Page Editor (WPE) is NOT
+registered as the default editor for JSP files. You can make the WPE the
+default editor for JSP files by following these steps:
+<ul>
+	<li>Navigate to "Window" -&gt; "Preferences..." -&gt; "General"
+	-&gt; "Editors" -&gt; "File Associations"</li>
+	<li>In the "File types" section, select "*.jsp"</li>
+	<li>In the "Associated editors" section, select "Web Page Editor"</li>
+	<li>Select the "Default" button</li>
+</ul>
+
+<p><a id="newproject"></a></p>
+<h3>Create a JavaServer Faces Project</h3>
+
+<p>Create a New Dynamic Web Application with the name of <b>JSFTutorial</b>.
+Set the target runtime to the <b>Apache Tomcat 6.0</b><br>
+In the <b>configuration</b> section, select the <b>JavaServer Faces
+Project v1.2</b>. Skip the next two panels to get to the JSF Capabilities
+page.<br>
+<br>
+<img alt="New Dynamic Web Application"
+	src="images/new-dynamic-web-project.png" height="588" width="554"></p>
+
+
+<br>
+
+<p>On the JSF Capabilities page, from the drop-down for the Type of
+the JSF Library, select <b>User Library</b>. <br>
+<br>
+
+<img alt="JSF Capabilities page"
+	src="images/jsf-capabilities-library.png"></p>
+
+
+<br>
+<p>Click on the <b>Download library</b> icon.
+The Download Library dialog is displayed with the list of providers for
+the JSF implementation JAR files. Select the library from Sun
+Microsystem. Click <b>Next</b>. Accept the license and hit <b>Finish</b> <br><br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-download-library.png"></p>
+
+
+<br>
+
+The tool downloads the JAR files, creates a JDT User Library and adds it to the current project. Select the checkbox for the new library if it is not selected. Next, select the <b>Manage libraries</b> icon.<br>
+<br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-capabilities-library-2.png"></p>
+<br>
+<br>
+
+Create a JDT User Library to hold the JSTL jar file. Seelct <b>OK.</b>
+<br><br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-new-library.png"></p>
+<br>
+<br>
+The JSTL library is displayed in the JSF Capabilities dialog. Select the libray and hit <b>Finish</b>
+<br><br>
+<img alt="JSF Capabilities page"
+	src="images/jsf-add-jstl-library.png"></p>
+<br>
+<br>
+<p>Your JSF application has been created. Note that the web.xml file
+has been updated with the Faces Servlet and servlet-mapping, a stub JSF
+application configuration file (faces-config.xml) has been created, and
+the build path has been updated with the implementation jars.<br>
+<br>
+<br>
+<img alt="" src="images/project-explorer.png" height="283" width="389"></p>
+
+
+<br>
+<p><img src="images/note.gif" height="13" width="62">If you
+have an existing Dynamic Web Application, it is possible to add JSF
+capabilities by going to:<br>
+<b>Project Properties &gt; Project Facets &gt; Add\Remove Project
+Facets…</b></p>
+
+<p><a id="newpage"></a></p>
+
+<h3>Create a JSF JSP Page</h3>
+<p>Use the JSP Page wizard to create a page called <b>login.jsp</b>
+in the Web Content folder of the new application. In the Select
+Templates page of the wizard, select the <b>New JSP(html)</b> template.
+Click Finish. The page will be opened in the Web Page Editor as shown
+below<br>
+<br>
+<br>
+<img alt="Web Page Editor" src="images/web-page-editor.png" height="589"
+	width="957"></p>
+
+<br>
+Open the Properties View. Right-mouse click on the designer canvas and
+from the context menu, select Show-&gt;Properties. Wait for the "Reading
+Properties" dialog to disappear.
+<br>
+<br>
+<h5>Add a CommandButton to the canvas.</h5>
+<ul>
+	<li>In the <b>Palette View</b>, click on the section <b>JSF
+	HTML</b> to display the list of components.</li>
+	<li>Drag-and-drop the CommandButton to the canvas. Note that the
+	editor wraps the CommandButton with <b>&lt;f:view&gt;</b> and <b>&lt;h:form&gt;</b>
+	tag.</li>
+	<li>In the properties view, click on <b>Quick Edit</b>.</li>
+	<li>Set the <b>Value</b> attribute to <b>Login</b>.</li>
+	<li>Set the <b>Action</b> attribute to <b>login</b></li>
+</ul>
+<br>
+<br>
+<img alt="WPE-Add CommandButton" src="images/wpe-add-cmd.png"
+	height="447" width="854">
+</p>
+
+<br>
+<h5>Add a PanelGrid</h5>
+<ul>
+	<li>From the Palette View, Drag-and-drop the PanelGrid to the
+	canvas. Notice the feedback on the drop target.</li>
+	<li>Drop the Panel Grid before the Command Button, but inside the
+	Form tag. The Panel Grid is created with a predefined set of OutputText
+	components.</li>
+</ul>
+<h5>Modify the components inside the Panel Grid</h5>
+<ul>
+	<li>Click on the OutputText <b>Item2</b> and hit Delete</li>
+	<li>Add a InputText (Text Input in the Palette view) tag after <b>Item1</b>
+	and before <b>Item3</b></li>
+	<li>Delete the OutputText, <b>Item 4</b></li>
+	<li>Add a InputSecret (Secret Input in the Palette view) tag after
+	<b>Item3</b></li>
+	<li>Click on the OutputText, <b>Item1</b>. Change its value in the
+	Source View to <b>Name</b></li>
+	<li>Click on the OutputText, <b>Item3</b>. Change its value in the
+	Source View to <b>Password</b></li>
+	<li>Click on the <b>Preview</b> tab to see the page rendered in a
+	browser</li>
+	<li>Click on the InputText tag next to <b>Name</b>. In the
+	Property View, set the value attribute to <b>#{loginBean.name}</b>.</li>
+	<li>Save the page. The editor will flag a warning indicating that
+	the variable, <b>loginBean</b> cannot be resolved.</li>
+</ul>
+<br>
+<br>
+<img alt="WPE-Add PanelGrid" src="images/wpe-add-panel.png" height="438"
+	width="892">
+</p>
+
+<br>
+
+<a id="faces-config-bean"></a>
+In the Project Explorer, expand the node, JSFTutorial-&gt;WebContent.
+Double-click on
+<b>faces-config.xml</b>
+. This will launch the Faces Configuration editor. Select the
+<b>ManagedBean</b>
+tab.
+
+<br>
+<br>
+<img alt="Faces Config Editor Managed Bean"
+	src="images/facesconfig-editor-bean.png" height="423" width="694">
+<br>
+<br>
+Click on the
+<b>Add</b>
+button. This will launch the New Managed Bean wizard. Select the option,
+<b>Create a new Java class</b>
+. In the next wizard panel, enter the package as,
+<b>com.tutorial</b>
+and the Name of the class as
+<b>LoginBean</b>
+. Click the Finish button.
+<br>
+<br>
+<img alt="New Managed Bean" src="images/new-managedbean.png"
+	height="234" width="495">
+<br>
+<br>
+This will create the Java class and register it as a managed bean. Save
+the Faces Configuration editor.To edit the Java class, click on the
+hyperlink,
+<b>ManagedBean class</b>
+in the Managed bean page as shown in the figure below. This will launch
+the Java editor.
+<br>
+<br>
+<img alt="Faces Configuration Editor - Managed Bean tab"
+	src="images/fce-managedbean-class.png" height="181" width="599">
+<br>
+<br>
+
+<p><a id="createbean"></a></p>
+<br>
+Edit the Java class,
+<b>com.tutorial.LoginBean</b>
+. Add the following code and save.
+<br>
+<br>
+<img alt="LoginBean" src="images/loginbean.png" height="491" width="405">
+
+<br>
+<a id='el-validate-bean'></a>
+In the Project Explorer view, right-mouse click on the JSP page,
+<b>login.jsp</b>
+and from the context menu, select the
+<b>Validate</b>
+option. Note that the page should now be valid.
+<br>
+<br>
+<a id="el-ca-bean-properties"> </a>
+In the Source Page of the Web Page Editor, add the JSF tag,
+<b>&lt;h:inputSecret value="#{}"&gt;&lt;/h:inputSecret&gt; </b>
+. With the cursor inside the brackets, hit
+<b>Ctrl+spacebar</b>
+. You should see a pop-up with a list of all the implicit objects plus
+the managed bean defined above. Select the managed bean,
+<b>loginBean</b>
+<br>
+<br>
+<img alt="Validate bean properties in EL" src="images/el-ca-all.png"
+	height="186" width="715">
+<br>
+<br>
+Enter the name of a property, say x, that is not defined in the managed
+bean and save the change. The editor will report a warning that the
+property cannot be resolved.
+<br>
+<br>
+<img alt="Validate bean properties in EL"
+	src="images/validate-bean-properties.png" height="141" width="509">
+<br>
+<br>
+Delete the invalid property. Hit
+<b>Ctrl+spacebar</b>
+after the
+<b>'.' </b>
+in the bean name. You should see a pop-up listing the properties defined
+in the managed bean. Select
+<b>password</b>
+from the menu.
+<br>
+<br>
+<img alt="Content Assist" src="images/el-ca-bean-properties.png"
+	height="55" width="487">
+<br>
+<br>
+Create a Java class,
+<b>com.tutorial.validatePassword</b>
+that implements the
+<b>Validator</b>
+interface and save.
+<br>
+<br>
+<img alt="Validator" src="images/custom-validator.png" height="278"
+	width="611">
+
+<br>
+<a id="faces-config-validator"></a>
+In the Project Explorer, expand the node, JSFTutorial-&gt;WebContent.
+Double-click on
+<b>faces-config.xml</b>
+. This will launch the faces-config editor. Select the
+<b>Component</b>
+tab. Expand the
+<b>Validators</b>
+section.
+
+<br>
+<br>
+<img alt="Faces Config Editor Component tab"
+	src="images/faces-config-validator.png" height="376" width="788">
+<br>
+<br>
+Click on the
+<b>Add</b>
+button. Select the
+<b>Browse</b>
+button associated with the
+<b>Validator Class</b>
+field and select the
+<b>com.tutorial.ValidatePassword</b>
+class. Save the changes.
+<br>
+<br>
+<img alt="Faces Config Editor register Validator"
+	src="images/facesconfig-register-validator.png" height="372"
+	width="645">
+<br>
+<br>
+<a id="ca-validator-id-list"></a>
+Add the JSF tag,
+<b>&lt;f:validator id=""&gt;&lt;/f:validator &gt; </b>
+. With the cursor inside the double-quote, hit
+<b>Ctrl+spacebar</b>
+. You should see a pop-up with a list of all the standard validators
+plus those registered in the faces-config file. Select
+<b>Validate Password</b>
+.
+<br>
+<br>
+<img alt="Content assist for validators"
+	src="images/ca-validator-lov.png" height="112" width="495">
+<br>
+<br>
+<br>
+<a id="el-ca-loadbundle"></a>
+We will now move the static strings we have used in the page to a
+resource bundle. To do this, add a file called,
+<b>messages.properties</b>
+in the folder
+<b>com.tutorial</b>
+. Define the properties as shown below and save the file.
+<br>
+<br>
+<img alt="Content assist for resource bundle"
+	src="images/el-ca-messages-properties.png" height="207" width="552">
+<br>
+<br>
+Add the JSF tag,
+<b>loadBundle</b>
+as shown below. You can drag-and-drop the tag from the
+<b>JSF Core</b>
+section of the Palette View.
+<br>
+<br>
+<img alt="Content assist for resource bundle"
+	src="images/el-ca-define-loadbundle.png" height="86" width="480">
+<br>
+<br>
+Delete the string,
+<b>Name</b>
+in the value attribute of the
+<b>outputLabel</b>
+tag. Position the curson inside the brackets and hit
+<b>Ctrl+spacebar</b>
+. You should see a pop-up with a list that includes the
+<b>msg</b>
+variable that you defined in the
+<b>loadBundle</b>
+tag. Select it.
+<br>
+<br>
+<img alt="Content assist for resource bundle"
+	src="images/el-ca-loadbundle-var.png" height="187" width="529">
+<br>
+<br>
+Enter a dot after
+<b>msg</b>
+and and hit
+<b>Ctrl+spacebar</b>
+. You should see a pop-up with a list of properties defined in the
+<b>messages.properties</b>
+file. Select the property,
+<b>name</b>
+.
+<br>
+<br>
+<img alt="Content assist for resource bundle"
+	src="images/el-ca-msg-properties.png" height="69" width="550">
+<br>
+<br>
+<br>
+Complete the login page as shown below.
+<br>
+<br>
+<img alt="Complete login page" src="images/login-final.png" height="484"
+	width="836">
+<br>
+<br>
+Create a new JSF page,
+<b>welcome.jsp</b>
+as shown below.
+<br>
+<br>
+<img alt="Complete login page" src="images/welcome.png" height="342"
+	width="650">
+<br>
+<br>
+<h3><a id="facesconfigeditor"></a>Faces Configuration Resource
+Editor</h3>
+The JSF Tools project includes a special editor for the faces
+configuration resource files. The following section gives a brief
+introduction to the editor. A comprehensive tutorial detailing all the
+features of the editor will be published soon.
+<br>
+Double-click on the
+<b>faces-config.xml</b>
+file to launch the Faces configuration editor. Switch to the
+<b>Navigation</b>
+tab.
+<br>
+<br>
+<img alt="Faces Configuration Editor"
+	src="images/facesconfig-editor.png" height="388" width="528">
+<br>
+<br>
+<ul>
+	<li>Add the <b>login.jsp</b> and <b>welcome.jsp</b> to the
+	Navigation tab. Select the <b>Page</b> control from the Palette and
+	drop it on the Navigation tab. Choose the page in the resulting <b>Select
+	JSP File</b> dialog.</li>
+
+	<li>Connect the two pages. Click on the <b>Link</b> control in the
+	Palette, select the <b>login</b> page and draw a line to the <b>welcome</b>
+	page. Select the line in the Navigation tab and in the property view,
+	set the value of the <b>from-outcome</b> to <b>login</b> .</li>
+</ul>
+<br>
+<br>
+<img alt="Faces Configuration Editor" src="images/navigation.png"
+	height="412" width="519">
+<br>
+<br>
+<h3><a id="testpage"></a>Testing the JSF JSP Page</h3>
+<p>1) We will now execute the page against the Apache Tomcat server.
+Choose <b>Run on Server</b> using the context menu while selecting the
+login.jsp page in the navigator. <br>
+<br>
+<br>
+<img alt="" src="images/run-jsf.PNG" height="443" width="450"></p>
+
+
+<br>
+
+<p>2) Choose your Apache Tomcat server and set it up as required if
+you had not already done so.<br>
+<br>
+3) Click Finish. You should see from the Console view that the Tomcat
+server starts and then you should see the executing login page appear in
+the Web Browser like below. <br>
+<br>
+<br>
+<img alt="" src="images/jsf-app.png" height="173" width="547"></p>
+
+
+<br>
+Click on the
+<b>login</b>
+button. You should navigate to the
+<b>welcome</b>
+page.
+<br>
+<br>
+<img alt="" src="images/jsf-app1.png" height="144" width="516">
+
+
+
+<br>
+<p><b> Congratulations! You have created and executed your first
+JavaServer Faces application using the new Eclipse WTP JSF Tools. </b></p>
+</body>
+</html>

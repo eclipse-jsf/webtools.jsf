@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Getting Started" link_to="toc.xml#jsf_getstarted">
+ <topic href="html/gettingstarted/tutorial/JSFTools_tutorial_JSF20.html" label="JSF Tools Tutorial - JSF 2.0">
+ </topic> 
+	<topic href="html/gettingstarted/tutorial/JSFTools_tutorial.html" label="JSF Tools Tutorial - JSF 1.2">
+ </topic>
+	<topic label="Web Page Editor" href="html/gettingstarted/wpe/wpe_getting_started.html"/>
+ <topic href="html/gettingstarted/trinidad/trinidad_initialsetupguide.html" label="Apache MyFaces Trinidad - Initial Setup Guide">
+ </topic>
+</toc>

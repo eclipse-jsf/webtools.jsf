@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Concepts" > 
+	<topic label="JavaServer Faces Specification" href="http://java.sun.com/javaee/javaserverfaces/reference/api/index.html"/>
+	<topic label="JSF Facets"  href="html/concepts/jsf_facets.html"> 
+		<topic label="What happens during facet install?" href="html/concepts/jsf_facets_install.html"/>
+		<topic label="What happens during facet un-install?" href="html/concepts/jsf_facets_uninstall.html"/>		
+	</topic>
+	<topic label="JSF Libraries"  href="html/concepts/jsf_libs.html"/>
+	<topic label="JSP JSF Source Page Editing Tools" href="html/concepts/jsf_source_editing.html">
+		<topic label="Content Assist" href="html/concepts/jsf_source_editing.html#contentassist" /> 
+		<topic label="Validation" href="html/concepts/jsf_source_editing.html#validation" />
+  <topic href="html/concepts/jsf_source_editing.html#hyperlink" label="Hyperlink">
+  </topic> 
+<!--
+		<topic label="Snippets" href="html/concepts/jsf_source_editing.html#snippets" />
+-->
+	</topic> 
+	<topic label="JSF Application Configuration" href="html/concepts/jsf_app_config_mgr.html" />
+ <topic href="html/concepts/jsf_tag_registry.html" label="JSF Tag Registry">
+ </topic>
+ <topic href="html/concepts/jsf_component_tree.html" label="JSF Component Tree">
+ </topic>	
+</toc>

@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JSF Expression Language Tooling</title>
+  
+
+  
+
+
+  
+  
+
+
+  
+  <meta http-equiv="Content-Style-Type" content="text/css">
+
+
+  
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+
+
+  
+  <link rel="stylesheet" href="../../book.css" type="text/css"></head>
+<body>
+<table summary="" cellpadding="0" cellspacing="0" width="100%">
+
+
+<tbody><tr valign="bottom">
+<td align="left" width="86%">
+<h1>JSF Expression Language Tooling</h1>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<hr>
+<h3>Overview</h3>
+
+
+<p>The JSF Expression Language (JSF EL) tooling provides basic support
+for design time evaluation of JSF 1.1 EL.&nbsp; It implements parts of
+the following specifications:</p>
+
+
+
+
+<a href="http://java.sun.com/javaee/javaserverfaces/download.html">JSF 1.1 Specification</a> -- particularly chapters 5 and 9.<br>
+
+
+<p><a href="http://jcp.org/aboutJava/communityprocess/final/jsr152/">JSP 2.0 Specification</a> -- particularly chapter 2.<br>
+</p>
+
+
+In order to support design-time evaluation of expressions, the tooling has the following basic capabilities:<br>
+<ul>
+  <li>syntax parsing <br>
+  </li>
+  <li>design-time variable, property and method resolution</li>
+  <li>semantic type analysis</li>
+  <li>static expression evaluation</li>
+</ul>
+<h3>Syntax Parsing<br>
+</h3>
+The WTP JSP tooling provides an EL parser that the JSF EL tooling
+leverage because of the syntactic commonality between JSP and JSF EL.&nbsp;
+The parser is based on JavaCC and constructs an abstract syntax tree
+(AST) that is further processed by the framework.&nbsp; The parser
+reports syntax errors in expressions.<br>
+<h3>Design-time variable, property and method resolution</h3>
+JSF EL expressions may contain variable and method bindings that
+reference external objects.&nbsp; At runtime, this is accomplished
+through several mechanisms that convert different types of
+identifier symbols into objects and methods.&nbsp; At design-time the
+JSF tooling tries to parallel these as closely as possible.&nbsp; These
+mechanisms are:<br>
+<br>
+<ul>
+  <li>VariableResolver</li>
+  <li>PropertyResolver</li>
+  <li>MethodBinding</li>
+</ul>For more information on pluggable resolvers, see <a href="the_design_time_application_manager.html">The Design Time Application Manager</a>.<br>
+<span style="font-weight: bold;"></span><span style="font-weight: bold;"></span>
+<h3>Semantic type analysis</h3>
+Type analysis of literals is performed for all expressions.&nbsp;
+Analysis is done on all variables, properties and methods that can be
+resolved.&nbsp; Type analysis can verify that:<br>
+<ul>
+  <li>operator arguments are of a valid type or can be coerced to one.</li>
+  <li>EL attribute values resolve to a type that is expected by its tag attribute</li>
+  <li>the result of an EL expression supports the assignment properties expected by its tag attribute&nbsp;<br>
+  </li>
+</ul>
+<h4>Argument Coercability</h4>
+Many EL operators expect arguments with a particular type.&nbsp; For
+example, the arithmetic addition operator, '+', expects that both of
+its operands are numeric.&nbsp; EL does provide for automatic type
+coercions and conversions, however some operands cannot be coerced and
+will cause runtime errors.&nbsp; The following are examples of
+syntactically valid EL expressions that will cause type coercions
+exceptions at runtime:<br>
+<br>
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Expression<br>
+      </td>
+      <td style="vertical-align: top;">Problem<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">myBean.stringArrayProperty + myBean.booleanProperty<br>
+      </td>
+      <td style="vertical-align: top;">The first operand is an array of strings.&nbsp; Arrays cannot be coerced to a numeric type supported by the addition operator<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">-false<br>
+      </td>
+      <td style="vertical-align: top;">Boolean 'false' cannot be coerced to a numeric type expected by the unary minus operator.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">&nbsp;!5<br>
+      </td>
+      <td style="vertical-align: top;">The numeric value '5' cannot be
+coerced to a boolean required by the unary not operator (Note this is
+what the specification says; some implementation use a C-style
+number-to-boolean coercion and flag a warning).<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h4>Attribute value compatibility</h4>
+For those tag attributes that are annotated with JSF tooling meta-data
+providing type information, EL type information can be compared to what
+is expected by the attribute.&nbsp; Below are some examples of
+attribute values being assigned EL expressions that have incompatible
+types.&nbsp; The tag prefix "h" represents the built-in JSF "html" tag library.<br>
+<br>
+<table style="text-align: left; width: 1241px; height: 59px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">Example<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Problem<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">&lt;h:inputText rendered="#{myBean.arrayProperty}"/&gt;<br>
+      </td>
+      <td style="vertical-align: top;">The rendered attribute expects a boolean value.&nbsp; An array value can be coerced or converted to boolean<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">&lt;h:dataTable binding="#{myBeanSubClass.booleanProperty}"/&gt;<br>
+      </td>
+      <td style="vertical-align: top;">The
+binding attribute expects a binding to a UIComponent object.&nbsp; The
+boolean property can be neither converted or coerced to a valid type.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h4>Assignability analysis</h4>
+Some JSF tag attributes support the writing back of data to an identified object, such as a bean property:<br>
+<br>
+e.g. &lt;h:inputText value=#{bean.readOnlyProperty}/&gt;<br>
+<br>
+For tags that are annotated with JSF tooling meta-data, the framework
+can check if the property is writable as expected.&nbsp; In the example
+above, the inputText will write back the value entered by the user to
+bean.readOnlyProperty.&nbsp; However, if the bean doesn't implement a
+setter for this property, the user will be issued a warning that the
+tag logic may not work completely as expected.<br>
+<h3>Static Expression Evaluation</h3>
+
+The JSF EL validation component performs design time expression
+evaluation on an AST provided by the parser.&nbsp; The expression evaluator
+is able to do the following expression evaluations:<br>
+
+<br>
+
+<ul>
+<li>constant expression detection</li><li>logical short-circuit analysis</li><li>possible division by zero<br>
+  </li>
+</ul>
+
+<h4>Constant expression detection</h4>
+
+Certain types of expressions can be statically analyzed for
+deterministic evaluation.&nbsp; Such deterministic evaluation may imply
+programmer error.&nbsp; For example the following expressions always
+evaluate to a constant value regardless of runtime conditions:<br>
+
+<br>
+
+<table style="width: 100%; text-align: left;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">Expression<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Constant Evaluation<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">Reason<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">5+3<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">8<br>
+      </td>
+      <td style="vertical-align: top;">All values in the expression are constant at design time.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">empty 'notEmpty'<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">false<br>
+      </td>
+      <td style="vertical-align: top;">Empty operator always returns false for non-null, non-empty strings.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">empty 5<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">false<br>
+      </td>
+      <td style="vertical-align: top;">The empty operator always returns false if the argument is not a string, collection, array or map.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">-null<br>
+      </td>
+      <td style="vertical-align: top; text-align: center;">0<br>
+      </td>
+      <td style="vertical-align: top;">The minus operator treats null as 0.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<h4>Logical short-circuit analysis<br>
+</h4>
+JSF EL supports short-circuit evaluation of boolean expressions.&nbsp;
+Short-circuit evaluation can cause entire sub-expressions to not be
+evaluated and important
+side-effects may not occur.&nbsp; The following are examples of EL
+expressions that will be short-circuited:<br>
+
+<br>
+
+<table style="text-align: left; height: 80px; width: 1241px;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Expression<br>
+      </td>
+      <td style="vertical-align: top;">Description<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">false &amp;&amp; myBean.x<br>
+      </td>
+      <td style="vertical-align: top;">This logical predicate always
+evaluates to false regardless of the value of myBean.x.&nbsp; Because this
+expression "short-circuits" on the first argument, myBean.x will never
+be evaluated meaning any expected side-effects will not occur.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">true || myBean.x<br>
+      </td>
+      <td style="vertical-align: top;">Similar to the above, myBean.x will never be evaluated because true or'd with any value is guaranteed to be true.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<h4>Possible division by zero</h4>
+
+Division by zero can cause runtime exceptions in a JSF application.&nbsp;
+The following are examples of EL expressions that may result in a
+divide-by-zero error:<br>
+
+<br>
+
+'x / 0'<br>
+
+'x / (5-5)'<br>
+<br>
+
+
+
+
+
+</body></html>

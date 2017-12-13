@@ -1,0 +1,14 @@
+org.eclipse.jst.jsf.core;
+org.eclipse.jst.jsf.ui;
+org.eclipse.jst.jsf.facelet.core;
+org.eclipse.jst.jsf.facelet.ui;
+org.eclipse.jst.jsf.facesconfig;
+org.eclipse.jst.jsf.facesconfig.ui;
+org.eclipse.jst.jsf.common;
+org.eclipse.jst.jsf.common.ui;
+org.eclipse.jst.jsf.common.runtime;
+org.eclipse.jst.jsf.standard.tagsupport;
+org.eclipse.jst.jsf.apache.trinidad.tagsupport;
+org.eclipse.jst.pagedesigner;
+org.eclipse.jst.pagedesigner.jsf.ui;
+org.eclipse.jst.pagedesigner.jsp.core;

@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Supplying Tag Library Meta-data for Apache MyFaces Tomahawk</title>
+
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<link rel="stylesheet" href="../../book.css" type="text/css"/>
+<link rel="stylesheet" href="default_style.css"/>
+</head>
+<body>
+<table summary="" cellspacing="0" cellpadding="0" width="100%">
+<tr valign="bottom">
+<td align="left" width="86%">
+<h1>Supplying Tag Library Meta-data for Apache MyFaces Tomahawk</h1>
+</td>
+</tr>
+</table>
+<hr/>
+<h3>Summary</h3>
+<p>
+	In this tutorial we will write a plugin that supplies meta-data that will be
+	used when editing a JSF JSP page that uses the tag library for the Apache
+	MyFaces Tomahawk JSF component library.
+  This is part one of a series of tutorials that will build up an example of supplying meta-data for  a small set of tags from this tag library.   This part will concentrate on providing content assist and validation in the structured source editor, and introduce the design-time meta-data framework.</p>
+<h3>Introduction</h3>
+<p>
+	This tutorial will walk through the process of writing a plugin that
+	provides additional functionality while editing JSF JSP pages that use the
+	tag library for the Apache MyFaces Tomahawk component library. By supplying
+	meta-data for this tag library, code-completion, validation functionality 
+	and much of the functionality in the Web Page Editor becomes available for  the Tomahawk tags. This plugin will not
+	aim to provide a complete set of meta-data for the library, it will simply
+	lay the groundwork and explain the general concepts.
+</p>
+<p>
+	It is assumed that the user is already familiar with the use of JSP tags
+	and basic editing of JSP pages. It is further assumed that the user is
+	familiar with adding tag libraries to web projects and correctly specifying
+	their use in JSP pages.
+</p>
+<h3>Create New Plug-in Project</h3>
+<p>
+	First we will need to create a new Plug-in Project in order to extend the
+	necessary extension point to supply your meta-data. Select <b>File</b> &gt;
+	<b>New</b> &gt; <b>Project...</b> to open the New Project dialog, select
+	<b>Plug-in Project</b> and click <b>Next &gt;</b>.
+</p>
+<img src="images/new_project_dialog.png" border="0" alt="New Project dialog"/>
+<p>
+	Provide an appropriate value for <b>Project name</b>, uncheck <b>Create a
+	Java project</b> (in this example we do not require this to be a Java
+	project, although a Java project is perfectly valid and in some cases may
+	be desirable) and click <b>Next &gt;</b>.
+</p>
+<img src="images/new_plugin_project_dialog1.png" border="0" alt="New Plug-in Project dialog"/>
+<p>
+	Provide appropriate values for <b>Plug-in Properties</b> and click <b>Next
+	&gt;</b>.
+</p>
+<img src="images/new_plugin_project_dialog2.png" border="0" alt="New Plug-in Project dialog"/>
+<p>
+	Uncheck <b>Create a plug-in using one of the templates</b> and click
+	<b>Finish</b> to complete creation of the plug-in project.
+</p>
+<img src="images/new_plugin_project_dialog3.png" border="0" alt="New Plug-in Project dialog"/>
+<h3>Configure Plug-in Project</h3>
+<p>
+	In the <b>Package Explorer</b>, double-click <b>MANIFEST.MF</b> to open it
+	in the Plug-in Manifest Editor (if it is not already open as a result of
+	creating the project in the previous step).
+</p>
+<img src="images/open_manifest.png" border="0" alt="Open MANIFEST.MF"/><p></p>
+
+<p>
+	In the Plug-in Manifest Editor, select the <b>Dependencies</b> tab and
+	click the <b>Add...</b> button to add
+	<b>org.eclipse.jst.jsf.common</b> as a required plug-in.
+</p>
+<img src="images/plugin_dependencies.png" border="0" alt="Plug-in Dependencies" style="height: 368px; width: 626px"/><p></p>
+<p>
+	In the Plug-in Manifest Editor, select the <b>Extensions</b> tab and click
+	the <b>Add...</b> button to add
+	<b>org.eclipse.jst.jsf.common.standardMetaDataFiles</b> as an
+	extension.
+</p>
+<img src="images/plugin_extensions1.png" border="0" alt="Plug-in Extensions" style="width: 625px; height: 315px"/><p></p>
+<p>
+	Still in the Plug-in Manifest Editor and on the Extensions tab, right-click
+	<b>org.eclipse.jst.jsf.common.standardMetaDataFiles</b> and
+	select <b>New</b> &gt; <b>standardMetaDataFile</b>. Set the <b>uri</b> to
+	<b>http://myfaces.apache.org/tomahawk</b> and the <b>location</b> to
+	<b>metadata/apache_tomahawk.xml</b> (the value of location is the
+	plugin-relative location of the meta-data file that we will create in a
+	later step and so is arbitrary, while the value of uri <i>must</i>
+	correspond with  the tag library's specified URI). For this example, we
+	will not be specifying values for the optional <b>locator</b> property.
+	Save your work and close the Plug-in Manifest Editor if
+	you desire.
+</p>
+<img src="images/plugin_extensions2.png" border="0" alt="Plug-in Extensions" style="width: 625px; height: 315px"/>
+<h3>Create Meta-data File</h3>
+<p>
+	Create a new folder and XML file, such that from the plug-in project root
+	you now have the file <b>metadata/apache_tomahawk.xml</b> (which matches
+	the value of <b>location</b> as set in the previous step). Double-click
+	this file to open in the XML editor.
+</p>
+<img src="images/open_metadata_xml.png" border="0" alt="Open metadata/apache_tomahawk.xml"/>
+<p>
+	Working in the XML editor, paste the following XML into the
+	<b>metadata/apache_tomahawk.xml</b> file. We now have a minimal, legal
+	(although not particularly useful) meta-data file.
+</p>
+<div class="code"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;md:metadatamodel
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore" 
+	id="http://myfaces.apache.org/tomahawk"
+	type="tagFile"&gt;
+&lt;/md:metadatamodel&gt;</pre></div>
+<p>
+	In this example, we will be providing meta-data for Tomahawk's <b>popup</b>
+	tag. To begin, we need to specify in our meta-data file the name of the tag that we are supplying meta-data. We do this by simply setting the
+	<b>id</b> attribute of the <b>entity</b> element to <b>popup</b>,
+	as seen below.</p>
+<img src="images/edit_xml1.png" border="0" alt="Edit Meta-data"/>
+<p>
+	We continue by specifying properties for the <b>popup</b> tag's attributes.
+	We do this by adding  child <b>entity</b> elements to the<b> popup entity</b>. We will
+	start with the <b>displayAtDistanceX</b> and <b>displayAtDistanceY</b>
+	attributes, the values of which must be an integer. This is done by specifying a<b> trait</b>, a property of the entity.  
+	The <b>trait</b> that the JSF tool uses to apply validation, and possible values to the structured source editor, is a <b>trait</b> named,
+	 &quot;attribute-value-runtime-type&quot;.  Additional information on this trait can be found in the 
+	 <a href="..\programmersguide\metadata_processing_framework.html">Meta-data Processing Framework</a>.
+	We specify this by adding the appropriate <b>entity</b> and <b>trait</b> elements to
+	our XML file, as seen below. (The
+	"org.eclipse.jst.jsf.core.attributevalues.IntegerType" runtime
+	type is one	of the types pre-defined in the
+	org.eclipse.jst.jsf.core plug-in.)
+</p>
+<img src="images/edit_xml2.png" border="0" alt="Edit Meta-data"/>
+<p>
+	We continue by specifying appropriate <b>entity</b> and
+	<b>trait</b> elements for the <b>closePopupOnExitingElement</b> and
+	<b>closePopupOnExitingPopup</b> attributes, the values of which at runtime must be
+	boolean, and the default value of each is "true". As seen below, we use
+	the "org.eclipse.jst.jsf.core.attributevalues.BooleanType"
+	runtime type to specify this.
+</p>
+<img src="images/edit_xml3.png" border="0" alt="Edit Meta-data"/>
+<p>
+	To complete the meta-data for this example, we will address those attributes
+	which may be common to many tags and may have the same meaning no matter which 
+	element upon which they are being defined for.  Examples are <b>id</b> and <b>binding</b>.  
+	A special element called <b>entityGroup</b> can be defined as a child of the <b>metadatamodel</b> element which  that can include any number entities and/or traits. 
+	Any <b>entity</b> can then reference this <b>entityGroup</b> using an <b>include-entity-group</b> element which 
+	will copy the contents of the group to the inclusion point.   As seen below, we now do this for the <b>id</b> and
+	<b>binding</b> attributes using pre-defined runtime types and properties.
+</p>
+<img src="images/edit_xml4.png" border="0" alt="Edit Meta-data"/>
+<p>
+	If the an <b>entity</b> or <b>trait</b> is present with the same <b>id</b> as one in the <b>entityGroup</b>, the <b>entityGroup</b>
+	instance is ignored.  This allows for the including <b>entity</b> to override a member of the <b>entityGroup</b>'s element.</p>
+<p>
+	This plugin can now be packaged and deployed to Eclipse in order to get
+	advanced editing capabilities (e.g. content-assist and validation) for the
+	attributes of the elements of the Tomahawk tag library that we have defined
+	here. Obviously, this example only covers part of the tag library, but
+	hopefully serves as a starting point for interested developers.
+</p>
+<p>
+	For reference, the contents of the completed example
+	<b>metadata/apache_tomahawk.xml</b> file follows.
+</p>
+<div class="code"><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;md:metadatamodel
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" 
+	xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore"
+	xmlns:mdt="http://org.eclipse.jst.jsf.common.metadata/metadataTraitTypes.ecore"  
+	id="http://myfaces.apache.org/tomahawk"
+	type="tagFile"&gt;
+	
+	&lt;entity id="popup"&gt;		
+		&lt;include-entity-group id="common-attributes"/&gt;
+		&lt;entity id="displayAtDistanceX"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;
+					org.eclipse.jst.jsf.core.attributevalues.IntegerType
+				&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;
+		&lt;entity id="displayAtDistanceY"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;
+					org.eclipse.jst.jsf.core.attributevalues.IntegerType
+				&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;		
+		&lt;entity id="closePopupOnExitingElement"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				&lt;/value&gt;
+			&lt;/trait&gt;
+			&lt;trait id="default-value"&gt;
+				&lt;value&gt;true&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;
+		&lt;entity id="closePopupOnExitingPopup"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;
+					org.eclipse.jst.jsf.core.attributevalues.BooleanType
+				&lt;/value&gt;
+			&lt;/trait&gt;
+			&lt;trait id="default-value"&gt;
+				&lt;value&gt;true&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;
+	&lt;/entity&gt;
+	&lt;entityGroup id="common-attributes"&gt;
+		&lt;entity id="id"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;
+					org.eclipse.jst.jsf.core.attributevalues.ComponentIDType
+				&lt;/value&gt;
+			&lt;/trait&gt;
+		&lt;/entity&gt;
+		&lt;entity id="binding"&gt;
+			&lt;trait id="attribute-value-runtime-type"&gt;
+				&lt;value&gt;
+					org.eclipse.jst.jsf.core.attributevalues.ComponentBindingType
+				&lt;/value&gt;
+			&lt;/trait&gt;
+			&lt;trait id="runtime-return-type"&gt;
+				&lt;value&gt;javax.faces.component.UIComponent&lt;/value&gt;
+			&lt;/trait&gt;				
+		&lt;/entity&gt;	
+	&lt;/entityGroup&gt;		
+&lt;/md:metadatamodel&gt;
+</pre></div>
+</body>
+</html>
