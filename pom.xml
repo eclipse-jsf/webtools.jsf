@@ -75,9 +75,11 @@
      <module>assembly/features/org.eclipse.jsf.assembly.feature</module>
      <module>assembly/features/org.eclipse.jsf_sdk.assembly.feature</module>
      <module>assembly/plugins/org.eclipse.jsf.branding</module>
+
      <module>docs/features/org.eclipse.jst.jsf.doc.feature</module>
      <module>docs/plugins/org.eclipse.jst.jsf.doc.dev</module>
      <module>docs/plugins/org.eclipse.jst.jsf.doc.user</module>
+
      <module>jsf/features/org.eclipse.jsf.feature</module>
      <module>jsf/features/org.eclipse.jsf_sdk.feature</module>
      <module>jsf/features/org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature</module>
@@ -85,6 +87,7 @@
      <module>jsf/features/org.eclipse.jst.jsf.tests.feature</module>
      <module>jsf/features/org.eclipse.jst.webpageeditor.feature</module>
      <module>jsf/features/org.eclipse.jst.webpageeditor_sdk.feature</module>
+
      <module>jsf/plugins/org.eclipse.jst.jsf.apache.trinidad.tagsupport</module>
      <module>jsf/plugins/org.eclipse.jst.jsf.common</module>
      <module>jsf/plugins/org.eclipse.jst.jsf.common.runtime</module>
@@ -99,6 +102,7 @@
      <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsf.ui</module>
      <module>jsf/plugins/org.eclipse.jst.pagedesigner.jsp.core</module>
      <module>jsf/plugins/org.eclipse.jst.pagedesigner</module>
+     
      <module>jsf/tests/org.eclipse.jst.jsf.common.runtime.tests</module>
      <module>jsf/tests/org.eclipse.jst.jsf.contentassist.tests</module>
      <module>jsf/tests/org.eclipse.jst.jsf.context.symbol.tests</module>
@@ -112,5 +116,7 @@
      <module>jsf/tests/org.eclipse.jst.jsf.ui.tests</module>
      <module>jsf/tests/org.eclipse.jst.jsf.validation.el.tests</module>
      <module>jsf/tests/org.eclipse.jst.pagedesigner.tests</module>
+
+     <module>site</module>
   </modules>
 </project>
