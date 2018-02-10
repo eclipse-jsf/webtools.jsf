@@ -12,6 +12,9 @@
     <feature id="org.eclipse.jsf.assembly.feature"><category name="jsf"/></feature>
     <feature id="org.eclipse.jsf_sdk.assembly.feature"><category name="jsf.sdk"/></feature>
 
+    <bundle id="org.eclipse.jst.jsf.doc.dev"/>
+    <bundle id="org.eclipse.jst.jsf.doc.user"/>
+
     <category-def name="jsf" label="Web Tools Platform (WTP) Java Server Faces"><description>
     Java Server Faces plugins shared by WTP features
     </description></category-def>
