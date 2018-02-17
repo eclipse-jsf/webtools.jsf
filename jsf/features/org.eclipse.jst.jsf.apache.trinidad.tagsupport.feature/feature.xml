@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"
       label="%featureName"
-      version="2.6.0.qualifier"
+      version="2.6.1.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="1.0.1.qualifier">
@@ -24,10 +24,10 @@
       <import plugin="org.eclipse.core.runtime" version="3.2.0" match="compatible"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.2.0" match="compatible"/>
       <import plugin="org.eclipse.gef" version="3.2.0" match="compatible"/>
-      <import plugin="org.eclipse.wst.sse.core" version="1.1.0" match="equivalent"/>
-      <import plugin="org.eclipse.jst.jsf.common" version="1.1.0" match="compatible"/>
-      <import plugin="org.eclipse.jst.pagedesigner" version="1.1.0" match="compatible"/>
-      <import plugin="org.eclipse.jst.jsf.core" version="1.1.0" match="compatible"/>
+      <import plugin="org.eclipse.wst.sse.core"/>
+      <import plugin="org.eclipse.jst.jsf.common"/>
+      <import plugin="org.eclipse.jst.pagedesigner"/>
+      <import plugin="org.eclipse.jst.jsf.core"/>
       <import plugin="org.eclipse.jdt.core" version="3.4.0" match="compatible"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="compatible"/>
    </requires>

@@ -15,6 +15,8 @@
     <bundle id="org.eclipse.jst.jsf.doc.dev"/>
     <bundle id="org.eclipse.jst.jsf.doc.user"/>
 
+    <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature.source"/>
+
     <category-def name="jsf" label="Web Tools Platform (WTP) Java Server Faces"><description>
     Java Server Faces plugins shared by WTP features
     </description></category-def>
