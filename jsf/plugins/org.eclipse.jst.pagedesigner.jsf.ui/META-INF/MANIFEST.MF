@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jst.pagedesigner.jsf.ui;singleton:=true
-Bundle-Version: 1.5.0.qualifier
+Bundle-Version: 1.5.1.qualifier
 Bundle-Activator: org.eclipse.jst.pagedesigner.jsf.ui.JSFUIPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -12,8 +12,8 @@ Require-Bundle: org.eclipse.jst.jsf.facesconfig;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.common.ui;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.common;bundle-version="[1.1.0,2.0.0)",
- org.eclipse.wst.sse.core;bundle-version="[1.1.0,1.2.0)",
- org.eclipse.wst.xml.core;bundle-version="[1.1.0,1.2.0)",
+ org.eclipse.wst.sse.core;bundle-version="[1.1.0,2.0.0)",
+ org.eclipse.wst.xml.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.gef;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)",

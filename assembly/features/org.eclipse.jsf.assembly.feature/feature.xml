@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.jsf.assembly.feature"
       label="%name"
-      version="3.4.0.qualifier"
+      version="3.4.1.qualifier"
       provider-name="%provider"
       plugin="org.eclipse.jsf.branding"
       license-feature="org.eclipse.license"
@@ -20,16 +20,9 @@
       %license
    </license>
 
-   <includes
-         id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.jst.webpageeditor.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.jsf.feature"
-         version="0.0.0"/>
-
+   <requires>
+      <import feature="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"/>
+      <import feature="org.eclipse.jst.webpageeditor.feature"/>
+      <import feature="org.eclipse.jsf.feature"/>
+   </requires>
 </feature>

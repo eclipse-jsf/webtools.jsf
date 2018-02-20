@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.contentassist.tests
-Bundle-Version: 1.5.100.qualifier
+Bundle-Version: 1.5.101.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.contentassist.tests.ContentAssistTestsPlugin
 Bundle-Localization: plugin
 Bundle-ClassPath: jsfcontentassisttests.jar
@@ -11,14 +11,14 @@ Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
  org.junit;bundle-version="3.8.1",
  org.eclipse.jst.jsf.test.util;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.wst.sse.core;bundle-version="[1.1.0,1.2.0)",
- org.eclipse.jst.jsp.core;bundle-version="[1.1.0,1.3.0)",
- org.eclipse.wst.xml.core;bundle-version="[1.1.0,1.2.0)",
+ org.eclipse.wst.sse.core;bundle-version="[1.1.0,2.0.0)",
+ org.eclipse.jst.jsp.core;bundle-version="[1.1.0,2.0.0)",
+ org.eclipse.wst.xml.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.common;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jst.jsf.core.tests;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jface.text;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)",
- org.eclipse.wst.html.core;bundle-version="[1.1.0,1.3.0)",
+ org.eclipse.wst.html.core;bundle-version="[1.1.0,2.0.0)",
  org.eclipse.jdt.core;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.emf.ecore,
  org.eclipse.wst.common.project.facet.core;bundle-version="[1.4.0,1.5.0)"
