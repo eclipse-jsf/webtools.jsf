@@ -1,21 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
+     <feature id="org.eclipse.jsf.assembly.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jsf.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jsf_sdk.assembly.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jsf_sdk.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jst.jsf.doc.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jst.jsf.tests.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jst.webpageeditor.feature"><category name="jsf"/></feature>
+     <feature id="org.eclipse.jst.webpageeditor_sdk.feature"><category name="jsf"/></feature>
 
-    <feature id="org.eclipse.jst.jsf.doc.feature"><category name="jsf"/></feature>
-    <feature id="org.eclipse.jsf.feature"><category name="jsf"/></feature>
-    <feature id="org.eclipse.jst.webpageeditor.feature"><category name="jsf"/></feature>
-    <feature id="org.eclipse.jsf_sdk.feature"><category name="jsf.sdk"/></feature>
-    <feature id="org.eclipse.jst.jsf.tests.feature"><category name="jsf"/></feature>
-    <feature id="org.eclipse.jst.webpageeditor_sdk.feature"><category name="jsf.sdk"/></feature>
-    <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature"><category name="jsf.sdk"/></feature>
-    <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature"><category name="jsf"/></feature>
-    <feature id="org.eclipse.jsf.assembly.feature"><category name="jsf"/></feature>
-    <feature id="org.eclipse.jsf_sdk.assembly.feature"><category name="jsf.sdk"/></feature>
+     <bundle id="org.eclipse.jsf.branding"/>
+     <bundle id="org.eclipse.jst.jsf.apache.trinidad.tagsupport"/>
+     <bundle id="org.eclipse.jst.jsf.common"/>
+     <bundle id="org.eclipse.jst.jsf.common.runtime"/>
+     <bundle id="org.eclipse.jst.jsf.common.runtime.tests"/>
+     <bundle id="org.eclipse.jst.jsf.common.ui"/>
+     <bundle id="org.eclipse.jst.jsf.contentassist.tests"/>
+     <bundle id="org.eclipse.jst.jsf.context.symbol.tests"/>
+     <bundle id="org.eclipse.jst.jsf.core"/>
+     <bundle id="org.eclipse.jst.jsf.core.tests"/>
+     <bundle id="org.eclipse.jst.jsf.designtime.tests"/>
+     <bundle id="org.eclipse.jst.jsf.doc.dev"/>
+     <bundle id="org.eclipse.jst.jsf.doc.user"/>
+     <bundle id="org.eclipse.jst.jsf.facelet.core"/>
+     <bundle id="org.eclipse.jst.jsf.facelet.ui"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.tests"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.ui"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.ui.test"/>
+     <bundle id="org.eclipse.jst.jsf.metadata.tests"/>
+     <bundle id="org.eclipse.jst.jsf.metadataprocessingtests2"/>
+     <bundle id="org.eclipse.jst.jsf.standard.tagsupport"/>
+     <bundle id="org.eclipse.jst.jsf.test.util"/>
+     <bundle id="org.eclipse.jst.jsf.ui"/>
+     <bundle id="org.eclipse.jst.jsf.ui.tests"/>
+     <bundle id="org.eclipse.jst.jsf.validation.el.tests"/>
+     <bundle id="org.eclipse.jst.pagedesigner"/>
+     <bundle id="org.eclipse.jst.pagedesigner.jsf.ui"/>
+     <bundle id="org.eclipse.jst.pagedesigner.jsp.core"/>
+     <bundle id="org.eclipse.jst.pagedesigner.tests"/>
 
-    <bundle id="org.eclipse.jst.jsf.doc.dev"/>
-    <bundle id="org.eclipse.jst.jsf.doc.user"/>
+     <!-- sources -->
 
-    <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature.source"/>
+     <!-- these features do not have sources, since they're just wrappers for other content -->     
+     <!-- <feature id="org.eclipse.jsf.assembly.feature.source"/> -->
+     <!-- <feature id="org.eclipse.jsf_sdk.assembly.feature.source"/> -->
+     <!-- <feature id="org.eclipse.jsf_sdk.feature.source"/> -->
+     <!-- <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature.source"/> -->
+     <!-- <feature id="org.eclipse.jst.jsf.doc.feature.source"/> -->
+     <!-- <feature id="org.eclipse.jst.jsf.tests.feature.source"/> -->
+     <!-- <feature id="org.eclipse.jst.webpageeditor_sdk.feature.source"/> -->
+
+     <feature id="org.eclipse.jsf.feature.source"/>
+     <feature id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.feature.source"/>
+     <feature id="org.eclipse.jst.webpageeditor.feature.source"/>
+
+     <bundle id="org.eclipse.jsf.branding.source"/>
+     <bundle id="org.eclipse.jst.jsf.apache.trinidad.tagsupport.source"/>
+     <bundle id="org.eclipse.jst.jsf.common.source"/>
+     <bundle id="org.eclipse.jst.jsf.common.runtime.source"/>
+     <bundle id="org.eclipse.jst.jsf.common.runtime.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.common.ui.source"/>
+     <bundle id="org.eclipse.jst.jsf.contentassist.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.context.symbol.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.core.source"/>
+     <bundle id="org.eclipse.jst.jsf.core.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.designtime.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.doc.dev.source"/>
+     <bundle id="org.eclipse.jst.jsf.doc.user.source"/>
+     <bundle id="org.eclipse.jst.jsf.facelet.core.source"/>
+     <bundle id="org.eclipse.jst.jsf.facelet.ui.source"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.source"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.ui.source"/>
+     <bundle id="org.eclipse.jst.jsf.facesconfig.ui.test.source"/>
+     <bundle id="org.eclipse.jst.jsf.metadata.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.metadataprocessingtests2.source"/>
+     <bundle id="org.eclipse.jst.jsf.standard.tagsupport.source"/>
+     <bundle id="org.eclipse.jst.jsf.test.util.source"/>
+     <bundle id="org.eclipse.jst.jsf.ui.source"/>
+     <bundle id="org.eclipse.jst.jsf.ui.tests.source"/>
+     <bundle id="org.eclipse.jst.jsf.validation.el.tests.source"/>
+     <bundle id="org.eclipse.jst.pagedesigner.source"/>
+     <bundle id="org.eclipse.jst.pagedesigner.jsf.ui.source"/>
+     <bundle id="org.eclipse.jst.pagedesigner.jsp.core.source"/>
+     <bundle id="org.eclipse.jst.pagedesigner.tests.source"/>
 
     <category-def name="jsf" label="Web Tools Platform (WTP) Java Server Faces"><description>
     Java Server Faces plugins shared by WTP features

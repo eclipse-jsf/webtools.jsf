@@ -20,12 +20,8 @@
       %license
    </license>
 
-   <includes
-         id="org.eclipse.jsf.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.jsf.feature.source"
-         version="0.0.0"/>
+   <requires>
+      <import feature="org.eclipse.jsf.feature"/>
+   </requires>
 
 </feature>

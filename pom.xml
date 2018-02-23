@@ -8,6 +8,7 @@
  
   Contributors:
     Thanh Ha (Eclipse Foundation) - initial implementation
+    Nick Boldt, Red Hat - add sources to update site; support Tycho 1.1
 -->
 
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
