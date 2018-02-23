@@ -154,6 +154,13 @@ public class MockJavaProject extends MockJavaElement implements IJavaProject
 
     }
 
+    // TODO: implement this?
+    public IPackageFragmentRoot[] findUnfilteredPackageFragmentRoots(final IClasspathEntry entry)
+    {
+        throw new UnsupportedOperationException();
+
+    }
+
     public IType findType(final String fullyQualifiedName) throws JavaModelException
     {
         throw new UnsupportedOperationException();
