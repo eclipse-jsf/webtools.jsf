@@ -3,6 +3,7 @@ package org.eclipse.jst.jsf.test.util.mock.java;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -161,6 +162,18 @@ public class MockJavaProject extends MockJavaElement implements IJavaProject
 
     }
 
+    // TODO: implement this?
+    public IClasspathEntry getClasspathEntryFor(final IPath path)
+    {
+    	throw new UnsupportedOperationException();
+    }
+    
+    // TODO: implement this?
+    public Set<String> determineModulesOfProjectsWithNonEmptyClasspath()
+    {
+    	throw new UnsupportedOperationException();
+    }
+    
     public IType findType(final String fullyQualifiedName) throws JavaModelException
     {
         throw new UnsupportedOperationException();
@@ -236,7 +249,7 @@ public class MockJavaProject extends MockJavaElement implements IJavaProject
 
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Map getOptions(final boolean inheritJavaCoreOptions)
     {
         throw new UnsupportedOperationException();
