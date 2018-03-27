@@ -22,7 +22,7 @@
 
   <groupId>org.eclipse.webtools.jsf</groupId>
   <artifactId>org.eclipse.jst.jsf.facelet.core</artifactId>
-  <version>1.4.1-SNAPSHOT</version>
+  <version>1.4.2-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 
   <profiles>
