@@ -82,6 +82,15 @@ public final class IJSFCoreConstants
      */
     public static final String JSF_VERSION_2_2 = FACET_VERSION_2_2;
 
+	/**
+	 * The facet version for a JSF 2.3 project
+	 */
+	public static final String FACET_VERSION_2_3 = "2.3"; //$NON-NLS-1$
+	/**
+	 * The version string for a JSF 2.3 project
+	 */
+	public static final String JSF_VERSION_2_3 = FACET_VERSION_2_3;
+
     /**
      * @param facet
      * @return true if the facet is a jsf facet.
