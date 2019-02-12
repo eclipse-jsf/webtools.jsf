@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007 Oracle Corporation
+ * Copyright (c) 2007, 2008 Oracle Corporation
  *
  * $Id: QuickEditTabSectionsPackageImpl.java,v 1.3 2008/11/18 22:22:35 gkessler Exp $
  */

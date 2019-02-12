@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007 Oracle Corporation
+ * Copyright (c) 2007, 2010 Oracle Corporation
  *
  * $Id: BooleanValue.java,v 1.1 2010/01/21 00:01:44 gkessler Exp $
  */

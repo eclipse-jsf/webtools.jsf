@@ -1,5 +1,5 @@
 /**
- * Copyright 2006 Oracle
+ * Copyright 2006, 2008 Oracle
  *
  * $Id: SymbolPackage.java,v 1.10 2008/11/18 22:24:37 gkessler Exp $
  */

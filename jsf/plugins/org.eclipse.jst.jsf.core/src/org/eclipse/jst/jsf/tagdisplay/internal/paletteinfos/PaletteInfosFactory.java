@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007 Oracle Corporation
+ * Copyright (c) 2007, 2008 Oracle Corporation
  *
  * $Id: PaletteInfosFactory.java,v 1.2 2008/11/18 22:23:54 gkessler Exp $
  */

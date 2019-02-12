@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
+<!--
+    Copyright (c) 2008, 2019 IBM Corporation and others.
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 2.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-2.0/
+
+    SPDX-License-Identifier: EPL-2.0
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
 <md:metadatamodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:viewMap="http://org.eclipse.jst.jsf.core/componentMapping.ecore" xmlns:md="http://org.eclipse.jst.jsf.common.metadata/metadata.ecore" xsi:noNamespaceSchemaLocation="http://org.eclipse.jst.jsf.core/componentMapping.ecore" id="http://java.sun.com/jsf/html" type="tagFile">
   <entity id="selectOneMenu" type="tag">
     <include-entity-group id="common-valueholder-attributes"/>

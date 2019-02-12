@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
+<!--
+    Copyright (c) 2006, 2019 IBM Corporation and others.
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 2.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-2.0/
+
+    SPDX-License-Identifier: EPL-2.0
+
+    Contributors:
+        IBM Corporation - initial API and implementation
+ -->
+
 <toc label="Programmer's Guide" link_to="toc.xml#jsf_dev_programmersguide">
 	<topic label="Contributing JSP Source Page Editing Services for a Tag Library" href="html/programmersguide/contributing_jsp_source_page_editing_services_for_a_tag_library.html" >
 		<topic label="Design-time Meta-data Framework" href="html/programmersguide/metadata_framework.html"/>
