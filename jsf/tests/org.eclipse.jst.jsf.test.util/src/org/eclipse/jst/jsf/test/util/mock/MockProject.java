@@ -26,12 +26,10 @@ import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IPluginDescriptor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.content.IContentTypeMatcher;
 
-@SuppressWarnings("deprecation")
 public class MockProject extends MockContainer implements IProject
 {
 
@@ -105,11 +103,6 @@ public class MockProject extends MockContainer implements IProject
     }
 
     public IProjectNature getNature(String natureId) throws CoreException
-    {
-        throw new UnsupportedOperationException();
-    }
-
-    public IPath getPluginWorkingLocation(IPluginDescriptor plugin)
     {
         throw new UnsupportedOperationException();
     }
