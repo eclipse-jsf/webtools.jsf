@@ -500,4 +500,8 @@ public class MockJavaProject extends MockJavaElement implements IJavaProject
         return super.toString().concat("[JavaProject]");
     }
 
+	public IModuleDescription getOwnModuleDescription() throws JavaModelException {
+		throw new UnsupportedOperationException();
+	}
+
 }
