@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2010 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2020 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jst.pagedesigner.dnd.internal.DesignerSourceDropTargetListener;
 import org.eclipse.jst.pagedesigner.utils.StructuredModelUtil;
 import org.eclipse.swt.dnd.DND;
@@ -39,6 +40,15 @@ public class DesignerStructuredTextEditorJSP extends StructuredTextEditor
     private DropTarget _dropTarget;
     private IStructuredModel _structuredModel;
     private IModelStateListener _modelStateListener;
+
+    @Override
+    protected void installTextDragAndDrop(ISourceViewer textViewer) {
+        // intentional no-op
+    }
+    @Override
+    protected void uninstallTextDragAndDrop(ISourceViewer viewer) {
+        // do nothing
+    }
 
     @Override
     protected void initializeDrop(final ITextViewer viewer)

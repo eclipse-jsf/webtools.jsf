@@ -22,6 +22,6 @@
 
   <groupId>org.eclipse.webtools.jsf</groupId>
   <artifactId>org.eclipse.jst.jsf.ui</artifactId>
-  <version>1.6.102-SNAPSHOT</version>
+  <version>1.6.103-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>

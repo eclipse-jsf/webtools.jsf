@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2011 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2020 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -164,7 +164,7 @@ public class DesignerSourceDropTargetListener extends
 				IResource[] resources = (IResource[]) data;
 				if (resources.length > 0 && (resources[0] instanceof IFile)) {
 					IFile file = (IFile) resources[0];
-					ITagDropSourceData dropSource = (ITagDropSourceData) file
+					ITagDropSourceData dropSource = file
 							.getAdapter(ITagDropSourceData.class);
 					if (dropSource != null) {
 						command = new PaletteDropInsertCommand(
