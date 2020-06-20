@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2013 Oracle Corporation.
+ * Copyright (c) 2010, 2020 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -48,7 +48,7 @@ public class BundleHacker
         declaredField.setAccessible(true);
 
         @SuppressWarnings("unchecked")
-		EquinoxContainer container = new EquinoxContainer(Collections.EMPTY_MAP);
+		EquinoxContainer container = new EquinoxContainer(Collections.EMPTY_MAP, null);
         EquinoxBundle bundle = createEquinoxBundle(container);
 
         BundleContextImpl bundleContextImpl = new BundleContextImpl(bundle,container);
