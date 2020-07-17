@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2008 Oracle Corporation and others.
+ * Copyright (c) 2001, 2020 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -348,8 +348,8 @@ public class ComponentFactory
     }
 
 
-    private static final Integer ZERO = new Integer(0);
-    private static final Integer MINUS_ONE = new Integer(-1);
+    private static final Integer ZERO = Integer.valueOf(0);
+    private static final Integer MINUS_ONE = Integer.valueOf(-1);
 
     private static void maybeDefaultFirst(Map attributes)
     {

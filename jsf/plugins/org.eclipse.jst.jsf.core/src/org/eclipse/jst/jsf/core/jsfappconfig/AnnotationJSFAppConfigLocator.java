@@ -27,8 +27,6 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jst.jsf.common.internal.componentcore.AbstractVirtualComponentQuery.DefaultVirtualComponentQuery;
-import org.eclipse.jst.jsf.core.jsfappconfig.AbstractJSFAppConfigLocater;
-import org.eclipse.jst.jsf.core.jsfappconfig.JSFAppConfigUtils;
 import org.eclipse.wst.common.componentcore.resources.IVirtualFolder;
 
 /**
