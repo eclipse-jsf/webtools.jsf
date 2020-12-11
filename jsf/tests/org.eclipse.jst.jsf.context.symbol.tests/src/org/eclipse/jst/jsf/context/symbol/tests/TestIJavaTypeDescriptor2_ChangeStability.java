@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
+ * Copyright (c) 2001, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- *     Oracle Corporation - initial API and implementation
+ *     Oracle Corporation  - initial API and implementation
+ *     Reto Weiss/Axon Ivy - Cache resolved types
  *******************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.tests;
 
@@ -20,6 +21,7 @@ import java.util.Map;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
@@ -29,7 +31,7 @@ import org.eclipse.jdt.core.dom.Type;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
-import org.eclipse.jst.jsf.common.util.TypeUtil;
+import org.eclipse.jst.jsf.common.util.JDTTypeResolver;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
@@ -52,6 +54,7 @@ import org.eclipse.text.edits.TextEdit;
  */
 public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase 
 {
+    private static final IType[] EMPTY_SUPER_TYPES = new IType[0];
     private IBeanInstanceSymbol     _testBean1Symbol;
     private IBeanInstanceSymbol     _testBean2Symbol;
 
@@ -64,6 +67,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
     private final static String testBeanName1 = "TestBean1";
     private final static String testBeanName2 = "TestBean2";
 
+    @Override
     protected void setUp() throws Exception 
     {
         super.setUp();
@@ -111,6 +115,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         return bean;
     }
     
+    @Override
     protected void tearDown() throws Exception 
     {
         super.tearDown();
@@ -129,7 +134,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         IType type = _testBean1Symbol.getJavaTypeDescriptor().getType();
         IMethod newMethod = type.createMethod(NON_BEAN_METHOD_CONTENTS, null, true, null);
         assertNotNull(newMethod);
-        assertEquals(NON_BEAN_METHOD_SIG, TypeUtil.resolveMethodSignature(type, newMethod.getSignature()));
+        assertEquals(NON_BEAN_METHOD_SIG, resolveMethodSignature(type, newMethod));
         assertTrue(newMethod.exists());
         
         // post-cond: bean has new method 
@@ -184,7 +189,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         IMethod newMethod = type.createMethod(BEAN_METHOD_CONTENTS, null, true, null);
         assertNotNull(newMethod);
         assertTrue(newMethod.exists());
-        assertEquals(BEAN_METHOD_SIG, TypeUtil.resolveMethodSignature(type, newMethod.getSignature()));
+        assertEquals(BEAN_METHOD_SIG, resolveMethodSignature(type, newMethod));
         
         {
             // post-cond: bean has new method 
@@ -218,7 +223,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         IType type = _testBean1Symbol.getJavaTypeDescriptor().getType();
         IMethod method = type.getMethod(EXISTING_BEAN_METHOD, new String[0]);
         assertNotNull(method);
-        assertEquals(EXISTING_BEAN_METHOD_SIG, TypeUtil.resolveMethodSignature(type, method.getSignature()));
+        assertEquals(EXISTING_BEAN_METHOD_SIG, resolveMethodSignature(type, method));
         assertTrue(method.exists());
         method.delete(true, null);
         assertFalse(method.exists());
@@ -253,7 +258,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         IType type = _testBean1Symbol.getJavaTypeDescriptor().getType();
         IMethod method = type.getMethod(EXISTING_BEAN_METHOD, new String[0]);
         assertNotNull(method);
-        assertEquals(EXISTING_BEAN_METHOD_SIG, TypeUtil.resolveMethodSignature(type, method.getSignature()));
+        assertEquals(EXISTING_BEAN_METHOD_SIG, resolveMethodSignature(type, method));
         assertTrue(method.exists());
         method.rename(NEW_READONLY_BEAN_METHOD_NAME, false, null);
         method = type.getMethod(NEW_READONLY_BEAN_METHOD_NAME, new String[0]);
@@ -283,7 +288,7 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         _beanProperties.put(prop.getName(), prop);
         compareSymbolMaps(_beanProperties, newProperties);
     }
-    
+
     private static final String  READONLY_BEAN_REPLACEMENT_METHOD =
         "public Integer "+EXISTING_BEAN_METHOD+"(){return new Integer(4);}";
     private static final String  READONLY_BEAN_REPLACEMENT_SIG =
@@ -518,4 +523,10 @@ public class TestIJavaTypeDescriptor2_ChangeStability extends ModelBaseTestCase
         cu.getBuffer().setContents(newSource);
         cu.commitWorkingCopy(true, null);
     }
+    
+    private String resolveMethodSignature(IType type, IMethod method) throws JavaModelException
+    {
+      return new JDTTypeResolver(type, EMPTY_SUPER_TYPES).resolveMethodEraseTypeParams(method.getSignature());
+    }
+
 }

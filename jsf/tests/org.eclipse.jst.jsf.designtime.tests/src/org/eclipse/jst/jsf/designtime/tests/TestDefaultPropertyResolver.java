@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2011 Oracle Corporation.
+ * Copyright (c) 2007, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy    - Cache JDTBeanIntrospector
  * 
  ********************************************************************************/
 package org.eclipse.jst.jsf.designtime.tests;
@@ -16,8 +17,6 @@ package org.eclipse.jst.jsf.designtime.tests;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -43,6 +42,8 @@ import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+
+import junit.framework.TestCase;
 
 /**
  * Unit tests for the default property resolver
@@ -199,44 +200,43 @@ public class TestDefaultPropertyResolver extends TestCase
      */
     public void testSanity()
     {
-        JDTBeanIntrospector beanIntrospector =
-            new JDTBeanIntrospector(_testBean1Type);
+        JDTBeanIntrospector beanIntrospector = JDTBeanIntrospector.forType(_testBean1Type);
         Map<String, JDTBeanProperty> props = beanIntrospector.getProperties();
         assertEquals(NUM_PROPERTIES_TEST_BEAN_1, props.size());
         assertTrue(props.containsKey("stringProp1"));
         assertTrue(props.containsKey("booleanIsProp1"));
 
-        beanIntrospector = new JDTBeanIntrospector(_testMapBean1Type);
+        beanIntrospector = JDTBeanIntrospector.forType(_testMapBean1Type);
         props = beanIntrospector.getProperties();
         // has 2 as a bean: isEmpty -> empty property + class
         assertEquals(2, props.size());
 
-        beanIntrospector = new JDTBeanIntrospector(_testBean2Type);
+        beanIntrospector = JDTBeanIntrospector.forType(_testBean2Type);
         props = beanIntrospector.getProperties();
         // two props: myBean3, class
         assertEquals(2, props.size());
 
-        beanIntrospector = new JDTBeanIntrospector(_testBean3Type);
+        beanIntrospector = JDTBeanIntrospector.forType(_testBean3Type);
         props = beanIntrospector.getProperties();
         // two props: one of type TestBean2 + class
         assertEquals(2, props.size());
 
-        beanIntrospector = new JDTBeanIntrospector(_testBeanWithMapProp);
+        beanIntrospector = JDTBeanIntrospector.forType(_testBeanWithMapProp);
         props = beanIntrospector.getProperties();
         // two props: one of type Map + class
         assertEquals(2, props.size());
 
-        beanIntrospector = new JDTBeanIntrospector(_testListBeanType);
+        beanIntrospector = JDTBeanIntrospector.forType(_testListBeanType);
         props = beanIntrospector.getProperties();
         // includes isEmpty and class
         assertEquals(3, props.size());
 
-        beanIntrospector = new JDTBeanIntrospector(_testBeanWithListPropType);
+        beanIntrospector = JDTBeanIntrospector.forType(_testBeanWithListPropType);
         props = beanIntrospector.getProperties();
         assertEquals(2, props.size());
 
         beanIntrospector =
-            new JDTBeanIntrospector(_testBeanWithGenericProperties);
+            JDTBeanIntrospector.forType(_testBeanWithGenericProperties);
         props = beanIntrospector.getProperties();
         assertEquals(3, props.size());
     }

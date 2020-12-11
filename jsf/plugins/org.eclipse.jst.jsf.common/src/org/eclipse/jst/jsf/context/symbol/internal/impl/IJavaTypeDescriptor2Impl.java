@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2010 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy    - Cache JDTBeanIntrospector
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
@@ -28,13 +29,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.types.TypeInfoCache;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.util.JDTBeanMethod;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
@@ -70,27 +71,27 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * @generated
      */
     @SuppressWarnings("hiding")
-	public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
+    public static final String copyright = "Copyright 2006 Oracle";  //$NON-NLS-1$
 
     /**
      * The default value of the '{@link #getType() <em>Type</em>}' attribute.
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @see #getType()
      * @generated
      * @ordered
      */
-	protected static final IType TYPE_EDEFAULT = null;
+    protected static final IType TYPE_EDEFAULT = null;
 
     /**
      * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @see #getType()
      * @generated
      * @ordered
      */
-	protected IType type = TYPE_EDEFAULT;
+    protected IType type = TYPE_EDEFAULT;
 
     /**
      * The default value of the '{@link #getArrayCount() <em>Array Count</em>}' attribute.
@@ -125,7 +126,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * @ordered
      */
     @SuppressWarnings("hiding")
-	protected static final IJavaElement JDT_CONTEXT_EDEFAULT = null;
+    protected static final IJavaElement JDT_CONTEXT_EDEFAULT = null;
 
     /**
      * The cached value of the '{@link #getJdtContext() <em>Jdt Context</em>}' attribute.
@@ -136,24 +137,25 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * @ordered
      */
     @SuppressWarnings("hiding")
-	protected IJavaElement jdtContext = JDT_CONTEXT_EDEFAULT;
+    protected IJavaElement jdtContext = JDT_CONTEXT_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	protected IJavaTypeDescriptor2Impl() {
+    protected IJavaTypeDescriptor2Impl() {
         super();
     }
 
     /**
      * <!-- begin-user-doc -->
      * @return the static class 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	protected EClass eStaticClass() {
+    @Override
+    protected EClass eStaticClass() {
         return SymbolPackage.Literals.IJAVA_TYPE_DESCRIPTOR2;
     }
 
@@ -161,31 +163,32 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- begin-user-doc -->
      * @return the JDT type descriptor; if type is an array then this type
      * represent's the array base type only
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public IType getType() {
+    public IType getType() {
         return type;
     }
 
     /**
      * <!-- begin-user-doc -->
      * @param newType 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public void setType(IType newType) {
+    public void setType(IType newType) {
         IType oldType = type;
         type = newType;
         if (eNotificationRequired())
             eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE, oldType, type));
     }
 
-	/**
-	 * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getInterfaceTypeSignatures()
-	 * @generated NOT
-	 */
-	public EList getInterfaceTypeSignatures() 
+    /**
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getInterfaceTypeSignatures()
+     * @generated NOT
+     */
+    @Override
+    public EList getInterfaceTypeSignatures() 
     {
         EList  interfaces = new BasicEList();
         
@@ -208,6 +211,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getSuperTypeSignatures()
      * @generated NOT
      */
+    @Override
     public EList getSuperTypeSignatures() 
     {
         EList  interfaces = new BasicEList();
@@ -247,64 +251,66 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         }
     }
 
+    @Override
     public EList getProperties() 
     {
         return getBeanProperties();
     }
 
     
+    @Override
     public EList getMethods() 
     {
         return getBeanMethods();
     }
 
     /**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
      * @return the bean props for this java type 
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList getBeanProperties() 
-	{
-	    TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
-	    IBeanPropertySymbol[] properties = typeInfoCache.getCachedPropertySymbols(type);
-	    Collection propertyColl;
-	    if (properties == null) {
-	        propertyColl = getPropertiesInternal();
-	        properties = (IBeanPropertySymbol[]) propertyColl.toArray(new IBeanPropertySymbol[propertyColl.size()]);
-	        typeInfoCache.cachePropertySymbols(type, properties);
-	    } 
-	    else 
-	    {
+     * <!-- end-user-doc -->
+     * @generated NOT
+     */
+    public EList getBeanProperties() 
+    {
+        TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
+        IBeanPropertySymbol[] properties = typeInfoCache.getCachedPropertySymbols(type);
+        Collection propertyColl;
+        if (properties == null) {
+            propertyColl = getPropertiesInternal();
+            properties = (IBeanPropertySymbol[]) propertyColl.toArray(new IBeanPropertySymbol[propertyColl.size()]);
+            typeInfoCache.cachePropertySymbols(type, properties);
+        } 
+        else 
+        {
             propertyColl = new ArrayList(properties.length);
             Collections.addAll(propertyColl, (Object[])properties);
-	    }
-	    BasicEList list = new BasicEList(propertyColl);
-	    return list;
-	}
+        }
+        BasicEList list = new BasicEList(propertyColl);
+        return list;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
+    /**
+     * <!-- begin-user-doc -->
      * @return the bean methods for this type  
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList getBeanMethods() {
-	    TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
-	    IBeanMethodSymbol[] methods = typeInfoCache.getCachedMethodSymbols(type);
-	    Collection methodColl;
-	    if (methods == null) 
-	    {
-	        methodColl = getMethodsInternal();
-	        methods = (IBeanMethodSymbol[]) methodColl.toArray(new IBeanMethodSymbol[methodColl.size()]);
-	        typeInfoCache.cacheMethodSymbols(type, methods);
-	    } else {
-	        methodColl = new ArrayList(methods.length);
-	        Collections.addAll(methodColl, (Object[])methods);
-	    }
-	    BasicEList list = new BasicEList(methodColl);
-		return list;
-	}
+     * <!-- end-user-doc -->
+     * @generated NOT
+     */
+    public EList getBeanMethods() {
+        TypeInfoCache typeInfoCache = TypeInfoCache.getInstance();
+        IBeanMethodSymbol[] methods = typeInfoCache.getCachedMethodSymbols(type);
+        Collection methodColl;
+        if (methods == null) 
+        {
+            methodColl = getMethodsInternal();
+            methods = (IBeanMethodSymbol[]) methodColl.toArray(new IBeanMethodSymbol[methodColl.size()]);
+            typeInfoCache.cacheMethodSymbols(type, methods);
+        } else {
+            methodColl = new ArrayList(methods.length);
+            Collections.addAll(methodColl, (Object[])methods);
+        }
+        BasicEList list = new BasicEList(methodColl);
+        return list;
+    }
 
     
     /**
@@ -328,11 +334,12 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
             eNotify(new ENotificationImpl(this, Notification.SET, SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__ARRAY_COUNT, oldArrayCount, arrayCount));
     }
 
-	/**
+    /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public IJavaElement getJdtContext() {
         return jdtContext;
     }
@@ -342,6 +349,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void setJdtContext(IJavaElement newJdtContext) {
         IJavaElement oldJdtContext = jdtContext;
         jdtContext = newJdtContext;
@@ -360,6 +368,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated NOT
      */
+    @Override
     public IType resolveType(String resolvedTypeSignature) 
     {
         IType resolvedType = null;
@@ -401,6 +410,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
             case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
@@ -420,6 +430,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
@@ -445,6 +456,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public void eUnset(int featureID) {
         switch (featureID) {
             case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
@@ -468,6 +480,7 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
             case SymbolPackage.IJAVA_TYPE_DESCRIPTOR2__TYPE:
@@ -482,71 +495,74 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
         return super.eIsSet(featureID);
     }
 
+    @Override
     public boolean isArray() 
     {
-	    return getArrayCount() > 0;
+        return getArrayCount() > 0;
     }
 
     /**
-	 * @generated NOT
-	 */
-	public IObjectSymbol getArrayElement() 
-	{
-		if (isArray())
-		{
-			final String typeSignature = getTypeSignature();
-			final int arrayCount_ = Signature.getArrayCount(typeSignature);
-			final String baseType = Signature.getElementType(typeSignature);
-			final String elementTypeSignature = Signature.createArraySignature(baseType, arrayCount_-1);
+     * @generated NOT
+     */
+    @Override
+    public IObjectSymbol getArrayElement() 
+    {
+        if (isArray())
+        {
+            final String typeSignature = getTypeSignature();
+            final int arrayCount_ = Signature.getArrayCount(typeSignature);
+            final String baseType = Signature.getElementType(typeSignature);
+            final String elementTypeSignature = Signature.createArraySignature(baseType, arrayCount_-1);
 
-			final IJavaTypeDescriptor2 elementTypeDesc = 
-				SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
-			final String fullyQualifiedElementType = TypeUtil.getFullyQualifiedName(baseType);
-			
-			IType elementType = null;
+            final IJavaTypeDescriptor2 elementTypeDesc = 
+                SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+            final String fullyQualifiedElementType = TypeUtil.getFullyQualifiedName(baseType);
+            
+            IType elementType = null;
 
-			try 
-			{
-			    IType myType = getType();
-				if (myType != null)
-				{
-					elementType = getType().getJavaProject()
-					                 .findType(fullyQualifiedElementType);
-				}
-			} 
-			catch (JavaModelException e) 
-			{
-				// suppress
-			}
+            try 
+            {
+                IType myType = getType();
+                if (myType != null)
+                {
+                    elementType = getType().getJavaProject()
+                                     .findType(fullyQualifiedElementType);
+                }
+            } 
+            catch (JavaModelException e) 
+            {
+                // suppress
+            }
 
-			if (elementType != null)
-			{
-				elementTypeDesc.setType(elementType);
-			}
-			else
-			{
-				elementTypeDesc.setTypeSignatureDelegate(elementTypeSignature);
-			}
+            if (elementType != null)
+            {
+                elementTypeDesc.setType(elementType);
+            }
+            else
+            {
+                elementTypeDesc.setTypeSignatureDelegate(elementTypeSignature);
+            }
             
             elementTypeDesc.setArrayCount(Signature.getArrayCount(elementTypeSignature));
-			
-			IPropertySymbol newPropertySymbol = 
-				SymbolFactory.eINSTANCE.createIPropertySymbol();
-			newPropertySymbol.setTypeDescriptor(elementTypeDesc);
-			newPropertySymbol.setWritable(true);
-			newPropertySymbol.setReadable(true);
-			newPropertySymbol.setName(fullyQualifiedElementType);
+            
+            IPropertySymbol newPropertySymbol = 
+                SymbolFactory.eINSTANCE.createIPropertySymbol();
+            newPropertySymbol.setTypeDescriptor(elementTypeDesc);
+            newPropertySymbol.setWritable(true);
+            newPropertySymbol.setReadable(true);
+            newPropertySymbol.setName(fullyQualifiedElementType);
             return newPropertySymbol;
-		}
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getTypeSignature()
+    /* (non-Javadoc)
+     * @see org.eclipse.jst.jsf.context.symbol.internal.impl.ITypeDescriptorImpl#getTypeSignature()
      * @generated NOT
-	 */
-	public String getTypeSignature() 
+     */
+    @Override
+    public String getTypeSignature() 
     {
         if (getType() == null)
         {
@@ -564,35 +580,34 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
     }
 
     private Collection getPropertiesInternal()
-	{
+    {
         // if I'm an array then I have no bean properties
         if (isArray())
         {
             return Collections.EMPTY_LIST;
         }
         
-        final JDTBeanIntrospector  introspector = 
-            new JDTBeanIntrospector(getType());
+        final JDTBeanIntrospector  introspector = JDTBeanIntrospector.forType(type); 
         
-		final Map<String, JDTBeanProperty> properties = introspector.getProperties();
-		
-		final Collection calculatedProps = new ArrayList(properties.size());
+        final Map<String, JDTBeanProperty> properties = introspector.getProperties();
         
-		for (final Iterator<Map.Entry<String, JDTBeanProperty>> it = properties.entrySet().iterator(); it.hasNext();)
-		{
-		    Map.Entry<String, JDTBeanProperty> entry = it.next();
-		    final String propertyName = entry.getKey();
+        final Collection calculatedProps = new ArrayList(properties.size());
+        
+        for (final Iterator<Map.Entry<String, JDTBeanProperty>> it = properties.entrySet().iterator(); it.hasNext();)
+        {
+            Map.Entry<String, JDTBeanProperty> entry = it.next();
+            final String propertyName = entry.getKey();
             final JDTBeanProperty property = entry.getValue();
 
-			final IBeanPropertySymbol workingCopy =
-			    SymbolFactory.eINSTANCE.createIBeanPropertySymbol();
-			workingCopy.setName(propertyName);
-			workingCopy.setOwner(this);
+            final IBeanPropertySymbol workingCopy =
+                SymbolFactory.eINSTANCE.createIBeanPropertySymbol();
+            workingCopy.setName(propertyName);
+            workingCopy.setOwner(this);
                         
             final IJavaTypeDescriptor2 workingCopyDesc = 
                 SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
             workingCopy.setTypeDescriptor(workingCopyDesc);
-			workingCopy.setReadable(property.isReadable());
+            workingCopy.setReadable(property.isReadable());
             workingCopy.setWritable(property.isWritable());
                             
             workingCopyDesc.setArrayCount(property.getArrayCount());
@@ -612,61 +627,58 @@ public class IJavaTypeDescriptor2Impl extends ITypeDescriptorImpl implements IJa
             }
             
             calculatedProps.add(workingCopy);
-		}
+        }
 
-		return calculatedProps;
-	}
+        return calculatedProps;
+    }
 
     private Collection getMethodsInternal()
-	{
-        JDTBeanIntrospector introspector =
-            new JDTBeanIntrospector(getType());
+    {
+        JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(type);
         
-		IMethod[] methods = introspector.getAllMethods();
+        JDTBeanMethod[] methods = introspector.getMethods();
 
         List methodSymbols = new ArrayList();
 
-		for (int i = 0; i < methods.length; i++)
-		{
-			IMethod method = methods[i];
-			
-			try
-			{
-				// to be a bean method, it must not a constructor, must be public
-				// and must not be static
-				if (!method.isConstructor()
-						&& Flags.isPublic(method.getFlags())
-						&& !Flags.isStatic(method.getFlags()))
-				{
-					String methodName = method.getElementName();
-					IBeanMethodSymbol workingCopy = SymbolFactory.eINSTANCE.createIBeanMethodSymbol();
-					workingCopy.setName(methodName);
-					workingCopy.setOwner(this);
-                    workingCopy.setSignature(TypeUtil.
-                                                resolveMethodSignature
-                                                    (getType(), 
-                                                     method.getSignature()));
-					methodSymbols.add(workingCopy);
-				}
-			}
-			catch (JavaModelException jme)
-			{
-				// error reading meta-data.  Skip to next one
+        for (int i = 0; i < methods.length; i++)
+        {
+            JDTBeanMethod method = methods[i];
+            
+            try
+            {
+                // to be a bean method, it must not a constructor, must be public
+                // and must not be static
+                if (!method.isConstructor()
+                        && Flags.isPublic(method.getFlags())
+                        && !Flags.isStatic(method.getFlags()))
+                {
+                    String methodName = method.getElementName();
+                    IBeanMethodSymbol workingCopy = SymbolFactory.eINSTANCE.createIBeanMethodSymbol();
+                    workingCopy.setName(methodName);
+                    workingCopy.setOwner(this);
+                    workingCopy.setSignature(method.getResolvedSignatureErased());
+                    methodSymbols.add(workingCopy);
+                }
+            }
+            catch (JavaModelException jme)
+            {
+                // error reading meta-data.  Skip to next one
                 JSFCommonPlugin.log(jme);
-			}
-		}
-		
-		return methodSymbols;
-	}
+            }
+        }
+        
+        return methodSymbols;
+    }
 
 
     /**
      * <!-- begin-user-doc -->
      * @return the default string rep 
-	 * <!-- end-user-doc -->
+     * <!-- end-user-doc -->
      * @generated
      */
-	public String toString() {
+    @Override
+    public String toString() {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());

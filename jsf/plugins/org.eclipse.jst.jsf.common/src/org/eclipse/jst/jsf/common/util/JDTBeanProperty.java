@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Oracle Corporation.
+ * Copyright (c) 2007, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,18 +9,16 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy      Cache resolved types
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.common.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 
 /**
  * Represents a single bean property backed by JDT data
@@ -30,226 +28,125 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
  * @author cbateman
  *
  */
-public class JDTBeanProperty 
+public class JDTBeanProperty
 {
-	/**
-	 * the IMethod for the accessor  (either is or get)
-	 */
-	private IMethod   _getter;
-	
-	/**
-	 * the IMethod for a "set" accessor method
-	 */
-	private IMethod   _setter;
+  private final IType type;
+  private final String typeSignature;
+  private final List<String> typeParameterSignatures;
+  private final IMethod getter;
+  private final IMethod setter;
+  private final String propertyName;
 
-	/**
-	 * The IType that this property belongs to
-	 */
-	protected final IType    _type;
-    
-    /**
-     * @param type
-     */
-    protected JDTBeanProperty(IType type)
-    {
-        _type = type;
-    }
+  JDTBeanProperty(String propertyName, IType type, String typeSignature, List<String> typeParameterSignatures, IMethod getter, IMethod setter)
+  {
+    this.propertyName = propertyName;
+    this.type = type;
+    this.typeSignature = typeSignature;
+    this.typeParameterSignatures = typeParameterSignatures;
+    this.getter = getter;
+    this.setter = setter;
+  }
 
-    /**
-	 * @return true if this property is readable
-	 */
-	public boolean isReadable()
-	{
-		return  _getter != null;
-	}
-	
-	/**
-	 * @return true if this property is writable
-	 */
-	public boolean isWritable()
-	{
-		return _setter != null;
-	}
-	
-	
-	/**
-	 * @return the get accessor IMethod or null if none
-	 */
-	public IMethod getGetter() {
-		return _getter;
-	}
+  /**
+   * @return true if property can be read
+   */
+  public boolean isReadable()
+  {
+    return getter != null;
+  }
 
-	
-	
-	/**
-	 * Set the get accessor IMethod
-	 * @param getter -- may be null to indicate none
-	 */
-	void setGetter(IMethod getter) {
-		_getter = getter;
-	}
+  /**
+   * @return true if property can be written
+   */
+  public boolean isWritable()
+  {
+    return setter != null;
+  }
 
+  /**
+   * @return JDT getter method
+   */
+  public IMethod getGetter()
+  {
+    return getter;
+  }
 
-	/**
-	 * @return the set mutator IMethod or null if none
-	 */
-	public IMethod getSetter() {
-		return _setter;
-	}
+  /**
+   * @return JDT setter metod
+   */
+  public IMethod getSetter()
+  {
+    return setter;
+  }
 
-	/**
-	 * @param setter
-	 */
-	void setSetter(IMethod setter) {
-		_setter = setter;
-	}
-	
-    /**
-     * @return the IType for this property's type or null if it
-     * cannot determined.  Note that null does not necessarily indicate an error
-     * since some types like arrays of things do not have corresponding JDT IType's
-     * If typeSignature represents an array, the base element IType is returned
-     * if possible
-     */
-    public IType getType()
-    {
-        final String typeSignature = Signature.getElementType(getTypeSignature());
-        return TypeUtil.resolveType(_type, typeSignature);
-    }
-	
-    /**
-     * @return the number of array nesting levels in typeSignature.
-     * Returns 0 if not an array.
-     */
-    public int getArrayCount()
-    {
-    	final String sig = getTypeSignature();
-    	if (sig == null)
-    		return 0;
-        return Signature.getArrayCount(sig);
-    }
-    
-    /**
-     * @return true if property is an enum type, false otherwise or if cannot be resolved
-     */
-    public boolean isEnumType()
-    {
-        return TypeUtil.isEnumType(getType());
-    }
-    
-	/**
-	 * Fully equivalent to:
-	 * 
-	 * getTypeSignature(true)
-	 * 
-	 * @return the fully resolved (if possible) type signature for
-     * the property or null if unable to determine.
-     * 
-     * NOTE: this is the "type erasure" signature, so any type parameters
-     * will be removed and only the raw type signature will be returned.
-	 */
-	public String getTypeSignature()
-    {
-	    return getTypeSignature(true);
-    }
-	
-	
-    /**
-     * @param eraseTypeParameters if true, the returned type has type parameters
-     * erased. If false, template types are resolved. 
-     * 
-     * @see org.eclipse.jst.jsf.common.util.TypeUtil#resolveTypeSignature(IType, String, boolean)
-     * for more information on how specific kinds of unresolved generics are resolved
-     * 
-     * @return the fully resolved (if possible) type signature for
-     * the property or null if unable to determine.
-     */
-    public String getTypeSignature(boolean eraseTypeParameters)
-    {
-        try
-        {
-            String unResolvedSig = getUnresolvedType();
-            return TypeUtil.resolveTypeSignature(_type, unResolvedSig, eraseTypeParameters);
-        }
-        catch (JavaModelException jme)
-        {
-            JSFCommonPlugin.log(jme, "Error resolving bean property type signature"); //$NON-NLS-1$
-            return null;
-        }
-    }
-    
-	/**
-	 * For example, if this property was formed from: List<String> getListOfStrings()
-	 * then the list would consist of the signature "Ljava.lang.String;".  All 
-	 * nested type paramters are resolved
-	 * 
-     * @see org.eclipse.jst.jsf.common.util.TypeUtil#resolveTypeSignature(IType, String, boolean)
-     * for more information on how specific kinds of unresolved generics are resolved
-	 * 
-	 * @return a list of type signatures (fully resolved if possible)
-	 * of this property's bounding type parameters.
-	 */
-	public List<String> getTypeParameterSignatures()
-	{
-	    List<String>  signatures = new ArrayList<String>();
-	    
-	    try
-	    {
-	        final String[] typeParameters = Signature.getTypeArguments(getUnresolvedType());
-	        //System.err.println(getUnresolvedType());
-	        for (String parameter : typeParameters)
-	        {
-	            //System.out.println(parameter);
-	            signatures.add(TypeUtil.resolveTypeSignature(_type, parameter, false));
-	        }
-	    }
-	    catch (JavaModelException jme)
-	    {
-            JSFCommonPlugin.log(jme, "Error resolving bean property type signature"); //$NON-NLS-1$
-            // fall-through and return empty array
-	    }
+  /**
+   * @return the IType for this property's type or null if it cannot determined.
+   *         Note that null does not necessarily indicate an error since some
+   *         types like arrays of things do not have corresponding JDT IType's
+   *         If typeSignature represents an array, the base element IType is
+   *         returned if possible
+   */
+  public IType getType()
+  {
+    return type;
+  }
 
-	    return signatures;
-	}
+  /**
+   * @return the number of array nesting levels in typeSignature. Returns 0 if
+   *         not an array.
+   */
+  public int getArrayCount()
+  {
+    final String sig = getTypeSignature();
+    if (sig == null)
+      return 0;
+    return Signature.getArrayCount(sig);
+  }
 
-//	public Map<String, String> getTypeParameterSignatureMap()
-//	{
-//	    Map<String, String>  signatures = new HashMap<String, String>();
-//        
-//        try
-//        {
-//            final String[] typeParameters = Signature.getTypeArguments(getUnresolvedType());
-//            
-//            for (String parameter : typeParameters)
-//            {
-//                signatures.add(TypeUtil.resolveTypeSignature(_type, parameter, false));
-//            }
-//        }
-//        catch (JavaModelException jme)
-//        {
-//            JSFCommonPlugin.log(jme, "Error resolving bean property type signature"); //$NON-NLS-1$
-//            // fall-through and return empty array
-//        }
-//
-//        return signatures;
-//	}
-	
-    private String getUnresolvedType() throws JavaModelException
-    {
-        String   typeSig = null;
-        
-        // first decide which method to use; getter always gets precendence
-        if (_getter != null)
-        {
-            typeSig = _getter.getReturnType();
-        }
-        // TODO: if no getter or setter could we have been created?
-        // use setter
-        else
-        {
-            typeSig = _setter.getParameterTypes()[0];
-        }
-        
-        return typeSig;
-    }
+  /**
+   * @return true if property is an enum type, false otherwise or if cannot be
+   *         resolved
+   */
+  public boolean isEnumType()
+  {
+    return TypeUtil.isEnumType(getType());
+  }
+
+  /**
+   * Fully equivalent to:
+   * 
+   * getTypeSignature(true)
+   * 
+   * @return the fully resolved (if possible) type signature for the property or
+   *         null if unable to determine.
+   * 
+   *         NOTE: this is the "type erasure" signature, so any type parameters
+   *         will be removed and only the raw type signature will be returned.
+   */
+  public String getTypeSignature()
+  {
+    return typeSignature;
+  }
+
+  /**
+   * For example, if this property was formed from: List<String>
+   * getListOfStrings() then the list would consist of the signature
+   * "Ljava.lang.String;". All nested type paramters are resolved
+   * 
+   * @return a list of type signatures (fully resolved if possible) of this
+   *         property's bounding type parameters.
+   */
+  public List<String> getTypeParameterSignatures()
+  {
+    return typeParameterSignatures;
+  }
+  
+  @Override
+  public String toString()
+  {    
+    return "JDTBeanProperty [name="+propertyName+ //$NON-NLS-1$
+           " typeSignature="+typeSignature+ //$NON-NLS-1$
+           " typeParameterSignatures "+typeParameterSignatures+ //$NON-NLS-1$
+           "]";  //$NON-NLS-1$
+  }
 }

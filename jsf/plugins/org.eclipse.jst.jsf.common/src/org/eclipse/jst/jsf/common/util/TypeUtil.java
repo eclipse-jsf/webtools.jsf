@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2010 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,12 +9,12 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy    - Cache resolved types
  *    
  ********************************************************************************/
 
 package org.eclipse.jst.jsf.common.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.core.IField;
@@ -45,234 +45,18 @@ public final class TypeUtil
         		|| (Signature.getTypeSignatureKind(typeSignature) == Signature.ARRAY_TYPE_SIGNATURE
         			&& Signature.getElementType(typeSignature).charAt(0) == Signature.C_RESOLVED))
         {
-            IType type = null;
-            
             try
             {
-                type = owningType.getJavaProject().
+                return owningType.getJavaProject().
                            findType(getFullyQualifiedName(typeSignature));
             }
             catch (JavaModelException jme)
             {
                 // do nothing; return type == null;
             }
-            
-            return type;
+            return null;
         }
-        
-        
         return resolveTypeRelative(owningType, typeSignature);
-    }
-
-    /**
-     * Fully equivalent to:
-     * 
-     * #resolveTypeSignature(owningType, typeSignature, true)
-     * 
-     * If resolved, type signature has generic type parameters erased (absent).
-     * 
-     * @param owningType
-     * @param typeSignature
-     * @return the resolved type signature for typeSignature in owningType or
-     * typeSignature unchanged if cannot resolve.
-     */
-    public static String resolveTypeSignature(final IType owningType, final String typeSignature)
-    {
-        return resolveTypeSignature(owningType, typeSignature, true);
-    }
-    
-    /**
-     * Resolve typeSignature in the context of owningType.  This method will return 
-     * a type erased signture if eraseTypeParameters == true and will attempt to
-     * resolve and include parameters if eraseTypeParamters == false
-     * 
-     * NOTE: special rules apply to the way unresolved type parameters and wildcards
-     * are resolved:
-     * 
-     * 1) If a fully unresolved type parameter is found, then it will be replaced with Ljava.lang.Object;
-     * 
-     * i.e.  List<T>  -> Ljava.util.List<Ljava.lang.Object;>;  for any unresolved T.
-     * 
-     * 2) Any bounded wildcard will be replaced by the bound:
-     * 
-     * i.e. List<? extends String> -> Ljava.util.List<Ljava.lang.String;>;
-     * i.e. List<? super String> -> Ljava.util.List<Ljava.lang.String;>;
-     * 
-     * Note limitation here: bounds that use 'super' will take the "best case" scenario that the list
-     * type is of that type.
-     * 
-     * 3) The unbounded wildcard will be replaced by Ljava.lang.Object;
-     * 
-     * i.e. List<?> -> Ljava.util.List<Ljava.lang.Object;>;
-     * 
-     * 
-     * The reason for this substition is to return the most accurate reasonable approximation
-     * of the type within what is known by owningType
-     * 
-     * @param owningType
-     * @param typeSignature
-     * @param eraseTypeParameters if set to false, type parameters are resolved included
-     * in the signature
-     * @return the resolved type signature for typeSignature in owningType or
-     * typeSignature unchanged if cannot resolve.
-     */
-    public static String resolveTypeSignature(final IType owningType, final String typeSignature, boolean eraseTypeParameters)
-    {
-        final int sigKind = Signature.getTypeSignatureKind(typeSignature);
-    
-        switch (sigKind)
-        {
-            case Signature.BASE_TYPE_SIGNATURE:
-                return typeSignature;
-                
-            case Signature.ARRAY_TYPE_SIGNATURE:
-            {
-                final String elementType = Signature.getElementType(typeSignature);
-                
-                if (Signature.getTypeSignatureKind(elementType) == Signature.BASE_TYPE_SIGNATURE)
-                {
-                    return typeSignature;
-                }
-
-                final String resolvedElementType = resolveSignatureRelative(owningType, elementType, eraseTypeParameters);
-                String resultType = ""; //$NON-NLS-1$
-                for (int i = 0; i < Signature.getArrayCount(typeSignature);i++)
-                {
-                    resultType+=Signature.C_ARRAY;
-                }
-                
-                return resultType+resolvedElementType;
-            }
-
-            case Signature.TYPE_VARIABLE_SIGNATURE:
-            	return resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
-            
-            case Signature.CLASS_TYPE_SIGNATURE:
-                return resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
-
-            case Signature.WILDCARD_TYPE_SIGNATURE:
-                // strip the wildcard and try again.  Too bad Signature doesn't seem to have a method
-                // for this
-                if (typeSignature.charAt(0) == Signature.C_STAR)
-                {
-                    return TypeConstants.TYPE_JAVAOBJECT;
-                }
-                return resolveTypeSignature(owningType, typeSignature.substring(1), eraseTypeParameters);
-            
-            case Signature.CAPTURE_TYPE_SIGNATURE:
-                // strip the capture and try again
-                return resolveTypeSignature(owningType, Signature.removeCapture(typeSignature), eraseTypeParameters);
-//            case Signature.TYPE_VARIABLE_SIGNATURE:
-//                resolveSignatureRelative(owningType, typeSignature, eraseTypeParameters);
-
-            default:
-                return typeSignature;
-        }
-    }
-    
-    /**
-     * @param owningType -- type relative to which typeSignature will be resolved
-     * @param typeSignature -- non-array type signature
-     * @return the resolved type signature if possible or typeSignature if not
-     */
-    private static String resolveSignatureRelative(final IType owningType, final String typeSignature, final boolean eraseTypeParameters)
-    {
-        // if already fully resolved, return the input
-        if (typeSignature.charAt(0) == Signature.C_RESOLVED)
-        {
-            return typeSignature;
-        }
-
-        List<String> typeParameters = new ArrayList<String>();
-
-        IType resolvedType = resolveTypeRelative(owningType, typeSignature);
-
-        if (resolvedType != null)
-        {
-            if (!eraseTypeParameters)
-            {
-                // ensure that type parameters are resolved recursively
-                for (String typeParam : Signature.getTypeArguments(typeSignature))
-                {
-                    typeParam = Signature.removeCapture(typeParam);
-                    // check and remove bound wildcarding (extends/super/?)
-                    if (Signature.getTypeSignatureKind(typeParam) == Signature.WILDCARD_TYPE_SIGNATURE)
-                    {
-                        // convert ? to Object, strip extends/super
-                        if (typeParam.charAt(0) == Signature.C_STAR)
-                        {
-                            typeParam = TypeConstants.TYPE_JAVAOBJECT;
-                        }
-                        else
-                        {
-                            typeParam = typeParam.substring(1);
-                        }
-                    }
-                    final String resolvedParameter = 
-                    	resolveSignatureRelative(
-                    			// use the enclosing type, 
-                    			// *not* the resolved type because 
-                    			// we need to resolve in that context
-                    			owningType, 
-                    				typeParam, eraseTypeParameters);
-                    typeParameters.add(resolvedParameter);
-                }
-            }
-
-            final String  resolvedTypeSignature = 
-                Signature.createTypeSignature
-                    (resolvedType.getFullyQualifiedName(), true);
-           
-
-            if (typeParameters.size() > 0 && !eraseTypeParameters)
-            {
-                StringBuffer sb = new StringBuffer(resolvedTypeSignature);
-
-                if (sb.charAt(sb.length()-1) == ';')
-                {
-                    sb = sb.delete(sb.length()-1, sb.length());
-                }
-                
-                sb.append("<"); //$NON-NLS-1$
-                for(String param : typeParameters)
-                {
-                    //System.out.println("type param: "+resolvedType.getTypeParameter(param));
-                    sb.append(param);
-                }
-                
-                // replace the dangling ',' with the closing ">"
-                sb.append(">;"); //$NON-NLS-1$
-                return sb.toString();
-            }
-            
-            return resolvedTypeSignature;
-        }
-
-        if (Signature.getTypeSignatureKind(typeSignature) == 
-                Signature.CLASS_TYPE_SIGNATURE
-            || Signature.getTypeSignatureKind(typeSignature)
-                == Signature.TYPE_VARIABLE_SIGNATURE)
-        {
-            // if we are unable to resolve, check to see if the owning type has
-            // a parameter by this name
-            ITypeParameter typeParam = owningType.getTypeParameter(Signature.getSignatureSimpleName(typeSignature));
-            
-            // if we have a type parameter and it hasn't been resolved to a type,
-            // then assume it is a method template placeholder (i.e. T in ArrayList).
-            // at runtime these unresolved parameter variables are effectively 
-            // turned into Object's.  For example, think List.add(E o).  At runtime,
-            // E will behave exactly like java.lang.Object in that signature
-            if (typeParam.exists())
-            {
-                return TypeConstants.TYPE_JAVAOBJECT;
-            }
-            
-            // TODO: is there a better way to handle a failure to resolve
-            // than just garbage out?
-            //JSFCommonPlugin.log(new Exception("Failed to resolve type: "+typeSignature), "Failed to resolve type: "+typeSignature); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-        
-        return typeSignature;
     }
 
     private static IType resolveTypeRelative(final IType owningType, final String typeSignature)
@@ -313,37 +97,6 @@ public final class TypeUtil
         return Signature.createTypeSignature(fullyQualifiedName, true);
     }
 
-    
-    /**
-     * @param owner
-     * @param unresolvedSignature
-     * @return the resolved method signature for unresolvedSignature in owner
-     */
-    public static String resolveMethodSignature(final IType  owner, 
-                                         final String unresolvedSignature)
-    {
-        
-        final String unresolvedSignatureNormalized =
-            unresolvedSignature.replaceAll("/", "."); //$NON-NLS-1$ //$NON-NLS-2$
-        
-        // get the list of parameters
-        final String[] parameters = 
-            Signature.getParameterTypes(unresolvedSignatureNormalized);
-        
-        for (int i = 0; i < parameters.length; i++)
-        {
-            // try to full resolve the type
-            parameters[i] = resolveTypeSignature(owner, parameters[i]);
-        }
-        
-        // resolve return type
-        final String resolvedReturn = 
-            resolveTypeSignature(owner, 
-                                  Signature.getReturnType(unresolvedSignatureNormalized));
-        
-        return Signature.createMethodSignature(parameters, resolvedReturn);
-    }
-    
     /**
      * @param typeSignature     
      * @return a fully qualified Java class name from a type signature
@@ -355,7 +108,7 @@ public final class TypeUtil
         final String typeName = Signature.getSignatureSimpleName(typeSignature);
         return "".equals(packageName) ? typeName : packageName + "." + typeName;  //$NON-NLS-1$//$NON-NLS-2$
     }
-    
+
     private static IType resolveInParents(IType  childType, String fullyQualifiedName)
                                 throws JavaModelException
     {
@@ -407,7 +160,7 @@ public final class TypeUtil
             return null;
         }
     }
-    
+
     /**
      * @param type
      * @param typeParamSignature -- must be a Type Variable Signature
@@ -452,7 +205,7 @@ public final class TypeUtil
         
         return null;
     }
-    
+
     /**
      * @param type
      * @param fieldName
@@ -493,7 +246,7 @@ public final class TypeUtil
         
         return false;
     }
-    
+
     /**
      * @param typeSig1 the type signature of the first enum. Must be non-null, fully resolved enum type.
      * @param typeSig2 the type signature of the second enum.  Must be non-null, fully resolved enum type.
@@ -525,7 +278,7 @@ public final class TypeUtil
         // only comparable if is the same class
         return typeSig1.equals(typeSig2);
     }
-    
+
     /**
      * @param typeSig1 the type signature of the first enum. Must be non-null, fully resolved enum type.
      * @param typeSig2 the type signature of the second enum. Must be non-null, fully resolved enum type.
@@ -556,7 +309,6 @@ public final class TypeUtil
         // can never be equal
         return !typeSig1.equals(typeSig2);
     }
-    
 
     /**
      * NOTE: we diverge from IType.isEnum() because we also return true if the base type
@@ -591,7 +343,7 @@ public final class TypeUtil
         // if unresolved assume false
         return false;
     }
-    
+
     private TypeUtil()
     {
         // no external instantiation

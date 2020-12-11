@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2012 Oracle Corporation.
+ * Copyright (c) 2011, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,31 +8,33 @@
  * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
- *    Andrew McCulloch - initial API and implementation
- *    Ian Trimble - maintenance
+ *        Andrew McCulloch        - initial API and implementation
+ *        Ian Trimble                 - maintenance
+ *        Reto Weiss/Axon Ivy - Use cached JDTBeanIntrospector to resolve annotation types
  *******************************************************************************/ 
 package org.eclipse.jst.jsf.core.jsfappconfig;
 
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.MANAGED_BEAN_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.REFERENCED_BEAN_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.APPLICATION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_APPLICATION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_MODEL_BEAN_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_NAMED_BEAN_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_REQUEST_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_SESSION_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CUSTOM_SCOPED_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_COMPONENT_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_CONVERTER_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_RENDERER_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.FACES_VALIDATOR_ANNOTATION_CLASS;
-
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.MANAGED_BEAN_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.NONE_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.VIEW_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.REFERENCED_BEAN_ANNOTATION_CLASS;
 import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.SESSION_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.APPLICATION_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CUSTOM_SCOPED_ANNOTATION_CLASS;
+import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.VIEW_SCOPED_ANNOTATION_CLASS;
 
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_NAMED_BEAN_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_MODEL_BEAN_ANNOTATION_CLASS;
-
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_REQUEST_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_SESSION_SCOPED_ANNOTATION_CLASS;
-import static org.eclipse.jst.jsf.core.jsfappconfig.AnnotationJSFAppConfigProvider.CDI_APPLICATION_SCOPED_ANNOTATION_CLASS;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
@@ -40,8 +42,10 @@ import org.eclipse.jdt.core.IAnnotation;
 import org.eclipse.jdt.core.IMemberValuePair;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.search.SearchMatch;
 import org.eclipse.jdt.core.search.SearchRequestor;
+import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentClassType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentFamilyType;
 import org.eclipse.jst.jsf.facesconfig.emf.ComponentType;
@@ -71,76 +75,163 @@ import org.eclipse.jst.jsf.facesconfig.emf.ValidatorType;
 /**
  * SearchRequestor that looks at annotations for JSF configuration.
  * 
- * <p><b>Provisional API - subject to change</b></p>
+ * <p>
+ * <b>Provisional API - subject to change</b>
+ * </p>
  * 
  * @author Andrew McCulloch - Oracle
  */
-public class AnnotationSearchRequestor extends SearchRequestor {
-    
+public class AnnotationSearchRequestor extends SearchRequestor
+{
     private final FacesConfigType facesConfig;
     
-    AnnotationSearchRequestor(final FacesConfigType facesConfig) {
-         this.facesConfig = facesConfig;
-    }
+    private static final Set<String> ANNOATION_CANDIDATES = ofAnnotation(
+            MANAGED_BEAN_ANNOTATION_CLASS, 
+            REFERENCED_BEAN_ANNOTATION_CLASS, 
+            FACES_COMPONENT_ANNOTATION_CLASS, 
+            FACES_CONVERTER_ANNOTATION_CLASS, 
+            FACES_RENDERER_ANNOTATION_CLASS,
+            FACES_VALIDATOR_ANNOTATION_CLASS, 
+            CDI_NAMED_BEAN_ANNOTATION_CLASS, 
+            CDI_MODEL_BEAN_ANNOTATION_CLASS);
     
-    public void acceptSearchMatch(SearchMatch match) throws CoreException {
-        if (match.getAccuracy() == SearchMatch.A_ACCURATE) {
-            Object element = match.getElement();
-            if (element instanceof IType) {
-                IType type = (IType) element;
-                IAnnotation[] annotations = type.getAnnotations();
-                if (annotations != null) {
-                    for (int i = 0, k = annotations.length; i < k; i++) {
-                        if (annotations[i].exists()) {
-                            String annotationType = annotations[i].getElementName();
-                            String[][] resolvedAnnotationTypes = type.resolveType(annotationType);
-                            if (resolvedAnnotationTypes != null) {
-                                String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
-                                if (MANAGED_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                    addManagedBean(annotations[i], type);
-                                } else if (REFERENCED_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                    addReferencedBean(annotations[i], type);
-                                } else if (FACES_COMPONENT_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                    addComponent(annotations[i], type);
-                                } else if (FACES_CONVERTER_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                    addConverter(annotations[i], type);
-                                } else if (FACES_RENDERER_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                    addRenderer(annotations[i], type);
-                                } else if (FACES_VALIDATOR_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                    addValidator(annotations[i], type);
-                                } else if (CDI_NAMED_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                	addCDINamedBean(annotations[i], type);
-                                } else if (CDI_MODEL_BEAN_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                                	addCDIModelBean(type);
-                                }
-                            }
-                        }
-                    }
-                }
+    private static final Set<String> SCOPED_ANNOTATION_CANDIDATES = ofAnnotation(
+            NONE_SCOPED_ANNOTATION_CLASS,
+            VIEW_SCOPED_ANNOTATION_CLASS,
+            SESSION_SCOPED_ANNOTATION_CLASS,
+            APPLICATION_SCOPED_ANNOTATION_CLASS,
+            CUSTOM_SCOPED_ANNOTATION_CLASS);
+
+    private static final Set<String> CDI_SCOPED_ANNOTATION_CANDIDATES = ofAnnotation(
+            CDI_REQUEST_SCOPED_ANNOTATION_CLASS,
+            CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS,
+            CDI_SESSION_SCOPED_ANNOTATION_CLASS,
+            CDI_APPLICATION_SCOPED_ANNOTATION_CLASS);
+ 
+    private static Set<String> ofAnnotation(String... annotationClasses)
+    {
+        Set<String> candidates = new HashSet<String>();
+        for (String annotationClass : annotationClasses)
+        {
+            candidates.add(annotationClass);
+            candidates.add(Signature.getSimpleName(annotationClass));
+        }
+        return Collections.unmodifiableSet(candidates);
+    }
+
+    AnnotationSearchRequestor(final FacesConfigType facesConfig)
+    {
+        this.facesConfig = facesConfig;
+    }
+
+    @Override
+    public void acceptSearchMatch(SearchMatch match) throws CoreException
+    {
+        if (match.getAccuracy() != SearchMatch.A_ACCURATE)
+        {
+            return;
+        }
+
+        Object element = match.getElement();
+        if (!(element instanceof IType))
+        {
+            return;
+        }
+        IType type = (IType) element;
+        JDTBeanIntrospector beanIntrospector = JDTBeanIntrospector.forType(type);
+        IAnnotation[] annotations = type.getAnnotations();
+        if (annotations == null)
+        {
+            return;
+        }
+        for (IAnnotation annotation : annotations)
+        {
+            processAnnotation(type, beanIntrospector, annotation);
+        }
+    }
+
+    private void processAnnotation(IType type, JDTBeanIntrospector beanIntrospector, IAnnotation annotation) throws CoreException
+    {
+        if (!annotation.exists())
+        {
+            return;
+        }
+        String annotationType = annotation.getElementName();
+        if (! isAnnotationCandidate(annotationType))
+        {
+            return;
+        }
+        String annotationClassName = beanIntrospector.resolveFullQualifiedTypeName(annotationType);
+        if (annotationClassName != null)
+        {
+            if (MANAGED_BEAN_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addManagedBean(annotation, type, beanIntrospector);
+            }
+            else if (REFERENCED_BEAN_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addReferencedBean(annotation, type);
+            }
+            else if (FACES_COMPONENT_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addComponent(annotation, type);
+            }
+            else if (FACES_CONVERTER_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addConverter(annotation, type);
+            }
+            else if (FACES_RENDERER_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addRenderer(annotation, type);
+            }
+            else if (FACES_VALIDATOR_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addValidator(annotation, type);
+            }
+            else if (CDI_NAMED_BEAN_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addCDINamedBean(annotation, beanIntrospector, type);
+            }
+            else if (CDI_MODEL_BEAN_ANNOTATION_CLASS.equals(annotationClassName))
+            {
+                addCDIModelBean(type);
             }
         }
     }
 
-    private void addReferencedBean(IAnnotation referencedBeanAnnotation, IType beanType) throws JavaModelException {
+    private boolean isAnnotationCandidate(String annotationType)
+    {
+        return ANNOATION_CANDIDATES.contains(annotationType);
+    }
+
+    private void addReferencedBean(IAnnotation referencedBeanAnnotation, IType beanType)
+                    throws JavaModelException
+    {
         IMemberValuePair[] pairs = referencedBeanAnnotation.getMemberValuePairs();
         String beanNameString = null;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("name".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    beanNameString = (String)pair.getValue();
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("name".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    beanNameString = (String) pair.getValue();
                 }
             }
         }
-        if (beanNameString == null) {
+        if (beanNameString == null)
+        {
             beanNameString = beanType.getElementName();
-            if (beanNameString != null && beanNameString.length() > 0) {
+            if (beanNameString != null && beanNameString.length() > 0)
+            {
                 StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toUpperCase());
                 beanNameString = casedName.append(beanNameString.substring(1)).toString();
             }
         }
         String beanClassName = beanType.getFullyQualifiedName();
 
-        if (beanNameString != null && beanClassName != null) {
+        if (beanNameString != null && beanClassName != null)
+        {
             ReferencedBeanType bean = FacesConfigFactory.eINSTANCE.createReferencedBeanType();
             ReferencedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createReferencedBeanNameType();
             beanName.setTextContent(beanNameString);
@@ -152,57 +243,40 @@ public class AnnotationSearchRequestor extends SearchRequestor {
         }
     }
 
-    private void addManagedBean(IAnnotation beanAnnotation, IType beanType) throws JavaModelException {
+    private void addManagedBean(IAnnotation beanAnnotation, IType beanType, JDTBeanIntrospector beanIntrospector) throws JavaModelException
+    {
         IMemberValuePair[] pairs = beanAnnotation.getMemberValuePairs();
         String beanNameString = null;
         Boolean isBeanEager = Boolean.FALSE;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("name".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    beanNameString = (String)pair.getValue();
-                } else if ("eager".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_BOOLEAN) { //$NON-NLS-1$
-                    isBeanEager = (Boolean)pair.getValue();
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("name".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    beanNameString = (String) pair.getValue();
+                }
+                else if ("eager".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_BOOLEAN) //$NON-NLS-1$
+                {
+                    isBeanEager = (Boolean) pair.getValue();
                 }
             }
         }
-        if (beanNameString == null || beanNameString.length() < 1) {
+        if (beanNameString == null || beanNameString.length() < 1)
+        {
             beanNameString = beanType.getElementName();
-            if (beanNameString != null && beanNameString.length() > 0) {
+            if (beanNameString != null && beanNameString.length() > 0)
+            {
                 StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toLowerCase());
                 beanNameString = casedName.append(beanNameString.substring(1)).toString();
             }
         }
         String beanClassName = beanType.getFullyQualifiedName();
 
-        String beanScopeString = "request"; //$NON-NLS-1$
-        IAnnotation[] annotations = beanType.getAnnotations();
-        if (annotations != null) {
-	        for (int i = 0, k = annotations.length; i < k; i++) {
-                if (annotations[i].exists()) {
-                    String annotationType = annotations[i].getElementName();
-                    String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
-                    if (resolvedAnnotationTypes != null) {
-                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
-                        if (NONE_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "none"; //$NON-NLS-1$
-                        } else if (VIEW_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "view"; //$NON-NLS-1$
-                        } else if (SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "session"; //$NON-NLS-1$
-                        } else if (APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "application"; //$NON-NLS-1$
-                        } else if (CUSTOM_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                            IMemberValuePair[] scopePairs = annotations[i].getMemberValuePairs();
-                            if (scopePairs != null && scopePairs.length == 1 && scopePairs[0].getValueKind() == IMemberValuePair.K_STRING) {
-                                beanScopeString = (String)scopePairs[0].getValue();
-                            }
-                        }
-                    }
-                }
-	        }
-        }
+        String beanScopeString = processScopeAnnotations(beanType, beanIntrospector);
 
-        if (beanNameString != null && beanClassName != null) {
+        if (beanNameString != null && beanClassName != null)
+        {
             ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
             ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
             beanName.setTextContent(beanNameString);
@@ -219,88 +293,176 @@ public class AnnotationSearchRequestor extends SearchRequestor {
         }
     }
 
-    private void addValidator(IAnnotation validatorAnnotation, IType validatorType) throws JavaModelException {
+    private String processScopeAnnotations(IType beanType, JDTBeanIntrospector beanIntrospector) throws JavaModelException
+    {
+        String beanScopeString = "request"; //$NON-NLS-1$
+        IAnnotation[] annotations = beanType.getAnnotations();
+        if (annotations == null)
+        {
+            return beanScopeString;
+        }
+        for (IAnnotation annotation : annotations)
+        {
+            String scope = processScopeAnnoation(beanType, beanIntrospector, annotation);
+            if (scope != null)
+            {
+                beanScopeString = scope;
+            }
+        }
+        return beanScopeString;
+    }
+
+    private String processScopeAnnoation(IType beanType, JDTBeanIntrospector beanIntrospector, IAnnotation annotation) throws JavaModelException
+    {
+        if (! annotation.exists())
+        {
+            return null;
+        }
+        String annotationType = annotation.getElementName();
+        if (! isScopeAnnotationCandidate(annotationType))
+        {
+            return null;
+        }
+        String annotationClassName = beanIntrospector.resolveFullQualifiedTypeName(annotationType);
+        if (annotationClassName == null)
+        {
+            return null;
+        }
+        if (NONE_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "none"; //$NON-NLS-1$
+        }
+        else if (VIEW_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "view"; //$NON-NLS-1$
+        }
+        else if (SESSION_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "session"; //$NON-NLS-1$
+        }
+        else if (APPLICATION_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "application"; //$NON-NLS-1$
+        }
+        else if (CUSTOM_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            IMemberValuePair[] scopePairs = annotation.getMemberValuePairs();
+            if (scopePairs != null && scopePairs.length == 1
+                            && scopePairs[0].getValueKind() == IMemberValuePair.K_STRING)
+            {
+                return (String) scopePairs[0].getValue();
+            }
+        }
+        return null;
+    }
+
+    private boolean isScopeAnnotationCandidate(String annotationType)
+    {
+        return SCOPED_ANNOTATION_CANDIDATES.contains(annotationType);
+    }
+
+    private void addValidator(IAnnotation validatorAnnotation, IType validatorType) throws JavaModelException
+    {
         String validatorClassName = validatorType.getFullyQualifiedName();
         IMemberValuePair[] pairs = validatorAnnotation.getMemberValuePairs();
         String validatorIDString = null;
-//        Boolean isDefaultBoolean = null;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    validatorIDString = (String)pair.getValue();
-                    //isDefault not used in emf model
-//                } else if ("isDefault".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_BOOLEAN) {  //$NON-NLS-1$
-//                    isDefaultBoolean = (Boolean)pair.getValue();
+        // Boolean isDefaultBoolean = null;
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    validatorIDString = (String) pair.getValue();
+                    // isDefault not used in emf model
+                    // } else if ("isDefault".equals(pair.getMemberName()) &&
+                    // pair.getValueKind() == IMemberValuePair.K_BOOLEAN) { //$NON-NLS-1$
+                    // isDefaultBoolean = (Boolean)pair.getValue();
                 }
             }
         }
-        
-        if (validatorClassName != null && validatorIDString != null) {
+
+        if (validatorClassName != null && validatorIDString != null)
+        {
             ValidatorType validator = FacesConfigFactory.eINSTANCE.createValidatorType();
             ValidatorClassType validatorClass = FacesConfigFactory.eINSTANCE.createValidatorClassType();
             validatorClass.setTextContent(validatorClassName);
             validator.setValidatorClass(validatorClass);
-            
+
             ValidatorIdType validatorID = FacesConfigFactory.eINSTANCE.createValidatorIdType();
             validatorID.setTextContent(validatorIDString);
             validator.setValidatorId(validatorID);
-            
 
-//          if (isDefaultBoolean == null) {
-//              isDefaultBoolean = Boolean.FALSE;
-//          }
-            
+            // if (isDefaultBoolean == null) {
+            // isDefaultBoolean = Boolean.FALSE;
+            // }
+
             facesConfig.getValidator().add(validator);
         }
     }
 
-    private void addRenderer(IAnnotation rendererAnnotation, IType rendererType) throws JavaModelException {
+    private void addRenderer(IAnnotation rendererAnnotation, IType rendererType) throws JavaModelException
+    {
         String rendererClassName = rendererType.getFullyQualifiedName();
         IMemberValuePair[] pairs = rendererAnnotation.getMemberValuePairs();
         String rendererTypeString = null;
         String componentFamilyString = null;
         String renderKitIDString = null;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("rendererType".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    rendererTypeString = (String)pair.getValue();
-                } else if ("componentFamily".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) {  //$NON-NLS-1$
-                    componentFamilyString = (String)pair.getValue();
-                } else if ("renderKitId".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) {  //$NON-NLS-1$
-                    renderKitIDString = (String)pair.getValue();
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("rendererType".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    rendererTypeString = (String) pair.getValue();
+                }
+                else if ("componentFamily".equals(pair.getMemberName()) //$NON-NLS-1$
+                                && pair.getValueKind() == IMemberValuePair.K_STRING)
+                {
+                    componentFamilyString = (String) pair.getValue();
+                }
+                else if ("renderKitId".equals(pair.getMemberName()) //$NON-NLS-1$
+                                && pair.getValueKind() == IMemberValuePair.K_STRING)
+                {
+                    renderKitIDString = (String) pair.getValue();
                 }
             }
         }
-        
-        if (rendererClassName != null && rendererTypeString != null && componentFamilyString != null) {
+
+        if (rendererClassName != null && rendererTypeString != null && componentFamilyString != null)
+        {
             RendererType renderer = FacesConfigFactory.eINSTANCE.createRendererType();
             RendererClassType rendererClass = FacesConfigFactory.eINSTANCE.createRendererClassType();
             rendererClass.setTextContent(rendererClassName);
             renderer.setRendererClass(rendererClass);
 
-
             RendererTypeType rendererTypeType = FacesConfigFactory.eINSTANCE.createRendererTypeType();
             rendererTypeType.setTextContent(rendererTypeString);
             renderer.setRendererType(rendererTypeType);
-            
+
             ComponentFamilyType componentFamily = FacesConfigFactory.eINSTANCE.createComponentFamilyType();
             componentFamily.setTextContent(componentFamilyString);
             renderer.setComponentFamily(componentFamily);
 
-            
-            if (renderKitIDString == null) {
-                //use the default
+            if (renderKitIDString == null)
+            {
+                // use the default
                 renderKitIDString = "HTML_BASIC"; //$NON-NLS-1$
             }
             EList renderKits = facesConfig.getRenderKit();
-            if (renderKits != null) {
+            if (renderKits != null)
+            {
                 RenderKitType renderKit = null;
-                for (int i = 0, k = renderKits.size(); i < k; i++) {
-                    if (((RenderKitType)renderKits.get(i)).getRenderKitId() != null && renderKitIDString.equals(((RenderKitType)renderKits.get(i)).getRenderKitId().getTextContent())) {
-                        renderKit = (RenderKitType)(renderKits.get(i));
+                for (int i = 0, k = renderKits.size(); i < k; i++)
+                {
+                    if (((RenderKitType) renderKits.get(i)).getRenderKitId() != null && renderKitIDString
+                                    .equals(((RenderKitType) renderKits.get(i)).getRenderKitId().getTextContent()))
+                    {
+                        renderKit = (RenderKitType) (renderKits.get(i));
                     }
                 }
-                if (renderKit == null) {
+                if (renderKit == null)
+                {
                     renderKit = FacesConfigFactory.eINSTANCE.createRenderKitType();
                     RenderKitIdType renderKitID = FacesConfigFactory.eINSTANCE.createRenderKitIdType();
                     renderKitID.setTextContent(renderKitIDString);
@@ -312,34 +474,43 @@ public class AnnotationSearchRequestor extends SearchRequestor {
         }
     }
 
-    private void addConverter(IAnnotation converterAnnotation, IType converterType) throws JavaModelException {
+    private void addConverter(IAnnotation converterAnnotation, IType converterType) throws JavaModelException
+    {
         String converterClassName = converterType.getFullyQualifiedName();
         IMemberValuePair[] pairs = converterAnnotation.getMemberValuePairs();
         String converterIDString = null;
         String converterForClassString = null;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    converterIDString = (String)pair.getValue();
-                } else if ("forClass".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_CLASS) {  //$NON-NLS-1$
-                    converterForClassString = (String)pair.getValue();
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    converterIDString = (String) pair.getValue();
+                }
+                else if ("forClass".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_CLASS) //$NON-NLS-1$
+                {
+                    converterForClassString = (String) pair.getValue();
                 }
             }
         }
-        if (converterClassName != null) {
+        if (converterClassName != null)
+        {
             ConverterType converter = FacesConfigFactory.eINSTANCE.createConverterType();
             ConverterClassType converterClass = FacesConfigFactory.eINSTANCE.createConverterClassType();
             converterClass.setTextContent(converterClassName);
             converter.setConverterClass(converterClass);
 
-            if (converterIDString != null) {
+            if (converterIDString != null)
+            {
                 ConverterIdType converterID = FacesConfigFactory.eINSTANCE.createConverterIdType();
                 converterID.setTextContent(converterIDString);
                 converter.setConverterId(converterID);
-            }  
-            
-            if (converterForClassString == null) {
-                //use the default
+            }
+
+            if (converterForClassString == null)
+            {
+                // use the default
                 converterForClassString = "java.lang.Object"; //$NON-NLS-1$
             }
             ConverterForClassType converterForClass = FacesConfigFactory.eINSTANCE.createConverterForClassType();
@@ -349,45 +520,56 @@ public class AnnotationSearchRequestor extends SearchRequestor {
         }
     }
 
-    private void addComponent(IAnnotation componentAnnotation, IType componentType) throws JavaModelException {
+    private void addComponent(IAnnotation componentAnnotation, IType componentType) throws JavaModelException
+    {
         String componentClassName = componentType.getFullyQualifiedName();
         IMemberValuePair[] pairs = componentAnnotation.getMemberValuePairs();
         String componentTypeString = null;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    componentTypeString = (String)pair.getValue();
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    componentTypeString = (String) pair.getValue();
                 }
             }
         }
-        if (componentTypeString != null && componentClassName != null) {
-            ComponentType component =  FacesConfigFactory.eINSTANCE.createComponentType();
+        if (componentTypeString != null && componentClassName != null)
+        {
+            ComponentType component = FacesConfigFactory.eINSTANCE.createComponentType();
             ComponentClassType componentClass = FacesConfigFactory.eINSTANCE.createComponentClassType();
             componentClass.setTextContent(componentClassName);
             component.setComponentClass(componentClass);
-            
+
             ComponentTypeType componentTypeType = FacesConfigFactory.eINSTANCE.createComponentTypeType();
             componentTypeType.setTextContent(componentTypeString);
             component.setComponentType(componentTypeType);
-            
+
             facesConfig.getComponent().add(component);
         }
     }
 
-    private void addCDINamedBean(IAnnotation beanAnnotation, IType beanType) throws JavaModelException {
+    private void addCDINamedBean(IAnnotation beanAnnotation, JDTBeanIntrospector beanIntrospector, IType beanType) throws JavaModelException
+    {
         IMemberValuePair[] pairs = beanAnnotation.getMemberValuePairs();
 
         String beanNameString = null;
-        if (pairs != null) {
-            for (IMemberValuePair pair : pairs) {
-                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) { //$NON-NLS-1$
-                    beanNameString = (String)pair.getValue();
+        if (pairs != null)
+        {
+            for (IMemberValuePair pair : pairs)
+            {
+                if ("value".equals(pair.getMemberName()) && pair.getValueKind() == IMemberValuePair.K_STRING) //$NON-NLS-1$
+                {
+                    beanNameString = (String) pair.getValue();
                 }
             }
         }
-        if (beanNameString == null || beanNameString.length() < 1) {
+        if (beanNameString == null || beanNameString.length() < 1)
+        {
             beanNameString = beanType.getElementName();
-            if (beanNameString != null && beanNameString.length() > 0) {
+            if (beanNameString != null && beanNameString.length() > 0)
+            {
                 StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toLowerCase());
                 beanNameString = casedName.append(beanNameString.substring(1)).toString();
             }
@@ -395,30 +577,10 @@ public class AnnotationSearchRequestor extends SearchRequestor {
 
         String beanClassName = beanType.getFullyQualifiedName();
 
-        String beanScopeString = "dependent"; //$NON-NLS-1$
-        IAnnotation[] annotations = beanType.getAnnotations();
-        if (annotations != null) {
-	        for (int i = 0, k = annotations.length; i < k; i++) {
-                if (annotations[i].exists()) {
-                    String annotationType = annotations[i].getElementName();
-                    String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
-                    if (resolvedAnnotationTypes != null) {
-                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
-                        if (CDI_REQUEST_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "request"; //$NON-NLS-1$
-                        } else if (CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "conversation"; //$NON-NLS-1$
-                        } else if (CDI_SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "session"; //$NON-NLS-1$
-                        } else if (CDI_APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "application"; //$NON-NLS-1$
-                        }
-                    }
-                }
-	        }
-        }
+        String beanScopeString = processCDIScopeAnnotations(beanType, beanIntrospector);
 
-        if (beanNameString != null && beanClassName != null) {
+        if (beanNameString != null && beanClassName != null)
+        {
             ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
             ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
             beanName.setTextContent(beanNameString);
@@ -435,9 +597,70 @@ public class AnnotationSearchRequestor extends SearchRequestor {
         }
     }
 
-    private void addCDIModelBean(IType beanType) throws JavaModelException {
+    private String processCDIScopeAnnotations(IType beanType, JDTBeanIntrospector beanIntrospector) throws JavaModelException
+    {
+        String beanScopeString = "dependent"; //$NON-NLS-1$
+        IAnnotation[] annotations = beanType.getAnnotations();
+        if (annotations == null)
+        {
+            return beanScopeString;
+        }
+        for (IAnnotation annotation : annotations)
+        {
+            String scope = processCDIScopeAnnotation(beanType, beanIntrospector, annotation);
+            if (scope != null)
+            {
+                beanScopeString = scope;
+            }
+        }
+        return beanScopeString;
+    }
+    
+    private String processCDIScopeAnnotation(IType beanType, JDTBeanIntrospector beanIntrospector, IAnnotation annotation)
+    {
+        if (!annotation.exists())
+        {
+            return null;
+        }
+        String annotationType = annotation.getElementName();
+        if (! isCDIScopeAnnotationCandidate(annotationType))
+        {
+            return null;
+        }
+        String annotationClassName = beanIntrospector.resolveFullQualifiedTypeName(annotationType);
+        if (annotationClassName == null)
+        {
+            return null;
+        }
+        if (CDI_REQUEST_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "request"; //$NON-NLS-1$
+        }
+        else if (CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "conversation"; //$NON-NLS-1$
+        }
+        else if (CDI_SESSION_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "session"; //$NON-NLS-1$
+        }
+        else if (CDI_APPLICATION_SCOPED_ANNOTATION_CLASS.equals(annotationClassName))
+        {
+            return "application"; //$NON-NLS-1$
+        }
+        return null;
+    }
+
+    private boolean isCDIScopeAnnotationCandidate(String annotationType)
+    {
+        return CDI_SCOPED_ANNOTATION_CANDIDATES.contains(annotationType);
+    }
+
+    private void addCDIModelBean(IType beanType) throws JavaModelException
+    {
         String beanNameString = beanType.getElementName();
-        if (beanNameString != null && beanNameString.length() > 0) {
+        if (beanNameString != null && beanNameString.length() > 0)
+        {
             StringBuffer casedName = new StringBuffer(String.valueOf(beanNameString.charAt(0)).toLowerCase());
             beanNameString = casedName.append(beanNameString.substring(1)).toString();
         }
@@ -446,26 +669,37 @@ public class AnnotationSearchRequestor extends SearchRequestor {
 
         String beanScopeString = "request"; //$NON-NLS-1$
         IAnnotation[] annotations = beanType.getAnnotations();
-        if (annotations != null) {
-	        for (int i = 0, k = annotations.length; i < k; i++) {
-                if (annotations[i].exists()) {
+        if (annotations != null)
+        {
+            for (int i = 0, k = annotations.length; i < k; i++)
+            {
+                if (annotations[i].exists())
+                {
                     String annotationType = annotations[i].getElementName();
                     String[][] resolvedAnnotationTypes = beanType.resolveType(annotationType);
-                    if (resolvedAnnotationTypes != null) {
-                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.').append(resolvedAnnotationTypes[0][1]).toString();
-                        if (CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "conversation"; //$NON-NLS-1$
-                        } else if (CDI_SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "session"; //$NON-NLS-1$
-                        } else if (CDI_APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName)) {
-                        	beanScopeString = "application"; //$NON-NLS-1$
+                    if (resolvedAnnotationTypes != null)
+                    {
+                        String resolvedAnnotationClassName = new StringBuffer(resolvedAnnotationTypes[0][0]).append('.')
+                                        .append(resolvedAnnotationTypes[0][1]).toString();
+                        if (CDI_CONVERSATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName))
+                        {
+                            beanScopeString = "conversation"; //$NON-NLS-1$
+                        }
+                        else if (CDI_SESSION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName))
+                        {
+                            beanScopeString = "session"; //$NON-NLS-1$
+                        }
+                        else if (CDI_APPLICATION_SCOPED_ANNOTATION_CLASS.equals(resolvedAnnotationClassName))
+                        {
+                            beanScopeString = "application"; //$NON-NLS-1$
                         }
                     }
                 }
-	        }
+            }
         }
 
-        if (beanNameString != null && beanClassName != null) {
+        if (beanNameString != null && beanClassName != null)
+        {
             ManagedBeanType bean = FacesConfigFactory.eINSTANCE.createManagedBeanType();
             ManagedBeanNameType beanName = FacesConfigFactory.eINSTANCE.createManagedBeanNameType();
             beanName.setTextContent(beanNameString);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
+ * Copyright (c) 2001, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,10 +9,12 @@
  * 
  * Contributors:
  *     Oracle Corporation - initial API and implementation
+ *     Reto Weiss/Axon Ivy      Cache resolved types
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.internal.types;
 
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 
@@ -32,6 +34,7 @@ class TypeInfo {
     private IType[] supertypes = null;
     private IType[] interfaceTypes = null;
     private String[] missingSupertypeNames = null;
+    private JDTBeanIntrospector beanIntrospector = null;
     
     /**Creates an empty TypeInfo object
      */
@@ -109,4 +112,11 @@ class TypeInfo {
         this.missingSupertypeNames = missingSupertypeNames;
     }
     
+    public JDTBeanIntrospector getBeanIntrospector() {
+      return beanIntrospector;
+    }
+    
+    public void setBeanIntrospector(JDTBeanIntrospector beanIntrospector) {
+      this.beanIntrospector = beanIntrospector;
+    }
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2009 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,14 +9,13 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+*     Reto Weiss/Axon Ivy    - Cache resolved types 
  * 
  ********************************************************************************/
 
 package org.eclipse.jst.jsf.core.tests.util;
 
 import java.util.Map;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -25,12 +24,13 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
-import org.eclipse.jst.jsf.common.util.JDTBeanPropertyWorkingCopy;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+
+import junit.framework.TestCase;
 
 /**
  * Tester fot he JDTBeanIntrospector class
@@ -144,17 +144,16 @@ public class TestJDTBeanIntrospector extends TestCase
         
         // introspect after classes loaded to ensure all dependencies
         // are in the project
-        JDTBeanIntrospector beanIntrospector =
-            new JDTBeanIntrospector(_testBean1Type);
+        JDTBeanIntrospector beanIntrospector = JDTBeanIntrospector.forType(_testBean1Type);
         _properties = beanIntrospector.getProperties();
 
-        beanIntrospector = new JDTBeanIntrospector(_testBeanSubclassType);
+        beanIntrospector = JDTBeanIntrospector.forType(_testBeanSubclassType);
         _subClassProperties = beanIntrospector.getProperties();
 
-        beanIntrospector = new JDTBeanIntrospector(_testBeanGenericType);
+        beanIntrospector = JDTBeanIntrospector.forType(_testBeanGenericType);
         _genericTypeProperties = beanIntrospector.getProperties();
 
-        beanIntrospector = new JDTBeanIntrospector(_testInterface);
+        beanIntrospector = JDTBeanIntrospector.forType(_testInterface);
         _interfaceProperties = beanIntrospector.getProperties();
     }
 
@@ -197,13 +196,6 @@ public class TestJDTBeanIntrospector extends TestCase
                 .size());
         assertNull("Empty string is invalid property name", properties.get(""));
         assertNull("Null is not a valid property name", properties.get(null));
-
-        // ensure type correctness of all values
-        for (final JDTBeanProperty value : properties.values())
-        {
-            // no working copies should slip their way in
-            assertFalse(value instanceof JDTBeanPropertyWorkingCopy);
-        }
     }
 
     /**
@@ -622,9 +614,7 @@ public class TestJDTBeanIntrospector extends TestCase
     {
         final JDTBeanProperty property =
             _genericTypeProperties.get("listOfListOfStrings");
-        assertEquals("Ljava.util.List;", property.getTypeSignature(true));
-        assertEquals("Ljava.util.List<Ljava.util.List<Ljava.lang.String;>;>;",
-                property.getTypeSignature(false));
+        assertEquals("Ljava.util.List;", property.getTypeSignature());
 
         assertEquals(1, property.getTypeParameterSignatures().size());
         assertEquals("Ljava.util.List<Ljava.lang.String;>;", property
@@ -635,9 +625,7 @@ public class TestJDTBeanIntrospector extends TestCase
     {
         final JDTBeanProperty property =
             _genericTypeProperties.get("mapOfString_String");
-        assertEquals("Ljava.util.Map;", property.getTypeSignature(true));
-        assertEquals("Ljava.util.Map<Ljava.lang.String;Ljava.lang.String;>;",
-                property.getTypeSignature(false));
+        assertEquals("Ljava.util.Map;", property.getTypeSignature());
 
         assertEquals(2, property.getTypeParameterSignatures().size());
         assertEquals("Ljava.lang.String;", property
@@ -650,9 +638,7 @@ public class TestJDTBeanIntrospector extends TestCase
     public void testUnboundedProperty_List() throws Exception
     {
         final JDTBeanProperty property = _genericTypeProperties.get("unboundedList");
-        assertEquals("Ljava.util.List;", property.getTypeSignature(true));
-        assertEquals("Ljava.util.List<Ljava.lang.Object;>;", property
-                .getTypeSignature(false));
+        assertEquals("Ljava.util.List;", property.getTypeSignature());
 
         assertEquals(1, property.getTypeParameterSignatures().size());
         assertEquals("Ljava.lang.Object;", property

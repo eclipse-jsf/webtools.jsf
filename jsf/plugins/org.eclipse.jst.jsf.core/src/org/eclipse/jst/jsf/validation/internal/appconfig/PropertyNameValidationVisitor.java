@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2010 Oracle Corporation and others.
+ * Copyright (c) 2001, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- *     Oracle Corporation - initial API and implementation
+ *     Oracle Corporation  - initial API and implementation
+ *     Reto Weiss/Axon Ivy - Use cached JDTBeanIntrospector 
  *******************************************************************************/
 package org.eclipse.jst.jsf.validation.internal.appconfig;
 
@@ -54,11 +55,13 @@ class PropertyNameValidationVisitor extends EObjectValidationVisitor
         _typeCache = new HashMap<String, IType>();
     }
 
+    @Override
     protected EObjectValidationVisitor[] getChildNodeValidators() 
     {
         return PropertyValidationVisitor.NO_CHILDREN;
     }
 
+    @Override
     protected void doValidate(EObject object, List messages, IFile file) 
     {
         final String parentClassType = getParentClassType(object);
@@ -144,7 +147,7 @@ class PropertyNameValidationVisitor extends EObjectValidationVisitor
 
 	private Map<String, JDTBeanProperty> getProperties(final IType type, final IProject project) 
 	{
-		final JDTBeanIntrospector introspector = new JDTBeanIntrospector(type);
+		final JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(type);
 		return introspector.getProperties();
 	}
 	

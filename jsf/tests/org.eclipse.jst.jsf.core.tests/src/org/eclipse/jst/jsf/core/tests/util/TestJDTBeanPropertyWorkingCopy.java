@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2008 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,11 +9,10 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy    - Cache resolved types *    
  * 
  ********************************************************************************/
 package org.eclipse.jst.jsf.core.tests.util;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -22,11 +21,14 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
 import org.eclipse.jst.jsf.common.util.JDTBeanPropertyWorkingCopy;
+import org.eclipse.jst.jsf.common.util.JDTTypeResolver;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
 import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
+
+import junit.framework.TestCase;
 
 /**
  * Tests basic operations on the jdt bean property
@@ -95,8 +97,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
      */
     public void testSimpleBeanProperty()
     {
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type.getMethod("getStringProp1", new String[0]);
@@ -132,8 +133,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
      */
     public void testSimpleIsBeanProperty()
     {
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type.getMethod("isBooleanIsProp1", new String[0]);
@@ -171,8 +171,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
      */
     public void testIsAccessorTakesPrecedence()
     {
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleIsGetter =
             _testBean1Type.getMethod("isBooleanIsProp2", new String[0]);
@@ -254,8 +253,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
      */
     public void testDoNotUseSetterIfDoesNotMatchGetterType()
     {
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type.getMethod("getStringProperty2", new String[0]);
@@ -295,8 +293,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
     public void testReadonlyBeanProperty()
     {
         // readonly get
-        JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type.getMethod("getReadonlyStringProperty",
@@ -326,7 +323,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
         // should be an IType for a String
         assertNotNull(beanProperty.getType());
 
-        workingCopy = new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        workingCopy = createPropertyWorkingCopy();
 
         // readonly is getter
         final IMethod isGetter =
@@ -365,8 +362,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
     public void testWriteonlyBeanProperty()
     {
         // readonly get
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleSetter =
             _testBean1Type.getMethod("setWriteonlyStringProperty",
@@ -403,8 +399,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
     public void testStringArrayProperty()
     {
         // readonly get
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type.getMethod("getStringArrayProperty",
@@ -444,8 +439,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
     public void testCollectionProperty()
     {
         // readonly get
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type
@@ -485,8 +479,7 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
     public void testMapProperty()
     {
         // readonly get
-        final JDTBeanPropertyWorkingCopy workingCopy =
-            new JDTBeanPropertyWorkingCopy(_testBean1Type);
+        final JDTBeanPropertyWorkingCopy workingCopy = createPropertyWorkingCopy();
 
         final IMethod simpleGetter =
             _testBean1Type.getMethod("getMapProperty", new String[0]);
@@ -516,6 +509,11 @@ public class TestJDTBeanPropertyWorkingCopy extends TestCase
 
         // should resolve a type
         assertNotNull(beanProperty.getType());
+    }
+
+    private JDTBeanPropertyWorkingCopy createPropertyWorkingCopy()
+    {
+      return new JDTBeanPropertyWorkingCopy(_testBean1Type, new JDTTypeResolver(_testBean1Type, new IType[0]), "StringProp1");
     }
 
 }

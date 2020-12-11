@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2009 Oracle Corporation and others.
+ * Copyright (c) 2001, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- *     Oracle Corporation - initial API and implementation
+ *     Oracle Corporation  - initial API and implementation
+ *     Reto Weiss/Axon Ivy - Cache resolved types
  *******************************************************************************/
 package org.eclipse.jst.jsf.common.internal.types;
 
@@ -36,6 +37,7 @@ import org.eclipse.jdt.core.ITypeRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
+import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 
@@ -84,7 +86,7 @@ public class TypeInfoCache implements IElementChangedListener {
     public static void disposeInstance(final TypeInfoCache cache)
     {
         if (cache != null 
-                && cache != instance)        
+                && cache != instance)
         {
             JavaCore.removeElementChangedListener(cache);
             
@@ -181,6 +183,24 @@ public class TypeInfoCache implements IElementChangedListener {
         return methods;
     }
     
+
+    /**
+     * @param beanType
+     * @return cached bean introspector or null
+     */
+    public JDTBeanIntrospector getCachedBeanIntrospector(IType beanType)
+    {
+      if (beanType != null)
+      {
+          TypeInfo typeInfo = getTypeInfo(beanType);
+          if (typeInfo != null)
+          {
+              return typeInfo.getBeanIntrospector();
+          }
+      }
+      return null;
+    }
+    
     /**Returns the cached supertypes for a given type. Will return null if no supertypes
      * have been cached for this type or if the type/something it depends on has changed since
      * then.
@@ -189,18 +209,16 @@ public class TypeInfoCache implements IElementChangedListener {
      * @see TypeInfoCache#cacheSupertypesFor(IType)
      */
     public synchronized IType[] getCachedSupertypes(IType type) {
-        IType[] types = null;
-        
         if (type != null)
         {
             TypeInfo typeInfo = getTypeInfo(type);
             if (typeInfo != null)
             {
-                types = typeInfo.getSupertypes();
+                return typeInfo.getSupertypes();
             }
         }
         
-        return types;
+        return null;
     }
     
     /**Returns the cached implemented interfaces for a given type. Will return null if no interfaces
@@ -252,6 +270,22 @@ public class TypeInfoCache implements IElementChangedListener {
                 typeInfo.setPropertySymbols(properties);
             }
         }
+    }
+
+    /**
+     * Chaches the given bean introspector for the given type
+     * @param beanType
+     * @param beanIntrospector
+     */
+    public void cacheBeanIntrospector(IType beanType, JDTBeanIntrospector beanIntrospector)
+    {
+      if (beanType != null)
+      {
+          TypeInfo typeInfo = getOrCreateTypeInfo(beanType);
+          if (typeInfo != null) {
+              typeInfo.setBeanIntrospector(beanIntrospector);
+          }
+      }
     }
     
     /**Caches the supertypes for the given type. The supertypes will be calculated (and also returned)
@@ -601,5 +635,4 @@ public class TypeInfoCache implements IElementChangedListener {
             }
         }
     }
-
 }

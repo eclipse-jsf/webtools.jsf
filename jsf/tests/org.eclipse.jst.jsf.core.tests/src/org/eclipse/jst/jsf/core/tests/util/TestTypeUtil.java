@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Oracle Corporation.
+ * Copyright (c) 2007, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy    - Cache resolved types    
  * 
  ********************************************************************************/
 package org.eclipse.jst.jsf.core.tests.util;
@@ -16,12 +17,11 @@ package org.eclipse.jst.jsf.core.tests.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
+import org.eclipse.jst.jsf.common.util.JDTTypeResolver;
 import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.core.tests.TestsPlugin;
 import org.eclipse.jst.jsf.test.util.JDTTestEnvironment;
@@ -29,8 +29,12 @@ import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 
+import junit.framework.TestCase;
+
 public class TestTypeUtil extends TestCase
 {
+  private static final IType[] EMPTY_SUPER_TYPES = new IType[0];
+  
     private JDTTestEnvironment  _jdtTestEnvironment;
     private IType               _testBean1Type;
     private IType               _testBeanSubclassType;
@@ -52,6 +56,7 @@ public class TestTypeUtil extends TestCase
 
     // private final static String testEnumName2 = "TestEnum2";
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
@@ -153,6 +158,7 @@ public class TestTypeUtil extends TestCase
         // new JDTBeanIntrospector(_testBeanGenericType);
     }
 
+    @Override
     protected void tearDown() throws Exception
     {
         super.tearDown();
@@ -169,28 +175,28 @@ public class TestTypeUtil extends TestCase
     public void testResolveTypeSignatureITypeString()
     {
         // this one should be the same regardless of type erasure
-        assertEquals(TypeConstants.TYPE_STRING, TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QString;", true));
-        assertEquals(TypeConstants.TYPE_STRING, TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QString;", false));
+        assertEquals(TypeConstants.TYPE_STRING, 
+                resolver(_testBean1Type).resolveEraseTypeParams("QString;"));
+        assertEquals(TypeConstants.TYPE_STRING, 
+                resolver(_testBean1Type).resolveKeepTypeParams("QString;"));
 
         // no parameters are provided here, so we should see the same result
-        assertEquals(TypeConstants.TYPE_COLLECTION, TypeUtil
-                .resolveTypeSignature(_testBean1Type, "QCollection;", true));
-        assertEquals(TypeConstants.TYPE_COLLECTION, TypeUtil
-                .resolveTypeSignature(_testBean1Type, "QCollection;", false));
-        assertEquals(TypeConstants.TYPE_MAP, TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QMap;", true));
-        assertEquals(TypeConstants.TYPE_MAP, TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QMap;", false));
+        assertEquals(TypeConstants.TYPE_COLLECTION, 
+                resolver(_testBean1Type).resolveEraseTypeParams("QCollection;"));
+        assertEquals(TypeConstants.TYPE_COLLECTION, 
+                resolver(_testBean1Type).resolveKeepTypeParams("QCollection;"));
+        assertEquals(TypeConstants.TYPE_MAP, 
+                resolver(_testBean1Type).resolveEraseTypeParams("QMap;"));
+        assertEquals(TypeConstants.TYPE_MAP, 
+                resolver(_testBean1Type).resolveKeepTypeParams("QMap;"));
 
         // in this case, the provided signature has type erasure, so the answer
         // will different depending on typeErasure flag
-        final String typeSigWithErasure = TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QMap<QString;QString;>;", true);
+        final String typeSigWithErasure = resolver(_testBean1Type)
+                .resolveEraseTypeParams("QMap<QString;QString;>;");
         assertEquals(TypeConstants.TYPE_MAP, typeSigWithErasure);
-        final String typeSigNoErasure = TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QMap<QString;QString;>;", false);
+        final String typeSigNoErasure = resolver(_testBean1Type)
+                .resolveKeepTypeParams("QMap<QString;QString;>;");
         assertEquals("Ljava.util.Map<Ljava.lang.String;Ljava.lang.String;>;",
                 typeSigNoErasure);
 
@@ -198,28 +204,28 @@ public class TestTypeUtil extends TestCase
         final IType mapType = TypeUtil.resolveType(_jdtTestEnvironment
                 .getJavaProject(), "Ljava.util.Map;");
         assertNotNull(mapType);
-        assertEquals(TypeConstants.TYPE_JAVAOBJECT, TypeUtil
-                .resolveTypeSignature(mapType, "TV;", false));
+        assertEquals(TypeConstants.TYPE_JAVAOBJECT, 
+                resolver(mapType).resolveKeepTypeParams("TV;"));
 
         // unfound signature
-        assertEquals("QSomeNotRealClass;", TypeUtil.resolveTypeSignature(
-                _testBean1Type, "QSomeNotRealClass;", false));
+        assertEquals("QSomeNotRealClass;", 
+                resolver(_testBean1Type).resolveKeepTypeParams("QSomeNotRealClass;"));
 
         // arrays
-        assertEquals("[I", TypeUtil.resolveTypeSignature(_testBean1Type, "[I"));
+        assertEquals("[I", resolver(_testBean1Type).resolveEraseTypeParams("[I"));
 
-        assertEquals("[Ljava.lang.String;", TypeUtil.resolveTypeSignature(
-                _testBean1Type, "[QString;"));
+        assertEquals("[Ljava.lang.String;", 
+                resolver(_testBean1Type).resolveKeepTypeParams("[QString;"));
 
-        assertEquals("[Ljava.util.Map;", TypeUtil.resolveTypeSignature(
-                _testBean1Type, "[QMap;"));
+        assertEquals("[Ljava.util.Map;", 
+                resolver(_testBean1Type).resolveKeepTypeParams("[QMap;"));
 
-        assertEquals("[Ljava.util.Collection;", TypeUtil.resolveTypeSignature(
-                _testBean1Type, "[QCollection;"));
+        assertEquals("[Ljava.util.Collection;", 
+                resolver(_testBean1Type).resolveKeepTypeParams("[QCollection;"));
 
         // array of arrays
-        assertEquals("[[[Ljava.lang.String;", TypeUtil.resolveTypeSignature(
-                _testBean1Type, "[[[QString;"));
+        assertEquals("[[[Ljava.lang.String;", 
+                resolver(_testBean1Type).resolveKeepTypeParams("[[[QString;"));
 
         // cover cases where wildcards and/or capture are used. All should be
         // equivalent to the case for
@@ -235,50 +241,50 @@ public class TestTypeUtil extends TestCase
             final boolean typeErasure)
     {
         // extends
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<+QString;+QString;>;", typeErasure));
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<+QString;QString;>;", typeErasure));
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<QString;+QString;>;", typeErasure));
         // super
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<-QString;-QString;>;", typeErasure));
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<-QString;QString;>;", typeErasure));
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<QString;-QString;>;", typeErasure));
         // star
         // this one is distinct because * are converted to Object
         final String expected1 = "Ljava.util.Map"
                 + (typeErasure ? ";"
                         : "<Ljava.lang.Object;Ljava.lang.Object;>;");
-        assertEquals(expected1, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected1, resolveTypeSignature(_testBean1Type,
                 "QMap<**>;", typeErasure));
         final String expected2 = "Ljava.util.Map"
                 + (typeErasure ? ";"
                         : "<Ljava.lang.Object;Ljava.lang.String;>;");
-        assertEquals(expected2, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected2, resolveTypeSignature(_testBean1Type,
                 "QMap<*QString;>;", typeErasure));
         final String expected3 = "Ljava.util.Map"
                 + (typeErasure ? ";"
                         : "<Ljava.lang.String;Ljava.lang.Object;>;");
-        assertEquals(expected3, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected3, resolveTypeSignature(_testBean1Type,
                 "QMap<QString;*>;", typeErasure));
         // capture extends
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<!+QString;!+QString;>;", typeErasure));
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<!+QString;QString;>;", typeErasure));
-        assertEquals(expected, TypeUtil.resolveTypeSignature(_testBean1Type,
+        assertEquals(expected, resolveTypeSignature(_testBean1Type,
                 "QMap<QString;!+QString;>;", typeErasure));
 
-        assertEquals("Ljava.lang.String;", TypeUtil.resolveTypeSignature(
+        assertEquals("Ljava.lang.String;", resolveTypeSignature(
                 _testBean1Type, "!+QString;", typeErasure));
 
         // test regression on
         // https://bugs.eclipse.org/bugs/show_bug.cgi?id=197506
-        assertEquals("Ljava.lang.Object;", TypeUtil.resolveTypeSignature(
+        assertEquals("Ljava.lang.Object;", resolveTypeSignature(
                 _testBean1Type, "*", typeErasure));
     }
 
@@ -322,21 +328,21 @@ public class TestTypeUtil extends TestCase
 
     public void testResolveMethodSignature() throws Exception
     {
-        assertEquals("()Ljava.lang.String;", TypeUtil.resolveMethodSignature(
-                _testBean1Type, "()QString;"));
-        assertEquals("(Ljava.lang.String;)V", TypeUtil.resolveMethodSignature(
-                _testBean1Type, "(QString;)V"));
-        assertEquals("(Ljava.lang.String;Z)V", TypeUtil.resolveMethodSignature(
-                _testBean1Type, "(QString;Z)V"));
+        assertEquals("()Ljava.lang.String;", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams("()QString;"));
+        assertEquals("(Ljava.lang.String;)V", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams("(QString;)V"));
+        assertEquals("(Ljava.lang.String;Z)V", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams("(QString;Z)V"));
 
         IMethod method = _testBean1Type.getMethod("getStringProp1", null);
-        assertEquals("()Ljava.lang.String;", TypeUtil.resolveMethodSignature(
-                _testBean1Type, method.getSignature()));
+        assertEquals("()Ljava.lang.String;", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams(method.getSignature()));
 
         method = _testBean1Type.getMethod("setStringProperty2", new String[]
         { "I" });
-        assertEquals("(I)V", TypeUtil.resolveMethodSignature(_testBean1Type,
-                method.getSignature()));
+        assertEquals("(I)V", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams(method.getSignature()));
 
         // test binary methods
         // the framework returns method signatures using "/" instead of "."
@@ -345,38 +351,36 @@ public class TestTypeUtil extends TestCase
         // sanity: _binaryType must a JDT BinaryType impl for this test to
         // be valid
         assertTrue(_binaryType.isBinary());
-        assertEquals("()Ljava.lang.String;", TypeUtil.resolveMethodSignature(
-                _binaryType, _binaryType.getMethod("getStringProperty", null)
+        assertEquals("()Ljava.lang.String;", resolver(_testBean1Type).resolveMethodEraseTypeParams(
+                _binaryType.getMethod("getStringProperty", null)
                         .getSignature()));
 
-        assertEquals("(Ljava.lang.String;)V", TypeUtil.resolveMethodSignature(
-                _binaryType, _binaryType.getMethod("setStringProperty",
+        assertEquals("(Ljava.lang.String;)V", resolver(_testBean1Type).resolveMethodEraseTypeParams(
+                _binaryType.getMethod("setStringProperty",
                         new String[]
                         { "Ljava.lang.String;" }).getSignature()));
 
-        assertEquals("()I", TypeUtil.resolveMethodSignature(_binaryType,
+        assertEquals("()I", resolver(_testBean1Type).resolveMethodEraseTypeParams(
                 _binaryType.getMethod("getIntegerProperty", null)
                         .getSignature()));
 
-        assertEquals("(I)V", TypeUtil.resolveMethodSignature(_binaryType,
+        assertEquals("(I)V", resolver(_testBean1Type).resolveMethodEraseTypeParams(
                 _binaryType.getMethod("setIntegerProperty", new String[]
                 { "I" }).getSignature()));
 
-        assertEquals("()Lcom.test.BinaryPropertyAndMethodType;", TypeUtil
-                .resolveMethodSignature(_binaryType, _binaryType.getMethod(
+        assertEquals("()Lcom.test.BinaryPropertyAndMethodType;", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams(_binaryType.getMethod(
                         "getUserDefined", null).getSignature()));
 
-        assertEquals("(Lcom.test.BinaryPropertyAndMethodType;)V", TypeUtil
-                .resolveMethodSignature(_binaryType, _binaryType.getMethod(
+        assertEquals("(Lcom.test.BinaryPropertyAndMethodType;)V", 
+                resolver(_testBean1Type).resolveMethodEraseTypeParams(_binaryType.getMethod(
                         "setUserDefined", new String[]
                         { "Lcom.test.BinaryPropertyAndMethodType;" })
                         .getSignature()));
 
         assertEquals(
                 "(Ljava.lang.String;Lcom.test.BinaryPropertyAndMethodType;I)I",
-                TypeUtil
-                        .resolveMethodSignature(
-                                _binaryType,
+                resolver(_testBean1Type).resolveMethodEraseTypeParams(
                                 _binaryType
                                         .getMethod(
                                                 "methodWithMultipleArgs",
@@ -442,5 +446,22 @@ public class TestTypeUtil extends TestCase
         assertTrue(TypeUtil.isEnumMember(type, "anything"));
         assertTrue(TypeUtil.isEnumMember(type, "deadbeef"));
 
+    }
+        
+    String resolveTypeSignature(IType type, String typeSignature, boolean erased)
+    {
+      if (erased)
+      {
+        return new JDTTypeResolver(type, EMPTY_SUPER_TYPES).resolveEraseTypeParams(typeSignature);
+      }
+      else
+      {
+        return new JDTTypeResolver(type, EMPTY_SUPER_TYPES).resolveKeepTypeParams(typeSignature);
+      }
+    }
+    
+    JDTTypeResolver resolver(IType type)
+    {
+      return new JDTTypeResolver(type, EMPTY_SUPER_TYPES);
     }
 }

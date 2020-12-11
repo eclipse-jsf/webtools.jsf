@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2007 Oracle Corporation and others.
+ * Copyright (c) 2001, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- *     Oracle Corporation - initial API and implementation
+ *     Oracle Corporation  - initial API and implementation
+ *     Reto Weiss/Axon Ivy - Cache JDTBeanIntrospector
  *******************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
 
@@ -22,8 +23,8 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.JavadocContentAccess;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.util.JDTBeanMethod;
 import org.eclipse.jst.jsf.common.util.JDTBeanProperty;
-import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.context.symbol.IBeanMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IBeanPropertySymbol;
 
@@ -76,19 +77,13 @@ public class JavaUtil {
      */
     public static IMethod findCorrespondingMethod(final IBeanMethodSymbol symbol) {
         final IType type = symbol.getOwner().getType();
-        final JDTBeanIntrospector introspector = new JDTBeanIntrospector(type);
-        final IMethod[] methods = introspector.getAllMethods();
-        for (final IMethod method : methods) {
+        final JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(type);
+        final JDTBeanMethod[] methods = introspector.getMethods();
+        for (final JDTBeanMethod method : methods) {
             if (method.getElementName().equals(symbol.getName())) {
-                try {
-                    final String currentMethodsSignature = TypeUtil.resolveMethodSignature(method.getDeclaringType(),
-                            method.getSignature());
-                    if (currentMethodsSignature.equals(symbol.getSignature())) {
-                        return method;
-                    }
-                } catch (final JavaModelException e) {
-                    JSFCommonPlugin.log(IStatus.WARNING, "error determining for method '" //$NON-NLS-1$
-                            + method.getElementName() + "'.", e); //$NON-NLS-1$
+                final String currentMethodsSignature = method.getResolvedSignatureErased();
+                if (currentMethodsSignature.equals(symbol.getSignature())) {
+                    return method.getMethod();
                 }
             }
         }
@@ -100,7 +95,7 @@ public class JavaUtil {
      * @return a JDTBeanProperty for the given property symbol
      */
     public static JDTBeanProperty findCorrespondingJDTProperty(final IBeanPropertySymbol propertySymbol) {
-        final JDTBeanIntrospector introspector = new JDTBeanIntrospector(propertySymbol.getOwner().getType());
+        final JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(propertySymbol.getOwner().getType());
         return introspector.getProperties().get(propertySymbol.getName());
     }
 }

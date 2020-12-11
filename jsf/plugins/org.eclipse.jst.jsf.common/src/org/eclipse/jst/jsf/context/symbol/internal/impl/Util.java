@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007 Oracle Corporation.
+ * Copyright (c) 2007, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Reto Weiss/Axon Ivy    - Cache JDTBeanIntrospector
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.impl;
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
@@ -25,6 +25,7 @@ import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.internal.types.ValueType;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
+import org.eclipse.jst.jsf.common.util.JDTBeanMethod;
 import org.eclipse.jst.jsf.common.util.TypeUtil;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
@@ -46,96 +47,90 @@ final class Util
         // the call then do this the hard way...
         if (type != null && result == null)
         {
-            final JDTBeanIntrospector introspector = 
-                new JDTBeanIntrospector(type);
+            final JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(type);
 
-            final IMethod callMethod = 
-                Util.matchMethod(methodName, methodArguments, introspector.getAllMethods(),typeDesc.getTypeParameterSignatures());
+            final JDTBeanMethod callMethod = 
+                Util.matchMethod(methodName, methodArguments, introspector.getMethods(),typeDesc.getTypeParameterSignatures());
 
             if (callMethod != null)
             {
-                try 
+                try
                 {
-                    // resolve the method's return type; don't erase parameters
-                    String retTypeSignature = callMethod.getReturnType();
-                        
-                    // if we have a type variable, try to parameter match it
-                    if (Signature.getTypeSignatureKind(retTypeSignature) == Signature.TYPE_VARIABLE_SIGNATURE)
-                    {
-                        retTypeSignature = TypeUtil.matchTypeParameterToArgument
-                            (type
-                               , retTypeSignature, typeDesc.getTypeParameterSignatures());
-                        
-                        if (retTypeSignature == null)
-                        {
-                            retTypeSignature = TypeConstants.TYPE_JAVAOBJECT;
-                        }
-                    }
-                    // otherwise, try and resolve it in type
-                    else
-                    {
-                    	retTypeSignature = TypeUtil.resolveTypeSignature
-                    		(type, callMethod.getReturnType(), false);
-                    }
-
-                    final IPropertySymbol  propSymbol = 
-                        SymbolFactory.eINSTANCE.createIPropertySymbol();
-
-                    // TODO: there is a possible problem here for non-string keyed maps
-                    propSymbol.setName(symbolName);
-                    propSymbol.setReadable(true);
-                    
-                    {
-                        IJavaTypeDescriptor2 newTypeDesc = null;
-                        
-                        if (retTypeSignature.equals(TypeConstants.TYPE_JAVAOBJECT))
-                        {
-                            newTypeDesc = SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
-                        }
-                        else
-                        {
-                            newTypeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
-                        }
-                        
-                        newTypeDesc.setArrayCount(Signature.getArrayCount(retTypeSignature));
-                        
-                        // may be null
-                        newTypeDesc.setType(typeDesc.resolveType(retTypeSignature));
-                        newTypeDesc.setTypeSignatureDelegate(retTypeSignature);
-                        propSymbol.setTypeDescriptor(newTypeDesc);
-                    }
-                    
-                    result = propSymbol;
-                } 
-                catch (JavaModelException e) 
-                {
-                    JSFCommonPlugin.log(e);
-                    // fall-through and return null result
-                }
+                  // resolve the method's return type; don't erase parameters
+                  String retTypeSignature = callMethod.getUnresolvedReturnTypeUnerased();
+                      
+                  // if we have a type variable, try to parameter match it
+                  if (Signature.getTypeSignatureKind(retTypeSignature) == Signature.TYPE_VARIABLE_SIGNATURE)
+                  {
+                      retTypeSignature = TypeUtil.matchTypeParameterToArgument
+                          (type
+                             , retTypeSignature, typeDesc.getTypeParameterSignatures());
+                      
+                      if (retTypeSignature == null)
+                      {
+                          retTypeSignature = TypeConstants.TYPE_JAVAOBJECT;
+                      }
+                  }
+                  else
+                  {
+                    retTypeSignature = callMethod.getResolvedReturnTypeUnerased();
+                  }
+  
+                  final IPropertySymbol  propSymbol = 
+                      SymbolFactory.eINSTANCE.createIPropertySymbol();
+  
+                  // TODO: there is a possible problem here for non-string keyed maps
+                  propSymbol.setName(symbolName);
+                  propSymbol.setReadable(true);
+                  
+                  {
+                      IJavaTypeDescriptor2 newTypeDesc = null;
+                      
+                      if (retTypeSignature.equals(TypeConstants.TYPE_JAVAOBJECT))
+                      {
+                          newTypeDesc = SymbolFactory.eINSTANCE.createIBoundedJavaTypeDescriptor();
+                      }
+                      else
+                      {
+                          newTypeDesc = SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+                      }
+                      
+                      newTypeDesc.setArrayCount(Signature.getArrayCount(retTypeSignature));
+                      
+                      // may be null
+                      newTypeDesc.setType(typeDesc.resolveType(retTypeSignature));
+                      newTypeDesc.setTypeSignatureDelegate(retTypeSignature);
+                      propSymbol.setTypeDescriptor(newTypeDesc);
+                  }
+                  
+                  result = propSymbol;
+              } 
+              catch (JavaModelException e) 
+              {
+                  JSFCommonPlugin.log(e);
+                  // fall-through and return null result
+              }
             }
         }
 
         return result;
     }
 
-    static IMethod matchMethod(String methodName, List methodArguments, IMethod[] allMethods, List typeParameterSignatures)
+    static JDTBeanMethod matchMethod(String methodName, List methodArguments, JDTBeanMethod[] allMethods, List typeParameterSignatures)
     {
-//        final List argSigs = convertArgsToSignatures(methodArguments);
-        IMethod matchedMethod = null;
-
         for (int i = 0; i < allMethods.length; i++)
         {
-            final IMethod method = allMethods[i];
+            final JDTBeanMethod method = allMethods[i];
             
             // check for names and argument count match
-            if (method.getParameterTypes().length == methodArguments.size()
+            if (method.getResolvedParameterTypesUnerased().length == methodArguments.size()
                     && method.getElementName().equals(methodName))
             {
-                List<String> methods = resolveMethodParameters(method, typeParameterSignatures);
+                List<String> params = resolveMethodParameters(method, typeParameterSignatures);
                 
                 // need to verify argument matches
                 boolean isMatched = true;
-                CHECK_ARGUMENTS: for (int j = 0; j < methods.size(); j++)
+                CHECK_ARGUMENTS: for (int j = 0; j < params.size(); j++)
                 {
                     final ValueType valueType = (ValueType) methodArguments.get(j);
 
@@ -145,8 +140,8 @@ final class Util
                     // - method name overloading
                     // - autoboxing primitives
                     // - certain kinds of parameterized args
-                    if (!methods.get(j).equals(valueType.getSignature())
-                         && !(methods.get(j).equals(TypeConstants.TYPE_JAVAOBJECT)
+                    if (!params.get(j).equals(valueType.getSignature())
+                         && !(params.get(j).equals(TypeConstants.TYPE_JAVAOBJECT)
                                  && Signature.getTypeSignatureKind(valueType.getSignature())==Signature.CLASS_TYPE_SIGNATURE))
                     {
                         // not a match
@@ -162,18 +157,15 @@ final class Util
             }
         }
 
-        return matchedMethod;
+        return null;
     }
     
-    static List<String> resolveMethodParameters(IMethod method, List typeParametersSignatures)
+    static List<String> resolveMethodParameters(JDTBeanMethod method, List typeParametersSignatures)
     {
         List<String>   resolved = new ArrayList<String>();
-        String[] parameterTypes = method.getParameterTypes();
+        String[] parameterTypes = method.getResolvedParameterTypesUnerased();
         for (String parameter : parameterTypes)
         { 
-            parameter = TypeUtil.resolveTypeSignature(method.getDeclaringType()
-                    , parameter, false);
-            
             if (Signature.getTypeSignatureKind(parameter) == Signature.TYPE_VARIABLE_SIGNATURE)
             {
                 parameter = TypeUtil.matchTypeParameterToArgument

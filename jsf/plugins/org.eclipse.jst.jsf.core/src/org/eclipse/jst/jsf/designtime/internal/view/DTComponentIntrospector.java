@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2011 Oracle Corporation and others.
+ * Copyright (c) 2001, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- *     Oracle Corporation - initial API and implementation
+ *     Oracle Corporation  - initial API and implementation
+ *     Reto Weiss/Axon Ivy - Use cached JDTBeanIntrospector 
  *******************************************************************************/
 package org.eclipse.jst.jsf.designtime.internal.view;
 
@@ -357,9 +358,7 @@ public final class DTComponentIntrospector
 
             if (type != null)
             {
-                // TODO: should be able to use type cache for this
-                final JDTBeanIntrospector introspector = new JDTBeanIntrospector(
-                        type);
+                final JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(type);
                 properties = introspector.getProperties();
             }
         }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2019 IBM Corporation and others.
+ * Copyright (c) 2006, 2021 IBM Corporation and others.
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -8,7 +8,8 @@
  * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     IBM Corporation     - initial API and implementation
+ *     Reto Weiss/Axon Ivy - Cache JDTBeanIntrospector
  *******************************************************************************/
 /**
  * <copyright>
@@ -24,14 +25,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.jst.jsf.common.JSFCommonPlugin;
 import org.eclipse.jst.jsf.common.internal.types.TypeConstants;
 import org.eclipse.jst.jsf.common.util.JDTBeanIntrospector;
-import org.eclipse.jst.jsf.common.util.TypeUtil;
+import org.eclipse.jst.jsf.common.util.JDTBeanMethod;
 import org.eclipse.jst.jsf.context.symbol.IBoundedListTypeDescriptor;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
@@ -73,6 +71,7 @@ public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl impl
      * <!-- end-user-doc -->
      * @generated
      */
+    @Override
     protected EClass eStaticClass() {
         return SymbolPackage.Literals.IBOUNDED_LIST_TYPE_DESCRIPTOR;
     }
@@ -137,68 +136,55 @@ public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl impl
         
         if (type != null)
         {
-            final JDTBeanIntrospector introspector = 
-                new JDTBeanIntrospector(type);
+            final JDTBeanIntrospector introspector = JDTBeanIntrospector.forType(type);
             
-            final IMethod callMethod = 
-                matchMethod(methodName, methodArguments, introspector.getAllMethods());
+            final JDTBeanMethod callMethod = 
+                matchMethod(methodName, methodArguments, introspector.getMethods());
             
             if (callMethod != null)
             {
-                try 
-                {
-                    // resolve the method's return type; don't erase parameters
-                    final String retTypeSignature = 
-                        TypeUtil.resolveTypeSignature
-                            (type, callMethod.getReturnType(), false) ;
-                    
-                    final IPropertySymbol  propSymbol = 
-                        SymbolFactory.eINSTANCE.createIPropertySymbol();
+                // resolve the method's return type; don't erase parameters
+                final String retTypeSignature = callMethod.getResolvedReturnTypeUnerased();
+                final IPropertySymbol  propSymbol = 
+                    SymbolFactory.eINSTANCE.createIPropertySymbol();
 
-                    // TODO: there is a possible problem here for non-string keyed maps
-                    propSymbol.setName(symbolName);
-                    propSymbol.setReadable(true);
-                    IJavaTypeDescriptor2 typeDesc = 
-                        SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
-                    
-                    typeDesc.setArrayCount(Signature.getArrayCount(retTypeSignature));
-                    
-                    // may be null
-                    typeDesc.setType(resolveType(retTypeSignature));
-                    typeDesc.setTypeSignatureDelegate(retTypeSignature);
-                    propSymbol.setTypeDescriptor(typeDesc);
-                    result = propSymbol;
-                } 
-                catch (JavaModelException e) 
-                {
-                    JSFCommonPlugin.log(e);
-                    // fall-through and return null result
-                }
+                // TODO: there is a possible problem here for non-string keyed maps
+                propSymbol.setName(symbolName);
+                propSymbol.setReadable(true);
+                IJavaTypeDescriptor2 typeDesc = 
+                    SymbolFactory.eINSTANCE.createIJavaTypeDescriptor2();
+                
+                typeDesc.setArrayCount(Signature.getArrayCount(retTypeSignature));
+                
+                // may be null
+                typeDesc.setType(resolveType(retTypeSignature));
+                typeDesc.setTypeSignatureDelegate(retTypeSignature);
+                propSymbol.setTypeDescriptor(typeDesc);
+                result = propSymbol;
             }
         }
         
         return result;
     }
     
-    private IMethod matchMethod(String name, List methodArguments, IMethod[] allMethods)
+    private JDTBeanMethod matchMethod(String name, List methodArguments, JDTBeanMethod[] allMethods)
     {
         final List argSigs = convertArgsToSignatures(methodArguments);
-        IMethod matchedMethod = null;
         
         for (int i = 0; i < allMethods.length; i++)
         {
-            final IMethod method = allMethods[i];
+            final JDTBeanMethod method = allMethods[i];
             
             // check for names and argument count match
-            if (method.getParameterTypes().length == argSigs.size()
+            if (method.getUnresolvedParameterTypesUnerased().length == argSigs.size()
                     && method.getElementName().equals(name))
             {
-                String[] methods = method.getParameterTypes();
+                String[] paramSigs = method.getUnresolvedParameterTypesUnerased(); // RWEI seems not be correct to get unresolved types here
                 // need to verify argument matches
                 boolean isMatched = true;
-                CHECK_ARGUMENTS: for (int j = 0; j < methods.length; j++)
+                CHECK_ARGUMENTS: for (int j = 0; j < paramSigs.length; j++)
                 {
-                    if (!methods[j].equals(argSigs.get(j)))
+                    if (!paramSigs[j].equals(argSigs.get(j)))
                     {
                         // not a match
                         isMatched = false;
@@ -213,7 +199,7 @@ public class IBoundedListTypeDescriptorImpl extends IListTypeDescriptorImpl impl
             }
         }
 
-        return matchedMethod;
+        return null;
     }
 
     private List convertArgsToSignatures(List methodArgs)
