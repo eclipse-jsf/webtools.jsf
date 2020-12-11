@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2013 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc) 
  *
  ********************************************************************************/
 package org.eclipse.jst.jsf.core.internal.contentassist.el;
@@ -28,8 +29,8 @@ import org.eclipse.jst.jsf.context.symbol.IMethodSymbol;
 import org.eclipse.jst.jsf.context.symbol.IObjectSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
-import org.eclipse.jst.jsf.context.symbol.provider.ProposalCreationFactoryAdapter;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider.IProposalCreationFactory;
+import org.eclipse.jst.jsf.context.symbol.provider.ProposalCreationFactoryAdapter;
 import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
 import org.eclipse.jst.jsp.core.internal.regions.DOMJSPRegionContexts;
@@ -150,7 +151,6 @@ public class FunctionCompletionStrategy extends ContentAssistStrategy
         @Override
 		public ICompletionProposal createProposal(final String replacementText,
                                                   final String displayText,
-                                                  final String additionalText,
                                                   final Image displayImage,
                                                   final Object target)
         {
@@ -201,8 +201,8 @@ public class FunctionCompletionStrategy extends ContentAssistStrategy
                                          displayImage,
                                          displayText,
                                          null,
-                                         additionalText,
-                                         getRelevance(target, DEFAULT_RELEVANCE));
+                                         getRelevance(target, DEFAULT_RELEVANCE),
+                                         target);
         }
 
         private int getRelevance(final Object target, final int defaultRelevance)

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc) 
  *    
  ********************************************************************************/
 
@@ -127,12 +128,10 @@ public class TestIPropertySymbolItemProvider extends TestCase
             _replacementText = new ArrayList<String>();
         }
 
-        public ICompletionProposal createProposal(String replacementText, String displayText, String additionalText, Image displayImage, Object targetObject) 
+        public ICompletionProposal createProposal(String replacementText, String displayText, Image displayImage, Object targetObject) 
         {
             _replacementText.add(replacementText);
-            
-            return super.createProposal(replacementText, displayText, additionalText,
-                    displayImage, targetObject);
+            return super.createProposal(replacementText, displayText, displayImage, targetObject);
         }
     }
 }

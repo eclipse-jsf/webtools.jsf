@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2013 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc)
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
@@ -74,7 +75,8 @@ public class IBeanInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public List getPropertyDescriptors(Object object) {
+	@Override
+  public List getPropertyDescriptors(Object object) {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -138,7 +140,8 @@ public class IBeanInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getImage(Object object) {
+	@Override
+  public Object getImage(Object object) {
 		return overlayImage(object, getResourceLocator().getImage("full/obj16/IBeanInstanceSymbol")); //$NON-NLS-1$
 	}
 
@@ -150,7 +153,8 @@ public class IBeanInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
      * @generated NOT
      */
-	public String getText(Object object) {
+	@Override
+  public String getText(Object object) {
         String label = ((IBeanInstanceSymbol)object).getName();
         return label == null || label.length() == 0 ?
             getString("_UI_IBeanInstanceSymbol_type") : //$NON-NLS-1$
@@ -165,7 +169,8 @@ public class IBeanInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void notifyChanged(Notification notification) {
+	@Override
+  public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -179,7 +184,8 @@ public class IBeanInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
+	@Override
+  protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -190,7 +196,8 @@ public class IBeanInstanceSymbolItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResourceLocator getResourceLocator() {
+	@Override
+  public ResourceLocator getResourceLocator() {
 		return JSFCommonPlugin.INSTANCE;
 	}
 
@@ -199,14 +206,14 @@ public class IBeanInstanceSymbolItemProvider
 	 * @param proposalFactory 
 	 * @return a completion proposal for target at offset
 	 */
-	public ICompletionProposal[] getProposals(Object target_, 
+	@Override
+  public ICompletionProposal[] getProposals(Object target_, 
                                           IProposalCreationFactory proposalFactory) 
 	{
 		IBeanInstanceSymbol  symbol = (IBeanInstanceSymbol) target_;
 
 		final String replacementText = symbol.getName();
 		final String displayText = getText(symbol);
-		final String additionalText = symbol.getDetailedDescription();
 		// for running headless, we need to avoid hitting the image registry
         // because it accesses the Display object that won't exist
         final Image displayImage = Display.getCurrent() != null ? 
@@ -217,7 +224,6 @@ public class IBeanInstanceSymbolItemProvider
 		{
             proposalFactory.createProposal(replacementText, 
                                            displayText, 
-                                           additionalText, 
                                            displayImage,
                                            target_)
         };

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc)
  *    
  ********************************************************************************/
 
@@ -18,7 +19,6 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider.IProposalCreationFactory;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.wst.sse.ui.internal.contentassist.CustomCompletionProposal;
 
 /**
  * Default implementation of the proposal creation factory
@@ -53,7 +53,7 @@ public class ProposalCreationFactoryAdapter implements IProposalCreationFactory
     }
 
     public ICompletionProposal createProposal(String replacementText, 
-                String displayText, String additionalText, Image displayImage,
+                String displayText, Image displayImage,
                 Object targetObject) 
                 
     {
@@ -64,8 +64,8 @@ public class ProposalCreationFactoryAdapter implements IProposalCreationFactory
                 displayImage, 
                 displayText, 
                 null, 
-                additionalText,
-                1);
+                1,
+                targetObject);
     }
     
     /**
@@ -78,8 +78,8 @@ public class ProposalCreationFactoryAdapter implements IProposalCreationFactory
      * @param displayImage
      * @param displayText
      * @param contextInfo
-     * @param additionalText
      * @param relevance
+     * @param target The original source object.
      * @return a default configuration of the completion proposal based on 
      * the CustomCompletionProposal
      */
@@ -91,17 +91,17 @@ public class ProposalCreationFactoryAdapter implements IProposalCreationFactory
                                           final Image displayImage,
                                           final String displayText,
                                           final IContextInformation contextInfo,
-                                          final String additionalText,
-                                          final int relevance)
+                                          final int relevance,
+                                          final Object target)
     {
-        return new CustomCompletionProposal(replacementText, 
+        return new LazyAdditionalTextCompletionProposal(replacementText, 
                 replacementOffset, 
                 replacementLength, 
                 cursorPosition, 
                 displayImage, 
                 displayText, 
                 contextInfo, 
-                additionalText,
-                relevance);
+                relevance,
+                target);
     }
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2013 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc)
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
@@ -327,7 +328,6 @@ public class IInstanceSymbolItemProvider
         {
             proposalFactory.createProposal(replacementText, 
                                            displayText, 
-                                           null, 
                                            displayImage,
                                            target_)
         };

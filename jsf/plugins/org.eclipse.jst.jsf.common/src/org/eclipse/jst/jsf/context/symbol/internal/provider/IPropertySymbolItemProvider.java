@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2008 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc)
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
@@ -36,7 +37,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jst.jsf.common.JSFCommonPlugin;
-import org.eclipse.jst.jsf.context.symbol.IDescribedInDetail;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
 import org.eclipse.jst.jsf.context.symbol.SymbolPackage;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
@@ -325,7 +325,6 @@ public class IPropertySymbolItemProvider
                     completions.add(proposalFactory.createProposal(                          
                                         replacementText, 
                                         replacementText, 
-                                        null, 
                                         displayImage, symbol));
                 }
                 else
@@ -350,14 +349,9 @@ public class IPropertySymbolItemProvider
 	private ICompletionProposal createProposal(IPropertySymbol symbol,
 			final String replacementText, final String displayText,
 			final Image displayImage, IProposalCreationFactory proposalFactory) {
-		String additionalText = null; // TODO: put property value here where possible?
-        if (symbol instanceof IDescribedInDetail) {
-            additionalText = ((IDescribedInDetail) symbol).getDetailedDescription();
-        }
 		return proposalFactory.createProposal(
 		                                    replacementText, 
 		                                    displayText, 
-		                                    additionalText,
 		                                    displayImage, symbol);
 	}
 }

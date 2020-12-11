@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc)
  *    
  ********************************************************************************/
 package org.eclipse.jst.jsf.context.symbol.internal.provider;
@@ -239,7 +240,6 @@ public class IBeanMethodSymbolItemProvider
 
         final String replacementText = symbol.getName();
         final String displayText = getText(target_);
-        final String additionalText = symbol.getDetailedDescription();
         final Image displayImage = 
             ExtendedImageRegistry.getInstance().getImage(getImage(symbol));
         
@@ -247,7 +247,6 @@ public class IBeanMethodSymbolItemProvider
         {
             proposalFactory.createProposal(replacementText, 
                                            displayText, 
-                                           additionalText, 
                                            displayImage,
                                            target_)
         };

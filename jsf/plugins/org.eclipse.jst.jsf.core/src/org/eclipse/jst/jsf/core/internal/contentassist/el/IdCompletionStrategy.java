@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007 Oracle Corporation.
+ * Copyright (c) 2006, 2021 Oracle Corporation.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -9,6 +9,7 @@
  *
  * Contributors:
  *    Cameron Bateman/Oracle - initial API and implementation
+ *    Andreas Rusch/Axon Ivy - Lazy compute additional proposal info (javadoc)
  *    
  ********************************************************************************/
 
@@ -28,8 +29,8 @@ import org.eclipse.jst.jsf.context.symbol.ERuntimeSource;
 import org.eclipse.jst.jsf.context.symbol.IInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.ISymbol;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider;
-import org.eclipse.jst.jsf.context.symbol.provider.ProposalCreationFactoryAdapter;
 import org.eclipse.jst.jsf.context.symbol.provider.IContentProposalProvider.IProposalCreationFactory;
+import org.eclipse.jst.jsf.context.symbol.provider.ProposalCreationFactoryAdapter;
 import org.eclipse.jst.jsf.designtime.resolver.ISymbolContextResolver;
 import org.eclipse.jst.jsf.designtime.resolver.StructuredDocumentSymbolResolverFactory;
 import org.eclipse.swt.graphics.Image;
@@ -132,17 +133,18 @@ class IdCompletionStrategy extends ContentAssistStrategy
             super(replacementOffset - replacementLength, replacementLength);
         }
 
+        @Override
         public ICompletionProposal createProposal(final String replacementText, 
                                                   final String displayText, 
-                                                  final String additionalText, 
                                                   final Image displayImage, 
                                                   final Object targetObject) 
         {
             return createDefaultProposal(replacementText, _replacementOffset, 
                                          _replacementLength, 
                                          replacementText.length(), displayImage, 
-                                         displayText, null, additionalText, 
-                                         getRelevance(targetObject));
+                                         displayText, null,
+                                         getRelevance(targetObject),
+                                         targetObject);
         }
         
         private int getRelevance(Object target)
