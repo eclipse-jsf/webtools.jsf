@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Oracle Corporation.
+ * Copyright (c) 2007, 2021 Oracle Corporation. and others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -17,9 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jst.common.project.facet.core.internal.FacetCorePlugin;
 import org.eclipse.jst.jsf.context.symbol.IBeanInstanceSymbol;
 import org.eclipse.jst.jsf.context.symbol.IJavaTypeDescriptor2;
 import org.eclipse.jst.jsf.context.symbol.IPropertySymbol;
@@ -29,6 +28,8 @@ import org.eclipse.jst.jsf.test.util.JSFTestUtil;
 import org.eclipse.jst.jsf.test.util.TestFileResource;
 import org.eclipse.jst.jsf.test.util.WebProjectTestEnvironment;
 import org.osgi.framework.Bundle;
+
+import junit.framework.TestCase;
 
 /**
  * @author cbateman
@@ -44,7 +45,7 @@ public class ModelBaseTestCase extends TestCase
     /**
      * The base source folder name for Java classes
      */
-    protected final static String srcFolderName = "src";
+    protected final static String srcFolderName = FacetCorePlugin.DEFAULT_SOURCE_FOLDER;
 
     protected void setUp() throws Exception 
     {
