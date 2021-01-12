@@ -49,8 +49,8 @@ public enum FaceletTaglibVersion implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-    _20(0, "_20", "2.0"),  //$NON-NLS-1$ //$NON-NLS-2$
-    /**
+	_20(0, "_20", "2.0"),  //$NON-NLS-1$ //$NON-NLS-2$
+	/**
 	 * The '<em><b>21</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,7 +67,16 @@ public enum FaceletTaglibVersion implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	_22(2, "_22", "2.2");  //$NON-NLS-1$//$NON-NLS-2$
+	_22(2, "_22", "2.2"),  //$NON-NLS-1$//$NON-NLS-2$
+	/**
+	 * The '<em><b>23</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #_23_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	_23(3, "_23", "2.3");  //$NON-NLS-1$//$NON-NLS-2$
 
     /**
 	 * The '<em><b>20</b></em>' literal value.
@@ -99,7 +108,7 @@ public enum FaceletTaglibVersion implements Enumerator
 	 */
 	public static final int _21_VALUE = 1;
 
-				/**
+	/**
 	 * The '<em><b>22</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -114,6 +123,21 @@ public enum FaceletTaglibVersion implements Enumerator
 	 */
 	public static final int _22_VALUE = 2;
 
+	/**
+	 * The '<em><b>23</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>23</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #_23
+	 * @model literal="2.3"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int _23_VALUE = 3;
+
 				/**
 	 * An array of all the '<em><b>Version</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
@@ -125,6 +149,7 @@ public enum FaceletTaglibVersion implements Enumerator
 			_20,
 			_21,
 			_22,
+			_23,
 		};
 
     /**
@@ -187,6 +212,7 @@ public enum FaceletTaglibVersion implements Enumerator
 			case _20_VALUE: return _20;
 			case _21_VALUE: return _21;
 			case _22_VALUE: return _22;
+			case _23_VALUE: return _23;
 		}
 		return null;
 	}
