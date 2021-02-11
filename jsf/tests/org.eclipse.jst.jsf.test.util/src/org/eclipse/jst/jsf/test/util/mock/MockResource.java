@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2011 Oracle Corporation.
+ * Copyright (c) 2010, 2021 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -196,6 +196,10 @@ public class MockResource implements IResource
         throw new UnsupportedOperationException();
     }
 
+    public IMarker createMarker(String type, Map<String, ? extends Object> attributes) throws CoreException {
+        throw new UnsupportedOperationException();
+    }
+
     public IResourceProxy createProxy()
     {
         throw new UnsupportedOperationException();
@@ -334,7 +338,7 @@ public class MockResource implements IResource
     {
         if (getType() == IResource.ROOT || getType() == IResource.PROJECT)
         {
-            return new Path("");
+            return Path.EMPTY;
         }
         IPath projectPath = getProject().getFullPath();
         Assert.assertTrue(projectPath.isPrefixOf(getFullPath()));
