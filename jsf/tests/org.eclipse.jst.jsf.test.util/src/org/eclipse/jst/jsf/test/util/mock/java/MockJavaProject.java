@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 IBM Corporation and others.
+ * Copyright (c) 2010, 2021 IBM Corporation and others.
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -501,6 +501,10 @@ public class MockJavaProject extends MockJavaElement implements IJavaProject
     }
 
 	public IModuleDescription getOwnModuleDescription() throws JavaModelException {
+		throw new UnsupportedOperationException();
+	}
+
+	public IClasspathEntry findContainingClasspathEntry(IResource resource) {
 		throw new UnsupportedOperationException();
 	}
 
