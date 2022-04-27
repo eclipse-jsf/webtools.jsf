@@ -334,7 +334,6 @@ public class MockClasspathEntry implements IClasspathEntry
         }
     }
 
-	@Override
 	public IPath getExternalAnnotationPath(IProject project, boolean resolve) {
 		return Path.ROOT;
 	}
