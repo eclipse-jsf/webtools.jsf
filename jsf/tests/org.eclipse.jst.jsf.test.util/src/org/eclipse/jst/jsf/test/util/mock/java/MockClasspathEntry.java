@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 IBM Corporation and others.
+ * Copyright (c) 2010, 2022 IBM Corporation and others.
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,9 @@
  *******************************************************************************/
 package org.eclipse.jst.jsf.test.util.mock.java;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -331,6 +333,11 @@ public class MockClasspathEntry implements IClasspathEntry
             return false;
         }
     }
+
+	@Override
+	public IPath getExternalAnnotationPath(IProject project, boolean resolve) {
+		return Path.ROOT;
+	}
 
     @Override
     public int hashCode()
