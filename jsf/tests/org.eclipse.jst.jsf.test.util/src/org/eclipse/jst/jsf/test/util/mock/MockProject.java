@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2019 IBM Corporation and others.
+ * Copyright (c) 2010, 2022 IBM Corporation and others.
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -202,7 +202,7 @@ public class MockProject extends MockContainer implements IProject
 
 	public IBuildConfiguration[] getBuildConfigs() throws CoreException {
 		// TODO Auto-generated method stub
-		return null;
+		return new IBuildConfiguration[0];
 	}
 
 	public IBuildConfiguration[] getReferencedBuildConfigs(String configName,
@@ -219,6 +219,10 @@ public class MockProject extends MockContainer implements IProject
 	public void clearCachedDynamicReferences() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getDefaultLineSeparator() throws CoreException {
+		return "\n";
 	}
 
 }

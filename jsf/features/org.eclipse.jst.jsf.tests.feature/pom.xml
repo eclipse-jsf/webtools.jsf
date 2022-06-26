@@ -22,6 +22,6 @@
 
   <groupId>org.eclipse.webtools.jsf</groupId>
   <artifactId>org.eclipse.jst.jsf.tests.feature</artifactId>
-  <version>3.5.400-SNAPSHOT</version>
+  <version>3.5.500-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
 </project>
