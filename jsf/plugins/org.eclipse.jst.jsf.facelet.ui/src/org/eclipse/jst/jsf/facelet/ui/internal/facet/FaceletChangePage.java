@@ -13,9 +13,10 @@
 package org.eclipse.jst.jsf.facelet.ui.internal.facet;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeansObservables;
+import org.eclipse.core.databinding.beans.typed.BeanProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.databinding.swt.SWTObservables;
+import org.eclipse.jface.databinding.swt.ISWTObservableValue;
+import org.eclipse.jface.databinding.swt.typed.WidgetProperties;
 import org.eclipse.jst.jsf.facelet.core.internal.facet.ChangeActionType;
 import org.eclipse.jst.jsf.facelet.core.internal.facet.FacetChangeModel;
 import org.eclipse.swt.SWT;
@@ -80,12 +81,10 @@ public abstract class FaceletChangePage extends AbstractFacetWizardPage
         _chgDefaultSuffix.setText(getTextForChangeType() + " '.xhtml' DEFAULT_SUFFIX parameter");
         _chgDefaultSuffix.setSelection(_dataModel.isChgDefaultSuffix());
         _chgDefaultSuffix.setLayoutData(new RowData());
-        IObservableValue modelObservable = BeansObservables.observeValue(
-                _dataModel, "chgDefaultSuffix");
+        IObservableValue<Boolean> modelObservable = BeanProperties.value(FacetChangeModel.class, "chgDefaultSuffix", boolean.class).observe(_dataModel);
+        ISWTObservableValue<Boolean> buttonObservable = WidgetProperties.buttonSelection().observe(_chgDefaultSuffix);
 
-        _bindingContext.bindValue(SWTObservables
-                .observeSelection(_chgDefaultSuffix), modelObservable, null,
-                null);
+        _bindingContext.bindValue(buttonObservable, modelObservable);
     }
 
     private void initViewHandlerButton(final Composite parent)
@@ -94,12 +93,10 @@ public abstract class FaceletChangePage extends AbstractFacetWizardPage
         _chgViewHandler.setText(getTextForChangeType() + " Facelet view handler");
         _chgViewHandler.setSelection(_dataModel.isChgViewHandler());
         _chgViewHandler.setLayoutData(new RowData());
-        IObservableValue modelObservable = BeansObservables.observeValue(
-                _dataModel, "chgViewHandler");
+        IObservableValue<Boolean> modelObservable = BeanProperties.value(FacetChangeModel.class, "chgViewHandler", boolean.class).observe(_dataModel);
+        ISWTObservableValue<Boolean> buttonObservable = WidgetProperties.buttonSelection().observe(_chgViewHandler);
 
-        _bindingContext
-                .bindValue(SWTObservables.observeSelection(_chgViewHandler),
-                        modelObservable, null, null);
+        _bindingContext.bindValue(buttonObservable, modelObservable);
     }
 
     private void initConfigureListener(final Composite parent)
@@ -109,12 +106,10 @@ public abstract class FaceletChangePage extends AbstractFacetWizardPage
                 .setText(getTextForChangeType() + " configure listener (needed by some Tomcat containers)");
         _chgConfigureListener.setSelection(_dataModel.isChgConfigureListener());
         _chgConfigureListener.setLayoutData(new RowData());
-        IObservableValue modelObservable = BeansObservables.observeValue(
-                _dataModel, "chgConfigureListener");
+        IObservableValue<Boolean> modelObservable = BeanProperties.value(FacetChangeModel.class, "chgConfigureListener", boolean.class).observe(_dataModel);
+        ISWTObservableValue<Boolean> buttonObservable = WidgetProperties.buttonSelection().observe(_chgConfigureListener);
 
-        _bindingContext.bindValue(SWTObservables
-                .observeSelection(_chgConfigureListener), modelObservable,
-                null, null);
+        _bindingContext.bindValue(buttonObservable, modelObservable);
     }
 
     private void initWebappLifecycleListener(final Composite parent)
@@ -125,12 +120,10 @@ public abstract class FaceletChangePage extends AbstractFacetWizardPage
         _chgWebappLifecycleListener.setSelection(_dataModel
                 .isChgConfigureListener());
         _chgWebappLifecycleListener.setLayoutData(new RowData());
-        IObservableValue modelObservable = BeansObservables.observeValue(
-                _dataModel, "chgWebAppLifecycleListener");
+        IObservableValue<Boolean> modelObservable = BeanProperties.value(FacetChangeModel.class, "chgWebAppLifecycleListener", boolean.class).observe(_dataModel);
+        ISWTObservableValue<Boolean> buttonObservable = WidgetProperties.buttonSelection().observe(_chgWebappLifecycleListener);
 
-        _bindingContext.bindValue(SWTObservables
-                .observeSelection(_chgWebappLifecycleListener),
-                modelObservable, null, null);
+        _bindingContext.bindValue(buttonObservable, modelObservable);
     }
 
     public void createControl(final Composite parent)
