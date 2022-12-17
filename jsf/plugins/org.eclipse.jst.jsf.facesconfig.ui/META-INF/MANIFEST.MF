@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.facesconfig.ui
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: org.eclipse.jst.jsf.facesconfig.ui;singleton:=true
 Bundle-Version: 1.5.2.qualifier
@@ -54,4 +55,4 @@ Export-Package: org.eclipse.jst.jsf.facesconfig.ui;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.ui.section;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.ui.util;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.ui.wizard;x-internal:=true
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-11
