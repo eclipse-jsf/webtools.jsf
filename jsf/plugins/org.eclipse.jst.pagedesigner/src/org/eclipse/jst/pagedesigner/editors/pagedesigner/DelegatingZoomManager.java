@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2008 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2022 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,11 @@ import org.eclipse.gef.editparts.ZoomManager;
 
 /**
  * A delegating ZoomManager.
+ *
+ * @deprecated unused in this plugin. This class uses deprecated API. If you need this functionality,
+ * migrate to {@link org.eclipse.jst.jsf.common.ui.DelegatingZoomManager} which this plugin depends on anyway.
  */
+@Deprecated(forRemoval = true, since = "1.9.0")
 public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 	/** the current ZoomManager all work is delegated to */
 	private final static int DEFAULT_ZOOM = 1;
