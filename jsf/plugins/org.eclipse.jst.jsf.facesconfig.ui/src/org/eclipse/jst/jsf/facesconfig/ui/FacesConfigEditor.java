@@ -115,13 +115,13 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
 /**
  * This is the main editor for the faces-config file.  Note that the model
  * load can involve long-running socket operations (shouldn't but can),
- * so the editor UI is load asynchronously.  This is means that any 
+ * so the editor UI is load asynchronously.  This is means that any
  * operations that need to be executed on editor open should be run
  * using AddPagesTask.pageSafeExecute() to ensure that they occur
  * after all editor pages have finished loading.
- * 
+ *
  * @author sfshi
- * 
+ *
  */
 public class FacesConfigEditor extends FormEditor implements
 		IEditingDomainProvider, ISelectionProvider {
@@ -130,8 +130,8 @@ public class FacesConfigEditor extends FormEditor implements
      * This editor's ID.  TODO: this should prob be in plugin.properties?
      */
     public static final String EDITOR_ID = "org.eclipse.jst.jsf.facesconfig.ui.FacesConfigEditor"; //$NON-NLS-1$
-    
-    
+
+
     /**
      * Page id for Source page.   Used for testing only.
      */
@@ -175,20 +175,20 @@ public class FacesConfigEditor extends FormEditor implements
 	private IProject currentProject;
 
 	private boolean isWebProject;
-	
+
 	private ModelLoader        _modelLoader;
-	
+
 	/**
 	 * only true once dispose() has been called
 	 * used to signal that the editor was disposed.
 	 */
 	private boolean _isDisposed; // = false;
-	
+
     /**
      * Used to load editor pages when the model is loaded
      */
     private final AddPagesTask     _addPagesTask = new AddPagesTask();
-        
+
 	/**
 	 * Default constructor
 	 */
@@ -199,7 +199,7 @@ public class FacesConfigEditor extends FormEditor implements
 	/**
 	 * This listens for workspace changes. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
@@ -213,10 +213,10 @@ public class FacesConfigEditor extends FormEditor implements
 						protected ResourceSet resourceSet = editingDomain
 								.getResourceSet();
 
-						@SuppressWarnings("hiding") 
+						@SuppressWarnings("hiding")
                         protected Collection changedResources = new ArrayList();
 
-						@SuppressWarnings("hiding") 
+						@SuppressWarnings("hiding")
                         protected Collection removedResources = new ArrayList();
 
 						public boolean visit(IResourceDelta delta_) {
@@ -284,21 +284,21 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Resources that have been removed since last activation.
-	 * 
+	 *
 	 * @generated
 	 */
 	Collection removedResources = new ArrayList();
 
 	/**
 	 * Resources that have been changed since last activation.
-	 * 
+	 *
 	 * @generated
 	 */
 	Collection changedResources = new ArrayList();
 
 	/**
 	 * Resources that have been saved.
-	 * 
+	 *
 	 * @generated
 	 */
 	Collection savedResources = new ArrayList();
@@ -372,7 +372,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 		//Bug 191494 - Unable to switch pages in faces config editor without mouse
 		// Activate plugin context
-		IContextService contextService = (IContextService) getSite()
+		IContextService contextService = getSite()
 				.getService(IContextService.class);
 		contextService
 				.activateContext("org.eclipse.jst.jsf.facesconfig.editorContext"); //$NON-NLS-1$
@@ -386,24 +386,24 @@ public class FacesConfigEditor extends FormEditor implements
 	/*
 	 * @see org.eclipse.ui.part.EditorPart#setInput(org.eclipse.ui.IEditorInput)
 	 */
-	protected void setInput(IEditorInput input) 
+	protected void setInput(IEditorInput input)
 	{
         isWebProject = matches(input);
         super.setInput(input);
 
-		IFile inputFile = (IFile) input.getAdapter(IFile.class);
-		if (inputFile != null) 
+		IFile inputFile = input.getAdapter(IFile.class);
+		if (inputFile != null)
 		{
 			final IProject project = inputFile.getProject();
 			final IPath inputPath = inputFile.getFullPath();
-			
-			_modelLoader = new ModelLoader(); 
+
+			_modelLoader = new ModelLoader();
 			_modelLoader.load(project, inputPath, isWebProject, _addPagesTask);
 		}
 	}
 
 
-	protected void addPages() 
+	protected void addPages()
 	{
 	    // try loading wait page
 	    // if we get to here before model load completes,
@@ -415,22 +415,22 @@ public class FacesConfigEditor extends FormEditor implements
 	}
 
 	/**
-	 * This runnable is used to used to manage the loading of the 
+	 * This runnable is used to used to manage the loading of the
 	 * editor pages for editor in a deferred fashion.  Because the model
 	 * loading for this editor can be noticably long and (unfortunately)
 	 * may involve socket calls that block, loadModel(), runs this on a
 	 * separate thread. This class is intended to be used in two ways:
-	 * 
+	 *
 	 * 1) by the model loading code to signal it is finished by executing
 	 * the run() via a display.asyncExec().
-	 * 
+	 *
 	 * 2) by the addPages() call back on the the main editor as a way to
 	 * load a "Please wait for loading" page if the loading is still running
 	 * by the time the editor is ready to visualize itself.
-	 * 
+	 *
 	 * Note that in both cases methods of this class *must* be running on the
 	 * main display thread.
-	 * 
+	 *
 	 * @author cbateman
 	 *
 	 */
@@ -439,12 +439,12 @@ public class FacesConfigEditor extends FormEditor implements
 	    private final AtomicBoolean    _arePagesLoaded = new AtomicBoolean(false);     // set to true when the regular editor pages are loaded
 	    private FormPage               _waitPage;
 	    private List<Runnable>         _deferredRunnables = new ArrayList<Runnable>();
-	    
+
 	    /**
 	     * If the editor pages are loaded, runnable.run() is invoked immediately
-	     * If the editor pages are not loaded yet, runnable is queued and will be 
+	     * If the editor pages are not loaded yet, runnable is queued and will be
 	     * executed in the order they are added immediately after the pages are loaded
-	     * 
+	     *
 	     * @param runnable
 	     */
 	    public synchronized void pageSafeExecute(Runnable runnable)
@@ -461,32 +461,32 @@ public class FacesConfigEditor extends FormEditor implements
     	        }
 	        }
 	    }
-	    
+
         /**
          * @return true if the pages are loaded
          */
-        public synchronized boolean getArePagesLoaded() 
+        public synchronized boolean getArePagesLoaded()
         {
             return _arePagesLoaded.get();
         }
-        
+
         /**
          * Remove the wait page if present.
          */
         public synchronized void removeWaitPage()
         {
-            if (_waitPage != null 
-            		&& !_waitPage.getPartControl().isDisposed()) 
+            if (_waitPage != null
+            		&& !_waitPage.getPartControl().isDisposed())
             {
                 int index = _waitPage.getIndex();
-                
+
                 if (index >= 0)
                 {
                     removePage(index);
                 }
             }
         }
-        
+
         /**
          * Add the wait page if the main pages aren't already loaded
          */
@@ -496,7 +496,7 @@ public class FacesConfigEditor extends FormEditor implements
             if (!getArePagesLoaded())
             {
                 _waitPage = new WaitForLoadPage(FacesConfigEditor.this, "WaitForLoad", EditorMessages.FacesConfigEditor_WaitForLoad_EditorTabTitle); //$NON-NLS-1$
-                
+
                 try
                 {
                     addPage(0,_waitPage);
@@ -515,23 +515,23 @@ public class FacesConfigEditor extends FormEditor implements
         /**
          * Must be run on the UI thread
          */
-        public void doRun(FacesConfigArtifactEdit  edit) 
+        public void doRun(FacesConfigArtifactEdit  edit)
         {
             synchronized(this)
             {
                 // ensure wait page gets removed
                 removeWaitPage();
-                
+
                 if (!getArePagesLoaded()
                         && !_isDisposed)  // NOTE: we assume that access to variable does not need to
-                                          // to be synchronous since this method must 
+                                          // to be synchronous since this method must
                                           // be run on the UI thread.  The only way
                                           // that isDisposed should be true is if model loading took a long
                                           // time and the user closed the editor before it completed (trigger dispose to be called)
                 {
-                    try 
+                    try
                     {
-                        if (isWebProject && edit != null && edit.getFacesConfig() != null) 
+                        if (isWebProject && edit != null && edit.getFacesConfig() != null)
                         {
                             // only add the intro editor if the preference
                             // is set to do so.
@@ -540,13 +540,13 @@ public class FacesConfigEditor extends FormEditor implements
                                 IntroductionPage page1 = new IntroductionPage(FacesConfigEditor.this);
                                 addPage(page1, FacesConfigEditor.this.getEditorInput());
                             }
-                            
+
                             overviewPage = new OverviewPage(FacesConfigEditor.this);
                             overviewPageID = addPage(overviewPage, FacesConfigEditor.this.getEditorInput());
-        
+
                             // Page flow
                             createAndAddPageflowPage();
-        
+
                             // pages
                             IFormPage managedBeanPage = new ManagedBeanPage(FacesConfigEditor.this);
                             managedBeanPageID = addPage(managedBeanPage, FacesConfigEditor.this.getEditorInput());
@@ -555,7 +555,7 @@ public class FacesConfigEditor extends FormEditor implements
                             IFormPage othersPage = new OthersPage(FacesConfigEditor.this);
                             othersPageID = addPage(othersPage, FacesConfigEditor.this.getEditorInput());
                         }
-        
+
                         sourcePage = new StructuredTextEditor();
                         sourcePage.setEditorPart(FacesConfigEditor.this);
                         sourcePageId = addPage(sourcePage, FacesConfigEditor.this.getEditorInput());
@@ -564,7 +564,7 @@ public class FacesConfigEditor extends FormEditor implements
 
                         /*
                          * Bug 335276 - compile errors with near M5 platform
-                         * 
+                         *
                          * Code previously added to address Bug 263806 relied on internal classes
                          * that have since been removed. Bug 263806 no longer requires the code that
                          * was added in order to function correctly, and so the old fix for Bug
@@ -579,7 +579,7 @@ public class FacesConfigEditor extends FormEditor implements
                         {
                             runnable.run();
                         }
-                        
+
                         // flag the fact that the regular editor pages have been added
                         _arePagesLoaded.set(true);
                     } catch (PartInitException e) {
@@ -592,10 +592,10 @@ public class FacesConfigEditor extends FormEditor implements
             }
         }
 	}
-	
+
 	/**
 	 * Creates the pageflow page of the multi-page editor.
-	 * @throws PartInitException 
+	 * @throws PartInitException
 	 */
 	protected void createAndAddPageflowPage() throws PartInitException {
 		pageflowPage = new PageflowEditor(this);
@@ -626,12 +626,12 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * get the action's registry of sub pages.
-	 * @param page 
-	 * 
+	 * @param page
+	 *
 	 */
 	protected void addPageActionRegistry(IEditorPart page) {
 		if (page != null) {
-			ActionRegistry pageActionRegisty = (ActionRegistry) page
+			ActionRegistry pageActionRegisty = page
 					.getAdapter(ActionRegistry.class);
 			if (pageActionRegisty != null) {
 				for (Iterator iter = pageActionRegisty.getActions(); iter
@@ -647,7 +647,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the action registry of this editor.
-	 * 
+	 *
 	 * @return - the action registry
 	 */
 	protected ActionRegistry getActionRegistry() {
@@ -659,10 +659,10 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the root object of the configuration model.
-	 * 
+	 *
 	 * @return the root object.  Should not, but may return null.
 	 */
-	public FacesConfigType getFacesConfig() 
+	public FacesConfigType getFacesConfig()
 	{
 	    FacesConfigArtifactEdit  edit = _modelLoader.getEdit();
 	    if (edit != null)
@@ -675,10 +675,10 @@ public class FacesConfigEditor extends FormEditor implements
 	/*
 	 * @see org.eclipse.ui.ISaveablePart#isDirty()
 	 */
-	public boolean isDirty() { 
-		return ((BasicCommandStack) editingDomain.getCommandStack()) 
+	public boolean isDirty() {
+		return ((BasicCommandStack) editingDomain.getCommandStack())
 				.isSaveNeeded()
-				|| super.isDirty(); 
+				|| super.isDirty();
 	}
 
 	/**
@@ -697,9 +697,9 @@ public class FacesConfigEditor extends FormEditor implements
 
 		/**
 		 * Adds a <code>CommandStack</code> to observe.
-		 * 
+		 *
 		 * @param commandStack
-		 * @param editor 
+		 * @param editor
 		 */
 		public void addCommandStack(CommandStack commandStack,
 				IEditorPart editor) {
@@ -716,7 +716,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 		/**
 		 * set the dirty status for the models of different editor
-		 * 
+		 *
 		 * @param editor -
 		 *            editor, e.g., pageflow or databinding page.
 		 * @param dirty -
@@ -731,7 +731,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 		/**
 		 * Updates the specified actions.
-		 * 
+		 *
 		 * @param actionIds -
 		 *            the list of ids of actions to update
 		 */
@@ -746,7 +746,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 		/*
 		 * (non-Javadoc)
-		 * 
+		 *
 		 * @see CommandStackListener#commandStackChanged(java.util.EventObject)
 		 */
 		public void commandStackChanged(EventObject event) {
@@ -777,7 +777,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 		/**
 		 * Changes the dirty state.
-		 * 
+		 *
 		 * @param dirty -
 		 *            dirty state
 		 */
@@ -828,7 +828,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the global command stack listener.
-	 * 
+	 *
 	 * @return the <code>CommandStackListener</code>
 	 */
 	protected MultiPageCommandStackListener getMultiPageCommandStackListener() {
@@ -935,7 +935,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the <code>TabbedPropertySheetPage</code> for this editor.
-	 * 
+	 *
 	 * @return - the <code>TabbedPropertySheetPage</code>
 	 */
 	protected IPropertySheetPage getPropertySheetPage() {
@@ -953,7 +953,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * check whether the input is related with IFile.
-	 * 
+	 *
 	 * @param input
 	 * @return
 	 */
@@ -969,7 +969,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the <code>DelegatingZoomManager</code> for this editor.
-	 * 
+	 *
 	 * @return - the <code>DelegatingZoomManager</code>
 	 */
 	protected DelegatingZoomManager getDelegatingZoomManager() {
@@ -995,7 +995,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the <code>CommandStack</code> for this editor.
-	 * 
+	 *
 	 * @return - the <code>CommandStack</code>
 	 */
 	public DelegatingCommandStack getDelegatingCommandStack() {
@@ -1089,7 +1089,7 @@ public class FacesConfigEditor extends FormEditor implements
 	/**
 	 * get or create the source page's GEF command stack based on its EMF
 	 * command stack.
-	 * 
+	 *
 	 * @return
 	 */
 	private CommandStack getSourcePageCommandStack() {
@@ -1101,7 +1101,7 @@ public class FacesConfigEditor extends FormEditor implements
             else
             {
                 EditorPlugin.getDefault().getLog().log(
-                   new Status(IStatus.ERROR, EditorPlugin.getPluginId(), 0, 
+                   new Status(IStatus.ERROR, EditorPlugin.getPluginId(), 0,
                            "Error getting undo stack for Faces Config editor.  Undo may be disabled", //$NON-NLS-1$
                            new Throwable()));
             }
@@ -1118,7 +1118,7 @@ public class FacesConfigEditor extends FormEditor implements
 	 * Adds an editor action to this editor.
 	 * <p>
 	 * Editor actions are actions that depend and work on the editor.
-	 * 
+	 *
 	 * @param action -
 	 *            the editor action
 	 */
@@ -1152,7 +1152,7 @@ public class FacesConfigEditor extends FormEditor implements
 		CommandStack cmdStack = null;
 
 		if (activeEditor == pageflowPage) {
-			cmdStack = (CommandStack) activeEditor
+			cmdStack = activeEditor
 					.getAdapter(CommandStack.class);
 		} else if (activeEditor == sourcePage)// other page will delegate the
 		// GEF command stack to source
@@ -1171,7 +1171,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 		// update zoom actions
 		ZoomManager zoomManager = null;
-		zoomManager = (ZoomManager) activeEditor.getAdapter(ZoomManager.class);
+		zoomManager = activeEditor.getAdapter(ZoomManager.class);
 
 		if (zoomManager != null) {
 			getDelegatingZoomManager().setCurrentZoomManager(zoomManager);
@@ -1192,7 +1192,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see MultiPageEditorPart#pageChange(int)
 	 */
 	protected void pageChange(int newPageIndex) {
@@ -1208,41 +1208,41 @@ public class FacesConfigEditor extends FormEditor implements
 		}
 	}
 
-	public void dispose() 
+	public void dispose()
 	{
         // signal that we have been disposed
         // do this before anything else
 	    _isDisposed = true;
 	    _modelLoader.dispose();
-	    
+
 	    ResourcesPlugin.getWorkspace().removeResourceChangeListener(
 				resourceChangeListener);
 
 		adapterFactory.dispose();
 
-		if (this.outlinePage != null) 
-			outlinePage.dispose();		
-		
-		if (sourcePage != null) 
+		if (this.outlinePage != null)
+			outlinePage.dispose();
+
+		if (sourcePage != null)
 			sourcePage.dispose();
-		
+
 		if (sourceCommandStack != null)
 			sourceCommandStack.dispose();
-		
-		if (pageflowPage != null) 
-			pageflowPage.dispose();					
-		
+
+		if (pageflowPage != null)
+			pageflowPage.dispose();
+
 	    if (multiPageCommandStackListener != null)
-	    	multiPageCommandStackListener.dispose();	    
-	    
+	    	multiPageCommandStackListener.dispose();
+
 		//do not call dispose on delegatingCommandStack.   source and multiPage are already disposed
-		
+
 		super.dispose();
 	}
 
 	/**
 	 * get the project of the faces config file that the editor is working on.
-	 * 
+	 *
 	 * @return IProject
 	 */
 	public IProject getProject() {
@@ -1262,7 +1262,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Returns the <code>IContentOutlinePage</code> for this editor.
-	 * 
+	 *
 	 * @return - the <code>IContentOutlinePage</code>
 	 */
 	protected IContentOutlinePage getOutlinePage() {
@@ -1316,12 +1316,12 @@ public class FacesConfigEditor extends FormEditor implements
 
 	public Object getSelectedPage() {
 		IFormPage page = getActivePageInstance();
-		if (page != null) 
+		if (page != null)
 			return page;
-			
+
 		if (getActiveEditor() instanceof PageflowEditor)
 			return getActiveEditor();
-		
+
 		return null;
 	}
 
@@ -1339,7 +1339,7 @@ public class FacesConfigEditor extends FormEditor implements
 
 	/**
 	 * Handles what to do with changed resources on activation.
-	 * 
+	 *
 	 * @generated
 	 */
 	protected void handleChangedResources() {
@@ -1380,12 +1380,12 @@ public class FacesConfigEditor extends FormEditor implements
 		} else if (pageID.equals(OthersPage.PAGE_ID)) {
 			setActivePage(othersPageID);
 		} else if (pageID.equals(SOURCE_PAGE_ID)) {
-			setActivePage(sourcePageId);			
+			setActivePage(sourcePageId);
 		}
 	}
 
 	private boolean matches(IEditorInput input) {
-		final IResource file = (IResource) input.getAdapter(IResource.class);
+		final IResource file = input.getAdapter(IResource.class);
 		boolean hasWebFacet = false;
 		boolean hasJSFFacet = false;
 
@@ -1425,13 +1425,13 @@ public class FacesConfigEditor extends FormEditor implements
 
 		return hasWebFacet && hasJSFFacet;
 	}
-	
+
     /**
      * DANGER!  This call is for testing only!  Should not be used,
      * even internally, by production code.
      * @param timeoutMs the time to wait in milliseconds
-     * @throws InterruptedException 
-     */	
+     * @throws InterruptedException
+     */
 	public void doPageLoad(long timeoutMs) throws InterruptedException
 	{
 	    _modelLoader.waitForLoad(timeoutMs);

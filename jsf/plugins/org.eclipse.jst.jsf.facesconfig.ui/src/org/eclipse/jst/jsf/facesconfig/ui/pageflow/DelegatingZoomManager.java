@@ -25,7 +25,7 @@ import org.eclipse.gef.editparts.ZoomManager;
 
 /**
  * A delegating ZoomManager.
- * 
+ *
  */
 public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 	/** Default string or double value of zoom level */
@@ -49,7 +49,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomListener#zoomChanged(double)
 	 */
 	public void zoomChanged(double zoom) {
@@ -61,7 +61,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#addZoomListener(ZoomListener)
 	 */
 	public void addZoomListener(ZoomListener listener) {
@@ -70,7 +70,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#removeZoomListener(oZoomListener)
 	 */
 	public void removeZoomListener(ZoomListener listener) {
@@ -79,7 +79,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/**
 	 * Sets the ZoomManager all work should be delegated to.
-	 * 
+	 *
 	 * @param zoomManager
 	 */
 	public void setCurrentZoomManager(ZoomManager zoomManager) {
@@ -96,7 +96,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#canZoomIn()
 	 */
 	public boolean canZoomIn() {
@@ -109,7 +109,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#canZoomOut()
 	 */
 	public boolean canZoomOut() {
@@ -122,7 +122,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getMaxZoom()
 	 */
 	public double getMaxZoom() {
@@ -135,7 +135,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getMinZoom()
 	 */
 	public double getMinZoom() {
@@ -148,7 +148,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getNextZoomLevel()
 	 */
 	public double getNextZoomLevel() {
@@ -161,7 +161,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getPreviousZoomLevel()
 	 */
 	public double getPreviousZoomLevel() {
@@ -174,7 +174,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getScalableFigure()
 	 */
 	public ScalableFigure getScalableFigure() {
@@ -187,7 +187,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getUIMultiplier()
 	 */
 	public double getUIMultiplier() {
@@ -200,7 +200,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getViewport()
 	 */
 	public Viewport getViewport() {
@@ -213,7 +213,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getZoom()
 	 */
 	public double getZoom() {
@@ -226,7 +226,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getZoomAsText()
 	 */
 	public String getZoomAsText() {
@@ -239,7 +239,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getZoomLevels()
 	 */
 	public double[] getZoomLevels() {
@@ -252,7 +252,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#getZoomLevelsAsText()
 	 */
 	public String[] getZoomLevelsAsText() {
@@ -265,7 +265,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#setUIMultiplier(double)
 	 */
 	public void setUIMultiplier(double multiplier) {
@@ -278,7 +278,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#setViewLocation(Point)
 	 */
 	public void setViewLocation(Point p) {
@@ -291,7 +291,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#setZoom(double)
 	 */
 	public void setZoom(double zoom) {
@@ -303,7 +303,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#setZoomAnimationStyle(int)
 	 */
 	public void setZoomAnimationStyle(int style) {
@@ -315,7 +315,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#setZoomAsText(String)
 	 */
 	public void setZoomAsText(String zoomString) {
@@ -327,7 +327,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#setZoomLevels(double[])
 	 */
 	public void setZoomLevels(double[] zoomLevels) {
@@ -339,7 +339,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#zoomIn()
 	 */
 	public void zoomIn() {
@@ -351,7 +351,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#zoomOut()
 	 */
 	public void zoomOut() {
@@ -363,7 +363,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see ZoomManager#zoomTo(Rectangle)
 	 */
 	public void zoomTo(Rectangle rect) {
