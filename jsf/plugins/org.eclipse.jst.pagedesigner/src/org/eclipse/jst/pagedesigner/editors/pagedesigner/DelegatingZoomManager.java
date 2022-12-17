@@ -46,7 +46,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomListener#zoomChanged(double)
 	 */
 	public void zoomChanged(double zoom) {
@@ -58,7 +58,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#addZoomListener(org.eclipse.gef.editparts.ZoomListener)
 	 */
 	public void addZoomListener(ZoomListener listener) {
@@ -67,7 +67,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#removeZoomListener(org.eclipse.gef.editparts.ZoomListener)
 	 */
 	public void removeZoomListener(ZoomListener listener) {
@@ -76,7 +76,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/**
 	 * Sets the ZoomManager all work should be delegated to.
-	 * 
+	 *
 	 * @param zoomManager
 	 */
 	public void setCurrentZoomManager(ZoomManager zoomManager) {
@@ -93,7 +93,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#canZoomIn()
 	 */
 	public boolean canZoomIn() {
@@ -105,7 +105,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#canZoomOut()
 	 */
 	public boolean canZoomOut() {
@@ -117,7 +117,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getMaxZoom()
 	 */
 	public double getMaxZoom() {
@@ -130,7 +130,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getMinZoom()
 	 */
 	public double getMinZoom() {
@@ -142,7 +142,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getNextZoomLevel()
 	 */
 	public double getNextZoomLevel() {
@@ -154,7 +154,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getPreviousZoomLevel()
 	 */
 	public double getPreviousZoomLevel() {
@@ -166,7 +166,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getScalableFigure()
 	 */
 	public ScalableFigure getScalableFigure() {
@@ -179,7 +179,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getUIMultiplier()
 	 */
 	public double getUIMultiplier() {
@@ -192,7 +192,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getViewport()
 	 */
 	public Viewport getViewport() {
@@ -205,7 +205,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getZoom()
 	 */
 	public double getZoom() {
@@ -218,7 +218,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getZoomAsText()
 	 */
 	public String getZoomAsText() {
@@ -232,7 +232,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getZoomLevels()
 	 */
 	public double[] getZoomLevels() {
@@ -245,7 +245,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#getZoomLevelsAsText()
 	 */
 	public String[] getZoomLevelsAsText() {
@@ -258,7 +258,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#setUIMultiplier(double)
 	 */
 	public void setUIMultiplier(double multiplier) {
@@ -271,7 +271,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#setViewLocation(org.eclipse.draw2d.geometry.Point)
 	 */
 	public void setViewLocation(Point p) {
@@ -284,7 +284,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#setZoom(double)
 	 */
 	public void setZoom(double zoom) {
@@ -297,7 +297,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#setZoomAnimationStyle(int)
 	 */
 	public void setZoomAnimationStyle(int style) {
@@ -310,7 +310,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#setZoomAsText(java.lang.String)
 	 */
 	public void setZoomAsText(String zoomString) {
@@ -323,7 +323,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#setZoomLevels(double[])
 	 */
 	public void setZoomLevels(double[] zoomLevels) {
@@ -336,7 +336,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#zoomIn()
 	 */
 	public void zoomIn() {
@@ -349,7 +349,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#zoomOut()
 	 */
 	public void zoomOut() {
@@ -362,7 +362,7 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.eclipse.gef.editparts.ZoomManager#zoomTo(org.eclipse.draw2d.geometry.Rectangle)
 	 */
 	public void zoomTo(Rectangle rect) {
