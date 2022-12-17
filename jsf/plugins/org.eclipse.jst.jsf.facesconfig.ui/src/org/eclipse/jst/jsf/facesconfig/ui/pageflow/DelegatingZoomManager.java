@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2008 Sybase, Inc. and others.
+ * Copyright (c) 2004, 2022 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,9 @@ import org.eclipse.gef.editparts.ZoomManager;
 /**
  * A delegating ZoomManager.
  *
+ * @deprecated replaced by {@link org.eclipse.jst.jsf.common.ui.DelegatingZoomManager}.
  */
+@Deprecated(forRemoval = true, since = "1.6.0")
 public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 	/** Default string or double value of zoom level */
 	private static final String DEFAULT_ZOOM_LEVEL_STRING = "100%"; //$NON-NLS-1$
