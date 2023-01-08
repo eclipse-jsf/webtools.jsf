@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2022 Sybase, Inc. and others.
+ * Copyright (c) 2004, 2023 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,6 @@ public class DelegatingZoomManager extends ZoomManager implements ZoomListener {
 		super((ScalableFigure) null, (Viewport) null);
 	}
 
-	@Override
 	public void zoomChanged(double zoom) {
 		Object[] listeners = zoomListeners.getListeners();
 		for (int i = 0; i < listeners.length; ++i) {
