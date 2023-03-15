@@ -9,6 +9,7 @@
  * 
  * Contributors:
  *     Oracle Corporation - initial API and implementation
+ *     Reto Weiss Axon Ivy AG - Support for multiple EL expressions in attribute value and outside of tags
  *******************************************************************************/
 package org.eclipse.jst.jsf.validation.internal.strategy;
 
@@ -195,97 +196,16 @@ AbstractXMLViewValidationStrategy
             final Region2AttrAdapter attrAdapter,
             final IStructuredDocumentContext context)
     {
-        int offsetOfFirstEL = -1;
         final String attrValue = attrAdapter.getValue();
-
-        // TODO: should find and validate all
-        offsetOfFirstEL = attrValue.indexOf('#');
-
-        if (offsetOfFirstEL != -1 && offsetOfFirstEL < attrValue.length() - 1
-                && attrValue.charAt(offsetOfFirstEL + 1) == '{')
-        {
-            offsetOfFirstEL += 2;
-        }
-        else
-        {
-            offsetOfFirstEL = -1;
-        }
-
-        final XMLViewDefnAdapter adapter = DTAppManagerUtil
-        .getXMLViewDefnAdapter(context);
-
+        final XMLViewDefnAdapter adapter = DTAppManagerUtil.getXMLViewDefnAdapter(context);
         boolean isEL = false;
-        if (adapter != null && offsetOfFirstEL != -1)
+        if (adapter != null)
         {
-            try
+            int offsetOfEL = findElStartOffset(attrValue, 0);
+            while(offsetOfEL >= 0) 
             {
-                // use the attribute's context plus the offset into the
-                // whole attribute value to find where we think the el
-                // expression starts. Add one since the attribute value
-                // string returned by attrAdapter will have the value quotes
-                // removed, but the region offsets include the quotes.
-                IStructuredDocumentContext elContext = IStructuredDocumentContextFactory.INSTANCE
-                .getContext(context.getStructuredDocument(), context
-                        .getDocumentPosition()
-                        + offsetOfFirstEL + 1);
-                final DTELExpression elExpression = adapter
-                .getELExpression(elContext);
-                if (elExpression != null)
-                {
-                    final String elText = elExpression.getText();
-
-                    if (DEBUG)
-                    {
-                        System.out.println(addDebugSpacer(3) + "EL attrVal= " //$NON-NLS-1$
-                                + elText);
-                    }
-
-                    elContext = elExpression.getDocumentContext();
-                    // EL validation is user configurable because
-                    // it can be computationally costly.
-                    if (_validationContext.shouldValidateEL())
-                    {
-                        // also, skip the validation if the expression is empty
-                        // or only whitespace, since the parser doesn't handle
-                        // it
-                        // anyway.
-                        if ("".equals(elText.trim())) //$NON-NLS-1$
-                        {
-                            final int offset = elContext.getDocumentPosition() - 1;
-                            final int length = elText.length() + 2;
-                            final Diagnostic diagnostic = _validationContext
-                            .getDiagnosticFactory()
-                            .create_EMPTY_EL_EXPRESSION();
-                            // detected empty EL expression
-                            if (_validationContext.shouldValidateEL())
-                            {
-                                _validationContext.getReporter().report(
-                                        diagnostic, offset, length);
-                            }
-                        }
-                        else
-                        {
-                            final List elVals = MetaDataEnabledProcessingFactory
-                            .getInstance()
-                            .getAttributeValueRuntimeTypeFeatureProcessors(
-                                    IValidELValues.class,
-                                    elContext,
-                                    attrAdapter
-                                    .getAttributeIdentifier());
-                            final String safeELText = elText.replaceAll(
-                                    "[\n\r\t]", " "); //$NON-NLS-1$ //$NON-NLS-2$
-                            validateELExpression(context, elContext, elVals,
-                                    elementAdapter, attrAdapter, safeELText);
-                            isEL = true;
-                        }
-                    } else {
-                        isEL = true;
-                    }
-                }
-            }
-            catch (final ViewHandlerException e)
-            {
-                // fall through to return false
+                isEL |= validateEl(elementAdapter, attrAdapter, context, offsetOfEL, adapter);
+                offsetOfEL = findElStartOffset(attrValue, offsetOfEL);
             }
         }
 
@@ -294,6 +214,94 @@ AbstractXMLViewValidationStrategy
         final boolean isEL2 = checkIfELAndValidate2(attrAdapter, context);
 
         return isEL || isEL2;
+    }
+
+    private int findElStartOffset(String attrValue, int fromOffset)
+    {
+        int offsetOfEL = attrValue.indexOf('#', fromOffset);
+        if (offsetOfEL != -1 && offsetOfEL < attrValue.length() - 1
+                && attrValue.charAt(offsetOfEL + 1) == '{')
+        {
+            return offsetOfEL + 2;
+        }
+        return -1;
+    }
+
+    private boolean validateEl(final Region2ElementAdapter elementAdapter,
+            final Region2AttrAdapter attrAdapter, final IStructuredDocumentContext context,
+            int offsetOfFirstEL, final XMLViewDefnAdapter adapter)
+    {
+      try
+      {
+          // use the attribute's context plus the offset into the
+          // whole attribute value to find where we think the el
+          // expression starts. Add one since the attribute value
+          // string returned by attrAdapter will have the value quotes
+          // removed, but the region offsets include the quotes.
+          IStructuredDocumentContext elContext = IStructuredDocumentContextFactory.INSTANCE
+          .getContext(context.getStructuredDocument(), context
+                  .getDocumentPosition()
+                  + offsetOfFirstEL + 1);
+          final DTELExpression elExpression = adapter
+          .getELExpression(elContext);
+          if (elExpression != null)
+          {
+              final String elText = elExpression.getText();
+
+              if (DEBUG)
+              {
+                  System.out.println(addDebugSpacer(3) + "EL attrVal= " //$NON-NLS-1$
+                          + elText);
+              }
+
+              elContext = elExpression.getDocumentContext();
+              // EL validation is user configurable because
+              // it can be computationally costly.
+              if (_validationContext.shouldValidateEL())
+              {
+                  // also, skip the validation if the expression is empty
+                  // or only whitespace, since the parser doesn't handle
+                  // it
+                  // anyway.
+                  if ("".equals(elText.trim())) //$NON-NLS-1$
+                  {
+                      final int offset = elContext.getDocumentPosition() - 1;
+                      final int length = elText.length() + 2;
+                      final Diagnostic diagnostic = _validationContext
+                      .getDiagnosticFactory()
+                      .create_EMPTY_EL_EXPRESSION();
+                      // detected empty EL expression
+                      if (_validationContext.shouldValidateEL())
+                      {
+                          _validationContext.getReporter().report(
+                                  diagnostic, offset, length);
+                      }
+                  }
+                  else
+                  {
+                      final List elVals = MetaDataEnabledProcessingFactory
+                      .getInstance()
+                      .getAttributeValueRuntimeTypeFeatureProcessors(
+                              IValidELValues.class,
+                              elContext,
+                              attrAdapter
+                              .getAttributeIdentifier());
+                      final String safeELText = elText.replaceAll(
+                              "[\n\r\t]", " "); //$NON-NLS-1$ //$NON-NLS-2$
+                      validateELExpression(context, elContext, elVals,
+                              elementAdapter, attrAdapter, safeELText);
+                      return true;
+                  }
+              } else {
+                  return true;
+              }
+          }
+      }
+      catch (final ViewHandlerException e)
+      {
+          // fall through to return false
+      }
+      return false;
     }
 
     /**
@@ -371,15 +379,15 @@ AbstractXMLViewValidationStrategy
         final CompositeType exprType = elValidator.getExpressionType();
         if (exprType != null)
         {
-        	// Ignore the expression whose last two segments are of types Object.
-        	final CompositeType boxedType = TypeTransformer
-            	.transformBoxPrimitives(exprType);
-        	final String[] testSignatures = boxedType.getSignatures();
-        	if (testSignatures.length > 0 && TypeConstants.TYPE_JAVAOBJECT.equals(testSignatures[0])) 
-        	{
-        		if (elText.indexOf('.') != -1) 
-        		{
-        			String elText2 = elText.substring(0, elText.lastIndexOf('.'));
+          // Ignore the expression whose last two segments are of types Object.
+          final CompositeType boxedType = TypeTransformer
+              .transformBoxPrimitives(exprType);
+          final String[] testSignatures = boxedType.getSignatures();
+          if (testSignatures.length > 0 && TypeConstants.TYPE_JAVAOBJECT.equals(testSignatures[0])) 
+          {
+            if (elText.indexOf('.') != -1) 
+            {
+              String elText2 = elText.substring(0, elText.lastIndexOf('.'));
                     final ELExpressionValidator elValidator2 = new ELExpressionValidator(
                             elContext, elText2, _validationContext
                                     .getSymbolResolverFactory(), _validationContext
@@ -387,15 +395,15 @@ AbstractXMLViewValidationStrategy
                     elValidator2.validateXMLNode();
 
                     final CompositeType exprType2 = elValidator.getExpressionType();
-                	final CompositeType boxedType2 = TypeTransformer.transformBoxPrimitives(exprType2);
-                	final String[] testSignatures2 = boxedType2.getSignatures();
-                	if (testSignatures2.length > 0 && TypeConstants.TYPE_JAVAOBJECT.equals(testSignatures2[0])) 
-                	{
-                		return;
-                	}
-        		}
-        	}
-        	
+                  final CompositeType boxedType2 = TypeTransformer.transformBoxPrimitives(exprType2);
+                  final String[] testSignatures2 = boxedType2.getSignatures();
+                  if (testSignatures2.length > 0 && TypeConstants.TYPE_JAVAOBJECT.equals(testSignatures2[0])) 
+                  {
+                    return;
+                  }
+            }
+          }
+          
             for (final Iterator it = elVals.iterator(); it.hasNext();)
             {
                 final IValidELValues elval = (IValidELValues) it.next();
@@ -412,7 +420,7 @@ AbstractXMLViewValidationStrategy
                                 expectedType, exprType, elementAdapter,
                                 attrAdapter);
                         if (ELValidationUtil.isProjectEL22(_validationContext.getFile())) {
-                        	expectedType = addEL22Alternatives(expectedType);
+                          expectedType = addEL22Alternatives(expectedType);
                         }
                         status = _typeComparator.calculateTypeCompatibility(
                                 expectedType, exprType);
@@ -435,33 +443,33 @@ AbstractXMLViewValidationStrategy
     }
 
     private CompositeType addEL22Alternatives(final CompositeType expectedType) {
-    	CompositeType type = expectedType;
-    	if (expectedType != null) {
-    		final int assignmentTypeMask = expectedType.getAssignmentTypeMask();
-    		if ((assignmentTypeMask & IAssignable.ASSIGNMENT_TYPE_RHS) != 0 ||
-    				assignmentTypeMask == IAssignable.ASSIGNMENT_TYPE_NONE) {
-        		int assignmentType = IAssignable.ASSIGNMENT_TYPE_NONE;
-        		if ((assignmentTypeMask & IAssignable.ASSIGNMENT_TYPE_RHS) != 0) {
-        			assignmentType = IAssignable.ASSIGNMENT_TYPE_RHS;
-        		}
-        		final List<String> signatures = new ArrayList<String>();
-        		for (final String signature: expectedType.getSignatures()) {
-        			signatures.add(signature);
-            		final List<String> methodSignatures = new ArrayList<String>();
-            		for (int i = 0; i < 20; i++) {
-            			final String methodSignature = Signature.createMethodSignature(
-            					methodSignatures.toArray(new String[i]),
-            					Signature.getElementType(signature)); 
-            			signatures.add(methodSignature);
-            			methodSignatures.add("Ljava.lang.String;"); //$NON-NLS-1$
-            		}
-        		}
-        		type = new CompositeType(
-        				signatures.toArray(new String[signatures.size()]),
-        				assignmentType);
-    		}
-    	}
-    	return type;
+      CompositeType type = expectedType;
+      if (expectedType != null) {
+        final int assignmentTypeMask = expectedType.getAssignmentTypeMask();
+        if ((assignmentTypeMask & IAssignable.ASSIGNMENT_TYPE_RHS) != 0 ||
+            assignmentTypeMask == IAssignable.ASSIGNMENT_TYPE_NONE) {
+            int assignmentType = IAssignable.ASSIGNMENT_TYPE_NONE;
+            if ((assignmentTypeMask & IAssignable.ASSIGNMENT_TYPE_RHS) != 0) {
+              assignmentType = IAssignable.ASSIGNMENT_TYPE_RHS;
+            }
+            final List<String> signatures = new ArrayList<String>();
+            for (final String signature: expectedType.getSignatures()) {
+              signatures.add(signature);
+                final List<String> methodSignatures = new ArrayList<String>();
+                for (int i = 0; i < 20; i++) {
+                  final String methodSignature = Signature.createMethodSignature(
+                      methodSignatures.toArray(new String[i]),
+                      Signature.getElementType(signature)); 
+                  signatures.add(methodSignature);
+                  methodSignatures.add("Ljava.lang.String;"); //$NON-NLS-1$
+                }
+            }
+            type = new CompositeType(
+                signatures.toArray(new String[signatures.size()]),
+                assignmentType);
+        }
+      }
+      return type;
     }
 
     private boolean disableAlternativeTypes()
@@ -484,7 +492,7 @@ AbstractXMLViewValidationStrategy
     }
     
     private boolean hasProperty(final String key) {
-    	 String res = System.getProperty(key);
+       String res = System.getProperty(key);
          if (res == null) {
              //check env var also
              res = System.getenv(key);
@@ -512,7 +520,7 @@ AbstractXMLViewValidationStrategy
                 .getDocumentContext();
         final DTUIViewRoot viewRoot = _validationContext.getViewRootHandle().getCachedViewRoot();
         final IAdaptable serviceAdaptable = viewRoot.getServices();
-        final XMLViewObjectMappingService mappingService = (XMLViewObjectMappingService) serviceAdaptable
+        final XMLViewObjectMappingService mappingService = serviceAdaptable
                 .getAdapter(XMLViewObjectMappingService.class);
         if (mappingService != null)
         {

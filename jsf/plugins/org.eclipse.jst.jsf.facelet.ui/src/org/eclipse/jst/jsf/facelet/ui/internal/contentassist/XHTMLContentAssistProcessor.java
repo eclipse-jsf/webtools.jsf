@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Reto Weiss Axon Ivy AG - Support for multiple EL expressions in attribute value and outside of tags
  *******************************************************************************/
 package org.eclipse.jst.jsf.facelet.ui.internal.contentassist;
 
@@ -287,4 +288,55 @@ public class XHTMLContentAssistProcessor extends AbstractContentAssistProcessor
         }
         return null;
     }
+    
+    @Override
+    protected ContentAssistRequest computeContentProposals(int documentPosition, String matchString,
+          ITextRegion completionRegion, IDOMNode nodeAtOffset, IDOMNode node)
+    {
+      if (isInElExpression(nodeAtOffset.getTextContent(), documentPosition-nodeAtOffset.getStartOffset()))
+      {
+        return newContentAssistRequest(nodeAtOffset, node, getStructuredDocumentRegion(documentPosition), completionRegion, documentPosition, 0, matchString);
+      }
+      return super.computeContentProposals(documentPosition, matchString, completionRegion, nodeAtOffset, node);
+    }
+
+    private boolean isInElExpression(String textContent, int position)
+    {
+      return hasStartTagBefore(textContent, position) && hasEndTagAfter(textContent, position);
+    }
+
+    private boolean hasStartTagBefore(String textContent, int position)
+    {
+      for (int pos = position - 1; pos > 0; pos--) 
+      {
+        char ch = textContent.charAt(pos);
+        if (ch == '}') 
+        {
+          return false;
+        }
+        if (ch == '{' && textContent.charAt(pos - 1) == '#') 
+        {
+          return true;
+        }
+      }
+      return false;
+    }
+    
+    private boolean hasEndTagAfter(String textContent, int position)
+    {
+      for (int pos = position; pos < textContent.length(); pos++) 
+      {
+        char ch = textContent.charAt(pos);
+        if (ch == '}') 
+        {
+          return true;
+        }
+        if (ch == '#' && textContent.charAt(pos + 1) == '{') 
+        {
+          return false;
+        }
+      }
+      return false;
+    }
+
 }

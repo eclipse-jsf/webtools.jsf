@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Reto Weiss Axon Ivy AG - Support for multiple EL expressions in attribute value and outside of tags
  *******************************************************************************/
 package org.eclipse.jst.jsf.facelet.core.internal.view;
 
@@ -23,7 +24,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jst.jsf.context.IModelContext;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IDOMContextResolver;
 import org.eclipse.jst.jsf.context.resolver.structureddocument.IStructuredDocumentContextResolverFactory;
-import org.eclipse.jst.jsf.context.resolver.structureddocument.internal.ITextRegionContextResolver;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContext;
 import org.eclipse.jst.jsf.context.structureddocument.IStructuredDocumentContextFactory;
 import org.eclipse.jst.jsf.core.internal.JSFCorePlugin;
@@ -32,9 +32,9 @@ import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerEx
 import org.eclipse.jst.jsf.designtime.internal.view.IDTViewHandler.ViewHandlerException.Cause;
 import org.eclipse.jst.jsf.designtime.internal.view.TaglibBasedViewDefnAdapter;
 import org.eclipse.jst.jsf.designtime.internal.view.model.ITagRegistry;
+import org.eclipse.jst.jsf.facelet.core.internal.util.ViewUtil;
 import org.eclipse.wst.sse.core.StructuredModelManager;
 import org.eclipse.wst.sse.core.internal.provisional.IStructuredModel;
-import org.eclipse.wst.xml.core.internal.regions.DOMRegionContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -95,7 +95,7 @@ public class FaceletViewDefnAdapter extends TaglibBasedViewDefnAdapter
     public DTELExpression getELExpression(final IModelContext genericContext)
             throws ViewHandlerException
     {
-        final IStructuredDocumentContext context = (IStructuredDocumentContext) genericContext
+        final IStructuredDocumentContext context = genericContext
                 .getAdapter(IStructuredDocumentContext.class);
 
         if (context == null)
@@ -103,42 +103,7 @@ public class FaceletViewDefnAdapter extends TaglibBasedViewDefnAdapter
             throw new ViewHandlerException(Cause.EL_NOT_FOUND);
         }
 
-        final ITextRegionContextResolver resolver =
-            IStructuredDocumentContextResolverFactory.INSTANCE
-            .getTextRegionResolver(context);
-
-        if (resolver != null)
-        {
-            final String regionType = resolver.getRegionType();
-            int startOffset = resolver.getStartOffset();
-            int relativeOffset = context.getDocumentPosition() - startOffset;
-            
-            if (DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE.equals(regionType))
-            {
-                final String attributeText = resolver.getRegionText();
-                int elOpenIdx = attributeText.indexOf("#"); //$NON-NLS-1$
-                
-                if (elOpenIdx >= 0 && elOpenIdx < relativeOffset
-                        && elOpenIdx+1 < attributeText.length()
-                        && attributeText.charAt(elOpenIdx+1) == '{')
-                {
-                    // we may have a hit
-                    int elCloseIdx = attributeText.indexOf('}', elOpenIdx+1);
-                    if (elCloseIdx  != -1)
-                    {
-                        final IStructuredDocumentContext elContext =
-                            IStructuredDocumentContextFactory.INSTANCE.getContext(
-                                    context.getStructuredDocument(), resolver
-                                    .getStartOffset()+elOpenIdx+2);
-                        final String elText = attributeText.substring(
-                                elOpenIdx + 2, elCloseIdx);
-                        return new DTELExpression(elContext, elText);
-                    }
-                }
-            }
-        }
-
-        return null;
+        return ViewUtil.getDTELExpression(context);
     }
 
     @Override

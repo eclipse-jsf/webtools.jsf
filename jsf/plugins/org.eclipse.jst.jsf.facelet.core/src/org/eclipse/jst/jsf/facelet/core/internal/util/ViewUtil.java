@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     Reto Weiss Axon Ivy AG - Support for multiple EL expressions in attribute value and outside of tags
  *******************************************************************************/
 package org.eclipse.jst.jsf.facelet.core.internal.util;
 
@@ -282,7 +283,7 @@ public final class ViewUtil
      * @return the el expression from the context or null if none found.
      */
     public static DTELExpression getDTELExpression(IModelContext genericContext) {
-        final IStructuredDocumentContext context = (IStructuredDocumentContext) genericContext
+        final IStructuredDocumentContext context = genericContext
                 .getAdapter(IStructuredDocumentContext.class);
 
 //        if (context == null)
@@ -290,42 +291,64 @@ public final class ViewUtil
 //            throw new ViewHandlerException(Cause.EL_NOT_FOUND);
 //        }
 
-        final ITextRegionContextResolver resolver =
-            IStructuredDocumentContextResolverFactory.INSTANCE
-            .getTextRegionResolver(context);
-
-        if (resolver != null)
-        {
-            final String regionType = resolver.getRegionType();
-            int startOffset = resolver.getStartOffset();
-            int relativeOffset = context.getDocumentPosition() - startOffset;
-            
-            if (DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE.equals(regionType))
-            {
-                final String attributeText = resolver.getRegionText();
-                int elOpenIdx = attributeText.indexOf("#"); //$NON-NLS-1$
-                
-                if (elOpenIdx >= 0 && elOpenIdx < relativeOffset
-                        && elOpenIdx+1 < attributeText.length()
-                        && attributeText.charAt(elOpenIdx+1) == '{')
-                {
-                    // we may have a hit
-                    int elCloseIdx = attributeText.indexOf('}', elOpenIdx+1);
-                    if (elCloseIdx  != -1)
-                    {
-                        final IStructuredDocumentContext elContext =
-                            IStructuredDocumentContextFactory.INSTANCE.getContext(
-                                    context.getStructuredDocument(), resolver
-                                    .getStartOffset()+elOpenIdx+2);
-                        final String elText = attributeText.substring(
-                                elOpenIdx + 2, elCloseIdx);
-                        return new DTELExpression(elContext, elText);
-                    }
-                }
-            }
-        }
-
-        return null;
+        return getDTELExpression(context);
     }
 
+    /**
+     * @param context
+     * @return the el expression from the context or null if none found.
+     */
+    public static DTELExpression getDTELExpression(final IStructuredDocumentContext context)
+    {
+        ITextRegionContextResolver resolver = IStructuredDocumentContextResolverFactory.INSTANCE.getTextRegionResolver(context);
+        if (resolver == null) 
+        {
+            return null;
+        }
+        String regionType = resolver.getRegionType();
+        int startOffset = resolver.getStartOffset();
+        int relativeOffset = context.getDocumentPosition() - startOffset;
+        if (!DOMRegionContext.XML_TAG_ATTRIBUTE_VALUE.equals(regionType) &&
+            !DOMRegionContext.XML_CONTENT.equals(regionType))
+        {
+            return null;
+        }
+        final String text = resolver.getRegionText();
+        if (relativeOffset >= text.length()) 
+        {
+            return null;
+        }
+        int elOpenIdx = findOpenElIndex(text, relativeOffset);
+        if (elOpenIdx < 0) 
+        {
+            return null;
+        }
+        int elCloseIdx = text.indexOf('}', elOpenIdx);
+        if (elCloseIdx  == -1)
+        {
+            return null;
+        }
+        final IStructuredDocumentContext elContext = IStructuredDocumentContextFactory.INSTANCE.getContext(
+                    context.getStructuredDocument(), 
+                    resolver.getStartOffset()+elOpenIdx);
+        final String elText = text.substring(elOpenIdx, elCloseIdx);
+        return new DTELExpression(elContext, elText);
+    }
+
+    private static int findOpenElIndex(String attributeText, int relativeOffset)
+    {
+      for (int pos = relativeOffset - 1; pos > 0; pos--) 
+      {
+        char ch = attributeText.charAt(pos);
+        if (ch == '{' && attributeText.charAt(pos - 1) == '#') 
+        {
+          return pos + 1;
+        } 
+        else if (ch == '}') 
+        {
+          return -1;
+        }
+      }
+      return -1;
+    }
 }
