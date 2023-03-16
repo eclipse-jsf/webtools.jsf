@@ -22,6 +22,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jst.jsf.common.internal.types.BooleanLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.IAssignable;
 import org.eclipse.jst.jsf.common.internal.types.LiteralType;
+import org.eclipse.jst.jsf.common.internal.types.NullLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.StringLiteralType;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercer;
 import org.eclipse.jst.jsf.common.internal.types.TypeCoercionException;
@@ -55,6 +56,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
     /* (non-Javadoc)
      * @see org.eclipse.jst.jsf.validation.internal.el.operators.BinaryOperator#performOperation(org.eclipse.jst.jsf.core.internal.types.ValueType, org.eclipse.jst.jsf.core.internal.types.ValueType)
      */
+    @Override
     public ValueType performOperation(ValueType firstArg, ValueType secondArg) 
     {
         // JSP.2.3.5.7 step 1 if operands are equal, then true for ==, false for !=
@@ -170,10 +172,8 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         // the only literal value that could have got us here is a 
         // StringLiteralValue since the others a filtered out before this is
         // called
-        if (nonEnumType instanceof LiteralType)
+        if (nonEnumType instanceof StringLiteralType)
         {
-            assert nonEnumType instanceof StringLiteralType;
-            
             Diagnostic result = validateIfEnumToStringComparison(((StringLiteralType)nonEnumType).getLiteralValue(), enumType);
             
             if (result != null)
@@ -185,7 +185,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         }
         
         // if the arg is a String, then we can't prove anything before runtime
-        if (nonEnumType.isInstanceOf(TypeConstants.TYPE_STRING))
+        if (nonEnumType instanceof NullLiteralType || nonEnumType.isInstanceOf(TypeConstants.TYPE_STRING))
         {
             return new ValueType(TypeConstants.TYPE_BOOLEAN, IAssignable.ASSIGNMENT_TYPE_RHS);
         }
@@ -194,11 +194,12 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         return BooleanLiteralType.valueOf(doRealOperation("foo", "foo_")); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
+    @Override
     public Diagnostic validate(ValueType firstArg, ValueType secondArg) {
-    	if (TypeConstants.TYPE_JAVAOBJECT.equals(firstArg.getSignature()) ||
-    			TypeConstants.TYPE_JAVAOBJECT.equals(secondArg.getSignature())) {
-    		return Diagnostic.OK_INSTANCE;
-    	}
+        if (TypeConstants.TYPE_JAVAOBJECT.equals(firstArg.getSignature()) ||
+            TypeConstants.TYPE_JAVAOBJECT.equals(secondArg.getSignature())) {
+                return Diagnostic.OK_INSTANCE;
+        }
         
         // JSP.2.3.5.7 step 2 if either operand is null, then not equal
         if (TypeCoercer.typeIsNull(firstArg.getSignature())
@@ -485,10 +486,8 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         // the only literal value that could have got us here is a 
         // StringLiteralValue since the others a filtered out before this is
         // called
-        if (nonEnumType instanceof LiteralType)
+        if (nonEnumType instanceof StringLiteralType)
         {
-            assert nonEnumType instanceof StringLiteralType;
-            
             Diagnostic result = validateIfEnumToStringComparison(((StringLiteralType)nonEnumType).getLiteralValue(), enumType);
             
             if (result != null)
@@ -499,7 +498,7 @@ import org.eclipse.jst.jsf.validation.internal.el.diagnostics.DiagnosticFactory;
         }
         
         // if the arg is a String, then we can't prove anything before runtime
-        if (nonEnumType.isInstanceOf(TypeConstants.TYPE_STRING))
+        if (nonEnumType instanceof NullLiteralType || nonEnumType.isInstanceOf(TypeConstants.TYPE_STRING))
         {
             return Diagnostic.OK_INSTANCE;
         }
