@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.core.tests
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.core.tests;singleton:=true
-Bundle-Version: 1.5.200.qualifier
+Bundle-Version: 1.6.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.core.tests.TestsPlugin
 Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
@@ -54,4 +55,4 @@ Export-Package: org.eclipse.jst.jsf.core.tests;x-friends:="org.eclipse.jst.jsf.u
    org.eclipse.jst.pagedesigner.tests",
  org.eclipse.jst.jsf.core.tests.validation
 Plugin-Class: org.eclipse.jst.jsf.core.tests.TestsPlugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17

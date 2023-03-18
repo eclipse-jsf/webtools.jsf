@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.ui
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: org.eclipse.jst.jsf.ui; singleton:=true
-Bundle-Version: 1.6.103.qualifier
+Bundle-Version: 1.7.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.ui.internal.JSFUiPlugin
 Bundle-Vendor: %plugin.provider
 Bundle-Localization: plugin
@@ -43,4 +44,4 @@ Export-Package: org.eclipse.jst.jsf.ui.internal;x-friends:="org.eclipse.jst.jsf.
  org.eclipse.jst.jsf.ui.internal.project.facet;x-friends:="org.eclipse.jst.jsf.ui.tests",
  org.eclipse.jst.jsf.ui.internal.tagregistry;x-internal:=true,
  org.eclipse.jst.jsf.ui.internal.validation;x-internal:=true
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17

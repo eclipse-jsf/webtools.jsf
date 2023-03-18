@@ -23,7 +23,7 @@
 
   <groupId>org.eclipse.webtools.jsf</groupId>
   <artifactId>org.eclipse.jst.jsf.designtime.tests</artifactId>
-  <version>1.15.100-SNAPSHOT</version>
+  <version>1.16.0-SNAPSHOT</version>
   <packaging>eclipse-test-plugin</packaging>
 
   <build>

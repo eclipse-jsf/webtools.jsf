@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.jst.jsf.facelet.ui
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.facelet.ui;singleton:=true
-Bundle-Version: 1.4.0.qualifier
+Bundle-Version: 1.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.facelet.ui.internal.FaceletUiPlugin
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
@@ -32,7 +32,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jst.jsf.ui;bundle-version="1.0.1",
  org.eclipse.jst.jsf.facelet.core;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.jst.jsf.facelet.ui.internal;x-internal:=true,
  org.eclipse.jst.jsf.facelet.ui.internal.contentassist;x-internal:=true,
  org.eclipse.jst.jsf.facelet.ui.internal.facet;x-internal:=true,

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: org.eclipse.jst.pagedesigner;singleton:=true
 Bundle-Name: %pluginName
-Bundle-Version: 1.9.0.qualifier
+Bundle-Version: 1.10.0.qualifier
 Bundle-Activator: org.eclipse.jst.pagedesigner.PDPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -120,7 +120,7 @@ Export-Package: org.eclipse.jst.pagedesigner;x-internal:=true,
  org.eclipse.jst.pagedesigner.utils;x-internal:=true,
  org.eclipse.jst.pagedesigner.validation.caret;x-internal:=true,
  org.eclipse.jst.pagedesigner.viewer;x-internal:=true
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Import-Package: javax.servlet.jsp.el;version="2.0.0"
 Automatic-Module-Name: org.eclipse.jst.pagedesigner
 

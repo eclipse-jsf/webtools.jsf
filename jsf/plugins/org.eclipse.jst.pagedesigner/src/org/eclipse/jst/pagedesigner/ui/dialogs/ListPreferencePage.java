@@ -46,8 +46,7 @@ public class ListPreferencePage extends PreferencePage {
 	}
 
 	/**
-	 * @see org.eclipse.jface.preference.
-	 *      PreferencePage#createContents(Composite)
+	 * @see org.eclipse.jface.preference.PreferencePage#createContents(Composite)
 	 */
 	protected Control createContents(Composite parent) {
 		GridLayout layout;

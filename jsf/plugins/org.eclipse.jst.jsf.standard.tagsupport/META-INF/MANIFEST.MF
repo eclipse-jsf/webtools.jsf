@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.standard.tagsupport
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jst.jsf.standard.tagsupport;singleton:=true
-Bundle-Version: 1.5.1.qualifier
+Bundle-Version: 1.6.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.jst.jsf.standard.tagsupport.StandardTagSupportPlugin
 Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
@@ -10,6 +11,6 @@ Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jst.jsf.common;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.emf.ecore.xmi;bundle-version="[2.2.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.jst.jsf.standard.tagsupport;x-internal:=true
 Bundle-Vendor: %pluginProvider

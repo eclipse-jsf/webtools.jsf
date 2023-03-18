@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.jst.jsf.common.ui
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.jst.jsf.common.ui;singleton:=true
-Bundle-Version: 1.6.0.qualifier
+Bundle-Version: 1.7.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.common.ui.JSFUICommonPlugin
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)",
@@ -34,4 +34,4 @@ Export-Package: org.eclipse.jst.jsf.common.ui;x-friends:="org.eclipse.jst.pagede
  org.eclipse.jst.jsf.common.ui.internal.utils;x-friends:="org.eclipse.jst.pagedesigner,org.eclipse.jst.jsf.facesconfig.ui,org.eclipse.jst.pagedesigner.jsf.ui"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %pluginProvider
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17

@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.facesconfig
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: org.eclipse.jst.jsf.facesconfig; singleton:=true
-Bundle-Version: 1.5.102.qualifier
+Bundle-Version: 1.6.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.facesconfig.FacesConfigPlugin$Implementation
 Bundle-Vendor: %plugin.provider
 Bundle-Localization: plugin
@@ -29,4 +30,4 @@ Export-Package: org.eclipse.jst.jsf.facesconfig,
  org.eclipse.jst.jsf.facesconfig.internal.nls;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.internal.translator;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.util
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17

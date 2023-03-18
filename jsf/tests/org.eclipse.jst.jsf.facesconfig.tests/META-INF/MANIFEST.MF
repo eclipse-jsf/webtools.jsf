@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.facesconfig.tests
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.facesconfig.tests;singleton:=true
-Bundle-Version: 1.4.101.qualifier
+Bundle-Version: 1.5.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.facesconfig.tests.TestsPlugin
 Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
@@ -18,7 +19,7 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.jst.jsf.test.util;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.jst.jsf.core;bundle-version="[1.1.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.eclipse.jst.jsf.facesconfig.tests;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.tests.read;x-internal:=true,
  org.eclipse.jst.jsf.facesconfig.tests.util;x-internal:=true,

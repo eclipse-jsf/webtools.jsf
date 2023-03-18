@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.jst.jsf.test.util
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: org.eclipse.jst.jsf.test.util
-Bundle-Version: 1.5.600.qualifier
+Bundle-Version: 1.6.0.qualifier
 Bundle-Activator: org.eclipse.jst.jsf.test.util.Activator
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
@@ -38,5 +39,5 @@ Export-Package: org.eclipse.jst.jsf.test.util,
  org.eclipse.jst.jsf.test.util.mock.osgi,
  org.eclipse.jst.jsf.test.util.mock.smodel
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-Vendor: %Bundle-Vendor.0

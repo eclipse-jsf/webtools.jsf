@@ -63,8 +63,7 @@ public class PositioningPreferencePage extends PreferencePage {
 	}
 
 	/**
-	 * @see org.eclipse.jface.preference.
-	 *      PreferencePage#createContents(Composite)
+	 * @see org.eclipse.jface.preference.PreferencePage#createContents(Composite)
 	 */
 	protected Control createContents(Composite parent) {
 		GridLayout layout;
@@ -778,7 +777,7 @@ public class PositioningPreferencePage extends PreferencePage {
 	private boolean isEmptyString(String str) {
 		if (str == null || str.length() == 0) {
 			return true;
-        }	
+        }
         return false;
 	}
 }

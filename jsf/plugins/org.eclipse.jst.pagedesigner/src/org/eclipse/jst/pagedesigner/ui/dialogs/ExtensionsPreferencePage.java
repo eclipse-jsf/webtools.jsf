@@ -37,7 +37,7 @@ public class ExtensionsPreferencePage extends PreferencePage {
 
 	/**
 	 * Creates an instance.
-	 * 
+	 *
 	 * @param element IDOMElement instance.
 	 * @param style CSSPropertyContext instance.
 	 */
@@ -50,8 +50,7 @@ public class ExtensionsPreferencePage extends PreferencePage {
 	}
 
 	/**
-	 * @see org.eclipse.jface.preference.
-	 *      PreferencePage#createContents(Composite)
+	 * @see org.eclipse.jface.preference.PreferencePage#createContents(Composite)
 	 */
 	protected Control createContents(Composite parent) {
 		GridLayout layout;
