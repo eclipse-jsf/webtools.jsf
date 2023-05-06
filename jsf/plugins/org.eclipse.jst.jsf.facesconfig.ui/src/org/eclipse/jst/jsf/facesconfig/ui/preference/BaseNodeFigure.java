@@ -821,7 +821,7 @@ import org.eclipse.swt.graphics.Image;
 
 	private static void moveToTop(IFigure parent, IFigure child) {
 		parent.getChildren().remove(child);
-		parent.getChildren().add(child);
+		((List<IFigure>)parent.getChildren()).add(child);
 	}
 
 	/**
@@ -835,8 +835,7 @@ import org.eclipse.swt.graphics.Image;
 			parent = parent.getParent();
 		}
 		if (parent instanceof Layer) {
-			parent.getChildren().remove(child);
-			parent.getChildren().add(child);
+			moveToTop(parent,child);
 		}
 	}
 
