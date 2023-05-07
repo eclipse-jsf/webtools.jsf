@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2007 Sybase, Inc. and others.
+ * Copyright (c) 2004, 2023 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -820,8 +820,8 @@ import org.eclipse.swt.graphics.Image;
 	}
 
 	private static void moveToTop(IFigure parent, IFigure child) {
-		parent.getChildren().remove(child);
-		((List<IFigure>)parent.getChildren()).add(child);
+		parent.remove(child);
+		parent.add(child);
 	}
 
 	/**
