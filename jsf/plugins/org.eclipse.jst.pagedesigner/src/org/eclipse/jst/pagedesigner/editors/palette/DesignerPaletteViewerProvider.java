@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2009 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2023 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -50,7 +50,7 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 				StructuredSelection sel = (StructuredSelection)getViewer().getSelection();
 				if (sel != null 
 						&& sel.getFirstElement() instanceof DrawerEditPart
-						&& ((DrawerEditPart)sel.getFirstElement()).getDrawer() instanceof TaglibPaletteDrawer)
+						&& ((DrawerEditPart)sel.getFirstElement()).getModel() instanceof TaglibPaletteDrawer)
 					menu.add(new HideTagLibAction((DrawerEditPart)sel.getFirstElement(), Messages.DesignerPaletteViewerProvider_Hide));
 				super.buildContextMenu(menu);
 			}
@@ -102,7 +102,7 @@ public class DesignerPaletteViewerProvider extends PaletteViewerProvider {
 		 * @see org.eclipse.jface.action.Action#run()
 		 */
 		public void run() {
-			TaglibPaletteDrawer pd = (TaglibPaletteDrawer)tagLib.getDrawer();
+			TaglibPaletteDrawer pd = (TaglibPaletteDrawer)tagLib.getModel();
 			pd.setVisible(false);
 			DesignerPaletteCustomizationsHelper.hideTaglibDrawer(pd);
 		}		
