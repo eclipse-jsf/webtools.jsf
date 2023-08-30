@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2011 Oracle Corporation and others.
+ * Copyright (c) 2001, 2023 Oracle Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
  * which accompanies this distribution, and is available at
@@ -202,7 +202,7 @@ AbstractXMLViewValidationStrategy
         if (adapter != null)
         {
             int offsetOfEL = findElStartOffset(attrValue, 0);
-            while(offsetOfEL >= 0) 
+            while (offsetOfEL >= 0)
             {
                 isEL |= validateEl(elementAdapter, attrAdapter, context, offsetOfEL, adapter);
                 offsetOfEL = findElStartOffset(attrValue, offsetOfEL);
