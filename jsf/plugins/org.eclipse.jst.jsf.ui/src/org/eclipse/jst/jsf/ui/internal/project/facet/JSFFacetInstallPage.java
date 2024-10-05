@@ -28,7 +28,7 @@ import org.eclipse.jst.common.project.facet.ui.libprov.LibraryProviderFrameworkU
 import org.eclipse.jst.j2ee.project.facet.IJ2EEModuleFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.IJSFFacetInstallDataModelProperties;
 import org.eclipse.jst.jsf.core.internal.project.facet.JsfFacetConfigurationUtil;
-import org.eclipse.jst.jsf.ui.internal.JSFUiPlugin;
+import org.eclipse.jst.jsf.ui.internal.JSFUIPlugin;
 import org.eclipse.jst.jsf.ui.internal.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -77,11 +77,10 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 
 	private IDialogSettings dialogSettings;
 	private IDataModel webAppDataModel;
-	private static final String SETTINGS_ROOT = JSFUiPlugin.PLUGIN_ID
+	private static final String SETTINGS_ROOT = JSFUIPlugin.PLUGIN_ID
 			+ ".jsfFacetInstall"; //$NON-NLS-1$
 	private static final String SETTINGS_CONFIG = "configPath"; //$NON-NLS-1$
 	private static final String SETTINGS_SERVLET = "servletName"; //$NON-NLS-1$
-	private static final String SETTINGS_SERVLET_CLASSNAME = "servletClassname"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_MAPPINGS = "urlMappings"; //$NON-NLS-1$
 	private static final String SETTINGS_URL_PATTERN = "pattern"; //$NON-NLS-1$
 	private static final String SETTINGS_CONFIGURE_SERVLET = "configureServlet"; //$NON-NLS-1$
@@ -101,7 +100,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		}), "jsf.facet.install.page"); //$NON-NLS-1$
 		setTitle(Messages.JSFFacetInstallPage_title);
 		setDescription(Messages.JSFFacetInstallPage_description);
-		dialogSettings = JSFUiPlugin.getDefault().getDialogSettings();
+		dialogSettings = JSFUIPlugin.getDefault().getDialogSettings();
 
 	}
 
@@ -292,13 +291,8 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		}
 		txtJSFServletName.setText(servletName);
 
-		String servletClassname = null;
-		if (root != null)
-			servletClassname = root.get(SETTINGS_SERVLET_CLASSNAME);
-		if (servletClassname == null || servletClassname.equals("")) { //$NON-NLS-1$
-			servletClassname = (String) model
-					.getDefaultProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME);
-		}
+		String servletClassname = (String) model
+				.getDefaultProperty(IJSFFacetInstallDataModelProperties.SERVLET_CLASSNAME);
 		txtJSFServletClassName.setText(servletClassname);
 
 		loadURLMappingPatterns(root);
@@ -338,7 +332,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 		root.put(SETTINGS_CONFIGURE_SERVLET, getConfigureServlet());
 		root.put(SETTINGS_CONFIG, getJSFConfig());
 		root.put(SETTINGS_SERVLET, getJSFServletName());
-		root.put(SETTINGS_SERVLET_CLASSNAME, getJSFServletClassname());
 		DialogSettings mappings = new DialogSettings(SETTINGS_URL_MAPPINGS);
 		root.addSection(mappings);
 		mappings.put(SETTINGS_URL_PATTERN, getJSFPatterns());
@@ -350,10 +343,6 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 
 	private String getJSFServletName() {
 		return txtJSFServletName.getText().trim();
-	}
-
-	private String getJSFServletClassname() {
-		return txtJSFServletClassName.getText().trim();
 	}
 	
 	private String[] getJSFPatterns() {
@@ -487,7 +476,7 @@ public class JSFFacetInstallPage extends DataModelWizardPage implements
 					webAppDataModel.addListener(this);
 				}
 			} catch (CoreException e) {
-				JSFUiPlugin.log(IStatus.ERROR,
+				JSFUIPlugin.log(IStatus.ERROR,
 						Messages.JSFFacetInstallPage_ErrorNoWebAppDataModel, e);
 			}
 		}
