@@ -1,6 +1,7 @@
 package org.eclipse.jst.jsf.taglibprocessing.attributevalues;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -40,8 +41,10 @@ public class SearchExpressionType extends StringType {
 		List<PossibleValue> possibleValues = super.getPossibleValues();
 		possibleValues = removeAlreadySelected(possibleValues, currentAttrValue);
 		possibleValues = setDefaultFirst(possibleValues);
+		final List<String> specialCasesList = Arrays.asList(specialCases);
 		return possibleValues.stream()
-			.peek(val -> val.setValue(currentValue + val.getValue()))
+			.peek(val -> val.setValue(specialCasesList.indexOf(val.getValue()) == -1 ?
+					currentValue + val.getValue() : val.getValue()))
 			.collect(Collectors.toList());
 	}
 
