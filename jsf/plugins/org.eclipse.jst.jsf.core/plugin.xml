@@ -321,6 +321,9 @@
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.DateTimePatternType"
             id="attributevalues.DateTimePatternType"/>  
       <attributeValueRuntimeType
+            class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.DateTimeType"
+            id="attributevalues.DateTimeType"/>
+      <attributeValueRuntimeType
             class="org.eclipse.jst.jsf.taglibprocessing.attributevalues.NumberPatternType"
             id="attributevalues.NumberPatternType"/>                 
       <attributeValueRuntimeType
