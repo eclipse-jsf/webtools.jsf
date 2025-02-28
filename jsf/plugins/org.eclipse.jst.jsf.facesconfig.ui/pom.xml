@@ -22,6 +22,6 @@
 
   <groupId>org.eclipse.webtools.jsf</groupId>
   <artifactId>org.eclipse.jst.jsf.facesconfig.ui</artifactId>
-  <version>1.7.0-SNAPSHOT</version>
+  <version>1.7.1-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>

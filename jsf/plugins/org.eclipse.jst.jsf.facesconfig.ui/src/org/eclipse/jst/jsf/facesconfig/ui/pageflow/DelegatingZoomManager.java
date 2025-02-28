@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2022 Sybase, Inc. and others.
+ * Copyright (c) 2004, 2025 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,7 @@ import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.editparts.ZoomListener;
+import org.eclipse.draw2d.zoom.ZoomListener;
 import org.eclipse.gef.editparts.ZoomManager;
 
 /**
