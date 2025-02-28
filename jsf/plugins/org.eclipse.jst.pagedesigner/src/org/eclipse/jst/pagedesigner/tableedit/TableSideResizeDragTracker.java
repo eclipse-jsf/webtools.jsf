@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007 Sybase, Inc. and others.
+ * Copyright (c) 2006, 2025 Sybase, Inc. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -153,10 +153,10 @@ public class TableSideResizeDragTracker extends DragEditPartsTracker {
 	 * 
 	 * @see org.eclipse.gef.tools.DragEditPartsTracker#updateTargetRequest()
 	 */
-	protected void updateTargetRequest() {
-		TableResizeRequest req = (TableResizeRequest) getTargetRequest();
-		req.setDelta(calculateDelta());
-	}
+//	protected void updateTargetRequest() {
+//		TableResizeRequest req = (TableResizeRequest) getTargetRequest();
+//		req.setDelta(calculateDelta());
+//	}
 
 	/*
 	 * (non-Javadoc)
